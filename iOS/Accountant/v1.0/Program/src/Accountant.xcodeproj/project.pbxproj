@@ -109,6 +109,9 @@
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
+				F9812F9423F2E0410076AD48 /* AccountSettlement */,
+				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
+				F9812F9223F2DC2E0076AD48 /* JournalEntry */,
 			);
 			path = Accountant;
 			sourceTree = "<group>";
@@ -129,6 +132,27 @@
 				F94EDDB8237AEB3C0074D812 /* Info.plist */,
 			);
 			path = AccountantUITests;
+			sourceTree = "<group>";
+		};
+		F9812F9223F2DC2E0076AD48 /* JournalEntry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JournalEntry;
+			sourceTree = "<group>";
+		};
+		F9812F9323F2DEBF0076AD48 /* GeneralLedger */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GeneralLedger;
+			sourceTree = "<group>";
+		};
+		F9812F9423F2E0410076AD48 /* AccountSettlement */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AccountSettlement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
