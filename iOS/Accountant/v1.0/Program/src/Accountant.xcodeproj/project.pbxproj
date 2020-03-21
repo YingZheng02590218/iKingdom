@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F90114142412A02F009DBE2F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* JournalEntry.swift */; };
 		F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD92237AEB3A0074D812 /* AppDelegate.swift */; };
 		F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */; };
 		F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD96237AEB3A0074D812 /* DocumentView.swift */; };
@@ -16,6 +17,10 @@
 		F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
 		F94EDDAC237AEB3C0074D812 /* AccountantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDAB237AEB3C0074D812 /* AccountantTests.swift */; };
 		F94EDDB7237AEB3C0074D812 /* AccountantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */; };
+		F9CF22E32424F42C00572070 /* ViewControllerA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E22424F42C00572070 /* ViewControllerA.swift */; };
+		F9CF22E52424F46500572070 /* TableViewControllerA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E42424F46500572070 /* TableViewControllerA.swift */; };
+		F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* TableViewCell.swift */; };
+		F9CF22E92425FDEF00572070 /* ViewA.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E82425FDEF00572070 /* ViewA.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F90114132412A02F009DBE2F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
 		F94EDD8F237AEB3A0074D812 /* Accountant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDD92237AEB3A0074D812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +57,10 @@
 		F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountantUITests.swift; sourceTree = "<group>"; };
 		F94EDDB8237AEB3C0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9CF22E22424F42C00572070 /* ViewControllerA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerA.swift; sourceTree = "<group>"; };
+		F9CF22E42424F46500572070 /* TableViewControllerA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerA.swift; sourceTree = "<group>"; };
+		F9CF22E62425016E00572070 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		F9CF22E82425FDEF00572070 /* ViewA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewA.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,7 @@
 				F94EDD90237AEB3A0074D812 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		F94EDD90237AEB3A0074D812 /* Products */ = {
 			isa = PBXGroup;
@@ -105,10 +116,14 @@
 				F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */,
 				F94EDD96237AEB3A0074D812 /* DocumentView.swift */,
 				F94EDD98237AEB3A0074D812 /* Document.swift */,
-				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
-				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */,
+				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
+				F9CF22E42424F46500572070 /* TableViewControllerA.swift */,
+				F9CF22E62425016E00572070 /* TableViewCell.swift */,
+				F9CF22E82425FDEF00572070 /* ViewA.swift */,
+				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
+				F9CF22E22424F42C00572070 /* ViewControllerA.swift */,
 				F9812F9423F2E0410076AD48 /* AccountSettlement */,
 				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
 				F9812F9223F2DC2E0076AD48 /* JournalEntry */,
@@ -137,6 +152,7 @@
 		F9812F9223F2DC2E0076AD48 /* JournalEntry */ = {
 			isa = PBXGroup;
 			children = (
+				F90114132412A02F009DBE2F /* JournalEntry.swift */,
 			);
 			path = JournalEntry;
 			sourceTree = "<group>";
@@ -287,8 +303,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
+				F9CF22E92425FDEF00572070 /* ViewA.swift in Sources */,
+				F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
+				F9CF22E52424F46500572070 /* TableViewControllerA.swift in Sources */,
+				F90114142412A02F009DBE2F /* JournalEntry.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
+				F9CF22E32424F42C00572070 /* ViewControllerA.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +484,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = Accountant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,7 +503,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = Accountant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
