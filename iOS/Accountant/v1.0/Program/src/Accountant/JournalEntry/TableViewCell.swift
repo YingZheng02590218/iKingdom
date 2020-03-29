@@ -11,9 +11,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var label_list_summary: UILabel!
-    @IBOutlet weak var label_list_summary_credit: UILabel!
-    @IBOutlet weak var label_list_summary_debit: UILabel!
-    @IBOutlet weak var label_list_data: UILabel!
+    @IBOutlet weak var label_list_date: UILabel!
     @IBOutlet weak var label_list_number: UILabel!
     @IBOutlet weak var label_list_debit: UILabel!
     @IBOutlet weak var label_list_credit: UILabel!

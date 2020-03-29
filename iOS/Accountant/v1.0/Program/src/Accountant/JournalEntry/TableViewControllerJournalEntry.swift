@@ -8,8 +8,15 @@
 
 import UIKit
 
-class TableViewControllerA: UITableViewController {
-
+class TableViewControllerJournalEntry: UITableViewController {
+    
+    @IBAction func showModalView(_ sender: UIButton) {
+//        self.dismiss(animated: true, completion: nil)
+//        let test = "testtesttest"
+//        let controller = UIViewController(activityItems: [test], applicationActivities: nil)//UIViewController()UIActivityViewController
+//        self.present(controller, animated: true, completion: nil)
+    }
+    
     let JournalEntries = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","31",]     //["4","5","6","7","8","9","10","11","12","1","2","3"] //["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     let summary_debit = ["現金","普通預金","旅費交通費","交際費","交通費","受取利息","減価償却費","雑益","雑損","減価償却累計額","k","l","m","n","o","p","q","減価償却累計額","s","t","u","v","w","x","y","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額"]
     let summary_credit = ["現金","普通預金","旅費交通費","交際費","交通費","受取利息","減価償却費","雑益","雑損","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","o","p","q","減価償却累計額","s","減価償却累計額","u","減価償却累計額","w","x","y","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額"]
@@ -35,7 +42,7 @@ class TableViewControllerA: UITableViewController {
     }
     //セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25 //セクションヘッダーの高さを50に設定
+        return 23 //セクションヘッダーの高さを50に設定
     }
     //セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -49,32 +56,33 @@ class TableViewControllerA: UITableViewController {
     }
     //セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var section_num = section + 4//4月スタートを補正
-        //todo セクションヘッダーは12ヶ月分にする
-        if section_num >= 13 {
+        var section_num = section + 4//4月スタートに補正する todo 設定の決算月によって変更する
+        //セクションヘッダーは1年分の12ヶ月にする
+        if section_num >= 13 {  //12ヶ月を超えた場合1月に戻す
             section_num -= 12
         }
         let header_title = section_num.description + "  月"
         return header_title
     }
-    //セルの数を、categories.countで、categories配列の要素の数に指定します。
+    //セルの数を、JournalEntries.countで、JournalEntries配列の要素の数に指定します。
+    //ToDo 仕訳の数にする
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return JournalEntries.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //①
+        //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
-        //②
-        //todo
+        //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+        cell.label_list_date.text = JournalEntries[indexPath.row]   //date
+//        cell.label_list_summary_debit.text = "(" + summary_debit[indexPath.row] + ")"   //summary
+//        cell.label_list_summary_credit.text = "(" + summary_credit[indexPath.row] + ")"
         cell.label_list_summary.text = JournalEntries[indexPath.row]
-        cell.label_list_summary_debit.text = "(" + summary_debit[indexPath.row] + ")"
-        cell.label_list_summary_credit.text = "(" + summary_credit[indexPath.row] + ")"
-        cell.label_list_data.text = JournalEntries[indexPath.row]
-        cell.label_list_number.text = JournalEntries[indexPath.row]
-        cell.label_list_debit.text = debit[indexPath.row]
-        cell.label_list_credit.text = credit[indexPath.row]
+        cell.label_list_summary.textAlignment = NSTextAlignment.right
+        cell.label_list_number.text = JournalEntries[indexPath.row] //number
+        cell.label_list_debit.text = debit[indexPath.row]   //amount of money debit
+        cell.label_list_credit.text = credit[indexPath.row] //amount of money credit
         //③
         return cell
     }
