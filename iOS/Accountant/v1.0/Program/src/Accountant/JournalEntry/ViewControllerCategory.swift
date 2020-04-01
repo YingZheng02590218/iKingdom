@@ -8,9 +8,6 @@
 
 import UIKit
 
-//protocol DataReturn {
-//    func returnData(data: String)
-//}
 class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     @IBOutlet weak var PickerView_category: UIPickerView!
@@ -21,8 +18,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     var subCategories_netAsset :[String] = Array<String>()
     var subCategories_expends :[String] = Array<String>()
     var subCategories_revenue :[String] = Array<String>()
-    //todo
-//    var delegate: DataReturn?
+
+    var identifier :String = "identifier_debit"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,43 +108,38 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     }
     //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @IBAction func Button_Done(_ sender: UIButton) {
-        //todo
- //       delegate?.returnData(data: "returnData")
-        self.performSegue(withIdentifier: "segue_debit", sender: self)
-//        PickerView_category.selectedRow(inComponent: 1))
-//        self.dismiss(animated: true, completion: nil)
+        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
+        var result :String
+        switch PickerView_category.selectedRow(inComponent: 0) {
+        case 0://"資産":
+            result = subCategories_assets[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        case 1://"負債":
+            result = subCategories_liabilities[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        case 2://"純資産":
+            result = subCategories_netAsset[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        case 3://"費用":
+            result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        case 4://"収益":
+            result = subCategories_revenue[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        default:
+            result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
+            break
+        }
+        if identifier == "identifier_debit" {
+            viewControllerJournalEntry.TextField_category_debit.text = result  //ここで値渡し
+            viewControllerJournalEntry.TextField_category_credit.becomeFirstResponder()
+        }else if identifier == "identifier_credit" {
+            viewControllerJournalEntry.TextField_category_credit.text = result  //ここで値渡し
+            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
+        }
+        self.dismiss(animated: true, completion: nil)
     }
-    //todo
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let viewControllerJournalEntry = segue.destination as! ViewControllerJournalEntry
-//        //let next = segue.destination as! NextViewController
-//        //next.<プロパティ> = <受け渡す値>
-//        var result :String
-//        switch PickerView_category.selectedRow(inComponent: 0) {
-//        case 0://"資産":
-//            result = subCategories_assets[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        case 1://"負債":
-//            result = subCategories_liabilities[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        case 2://"純資産":
-//            result = subCategories_netAsset[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        case 3://"費用":
-//            result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        case 4://"収益":
-//            result = subCategories_revenue[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        default:
-//            result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
-//            break
-//        }
-//        viewControllerJournalEntry.TextField_category_debit.text = result
-//    }
-//    override func prepare(for segue: UIStoryboard, sender: Any?) {
-//        var viewControllerCategory = segue.destination as ViewControllerCategory
-//    }
+    
     /*
     // MARK: - Navigation
 

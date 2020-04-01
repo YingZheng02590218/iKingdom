@@ -405,7 +405,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN">
+                                    <textField opaque="NO" tag="111" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN">
                                         <rect key="frame" x="0.0" y="307" width="187" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -413,35 +413,36 @@
                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="C4G-gx-4bu"/>
-                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="" id="mUT-xo-yoA"/>
+                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_debit" id="mUT-xo-yoA"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
+                                    <textField opaque="NO" tag="222" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
                                         <rect key="frame" x="187" y="307" width="187" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="webSearch" keyboardAppearance="light" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="1bo-or-NDq"/>
+                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_credit" id="nbr-rI-2cp"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
+                                    <textField opaque="NO" tag="333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
                                         <rect key="frame" x="0.0" y="359" width="187" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_amount_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
+                                    <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
                                         <rect key="frame" x="187" y="359" width="187" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_amount_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="GJD-oK-r8r"/>
                                         </connections>
@@ -497,7 +498,9 @@
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="DatePicker" destination="at7-za-9iH" id="Ctw-Q8-Pm7"/>
-                        <outlet property="TextField_category_credit" destination="A6X-6C-QV3" id="Jnf-nN-itm"/>
+                        <outlet property="TextField_amount_credit" destination="Nl1-2I-b4z" id="aWd-Zh-hCe"/>
+                        <outlet property="TextField_amount_debit" destination="0n6-qv-73D" id="U7e-5C-W86"/>
+                        <outlet property="TextField_category_credit" destination="A6X-6C-QV3" id="5VT-jW-brI"/>
                         <outlet property="TextField_category_debit" destination="uJk-nd-XmN" id="iPR-aC-8eH"/>
                     </connections>
                 </viewController>
@@ -532,7 +535,6 @@
                     </view>
                     <connections>
                         <outlet property="PickerView_category" destination="WDQ-HF-nIB" id="dXf-7F-qlr"/>
-                        <segue destination="e0k-EA-w5f" kind="show" identifier="segue_debit" id="Gvd-tG-yng"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggx-8V-WHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -627,6 +629,6 @@
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Gvd-tG-yng"/>
+        <segue reference="nbr-rI-2cp"/>
     </inferredMetricsTieBreakers>
 </document>
