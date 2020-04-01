@@ -486,6 +486,10 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="Button_Input:" destination="h72-Iq-fc2" eventType="touchUpInside" id="Pu7-YP-RTr"/>
+                                            <action selector="Button_Input:" destination="e0k-EA-w5f" eventType="touchUpInside" id="ndK-ft-jJ6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -505,6 +509,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdC-nl-nIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="h72-Iq-fc2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1448.8" y="2039.408866995074"/>
         </scene>
@@ -534,6 +539,7 @@
                         <viewLayoutGuide key="safeArea" id="teg-wR-oig"/>
                     </view>
                     <connections>
+                        <outlet property="Button_Done" destination="KU3-uL-KOd" id="yJc-V8-Ogp"/>
                         <outlet property="PickerView_category" destination="WDQ-HF-nIB" id="dXf-7F-qlr"/>
                     </connections>
                 </viewController>
