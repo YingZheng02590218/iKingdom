@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewControllerJournalEntry: UIViewController {
 
@@ -22,6 +23,13 @@ class ViewControllerJournalEntry: UIViewController {
     @IBAction func TextField_amount_debit(_ sender: UITextField) {}
     @IBAction func TextField_amount_credit(_ sender: UITextField) {}
     
+    @IBAction func Button_Input(_ sender: Any) {
+        print(TextField_category_debit.text)
+        print(TextField_category_credit.text)
+        print(TextField_amount_debit.text)
+        print(TextField_amount_credit.text)
+    }
+    
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
     var subCategories_liabilities :[String] = Array<String>()
@@ -32,10 +40,11 @@ class ViewControllerJournalEntry: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        createTextField()
+        createTextFieldForCategory()
+        createTextFieldForAmount()
     }
 //TextField
-    func createTextField(){
+    func createTextFieldForCategory() {
         //TextFieldのキーボードを表示させないように、ダミーのViewを表示
         TextField_category_debit.inputView = UIView()
         TextField_category_credit.inputView = UIView()
@@ -46,7 +55,9 @@ class ViewControllerJournalEntry: UIViewController {
         self.TextField_category_debit.becomeFirstResponder()
 //        self.TextField_category_debit.resignFirstResponder()
 //        self.TextField_category_credit.becomeFirstResponder()
-//
+    }
+    
+    func createTextFieldForAmount(){
     // toolbar
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)

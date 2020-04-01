@@ -11,6 +11,7 @@ import UIKit
 class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     @IBOutlet weak var PickerView_category: UIPickerView!
+    @IBOutlet weak var Button_Done: UIButton!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
