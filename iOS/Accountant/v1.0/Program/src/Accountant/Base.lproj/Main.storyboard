@@ -389,7 +389,16 @@
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="at7-za-9iH">
                                         <rect key="frame" x="100" y="120" width="245" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                            <!--1970-01-01 11:00:00 +0000-->
+                                        </date>
+                                        <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                            <!--2037-12-31 11:00:00 +0000-->
+                                        </date>
                                         <locale key="locale" localeIdentifier="ja"/>
+                                        <connections>
+                                            <action selector="DatePicker:" destination="e0k-EA-w5f" eventType="valueChanged" id="WBL-66-WbP"/>
+                                        </connections>
                                     </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-CJ-jrm">
                                         <rect key="frame" x="0.0" y="220" width="187" height="87"/>
@@ -413,6 +422,7 @@
                                         <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="C4G-gx-4bu"/>
+                                            <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="N3A-cj-49u"/>
                                             <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_debit" id="mUT-xo-yoA"/>
                                         </connections>
                                     </textField>
@@ -424,6 +434,7 @@
                                         <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="1bo-or-NDq"/>
+                                            <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="OsY-fL-gUu"/>
                                             <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_credit" id="nbr-rI-2cp"/>
                                         </connections>
                                     </textField>
@@ -491,6 +502,20 @@
                                             <action selector="Button_Input:" destination="e0k-EA-w5f" eventType="touchUpInside" id="ndK-ft-jJ6"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbY-2v-Fqx">
+                                        <rect key="frame" x="58" y="592" width="269" height="88"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnq-Wf-hWO">
+                                        <rect key="frame" x="0.0" y="407" width="187" height="51"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -502,6 +527,8 @@
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="DatePicker" destination="at7-za-9iH" id="Ctw-Q8-Pm7"/>
+                        <outlet property="Label_category_debit" destination="rnq-Wf-hWO" id="HJg-X1-nQ9"/>
+                        <outlet property="Label_date" destination="CbY-2v-Fqx" id="i3s-iv-lzk"/>
                         <outlet property="TextField_amount_credit" destination="Nl1-2I-b4z" id="aWd-Zh-hCe"/>
                         <outlet property="TextField_amount_debit" destination="0n6-qv-73D" id="U7e-5C-W86"/>
                         <outlet property="TextField_category_credit" destination="A6X-6C-QV3" id="5VT-jW-brI"/>
@@ -635,6 +662,6 @@
         <image name="pencil" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nbr-rI-2cp"/>
+        <segue reference="mUT-xo-yoA"/>
     </inferredMetricsTieBreakers>
 </document>
