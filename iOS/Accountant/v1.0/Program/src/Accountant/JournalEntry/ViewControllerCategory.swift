@@ -133,10 +133,10 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         }
         if identifier == "identifier_debit" {
             viewControllerJournalEntry.TextField_category_debit.text = result  //ここで値渡し
-            viewControllerJournalEntry.TextField_category_credit.becomeFirstResponder()
+            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
         }else if identifier == "identifier_credit" {
             viewControllerJournalEntry.TextField_category_credit.text = result  //ここで値渡し
-            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
+            viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
         }
         self.dismiss(animated: true, completion: nil)
     }
