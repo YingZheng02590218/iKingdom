@@ -12,6 +12,7 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     
     @IBOutlet weak var PickerView_category: UIPickerView!
     @IBOutlet weak var Button_Done: UIButton!
+    @IBOutlet weak var Button_Cancel: UIButton!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -24,16 +25,14 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
     //UIPickerView
         // Delegate設定
         PickerView_category.delegate = self
         PickerView_category.dataSource = self
-        //借方、貸方
+        //借方、貸方 大項目
         categories = [
             "資産","負債","純資産","費用","収益"]
-        //勘定科目
+        //勘定科目  小項目
         subCategories_assets = [
             "現金","定期預金","普通預金","原材料","立替金","備品"]
         subCategories_liabilities = [
@@ -131,12 +130,26 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
             result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
             break
         }
+        //Segueを場合分け
         if identifier == "identifier_debit" {
             viewControllerJournalEntry.TextField_category_debit.text = result  //ここで値渡し
             viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
         }else if identifier == "identifier_credit" {
             viewControllerJournalEntry.TextField_category_credit.text = result  //ここで値渡し
             viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func Button_Cancel(_ sender: UIButton) {
+        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
+        //Segueを場合分け
+        if identifier == "identifier_debit" {
+            viewControllerJournalEntry.TextField_category_debit.text = ""  //ここで値渡し
+//            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
+        }else if identifier == "identifier_credit" {
+            viewControllerJournalEntry.TextField_category_credit.text = ""  //ここで値渡し
+//            viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
         }
         self.dismiss(animated: true, completion: nil)
     }
