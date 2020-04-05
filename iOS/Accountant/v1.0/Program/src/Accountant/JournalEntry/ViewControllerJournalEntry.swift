@@ -11,40 +11,17 @@ import RealmSwift
 
 class ViewControllerJournalEntry: UIViewController {
 
-    @IBOutlet weak var DatePicker: UIDatePicker!
     @IBOutlet weak var Button_Left: UIButton!
-    @IBOutlet weak var TextField_category_debit: UITextField!
-    @IBOutlet weak var Label_category_debit: UILabel!
-    @IBOutlet weak var TextField_category_credit: UITextField!
-    
-    @IBOutlet weak var TextField_amount_debit: UITextField!
-    @IBOutlet weak var TextField_amount_credit: UITextField!
-    
-    @IBAction func DatePicker(_ sender: UIDatePicker) {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "YYYY/MM/dd"
-//        Label_date.text = "\(formatter.string(from: DatePicker.date))"
-    }
-    @IBAction func TextField_category_debit(_ sender: UITextField) {
-         self.view.endEditing(true)
-    }
-    @IBAction func TextField_category_credit(_ sender: UITextField) {
-        self.view.endEditing(true)
-    }
-    @IBAction func TextField_amount_debit(_ sender: UITextField) {}
-    @IBAction func TextField_amount_credit(_ sender: UITextField) {}
-    
     @IBAction func Button_Input(_ sender: Any) {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/dd"
-        print("\(formatter.string(from: DatePicker.date))")
-        print(DatePicker.date)
-        print(TextField_category_debit.text)
-        print(TextField_category_credit.text)
-        print(TextField_amount_debit.text)
-        print(TextField_amount_credit.text)
+        print("\(DatePicker.date)")
+        print("日付　　　　 " + "\(formatter.string(from: DatePicker.date))")
+        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
+        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
+        print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
+        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
     }
-    @IBOutlet weak var Label_date: UILabel!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -60,14 +37,22 @@ class ViewControllerJournalEntry: UIViewController {
         createTextFieldForAmount()
         createDatePicker()
 //        performSegue(withIdentifier: "identifier_debit", sender: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
     }
     
+    
+    @IBOutlet weak var DatePicker: UIDatePicker!
+    @IBAction func DatePicker(_ sender: UIDatePicker) {}
+
     func createDatePicker() {
-        let f     = DateFormatter()//年
-        let ff    = DateFormatter()//月
-        let fff   = DateFormatter()//月日
-        let ffff  = DateFormatter()//年月日
-        let ffff2 = DateFormatter()//年月日
+        let f     = DateFormatter() //年
+        let ff    = DateFormatter() //月
+        let fff   = DateFormatter() //月日
+        let ffff  = DateFormatter() //年月日
+        let ffff2 = DateFormatter() //年月日
         let fffff = DateFormatter()
 
         f.dateFormat    = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
@@ -90,12 +75,8 @@ class ViewControllerJournalEntry: UIViewController {
         print(now)
 
         let nowStringYear = f.string(from: now)//年
-        
-//        let modifiedDate = Calendar.current.date(byAdding: .year, value: -1, to: now)!
         let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!)//年
-//        let modifiedDate2 = Calendar.current.date(byAdding: .year, value: 1, to: now)!
         let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)//年
-        
 //        let nowStringMonth = ff.string(from: now)//月
         let nowStringMonthDay = fff.string(from: now)//月日
         
@@ -103,33 +84,25 @@ class ViewControllerJournalEntry: UIViewController {
         let dayOfEndInPeriod :Date   = fff.date(from: "03/31")!
         let dayOfStartInPeriod :Date = fff.date(from: "04/01")!
         let dayOfEndInYear :Date     = fff.date(from: "12/31")!
-//        let dayOfStartInPeriod :Date = ff.date(from: "04")!
-//        let dayOfEndInYear :Date     = ff.date(from: "12")!
-//        let dayOfStartInYewr :Date   = ff.date(from: "01")!
-//        let dayOfEndInPeriod :Date   = ff.date(from: "03")!
 
         //一月以降か
-        let dayInterval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: fff.date(from: nowStringMonthDay)! )).month
+        let Interval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: fff.date(from: nowStringMonthDay)! )).month
         //三月三十一日未満か
-        let dayInterval1 = (Calendar.current.dateComponents([.month], from: dayOfEndInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
+        let Interval1 = (Calendar.current.dateComponents([.month], from: dayOfEndInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
         //四月以降か
-        let dayInterval2 = (Calendar.current.dateComponents([.month], from: dayOfStartInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
+        let Interval2 = (Calendar.current.dateComponents([.month], from: dayOfStartInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
         //十二月と同じ、もしくはそれ以前か
-        let dayInterval3 = (Calendar.current.dateComponents([.month], from: dayOfEndInYear, to: fff.date(from: nowStringMonthDay)! )).month
-        //一月以降か
-        if  dayInterval! >= 0  {
-            //三月三十一日未満か
-            if  dayInterval1! <= 0  {
+        let Interval3 = (Calendar.current.dateComponents([.month], from: dayOfEndInYear, to: fff.date(from: nowStringMonthDay)! )).month
+        
+        if  Interval! >= 0  {
+            if  Interval1! <= 0  { //第四四半期の場合
                 DatePicker.minimumDate = ffff2.date(from: (nowStringPreviousYear + "-04-01"))
                 DatePicker.maximumDate = ffff2.date(from: (nowStringYear + "-03-31"))
                 //四月以降か
-                if dayInterval2! >= 0 {
-                    //十二月と同じ、もしくはそれ以前か
-                    if dayInterval3! <= 0 {
-                        //04-02にすると04-01となる
-                        DatePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!
-                        //04-01にすると03-31となる
-                        DatePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!
+                if Interval2! >= 0 { //第一四半期　以降
+                    if Interval3! <= 0 { //第三四半期　以内
+                        DatePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
+                        DatePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
                     }
                 }
             }
@@ -144,67 +117,123 @@ class ViewControllerJournalEntry: UIViewController {
         
 //        print(nowStringYear)
 //        print(nowStringNextYear)
-        Label_date.text = ffff.string(from: DatePicker.date)
-    }
-
-//TextField
-    func createTextFieldForCategory() {
-        //TextFieldのキーボードを表示させないように、ダミーのViewを表示
-//        TextField_category_debit.inputView = UIView()
-//        TextField_category_credit.inputView = UIView()
-        //TextFieldのキーボードを出したくない
-        TextField_category_debit.isUserInteractionEnabled = true
-        TextField_category_credit.isUserInteractionEnabled = true
-        //仕訳画面を開いたら借方勘定科目TextFieldのキーボードを自動的に表示する
-        self.TextField_category_debit.becomeFirstResponder()
-//        self.TextField_category_debit.resignFirstResponder()
-//        self.TextField_category_credit.becomeFirstResponder()
+//        Label_date.text = ffff.string(from: DatePicker.date)
     }
     
+//TextField
+    @IBOutlet weak var TextField_category_debit: UITextField!
+    @IBOutlet weak var TextField_category_credit: UITextField!
+    @IBAction func TextField_category_debit(_ sender: UITextField) {
+        //カーソルが当たったらすぐに終了させる　勘定科目画面に遷移させるため
+         self.view.endEditing(true)
+    }
+    @IBAction func TextField_category_credit(_ sender: UITextField) {
+        //カーソルが当たったらすぐに終了させる　勘定科目画面に遷移させるため
+        self.view.endEditing(true)
+    }
+    func createTextFieldForCategory() {
+        //TextFieldのキーボードを表示させないように、ダミーのViewを表示 TextField
+//        TextField_category_debit.inputView = UIView()
+//        TextField_category_credit.inputView = UIView()
+        //TextFieldのキーボードを出したくない 場合はfalse カーソルすら当たらなくなる
+//        TextField_category_debit.isUserInteractionEnabled = true
+//        TextField_category_credit.isUserInteractionEnabled = true
+        //仕訳画面を開いたら借方勘定科目TextFieldのキーボードを自動的に表示する
+        self.TextField_category_debit.becomeFirstResponder()
+    }
+    
+    @IBOutlet weak var TextField_amount_debit: UITextField!
+    @IBOutlet weak var TextField_amount_credit: UITextField!
+    @IBAction func TextField_amount_debit(_ sender: UITextField) {}
+    @IBAction func TextField_amount_credit(_ sender: UITextField) {
+        TextField_amount_credit.text = TextField_amount_debit.text
+    }
     func createTextFieldForAmount(){
-    // toolbar 借方 Tag5
+    // toolbar 借方 Done:Tag5 Cancel:Tag55
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
         doneButtonItem.tag = 5
-        toolbar.setItems([doneButtonItem], animated: true)
+        let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+        cancelItem.tag = 55
+        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
         TextField_amount_debit.inputAccessoryView = toolbar
-    // toolbar2 貸方 Tag6
+    // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
         toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
         doneButtonItem2.tag = 6
-        toolbar2.setItems([doneButtonItem2], animated: true)
+        let flexSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+        cancelItem2.tag = 66
+        toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
         TextField_amount_credit.inputAccessoryView = toolbar2
     }
+
+    let SCREEN_SIZE = UIScreen.main.bounds.size
+    //UIKeyboardWillShow通知を受けて、実行される関数
+    @objc func keyboardWillShow(_ notification: NSNotification){
+        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
+//         textField.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - textField.frame.height
+        print("キーボード高さ" + "\(keyboardHeight)")
+        print("スクリーン高さ-キーボード高さ" + "\(SCREEN_SIZE.height - keyboardHeight)")
+        print("スクリーン高さ" + "\(SCREEN_SIZE.height)")
+    }
+    //UIKeyboardWillShow通知を受けて、実行される関数
+    @objc func keyboardWillHide(_ notification: NSNotification){
+//        textField.frame.origin.y = SCREEN_SIZE.height - textField.frame.height
+    }
+    //TextFieldのキーボードについているBarButtonが押下された時
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
-      // do something here
-        // キーボードを閉じる処理
-           self.view.endEditing(true)
-        if sender.tag == 5 {
-            //TextFieldのキーボードを自動的に表示する
-            // 今フォーカスが当たっているテキストボックスからフォーカスを外す
+        switch sender.tag {
+        case 5://借方金額の場合 Done
+            // キーボードを閉じる
+            self.view.endEditing(true)
+            //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
             TextField_category_credit.becomeFirstResponder()
+            break
+        case 6://貸方金額の場合 Done
+            self.view.endEditing(true)
+            break
+        case 55://借方金額の場合 Cancel
+            self.view.endEditing(true)
+            TextField_amount_debit.text = ""
+            break
+        case 66://貸方金額の場合 Cancel
+            self.view.endEditing(true)
+            TextField_amount_credit.text = ""
+            break
+        default:
+            self.view.endEditing(true)
+            break
         }
     }
-//    キーボード起動時
+// キーボード起動時
 //    textFieldShouldBeginEditing
 //    textFieldDidBeginEditing
-//    リターン押下時
+// リターン押下時
 //    textFieldShouldReturn before responder
 //    textFieldShouldEndEditing
 //    textFieldDidEndEditing
 //    textFieldShouldReturn
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-      return true
+        //todo
+        if textField.text == "勘定科目"{
+            return true
+        }else{
+            return false
+        }
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-      print("変更中")
+        //todo
+        print("変更中")
       return true
     }
     // テキストフィールがタップされ、入力可能になる直前
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        //todo
         print(#function)
         print("テキストフィールがタップされ、入力可能になったあと")
         //TextFieldのキーボードを自動的に閉じる
@@ -221,15 +250,18 @@ class ViewControllerJournalEntry: UIViewController {
     }
 //    キーボードを閉じる前
     func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
+      //todo
       print("キーボードを閉じる前")
       return true
     }
 //    キーボードを閉じたあと
     func textFieldDidEndEditing(_ textField:UITextField){
+      //todo
       print("キーボードを閉じたあと")
     }
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //todo
         //resignFirstResponder()メソッドを利用します。
         textField.resignFirstResponder()
         print("キーボードを閉じる前")
@@ -245,19 +277,22 @@ class ViewControllerJournalEntry: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // segue.destinationの型はUIViewController
+        //todo
+//        TextField_amount_debit.resignFirstResponder()
+//        TextField_amount_credit.resignFirstResponder()
+        // segue.destinationの型はUIViewController
         let viewControllerCategory = segue.destination as! ViewControllerCategory
         switch segue.identifier {
-         case "identifier_debit":
-           viewControllerCategory.identifier = "identifier_debit"
+        case "identifier_debit":
+                viewControllerCategory.identifier = "identifier_debit"
             break
         case "identifier_credit":
-            viewControllerCategory.identifier = "identifier_credit"
+                viewControllerCategory.identifier = "identifier_credit"
             break
-         default:
+        default:
 //            viewControllerCategory.identifier = "identifier_debit"
            break
-         }
+        }
     }
     /*
     // MARK: - Navigation

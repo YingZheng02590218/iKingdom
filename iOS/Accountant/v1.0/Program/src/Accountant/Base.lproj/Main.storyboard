@@ -76,11 +76,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="center" id="xxB-qN-E2e" customClass="ViewA" customModule="Accountant" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-t7-k1C">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct2-2m-ASx" userLabel="list_heading">
@@ -98,7 +98,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="env-Tl-sW1">
-                                            <rect key="frame" x="343" y="9" width="24.333333333333332" height="23.666666666666664"/>
+                                            <rect key="frame" x="342" y="14" width="24.333333333333332" height="23.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <connections>
                                                 <action selector="showModalView:" destination="E4z-n2-vvK" eventType="touchUpInside" id="9v8-8K-iJs"/>
@@ -115,18 +115,18 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KJy-xe-WoY">
-                                    <rect key="frame" x="0.0" y="50" width="30" height="40"/>
+                                    <rect key="frame" x="0.0" y="55" width="30" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34J-GN-cj1" userLabel="list_date">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="20"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="27" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v4k-on-Yay" userLabel="list_date_mon">
-                                            <rect key="frame" x="0.0" y="20" width="30" height="20"/>
+                                            <rect key="frame" x="0.0" y="20" width="26" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
@@ -141,7 +141,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZ3-Yb-aOE">
-                                    <rect key="frame" x="30" y="50" width="185" height="40"/>
+                                    <rect key="frame" x="30" y="55" width="185" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摘要" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vxT-pq-qiZ" userLabel="list_summary">
@@ -160,7 +160,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-RV-6l7">
-                                    <rect key="frame" x="215" y="50" width="30" height="40"/>
+                                    <rect key="frame" x="215" y="55" width="30" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MMI-DC-dNs" userLabel="list_number">
@@ -186,7 +186,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp">
-                                    <rect key="frame" x="245" y="50" width="65" height="40"/>
+                                    <rect key="frame" x="245" y="55" width="65" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xIO-Lc-Pc5" userLabel="list_debit">
@@ -205,7 +205,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOq-R1-al2">
-                                    <rect key="frame" x="310" y="50" width="65" height="40"/>
+                                    <rect key="frame" x="310" y="55" width="65" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fyc-CB-cu4" userLabel="list_credit">
@@ -229,7 +229,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" rowHeight="30" id="ml1-A7-SRY" customClass="TableViewCell" customModule="Accountant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="118" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="123" width="375" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ml1-A7-SRY" id="H9p-AI-sti">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -366,12 +366,12 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hz-Mm-EA8">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <attributedString key="attributedText">
                                             <fragment content="仕訳入力">
                                                 <attributes>
-                                                    <font key="NSFont" size="29" name="HiraginoSans-W3"/>
+                                                    <font key="NSFont" size="30" name="HiraginoSans-W3"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     <integer key="NSUnderline" value="1"/>
                                                 </attributes>
@@ -379,15 +379,73 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-xu-Rt7">
-                                        <rect key="frame" x="0.0" y="120" width="70" height="100"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-CJ-jrm">
+                                        <rect key="frame" x="0.0" y="250" width="187" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0T-9p-Iin">
+                                        <rect key="frame" x="187" y="250" width="187" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" tag="111" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN">
+                                        <rect key="frame" x="0.0" y="335" width="187" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="C4G-gx-4bu"/>
+                                            <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="N3A-cj-49u"/>
+                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_debit" id="mUT-xo-yoA"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" tag="222" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
+                                        <rect key="frame" x="187" y="335" width="187" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="1bo-or-NDq"/>
+                                            <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="OsY-fL-gUu"/>
+                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_credit" id="nbr-rI-2cp"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" tag="333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
+                                        <rect key="frame" x="0.0" y="385" width="187" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="TextField_amount_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
+                                        <rect key="frame" x="187" y="385" width="187" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="TextField_amount_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="GJD-oK-r8r"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-xu-Rt7">
+                                        <rect key="frame" x="0.0" y="125" width="70" height="125"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="at7-za-9iH">
-                                        <rect key="frame" x="100" y="120" width="245" height="100"/>
+                                        <rect key="frame" x="100" y="125" width="245" height="125"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                         <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                             <!--1970-01-01 11:00:00 +0000-->
@@ -400,66 +458,8 @@
                                             <action selector="DatePicker:" destination="e0k-EA-w5f" eventType="valueChanged" id="WBL-66-WbP"/>
                                         </connections>
                                     </datePicker>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-CJ-jrm">
-                                        <rect key="frame" x="0.0" y="220" width="187" height="87"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0T-9p-Iin">
-                                        <rect key="frame" x="187" y="220" width="187" height="87"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" tag="111" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN">
-                                        <rect key="frame" x="0.0" y="307" width="187" height="51"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="C4G-gx-4bu"/>
-                                            <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="N3A-cj-49u"/>
-                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_debit" id="mUT-xo-yoA"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" tag="222" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
-                                        <rect key="frame" x="187" y="307" width="187" height="51"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="1bo-or-NDq"/>
-                                            <action selector="TextField_category_credit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="OsY-fL-gUu"/>
-                                            <segue destination="F7m-qr-p5p" kind="presentation" identifier="identifier_credit" id="nbr-rI-2cp"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" tag="333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
-                                        <rect key="frame" x="0.0" y="359" width="187" height="51"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="TextField_amount_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
-                                        <rect key="frame" x="187" y="359" width="187" height="51"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                        <connections>
-                                            <action selector="TextField_amount_credit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="GJD-oK-r8r"/>
-                                        </connections>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-Dp-EYX">
-                                        <rect key="frame" x="70" y="120" width="30" height="100"/>
+                                        <rect key="frame" x="70" y="125" width="30" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -472,7 +472,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-lY-iO7">
-                                        <rect key="frame" x="344" y="120" width="30" height="100"/>
+                                        <rect key="frame" x="344" y="125" width="30" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -485,7 +485,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-R6-X65">
-                                        <rect key="frame" x="81" y="466" width="213" height="69"/>
+                                        <rect key="frame" x="81" y="574" width="213" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -502,20 +502,6 @@
                                             <action selector="Button_Input:" destination="e0k-EA-w5f" eventType="touchUpInside" id="ndK-ft-jJ6"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbY-2v-Fqx">
-                                        <rect key="frame" x="58" y="592" width="269" height="88"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnq-Wf-hWO">
-                                        <rect key="frame" x="0.0" y="407" width="187" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -527,8 +513,6 @@
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="DatePicker" destination="at7-za-9iH" id="Ctw-Q8-Pm7"/>
-                        <outlet property="Label_category_debit" destination="rnq-Wf-hWO" id="HJg-X1-nQ9"/>
-                        <outlet property="Label_date" destination="CbY-2v-Fqx" id="i3s-iv-lzk"/>
                         <outlet property="TextField_amount_credit" destination="Nl1-2I-b4z" id="aWd-Zh-hCe"/>
                         <outlet property="TextField_amount_debit" destination="0n6-qv-73D" id="U7e-5C-W86"/>
                         <outlet property="TextField_category_credit" destination="A6X-6C-QV3" id="5VT-jW-brI"/>
@@ -549,23 +533,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WDQ-HF-nIB" userLabel="Picker View category">
-                                <rect key="frame" x="0.0" y="544" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="464" width="375" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KU3-uL-KOd">
-                                <rect key="frame" x="305" y="492" width="70" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="Button_Done:" destination="F7m-qr-p5p" eventType="touchUpInside" id="rq8-wu-et7"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wdf-NW-fad">
+                                <rect key="frame" x="0.0" y="420" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqJ-jp-JGS">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="Button_Cancel:" destination="F7m-qr-p5p" eventType="touchUpInside" id="1ZL-mz-oi0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KU3-uL-KOd">
+                                        <rect key="frame" x="295" y="0.0" width="80" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="Button_Done:" destination="F7m-qr-p5p" eventType="touchUpInside" id="rq8-wu-et7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="teg-wR-oig"/>
                     </view>
                     <connections>
+                        <outlet property="Button_Cancel" destination="wqJ-jp-JGS" id="3Y2-qD-brd"/>
                         <outlet property="Button_Done" destination="KU3-uL-KOd" id="yJc-V8-Ogp"/>
                         <outlet property="PickerView_category" destination="WDQ-HF-nIB" id="dXf-7F-qlr"/>
                     </connections>
