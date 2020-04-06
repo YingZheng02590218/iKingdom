@@ -394,7 +394,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" tag="111" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN">
-                                        <rect key="frame" x="0.0" y="335" width="187" height="50"/>
+                                        <rect key="frame" x="2" y="335" width="185" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -406,7 +406,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="222" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
-                                        <rect key="frame" x="187" y="335" width="187" height="50"/>
+                                        <rect key="frame" x="187" y="335" width="185" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -418,7 +418,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
-                                        <rect key="frame" x="0.0" y="385" width="187" height="50"/>
+                                        <rect key="frame" x="2" y="385" width="185" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -428,7 +428,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
-                                        <rect key="frame" x="187" y="385" width="187" height="50"/>
+                                        <rect key="frame" x="187" y="385" width="185" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -484,8 +484,22 @@
                                             </attributedString>
                                         </state>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="取引内容" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
+                                        <rect key="frame" x="2" y="485" width="371" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3g-IS-J1T">
+                                        <rect key="frame" x="1" y="435" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-R6-X65">
-                                        <rect key="frame" x="81" y="574" width="213" height="69"/>
+                                        <rect key="frame" x="81" y="597" width="213" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">

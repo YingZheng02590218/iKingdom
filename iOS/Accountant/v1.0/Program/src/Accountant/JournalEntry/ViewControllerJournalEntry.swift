@@ -158,6 +158,15 @@ class ViewControllerJournalEntry: UIViewController {
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
         cancelItem.tag = 55
         toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+//        toolbar.backgroundColor = UIColor.clear
+        //UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        //UIColor(red: 0.5, green: 0.5, blue: 0, alpha: 0.5)
+        //UIColor.clear
+        //(Red: 0, green: 0, blue: 0, alpha: 0)
+        // alpha 0 で色を設定
+//        toolbar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        //UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        toolbar.isTranslucent = true
         TextField_amount_debit.inputAccessoryView = toolbar
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
@@ -168,6 +177,9 @@ class ViewControllerJournalEntry: UIViewController {
         let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
         cancelItem2.tag = 66
         toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
+//        toolbar2.backgroundColor = UIColor.clear//(Red: 0, green: 0, blue: 0, alpha: 0) // alpha 0透明　1不透明
+//        toolbar2.barTintColor = UIColor.clear//UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
+        toolbar2.isTranslucent = true
         TextField_amount_credit.inputAccessoryView = toolbar2
     }
 
