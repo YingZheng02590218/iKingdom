@@ -9,19 +9,9 @@
 import UIKit
 import RealmSwift
 
-class ViewControllerJournalEntry: UIViewController {
+class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var Button_Left: UIButton!
-    @IBAction func Button_Input(_ sender: Any) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM/dd"
-        print("\(DatePicker.date)")
-        print("日付　　　　 " + "\(formatter.string(from: DatePicker.date))")
-        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
-        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
-        print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
-        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
-    }
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -33,10 +23,11 @@ class ViewControllerJournalEntry: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        createDatePicker()
         createTextFieldForCategory()
         createTextFieldForAmount()
-        createDatePicker()
-//        performSegue(withIdentifier: "identifier_debit", sender: nil)
+        createTextFieldForSmallwritting()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -141,153 +132,7 @@ class ViewControllerJournalEntry: UIViewController {
         //仕訳画面を開いたら借方勘定科目TextFieldのキーボードを自動的に表示する
         self.TextField_category_debit.becomeFirstResponder()
     }
-    
-    @IBOutlet weak var TextField_amount_debit: UITextField!
-    @IBOutlet weak var TextField_amount_credit: UITextField!
-    @IBAction func TextField_amount_debit(_ sender: UITextField) {}
-    @IBAction func TextField_amount_credit(_ sender: UITextField) {
-        TextField_amount_credit.text = TextField_amount_debit.text
-    }
-    func createTextFieldForAmount(){
-    // toolbar 借方 Done:Tag5 Cancel:Tag55
-        let toolbar = UIToolbar()
-        toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
-        doneButtonItem.tag = 5
-        let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
-        cancelItem.tag = 55
-        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
-//        toolbar.backgroundColor = UIColor.clear
-        //UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
-        //UIColor(red: 0.5, green: 0.5, blue: 0, alpha: 0.5)
-        //UIColor.clear
-        //(Red: 0, green: 0, blue: 0, alpha: 0)
-        // alpha 0 で色を設定
-//        toolbar.barTintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
-        //UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
-        toolbar.isTranslucent = true
-        TextField_amount_debit.inputAccessoryView = toolbar
-    // toolbar2 貸方 Done:Tag6 Cancel:Tag66
-        let toolbar2 = UIToolbar()
-        toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
-        doneButtonItem2.tag = 6
-        let flexSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
-        cancelItem2.tag = 66
-        toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
-//        toolbar2.backgroundColor = UIColor.clear//(Red: 0, green: 0, blue: 0, alpha: 0) // alpha 0透明　1不透明
-//        toolbar2.barTintColor = UIColor.clear//UIColor(red: 0, green: 0, blue: 0, alpha: 0.0)
-        toolbar2.isTranslucent = true
-        TextField_amount_credit.inputAccessoryView = toolbar2
-    }
-
-    let SCREEN_SIZE = UIScreen.main.bounds.size
-    //UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillShow(_ notification: NSNotification){
-        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
-//         textField.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - textField.frame.height
-        print("キーボード高さ" + "\(keyboardHeight)")
-        print("スクリーン高さ-キーボード高さ" + "\(SCREEN_SIZE.height - keyboardHeight)")
-        print("スクリーン高さ" + "\(SCREEN_SIZE.height)")
-    }
-    //UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillHide(_ notification: NSNotification){
-//        textField.frame.origin.y = SCREEN_SIZE.height - textField.frame.height
-    }
-    //TextFieldのキーボードについているBarButtonが押下された時
-    @objc func barButtonTapped(_ sender: UIBarButtonItem) {
-        switch sender.tag {
-        case 5://借方金額の場合 Done
-            // キーボードを閉じる
-            self.view.endEditing(true)
-            //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
-            TextField_category_credit.becomeFirstResponder()
-            break
-        case 6://貸方金額の場合 Done
-            self.view.endEditing(true)
-            break
-        case 55://借方金額の場合 Cancel
-            self.view.endEditing(true)
-            TextField_amount_debit.text = ""
-            break
-        case 66://貸方金額の場合 Cancel
-            self.view.endEditing(true)
-            TextField_amount_credit.text = ""
-            break
-        default:
-            self.view.endEditing(true)
-            break
-        }
-    }
-// キーボード起動時
-//    textFieldShouldBeginEditing
-//    textFieldDidBeginEditing
-// リターン押下時
-//    textFieldShouldReturn before responder
-//    textFieldShouldEndEditing
-//    textFieldDidEndEditing
-//    textFieldShouldReturn
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        //todo
-        if textField.text == "勘定科目"{
-            return true
-        }else{
-            return false
-        }
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //todo
-        print("変更中")
-      return true
-    }
-    // テキストフィールがタップされ、入力可能になる直前
-    // テキストフィールがタップされ、入力可能になったあと
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //todo
-        print(#function)
-        print("テキストフィールがタップされ、入力可能になったあと")
-        //TextFieldのキーボードを自動的に閉じる
-        // 今フォーカスが当たっているテキストボックスからフォーカスを外す
-//        textField.resignFirstResponder()
-        self.view.endEditing(true)
-        if textField.tag == 111 {
-            //TextFieldのキーボードを自動的に表示する
-            // 今フォーカスが当たっているテキストボックスからフォーカスを外す
-            TextField_category_credit.becomeFirstResponder()
-        }else if textField.tag == 333{
-            TextField_amount_credit.becomeFirstResponder()
-        }
-    }
-//    キーボードを閉じる前
-    func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
-      //todo
-      print("キーボードを閉じる前")
-      return true
-    }
-//    キーボードを閉じたあと
-    func textFieldDidEndEditing(_ textField:UITextField){
-      //todo
-      print("キーボードを閉じたあと")
-    }
-    //リターンキーが押されたとき
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //todo
-        //resignFirstResponder()メソッドを利用します。
-        textField.resignFirstResponder()
-        print("キーボードを閉じる前")
-        // キーボードを閉じる処理
-        self.view.endEditing(true)
-        print("キーボードを閉じたあと")
-        return true
-    }
-    //TextField キーボード以外の部分をタッチ
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // touchesBeganメソッドをオーバーライドします。
-        self.view.endEditing(true)
-    }
-    
+    // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //todo
 //        TextField_amount_debit.resignFirstResponder()
@@ -305,6 +150,207 @@ class ViewControllerJournalEntry: UIViewController {
 //            viewControllerCategory.identifier = "identifier_debit"
            break
         }
+    }
+    
+    @IBOutlet weak var TextField_amount_debit: UITextField!
+    @IBOutlet weak var TextField_amount_credit: UITextField!
+    @IBAction func TextField_amount_debit(_ sender: UITextField) {}
+    @IBAction func TextField_amount_credit(_ sender: UITextField) {}
+    // TextField 金額
+    func createTextFieldForAmount() {
+        TextField_amount_debit.delegate = self
+        TextField_amount_credit.delegate = self
+    // toolbar 借方 Done:Tag5 Cancel:Tag55
+        let toolbar = UIToolbar()
+        toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        toolbar.backgroundColor = UIColor.clear// 名前で指定する
+        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+        toolbar.isTranslucent = true
+        toolbar.barStyle = .default
+        let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
+        doneButtonItem.tag = 5
+        let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+        cancelItem.tag = 55
+        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+        TextField_amount_debit.inputAccessoryView = toolbar
+    // toolbar2 貸方 Done:Tag6 Cancel:Tag66
+        let toolbar2 = UIToolbar()
+        toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        toolbar2.backgroundColor = UIColor.clear
+        toolbar2.barTintColor = UIColor.clear
+        toolbar2.isTranslucent = true
+        toolbar2.barStyle = .default
+        let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
+        doneButtonItem2.tag = 6
+        let flexSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+        cancelItem2.tag = 66
+        toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
+        TextField_amount_credit.inputAccessoryView = toolbar2
+    }
+    
+    @IBOutlet weak var TextField_SmallWritting: UITextField!
+    @IBAction func TextField_SmallWritting(_ sender: UITextField) {}
+    // TextField 小書き
+    func createTextFieldForSmallwritting() {
+        TextField_SmallWritting.delegate = self
+// toolbar 小書き Done:Tag Cancel:Tag
+       let toolbar = UIToolbar()
+       toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+//       toolbar.backgroundColor = UIColor.clear// 名前で指定する
+//       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+       toolbar.isTranslucent = true
+//       toolbar.barStyle = .default
+       let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
+       doneButtonItem.tag = 7
+       let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+       let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+       cancelItem.tag = 77
+       toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+       TextField_SmallWritting.inputAccessoryView = toolbar
+    }
+    
+    let SCREEN_SIZE = UIScreen.main.bounds.size
+    // UIKeyboardWillShow通知を受けて、実行される関数
+    @objc func keyboardWillShow(_ notification: NSNotification){
+        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
+//         textField.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - textField.frame.height
+        print("キーボード高さ" + "\(keyboardHeight)")
+        print("スクリーン高さ-キーボード高さ" + "\(SCREEN_SIZE.height - keyboardHeight)")
+        print("スクリーン高さ" + "\(SCREEN_SIZE.height)")
+    }
+    // UIKeyboardWillShow通知を受けて、実行される関数
+    @objc func keyboardWillHide(_ notification: NSNotification){
+//        textField.frame.origin.y = SCREEN_SIZE.height - textField.frame.height
+    }
+    // TextFieldのキーボードについているBarButtonが押下された時
+    @objc func barButtonTapped(_ sender: UIBarButtonItem) {
+        switch sender.tag {
+        case 5://借方金額の場合 Done
+            // キーボードを閉じる
+            self.view.endEditing(true)
+            //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
+            TextField_category_credit.becomeFirstResponder()
+            break
+        case 6://貸方金額の場合 Done
+            self.view.endEditing(true)
+            // カーソルを小書きへ移す
+            self.TextField_SmallWritting.becomeFirstResponder()
+            break
+        case 7://小書きの場合 Done
+            self.view.endEditing(true)
+            break
+        case 55://借方金額の場合 Cancel
+            self.view.endEditing(true)
+            TextField_amount_debit.text = ""
+            break
+        case 66://貸方金額の場合 Cancel
+            self.view.endEditing(true)
+            TextField_amount_credit.text = ""
+            break
+        case 77://小書きの場合 Cancel
+            self.view.endEditing(true)
+            TextField_SmallWritting.text = ""
+            break
+        default:
+            self.view.endEditing(true)
+            break
+        }
+    }
+    // キーボード起動時
+    //    textFieldShouldBeginEditing
+    //    textFieldDidBeginEditing
+    // リターン押下時
+    //    textFieldShouldReturn before responder
+    //    textFieldShouldEndEditing
+    //    textFieldDidEndEditing
+    //    textFieldShouldReturn
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        //todo
+        if textField.text == "勘定科目" {
+            return true
+        }else if textField.text == "金額" {
+            return true
+        }else if textField.text == "取引内容" {
+            return true
+        }else{
+            return false
+        }
+    }
+    // 文字数制限
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //todo
+        print("テキストフィールド入力中")
+        // 文字数最大値を定義
+        var maxLength: Int = 0
+        
+        switch textField.tag {
+        case 333,444: // 金額の文字数
+            maxLength = 7
+        case 555: // 小書きの文字数
+            maxLength = 25
+        default:
+            break
+        }
+        // textField内の文字数
+        let textFieldNumber = textField.text?.count ?? 0//todo
+        // 入力された文字数
+        let stringNumber = string.count
+        // 最大文字数以上ならfalseを返す
+        return textFieldNumber + stringNumber <= maxLength
+    }
+    // テキストフィールがタップされ、入力可能になったあと
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //todo
+        print(#function)
+        print("テキストフィールがタップされ、入力可能になったあと")
+        //TextFieldのキーボードを自動的に閉じる
+//        self.view.endEditing(true)
+    }
+    //キーボードを閉じる前
+    func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
+        //todo
+        print("キーボードを閉じる前")
+        return true
+    }
+    //キーボードを閉じたあと
+    func textFieldDidEndEditing(_ textField:UITextField){
+        //todo
+        print("キーボードを閉じた後")
+        // TextField 貸方金額　入力後
+        if textField.tag == 333 {
+            TextField_amount_credit.text = TextField_amount_debit.text
+        }
+    }
+    //リターンキーが押されたとき
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //todo
+        //resignFirstResponder()メソッドを利用します。
+        textField.resignFirstResponder()
+        print("キーボードを閉じる前")
+        // キーボードを閉じる処理
+//        self.view.endEditing(true)
+        print("キーボードを閉じた後")
+        return true
+    }
+    //TextField キーボード以外の部分をタッチ
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // touchesBeganメソッドをオーバーライドします。
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func Button_Input(_ sender: Any) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY/MM/dd"
+        // printによる出力はUTCになってしまうので、9時間ずれる
+        print("\(DatePicker.date)")
+        print("日付　　　　 " + "\(formatter.string(from: DatePicker.date))")
+        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
+        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
+        print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
+        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
+        print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
     }
     /*
     // MARK: - Navigation
