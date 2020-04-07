@@ -484,12 +484,15 @@
                                             </attributedString>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="取引内容" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
+                                    <textField opaque="NO" tag="555" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="取引内容" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
                                         <rect key="frame" x="2" y="485" width="371" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" smartQuotesType="yes"/>
+                                        <connections>
+                                            <action selector="TextField_SmallWritting:" destination="e0k-EA-w5f" eventType="touchUpInside" id="hXk-Qt-GUk"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3g-IS-J1T">
                                         <rect key="frame" x="1" y="435" width="375" height="50"/>
@@ -527,6 +530,7 @@
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="DatePicker" destination="at7-za-9iH" id="Ctw-Q8-Pm7"/>
+                        <outlet property="TextField_SmallWritting" destination="rih-f4-HCX" id="Dbd-x6-tWx"/>
                         <outlet property="TextField_amount_credit" destination="Nl1-2I-b4z" id="aWd-Zh-hCe"/>
                         <outlet property="TextField_amount_debit" destination="0n6-qv-73D" id="U7e-5C-W86"/>
                         <outlet property="TextField_category_credit" destination="A6X-6C-QV3" id="5VT-jW-brI"/>
