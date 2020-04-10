@@ -35,7 +35,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     }
     
     
-    @IBOutlet weak var DatePicker: UIDatePicker!
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
 
     func createDatePicker() {
@@ -87,20 +87,23 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         
         if  Interval! >= 0  {
             if  Interval1! <= 0  { //第四四半期の場合
-                DatePicker.minimumDate = ffff2.date(from: (nowStringPreviousYear + "-04-01"))
-                DatePicker.maximumDate = ffff2.date(from: (nowStringYear + "-03-31"))
+                datePicker.minimumDate = ffff2.date(from: (nowStringPreviousYear + "-04-01"))
+                datePicker.maximumDate = ffff2.date(from: (nowStringYear + "-03-31"))
                 //四月以降か
                 if Interval2! >= 0 { //第一四半期　以降
                     if Interval3! <= 0 { //第三四半期　以内
-                        DatePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
-                        DatePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
+                        datePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
+                        datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
                     }
                 }
             }
         }
-        print(DatePicker.minimumDate)
-        print(DatePicker.maximumDate)
- 
+        print("\(String(describing: datePicker.minimumDate))")
+        print("\(String(describing: datePicker.maximumDate))")
+        
+        datePicker.date = now
+        print("\(String(describing: datePicker.date))")
+
 //        print(fff.string(from: dayOfStartInPeriod))
 //        print(fff.string(from: dayOfEndInYear))
 //        print(fff.string(from: dayOfStartInYear))
@@ -344,8 +347,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/dd"
         // printによる出力はUTCになってしまうので、9時間ずれる
-        print("\(DatePicker.date)")
-        print("日付　　　　 " + "\(formatter.string(from: DatePicker.date))")
+        print("\(datePicker.date)")
+        print("日付　　　　 " + "\(formatter.string(from: datePicker.date))")
         print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
         print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
         print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
