@@ -10,8 +10,6 @@ import UIKit
 import RealmSwift
 
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
-
-    @IBOutlet weak var Button_Left: UIButton!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -37,6 +35,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
+    let now :Date = Date()
 
     func createDatePicker() {
         let f     = DateFormatter() //年
@@ -55,7 +54,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        dateFormatter.dateFormat = "YYYY-MM-DD"
         ffff2.dateFormat = "yyyy-MM-dd"
 
-        let now :Date = Date()
 //        var now :Date = Date()
 //        let now1 = fffff.string(from: Calendar.current.date(byAdding: .month, value: -3, to: now)!)
 //        now = fffff.date(from: now1)!
@@ -113,6 +111,30 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print(nowStringNextYear)
 //        Label_date.text = ffff.string(from: DatePicker.date)
     }
+    var diff :Int = 0
+    @IBOutlet weak var Button_Left: UIButton!
+    @IBAction func Button_Left(_ sender: UIButton) {
+        //todo
+        let min = datePicker.minimumDate!
+        if datePicker.date > min {
+            diff -= 1
+        }
+        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
+        datePicker.date = modifiedDate
+        print("\(String(describing: datePicker.date))")
+    }
+    @IBOutlet weak var Button_Right: UIButton!
+    @IBAction func Button_Right(_ sender: UIButton) {
+        //todo
+        let max = datePicker.maximumDate!
+        if datePicker.date < max {
+            diff += 1
+        }
+        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
+        datePicker.date = modifiedDate
+        print("\(String(describing: datePicker.date))")
+    }
+    
     
 //TextField
     @IBOutlet weak var TextField_category_debit: UITextField!

@@ -46,9 +46,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "barButtonTapped(_:)"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "keyboardWillHide(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,10 +62,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "ViewControllerJournalEntry"
-            landmarkType = "3">
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "keyboardWillShow(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -142,8 +142,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "barButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "barButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,9 +174,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "Button_Cancel(_:)"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "Button_Done(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -190,9 +190,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "Button_Cancel(_:)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "Button_Done(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -206,9 +206,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "Button_Cancel(_:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "Button_Done(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -222,10 +222,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "ViewControllerJournalEntry"
-            landmarkType = "3">
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "createTextFieldForSmallwritting()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -238,10 +238,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "ViewControllerJournalEntry"
-            landmarkType = "3">
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "keyboardWillShow(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -254,9 +254,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "textFieldShouldClear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -270,9 +270,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
-            landmarkName = "textFieldDidBeginEditing(_:)"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -286,9 +286,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "textFieldShouldEndEditing(_:)"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "textFieldDidBeginEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -302,9 +302,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "textFieldShouldReturn(_:)"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "textFieldDidEndEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -318,8 +318,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,9 +334,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "textFieldDidEndEditing(_:)"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "textFieldShouldEndEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -350,9 +350,9 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "textFieldDidEndEditing(_:)"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "textFieldShouldEndEditing(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -366,10 +366,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "textFieldDidEndEditing(_:)"
-            landmarkType = "7">
+            startingLineNumber = "340"
+            endingLineNumber = "340"
+            landmarkName = "ViewControllerJournalEntry"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -382,10 +382,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "textFieldShouldClear(_:)"
-            landmarkType = "7">
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "ViewControllerJournalEntry"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -398,10 +398,10 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "textFieldShouldClear(_:)"
-            landmarkType = "7">
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "ViewControllerJournalEntry"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -414,8 +414,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +430,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +446,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "textFieldShouldClear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,8 +462,8 @@
             filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "textFieldShouldClear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -481,6 +481,162 @@
             startingLineNumber = "104"
             endingLineNumber = "104"
             landmarkName = "createDatePicker()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4DF1D244-61A3-472B-BFEC-D64E6476CF5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Accountant/JournalEntry/ViewControllerJournalEntry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "Button_Left(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B30888F1-FF53-4632-BE27-47B4C33DE69C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "583">
+               </Location>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "862">
+               </Location>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "1371">
+               </Location>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "1881">
+               </Location>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "2391">
+               </Location>
+               <Location
+                  uuid = "3BD2096C-10CC-4C33-B92A-78BD5F81DCDF - 19197aa6d500e261"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Accountant.ViewControllerCategory.pickerView(_: __C.UIPickerView, didSelectRow: Swift.Int, inComponent: Swift.Int) -&gt; ()"
+                  moduleName = "Accountant"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thehisashi828/iKingdom/iOS/Accountant/v1.0/Program/src/Accountant/JournalEntry/ViewControllerCategory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "2901">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50404C64-0C1A-4FBB-B19E-A01FC5BC6E8E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Accountant/JournalEntry/ViewControllerCategory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
