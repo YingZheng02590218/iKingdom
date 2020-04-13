@@ -99,6 +99,50 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
      }
      // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //todo
+        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
+        var result :String
+        var count :Int
+        // ドラムロールの2列目か？
+        if component == 1 {
+            switch PickerView_category.selectedRow(inComponent: 0) {
+            case 0://"資産":
+                result = subCategories_assets[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_assets.count
+                break
+            case 1://"負債":
+                result = subCategories_liabilities[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_liabilities.count
+                break
+            case 2://"純資産":
+                result = subCategories_netAsset[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_netAsset.count
+                break
+            case 3://"費用":
+                result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_expends.count
+                break
+            case 4://"収益":
+                result = subCategories_revenue[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_revenue.count
+                break
+            default:
+                result = subCategories_expends[PickerView_category.selectedRow(inComponent: 1)] as String
+                count = subCategories_expends.count
+                break
+            }
+            //借方勘定科目と貸方勘定科目は同じか？
+            if viewControllerJournalEntry.TextField_category_debit.text  == result {
+                // ドラムロールの最大値か？
+                count -= 1
+                if count == row {
+                    PickerView_category.selectRow(row - 1, inComponent: 1, animated: true)
+                }else{
+                    PickerView_category.selectRow(row + 1, inComponent: 1, animated: true)
+    //            PickerView_category.selectRow(0, inComponent: 1, animated: false)
+                }
+            }
+        }
         //一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
         self.PickerView_category.reloadAllComponents()
     }
