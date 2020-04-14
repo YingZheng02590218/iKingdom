@@ -240,14 +240,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // UIKeyboardWillShow通知を受けて、実行される関数
     @objc func keyboardWillShow(_ notification: NSNotification){
         let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
-//         textField.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - textField.frame.height
-        print("キーボード高さ" + "\(keyboardHeight)")
-        print("スクリーン高さ-キーボード高さ" + "\(SCREEN_SIZE.height - keyboardHeight)")
-        print("スクリーン高さ" + "\(SCREEN_SIZE.height)")
+        print("スクリーン高さ          " + "\(SCREEN_SIZE.height)")
+        print("キーボードまでの高さ     " + "\(SCREEN_SIZE.height - keyboardHeight)")
+        print("キーボード高さ          " + "\(keyboardHeight)")
+//        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - TextField_SmallWritting.frame.height
     }
     // UIKeyboardWillShow通知を受けて、実行される関数
     @objc func keyboardWillHide(_ notification: NSNotification){
-//        textField.frame.origin.y = SCREEN_SIZE.height - textField.frame.height
+//        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - TextField_SmallWritting.frame.height
     }
     // TextFieldのキーボードについているBarButtonが押下された時
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
