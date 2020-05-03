@@ -88,11 +88,10 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 datePicker.minimumDate = ffff2.date(from: (nowStringPreviousYear + "-04-01"))
                 datePicker.maximumDate = ffff2.date(from: (nowStringYear + "-03-31"))
                 //四月以降か
-                if Interval2! >= 0 { //第一四半期　以降
-                    if Interval3! <= 0 { //第三四半期　以内
-                        datePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
-                        datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
-                    }
+            }else if Interval2! >= 0 { //第一四半期　以降
+                if Interval3! <= 0 { //第三四半期　以内
+                    datePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
+                    datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
                 }
             }
         }
