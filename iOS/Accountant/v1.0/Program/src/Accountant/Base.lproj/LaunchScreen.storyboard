@@ -18,15 +18,20 @@
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="sSL-xp-tCX">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wait a second..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0I-36-68R">
-                                        <rect key="frame" x="303.3293885601538" y="650.15779092703497" width="414.00000000000006" height="67.999999999999886"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait a second..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0I-36-68R">
+                                        <rect key="frame" x="305" y="650" width="414" height="68"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="l0I-36-68R" secondAttribute="trailing" constant="305" id="HQg-IN-4GA"/>
+                                    <constraint firstAttribute="bottom" secondItem="l0I-36-68R" secondAttribute="bottom" constant="648" id="Ifz-wJ-aJT"/>
+                                    <constraint firstItem="l0I-36-68R" firstAttribute="top" secondItem="sSL-xp-tCX" secondAttribute="top" constant="650" id="Igt-TI-zRm"/>
+                                    <constraint firstItem="l0I-36-68R" firstAttribute="leading" secondItem="sSL-xp-tCX" secondAttribute="leading" constant="305" id="Nzq-Dn-GaC"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
