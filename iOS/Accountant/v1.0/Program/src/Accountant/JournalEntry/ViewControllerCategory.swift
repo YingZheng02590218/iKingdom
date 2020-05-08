@@ -47,8 +47,16 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         subCategories_revenue = [
             "売上","受取利息","有価証券利息","雑益","固定資産売却益"]
 
-        PickerView_category.selectRow(0, inComponent: 0, animated: false)
-        PickerView_category.selectRow(0, inComponent: 1, animated: false)
+    //Segueを場合分け　初期値
+        if identifier == "identifier_debit" {//借方　資産　現金
+            PickerView_category.selectRow(0, inComponent: 0, animated: false)
+            PickerView_category.selectRow(0, inComponent: 1, animated: false)
+        }else if identifier == "identifier_credit" {//貸方　費用　仕入
+            PickerView_category.selectRow(3, inComponent: 0, animated: false)
+            PickerView_category.selectRow(0, inComponent: 1, animated: false)
+        }
+        //借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
+        self.PickerView_category.reloadAllComponents()
     }
 //UIPickerView
     //UIPickerViewの列の数 コンポーネントの数
