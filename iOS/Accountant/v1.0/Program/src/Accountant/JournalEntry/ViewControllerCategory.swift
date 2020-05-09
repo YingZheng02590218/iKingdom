@@ -140,7 +140,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
                 break
             }
             //借方勘定科目と貸方勘定科目は同じか？
-            if viewControllerJournalEntry.TextField_category_debit.text  == result {
+            if viewControllerJournalEntry.TextField_category_debit.text  == result ||
+                viewControllerJournalEntry.TextField_category_credit.text  == result {
                 // ドラムロールの最大値か？
                 count -= 1
                 if count == row {
@@ -190,7 +191,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
             break
         }
         //借方勘定科目と貸方勘定科目は同じか？
-        if viewControllerJournalEntry.TextField_category_debit.text  == result {
+        if viewControllerJournalEntry.TextField_category_debit.text  == result ||
+            viewControllerJournalEntry.TextField_category_credit.text  == result {
             // ドラムロールの最大値か？
             count -= 1
             if count == PickerView_category.selectedRow(inComponent: 1) {
@@ -205,10 +207,17 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         //Segueを場合分け
             if identifier == "identifier_debit" {
                 viewControllerJournalEntry.TextField_category_debit.text = result  //ここで値渡し
-                viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
+                if viewControllerJournalEntry.TextField_amount_debit.text == "金額" {
+                    viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
+                }
+                viewControllerJournalEntry.Label_Popup.text = ""//ポップアップの文字表示をクリア
             }else if identifier == "identifier_credit" {
                 viewControllerJournalEntry.TextField_category_credit.text = result  //ここで値渡し
-                viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
+//                viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
+                if viewControllerJournalEntry.TextField_SmallWritting.text == "取引内容" {
+                    viewControllerJournalEntry.TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
+                }
+                viewControllerJournalEntry.Label_Popup.text = ""//ポップアップの文字表示をクリア
             }
             self.dismiss(animated: true, completion: nil)
         }
@@ -218,10 +227,10 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
         //Segueを場合分け
         if identifier == "identifier_debit" {
-            viewControllerJournalEntry.TextField_category_debit.text = ""  //ここで値渡し
+            viewControllerJournalEntry.TextField_category_debit.text = "勘定科目"  //ここで値渡し
 //            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
         }else if identifier == "identifier_credit" {
-            viewControllerJournalEntry.TextField_category_credit.text = ""  //ここで値渡し
+            viewControllerJournalEntry.TextField_category_credit.text = "勘定科目"  //ここで値渡し
 //            viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
         }
         self.dismiss(animated: true, completion: nil)
