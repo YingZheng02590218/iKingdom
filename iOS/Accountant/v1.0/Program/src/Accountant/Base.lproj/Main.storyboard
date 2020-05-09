@@ -85,9 +85,10 @@
                                         <constraint firstAttribute="width" secondItem="sU1-Ca-Ncn" secondAttribute="height" multiplier="512:25" id="MiD-iL-dxF"/>
                                     </constraints>
                                     <items>
+                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zNh-Dy-EMC"/>
                                         <barButtonItem style="plain" id="fPC-w5-scV">
                                             <view key="customView" contentMode="scaleToFill" id="cpx-Df-Nl4">
-                                                <rect key="frame" x="20" y="3" width="181" height="44"/>
+                                                <rect key="frame" x="421.5" y="3" width="181" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcc-Df-EXO" userLabel="list_heading">
@@ -104,7 +105,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="0.94895765590000003" blue="0.88722921990000003" alpha="0.55412564210000004" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="tcc-Df-EXO" firstAttribute="centerX" secondItem="cpx-Df-Nl4" secondAttribute="centerX" id="61K-u7-XrQ"/>
@@ -114,7 +115,7 @@
                                                 </constraints>
                                             </view>
                                         </barButtonItem>
-                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="zNh-Dy-EMC"/>
+                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="SzX-by-Spk"/>
                                         <barButtonItem style="plain" systemItem="add" id="nxa-q0-hvw">
                                             <connections>
                                                 <segue destination="e0k-EA-w5f" kind="presentation" id="uCQ-Hu-dfD"/>
@@ -144,6 +145,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="KJy-xe-WoY" secondAttribute="height" multiplier="41:25" id="5pN-Gy-zcj"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.5"/>
@@ -162,6 +166,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="NZ3-Yb-aOE" secondAttribute="height" multiplier="101:10" id="DyA-vW-R6l"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.5"/>
@@ -187,6 +194,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="gNc-RV-6l7" secondAttribute="height" multiplier="41:25" id="ezo-I2-6Jp"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.5"/>
@@ -194,7 +204,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp">
-                                            <rect key="frame" x="669" y="0.0" width="177.5" height="50"/>
+                                            <rect key="frame" x="669" y="0.0" width="177" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xIO-Lc-Pc5" userLabel="list_debit">
                                                     <rect key="frame" x="0.0" y="6" width="178" height="40"/>
@@ -205,6 +215,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="JHr-XB-bqp" secondAttribute="height" multiplier="177:50" id="yoq-HB-i8M"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.5"/>
@@ -223,6 +236,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="xOq-R1-al2" secondAttribute="height" multiplier="89:25" id="vkF-mi-qGB"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.5"/>
@@ -233,6 +249,7 @@
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="gNc-RV-6l7" firstAttribute="leading" secondItem="NZ3-Yb-aOE" secondAttribute="trailing" id="0Tj-Kj-vka"/>
+                                        <constraint firstItem="xOq-R1-al2" firstAttribute="leading" secondItem="JHr-XB-bqp" secondAttribute="trailing" id="53J-VY-z25"/>
                                         <constraint firstItem="KJy-xe-WoY" firstAttribute="top" secondItem="Wp9-Oh-Zng" secondAttribute="top" id="5wb-p6-KuJ"/>
                                         <constraint firstAttribute="bottom" secondItem="KJy-xe-WoY" secondAttribute="bottom" id="83H-uk-hmh"/>
                                         <constraint firstItem="xOq-R1-al2" firstAttribute="top" secondItem="Wp9-Oh-Zng" secondAttribute="top" id="9cC-m2-uoe"/>
@@ -243,13 +260,8 @@
                                         <constraint firstAttribute="bottom" secondItem="xOq-R1-al2" secondAttribute="bottom" id="S2c-nb-VFC"/>
                                         <constraint firstItem="NZ3-Yb-aOE" firstAttribute="top" secondItem="Wp9-Oh-Zng" secondAttribute="top" id="TR8-7Q-EZB"/>
                                         <constraint firstAttribute="trailing" secondItem="xOq-R1-al2" secondAttribute="trailing" id="Wpy-QS-fl9"/>
-                                        <constraint firstItem="xOq-R1-al2" firstAttribute="leading" secondItem="Wp9-Oh-Zng" secondAttribute="leading" constant="846" id="Xoa-6a-jBO"/>
-                                        <constraint firstAttribute="trailing" secondItem="NZ3-Yb-aOE" secondAttribute="trailing" constant="437" id="aCO-YE-PtD"/>
-                                        <constraint firstItem="NZ3-Yb-aOE" firstAttribute="leading" secondItem="Wp9-Oh-Zng" secondAttribute="leading" constant="82" id="axT-j7-8On"/>
                                         <constraint firstItem="KJy-xe-WoY" firstAttribute="leading" secondItem="Wp9-Oh-Zng" secondAttribute="leading" id="cb9-Kb-XJ7"/>
                                         <constraint firstAttribute="bottom" secondItem="JHr-XB-bqp" secondAttribute="bottom" id="g7E-q5-QLR"/>
-                                        <constraint firstItem="JHr-XB-bqp" firstAttribute="leading" secondItem="Wp9-Oh-Zng" secondAttribute="leading" constant="669" id="kco-3m-hpa"/>
-                                        <constraint firstAttribute="trailing" secondItem="JHr-XB-bqp" secondAttribute="trailing" constant="177.5" id="kvx-8Y-8nG"/>
                                         <constraint firstItem="gNc-RV-6l7" firstAttribute="top" secondItem="Wp9-Oh-Zng" secondAttribute="top" id="o8O-hp-ytR"/>
                                         <constraint firstItem="JHr-XB-bqp" firstAttribute="leading" secondItem="gNc-RV-6l7" secondAttribute="trailing" id="smD-hd-HTN"/>
                                     </constraints>
@@ -280,7 +292,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="82" height="30"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eDf-Qm-jtQ" userLabel="list_date">
-                                                    <rect key="frame" x="-8" y="0.0" width="82" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="82" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -288,6 +300,9 @@
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="41:15" id="gRG-fv-oUJ"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <real key="value" value="0.29999999999999999"/>
@@ -393,7 +408,6 @@
                                         <constraint firstAttribute="bottom" secondItem="LnB-Zo-l5J" secondAttribute="bottom" id="Wpt-z4-3BI"/>
                                         <constraint firstItem="Y6V-Oo-hoJ" firstAttribute="leading" secondItem="LnB-Zo-l5J" secondAttribute="trailing" id="eh8-BL-4Xy"/>
                                         <constraint firstAttribute="bottom" secondItem="bkL-Dh-ed9" secondAttribute="bottom" id="ejD-af-DT0"/>
-                                        <constraint firstItem="Y6V-Oo-hoJ" firstAttribute="leading" secondItem="LnB-Zo-l5J" secondAttribute="trailing" id="f0B-4t-wgU"/>
                                         <constraint firstAttribute="bottom" secondItem="aJX-uJ-Vz7" secondAttribute="bottom" id="hUu-nk-FaF"/>
                                         <constraint firstAttribute="trailing" secondItem="aJX-uJ-Vz7" secondAttribute="trailing" id="nB8-Me-EqW"/>
                                         <constraint firstItem="LnB-Zo-l5J" firstAttribute="leading" secondItem="bkL-Dh-ed9" secondAttribute="trailing" id="nSL-Lg-3SE"/>
@@ -556,7 +570,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="222" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3">
-                                                        <rect key="frame" x="185" y="0.0" width="185" height="50"/>
+                                                        <rect key="frame" x="190" y="0.0" width="185" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -581,11 +595,12 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                         <connections>
-                                                            <action selector="TextField_amount_debit:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
+                                                            <action selector="TextField_amount_debit_valueChanged:" destination="e0k-EA-w5f" eventType="valueChanged" id="cVi-b7-8Jz"/>
+                                                            <action selector="TextField_amount_debit_valueChanged:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
-                                                        <rect key="frame" x="185" y="0.0" width="185" height="50"/>
+                                                        <rect key="frame" x="190" y="0.0" width="185" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -652,6 +667,13 @@
                                                     <action selector="Button_Input:" destination="e0k-EA-w5f" eventType="touchUpInside" id="ndK-ft-jJ6"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLM-e1-tcf">
+                                                <rect key="frame" x="38" y="101" width="298" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
@@ -672,6 +694,7 @@
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="Button_Right" destination="PjN-lY-iO7" id="FOr-3K-heX"/>
+                        <outlet property="Label_Popup" destination="BLM-e1-tcf" id="VGx-zJ-wRO"/>
                         <outlet property="TextField_SmallWritting" destination="rih-f4-HCX" id="Dbd-x6-tWx"/>
                         <outlet property="TextField_amount_credit" destination="Nl1-2I-b4z" id="aWd-Zh-hCe"/>
                         <outlet property="TextField_amount_debit" destination="0n6-qv-73D" id="U7e-5C-W86"/>
@@ -683,7 +706,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdC-nl-nIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="h72-Iq-fc2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1448.8" y="2039.408866995074"/>
+            <point key="canvasLocation" x="1448.4375" y="2039.3850658857978"/>
         </scene>
         <!--勘定科目-->
         <scene sceneID="I6c-Xs-v0Z">

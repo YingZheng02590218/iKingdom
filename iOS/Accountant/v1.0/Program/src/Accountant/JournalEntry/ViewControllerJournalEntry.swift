@@ -197,6 +197,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
         cancelItem.tag = 55
         toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+//        doneButtonItem.isEnabled = false
         TextField_amount_debit.inputAccessoryView = toolbar
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
@@ -211,7 +212,19 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
         cancelItem2.tag = 66
         toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
+//        doneButtonItem2.isEnabled = false
         TextField_amount_credit.inputAccessoryView = toolbar2
+        
+        // TextFieldに入力された値に反応
+        TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+        TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+    }
+    // TextFieldに入力され値が変化した時の処理の関数
+    @objc func textFieldDidChange(_ sender: UITextField) {
+//    func textFieldEditingChanged(_ sender: UITextField){
+        if sender.text != "" {
+            print("\(String(describing: sender.text))")
+        }
     }
     
     @IBOutlet weak var TextField_SmallWritting: UITextField!
@@ -238,10 +251,10 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     let SCREEN_SIZE = UIScreen.main.bounds.size
     // UIKeyboardWillShow通知を受けて、実行される関数
     @objc func keyboardWillShow(_ notification: NSNotification){
-        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
-        print("スクリーン高さ          " + "\(SCREEN_SIZE.height)")
-        print("キーボードまでの高さ     " + "\(SCREEN_SIZE.height - keyboardHeight)")
-        print("キーボード高さ          " + "\(keyboardHeight)")
+//        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
+//        print("スクリーン高さ          " + "\(SCREEN_SIZE.height)")
+//        print("キーボードまでの高さ     " + "\(SCREEN_SIZE.height - keyboardHeight)")
+//        print("キーボード高さ          " + "\(keyboardHeight)")
 //        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - TextField_SmallWritting.frame.height
     }
     // UIKeyboardWillShow通知を受けて、実行される関数
@@ -252,33 +265,56 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 5://借方金額の場合 Done
-            // キーボードを閉じる
-            self.view.endEditing(true)
-            //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
-            TextField_category_credit.becomeFirstResponder()
+            if TextField_amount_debit.text == "0"{
+                TextField_amount_debit.text = ""
+                Label_Popup.text = "金額が0となっています"
+            }else if TextField_amount_debit.text == ""{
+                Label_Popup.text = "金額が空白となっています"
+            }else{
+                // キーボードを閉じる
+                self.view.endEditing(true)
+                if TextField_category_credit.text == "勘定科目" {
+                    //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
+                    TextField_category_credit.becomeFirstResponder()
+                }
+                Label_Popup.text = ""
+            }
             break
         case 6://貸方金額の場合 Done
-            self.view.endEditing(true)
-            // カーソルを小書きへ移す
-            self.TextField_SmallWritting.becomeFirstResponder()
+            if TextField_amount_credit.text == "0"{
+                TextField_amount_credit.text = ""
+                Label_Popup.text = "金額が0となっています"
+            }else if TextField_amount_credit.text == ""{
+                Label_Popup.text = "金額が空白となっています"
+            }else{
+                self.view.endEditing(true)
+                if TextField_SmallWritting.text == "取引内容" {
+                    // カーソルを小書きへ移す
+                    self.TextField_SmallWritting.becomeFirstResponder()
+                }
+                Label_Popup.text = ""
+            }
             break
         case 7://小書きの場合 Done
             self.view.endEditing(true)
+            if TextField_SmallWritting.text == "" {
+                TextField_SmallWritting.text = "取引内容"
+            }
             break
         case 55://借方金額の場合 Cancel
             self.view.endEditing(true)
-            TextField_amount_debit.text = ""
+                TextField_amount_debit.text = "金額"
             break
         case 66://貸方金額の場合 Cancel
             self.view.endEditing(true)
-            TextField_amount_credit.text = ""
+                TextField_amount_credit.text = "金額"
             break
         case 77://小書きの場合 Cancel
             self.view.endEditing(true)
-            TextField_SmallWritting.text = ""
+                TextField_SmallWritting.text = "取引内容"
             break
         default:
-            self.view.endEditing(true)
+                self.view.endEditing(true)
             break
         }
     }
@@ -290,6 +326,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     //    textFieldShouldEndEditing
     //    textFieldDidEndEditing
     //    textFieldShouldReturn
+    // テキストフィールがタップされ、入力可能になったあと
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        //todo
+//        print(#function)
+        print("テキストフィールがタップされ、入力可能になったあと")
+        //TextFieldのキーボードを自動的に閉じる
+//        self.view.endEditing(true)
+    }
+    // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         //todo
         if textField.text == "勘定科目" {
@@ -324,46 +369,64 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // 最大文字数以上ならfalseを返す
         return textFieldNumber + stringNumber <= maxLength
     }
-    // テキストフィールがタップされ、入力可能になったあと
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //todo
-        print(#function)
-        print("テキストフィールがタップされ、入力可能になったあと")
-        //TextFieldのキーボードを自動的に閉じる
-//        self.view.endEditing(true)
-    }
-    //キーボードを閉じる前
-    func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
-        //todo
-        print("キーボードを閉じる前")
-        return true
-    }
-    //キーボードを閉じたあと
-    func textFieldDidEndEditing(_ textField:UITextField){
-        //todo
-        print("キーボードを閉じた後")
-        // TextField 貸方金額　入力後
-        if textField.tag == 333 {
-            TextField_amount_credit.text = TextField_amount_debit.text
-        }
-    }
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //todo
-        //resignFirstResponder()メソッドを利用します。
-        textField.resignFirstResponder()
-        print("キーボードを閉じる前")
+//        print("キーボードを閉じる前")
         // キーボードを閉じる処理
 //        self.view.endEditing(true)
-        print("キーボードを閉じた後")
-        return true
+//        print("キーボードを閉じた後")
+        //todo
+        switch textField.text {
+        case "勘定科目":
+            Label_Popup.text = "勘定科目を入力してください"
+            return false
+        case "":// ありえない　リターンキーを押せないため
+            Label_Popup.text = "空白となっています"
+            return false
+        case "金額":
+            Label_Popup.text = "金額を入力してください"
+            return false
+        case "0":
+            textField.text = ""
+            Label_Popup.text = "金額が0となっています"
+            return false
+        default:
+            Label_Popup.text = ""//ポップアップの文字表示をクリア
+            //resignFirstResponder()メソッドを利用します。
+            textField.resignFirstResponder()
+            return true
+        }
     }
     //TextField キーボード以外の部分をタッチ
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // touchesBeganメソッドをオーバーライドします。
         self.view.endEditing(true)
     }
+    //キーボードを閉じる前
+    func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
+        //todo
+//        print(#function)
+        print("キーボードを閉じる前")
+        return true
+    }
+    //キーボードを閉じたあと
+    func textFieldDidEndEditing(_ textField:UITextField){
+        //todo
+//        print(#function)
+        print("キーボードを閉じた後")
+        // TextField 貸方金額　入力後
+        if textField.tag == 333 {
+            if TextField_amount_debit.text != "" {
+                TextField_amount_credit.text = TextField_amount_debit.text
+            }
+        }else if textField.tag == 444 {
+            if TextField_amount_credit.text != "" {
+                TextField_amount_debit.text = TextField_amount_credit.text
+            }
+        }
+    }
     
+    @IBOutlet weak var Label_Popup: UILabel!
     @IBAction func Button_Input(_ sender: Any) {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/dd"
@@ -375,6 +438,38 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
         print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
         print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
+        
+        if TextField_category_debit.text != "勘定科目" && TextField_category_debit.text != "" {
+            if TextField_category_credit.text != "勘定科目" && TextField_category_credit.text != "" {
+                if TextField_amount_debit.text != "金額" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
+                    if TextField_amount_credit.text != "金額" && TextField_amount_credit.text != "" && TextField_amount_credit.text != "0" {
+                        if TextField_SmallWritting.text == "取引内容" {
+                            TextField_SmallWritting.text = ""
+                        }
+                        self.dismiss(animated: true, completion: nil)
+                    // 入力チェック　エラー　ポップアップを表示したい
+                    // Tode
+        //            self.dismiss(animated: true, completion: nil)
+                    }else{
+                        Label_Popup.text = "金額を入力してください"
+                        //未入力のTextFieldのキーボードを自動的に表示する
+                        TextField_amount_credit.becomeFirstResponder()
+                    }
+                }else{
+                    Label_Popup.text = "金額を入力してください"
+                    //未入力のTextFieldのキーボードを自動的に表示する
+                    TextField_amount_debit.becomeFirstResponder()
+                }
+            }else{
+                Label_Popup.text = "勘定科目を入力してください"
+                //未入力のTextFieldのキーボードを自動的に表示する
+                TextField_category_credit.becomeFirstResponder()
+            }
+        }else{
+            Label_Popup.text = "勘定科目を入力してください"
+            //未入力のTextFieldのキーボードを自動的に表示する
+            TextField_category_debit.becomeFirstResponder()
+        }
     }
     /*
     // MARK: - Navigation

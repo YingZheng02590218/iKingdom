@@ -195,12 +195,12 @@
 			isa = PBXGroup;
 			children = (
 				F9CF22E42424F46500572070 /* TableViewControllerJournalEntry.swift */,
-				F9CF22E82425FDEF00572070 /* ViewA.swift */,
 				F9CF22E62425016E00572070 /* TableViewCell.swift */,
-				F90114132412A02F009DBE2F /* JournalEntry.swift */,
 				F92EA9372428B18100B721C3 /* ViewControllerJournalEntry.swift */,
 				F9B81D512430877B00F01630 /* ViewControllerCategory.swift */,
 				F97074022434C0FA00902776 /* Pickerkeyboard.swift */,
+				F90114132412A02F009DBE2F /* JournalEntry.swift */,
+				F9CF22E82425FDEF00572070 /* ViewA.swift */,
 			);
 			path = JournalEntry;
 			sourceTree = "<group>";
@@ -709,7 +709,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = AccountantTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -751,6 +753,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = AccountantUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
