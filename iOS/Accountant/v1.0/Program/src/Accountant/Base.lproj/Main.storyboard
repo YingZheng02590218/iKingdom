@@ -631,7 +631,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" smartQuotesType="yes"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                 <connections>
                                                     <action selector="TextField_SmallWritting:" destination="e0k-EA-w5f" eventType="touchUpInside" id="hXk-Qt-GUk"/>
                                                 </connections>
