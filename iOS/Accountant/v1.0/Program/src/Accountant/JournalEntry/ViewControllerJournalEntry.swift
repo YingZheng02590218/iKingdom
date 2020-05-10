@@ -417,11 +417,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // TextField 貸方金額　入力後
         if textField.tag == 333 {
             if TextField_amount_debit.text != "" {
-                TextField_amount_credit.text = TextField_amount_debit.text
+                TextField_amount_credit.text = TextField_amount_debit.text // 借方金額を貸方金額に表示
+            }
+            if TextField_category_credit.text == "勘定科目" {//貸方勘定科目が未入力の場合
+                //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
+                TextField_category_credit.becomeFirstResponder()
             }
         }else if textField.tag == 444 {
             if TextField_amount_credit.text != "" {
-                TextField_amount_debit.text = TextField_amount_credit.text
+                TextField_amount_debit.text = TextField_amount_credit.text // 貸方金額を借方金額に表示
             }
         }
     }
