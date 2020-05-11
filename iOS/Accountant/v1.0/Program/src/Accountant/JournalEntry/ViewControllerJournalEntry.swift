@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RealmSwift
+import RealmSwift // データベースのインポート
+
 
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
@@ -61,7 +62,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print(ff.string(from: now))//月
 //        print(fff.string(from: now))//月日
 //        print(ffff.string(from: now))//年月日
-        print(now)
+//        print(now)
 
         let nowStringYear = f.string(from: now)//年
         let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!)//年
@@ -95,11 +96,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        print("\(String(describing: datePicker.minimumDate))")
-        print("\(String(describing: datePicker.maximumDate))")
-        
+//        print("\(String(describing: datePicker.minimumDate))")
+//        print("\(String(describing: datePicker.maximumDate))")
+//
         datePicker.date = now
-        print("\(String(describing: datePicker.date))")
+//        print("\(String(describing: datePicker.date))")
 
 //        print(fff.string(from: dayOfStartInPeriod))
 //        print(fff.string(from: dayOfEndInYear))
@@ -120,7 +121,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
         let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
         datePicker.date = modifiedDate
-        print("\(String(describing: datePicker.date))")
+//        print("\(String(describing: datePicker.date))")
     }
     @IBOutlet weak var Button_Right: UIButton!
     @IBAction func Button_Right(_ sender: UIButton) {
@@ -131,7 +132,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
         let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
         datePicker.date = modifiedDate
-        print("\(String(describing: datePicker.date))")
+//        print("\(String(describing: datePicker.date))")
     }
     
     
@@ -430,19 +431,21 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // 入力ボタン
     @IBOutlet weak var Label_Popup: UILabel!
     @IBAction func Button_Input(_ sender: Any) {
+        // シスログ出力
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/dd"
         // printによる出力はUTCになってしまうので、9時間ずれる
-        print("\(datePicker.date)")
-        print("日付　　　　 " + "\(formatter.string(from: datePicker.date))")
-        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
-        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
-        print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
-        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
-        print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
-        
+//        print("\(datePicker.date)")
+//        print("日付　　　　 " + "\(formatter.string(from: datePicker.date))")
+//        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
+//        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
+//        print("借方金額　　 " + "\(String(describing: TextField_amount_debit.text))")
+//        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
+//        print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
+        // 入力チェック
         if TextField_category_debit.text != "勘定科目" && TextField_category_debit.text != "" {
             if TextField_category_credit.text != "勘定科目" && TextField_category_credit.text != "" {
                 if TextField_amount_debit.text != "金額" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
@@ -450,10 +453,38 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         if TextField_SmallWritting.text == "取引内容" {
                             TextField_SmallWritting.text = ""
                         }
+                        // データベース
+                        // オブジェクトを作成
+//                        var amount_debit:Int? = Int(TextField_amount_debit.text!)
+//                        var amount_credit:Int? = Int(TextField_amount_credit.text!)
+//                        let journalEntry = JournalEntry(value: [2,
+//                                                                formatter.string(from: datePicker.date),
+//                                                                "\(String(describing: TextField_category_debit.text))",
+//                                                                Int(TextField_amount_debit.text!),
+//                                                                "\(String(describing: TextField_category_credit.text))",
+//                                                                Int(TextField_amount_credit.text!),
+//                                                                "\(String(describing: TextField_SmallWritting.text))"
+//                        ])
+                        // データベース　書き込み
+                        let journalEntry = JournalEntry() //仕訳
+                // ToDo 自動採番にしたい
+//                        journalEntry.number = 2
+                        journalEntry.date = formatter.string(from: datePicker.date)     //日付
+                        journalEntry.debit_category = TextField_category_debit.text!    //借方勘定
+                        journalEntry.debit_amount = Int(TextField_amount_debit.text!)!  //借方金額 Int型(TextField.text アンラップ)
+                        journalEntry.credit_category = TextField_category_credit.text!  //貸方勘定
+                        journalEntry.credit_amount = Int(TextField_amount_credit.text!)!//貸方金額 Int型(TextField.text アンラップ)
+                        journalEntry.smallWritting = TextField_SmallWritting.text!      //小書き
+print(journalEntry)
+                        // (1)Realmのインスタンスを生成する
+                        let realm = try! Realm()
+                        // (2)書き込みトランザクション内でデータを追加する
+                        try! realm.write {
+                            journalEntry.save() //仕分け番号　自動採番
+                            realm.add(journalEntry)
+                        }
+
                         self.dismiss(animated: true, completion: nil)
-                    // 入力チェック　エラー　ポップアップを表示したい
-                    // Tode
-        //            self.dismiss(animated: true, completion: nil)
                     }else{
                         Label_Popup.text = "金額を入力してください"
                         //未入力のTextFieldのキーボードを自動的に表示する
@@ -465,12 +496,12 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_amount_debit.becomeFirstResponder()
                 }
             }else{
-                Label_Popup.text = "勘定科目を入力してください"
+                Label_Popup.text = "貸方勘定科目を入力してください"
                 //未入力のTextFieldのキーボードを自動的に表示する
                 TextField_category_credit.becomeFirstResponder()
             }
         }else{
-            Label_Popup.text = "勘定科目を入力してください"
+            Label_Popup.text = "借方勘定科目を入力してください"
             //未入力のTextFieldのキーボードを自動的に表示する
             TextField_category_debit.becomeFirstResponder()
         }

@@ -198,8 +198,8 @@
 				F9CF22E62425016E00572070 /* TableViewCell.swift */,
 				F92EA9372428B18100B721C3 /* ViewControllerJournalEntry.swift */,
 				F9B81D512430877B00F01630 /* ViewControllerCategory.swift */,
-				F97074022434C0FA00902776 /* Pickerkeyboard.swift */,
 				F90114132412A02F009DBE2F /* JournalEntry.swift */,
+				F97074022434C0FA00902776 /* Pickerkeyboard.swift */,
 				F9CF22E82425FDEF00572070 /* ViewA.swift */,
 			);
 			path = JournalEntry;
