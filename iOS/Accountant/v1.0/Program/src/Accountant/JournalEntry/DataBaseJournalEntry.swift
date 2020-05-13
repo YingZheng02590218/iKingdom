@@ -9,14 +9,14 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-class JournalEntry: RObject {
+class DataBaseJournalEntry: RObject {
     // モデル定義
-//    @objc dynamic var number: Int = 0                   //非オプショナル型
+//    @objc dynamic var number: Int = 0                 //非オプショナル型
     @objc dynamic var date: String = ""                 //非オプショナル型
     @objc dynamic var debit_category: String = ""       //非オプショナル型
-    @objc dynamic var debit_amount: Int = 0                   //非オプショナル型
+    @objc dynamic var debit_amount: Int = 0             //非オプショナル型
     @objc dynamic var credit_category: String = ""      //非オプショナル型
-    @objc dynamic var credit_amount: Int = 0                  //非オプショナル型
+    @objc dynamic var credit_amount: Int = 0            //非オプショナル型
     @objc dynamic var smallWritting: String = ""        //非オプショナル型
 }
 

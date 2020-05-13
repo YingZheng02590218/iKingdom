@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import RealmSwift // データベースのインポート
-
 
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
@@ -352,6 +350,12 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //todo
         print("テキストフィールド入力中")
+        //入力チェック　数字のみｂに制限
+        if textField == TextField_amount_debit || textField == TextField_amount_credit {
+            let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
         // 文字数最大値を定義
         var maxLength: Int = 0
         
@@ -370,6 +374,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // 最大文字数以上ならfalseを返す
         return textFieldNumber + stringNumber <= maxLength
     }
+
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        print("キーボードを閉じる前")
@@ -453,38 +458,25 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         if TextField_SmallWritting.text == "取引内容" {
                             TextField_SmallWritting.text = ""
                         }
-                        // データベース
-                        // オブジェクトを作成
-//                        var amount_debit:Int? = Int(TextField_amount_debit.text!)
-//                        var amount_credit:Int? = Int(TextField_amount_credit.text!)
-//                        let journalEntry = JournalEntry(value: [2,
-//                                                                formatter.string(from: datePicker.date),
-//                                                                "\(String(describing: TextField_category_debit.text))",
-//                                                                Int(TextField_amount_debit.text!),
-//                                                                "\(String(describing: TextField_category_credit.text))",
-//                                                                Int(TextField_amount_credit.text!),
-//                                                                "\(String(describing: TextField_SmallWritting.text))"
-//                        ])
-                        // データベース　書き込み
-                        let journalEntry = JournalEntry() //仕訳
-                // ToDo 自動採番にしたい
-//                        journalEntry.number = 2
-                        journalEntry.date = formatter.string(from: datePicker.date)     //日付
-                        journalEntry.debit_category = TextField_category_debit.text!    //借方勘定
-                        journalEntry.debit_amount = Int(TextField_amount_debit.text!)!  //借方金額 Int型(TextField.text アンラップ)
-                        journalEntry.credit_category = TextField_category_credit.text!  //貸方勘定
-                        journalEntry.credit_amount = Int(TextField_amount_credit.text!)!//貸方金額 Int型(TextField.text アンラップ)
-                        journalEntry.smallWritting = TextField_SmallWritting.text!      //小書き
-print(journalEntry)
-                        // (1)Realmのインスタンスを生成する
-                        let realm = try! Realm()
-                        // (2)書き込みトランザクション内でデータを追加する
-                        try! realm.write {
-                            journalEntry.save() //仕分け番号　自動採番
-                            realm.add(journalEntry)
-                        }
+
+                        // データベース　仕訳データを追加
+                        let dataBaseManager = DataBaseManager() //データベースマネジャー
+                        // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
+                        dataBaseManager.addJournalEntry(
+                            date: formatter.string(from: datePicker.date),
+                            debit_category: TextField_category_debit.text!,
+                            debit_amount: Int(TextField_amount_debit.text!)!,
+                            credit_category: TextField_category_credit.text!,
+                            credit_amount: Int(TextField_amount_credit.text!)!,
+                            smallWritting: TextField_SmallWritting.text!
+                        )
 
                         self.dismiss(animated: true, completion: nil)
+//                        dismiss(animated: true, completion: {
+//                                [presentingViewController] () -> Void in
+//                                    // 閉じた時に行いたい処理
+//                                    presentingViewController?.viewWillAppear(true)
+//                        })
                     }else{
                         Label_Popup.text = "金額を入力してください"
                         //未入力のTextFieldのキーボードを自動的に表示する
