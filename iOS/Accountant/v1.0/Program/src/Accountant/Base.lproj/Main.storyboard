@@ -294,7 +294,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eDf-Qm-jtQ" userLabel="list_date">
                                                     <rect key="frame" x="0.0" y="0.0" width="82" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -312,8 +312,26 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkL-Dh-ed9">
                                             <rect key="frame" x="82" y="0.0" width="505" height="30"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk3-Ha-t3F" userLabel="label_list_summary_debit">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Mk3-Ha-t3F" secondAttribute="height" multiplier="4:1" id="qVy-Hm-OIq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxD-kV-wBI" userLabel="label_list_summary_credit">
+                                                    <rect key="frame" x="120" y="0.0" width="120" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="VxD-kV-wBI" secondAttribute="height" multiplier="4:1" id="NeH-SX-Gqh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TkY-SG-PWu" userLabel="list_summary">
-                                                    <rect key="frame" x="0.0" y="0.0" width="505" height="30"/>
+                                                    <rect key="frame" x="240" y="0.0" width="265" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
@@ -322,7 +340,14 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
+                                                <constraint firstItem="VxD-kV-wBI" firstAttribute="leading" secondItem="Mk3-Ha-t3F" secondAttribute="trailing" id="29P-jx-hPg"/>
                                                 <constraint firstAttribute="width" secondItem="bkL-Dh-ed9" secondAttribute="height" multiplier="37:6" constant="320" id="3rQ-J0-hQ8"/>
+                                                <constraint firstItem="Mk3-Ha-t3F" firstAttribute="top" secondItem="bkL-Dh-ed9" secondAttribute="top" id="86p-kI-Q9F"/>
+                                                <constraint firstItem="TkY-SG-PWu" firstAttribute="leading" secondItem="VxD-kV-wBI" secondAttribute="trailing" id="Onr-D5-fkg"/>
+                                                <constraint firstAttribute="bottom" secondItem="VxD-kV-wBI" secondAttribute="bottom" id="aaN-hh-7B3"/>
+                                                <constraint firstItem="VxD-kV-wBI" firstAttribute="top" secondItem="bkL-Dh-ed9" secondAttribute="top" id="fhZ-7o-3w8"/>
+                                                <constraint firstItem="Mk3-Ha-t3F" firstAttribute="leading" secondItem="bkL-Dh-ed9" secondAttribute="leading" id="jjm-dN-ezy"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mk3-Ha-t3F" secondAttribute="bottom" id="ndU-uZ-hUF"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -421,6 +446,8 @@
                                     <outlet property="label_list_debit" destination="6ZV-ST-w65" id="UFg-ad-B3H"/>
                                     <outlet property="label_list_number" destination="vTv-eH-Pw0" id="6jg-jd-3IZ"/>
                                     <outlet property="label_list_summary" destination="TkY-SG-PWu" id="C1F-5v-gdZ"/>
+                                    <outlet property="label_list_summary_credit" destination="VxD-kV-wBI" id="wcd-0H-Ro2"/>
+                                    <outlet property="label_list_summary_debit" destination="Mk3-Ha-t3F" id="6bd-Az-x4O"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -431,6 +458,9 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="仕訳帳" image="pencil" catalog="system" id="f7O-AB-DCy" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="yew-EW-Qmi" id="i1J-O3-OTs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFI-vF-foE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
