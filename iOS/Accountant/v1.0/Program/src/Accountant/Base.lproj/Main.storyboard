@@ -313,25 +313,25 @@
                                             <rect key="frame" x="82" y="0.0" width="505" height="30"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk3-Ha-t3F" userLabel="label_list_summary_debit">
-                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Mk3-Ha-t3F" secondAttribute="height" multiplier="4:1" id="qVy-Hm-OIq"/>
+                                                        <constraint firstAttribute="width" secondItem="Mk3-Ha-t3F" secondAttribute="height" multiplier="10:3" id="IyG-Bo-1KD"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxD-kV-wBI" userLabel="label_list_summary_credit">
-                                                    <rect key="frame" x="120" y="0.0" width="120" height="30"/>
+                                                    <rect key="frame" x="100" y="0.0" width="100" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="VxD-kV-wBI" secondAttribute="height" multiplier="4:1" id="NeH-SX-Gqh"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TkY-SG-PWu" userLabel="list_summary">
-                                                    <rect key="frame" x="240" y="0.0" width="265" height="30"/>
+                                                    <rect key="frame" x="200" y="0.0" width="305" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
@@ -451,15 +451,11 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="E4z-n2-vvK" id="Fzh-hV-FOQ"/>
-                            <outlet property="delegate" destination="E4z-n2-vvK" id="RI9-YH-99K"/>
-                        </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="仕訳帳" image="pencil" catalog="system" id="f7O-AB-DCy" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="yew-EW-Qmi" id="i1J-O3-OTs"/>
+                        <outlet property="TableView_JournalEntry" destination="yew-EW-Qmi" id="nLx-88-fjh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFI-vF-foE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -32,18 +32,16 @@ class TableViewControllerJournalEntry: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    @IBOutlet var tableViewM: UITableView!
-    override func viewWillAppear(_ animated: Bool){
+    @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
+    override func viewWillAppear(_ animated: Bool){ //ビューが表示される直前に呼ばれる
+        //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
         presentingViewController?.beginAppearanceTransition(false, animated: animated)
         super.viewWillAppear(animated)
+        // 仕訳入力後に仕訳帳を更新する
+        TableView_JournalEntry.reloadData()
     }
-    override func viewDidAppear(_ animated: Bool){
-        super.viewDidAppear(animated)
-        presentingViewController?.endAppearanceTransition()
-//        tableViewM.reloadData()
-    }
-    override func viewDidDisappear(_ animated: Bool){}
+//    override func viewDidAppear(_ animated: Bool){}
+//    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
 
     //セクションの数はreturn 1でひとつに設定します。12ヶ月分にする
@@ -95,18 +93,29 @@ class TableViewControllerJournalEntry: UITableViewController {
         
         //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
         // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-        cell.label_list_date.text = objects[indexPath.row].date + " "                               //日付
-        cell.label_list_summary_debit.text = " (" + objects[indexPath.row].debit_category + ")"     //借方勘定
+        cell.label_list_date.text = "\(objects[indexPath.row].date) "                               //日付
+        cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
         cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-        cell.label_list_summary_credit.text = "(" + objects[indexPath.row].credit_category + ") "   //貸方勘定
+        cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
         cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-        cell.label_list_summary.text = objects[indexPath.row].smallWritting + " "                   //小書き
+        cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "                   //小書き
         cell.label_list_summary.textAlignment = NSTextAlignment.right
         // ToDo 勘定科目の番号
         cell.label_list_number.text = "1" //元丁
-        cell.label_list_debit.text = String(objects[indexPath.row].debit_amount) + " "        //借方金額
-        cell.label_list_credit.text = String(objects[indexPath.row].credit_amount) + " "      //貸方金額
+        cell.label_list_debit.text = "\(String(objects[indexPath.row].debit_amount)) "        //借方金額
+        cell.label_list_credit.text = "\(String(objects[indexPath.row].credit_amount)) "      //貸方金額
         //③
+        
+        // セクション毎に分けて表示する　Todo
+        //indexPathがrowとsectionを持っているので、sectionで切り分ける。ここがポイント
+        switch indexPath.section {
+        case 0: // 4月スタート
+            if String(objects[indexPath.row].date) == "2020/04/01" {
+                
+            }
+        default:
+            <#code#>
+        }
         
         return cell
     }

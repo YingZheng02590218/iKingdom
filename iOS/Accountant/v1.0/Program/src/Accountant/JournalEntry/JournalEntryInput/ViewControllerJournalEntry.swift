@@ -346,19 +346,24 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             return false
         }
     }
-    // 文字数制限
+    // 入力チェック(半角数字、文字数制限)
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //todo
         print("テキストフィールド入力中")
-        //入力チェック　数字のみｂに制限
-        if textField == TextField_amount_debit || textField == TextField_amount_credit {
+        
+        var resultForCharacter = false
+        var resultForLength = false
+        // 入力チェック　数字のみに制限
+        if textField == TextField_amount_debit || textField == TextField_amount_credit { // 借方金額仮　貸方金額
             let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
             let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
+            // 指定したスーパーセットの文字セットでないならfalseを返す
+            resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
+        }else{  // 小書き
+            resultForCharacter = true
         }
-        // 文字数最大値を定義
-        var maxLength: Int = 0
-        
+        // 入力チェック　文字数最大数を設定
+        var maxLength: Int = 0 // 文字数最大値を定義
         switch textField.tag {
         case 333,444: // 金額の文字数
             maxLength = 7
@@ -368,11 +373,19 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             break
         }
         // textField内の文字数
-        let textFieldNumber = textField.text?.count ?? 0//todo
+        let textFieldNumber = textField.text?.count ?? 0    //todo
         // 入力された文字数
         let stringNumber = string.count
         // 最大文字数以上ならfalseを返す
-        return textFieldNumber + stringNumber <= maxLength
+        resultForLength = textFieldNumber + stringNumber <= maxLength
+        // 判定
+        if !resultForCharacter { // 指定したスーパーセットの文字セットでないならfalseを返す
+            return false
+        }else if !resultForLength { // 最大文字数以上ならfalseを返す
+            return false
+        }else {
+            return true
+        }
     }
 
     //リターンキーが押されたとき
@@ -470,13 +483,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             credit_amount: Int(TextField_amount_credit.text!)!,
                             smallWritting: TextField_SmallWritting.text!
                         )
-
-                        self.dismiss(animated: true, completion: nil)
-//                        dismiss(animated: true, completion: {
-//                                [presentingViewController] () -> Void in
-//                                    // 閉じた時に行いたい処理
-//                                    presentingViewController?.viewWillAppear(true)
-//                        })
+                        // 
+//                        self.dismiss(animated: true, completion: nil)
+                        dismiss(animated: true, completion: {
+                                [presentingViewController] () -> Void in
+                                    // ViewController(仕訳画面)を閉じた時に遷移元のTableViewController(仕訳帳画面)で行いたい処理
+                                    presentingViewController?.viewWillAppear(true)
+//                            presentingViewController?.viewDidAppear(true)
+                        })
                     }else{
                         Label_Popup.text = "金額を入力してください"
                         //未入力のTextFieldのキーボードを自動的に表示する
