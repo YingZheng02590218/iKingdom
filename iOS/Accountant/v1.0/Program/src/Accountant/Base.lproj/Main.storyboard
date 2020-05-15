@@ -75,7 +75,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <view key="tableHeaderView" contentMode="center" id="xxB-qN-E2e" customClass="ViewA" customModule="Accountant" customModuleProvider="target">
+                        <view key="tableHeaderView" contentMode="center" id="xxB-qN-E2e">
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="95"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -420,8 +420,6 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="aJX-uJ-Vz7" secondAttribute="trailing" id="8aD-hv-kJL"/>
-                                        <constraint firstItem="aJX-uJ-Vz7" firstAttribute="leading" secondItem="Y6V-Oo-hoJ" secondAttribute="trailing" id="DOI-u1-Yqj"/>
                                         <constraint firstItem="aJX-uJ-Vz7" firstAttribute="leading" secondItem="Y6V-Oo-hoJ" secondAttribute="trailing" id="Dhk-dC-lZt"/>
                                         <constraint firstItem="OWx-ld-1C2" firstAttribute="leading" secondItem="H9p-AI-sti" secondAttribute="leading" id="Hfh-KA-LFi"/>
                                         <constraint firstItem="bkL-Dh-ed9" firstAttribute="top" secondItem="H9p-AI-sti" secondAttribute="top" id="NtB-v0-shW"/>

@@ -35,12 +35,19 @@ class TableViewControllerJournalEntry: UITableViewController {
     @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     override func viewWillAppear(_ animated: Bool){ //ビューが表示される直前に呼ばれる
         //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
-        presentingViewController?.beginAppearanceTransition(false, animated: animated)
+//        presentingViewController?.beginAppearanceTransition(false, animated: animated)
         super.viewWillAppear(animated)
+//        print("viewWillAppear \(presentedViewController)")
+//        print("viewWillAppear \(presentingViewController)")
+
         // 仕訳入力後に仕訳帳を更新する
         TableView_JournalEntry.reloadData()
+        // テーブルビューの初期表示位置を指定　３月の先頭
+        let indexPath = IndexPath(row: 0, section: 11)
+        self.TableView_JournalEntry.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: false)
     }
-//    override func viewDidAppear(_ animated: Bool){}
+    
+    override func viewDidAppear(_ animated: Bool){}
 //    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
 
@@ -72,22 +79,21 @@ class TableViewControllerJournalEntry: UITableViewController {
         let header_title = section_num.description + "  月"
         return header_title
     }
-    //セルの数を、JournalEntries.countで、JournalEntries配列の要素の数に指定します。
-    //ToDo 仕訳の数にする
+    //セルの数を、モデル(仕訳)の数に指定
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         // データベース
         let dataBaseManager = DataBaseManager() //データベースマネジャー
-        let objects = dataBaseManager.getJournalEntry()
-        
-        return objects.count //JournalEntries.count
+        let counts = dataBaseManager.getJournalEntryCounts(section: section) // 何月のセクションに表示するセルかを引数で渡す
+//        print("月別のセル数:\(counts)")
+        return counts //月別の仕訳データ数
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
         let dataBaseManager = DataBaseManager() //データベースマネジャー
-        let objects = dataBaseManager.getJournalEntry()
-        
+        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
+//        print("月別のセル:\(objects)")
         //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
         
@@ -105,17 +111,6 @@ class TableViewControllerJournalEntry: UITableViewController {
         cell.label_list_debit.text = "\(String(objects[indexPath.row].debit_amount)) "        //借方金額
         cell.label_list_credit.text = "\(String(objects[indexPath.row].credit_amount)) "      //貸方金額
         //③
-        
-        // セクション毎に分けて表示する　Todo
-        //indexPathがrowとsectionを持っているので、sectionで切り分ける。ここがポイント
-        switch indexPath.section {
-        case 0: // 4月スタート
-            if String(objects[indexPath.row].date) == "2020/04/01" {
-                
-            }
-        default:
-            <#code#>
-        }
         
         return cell
     }

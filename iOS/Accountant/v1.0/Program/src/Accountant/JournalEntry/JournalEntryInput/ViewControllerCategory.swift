@@ -157,6 +157,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     }
     //PickerView以外の部分をタッチ
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        print("画面外 \(presentedViewController)")
+//        print("画面外 \(presentingViewController)")
         self.dismiss(animated: true, completion: nil)
     }
     //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
@@ -219,6 +221,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
                 }
                 viewControllerJournalEntry.Label_Popup.text = ""//ポップアップの文字表示をクリア
             }
+//           print("勘定科目Doneボタン \(presentedViewController)")
+//           print("勘定科目Doneボタン \(presentingViewController)")
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -233,6 +237,8 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
             viewControllerJournalEntry.TextField_category_credit.text = "勘定科目"  //ここで値渡し
 //            viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
         }
+//        print("勘定科目キャンセルボタン \(presentedViewController)")
+//        print("勘定科目キャンセルボタン \(presentingViewController)")
         self.dismiss(animated: true, completion: nil)
     }
     

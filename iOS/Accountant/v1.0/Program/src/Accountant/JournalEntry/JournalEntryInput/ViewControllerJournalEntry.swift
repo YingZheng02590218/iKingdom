@@ -329,7 +329,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         //todo
 //        print(#function)
-        print("テキストフィールがタップされ、入力可能になったあと")
+//        print("テキストフィールがタップされ、入力可能になったあと")
         //TextFieldのキーボードを自動的に閉じる
 //        self.view.endEditing(true)
     }
@@ -349,7 +349,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // 入力チェック(半角数字、文字数制限)
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //todo
-        print("テキストフィールド入力中")
+//        print("テキストフィールド入力中")
         
         var resultForCharacter = false
         var resultForLength = false
@@ -425,14 +425,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
         //todo
 //        print(#function)
-        print("キーボードを閉じる前")
+//        print("キーボードを閉じる前")
         return true
     }
     //キーボードを閉じたあと
     func textFieldDidEndEditing(_ textField:UITextField){
         //todo
 //        print(#function)
-        print("キーボードを閉じた後")
+//        print("キーボードを閉じた後")
         // TextField 貸方金額　入力後
         if textField.tag == 333 {
             if TextField_amount_debit.text != "" {
@@ -485,11 +485,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         )
                         // 
 //                        self.dismiss(animated: true, completion: nil)
-                        dismiss(animated: true, completion: {
+//                        print("入力ボタン \(presentingViewController)")
+                        let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
+                        let presentingViewController = tabBarController.selectedViewController as! TableViewControllerJournalEntry // 基底のコントローラから、現在選択されているコントローラを取得する
+                        // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                        self.dismiss(animated: true, completion: {
                                 [presentingViewController] () -> Void in
                                     // ViewController(仕訳画面)を閉じた時に遷移元のTableViewController(仕訳帳画面)で行いたい処理
-                                    presentingViewController?.viewWillAppear(true)
-//                            presentingViewController?.viewDidAppear(true)
+                                    presentingViewController.viewWillAppear(true)
                         })
                     }else{
                         Label_Popup.text = "金額を入力してください"
