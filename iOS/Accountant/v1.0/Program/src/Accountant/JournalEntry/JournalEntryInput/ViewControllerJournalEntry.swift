@@ -157,11 +157,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //todo
-//        TextField_amount_debit.resignFirstResponder()
-//        TextField_amount_credit.resignFirstResponder()
         // segue.destinationの型はUIViewController
         let viewControllerCategory = segue.destination as! ViewControllerCategory
+//        viewControllerCategory.modalPresentationStyle = .fullScreen // iOS13からモーダル表示のデフォルト遷移方法が自動（UIModalPresentationStyle.automatic）に変更されました。それを阻止
         switch segue.identifier {
         case "identifier_debit":
                 viewControllerCategory.identifier = "identifier_debit"
@@ -186,7 +184,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // toolbar 借方 Done:Tag5 Cancel:Tag55
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        toolbar.backgroundColor = UIColor.clear// 名前で指定する
+//        toolbar.backgroundColor = UIColor.clear// 名前で指定する
         toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
@@ -201,7 +199,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
         toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-        toolbar2.backgroundColor = UIColor.clear
+//        toolbar2.backgroundColor = UIColor.clear // バックグラウンドカラーをクリアにすると黒色になってしまう
         toolbar2.barTintColor = UIColor.clear
         toolbar2.isTranslucent = true
         toolbar2.barStyle = .default
@@ -225,7 +223,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             print("\(String(describing: sender.text))")
         }
     }
-    
+    // TextFieldをタップしても呼ばれない
+    @IBAction func TapGestureRecognizer(_ sender: Any) {// この前に　touchesBegan が呼ばれている
+        self.view.endEditing(true)
+    }
+
     @IBOutlet weak var TextField_SmallWritting: UITextField!
     @IBAction func TextField_SmallWritting(_ sender: UITextField) {}
     // TextField 小書き
@@ -270,8 +272,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_debit.text == ""{
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                // キーボードを閉じる
-                self.view.endEditing(true)
+                TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+                self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_category_credit.text == "勘定科目" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
                     TextField_category_credit.becomeFirstResponder()
@@ -286,7 +288,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_credit.text == ""{
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                self.view.endEditing(true)
+                TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
+                self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_SmallWritting.text == "取引内容" {
                     // カーソルを小書きへ移す
                     self.TextField_SmallWritting.becomeFirstResponder()
@@ -298,19 +301,27 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             self.view.endEditing(true)
             if TextField_SmallWritting.text == "" {
                 TextField_SmallWritting.text = "取引内容"
+                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             }
             break
         case 55://借方金額の場合 Cancel
-            self.view.endEditing(true)
                 TextField_amount_debit.text = "金額"
+                TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+                TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+                Label_Popup.text = ""
+                self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
         case 66://貸方金額の場合 Cancel
-            self.view.endEditing(true)
                 TextField_amount_credit.text = "金額"
+                TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+                TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+                Label_Popup.text = ""
+                self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
         case 77://小書きの場合 Cancel
-            self.view.endEditing(true)
                 TextField_SmallWritting.text = "取引内容"
+                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+                self.view.endEditing(true)
             break
         default:
                 self.view.endEditing(true)
@@ -325,6 +336,21 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     //    textFieldShouldEndEditing
     //    textFieldDidEndEditing
     //    textFieldShouldReturn
+    // キーボードが表示される前に呼ばれるDelegateメソッド
+//    var isShowKeyboard = false
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        // trueを返すとキーボードが表示される、falseを返すと表示されない
+//        if isShowKeyboard {
+//            // キーボードが出ていたら閉じる
+//            view.endEditing(true)
+//            isShowKeyboard = false
+//            return false
+//        } else {
+//            // キーボードを表示する
+//            isShowKeyboard = true
+//            return true
+//        }
+//    }
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
         //todo
@@ -332,6 +358,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("テキストフィールがタップされ、入力可能になったあと")
         //TextFieldのキーボードを自動的に閉じる
 //        self.view.endEditing(true)
+        textField.textColor = UIColor.black // 文字色をブラックとする
     }
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -348,9 +375,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     }
     // 入力チェック(半角数字、文字数制限)
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        //todo
 //        print("テキストフィールド入力中")
-        
         var resultForCharacter = false
         var resultForLength = false
         // 入力チェック　数字のみに制限
@@ -391,10 +416,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        print("キーボードを閉じる前")
-        // キーボードを閉じる処理
-//        self.view.endEditing(true)
+//        self.view.endEditing(true) // キーボードを閉じる処理
 //        print("キーボードを閉じた後")
-        //todo
         switch textField.text {
         case "勘定科目":
             Label_Popup.text = "勘定科目を入力してください"
@@ -416,31 +439,53 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             return true
         }
     }
-    //TextField キーボード以外の部分をタッチ
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //TextField キーボード以外の部分をタッチ　 TextFieldをタップしても呼ばれない
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {// この後に TapGestureRecognizer が呼ばれている
+        // 初期値を再設定
+        setInitialData()
         // touchesBeganメソッドをオーバーライドします。
         self.view.endEditing(true)
     }
+    // 初期値を再設定
+    func setInitialData() {
+        if TextField_category_debit.text == "" {
+            TextField_category_debit.text = "勘定科目"
+            TextField_category_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }else if TextField_category_credit.text == "" {
+            TextField_category_credit.text = "勘定科目"
+            TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }else if TextField_amount_debit.text == "" {
+            TextField_amount_debit.text = "金額"
+            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }else if TextField_amount_credit.text == "" {
+            TextField_amount_credit.text = "金額"
+            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }else if TextField_SmallWritting.text == "" {
+            TextField_SmallWritting.text = "取引内容"
+            TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }
+    }
     //キーボードを閉じる前
     func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
-        //todo
 //        print(#function)
 //        print("キーボードを閉じる前")
         return true
     }
     //キーボードを閉じたあと
     func textFieldDidEndEditing(_ textField:UITextField){
-        //todo
 //        print(#function)
 //        print("キーボードを閉じた後")
         // TextField 貸方金額　入力後
         if textField.tag == 333 {
-            if TextField_amount_debit.text != "" {
-                TextField_amount_credit.text = TextField_amount_debit.text // 借方金額を貸方金額に表示
-            }
-            if TextField_category_credit.text == "勘定科目" {//貸方勘定科目が未入力の場合
-                //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
-                TextField_category_credit.becomeFirstResponder()
+            if TextField_amount_debit.text != "" {  // 初期値が代入されている
+                TextField_amount_credit.text = TextField_amount_debit.text          // 借方金額を貸方金額に表示
+                if  TextField_amount_debit.text != "金額" {                          // 借方金額が初期値ではない場合　かつ
+                    if TextField_category_credit.text == "勘定科目" {                 // 貸方勘定科目が未入力の場合に
+                        //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
+                        TextField_category_credit.becomeFirstResponder()            // カーソル移動
+                    }
+                    
+                }
             }
         }else if textField.tag == 444 {
             if TextField_amount_credit.text != "" {
@@ -448,7 +493,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
     // 入力ボタン
     @IBOutlet weak var Label_Popup: UILabel!
     @IBAction func Button_Input(_ sender: Any) {
@@ -471,7 +515,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         if TextField_SmallWritting.text == "取引内容" {
                             TextField_SmallWritting.text = ""
                         }
-
                         // データベース　仕訳データを追加
                         let dataBaseManager = DataBaseManager() //データベースマネジャー
                         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
@@ -483,15 +526,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             credit_amount: Int(TextField_amount_credit.text!)!,
                             smallWritting: TextField_SmallWritting.text!
                         )
-                        // 
-//                        self.dismiss(animated: true, completion: nil)
 //                        print("入力ボタン \(presentingViewController)")
                         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
                         let presentingViewController = tabBarController.selectedViewController as! TableViewControllerJournalEntry // 基底のコントローラから、現在選択されているコントローラを取得する
                         // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                         self.dismiss(animated: true, completion: {
                                 [presentingViewController] () -> Void in
-                                    // ViewController(仕訳画面)を閉じた時に遷移元のTableViewController(仕訳帳画面)で行いたい処理
+                                    // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
                                     presentingViewController.viewWillAppear(true)
                         })
                     }else{
@@ -515,6 +556,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_debit.becomeFirstResponder()
         }
     }
+    @IBAction func Button_cancel(_ sender: UIButton) {
+        // 終了させる　仕訳帳画面へ戻る
+        self.dismiss(animated: true, completion: nil)
+    }
+
     /*
     // MARK: - Navigation
 

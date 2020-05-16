@@ -29,6 +29,9 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         // Delegate設定
         PickerView_category.delegate = self
         PickerView_category.dataSource = self
+//        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
+//        viewControllerJournalEntry.view.endEditing(true)
+
         //借方、貸方 大項目
         categories = [
             "資産","負債","純資産","費用","収益"]
@@ -159,7 +162,14 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        print("画面外 \(presentedViewController)")
 //        print("画面外 \(presentingViewController)")
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        // ViewControllerJournalEntryのsetInitialDataを呼び出す　初期値の再設定のため
+        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
+        self.dismiss(animated: true, completion: {
+                [viewControllerJournalEntry] () -> Void in
+                    // ViewController(勘定科目画面)を閉じた時に、ViewController(仕訳画面)で行いたい処理
+                    viewControllerJournalEntry.setInitialData()
+        })
     }
     //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @IBAction func Button_Done(_ sender: UIButton) {
@@ -209,12 +219,14 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         //Segueを場合分け
             if identifier == "identifier_debit" {
                 viewControllerJournalEntry.TextField_category_debit.text = result  //ここで値渡し
+                viewControllerJournalEntry.TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
                 if viewControllerJournalEntry.TextField_amount_debit.text == "金額" {
                     viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
                 }
                 viewControllerJournalEntry.Label_Popup.text = ""//ポップアップの文字表示をクリア
             }else if identifier == "identifier_credit" {
                 viewControllerJournalEntry.TextField_category_credit.text = result  //ここで値渡し
+                viewControllerJournalEntry.TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
 //                viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
                 if viewControllerJournalEntry.TextField_SmallWritting.text == "取引内容" {
                     viewControllerJournalEntry.TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
@@ -232,9 +244,12 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         //Segueを場合分け
         if identifier == "identifier_debit" {
             viewControllerJournalEntry.TextField_category_debit.text = "勘定科目"  //ここで値渡し
+            viewControllerJournalEntry.TextField_category_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+
 //            viewControllerJournalEntry.TextField_amount_debit.becomeFirstResponder()
         }else if identifier == "identifier_credit" {
             viewControllerJournalEntry.TextField_category_credit.text = "勘定科目"  //ここで値渡し
+            viewControllerJournalEntry.TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
 //            viewControllerJournalEntry.TextField_amount_credit.becomeFirstResponder()
         }
 //        print("勘定科目キャンセルボタン \(presentedViewController)")

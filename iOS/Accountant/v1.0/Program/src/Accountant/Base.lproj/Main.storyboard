@@ -96,7 +96,7 @@
                                                         <attributedString key="attributedText">
                                                             <fragment content="仕訳帳">
                                                                 <attributes>
-                                                                    <font key="NSFont" size="25" name="HiraginoSans-W3"/>
+                                                                    <font key="NSFont" size="25" name="HiraginoSans-W6"/>
                                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     <integer key="NSUnderline" value="1"/>
                                                                 </attributes>
@@ -129,14 +129,14 @@
                                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="KJy-xe-WoY">
                                             <rect key="frame" x="0.0" y="0.0" width="82" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34J-GN-cj1" userLabel="list_date">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34J-GN-cj1" userLabel="list_date_year">
                                                     <rect key="frame" x="0.0" y="0.0" width="82" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v4k-on-Yay" userLabel="list_date_mon">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月　　日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v4k-on-Yay" userLabel="list_date_month">
                                                     <rect key="frame" x="0.0" y="25" width="82" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -453,6 +453,7 @@
                     <tabBarItem key="tabBarItem" title="仕訳帳" image="pencil" catalog="system" id="f7O-AB-DCy" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="Label_list_date_year" destination="34J-GN-cj1" id="b4p-CP-Hj6"/>
                         <outlet property="TableView_JournalEntry" destination="yew-EW-Qmi" id="nLx-88-fjh"/>
                     </connections>
                 </tableViewController>
@@ -481,7 +482,7 @@
                                                 <attributedString key="attributedText">
                                                     <fragment content="仕訳入力">
                                                         <attributes>
-                                                            <font key="NSFont" size="30" name="HiraginoSans-W3"/>
+                                                            <font key="NSFont" size="30" name="HiraginoSans-W6"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             <integer key="NSUnderline" value="1"/>
                                                         </attributes>
@@ -514,7 +515,7 @@
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="&lt;">
                                                                     <attributes>
-                                                                        <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
+                                                                        <font key="NSFont" size="20" name="Futura-Bold"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
@@ -544,7 +545,7 @@
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="&gt;">
                                                                     <attributes>
-                                                                        <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
+                                                                        <font key="NSFont" size="20" name="Futura-Bold"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
@@ -615,7 +616,7 @@
                                                     <textField opaque="NO" tag="333" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
                                                         <rect key="frame" x="0.0" y="0.0" width="185" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                         <connections>
@@ -626,7 +627,7 @@
                                                     <textField opaque="NO" tag="444" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
                                                         <rect key="frame" x="190" y="0.0" width="185" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                         <connections>
@@ -675,7 +676,7 @@
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="入力">
                                                             <attributes>
-                                                                <font key="NSFont" size="23" name="HiraginoSans-W4"/>
+                                                                <font key="NSFont" size="23" name="HiraginoSans-W6"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -697,11 +698,32 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-9b-Hzc">
+                                                <rect key="frame" x="30" y="52" width="30" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="×">
+                                                            <attributes>
+                                                                <font key="NSFont" size="23" name="Futura-Bold"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <connections>
+                                                    <action selector="Button_cancel:" destination="e0k-EA-w5f" eventType="touchUpInside" id="eCk-qx-aK1"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="J3w-An-5tU" appends="YES" id="sbs-NU-5Ee"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -727,6 +749,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdC-nl-nIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="J3w-An-5tU">
+                    <connections>
+                        <action selector="TapGestureRecognizer:" destination="e0k-EA-w5f" id="5kd-qg-guf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1448.4375" y="2039.3850658857978"/>
         </scene>
