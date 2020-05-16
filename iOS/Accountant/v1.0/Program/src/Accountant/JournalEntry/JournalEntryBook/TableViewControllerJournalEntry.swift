@@ -24,43 +24,41 @@ class TableViewControllerJournalEntry: UITableViewController {
 //    let credit = ["100","1000","10000","100000","1000000","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999",]
 
 //    override func loadView(){}
+    @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
+    @IBOutlet weak var Label_list_date_year: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // ToDo どこで設定した年度のデータを参照するか考える
+        Label_list_date_year.text = "2020 　年"
     }
-    @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     override func viewWillAppear(_ animated: Bool){ //ビューが表示される直前に呼ばれる
         //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
 //        presentingViewController?.beginAppearanceTransition(false, animated: animated)
         super.viewWillAppear(animated)
-//        print("viewWillAppear \(presentedViewController)")
-//        print("viewWillAppear \(presentingViewController)")
-
+        print("viewWillAppear \(presentedViewController)")
+        print("viewWillAppear \(presentingViewController)")
+        // TabBarControllerから遷移してきした時のみ、テーブルビューの更新と初期表示位置を指定したい　ToDo
         // 仕訳入力後に仕訳帳を更新する
         TableView_JournalEntry.reloadData()
         // テーブルビューの初期表示位置を指定　３月の先頭
-        let indexPath = IndexPath(row: 0, section: 11)
+        let indexPath = IndexPath(row: 0, section: 0) //ToDo
         self.TableView_JournalEntry.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: false)
     }
-    
-    override func viewDidAppear(_ animated: Bool){}
+//    override func viewDidAppear(_ animated: Bool){}
 //    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
 
-    //セクションの数はreturn 1でひとつに設定します。12ヶ月分にする
+
+    // セクションの数を設定する
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 12
+        return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
     }
-    //セクションヘッダーの高さを決める
+    // セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 23 //セクションヘッダーの高さを50に設定
+        return 33 //セクションヘッダーの高さを33に設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
     }
-    //セクションヘッダーの色とか調整する
+    // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.gray
@@ -69,7 +67,7 @@ class TableViewControllerJournalEntry: UITableViewController {
 //        let crossAttr = [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
 //        header.textLabel?.text = attributedStr
     }
-    //セクションヘッダーのテキスト決める
+    // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var section_num = section + 4//4月スタートに補正する todo 設定の決算月によって変更する
         //セクションヘッダーは1年分の12ヶ月にする
