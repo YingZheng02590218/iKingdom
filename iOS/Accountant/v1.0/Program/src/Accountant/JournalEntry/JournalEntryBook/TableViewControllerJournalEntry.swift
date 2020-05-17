@@ -30,24 +30,30 @@ class TableViewControllerJournalEntry: UITableViewController {
         super.viewDidLoad()
         // ToDo どこで設定した年度のデータを参照するか考える
         Label_list_date_year.text = "2020 　年"
+        // 初期表示位置
+        scroll = true
     }
-    override func viewWillAppear(_ animated: Bool){ //ビューが表示される直前に呼ばれる
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
         //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
 //        presentingViewController?.beginAppearanceTransition(false, animated: animated)
         super.viewWillAppear(animated)
-        print("viewWillAppear \(presentedViewController)")
-        print("viewWillAppear \(presentingViewController)")
+//        print("viewWillAppear \(String(describing: presentedViewController))")
+//        print("viewWillAppear \(String(describing: presentingViewController))")
         // TabBarControllerから遷移してきした時のみ、テーブルビューの更新と初期表示位置を指定したい　ToDo
         // 仕訳入力後に仕訳帳を更新する
         TableView_JournalEntry.reloadData()
-        // テーブルビューの初期表示位置を指定　３月の先頭
-        let indexPath = IndexPath(row: 0, section: 0) //ToDo
-        self.TableView_JournalEntry.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: false)
     }
-//    override func viewDidAppear(_ animated: Bool){}
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+        // 初期表示位置 OFF
+        scroll = false
+    }
 //    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
 
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {}
 
     // セクションの数を設定する
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,6 +117,34 @@ class TableViewControllerJournalEntry: UITableViewController {
         //③
         
         return cell
+    }
+    // セルが画面に表示される直前に表示される
+    var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if scroll {     // 初回起動時の場合
+            var indexPath_local = IndexPath(row: 0, section: 0)
+            for s in 0..<TableView_JournalEntry.numberOfSections-1 {            //セクション数　ゼロスタート補正
+                if TableView_JournalEntry.numberOfRows(inSection: s) > 0 {
+                    let r = TableView_JournalEntry.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
+                    indexPath_local = IndexPath(row: r, section: s)
+                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: true)
+                }
+            }
+            // ボツ　見えている範囲のみなので行数が増えると動かない
+//            if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last { // 見えている範囲のみなので行数が増えると動かない　.firstの意味は先頭行のこと　エラーがでている
+//                print("lastVisibleIndexPath \(lastVisibleIndexPath[0]),\(lastVisibleIndexPath[1])")
+//                print("           indexPath \(indexPath[0]),\(indexPath[1])")
+//                if indexPath != lastVisibleIndexPath {  // 表示しようとしているセルの行が、最後の行ではない場合
+//                    print("           indexPath.row \(indexPath.row), numberOfRows \(tableView.numberOfRows(inSection: indexPath[0]))")
+//                    if indexPath.row == tableView.numberOfRows(inSection: indexPath[0])-1 { // 表示しようとしているセル（行）とセルの数を比較。ゼロスタート補正　最大数まで表示した場合
+                        // テーブルビューの初期表示位置を指定 セルが表示されるたびにセルの最後尾までスクロールする
+//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.middle, animated: true)
+//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.none, animated: true)
+//                    }
+//                }
+//            }
+        }
     }
 
     
