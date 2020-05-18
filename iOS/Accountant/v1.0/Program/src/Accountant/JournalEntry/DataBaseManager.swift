@@ -14,11 +14,11 @@ class DataBaseManager  {
     // データベース
     
     // モデルオブフェクトの追加
-    func addJournalEntry(date: String,debit_category: String,debit_amount: Int,credit_category: String,credit_amount: Int,smallWritting: String) {
+    func addJournalEntry(date: String,debit_category: String,debit_amount: Int,credit_category: String,credit_amount: Int,smallWritting: String) -> Int {
         // オブジェクトを作成
         let dataBaseJournalEntry = DataBaseJournalEntry() //仕訳
         // 自動採番にした
-        //                        journalEntry.number = 2
+        var number = 0
         dataBaseJournalEntry.date = date                        //日付
         dataBaseJournalEntry.debit_category = debit_category    //借方勘定
         dataBaseJournalEntry.debit_amount = debit_amount        //借方金額 Int型(TextField.text アンラップ)
@@ -31,10 +31,11 @@ class DataBaseManager  {
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
-            dataBaseJournalEntry.save() //仕分け番号　自動採番
+            number = dataBaseJournalEntry.save() //仕分け番号　自動採番
             realm.add(dataBaseJournalEntry)
         }
 //        print(dataBaseJournalEntry)
+        return number
     }
     // モデルオブフェクトの取得
     func getJournalEntry(section: Int) -> Results<DataBaseJournalEntry> { //DataBaseJournalEntry {
