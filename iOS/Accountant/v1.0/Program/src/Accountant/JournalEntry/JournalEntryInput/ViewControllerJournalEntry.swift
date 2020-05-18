@@ -518,7 +518,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         // データベース　仕訳データを追加
                         let dataBaseManager = DataBaseManager() //データベースマネジャー
                         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-                        dataBaseManager.addJournalEntry(
+                        let number = dataBaseManager.addJournalEntry(
                             date: formatter.string(from: datePicker.date),
                             debit_category: TextField_category_debit.text!,
                             debit_amount: Int(TextField_amount_debit.text!)!,
@@ -533,7 +533,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         self.dismiss(animated: true, completion: {
                                 [presentingViewController] () -> Void in
                                     // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
-                                    presentingViewController.viewWillAppear(true)
+//                                    presentingViewController.viewWillAppear(true)
+                                presentingViewController.autoScroll(number: number)
                         })
                     }else{
                         Label_Popup.text = "金額を入力してください"

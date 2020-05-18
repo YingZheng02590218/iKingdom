@@ -40,9 +40,6 @@ class TableViewControllerJournalEntry: UITableViewController {
         super.viewWillAppear(animated)
 //        print("viewWillAppear \(String(describing: presentedViewController))")
 //        print("viewWillAppear \(String(describing: presentingViewController))")
-        // TabBarControllerから遷移してきした時のみ、テーブルビューの更新と初期表示位置を指定したい　ToDo
-        // 仕訳入力後に仕訳帳を更新する
-        TableView_JournalEntry.reloadData()
     }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
@@ -54,7 +51,15 @@ class TableViewControllerJournalEntry: UITableViewController {
 
     
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {}
-
+    // スクロール
+    var Number = 0
+    func autoScroll(number: Int) {
+        // TabBarControllerから遷移してきした時のみ、テーブルビューの更新と初期表示位置を指定
+        scroll_adding = true
+        Number = number
+        // 仕訳入力後に仕訳帳を更新する
+        TableView_JournalEntry.reloadData()
+    }
     // セクションの数を設定する
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -92,6 +97,7 @@ class TableViewControllerJournalEntry: UITableViewController {
         return counts //月別の仕訳データ数
     }
     //セルを生成して返却するメソッド
+    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
         let dataBaseManager = DataBaseManager() //データベースマネジャー
@@ -103,6 +109,9 @@ class TableViewControllerJournalEntry: UITableViewController {
         
         //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
         // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+        if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+            indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
+        }
         cell.label_list_date.text = "\(objects[indexPath.row].date) "                               //日付
         cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
         cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
@@ -120,14 +129,15 @@ class TableViewControllerJournalEntry: UITableViewController {
     }
     // セルが画面に表示される直前に表示される
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
+    var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if scroll {     // 初回起動時の場合
-            var indexPath_local = IndexPath(row: 0, section: 0)
+        var indexPath_local = IndexPath(row: 0, section: 0)
+        if scroll || scroll_adding {     // 初回起動時の場合 入力ボタン押下時の場合
             for s in 0..<TableView_JournalEntry.numberOfSections-1 {            //セクション数　ゼロスタート補正
                 if TableView_JournalEntry.numberOfRows(inSection: s) > 0 {
                     let r = TableView_JournalEntry.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
                     indexPath_local = IndexPath(row: r, section: s)
-                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: true)
+                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: false) // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 }
             }
             // ボツ　見えている範囲のみなので行数が増えると動かない
@@ -144,6 +154,14 @@ class TableViewControllerJournalEntry: UITableViewController {
 //                    }
 //                }
 //            }
+        }
+        if scroll_adding {     // 入力ボタン押下時の場合
+            // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
+            if indexPath == indexPath_local { // 最後のセルまで表示しされたかどうか
+                self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.bottom, animated: false) // 追加した仕訳データの行を画面の下方に表示する
+                // 入力ボタン押下時の表示位置 OFF
+                scroll_adding = false
+            }
         }
     }
 

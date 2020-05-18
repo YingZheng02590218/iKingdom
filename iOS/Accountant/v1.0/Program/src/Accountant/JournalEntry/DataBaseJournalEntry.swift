@@ -25,7 +25,7 @@ class RObject: Object {
     @objc dynamic var number: Int = 0                   //非オプショナル型
 
     // データを保存。
-    func save() {
+    func save() -> Int {
         let realm = try! Realm()
         if realm.isInWriteTransaction {
             if self.number == 0 { self.number = self.createNewId() }
@@ -36,6 +36,7 @@ class RObject: Object {
                 realm.add(self, update: .error)
             }
         }
+        return number
     }
     // 新しいIDを採番します。
     private func createNewId() -> Int {
