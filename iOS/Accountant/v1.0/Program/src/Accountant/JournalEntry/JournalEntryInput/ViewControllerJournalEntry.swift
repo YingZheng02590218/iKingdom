@@ -215,12 +215,21 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+        
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
     }
     // TextFieldに入力され値が変化した時の処理の関数
     @objc func textFieldDidChange(_ sender: UITextField) {
 //    func textFieldEditingChanged(_ sender: UITextField){
         if sender.text != "" {
             print("\(String(describing: sender.text))")
+        }
+        // カンマを追加する
+        if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
+            sender.text = "\(addComma(string: String(sender.text!)))"
         }
     }
     // TextFieldをタップしても呼ばれない
@@ -373,14 +382,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             return false
         }
     }
-    // 入力チェック(半角数字、文字数制限)
+    // textFieldに文字が入力される際に呼ばれる　入力チェック(半角数字、文字数制限)
+    // 戻り値にtrueを返すと入力した文字がTextFieldに反映され、falseを返すと入力した文字が反映されない。
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //        print("テキストフィールド入力中")
         var resultForCharacter = false
         var resultForLength = false
         // 入力チェック　数字のみに制限
         if textField == TextField_amount_debit || textField == TextField_amount_credit { // 借方金額仮　貸方金額
-            let allowedCharacters = CharacterSet(charactersIn:"0123456789")//Here change this characters based on your requirement
+            let allowedCharacters = CharacterSet(charactersIn:",0123456789")//Here change this characters based on your requirement
             let characterSet = CharacterSet(charactersIn: string)
             // 指定したスーパーセットの文字セットでないならfalseを返す
             resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
@@ -390,8 +400,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // 入力チェック　文字数最大数を設定
         var maxLength: Int = 0 // 文字数最大値を定義
         switch textField.tag {
-        case 333,444: // 金額の文字数
-            maxLength = 7
+        case 333,444: // 金額の文字数 + カンマの数 (100万円の位まで入力可能とする)
+            maxLength = 7 + 2
         case 555: // 小書きの文字数
             maxLength = 25
         default:
@@ -412,7 +422,21 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             return true
         }
     }
-
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
+    }
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        print("キーボードを閉じる前")
@@ -521,9 +545,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         let number = dataBaseManager.addJournalEntry(
                             date: formatter.string(from: datePicker.date),
                             debit_category: TextField_category_debit.text!,
-                            debit_amount: Int(TextField_amount_debit.text!)!,
+                            debit_amount: Int(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                             credit_category: TextField_category_credit.text!,
-                            credit_amount: Int(TextField_amount_credit.text!)!,
+                            credit_amount: Int(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                             smallWritting: TextField_SmallWritting.text!
                         )
 //                        print("入力ボタン \(presentingViewController)")

@@ -32,6 +32,10 @@ class TableViewControllerJournalEntry: UITableViewController {
         Label_list_date_year.text = "2020年"
         // 初期表示位置
         scroll = true
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
@@ -121,11 +125,20 @@ class TableViewControllerJournalEntry: UITableViewController {
         cell.label_list_summary.textAlignment = NSTextAlignment.right
         // ToDo 勘定科目の番号
         cell.label_list_number.text = "1" //元丁
-        cell.label_list_debit.text = "\(String(objects[indexPath.row].debit_amount)) "        //借方金額
-        cell.label_list_credit.text = "\(String(objects[indexPath.row].credit_amount)) "      //貸方金額
+        cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
+        cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
         //③
         
         return cell
+    }
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
     }
     // セルが画面に表示される直前に表示される
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
