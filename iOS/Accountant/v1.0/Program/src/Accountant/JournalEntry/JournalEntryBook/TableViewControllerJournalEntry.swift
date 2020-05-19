@@ -29,7 +29,7 @@ class TableViewControllerJournalEntry: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // ToDo どこで設定した年度のデータを参照するか考える
-        Label_list_date_year.text = "2020 　年"
+        Label_list_date_year.text = "2020年"
         // 初期表示位置
         scroll = true
     }
