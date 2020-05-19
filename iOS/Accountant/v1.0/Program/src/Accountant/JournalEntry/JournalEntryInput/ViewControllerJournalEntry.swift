@@ -34,24 +34,35 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
-    let now :Date = Date()
 
     func createDatePicker() {
+        // 現在時刻を取得
+        let now :Date = Date() // UTC時間なので　9時間ずれる
+
         let f     = DateFormatter() //年
         let ff    = DateFormatter() //月
         let fff   = DateFormatter() //月日
         let ffff  = DateFormatter() //年月日
         let ffff2 = DateFormatter() //年月日
         let fffff = DateFormatter()
+        let timezone = DateFormatter()
 
         f.dateFormat    = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        f.timeZone = .current
         ff.dateFormat   = DateFormatter.dateFormat(fromTemplate: "MM", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        ff.timeZone = .current
         fff.dateFormat  = DateFormatter.dateFormat(fromTemplate: "MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        fff.timeZone = .current
         ffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMdd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        ffff.timeZone = .current
+        ffff2.dateFormat = "yyyy-MM-dd"
+        ffff2.timeZone = .current
         fffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        fffff.timeZone = .current
+        timezone.dateFormat  = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale.current)
+        timezone.timeZone = .current
 //        var dateFormatter = NSDateFormatter()
 //        dateFormatter.dateFormat = "YYYY-MM-DD"
-        ffff2.dateFormat = "yyyy-MM-dd"
 
 //        var now :Date = Date()
 //        let now1 = fffff.string(from: Calendar.current.date(byAdding: .month, value: -3, to: now)!)
@@ -59,14 +70,16 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print(f.string(from: now))//年
 //        print(ff.string(from: now))//月
 //        print(fff.string(from: now))//月日
-//        print(ffff.string(from: now))//年月日
-//        print(now)
+//        print("現在時刻：\(ffff.string(from: now))")     //年月日
+        print("現在時刻 fffff   ：\(fffff.string(from: now))")    //年月日
+        print("現在時刻 timezone：\(timezone.string(from: now))")
+        print("現在時刻 now     ：\(now)")
 
-        let nowStringYear = f.string(from: now)//年
-        let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!)//年
-        let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)//年
-//        let nowStringMonth = ff.string(from: now)//月
-        let nowStringMonthDay = fff.string(from: now)//月日
+        let nowStringYear = f.string(from: now)                                                                 //年
+        let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!) //年
+        let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)      //年
+//        let nowStringMonth = ff.string(from: now)                                                             //月
+        let nowStringMonthDay = fff.string(from: now)                                                           //月日
         
         let dayOfStartInYear :Date   = fff.date(from: "01/01")!
         let dayOfEndInPeriod :Date   = fff.date(from: "03/31")!
@@ -94,10 +107,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        // ピッカーの初期値
+        let a = timezone.string(from: now)
+        print(timezone.date(from: a)!)
+        datePicker.date = timezone.date(from: timezone.string(from: now))!
+        
 //        print("\(String(describing: datePicker.minimumDate))")
 //        print("\(String(describing: datePicker.maximumDate))")
 //
-        datePicker.date = now
 //        print("\(String(describing: datePicker.date))")
 
 //        print(fff.string(from: dayOfStartInPeriod))
@@ -109,16 +126,18 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print(nowStringNextYear)
 //        Label_date.text = ffff.string(from: DatePicker.date)
     }
-    var diff :Int = 0
+//    var diff :Int = 0
     @IBOutlet weak var Button_Left: UIButton!
     @IBAction func Button_Left(_ sender: UIButton) {
         //todo
         let min = datePicker.minimumDate!
         if datePicker.date > min {
-            diff -= 1
+//            diff -= 1
+            let modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: datePicker.date)! // 1日前へ
+            datePicker.date = modifiedDate
         }
-        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
-        datePicker.date = modifiedDate
+//        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
+//        datePicker.date = modifiedDate
 //        print("\(String(describing: datePicker.date))")
     }
     @IBOutlet weak var Button_Right: UIButton!
@@ -126,10 +145,12 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         //todo
         let max = datePicker.maximumDate!
         if datePicker.date < max {
-            diff += 1
+//            diff += 1
+            let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: datePicker.date)! // 1日次へ
+            datePicker.date = modifiedDate
         }
-        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
-        datePicker.date = modifiedDate
+//        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
+//        datePicker.date = modifiedDate
 //        print("\(String(describing: datePicker.date))")
     }
     
@@ -521,10 +542,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Label_Popup: UILabel!
     @IBAction func Button_Input(_ sender: Any) {
         // シスログ出力
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM/dd"
         // printによる出力はUTCになってしまうので、9時間ずれる
 //        print("\(datePicker.date)")
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current // UTC時刻を補正
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+//        print("\(formatter.string(from: datePicker.date))")
+        formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
+//        print("\(formatter.string(from: datePicker.date))")
 //        print("日付　　　　 " + "\(formatter.string(from: datePicker.date))")
 //        print("借方勘定科目 " + "\(String(describing: TextField_category_debit.text))")
 //        print("貸方勘定科目 " + "\(String(describing: TextField_category_credit.text))")
