@@ -21,6 +21,8 @@
 		F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
 		F94EDDAC237AEB3C0074D812 /* AccountantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDAB237AEB3C0074D812 /* AccountantTests.swift */; };
 		F94EDDB7237AEB3C0074D812 /* AccountantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */; };
+		F9789A342475C49B00B62CAF /* TableViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* TableViewControllerSettings.swift */; };
+		F9789A362475CA8000B62CAF /* TableViewCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManager.swift */; };
 		F9B81D522430877B00F01630 /* ViewControllerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B81D512430877B00F01630 /* ViewControllerCategory.swift */; };
 		F9BF067D24289DC700C59031 /* TableViewControllerGeneralRedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* TableViewControllerGeneralRedger.swift */; };
@@ -71,6 +73,8 @@
 		F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountantUITests.swift; sourceTree = "<group>"; };
 		F94EDDB8237AEB3C0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9789A332475C49B00B62CAF /* TableViewControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerSettings.swift; sourceTree = "<group>"; };
+		F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSettings.swift; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F9B81D512430877B00F01630 /* ViewControllerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCategory.swift; sourceTree = "<group>"; };
 		F9BF067C24289DC700C59031 /* TableViewControllerGeneralRedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerGeneralRedger.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				F94EDD91237AEB3A0074D812 /* Accountant */,
+				F9789A322475C41700B62CAF /* Settings */,
 				F94EDDAA237AEB3B0074D812 /* AccountantTests */,
 				F94EDDB5237AEB3C0074D812 /* AccountantUITests */,
 				F94EDD90237AEB3A0074D812 /* Products */,
@@ -187,6 +192,15 @@
 				F94EDDB8237AEB3C0074D812 /* Info.plist */,
 			);
 			path = AccountantUITests;
+			sourceTree = "<group>";
+		};
+		F9789A322475C41700B62CAF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F9789A332475C49B00B62CAF /* TableViewControllerSettings.swift */,
+				F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		F9812F9223F2DC2E0076AD48 /* JournalEntry */ = {
@@ -479,7 +493,9 @@
 				F9CF22E52424F46500572070 /* TableViewControllerJournalEntry.swift in Sources */,
 				F9BF067D24289DC700C59031 /* TableViewControllerGeneralRedger.swift in Sources */,
 				F9B81D522430877B00F01630 /* ViewControllerCategory.swift in Sources */,
+				F9789A342475C49B00B62CAF /* TableViewControllerSettings.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
+				F9789A362475CA8000B62CAF /* TableViewCellSettings.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManager.swift in Sources */,
