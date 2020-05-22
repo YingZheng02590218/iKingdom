@@ -11,6 +11,13 @@
 		9BDB671CB0D8BBA854E16604 /* Pods_AccountantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC6138EA740D75AAB1DD259 /* Pods_AccountantTests.framework */; };
 		F57BFBC12EF00163D781E050 /* Pods_Accountant_AccountantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36BAF969D04BE9BB741A1D /* Pods_Accountant_AccountantUITests.framework */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
+		F9134C242476BC25002A0F77 /* TableViewControllerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* TableViewControllerCategory.swift */; };
+		F9134C262476BCE6002A0F77 /* TableViewCellCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* TableViewCellCategory.swift */; };
+		F9134C282476E8CF002A0F77 /* DatabaseManagerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C272476E8CF002A0F77 /* DatabaseManagerSettings.swift */; };
+		F9134C2A2476E987002A0F77 /* DatabaseSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DatabaseSettings.swift */; };
+		F929C00B247708CF0034FAAF /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929C00A247708CF0034FAAF /* MasterData.swift */; };
+		F929C01E247773B30034FAAF /* MasterData.realm in Resources */ = {isa = PBXBuildFile; fileRef = F929C01D247773B30034FAAF /* MasterData.realm */; };
+		F929C020247773D40034FAAF /* MasterData.csv in Resources */ = {isa = PBXBuildFile; fileRef = F929C01F247773D40034FAAF /* MasterData.csv */; };
 		F92EA9382428B18100B721C3 /* ViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92EA9372428B18100B721C3 /* ViewControllerJournalEntry.swift */; };
 		F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD92237AEB3A0074D812 /* AppDelegate.swift */; };
 		F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */; };
@@ -57,6 +64,13 @@
 		CBC6138EA740D75AAB1DD259 /* Pods_AccountantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccountantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.release.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.release.xcconfig"; sourceTree = "<group>"; };
 		F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournalEntry.swift; sourceTree = "<group>"; };
+		F9134C232476BC25002A0F77 /* TableViewControllerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerCategory.swift; sourceTree = "<group>"; };
+		F9134C252476BCE6002A0F77 /* TableViewCellCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellCategory.swift; sourceTree = "<group>"; };
+		F9134C272476E8CF002A0F77 /* DatabaseManagerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerSettings.swift; sourceTree = "<group>"; };
+		F9134C292476E987002A0F77 /* DatabaseSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSettings.swift; sourceTree = "<group>"; };
+		F929C00A247708CF0034FAAF /* MasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
+		F929C01D247773B30034FAAF /* MasterData.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = MasterData.realm; sourceTree = "<group>"; };
+		F929C01F247773D40034FAAF /* MasterData.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = MasterData.csv; sourceTree = "<group>"; };
 		F92EA9372428B18100B721C3 /* ViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F94EDD8F237AEB3A0074D812 /* Accountant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDD92237AEB3A0074D812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,11 +148,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F9134C222476BBC1002A0F77 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F9134C232476BC25002A0F77 /* TableViewControllerCategory.swift */,
+				F9134C252476BCE6002A0F77 /* TableViewCellCategory.swift */,
+				F929C009247708470034FAAF /* MasterData */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		F929C009247708470034FAAF /* MasterData */ = {
+			isa = PBXGroup;
+			children = (
+				F929C00A247708CF0034FAAF /* MasterData.swift */,
+			);
+			path = MasterData;
+			sourceTree = "<group>";
+		};
 		F94EDD86237AEB3A0074D812 = {
 			isa = PBXGroup;
 			children = (
+				F929C01F247773D40034FAAF /* MasterData.csv */,
+				F929C01D247773B30034FAAF /* MasterData.realm */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
-				F9789A322475C41700B62CAF /* Settings */,
 				F94EDDAA237AEB3B0074D812 /* AccountantTests */,
 				F94EDDB5237AEB3C0074D812 /* AccountantUITests */,
 				F94EDD90237AEB3A0074D812 /* Products */,
@@ -172,6 +205,7 @@
 				F9812F9423F2E0410076AD48 /* AccountSettlement */,
 				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
 				F9812F9223F2DC2E0076AD48 /* JournalEntry */,
+				F9789A322475C41700B62CAF /* Settings */,
 			);
 			path = Accountant;
 			sourceTree = "<group>";
@@ -199,6 +233,9 @@
 			children = (
 				F9789A332475C49B00B62CAF /* TableViewControllerSettings.swift */,
 				F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */,
+				F9134C222476BBC1002A0F77 /* Category */,
+				F9134C272476E8CF002A0F77 /* DatabaseManagerSettings.swift */,
+				F9134C292476E987002A0F77 /* DatabaseSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -356,6 +393,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F929C020247773D40034FAAF /* MasterData.csv in Resources */,
+				F929C01E247773B30034FAAF /* MasterData.realm in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
@@ -487,18 +526,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				F92EA9382428B18100B721C3 /* ViewControllerJournalEntry.swift in Sources */,
+				F9134C242476BC25002A0F77 /* TableViewControllerCategory.swift in Sources */,
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
+				F9134C262476BCE6002A0F77 /* TableViewCellCategory.swift in Sources */,
 				F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9CF22E52424F46500572070 /* TableViewControllerJournalEntry.swift in Sources */,
 				F9BF067D24289DC700C59031 /* TableViewControllerGeneralRedger.swift in Sources */,
 				F9B81D522430877B00F01630 /* ViewControllerCategory.swift in Sources */,
+				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
+				F9134C282476E8CF002A0F77 /* DatabaseManagerSettings.swift in Sources */,
 				F9789A342475C49B00B62CAF /* TableViewControllerSettings.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9789A362475CA8000B62CAF /* TableViewCellSettings.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManager.swift in Sources */,
+				F9134C2A2476E987002A0F77 /* DatabaseSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
