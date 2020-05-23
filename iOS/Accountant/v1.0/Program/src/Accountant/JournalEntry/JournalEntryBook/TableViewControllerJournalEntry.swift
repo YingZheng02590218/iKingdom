@@ -89,13 +89,17 @@ class TableViewControllerJournalEntry: UITableViewController {
         if section_num >= 13 {  //12ヶ月を超えた場合1月に戻す
             section_num -= 12
         }
-        let header_title = section_num.description + "  月"
+        var mon = "  月"
+        if section_num > 9 {
+            mon = "月"
+        }
+        let header_title = section_num.description + mon
         return header_title
     }
     //セルの数を、モデル(仕訳)の数に指定
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース
-        let dataBaseManager = DataBaseManager() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
         let counts = dataBaseManager.getJournalEntryCounts(section: section) // 何月のセクションに表示するセルかを引数で渡す
 //        print("月別のセル数:\(counts)")
         return counts //月別の仕訳データ数
@@ -104,7 +108,7 @@ class TableViewControllerJournalEntry: UITableViewController {
     var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
-        let dataBaseManager = DataBaseManager() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
         let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
 //        print("月別のセル:\(objects)")

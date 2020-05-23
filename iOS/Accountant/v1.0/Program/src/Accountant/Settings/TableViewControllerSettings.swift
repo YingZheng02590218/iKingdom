@@ -58,7 +58,7 @@ class TableViewControllerSettings: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellSettings {
         //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings", for: indexPath) as! TableViewCellSettings
-        
+            cell.textLabel?.text = "勘定科目" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
         return cell
     }
     /*

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-class DataBaseSettings: RObject2 {
+class DataBaseSettingsCategory: RObject2 {
     // モデル定義
     @objc dynamic var big_category: Int = 0       //大分類
     @objc dynamic var mid_category: Int = 0       //中分類

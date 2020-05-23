@@ -14,6 +14,7 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     @IBOutlet weak var Button_Done: UIButton!
     @IBOutlet weak var Button_Cancel: UIButton!
     
+    // ドラムロールに表示する勘定科目の文言
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
     var subCategories_liabilities :[String] = Array<String>()
@@ -32,25 +33,9 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
 //        let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry
 //        viewControllerJournalEntry.view.endEditing(true)
 
-        //借方、貸方 大項目
-        categories = [
-            "資産","負債","純資産","費用","収益"]
-        //勘定科目  小項目
-        subCategories_assets = [
-            "現金","定期預金","普通預金","原材料","立替金","備品"]
-        subCategories_liabilities = [
-            "未払金","長期借入金"]
-        subCategories_netAsset = [
-            "資本金"]
-        subCategories_expends = [
-            "仕入","地代家賃","水道光熱費","通信費","車両運搬費",
-            "減価償却費","消耗品費","美容費","支払給与","教育費",
-            "養育費","医療費","遊興費","交際費","支払保険料",
-            "支払保険料","支払利息","特別費","租税公課"]
-        subCategories_revenue = [
-            "売上","受取利息","有価証券利息","雑益","固定資産売却益"]
-
-    //Segueを場合分け　初期値
+        // ピッカー　ドラムロールの項目を初期化
+        getSettingsCategoryFromDB()
+        //Segueを場合分け　初期値
         if identifier == "identifier_debit" {       //借方　費用　仕入
             PickerView_category.selectRow(3, inComponent: 0, animated: false)
             PickerView_category.selectRow(0, inComponent: 1, animated: false)
@@ -60,6 +45,48 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         }
         //借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
         self.PickerView_category.reloadAllComponents()
+    }
+    // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
+    func getSettingsCategoryFromDB(){
+        //借方、貸方 大項目
+        categories = ["資産","負債","純資産","費用","収益"]
+        // データベース
+        let databaseManagerSettingsCategory = DatabaseManagerSettingsCategory() //データベースマネジャー
+        //
+        for i in 0..<categories.count { // 勘定区分
+            let objects = databaseManagerSettingsCategory.getSettings(section: i) // どのセクションに表示するセルかを判別するため引数で渡す
+//            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
+            var items: Array<String> = Array<String>()
+            for y in 0..<objects.count {    // 勘定
+                if objects[y].switching {   // トグルスイッチが有効の場合
+                    items.append(objects[y].category as String) // 配列 Array<Element>型　に要素を追加していく
+                }
+            }
+            transferItems(category: i, array: items)    // 勘定科目区分ごとに文言を用意する
+        }
+    }
+    // データベースにある設定データを変数に入れ替える
+    func transferItems(category: Int, array: Array<String>) {
+        switch category {           //勘定科目  小項目
+        case 0:
+            subCategories_assets = array
+            break
+        case 1:
+            subCategories_liabilities = array
+            break
+        case 2:
+            subCategories_netAsset = array
+            break
+        case 3:
+            subCategories_expends = array
+            break
+        case 4:
+            subCategories_revenue = array
+            break
+        default:
+            subCategories_assets = array
+            break
+        }
     }
 //UIPickerView
     //UIPickerViewの列の数 コンポーネントの数
@@ -108,6 +135,15 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
             }
         }
      }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        // ドラムロールの幅を指定　画面サイズによって可変にしたい ToDo
+        switch component {
+        case 0 : return 100
+        case 1 : return 240
+        default: return 0
+        }
+    }
      // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //todo
