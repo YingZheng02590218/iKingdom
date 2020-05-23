@@ -24,13 +24,22 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        // 設定画面　勘定科目　初期化　ToDo
+        initialiseMasterData()
     }
-    
+    //
+    func initialiseMasterData(){
+        // データベース
+        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+        if !databaseManagerSettings.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+            let masterData = MasterData()
+            masterData.readMasterDataFromCSV()   // マスターデータを作成する
+        }
+    }
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
@@ -221,7 +230,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let toolbar2 = UIToolbar()
         toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
 //        toolbar2.backgroundColor = UIColor.clear // バックグラウンドカラーをクリアにすると黒色になってしまう
-        toolbar2.barTintColor = UIColor.clear
+//        toolbar2.barTintColor = UIColor.clear
+        toolbar2.barTintColor = UIColor.white
         toolbar2.isTranslucent = true
         toolbar2.barStyle = .default
         let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
@@ -566,7 +576,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             TextField_SmallWritting.text = ""
                         }
                         // データベース　仕訳データを追加
-                        let dataBaseManager = DataBaseManager() //データベースマネジャー
+                        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
                         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
                         let number = dataBaseManager.addJournalEntry(
                             date: formatter.string(from: datePicker.date),

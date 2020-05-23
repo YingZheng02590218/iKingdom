@@ -10,7 +10,15 @@ import UIKit
 
 class TableViewCellCategory: UITableViewCell {
 
-    @IBOutlet weak var label_category: UILabel!
+    @IBOutlet weak var ToggleButton: UISwitch!
+
+    @IBAction func ToggleButton(_ sender: UISwitch) {
+//        if sender.isOn{
+//            print("on")
+//        } else {
+//            print("off")
+//        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

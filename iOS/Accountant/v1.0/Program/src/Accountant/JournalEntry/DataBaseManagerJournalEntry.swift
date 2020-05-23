@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-class DataBaseManager  {
+class DataBaseManagerJournalEntry  {
     
     // データベース
     
@@ -25,7 +25,6 @@ class DataBaseManager  {
         dataBaseJournalEntry.credit_category = credit_category  //貸方勘定
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
-
         // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()

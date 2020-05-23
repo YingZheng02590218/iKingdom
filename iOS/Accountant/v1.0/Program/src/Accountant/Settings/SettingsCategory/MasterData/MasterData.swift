@@ -32,7 +32,7 @@ class MasterData {
 //        )
     }
     
-    // マスターデータ読み込み
+    // CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
     func readMasterDataFromCSV() {
         if let csvPath = Bundle.main.path(forResource: "MasterData", ofType: "csv") {
             var csvString=""
@@ -42,11 +42,10 @@ class MasterData {
                 print(error.localizedDescription)
             }
             csvString.enumerateLines { (line, stop) -> () in
-
                  // 保存先のパスを出力しておく
                 print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
-
-                let dataBaseSettings = DataBaseSettings()
+                // モデルオブフェクトを生成
+                let dataBaseSettings = DataBaseSettingsCategory()
                 var number = 0 // 自動採番にした
                 dataBaseSettings.big_category = Int(line.components(separatedBy:",")[0])!
                 dataBaseSettings.mid_category = Int(line.components(separatedBy:",")[1])!
@@ -54,13 +53,13 @@ class MasterData {
                 dataBaseSettings.category = line.components(separatedBy:",")[3]
                 dataBaseSettings.explaining = line.components(separatedBy:",")[4]
                 dataBaseSettings.switching = self.toBoolean(string: line.components(separatedBy:",")[5])
-
+                // 書き込み
                 let realm = try! Realm()
                 try! realm.write {
-                    number = dataBaseSettings.save() //仕分け番号　自動採番
+                    number = dataBaseSettings.save() // 連番　自動採番
                     realm.add(dataBaseSettings)
                 }
-            print("連番: \(number)")
+                print("連番: \(number)")
             }
         }
     }
