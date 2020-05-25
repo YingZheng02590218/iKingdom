@@ -135,12 +135,14 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
             }
         }
      }
-    
+    // ドラムロールの幅を指定
+//    let SCREEN_SIZE = UIScreen.main.bounds.size // iPadではモーダルビューが小さなサイズで表示されるので、Screenのサイズは使えない。
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        // ドラムロールの幅を指定　画面サイズによって可変にしたい ToDo
+        // ドラムロールの幅を指定　画面サイズによって可変にする
+        let displayWidth: CGFloat = self.view.bounds.width // ビューのサイズを取得
         switch component {
-        case 0 : return 100
-        case 1 : return 240
+        case 0 : return displayWidth * 0.2915451895 // iPhone11Proの画面サイズを基準にサイズを指定。画面サイズにより可変。
+        case 1 : return displayWidth * 0.7084548105
         default: return 0
         }
     }

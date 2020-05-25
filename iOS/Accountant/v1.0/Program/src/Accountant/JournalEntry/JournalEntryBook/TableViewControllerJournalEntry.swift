@@ -120,12 +120,19 @@ class TableViewControllerJournalEntry: UITableViewController {
         if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
             indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
         }
-        cell.label_list_date.text = "\(objects[indexPath.row].date) "                               //日付
+        let d = "\(objects[indexPath.row].date)" // 日付
+        let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+        if date == "0" { // 日の十の位が0の場合は表示しない
+            cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
+        }else{
+            cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
+        }
+        cell.label_list_date.textAlignment = NSTextAlignment.right
         cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
         cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
         cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
         cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-        cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "                   //小書き
+        cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
         cell.label_list_summary.textAlignment = NSTextAlignment.right
         // ToDo 勘定科目の番号
         cell.label_list_number.text = "1" //元丁
