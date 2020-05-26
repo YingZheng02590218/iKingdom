@@ -145,7 +145,7 @@ class TableViewControllerJournalEntry: UITableViewController {
         cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
         cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
         cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
-        cell.label_list_summary.textAlignment = NSTextAlignment.right
+        cell.label_list_summary.textAlignment = NSTextAlignment.left
         // ToDo 勘定科目の番号
         cell.label_list_number.text = "1" //元丁
         cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
