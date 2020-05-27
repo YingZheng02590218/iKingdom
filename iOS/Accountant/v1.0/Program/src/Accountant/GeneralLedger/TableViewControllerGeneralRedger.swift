@@ -24,23 +24,48 @@ class TableViewControllerGeneralRedger: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 5
     }
-
+    // セクションヘッダーのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "資産の部"
+        case 1:
+            return "負債の部"
+        case 2:
+            return "純資産の部"
+        case 3:
+            return "費用の部"
+        case 4:
+            return "収益の部"
+        default:
+            return ""
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        // データベース
+        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let objects = databaseManagerSettings.getSettings(section: section) // どのセクションに表示するセルかを判別するため引数で渡す
+        return objects.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        // データベース
+        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let objects = databaseManagerSettings.getSettings(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
+        //① UI部品を指定　TableViewCellCategory
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath)
+        // 勘定科目の名称をセルに表示する
+        cell.textLabel?.text = " \(objects[indexPath.row].category as String)"
+        cell.textLabel?.textAlignment = NSTextAlignment.center
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
