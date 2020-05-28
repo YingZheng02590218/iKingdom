@@ -32,9 +32,13 @@
 		F9789A362475CA8000B62CAF /* TableViewCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9B81D522430877B00F01630 /* ViewControllerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B81D512430877B00F01630 /* ViewControllerCategory.swift */; };
-		F9BF067D24289DC700C59031 /* TableViewControllerGeneralRedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* TableViewControllerGeneralRedger.swift */; };
+		F9BF067D24289DC700C59031 /* TableViewControllerGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* TableViewControllerGeneralLedger.swift */; };
 		F9CF22E52424F46500572070 /* TableViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E42424F46500572070 /* TableViewControllerJournalEntry.swift */; };
 		F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* TableViewCell.swift */; };
+		F9D5D544247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D543247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift */; };
+		F9D5D54A247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift */; };
+		F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */; };
+		F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,9 +95,13 @@
 		F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSettings.swift; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9B81D512430877B00F01630 /* ViewControllerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCategory.swift; sourceTree = "<group>"; };
-		F9BF067C24289DC700C59031 /* TableViewControllerGeneralRedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerGeneralRedger.swift; sourceTree = "<group>"; };
+		F9BF067C24289DC700C59031 /* TableViewControllerGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerGeneralLedger.swift; sourceTree = "<group>"; };
 		F9CF22E42424F46500572070 /* TableViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F9CF22E62425016E00572070 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		F9D5D543247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedgerAccount.swift; sourceTree = "<group>"; };
+		F9D5D549247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGenearlLedgerAccount.swift; sourceTree = "<group>"; };
+		F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccount.swift; sourceTree = "<group>"; };
+		F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedger.swift; sourceTree = "<group>"; };
 		FF36BAF969D04BE9BB741A1D /* Pods_Accountant_AccountantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountant_AccountantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -262,7 +270,10 @@
 		F9812F9323F2DEBF0076AD48 /* GeneralLedger */ = {
 			isa = PBXGroup;
 			children = (
-				F9BF067C24289DC700C59031 /* TableViewControllerGeneralRedger.swift */,
+				F9BF067C24289DC700C59031 /* TableViewControllerGeneralLedger.swift */,
+				F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */,
+				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
+				F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */,
 			);
 			path = GeneralLedger;
 			sourceTree = "<group>";
@@ -290,6 +301,15 @@
 				F9B81D512430877B00F01630 /* ViewControllerCategory.swift */,
 			);
 			path = JournalEntryInput;
+			sourceTree = "<group>";
+		};
+		F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */ = {
+			isa = PBXGroup;
+			children = (
+				F9D5D549247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift */,
+				F9D5D543247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift */,
+			);
+			name = GenearlLedgerAccount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,16 +561,20 @@
 				F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9CF22E52424F46500572070 /* TableViewControllerJournalEntry.swift in Sources */,
-				F9BF067D24289DC700C59031 /* TableViewControllerGeneralRedger.swift in Sources */,
+				F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */,
+				F9BF067D24289DC700C59031 /* TableViewControllerGeneralLedger.swift in Sources */,
+				F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */,
 				F9B81D522430877B00F01630 /* ViewControllerCategory.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9789A342475C49B00B62CAF /* TableViewControllerSettings.swift in Sources */,
+				F9D5D54A247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9789A362475CA8000B62CAF /* TableViewCellSettings.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F929C0242478361F0034FAAF /* DatabaseManagerSettingsCategory.swift in Sources */,
+				F9D5D544247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
