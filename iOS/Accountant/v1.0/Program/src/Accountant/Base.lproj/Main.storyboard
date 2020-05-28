@@ -382,7 +382,7 @@
                             <viewLayoutGuide key="safeArea" id="Sbw-C3-BXX"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" rowHeight="90" id="ml1-A7-SRY" customClass="TableViewCell" customModule="Accountant" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" rowHeight="90" id="ml1-A7-SRY" customClass="TableViewCell" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="123" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ml1-A7-SRY" id="H9p-AI-sti">
@@ -465,7 +465,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="8:5" id="A5a-F8-7YV"/>
                                             </constraints>
@@ -519,7 +518,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstItem="VxD-kV-wBI" firstAttribute="height" secondItem="bkL-Dh-ed9" secondAttribute="height" multiplier="0.333333" id="00l-PH-V2v"/>
                                                 <constraint firstItem="Mk3-Ha-t3F" firstAttribute="top" secondItem="bkL-Dh-ed9" secondAttribute="top" id="113-UP-yFU"/>
@@ -579,7 +577,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="LnB-Zo-l5J" secondAttribute="height" multiplier="7:5" id="JoT-83-hgj"/>
                                             </constraints>
@@ -629,7 +626,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Y6V-Oo-hoJ" secondAttribute="height" multiplier="59:10" id="Oxi-Wz-3j8"/>
                                             </constraints>
@@ -679,7 +675,6 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="aJX-uJ-Vz7" secondAttribute="height" multiplier="89:15" id="zey-bH-dhO"/>
                                             </constraints>
@@ -1193,10 +1188,10 @@
             </objects>
             <point key="canvasLocation" x="1447" y="2724"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller Genearl Ledger Account-->
         <scene sceneID="gGf-Uo-AV6">
             <objects>
-                <viewController id="gyd-Yg-A56" sceneMemberID="viewController">
+                <viewController id="gyd-Yg-A56" customClass="ViewControllerGenearlLedgerAccount" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f68-RU-gpP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1208,13 +1203,13 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4Rc-4r-OlI"/>
-                                    <barButtonItem width="160" style="plain" id="ycT-mO-9OB">
+                                    <barButtonItem width="180" style="plain" id="ycT-mO-9OB">
                                         <view key="customView" contentMode="scaleToFill" id="53B-Zn-YCp">
-                                            <rect key="frame" x="116" y="9" width="143" height="26"/>
+                                            <rect key="frame" x="97.666666666666686" y="2" width="180" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTs-kO-9oa" userLabel="list_heading">
-                                                    <rect key="frame" x="0.0" y="0.0" width="143" height="26"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="＊＊＊">
@@ -1367,21 +1362,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEe-6c-QD7">
                                         <rect key="frame" x="295" y="0.0" width="15" height="45"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="rp3-tL-BCp" userLabel="list_number">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="rp3-tL-BCp" userLabel="list_debitOrCredit">
                                                 <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="又" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KW1-Ru-fOm" userLabel="list_number_2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="又" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KW1-Ru-fOm" userLabel="list_debitOrCredit_2">
                                                 <rect key="frame" x="0.0" y="15" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="9SQ-Td-CIY" userLabel="list_number_3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="9SQ-Td-CIY" userLabel="list_debitOrCredit_3">
                                                 <rect key="frame" x="0.0" y="30" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -1402,7 +1397,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSq-3h-ceG">
                                         <rect key="frame" x="310" y="0.0" width="65" height="45"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="差引残高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="UOr-zf-EiT" userLabel="list_debit">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="差引残高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="UOr-zf-EiT" userLabel="list_balance">
                                                 <rect key="frame" x="0.0" y="5" width="65" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -1462,13 +1457,263 @@
                                     <constraint firstItem="avl-I0-eLg" firstAttribute="top" secondItem="YIl-du-nd2" secondAttribute="top" id="y2G-Rr-7St"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jN9-PP-hg7">
-                                <rect key="frame" x="0.0" y="89" width="375" height="671"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jN9-PP-hg7">
+                                <rect key="frame" x="0.0" y="89" width="375" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger_account" rowHeight="30" id="dfB-Ka-NUI" userLabel="cell_list_generalLedger_account" customClass="TableViewCellGeneralLedgerAccount" customModule="Accountant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dfB-Ka-NUI" id="XLx-if-ENF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSj-Ab-Mhh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="KeE-Cg-kQ3" userLabel="list_date_month">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="RJg-nz-fOc" userLabel="list_date_day">
+                                                            <rect key="frame" x="20" y="0.0" width="25" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="tSj-Ab-Mhh" secondAttribute="height" multiplier="3:2" id="Nak-Md-Qw3"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-UI-PZr">
+                                                    <rect key="frame" x="45" y="0.0" width="105" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" id="UGS-za-XUB" userLabel="list_summary">
+                                                            <rect key="frame" x="0.0" y="0.0" width="105" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="KfE-UI-PZr" secondAttribute="height" multiplier="7:2" id="ZET-Pm-nSU"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-3p-95E">
+                                                    <rect key="frame" x="150" y="0.0" width="15" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zcc-G1-l6f" userLabel="list_number">
+                                                            <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="dPR-3p-95E" secondAttribute="height" multiplier="1:2" id="3jn-ph-HV7"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxL-Qp-D6m">
+                                                    <rect key="frame" x="165" y="0.0" width="65" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="sQk-3N-gmX" userLabel="list_debit">
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="OxL-Qp-D6m" secondAttribute="height" multiplier="13:6" id="eiU-bl-ZtQ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yx6-Xb-qZc">
+                                                    <rect key="frame" x="230" y="0.0" width="65" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="f47-Uo-MiR" userLabel="list_credit">
+                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="yx6-Xb-qZc" secondAttribute="height" multiplier="13:6" id="Cyt-nF-8qO"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgc-R4-jK9">
+                                                    <rect key="frame" x="295" y="0.0" width="15" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XXk-V4-PMR" userLabel="list_debitOrCredit">
+                                                            <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Rgc-R4-jK9" secondAttribute="height" multiplier="1:2" id="pjP-Hk-CqB"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-hj-q3L">
+                                                    <rect key="frame" x="310" y="0.0" width="65" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="bIo-8P-K6z" userLabel="list_balance">
+                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="AuW-hj-q3L" secondAttribute="height" multiplier="13:6" id="Dzh-6z-Gpm"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <real key="value" value="0.40000000000000002"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="OxL-Qp-D6m" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="0Qv-fc-tps"/>
+                                                <constraint firstItem="AuW-hj-q3L" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="0uy-QW-4u5"/>
+                                                <constraint firstItem="yx6-Xb-qZc" firstAttribute="leading" secondItem="OxL-Qp-D6m" secondAttribute="trailing" id="2dN-Mi-r8q"/>
+                                                <constraint firstItem="tSj-Ab-Mhh" firstAttribute="leading" secondItem="XLx-if-ENF" secondAttribute="leading" id="3Sp-nG-FT7"/>
+                                                <constraint firstItem="dPR-3p-95E" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="3y7-B9-Drl"/>
+                                                <constraint firstItem="OxL-Qp-D6m" firstAttribute="leading" secondItem="dPR-3p-95E" secondAttribute="trailing" id="DKq-xK-hc7"/>
+                                                <constraint firstAttribute="trailing" secondItem="AuW-hj-q3L" secondAttribute="trailing" id="LVD-Rb-tri"/>
+                                                <constraint firstAttribute="bottom" secondItem="yx6-Xb-qZc" secondAttribute="bottom" id="OqQ-Rk-0ma"/>
+                                                <constraint firstAttribute="bottom" secondItem="dPR-3p-95E" secondAttribute="bottom" id="PF0-6J-1De"/>
+                                                <constraint firstAttribute="bottom" secondItem="tSj-Ab-Mhh" secondAttribute="bottom" id="Su8-gq-Adw"/>
+                                                <constraint firstItem="yx6-Xb-qZc" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="Z8j-yx-jud"/>
+                                                <constraint firstAttribute="bottom" secondItem="KfE-UI-PZr" secondAttribute="bottom" id="aVm-3r-iV1"/>
+                                                <constraint firstItem="KfE-UI-PZr" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="g5T-7s-VlD"/>
+                                                <constraint firstItem="dPR-3p-95E" firstAttribute="leading" secondItem="KfE-UI-PZr" secondAttribute="trailing" id="jIM-jM-E2d"/>
+                                                <constraint firstItem="AuW-hj-q3L" firstAttribute="leading" secondItem="Rgc-R4-jK9" secondAttribute="trailing" id="oCy-pY-DOm"/>
+                                                <constraint firstAttribute="bottom" secondItem="AuW-hj-q3L" secondAttribute="bottom" id="oTM-hu-gQW"/>
+                                                <constraint firstItem="Rgc-R4-jK9" firstAttribute="leading" secondItem="yx6-Xb-qZc" secondAttribute="trailing" id="qOV-Qu-Nob"/>
+                                                <constraint firstAttribute="bottom" secondItem="OxL-Qp-D6m" secondAttribute="bottom" id="qYN-Hn-CJi"/>
+                                                <constraint firstItem="KfE-UI-PZr" firstAttribute="leading" secondItem="tSj-Ab-Mhh" secondAttribute="trailing" id="s2q-1j-fdN"/>
+                                                <constraint firstItem="tSj-Ab-Mhh" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="xZf-eK-YjQ"/>
+                                                <constraint firstItem="Rgc-R4-jK9" firstAttribute="top" secondItem="XLx-if-ENF" secondAttribute="top" id="z6R-3r-HPN"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rgc-R4-jK9" secondAttribute="bottom" id="zsR-nY-Eqy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="KfE-UI-PZr" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="0DK-HR-eEt"/>
+                                            <constraint firstItem="OxL-Qp-D6m" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.173333" id="Aqy-7e-D98"/>
+                                            <constraint firstItem="Rgc-R4-jK9" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.04" id="L56-YT-IAa"/>
+                                            <constraint firstItem="OxL-Qp-D6m" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="MTY-Cp-O2u"/>
+                                            <constraint firstItem="dPR-3p-95E" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="Rp3-PM-V0c"/>
+                                            <constraint firstItem="tSj-Ab-Mhh" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.12" id="Trp-MX-4i7"/>
+                                            <constraint firstItem="yx6-Xb-qZc" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.173333" id="UoW-RI-nNP"/>
+                                            <constraint firstItem="KfE-UI-PZr" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.28" id="X7f-nn-sTF"/>
+                                            <constraint firstItem="AuW-hj-q3L" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.173333" id="asT-0o-C0r"/>
+                                            <constraint firstItem="dPR-3p-95E" firstAttribute="width" secondItem="dfB-Ka-NUI" secondAttribute="width" multiplier="0.04" id="hTf-Ur-y3q"/>
+                                            <constraint firstItem="AuW-hj-q3L" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="kP2-Nt-xdu"/>
+                                            <constraint firstItem="yx6-Xb-qZc" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="pBO-O8-BDi"/>
+                                            <constraint firstItem="Rgc-R4-jK9" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="qCC-JC-nCg"/>
+                                            <constraint firstItem="tSj-Ab-Mhh" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="uib-Bu-QQ8"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label_list_balance" destination="bIo-8P-K6z" id="zfd-5z-19X"/>
+                                            <outlet property="label_list_credit" destination="f47-Uo-MiR" id="JZh-VI-Jvw"/>
+                                            <outlet property="label_list_date_day" destination="RJg-nz-fOc" id="nbs-OJ-AIz"/>
+                                            <outlet property="label_list_date_month" destination="KeE-Cg-kQ3" id="vyr-4M-1UE"/>
+                                            <outlet property="label_list_debit" destination="sQk-3N-gmX" id="tJH-It-thi"/>
+                                            <outlet property="label_list_debitOrCredit" destination="XXk-V4-PMR" id="AWd-ZM-eU1"/>
+                                            <outlet property="label_list_number" destination="Zcc-G1-l6f" id="6ih-SX-SMY"/>
+                                            <outlet property="label_list_summary" destination="UGS-za-XUB" id="eIy-Zc-YN2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="YIl-du-nd2" firstAttribute="width" secondItem="UFS-3d-hhU" secondAttribute="width" id="1et-8T-ZJ5"/>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="top" secondItem="YIl-du-nd2" secondAttribute="bottom" id="2GL-Rf-Hgw"/>
                             <constraint firstItem="hJ0-sk-VHe" firstAttribute="top" secondItem="f68-RU-gpP" secondAttribute="top" id="6Wf-dJ-Hrl"/>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="trailing" secondItem="f68-RU-gpP" secondAttribute="trailing" id="EIw-zn-wY8"/>
@@ -1480,24 +1725,29 @@
                             <constraint firstItem="YIl-du-nd2" firstAttribute="height" secondItem="UFS-3d-hhU" secondAttribute="height" multiplier="0.0613079" id="hYl-1P-4bT"/>
                             <constraint firstItem="YIl-du-nd2" firstAttribute="top" secondItem="hJ0-sk-VHe" secondAttribute="bottom" id="lia-KE-2kA"/>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="leading" secondItem="f68-RU-gpP" secondAttribute="leading" id="nTd-4m-Eoh"/>
+                            <constraint firstItem="hJ0-sk-VHe" firstAttribute="width" secondItem="UFS-3d-hhU" secondAttribute="width" id="nsV-HD-DfG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UFS-3d-hhU"/>
                     </view>
+                    <connections>
+                        <outlet property="TableView_account" destination="jN9-PP-hg7" id="aet-D9-2b4"/>
+                        <outlet property="label_list_heading" destination="gTs-kO-9oa" id="tws-c6-Glb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppl-w0-X1D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="1331.5270935960591"/>
+            <point key="canvasLocation" x="2105" y="2724"/>
         </scene>
         <!--総勘定元帳-->
         <scene sceneID="Y5e-Yq-6p2">
             <objects>
-                <tableViewController id="GLW-Xl-ppQ" customClass="TableViewControllerGeneralRedger" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GLW-Xl-ppQ" customClass="TableViewControllerGeneralLedger" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MY0-PK-Yhc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="vbI-yM-du8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="vbI-yM-du8" customClass="TableViewCellGeneralLedger" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vbI-yM-du8" id="n7T-Mk-RNG">
@@ -1516,6 +1766,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="総勘定元帳" id="IvK-Ga-tf1"/>
+                    <connections>
+                        <outlet property="TableView_generalLedger" destination="MY0-PK-Yhc" id="8PV-td-hrX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="le2-FJ-lhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
