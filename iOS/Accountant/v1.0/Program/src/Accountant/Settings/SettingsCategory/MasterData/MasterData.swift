@@ -10,14 +10,12 @@ import Foundation
 import RealmSwift // データベースのインポート
 
 class MasterData {
-        
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
     var subCategories_liabilities :[String] = Array<String>()
     var subCategories_netAsset :[String] = Array<String>()
     var subCategories_expends :[String] = Array<String>()
     var subCategories_revenue :[String] = Array<String>()
-
     // 初期設定データ
     func setInitialData() {
         // データベース　仕訳データを追加
@@ -31,18 +29,17 @@ class MasterData {
 //            switching: switching
 //        )
     }
-    
     // CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
     func readMasterDataFromCSV() {
         if let csvPath = Bundle.main.path(forResource: "MasterData", ofType: "csv") {
-            var csvString=""
+            var csvString = ""
             do{
                 csvString = try NSString(contentsOfFile: csvPath, encoding: String.Encoding.utf8.rawValue) as String
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
             csvString.enumerateLines { (line, stop) -> () in
-                 // 保存先のパスを出力しておく
+                // 保存先のパスを出力しておく
                 print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
                 // モデルオブフェクトを生成
                 let dataBaseSettings = DataBaseSettingsCategory()
@@ -74,5 +71,4 @@ class MasterData {
             return false
         }
     }
-    
 }

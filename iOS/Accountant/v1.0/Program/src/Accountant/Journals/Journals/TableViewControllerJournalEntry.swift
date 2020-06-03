@@ -29,13 +29,17 @@ class TableViewControllerJournalEntry: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // ToDo どこで設定した年度のデータを参照するか考える
-        Label_list_date_year.text = "2020年"
+        Label_list_date_year.text = "2020" + "年"
         // 初期表示位置
         scroll = true
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
+ 
+        // ToDo
+        let initial = Initial()
+        initial.initialize()
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
@@ -50,10 +54,9 @@ class TableViewControllerJournalEntry: UITableViewController {
         // 初期表示位置 OFF
         scroll = false
     }
+    
 //    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
-
-    
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {}
     // スクロール
     var Number = 0
@@ -66,7 +69,6 @@ class TableViewControllerJournalEntry: UITableViewController {
     }
     // セクションの数を設定する
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
     }
     // セクションヘッダーの高さを決める
@@ -89,10 +91,10 @@ class TableViewControllerJournalEntry: UITableViewController {
         if section_num >= 13 {  //12ヶ月を超えた場合1月に戻す
             section_num -= 12
         }
-        var mon = "  月"
-        if section_num > 9 {
-            mon = "月"
-        }
+        let mon = "月"
+//        if section_num > 9 {
+//            mon = "月"
+//        }
         let header_title = section_num.description + mon
         return header_title
     }
@@ -114,7 +116,6 @@ class TableViewControllerJournalEntry: UITableViewController {
 //        print("月別のセル:\(objects)")
         //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
-        
         //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
         // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
         if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
@@ -146,8 +147,10 @@ class TableViewControllerJournalEntry: UITableViewController {
         cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
         cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
         cell.label_list_summary.textAlignment = NSTextAlignment.left
-        // ToDo 勘定科目の番号
-        cell.label_list_number.text = "1" //元丁
+        let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")
+        cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
+        let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")
+        cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
         cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
         cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
         //③
@@ -200,61 +203,4 @@ class TableViewControllerJournalEntry: UITableViewController {
             }
         }
     }
-
-    
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

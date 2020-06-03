@@ -11,6 +11,7 @@ import UIKit
 class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var TableView_account: UITableView!
+    @IBOutlet weak var label_date_year: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +20,15 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         TableView_account.dataSource = self
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
+        // ToDo どこで設定した年度のデータを参照するか考える
+        label_date_year.text = "2020" + "年" // ToDo
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
+        // 差引残高　計算
+        generalLedgerAccountBalance.calculateBalance(account: account)
     }
-
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -50,10 +54,10 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         if section_num >= 13 {  //12ヶ月を超えた場合1月に戻す
             section_num -= 12
         }
-        var mon = "  月"
-        if section_num > 9 {
-            mon = "月"
-        }
+        let mon = "月"
+//        if section_num > 9 {
+//            mon = "月"
+//        }
         let header_title = section_num.description + mon
         return header_title
     }
@@ -67,14 +71,16 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     }
     
     var account :String = "" // 勘定名
+    let generalLedgerAccountBalance = GeneralLedgerAccountBalance()
     @IBOutlet weak var label_list_heading: UILabel!
     //セルを生成して返却するメソッド
-    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
+//    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
         let dataBaseManagerAccount = DataBaseManagerAccount() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
         let objects = dataBaseManagerAccount.getAccount(section: indexPath.section, account: account) // 何月のセクションに表示するセルかを判別するため引数で渡す
+//        let objects = dataBaseManagerAccount.getAccountTest(section: indexPath.section, account: account)
 //        print("月別のセル:\(objects)")
         //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as! TableViewCellGeneralLedgerAccount
@@ -104,28 +110,32 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
 //        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
 //        cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
 //        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-        if account == "\(objects[indexPath.row].debit_category)" {                                   //この勘定が借方の場合
-            cell.label_list_summary.text = "\(objects[indexPath.row].credit_category) "              //摘要　相手方勘定なので貸方
+        if account == "\(objects[indexPath.row].debit_category)" { // 借方勘定の場合                      //この勘定が借方の場合
+            cell.label_list_summary.text = "\(objects[indexPath.row].credit_category) "             //摘要　相手方勘定なので貸方
             cell.label_list_summary.textAlignment = NSTextAlignment.right
+            let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")
+            cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
             cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
-            cell.label_list_credit.text = ""                                                                        //貸方金額
-        }else if account == "\(objects[indexPath.row].credit_category)" {
-            cell.label_list_summary.text = "\(objects[indexPath.row].debit_category) "               //摘要　相手方勘定なので借方
+            cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
+        }else if account == "\(objects[indexPath.row].credit_category)" {  // 貸方勘定の場合
+            cell.label_list_summary.text = "\(objects[indexPath.row].debit_category) "              //摘要　相手方勘定なので借方
             cell.label_list_summary.textAlignment = NSTextAlignment.left
-            cell.label_list_debit.text = ""                                                                         //借方金額
+            let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")
+            cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+            cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
             cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
         }
-
-        // ToDo 勘定科目の番号
-        cell.label_list_number.text = "1" // 丁数
-        cell.label_list_debitOrCredit.text = "1"        // 借又貸
-        cell.label_list_balance.text = "ToDo"        //差引残高
+        // 差引残高　差引残高クラスで計算した計算結果を取得
+        let balanceAmount = generalLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+        cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
+        let balanceDebitOrCredit = generalLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+        cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
         
         return cell
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
-    func addComma(string :String) -> String{
+    func addComma(string :String) -> String {
         if(string != "") { // ありえないでしょう
             return formatter.string(from: NSNumber(value: Double(string)!))!
         }else{
@@ -155,15 +165,4 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
 //            }
 //        }
 //    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -10,9 +10,17 @@ import Foundation
 import RealmSwift // データベースのインポート
 
 class DatabaseManagerSettingsCategory  {
-    
     // データベース
     
+    // データベースにDataBaseSettingsCategoryモデルが存在するかどうかをチェックする
+    func checkInitialising() -> Bool {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
+        let objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
     // モデルオブフェクトの追加 マスターデータを作成する時のみ使用
 //    func addCategory(big_category: Int,small_category: Int,category: String,explaining: String,switching: Bool) {
 //        // オブジェクトを作成
@@ -24,7 +32,6 @@ class DatabaseManagerSettingsCategory  {
 //        dataBaseSettingsCategory.category = category                    //勘定科目
 //        dataBaseSettingsCategory.explaining = explaining                //説明
 //        dataBaseSettingsCategory.switching = switching                  //有効無効
-//
 //        // データベース　書き込み
 //        // (1)Realmのインスタンスを生成する
 //        let realm = try! Realm()
@@ -77,15 +84,6 @@ class DatabaseManagerSettingsCategory  {
         }
         return objects
     }
-    // データベースにDataBaseSettingsCategoryモデルが存在するかどうかをチェックする
-    func checkInitialising() -> Bool {
-        // データベース　読み込み
-        // (1)Realmのインスタンスを生成する
-        let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        let objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
-        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
-    }
     // モデルオブフェクトの更新
     func setSettingsCategorySwitching(tag: Int, isOn: Bool){
         // データベース　読み込み
@@ -97,5 +95,4 @@ class DatabaseManagerSettingsCategory  {
             realm.create(DataBaseSettingsCategory.self, value: value, update: .modified) // 一部上書き更新
         }
     }
-    
 }
