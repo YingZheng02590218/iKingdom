@@ -10,33 +10,51 @@ import Foundation
 import RealmSwift // データベースのインポート
 
 class DataBaseManagerJournalEntry  {
-    
     // データベース
     
-    // モデルオブフェクトの追加
-    func addJournalEntry(date: String,debit_category: String,debit_amount: Int,credit_category: String,credit_amount: Int,smallWritting: String) -> Int {
+    // モデルオブフェクトの追加　仕訳
+    func addJournalEntry(date: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
         // オブジェクトを作成
-        let dataBaseJournalEntry = DataBaseJournalEntry() //仕訳
-        // 自動採番にした
-        var number = 0
+        let dataBaseJournalEntry = DataBaseJournalEntry()       //仕訳
+        var number = 0                                          //仕訳番号 自動採番にした
         dataBaseJournalEntry.date = date                        //日付
         dataBaseJournalEntry.debit_category = debit_category    //借方勘定
         dataBaseJournalEntry.debit_amount = debit_amount        //借方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.credit_category = credit_category  //貸方勘定
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
+        // オブジェクトを作成
+//        let accountLeft = Account()                             //仕訳
+//        accountLeft.accountName = debit_category
+//        dataBaseJournalEntry.account.append(accountLeft)
+//        let accountRight = Account()                            //仕訳 Accountオブジェクトをひとつでプロパティを上書きはできなかった
+//        accountRight.accountName = credit_category
+//        dataBaseJournalEntry.account.append(accountRight)
+        let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
+        let left_number = dataBaseManagerAccount.getPrimaryNumberOfAccount(category: debit_category)
+        let right_number = dataBaseManagerAccount.getPrimaryNumberOfAccount(category: credit_category)
         // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
-            number = dataBaseJournalEntry.save() //仕分け番号　自動採番
-            realm.add(dataBaseJournalEntry)
+            number = dataBaseJournalEntry.save() //仕訳番号　自動採番
+//            realm.add(dataBaseJournalEntry)
+            // 仕訳帳に仕訳データを追加
+            let object = realm.object(ofType: DataBaseJournalEntryBook.self, forPrimaryKey: 1 ) // ToDo
+            object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+//勘定へ転記
+            // 勘定に借方の仕訳データを追加
+            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
+            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+            // 勘定に貸方の仕訳データを追加
+            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
+            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
         }
 //        print(dataBaseJournalEntry)
         return number
     }
-    // モデルオブフェクトの取得
+    // モデルオブフェクトの取得　仕訳
     func getJournalEntry(section: Int) -> Results<DataBaseJournalEntry> { //DataBaseJournalEntry {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
@@ -102,14 +120,27 @@ class DataBaseManagerJournalEntry  {
 //        return dataBaseJournalEntry
         return objects
     }
-    // モデルオブフェクトの数を取得
+    // 丁数を取得
+    func getNumberOfAccount(accountName: String) -> Int {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているDataBaseAccountモデルを全て取得する
+        var objects = realm.objects(DataBaseAccount.self) // モデル
+        // 希望する勘定だけを抽出する　ToDo
+        objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+        // 勘定のプライマリーキーを取得する
+        let numberOfAccount = objects[0].number
+        return numberOfAccount
+    }
+    // モデルオブフェクトの数を取得　仕訳
     func getJournalEntryCounts(section: Int) -> Int {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         let objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
-        //            print("DataBaseJournalEntryモデル : \(objects.count)")
+//            print("DataBaseJournalEntryモデル : \(objects.count)")
         var objectsCount = 0
         switch section {
         case 0: // April
@@ -152,7 +183,7 @@ class DataBaseManagerJournalEntry  {
             objectsCount = 0
             break
         }
-        //            print("DataBaseJournalEntry月別モデル数 :セクション \(section) :数 \(objectsCount)")
+//            print("DataBaseJournalEntry月別モデル数 :セクション \(section) :数 \(objectsCount)")
         return objectsCount // 仕訳データの数を返す
     }
 }

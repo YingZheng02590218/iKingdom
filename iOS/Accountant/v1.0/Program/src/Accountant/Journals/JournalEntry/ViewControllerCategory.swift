@@ -26,7 +26,7 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    //UIPickerView
+//UIPickerView
         // Delegate設定
         PickerView_category.delegate = self
         PickerView_category.dataSource = self
@@ -146,7 +146,7 @@ class ViewControllerCategory: UIViewController,UIPickerViewDataSource,UIPickerVi
         default: return 0
         }
     }
-     // UIPickerViewのRowが選択された時の挙動
+    // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //todo
         let viewControllerJournalEntry = self.presentingViewController as! ViewControllerJournalEntry

@@ -28,17 +28,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
-        // 設定画面　勘定科目　初期化　ToDo
-        initialiseMasterData()
-    }
-    //
-    func initialiseMasterData(){
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        if !databaseManagerSettings.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
-            let masterData = MasterData()
-            masterData.readMasterDataFromCSV()   // マスターデータを作成する
-        }
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -581,9 +570,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         let number = dataBaseManager.addJournalEntry(
                             date: formatter.string(from: datePicker.date),
                             debit_category: TextField_category_debit.text!,
-                            debit_amount: Int(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                             credit_category: TextField_category_credit.text!,
-                            credit_amount: Int(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                             smallWritting: TextField_SmallWritting.text!
                         )
 //                        print("入力ボタン \(presentingViewController)")

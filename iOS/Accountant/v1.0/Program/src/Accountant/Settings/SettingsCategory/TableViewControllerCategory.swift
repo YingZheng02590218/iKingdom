@@ -19,9 +19,7 @@ class TableViewControllerCategory: UITableViewController {
 //            masterData.readMasterDataFromCSV()   // マスターデータを作成する
 //        }
     }
-
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 5
@@ -68,7 +66,6 @@ class TableViewControllerCategory: UITableViewController {
         cell.ToggleButton.isOn = objects[indexPath.row].switching
         // 勘定科目の有効無効　変更時のアクションを指定
         cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
-
         return cell
     }
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す
@@ -80,8 +77,8 @@ class TableViewControllerCategory: UITableViewController {
         }
         let cell = hoge as! TableViewCellCategory
         // touchIndexは選択したセルが何番目かを記録しておくプロパティ
-        let touchIndex: IndexPath = self.tableView.indexPath(for: cell)!
-        print("トグルスイッチが変更されたセルのIndexPath:　\(touchIndex)")
+//        let touchIndex: IndexPath = self.tableView.indexPath(for: cell)!
+//        print("トグルスイッチが変更されたセルのIndexPath:　\(touchIndex)")
         // ここからデータベースを更新する
         changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効
     }
@@ -91,59 +88,4 @@ class TableViewControllerCategory: UITableViewController {
         let databaseManagerSettingsCategory = DatabaseManagerSettingsCategory() //データベースマネジャー
         databaseManagerSettingsCategory.setSettingsCategorySwitching(tag: tag, isOn: isOn)
     }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
