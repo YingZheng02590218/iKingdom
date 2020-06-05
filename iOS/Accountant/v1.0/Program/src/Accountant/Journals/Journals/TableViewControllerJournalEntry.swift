@@ -172,7 +172,8 @@ class TableViewControllerJournalEntry: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var indexPath_local = IndexPath(row: 0, section: 0)
         if scroll || scroll_adding {     // 初回起動時の場合 入力ボタン押下時の場合
-            for s in 0..<TableView_JournalEntry.numberOfSections-1 {            //セクション数　ゼロスタート補正
+            print(TableView_JournalEntry.numberOfSections)
+            for s in 0..<TableView_JournalEntry.numberOfSections {            //セクション数　ゼロスタート補正は不要
                 if TableView_JournalEntry.numberOfRows(inSection: s) > 0 {
                     let r = TableView_JournalEntry.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
                     indexPath_local = IndexPath(row: r, section: s)

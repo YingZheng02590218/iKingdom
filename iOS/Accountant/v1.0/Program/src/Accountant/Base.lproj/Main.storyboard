@@ -127,7 +127,7 @@
         <!--会計期間-->
         <scene sceneID="xsH-4i-hU7">
             <objects>
-                <tableViewController id="PTX-OS-j96" customClass="TableViewControllerSettingsTerm" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="PTX-OS-j96" customClass="TableViewControllerSettingsPeriod" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gIz-cK-sx7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,11 +147,63 @@
                             <outlet property="delegate" destination="PTX-OS-j96" id="5Ud-42-3Qr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="会計期間" id="sly-4v-bkn"/>
+                    <navigationItem key="navigationItem" title="会計期間" id="sly-4v-bkn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hWP-C8-mAT">
+                            <connections>
+                                <segue destination="D9t-bn-aNV" kind="popoverPresentation" popoverAnchorBarButtonItem="hWP-C8-mAT" id="WqY-nq-W4j">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bvp-k2-RDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4126" y="2724"/>
+        </scene>
+        <!--View Controller Settings Period Year-->
+        <scene sceneID="Om1-ys-DZR">
+            <objects>
+                <viewController id="D9t-bn-aNV" customClass="ViewControllerSettingsPeriodYear" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0E4-Nl-IJl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x5a-wp-wQi">
+                                <rect key="frame" x="0.0" y="70" width="375" height="688"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pickerView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ILg-pc-f36">
+                                <rect key="frame" x="0.0" y="26" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <items>
+                                    <navigationItem title="会計帳簿追加" id="Ats-M5-MsS">
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Ioa-pJ-AdJ">
+                                            <connections>
+                                                <action selector="cancel:" destination="D9t-bn-aNV" id="30Z-BO-wzx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="Ysd-t8-yVL">
+                                            <connections>
+                                                <action selector="save:" destination="D9t-bn-aNV" id="63d-4L-3Ds"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yJA-FI-qdW"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="pickerView" destination="x5a-wp-wQi" id="ZuM-Zj-lDI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qJz-Bf-u6Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4125.6000000000004" y="3400.4926108374384"/>
         </scene>
         <!--設定-->
         <scene sceneID="vdu-9x-dlK">

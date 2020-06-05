@@ -10,11 +10,12 @@ import Foundation
 
 class Initial {
     
+    // 初期化処理
     func initialize(){
-        // 設定画面　勘定科目　初期化　ToDo
+        // 設定画面　勘定科目　初期化
         initialiseMasterData()
-        // 主要簿
-        initializeMainBooks(fiscalYear: 2030)
+        // 設定画面　会計帳簿棚　初期化
+        initializeAccountingBooksShelf()
     }
     // 設定画面　勘定科目　勘定科目一覧を初期化
     func initialiseMasterData(){
@@ -26,38 +27,62 @@ class Initial {
             masterData.readMasterDataFromCSV()   // マスターデータを作成する
         }
     }
-    // 主要簿　会計期間画面
-    func initializeMainBooks(fiscalYear: Int) {
+    // 会計帳簿棚
+    func initializeAccountingBooksShelf() {
         // オブジェクト作成
-        let dataBaseManagerMainBooks = DataBaseManagerMainBooks()
-        // データベースに主要簿があるかをチェック
-        if !dataBaseManagerMainBooks.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
-            let number = dataBaseManagerMainBooks.addMainBooks(fiscalYear: fiscalYear)
-            // 仕訳帳画面　　初期化　ToDo
-            initialiseJournalEntryBook(number: number)
-            // 総勘定元帳画面　勘定画面　勘定　初期化　ToDo
-            initialiseAccounts(number: number)
+        let dataBaseManager = DataBaseManagerAccountingBooksShelf()
+        // データベースに会計帳簿があるかをチェック
+        if !dataBaseManager.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+            let number = dataBaseManager.addAccountingBooksShelf(company: "株式会社 iKingdom") // ToDo
+            // 会計帳簿
+            initializeAccountingBooks()
+        }
+    }
+    // 初期値用の年月を取得
+    func getTheTime() -> Int {
+        // 現在時刻を取得
+        let now :Date = Date() // UTC時間なので　9時間ずれる
+
+        switch Calendar.current.dateComponents([.month], from: now).month! {
+        case 4,5,6,7,8,9,10,11,12:
+            return Calendar.current.dateComponents([.year], from: now).year!
+//        case 1,2,3:
+//            return Calendar.current.date(byAdding: .year, value: -1, to: now)!
+        default:
+            let lastYear = Calendar.current.dateComponents([.year], from: now).year!
+            return lastYear-1 // 1月から3月であれば去年の年に補正する
+        }
+    }
+    // 会計帳簿　会計期間画面
+    func initializeAccountingBooks() {
+        // オブジェクト作成
+        let dataBaseManager = DataBaseManagerAccountingBooks()
+        let fiscalYear = getTheTime()                   // デフォルトで現在の年月から今年度の会計帳簿を作成する
+        // データベースに会計帳簿があるかをチェック
+        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {           // データベースにモデルオブフェクトが存在しない場合
+            let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
+            // 仕訳帳画面　　初期化
+            initialiseJournalEntryBook(number: number,fiscalYear: fiscalYear)
+            // 総勘定元帳画面　初期化
+            initialiseAccounts(number: number,fiscalYear: fiscalYear)
         }
     }
     // 仕訳帳画面　仕訳帳を初期化
-    func initialiseJournalEntryBook(number: Int){
+    func initialiseJournalEntryBook(number: Int,fiscalYear: Int){
         // Test ToDo
-         let dataBaseManagerJournalEntryBook = DataBaseManagerJournalEntryBook()
+         let dataBaseManager = DataBaseManagerJournalEntryBook() //データベースマネジャー
         // データベースに仕訳帳画面の仕訳帳があるかをチェック
-        if !dataBaseManagerJournalEntryBook.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
-            dataBaseManagerJournalEntryBook.addJournalEntryBook(number: number)
+        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {                // データベースにモデルオブフェクトが存在しない場合
+            dataBaseManager.addJournalEntryBook(number: number)
         }
-//        let dataBaseJournalEntryBook = dataBaseManagerJournalEntryBook.getJournalEntryBook()
-//        print("仕訳帳：\(dataBaseJournalEntryBook)")
     }
-    // 総勘定元帳画面　勘定画面　勘定を初期化
-    func initialiseAccounts(number: Int) {
+    // 総勘定元帳画面　総勘定元帳を初期化
+    func initialiseAccounts(number: Int,fiscalYear: Int) {
         // データベース
-        let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerGeneralLedger() //データベースマネジャー
         // データベースに勘定画面の勘定があるかをチェック
-        if !dataBaseManagerGeneralLedger.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
-            dataBaseManagerGeneralLedger.addGeneralLedger(number: number)
-
+        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {            // データベースにモデルオブフェクトが存在しない場合
+            dataBaseManager.addGeneralLedger(number: number)
         }
     }
 }

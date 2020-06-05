@@ -13,12 +13,13 @@ class DataBaseManagerJournalEntryBook {
     // データベース
     
     // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising() -> Bool {
+    func checkInitialising(fiscalYear: Int) -> Bool {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = realm.objects(DataBaseJournalEntryBook.self) // DataBaseAccountモデル
+        var objects = realm.objects(DataBaseJournalEntryBook.self) // DataBaseJournalEntryBookモデル
+        objects = objects.filter("fiscalYear == \(fiscalYear)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // モデルオブフェクトの追加　仕訳帳
@@ -26,8 +27,8 @@ class DataBaseManagerJournalEntryBook {
         // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // 主要簿　のオブジェクトを取得
-        let object = realm.object(ofType: DataBaseMainBooks.self, forPrimaryKey: number)!
+        // 会計帳簿　のオブジェクトを取得
+        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // オブジェクトを作成
         let dataBaseJournalEntryBook = DataBaseJournalEntryBook() // 仕訳帳
         dataBaseJournalEntryBook.fiscalYear = object.fiscalYear // Todo
