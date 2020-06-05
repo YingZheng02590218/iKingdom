@@ -12,6 +12,6 @@ import RealmSwift // データベースのインポート
 // 勘定クラス
 // 勘定 は 仕訳データ を 1 つ以上持っています。
 class DataBaseAccount: RObject {
-    @objc dynamic var accountName: String = ""          // 勘定名
+    @objc dynamic var accountName: String = ""                // 勘定名
     let dataBaseJournalEntries = List<DataBaseJournalEntry>() //一対多の関連
 }

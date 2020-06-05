@@ -12,12 +12,13 @@ import RealmSwift
 class DataBaseManagerGeneralLedger {
     
     // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising() -> Bool { // 共通化したい
+    func checkInitialising(fiscalYear: Int) -> Bool { // 共通化したい
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = realm.objects(DataBaseGeneralLedger.self) // DataBaseAccountモデル
+        var objects = realm.objects(DataBaseGeneralLedger.self) // DataBaseAccountモデル
+        objects = objects.filter("fiscalYear == \(fiscalYear)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // 設定画面の勘定科目一覧にある勘定を取得する
@@ -38,7 +39,7 @@ class DataBaseManagerGeneralLedger {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // 主要簿　のオブジェクトを取得
-        let object = realm.object(ofType: DataBaseMainBooks.self, forPrimaryKey: number)!
+        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // オブジェクトを作成
         let dataBaseGeneralLedger = DataBaseGeneralLedger() // 総勘定元帳
         dataBaseGeneralLedger.fiscalYear = object.fiscalYear // Todo
