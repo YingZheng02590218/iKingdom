@@ -20,14 +20,22 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         TableView_account.dataSource = self
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
+        // データベース
+        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let fiscalYear = dataBaseManager.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
-        label_date_year.text = "2020" + "年" // ToDo
+        label_date_year.text = fiscalYear.description + "年" 
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
         // 差引残高　計算
         generalLedgerAccountBalance.calculateBalance(account: account)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
+//        self.loadView()
+//        self.viewDidLoad()
     }
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {

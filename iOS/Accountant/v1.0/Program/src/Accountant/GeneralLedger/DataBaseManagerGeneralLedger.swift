@@ -63,7 +63,7 @@ class DataBaseManagerGeneralLedger {
         }
     }
     // モデルオブフェクトの取得　総勘定元帳
-    func getGeneralLedger() -> DataBaseGeneralLedger { //DataBaseJournalEntryBook {
+    func getGeneralLedger() -> DataBaseGeneralLedger {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()

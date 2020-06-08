@@ -39,28 +39,45 @@ class DataBaseManagerJournalEntry  {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             number = dataBaseJournalEntry.save() //仕訳番号　自動採番
+            // 開いている会計帳簿を取得
+            let dataBaseManagerPeriod = DataBaseManagerPeriod()
+            let object = dataBaseManagerPeriod.getSettingsPeriod()
+            // 開いている会計帳簿の年度を取得
+            let fiscalYear = object.dataBaseJournalEntryBook?.fiscalYear
+            dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
 //            realm.add(dataBaseJournalEntry)
             // 仕訳帳に仕訳データを追加
-            let object = realm.object(ofType: DataBaseJournalEntryBook.self, forPrimaryKey: 1 ) // ToDo
-            object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+//            let object = realm.object(ofType: DataBaseJournalEntryBook.self, forPrimaryKey: 1 ) // ToDo
+            object.dataBaseJournalEntryBook?.dataBaseJournalEntries.append(dataBaseJournalEntry)
 //勘定へ転記
             // 勘定に借方の仕訳データを追加
-            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
-            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+//            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
+//            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+            // 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
+            object.dataBaseGeneralLedger?.dataBaseAccounts[left_number].dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 勘定に貸方の仕訳データを追加
-            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
-            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+//            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
+//            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+            object.dataBaseGeneralLedger?.dataBaseAccounts[right_number].dataBaseJournalEntries.append(dataBaseJournalEntry)
         }
 //        print(dataBaseJournalEntry)
         return number
     }
     // モデルオブフェクトの取得　仕訳
-    func getJournalEntry(section: Int) -> Results<DataBaseJournalEntry> { //DataBaseJournalEntry {
+    func getJournalEntry(section: Int) -> Results<DataBaseJournalEntry> {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
+        // (2)データベース内に保存されているモデルを取得する
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        // すべての仕訳データを取得
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
+        // 開いている会計帳簿の年度の仕訳データに絞り込む
+        objects = objects.filter("fiscalYear == \(fiscalYear)")
         // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
 //        print("並び替え後　\(objects)")
@@ -139,7 +156,17 @@ class DataBaseManagerJournalEntry  {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
-        let objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        // すべての仕訳データを取得
+        var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
+        // 開いている会計帳簿の年度の仕訳データに絞り込む
+        objects = objects.filter("fiscalYear == \(fiscalYear)")
+        // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
+        objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
 //            print("DataBaseJournalEntryモデル : \(objects.count)")
         var objectsCount = 0
         switch section {

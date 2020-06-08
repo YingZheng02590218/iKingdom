@@ -42,7 +42,7 @@ class DataBaseManagerJournalEntryBook {
         }
     }
     // モデルオブフェクトの取得　仕訳帳
-    func getJournalEntryBook() -> DataBaseJournalEntryBook { //DataBaseJournalEntryBook {
+    func getJournalEntryBook() -> DataBaseJournalEntryBook {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()

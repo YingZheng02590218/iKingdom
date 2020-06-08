@@ -28,18 +28,21 @@ class TableViewControllerJournalEntry: UITableViewController {
     @IBOutlet weak var Label_list_date_year: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // ToDo
+        let initial = Initial()
+        initial.initialize()
+        // データベース　注意：Initialより後に記述する
+        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let fiscalYear = dataBaseManager.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
-        Label_list_date_year.text = "2020" + "年"
+        Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
         scroll = true
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
- 
-        // ToDo
-        let initial = Initial()
-        initial.initialize()
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
@@ -48,6 +51,9 @@ class TableViewControllerJournalEntry: UITableViewController {
         super.viewWillAppear(animated)
 //        print("viewWillAppear \(String(describing: presentedViewController))")
 //        print("viewWillAppear \(String(describing: presentingViewController))")
+        // UIViewControllerの表示画面を更新・リロード
+        self.loadView()
+        self.viewDidLoad()
     }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){

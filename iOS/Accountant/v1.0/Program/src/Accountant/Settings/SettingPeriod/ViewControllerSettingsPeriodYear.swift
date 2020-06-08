@@ -25,18 +25,26 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
 //UIPickerView
     //UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1 // ドラムロールは一列
+        return 2 // ドラムロールは二列
     }
     //UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-        
-        return dataBaseManagerPeriod.getMainBooksAllCount() + 1 //翌年の分
+        switch component {
+        case 0:
+            let dataBaseManagerPeriod = DataBaseManagerPeriod()
+            return dataBaseManagerPeriod.getMainBooksAllCount() + 1 //翌年の分
+        default:
+            return 1
+        }
     }
     //UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-        return getPeriodFromDB(row: row)
+        switch component {
+        case 0:
+            return getPeriodFromDB(row: row)
+        default:
+            return "年度"
+        }
      }
     // 年度の選択肢
     func getPeriodFromDB(row: Int) -> String {

@@ -21,6 +21,16 @@ class DataBaseManagerAccountingBooks  {
         objects = objects.filter("fiscalYear == \(fiscalYear)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
     }
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkOpeningAccountingBook() -> Bool { // 共通化したい
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを全て取得する
+        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        objects = objects.filter("openOrClose == \(true)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
+        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
     // モデルオブフェクトの追加
     func addAccountingBooks(fiscalYear: Int) -> Int {
         // データベース　書き込み
@@ -31,6 +41,9 @@ class DataBaseManagerAccountingBooks  {
         // オブジェクトを作成
         let dataBaseAccountingBooks = DataBaseAccountingBooks() // 会計帳簿
         dataBaseAccountingBooks.fiscalYear = fiscalYear
+        if !checkOpeningAccountingBook() { // 会計帳簿がひとつだけならこの帳簿を開く
+            dataBaseAccountingBooks.openOrClose = true
+        }
         // (2)書き込みトランザクション内でデータを追加する
         var number = 0
         try! realm.write {
