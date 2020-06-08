@@ -12,14 +12,15 @@ import RealmSwift // データベースのインポート
 class DataBaseJournalEntry: RObject {
     // モデル定義
 //    @objc dynamic var number: Int = 0                 //仕訳番号
+    @objc dynamic var fiscalYear: Int = 0               //年度
     @objc dynamic var date: String = ""                 //日付
     @objc dynamic var debit_category: String = ""       //借方勘定
-    @objc dynamic var debit_amount: Int64 = 0             //借方金額
+    @objc dynamic var debit_amount: Int64 = 0           //借方金額
     @objc dynamic var credit_category: String = ""      //貸方勘定
-    @objc dynamic var credit_amount: Int64 = 0            //貸方金額
+    @objc dynamic var credit_amount: Int64 = 0          //貸方金額
     @objc dynamic var smallWritting: String = ""        //小書き
-    @objc dynamic var balance_left: Int64 = 0
-    @objc dynamic var balance_right: Int64 = 0
+    @objc dynamic var balance_left: Int64 = 0           //差引残高
+    @objc dynamic var balance_right: Int64 = 0          //差引残高
 //    let account = List<Account>()               //多対多の関連 勘定
 
 //    override static func ignoredProperties() -> [String] {

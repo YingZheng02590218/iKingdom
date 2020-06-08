@@ -38,9 +38,30 @@ class DataBaseManagerPeriod {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseManagerPeriodモデルをひとつ取得する
-        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
-        return object // 主要簿を返す
+        // (2)データベース内に保存されているモデルをひとつ取得する
+//        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
+        // (2)データベース内に保存されているモデルを全て取得する
+        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+        objects = objects.filter("openOrClose == \(true)")
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
+        return object // 会計帳簿を返す
+    }
+    // 年度の取得　会計帳簿
+    func getSettingsPeriodYear() -> Int {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        //        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
+        // (2)データベース内に保存されているモデルを全て取得する
+        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+        objects = objects.filter("openOrClose == \(true)")
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
+        return object.fiscalYear // 年度を返す
     }
     // モデルオブフェクトの更新
     func setMainBooksOpenOrClose(tag: Int){
@@ -51,7 +72,7 @@ class DataBaseManagerPeriod {
         let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)! // 会計帳簿棚は会社に一つ
         // (2)書き込みトランザクション内でデータを更新する
         try! realm.write {
-            // 一旦、すべてのチェックマークを外す
+            // 一括更新　一旦、すべてのチェックマークを外す
             object.setValue(false, forKeyPath: "dataBaseAccountingBooks.openOrClose")
             // そして、選択された年度の会計帳簿にチェックマークをつける
             let value: [String: Any] = ["number": tag, "openOrClose": true]

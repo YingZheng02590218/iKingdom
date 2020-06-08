@@ -44,8 +44,15 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
-        // 希望する勘定だけを抽出する　ToDo
-        objects = objects.filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
+                // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
         // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
 //        print("並び替え後　\(objects)")
@@ -99,8 +106,15 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
-        // 希望する勘定だけを抽出する　ToDo
-        objects = objects.filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
+                // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
         // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
@@ -156,8 +170,15 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
-        // 希望する勘定だけを抽出する　ToDo
-        objects = objects.filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
         // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         var objectsCount = 0

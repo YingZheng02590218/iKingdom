@@ -41,8 +41,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let ff    = DateFormatter() //月
         let fff   = DateFormatter() //月日
         let ffff  = DateFormatter() //年月日
-        let ffff2 = DateFormatter() //年月日
         let fffff = DateFormatter()
+        let ffffff = DateFormatter()
+        let ffff2 = DateFormatter() //年月日
         let timezone = DateFormatter()
 
         f.dateFormat    = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
@@ -53,29 +54,45 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         fff.timeZone = .current
         ffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMdd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         ffff.timeZone = .current
-        ffff2.dateFormat = "yyyy-MM-dd"
-        ffff2.timeZone = .current
         fffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         fffff.timeZone = .current
-        timezone.dateFormat  = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale.current)
+        ffffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        ffffff.timeZone = .current
+//        timezone.dateFormat  = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale.current)
+        ffff2.dateFormat = "yyyy-MM-dd"
+        ffff2.timeZone = .current
+        timezone.dateFormat  = "MM-dd"
         timezone.timeZone = .current
+        timezone.locale = Locale(identifier: "en_US_POSIX")
 //        var dateFormatter = NSDateFormatter()
 //        dateFormatter.dateFormat = "YYYY-MM-DD"
 
 //        var now :Date = Date()
 //        let now1 = fffff.string(from: Calendar.current.date(byAdding: .month, value: -3, to: now)!)
 //        now = fffff.date(from: now1)!
-//        print(f.string(from: now))//年
-//        print(ff.string(from: now))//月
-//        print(fff.string(from: now))//月日
-//        print("現在時刻：\(ffff.string(from: now))")     //年月日
-        print("現在時刻 fffff   ：\(fffff.string(from: now))")    //年月日
-        print("現在時刻 timezone：\(timezone.string(from: now))")
-        print("現在時刻 now     ：\(now)")
+        print("現在時刻 now      ：\(now)")
+        print("現在時刻 f        ：\(f.string(from: now))") //年
+        print("現在時刻 ff       ：\(ff.string(from: now))") //月
+        print("現在時刻 fff      ：\(fff.string(from: now))") //月日
+        print("現在時刻 ffff     ：\(ffff.string(from: now))") //年月日
+        print("現在時刻 ffff2    ：\(ffff2.string(from: now))") //年月日
+        print("現在時刻 fffff    ：\(fffff.string(from: now))") //年月日
+        print("現在時刻 ffffff   ：\(ffffff.string(from: now))") //
+        print("現在時刻 timezone ：\(timezone.string(from: now))")
 
-        let nowStringYear = f.string(from: now)                                                                 //年
-        let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!) //年
-        let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)      //年
+        
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear = object.dataBaseJournalEntryBook?.fiscalYear
+        let nowStringYear = fiscalYear!.description                            //年度
+        let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
+        let nowStringNextYear = (fiscalYear! + 1).description                  //年度
+        
+//        let nowStringYear = f.string(from: now)                                                                 //年
+//        let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!) //年
+//        let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)      //年
 //        let nowStringMonth = ff.string(from: now)                                                             //月
         let nowStringMonthDay = fff.string(from: now)                                                           //月日
         
@@ -106,9 +123,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         // ピッカーの初期値
-        let a = timezone.string(from: now)
-        print(timezone.date(from: a)!)
-        datePicker.date = timezone.date(from: timezone.string(from: now))!
+        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now)))")
+        print("年度+現在の月日    ： \(fff.string(from: now))")
+        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear)")
+        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + ",")")
+        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + "," + ffffff.string(from: now))")
+
+        //        datePicker.date = timezone.date(from: timezone.string(from: now))!
+        datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         
 //        print("\(String(describing: datePicker.minimumDate))")
 //        print("\(String(describing: datePicker.maximumDate))")
