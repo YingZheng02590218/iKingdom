@@ -1,5 +1,5 @@
 //
-//  GeneralLedgerAccountBalance.swift
+//  DataBaseManagerGeneralLedgerAccountBalance.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/05/28.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class GeneralLedgerAccountBalance {
+class DataBaseManagerGeneralLedgerAccountBalance {
     
     var balanceAmount:Int64 = 0            // 差引残高額
     var balanceDebitOrCredit:String = "" // 借又貸

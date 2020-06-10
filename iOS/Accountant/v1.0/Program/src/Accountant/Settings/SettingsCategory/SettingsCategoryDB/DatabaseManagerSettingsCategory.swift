@@ -84,6 +84,62 @@ class DatabaseManagerSettingsCategory  {
         }
         return objects
     }
+    // モデルオブフェクトの取得
+    func getMiddleCategory(section: Int, mid_category: Int) -> Int { //Results<DataBaseSettingsCategory> {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
+        var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        // セクション　資産の部、負債の部、純資産の部
+        objects = objects.filter("big_category == \(section)")
+        
+        switch mid_category {
+        case 0: // 流動資産
+            objects = objects.filter("mid_category == 0")
+            break
+        case 1: // 固定資産
+            objects = objects.filter("mid_category == 1")
+            break
+        case 2: // 流動負債
+            objects = objects.filter("mid_category == 2")
+            break
+        case 3: // 固定負債
+            objects = objects.filter("mid_category == 3")
+            break
+        case 4: // 株主資本
+            objects = objects.filter("mid_category == 4")
+            break
+        case 5: // 営業費用
+            objects = objects.filter("mid_category == 5")
+            break
+        case 6: // 営業外費用
+            objects = objects.filter("mid_category == 6")
+            break
+        case 7: // 特別損失
+            objects = objects.filter("mid_category == 7")
+            break
+        case 8: // 税等
+            objects = objects.filter("mid_category == 8")
+            break
+        case 9: // 営業収益
+            objects = objects.filter("mid_category == 9")
+            break
+        case 10: // 営業外収益
+            objects = objects.filter("mid_category == 10")
+            break
+        case 11: // 特別利益
+            objects = objects.filter("mid_category == 11")
+            break
+        default:
+            objects = objects.filter("mid_category == 0") // ありえない
+            break
+        }
+        return objects.count
+    }
+
     // モデルオブフェクトの更新
     func setSettingsCategorySwitching(tag: Int, isOn: Bool){
         // データベース　読み込み
