@@ -30,7 +30,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
         // 差引残高　計算
-        generalLedgerAccountBalance.calculateBalance(account: account)
+        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account)
     }
     override func viewWillAppear(_ animated: Bool) {
         // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
@@ -79,7 +79,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     }
     
     var account :String = "" // 勘定名
-    let generalLedgerAccountBalance = GeneralLedgerAccountBalance()
+    let dataBaseManagerGeneralLedgerAccountBalance = DataBaseManagerGeneralLedgerAccountBalance()
     @IBOutlet weak var label_list_heading: UILabel!
     //セルを生成して返却するメソッド
 //    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
@@ -134,9 +134,9 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
         }
         // 差引残高　差引残高クラスで計算した計算結果を取得
-        let balanceAmount = generalLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+        let balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
         cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
-        let balanceDebitOrCredit = generalLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+        let balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
         cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
         
         return cell

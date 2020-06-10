@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 仕訳帳クラス
 class TableViewControllerJournalEntry: UITableViewController {
     
     @IBAction func showModalView(_ sender: UIButton) {
