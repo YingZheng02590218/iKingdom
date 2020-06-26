@@ -43,24 +43,29 @@ class DataBaseManagerJournalEntry  {
             let dataBaseManagerPeriod = DataBaseManagerPeriod()
             let object = dataBaseManagerPeriod.getSettingsPeriod()
             // 開いている会計帳簿の年度を取得
-            let fiscalYear = object.dataBaseJournalEntryBook?.fiscalYear
+            let fiscalYear = object.dataBaseJournals?.fiscalYear
             dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
 //            realm.add(dataBaseJournalEntry)
             // 仕訳帳に仕訳データを追加
-//            let object = realm.object(ofType: DataBaseJournalEntryBook.self, forPrimaryKey: 1 ) // ToDo
-            object.dataBaseJournalEntryBook?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+//            let object = realm.object(ofType: DataBaseJournals.self, forPrimaryKey: 1 ) // ToDo
+            object.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
 //勘定へ転記
             // 勘定に借方の仕訳データを追加
 //            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
 //            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
-            object.dataBaseGeneralLedger?.dataBaseAccounts[left_number].dataBaseJournalEntries.append(dataBaseJournalEntry)
+            object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 勘定に貸方の仕訳データを追加
 //            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
 //            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
-            object.dataBaseGeneralLedger?.dataBaseAccounts[right_number].dataBaseJournalEntries.append(dataBaseJournalEntry)
+            object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].dataBaseJournalEntries.append(dataBaseJournalEntry)
         }
 //        print(dataBaseJournalEntry)
+        // 仕訳データを追加したら、試算表を再計算するためのフラグをここで立てる 2020/06/1614:47
+        //flag_journalEntryAdded = true
+        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
+        let dataBaseManager = DataBaseManagerTB()
+        dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category)
         return number
     }
     // モデルオブフェクトの取得　仕訳
@@ -73,7 +78,7 @@ class DataBaseManagerJournalEntry  {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // すべての仕訳データを取得
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
         // 開いている会計帳簿の年度の仕訳データに絞り込む
@@ -160,7 +165,7 @@ class DataBaseManagerJournalEntry  {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // すべての仕訳データを取得
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
         // 開いている会計帳簿の年度の仕訳データに絞り込む

@@ -48,7 +48,7 @@ class DataBaseManagerAccount {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // 希望する勘定だけを抽出する
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -110,7 +110,7 @@ class DataBaseManagerAccount {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // 希望する勘定だけを抽出する
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -174,7 +174,7 @@ class DataBaseManagerAccount {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournalEntryBook!.fiscalYear
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // 希望する勘定だけを抽出する
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")

@@ -12,6 +12,6 @@ import RealmSwift
 // 会計帳簿棚クラス
 // 会計帳簿棚 は 会計帳簿 を 1 個持つことができます。
 class DataBaseAccountingBooksShelf: RObject {
-    @objc dynamic var company: String = ""                        // 社名
-    let dataBaseAccountingBooks = List<DataBaseAccountingBooks>() //一対多の関連 会計帳簿
+    @objc dynamic var company: String = ""                                          // 社名
+    let dataBaseAccountingBooks = List<DataBaseAccountingBooks>()                  //一対多の関連 会計帳簿
 }

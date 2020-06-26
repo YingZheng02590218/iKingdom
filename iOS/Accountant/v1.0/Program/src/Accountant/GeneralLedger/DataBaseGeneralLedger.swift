@@ -12,6 +12,6 @@ import RealmSwift // データベースのインポート
 // 総勘定元帳クラス
 // 総勘定元帳 は 勘定 を 1 個以上持つことができます。
 class DataBaseGeneralLedger: RObject {
-    @objc dynamic var fiscalYear: Int = 0 //ToDo // 年度
+    @objc dynamic var fiscalYear: Int = 0           // 年度
     let dataBaseAccounts = List<DataBaseAccount>() //一対多の関連
 }

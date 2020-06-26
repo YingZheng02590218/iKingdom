@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 総勘定元帳　勘定クラス
 class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var TableView_account: UITableView!
@@ -32,6 +33,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         // 差引残高　計算
         dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
 //        self.loadView()

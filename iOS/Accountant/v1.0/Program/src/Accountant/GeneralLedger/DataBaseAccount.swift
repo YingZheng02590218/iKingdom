@@ -14,4 +14,8 @@ import RealmSwift // データベースのインポート
 class DataBaseAccount: RObject {
     @objc dynamic var accountName: String = ""                // 勘定名
     let dataBaseJournalEntries = List<DataBaseJournalEntry>() //一対多の関連
+    @objc dynamic var debit_total: Int64 = 0           //借方合計
+    @objc dynamic var credit_total: Int64 = 0          //貸方合計
+    @objc dynamic var debit_balance: Int64 = 0         //借方残高
+    @objc dynamic var credit_balance: Int64 = 0        //貸方残高
 }

@@ -67,8 +67,17 @@ class DataBaseManagerGeneralLedger {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseJournalEntryBookモデルをひとつ取得する
-        let object = realm.object(ofType: DataBaseGeneralLedger.self, forPrimaryKey: 1)! //ToDo // DataBaseJournalEntryBookモデル
-        return object // 仕訳帳を返す
+        // (2)データベース内に保存されているDataBaseJournalsモデルをひとつ取得する
+//        let object = realm.object(ofType: DataBaseGeneralLedger.self, forPrimaryKey: 1)! //ToDo // DataBaseJournalsモデル
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        var objects = realm.objects(DataBaseAccountingBooks.self)
+        // 希望する勘定だけを抽出する
+        objects = objects.filter("fiscalYear == \(fiscalYear)")
+        return objects[0].dataBaseGeneralLedger!
     }
 }

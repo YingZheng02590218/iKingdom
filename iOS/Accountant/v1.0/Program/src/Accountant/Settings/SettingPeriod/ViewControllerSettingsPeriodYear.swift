@@ -84,10 +84,10 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
         // 仕訳帳画面　　初期化
             // データベース
-            let dataBaseManagerJournalEntryBook = DataBaseManagerJournalEntryBook() //データベースマネジャー
+            let dataBaseManagerJournals = DataBaseManagerJournals() //データベースマネジャー
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
-            if !dataBaseManagerJournalEntryBook.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
-                dataBaseManagerJournalEntryBook.addJournalEntryBook(number: number)
+            if !dataBaseManagerJournals.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+                dataBaseManagerJournals.addJournals(number: number)
             }
         // 総勘定元帳画面　初期化
             // データベース
