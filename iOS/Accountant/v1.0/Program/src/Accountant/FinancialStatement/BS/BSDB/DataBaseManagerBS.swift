@@ -215,7 +215,7 @@ class DataBaseManagerBS {
                 objectss[0].Equity_total = bigCategoryTotalAmount
                 break
             default:
-                print(bigCategoryTotalAmount)
+                print("bigCategoryTotalAmount", bigCategoryTotalAmount)
             }
         }
     }
@@ -294,7 +294,7 @@ class DataBaseManagerBS {
         }else {
             result = objectss[0].dataBaseAccounts[number].debit_total
         }
-        
+        print("getAccountTotal")
         print(account, objectss[0].dataBaseAccounts[number].debit_total)
         print(account, objectss[0].dataBaseAccounts[number].credit_total)
 
@@ -353,7 +353,7 @@ class DataBaseManagerBS {
         // 勘定の丁数(プライマリーキー)を取得
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
-        print("number\(number)")
+//        print("number\(number)")
         
         var DebitOrCredit:String = "" // 借又貸
         // 借方と貸方で金額が大きい方はどちらか
@@ -382,6 +382,7 @@ class DataBaseManagerBS {
                 PositiveOrNegative = ""
             }
         }
+        print("getTotalDebitOrCredit")
         print(account, objectss[0].dataBaseAccounts[number].debit_balance)
         print(account, objectss[0].dataBaseAccounts[number].credit_balance)
 

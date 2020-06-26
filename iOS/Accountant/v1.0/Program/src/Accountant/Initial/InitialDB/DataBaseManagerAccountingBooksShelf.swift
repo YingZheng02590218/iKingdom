@@ -32,7 +32,7 @@ class DataBaseManagerAccountingBooksShelf  {
         var number = 0
         try! realm.write {
             number = dataBaseAccountingBooksShelf.save() //　自動採番
-            print(number)
+            print("addAccountingBooksShelf",number)
             // 会社　の数だけ増える　ToDo
             realm.add(dataBaseAccountingBooksShelf)
 //            object.dataBaseAccountingBooks.append(dataBaseAccountingBooks)

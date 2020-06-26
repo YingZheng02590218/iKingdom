@@ -39,18 +39,23 @@ class DataBaseManagerFinancialStatements  {
         workSheet.fiscalYear = object.fiscalYear
         let compoundTrialBalance = DataBaseCompoundTrialBalance()
         compoundTrialBalance.fiscalYear = object.fiscalYear
-        // オブジェクトを作成
         let dataBaseFinancialStatements = DataBaseFinancialStatements() //
         dataBaseFinancialStatements.fiscalYear = object.fiscalYear
-        dataBaseFinancialStatements.balanceSheet = balanceSheet
-        dataBaseFinancialStatements.profitAndLossStatement = profitAndLossStatement
-        dataBaseFinancialStatements.cashFlowStatement = cashFlowStatement
-        dataBaseFinancialStatements.workSheet = workSheet
-        dataBaseFinancialStatements.compoundTrialBalance = compoundTrialBalance
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
+            balanceSheet.save()
+            profitAndLossStatement.save()
+            cashFlowStatement.save()
+            workSheet.save()
+            compoundTrialBalance.save()
             let number = dataBaseFinancialStatements.save() //　自動採番
-            print(number)
+            print("addFinancialStatements",number)
+            // オブジェクトを作成して追加
+            dataBaseFinancialStatements.balanceSheet = balanceSheet
+            dataBaseFinancialStatements.profitAndLossStatement = profitAndLossStatement
+            dataBaseFinancialStatements.cashFlowStatement = cashFlowStatement
+            dataBaseFinancialStatements.workSheet = workSheet
+            dataBaseFinancialStatements.compoundTrialBalance = compoundTrialBalance
             // 年度　の数だけ増える　ToDo
 //            realm.add(dataBaseMainBooks)
             object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する

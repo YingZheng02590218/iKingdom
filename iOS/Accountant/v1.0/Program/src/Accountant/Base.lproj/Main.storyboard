@@ -494,7 +494,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="center" id="xxB-qN-E2e">
-                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="95"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
                                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sU1-Ca-Ncn">
@@ -503,7 +503,7 @@
                                         <barButtonItem style="plain" systemItem="flexibleSpace" id="zNh-Dy-EMC"/>
                                         <barButtonItem width="160" style="plain" id="fPC-w5-scV">
                                             <view key="customView" contentMode="scaleToFill" id="cpx-Df-Nl4">
-                                                <rect key="frame" x="108" y="4" width="160" height="42"/>
+                                                <rect key="frame" x="107.66666666666669" y="4" width="160" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcc-Df-EXO" userLabel="list_heading">
@@ -550,7 +550,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="45"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="34J-GN-cj1" userLabel="list_date_year">
-                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -564,7 +564,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="aKn-6c-8lp" userLabel="list_date_day">
-                                                    <rect key="frame" x="18" y="20" width="27" height="20"/>
+                                                    <rect key="frame" x="17" y="20" width="27" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -603,7 +603,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-RV-6l7">
-                                            <rect key="frame" x="229.66666666666663" y="0.0" width="15.333333333333343" height="45"/>
+                                            <rect key="frame" x="229.66666666666666" y="0.0" width="15.333333333333343" height="45"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MMI-DC-dNs" userLabel="list_number">
                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="20"/>
@@ -631,10 +631,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp">
-                                            <rect key="frame" x="245" y="0.0" width="64.666666666666657" height="45"/>
+                                            <rect key="frame" x="244.99999999999997" y="0.0" width="64.666666666666657" height="45"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="xIO-Lc-Pc5" userLabel="list_debit">
-                                                    <rect key="frame" x="0.0" y="5" width="63" height="35"/>
+                                                    <rect key="frame" x="0.0" y="5" width="62" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -652,10 +652,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOq-R1-al2">
-                                            <rect key="frame" x="309.66666666666674" y="0.0" width="65.333333333333314" height="45"/>
+                                            <rect key="frame" x="309.66666666666669" y="0.0" width="65.333333333333314" height="45"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="fyc-CB-cu4" userLabel="list_credit">
-                                                    <rect key="frame" x="0.0" y="5" width="66" height="35"/>
+                                                    <rect key="frame" x="0.0" y="5" width="67" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -729,81 +729,220 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWx-ld-1C2">
                                             <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="90"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="PS7-MI-uqW" userLabel="list_date">
-                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="eDf-Qm-jtQ" userLabel="list_date">
-                                                    <rect key="frame" x="18" y="0.0" width="27" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="aQ4-OK-sNk" userLabel="list_date2">
-                                                    <rect key="frame" x="0.0" y="30" width="20" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="XgI-KM-9WH" userLabel="list_date2">
-                                                    <rect key="frame" x="18" y="30" width="27" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="tz0-ah-qKw" userLabel="list_date3">
-                                                    <rect key="frame" x="0.0" y="60" width="20" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="FLz-a6-4Iv" userLabel="list_date3">
-                                                    <rect key="frame" x="18" y="60" width="27" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                            <real key="value" value="0.29999999999999999"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-6E-W6U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44.666666666666664" height="30"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6L-Mh-StP">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="PS7-MI-uqW" userLabel="list_date">
+                                                                    <rect key="frame" x="0.0" y="-1" width="20" height="31"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Z6L-Mh-StP" secondAttribute="height" multiplier="2:3" id="5Sf-G0-LKt"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfu-8K-me9">
+                                                            <rect key="frame" x="20" y="0.0" width="24.666666666666671" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="eDf-Qm-jtQ" userLabel="list_date">
+                                                                    <rect key="frame" x="-1" y="0.0" width="27" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Qfu-8K-me9" secondAttribute="height" multiplier="5:6" id="mAy-f4-Nev"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Qfu-8K-me9" firstAttribute="leading" secondItem="Z6L-Mh-StP" secondAttribute="trailing" id="6eF-Cv-i3v"/>
+                                                        <constraint firstItem="Qfu-8K-me9" firstAttribute="height" secondItem="u6b-6E-W6U" secondAttribute="height" id="7ZJ-Vu-vMv"/>
+                                                        <constraint firstItem="Z6L-Mh-StP" firstAttribute="top" secondItem="u6b-6E-W6U" secondAttribute="top" id="9Bv-H1-qvk"/>
+                                                        <constraint firstItem="Z6L-Mh-StP" firstAttribute="width" secondItem="u6b-6E-W6U" secondAttribute="width" multiplier="0.444444" id="EbV-d8-f2M"/>
+                                                        <constraint firstItem="Qfu-8K-me9" firstAttribute="leading" secondItem="Z6L-Mh-StP" secondAttribute="trailing" id="J59-JC-ego"/>
+                                                        <constraint firstItem="Z6L-Mh-StP" firstAttribute="leading" secondItem="u6b-6E-W6U" secondAttribute="leading" id="KmQ-Pg-3nk"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Z6L-Mh-StP" secondAttribute="bottom" id="N6v-SL-XMg"/>
+                                                        <constraint firstItem="Z6L-Mh-StP" firstAttribute="height" secondItem="u6b-6E-W6U" secondAttribute="height" id="Vg6-1F-gga"/>
+                                                        <constraint firstAttribute="width" secondItem="u6b-6E-W6U" secondAttribute="height" multiplier="3:2" id="eCm-fw-oxI"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qfu-8K-me9" secondAttribute="trailing" id="eEP-oy-vmQ"/>
+                                                        <constraint firstItem="Qfu-8K-me9" firstAttribute="width" secondItem="u6b-6E-W6U" secondAttribute="width" multiplier="0.555556" id="lFF-Ie-u3Z"/>
+                                                        <constraint firstItem="Qfu-8K-me9" firstAttribute="top" secondItem="u6b-6E-W6U" secondAttribute="top" id="s1h-NO-VWc"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Qfu-8K-me9" secondAttribute="bottom" id="uZm-rM-yj7"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BP7-EJ-awy">
+                                                    <rect key="frame" x="0.0" y="30" width="44.666666666666664" height="30"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gP-Ca-kgg">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="aQ4-OK-sNk" userLabel="list_date2">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="1gP-Ca-kgg" secondAttribute="height" multiplier="2:3" id="Bao-5Z-mHz"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7p-sG-9Ov">
+                                                            <rect key="frame" x="20" y="0.0" width="24.666666666666671" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="XgI-KM-9WH" userLabel="list_date2">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="X7p-sG-9Ov" secondAttribute="height" multiplier="5:6" id="PeU-kl-RWK"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="X7p-sG-9Ov" firstAttribute="leading" secondItem="1gP-Ca-kgg" secondAttribute="trailing" id="5XT-bl-KR2"/>
+                                                        <constraint firstItem="1gP-Ca-kgg" firstAttribute="width" secondItem="BP7-EJ-awy" secondAttribute="width" multiplier="0.444444" id="FAu-31-yPB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="X7p-sG-9Ov" secondAttribute="bottom" id="IxA-A6-MLf"/>
+                                                        <constraint firstAttribute="width" secondItem="BP7-EJ-awy" secondAttribute="height" multiplier="3:2" id="KqZ-b2-wLt"/>
+                                                        <constraint firstItem="X7p-sG-9Ov" firstAttribute="height" secondItem="BP7-EJ-awy" secondAttribute="height" id="Lfi-oc-UOY"/>
+                                                        <constraint firstItem="1gP-Ca-kgg" firstAttribute="top" secondItem="BP7-EJ-awy" secondAttribute="top" id="N2J-Ro-7zM"/>
+                                                        <constraint firstItem="1gP-Ca-kgg" firstAttribute="height" secondItem="BP7-EJ-awy" secondAttribute="height" id="Qn8-Pa-MYj"/>
+                                                        <constraint firstItem="X7p-sG-9Ov" firstAttribute="top" secondItem="BP7-EJ-awy" secondAttribute="top" id="UsU-RU-fnZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="X7p-sG-9Ov" secondAttribute="trailing" id="VFd-Z3-RZD"/>
+                                                        <constraint firstItem="1gP-Ca-kgg" firstAttribute="leading" secondItem="BP7-EJ-awy" secondAttribute="leading" id="aTn-hB-xCV"/>
+                                                        <constraint firstItem="X7p-sG-9Ov" firstAttribute="width" secondItem="BP7-EJ-awy" secondAttribute="width" multiplier="0.555556" id="bj4-Vv-oQr"/>
+                                                        <constraint firstItem="X7p-sG-9Ov" firstAttribute="leading" secondItem="1gP-Ca-kgg" secondAttribute="trailing" id="kGm-IK-G2l"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1gP-Ca-kgg" secondAttribute="bottom" id="p2R-sw-ep7"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCx-db-7kP">
+                                                    <rect key="frame" x="0.0" y="60" width="44.666666666666664" height="30"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fno-lT-V7M">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="tz0-ah-qKw" userLabel="list_date3">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Fno-lT-V7M" secondAttribute="height" multiplier="2:3" id="Gxs-C7-YKv"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyt-mv-dVS">
+                                                            <rect key="frame" x="20" y="0.0" width="24.666666666666671" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="FLz-a6-4Iv" userLabel="list_date3">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Vyt-mv-dVS" secondAttribute="height" multiplier="5:6" id="rX8-pd-QFS"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Fno-lT-V7M" firstAttribute="height" secondItem="OCx-db-7kP" secondAttribute="height" id="2aG-U2-aNa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Vyt-mv-dVS" secondAttribute="trailing" id="3vM-u2-wwe"/>
+                                                        <constraint firstAttribute="width" secondItem="OCx-db-7kP" secondAttribute="height" multiplier="3:2" id="6KG-oK-Ioa"/>
+                                                        <constraint firstItem="Vyt-mv-dVS" firstAttribute="height" secondItem="OCx-db-7kP" secondAttribute="height" id="8GC-ZH-fd2"/>
+                                                        <constraint firstItem="Vyt-mv-dVS" firstAttribute="top" secondItem="OCx-db-7kP" secondAttribute="top" id="BgE-pj-thH"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Vyt-mv-dVS" secondAttribute="bottom" id="IGV-Mn-dfg"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Fno-lT-V7M" secondAttribute="bottom" id="Y9b-Cw-Qat"/>
+                                                        <constraint firstItem="Vyt-mv-dVS" firstAttribute="leading" secondItem="Fno-lT-V7M" secondAttribute="trailing" id="ZRS-Rf-5RE"/>
+                                                        <constraint firstItem="Vyt-mv-dVS" firstAttribute="leading" secondItem="Fno-lT-V7M" secondAttribute="trailing" id="biw-eN-xtr"/>
+                                                        <constraint firstItem="Fno-lT-V7M" firstAttribute="width" secondItem="OCx-db-7kP" secondAttribute="width" multiplier="0.444444" id="dh1-Dt-hXD"/>
+                                                        <constraint firstItem="Fno-lT-V7M" firstAttribute="top" secondItem="OCx-db-7kP" secondAttribute="top" id="hIm-SQ-cis"/>
+                                                        <constraint firstItem="Vyt-mv-dVS" firstAttribute="width" secondItem="OCx-db-7kP" secondAttribute="width" multiplier="0.555556" id="lJg-rq-qNw"/>
+                                                        <constraint firstItem="Fno-lT-V7M" firstAttribute="leading" secondItem="OCx-db-7kP" secondAttribute="leading" id="mcH-t2-CL9"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="BP7-EJ-awy" firstAttribute="height" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="0.333333" id="866-eF-gcb"/>
                                                 <constraint firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="8:5" id="A5a-F8-7YV"/>
+                                                <constraint firstItem="u6b-6E-W6U" firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="width" id="G80-Dk-KzS"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="top" secondItem="BP7-EJ-awy" secondAttribute="bottom" id="Kh3-H8-aTz"/>
+                                                <constraint firstAttribute="bottom" secondItem="OCx-db-7kP" secondAttribute="bottom" id="OUx-lt-HxR"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="top" secondItem="BP7-EJ-awy" secondAttribute="bottom" id="PDH-fm-8QA"/>
+                                                <constraint firstItem="u6b-6E-W6U" firstAttribute="top" secondItem="OWx-ld-1C2" secondAttribute="top" id="Rrh-2w-Ab8"/>
+                                                <constraint firstAttribute="trailing" secondItem="OCx-db-7kP" secondAttribute="trailing" id="S82-TI-4vk"/>
+                                                <constraint firstItem="BP7-EJ-awy" firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="width" id="UL7-bH-84t"/>
+                                                <constraint firstAttribute="trailing" secondItem="u6b-6E-W6U" secondAttribute="trailing" id="ZKs-1t-Aj8"/>
+                                                <constraint firstItem="u6b-6E-W6U" firstAttribute="leading" secondItem="OWx-ld-1C2" secondAttribute="leading" id="Zbd-QW-2Xh"/>
+                                                <constraint firstAttribute="trailing" secondItem="OCx-db-7kP" secondAttribute="trailing" id="bve-vK-ro9"/>
+                                                <constraint firstItem="BP7-EJ-awy" firstAttribute="leading" secondItem="OWx-ld-1C2" secondAttribute="leading" id="gpW-SJ-hNO"/>
+                                                <constraint firstItem="u6b-6E-W6U" firstAttribute="height" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="0.333333" id="mLM-1b-16E"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="width" secondItem="OWx-ld-1C2" secondAttribute="width" id="mnw-la-SYF"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="leading" secondItem="OWx-ld-1C2" secondAttribute="leading" id="n9h-q1-vMZ"/>
+                                                <constraint firstItem="u6b-6E-W6U" firstAttribute="height" secondItem="OWx-ld-1C2" secondAttribute="height" id="o06-zI-6gN"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="height" secondItem="OWx-ld-1C2" secondAttribute="height" multiplier="0.333333" id="vMR-4q-FfG"/>
+                                                <constraint firstItem="BP7-EJ-awy" firstAttribute="top" secondItem="u6b-6E-W6U" secondAttribute="bottom" id="x7r-jq-veK"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="leading" secondItem="OWx-ld-1C2" secondAttribute="leading" id="xHr-rM-kdS"/>
+                                                <constraint firstAttribute="bottom" secondItem="OCx-db-7kP" secondAttribute="bottom" id="yVS-gC-6W7"/>
+                                                <constraint firstItem="OCx-db-7kP" firstAttribute="top" secondItem="BP7-EJ-awy" secondAttribute="bottom" id="ybq-Vt-WGg"/>
+                                                <constraint firstAttribute="trailing" secondItem="BP7-EJ-awy" secondAttribute="trailing" id="zph-0B-KI6"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -875,7 +1014,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnB-Zo-l5J">
-                                            <rect key="frame" x="229.66666666666663" y="0.0" width="15.333333333333343" height="90"/>
+                                            <rect key="frame" x="229.66666666666666" y="0.0" width="15.333333333333343" height="90"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="vTv-eH-Pw0" userLabel="list_number">
                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
@@ -924,10 +1063,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6V-Oo-hoJ">
-                                            <rect key="frame" x="245" y="0.0" width="64.666666666666657" height="90"/>
+                                            <rect key="frame" x="244.99999999999997" y="0.0" width="64.666666666666657" height="90"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="6ZV-ST-w65" userLabel="list_debit">
-                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -939,7 +1078,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KJE-94-FDE" userLabel="list_debit2">
-                                                    <rect key="frame" x="0.0" y="30" width="66" height="30"/>
+                                                    <rect key="frame" x="0.0" y="30" width="65" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -951,7 +1090,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ARm-fs-kAB" userLabel="list_debit3">
-                                                    <rect key="frame" x="0.0" y="60" width="66" height="30"/>
+                                                    <rect key="frame" x="0.0" y="60" width="65" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -973,10 +1112,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJX-uJ-Vz7">
-                                            <rect key="frame" x="309.66666666666674" y="0.0" width="65.333333333333314" height="90"/>
+                                            <rect key="frame" x="309.66666666666669" y="0.0" width="65.333333333333314" height="90"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zLw-dE-neh" userLabel="list_credit1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -988,7 +1127,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="XRV-I0-d5h" userLabel="list_credit">
-                                                    <rect key="frame" x="0.0" y="30" width="65" height="30"/>
+                                                    <rect key="frame" x="0.0" y="30" width="66" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -1000,7 +1139,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iEw-qs-NAB" userLabel="list_credit3">
-                                                    <rect key="frame" x="0.0" y="60" width="65" height="30"/>
+                                                    <rect key="frame" x="0.0" y="60" width="66" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -1030,8 +1169,10 @@
                                         <constraint firstItem="Y6V-Oo-hoJ" firstAttribute="leading" secondItem="LnB-Zo-l5J" secondAttribute="trailing" id="Cxx-ah-aKf"/>
                                         <constraint firstItem="bkL-Dh-ed9" firstAttribute="height" secondItem="H9p-AI-sti" secondAttribute="height" id="DzI-Y1-Dzr"/>
                                         <constraint firstItem="bkL-Dh-ed9" firstAttribute="top" secondItem="H9p-AI-sti" secondAttribute="top" id="EOW-Lh-uuA"/>
+                                        <constraint firstItem="LnB-Zo-l5J" firstAttribute="height" secondItem="H9p-AI-sti" secondAttribute="height" id="ETC-4f-1BL"/>
                                         <constraint firstItem="LnB-Zo-l5J" firstAttribute="top" secondItem="H9p-AI-sti" secondAttribute="top" id="FLb-La-FcS"/>
                                         <constraint firstItem="OWx-ld-1C2" firstAttribute="top" secondItem="H9p-AI-sti" secondAttribute="top" id="KXY-5b-dC7"/>
+                                        <constraint firstItem="LnB-Zo-l5J" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H9p-AI-sti" secondAttribute="width" multiplier="0.04" id="NV4-zU-tyT"/>
                                         <constraint firstAttribute="trailing" secondItem="aJX-uJ-Vz7" secondAttribute="trailing" id="Uqh-Oo-aaz"/>
                                         <constraint firstItem="aJX-uJ-Vz7" firstAttribute="leading" secondItem="Y6V-Oo-hoJ" secondAttribute="trailing" id="e3z-Y5-6Xu"/>
                                         <constraint firstAttribute="bottom" secondItem="OWx-ld-1C2" secondAttribute="bottom" id="gFo-le-fa9"/>
@@ -1690,21 +1831,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 年" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="3RZ-Xv-Jw2" userLabel="list_date_year">
-                                                <rect key="frame" x="0.0" y="5" width="46" height="19"/>
+                                                <rect key="frame" x="0.0" y="5" width="45" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="4HI-HT-ea7" userLabel="list_date_month">
-                                                <rect key="frame" x="0.0" y="25" width="20" height="19"/>
+                                                <rect key="frame" x="0.0" y="25" width="20" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="cCN-7S-F4y" userLabel="list_date_day">
-                                                <rect key="frame" x="17" y="25" width="29" height="19"/>
+                                                <rect key="frame" x="16" y="25" width="29" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
@@ -1725,7 +1866,7 @@
                                         <rect key="frame" x="45" y="0.0" width="105" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摘要" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="URJ-DN-tIs" userLabel="list_summary">
-                                                <rect key="frame" x="0.0" y="5" width="105" height="39"/>
+                                                <rect key="frame" x="0.0" y="5" width="104" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -1746,14 +1887,14 @@
                                         <rect key="frame" x="150" y="0.0" width="15" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="VCk-AF-fM8" userLabel="list_number">
-                                                <rect key="frame" x="0.0" y="0.0" width="16" height="19"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="15" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="D76-cX-5Ff" userLabel="list_number_2">
-                                                <rect key="frame" x="0.0" y="24" width="16" height="20"/>
+                                                <rect key="frame" x="0.0" y="25" width="15" height="20"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
@@ -1774,7 +1915,7 @@
                                         <rect key="frame" x="165" y="0.0" width="65" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="p77-3H-nLF" userLabel="list_debit">
-                                                <rect key="frame" x="0.0" y="5" width="65" height="39"/>
+                                                <rect key="frame" x="0.0" y="5" width="65" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -1795,7 +1936,7 @@
                                         <rect key="frame" x="230" y="0.0" width="65" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Ofu-WN-UUn" userLabel="list_credit">
-                                                <rect key="frame" x="0.0" y="5" width="66" height="39"/>
+                                                <rect key="frame" x="0.0" y="5" width="65" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -1816,21 +1957,21 @@
                                         <rect key="frame" x="295" y="0.0" width="15" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="rp3-tL-BCp" userLabel="list_debitOrCredit">
-                                                <rect key="frame" x="0.0" y="0.0" width="16" height="14"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="又" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KW1-Ru-fOm" userLabel="list_debitOrCredit_2">
-                                                <rect key="frame" x="0.0" y="15" width="16" height="14"/>
+                                                <rect key="frame" x="0.0" y="15" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="9SQ-Td-CIY" userLabel="list_debitOrCredit_3">
-                                                <rect key="frame" x="0.0" y="30" width="16" height="14"/>
+                                                <rect key="frame" x="0.0" y="30" width="15" height="15"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <nil key="textColor"/>
@@ -1851,7 +1992,7 @@
                                         <rect key="frame" x="310" y="0.0" width="65" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="差引残高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="UOr-zf-EiT" userLabel="list_balance">
-                                                <rect key="frame" x="0.0" y="5" width="65" height="39"/>
+                                                <rect key="frame" x="0.0" y="5" width="64" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -1927,33 +2068,62 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSj-Ab-Mhh">
                                                     <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="KeE-Cg-kQ3" userLabel="list_date_month">
-                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.29999999999999999"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="RJg-nz-fOc" userLabel="list_date_day">
-                                                            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.29999999999999999"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iH3-BB-Aw3">
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="KeE-Cg-kQ3" userLabel="list_date_month">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="iH3-BB-Aw3" secondAttribute="height" multiplier="2:3" id="b7M-B3-0eK"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-XR-WCA">
+                                                            <rect key="frame" x="20" y="0.0" width="25" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="RJg-nz-fOc" userLabel="list_date_day">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="7aM-XR-WCA" secondAttribute="height" multiplier="5:6" id="L9M-4J-4Vw"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="iH3-BB-Aw3" firstAttribute="top" secondItem="tSj-Ab-Mhh" secondAttribute="top" id="2SN-C4-BY6"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7aM-XR-WCA" secondAttribute="bottom" id="9FM-MU-158"/>
+                                                        <constraint firstItem="iH3-BB-Aw3" firstAttribute="width" secondItem="tSj-Ab-Mhh" secondAttribute="width" multiplier="0.444444" id="Jcf-Jr-dGB"/>
+                                                        <constraint firstItem="iH3-BB-Aw3" firstAttribute="height" secondItem="tSj-Ab-Mhh" secondAttribute="height" id="N7c-bY-ufZ"/>
                                                         <constraint firstAttribute="width" secondItem="tSj-Ab-Mhh" secondAttribute="height" multiplier="3:2" id="Nak-Md-Qw3"/>
+                                                        <constraint firstItem="7aM-XR-WCA" firstAttribute="leading" secondItem="iH3-BB-Aw3" secondAttribute="trailing" id="NwP-la-Sla"/>
+                                                        <constraint firstAttribute="bottom" secondItem="iH3-BB-Aw3" secondAttribute="bottom" id="V6q-Fv-rxE"/>
+                                                        <constraint firstItem="iH3-BB-Aw3" firstAttribute="leading" secondItem="tSj-Ab-Mhh" secondAttribute="leading" id="VCH-9y-HJw"/>
+                                                        <constraint firstItem="7aM-XR-WCA" firstAttribute="height" secondItem="tSj-Ab-Mhh" secondAttribute="height" id="aZ8-nP-6xG"/>
+                                                        <constraint firstItem="7aM-XR-WCA" firstAttribute="top" secondItem="tSj-Ab-Mhh" secondAttribute="top" id="cZx-MP-ppf"/>
+                                                        <constraint firstItem="7aM-XR-WCA" firstAttribute="width" secondItem="tSj-Ab-Mhh" secondAttribute="width" multiplier="0.555556" id="vMV-B0-MeU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7aM-XR-WCA" secondAttribute="trailing" id="wE1-xd-59N"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -1965,7 +2135,7 @@
                                                     <rect key="frame" x="45" y="0.0" width="105" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" id="UGS-za-XUB" userLabel="list_summary">
-                                                            <rect key="frame" x="0.0" y="0.0" width="105" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="104" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -1990,7 +2160,7 @@
                                                     <rect key="frame" x="150" y="0.0" width="15" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000001" id="Zcc-G1-l6f" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -2015,7 +2185,7 @@
                                                     <rect key="frame" x="165" y="0.0" width="65" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="sQk-3N-gmX" userLabel="list_debit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -2040,7 +2210,7 @@
                                                     <rect key="frame" x="230" y="0.0" width="65" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="f47-Uo-MiR" userLabel="list_credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -2065,7 +2235,7 @@
                                                     <rect key="frame" x="295" y="0.0" width="15" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XXk-V4-PMR" userLabel="list_debitOrCredit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="15" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -2090,7 +2260,7 @@
                                                     <rect key="frame" x="310" y="0.0" width="65" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="bIo-8P-K6z" userLabel="list_balance">
-                                                            <rect key="frame" x="0.0" y="0.0" width="65" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
@@ -2151,7 +2321,7 @@
                                             <constraint firstItem="AuW-hj-q3L" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="kP2-Nt-xdu"/>
                                             <constraint firstItem="yx6-Xb-qZc" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="pBO-O8-BDi"/>
                                             <constraint firstItem="Rgc-R4-jK9" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="qCC-JC-nCg"/>
-                                            <constraint firstItem="tSj-Ab-Mhh" firstAttribute="height" secondItem="dfB-Ka-NUI" secondAttribute="height" id="uib-Bu-QQ8"/>
+                                            <constraint firstItem="tSj-Ab-Mhh" firstAttribute="height" relation="greaterThanOrEqual" secondItem="dfB-Ka-NUI" secondAttribute="height" id="uib-Bu-QQ8"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="label_list_balance" destination="bIo-8P-K6z" id="zfd-5z-19X"/>
@@ -2218,7 +2388,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平成21年12月31日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="GPW-sW-FCb" userLabel="closingDate">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="GPW-sW-FCb" userLabel="closingDate">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -2243,7 +2413,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="25"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="EVM-IB-53o" userLabel="list_debit">
-                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="91" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -2264,7 +2434,7 @@
                                                 <rect key="frame" x="91.666666666666671" y="0.0" width="191.66666666666663" height="25"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="53G-4Y-TzC" userLabel="account_name">
-                                                        <rect key="frame" x="0.0" y="0.0" width="191" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="192" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -2360,7 +2530,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="15"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="jMV-GR-zBr" userLabel="debit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="91" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -2385,7 +2555,7 @@
                                                     <rect key="frame" x="91.666666666666671" y="0.0" width="191.66666666666663" height="15"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="pPX-xu-CGo" userLabel="account">
-                                                            <rect key="frame" x="0.0" y="0.0" width="192" height="15"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="191" height="15"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -2410,7 +2580,7 @@
                                                     <rect key="frame" x="283.33333333333331" y="0.0" width="91.666666666666686" height="15"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="EfX-FX-eaV" userLabel="credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="15"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="91" height="15"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -2434,7 +2604,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FaB-oj-3OX" firstAttribute="leading" secondItem="56t-n0-Eon" secondAttribute="trailing" id="0nP-Ks-4m3"/>
-                                                <constraint firstItem="56t-n0-Eon" firstAttribute="height" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="48T-ZP-Oul"/>
+                                                <constraint firstItem="56t-n0-Eon" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="48T-ZP-Oul"/>
                                                 <constraint firstItem="ffJ-sQ-Qxc" firstAttribute="leading" secondItem="FaB-oj-3OX" secondAttribute="trailing" id="7Mv-6P-qrl"/>
                                                 <constraint firstItem="FaB-oj-3OX" firstAttribute="width" secondItem="Q4Q-RK-uLG" secondAttribute="width" multiplier="0.511719" id="7Tf-vW-ag1"/>
                                                 <constraint firstItem="ffJ-sQ-Qxc" firstAttribute="width" secondItem="Q4Q-RK-uLG" secondAttribute="width" multiplier="0.244141" id="BaF-ob-N2f"/>
@@ -2443,11 +2613,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="56t-n0-Eon" secondAttribute="bottom" id="Slg-dg-yg7"/>
                                                 <constraint firstItem="56t-n0-Eon" firstAttribute="top" secondItem="Q4Q-RK-uLG" secondAttribute="top" id="VSE-e6-8Vx"/>
                                                 <constraint firstAttribute="bottom" secondItem="FaB-oj-3OX" secondAttribute="bottom" id="W8S-oi-1LM"/>
-                                                <constraint firstItem="ffJ-sQ-Qxc" firstAttribute="height" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="eBM-aG-bjk"/>
-                                                <constraint firstItem="FaB-oj-3OX" firstAttribute="height" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="qNI-U1-I1q"/>
+                                                <constraint firstItem="ffJ-sQ-Qxc" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="eBM-aG-bjk"/>
+                                                <constraint firstItem="FaB-oj-3OX" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Q4Q-RK-uLG" secondAttribute="height" id="qNI-U1-I1q"/>
                                                 <constraint firstItem="ffJ-sQ-Qxc" firstAttribute="top" secondItem="Q4Q-RK-uLG" secondAttribute="top" id="rle-62-cEk"/>
                                                 <constraint firstAttribute="trailing" secondItem="ffJ-sQ-Qxc" secondAttribute="trailing" id="tLN-8T-5Z1"/>
-                                                <constraint firstItem="56t-n0-Eon" firstAttribute="width" secondItem="Q4Q-RK-uLG" secondAttribute="width" multiplier="0.244141" id="v93-5r-kEs"/>
+                                                <constraint firstItem="56t-n0-Eon" firstAttribute="width" relation="lessThanOrEqual" secondItem="Q4Q-RK-uLG" secondAttribute="width" multiplier="0.244141" id="v93-5r-kEs"/>
                                                 <constraint firstItem="FaB-oj-3OX" firstAttribute="top" secondItem="Q4Q-RK-uLG" secondAttribute="top" id="wBz-dn-WOh"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -2465,7 +2635,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgS-Xs-H4m">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.33333333333333331" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.66666666666666663" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="whK-bS-j4b" userLabel="debit">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="41"/>
@@ -2490,10 +2660,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sl8-jo-5gL">
-                                                    <rect key="frame" x="0.33333333333333331" y="0.0" width="0.66666666666666674" height="40"/>
+                                                    <rect key="frame" x="0.6666666666666714" y="0.0" width="1.666666666666667" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="ZkJ-9D-wuI" userLabel="account">
-                                                            <rect key="frame" x="0.0" y="0.0" width="1" height="40"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -2515,10 +2685,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3k-uW-8C4">
-                                                    <rect key="frame" x="1" y="0.0" width="0.33333333333333326" height="40"/>
+                                                    <rect key="frame" x="2" y="0.0" width="0.66666666666666652" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="Npe-wD-MUz" userLabel="credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="1" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -2541,8 +2711,8 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Sl8-jo-5gL" firstAttribute="height" secondItem="bQ6-qY-t59" secondAttribute="height" id="2zI-a4-z0W"/>
-                                                <constraint firstItem="AgS-Xs-H4m" firstAttribute="height" secondItem="bQ6-qY-t59" secondAttribute="height" id="3ZP-AL-5Ya"/>
+                                                <constraint firstItem="Sl8-jo-5gL" firstAttribute="height" relation="greaterThanOrEqual" secondItem="bQ6-qY-t59" secondAttribute="height" id="2zI-a4-z0W"/>
+                                                <constraint firstItem="AgS-Xs-H4m" firstAttribute="height" relation="greaterThanOrEqual" secondItem="bQ6-qY-t59" secondAttribute="height" id="3ZP-AL-5Ya"/>
                                                 <constraint firstItem="AgS-Xs-H4m" firstAttribute="top" secondItem="bQ6-qY-t59" secondAttribute="top" id="44R-3s-Gy3"/>
                                                 <constraint firstItem="AgS-Xs-H4m" firstAttribute="width" secondItem="bQ6-qY-t59" secondAttribute="width" multiplier="0.244141" id="Ctw-1r-2ji"/>
                                                 <constraint firstAttribute="bottom" secondItem="Z3k-uW-8C4" secondAttribute="bottom" id="Mps-fi-lZV"/>
@@ -2584,10 +2754,29 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hiu-xy-Icn"/>
                     </view>
-                    <navigationItem key="navigationItem" title="試算表" id="Bq0-HH-9Ny"/>
+                    <navigationItem key="navigationItem" title="試算表" id="Bq0-HH-9Ny">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="nDP-83-JB8">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="7vG-Cv-jth">
+                                <rect key="frame" x="252" y="6" width="107" height="32"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <segments>
+                                    <segment title="合計"/>
+                                    <segment title="残高"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControl:" destination="ESF-WI-cH7" eventType="valueChanged" id="xKq-c3-dta"/>
+                                </connections>
+                            </segmentedControl>
+                            <connections>
+                                <action selector="segmentedControl_switch:" destination="ESF-WI-cH7" id="EmP-ub-lm4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="TableView_TB" destination="Q3D-4O-W0X" id="IGM-Q8-9Yj"/>
                         <outlet property="label_closingDate" destination="GPW-sW-FCb" id="jAd-x7-Xbv"/>
+                        <outlet property="label_company_name" destination="FK7-dc-8bH" id="ae4-bw-kne"/>
+                        <outlet property="segmentedControl_switch" destination="7vG-Cv-jth" id="Sfg-jf-4lg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkb-eW-vWi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

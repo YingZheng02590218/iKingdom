@@ -106,7 +106,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         var objects = realm.objects(DataBaseJournalEntry.self) // DataBaseJournalEntryモデル
-                // 開いている会計帳簿を取得
+        // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
@@ -126,8 +126,15 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseAccountモデルを全て取得する
         var objects = realm.objects(DataBaseAccount.self) // モデル
-        // 希望する勘定だけを抽出する　ToDo
-        objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
         // 勘定のプライマリーキーを取得する
         let numberOfAccount = objects[0].number
         return numberOfAccount

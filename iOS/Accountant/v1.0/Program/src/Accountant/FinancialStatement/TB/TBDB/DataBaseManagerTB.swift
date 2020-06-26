@@ -24,7 +24,7 @@ class DataBaseManagerTB {
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
-            for r in 0..<3 {
+            for r in 0..<4 { //注意：3になっていた。誤り
                 var l: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
                 for i in 0..<objectG.dataBaseAccounts.count {
                     l += getTotalAmount(account: objectG.dataBaseAccounts[i].accountName, leftOrRight: r) // 累計額に追加
@@ -110,7 +110,6 @@ class DataBaseManagerTB {
         }
         print(objects)
     }
-    
     // 合計残高　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
         let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -157,7 +156,7 @@ class DataBaseManagerTB {
         default:
             print(result)
         }
-        
+        print("getTotalAmount")
         print(account, objectss[0].dataBaseAccounts[number].debit_total)
         print(account, objectss[0].dataBaseAccounts[number].credit_total)
         

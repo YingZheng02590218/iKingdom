@@ -48,12 +48,13 @@ class DataBaseManagerGeneralLedger {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             let number = dataBaseGeneralLedger.save() //　自動採番
-            print(number)
+            print("addGeneralLedger",number)
             // オブジェクトを作成 勘定
             for i in 0..<objects.count{
                 let dataBaseAccount = DataBaseAccount() // 勘定
                 let number = dataBaseAccount.save() //　自動採番
-                print(number)
+                print("dataBaseAccount",number)
+                dataBaseAccount.fiscalYear = object.fiscalYear
                 dataBaseAccount.accountName = objects[i].category
                 dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
             }

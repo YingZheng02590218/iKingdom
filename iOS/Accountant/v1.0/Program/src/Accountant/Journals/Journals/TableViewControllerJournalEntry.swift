@@ -36,7 +36,7 @@ class TableViewControllerJournalEntry: UITableViewController {
         // データベース　注意：Initialより後に記述する
         let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManager.getSettingsPeriodYear()
-        // ToDo どこで設定した年度のデータを参照するか考える
+        // どこで設定した年度のデータを参照するか考える
         Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
         scroll = true
@@ -179,7 +179,7 @@ class TableViewControllerJournalEntry: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var indexPath_local = IndexPath(row: 0, section: 0)
         if scroll || scroll_adding {     // 初回起動時の場合 入力ボタン押下時の場合
-            print(TableView_JournalEntry.numberOfSections)
+//            print(TableView_JournalEntry.numberOfSections)
             for s in 0..<TableView_JournalEntry.numberOfSections {            //セクション数　ゼロスタート補正は不要
                 if TableView_JournalEntry.numberOfRows(inSection: s) > 0 {
                     let r = TableView_JournalEntry.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
