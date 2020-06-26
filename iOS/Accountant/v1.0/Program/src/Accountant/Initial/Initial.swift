@@ -34,7 +34,7 @@ class Initial {
         // データベースに会計帳簿があるかをチェック
         if !dataBaseManager.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let number = dataBaseManager.addAccountingBooksShelf(company: "株式会社 iKingdom") // ToDo
-            print(number)
+            print("initializeAccountingBooksShelf",number)
             // 会計帳簿
             initializeAccountingBooks()
 //            // 財務諸表
@@ -90,7 +90,7 @@ class Initial {
             dataBaseManager.addGeneralLedger(number: number)
         }
     }
-    // 財務諸表　初期化
+    // 決算書画面　初期化
     func initializeFinancialStatements(number: Int,fiscalYear: Int) {
         // オブジェクト作成
         let dataBaseManager = DataBaseManagerFinancialStatements()

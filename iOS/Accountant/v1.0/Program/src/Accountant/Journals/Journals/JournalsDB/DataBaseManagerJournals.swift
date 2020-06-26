@@ -35,7 +35,7 @@ class DataBaseManagerJournals {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             let number = dataBaseJournals.save() //ページ番号(一年で1ページ)　自動採番
-            print(number)
+            print("addJournals",number)
             // 年度　の数だけ増える　ToDo
 //            realm.add(dataBaseJournals)
             object.dataBaseJournals = dataBaseJournals

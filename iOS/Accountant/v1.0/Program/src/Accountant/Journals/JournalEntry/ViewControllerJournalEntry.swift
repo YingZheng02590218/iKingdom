@@ -70,15 +70,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        var now :Date = Date()
 //        let now1 = fffff.string(from: Calendar.current.date(byAdding: .month, value: -3, to: now)!)
 //        now = fffff.date(from: now1)!
-        print("現在時刻 now      ：\(now)")
-        print("現在時刻 f        ：\(f.string(from: now))") //年
-        print("現在時刻 ff       ：\(ff.string(from: now))") //月
-        print("現在時刻 fff      ：\(fff.string(from: now))") //月日
-        print("現在時刻 ffff     ：\(ffff.string(from: now))") //年月日
-        print("現在時刻 ffff2    ：\(ffff2.string(from: now))") //年月日
-        print("現在時刻 fffff    ：\(fffff.string(from: now))") //年月日
-        print("現在時刻 ffffff   ：\(ffffff.string(from: now))") //
-        print("現在時刻 timezone ：\(timezone.string(from: now))")
+//        print("現在時刻 now      ：\(now)")
+//        print("現在時刻 f        ：\(f.string(from: now))") //年
+//        print("現在時刻 ff       ：\(ff.string(from: now))") //月
+//        print("現在時刻 fff      ：\(fff.string(from: now))") //月日
+//        print("現在時刻 ffff     ：\(ffff.string(from: now))") //年月日
+//        print("現在時刻 ffff2    ：\(ffff2.string(from: now))") //年月日
+//        print("現在時刻 fffff    ：\(fffff.string(from: now))") //年月日
+//        print("現在時刻 ffffff   ：\(ffffff.string(from: now))") //
+//        print("現在時刻 timezone ：\(timezone.string(from: now))")
 
         
         // 開いている会計帳簿を取得
@@ -123,11 +123,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         // ピッカーの初期値
-        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!)")
-        print("年度+現在の月日    ： \(fff.string(from: now))")
-        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear)")
-        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + ",")")
-        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + "," + ffffff.string(from: now))")
+//        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!)")
+//        print("年度+現在の月日    ： \(fff.string(from: now))")
+//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear)")
+//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + ",")")
+//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + "," + ffffff.string(from: now))")
 
         //        datePicker.date = timezone.date(from: timezone.string(from: now))!
         datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる

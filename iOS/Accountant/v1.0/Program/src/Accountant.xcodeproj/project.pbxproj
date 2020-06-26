@@ -258,6 +258,15 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		F9318AE224A60C5200CE45BE /* FinancialStatementDB */ = {
+			isa = PBXGroup;
+			children = (
+				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
+				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
+			);
+			path = FinancialStatementDB;
+			sourceTree = "<group>";
+		};
 		F9354DB02498986F007DB098 /* TBDB */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				F955B606248FE6EF005E2C6D /* TableViewControllerFinancialStatement.swift */,
+				F9318AE224A60C5200CE45BE /* FinancialStatementDB */,
 				F955B60E2490FCD6005E2C6D /* BS */,
 				F955B6082490E305005E2C6D /* PL */,
 				F955B60F2490FD1D005E2C6D /* CF */,
@@ -601,8 +611,6 @@
 				F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */,
 				F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */,
 				F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */,
-				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
-				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
 			);
 			path = InitialDB;
 			sourceTree = "<group>";

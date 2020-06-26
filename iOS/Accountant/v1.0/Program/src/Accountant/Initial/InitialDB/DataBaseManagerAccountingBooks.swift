@@ -48,7 +48,7 @@ class DataBaseManagerAccountingBooks  {
         var number = 0
         try! realm.write {
             number = dataBaseAccountingBooks.save() //　自動採番
-            print(number)
+            print("addAccountingBooks",number)
             // 年度　の数だけ増える　ToDo
 //            realm.add(dataBaseMainBooks)
             object.dataBaseAccountingBooks.append(dataBaseAccountingBooks) // 会計帳簿棚に会計帳簿を追加する

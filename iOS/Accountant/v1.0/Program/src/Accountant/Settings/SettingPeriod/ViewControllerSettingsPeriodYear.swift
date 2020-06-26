@@ -96,6 +96,13 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
             if !dataBaseManagerGeneralLedger.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
                 dataBaseManagerGeneralLedger.addGeneralLedger(number: number)
             }
+        // 決算書画面　初期化
+            // データベース
+            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements() //データベースマネジャー
+            // データベースに勘定画面の勘定があるかをチェック
+            if !dataBaseManagerFinancialStatements.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+                dataBaseManagerFinancialStatements.addFinancialStatements(number: number)
+            }
         }
     }
     
