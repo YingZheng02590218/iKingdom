@@ -99,14 +99,15 @@ class TableViewControllerFinancialStatement: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // 画面遷移の準備　貸借対照表画面 損益計算書画面 キャッシュフロー計算書
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // 選択されたセルを取得
+        let indexPath: IndexPath = self.TableViewFS.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
+    
 
 }

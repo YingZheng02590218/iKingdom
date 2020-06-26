@@ -85,7 +85,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
-        let fiscalYear = object.dataBaseJournalEntryBook?.fiscalYear
+        let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
         let nowStringNextYear = (fiscalYear! + 1).description                  //年度
@@ -123,7 +123,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         // ピッカーの初期値
-        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now)))")
+        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!)")
         print("年度+現在の月日    ： \(fff.string(from: now))")
         print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear)")
         print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + ",")")
@@ -267,11 +267,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     @objc func textFieldDidChange(_ sender: UITextField) {
 //    func textFieldEditingChanged(_ sender: UITextField){
         if sender.text != "" {
-            print("\(String(describing: sender.text))")
-        }
-        // カンマを追加する
-        if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
-            sender.text = "\(addComma(string: String(sender.text!)))"
+            // カンマを追加する
+            if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
+                sender.text = "\(addComma(string: String(sender.text!)))"
+            }
+            print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }
     }
     // TextFieldをタップしても呼ばれない

@@ -43,7 +43,18 @@ class DatabaseManagerSettingsCategory  {
 //        print(number)
 //        print(dataBaseSettingsCategory)
 //    }
-    
+    // モデルオブフェクトの取得
+    func getAllSettingsCategory() -> Results<DataBaseSettingsCategory> { //DataBaseSettingsCategory {
+            // データベース　読み込み
+            // (1)Realmのインスタンスを生成する
+            let realm = try! Realm()
+            // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
+            var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+            // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+            objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+            return objects
+        }
+
     // モデルオブフェクトの取得
     func getSettings(section: Int) -> Results<DataBaseSettingsCategory> { //DataBaseSettingsCategory {
         // マスターデータから読み取り
@@ -85,7 +96,7 @@ class DatabaseManagerSettingsCategory  {
         return objects
     }
     // モデルオブフェクトの取得
-    func getMiddleCategory(section: Int, mid_category: Int) -> Int { //Results<DataBaseSettingsCategory> {
+    func getMiddleCategory(section: Int, mid_category: Int) -> Results<DataBaseSettingsCategory> {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -137,7 +148,59 @@ class DatabaseManagerSettingsCategory  {
             objects = objects.filter("mid_category == 0") // ありえない
             break
         }
-        return objects.count
+        return objects
+    }
+    // モデルオブフェクトの取得
+    func getSmallCategory(section: Int, small_category: Int) -> Results<DataBaseSettingsCategory> {//Int {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
+        var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        // セクション　資産の部、負債の部、純資産の部
+        objects = objects.filter("big_category == \(section)")
+        
+        switch small_category {
+        case 0: // 当座資産0
+            objects = objects.filter("small_category == 0")
+            break
+        case 1: // 棚卸資産1
+            objects = objects.filter("small_category == 1")
+            break
+        case 2: // その他の資産2
+            objects = objects.filter("small_category == 2")
+            break
+        case 3: // 有形固定資産3
+            objects = objects.filter("small_category == 3")
+            break
+        case 4: // 無形固定資産4
+            objects = objects.filter("small_category == 4")
+            break
+        case 5: // 投資その他の資産5
+            objects = objects.filter("small_category == 5")
+            break
+        case 6: // 仕入債務6
+            objects = objects.filter("small_category == 6")
+            break
+        case 7: // その他流動負債7
+            objects = objects.filter("small_category == 7")
+            break
+        case 8: // 売上原価8
+            objects = objects.filter("small_category == 8")
+            break
+        case 9: // 販売費及び一般管理費9
+            objects = objects.filter("small_category == 9")
+            break
+        case 10: // 売上高10
+            objects = objects.filter("small_category == 10")
+            break
+        default:
+            objects = objects.filter("small_category == 0") // ありえない
+            break
+        }
+        return objects//.count
     }
 
     // モデルオブフェクトの更新
