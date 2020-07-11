@@ -57,7 +57,14 @@ class TableViewControllerGeneralLedger: UITableViewController {
         // 勘定科目の名称をセルに表示する
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
-        
+        // 仕訳データがない勘定の表示名をグレーアウトする
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objectss = dataBaseManagerAccount.getAccountAll(account: "\(objects[indexPath.row].category as String)")
+        if objectss.count > 0 {
+            cell.textLabel?.textColor = .black
+        }else {
+            cell.textLabel?.textColor = .lightGray
+        }
         return cell
     }
     

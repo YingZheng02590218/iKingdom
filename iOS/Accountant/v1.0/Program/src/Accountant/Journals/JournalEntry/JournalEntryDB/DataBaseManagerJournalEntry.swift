@@ -31,8 +31,8 @@ class DataBaseManagerJournalEntry  {
 //        accountRight.accountName = credit_category
 //        dataBaseJournalEntry.account.append(accountRight)
         let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
-        let left_number = dataBaseManagerAccount.getPrimaryNumberOfAccount(category: debit_category)
-        let right_number = dataBaseManagerAccount.getPrimaryNumberOfAccount(category: credit_category)
+        let left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
+        let right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
         // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -154,6 +154,26 @@ class DataBaseManagerJournalEntry  {
         // 勘定のプライマリーキーを取得する
         let numberOfAccount = objects[0].number
         return numberOfAccount
+    }
+    // 勘定のプライマリーキーを取得　※丁数ではない
+    func getPrimaryNumberOfAccount(accountName: String) -> Int {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを全て取得する
+        var objects = realm.objects(DataBaseAccount.self) // モデル
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+        let number: Int = objects[0].number
+        
+        return number
     }
     // モデルオブフェクトの数を取得　仕訳
     func getJournalEntryCounts(section: Int) -> Int {

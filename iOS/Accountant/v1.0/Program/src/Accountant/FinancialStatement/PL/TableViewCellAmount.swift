@@ -1,16 +1,16 @@
 //
-//  TableViewCellTotal.swift
+//  TableViewCellAmount.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2020/06/13.
+//  Created by Hisashi Ishihara on 2020/06/29.
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
 import UIKit
 
-class TableViewCellTotal: UITableViewCell {
+class TableViewCellAmount: UITableViewCell {
 
-    @IBOutlet weak var label_total: UILabel!
+    @IBOutlet weak var label_amount: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

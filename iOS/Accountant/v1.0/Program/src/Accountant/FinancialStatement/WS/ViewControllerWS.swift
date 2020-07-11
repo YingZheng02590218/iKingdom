@@ -1,36 +1,27 @@
 //
-//  ViewControllerTB.swift
+//  ViewControllerWS.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2020/06/19.
+//  Created by Hisashi Ishihara on 2020/07/10.
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
 import UIKit
 
-// 試算表クラス
-class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
+// 精算表クラス
+class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
 
     @IBOutlet weak var view_top: UIView!
-    @IBOutlet weak var TableView_TB: UITableView!
+    @IBOutlet weak var TableView_WS: UITableView!
     @IBOutlet weak var label_company_name: UILabel!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
-    @IBOutlet weak var segmentedControl_switch: UISegmentedControl!
-    @IBAction func segmentedControl(_ sender: Any) {
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "合計試算表"
-        }else {
-            label_title.text = "残高試算表"
-        }
-        TableView_TB.reloadData()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        TableView_TB.delegate = self
-        TableView_TB.dataSource = self
+        TableView_WS.delegate = self
+        TableView_WS.dataSource = self
         
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
         databaseManager.culculatAmountOfAllAccount()
@@ -43,15 +34,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
         label_closingDate.text = fiscalYear.description + "年3月31日" // 決算日を表示する
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "合計試算表"
-        }else {
-            label_title.text = "残高試算表"
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-//        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+        label_title.text = "精算表"
     }
     //セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,47 +53,47 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         if indexPath.row < objects.count {
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TableViewCellTB
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as! TableViewCellWS
             // 勘定科目をセルに表示する
             //        cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
             cell.label_account.text = "\(objects[indexPath.row].category as String)"
             cell.label_account.textAlignment = NSTextAlignment.center
-            switch segmentedControl_switch.selectedSegmentIndex {
-            case 0: // 合計　借方
-                cell.label_debit.text = databaseManager.setComma(amount: databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
-                    // 合計　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
-                break
-            case 1: // 残高　借方
-                cell.label_debit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
-                    // 残高　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
-                break
-            default:
-                print("cell_TB")
-            }
+//            switch segmentedControl_switch.selectedSegmentIndex {
+//            case 0: // 合計　借方
+//                cell.label_debit.text = databaseManager.setComma(amount: databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
+//                    // 合計　貸方
+//                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
+//                break
+//            case 1: // 残高　借方
+//                cell.label_debit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
+//                    // 残高　貸方
+//                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
+//                break
+//            default:
+//                print("cell_WS")
+//            }
             return cell
         }else {
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             let object = dataBaseManagerFinancialStatements.getFinancialStatements()
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as! TableViewCellTB
-//            let r = 0
-//            switch r {
-            switch segmentedControl_switch.selectedSegmentIndex {
-            case 0: // 合計　借方
-                cell.label_debit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.debit_total_total)
-                    // 合計　貸方
-                cell.label_credit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.credit_total_total)
-                break
-            case 1: // 残高　借方
-                cell.label_debit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
-                    // 残高　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
-                break
-            default:
-                print("cell_last_TB")
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as! TableViewCellWS
+////            let r = 0
+////            switch r {
+//            switch segmentedControl_switch.selectedSegmentIndex {
+//            case 0: // 合計　借方
+//                cell.label_debit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.debit_total_total)
+//                    // 合計　貸方
+//                cell.label_credit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.credit_total_total)
+//                break
+//            case 1: // 残高　借方
+//                cell.label_debit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+//                    // 残高　貸方
+//                cell.label_credit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
+//                break
+//            default:
+//                print("cell_last_TB")
+//            }
             return cell
         }
     }
@@ -122,48 +105,59 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
             print("scrollView.contentInset      : \(scrollView.contentInset)")
             print("view_top.bounds.height       : \(view_top.bounds.height)")
-            print("TableView_TB.bounds.height   : \(TableView_TB.bounds.height)")
-            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-            }else if scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ scrollView.contentOffset.y >= view_top.bounds.height &&
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)//[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)//注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y-self.navigationController!.navigationBar.bounds.height) * -1, left: 0, bottom: 0, right: 0)
-//                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
-//                        TableView_TB.contentInset = edgeInsets
-//                        TableView_TB.scrollIndicatorInsets = edgeInsets
-            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
-    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+            print("TableView_TB.bounds.height   : \(TableView_WS.bounds.height)")
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
+            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
+            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
+                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+TableView_WS.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
             }
-            print("navigationController!.navigationBar.bounds.height : \(self.navigationController!.navigationBar.bounds.height)")
-            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      :: \(scrollView.contentInset)")
-            print("view_top.bounds.height       :: \(view_top.bounds.height)")
-            print("TableView_TB.bounds.height   :: \(TableView_TB.bounds.height)")
         }else{
+            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+//            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
+//            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }else if scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ scrollView.contentOffset.y >= view_top.bounds.height &&
+////                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)//[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy
+////                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)//注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
+//                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y-self.navigationController!.navigationBar.bounds.height) * -1, left: 0, bottom: 0, right: 0)
+////                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
+////                        TableView_TB.contentInset = edgeInsets
+////                        TableView_TB.scrollIndicatorInsets = edgeInsets
+//            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
+//    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }
+//            print("navigationController!.navigationBar.bounds.height : \(self.navigationController!.navigationBar.bounds.height)")
+//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
+//            print("scrollView.contentInset      :: \(scrollView.contentInset)")
+//            print("view_top.bounds.height       :: \(view_top.bounds.height)")
+//            print("TableView_TB.bounds.height   :: \(TableView_WS.bounds.height)")
+//        }else{
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
-    @IBOutlet weak var button_print: UIButton!
+    @IBOutlet var button_print: UIButton!
     /**
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
-        let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        printing = true
+        let indexPath = TableView_WS.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         print("TableView_TB.indexPathsForVisibleRows: \(indexPath)")
 //        self.TableView_TB.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
-        self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.TableView_WS.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
+        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
-        TableView_TB.showsVerticalScrollIndicator = false
+        TableView_WS.showsVerticalScrollIndicator = false
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_TB.contentSize.width / 25.4 * 72, height: TableView_TB.contentSize.height / 25.4 * 72)
-        pageSize = CGSize(width: TableView_TB.contentSize.width, height: TableView_TB.contentSize.height)
-        print("TableView_TB.contentSize:\(TableView_TB.contentSize)")
+        pageSize = CGSize(width: TableView_WS.contentSize.width, height: TableView_WS.contentSize.height)
+        print("TableView_TB.contentSize:\(TableView_WS.contentSize)")
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
@@ -174,8 +168,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        printing = true
-        let newImage = self.TableView_TB.captureImagee()
+        let newImage = self.TableView_WS.captureImagee()
 //        let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
 //        print("TableView_TB.indexPathsForVisibleRows: \(indexPath)")
 //        self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.top, animated: false)
@@ -183,7 +176,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -227,7 +220,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             let printInfo = UIPrintInfo.printInfo()
             printInfo.outputType = .general
-            printInfo.jobName = "Trial Balance Sheet"
+            printInfo.jobName = "Work Sheet"
             printInfo.duplex = .none
             pic.printInfo = printInfo
             //'showsPageRange' was deprecated in iOS 10.0: Pages can be removed from the print preview, so page range is always shown.
@@ -259,8 +252,8 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
         //余計なUIをキャプチャしないように隠したのを戻す
-        TableView_TB.showsVerticalScrollIndicator = true
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
+        TableView_WS.showsVerticalScrollIndicator = true
+        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
     }
     
     // MARK: - UIImageWriteToSavedPhotosAlbum
@@ -287,23 +280,4 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
 }
-extension UIScrollView {
 
-    func getContentImage(captureSize: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(captureSize, false, 0.0)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-
-        // 元の frame.size を記憶
-        let originalSize = self.frame.size
-        // frame.size を一時的に変更
-        self.frame.size = self.contentSize
-        self.layer.render(in: context)
-        // 元に戻す
-        self.frame.size = originalSize
-
-        let capturedImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-
-        return capturedImage
-    }
-}

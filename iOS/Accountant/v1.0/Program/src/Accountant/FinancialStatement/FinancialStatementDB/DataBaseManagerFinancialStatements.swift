@@ -43,13 +43,18 @@ class DataBaseManagerFinancialStatements  {
         dataBaseFinancialStatements.fiscalYear = object.fiscalYear
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
-            balanceSheet.save()
-            profitAndLossStatement.save()
-            cashFlowStatement.save()
-            workSheet.save()
-            compoundTrialBalance.save()
-            let number = dataBaseFinancialStatements.save() //　自動採番
-            print("addFinancialStatements",number)
+            var number = balanceSheet.save()
+            print("balanceSheet",number)
+             number = profitAndLossStatement.save()
+            print("profitAndLossStatement",number)
+             number = cashFlowStatement.save()
+            print("cashFlowStatement",number)
+             number = workSheet.save()
+            print("workSheet",number)
+             number = compoundTrialBalance.save()
+            print("compoundTrialBalance",number)
+             number = dataBaseFinancialStatements.save() //　自動採番
+            print("dataBaseFinancialStatements",number)
             // オブジェクトを作成して追加
             dataBaseFinancialStatements.balanceSheet = balanceSheet
             dataBaseFinancialStatements.profitAndLossStatement = profitAndLossStatement

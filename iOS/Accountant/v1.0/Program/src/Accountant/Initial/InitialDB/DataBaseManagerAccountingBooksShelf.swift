@@ -39,4 +39,19 @@ class DataBaseManagerAccountingBooksShelf  {
         }
         return number
     }
+    // 社名の取得
+    func getCompany() -> String {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)! // モデル
+        // (2)データベース内に保存されているモデルを全て取得する
+//        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+//        objects = objects.filter("openOrClose == \(true)")
+        // (2)データベース内に保存されているモデルをひとつ取得する
+//        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
+        return object.company // 社名を返す
+    }
 }

@@ -96,7 +96,7 @@ class DatabaseManagerSettingsCategory  {
         return objects
     }
     // モデルオブフェクトの取得
-    func getMiddleCategory(section: Int, mid_category: Int) -> Results<DataBaseSettingsCategory> {
+    func getMiddleCategory(mid_category: Int) -> Results<DataBaseSettingsCategory> {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -105,7 +105,7 @@ class DatabaseManagerSettingsCategory  {
         // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         // セクション　資産の部、負債の部、純資産の部
-        objects = objects.filter("big_category == \(section)")
+//        objects = objects.filter("big_category == \(section)") //不要
         
         switch mid_category {
         case 0: // 流動資産

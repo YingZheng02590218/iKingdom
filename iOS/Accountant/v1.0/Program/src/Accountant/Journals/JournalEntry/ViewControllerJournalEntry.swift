@@ -194,7 +194,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        TextField_category_debit.isUserInteractionEnabled = true
 //        TextField_category_credit.isUserInteractionEnabled = true
         //仕訳画面を開いたら借方勘定科目TextFieldのキーボードを自動的に表示する
-        self.TextField_category_debit.becomeFirstResponder()
+//        self.TextField_category_debit.becomeFirstResponder() // 2020/07/09 17:24 不要だと指摘あり
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -599,7 +599,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                         )
 //                        print("入力ボタン \(presentingViewController)")
                         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-                        let presentingViewController = tabBarController.selectedViewController as! TableViewControllerJournalEntry // 基底のコントローラから、現在選択されているコントローラを取得する
+                        let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
+//                        let nc = viewController.presentingViewController as! UINavigationController
+                        let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournalEntry // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                         // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                         self.dismiss(animated: true, completion: {
                                 [presentingViewController] () -> Void in
