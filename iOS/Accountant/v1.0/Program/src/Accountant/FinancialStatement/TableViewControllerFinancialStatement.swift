@@ -105,6 +105,15 @@ class TableViewControllerFinancialStatement: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.TableViewFS.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+
+//        switch segue.identifier {
+//        case "segue_PL": //“セグウェイにつけた名称”:
+//          // segue.destinationの型はUIViewController
+//          let controller = segue.destination as! TableViewControllerPL
+////          遷移先のコントローラー.条件用の属性 = “条件”
+//        default:
+//          break
+//        }
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
     }

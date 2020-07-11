@@ -79,7 +79,7 @@ class DataBaseManagerTB {
         // 勘定の丁数(プライマリーキー)を取得
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
-        print("number\(number)")
+//        print("number\(number)")
         
         // データベース　書き込み
         // (1)Realmのインスタンスを生成する
@@ -108,7 +108,7 @@ class DataBaseManagerTB {
                 objectss[0].dataBaseAccounts[number].credit_balance = 0
             }
         }
-        print(objects)
+//        print(objects)
     }
     // 合計残高　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
@@ -129,7 +129,7 @@ class DataBaseManagerTB {
         // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
-        print("number\(number)")
+//        print("number\(number)")
         
         var result:Int64 = 0
         // 借方と貸方で金額が大きい方はどちらか
@@ -156,11 +156,37 @@ class DataBaseManagerTB {
         default:
             print(result)
         }
-        print("getTotalAmount")
-        print(account, objectss[0].dataBaseAccounts[number].debit_total)
-        print(account, objectss[0].dataBaseAccounts[number].credit_total)
+//        print("getTotalAmount")
+//        print(account, objectss[0].dataBaseAccounts[number].debit_total)
+//        print(account, objectss[0].dataBaseAccounts[number].credit_total)
         
         return result
     }
-
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
+            return ""
+        }else {
+            return addComma(string: amount.description)
+        }
+    }
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
+    }
 }

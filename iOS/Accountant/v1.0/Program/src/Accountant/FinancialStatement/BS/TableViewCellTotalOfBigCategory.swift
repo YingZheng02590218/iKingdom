@@ -1,5 +1,5 @@
 //
-//  TableViewCellTotal.swift
+//  TableViewCellTotalOfMiddleCategory.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/06/13.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TableViewCellTotalOfMiddleCategory: UITableViewCell {
+class TableViewCellTotalOfBigCategory: UITableViewCell {
 
-    @IBOutlet weak var label_totalOfMiddleCategory: UILabel!
+    @IBOutlet weak var label_totalOfBigCategory: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,5 +1,5 @@
 //
-//  TableViewControllerA.swift
+//  TableViewControllerJournalEntry.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/03/20.
@@ -9,7 +9,7 @@
 import UIKit
 
 // 仕訳帳クラス
-class TableViewControllerJournalEntry: UITableViewController {
+class TableViewControllerJournalEntry: UITableViewController, UIPrintInteractionControllerDelegate {
     
     @IBAction func showModalView(_ sender: UIButton) {
 //        self.dismiss(animated: true, completion: nil)
@@ -25,17 +25,34 @@ class TableViewControllerJournalEntry: UITableViewController {
 //    let credit = ["100","1000","10000","100000","1000000","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999",]
 
 //    override func loadView(){}
+    
     @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
-    @IBOutlet weak var Label_list_date_year: UILabel!
+    @IBOutlet weak var label_company_name: UILabel!
+    @IBOutlet weak var label_title: UILabel!
+    @IBOutlet weak var label_closingDate: UILabel!
+    @IBOutlet var Label_list_date_year: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // ToDo
         let initial = Initial()
         initial.initialize()
+        
+        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        databaseManager.culculatAmountOfAllAccount()
+        // 月末、年度末などの決算日をラベルに表示する
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let company = dataBaseManagerAccountingBooksShelf.getCompany()
+        label_company_name.text = company // 社名
+//        label_closingDate.text = "令和xx年3月31日"
+        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
+        // ToDo どこで設定した年度のデータを参照するか考える
+        label_closingDate.text = fiscalYear.description + "年3月31日" // 決算日を表示する
+        label_title.text = "仕訳帳"
+
         // データベース　注意：Initialより後に記述する
-        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
-        let fiscalYear = dataBaseManager.getSettingsPeriodYear()
         // どこで設定した年度のデータを参照するか考える
         Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
@@ -55,11 +72,31 @@ class TableViewControllerJournalEntry: UITableViewController {
         // UIViewControllerの表示画面を更新・リロード
         self.loadView()
         self.viewDidLoad()
+        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
     }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
         // 初期表示位置 OFF
         scroll = false
+        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        print("tableView.indexPathsForVisibleRows: \(indexPath)")
+        // 仕訳データが0件の場合、印刷ボタンを不活性にする
+        if indexPath!.count > 0 {
+            button_print.isEnabled = true
+        }else {
+            button_print.isEnabled = false
+        }
+        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
+//        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        if indexPath != nil && indexPath!.count > 0 {
+            self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
+            self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //セクション0のロウ0は存在しないかもしれないのでこれは誤り
+        }
     }
     
 //    override func viewDidDisappear(_ animated: Bool){}
@@ -80,7 +117,7 @@ class TableViewControllerJournalEntry: UITableViewController {
     }
     // セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 33 //セクションヘッダーの高さを33に設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
+        return 0//33 //セクションヘッダーの高さを33に設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
     }
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -154,9 +191,9 @@ class TableViewControllerJournalEntry: UITableViewController {
         cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
         cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
         cell.label_list_summary.textAlignment = NSTextAlignment.left
-        let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")
+        let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
         cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
-        let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")
+        let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
         cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
         cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
         cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
@@ -173,7 +210,7 @@ class TableViewControllerJournalEntry: UITableViewController {
             return ""
         }
     }
-    // セルが画面に表示される直前に表示される
+    // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -211,4 +248,187 @@ class TableViewControllerJournalEntry: UITableViewController {
             }
         }
     }
+    @IBOutlet weak var view_top: UIView!
+    var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
+    // disable sticky section header
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if printing {
+//            print(UIApplication.shared.statusBarFrame.height)
+//            print(self.navigationController!.navigationBar.bounds.height)
+//            print(view_top.bounds.height)
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
+            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
+                // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
+                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
+            }
+        }else{
+            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+            //            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
+//            print("tableView.sectionHeaderHeight: \(tableView.sectionHeaderHeight)")
+//            print("scrollView.contentInset      : \(scrollView.contentInset)")
+//            if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }else if scrollView.contentOffset.y > tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // セクションの重複を防ぐ
+////                scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)// おかしくなる
+//                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)//上手く表示された
+////                scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight) * -1, left: 0, bottom: 0, right: 0) // sectionHeaderHeightをinsetに設定すると セクションが重複した
+//            }else if scrollView.contentOffset.y >= tableView.sectionHeaderHeight {
+//    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }
+//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
+//            print("tableView.sectionHeaderHeight:: \(tableView.sectionHeaderHeight)")
+////            print("scrollView.contentInset      :: \(scrollView.contentInset)")
+//        }else{
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        }
+    }
+    
+    var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
+    @IBOutlet weak var barButtonItem_add: UIBarButtonItem!//ヘッダー部分の追加ボタン
+    @IBOutlet weak var button_print: UIButton!
+    /**
+     * 印刷ボタン押下時メソッド
+     * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
+     */
+    @IBAction func button_print(_ sender: UIButton) {
+        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        print("tableView.indexPathsForVisibleRows: \(indexPath)")
+        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        printing = true
+        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        // 第三の方法
+        //余計なUIをキャプチャしないように隠す
+        tableView.showsVerticalScrollIndicator = false
+        barButtonItem_add.isEnabled = false
+        barButtonItem_add.tintColor = UIColor.clear
+        button_print.isHidden = true
+//            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
+        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
+        //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
+//        var rect = self.view.bounds
+        //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
+        //1. UIGraphicsBeginImageContextWithOptions関数でビットマップコンテキストを生成し、グラフィックススタックにプッシュします。
+        UIGraphicsBeginImageContextWithOptions(pageSize, true, 0.0)
+            //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
+//        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
+            //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
+        //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let newImage = self.tableView.captureImagee()
+        //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
+        UIGraphicsEndImageContext()
+        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        printing = false
+        /*
+        ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
+         CGBitmapContextCreate関数を使用して、コンテキストを作成し、
+         それに画像コンテンツを描画します。
+         描画が完了したら、CGBitmapContextCreateImage関数を使用し、そのビットマップコンテキストからCGImageRefを作成します。
+         Core Graphicsの画像を直接描画したり、この画像を使用して UIImageオブジェクトを初期化することができます。
+         完了したら、グラフィックスコンテキストに対 してCGContextRelease関数を呼び出します。
+        */
+        let myImageView = UIImageView(image: newImage)
+        myImageView.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
+        
+//PDF
+        //p-49 リスト 4-2 ページ単位のコンテンツの描画
+            let framePath = NSMutableData()
+        //p-45 「PDFコンテキストの作成と設定」
+            // PDFグラフィックスコンテキストは、UIGraphicsBeginPDFContextToData関数、
+            //  または UIGraphicsBeginPDFContextToFile関数のいずれかを使用して作成します。
+            //  UIGraphicsBeginPDFContextToData関数の場合、
+            //  保存先はこの関数に渡される NSMutableDataオブジェクトです。
+            UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
+        print(" myImageView.bounds : \(myImageView.bounds)")
+        //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
+            UIGraphicsBeginPDFPage()
+         /* PDFページの描画
+           UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
+           UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
+        */
+        //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
+            // グラフィックスコンテキストを取得する
+            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
+            myImageView.layer.render(in: currentContext)
+            //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
+            UIGraphicsEndPDFContext()
+            
+//ここからプリントです
+        //p-63 リスト 5-1 ページ範囲の選択が可能な単一のPDFドキュメント
+        let pic = UIPrintInteractionController.shared
+        if UIPrintInteractionController.canPrint(framePath as Data) {
+            //pic.delegate = self;
+            pic.delegate = self
+            
+            let printInfo = UIPrintInfo.printInfo()
+            printInfo.outputType = .general
+            printInfo.jobName = "Journals"
+            printInfo.duplex = .none
+            pic.printInfo = printInfo
+            //'showsPageRange' was deprecated in iOS 10.0: Pages can be removed from the print preview, so page range is always shown.
+            pic.printingItem = framePath
+    
+            let completionHandler: (UIPrintInteractionController, Bool, NSError) -> Void = { (pic: UIPrintInteractionController, completed: Bool, error: Error?) in
+                
+                if !completed && (error != nil) {
+                    print("FAILED! due to error in domain %@ with error code %u \(String(describing: error))")
+                }
+            }
+            //p-79 印刷インタラクションコントローラを使って印刷オプションを提示
+            //UIPrintInteractionControllerには、ユーザに印刷オプションを表示するために次の3つのメソッ ドが宣言されており、それぞれアニメーションが付属しています。
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                //これらのうちの2つは、iPadデバイス上で呼び出されることを想定しています。
+                //・presentFromBarButtonItem:animated:completionHandler:は、ナビゲーションバーまたは ツールバーのボタン(通常は印刷ボタン)からアニメーションでPopover Viewを表示します。
+//                print("通過・printButton.frame -> \(button_print.frame)")
+//                print("通過・printButton.bounds -> \(button_print.bounds)")
+                //UIBarButtonItemの場合
+                //pic.present(from: printUIButton, animated: true, completionHandler: nil)
+                //・presentFromRect:inView:animated:completionHandler:は、アプリケーションのビューの任意の矩形からアニメーションでPopover Viewを表示します。
+                pic.present(from: CGRect(x: 0, y: 0, width: 0, height: 0), in: self.view, animated: true, completionHandler: nil)
+                print("iPadです")
+            } else {
+                //モーダル表示
+                //・presentAnimated:completionHandler:は、画面の下端からスライドアップするページをアニ メーション化します。これはiPhoneおよびiPod touchデバイス上で呼び出されることを想定しています。
+                pic.present(animated: true, completionHandler: completionHandler as? UIPrintInteractionController.CompletionHandler)
+                print("iPhoneです")
+            }
+        }
+        //余計なUIをキャプチャしないように隠したのを戻す
+        tableView.showsVerticalScrollIndicator = true
+        button_print.isHidden = false
+        barButtonItem_add.isEnabled = true
+        barButtonItem_add.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+//        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+    }
+    
+    // MARK: - UIImageWriteToSavedPhotosAlbum
+    
+    @objc func didFinishWriteImage(_ image: UIImage, error: NSError?, contextInfo: UnsafeMutableRawPointer) {
+        if let error = error {
+        print("Image write error: \(error)")
+        }
+    }
+
+    func printInteractionController ( _ printInteractionController: UIPrintInteractionController, choosePaper paperList: [UIPrintPaper]) -> UIPrintPaper {
+        print("printInteractionController")
+        for i in 0..<paperList.count {
+            let paper: UIPrintPaper = paperList[i]
+        print(" paperListのビクセル is \(paper.paperSize.width) \(paper.paperSize.height)")
+        }
+        //ピクセル
+        print(" pageSizeピクセル    -> \(pageSize)")
+        let bestPaper = UIPrintPaper.bestPaper(forPageSize: pageSize, withPapersFrom: paperList)
+        //mmで用紙サイズと印刷可能範囲を表示
+        print(" paperSizeミリ      -> \(bestPaper.paperSize.width / 72.0 * 25.4), \(bestPaper.paperSize.height / 72.0 * 25.4)")
+        print(" bestPaper         -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4), \(bestPaper.printableRect.origin.y / 72.0 * 25.4), \(bestPaper.printableRect.size.width / 72.0 * 25.4), \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
+        return bestPaper
+    }
+
+
 }
