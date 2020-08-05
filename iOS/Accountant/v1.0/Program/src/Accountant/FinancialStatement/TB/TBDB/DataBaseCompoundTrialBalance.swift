@@ -18,5 +18,10 @@ class DataBaseCompoundTrialBalance: RObject {
     @objc dynamic var credit_total_total: Int64 = 0                     //貸方　合計　合計
     @objc dynamic var debit_balance_total: Int64 = 0                     //借方　残高　合計
     @objc dynamic var credit_balance_total: Int64 = 0                     //貸方　残高　合計
-
+}
+// 月次合計残高試算表クラス
+class DataBaseCompoundTrialBalanceMonth: DataBaseCompoundTrialBalance {
+}
+// 日次合計残高試算表クラス
+class DataBaseCompoundTrialBalanceDay: DataBaseCompoundTrialBalance {
 }

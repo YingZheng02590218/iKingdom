@@ -99,12 +99,32 @@ class DataBaseManagerAccount {
         return objects
     }
     // モデルオブフェクトの取得 勘定別に取得
-    func getAccountAll(account: String) -> Results<DataBaseJournalEntry> {
+    func getAllAccount(account: String) -> Results<DataBaseJournalEntry> {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
         var objects = realm.objects(DataBaseJournalEntry.self)
+        // 開いている会計帳簿を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        // 希望する勘定だけを抽出する
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
+        // ソートする        注意：ascending: true とするとDataBaseJournalEntryのnumberの自動採番がおかしくなる
+        objects = objects.sorted(byKeyPath: "date", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        return objects
+    }
+    // モデルオブフェクトの取得 勘定別に取得
+    func getAllAccountAdjusting(account: String) -> Results<DataBaseAdjustingEntry> {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているDataBaseJournalEntryモデルを全て取得する
+        var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()

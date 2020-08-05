@@ -22,9 +22,15 @@ class Initial {
         // データベース
         let databaseManagerSettingsCategory = DatabaseManagerSettingsCategory() //データベースマネジャー
         // データベースに設定画面の勘定科目一覧があるかをチェック
+        // マイグレーション　CSVファイルに変更がある場合、一度作成したモデルオブジェクトを削除してから新たに作り直す　考える
         if !databaseManagerSettingsCategory.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
             masterData.readMasterDataFromCSV()   // マスターデータを作成する
+        }
+        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
+        if !dataBaseManagerSettingsCategoryBSAndPL.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+            let masterData = MasterData()
+            masterData.readMasterDataFromCSVOfBSAndPL()
         }
     }
     // 会計帳簿棚
@@ -33,7 +39,7 @@ class Initial {
         let dataBaseManager = DataBaseManagerAccountingBooksShelf()
         // データベースに会計帳簿があるかをチェック
         if !dataBaseManager.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
-            let number = dataBaseManager.addAccountingBooksShelf(company: "株式会社 iKingdom") // ToDo
+            let number = dataBaseManager.addAccountingBooksShelf(company: "事業者名")
             print("initializeAccountingBooksShelf",number)
             // 会計帳簿
             initializeAccountingBooks()
@@ -60,7 +66,8 @@ class Initial {
     func initializeAccountingBooks() {
         // オブジェクト作成
         let dataBaseManager = DataBaseManagerAccountingBooks()
-        let fiscalYear = getTheTime()                   // デフォルトで現在の年月から今年度の会計帳簿を作成する
+        var fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
+        fiscalYear -= 1                     // デフォルトで現在の年月から前年度の会計帳簿を作成する
         // データベースに会計帳簿があるかをチェック
         if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {           // データベースにモデルオブフェクトが存在しない場合
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)

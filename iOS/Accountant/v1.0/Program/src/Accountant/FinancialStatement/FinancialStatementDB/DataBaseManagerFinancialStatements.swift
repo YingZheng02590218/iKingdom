@@ -56,6 +56,17 @@ class DataBaseManagerFinancialStatements  {
              number = dataBaseFinancialStatements.save() //　自動採番
             print("dataBaseFinancialStatements",number)
             // オブジェクトを作成して追加
+            // 設定画面の勘定科目一覧にある勘定を取得する
+            let DM = DataBaseManagerSettingsCategoryBSAndPL()
+            let objects = DM.getAllSettingsCategoryBSAndPL()
+            // オブジェクトを作成 表記名
+            for i in 0..<objects.count{
+                let dataBaseBSAndPLAccount = DataBaseBSAndPLAccount() // 表記名
+                let number = dataBaseBSAndPLAccount.save() //　自動採番
+                dataBaseBSAndPLAccount.fiscalYear = object.fiscalYear
+                dataBaseBSAndPLAccount.accountName = objects[i].category
+                balanceSheet.dataBaseBSAndPLAccounts.append(dataBaseBSAndPLAccount)   // 表記名を作成して貸借対照表に追加する
+            }
             dataBaseFinancialStatements.balanceSheet = balanceSheet
             dataBaseFinancialStatements.profitAndLossStatement = profitAndLossStatement
             dataBaseFinancialStatements.cashFlowStatement = cashFlowStatement

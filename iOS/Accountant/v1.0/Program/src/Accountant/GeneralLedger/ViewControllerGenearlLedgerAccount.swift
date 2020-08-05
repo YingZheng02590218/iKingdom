@@ -33,6 +33,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         formatter.groupingSize = 3
         // 差引残高　計算
         dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account)
+        // リロード機能は使用不可のため不要
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +43,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_account.indexPathsForVisibleRows: \(indexPath)")
+        print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
         if indexPath!.count > 0 {
             button_print.isEnabled = true
@@ -135,14 +136,16 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             cell.label_list_summary.text = "\(objects[indexPath.row].credit_category) "             //摘要　相手方勘定なので貸方
             cell.label_list_summary.textAlignment = NSTextAlignment.right
             let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")
-            cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+            // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+            cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
             cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
             cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
         }else if account == "\(objects[indexPath.row].credit_category)" {  // 貸方勘定の場合
             cell.label_list_summary.text = "\(objects[indexPath.row].debit_category) "              //摘要　相手方勘定なので借方
             cell.label_list_summary.textAlignment = NSTextAlignment.left
             let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")
-            cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+            // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+            cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
             cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
             cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
         }
@@ -167,10 +170,10 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      : \(scrollView.contentInset)")
-            print("view_top.bounds.height       : \(view_top.bounds.height)")
-            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
+//            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
+//            print("scrollView.contentInset      : \(scrollView.contentInset)")
+//            print("view_top.bounds.height       : \(view_top.bounds.height)")
+//            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
             if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
                 scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
             }else if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
@@ -184,10 +187,10 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
                 scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
             }
-            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      :: \(scrollView.contentInset)")
-            print("view_top.bounds.height       :: \(view_top.bounds.height)")
-            print("TableView_account.bounds.height   :: \(TableView_account.bounds.height)")
+//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
+//            print("scrollView.contentInset      :: \(scrollView.contentInset)")
+//            print("view_top.bounds.height       :: \(view_top.bounds.height)")
+//            print("TableView_account.bounds.height   :: \(TableView_account.bounds.height)")
         }else{
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
@@ -199,7 +202,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
      */
     @IBAction func button_print(_ sender: UIButton) {
         let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_account.indexPathsForVisibleRows: \(indexPath)")
+        print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
         self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)
         self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
 //        self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
@@ -207,9 +210,12 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         //余計なUIをキャプチャしないように隠す
         TableView_account.showsVerticalScrollIndicator = false
         button_print.isHidden = true
+        if let tappedIndexPath: IndexPath = self.TableView_account.indexPathForSelectedRow { // タップされたセルの位置を取得
+            TableView_account.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        }
             pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_account.contentSize.width / 25.4 * 72, height: TableView_account.contentSize.height+view_top.bounds.height / 25.4 * 72) //先頭行の高さを考慮する
-        print("TableView_account.contentSize:\(TableView_account.contentSize)")
+//        print("TableView_account.contentSize:\(TableView_account.contentSize)")
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
@@ -248,16 +254,43 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
         print(" myImageView.bounds : \(myImageView.bounds)")
         //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-            UIGraphicsBeginPDFPage()
+//            UIGraphicsBeginPDFPage()
+//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+
          /* PDFページの描画
            UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
            UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
         */
         //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
             // グラフィックスコンテキストを取得する
+//            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext)
+//            if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
+//    //2ページ目
+//           UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext2)
+//            }
+//            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+//    //3ページ目
+//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*2, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//             // グラフィックスコンテキストを取得する
+//             guard let currentContext3 = UIGraphicsGetCurrentContext() else { return }
+//             myImageView.layer.render(in: currentContext3)
+//            }
+        // ビューイメージを全て印刷できるページ数を用意する
+        var pageCounts: CGFloat = 0
+        while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
+            //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+            // グラフィックスコンテキストを取得する
             guard let currentContext = UIGraphicsGetCurrentContext() else { return }
             myImageView.layer.render(in: currentContext)
-            //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
+            // ページを増加
+            pageCounts += 1
+        }
+        //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
             UIGraphicsEndPDFContext()
             
 //ここからプリントです

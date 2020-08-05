@@ -101,7 +101,17 @@ class TableViewControllerFinancialStatement: UITableViewController {
 
     
     // MARK: - Navigation
+    
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        if IndexPath(row: 2, section: 0) == self.TableViewFS.indexPathForSelectedRow! { //キャッシュ・フロー計算書　未対応
+            return false //false:画面遷移させない
+        }
+        return true
+    }
     // 画面遷移の準備　貸借対照表画面 損益計算書画面 キャッシュフロー計算書
+    var tappedIndexPath: IndexPath?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.TableViewFS.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得

@@ -9,7 +9,7 @@
 import UIKit
 
 // 仕訳帳クラス
-class TableViewControllerJournalEntry: UITableViewController, UIPrintInteractionControllerDelegate {
+class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
     
     @IBAction func showModalView(_ sender: UIButton) {
 //        self.dismiss(animated: true, completion: nil)
@@ -34,22 +34,35 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 更新機能　編集機能
+        // UILongPressGestureRecognizer宣言
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent:") → うまくできなかった。2020/07/26
+        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        longPressRecognizer.delegate = self
+        // tableViewにrecognizerを設定
+        tableView.addGestureRecognizer(longPressRecognizer)
         
         // ToDo
         let initial = Initial()
         initial.initialize()
         
+        // 表示機能
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.culculatAmountOfAllAccount()
+        databaseManager.calculateAmountOfAllAccount()
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
-        let company = dataBaseManagerAccountingBooksShelf.getCompany()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
 //        label_closingDate.text = "令和xx年3月31日"
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // ToDo どこで設定した年度のデータを参照するか考える
-        label_closingDate.text = fiscalYear.description + "年3月31日" // 決算日を表示する
+        // どこで設定した年度のデータを参照するか考える
+        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "仕訳帳"
 
         // データベース　注意：Initialより後に記述する
@@ -61,17 +74,85 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
+        
+        // リロード機能
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
+    }
+    // リロード機能
+    @objc func refreshTable() {
+        // 全勘定の合計と残高を計算する
+        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        databaseManager.setAllAccountTotal()
+        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
+        // 更新処理
+        self.tableView.reloadData()
+        // クルクルを止める
+        refreshControl?.endRefreshing()
+    }
+    // 編集機能　長押しした際に呼ばれるメソッド
+    @objc func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+        // 押された位置でcellのPathを取得
+        let point = recognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizer.State.began  {
+            // 長押しされた場合の処理
+            print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
+            // ロングタップされたセルの位置をフィールドで保持する
+            self.tappedIndexPath = indexPath
+            // 別の画面に遷移 仕訳画面
+            performSegue(withIdentifier: "longTapped", sender: nil)
+        }
+    }
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        if identifier == "longTapped" { // segueがタップ
+            if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
+                if let tappedIndexPathh:IndexPath = self.tappedIndexPath! { //代入に成功したら、ロングタップだと判断できる
+                    return true //true:画面遷移させる
+                }
+            }
+        }else if identifier == "buttonTapped" {
+            return true
+        }
+        return false //false:画面遷移させない
+    }
+    // 追加機能　画面遷移の準備　勘定科目画面
+    var tappedIndexPath: IndexPath?
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue.destinationの型はUIViewController
+        let controller = segue.destination as! ViewControllerJournalEntry
+        // 遷移先のコントローラに値を渡す
+        if segue.identifier == "buttonTapped" {
+//        if sender != nil { // 型を判定　nil:セレクター UIBarButtonItem:仕訳追加ボタン Accountant.TableViewCell:セル
+//        if type(of: sender) is UIBarButtonItem.Type {
+            controller.journalEntryType = "JournalEntries" // セルに表示した仕訳タイプを取得
+        }else if segue.identifier == "longTapped" {
+            if tappedIndexPath != nil { // nil:ロングタップではない
+                controller.journalEntryType = "JournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+            }
+        }
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
-        //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
+    //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
 //        presentingViewController?.beginAppearanceTransition(false, animated: animated)
         super.viewWillAppear(animated)
-//        print("viewWillAppear \(String(describing: presentedViewController))")
-//        print("viewWillAppear \(String(describing: presentingViewController))")
         // UIViewControllerの表示画面を更新・リロード
-        self.loadView()
-        self.viewDidLoad()
+//        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
+        self.viewDidLoad() // 2020/07/31
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
@@ -83,7 +164,7 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         // 初期表示位置 OFF
         scroll = false
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("tableView.indexPathsForVisibleRows: \(indexPath)")
+        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
         if indexPath!.count > 0 {
             button_print.isEnabled = true
@@ -99,9 +180,8 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         }
     }
     
-//    override func viewDidDisappear(_ animated: Bool){}
     // MARK: - Table view data source
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {}
+
     // スクロール
     var Number = 0
     func autoScroll(number: Int) {
@@ -147,8 +227,9 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         // データベース
         let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
         let counts = dataBaseManager.getJournalEntryCounts(section: section) // 何月のセクションに表示するセルかを引数で渡す
+        let objects = dataBaseManager.getJournalAdjustingEntry(section: section) // 決算整理仕訳
 //        print("月別のセル数:\(counts)")
-        return counts //月別の仕訳データ数
+        return counts + objects.count //月別の仕訳データ数
     }
     //セルを生成して返却するメソッド
     var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
@@ -157,49 +238,94 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
         let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
-//        print("月別のセル:\(objects)")
-        //① UI部品を指定　TableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
-        //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
-        // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-        if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-            indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
-        }
-        
-        let d = "\(objects[indexPath.row].date)" // 日付
-        // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-        if indexPath.row == 0 {
-            let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-            if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-            }else{
-                cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+
+        if indexPath.row >= objects.count {
+            let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section) // 決算整理仕訳
+            //① UI部品を指定　TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
+            cell.backgroundColor = .lightGray // 目印
+            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+            if Number == objectss[indexPath.row-objects.count].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
             }
-        }else{
-            cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+            let d = "\(objectss[indexPath.row-objects.count].date)" // 日付
+            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+            if indexPath.row == 0 {
+                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                }else{
+                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                }
+            }else{
+                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+            }
+            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+            if date == "0" { // 日の十の位が0の場合は表示しない
+                cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(1))" // 末尾1文字の「日」         //日付
+            }else{
+                cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(2))" // 末尾2文字の「日」         //日付
+            }
+            cell.label_list_date.textAlignment = NSTextAlignment.right
+            cell.label_list_summary_debit.text = " (\(objectss[indexPath.row-objects.count].debit_category))"     //借方勘定
+            cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+            cell.label_list_summary_credit.text = "(\(objectss[indexPath.row-objects.count].credit_category)) "   //貸方勘定
+            cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+            cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].smallWritting) "              //小書き
+            cell.label_list_summary.textAlignment = NSTextAlignment.left
+            let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")  // 丁数を取得
+            cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
+            let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")    // 丁数を取得
+            cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
+            cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
+            //③
+            return cell
+        }else {
+//        print("月別のセル:\(objects)")
+            //① UI部品を指定　TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
+            cell.backgroundColor = .white // 目印を消す
+            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+            if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
+            }
+            let d = "\(objects[indexPath.row].date)" // 日付
+            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+            if indexPath.row == 0 {
+                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                }else{
+                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                }
+            }else{
+                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+            }
+            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+            if date == "0" { // 日の十の位が0の場合は表示しない
+                cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
+            }else{
+                cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
+            }
+            cell.label_list_date.textAlignment = NSTextAlignment.right
+            cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
+            cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+            cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
+            cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+            cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
+            cell.label_list_summary.textAlignment = NSTextAlignment.left
+            let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
+            cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
+            let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
+            cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
+            cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
+            //③
+            return cell
         }
-        let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-        if date == "0" { // 日の十の位が0の場合は表示しない
-            cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
-        }else{
-            cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
-        }
-        cell.label_list_date.textAlignment = NSTextAlignment.right
-        cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
-        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-        cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
-        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-        cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
-        cell.label_list_summary.textAlignment = NSTextAlignment.left
-        let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
-        cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
-        let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
-        cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
-        cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
-        cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
-        //③
-        
-        return cell
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
@@ -248,15 +374,58 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
             }
         }
     }
+    // 削除機能 セルを左へスワイプ
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
+        // スタイルには、normal と　destructive がある
+        let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+               // なんか処理
+            // 確認のポップアップを表示したい
+            self.showPopover(indexPath: indexPath)
+               completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
+               }
+        action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
+               let configuration = UISwipeActionsConfiguration(actions: [action])
+            return configuration
+    }
+    // 削除機能 アラートのポップアップを表示
+    private func showPopover(indexPath: IndexPath) {
+        let alert = UIAlertController(title: "削除", message: "仕訳データを削除しますか？", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (action: UIAlertAction!) in
+            print("OK アクションをタップした時の処理")
+            // データベース
+            let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
+            // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+            let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
+            print(objects)
+            if indexPath.row >= objects.count {
+                let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section) // 決算整理仕訳
+                // 決算整理仕訳データを削除
+                let result = dataBaseManager.deleteAdjustingJournalEntry(number: objectss[indexPath.row-objects.count].number)
+                if result == true {
+                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                }
+            }else {
+                // 仕訳データを削除
+                let result = dataBaseManager.deleteJournalEntry(number: objects[indexPath.row].number)
+                if result == true {
+                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var view_top: UIView!
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // disable sticky section header
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-//            print(UIApplication.shared.statusBarFrame.height)
-//            print(self.navigationController!.navigationBar.bounds.height)
-//            print(view_top.bounds.height)
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) 不要　2020/07/27
 //            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
             if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
                 // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
@@ -267,9 +436,6 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
             scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
 //            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
-            //            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-//            print("tableView.sectionHeaderHeight: \(tableView.sectionHeaderHeight)")
-//            print("scrollView.contentInset      : \(scrollView.contentInset)")
 //            if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
 //                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
 //            }else if scrollView.contentOffset.y > tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // セクションの重複を防ぐ
@@ -280,9 +446,6 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
 //    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
 //                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
 //            }
-//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-//            print("tableView.sectionHeaderHeight:: \(tableView.sectionHeaderHeight)")
-////            print("scrollView.contentInset      :: \(scrollView.contentInset)")
 //        }else{
 //            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        }
@@ -297,16 +460,20 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
      */
     @IBAction func button_print(_ sender: UIButton) {
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("tableView.indexPathsForVisibleRows: \(indexPath)")
+        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         printing = true
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         tableView.showsVerticalScrollIndicator = false
-        barButtonItem_add.isEnabled = false
-        barButtonItem_add.tintColor = UIColor.clear
-        button_print.isHidden = true
+        if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow {// タップされたセルの位置を取得
+            // nilでない場合
+            tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        }
+//        barButtonItem_add.isEnabled = false
+//        barButtonItem_add.tintColor = UIColor.clear
+//        button_print.isHidden = true
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
         pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
@@ -346,16 +513,43 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
             UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
         print(" myImageView.bounds : \(myImageView.bounds)")
         //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-            UIGraphicsBeginPDFPage()
+//            UIGraphicsBeginPDFPage()
+//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+
          /* PDFページの描画
            UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
            UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
         */
         //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext)
+//            if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
+//    //2ページ目
+//           UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext2)
+//            }
+//            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+//    //3ページ目
+//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*2, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//             // グラフィックスコンテキストを取得する
+//             guard let currentContext3 = UIGraphicsGetCurrentContext() else { return }
+//             myImageView.layer.render(in: currentContext3)
+//            }
+        // ビューイメージを全て印刷できるページ数を用意する
+        var pageCounts: CGFloat = 0
+        while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
+            //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
             // グラフィックスコンテキストを取得する
             guard let currentContext = UIGraphicsGetCurrentContext() else { return }
             myImageView.layer.render(in: currentContext)
-            //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
+            // ページを増加
+            pageCounts += 1
+        }
+        //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
             UIGraphicsEndPDFContext()
             
 //ここからプリントです
@@ -400,10 +594,14 @@ class TableViewControllerJournalEntry: UITableViewController, UIPrintInteraction
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
-        button_print.isHidden = false
-        barButtonItem_add.isEnabled = true
-        barButtonItem_add.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
-//        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        // ボタンはNavigationBarに配置したので下記は不要となった2020/07/12
+//        button_print.isHidden = false
+//        barButtonItem_add.isEnabled = true
+//        barButtonItem_add.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+//        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
+        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+        tableView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+        //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
     }
     
