@@ -27,7 +27,7 @@ class DataBaseManagerAccountingBooksShelf  {
         let realm = try! Realm()
         // オブジェクトを作成
         let dataBaseAccountingBooksShelf = DataBaseAccountingBooksShelf() // 会計帳簿棚
-        dataBaseAccountingBooksShelf.company = company // Todo
+        dataBaseAccountingBooksShelf.companyName = company 
         // (2)書き込みトランザクション内でデータを追加する
         var number = 0
         try! realm.write {
@@ -39,8 +39,8 @@ class DataBaseManagerAccountingBooksShelf  {
         }
         return number
     }
-    // 社名の取得
-    func getCompany() -> String {
+    // 事業者名の取得
+    func getCompanyName() -> String {
         // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -52,6 +52,19 @@ class DataBaseManagerAccountingBooksShelf  {
 //        objects = objects.filter("openOrClose == \(true)")
         // (2)データベース内に保存されているモデルをひとつ取得する
 //        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
-        return object.company // 社名を返す
+        return object.companyName // 事業者名を返す
+    }
+    // モデルオブフェクトの更新
+    func updateCompanyName(companyName: String) {
+        // データベース　読み込み
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルをひとつ取得する
+        let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)! // モデル
+        // (2)書き込みトランザクション内でデータを更新する
+        try! realm.write {
+            let value: [String: Any] = ["number": 1, "companyName": companyName]
+            realm.create(DataBaseAccountingBooksShelf.self, value: value, update: .modified) // 一部上書き更新
+        }
     }
 }

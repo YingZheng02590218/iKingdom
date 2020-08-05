@@ -32,24 +32,48 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         TableView_TB.delegate = self
         TableView_TB.dataSource = self
         
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.culculatAmountOfAllAccount()
+        // 合計額を計算
+        let databaseManager = DataBaseManagerTB()
+        databaseManager.calculateAmountOfAllAccount()
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
+        
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
-        let company = dataBaseManagerAccountingBooksShelf.getCompany()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
 //        label_closingDate.text = "令和xx年3月31日"
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // ToDo どこで設定した年度のデータを参照するか考える
-        label_closingDate.text = fiscalYear.description + "年3月31日" // 決算日を表示する
+        // どこで設定した年度のデータを参照するか考える
+        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             label_title.text = "合計試算表"
         }else {
             label_title.text = "残高試算表"
         }
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
+        self.TableView_TB.refreshControl = refreshControl
     }
-    
+    @objc func refreshTable() {
+        // 全勘定の合計と残高を計算する
+        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        databaseManager.setAllAccountTotal()
+        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
+        // 更新処理
+        self.TableView_TB.reloadData()
+        // クルクルを止める
+        TableView_TB.refreshControl?.endRefreshing()
+    }
     override func viewDidAppear(_ animated: Bool) {
 //        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
     }
@@ -111,6 +135,11 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             default:
                 print("cell_last_TB")
             }
+            // 借方貸方の金額が不一致の場合、文字色を赤
+            if cell.label_debit.text != cell.label_credit.text {
+                cell.label_debit.textColor = .red
+                cell.label_credit.textColor = .red
+            }
             return cell
         }
     }
@@ -118,29 +147,23 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-            print("navigationController!.navigationBar.bounds.height : \(self.navigationController!.navigationBar.bounds.height)")
-            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      : \(scrollView.contentInset)")
-            print("view_top.bounds.height       : \(view_top.bounds.height)")
-            print("TableView_TB.bounds.height   : \(TableView_TB.bounds.height)")
-            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-            }else if scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ scrollView.contentOffset.y >= view_top.bounds.height &&
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)//[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)//注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y-self.navigationController!.navigationBar.bounds.height) * -1, left: 0, bottom: 0, right: 0)
-//                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
-//                        TableView_TB.contentInset = edgeInsets
-//                        TableView_TB.scrollIndicatorInsets = edgeInsets
-            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
-    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }else if scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ scrollView.contentOffset.y >= view_top.bounds.height &&
+////                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)//[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy
+////                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)//注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
+//                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y-self.navigationController!.navigationBar.bounds.height) * -1, left: 0, bottom: 0, right: 0)
+////                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
+////                        TableView_TB.contentInset = edgeInsets
+////                        TableView_TB.scrollIndicatorInsets = edgeInsets
+//            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
+//    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//            }
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
+            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
+                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
             }
-            print("navigationController!.navigationBar.bounds.height : \(self.navigationController!.navigationBar.bounds.height)")
-            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      :: \(scrollView.contentInset)")
-            print("view_top.bounds.height       :: \(view_top.bounds.height)")
-            print("TableView_TB.bounds.height   :: \(TableView_TB.bounds.height)")
         }else{
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
@@ -152,7 +175,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
      */
     @IBAction func button_print(_ sender: UIButton) {
         let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_TB.indexPathsForVisibleRows: \(indexPath)")
+        print("TableView_TB.indexPathsForVisibleRows: \(String(describing: indexPath))")
 //        self.TableView_TB.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
         self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
@@ -160,6 +183,9 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         TableView_TB.showsVerticalScrollIndicator = false
+        if let tappedIndexPath: IndexPath = self.TableView_TB.indexPathForSelectedRow { // タップされたセルの位置を取得
+            TableView_TB.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_TB.contentSize.width / 25.4 * 72, height: TableView_TB.contentSize.height / 25.4 * 72)
         pageSize = CGSize(width: TableView_TB.contentSize.width, height: TableView_TB.contentSize.height)
@@ -206,15 +232,35 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
         print(" myImageView.bounds : \(myImageView.bounds)")
         //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-            UIGraphicsBeginPDFPage()
+//            UIGraphicsBeginPDFPage()
+//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+
          /* PDFページの描画
            UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
            UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
         */
         //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext)
+//            if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
+//    //2ページ目
+//           UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext2)
+//            }
+        // ビューイメージを全て印刷できるページ数を用意する
+        var pageCounts: CGFloat = 0
+        while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
+            //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
             // グラフィックスコンテキストを取得する
             guard let currentContext = UIGraphicsGetCurrentContext() else { return }
             myImageView.layer.render(in: currentContext)
+            // ページを増加
+            pageCounts += 1
+        }
             //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
             UIGraphicsEndPDFContext()
             

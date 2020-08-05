@@ -21,17 +21,50 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         dataBaseManagerPL.initializeBenefits()
         
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.culculatAmountOfAllAccount()
+        databaseManager.calculateAmountOfAllAccount()
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
-        let company = dataBaseManagerAccountingBooksShelf.getCompany()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
 //        label_closingDate.text = "令和xx年3月31日"
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
-        label_closingDate.text = fiscalYear.description + "年3月31日" // 決算日を表示する
+        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "損益計算書"
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
+        self.refreshControl = refreshControl
+    }
+    @objc func refreshTable() {
+        // 全勘定の合計と残高を計算する
+        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        databaseManager.setAllAccountTotal()
+        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
+        // 更新処理
+        self.tableView.reloadData()
+        // クルクルを止める
+        refreshControl?.endRefreshing()
+    }
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+    }
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
     }
 
     // MARK: - Table view data source
@@ -68,23 +101,46 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         //親会社株主に帰属する当期純利益
 
         // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        let objects = databaseManagerSettings.getMiddleCategory(mid_category: 10)  //営業外収益10
-        let objectss = databaseManagerSettings.getMiddleCategory(mid_category: 6)  //営業外費用6
-        let objectsss = databaseManagerSettings.getMiddleCategory(mid_category: 11)//特別利益11
-        let objectssss = databaseManagerSettings.getMiddleCategory(mid_category: 7)//特別損失7
-        return 14 + objects.count + objectss.count + objectsss.count + objectssss.count + 4    //4は合計欄の分
+//        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
+//        let objects = databaseManagerSettings.getMiddleCategory(mid_category: 10)  //営業外収益10
+//        let objectss = databaseManagerSettings.getMiddleCategory(mid_category: 6)  //営業外費用6
+//        let objectsss = databaseManagerSettings.getMiddleCategory(mid_category: 11)//特別利益11
+//        let objectssss = databaseManagerSettings.getMiddleCategory(mid_category: 7)//特別損失7
+        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 3)
+        let objectss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 4)
+        return 7 + 8 + 5 + objects.count + objectss.count    // 7:5大利益　8:小分類のタイトル　5:小分類の合計
     }
 
     let dataBaseManagerPL = DataBaseManagerPL()
+    let dataBaseManagerBSAndPL = DataBaseManagerBSAndPL() // Use of undeclared type ''が発生した。2020/07/24
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
         // 中分類　中分類ごとの数を取得
-        let mid_category10 = databaseManagerSettings.getMiddleCategory(mid_category: 10)
-        let mid_category6 = databaseManagerSettings.getMiddleCategory(mid_category: 6)
-        let mid_category11 = databaseManagerSettings.getMiddleCategory(mid_category: 11)
-        let mid_category7 = databaseManagerSettings.getMiddleCategory(mid_category: 7)
+        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 10)//営業外収益10
+        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 6)//営業外費用6
+        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 11)//特別利益11
+        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 7)//特別損失7
+        // 小分類
+        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 9)//販売費及び一般管理費9
+        
+        let han =           3 + objects9.count + 1 //販売費及び一般管理費合計
+        let ei =            3 + objects9.count + 2 //営業利益
+        let eigai =         3 + objects9.count + 3 //営業外収益10
+        let eigaiTotal =    3 + objects9.count + mid_category10.count + 4 //営業外収益合計
+        let eigaih =        3 + objects9.count + mid_category10.count + 5 //営業外費用6
+        let eigaihTotal =   3 + objects9.count + mid_category10.count + mid_category6.count + 6 //営業外費用合計
+        let kei =           3 + objects9.count + mid_category10.count + mid_category6.count + 7 //経常利益
+        let toku =          3 + objects9.count + mid_category10.count + mid_category6.count + 8 //特別利益11
+        let tokuTotal =     3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + 9 //特別利益合計
+        let tokus =         3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + 10 //特別損失7
+        let tokusTotal =    3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 11 //特別損失合計
+        let zei =           3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 12 //税金等調整前当期純利益
+        let zeikin =        3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 13 //法人税等8
+        let touki =         3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 14 //当期純利益
+        let htouki =        3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 15 //非支配株主に帰属する当期純利益
+        let otouki =        3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 16 //親会社株主に帰属する当期純利益
 
         switch indexPath.row {
         case 0: //売上高10
@@ -115,11 +171,18 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "販売費及び一般管理費"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+            // 金額は表示しない
+            cell.label_amount.text = ""
+            return cell
+        case han: //販売費及び一般管理費合計
+            let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
+            cell.textLabel?.text = "販売費及び一般管理費合計"
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getSmallCategoryTotal(big_category: 3, small_category: 9)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case 4: //営業利益
+        case ei: //営業利益
             let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "営業利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -127,14 +190,14 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 1)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
             return cell
-        case 5: //営業外収益10
+        case eigai: //営業外収益10
             let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "営業外収益"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             // 金額は表示しない
             cell.label_amount.text = ""
             return cell
-        case mid_category10.count + 6: //営業外収益合計
+        case eigaiTotal: //営業外収益合計
             let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "営業外収益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -142,14 +205,14 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 4, mid_category: 10)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case mid_category10.count + 7: //営業外費用6
+        case eigaih: //営業外費用6
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "営業外費用"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             // 金額は表示しない
             cell.label_amount.text = ""
             return cell
-        case mid_category10.count + mid_category6.count + 8: //営業外費用合計
+        case eigaihTotal: //営業外費用合計
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "営業外費用合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -157,7 +220,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 6)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + 9: //経常利益
+        case kei: //経常利益
             let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "経常利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -165,14 +228,14 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 2)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + 10: //特別利益11
+        case toku: //特別利益11
             let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "特別利益"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             // 金額は表示しない
             cell.label_amount.text = ""
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + 11: //特別利益合計
+        case tokuTotal: //特別利益合計
             let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "特別利益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -180,14 +243,14 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 4, mid_category: 11)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + 12: //特別損失7
+        case tokus: //特別損失7
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "特別損失"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             // 金額は表示しない
             cell.label_amount.text = ""
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 13: //特別損失合計
+        case tokusTotal: //特別損失合計
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "特別損失合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -195,7 +258,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 7)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 14: //税金等調整前当期純利益
+        case zei: //税金等調整前当期純利益
             let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "税金等調整前当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -203,15 +266,15 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 3)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 15: //税等8
+        case zeikin: //税等8
             let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
-            cell.textLabel?.text = "法人税等合計"
+            cell.textLabel?.text = "法人税等"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 8)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 16: //当期純利益
+        case touki: //当期純利益
             let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -219,88 +282,124 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 4)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
             return cell
-        case mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 17: //親会社株主に帰属する当期純利益
+        case htouki: //非支配株主に帰属する当期純利益
+            let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
+            cell.textLabel?.text = "非支配株主に帰属する当期純利益"
+            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            //ラベルを置いて金額を表示する
+            cell.label_amount.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
+            cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
+            return cell
+        case otouki: //親会社株主に帰属する当期純利益
             let cell = tableView.dequeueReusableCell(withIdentifier: "equal", for: indexPath) as! TableViewCellAmount
             cell.textLabel?.text = "親会社株主に帰属する当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 4)
+            cell.label_amount.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 15)
             return cell
         default:
             // 勘定科目
-            if       indexPath.row >= 6 &&                              // 営業外収益
-                     indexPath.row < mid_category10.count + 6 {         // 営業外収益のタイトルより下の行から、営業外収益合計の行より上
+            if       indexPath.row > 3 &&                // 販売費及び一般管理費9
+                     indexPath.row < han {                // 販売費及び一般管理費合計　タイトルより下の行から、合計の行より上
                 let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
-                cell.textLabel?.text = "    "+mid_category10[indexPath.row - 6].category
+                cell.textLabel?.text = "    "+objects9[indexPath.row - (3+1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerPL.getAccountTotal(big_category: 4, account: mid_category10[indexPath.row - 6].category) //収益:4
+                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: objects9[indexPath.row - (3+1)].BSAndPL_category)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
-            }else if indexPath.row >= mid_category10.count + 8 &&       // 営業外費用
-                     indexPath.row <  mid_category10.count + mid_category6.count + 8 { // 営業外費用のタイトルより下の行から、営業外費用合計の行より上
-                let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
-                cell.textLabel?.text = "    "+mid_category6[indexPath.row - (mid_category10.count + 8)].category
-                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerPL.getAccountTotal(big_category: 3, account: mid_category6[indexPath.row - (mid_category10.count + 8)].category)
-                cell.label_amount.font = UIFont.systemFont(ofSize: 15)
-                return cell
-            }else if indexPath.row >= mid_category10.count + mid_category6.count + 11 &&                       // 特別利益
-                     indexPath.row <  mid_category10.count + mid_category6.count + mid_category11.count + 11 {
+            }else if indexPath.row > eigai &&             // 営業外収益10
+                      indexPath.row < eigaiTotal {          // 営業外収益合計
                 let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
-                cell.textLabel?.text = "    "+mid_category11[indexPath.row - (mid_category10.count + mid_category6.count + 11)].category
+                cell.textLabel?.text = "    "+mid_category10[indexPath.row - (eigai + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerPL.getAccountTotal(big_category: 4, account: mid_category11[indexPath.row - (mid_category10.count+mid_category6.count+11)].category) //収益:4
+                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 4, bSAndPL_category: mid_category10[indexPath.row - (eigai + 1)].BSAndPL_category) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
-            }else if indexPath.row >= mid_category10.count + mid_category6.count + mid_category11.count + 13 && // 特別損失
-                     indexPath.row <  mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 13 {
+            }else if indexPath.row > eigaih &&          // 営業外費用
+                      indexPath.row < eigaihTotal {      // 営業外費用合計
                 let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
-                cell.textLabel?.text = "    "+mid_category7[indexPath.row - (mid_category10.count + mid_category6.count + mid_category11.count + 13)].category
+                cell.textLabel?.text = "    "+mid_category6[indexPath.row - (eigaih + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerPL.getAccountTotal(big_category: 3, account: mid_category7[indexPath.row - (mid_category10.count+mid_category6.count+mid_category11.count+13)].category)
+                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: mid_category6[indexPath.row - (eigaih + 1)].BSAndPL_category)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
-    //ToDo 税金　勘定科目を表示する
+            }else if indexPath.row > toku &&                       // 特別利益
+                      indexPath.row < tokuTotal {                   // 特別利益合計
+                let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
+                cell.textLabel?.text = "    "+mid_category11[indexPath.row - (toku + 1)].category
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                //ラベルを置いて金額を表示する
+                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 4, bSAndPL_category: mid_category11[indexPath.row - (toku+1)].BSAndPL_category) //収益:4
+                cell.label_amount.font = UIFont.systemFont(ofSize: 15)
+                return cell
+            }else if indexPath.row > tokus &&                   // 特別損失
+                      indexPath.row < tokusTotal {               // 特別損失合計
+                let cell = tableView.dequeueReusableCell(withIdentifier: "minus", for: indexPath) as! TableViewCellAmount
+                cell.textLabel?.text = "    "+mid_category7[indexPath.row - (tokus + 1)].category
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                //ラベルを置いて金額を表示する
+                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: mid_category7[indexPath.row - (tokus+1)].BSAndPL_category)
+                cell.label_amount.font = UIFont.systemFont(ofSize: 15)
+                return cell
+    // 税金　勘定科目を表示する必要はない
+                // 法人税、住民税及び事業税
+                // 法人税等調整額
             }else{
                     return tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
             }
         }
     }
-    
+    @IBOutlet weak var view_top: UIView!
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
         // disable sticky section header
         override func scrollViewDidScroll(_ scrollView: UIScrollView) {
             if printing {
-                print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-                if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
-                    scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-                    print("tableView.sectionHeaderHeight:: \(tableView.sectionHeaderHeight)")
-                }else if scrollView.contentOffset.y > tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // セクションの重複を防ぐ
-                    scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-                }else if scrollView.contentOffset.y >= tableView.sectionHeaderHeight {
-        //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-                    scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+                scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
+                if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
+                    // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
+                    scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
                 }
             }else{
-                scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                if self.navigationController?.navigationBar.bounds.height != nil { //ナビゲーションバーが見えない状態で画面遷移をするとnilとなる　2020/07/12 22:45
+                    // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+                    scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+                }
+                //            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             }
+//                if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
+//                    scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//                }else if scrollView.contentOffset.y > tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // セクションの重複を防ぐ
+//                    scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+//                }else if scrollView.contentOffset.y >= tableView.sectionHeaderHeight {
+//        //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+//                    scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+//                }
+//            }else{
+//                scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            }
         }
     
         var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
-    @IBOutlet weak var button_print: UIButton!
+        @IBOutlet weak var button_print: UIButton!
         /**
          * 印刷ボタン押下時メソッド
          */
         @IBAction func button_print(_ sender: UIButton) {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+            printing = true
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             // 第三の方法
             //余計なUIをキャプチャしないように隠す
             tableView.showsVerticalScrollIndicator = false
+            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
+                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+            }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
             pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
             //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
@@ -313,12 +412,12 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
             //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
     //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            printing = true
             let newImage = self.tableView.captureImagee()
             //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
             UIGraphicsEndImageContext()
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+            //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = false
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             /*
             ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
              CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -341,16 +440,44 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
             print(" myImageView.bounds : \(myImageView.bounds)")
             //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-                UIGraphicsBeginPDFPage()
+//                UIGraphicsBeginPDFPage()
+//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+
              /* PDFページの描画
                UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
                UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
             */
             //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
                 // グラフィックスコンテキストを取得する
+//                guard let currentContext = UIGraphicsGetCurrentContext() else { return }
+//                myImageView.layer.render(in: currentContext)
+//
+//            if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
+//    //2ページ目
+//           UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//            // グラフィックスコンテキストを取得する
+//            guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
+//            myImageView.layer.render(in: currentContext2)
+//            }
+//            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+//    //3ページ目
+//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*2, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+//             // グラフィックスコンテキストを取得する
+//             guard let currentContext3 = UIGraphicsGetCurrentContext() else { return }
+//             myImageView.layer.render(in: currentContext3)
+//            }
+            // ビューイメージを全て印刷できるページ数を用意する
+            var pageCounts: CGFloat = 0
+            while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
+                //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
+                UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+                // グラフィックスコンテキストを取得する
                 guard let currentContext = UIGraphicsGetCurrentContext() else { return }
                 myImageView.layer.render(in: currentContext)
-                //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
+                // ページを増加
+                pageCounts += 1
+            }
+            //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
                 UIGraphicsEndPDFContext()
                 
     //ここからプリントです
@@ -395,8 +522,9 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             }
             //余計なUIをキャプチャしないように隠したのを戻す
             tableView.showsVerticalScrollIndicator = true
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-
+            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+            tableView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         }
         
         // MARK: - UIImageWriteToSavedPhotosAlbum

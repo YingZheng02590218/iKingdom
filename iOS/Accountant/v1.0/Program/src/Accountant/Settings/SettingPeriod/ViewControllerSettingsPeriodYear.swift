@@ -68,11 +68,15 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
         let fiscalYear = getPeriodFromDB(row: row)
         createNewPeriod(fiscalYear: Int(fiscalYear)!)
 //        self.dismiss(animated: true, completion: nil)
+        let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
+        let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、スプリットコントローラを取得する
+        let navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+        let presentingViewController = navigationController.viewControllers[0] as! UITableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
         // viewWillAppearを呼び出す　更新のため
         self.dismiss(animated: true, completion: {
             [presentingViewController] () -> Void in
             // ViewController(年度選択画面)を閉じた時に、遷移元であるViewController(会計期間画面)で行いたい処理
-            presentingViewController?.viewWillAppear(true)// TableViewをリロードする処理がある
+            presentingViewController.viewWillAppear(true)// TableViewをリロードする処理がある
         })
     }
     

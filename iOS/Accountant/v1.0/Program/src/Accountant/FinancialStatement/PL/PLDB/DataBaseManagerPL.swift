@@ -13,13 +13,14 @@ class DataBaseManagerPL {
     
     func initializeBenefits(){
         // データベースに書き込み　//4:収益 3:費用
+        // 大分類
         setMiddleCategoryTotal(big_category: 4,mid_category: 9) //営業収益9
         setMiddleCategoryTotal(big_category: 4,mid_category: 10)//営業外収益10
         setMiddleCategoryTotal(big_category: 3,mid_category: 6) //営業外費用6
         setMiddleCategoryTotal(big_category: 4,mid_category: 11)//特別利益11
         setMiddleCategoryTotal(big_category: 3,mid_category: 7) //特別損失7
         setMiddleCategoryTotal(big_category: 3,mid_category: 8) //税等8 法人税等
-
+        // 小分類
         setSmallCategoryTotal(big_category: 4, small_category: 10)//営業収益9 売上高10
         setSmallCategoryTotal(big_category: 3, small_category: 8) //営業費用5  売上原価8
         setSmallCategoryTotal(big_category: 3, small_category: 9) //営業費用5  販管費9
@@ -213,7 +214,6 @@ class DataBaseManagerPL {
             default:
                 print()
             }
-            
         }
     }
     // 小分類　取得
@@ -297,7 +297,6 @@ class DataBaseManagerPL {
             default:
                 print()
             }
-            
         }
     }
     // 小分類　設定画面の勘定科目一覧にある勘定を取得する
@@ -327,7 +326,7 @@ class DataBaseManagerPL {
         formatter.groupingSize = 3
         return addComma(string: amount.description)
     }
-    // 合計残高　借方と貸方でより大きい方の合計を取得
+    // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
         let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
@@ -346,21 +345,24 @@ class DataBaseManagerPL {
         // 勘定の丁数(プライマリーキー)を取得
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
-//        print("number\(number)")
         
         var result:Int64 = 0
         // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].dataBaseAccounts[number].debit_total > objectss[0].dataBaseAccounts[number].credit_total {
-            result = objectss[0].dataBaseAccounts[number].debit_total
-        }else if objectss[0].dataBaseAccounts[number].debit_total < objectss[0].dataBaseAccounts[number].credit_total {
-            result = objectss[0].dataBaseAccounts[number].credit_total
+//        if objectss[0].dataBaseAccounts[number].debit_total > objectss[0].dataBaseAccounts[number].credit_total {
+//            result = objectss[0].dataBaseAccounts[number].debit_total
+//        }else if objectss[0].dataBaseAccounts[number].debit_total < objectss[0].dataBaseAccounts[number].credit_total {
+//            result = objectss[0].dataBaseAccounts[number].credit_total
+//        }else {
+//            result = objectss[0].dataBaseAccounts[number].debit_total
+//        }
+        // 決算整理後の値を利用する
+        if objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting {
+            result = objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting
+        }else if objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting {
+            result = objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting
         }else {
-            result = objectss[0].dataBaseAccounts[number].debit_total
+            result = objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting
         }
-//        print("getAccountTotal")
-//        print(account, objectss[0].dataBaseAccounts[number].debit_total)
-//        print(account, objectss[0].dataBaseAccounts[number].credit_total)
-        
         return result
     }
     // 中分類　設定画面の勘定科目一覧にある勘定を取得する

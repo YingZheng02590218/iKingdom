@@ -13,11 +13,6 @@ class TableViewCellCategory: UITableViewCell {
     @IBOutlet weak var ToggleButton: UISwitch!
 
     @IBAction func ToggleButton(_ sender: UISwitch) {
-//        if sender.isOn{
-//            print("on")
-//        } else {
-//            print("off")
-//        }
     }
     
     override func awakeFromNib() {
@@ -30,5 +25,4 @@ class TableViewCellCategory: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

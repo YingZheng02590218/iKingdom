@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
+// 仕訳クラス
 class DataBaseJournalEntry: RObject {
     // モデル定義
 //    @objc dynamic var number: Int = 0                 //仕訳番号

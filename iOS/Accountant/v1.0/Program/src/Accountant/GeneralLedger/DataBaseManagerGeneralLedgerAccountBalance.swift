@@ -17,7 +17,7 @@ class DataBaseManagerGeneralLedgerAccountBalance {
     
     func calculateBalance(account: String) {
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        objects = dataBaseManagerAccount.getAccountAll(account: account)
+        objects = dataBaseManagerAccount.getAllAccount(account: account)
         var left: Int64 = 0 // 差引残高 累積　勘定内の仕訳データを全て表示するまで、覚えておく
         var right: Int64 = 0
         // データベース　書き込み
