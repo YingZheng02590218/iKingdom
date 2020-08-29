@@ -67,11 +67,31 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
         let row = pickerView.selectedRow(inComponent: 0)
         let fiscalYear = getPeriodFromDB(row: row)
         createNewPeriod(fiscalYear: Int(fiscalYear)!)
-//        self.dismiss(animated: true, completion: nil)
-        let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-        let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、スプリットコントローラを取得する
-        let navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
-        let presentingViewController = navigationController.viewControllers[0] as! UITableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+        let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+        let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+        let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+        let navigationController2: UINavigationController
+        // iPadとiPhoneで動きが変わるので分岐する
+        if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+//        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
+             navigationController2 = splitViewController.viewControllers[1]  as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+            print("iPad ビューコントローラーの階層")
+            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
+            print("splitViewController[1]      :", splitViewController.viewControllers[1] )    // UINavigationController
+            print("  navigationController[0]   :", navigationController.viewControllers[0])    // TableViewControllerSettings
+            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // TableViewControllerSettingsPeriod
+        }else { // iPhone
+            navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+//             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+            print("iPhone ビューコントローラーの階層")
+            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
+            print("  navigationController[0]   :", navigationController.viewControllers[0])    // TableViewControllerSettings
+            print("  navigationController[1]   :", navigationController.viewControllers[1])    // UINavigationController
+            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // TableViewControllerSettingsPeriod
+        }
+
+        let presentingViewController = navigationController2.viewControllers[0] as! TableViewControllerSettingsPeriod // 呼び出し元のビューコントローラーを取得
+
         // viewWillAppearを呼び出す　更新のため
         self.dismiss(animated: true, completion: {
             [presentingViewController] () -> Void in
@@ -84,27 +104,27 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
         // オブジェクト作成
         let dataBaseManager = DataBaseManagerAccountingBooks()
         // データベースに会計帳簿があるかをチェック
-        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) { // データベースに同じ年度のモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitialising(DataBase: DataBaseAccountingBooks(), fiscalYear: fiscalYear) { // データベースに同じ年度のモデルオブフェクトが存在しない場合
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
         // 仕訳帳画面　　初期化
             // データベース
             let dataBaseManagerJournals = DataBaseManagerJournals() //データベースマネジャー
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
-            if !dataBaseManagerJournals.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+            if !dataBaseManagerJournals.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
                 dataBaseManagerJournals.addJournals(number: number)
             }
         // 総勘定元帳画面　初期化
             // データベース
             let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger() //データベースマネジャー
             // データベースに勘定画面の勘定があるかをチェック
-            if !dataBaseManagerGeneralLedger.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+            if !dataBaseManagerGeneralLedger.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
                 dataBaseManagerGeneralLedger.addGeneralLedger(number: number)
             }
         // 決算書画面　初期化
             // データベース
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements() //データベースマネジャー
             // データベースに勘定画面の勘定があるかをチェック
-            if !dataBaseManagerFinancialStatements.checkInitialising(fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+            if !dataBaseManagerFinancialStatements.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
                 dataBaseManagerFinancialStatements.addFinancialStatements(number: number)
             }
         }

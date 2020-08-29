@@ -21,7 +21,9 @@ class DataBaseCompoundTrialBalance: RObject {
 }
 // 月次合計残高試算表クラス
 class DataBaseCompoundTrialBalanceMonth: DataBaseCompoundTrialBalance {
+
 }
 // 日次合計残高試算表クラス
 class DataBaseCompoundTrialBalanceDay: DataBaseCompoundTrialBalance {
+
 }

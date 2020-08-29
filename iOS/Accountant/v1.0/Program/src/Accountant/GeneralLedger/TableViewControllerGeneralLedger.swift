@@ -19,6 +19,11 @@ class TableViewControllerGeneralLedger: UITableViewController {
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // 総勘定元帳を開いた後で、設定画面の勘定科目のON/OFFを変えるとエラーとなるのでリロードする
+        tableView.reloadData()
+    }
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
@@ -35,10 +40,7 @@ class TableViewControllerGeneralLedger: UITableViewController {
         // クルクルを止める
         refreshControl?.endRefreshing()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        // 総勘定元帳を開いた後で、設定画面の勘定科目のON/OFFを変えるとエラーとなるのでリロードする
-        tableView.reloadData()
-    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,8 +84,8 @@ class TableViewControllerGeneralLedger: UITableViewController {
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objectss = dataBaseManagerAccount.getAllAccount(account: "\(objects[indexPath.row].category as String)")
-        let objectsss = dataBaseManagerAccount.getAllAccountAdjusting(account: "\(objects[indexPath.row].category as String)")
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)")
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)")
         if objectss.count > 0 || objectsss.count > 0 {
             cell.textLabel?.textColor = .black
         }else {
@@ -91,7 +93,6 @@ class TableViewControllerGeneralLedger: UITableViewController {
         }
         return cell
     }
-    
 //    var account :String = "" // 勘定名
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        // 選択されたセルを取得

@@ -46,8 +46,6 @@ class DataBaseManagerBS {
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -80,6 +78,7 @@ class DataBaseManagerBS {
                 break
             default:
                 print(middleCategoryTotalAmount)
+                break
             }
         }
     }
@@ -104,8 +103,6 @@ class DataBaseManagerBS {
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -126,6 +123,7 @@ class DataBaseManagerBS {
                 break
             default:
                 print("bigCategoryTotalAmount", bigCategoryTotalAmount)
+                break
             }
         }
     }
@@ -136,19 +134,18 @@ class DataBaseManagerBS {
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         var objects = realm.objects(DataBaseSettingsCategory.self)
-        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         objects = objects.filter("mid_category == \(mid_category)")
         return objects
     }
     // 大分類　設定画面の勘定科目一覧にある勘定を取得する
     func getObjectsInBigCategory(big_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         var objects = realm.objects(DataBaseSettingsCategory.self)
-        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         objects = objects.filter("big_category == \(big_category)")
         return objects
@@ -159,14 +156,6 @@ class DataBaseManagerBS {
         let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
 
         return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        return addComma(string: amount.description)
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
@@ -201,41 +190,6 @@ class DataBaseManagerBS {
     }
     // 借又貸を取得
     func getTotalDebitOrCredit(big_category: Int, account: String) ->String {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-//        let objects = dataBaseManagerAccount.getAccountAll(account: account)
-//        let objects_local: Results<DataBaseJournalEntry>! //注意：ローカル変数を用意しないとこのクラスのフィールド変数のobjectsにフィルターをかけてしまう。
-//        objects_local = objects
-//        var DebitOrCredit:String = "" // 借又貸
-//        for r in 0..<objects_local.count {
-//            if objects_local[r].balance_left > objects_local[r].balance_right {
-//                DebitOrCredit = "借"
-//            }else if objects_local[r].balance_left < objects_local[r].balance_right {
-//                DebitOrCredit = "貸"
-//            }else {
-//                DebitOrCredit = "-"
-//            }
-//        }
-//        var PositiveOrNegative:String = "" // 借又貸
-//        switch big_category {
-//        case 0,3:
-//            switch DebitOrCredit {
-//            case "貸":
-//                PositiveOrNegative = "-"
-//            default:
-//                PositiveOrNegative = ""
-//            }
-//        default: // 1,2,4（負債、純資産、収益）
-//            switch DebitOrCredit {
-//                case "借":
-//                PositiveOrNegative = "-"
-//                break
-//            default:
-//                PositiveOrNegative = ""
-//            }
-//        }
-//        print(account, DebitOrCredit)
-//        return PositiveOrNegative
-        
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -250,6 +204,7 @@ class DataBaseManagerBS {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
@@ -282,41 +237,23 @@ class DataBaseManagerBS {
         }
         return PositiveOrNegative
     }
-    //カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
-    }
     // 中分類　取得
     func getMiddleCategoryTotal(big_category: Int, mid_category: Int) -> String {
         // データベースに書き込み　todo
 //        setMiddleCategoryTotal(big_category: big_category,mid_category: mid_category)
-        var result:Int64 = 0            // 累計額
-        
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         var objectss = realm.objects(DataBaseBalanceSheet.self) // モデル
         // 希望する勘定だけを抽出する
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
+        var result:Int64 = 0            // 累計額
         switch mid_category {
         case 0: //流動資産
             result = objectss[0].CurrentAssets_total
@@ -338,18 +275,24 @@ class DataBaseManagerBS {
             break
         default:
             print(result)
+            break
         }
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
-        return addComma(string: result.description)
+        // 三角形はマイナスの意味
+        if result < 0 { //0の場合は、空白を表示する
+            let amauntFix = result * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
+            return addComma(string: result.description)
+        }
     }
     // 大分類　取得
     func getBigCategoryTotal(big_category: Int) -> String {
 //        // データベースに書き込み　todo
 //        setBigCategoryTotal(big_category: big_category)
-        var result:Int64 = 0            // 累計額
 //        // 設定画面の勘定科目一覧にある勘定を取得する
 //        let objects = getObjectsInBigCategory(big_category: big_category)
 //        // オブジェクトを作成 勘定
@@ -376,7 +319,7 @@ class DataBaseManagerBS {
         var objectss = realm.objects(DataBaseBalanceSheet.self) // モデル
         // 希望する勘定だけを抽出する
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
+        var result:Int64 = 0            // 累計額
         switch big_category {
         case 0: //資産
             result = objectss[0].Asset_total
@@ -392,11 +335,41 @@ class DataBaseManagerBS {
             break
         default:
             print(result)
+            break
         }
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
         return addComma(string: result.description)
+    }
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        // 三角形はマイナスの意味
+        if amount < 0 { //0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
+            return addComma(string: amount.description)
+        }
+    }
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
     }
 }

@@ -59,6 +59,11 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.TableView_TB.refreshControl = refreshControl
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+    }
+    
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
@@ -74,12 +79,8 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         // クルクルを止める
         TableView_TB.refreshControl?.endRefreshing()
     }
-    override func viewDidAppear(_ animated: Bool) {
-//        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
-    }
     //セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // データベース
         let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
         let objects = databaseManagerSettings.getAllSettingsCategory()
@@ -87,7 +88,6 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
         let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
         let objects = databaseManagerSettings.getAllSettingsCategory()
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
@@ -331,8 +331,8 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         print(" bestPaper         -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4), \(bestPaper.printableRect.origin.y / 72.0 * 25.4), \(bestPaper.printableRect.size.width / 72.0 * 25.4), \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
         return bestPaper
     }
-
 }
+
 extension UIScrollView {
 
     func getContentImage(captureSize: CGSize) -> UIImage? {

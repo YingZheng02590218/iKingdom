@@ -13,7 +13,6 @@ class DataBaseManagerPeriod {
 
     // すべてのモデルオブフェクトの取得
     func getMainBooksAllCount() -> Int {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -24,7 +23,6 @@ class DataBaseManagerPeriod {
     }
     // すべてのモデルオブフェクトの取得
     func getMainBooksAll() -> Results<DataBaseAccountingBooks> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -35,7 +33,6 @@ class DataBaseManagerPeriod {
     }
     // 特定のモデルオブフェクトの取得　会計帳簿
     func getSettingsPeriod() -> DataBaseAccountingBooks {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルをひとつ取得する
@@ -50,11 +47,10 @@ class DataBaseManagerPeriod {
     }
     // 年度の取得　会計帳簿
     func getSettingsPeriodYear() -> Int {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルをひとつ取得する
-        //        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
+//        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
         // (2)データベース内に保存されているモデルを全て取得する
         var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
         // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
@@ -65,7 +61,6 @@ class DataBaseManagerPeriod {
     }
     // モデルオブフェクトの更新
     func setMainBooksOpenOrClose(tag: Int){
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         //(2)データベース内に保存されているDataBaseAccountingBooksShelfモデルをひとつ取得する

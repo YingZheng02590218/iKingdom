@@ -23,7 +23,6 @@ class DataBaseManagerBSAndPL {
     }
     // 設定表記名　取得　表記名別の勘定
     func getObjectsInBSAndPLCategory(bSAndPL_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -39,7 +38,6 @@ class DataBaseManagerBSAndPL {
     }
     // 設定表記名　取得　表記名の名称
     func getNameBSAndPLCategory(bSAndPL_category: Int) -> String {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -104,7 +102,6 @@ class DataBaseManagerBSAndPL {
         // 計算
         let BSAndPLCategoryTotalAmount = culculatAmountOfBSAndPLAccount(big_category: big_category, bSAndPL_category: bSAndPL_category)
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -154,8 +151,8 @@ class DataBaseManagerBSAndPL {
     * 合計　取得メソッド
     * 勘定の借方の合計と貸方の合計でより大きい方の合計を返す。
     * @param account 勘定名
-    * @return debit_total 借方合計
-    * @return  credit_total 貸方合計
+    * @return debit_total 借方合計　決算整理後
+    * @return  credit_total 貸方合計　決算整理後
     */
     func getTotalAmount(account: String) -> Int64 {
         // 開いている会計帳簿を取得
@@ -178,12 +175,12 @@ class DataBaseManagerBSAndPL {
         }
         var result:Int64 = 0
         // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].debit_total > objectss[0].credit_total {
-            result = objectss[0].debit_total
-        }else if objectss[0].debit_total < objectss[0].credit_total {
-            result = objectss[0].credit_total
+        if objectss[0].debit_total_AfterAdjusting > objectss[0].credit_total_AfterAdjusting {
+            result = objectss[0].debit_total_AfterAdjusting
+        }else if objectss[0].debit_total_AfterAdjusting < objectss[0].credit_total_AfterAdjusting {
+            result = objectss[0].credit_total_AfterAdjusting
         }else {
-            result = objectss[0].debit_total
+            result = objectss[0].debit_total_AfterAdjusting
         }
         return result
     }
@@ -214,9 +211,9 @@ class DataBaseManagerBSAndPL {
         }
         var DebitOrCredit:String = "" // 借又貸
         // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].debit_balance > objectss[0].credit_balance {
+        if objectss[0].debit_balance_AfterAdjusting > objectss[0].credit_balance_AfterAdjusting {
             DebitOrCredit = "借"
-        }else if objectss[0].debit_balance < objectss[0].credit_balance {
+        }else if objectss[0].debit_balance_AfterAdjusting < objectss[0].credit_balance_AfterAdjusting {
             DebitOrCredit = "貸"
         }else {
             DebitOrCredit = "-"
@@ -250,7 +247,13 @@ class DataBaseManagerBSAndPL {
 //        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
 //            return ""
 //        }else {
+        // 三角形はマイナスの意味
+        if amount < 0 { //0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
             return addComma(string: amount.description)
+        }
 //        }
     }
     //カンマ区切りに変換（表示用）

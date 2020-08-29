@@ -21,7 +21,6 @@ class DataBaseManagerWS {
         
         let dataBaseManagerTB = DataBaseManagerTB()
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
@@ -46,6 +45,7 @@ class DataBaseManagerWS {
                     break
                 default:
                     print(l)
+                    break
                 }
             }
         }
@@ -60,7 +60,6 @@ class DataBaseManagerWS {
         
         let dataBaseManagerTB = DataBaseManagerTB()
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
@@ -85,6 +84,7 @@ class DataBaseManagerWS {
                     break
                 default:
                     print(l)
+                    break
                 }
             }
             // 当期純利益を計算する
@@ -107,7 +107,6 @@ class DataBaseManagerWS {
         
         let dataBaseManagerTB = DataBaseManagerTB()
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
@@ -132,6 +131,7 @@ class DataBaseManagerWS {
                     break
                 default:
                     print(l)
+                    break
                 }
             }
         }

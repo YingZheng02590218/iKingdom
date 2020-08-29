@@ -27,7 +27,6 @@ class DataBaseManagerPL {
         // 利益を計算する関数を呼び出す todo
         setBenefitTotal()
     }
-    
     // 利益　計算
     func setBenefitTotal() {
         // 開いている会計帳簿を取得
@@ -38,7 +37,6 @@ class DataBaseManagerPL {
         
         // 利益5種類　売上総利益、営業利益、経常利益、税金等調整前当期純利益、当期純利益
         for i in 0..<5 {
-            // データベース　書き込み
             // (1)Realmのインスタンスを生成する
             let realm = try! Realm()
             // (2)データベース内に保存されているモデルを全て取得する
@@ -65,28 +63,26 @@ class DataBaseManagerPL {
                     break
                 default:
                     print()
+                    break
                 }
             }
         }
     }
     // 利益　取得
     func getBenefitTotal(benefit: Int) -> String {
-        var result:Int64 = 0            // 累計額
-        
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
         // 希望する勘定だけを抽出する
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
+        var result:Int64 = 0            // 累計額
         switch benefit {
         case 0: //売上総利益
             result = objectss[0].GrossProfitOrLoss
@@ -105,6 +101,7 @@ class DataBaseManagerPL {
             break
         default:
             print(result)
+            break
         }
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
@@ -114,22 +111,19 @@ class DataBaseManagerPL {
     }
     // 中分類　取得
     func getMiddleCategoryTotal(big_category: Int, mid_category: Int) -> String {
-        var result:Int64 = 0            // 累計額
-        
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
         // 希望する勘定だけを抽出する
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
+        var result:Int64 = 0            // 累計額
         switch mid_category {
         case 9: //営業収益9
             result = objectss[0].NetSales
@@ -183,7 +177,6 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -218,22 +211,19 @@ class DataBaseManagerPL {
     }
     // 小分類　取得
     func getSmallCategoryTotal(big_category: Int, small_category: Int) -> String {
-        var result:Int64 = 0            // 累計額
-        
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
         // 希望する勘定だけを抽出する
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
+        var result:Int64 = 0            // 累計額
         switch small_category {
         case 10: //売上高10
             result = objectss[0].NetSales
@@ -246,6 +236,7 @@ class DataBaseManagerPL {
             break
         default:
             print(result)
+            break
         }
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
@@ -275,7 +266,6 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -296,17 +286,17 @@ class DataBaseManagerPL {
                 break
             default:
                 print()
+                break
             }
         }
     }
     // 小分類　設定画面の勘定科目一覧にある勘定を取得する
     func getObjectsInSmallCategory(small_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
-        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         objects = objects.filter("small_category == \(small_category)")
         return objects
@@ -315,7 +305,6 @@ class DataBaseManagerPL {
     func getAccountTotal(big_category: Int, account: String) -> String {
         let totalAmount = getTotalAmount(account: account)  // 合計を取得
         let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
-        
         return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
     }
     // コンマを追加
@@ -324,11 +313,16 @@ class DataBaseManagerPL {
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
-        return addComma(string: amount.description)
+        // 三角形はマイナスの意味
+        if amount < 0 { //0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
+            return addComma(string: amount.description)
+        }
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -343,6 +337,7 @@ class DataBaseManagerPL {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
@@ -367,19 +362,17 @@ class DataBaseManagerPL {
     }
     // 中分類　設定画面の勘定科目一覧にある勘定を取得する
     func getObjectsInMiddleCategory(mid_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
-        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         objects = objects.filter("mid_category == \(mid_category)")
         return objects
     }
     // 借又貸を取得
     func getTotalDebitOrCredit(big_category: Int, account: String) ->String {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -394,9 +387,9 @@ class DataBaseManagerPL {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
-        //        print("number\(number)")
         
         var DebitOrCredit:String = "" // 借又貸
         // 借方と貸方で金額が大きい方はどちらか
@@ -425,10 +418,6 @@ class DataBaseManagerPL {
                 PositiveOrNegative = ""
             }
         }
-//        print("getTotalDebitOrCredit")
-//        print(account, objectss[0].dataBaseAccounts[number].debit_balance)
-//        print(account, objectss[0].dataBaseAccounts[number].credit_balance)
-        
         return PositiveOrNegative
     }
     //カンマ区切りに変換（表示用）
@@ -446,29 +435,4 @@ class DataBaseManagerPL {
         let string = string.replacingOccurrences(of: ",", with: "")
         return string
     }
-//    // モデルオブフェクトの取得
-//    func getMiddleCategoryFromGeneralLedger(mid_category: Int) -> Results<DataBaseAccount> {
-//
-//        // 開いている会計帳簿を取得
-//        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-//        let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        // 開いている会計帳簿の年度を取得
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-//
-//        // データベース
-//        let databaseManagerSettings = DatabaseManagerSettingsCategory()
-//        // 中分類　中分類ごとの数を取得
-//        let objectsFromSettings = databaseManagerSettings.getMiddleCategory(mid_category: mid_category)
-//
-//        // データベース　読み込み
-//        // (1)Realmのインスタンスを生成する
-//        let realm = try! Realm()
-//        // (2)データベース内に保存されているモデルを全て取得する
-//        var objects = realm.objects(DataBaseAccount.self)
-//        // 希望する勘定だけを抽出する
-//        objects = objects.filter("fiscalYear == \(fiscalYear)")
-//         //ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
-//        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-//        return objects
-//    }
 }

@@ -31,10 +31,8 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-//        label_closingDate.text = "令和xx年3月31日"
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // ToDo どこで設定した年度のデータを参照するか考える
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "損益計算書"
         
@@ -42,6 +40,16 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
     }
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+    }
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+    }
+    
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
@@ -57,59 +65,32 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         // クルクルを止める
         refreshControl?.endRefreshing()
     }
-    // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
-        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
-        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
-    }
-    // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//              損益計算書　計18行　+ 勘定科目
-        //営業収益9    売上高10
-        //営業費用5    売上原価8
-//        売上総利益
-        //            販売費及び一般管理費9 ＊販管費はひとまとめにする
-//        営業利益
-        //営業外収益10                    ＊ひとまとめにせずに勘定科目を列挙する
-        //...
-        //合計
-        //営業外費用6                     ＊ひとまとめにせずに勘定科目を列挙する
-        //...
-        //合計
-//        経常利益
-        //特別利益11                      ＊ひとまとめにせずに勘定科目を列挙する
-        //...
-        //合計
-        //特別損失7                       ＊ひとまとめにせずに勘定科目を列挙する
-        //...
-        //合計
-//        税金等調整前当期純利益
-        //税等8                           ＊ひとまとめにしない？
-        //...
-//        当期純利益
-        //親会社株主に帰属する当期純利益
-
         // データベース
 //        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
         let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
-//        let objects = databaseManagerSettings.getMiddleCategory(mid_category: 10)  //営業外収益10
-//        let objectss = databaseManagerSettings.getMiddleCategory(mid_category: 6)  //営業外費用6
-//        let objectsss = databaseManagerSettings.getMiddleCategory(mid_category: 11)//特別利益11
-//        let objectssss = databaseManagerSettings.getMiddleCategory(mid_category: 7)//特別損失7
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 3)
-        let objectss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 4)
-        return 7 + 8 + 5 + objects.count + objectss.count    // 7:5大利益　8:小分類のタイトル　5:小分類の合計
+        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 10)//営業外収益10
+        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 6)//営業外費用6
+        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 11)//特別利益11
+        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 7)//特別損失7
+        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: 3, small_category: 9)//販売費及び一般管理費9
+
+        
+//        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 3)
+//        let objectss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 4)
+//        let mid_category9 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 9)//営業収益9 小分類単位で利用するのでコメントアウト
+//        let mid_category5 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 5)//営業費用5 小分類単位で利用するのでコメントアウト
+        
+//        print(objects.count, objectss.count)
+//        print(mid_category10.count, mid_category6.count, mid_category11.count, mid_category7.count)
+        return 7 + 8 + 5 + mid_category10.count + objects9.count + mid_category6.count + mid_category11.count + mid_category7.count    // 7:5大利益　8:小分類のタイトル　5:小分類の合計
     }
 
     let dataBaseManagerPL = DataBaseManagerPL()

@@ -9,22 +9,14 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-class DataBaseManagerJournals {
-    // データベース
+class DataBaseManagerJournals: DataBaseManager {
     
     // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising(fiscalYear: Int) -> Bool {
-        // データベース　読み込み
-        // (1)Realmのインスタンスを生成する
-        let realm = try! Realm()
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objects = realm.objects(DataBaseJournals.self) // DataBaseJournalEntryモデル
-        objects = objects.filter("fiscalYear == \(fiscalYear)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
-        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+    func checkInitialising(DataBase: DataBaseJournals, fiscalYear: Int) -> Bool {
+        super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
     // モデルオブフェクトの追加　仕訳帳
     func addJournals(number: Int) {
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // 会計帳簿　のオブジェクトを取得
@@ -41,13 +33,17 @@ class DataBaseManagerJournals {
             object.dataBaseJournals = dataBaseJournals
         }
     }
-    // モデルオブフェクトの取得　仕訳帳
-//    func getJournals() -> DataBaseJournals {
-//        // データベース　読み込み
-//        // (1)Realmのインスタンスを生成する
-//        let realm = try! Realm()
-//        // (2)データベース内に保存されているDataBaseJournalsモデルをひとつ取得する
-//        let object = realm.object(ofType: DataBaseJournals.self, forPrimaryKey: 1)! //ToDo // DataBaseJournalsモデル
-//        return object // 仕訳帳を返す
-//    }
+    // モデルオブフェクトの削除
+    func deleteJournals(number: Int) -> Bool {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+        let object = realm.object(ofType: DataBaseJournals.self, forPrimaryKey: number)!
+        try! realm.write {
+            realm.delete(object.dataBaseJournalEntries) //仕訳
+            realm.delete(object.dataBaseAdjustingEntries) //決算整理仕訳
+            realm.delete(object) // 仕訳帳
+        }
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+    }
 }

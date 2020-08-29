@@ -39,6 +39,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.TableView_WS.refreshControl = refreshControl
     }
+    
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
@@ -79,25 +80,6 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             // 勘定科目をセルに表示する
             cell.label_account.text = "\(objects[indexPath.row].category as String)"
             cell.label_account.textAlignment = NSTextAlignment.center
-//           debit_total_total                    //借方　合計　合計
-//           credit_total_total                    //貸方　合計　合計
-//           debit_balance_total                    //借方　残高　合計
-//           credit_balance_total                    //貸方　残高　合計
-//            label_account
-//            label_debit
-//            label_credit
-//            label_debit1
-//            label_credit1
-//            label_debit2
-//            label_credit2
-//            label_debit3
-//            label_credit3
-//            big_category       //大分類　貸借対照表：0,1,2 損益計算書：3,4
-//            mid_category       //中分類
-//            small_category     //小分類
-//            category           //勘定科目
-//            explaining         //説明
-//            switching          //有効無効
             // 決算整理前残高試算表
             cell.label_debit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
             cell.label_debit.textAlignment = NSTextAlignment.right

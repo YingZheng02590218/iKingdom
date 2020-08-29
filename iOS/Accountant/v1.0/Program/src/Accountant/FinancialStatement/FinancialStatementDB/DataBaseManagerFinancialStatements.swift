@@ -9,21 +9,14 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-class DataBaseManagerFinancialStatements  {
+class DataBaseManagerFinancialStatements: DataBaseManager {
     
     // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising(fiscalYear: Int) -> Bool { // 共通化したい
-        // データベース　読み込み
-        // (1)Realmのインスタンスを生成する
-        let realm = try! Realm()
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objects = realm.objects(DataBaseFinancialStatements.self) // モデル
-        objects = objects.filter("fiscalYear == \(fiscalYear)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
-        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+    func checkInitialising(DataBase: DataBaseFinancialStatements, fiscalYear: Int) -> Bool {
+        super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
     // モデルオブフェクトの追加
     func addFinancialStatements(number: Int) {
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // 会計帳簿棚　のオブジェクトを取得
@@ -44,17 +37,17 @@ class DataBaseManagerFinancialStatements  {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             var number = balanceSheet.save()
-            print("balanceSheet",number)
+//            print("balanceSheet",number)
              number = profitAndLossStatement.save()
-            print("profitAndLossStatement",number)
+//            print("profitAndLossStatement",number)
              number = cashFlowStatement.save()
-            print("cashFlowStatement",number)
+//            print("cashFlowStatement",number)
              number = workSheet.save()
-            print("workSheet",number)
+//            print("workSheet",number)
              number = compoundTrialBalance.save()
-            print("compoundTrialBalance",number)
+//            print("compoundTrialBalance",number)
              number = dataBaseFinancialStatements.save() //　自動採番
-            print("dataBaseFinancialStatements",number)
+//            print("dataBaseFinancialStatements",number)
             // オブジェクトを作成して追加
             // 設定画面の勘定科目一覧にある勘定を取得する
             let DM = DataBaseManagerSettingsCategoryBSAndPL()
@@ -77,18 +70,36 @@ class DataBaseManagerFinancialStatements  {
             object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
         }
     }
-    // モデルオブフェクトの取得　総勘定元帳
-    func getFinancialStatements() -> DataBaseFinancialStatements {
-        // データベース　読み込み
+    // モデルオブフェクトの削除
+    func deleteFinancialStatements(number: Int) -> Bool {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルをひとつ取得する
+        // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
+        let object = realm.object(ofType: DataBaseFinancialStatements.self, forPrimaryKey: number)!
+        try! realm.write {
+            // 表記名を削除
+            realm.delete(object.balanceSheet!.dataBaseBSAndPLAccounts)
+            // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
+            realm.delete(object.balanceSheet!)
+            realm.delete(object.profitAndLossStatement!)
+            realm.delete(object.cashFlowStatement!)
+            realm.delete(object.workSheet!)
+            realm.delete(object.compoundTrialBalance!)
+            // 会計帳簿を削除
+            realm.delete(object)
+        }
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+    }
+    // モデルオブフェクトの取得　総勘定元帳
+    func getFinancialStatements() -> DataBaseFinancialStatements {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        // (2)データベース内に保存されているモデルをひとつ取得する
+        // (2)データベース内に保存されているモデルを取得する
         var objects = realm.objects(DataBaseFinancialStatements.self)
         // 希望する勘定だけを抽出する
         objects = objects.filter("fiscalYear == \(fiscalYear)")
