@@ -19,7 +19,6 @@ class Initial {
     }
     // 設定画面　勘定科目　勘定科目一覧を初期化
     func initialiseMasterData(){
-        // データベース
         let databaseManagerSettingsCategory = DatabaseManagerSettingsCategory() //データベースマネジャー
         // データベースに設定画面の勘定科目一覧があるかをチェック
         // マイグレーション　CSVファイルに変更がある場合、一度作成したモデルオブジェクトを削除してから新たに作り直す　考える
@@ -38,14 +37,14 @@ class Initial {
         // オブジェクト作成
         let dataBaseManager = DataBaseManagerAccountingBooksShelf()
         // データベースに会計帳簿があるかをチェック
-        if !dataBaseManager.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
             let number = dataBaseManager.addAccountingBooksShelf(company: "事業者名")
-            print("initializeAccountingBooksShelf",number)
-            // 会計帳簿
-            initializeAccountingBooks()
+//            print("initializeAccountingBooksShelf",number)
+        }
+        // 会計帳簿
+        initializeAccountingBooks()
 //            // 財務諸表
 //            initializeFinancialStatements()
-        }
     }
     // 初期値用の年月を取得
     func getTheTime() -> Int {
@@ -69,40 +68,37 @@ class Initial {
         var fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
         fiscalYear -= 1                     // デフォルトで現在の年月から前年度の会計帳簿を作成する
         // データベースに会計帳簿があるかをチェック
-        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {           // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitializing() {           // データベースにモデルオブフェクトが存在しない場合
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
             initialiseJournals(number: number,fiscalYear: fiscalYear)
             // 総勘定元帳画面　初期化
             initialiseAccounts(number: number,fiscalYear: fiscalYear)
-            // 財務諸表
+            // 決算書画面　初期化
             initializeFinancialStatements(number: number,fiscalYear: fiscalYear)
         }
     }
     // 仕訳帳画面　仕訳帳を初期化
     func initialiseJournals(number: Int,fiscalYear: Int){
-        // Test ToDo
          let dataBaseManager = DataBaseManagerJournals() //データベースマネジャー
         // データベースに仕訳帳画面の仕訳帳があるかをチェック
-        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {                // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
         }
     }
     // 総勘定元帳画面　総勘定元帳を初期化
     func initialiseAccounts(number: Int,fiscalYear: Int) {
-        // データベース
         let dataBaseManager = DataBaseManagerGeneralLedger() //データベースマネジャー
         // データベースに勘定画面の勘定があるかをチェック
-        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {            // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
             dataBaseManager.addGeneralLedger(number: number)
         }
     }
     // 決算書画面　初期化
     func initializeFinancialStatements(number: Int,fiscalYear: Int) {
-        // オブジェクト作成
         let dataBaseManager = DataBaseManagerFinancialStatements()
         // データベースに財務諸表があるかをチェック
-        if !dataBaseManager.checkInitialising(fiscalYear: fiscalYear) {           // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
             dataBaseManager.addFinancialStatements(number: number)
         }
     }

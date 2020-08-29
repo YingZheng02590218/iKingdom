@@ -32,6 +32,7 @@ class TableViewControllerSettingsInfomation: UITableViewController {
             return ""
         }
     }
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -42,12 +43,13 @@ class TableViewControllerSettingsInfomation: UITableViewController {
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{//TableViewCellSettings {
-        var cell = UITableViewCell()//TableViewCellSettings()
+        var cell = UITableViewCell()
         switch indexPath.section {
         case 0:
             //① UI部品を指定　TableViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "cell_companyName", for: indexPath) //as! TableViewCell
-                cell.textLabel?.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+                cell.textLabel?.text = "事業者名"
+            // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
             return cell
         default:
             return cell

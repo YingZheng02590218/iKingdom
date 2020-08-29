@@ -16,7 +16,6 @@ class TableViewCellCompanyName: UITableViewCell, UITextViewDelegate { //プロ�
         super.awakeFromNib()
         // デリゲートを設定
         textView_companyName.delegate = self
-
         // データベース
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
@@ -28,13 +27,12 @@ class TableViewCellCompanyName: UITableViewCell, UITextViewDelegate { //プロ�
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+
     func textViewDidChange(_ textView: UITextView) {
         print("")
- 
     }
+    
 //    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
 //        return false
 //    }
@@ -43,6 +41,7 @@ class TableViewCellCompanyName: UITableViewCell, UITextViewDelegate { //プロ�
 //    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
 //        return false
 //    }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         print("")
         // データベース

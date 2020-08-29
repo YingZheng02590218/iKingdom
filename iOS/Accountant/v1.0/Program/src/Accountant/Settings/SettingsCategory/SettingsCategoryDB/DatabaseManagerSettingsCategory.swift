@@ -11,11 +11,9 @@ import RealmSwift // データベースのインポート
 
 // 設定勘定科目クラス
 class DatabaseManagerSettingsCategory  {
-    // データベース
     
     // データベースにDataBaseSettingsCategoryモデルが存在するかどうかをチェックする
     func checkInitialising() -> Bool {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -46,7 +44,6 @@ class DatabaseManagerSettingsCategory  {
 //    }
     // モデルオブフェクトの取得　期中の勘定科目　決算整理仕訳以外　設定ONのみ
     func getAllSettingsCategory() -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -59,7 +56,6 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得　期末の勘定科目　決算整理仕訳のみ　設定ONのみ
     func getAllSettingsCategoryForAdjusting() -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -79,7 +75,7 @@ class DatabaseManagerSettingsCategory  {
 //            readOnly: true) // 読み取り専用
 //        let realm = try! Realm(configuration: config)   // 構造体
 //        var objects = realm.objects(DataBaseSettingsCategory.self).filter("number > 0")
-        // データベース　読み込み
+
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -110,7 +106,6 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得 スイッチONの全ての勘定科目
     func getSettingsSwitchingOn(section: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -142,7 +137,6 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得 スイッチONのBSかPLの勘定科目
     func getSettingsSwitchingOnBSorPL(BSorPL: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -165,15 +159,13 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得
     func getMiddleCategory(mid_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+        var objects = realm.objects(DataBaseSettingsCategory.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         // セクション　資産の部、負債の部、純資産の部
-//        objects = objects.filter("big_category == \(section)") //不要
         switch mid_category {
         case 0: // 流動資産
             objects = objects.filter("mid_category == 0")
@@ -219,16 +211,14 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得
     func getSmallCategory(section: Int, small_category: Int) -> Results<DataBaseSettingsCategory> {//Int {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
-        // ソートする        注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
+        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         // セクション　資産の部、負債の部、純資産の部
         objects = objects.filter("big_category == \(section)")
-        
         switch small_category {
         case 0: // 当座資産0
             objects = objects.filter("small_category == 0")
@@ -295,7 +285,6 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの取得 表記名別に勘定科目を取得
     func getSettingsCategoryBSAndPL(bSAndPL_category: Int) -> Results<DataBaseSettingsCategory> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -308,7 +297,6 @@ class DatabaseManagerSettingsCategory  {
     }
     // モデルオブフェクトの更新　スイッチの切り替え
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool){
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを更新する

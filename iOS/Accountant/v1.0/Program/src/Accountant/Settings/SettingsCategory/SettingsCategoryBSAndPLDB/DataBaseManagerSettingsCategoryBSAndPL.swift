@@ -10,11 +10,9 @@ import Foundation
 import RealmSwift // データベースのインポート
 
 class DataBaseManagerSettingsCategoryBSAndPL {
-    // データベース
     
     // データベースにモデルが存在するかどうかをチェックする　設定表記名クラス
     func checkInitialising() -> Bool {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -23,7 +21,6 @@ class DataBaseManagerSettingsCategoryBSAndPL {
     }
     // 設定表記名　取得 すべて
     func getAllSettingsCategoryBSAndPL() -> Results<DataBaseSettingsCategoryBSAndPL> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -39,7 +36,6 @@ class DataBaseManagerSettingsCategoryBSAndPL {
     }
     // 設定表記名　取得 ONのみ
     func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsCategoryBSAndPL> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -55,7 +51,6 @@ class DataBaseManagerSettingsCategoryBSAndPL {
     }
     // 設定表記名　取得 大分類別
     func getBigCategory(section: Int) -> Results<DataBaseSettingsCategoryBSAndPL> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -72,7 +67,6 @@ class DataBaseManagerSettingsCategoryBSAndPL {
     }
     // 設定表記名　取得 中分類別
     func getMiddleCategory(mid_category: Int) -> Results<DataBaseSettingsCategoryBSAndPL> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -89,7 +83,6 @@ class DataBaseManagerSettingsCategoryBSAndPL {
     }
     // 設定表記名　取得　小分類別
     func getSmallCategory(section: Int, small_category: Int) -> Results<DataBaseSettingsCategoryBSAndPL> {
-        // データベース　読み込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する

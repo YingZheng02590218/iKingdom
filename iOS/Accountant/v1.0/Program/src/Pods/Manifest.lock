@@ -1,22 +1,30 @@
 PODS:
-  - Realm (4.4.0):
-    - Realm/Headers (= 4.4.0)
-  - Realm/Headers (4.4.0)
-  - RealmSwift (4.4.0):
-    - Realm (= 4.4.0)
+  - EMTNeumorphicView (1.0.4)
+  - NeuKit (0.0.3)
+  - Realm (5.3.3):
+    - Realm/Headers (= 5.3.3)
+  - Realm/Headers (5.3.3)
+  - RealmSwift (5.3.3):
+    - Realm (= 5.3.3)
 
 DEPENDENCIES:
+  - EMTNeumorphicView
+  - NeuKit
   - RealmSwift
 
 SPEC REPOS:
   trunk:
+    - EMTNeumorphicView
+    - NeuKit
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
-  Realm: e125f464884cda953ebefe70c671b75b03b81b9b
-  RealmSwift: 33656a42bd300959a081fc13347376bc478071af
+  EMTNeumorphicView: cb5e92953e43b1872ab47fefd451a9ce0c16fc77
+  NeuKit: 466248b6c52fabfe4ddc04f38506c4ea802580fc
+  Realm: 2d57ea355bf8ca2a0964d6bfb38d28d7ff2addf6
+  RealmSwift: 0a709536ecea30eea1d3c514f6ade2ed078dee3c
 
-PODFILE CHECKSUM: c0e8f2badeaf75724adcb1645c13a79342d3427e
+PODFILE CHECKSUM: 7949438f7a06b658049d839bd9ae8cc669af54e7
 
 COCOAPODS: 1.8.4

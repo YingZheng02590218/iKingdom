@@ -57,14 +57,12 @@ class TableViewControllerSettings: UITableViewController {
             cell.textLabel?.text = "帳簿情報" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
             return cell
         case 1:
-            //① UI部品を指定　TableViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_term", for: indexPath) as! TableViewCellSettings
-            cell.textLabel?.text = "会計期間" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+            cell.textLabel?.text = "会計期間"
             return cell
         case 2:
-            //① UI部品を指定　TableViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings", for: indexPath) as! TableViewCellSettings
-            cell.textLabel?.text = "勘定科目" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+            cell.textLabel?.text = "勘定科目" 
             return cell
         default:
             return cell

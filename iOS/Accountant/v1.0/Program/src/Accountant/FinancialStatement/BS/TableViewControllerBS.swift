@@ -53,6 +53,13 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+    }
+    
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
         let databaseManager = DataBaseManagerTB() //データベースマネジャー
@@ -67,11 +74,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         self.tableView.reloadData()
         // クルクルを止める
         refreshControl?.endRefreshing()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
     }
     
     // MARK: - Table view data source
@@ -229,6 +231,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
+                if dataBaseManagerBS.getBigCategoryTotal(big_category: 0) != dataBaseManagerBS.getBigCategoryTotal(big_category: 3) {
+                    cell.label_totalOfBigCategory.textColor = .red
+                }else {
+                    cell.label_totalOfBigCategory.textColor = .black
+                }
                 return cell
             default:
 // 小分類
@@ -390,6 +398,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                // 文字色
+                cell.label_totalOfBigCategory.textColor = .black
                 return cell
             default:
                 // 小分類
@@ -537,6 +547,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                // 文字色
+                cell.label_totalOfBigCategory.textColor = .black
                 return cell
             case objects14.count + 2 + objects15.count + 1 + 1 + objects16.count + objects22.count + 1: //最後の行の下
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
@@ -555,6 +567,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
+                if dataBaseManagerBS.getBigCategoryTotal(big_category: 0) != dataBaseManagerBS.getBigCategoryTotal(big_category: 3) {
+                    cell.label_totalOfBigCategory.textColor = .red
+                }else {
+                    cell.label_totalOfBigCategory.textColor = .black
+                }
                 return cell
             default:
                 // 勘定科目
@@ -965,26 +983,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
 class PrintPageRendererBS: UIPrintPageRenderer {
     
 }
-//extension UIScrollView {
-//
-//    func getContentImage(captureSize: CGSize) -> UIImage? {
-//        UIGraphicsBeginImageContextWithOptions(captureSize, false, 0.0)
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//
-//        // 元の frame.size を記憶
-//        let originalSize = self.frame.size
-//        // frame.size を一時的に変更
-//        self.frame.size = self.contentSize
-//        self.layer.render(in: context)
-//        // 元に戻す
-//        self.frame.size = originalSize
-//
-//        let capturedImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext();
-//
-//        return capturedImage
-//    }
-//}
+
 extension UIView {
     // オフスクリーン画像を作成
     func captureImage() -> UIImage? {

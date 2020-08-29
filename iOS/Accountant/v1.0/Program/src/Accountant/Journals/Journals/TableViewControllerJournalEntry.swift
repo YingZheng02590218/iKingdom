@@ -11,21 +11,6 @@ import UIKit
 // 仕訳帳クラス
 class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
     
-    @IBAction func showModalView(_ sender: UIButton) {
-//        self.dismiss(animated: true, completion: nil)
-//        let test = "testtesttest"
-//        let controller = UIViewController(activityItems: [test], applicationActivities: nil)//UIViewController()UIActivityViewController
-//        self.present(controller, animated: true, completion: nil)
-    }
-    // 実装前の暫定的に使用する値
-//    let JournalEntries = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","31",]
-//    let summary_debit = ["現金","普通預金","旅費交通費","交際費","交通費","受取利息","減価償却費","雑益","雑損","減価償却累計額","k","l","m","n","o","p","q","減価償却累計額","s","t","u","v","w","x","y","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額"]
-//    let summary_credit = ["現金","普通預金","旅費交通費","交際費","交通費","受取利息","減価償却費","雑益","雑損","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","o","p","q","減価償却累計額","s","減価償却累計額","u","減価償却累計額","w","x","y","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額","減価償却累計額"]
-//    let debit = ["100","1000","10000","100000","1000000","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999",]
-//    let credit = ["100","1000","10000","100000","1000000","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999","9999999",]
-
-//    override func loadView(){}
-    
     @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     @IBOutlet weak var label_company_name: UILabel!
     @IBOutlet weak var label_title: UILabel!
@@ -74,11 +59,46 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
-        
+
         // リロード機能
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
+    }
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+    //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
+//        presentingViewController?.beginAppearanceTransition(false, animated: animated)
+        super.viewWillAppear(animated)
+        // UIViewControllerの表示画面を更新・リロード
+//        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
+        self.tableView.reloadData() // エラーが発生しないか心配
+        self.viewDidLoad() // 2020/07/31
+        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
+//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+    }
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+        // 初期表示位置 OFF
+        scroll = false
+        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
+        // 仕訳データが0件の場合、印刷ボタンを不活性にする
+        if indexPath!.count > 0 {
+            button_print.isEnabled = true
+        }else {
+            button_print.isEnabled = false
+        }
+        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
+//        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        if indexPath != nil && indexPath!.count > 0 {
+            self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
+            self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //セクション0のロウ0は存在しないかもしれないのでこれは誤り
+        }
     }
     // リロード機能
     @objc func refreshTable() {
@@ -118,8 +138,8 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
         if identifier == "longTapped" { // segueがタップ
             if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
-                if let tappedIndexPathh:IndexPath = self.tappedIndexPath! { //代入に成功したら、ロングタップだと判断できる
-                    return true //true:画面遷移させる
+                if let _:IndexPath = self.tappedIndexPath { //代入に成功したら、ロングタップだと判断できる
+                    return true //true: 画面遷移させる
                 }
             }
         }else if identifier == "buttonTapped" {
@@ -143,40 +163,6 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
                 controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
                 self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
             }
-        }
-    }
-    // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
-    //通常、このメソッドは遷移先のViewController(仕訳画面)から戻る際には呼ばれないので、遷移先のdismiss()のクロージャにこのメソッドを指定する
-//        presentingViewController?.beginAppearanceTransition(false, animated: animated)
-        super.viewWillAppear(animated)
-        // UIViewControllerの表示画面を更新・リロード
-//        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
-        self.viewDidLoad() // 2020/07/31
-        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
-        // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
-        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
-    }
-    // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
-        // 初期表示位置 OFF
-        scroll = false
-        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
-        // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if indexPath!.count > 0 {
-            button_print.isEnabled = true
-        }else {
-            button_print.isEnabled = false
-        }
-        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
-//        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        if indexPath != nil && indexPath!.count > 0 {
-            self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
-            self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
-//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //セクション0のロウ0は存在しないかもしれないのでこれは誤り
         }
     }
     
@@ -226,10 +212,9 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース
         let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
-        let counts = dataBaseManager.getJournalEntryCounts(section: section) // 何月のセクションに表示するセルかを引数で渡す
-        let objects = dataBaseManager.getJournalAdjustingEntry(section: section) // 決算整理仕訳
-//        print("月別のセル数:\(counts)")
-        return counts + objects.count //月別の仕訳データ数
+        let objects = dataBaseManager.getJournalEntry(section: section) // 通常仕訳　何月のセクションに表示するセルかを引数で渡す
+        let objectss = dataBaseManager.getJournalAdjustingEntry(section: section) // 決算整理仕訳
+        return objects.count + objectss.count //月別の仕訳データ数
     }
     //セルを生成して返却するメソッド
     var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
@@ -280,10 +265,8 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
             cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
             cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
-            //③
             return cell
         }else {
-//        print("月別のセル:\(objects)")
             //① UI部品を指定　TableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
             cell.backgroundColor = .white // 目印を消す
@@ -323,7 +306,6 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
             cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
             cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
-            //③
             return cell
         }
     }
@@ -627,6 +609,4 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         print(" bestPaper         -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4), \(bestPaper.printableRect.origin.y / 72.0 * 25.4), \(bestPaper.printableRect.size.width / 72.0 * 25.4), \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
         return bestPaper
     }
-
-
 }

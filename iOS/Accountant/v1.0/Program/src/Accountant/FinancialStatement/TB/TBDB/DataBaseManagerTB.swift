@@ -19,7 +19,6 @@ class DataBaseManagerTB {
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let object = dataBaseManagerFinancialStatements.getFinancialStatements()
 
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)書き込みトランザクション内でデータを追加する
@@ -44,13 +43,13 @@ class DataBaseManagerTB {
                     break
                 default:
                     print(l)
+                    break
                 }
             }
         }
     }
     // 合計残高試算表　計算　全ての勘定　合計、残高
     func setAllAccountTotal(){
-        // データベース
         let databaseManagerSettings = DatabaseManagerSettingsCategory()
         let objects = databaseManagerSettings.getAllSettingsCategory()
         for i in 0..<objects.count{
@@ -73,7 +72,7 @@ class DataBaseManagerTB {
     // 合計残高試算表　勘定別　計算
     func calculateAccountTotal(account: String) {
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objects = dataBaseManagerAccount.getAllAccount(account: account)
+        let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account)
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         
@@ -95,7 +94,6 @@ class DataBaseManagerTB {
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -146,7 +144,6 @@ class DataBaseManagerTB {
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -178,7 +175,7 @@ class DataBaseManagerTB {
     // 合計残高試算表　勘定別　計算
     func calculateAccountTotalAdjusting(account: String) {
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objects = dataBaseManagerAccount.getAllAccountAdjusting(account: account)
+        let objects = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account)
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         
@@ -200,7 +197,6 @@ class DataBaseManagerTB {
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
-        // データベース　書き込み
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -230,7 +226,6 @@ class DataBaseManagerTB {
     }
     // 合計残高　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -245,6 +240,7 @@ class DataBaseManagerTB {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
@@ -272,12 +268,12 @@ class DataBaseManagerTB {
             break
         default:
             print(result)
+            break
         }
         return result
     }
     // 合計残高　勘定別決算仕訳の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> Int64 {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -292,6 +288,7 @@ class DataBaseManagerTB {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
@@ -312,12 +309,12 @@ class DataBaseManagerTB {
             break
         default:
             print(result)
+            break
         }
         return result
     }
     // 合計残高　勘定別決算整理後の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> Int64 {
-        let dataBaseManagerAccount = DataBaseManagerAccount()
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -332,6 +329,7 @@ class DataBaseManagerTB {
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         
         // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
         number -= 1 // 0スタートに補正
         
@@ -352,6 +350,7 @@ class DataBaseManagerTB {
             break
         default:
             print(result)
+            break
         }
         return result
     }
