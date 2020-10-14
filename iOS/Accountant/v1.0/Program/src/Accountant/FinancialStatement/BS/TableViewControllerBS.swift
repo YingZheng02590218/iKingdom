@@ -27,25 +27,24 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
 //        dataBaseManager.setMiddleTotal(account_left: debit_category, account_right: credit_category)
         
         // 貸借対照表　計算
-        dataBaseManagerBS.initializeBS()
-        // 貸借対照表　計算
-        dataBaseManagerBSAndPL.initializeBSAndPL()
+//        dataBaseManagerBS.initializeBS()
+        // 設定表示科目　初期化
+//        dataBaseManagerTaxonomy.initializeTaxonomy()
         
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.calculateAmountOfAllAccount()
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        // 試算表　計算
+//        let databaseManager = DataBaseManagerTB()
+//        databaseManager.calculateAmountOfAllAccount()
+//        // 精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-//        label_closingDate.text = "令和xx年3月31日"
-        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // どこで設定した年度のデータを参照するか考える
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "貸借対照表"
         
@@ -55,6 +54,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // 貸借対照表　計算
+        dataBaseManagerBS.initializeBS()
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
@@ -62,9 +63,11 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        // 貸借対照表　初期化　再計算
+        dataBaseManagerBS.initializeBS()
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
         let databaseManagerWS = DataBaseManagerWS()
         databaseManagerWS.calculateAmountOfAllAccount()
@@ -84,7 +87,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     }
     // セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
+        return 30 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
     }
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -110,58 +113,76 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース DatabaseManagerSettingsCategory → DataBaseManagerBSAndPL 2020/07/19
-        // データベース DataBaseManagerBSAndPL → DataBaseManagerSettingsCategoryBSAndPL 2020/07/22
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: section) // どのセクションに表示するセルかを判別するため引数で渡す
+        // データベース DataBaseManagerBSAndPL → DataBaseManagerSettingsTaxonomy 2020/07/22
+        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+//        let objects = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "0",category1: "1",category2: String(section)) // 階層0：貸借対照表、階層1：貸借対照表
 //        return objects.count + 5 // 分類名(流動資産,固定資産など)と合計の行
         switch section {
+            // 大分類のタイトルはセクションヘッダーに表示する
         case 0://資産の部
-            return 1+6+6+objects.count // 大分類合計・中分類(タイトル、合計)・小分類(タイトル、合計)・表記名の数
+            // 階層3　中区分ごとの数を取得
+            let objects0100 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "0") // 流動資産
+            let objects0102 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "2") // 繰延資産
+            // 固定資産
+            let objects3 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "42") // 有形固定資産3
+            let objects4 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
+            let objects5 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
+            print("資産の部", 1+6+3+objects0100.count+objects0102.count+objects3.count+objects4.count+objects5.count)
+//            objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1
+            return 1+6+3+objects0100.count+objects0102.count+objects3.count+objects4.count+objects5.count // 大分類合計1・中分類(タイトル、合計)6・小分類(タイトル、合計)6・表示科目の数
         case 1://負債の部
-            return 1+4+2+objects.count
+            let objects0114 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "4") // 流動負債
+            let objectsCounts3 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "5") // 固定負債
+            print("負債の部", 1+4+objects0114.count+objectsCounts3.count)
+            return 1+4+objects0114.count+objectsCounts3.count
         case 2://純資産の部
-            return 1+4+0+objects.count+1 //+1は、負債純資産合計　の分
+            let objects14 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "9") //株主資本14
+            let objects15 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "10") //評価・換算差額等15
+//            0    1    2    11                    新株予約権
+//            0    1    2    12                    自己新株予約権
+//            0    1    2    13                    非支配株主持分
+//            0    1    2    14                    少数株主持分
+            let objects16 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "11")//新株予約権16
+            let objects22 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "13")//非支配株主持分22
+            print("純資産の部", 1+4+0+objects14.count+objects15.count+objects16.count+objects22.count+1)
+            return 1+4+0+objects14.count+objects15.count+objects16.count+objects22.count+1 //+1は、負債純資産合計　の分
         default:
             return 0
         }
     }
 
     let dataBaseManagerBS = DataBaseManagerBS()
-    let dataBaseManagerBSAndPL = DataBaseManagerBSAndPL()
+    let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // データベース
-//        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL()
+        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         
         switch indexPath.section {
-//大分類
+//大区分
         case 0: // 資産の部
-            // 中分類　中分類ごとの数を取得
-//            let objectsCounts0 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 0)
-//            let objectsCounts1 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 1)
-            // 小分類
-            let objects0 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 0)
-            let objects1 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 1)
-            let objects2 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 2)
-            let objects3 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 3)
-            let objects4 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 4)
-            let objects5 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 5)
-            let objects23 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 23) // 繰越資産
-// 中分類
+            // 階層3　中区分ごとの数を取得
+            let objects0100 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "0") // 流動資産
+            let objects0102 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "2") // 繰延資産
+            // 階層4 小区分
+            let objects3 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "42") // 有形固定資産3
+            let objects4 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
+            let objects5 = dataBaseManagerSettingsTaxonomy.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
+// 中区分
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  流動資産" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+                print("BS", indexPath.row, "  流動資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3: // 中分類名の分を1行追加
+            case objects0100.count + 1: // 中区分タイトルの分を1行追加　流動資産に属する勘定科目の数
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    流動資産合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 0)
+                print("BS", indexPath.row, "    流動資産合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 0)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -172,18 +193,42 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfMiddleCategory.attributedText = attributeText
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3 + 1: // 中分類名の分を1行追加 合計の行を追加
+            case objects0100.count + 1 + 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  固定資産"
+                print("BS", indexPath.row, "  固定資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1: //最後の行の前
+// 小区分
+            // 有形固定資産3
+            case objects0100.count + 1 + 1 + 1: // 112
+                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+                cell.textLabel?.text = "        "+translateSmallCategory(small_category: 3)
+                print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 3)+"★")
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                return cell
+            // 無形固定資産
+            case objects0100.count + 1 + 1 + 1 + objects3.count + 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+                cell.textLabel?.text = "        "+translateSmallCategory(small_category: 4)
+                print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 4)+"★")
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                return cell
+            // 投資その他資産　投資その他の資産
+            case objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+                cell.textLabel?.text = "        "+translateSmallCategory(small_category: 5)
+                print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 5)+"★")
+                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                return cell
+            case objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1: //最後の行の前
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    固定資産合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 1)
+                print("BS", indexPath.row, "    固定資産合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 1)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -194,18 +239,20 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfMiddleCategory.attributedText = attributeText
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1:
+            case objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  繰越資産"
+                print("BS", indexPath.row, "  繰越資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1 + objects23.count + 1:
+            case objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    繰越資産合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 12)
+                print("BS", indexPath.row, "    繰越資産合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 2)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -216,11 +263,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfMiddleCategory.attributedText = attributeText
                 return cell
-            case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1 + objects23.count + 1 + 1: //最後の行
+            case objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1 + 1: //最後の行
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
                 cell.textLabel?.text = "資産合計"
+                print("BS", indexPath.row, "資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-                let text:String = dataBaseManagerBS.getBigCategoryTotal(big_category: 0)
+                let text:String = dataBaseManagerBS.getTotalBig5(big5: 0)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -232,125 +280,83 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
                 // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
-                if dataBaseManagerBS.getBigCategoryTotal(big_category: 0) != dataBaseManagerBS.getBigCategoryTotal(big_category: 3) {
+                if dataBaseManagerBS.getTotalBig5(big5: 0) != dataBaseManagerBS.getTotalBig5(big5: 3) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
                     cell.label_totalOfBigCategory.textColor = .black
                 }
                 return cell
             default:
-// 小分類
-                switch indexPath.row {
-                // 当座資産0
-                case 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 0)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                // 棚卸資産1
-                case 1 + objects0.count + 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 1)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                // その他の資産2
-                case 1 + objects0.count + 1 + objects1.count + 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 2)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                // 有形固定資産3
-                case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 3)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                // 無形固定資産
-                case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + 1 + 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 4)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                // 投資その他資産
-                case 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + 1 + objects4.count + 1 + 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 5)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                default:
-                    // 勘定科目
+// 勘定科目
                     let cell = tableView.dequeueReusableCell(withIdentifier: "account", for: indexPath) as! TableViewCellAccount
                     cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                     cell.textLabel?.minimumScaleFactor = 0.05
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
-                    // 当座資産　0 に該当する表示名
-                    if       indexPath.row >= 2 &&                  // 中分類、小分類　計二行 // 小分類のタイトルより下の行から、中分類合計の行より上
-                             indexPath.row <  2+objects0.count+1 {   // 当座資産0
-                        cell.textLabel?.text = "        "+objects0[indexPath.row-(1+1)].category
-                        // 勘定別の合計　計算
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects0[indexPath.row-(1+1)].BSAndPL_category)
+                    if       indexPath.row >= 1 &&                           // 流動資産タイトルの1行下 中区分タイトルより下の行から、中区分合計の行より上
+                             indexPath.row <  objects0100.count + 1 + 1 {   // 流動資産合計　　　　中区分タイトル + 流動資産 + 合計
+                        cell.textLabel?.text = "        "+objects0100[indexPath.row-(1)].category
+                        print("BS", indexPath.row, "        "+objects0100[indexPath.row-(1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0100[indexPath.row-(1 )].number) // 勘定別の合計　計算
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 2+objects0.count &&
-                              indexPath.row <  2+objects0.count+1+objects1.count+1 { // 棚卸資産1
-                        cell.textLabel?.text = "        "+objects1[indexPath.row-(2+objects0.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects1[indexPath.row-(2+objects0.count+1)].BSAndPL_category)
+                        
+                    }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + 1 &&  // 有形固定資産タイトルの1行下
+                              indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 { // 無形固定資産
+                        cell.textLabel?.text = "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category
+                        print("BS", indexPath.row, "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 2+objects0.count+1+objects1.count &&
-                              indexPath.row <  2+objects0.count+1+objects1.count+1+objects2.count { // その他の資産2
-                        cell.textLabel?.text = "        "+objects2[indexPath.row-(2+objects0.count+1+objects1.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects2[indexPath.row-(2+objects0.count+1+objects1.count+1)].BSAndPL_category)
+                        
+                    }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1 && // 無形固定資産タイトルの1行下
+                              indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 { // 投資その他資産
+                        cell.textLabel?.text = "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category
+                        print("BS", indexPath.row, "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 2+objects0.count+1+objects1.count+1+objects2.count &&
-//                              indexPath.row <  2+objects0.count+1+objects1.count+1+objects2.count+1+1 { //小分類 ※中分類の中で小分類がふたつある（その他の資産2と引当金13）
-//                    }else if indexPath.row >= 2+objects0.count+1+objects1.count+1+objects2.count+1 &&
-                              indexPath.row <  4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1 { // 有形固定資産3
-                        cell.textLabel?.text = "        "+objects3[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects3[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1)].BSAndPL_category)
+                        
+                    }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1 && // 投資その他資産タイトルの1行下
+                              indexPath.row <  objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 { // 固定資産合計
+                        cell.textLabel?.text = "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category
+                        print("BS", indexPath.row, "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count &&
-                              indexPath.row <  4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1 { // 無形固定資産
-                        cell.textLabel?.text = "        "+objects4[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects4[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1)].BSAndPL_category)
-                        cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count &&
-                              indexPath.row <  4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count+1 { // 投資その他資産
-                        cell.textLabel?.text = "        "+objects5[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects5[indexPath.row-(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1)].BSAndPL_category)
-                        cell.label_account.textAlignment = .right
-                    }else if indexPath.row > 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1 &&
-                              indexPath.row < 1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1 + objects23.count + 1 { // 繰延資産
+                    }else if indexPath.row >= objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1 && // 繰延資産タイトルの1行下
+                              indexPath.row < objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1 { // 繰延資産合計
 //                        print(indexPath.row)
 //                        print(1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + 1 + objects4.count + 1 + 1)
 //                        print(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count)
 //                        print(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count+1+objects23.count)
-                        cell.textLabel?.text = "        "+objects23[indexPath.row-(1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects23[indexPath.row-(1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + objects4.count + objects5.count + 3 + 1 + 1+1)].BSAndPL_category)
+                        cell.textLabel?.text = "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category
+                        print("BS", indexPath.row, "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].number)
+                        cell.label_account.textAlignment = .right
+                    }else {
+                        cell.textLabel?.text = "default"
+                        print("BS", indexPath.row, "default")
+                        cell.label_account.text = "default"
                         cell.label_account.textAlignment = .right
                     }
                     return cell
-                }
             }
         case 1: // 負債の部
             // 中分類　中分類ごとの数を取得
-//            let objectsCounts2 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 2)
-            let objectsCounts3 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 3)
-            // 小分類
-            let objects6 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 6)
-            let objects7 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 7)
+            let objects0114 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "4") // 流動負債
+            let objectsCounts3 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "5") // 固定負債
             
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  流動負債"
+                print("BS", indexPath.row, "  流動負債"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case 2 + objects6.count + objects7.count + 1:
+            case objects0114.count + 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    流動負債合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 2)
+                print("BS", indexPath.row, "    流動負債合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 3)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -361,18 +367,20 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfMiddleCategory.attributedText = attributeText
                 return cell
-            case 2 + objects6.count + objects7.count + 2: // 中分類名の分を1行追加 合計の行を追加
+            case objects0114.count + 1 + 1: // 中分類名の分を1行追加 合計の行を追加
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  固定負債"
+                print("BS", indexPath.row, "  固定負債"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case 2 + objects6.count + objects7.count + 2 + 1 + objectsCounts3.count: //最後の行の前
+            case objects0114.count + 1 + 1 + objectsCounts3.count + 1: //最後の行の前 22
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    固定負債合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 3)
+                print("BS", indexPath.row, "    固定負債合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 4)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -383,11 +391,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfMiddleCategory.attributedText = attributeText
                 return cell
-            case 2 + objects6.count + objects7.count + 2 + 1 + objectsCounts3.count + 1: //最後の行
+            case objects0114.count + 1 + 1 + objectsCounts3.count + 1 + 1: //最後の行
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
                 cell.textLabel?.text = "負債合計"
+                print("BS", indexPath.row, "負債合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-                let text:String = dataBaseManagerBS.getBigCategoryTotal(big_category: 1)
+                let text:String = dataBaseManagerBS.getTotalBig5(big5: 1)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -402,56 +411,44 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.label_totalOfBigCategory.textColor = .black
                 return cell
             default:
-                // 小分類
-                switch indexPath.row {
-                case 1:                         // 仕入負債
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 6)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                case 1 + objects6.count + 1:    // その他流動負債？
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-                    cell.textLabel?.text = "        "+translateSmallCategory(small_category: 7)
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                    return cell
-                default:
                     // 勘定科目
                     let cell = tableView.dequeueReusableCell(withIdentifier: "account", for: indexPath) as! TableViewCellAccount
                     cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                     cell.textLabel?.minimumScaleFactor = 0.05
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
-                    if       indexPath.row >= 2 &&                  // 中分類、小分類　計二行
-                             indexPath.row <  2+objects6.count+1 {  // 小分類のタイトルより下の行から、小分類合計の行より上
-                        cell.textLabel?.text = "        "+objects6[indexPath.row-(1+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects6[indexPath.row-(1+1)].BSAndPL_category)
+                    if       indexPath.row >= 1 &&                     // 流動負債タイトルの1行下
+                             indexPath.row <  objects0114.count + 1 {  // 流動負債合計 中区分のタイトルより下の行から、中区分合計の行より上
+                        cell.textLabel?.text = "        "+objects0114[indexPath.row-(1)].category
+                        print("BS", indexPath.row, "        "+objects0114[indexPath.row-(1)].category)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0114[indexPath.row-(1)].number)
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 2+objects6.count &&
-                             indexPath.row <  2+objects6.count+1+objects7.count+1 { //小分類
-                        cell.textLabel?.text = "        "+objects7[indexPath.row-(2+objects6.count+1)].category
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects7[indexPath.row-(2+objects6.count+1)].BSAndPL_category)
+                    }else if indexPath.row >= objects0114.count + 1 + 1 + 1 && // 固定負債タイトルの1行下
+                              indexPath.row <  objects0114.count + 1 + 1 + objectsCounts3.count + 1 { // 固定負債合計
+                        cell.textLabel?.text = "        "+objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].category
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
-                    }else if indexPath.row >= 2+objects6.count + objects7.count+2+1 &&
-                        indexPath.row <  2+objects6.count + objects7.count+2+1+objectsCounts3.count+1 { //小分類 注意：その他流動負債の勘定を正しく表示できていなかった。
-                        cell.textLabel?.text = "        "+objectsCounts3[indexPath.row-(2+objects6.count + objects7.count+2+1)].category //"小分類なし" //Todo
-                        cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objectsCounts3[indexPath.row-(2+objects6.count + objects7.count+2+1)].BSAndPL_category)
+                    }else {
+                        cell.textLabel?.text = "default"
+                        print("BS", indexPath.row, "default")
+                        cell.label_account.text = "default"
                         cell.label_account.textAlignment = .right
                     }
                     return cell
-                }
             }
         case 2: // 純資産の部
-            // 中分類　中分類ごとの数を取得
-//            let objectsCounts4 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 4)
-            // 小分類
-            let objects14 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 14)//株主資本14
-            let objects15 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 15)//評価・換算差額等15
-            let objects16 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 16)//新株予約権16
-            let objects22 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 22)//非支配株主持分22
-// 中分類
+            // 中区分　中区分ごとの数を取得
+            let objects14 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "9" ) //株主資本14
+            let objects15 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "10") //評価・換算差額等15
+            let objects16 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "11") //新株予約権16
+            //            0    1    2    12                    自己新株予約権
+            let objects22 = dataBaseManagerSettingsTaxonomy.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "13") //非支配株主持分22
+            //            0    1    2    14                    少数株主持分
+// 中区分
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  株主資本"
+                print("BS", indexPath.row, "  株主資本"+"★")
                 //                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
@@ -461,7 +458,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    株主資本合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 4)
+                print("BS", indexPath.row, "    株主資本合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 5)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -475,6 +473,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             case objects14.count + 2: // 中分類名の分を1行追加 合計の行を追加
                 let cell = tableView.dequeueReusableCell(withIdentifier: "middleCategory", for: indexPath)
                 cell.textLabel?.text = "  その他の包括利益累計額"
+                print("BS", indexPath.row, "  その他の包括利益累計額"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
             case objects14.count + 2 + objects15.count + 1:
@@ -483,7 +482,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    その他の包括利益累計額合計"
-                let text:String = dataBaseManagerBS.getMiddleCategoryTotal(big_category: indexPath.section, mid_category: 12)
+                print("BS", indexPath.row, "    その他の包括利益累計額合計"+"★")
+                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 12)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -499,12 +499,11 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
-                
                 // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/08/03
                 guard 0 < objects16.count else {return cell} // 1. array.count（要素数）を利用する
-                
                 cell.textLabel?.text = "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category
-                let text:String = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].BSAndPL_category)
+                print("BS", indexPath.row, "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -521,7 +520,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
-                let text:String = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].BSAndPL_category)
+                print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -535,8 +535,9 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             case objects14.count + 2 + objects15.count + 1 + 1 + objects16.count + objects22.count: //最後の行
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
                 cell.textLabel?.text = "純資産合計"
+                print("BS", indexPath.row, "純資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-                let text:String = dataBaseManagerBS.getBigCategoryTotal(big_category: 2)
+                let text:String = dataBaseManagerBS.getTotalBig5(big5: 2)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -553,10 +554,11 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             case objects14.count + 2 + objects15.count + 1 + 1 + objects16.count + objects22.count + 1: //最後の行の下
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
                 cell.textLabel?.text = "負債純資産合計"
+                print("BS", indexPath.row, "負債純資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
 //                print(dataBaseManagerBS.getBigCategoryTotal(big_category: 1) )
 //                print(dataBaseManagerBS.getBigCategoryTotal(big_category: 2) )
-                let text:String = dataBaseManagerBS.getBigCategoryTotal(big_category: 3)
+                let text:String = dataBaseManagerBS.getTotalBig5(big5: 3)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -568,7 +570,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.label_totalOfBigCategory.attributedText = attributeText
                 cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
                 // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
-                if dataBaseManagerBS.getBigCategoryTotal(big_category: 0) != dataBaseManagerBS.getBigCategoryTotal(big_category: 3) {
+                if dataBaseManagerBS.getTotalBig5(big5: 0) != dataBaseManagerBS.getTotalBig5(big5: 3) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
                     cell.label_totalOfBigCategory.textColor = .black
@@ -580,15 +582,17 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
-                if       indexPath.row > 0 &&                        // 株主資本
+                if       indexPath.row >= 1 &&                       // 株主資本
                          indexPath.row <  objects14.count + 1 {      // 株主資本合計
                     cell.textLabel?.text = "        "+objects14[indexPath.row-1].category
-                    cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects14[indexPath.row-1].BSAndPL_category)
+                    print("BS", indexPath.row, "        "+objects14[indexPath.row-1].category)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects14[indexPath.row-1].number)
                     cell.label_account.textAlignment = .right
-                }else if indexPath.row > objects14.count + 2 &&                               //その他の包括利益累計額
-                          indexPath.row <  objects14.count + 2 + objects15.count + 1 + 0 {    //その他の包括利益累計額合計
+                }else if indexPath.row >= objects14.count + 2 + 1 &&                     //その他の包括利益累計額
+                          indexPath.row <   objects14.count + 2 + objects15.count + 1 {    //その他の包括利益累計額合計
                     cell.textLabel?.text = "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category
-                    cell.label_account.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: indexPath.section, bSAndPL_category: objects15[indexPath.row-(objects14.count + 2 + 1)].BSAndPL_category)
+                    print("BS", indexPath.row, "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects15[indexPath.row-(objects14.count + 2 + 1)].number)
                     cell.label_account.textAlignment = .right
                 }else {
                     print("??")
@@ -776,12 +780,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             // 0
 //            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: bounds.height * -1), size: pageSizeee), afterScreenUpdates: false)
             // データベース
-//            let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
+//            let databaseManagerSettings = DatabaseManagerSettingsCategory()
             // 画面上で印刷したい範囲のViewを全て描画させるために、TableViewを最下部まで段階的にスクロールさせる。＊段階的にしなくてもエラーは出なかった
-//            let objects = databaseManagerSettings.getSettings(section: 1) // どのセクションに表示するセルかを判別するため引数で渡す
+//            let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: 1) // どのセクションに表示するセルかを判別するため引数で渡す
 //            self.tableView.scrollToRow(at: IndexPath(row: 5+2+objects.count-1, section: 1), at: UITableView.ScrollPosition.bottom, animated: false) //最後の行を画面の下方に表示する
 //            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: -bounds.height), size: pageSizeee), afterScreenUpdates: false)
-//            let objects2 = databaseManagerSettings.getSettings(section: 2) // どのセクションに表示するセルかを判別するため引数で渡す
+//            let objects2 = databaseManagerSettings.getSettingsTaxonomyAccount(section: 2) // どのセクションに表示するセルかを判別するため引数で渡す
 //            self.tableView.scrollToRow(at: IndexPath(row: 5+0+objects2.count-1, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
 //            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: 0), size: pageSizeee), afterScreenUpdates: false)

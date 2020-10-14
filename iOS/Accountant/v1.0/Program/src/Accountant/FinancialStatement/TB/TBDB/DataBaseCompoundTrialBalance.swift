@@ -14,10 +14,10 @@ import RealmSwift // データベースのインポート
 class DataBaseCompoundTrialBalance: RObject {
     @objc dynamic var fiscalYear: Int = 0          //年度
 //    let dataBaseAccount = List<DataBaseAccount>() //一対多の関連
-    @objc dynamic var debit_total_total: Int64 = 0                     //借方　合計　合計
-    @objc dynamic var credit_total_total: Int64 = 0                     //貸方　合計　合計
-    @objc dynamic var debit_balance_total: Int64 = 0                     //借方　残高　合計
-    @objc dynamic var credit_balance_total: Int64 = 0                     //貸方　残高　合計
+    @objc dynamic var debit_total_total: Int64 = 0                     //借方　合計　集計
+    @objc dynamic var credit_total_total: Int64 = 0                     //貸方　合計　集計
+    @objc dynamic var debit_balance_total: Int64 = 0                     //借方　残高　集計
+    @objc dynamic var credit_balance_total: Int64 = 0                     //貸方　残高　集計
 }
 // 月次合計残高試算表クラス
 class DataBaseCompoundTrialBalanceMonth: DataBaseCompoundTrialBalance {

@@ -19,17 +19,19 @@ class Initial {
     }
     // 設定画面　勘定科目　勘定科目一覧を初期化
     func initialiseMasterData(){
-        let databaseManagerSettingsCategory = DatabaseManagerSettingsCategory() //データベースマネジャー
+        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         // データベースに設定画面の勘定科目一覧があるかをチェック
         // マイグレーション　CSVファイルに変更がある場合、一度作成したモデルオブジェクトを削除してから新たに作り直す　考える
-        if !databaseManagerSettingsCategory.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+        if !databaseManagerSettingsTaxonomyAccount.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
-            masterData.readMasterDataFromCSV()   // マスターデータを作成する
+//            masterData.readMasterDataFromCSV()   // マスターデータを作成する
+            masterData.readMasterDataFromCSVOfTaxonomyAccount()   
         }
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
+        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         if !dataBaseManagerSettingsCategoryBSAndPL.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
-            masterData.readMasterDataFromCSVOfBSAndPL()
+//            masterData.readMasterDataFromCSVOfBSAndPL()
+            masterData.readMasterDataFromCSVOfTaxonomy()
         }
     }
     // 会計帳簿棚

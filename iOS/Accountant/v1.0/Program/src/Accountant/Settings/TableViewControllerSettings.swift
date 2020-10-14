@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 設定
 class TableViewControllerSettings: UITableViewController {
 
     override func viewDidLoad() {

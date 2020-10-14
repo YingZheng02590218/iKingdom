@@ -32,7 +32,7 @@ class DataBaseManagerPeriod {
         return objects
     }
     // 特定のモデルオブフェクトの取得　会計帳簿
-    func getSettingsPeriod() -> DataBaseAccountingBooks {
+    func getSettingsPeriod() -> DataBaseAccountingBooks { // メソッド名を変更する
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルをひとつ取得する

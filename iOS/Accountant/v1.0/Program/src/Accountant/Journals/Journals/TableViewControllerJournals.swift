@@ -1,5 +1,5 @@
 //
-//  TableViewControllerJournalEntry.swift
+//  TableViewControllerJournals.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/03/20.
@@ -9,7 +9,7 @@
 import UIKit
 
 // 仕訳帳クラス
-class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
+class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
     
     @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     @IBOutlet weak var label_company_name: UILabel!
@@ -27,31 +27,26 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         // tableViewにrecognizerを設定
         tableView.addGestureRecognizer(longPressRecognizer)
         
-        // ToDo
+        // アプリ初期化
         let initial = Initial()
         initial.initialize()
-        
-        // 表示機能
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.calculateAmountOfAllAccount()
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        // 表示機能
+//        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+//        databaseManager.calculateAmountOfAllAccount()
+//        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-//        label_closingDate.text = "令和xx年3月31日"
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // どこで設定した年度のデータを参照するか考える
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "仕訳帳"
-
         // データベース　注意：Initialより後に記述する
-        // どこで設定した年度のデータを参照するか考える
         Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
         scroll = true
@@ -59,7 +54,6 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
-
         // リロード機能
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -122,15 +116,19 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
         let point = recognizer.location(in: tableView)
         let indexPath = tableView.indexPathForRow(at: point)
         
-        if indexPath == nil {
-            
-        } else if recognizer.state == UIGestureRecognizer.State.began  {
-            // 長押しされた場合の処理
-            print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
-            // ロングタップされたセルの位置をフィールドで保持する
-            self.tappedIndexPath = indexPath
-            // 別の画面に遷移 仕訳画面
-            performSegue(withIdentifier: "longTapped", sender: nil)
+        if indexPath?.section == 12 {
+            print("空白行を長押し")
+        }else {
+            if indexPath == nil {
+                
+            } else if recognizer.state == UIGestureRecognizer.State.began  {
+                // 長押しされた場合の処理
+                print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
+                // ロングタップされたセルの位置をフィールドで保持する
+                self.tappedIndexPath = indexPath
+                // 別の画面に遷移 仕訳画面
+                performSegue(withIdentifier: "longTapped", sender: nil)
+            }
         }
     }
     // 追加機能　画面遷移の準備の前に入力検証
@@ -179,7 +177,15 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
     }
     // セクションの数を設定する
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
+        // 空白行対応
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objects = dataBaseManagerAccount.getJournalEntryAll() // 通常仕訳　全
+        let objectss = dataBaseManagerAccount.getAdjustingEntryAll() // 決算整理仕訳　全
+        if objects.count + objectss.count <= 12 {
+            return 13 // 空白行を表示するためセクションを1つ追加
+        }else {
+            return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
+        }
     }
     // セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -211,102 +217,162 @@ class TableViewControllerJournalEntry: UITableViewController, UIGestureRecognize
     //セルの数を、モデル(仕訳)の数に指定
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース
-        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
-        let objects = dataBaseManager.getJournalEntry(section: section) // 通常仕訳　何月のセクションに表示するセルかを引数で渡す
+        let dataBaseManager = DataBaseManagerJournalEntry()
+        let objects = dataBaseManager.getJournalEntry(section: section) // 通常仕訳
         let objectss = dataBaseManager.getJournalAdjustingEntry(section: section) // 決算整理仕訳
-        return objects.count + objectss.count //月別の仕訳データ数
+        // 空白行対応
+        if section == 12 { // 空白行
+            let dataBaseManagerAccount = DataBaseManagerAccount()
+            let objects = dataBaseManagerAccount.getJournalEntryAll() // 通常仕訳　全
+            let objectss = dataBaseManagerAccount.getAdjustingEntryAll() // 決算整理仕訳　全
+            if objects.count + objectss.count <= 14 {
+                return 14 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
+            }else {
+                return 0 // 8件以上ある場合　不足分は0
+            }
+        }else {
+            return objects.count + objectss.count //月別の仕訳データ数
+        }
     }
     //セルを生成して返却するメソッド
     var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
-        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
-
-        if indexPath.row >= objects.count {
-            let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section) // 決算整理仕訳
-            //① UI部品を指定　TableViewCell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
-            cell.backgroundColor = .lightGray // 目印
-            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
-            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-            if Number == objectss[indexPath.row-objects.count].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
-            }
-            let d = "\(objectss[indexPath.row-objects.count].date)" // 日付
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row == 0 {
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }else{
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }
-            }else{
-                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-            }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(1))" // 末尾1文字の「日」         //日付
-            }else{
-                cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
-            cell.label_list_date.textAlignment = NSTextAlignment.right
-            cell.label_list_summary_debit.text = " (\(objectss[indexPath.row-objects.count].debit_category))"     //借方勘定
-            cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-            cell.label_list_summary_credit.text = "(\(objectss[indexPath.row-objects.count].credit_category)) "   //貸方勘定
-            cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-            cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].smallWritting) "              //小書き
-            cell.label_list_summary.textAlignment = NSTextAlignment.left
-            let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")  // 丁数を取得
-            cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
-            let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")    // 丁数を取得
-            cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
-            cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
-            return cell
-        }else {
+        if indexPath.section == 12 {// 空白行
             //① UI部品を指定　TableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
             cell.backgroundColor = .white // 目印を消す
-            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
-            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-            if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
-            }
-            let d = "\(objects[indexPath.row].date)" // 日付
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row == 0 {
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }else{
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }
-            }else{
-                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-            }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
-            }else{
-                cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
-            cell.label_list_date.textAlignment = NSTextAlignment.right
-            cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
-            cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-            cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
-            cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-            cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
-            cell.label_list_summary.textAlignment = NSTextAlignment.left
-            let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
-            cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
-            let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
-            cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
-            cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
+            cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
+            cell.label_list_date.text = ""     // 末尾2文字の「日」         //日付
+            cell.label_list_summary_debit.text = ""     //借方勘定
+            cell.label_list_summary_credit.text = ""   //貸方勘定
+            cell.label_list_summary.text = ""      //小書き
+            cell.label_list_number_left.text = ""       // 丁数
+            cell.label_list_number_right.text = ""
+            cell.label_list_debit.text = ""        //借方金額 注意：空白を代入しないと、変な値が入る。
+            cell.label_list_credit.text = ""       //貸方金額
+            // セルの選択不可にする
+//            cell.selectionStyle = .none
             return cell
+        }else { // 空白行ではない場合
+            //① UI部品を指定　TableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
+            
+            let dataBaseManager = DataBaseManagerJournalEntry()
+            let objects = dataBaseManager.getJournalEntry(section: indexPath.section)
+            
+            if indexPath.row >= objects.count {
+                let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section) // 決算整理仕訳
+                
+                cell.backgroundColor = .lightGray // 目印
+                //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+                // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+                if Number == objectss[indexPath.row-objects.count].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                    indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
+                }
+                let d = "\(objectss[indexPath.row-objects.count].date)" // 日付
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row == 0 {
+                    let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                    if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }else{
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }
+                }else{
+                    cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+                }
+                let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+                if date == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(1))" // 末尾1文字の「日」         //日付
+                }else{
+                    cell.label_list_date.text = "\(objectss[indexPath.row-objects.count].date.suffix(2))" // 末尾2文字の「日」         //日付
+                }
+                cell.label_list_date.textAlignment = NSTextAlignment.right
+                cell.label_list_summary_debit.text = " (\(objectss[indexPath.row-objects.count].debit_category))"     //借方勘定
+                cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+                cell.label_list_summary_credit.text = "(\(objectss[indexPath.row-objects.count].credit_category)) "   //貸方勘定
+                cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+                cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].smallWritting) "              //小書き
+                cell.label_list_summary.textAlignment = NSTextAlignment.left
+                if objectss[indexPath.row-objects.count].debit_category == "損益勘定" { // 損益勘定の場合
+                    cell.label_list_number_left.text = ""
+                }else{
+                    let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")  // 丁数を取得
+                    cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
+                }
+                if objectss[indexPath.row-objects.count].credit_category == "損益勘定" { // 損益勘定の場合
+                    cell.label_list_number_right.text = ""
+                }else{
+                    let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")    // 丁数を取得
+                    cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
+                }
+                cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
+                cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
+                // セルの選択を許可
+                cell.selectionStyle = .default
+                return cell
+            }else {
+                //① UI部品を指定　TableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! TableViewCell
+                cell.backgroundColor = .white // 目印を消す
+                //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+                // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+                if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                    indexPathForAutoScroll = indexPath                              // セルの位置　を覚えておく
+                }
+                let d = "\(objects[indexPath.row].date)" // 日付
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row == 0 {
+                    let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                    if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }else{
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }
+                }else{
+                    cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+                }
+                let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+                if date == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
+                }else{
+                    cell.label_list_date.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
+                }
+                cell.label_list_date.textAlignment = NSTextAlignment.right
+                cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
+                cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+                cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
+                cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+                cell.label_list_summary.text = "\(objects[indexPath.row].smallWritting) "              //小書き
+                cell.label_list_summary.textAlignment = NSTextAlignment.left
+                if objects[indexPath.row].debit_category == "損益勘定" { // 損益勘定の場合
+                    cell.label_list_number_left.text = ""
+                }else{
+                    let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
+                    cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
+                }
+                if objects[indexPath.row].credit_category == "損益勘定" { // 損益勘定の場合
+                    cell.label_list_number_right.text = ""
+                }else{
+                    let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
+                    cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
+                }
+                cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
+                cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
+                // セルの選択を許可
+                cell.selectionStyle = .default
+                return cell
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.section {
+            // 選択不可にしたい場合は"nil"を返す
+            case 12:
+                return nil
+            default:
+                return indexPath
         }
     }
     //カンマ区切りに変換（表示用）

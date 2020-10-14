@@ -8,7 +8,7 @@
 
 import UIKit
 
-// 試算表クラス
+// 試算表クラス　決算整理前
 class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
 
     @IBOutlet weak var view_top: UIView!
@@ -19,9 +19,9 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var segmentedControl_switch: UISegmentedControl!
     @IBAction func segmentedControl(_ sender: Any) {
         if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "合計試算表"
+            label_title.text = "決算整理前合計試算表"
         }else {
-            label_title.text = "残高試算表"
+            label_title.text = "決算整理前残高試算表"
         }
         TableView_TB.reloadData()
     }
@@ -31,29 +31,26 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         TableView_TB.delegate = self
         TableView_TB.dataSource = self
-        
-        // 合計額を計算
-        let databaseManager = DataBaseManagerTB()
-        databaseManager.calculateAmountOfAllAccount()
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
-        
+//        // 合計額を計算
+//        let databaseManager = DataBaseManagerTB()
+//        databaseManager.calculateAmountOfAllAccount()
+//        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-//        label_closingDate.text = "令和xx年3月31日"
-        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         // どこで設定した年度のデータを参照するか考える
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "合計試算表"
+            label_title.text = "決算整理前合計試算表"
         }else {
-            label_title.text = "残高試算表"
+            label_title.text = "決算整理前残高試算表"
         }
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -61,12 +58,15 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // 合計額を計算
+        let databaseManager = DataBaseManagerTB()
+        databaseManager.calculateAmountOfAllAccount()
 //        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
     }
     
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -81,17 +81,15 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     //セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objects = databaseManagerSettings.getAllSettingsCategory()
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
         return objects.count + 1 //合計額の行の分
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        let objects = databaseManagerSettings.getAllSettingsCategory()
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
+        let databaseManager = DataBaseManagerTB()
         if indexPath.row < objects.count {
             //① UI部品を指定
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TableViewCellTB
@@ -101,14 +99,14 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.label_account.textAlignment = NSTextAlignment.center
             switch segmentedControl_switch.selectedSegmentIndex {
             case 0: // 合計　借方
-                cell.label_debit.text = databaseManager.setComma(amount: databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
+                cell.label_debit.text = setComma(amount: databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
                     // 合計　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
+                cell.label_credit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
                 break
             case 1: // 残高　借方
-                cell.label_debit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
+                cell.label_debit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
                     // 残高　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
+                cell.label_credit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
                 break
             default:
                 print("cell_TB")
@@ -123,14 +121,14 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
 //            switch r {
             switch segmentedControl_switch.selectedSegmentIndex {
             case 0: // 合計　借方
-                cell.label_debit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.debit_total_total)
+                cell.label_debit.text = setComma(amount: object.compoundTrialBalance!.debit_total_total)
                     // 合計　貸方
-                cell.label_credit.text = databaseManager.setComma(amount: object.compoundTrialBalance!.credit_total_total)
+                cell.label_credit.text = setComma(amount: object.compoundTrialBalance!.credit_total_total)
                 break
             case 1: // 残高　借方
-                cell.label_debit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+                cell.label_debit.text = setComma(amount:object.compoundTrialBalance!.debit_balance_total)
                     // 残高　貸方
-                cell.label_credit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
+                cell.label_credit.text = setComma(amount:object.compoundTrialBalance!.credit_balance_total)
                 break
             default:
                 print("cell_last_TB")
@@ -143,6 +141,34 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             return cell
         }
     }
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
+            return ""
+        }else {
+            return addComma(string: amount.description)
+        }
+    }
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
+    }
+    
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
