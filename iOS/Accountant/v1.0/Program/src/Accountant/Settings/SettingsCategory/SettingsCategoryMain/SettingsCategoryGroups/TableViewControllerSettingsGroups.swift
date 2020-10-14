@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 種類別勘定科目一覧　画面
 class TableViewControllerSettingsGroups: UITableViewController {
 
     override func viewDidLoad() {

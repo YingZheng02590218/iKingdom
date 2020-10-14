@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 会計期間クラス
 class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresentationControllerDelegate {
 
     override func viewDidLoad() {

@@ -1,5 +1,5 @@
 //
-//  DataBaseManagerBSAndPL.swift
+//  DataBaseManagerTaxonomy.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/07/19.
@@ -9,108 +9,110 @@
 import Foundation
 import RealmSwift // データベースのインポート
 
-// 設定表記名クラス
-class DataBaseManagerBSAndPL {
+// 表示科目クラス
+class DataBaseManagerTaxonomy {
 
-    func initializeBSAndPL(){
-        // 設定表記名
-        let DM = DataBaseManagerSettingsCategoryBSAndPL()
-        let objects = DM.getAllSettingsCategoryBSAndPL()
-        // 設定表記名に存在する表記名の数だけ、計算とDBへの書き込みを行う
+    // 初期化
+    func initializeTaxonomy(){
+        // 設定表示科目
+        let dataBaseManager = DataBaseManagerSettingsTaxonomy()
+        let objects = dataBaseManager.getAllSettingsTaxonomy()
+        // 設定表示科目に存在する表示科目の数だけ、計算とDBへの書き込みを行う
         for i in 0..<objects.count {
-            setBSAndPLCategoryTotal(big_category: objects[i].big_category, bSAndPL_category: objects[i].BSAndPL_category)
+            setBSAndPLCategoryTotal(big_category: Int(objects[i].category2)!, number: objects[i].number)
         }
     }
-    // 設定表記名　取得　表記名別の勘定
-    func getObjectsInBSAndPLCategory(bSAndPL_category: Int) -> Results<DataBaseSettingsCategory> {
-        // (1)Realmのインスタンスを生成する
+    // 取得　設定勘定科目　設定表示科目の連番から設定表示科目別の設定勘定科目
+    func getAccountsInTaxonomy(numberOfTaxonomy: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsCategory.self) // モデル
-        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        objects = objects.filter("BSAndPL_category == \(bSAndPL_category)")
-                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+//        // 設定表示科目クラス
+//        let object = realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: number)
+        // 設定勘定科目クラス
+        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+//        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        objects = objects.filter("numberOfTaxonomy LIKE '\(numberOfTaxonomy)'")
+//                            .filter("category0 LIKE '\(object!.category0)'") // 大区分
+//                            .filter("category1 LIKE '\(object!.category1)'") // 中区分
+//                            .filter("category2 LIKE '\(object!.category2)'") // 小区分
+//                            .filter("category3 LIKE '\(object!.category3)'")
+//                            .filter("category4 LIKE '\(object!.category4)'")
+//                            .filter("category5 LIKE '\(object!.category5)'")
+//                            .filter("category6 LIKE '\(object!.category6)'")
+//                            .filter("category7 LIKE '\(object!.category7)'")
+//                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
         if objects.count == 0 {
-            print("ゼロ")
+//            print("ゼロ　getAccountsInTaxonomy", numberOfTaxonomy)
+        }else {
+            print("getAccountsInTaxonomy", numberOfTaxonomy)
         }
         return objects
     }
-    // 設定表記名　取得　表記名の名称
-    func getNameBSAndPLCategory(bSAndPL_category: Int) -> String {
-        // (1)Realmのインスタンスを生成する
+    // 取得　設定表示科目　設定表示科目の名称
+    func getNameOfSettingsTaxonomy(number: Int) -> String {
         let realm = try! Realm()
-        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsCategoryBSAndPL.self) // モデル
-        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        objects = objects.filter("BSAndPL_category == \(bSAndPL_category)")
-        if objects.count == 0 {
-            print("ゼロ")
-        }
-        return objects[0].category
+        let object = realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: number)
+        return object!.category
+    }
+    // 取得　設定表示科目　設定表示科目の大区分
+    func getCategory2OfSettingsTaxonomy(number: Int) -> Int {
+        let realm = try! Realm()
+        let object = realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: number)
+        return Int(object!.category2)!
     }
     /**
-    * 表記名　読込みメソッド
+    * 表示科目　読込みメソッド
     * 表示名別の合計をデータベースから読み込む。
     * @param account 大分類
     * @param account 勘定名
     * @return result 合計額
     */
-    // 表示名　取得 表示名別の合計
-    func getBSAndPLCategoryTotal(big_category: Int, bSAndPL_category: Int) -> String {
-        // 開いている会計帳簿を取得
+    // 取得 表示科目　表示名別の合計
+    func getTotalOfTaxonomy(number: Int) -> String {
+        // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-                
-        // 表記名の名称を取得
-        let accountName = getNameBSAndPLCategory(bSAndPL_category: bSAndPL_category)
-        
-        // データベース　書き込み
-        // (1)Realmのインスタンスを生成する
+        // 設定表示科目の連番から表示科目の名称を取得
+        let accountName = getNameOfSettingsTaxonomy(number: number)
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルを全て取得する
-        // 表記名クラス
-        var objectss = realm.objects(DataBaseBSAndPLAccount.self)
+        // 表示科目クラス
+        var objectss = realm.objects(DataBaseTaxonomy.self)
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
                             .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
 //                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-
-        let result:Int64 = objectss[0].total
+        var result:Int64 = 0
+        if objectss.count > 0 {
+            result = objectss[0].total
+        }else {
+            print("accountName LIKE '\(accountName)'が検索でヒットしなかった？")
+        }
         //カンマを追加して文字列に変換した値を返す
         return setComma(amount: result)
     }
     /**
-    * 表記名　書込みメソッド
-    * 表示名別の合計額をデータベースに書き込む。
+    * 表示科目　書込みメソッド
+    * 表示科目別の合計額をデータベースに書き込む。
     * @param big_category 大分類
-    * @param bSAndPL_category 表記名
+    * @param number 設定表示科目の連番
     * @return なし
     */
-    func setBSAndPLCategoryTotal(big_category: Int, bSAndPL_category: Int) {
-        // 開いている会計帳簿を取得
+    func setBSAndPLCategoryTotal(big_category: Int, number: Int) {
+        // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-
-        // 表記名の名称を取得
-        let accountName = getNameBSAndPLCategory(bSAndPL_category: bSAndPL_category)
-        
+        // 設定表示科目の名称を取得
+        let accountName = getNameOfSettingsTaxonomy(number: number)
+        let category2 = getCategory2OfSettingsTaxonomy(number: number)
         // 計算
-        let BSAndPLCategoryTotalAmount = culculatAmountOfBSAndPLAccount(big_category: big_category, bSAndPL_category: bSAndPL_category)
+        let BSAndPLCategoryTotalAmount = culculatAmountOfBSAndPLAccount(big_category: category2, numberOfTaxonomy: number)
         
-        // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objectss = realm.objects(DataBaseBSAndPLAccount.self) // モデル
-        // 希望する勘定だけを抽出する 表記名
+        var objectss = realm.objects(DataBaseTaxonomy.self)
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-                            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+                            .filter("accountName LIKE '\(accountName)'")
         if objectss.count == 0 {
-            print("ゼロ")
+            print("ゼロ　setBSAndPLCategoryTotal")
         }
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
@@ -118,18 +120,18 @@ class DataBaseManagerBSAndPL {
         }
     }
     /**
-    * 表記名　計算メソッド
+    * 表示科目　計算メソッド
     * 表示名に該当する勘定の合計を計算して合計額を返す。
     * @param account 大分類
     * @param bSAndPL_category 表記名
     * @return BSAndPLCategoryTotalAmount 合計額
     */
-    func culculatAmountOfBSAndPLAccount(big_category: Int, bSAndPL_category: Int) -> Int64 {
-        // 設定表記名にある勘定を取得する
-        let objects = getObjectsInBSAndPLCategory(bSAndPL_category: bSAndPL_category)
+    func culculatAmountOfBSAndPLAccount(big_category: Int, numberOfTaxonomy: Int) -> Int64 {
+        // 設定表示科目に紐づけられた設定勘定科目を取得する
+        let objects = getAccountsInTaxonomy(numberOfTaxonomy: numberOfTaxonomy)
         var BSAndPLCategoryTotalAmount: Int64 = 0            // 累計額
         // オブジェクトを作成 勘定
-        for i in 0..<objects.count{ //表記名に該当する勘定の金額を合計する
+        for i in 0..<objects.count{ //表示科目に該当する勘定の金額を合計する
             let totalAmount = getTotalAmount(account: objects[i].category)
             let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: objects[i].category)
             if totalDebitOrCredit == "-"{
@@ -139,13 +141,6 @@ class DataBaseManagerBSAndPL {
             }
         }
         return BSAndPLCategoryTotalAmount
-    }
-    // 合計残高　勘定別の合計と借又貸 取得
-    func getAccountTotal(big_category: Int, bSAndPL_category: Int) -> String {
-        let totalAmount = getBSAndPLCategoryTotal(big_category: big_category, bSAndPL_category: bSAndPL_category)  // 合計を取得
-//        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
-
-        return "\(totalAmount)"
     }
     /**
     * 合計　取得メソッド
@@ -171,16 +166,16 @@ class DataBaseManagerBSAndPL {
 //                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
 
         if objectss.count == 0 {
-            print("ゼロ")
+            print("ゼロ　getTotalAmount")
         }
         var result:Int64 = 0
-        // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].debit_total_AfterAdjusting > objectss[0].credit_total_AfterAdjusting {
-            result = objectss[0].debit_total_AfterAdjusting
-        }else if objectss[0].debit_total_AfterAdjusting < objectss[0].credit_total_AfterAdjusting {
-            result = objectss[0].credit_total_AfterAdjusting
+        // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
+        if objectss[0].debit_balance_AfterAdjusting > objectss[0].credit_balance_AfterAdjusting {
+            result = objectss[0].debit_balance_AfterAdjusting
+        }else if objectss[0].debit_balance_AfterAdjusting < objectss[0].credit_balance_AfterAdjusting {
+            result = objectss[0].credit_balance_AfterAdjusting
         }else {
-            result = objectss[0].debit_total_AfterAdjusting
+            result = objectss[0].debit_balance_AfterAdjusting
         }
         return result
     }
@@ -192,22 +187,18 @@ class DataBaseManagerBSAndPL {
     * @return  "" プラス
     */
     func getTotalDebitOrCredit(big_category: Int, account: String) -> String {
-        // 開いている会計帳簿を取得
+        // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
-        // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objectss = realm.objects(DataBaseAccount.self) // モデル
-        // 希望する勘定だけを抽出する
+        var objectss = realm.objects(DataBaseAccount.self)
         objectss = objectss.filter("fiscalYear == \(fiscalYear)")
                             .filter("accountName LIKE '\(account)'")
 //                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
         if objectss.count == 0 {
-            print("ゼロ")
+            print("ゼロ　getTotalDebitOrCredit")
         }
         var DebitOrCredit:String = "" // 借又貸
         // 借方と貸方で金額が大きい方はどちらか
@@ -224,26 +215,25 @@ class DataBaseManagerBSAndPL {
             switch DebitOrCredit {
             case "貸":
                 PositiveOrNegative = "-"
+                break
             default:
                 PositiveOrNegative = ""
+                break
             }
         default: // 1,2,4（負債、純資産、収益）
             switch DebitOrCredit {
-                case "借":
+            case "借":
                 PositiveOrNegative = "-"
                 break
             default:
                 PositiveOrNegative = ""
+                break
             }
         }
         return PositiveOrNegative
     }
     // コンマを追加
     func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
 //        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
 //            return ""
 //        }else {
@@ -258,7 +248,11 @@ class DataBaseManagerBSAndPL {
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String{
+    func addComma(string :String) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
         if(string != "") { // ありえないでしょう
             let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
             return formatter.string(from: NSNumber(value: Double(string)!))!

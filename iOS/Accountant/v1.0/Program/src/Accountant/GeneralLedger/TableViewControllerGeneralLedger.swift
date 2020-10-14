@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 総勘定元帳
 class TableViewControllerGeneralLedger: UITableViewController {
 
     @IBOutlet var TableView_generalLedger: UITableView!
@@ -44,49 +45,68 @@ class TableViewControllerGeneralLedger: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 12
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "資産の部"
-        case 1:
-            return "負債の部"
-        case 2:
-            return "純資産の部"
-        case 3:
-            return "費用の部"
-        case 4:
-            return "収益の部"
+        case 0: return    "流動資産"
+        case 1: return    "固定資産"
+        case 2: return    "繰延資産"
+        case 3: return    "流動負債"
+        case 4: return    "固定負債"
+        case 5: return    "資本"
+        case 6: return    "売上"
+        case 7: return    "売上原価"
+        case 8: return    "販売費及び一般管理費"
+        case 9: return    "営業外損益"
+        case 10: return    "特別損益"
+        case 11: return    "税金"
+
+//        case 0: return    "当座資産"
+//        case 1: return    "棚卸資産"
+//        case 2: return    "その他の流動資産"
+//        case 3: return    "有形固定資産"
+//        case 4: return    "無形固定資産"
+//        case 5: return    "投資その他の資産"
+//        case 6: return    "繰延資産"
+//        case 7: return    "仕入債務"
+//        case 8: return    "その他の流動負債"
+//        case 9: return    "長期債務"
+//        case 10: return    "株主資本"
+//        case 11: return    "評価・換算差額等"
+//        case 12: return    "新株予約権"
+//        case 13: return    "売上原価"
+//        case 14: return    "製造原価"
+//        case 15: return    "営業外収益"
+//        case 16: return    "営業外費用"
+//        case 17: return    "特別利益"
+//        case 18: return    "特別損失"
         default:
             return ""
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: section) // どのセクションに表示するセルかを判別するため引数で渡す
         return objects.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
-        //① UI部品を指定　TableViewCellCategory
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath)
         // 勘定科目の名称をセルに表示する
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)")
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)")
-        if objectss.count > 0 || objectsss.count > 0 {
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 仕訳
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
+        let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
+        let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
+        if objectss.count > 0 || objectsss.count > 0 || objectssss.count > 0 || objectsssss.count > 0 {
             cell.textLabel?.textColor = .black
         }else {
             cell.textLabel?.textColor = .lightGray
@@ -107,11 +127,8 @@ class TableViewControllerGeneralLedger: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.TableView_generalLedger.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
-//        let cell = self.TableView_generalLedger.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath)
         // segue.destinationの型はUIViewController
         let viewControllerGenearlLedgerAccount = segue.destination as! ViewControllerGenearlLedgerAccount
         // 遷移先のコントローラに値を渡す

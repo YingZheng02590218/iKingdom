@@ -23,7 +23,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
         // データベース
-        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerPeriod()
         let fiscalYear = dataBaseManager.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
         label_date_year.text = fiscalYear.description + "年" 
@@ -32,15 +32,15 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
         // 差引残高　計算
-        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account)
+        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account) // 毎回、計算は行わない
         // リロード機能は使用不可のため不要
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+//    override func viewWillAppear(_ animated: Bool) {
         // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
 //        self.loadView()
 //        self.viewDidLoad()
-    }
+//    }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
@@ -54,7 +54,15 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
+        // 空白行対応
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
+        let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
+        if objects.count + objectss.count <= 30 {
+            return 13 // 空白行を表示するためセクションを1つ追加
+        }else {
+            return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
+        }
     }
     // セクションヘッダーの高さを決める
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -86,10 +94,23 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     //セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース
-        let dataBaseManagerAccount = DataBaseManagerAccount() //データベースマネジャー
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(section: section, account: account) // 何月のセクションに表示するセルかを引数で渡す　通常仕訳
-        let objectss = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(section: section, account: account) // 決算整理仕訳
-        return objects.count + objectss.count //月別の仕訳データ数
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objects = dataBaseManagerAccount.getJournalEntryInAccount(section: section, account: account) // 通常仕訳　勘定別に月別に取得
+        let objectss = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(section: section, account: account) // 決算整理仕訳　勘定別に月別に取得
+//        let objectsss = dataBaseManagerAccount.getPLAccount(section: section)
+        // 空白行対応
+        if section == 12 { // 空白行
+            let dataBaseManagerAccount = DataBaseManagerAccount()
+            let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
+            let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
+            if objects.count + objectss.count <= 39 {
+                return 39 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
+            }else {
+                return 0 // 39件以上ある場合　不足分は0
+            }
+        }else {
+            return objects.count + objectss.count //月別の仕訳データ数
+        }
     }
     
     var account :String = "" // 勘定名
@@ -98,118 +119,173 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     //セルを生成して返却するメソッド
 //    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
-        let dataBaseManagerAccount = DataBaseManagerAccount() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(section: indexPath.section, account: account) // 何月のセクションに表示するセルかを判別するため引数で渡す
-//        let objects = dataBaseManagerAccount.getAccountTest(section: indexPath.section, account: account)
-//        print("月別のセル:\(objects)")
-
         //① UI部品を指定　TableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as! TableViewCellGeneralLedgerAccount
-        print(objects.count)
-        if indexPath.row >= objects.count { // 通常仕訳　の数以上の場合 決算整理仕訳
-            cell.backgroundColor = .lightGray // 目印
-            let objectss = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(section: indexPath.section, account: account) // 何月のセクションに表示するセルかを判別するため引数で渡す
-            
-            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
-            
-            let d = "\(objectss[indexPath.row-objects.count].date)" // 日付
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row-objects.count == 0 {
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }else{
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                }
-            }else{
-                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-            }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date_day.text = "\(objectss[indexPath.row-objects.count].date.suffix(1))" // 末尾1文字の「日」         //日付
-            }else{
-                cell.label_list_date_day.text = "\(objectss[indexPath.row-objects.count].date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
-            cell.label_list_date_day.textAlignment = NSTextAlignment.right
-            //        cell.label_list_summary_debit.text = " (\(objectss[indexPath.row].debit_category))"     //借方勘定
-            //        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-            //        cell.label_list_summary_credit.text = "(\(objectss[indexPath.row].credit_category)) "   //貸方勘定
-            //        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-            if account == "\(objectss[indexPath.row-objects.count].debit_category)" { // 借方勘定の場合                      //この勘定が借方の場合
-                cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].credit_category) "             //摘要　相手方勘定なので貸方
-                cell.label_list_summary.textAlignment = NSTextAlignment.right
-                let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")
-                // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
-                cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
-                cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
-                cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
-            }else if account == "\(objectss[indexPath.row-objects.count].credit_category)" {  // 貸方勘定の場合
-                cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].debit_category) "              //摘要　相手方勘定なので借方
-                cell.label_list_summary.textAlignment = NSTextAlignment.left
-                let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")
-                // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
-                cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
-                cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
-                cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
-            }
-            // 差引残高　差引残高クラスで計算した計算結果を取得
-            let balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
-            cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
-            let balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
-            cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
-        }else { // 通常仕訳
-            //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+
+        if indexPath.section == 12 {// 空白行
             cell.backgroundColor = .white // 目印を消す
-            let d = "\(objects[indexPath.row].date)" // 日付
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row == 0 {
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+            cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
+            cell.label_list_date_day.text = ""     // 末尾2文字の「日」         //日付
+            cell.label_list_summary.text = ""      //摘要　相手方勘定なので借方
+            cell.label_list_number.text = ""       // 丁数　相手方勘定なので貸方
+            cell.label_list_debit.text = ""        //借方金額 注意：空白を代入しないと、変な値が入る。
+            cell.label_list_credit.text = ""       //貸方金額
+            cell.label_list_balance.text = ""      //差引残高
+            cell.label_list_debitOrCredit.text = ""// 借又貸
+            // セルの選択不可にする
+//            cell.selectionStyle = .none
+        }else { // 空白行ではない場合
+            let dataBaseManagerAccount = DataBaseManagerAccount()
+            let objects = dataBaseManagerAccount.getJournalEntryInAccount(section: indexPath.section, account: account) // 何月のセクションに表示するセルかを判別するため引数で渡す
+            let objectss = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(section: indexPath.section, account: account) // 何月のセクションに表示するセルかを判別するため引数で渡す
+//            print("通常仕訳:\(objects.count)")
+//            print("決算整理仕訳:\(objectss.count)")
+            if indexPath.row >= objects.count { // 決算整理仕訳 通常仕訳の数以上の場合
+                cell.backgroundColor = .lightGray // 目印
+                //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+                let d = "\(objectss[indexPath.row-objects.count].date)" // 日付
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row-objects.count == 0 {
+                    let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                    if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }else{
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }
                 }else{
-                    cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
                 }
-            }else{
-                cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+                let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+                if date == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date_day.text = "\(objectss[indexPath.row-objects.count].date.suffix(1))" // 末尾1文字の「日」         //日付
+                }else{
+                    cell.label_list_date_day.text = "\(objectss[indexPath.row-objects.count].date.suffix(2))" // 末尾2文字の「日」         //日付
+                }
+                cell.label_list_date_day.textAlignment = NSTextAlignment.right
+//        cell.label_list_summary_debit.text = " (\(objectss[indexPath.row].debit_category))"     //借方勘定
+//        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+//        cell.label_list_summary_credit.text = "(\(objectss[indexPath.row].credit_category)) "   //貸方勘定
+//        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+                if account == "\(objectss[indexPath.row-objects.count].debit_category)" { // 借方勘定の場合                      //この勘定が借方の場合
+                    cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].credit_category) "             //摘要　相手方勘定なので貸方
+                    cell.label_list_summary.textAlignment = NSTextAlignment.right
+                    if objectss[indexPath.row-objects.count].credit_category == "損益勘定" { // 損益勘定の場合
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = ""//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }else {
+                        let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")// 損益勘定の場合はエラーになる
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }
+                    cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
+                    cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
+                }else if account == "\(objectss[indexPath.row-objects.count].credit_category)" {  // 貸方勘定の場合
+                    cell.label_list_summary.text = "\(objectss[indexPath.row-objects.count].debit_category) "              //摘要　相手方勘定なので借方
+                    cell.label_list_summary.textAlignment = NSTextAlignment.left
+                    if objectss[indexPath.row-objects.count].debit_category == "損益勘定" { // 損益勘定の場合
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = ""//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }else {
+                        let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")// 損益勘定の場合はエラーになる
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }
+                    cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
+                    cell.label_list_credit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].credit_amount))) "      //貸方金額
+                }
+                // 差引残高　差引残高クラスで計算した計算結果を取得
+                var balanceAmount:Int64 = 0
+                var balanceDebitOrCredit:String = ""
+                if account == "損益勘定" { // 損益勘定の場合
+                    balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjustingInPLAccount(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                    cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
+                    balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjustingInPLAccount(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                }else if account == "繰越利益" {
+                    balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjustingWithRetainedEarningsCarriedForward(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                    cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
+                    balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjustingWithRetainedEarningsCarriedForward(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                }else{
+//                    && account != "繰越利益" { // 繰越利益　は損益勘定から振替える以外に、仕訳する方法はあるのか？　2020/10/10
+                    balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                    cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
+                    balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: IndexPath(row: indexPath.row-objects.count, section: indexPath.section))
+                }
+                cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
+                // セルの選択を許可
+                cell.selectionStyle = .default
+            }else { // 通常仕訳
+                //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
+                cell.backgroundColor = .white // 目印を消す
+                let d = "\(objects[indexPath.row].date)" // 日付
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row == 0 {
+                    let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+                    if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }else{
+                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+                    }
+                }else{
+                    cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
+                }
+                let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+                if date == "0" { // 日の十の位が0の場合は表示しない
+                    cell.label_list_date_day.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
+                }else{
+                    cell.label_list_date_day.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
+                }
+                cell.label_list_date_day.textAlignment = NSTextAlignment.right
+//        cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
+//        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
+//        cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
+//        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
+                if account == "\(objects[indexPath.row].debit_category)" { // 借方勘定の場合                      //この勘定が借方の場合
+                    cell.label_list_summary.text = "\(objects[indexPath.row].credit_category) "             //摘要　相手方勘定なので貸方
+                    cell.label_list_summary.textAlignment = NSTextAlignment.right
+                    if objects[indexPath.row].credit_category == "損益勘定" { // 損益勘定の場合
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = ""//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }else {
+                        let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")// 損益勘定の場合はエラーになる
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }
+                    cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
+                    cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
+                }else if account == "\(objects[indexPath.row].credit_category)" {  // 貸方勘定の場合
+                    cell.label_list_summary.text = "\(objects[indexPath.row].debit_category) "              //摘要　相手方勘定なので借方
+                    cell.label_list_summary.textAlignment = NSTextAlignment.left
+                    if objects[indexPath.row].debit_category == "損益勘定" { // 損益勘定の場合
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = ""//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }else {
+                        let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")// 損益勘定の場合はエラーになる
+                        // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
+                        cell.label_list_number.text = numberOfAccount.description                               // 丁数　相手方勘定なので貸方
+                    }
+                    cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
+                    cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
+                }
+                // 差引残高　差引残高クラスで計算した計算結果を取得
+                let balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+                cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
+                let balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+                cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
+                // セルの選択を許可
+                cell.selectionStyle = .default
             }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date_day.text = "\(objects[indexPath.row].date.suffix(1))" // 末尾1文字の「日」         //日付
-            }else{
-                cell.label_list_date_day.text = "\(objects[indexPath.row].date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
-            cell.label_list_date_day.textAlignment = NSTextAlignment.right
-            //        cell.label_list_summary_debit.text = " (\(objects[indexPath.row].debit_category))"     //借方勘定
-            //        cell.label_list_summary_debit.textAlignment = NSTextAlignment.left
-            //        cell.label_list_summary_credit.text = "(\(objects[indexPath.row].credit_category)) "   //貸方勘定
-            //        cell.label_list_summary_credit.textAlignment = NSTextAlignment.right
-            if account == "\(objects[indexPath.row].debit_category)" { // 借方勘定の場合                      //この勘定が借方の場合
-                cell.label_list_summary.text = "\(objects[indexPath.row].credit_category) "             //摘要　相手方勘定なので貸方
-                cell.label_list_summary.textAlignment = NSTextAlignment.right
-                let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")
-                // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
-                cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
-                cell.label_list_debit.text = "\(addComma(string: String(objects[indexPath.row].debit_amount))) "        //借方金額
-                cell.label_list_credit.text = ""                                                                        //貸方金額 注意：空白を代入しないと、変な値が入る。
-            }else if account == "\(objects[indexPath.row].credit_category)" {  // 貸方勘定の場合
-                cell.label_list_summary.text = "\(objects[indexPath.row].debit_category) "              //摘要　相手方勘定なので借方
-                cell.label_list_summary.textAlignment = NSTextAlignment.left
-                let numberOfAccount = dataBaseManagerAccount.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")
-                // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
-                cell.label_list_number.text = "1"//numberOfAccount.description                               // 丁数　相手方勘定なので貸方
-                cell.label_list_debit.text = ""                                                                         //借方金額 注意：空白を代入しないと、変な値が入る。
-                cell.label_list_credit.text = "\(addComma(string: String(objects[indexPath.row].credit_amount))) "      //貸方金額
-            }
-            // 差引残高　差引残高クラスで計算した計算結果を取得
-            let balanceAmount = dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
-            cell.label_list_balance.text = "\(addComma(string: balanceAmount.description))"                           //差引残高
-            let balanceDebitOrCredit = dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
-            cell.label_list_debitOrCredit.text = balanceDebitOrCredit                                                 // 借又貸
-            
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.section {
+            // 選択不可にしたい場合は"nil"を返す
+            case 12:
+                return nil
+            default:
+                return indexPath
+        }
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う

@@ -16,16 +16,16 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
     // 設定画面の勘定科目一覧にある勘定を取得する
-    func getObjects() -> Results<DataBaseSettingsCategory> {
+    func getObjects() -> Results<DataBaseSettingsTaxonomyAccount> {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsCategory.self) // DataBaseSettingsCategoryモデル
+        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self) // DataBaseSettingsCategoryモデル
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
     }
-    // モデルオブフェクトの追加　総勘定元帳
+    // 追加　総勘定元帳
     func addGeneralLedger(number: Int){
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -49,6 +49,11 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 dataBaseAccount.accountName = objects[i].category
                 dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
             }
+            let dataBasePLAccount = DataBasePLAccount() // 損益勘定
+            let numberr = dataBasePLAccount.save() //　自動採番
+            dataBasePLAccount.fiscalYear = object.fiscalYear
+            dataBasePLAccount.accountName = "損益勘定"
+            dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する
             // 年度　の数だけ増える　ToDo
 //            realm.add(dataBaseGeneralLedger)
             object.dataBaseGeneralLedger = dataBaseGeneralLedger
@@ -78,18 +83,14 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         objects = objects.filter("fiscalYear == \(fiscalYear)")
         return objects[0].dataBaseGeneralLedger!
     }
-    // モデルオブフェクトの取得　総勘定元帳
+    // 取得　総勘定元帳　開いている会計帳簿内の元帳
     func getGeneralLedger() -> DataBaseGeneralLedger {
-        // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // 開いている会計帳簿を取得
+        // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        // (2)データベース内に保存されているモデルをひとつ取得する
         var objects = realm.objects(DataBaseAccountingBooks.self)
-        // 希望する勘定だけを抽出する
         objects = objects.filter("fiscalYear == \(fiscalYear)")
         return objects[0].dataBaseGeneralLedger!
     }

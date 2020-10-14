@@ -51,8 +51,8 @@ class DataBaseManagerWS {
         }
     }
     // 損益計算書　計算　合計、残高の合計値
-    func calculateAmountOfAllAccountForPL(){
-        let dataBaseManager = DatabaseManagerSettingsCategory()
+    func calculateAmountOfAllAccountForPL(){ // calculateAmountOfAllAccountForBS と共通化したい
+        let dataBaseManager = DatabaseManagerSettingsTaxonomyAccount()
         let objectG = dataBaseManager.getSettingsSwitchingOnBSorPL(BSorPL: 1)
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
@@ -99,7 +99,7 @@ class DataBaseManagerWS {
     }
     // 貸借対照表　計算　合計、残高の合計値
     func calculateAmountOfAllAccountForBS(){
-        let dataBaseManager = DatabaseManagerSettingsCategory()
+        let dataBaseManager = DatabaseManagerSettingsTaxonomyAccount()
         let objectG = dataBaseManager.getSettingsSwitchingOnBSorPL(BSorPL: 0)
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
@@ -135,32 +135,5 @@ class DataBaseManagerWS {
                 }
             }
         }
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-//        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
-//            return ""
-//        }else {
-            return addComma(string: amount.description)
-//        }
-    }
-    //カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
     }
 }

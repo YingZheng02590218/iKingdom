@@ -1,19 +1,16 @@
 //
-//  TableViewCellCategory.swift
+//  TableViewCellSettingCategoryDetail.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2020/05/21.
+//  Created by Hisashi Ishihara on 2020/09/21.
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
 import UIKit
 
-class TableViewCellCategoryList: UITableViewCell {
+class TableViewCellSettingCategoryDetail: UITableViewCell {
 
-    @IBOutlet weak var ToggleButton: UISwitch!
-
-    @IBAction func ToggleButton(_ sender: UISwitch) {
-    }
+    @IBOutlet var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,4 +22,5 @@ class TableViewCellCategoryList: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
 }

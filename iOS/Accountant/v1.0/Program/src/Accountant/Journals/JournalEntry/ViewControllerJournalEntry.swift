@@ -130,10 +130,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("現在時刻 timezone ：\(timezone.string(from: now))")
 
         
-        // 開いている会計帳簿を取得
+        // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
         let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
@@ -658,7 +657,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             TextField_SmallWritting.text = ""
                         }
                         // データベース　仕訳データを追加
-                        let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
+                        let dataBaseManager = DataBaseManagerJournalEntry() 
                         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
                         var number = 0
                         // 仕訳タイプ判定　仕訳、決算整理仕訳、編集
@@ -689,7 +688,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
                             let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
     //                        let nc = viewController.presentingViewController as! UINavigationController
-                            let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournalEntry // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                            let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournals // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in
@@ -725,7 +724,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                             }
                             let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
                             let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-                            let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournalEntry // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                            let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournals // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in

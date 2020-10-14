@@ -11,7 +11,6 @@ import RealmSwift // データベースのインポート
 
 // 損益計算書クラス
 class DataBaseProfitAndLossStatement: RObject {
-    // モデル定義
     @objc dynamic var fiscalYear: Int = 0                                     //年度
     
     @objc dynamic var NetSales: Int64 = 0                                     //売上高 Net sales

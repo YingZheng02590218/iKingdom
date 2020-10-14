@@ -25,12 +25,16 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         
 //        let databaseManager = DataBaseManagerTB() //データベースマネジャー
 //        databaseManager.calculateAmountOfAllAccount() // 必要？仕訳後にTBの計算をしている。精算表画面表示後に、仕訳があったらリロード機能で再計算する　2020/07/31
+        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        let databaseManagerWS = DataBaseManagerWS()
+        databaseManagerWS.calculateAmountOfAllAccount()
+        databaseManagerWS.calculateAmountOfAllAccountForBS()
+        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-//        label_closingDate.text = "令和xx年3月31日"
-        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
@@ -42,7 +46,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -57,22 +61,18 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     //セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objects = databaseManagerSettings.getAllSettingsCategory()
-        let objectss = databaseManagerSettings.getAllSettingsCategoryForAdjusting()
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
+        let objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: true, switching: true)
 
         return objects.count + 1 + objectss.count + 1 + 1  //+ 試算表合計の行の分+修正記入の行の分+当期純利益+修正記入、損益計算書、貸借対照表の合計の分
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
-        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        let objects = databaseManagerSettings.getAllSettingsCategory()                //期中の仕訳の勘定科目を取得
-        let objectss = databaseManagerSettings.getAllSettingsCategoryForAdjusting() //修正記入の勘定科目を取得
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        let databaseManagerWS = DataBaseManagerWS() //データベースマネジャー
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true) //期中の仕訳の勘定科目を取得
+        let objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: true, switching: true) //修正記入の勘定科目を取得
+        let databaseManager = DataBaseManagerTB()
         // セル　決算整理前残高試算表の行
         if indexPath.row < objects.count {
             //① UI部品を指定
@@ -81,18 +81,18 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.label_account.text = "\(objects[indexPath.row].category as String)"
             cell.label_account.textAlignment = NSTextAlignment.center
             // 決算整理前残高試算表
-            cell.label_debit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
+            cell.label_debit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
             cell.label_debit.textAlignment = NSTextAlignment.right
-            cell.label_credit.text = databaseManager.setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
+            cell.label_credit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
             cell.label_credit.textAlignment = NSTextAlignment.right
             cell.label_debit.backgroundColor = .clear
             cell.label_credit.backgroundColor = .clear
-            switch objects[indexPath.row].big_category {
-            case 0,1,2: //大分類　貸借対照表：0,1,2
+            switch Int(objects[indexPath.row].Rank0) {
+            case 0,1,2,3,4,5,12: //大分類　貸借対照表：0,1,2
                 // 修正記入
-                cell.label_debit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
+                cell.label_debit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
                 cell.label_debit1.textAlignment = NSTextAlignment.right
-                cell.label_credit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
+                cell.label_credit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
                 cell.label_credit1.textAlignment = NSTextAlignment.right
                 cell.label_debit1.backgroundColor = .clear
                 cell.label_credit1.backgroundColor = .clear
@@ -102,24 +102,24 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.label_debit2.backgroundColor = .lightGray
                 cell.label_credit2.backgroundColor = .lightGray
                 // 貸借対照表 修正記入の分を差し引きして、表示する　DataBaseManagerWSを作成して処理を記述する
-                cell.label_debit3.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
+                cell.label_debit3.text = setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
                 cell.label_debit3.textAlignment = NSTextAlignment.right
-                cell.label_credit3.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
+                cell.label_credit3.text = setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
                 cell.label_credit3.textAlignment = NSTextAlignment.right
                 cell.label_debit3.backgroundColor = .clear
                 cell.label_credit3.backgroundColor = .clear
-            case 3,4: //大分類 損益計算書：3,4
+            case 6,7,8,9,10,11: //大分類 損益計算書：3,4
                 // 修正記入
-                cell.label_debit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
+                cell.label_debit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
                 cell.label_debit1.textAlignment = NSTextAlignment.right
-                cell.label_credit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
+                cell.label_credit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
                 cell.label_credit1.textAlignment = NSTextAlignment.right
                 cell.label_debit1.backgroundColor = .clear
                 cell.label_credit1.backgroundColor = .clear
                 // 損益計算書
-                cell.label_debit2.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
+                cell.label_debit2.text = setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
                 cell.label_debit2.textAlignment = NSTextAlignment.right
-                cell.label_credit2.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
+                cell.label_credit2.text = setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
                 cell.label_credit2.textAlignment = NSTextAlignment.right
                 cell.label_debit2.backgroundColor = .clear
                 cell.label_credit2.backgroundColor = .clear
@@ -139,8 +139,8 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total", for: indexPath) as! TableViewCellWS
             cell.label_account.text = ""
             // 決算整理前残高試算表
-            cell.label_debit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
-            cell.label_credit.text = databaseManager.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
+            cell.label_debit.text = setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+            cell.label_credit.text = setComma(amount:object.compoundTrialBalance!.credit_balance_total)
             return cell
         }else if indexPath.row < objects.count + 1 + objectss.count { // セル　修正記入の行
             //① UI部品を指定
@@ -153,12 +153,12 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.label_credit.text = ""
             cell.label_debit.backgroundColor = .lightGray
             cell.label_credit.backgroundColor = .lightGray
-            switch objectss[indexPath.row-(objects.count + 1)].big_category {
-            case 0,1,2: //大分類　貸借対照表：0,1,2
+            switch Int(objectss[indexPath.row-(objects.count + 1)].Rank2) {
+            case 0,1,2,3,4,5,12: //大分類　貸借対照表：0,1,2
                 // 修正記入
-                cell.label_debit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 0))
+                cell.label_debit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 0))
                 cell.label_debit1.textAlignment = NSTextAlignment.right
-                cell.label_credit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 1))
+                cell.label_credit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 1))
                 cell.label_credit1.textAlignment = NSTextAlignment.right
                 cell.label_debit1.backgroundColor = .clear
                 cell.label_credit1.backgroundColor = .clear
@@ -168,24 +168,24 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.label_debit2.backgroundColor = .clear
                 cell.label_credit2.backgroundColor = .clear
                 // 貸借対照表
-                cell.label_debit3.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 2))
+                cell.label_debit3.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 2))
                 cell.label_debit3.textAlignment = NSTextAlignment.right
-                cell.label_credit3.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 3))
+                cell.label_credit3.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 3))
                 cell.label_credit3.textAlignment = NSTextAlignment.right
                 cell.label_debit3.backgroundColor = .clear
                 cell.label_credit3.backgroundColor = .clear
-            case 3,4: //大分類 損益計算書：3,4
+            case 6,7,8,9,10,11: //大分類 損益計算書：3,4
                 // 修正記入
-                cell.label_debit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 0))
+                cell.label_debit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 0))
                 cell.label_debit1.textAlignment = NSTextAlignment.right
-                cell.label_credit1.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 1))
+                cell.label_credit1.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 1))
                 cell.label_credit1.textAlignment = NSTextAlignment.right
                 cell.label_debit1.backgroundColor = .clear
                 cell.label_credit1.backgroundColor = .clear
                 // 損益計算書
-                cell.label_debit2.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 2))
+                cell.label_debit2.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 2))
                 cell.label_debit2.textAlignment = NSTextAlignment.right
-                cell.label_credit2.text = databaseManager.setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 3))
+                cell.label_credit2.text = setComma(amount:databaseManager.getTotalAmountAdjusting(account: "\(objectss[indexPath.row-(objects.count + 1)].category as String)", leftOrRight: 3))
                 cell.label_credit2.textAlignment = NSTextAlignment.right
                 cell.label_debit2.backgroundColor = .clear
                 cell.label_credit2.backgroundColor = .clear
@@ -195,7 +195,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.label_debit3.backgroundColor = .clear
                 cell.label_credit3.backgroundColor = .clear
             default: //大分類　貸借対照表：0,1,2 損益計算書：3,4
-                print("a")
+                print("aa")
             }
             return cell
         }else if indexPath.row < objects.count + 1 + objectss.count + 1  { // セル　当期純利益の行
@@ -217,16 +217,16 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.label_debit1.backgroundColor = .clear
             cell.label_credit1.backgroundColor = .clear
             // 損益計算書
-            cell.label_debit2.text = databaseManagerWS.setComma(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない
+            cell.label_debit2.text = setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない
             cell.label_debit2.textAlignment = NSTextAlignment.right
-            cell.label_credit2.text = databaseManagerWS.setComma(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない
+            cell.label_credit2.text = setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない
             cell.label_credit2.textAlignment = NSTextAlignment.right
             cell.label_debit2.backgroundColor = .clear
             cell.label_credit2.backgroundColor = .clear
             // 貸借対照表
-            cell.label_debit3.text = databaseManagerWS.setComma(amount: object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する//0でも空白にしない
+            cell.label_debit3.text = setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない //損益計算書とは反対の方に記入する//0でも空白にしない
             cell.label_debit3.textAlignment = NSTextAlignment.right
-            cell.label_credit3.text = databaseManagerWS.setComma(amount: object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する//0でも空白にしない
+            cell.label_credit3.text = setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない //損益計算書とは反対の方に記入する//0でも空白にしない
             cell.label_credit3.textAlignment = NSTextAlignment.right
             cell.label_debit3.backgroundColor = .clear
             cell.label_credit3.backgroundColor = .clear
@@ -240,10 +240,12 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             // 決算整理前残高試算表
             cell.label_debit.text = ""
             cell.label_credit.text = ""
+            cell.label_debit.backgroundColor = .lightGray
+            cell.label_credit.backgroundColor = .lightGray
             // 修正記入
-            cell.label_debit1.text = databaseManager.setComma(amount:object.workSheet!.debit_adjustingEntries_balance_total)
+            cell.label_debit1.text = setComma(amount:object.workSheet!.debit_adjustingEntries_balance_total)
             cell.label_debit1.textAlignment = NSTextAlignment.right
-            cell.label_credit1.text = databaseManager.setComma(amount:object.workSheet!.credit_adjustingEntries_balance_total)
+            cell.label_credit1.text = setComma(amount:object.workSheet!.credit_adjustingEntries_balance_total)
             cell.label_credit1.textAlignment = NSTextAlignment.right
             // 借方貸方の金額が不一致の場合、文字色を赤
             if cell.label_debit1.text != cell.label_credit1.text {
@@ -251,9 +253,9 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.label_credit1.textColor = .red
             }
             // 損益計算書
-            cell.label_debit2.text = databaseManager.setComma(amount:object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss)// 当期純利益と合計借方とを足す
+            cell.label_debit2.text = setComma(amount:object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss)// 当期純利益と合計借方とを足す
             cell.label_debit2.textAlignment = NSTextAlignment.right
-            cell.label_credit2.text = databaseManager.setComma(amount:object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome)// 当期純損失と合計貸方とを足す
+            cell.label_credit2.text = setComma(amount:object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome)// 当期純損失と合計貸方とを足す
             cell.label_credit2.textAlignment = NSTextAlignment.right
             // 借方貸方の金額が不一致の場合、文字色を赤
             if cell.label_debit2.text != cell.label_credit2.text {
@@ -261,9 +263,9 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.label_credit2.textColor = .red
             }
             // 貸借対照表
-            cell.label_debit3.text = databaseManager.setComma(amount:object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する
+            cell.label_debit3.text = setComma(amount:object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する
             cell.label_debit3.textAlignment = NSTextAlignment.right
-            cell.label_credit3.text = databaseManager.setComma(amount:object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する
+            cell.label_credit3.text = setComma(amount:object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する
             cell.label_credit3.textAlignment = NSTextAlignment.right
             // 借方貸方の金額が不一致の場合、文字色を赤
             if cell.label_debit3.text != cell.label_credit3.text {
@@ -281,7 +283,42 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 遷移先のコントローラに値を渡す
         controller.journalEntryType = "AdjustingAndClosingEntries" // セルに表示した仕訳タイプを取得
     }
-    
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
+            return ""
+        }else {
+            return addComma(string: amount.description)
+        }
+    }
+    //カンマ区切りに変換（表示用）
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
+    }
+    // コンマを追加
+    func setCommaWith0(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        return addComma(string: amount.description)
+    }
+
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

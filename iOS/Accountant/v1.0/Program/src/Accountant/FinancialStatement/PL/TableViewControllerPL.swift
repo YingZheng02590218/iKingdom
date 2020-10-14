@@ -18,17 +18,17 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     override func viewDidLoad() {
         super.viewDidLoad()
         // 損益計算書　計算
-        dataBaseManagerPL.initializeBenefits()
+//        dataBaseManagerPL.initializeBenefits()
         
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-        databaseManager.calculateAmountOfAllAccount()
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+//        databaseManager.calculateAmountOfAllAccount()
+//        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() 
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
         let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
@@ -42,6 +42,8 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
+        // 損益計算書　初期化　再計算
+        dataBaseManagerPL.initializeBenefits()
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
         tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
     }
@@ -52,9 +54,11 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        // 損益計算書　初期化　再計算
+        dataBaseManagerPL.initializeBenefits()
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
         let databaseManagerWS = DataBaseManagerWS()
         databaseManagerWS.calculateAmountOfAllAccount()
@@ -73,14 +77,12 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // データベース
-//        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
-        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 10)//営業外収益10
-        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 6)//営業外費用6
-        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 11)//特別利益11
-        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 7)//特別損失7
-        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: 3, small_category: 9)//販売費及び一般管理費9
+        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
+        let mid_category10 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
+        let mid_category6 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
+        let mid_category11 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
+        let mid_category7 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
+        let objects9 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
 
         
 //        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(section: 3)
@@ -94,17 +96,16 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     }
 
     let dataBaseManagerPL = DataBaseManagerPL()
-    let dataBaseManagerBSAndPL = DataBaseManagerBSAndPL() // Use of undeclared type ''が発生した。2020/07/24
+    let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy() // Use of undeclared type ''が発生した。2020/07/24
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // データベース
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsCategoryBSAndPL() //データベースマネジャー
-        // 中分類　中分類ごとの数を取得
-        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 10)//営業外収益10
-        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 6)//営業外費用6
-        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 11)//特別利益11
-        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(mid_category: 7)//特別損失7
-        // 小分類
-        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(section: indexPath.section, small_category: 9)//販売費及び一般管理費9
+        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() 
+        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
+        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
+        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
+        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
+        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
+
+//        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(section: indexPath.section, small_category: 9)//販売費及び一般管理費9
         
         let han =           3 + objects9.count + 1 //販売費及び一般管理費合計
         let ei =            3 + objects9.count + 2 //営業利益
@@ -129,7 +130,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "売上高"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する 
-            cell.label_amount.text = dataBaseManagerPL.getSmallCategoryTotal(big_category: 4, small_category: 10)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 4, rank0: 6)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case 1: //売上原価8
@@ -137,7 +138,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "売上原価"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getSmallCategoryTotal(big_category: 3, small_category: 8)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 7)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case 2: //売上総利益
@@ -160,7 +161,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "販売費及び一般管理費合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getSmallCategoryTotal(big_category: 3, small_category: 9)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 8)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case ei: //営業利益
@@ -183,7 +184,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "営業外収益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 4, mid_category: 10)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 15)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case eigaih: //営業外費用6
@@ -198,7 +199,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "営業外費用合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 6)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 16)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case kei: //経常利益
@@ -221,7 +222,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "特別利益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 4, mid_category: 11)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 17)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case tokus: //特別損失7
@@ -236,7 +237,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "特別損失合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 7)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 18)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case zei: //税金等調整前当期純利益
@@ -252,7 +253,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             cell.textLabel?.text = "法人税等"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.label_amount.text = dataBaseManagerPL.getMiddleCategoryTotal(big_category: 3, mid_category: 8)
+            cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 11)
             cell.label_amount.font = UIFont.systemFont(ofSize: 15)
             return cell
         case touki: //当期純利益
@@ -287,7 +288,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+objects9[indexPath.row - (3+1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: objects9[indexPath.row - (3+1)].BSAndPL_category)
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects9[indexPath.row - (3+1)].number) // BSAndPL_category を number に変更する 2020/09/17
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > eigai &&             // 営業外収益10
@@ -296,7 +297,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category10[indexPath.row - (eigai + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 4, bSAndPL_category: mid_category10[indexPath.row - (eigai + 1)].BSAndPL_category) //収益:4
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category10[indexPath.row - (eigai + 1)].number) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > eigaih &&          // 営業外費用
@@ -305,7 +306,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category6[indexPath.row - (eigaih + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: mid_category6[indexPath.row - (eigaih + 1)].BSAndPL_category)
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category6[indexPath.row - (eigaih + 1)].number)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > toku &&                       // 特別利益
@@ -314,7 +315,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category11[indexPath.row - (toku + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 4, bSAndPL_category: mid_category11[indexPath.row - (toku+1)].BSAndPL_category) //収益:4
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category11[indexPath.row - (toku+1)].number) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > tokus &&                   // 特別損失
@@ -323,7 +324,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category7[indexPath.row - (tokus + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerBSAndPL.getAccountTotal(big_category: 3, bSAndPL_category: mid_category7[indexPath.row - (tokus+1)].BSAndPL_category)
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category7[indexPath.row - (tokus+1)].number)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
     // 税金　勘定科目を表示する必要はない
