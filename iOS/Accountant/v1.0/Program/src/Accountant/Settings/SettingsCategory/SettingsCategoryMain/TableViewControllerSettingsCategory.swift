@@ -13,9 +13,9 @@ class TableViewControllerSettingsCategory: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
+//        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
+//        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+//        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
     }
 
     // MARK: - Table view data source
