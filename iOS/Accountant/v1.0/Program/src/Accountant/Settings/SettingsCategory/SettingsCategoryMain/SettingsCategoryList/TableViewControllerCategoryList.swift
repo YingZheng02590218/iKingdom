@@ -21,8 +21,8 @@ class TableViewControllerCategoryList: UITableViewController {
 //            masterData.readMasterDataFromCSV()   // マスターデータを作成する
 //        }
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
+//        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+//        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
     }
     
     override func viewWillAppear(_ animated: Bool) {

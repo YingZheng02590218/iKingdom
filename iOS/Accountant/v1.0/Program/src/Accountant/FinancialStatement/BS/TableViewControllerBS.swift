@@ -499,8 +499,49 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
-                // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/08/03
-                guard 0 < objects16.count else {return cell} // 1. array.count（要素数）を利用する
+                // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/10/19
+                guard 0 < objects16.count else { //新株予約権16 が0件の場合
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfMiddleCategory", for: indexPath) as! TableViewCellTotalOfMiddleCategory
+                    cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+                    cell.textLabel?.minimumScaleFactor = 0.05
+                    cell.textLabel?.adjustsFontSizeToFitWidth = true
+                    
+                    // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/08/03
+                    guard 0 < objects22.count else { //非支配株主持分22 が0件の場合
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
+                        cell.textLabel?.text = "純資産合計"
+                        print("BS", indexPath.row, "純資産合計"+"★")
+                        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+                        let text:String = dataBaseManagerBS.getTotalBig5(big5: 2)
+                        // テキストをカスタマイズするために、NSMutableAttributedStringにする
+                        let attributeText = NSMutableAttributedString(string: text)
+                        // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+                        attributeText.addAttribute(
+                          NSAttributedString.Key.underlineStyle,
+                          value: NSUnderlineStyle.single.rawValue,
+                          range: NSMakeRange(0, text.count)
+                        )
+                        cell.label_totalOfBigCategory.attributedText = attributeText
+                        cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                        // 文字色
+                        cell.label_totalOfBigCategory.textColor = .black
+                        return cell
+                    } // 1. array.count（要素数）を利用する
+                    
+                    cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
+                    print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
+                    let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
+                    // テキストをカスタマイズするために、NSMutableAttributedStringにする
+                    let attributeText = NSMutableAttributedString(string: text)
+                    // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+                    attributeText.addAttribute(
+                      NSAttributedString.Key.underlineStyle,
+                      value: NSUnderlineStyle.single.rawValue,
+                      range: NSMakeRange(0, text.count)
+                    )
+                    cell.label_totalOfMiddleCategory.attributedText = attributeText
+                    return cell
+                }
                 cell.textLabel?.text = "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category
                 print("BS", indexPath.row, "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category)
                 let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
@@ -519,6 +560,27 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/10/19
+                guard 0 < objects22.count else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
+                    cell.textLabel?.text = "純資産合計"
+                    print("BS", indexPath.row, "純資産合計"+"★")
+                    cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+                    let text:String = dataBaseManagerBS.getTotalBig5(big5: 2)
+                    // テキストをカスタマイズするために、NSMutableAttributedStringにする
+                    let attributeText = NSMutableAttributedString(string: text)
+                    // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+                    attributeText.addAttribute(
+                      NSAttributedString.Key.underlineStyle,
+                      value: NSUnderlineStyle.single.rawValue,
+                      range: NSMakeRange(0, text.count)
+                    )
+                    cell.label_totalOfBigCategory.attributedText = attributeText
+                    cell.label_totalOfBigCategory.font = UIFont.boldSystemFont(ofSize: 15)
+                    // 文字色
+                    cell.label_totalOfBigCategory.textColor = .black
+                    return cell
+                } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
                 print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
                 let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)

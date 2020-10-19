@@ -33,6 +33,9 @@ class Initial {
 //            masterData.readMasterDataFromCSVOfBSAndPL()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
+        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
+        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
     }
     // 会計帳簿棚
     func initializeAccountingBooksShelf() {
