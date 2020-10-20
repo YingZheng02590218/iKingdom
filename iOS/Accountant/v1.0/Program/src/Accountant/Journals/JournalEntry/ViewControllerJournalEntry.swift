@@ -71,7 +71,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_credit.textColor = UIColor.black
             TextField_amount_debit.textColor = UIColor.black
             TextField_amount_credit.textColor = UIColor.black
-            TextField_SmallWritting.textColor = UIColor.black
+            // 小書き　が空白だった場合
+            if TextField_SmallWritting.text == "" {
+                TextField_SmallWritting.text = "取引内容"
+                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            }else {
+                TextField_SmallWritting.textColor = UIColor.black
+            }
         }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -81,8 +87,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
-
+    // デートピッカー作成
     func createDatePicker() {
+        // ボタンの背景色　ダークモード対応
+        Button_Left.backgroundColor = .systemBackground
+        Button_Right.backgroundColor = .systemBackground
         // 現在時刻を取得
         let now :Date = Date() // UTC時間なので　9時間ずれる
 
@@ -129,7 +138,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("現在時刻 ffffff   ：\(ffffff.string(from: now))") //
 //        print("現在時刻 timezone ：\(timezone.string(from: now))")
 
-        
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -179,7 +187,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
         //        datePicker.date = timezone.date(from: timezone.string(from: now))!
         datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
-        
+        // 背景色
+        datePicker.backgroundColor = .systemBackground
 //        print("\(String(describing: datePicker.minimumDate))")
 //        print("\(String(describing: datePicker.maximumDate))")
 //
@@ -222,7 +231,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("\(String(describing: datePicker.date))")
     }
     
-    
 //TextField
     @IBOutlet weak var TextField_category_debit: PickerTextField!
     @IBOutlet weak var TextField_category_credit: PickerTextField!
@@ -234,6 +242,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         //カーソルが当たったらすぐに終了させる　勘定科目画面に遷移させるため
 //        self.view.endEditing(true)
     }
+    // TextField作成　勘定科目
     func createTextFieldForCategory() {
         //TextFieldのキーボードを表示させないように、ダミーのViewを表示 TextField
 //        TextField_category_debit.inputView = UIView()
@@ -254,7 +263,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var TextField_amount_credit: UITextField!
     @IBAction func TextField_amount_debit(_ sender: UITextField) {}
     @IBAction func TextField_amount_credit(_ sender: UITextField) {}
-    // TextField 金額
+    // TextField作成 金額
     func createTextFieldForAmount() {
         TextField_amount_debit.delegate = self
         TextField_amount_credit.delegate = self
@@ -272,6 +281,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         cancelItem.tag = 55
         toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
 //        doneButtonItem.isEnabled = false
+        // previous, next, paste ボタンを消す
+        self.TextField_amount_debit.inputAssistantItem.leadingBarButtonGroups.removeAll()
         TextField_amount_debit.inputAccessoryView = toolbar
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
@@ -288,12 +299,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         cancelItem2.tag = 66
         toolbar2.setItems([cancelItem2,flexSpaceItem2, doneButtonItem2], animated: true)
 //        doneButtonItem2.isEnabled = false
+        // previous, next, paste ボタンを消す
+        self.TextField_amount_credit.inputAssistantItem.leadingBarButtonGroups.removeAll()
+//        self.TextField_amount_credit.inputAssistantItem.trailingBarButtonGroups.removeAll()
         TextField_amount_credit.inputAccessoryView = toolbar2
-        
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
-        
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
@@ -317,7 +329,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var TextField_SmallWritting: UITextField!
     @IBAction func TextField_SmallWritting(_ sender: UITextField) {}
-    // TextField 小書き
+    // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
 // toolbar 小書き Done:Tag Cancel:Tag
