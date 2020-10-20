@@ -42,7 +42,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
 
     var numberOfAccount :Int = 0 // 勘定科目番号
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingCategoryDetail
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
         // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let object = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: numberOfAccount) // 勘定科目
@@ -187,7 +187,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at:indexPath) as! TableViewCellSettingCategoryDetail
+//        let cell = tableView.cellForRow(at:indexPath) as! TableViewCellSettingAccountDetailTaxonomy
         // 勘定科目名　変更
 //        var alertTextField: UITextField?
 //        let alert = UIAlertController(
