@@ -15,32 +15,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="sSL-xp-tCX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_1937" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-DS-EVi">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Sit-8E-ZJc">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </activityIndicatorView>
-                                </subviews>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="sSL-xp-tCX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5bf-sj-C0k"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sSL-xp-tCX" secondAttribute="bottom" id="EcZ-f9-COU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sSL-xp-tCX" secondAttribute="bottom" id="HiC-lu-r4J"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sSL-xp-tCX" secondAttribute="trailing" id="QNT-mV-Hz8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sSL-xp-tCX" secondAttribute="trailing" id="ZQd-fM-Jhg"/>
-                            <constraint firstItem="sSL-xp-tCX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="d0h-eZ-EUT"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="52.1484375" y="374.67057101024886"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="IMG_1937" width="1227" height="1227"/>
+    </resources>
 </document>
