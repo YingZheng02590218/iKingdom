@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks.sh
+${BUILT_PRODUCTS_DIR}/EMTNeumorphicView/EMTNeumorphicView.framework
+${BUILT_PRODUCTS_DIR}/NeuKit/NeuKit.framework
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
