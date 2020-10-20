@@ -1,4 +1,0 @@
-データベース選定
-
-Realm
-https://realm.io/docs/swift/latest
