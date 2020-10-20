@@ -142,15 +142,18 @@ class TableViewControllerCategoryList: UITableViewController {
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 選択されたセルを取得
-        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
-        // segue.destinationの型はUIViewController
-        let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
-        // 遷移先のコントローラに値を渡す
-        tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
-        // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
+        // セグエで場合分け
+        if segue.identifier != "segue_add_account" {
+            // 選択されたセルを取得
+            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+            let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+            let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
+            // segue.destinationの型はUIViewController
+            let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
+            // 遷移先のコントローラに値を渡す
+            tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
+            // セルの選択を解除
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
