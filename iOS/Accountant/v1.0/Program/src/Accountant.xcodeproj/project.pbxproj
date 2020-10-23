@@ -422,7 +422,6 @@
 		F94EDD91237AEB3A0074D812 /* Accountant */ = {
 			isa = PBXGroup;
 			children = (
-				F97422ED2541229100FBA052 /* GoogleService-Info.plist */,
 				F94EDD92237AEB3A0074D812 /* AppDelegate.swift */,
 				F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */,
 				F94EDD96237AEB3A0074D812 /* DocumentView.swift */,
@@ -431,6 +430,7 @@
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
+				F97422ED2541229100FBA052 /* GoogleService-Info.plist */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
