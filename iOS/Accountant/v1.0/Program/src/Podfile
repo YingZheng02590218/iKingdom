@@ -7,6 +7,7 @@ pod 'NeuKit'
 pod 'EMTNeumorphicView'
 pod 'Firebase/Analytics'
 pod 'Firebase/AdMob'
+pod 'Google-Mobile-Ads-SDK'
 
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!

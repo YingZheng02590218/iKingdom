@@ -81,6 +81,7 @@ DEPENDENCIES:
   - EMTNeumorphicView
   - Firebase/AdMob
   - Firebase/Analytics
+  - Google-Mobile-Ads-SDK
   - NeuKit
   - RealmSwift
 
@@ -121,6 +122,6 @@ SPEC CHECKSUMS:
   Realm: 2d57ea355bf8ca2a0964d6bfb38d28d7ff2addf6
   RealmSwift: 0a709536ecea30eea1d3c514f6ade2ed078dee3c
 
-PODFILE CHECKSUM: c93d607c90c60f70074b4b130130ecb06aaf34bd
+PODFILE CHECKSUM: 6f0651b5ac94f9078c163a1d87a9fffe85fb002d
 
 COCOAPODS: 1.8.4
