@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 総勘定元帳
 class TableViewControllerGeneralLedger: UITableViewController {
 
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "[Your AdMob ID]"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = true
+    @IBOutlet var gADBannerView: GADBannerView!
+    
     @IBOutlet var TableView_generalLedger: UITableView!
     
     override func viewDidLoad() {
@@ -24,6 +34,28 @@ class TableViewControllerGeneralLedger: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         // 総勘定元帳を開いた後で、設定画面の勘定科目のON/OFFを変えるとエラーとなるのでリロードする
         tableView.reloadData()
+        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        var gADBannerView = GADBannerView() // ソースコードではなくStoryboardで生成するため不要
+        gADBannerView = GADBannerView(adSize:kGADAdSizeBanner)
+        // TabBar の高さ
+//        let tabBarController = self.tabBarController// 一番基底となっているコントローラ
+//        print(tabBarController)
+        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+        print(self.view.frame.size.height)
+        print(gADBannerView.frame.height)
+//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height)
+        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+        if AdMobTest {
+            gADBannerView.adUnitID = TEST_ID
+        }
+        else{
+            gADBannerView.adUnitID = AdMobID
+        }
+        gADBannerView.rootViewController = self
+        gADBannerView.load(GADRequest())
+        self.view.addSubview(gADBannerView)
     }
     // リロード機能
     @objc func refreshTable() {
@@ -135,5 +167,19 @@ class TableViewControllerGeneralLedger: UITableViewController {
         viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // マネタイズ対応　完了
+        print("a", scrollView.contentOffset.y)
+        print("b", self.view.frame.size.height)
+        print("c", gADBannerView.frame.height)
+        print("d", self.tableView.contentSize.height)
+        if self.tableView.contentSize.height > self.view.frame.size.height + scrollView.contentOffset.y {
+            gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y) // スクロール時の、広告の位置を固定する
+        }else {
+            // テーブルビューを一番下までスクロールされた場合は、広告を隠す
+            gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height + scrollView.contentOffset.y - 100) // スクロール時の、広告の位置を固定する
+        }
     }
 }

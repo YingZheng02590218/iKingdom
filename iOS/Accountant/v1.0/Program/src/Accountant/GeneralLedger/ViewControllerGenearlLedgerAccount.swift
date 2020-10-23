@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 総勘定元帳　勘定クラス
 class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
-
+    
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "[Your AdMob ID]"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = true
+    @IBOutlet var gADBannerView: GADBannerView!
+    
     @IBOutlet weak var view_top: UIView!
     @IBOutlet weak var TableView_account: UITableView!
     @IBOutlet weak var label_date_year: UILabel!
@@ -36,11 +46,31 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         // リロード機能は使用不可のため不要
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
 //        self.loadView()
 //        self.viewDidLoad()
-//    }
+        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        var gADBannerView = GADBannerView() // ソースコードではなくStoryboardで生成するため不要
+        gADBannerView = GADBannerView(adSize:kGADAdSizeBanner)
+        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+        print(TableView_account.contentOffset.y)
+        print(self.TableView_account.frame.size.height)
+        print(self.view.frame.size.height)
+        print(gADBannerView.frame.height)
+        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + TableView_account.contentOffset.y) // スクロール時の、広告の位置を固定する　※- 40 はモーダルビューを使用した時に生じる差分？
+        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+        if AdMobTest {
+            gADBannerView.adUnitID = TEST_ID
+        }
+        else{
+            gADBannerView.adUnitID = AdMobID
+        }
+        gADBannerView.rootViewController = self
+        gADBannerView.load(GADRequest())
+        self.view.addSubview(gADBannerView)
+    }
     override func viewDidAppear(_ animated: Bool) {
         let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
@@ -322,7 +352,21 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
 //            print("view_top.bounds.height       :: \(view_top.bounds.height)")
 //            print("TableView_account.bounds.height   :: \(TableView_account.bounds.height)")
         }else{
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            // マネタイズ対応　完了
+            print("a", scrollView.contentOffset.y)
+            print("a", TableView_account.contentOffset.y)
+            print("b", self.view.frame.size.height)
+            print("b", self.TableView_account.frame.size.height)
+            print("c", gADBannerView.frame.height)
+            print("d", self.TableView_account.contentSize.height)
+            if self.TableView_account.contentSize.height > self.view.frame.size.height + scrollView.contentOffset.y {
+//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height) // スクロール時の、広告の位置を固定する
+                gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height) // スクロール時の、広告の位置を固定する
+            }else {
+                // テーブルビューを一番下までスクロールされた場合は、広告を隠す
+                gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - 100) // スクロール時の、広告の位置を固定する
+            }
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)

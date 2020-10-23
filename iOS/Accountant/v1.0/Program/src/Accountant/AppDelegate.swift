@@ -8,6 +8,7 @@
 
 import NeuKit
 import RealmSwift
+import Firebase // マネタイズ対応
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // will automatically perform the migration
         let realm = try! Realm()
         // Override point for customization after application launch.
+        
+        // // マネタイズ対応　Use Firebase library to configure APIs
+        FirebaseApp.configure()
+        
         return true
     }
 
