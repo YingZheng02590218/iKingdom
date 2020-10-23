@@ -135,7 +135,7 @@ class MasterData {
                     number = dataBaseSettingsTaxonomyAccount.save() // 連番　自動採番
                     realm.add(dataBaseSettingsTaxonomyAccount)
                 }
-                print("連番: \(number)")
+                print("連番: \(number), \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
             }
         }
     }
