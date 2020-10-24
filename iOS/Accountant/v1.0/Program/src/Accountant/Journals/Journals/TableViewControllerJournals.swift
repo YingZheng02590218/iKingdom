@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 仕訳帳クラス
 class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
+    
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = true
+    @IBOutlet var gADBannerView: GADBannerView!
     
     @IBOutlet var TableView_JournalEntry: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     @IBOutlet weak var label_company_name: UILabel!
@@ -49,7 +59,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // データベース　注意：Initialより後に記述する
         Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
-        scroll = true
+//        scroll = true
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
@@ -72,8 +82,58 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+//        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+        
+        // 要素数が少ないUITableViewで残りの部分や余白を消す
+        let tableFooterView = UIView(frame: CGRect.zero)
+        tableView.tableFooterView = tableFooterView
+
+        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+        // GADBannerView を作成する
+        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+//        print(self.view.frame.size.height)
+//        print(gADBannerView.frame.height)
+//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            gADBannerView.adUnitID = TEST_ID
+        }
+        else{
+            gADBannerView.adUnitID = AdMobID
+        }
+        gADBannerView.rootViewController = self
+        // 広告を読み込む
+        gADBannerView.load(GADRequest())
+        print(tableView.rowHeight)
+        // GADBannerView を作成する
+//        addBannerViewToView(gADBannerView, constant: 0)
+         addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: constant),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
         // 初期表示位置 OFF
@@ -483,6 +543,20 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
             scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
 //            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            // マネタイズ対応　完了
+//            if self.tableView.contentSize.height > self.tableView.frame.size.height + scrollView.contentOffset.y {
+//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y) // スクロール時の、広告の位置を固定する
+                // GADBannerView を作成する
+//                addBannerViewToView(gADBannerView, constant: 0)
+//            }else {
+                // テーブルビューを一番下までスクロールされた場合は、広告を隠す
+//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y - 100) // スクロール時の、広告の位置を固定する
+//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - 100) // スクロール時の、広告の位置を固定する
+//                print(tableView.rowHeight)
+                // GADBannerView を作成する
+//                addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+//            }
+//            gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y) // スクロール時の、広告の位置を固定する
         }
 //            if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
 //                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
