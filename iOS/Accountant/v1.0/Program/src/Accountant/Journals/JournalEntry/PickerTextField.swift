@@ -8,7 +8,7 @@
 
 import UIKit
 
-// ドラムロール
+// ドラムロール　仕訳画面　勘定科目選択
 class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ドラムロールに表示する勘定科目の文言
@@ -66,7 +66,9 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         toolbar.setItems([cancelItem, flexSpaceItem, doneItem], animated: true)
-        
+        // previous, next, paste ボタンを消す
+        self.inputAssistantItem.leadingBarButtonGroups.removeAll()
+
         self.inputView = picker
         self.inputAccessoryView = toolbar
         
@@ -137,7 +139,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             big_11 = array
             break
         default:
-            big_0 = array
+            //big_0 = array
             break
         }
     }
@@ -222,7 +224,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                 return big_10[row] as String
             case 11:
                 self.text = big_11[row] as String
-                return big_11[row] as String
+                return big_11[row] as String // エラー　2020/10/15
             default:
                 return ""
             }
@@ -232,18 +234,18 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // 文字色
 //        self.textColor = UIColor.black
-        var result :String = ""
-        var count :Int = 0
+//        var result :String = ""
+//        var count :Int = 0
         // ドラムロールの2列目か？
         if component == 1 {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0://"資産":
-                result = big_0[row] as String
+//                result = big_0[row] as String
                 self.text = big_0[row] as String
-                count = big_0.count
+//                count = big_0.count
                 break
             case 1://"負債":
-                result = big_1[row] as String
+//                result = big_1[row] as String
                 self.text = big_1[row] as String
 //                count = subCategories_liabilities.count
                 break

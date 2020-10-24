@@ -202,7 +202,12 @@ class TableViewControllerCategoryList: UITableViewController {
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
-        if segue.identifier != "segue_add_account" {
+        if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
+            // segue.destinationの型はUIViewController
+            let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
+            // 遷移先のコントローラに値を渡す
+            tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+        }else{ // 既存の設定勘定科目を選択された場合
             // 選択されたセルを取得
             let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
             let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
