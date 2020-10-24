@@ -16,8 +16,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
     @IBAction func segmentedControl(_ sender: Any) {
         self.tableView.reloadData()
     }
-    var howToUse: Bool = false // 勘定科目　詳細　設定画面からの遷移の場合はtrue
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,7 +209,9 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
         }
         return true
     }
+    var howToUse: Bool = false // 勘定科目　詳細　設定画面からの遷移の場合はtrue
     var numberOfTaxonomyAccount :Int = 0 // 設定勘定科目番号
+    var addAccount: Bool = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
     // セルが選択された時に呼び出される
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 表示科目選択　の場合
@@ -249,33 +249,52 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
         }
         let objects = dataBaseManagerSettingsTaxonomy.getBigCategoryAll(section: sheet)
         // 呼び出し元のコントローラを取得
-        let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-        let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、スプリットコントローラを取得する
-//        let navigationController1 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-//        let navigationController2 = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-//            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! TableViewControllerSettingsCategory // ナビゲーションコントローラから、勘定科目コントローラを取得する
-//            let tableViewControllerCategoryList = navigationController.viewControllers[1] as! TableViewControllerCategoryList // ナビゲーションコントローラから、勘定科目一覧コントローラを取得する
-        // iPadとiPhoneで動きが変わるので分岐する
-        
-        var navigationController: UINavigationController
-//        if UIDevice.current.userInterfaceIdiom == .pad { // iPad
-            let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-//            let tableViewControllerSettings = navigationController0.viewControllers[0]  as! TableViewControllerSettings
-            if navigationController0.viewControllers.count > 1 {
-                // 画面　画面分割表示して幅を1/4に狭めると配列要素[1]にナビゲーションコントローラがある　（横向き）
-                navigationController = navigationController0.viewControllers[1]  as! UINavigationController
-            }else {
-                // 画面　画面分割表示して幅を1/2に狭めると配列要素[0]にナビゲーションコントローラがある　（横向き）
-                navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-            }
-//            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! TableViewControllerSettingsCategory
-//            let tableViewControllerCategoryList1 = navigationController.viewControllers[1] as! TableViewControllerCategoryList
-//            let tableViewControllerSettingsCategoryDetail = navigationController.viewControllers[2] as! TableViewControllerSettingsCategoryDetail
-//        }else { // iPhone
-//            navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-//        }
-        let presentingViewController = navigationController.viewControllers[2] as! TableViewControllerSettingsCategoryDetail // ナビゲーションコントローラから、勘定科目詳細コントローラーを取得
-
+        if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
+            let presentingViewController = self.presentingViewController as! TableViewControllerSettingsCategoryDetail // 勘定科目詳細コントローラーを取得
+            let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+                (action: UIAlertAction!) in
+                print("OK アクションをタップした時の処理")
+                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                self.dismiss(animated: true, completion: {
+                    [presentingViewController] () -> Void in
+                    let num = presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
+                    presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                    presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+            addAccount = false // 新規追加後にフラグを倒す
+        }else { // 既存の設定勘定科目を選択された場合
+            let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
+            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、スプリットコントローラを取得する
+    //        let navigationController1 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
+    //        let navigationController2 = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
+    //            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! TableViewControllerSettingsCategory // ナビゲーションコントローラから、勘定科目コントローラを取得する
+    //            let tableViewControllerCategoryList = navigationController.viewControllers[1] as! TableViewControllerCategoryList // ナビゲーションコントローラから、勘定科目一覧コントローラを取得する
+            // iPadとiPhoneで動きが変わるので分岐する
+            
+            var navigationController: UINavigationController
+    //        if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+                let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
+    //            let tableViewControllerSettings = navigationController0.viewControllers[0]  as! TableViewControllerSettings
+                if navigationController0.viewControllers.count > 1 {
+                    // 画面　画面分割表示して幅を1/4に狭めると配列要素[1]にナビゲーションコントローラがある　（横向き）
+                    navigationController = navigationController0.viewControllers[1]  as! UINavigationController
+                }else {
+                    // 画面　画面分割表示して幅を1/2に狭めると配列要素[0]にナビゲーションコントローラがある　（横向き）
+                    navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
+                }
+    //            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! TableViewControllerSettingsCategory
+    //            let tableViewControllerCategoryList1 = navigationController.viewControllers[1] as! TableViewControllerCategoryList
+    //            let tableViewControllerSettingsCategoryDetail = navigationController.viewControllers[2] as! TableViewControllerSettingsCategoryDetail
+    //        }else { // iPhone
+    //            navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
+    //        }
+            let presentingViewController = navigationController.viewControllers[2] as! TableViewControllerSettingsCategoryDetail // ナビゲーションコントローラから、勘定科目詳細コントローラーを取得
         let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -285,11 +304,13 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
             self.dismiss(animated: true, completion: {
                 [presentingViewController] () -> Void in
                 presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
+                presentingViewController.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
                 presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
             })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
+        }
     }
 }

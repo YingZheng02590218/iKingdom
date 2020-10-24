@@ -9,10 +9,14 @@
 import UIKit
 
 // 勘定科目　詳細画面
-class TableViewControllerSettingsCategoryDetail: UITableViewController {
+class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        // テキストフィールド作成
+//        createTextFieldForCategory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,141 +53,290 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
         cell.label.text = "-"
         // セルの選択不可にする
         cell.selectionStyle = .none
-        if indexPath.section == 0 { // タクソノミ
-            switch indexPath.row {
-            case 0:
-                // 勘定科目の名称をセルに表示する
-                cell.textLabel?.text = "大区分"
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.textAlignment = NSTextAlignment.left
-                switch object?.Rank0 {
-                case "0": cell.label.text =   "流動資産"
-                    break
-                case "1": cell.label.text =   "固定資産"
-                    break
-                case "2": cell.label.text =   "繰延資産"
-                    break
-                case "3": cell.label.text =   "流動負債"
-                    break
-                case "4": cell.label.text =   "固定負債"
-                    break
-                case "5": cell.label.text =   "資本"
-                    break
-                case "6": cell.label.text =   "売上"
-                    break
-                case "7": cell.label.text =   "売上原価"
-                    break
-                case "8": cell.label.text =   "販売費及び一般管理費"
-                    break
-                case "9": cell.label.text =   "営業外損益"
-                    break
-                case "10": cell.label.text =   "特別損益"
-                    break
-                case "11": cell.label.text =   "税金"
-                    break
-                default:
-                    cell.label.text = "-"
-                    break
-                }
-    //            if object!.category0 != "" {
-    //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:"")[0].category
-    //            }
-                cell.label.textAlignment = NSTextAlignment.center
-                break
-            case 1:
-                cell.textLabel?.text = "中区分"
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.textAlignment = NSTextAlignment.left
-                switch object?.Rank1 {
-                case "0": cell.label.text =   "当座資産"
-                    break
-                case "1": cell.label.text =   "棚卸資産"
-                    break
-                case "2": cell.label.text =   "その他の流動資産"
-                    break
-                case "3": cell.label.text =   "有形固定資産"
-                    break
-                case "4": cell.label.text =   "無形固定資産"
-                    break
-                case "5": cell.label.text =   "投資その他の資産"
-                    break
-                case "6": cell.label.text =   "繰延資産"
-                    break
-                case "7": cell.label.text =   "仕入債務"
-                    break
-                case "8": cell.label.text =   "その他の流動負債"
-                    break
-                case "9": cell.label.text =   "長期債務"
-                    break
-                case "10": cell.label.text =   "株主資本"
-                    break
-                case "11": cell.label.text =   "評価・換算差額等"
-                    break
-                case "12": cell.label.text =   "新株予約権"
-                    break
-                case "13": cell.label.text =   "売上原価"
-                    break
-                case "14": cell.label.text =   "製造原価"
-                    break
-                case "15": cell.label.text =   "営業外収益"
-                    break
-                case "16": cell.label.text =   "営業外費用"
-                    break
-                case "17": cell.label.text =   "特別利益"
-                    break
-                case "18": cell.label.text =   "特別損失"
-                    break
-                default:
-                    cell.label.text = "-"
-                    break
-                }
-    //            if object!.category0 != "" {
-    //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:objectt!.category3,category4: "")[0].category
-    //            }
-                cell.label.textAlignment = NSTextAlignment.center
-                break
-            case 2:
-                cell.textLabel?.text = "小区分"
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.textAlignment = NSTextAlignment.left
-    //            if object!.category0 != "" {
-    //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:objectt!.category3,category4:objectt!.category4)[0].category
-    //            }
-                cell.label.textAlignment = NSTextAlignment.center
-                break
-            case 3: // 勘定科目
-                cell.textLabel?.text = "勘定科目名"
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.textAlignment = NSTextAlignment.left
-                cell.label.text = object!.category
-                //勘定科目
-                cell.label.textAlignment = NSTextAlignment.center
-                break
-            default:
-                //
-                break
-            }
-        }else {
-            cell.textLabel?.text = "表示科目名"
+        // 新規で設定勘定科目を追加する場合　addButtonを押下
+        if numberOfAccount == 0 { // 新規追加
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category", for: indexPath) as! TableViewCellSettingAccountDetail
+            // セルの選択
+            cell.selectionStyle = .none
             cell.textLabel?.textColor = .darkGray
             cell.textLabel?.textAlignment = NSTextAlignment.left
-            // セルの選択を許可
-            cell.selectionStyle = .default
-            if object!.Rank0 != "" {
-                // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
-                let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-                if "" != object?.numberOfTaxonomy {
-                    let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
-                    cell.label.text = objectt!.category
-                    cell.label.textColor = .black
-                }else {
-                    cell.label.text = "表示科目を選択してください"
-                    cell.label.textColor = .lightGray
+            cell.textField_AccountDetail.text = "-"
+            cell.textField_AccountDetail.textAlignment = NSTextAlignment.center
+            if indexPath.section == 0 { // 勘定科目
+                switch indexPath.row {
+                case 0:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
+                    // セルの選択
+                    cell.selectionStyle = .none
+                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textAlignment = NSTextAlignment.left
+                    cell.textField_AccountDetail_big.text = "-"
+                    cell.textField_AccountDetail_big.textAlignment = NSTextAlignment.center
+                    // 勘定科目の名称をセルに表示する
+                    cell.textLabel?.text = "大区分"
+                    cell.textField_AccountDetail_big.text = "選択してください"
+                    cell.textField_AccountDetail_big.textColor = .lightGray
+                    return cell
+                case 1:
+                    cell.textLabel?.text = "中区分"
+                    cell.textField_AccountDetail.text = "選択してください"
+                    cell.textField_AccountDetail.textColor = .lightGray
+                    return cell
+                case 2:
+                    cell.textLabel?.text = "小区分"
+                    cell.textField_AccountDetail.textColor = .lightGray
+                    return cell
+                case 3:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_Account", for: indexPath) as! TableViewCellSettingAccountDetailAccount
+                    // セルの選択
+                    cell.selectionStyle = .none
+                    cell.textLabel?.text = "勘定科目名"
+                    cell.textField_AccountDetail_Account.text = "入力してください"
+                    cell.textField_AccountDetail_Account.textColor = .lightGray
+                    return cell
+                default:
+                    //
+                    return cell
+                }
+            }else { // タクソノミ　表示科目
+                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+                // セルの選択
+                cell.selectionStyle = .default
+                cell.textLabel?.text = "表示科目名"
+                cell.label.text = "表示科目を選択してください"
+                cell.label.textColor = .lightGray
+                cell.label.textAlignment = NSTextAlignment.center
+                return cell
+            }
+        }else { // 新規追加　以外
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+            // セルの選択
+            cell.selectionStyle = .none
+            // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
+            let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+            let object = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: numberOfAccount) // 勘定科目
+            cell.label.text = "-"
+            if indexPath.section == 0 { // 勘定科目
+                switch indexPath.row {
+                case 0:
+                    // 勘定科目の名称をセルに表示する
+                    cell.textLabel?.text = "大区分"
+                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textAlignment = NSTextAlignment.left
+                    switch object?.Rank0 {
+                    case "0": cell.label.text =   "流動資産"
+                        break
+                    case "1": cell.label.text =   "固定資産"
+                        break
+                    case "2": cell.label.text =   "繰延資産"
+                        break
+                    case "3": cell.label.text =   "流動負債"
+                        break
+                    case "4": cell.label.text =   "固定負債"
+                        break
+                    case "5": cell.label.text =   "資本"
+                        break
+                    case "6": cell.label.text =   "売上"
+                        break
+                    case "7": cell.label.text =   "売上原価"
+                        break
+                    case "8": cell.label.text =   "販売費及び一般管理費"
+                        break
+                    case "9": cell.label.text =   "営業外損益"
+                        break
+                    case "10": cell.label.text =   "特別損益"
+                        break
+                    case "11": cell.label.text =   "税金"
+                        break
+                    default:
+//                        cell.label.text = "-"
+                        cell.label.text = "選択してください"
+                        cell.label.textColor = .lightGray
+                        break
+                    }
+        //            if object!.category0 != "" {
+        //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:"")[0].category
+        //            }
+                    cell.label.textAlignment = NSTextAlignment.center
+                    break
+                case 1:
+                    cell.textLabel?.text = "中区分"
+                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textAlignment = NSTextAlignment.left
+                    switch object?.Rank1 {
+                    case "0": cell.label.text =   "当座資産"
+                        break
+                    case "1": cell.label.text =   "棚卸資産"
+                        break
+                    case "2": cell.label.text =   "その他の流動資産"
+                        break
+                    case "3": cell.label.text =   "有形固定資産"
+                        break
+                    case "4": cell.label.text =   "無形固定資産"
+                        break
+                    case "5": cell.label.text =   "投資その他の資産"
+                        break
+                    case "6": cell.label.text =   "繰延資産"
+                        break
+                    case "7": cell.label.text =   "仕入債務"
+                        break
+                    case "8": cell.label.text =   "その他の流動負債"
+                        break
+                    case "9": cell.label.text =   "長期債務"
+                        break
+                    case "10": cell.label.text =   "株主資本"
+                        break
+                    case "11": cell.label.text =   "評価・換算差額等"
+                        break
+                    case "12": cell.label.text =   "新株予約権"
+                        break
+                    case "13": cell.label.text =   "売上原価"
+                        break
+                    case "14": cell.label.text =   "製造原価"
+                        break
+                    case "15": cell.label.text =   "営業外収益"
+                        break
+                    case "16": cell.label.text =   "営業外費用"
+                        break
+                    case "17": cell.label.text =   "特別利益"
+                        break
+                    case "18": cell.label.text =   "特別損失"
+                        break
+                    default:
+//                        cell.label.text = "-"
+                        cell.label.text = "選択してください"
+                        cell.label.textColor = .lightGray
+                        break
+                    }
+        //            if object!.category0 != "" {
+        //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:objectt!.category3,category4: "")[0].category
+        //            }
+                    cell.label.textAlignment = NSTextAlignment.center
+                    break
+                case 2:
+                    cell.textLabel?.text = "小区分"
+                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textAlignment = NSTextAlignment.left
+        //            if object!.category0 != "" {
+        //            cell.label.text = dataBaseManagerSettingsCategoryBSAndPL.getSmallCategory(category0: objectt!.category0,category1: objectt!.category1,category2: objectt!.category2,category3:objectt!.category3,category4:objectt!.category4)[0].category
+        //            }
+                    cell.label.textAlignment = NSTextAlignment.center
+                    break
+                case 3: // 勘定科目
+                    cell.textLabel?.text = "勘定科目名"
+                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textAlignment = NSTextAlignment.left
+                    //勘定科目
+                    if object!.category != "" {
+                        cell.label.text = object!.category
+                    }else {
+                        cell.label.text = "入力してください"
+                        cell.label.textColor = .lightGray
+                    }
+                    cell.label.textAlignment = NSTextAlignment.center
+                    break
+                default:
+                    //
+                    break
+                }
+            }else { // タクソノミ　表示科目
+                // セルの選択
+                cell.selectionStyle = .default
+                cell.textLabel?.text = "表示科目名"
+                cell.textLabel?.textColor = .darkGray
+                cell.textLabel?.textAlignment = NSTextAlignment.left
+//                if object!.Rank0 != "" {
+                    // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
+                    let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+                    if "" != object?.numberOfTaxonomy {
+                        let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
+                        cell.label.text = objectt!.category
+                        cell.label.textColor = .black
+                    }else {
+                        cell.label.text = "表示科目を選択してください"
+                        cell.label.textColor = .lightGray
+                    }
+//                }
+                cell.label.textAlignment = NSTextAlignment.center
+            }
+            return cell
+        }
+    }
+//    @IBOutlet var textField_AccountDetail_big: PickerTextFieldAccountDetail!
+//    @IBOutlet var textField_AccountDetail: PickerTextFieldAccountDetail!
+    // TextField作成
+    func createTextFieldForCategory() {
+//        textField_AccountDetail_big.delegate = self
+//        textField_AccountDetail.delegate = self
+//        let cell_big = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
+        let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
+        if cell_big.textField_AccountDetail_big.text == "" {
+//        // 大区分　中区分　小区分
+//        if reuseIdentifier == "identifier_category_big" {
+        
+            cell_big.textField_AccountDetail_big.setup(identifier: "identifier_category_big", component0: 0)
+        }
+//        }else {
+//            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) // 大区分のセルを取得
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
+//        if cell.textField_AccountDetail.text == "" {
+            // 勘定科目区分　大区分
+            let Rank0 = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
+            for i in 0..<Rank0.count {
+                print(Rank0[i] , cell_big.textField_AccountDetail_big!.text)
+                if Rank0[i] == cell_big.textField_AccountDetail_big!.text {
+                    // コンポーネント0で大区分が何を選択されたかを、渡す
+                    cell.textField_AccountDetail.setup(identifier: "identifier_category", component0: i)
+                    break
                 }
             }
-            cell.label.textAlignment = NSTextAlignment.center
+//        }
+        let cell_small = self.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! TableViewCellSettingAccountDetail
+        cell_small.textField_AccountDetail.setup(identifier: "identifier_category_small", component0: 0)
+
+        // TextFieldに入力された値に反応
+        cell_big.textField_AccountDetail_big.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+    }
+    // UIKeyboardWillShow通知を受けて、実行される関数
+    @objc func keyboardWillShow(_ notification: NSNotification){
+        createTextFieldForCategory()
+    }
+    // TextFieldに入力され値が変化した時の処理の関数
+    @objc func textFieldDidChange(_ sender: UITextField) {
+//    func textFieldEditingChanged(_ sender: UITextField){
+        sender.textColor = UIColor.black // 文字色をブラックとする
+        if sender.text != "" {
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
+            cell.textField_AccountDetail.text = "選択してください"
+            cell.textField_AccountDetail.textColor = .lightGray
         }
-        return cell
+    }
+    // テキストフィールがタップされ、入力可能になったあと
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // テキストフィールド作成
+        createTextFieldForCategory()
+        textField.textColor = UIColor.black // 文字色をブラックとする
+    }
+    //TextField キーボード以外の部分をタッチ　 TextFieldをタップしても呼ばれない
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {// この後に TapGestureRecognizer が呼ばれている
+        // 初期値を再設定
+        setInitialData()
+        // touchesBeganメソッドをオーバーライドします。
+        self.view.endEditing(true)
+    }
+    // 初期値を再設定
+    func setInitialData() {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
+        if cell.textField_AccountDetail.text == "" {
+            cell.textField_AccountDetail.text = "選択してください"
+            cell.textField_AccountDetail.textColor = UIColor.lightGray // 文字色をライトグレーとする
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category", for: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetail
+            if cell.textField_AccountDetail.text == "" {
+                cell.textField_AccountDetail.text = "選択してください"
+                cell.textField_AccountDetail.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            }
+        }
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -228,6 +381,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
         }
         return true
     }
+    var addAccount: Bool = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
     // 画面遷移の準備　表示科目一覧画面へ
     var tappedIndexPath: IndexPath?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -238,7 +392,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
         switch segue.identifier {
-        // 損益勘定
+        // 設定勘定科目
         case "segue_TaxonomyList": //“セグウェイにつけた名称”:
             // segue.destinationの型はUIViewController
             let viewControllerGenearlLedgerAccount = segue.destination as! TableViewControllerSettingsTaxonomyList
@@ -257,6 +411,10 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
                 break
             }
             viewControllerGenearlLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
+            if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
+                viewControllerGenearlLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
+            }
+            break
         default:
             //
             break
@@ -265,10 +423,16 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     // 勘定科目に紐づけられた表示科目を変更する　設定勘定科目連番、表示科目連番
-    func changeTaxonomyOfTaxonomyAccount(number: Int, numberOfTaxonomy: Int) {
-        // データベース　仕訳データを追加
+    func changeTaxonomyOfTaxonomyAccount(number: Int, numberOfTaxonomy: Int) -> Int {
+        // 勘定科目　追加か編集か
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        databaseManagerSettingsTaxonomyAccount.updateTaxonomyOfSettingsTaxonomyAccount(number: number, numberOfTaxonomy: String(numberOfTaxonomy))
+        var newnumber = 0
+        if number == 0 { // 新規追加
+            newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(Rank0: "", Rank1: "", Rank2: "", numberOfTaxonomy: String(numberOfTaxonomy), category: "", switching: false)
+        }else{ // 変更
+            databaseManagerSettingsTaxonomyAccount.updateTaxonomyOfSettingsTaxonomyAccount(number: number, numberOfTaxonomy: String(numberOfTaxonomy))
+            newnumber = number
+        }
+        return newnumber
     }
-
 }
