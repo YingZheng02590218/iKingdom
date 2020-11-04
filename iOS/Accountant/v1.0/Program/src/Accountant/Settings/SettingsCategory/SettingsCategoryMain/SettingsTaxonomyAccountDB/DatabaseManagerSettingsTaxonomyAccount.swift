@@ -245,4 +245,46 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
         }
     }
+    // 追加　設定勘定科目　新規作成
+    func addSettingsTaxonomyAccount(Rank0: String, Rank1: String, Rank2: String, numberOfTaxonomy: String, category: String, switching: Bool) -> Int {
+        // オブジェクトを作成
+        let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount()
+        var number = 0                                          //プライマリーキー 自動採番にした
+        dataBaseSettingsTaxonomyAccount.Rank0 = Rank0
+        dataBaseSettingsTaxonomyAccount.Rank1 = Rank1
+        dataBaseSettingsTaxonomyAccount.Rank2 = Rank2
+        dataBaseSettingsTaxonomyAccount.numberOfTaxonomy = numberOfTaxonomy
+        dataBaseSettingsTaxonomyAccount.category = category
+//        dataBaseSettingsTaxonomyAccount.dataBaseSettingsTaxonomyAccount.category =  = AdjustingAndClosingEntries
+        dataBaseSettingsTaxonomyAccount.switching = switching        // オブジェクトを作成
+        let realm = try! Realm()
+        try! realm.write {
+            number = dataBaseSettingsTaxonomyAccount.save() //　自動採番
+            // 設定勘定科目を追加
+            realm.add(dataBaseSettingsTaxonomyAccount)
+        }
+        // オブジェクトを作成 勘定クラス
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        dataBaseManagerAccount.addGeneralLedgerAccount(number: number)
+        return number
+    }
+    // 削除　設定勘定科目
+    func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
+        // 勘定クラス　勘定を削除
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
+        if isInvalidated {
+            // (1)Realmのインスタンスを生成する
+            let realm = try! Realm()
+            // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+            let object = realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)!
+            try! realm.write {
+                // 仕訳が残ってないか
+                // 勘定を削除
+                realm.delete(object)
+            }
+            return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+        }
+        return false // 勘定を削除できたら、設定勘定科目を削除する
+    }
 }

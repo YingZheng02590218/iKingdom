@@ -132,12 +132,14 @@ class DataBaseManagerTaxonomy {
         var BSAndPLCategoryTotalAmount: Int64 = 0            // 累計額
         // オブジェクトを作成 勘定
         for i in 0..<objects.count{ //表示科目に該当する勘定の金額を合計する
-            let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: objects[i].category)
-            if totalDebitOrCredit == "-"{
-                BSAndPLCategoryTotalAmount -= totalAmount
-            }else {
-                BSAndPLCategoryTotalAmount += totalAmount
+            if objects[i].category != "" { // ここで空白が入っている　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
+                let totalAmount = getTotalAmount(account: objects[i].category)
+                let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: objects[i].category)
+                if totalDebitOrCredit == "-"{
+                    BSAndPLCategoryTotalAmount -= totalAmount
+                }else {
+                    BSAndPLCategoryTotalAmount += totalAmount
+                }
             }
         }
         return BSAndPLCategoryTotalAmount
@@ -150,6 +152,7 @@ class DataBaseManagerTaxonomy {
     * @return  credit_total 貸方合計　決算整理後
     */
     func getTotalAmount(account: String) -> Int64 {
+        // 引数に空白が入るのでインデックスエラーとなる　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()

@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 会計期間クラス
 class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresentationControllerDelegate {
 
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = false
+    @IBOutlet var gADBannerView: GADBannerView!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +31,55 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     override func viewWillAppear(_ animated: Bool) {
         // 年度を追加後に会計期間画面を更新する
         tableView.reloadData()
+        // 要素数が少ないUITableViewで残りの部分や余白を消す
+        let tableFooterView = UIView(frame: CGRect.zero)
+        tableView.tableFooterView = tableFooterView
+
+        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+        // GADBannerView を作成する
+        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+//        print(self.view.frame.size.height)
+//        print(gADBannerView.frame.height)
+//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            gADBannerView.adUnitID = TEST_ID
+        }
+        else{
+            gADBannerView.adUnitID = AdMobID
+        }
+        gADBannerView.rootViewController = self
+        // 広告を読み込む
+        gADBannerView.load(GADRequest())
+        print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
+        // GADBannerView を作成する
+//        addBannerViewToView(gADBannerView, constant: 0)
+        addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: constant),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
     // 前準備
     override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
         // セグエのポップオーバー接続先を取得
