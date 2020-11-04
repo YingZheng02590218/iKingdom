@@ -99,7 +99,8 @@ class DataBaseManagerPL {
         default:
             print(result)
         }
-        return addComma(string: result.description)
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 計算　階層1 中区分
     func setTotalRank1(big5: Int, rank1: Int) {
@@ -180,14 +181,15 @@ class DataBaseManagerPL {
             print(result)
             break
         }
-        return addComma(string: result.description)
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 合計残高　勘定別の合計と借又貸 取得
-    func getAccountTotal(big_category: Int, account: String) -> String {
-        let totalAmount = getTotalAmount(account: account)  // 合計を取得
-        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
-        return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
-    }
+//    func getAccountTotal(big_category: Int, account: String) -> String {
+//        let totalAmount = getTotalAmount(account: account)  // 合計を取得
+//        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
+//        return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
+//    }
     // 利益　計算
     func setBenefitTotal() {
         // 開いている会計帳簿を取得
@@ -256,22 +258,8 @@ class DataBaseManagerPL {
             print(result)
             break
         }
-
-        return addComma(string: result.description)
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        // 三角形はマイナスの意味
-        if amount < 0 { //0の場合は、空白を表示する
-            let amauntFix = amount * -1
-            return "△ \(addComma(string: amauntFix.description))"
-        }else {
-            return addComma(string: amount.description)
-        }
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
@@ -369,6 +357,20 @@ class DataBaseManagerPL {
             }
         }
         return PositiveOrNegative
+    }
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        // 三角形はマイナスの意味
+        if amount < 0 { //0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
+            return addComma(string: amount.description)
+        }
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
