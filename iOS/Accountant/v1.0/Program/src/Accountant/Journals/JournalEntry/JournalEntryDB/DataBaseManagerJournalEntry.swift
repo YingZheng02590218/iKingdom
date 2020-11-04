@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift // データベースのインポート
 
 // 仕訳クラス
-class DataBaseManagerJournalEntry  {
+class DataBaseManagerJournalEntry {
     
     // 追加　仕訳
     func addJournalEntry(date: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
@@ -31,8 +31,8 @@ class DataBaseManagerJournalEntry  {
 //        accountRight.accountName = credit_category
 //        dataBaseJournalEntry.account.append(accountRight)
         let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
-        let left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category) // 丁数
-        let right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
+        let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
+        let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
@@ -42,7 +42,6 @@ class DataBaseManagerJournalEntry  {
         let realm = try! Realm()
         try! realm.write {
             number = dataBaseJournalEntry.save() //仕訳番号　自動採番
-
             dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
 //            realm.add(dataBaseJournalEntry)
             // 仕訳帳に仕訳データを追加
@@ -53,11 +52,11 @@ class DataBaseManagerJournalEntry  {
 //            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
 //            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
-            object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].dataBaseJournalEntries.append(dataBaseJournalEntry)
+            left_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 勘定に貸方の仕訳データを追加
 //            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
 //            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
-            object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].dataBaseJournalEntries.append(dataBaseJournalEntry)
+            right_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
         }
         // 仕訳データを追加したら、試算表を再計算するためのフラグをここで立てる 2020/06/1614:47
         //flag_journalEntryAdded = true
@@ -79,8 +78,8 @@ class DataBaseManagerJournalEntry  {
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
         let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
-        let left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
-        let right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
+        let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
+        let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 
         let realm = try! Realm()
         try! realm.write {
@@ -94,9 +93,9 @@ class DataBaseManagerJournalEntry  {
             object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
             //勘定へ転記
             // 勘定に借方の仕訳データを追加
-            object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+            left_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
             // 勘定に貸方の仕訳データを追加
-            object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+            right_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
         }
         // 仕訳データを追加したら、試算表を再計算するためのフラグをここで立てる 2020/06/1614:47
         //flag_journalEntryAdded = true
@@ -251,37 +250,6 @@ class DataBaseManagerJournalEntry  {
         let number: Int = objects[0].number
         return number
     }
-    // 削除　仕訳
-    func deleteJournalEntry(number: Int) -> Bool {
-        let realm = try! Realm()
-        let object = realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: number)!
-        // 再計算用に、勘定をメモしておく
-        let account_left = object.debit_category
-        let account_right = object.credit_category
-        try! realm.write {
-            realm.delete(object)
-            print("object.isInvalidated: \(object.isInvalidated)")
-        }
-        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
-        dataBaseManager.setAccountTotal(account_left: account_left, account_right: account_right)
-        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
-    }
-    // 削除　決算整理仕訳
-    func deleteAdjustingJournalEntry(number: Int) -> Bool {
-        let realm = try! Realm()
-        let object = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number)!
-        // 再計算用に、勘定をメモしておく
-        let account_left = object.debit_category
-        let account_right = object.credit_category
-        try! realm.write {
-            realm.delete(object)
-        }
-        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
-        dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right) // 決算整理仕訳用にしないといけない
-        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
-    }
     // 更新 仕訳
     func updateJournalEntry(primaryKey: Int, date: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
         let realm = try! Realm()
@@ -321,5 +289,36 @@ class DataBaseManagerJournalEntry  {
         dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right)//編集前の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)//編集後の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         return primaryKey
+    }
+    // 削除　仕訳
+    func deleteJournalEntry(number: Int) -> Bool {
+        let realm = try! Realm()
+        let object = realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: number)!
+        // 再計算用に、勘定をメモしておく
+        let account_left = object.debit_category
+        let account_right = object.credit_category
+        try! realm.write {
+            realm.delete(object)
+            print("object.isInvalidated: \(object.isInvalidated)")
+        }
+        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
+        let dataBaseManager = DataBaseManagerTB()
+        dataBaseManager.setAccountTotal(account_left: account_left, account_right: account_right)
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
+    }
+    // 削除　決算整理仕訳
+    func deleteAdjustingJournalEntry(number: Int) -> Bool {
+        let realm = try! Realm()
+        let object = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number)!
+        // 再計算用に、勘定をメモしておく
+        let account_left = object.debit_category
+        let account_right = object.credit_category
+        try! realm.write {
+            realm.delete(object)
+        }
+        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
+        let dataBaseManager = DataBaseManagerTB()
+        dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right) // 決算整理仕訳用にしないといけない
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
 }
