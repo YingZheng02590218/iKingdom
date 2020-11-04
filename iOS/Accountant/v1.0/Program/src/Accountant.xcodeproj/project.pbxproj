@@ -45,6 +45,7 @@
 		F955B60A2490E31E005E2C6D /* TableViewControllerPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6092490E31E005E2C6D /* TableViewControllerPL.swift */; };
 		F955B60C2490FB77005E2C6D /* TableViewControllerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B60B2490FB77005E2C6D /* TableViewControllerBS.swift */; };
 		F955B6112490FD3E005E2C6D /* TableViewControllerCF.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* TableViewControllerCF.swift */; };
+		F95A8C952552A0D900789B0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F95A8C942552A0D900789B0D /* GoogleService-Info.plist */; };
 		F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */; };
 		F9711329249D12A1006258F7 /* TableViewCellTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9711328249D12A1006258F7 /* TableViewCellTB.swift */; };
 		F973981524A99D5F00A05C5F /* TableViewCellAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F973981424A99D5F00A05C5F /* TableViewCellAmount.swift */; };
@@ -171,6 +172,7 @@
 		F955B6092490E31E005E2C6D /* TableViewControllerPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerPL.swift; sourceTree = "<group>"; };
 		F955B60B2490FB77005E2C6D /* TableViewControllerBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerBS.swift; sourceTree = "<group>"; };
 		F955B6102490FD3E005E2C6D /* TableViewControllerCF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerCF.swift; sourceTree = "<group>"; };
+		F95A8C942552A0D900789B0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
 		F9711328249D12A1006258F7 /* TableViewCellTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTB.swift; sourceTree = "<group>"; };
 		F973981424A99D5F00A05C5F /* TableViewCellAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellAmount.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				F94EDD98237AEB3A0074D812 /* Document.swift */,
 				F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */,
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
+				F95A8C942552A0D900789B0D /* GoogleService-Info.plist */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
@@ -917,6 +920,7 @@
 				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
+				F95A8C952552A0D900789B0D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
