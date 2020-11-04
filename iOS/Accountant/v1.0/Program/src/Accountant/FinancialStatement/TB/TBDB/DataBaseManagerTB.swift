@@ -147,45 +147,50 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             if account != "損益勘定" {
-                // 勘定の丁数(プライマリーキー)を取得
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                objectss[0].dataBaseAccounts[number].debit_total = 0
-                objectss[0].dataBaseAccounts[number].credit_total = 0
-                objectss[0].dataBaseAccounts[number].debit_balance = 0
-                objectss[0].dataBaseAccounts[number].credit_balance = 0
-                
-                objectss[0].dataBaseAccounts[number].debit_total_Adjusting = 0
-                objectss[0].dataBaseAccounts[number].credit_total_Adjusting = 0
-                objectss[0].dataBaseAccounts[number].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
-                objectss[0].dataBaseAccounts[number].credit_balance_Adjusting = 0
-                
-                objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting = 0
-                objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting = 0
-                objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting = 0
-                objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting = 0
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count {
+                    if objectss!.dataBaseAccounts[i].accountName == account {
+//                    // 勘定の丁数(プライマリーキー)を取得
+//                    var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//                    number -= 1 // 0スタートに補正
+                    objectss?.dataBaseAccounts[i].debit_total = 0
+                    objectss?.dataBaseAccounts[i].credit_total = 0
+                    objectss?.dataBaseAccounts[i].debit_balance = 0
+                    objectss?.dataBaseAccounts[i].credit_balance = 0
+                    
+                    objectss?.dataBaseAccounts[i].debit_total_Adjusting = 0
+                    objectss?.dataBaseAccounts[i].credit_total_Adjusting = 0
+                    objectss?.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
+                    objectss?.dataBaseAccounts[i].credit_balance_Adjusting = 0
+                    
+                    objectss?.dataBaseAccounts[i].debit_total_AfterAdjusting = 0
+                    objectss?.dataBaseAccounts[i].credit_total_AfterAdjusting = 0
+                    objectss?.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0
+                    objectss?.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0
+                    }
+                }
             }else { // 損益勘定の場合
-                objectss[0].dataBasePLAccount?.debit_total = 0
-                objectss[0].dataBasePLAccount?.credit_total = 0
-                objectss[0].dataBasePLAccount?.debit_balance = 0
-                objectss[0].dataBasePLAccount?.credit_balance = 0
+                objectss?.dataBasePLAccount?.debit_total = 0
+                objectss?.dataBasePLAccount?.credit_total = 0
+                objectss?.dataBasePLAccount?.debit_balance = 0
+                objectss?.dataBasePLAccount?.credit_balance = 0
                 
-                objectss[0].dataBasePLAccount?.debit_total_Adjusting = 0
-                objectss[0].dataBasePLAccount?.credit_total_Adjusting = 0
-                objectss[0].dataBasePLAccount?.debit_balance_Adjusting = 0
-                objectss[0].dataBasePLAccount?.credit_balance_Adjusting = 0
+                objectss?.dataBasePLAccount?.debit_total_Adjusting = 0
+                objectss?.dataBasePLAccount?.credit_total_Adjusting = 0
+                objectss?.dataBasePLAccount?.debit_balance_Adjusting = 0
+                objectss?.dataBasePLAccount?.credit_balance_Adjusting = 0
                 
-                objectss[0].dataBasePLAccount?.debit_total_AfterAdjusting = 0
-                objectss[0].dataBasePLAccount?.credit_total_AfterAdjusting = 0
-                objectss[0].dataBasePLAccount?.debit_balance_AfterAdjusting = 0
-                objectss[0].dataBasePLAccount?.credit_balance_AfterAdjusting = 0
+                objectss?.dataBasePLAccount?.debit_total_AfterAdjusting = 0
+                objectss?.dataBasePLAccount?.credit_total_AfterAdjusting = 0
+                objectss?.dataBasePLAccount?.debit_balance_AfterAdjusting = 0
+                objectss?.dataBasePLAccount?.credit_balance_AfterAdjusting = 0
             }
         }
     }
@@ -206,49 +211,54 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             if account != "損益勘定" {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count {
+                    if objectss!.dataBaseAccounts[i].accountName == account {
                 // 勘定の丁数(プライマリーキー)を取得
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                // 借方と貸方で金額が大きい方はどちらか
-                if left > right {
-                    objectss[0].dataBaseAccounts[number].debit_total = left
-                    objectss[0].dataBaseAccounts[number].credit_total = right
-                    objectss[0].dataBaseAccounts[number].debit_balance = left - right // 差額を格納
-                    objectss[0].dataBaseAccounts[number].credit_balance = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
-                }else if left < right {
-                    objectss[0].dataBaseAccounts[number].debit_total = left
-                    objectss[0].dataBaseAccounts[number].credit_total = right
-                    objectss[0].dataBaseAccounts[number].debit_balance = 0
-                    objectss[0].dataBaseAccounts[number].credit_balance = right - left
-                }else {
-                    objectss[0].dataBaseAccounts[number].debit_total = left
-                    objectss[0].dataBaseAccounts[number].credit_total = right
-                    objectss[0].dataBaseAccounts[number].debit_balance = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBaseAccounts[number].credit_balance = 0
+//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//                number -= 1 // 0スタートに補正
+                        // 借方と貸方で金額が大きい方はどちらか
+                        if left > right {
+                            objectss?.dataBaseAccounts[i].debit_total = left
+                            objectss?.dataBaseAccounts[i].credit_total = right
+                            objectss?.dataBaseAccounts[i].debit_balance = left - right // 差額を格納
+                            objectss?.dataBaseAccounts[i].credit_balance = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                        }else if left < right {
+                            objectss?.dataBaseAccounts[i].debit_total = left
+                            objectss?.dataBaseAccounts[i].credit_total = right
+                            objectss?.dataBaseAccounts[i].debit_balance = 0
+                            objectss?.dataBaseAccounts[i].credit_balance = right - left
+                        }else {
+                            objectss?.dataBaseAccounts[i].debit_total = left
+                            objectss?.dataBaseAccounts[i].credit_total = right
+                            objectss?.dataBaseAccounts[i].debit_balance = 0 // ゼロを入れないと前回値が残る
+                            objectss?.dataBaseAccounts[i].credit_balance = 0
+                        }
+                    }
                 }
             }else { // 損益勘定の場合
                 // 借方と貸方で金額が大きい方はどちらか
                 if left > right {
-                    objectss[0].dataBasePLAccount?.debit_total = left
-                    objectss[0].dataBasePLAccount?.credit_total = right
-                    objectss[0].dataBasePLAccount?.debit_balance = left - right // 差額を格納
-                    objectss[0].dataBasePLAccount?.credit_balance = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    objectss?.dataBasePLAccount?.debit_total = left
+                    objectss?.dataBasePLAccount?.credit_total = right
+                    objectss?.dataBasePLAccount?.debit_balance = left - right // 差額を格納
+                    objectss?.dataBasePLAccount?.credit_balance = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                 }else if left < right {
-                    objectss[0].dataBasePLAccount?.debit_total = left
-                    objectss[0].dataBasePLAccount?.credit_total = right
-                    objectss[0].dataBasePLAccount?.debit_balance = 0
-                    objectss[0].dataBasePLAccount?.credit_balance = right - left
+                    objectss?.dataBasePLAccount?.debit_total = left
+                    objectss?.dataBasePLAccount?.credit_total = right
+                    objectss?.dataBasePLAccount?.debit_balance = 0
+                    objectss?.dataBasePLAccount?.credit_balance = right - left
                 }else {
-                    objectss[0].dataBasePLAccount?.debit_total = left
-                    objectss[0].dataBasePLAccount?.credit_total = right
-                    objectss[0].dataBasePLAccount?.debit_balance = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBasePLAccount?.credit_balance = 0
+                    objectss?.dataBasePLAccount?.debit_total = left
+                    objectss?.dataBasePLAccount?.credit_total = right
+                    objectss?.dataBasePLAccount?.debit_balance = 0 // ゼロを入れないと前回値が残る
+                    objectss?.dataBasePLAccount?.credit_balance = 0
                 }
             }
         }
@@ -277,50 +287,55 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             if account != "損益勘定" {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count {
+                    if objectss!.dataBaseAccounts[i].accountName == account {
                 // 勘定の丁数(プライマリーキー)を取得
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                // 借方と貸方で金額が大きい方はどちらか
-                if left > right {
-                    objectss[0].dataBaseAccounts[number].debit_total_Adjusting = left
-                    objectss[0].dataBaseAccounts[number].credit_total_Adjusting = right
-                    objectss[0].dataBaseAccounts[number].debit_balance_Adjusting = left - right // 差額を格納
-                    objectss[0].dataBaseAccounts[number].credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
-                }else if left < right {
-                    objectss[0].dataBaseAccounts[number].debit_total_Adjusting = left
-                    objectss[0].dataBaseAccounts[number].credit_total_Adjusting = right
-                    objectss[0].dataBaseAccounts[number].debit_balance_Adjusting = 0
-                    objectss[0].dataBaseAccounts[number].credit_balance_Adjusting = right - left
-                }else {
-                    objectss[0].dataBaseAccounts[number].debit_total_Adjusting = left
-                    objectss[0].dataBaseAccounts[number].credit_total_Adjusting = right
-                    objectss[0].dataBaseAccounts[number].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBaseAccounts[number].credit_balance_Adjusting = 0
+//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//                number -= 1 // 0スタートに補正
+                        // 借方と貸方で金額が大きい方はどちらか
+                        if left > right {
+                            objectss?.dataBaseAccounts[i].debit_total_Adjusting = left
+                            objectss?.dataBaseAccounts[i].credit_total_Adjusting = right
+                            objectss?.dataBaseAccounts[i].debit_balance_Adjusting = left - right // 差額を格納
+                            objectss?.dataBaseAccounts[i].credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                        }else if left < right {
+                            objectss?.dataBaseAccounts[i].debit_total_Adjusting = left
+                            objectss?.dataBaseAccounts[i].credit_total_Adjusting = right
+                            objectss?.dataBaseAccounts[i].debit_balance_Adjusting = 0
+                            objectss?.dataBaseAccounts[i].credit_balance_Adjusting = right - left
+                        }else {
+                            objectss?.dataBaseAccounts[i].debit_total_Adjusting = left
+                            objectss?.dataBaseAccounts[i].credit_total_Adjusting = right
+                            objectss?.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
+                            objectss?.dataBaseAccounts[i].credit_balance_Adjusting = 0
+                        }
+                    }
                 }
             }else { // 損益勘定の場合
                 // 借方と貸方で金額が大きい方はどちらか
                 if left > right {
-                    objectss[0].dataBasePLAccount?.debit_total_Adjusting = left
-                    objectss[0].dataBasePLAccount?.credit_total_Adjusting = right
-                    objectss[0].dataBasePLAccount?.debit_balance_Adjusting = left - right // 差額を格納
-                    objectss[0].dataBasePLAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    objectss?.dataBasePLAccount?.debit_total_Adjusting = left
+                    objectss?.dataBasePLAccount?.credit_total_Adjusting = right
+                    objectss?.dataBasePLAccount?.debit_balance_Adjusting = left - right // 差額を格納
+                    objectss?.dataBasePLAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                 }else if left < right {
-                    objectss[0].dataBasePLAccount?.debit_total_Adjusting = left
-                    objectss[0].dataBasePLAccount?.credit_total_Adjusting = right
-                    objectss[0].dataBasePLAccount?.debit_balance_Adjusting = 0
-                    objectss[0].dataBasePLAccount?.credit_balance_Adjusting = right - left
+                    objectss?.dataBasePLAccount?.debit_total_Adjusting = left
+                    objectss?.dataBasePLAccount?.credit_total_Adjusting = right
+                    objectss?.dataBasePLAccount?.debit_balance_Adjusting = 0
+                    objectss?.dataBasePLAccount?.credit_balance_Adjusting = right - left
                 }else {
-                    objectss[0].dataBasePLAccount?.debit_total_Adjusting = left
-                    objectss[0].dataBasePLAccount?.credit_total_Adjusting = right
-                    objectss[0].dataBasePLAccount?.debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBasePLAccount?.credit_balance_Adjusting = 0
+                    objectss?.dataBasePLAccount?.debit_total_Adjusting = left
+                    objectss?.dataBasePLAccount?.credit_total_Adjusting = right
+                    objectss?.dataBasePLAccount?.debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
+                    objectss?.dataBasePLAccount?.credit_balance_Adjusting = 0
                 }
             }
         }
@@ -330,70 +345,75 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // 決算振替仕訳　損益勘定振替
         let dataBaseManagerPLAccount = DataBaseManagerPLAccount()
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             if account != "損益勘定" {//} && account != "繰越利益" {
-                // 勘定の丁数(プライマリーキー)を取得
-                let dataBaseManagerAccount = DataBaseManagerAccount()
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
-                objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting = objectss[0].dataBaseAccounts[number].debit_total + objectss[0].dataBaseAccounts[number].debit_total_Adjusting
-                objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting = objectss[0].dataBaseAccounts[number].credit_total + objectss[0].dataBaseAccounts[number].credit_total_Adjusting
-                // 残高額　借方と貸方で金額が大きい方はどちらか
-                if objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting {
-                    objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting =
-                        objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting -
-                        objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting // 差額を格納
-                    objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
-                    // 決算振替仕訳　損益勘定振替
-                    if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
-                        dataBaseManagerPLAccount.addTransferEntry(debit_category: account, amount: objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting, credit_category: "損益勘定")
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count { 
+                    if objectss!.dataBaseAccounts[i].accountName == account {
+        //                // 勘定の丁数(プライマリーキー)を取得
+        //                let dataBaseManagerAccount = DataBaseManagerAccount()
+        //                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+        //                number -= 1 // 0スタートに補正
+                        // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
+                        objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting = objectss!.dataBaseAccounts[i].debit_total + objectss!.dataBaseAccounts[i].debit_total_Adjusting
+                        objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting = objectss!.dataBaseAccounts[i].credit_total + objectss!.dataBaseAccounts[i].credit_total_Adjusting
+                        // 残高額　借方と貸方で金額が大きい方はどちらか
+                        if objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting {
+                            objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting =
+                                objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting -
+                                objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting // 差額を格納
+                            objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                            // 決算振替仕訳　損益勘定振替
+                            if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
+                                dataBaseManagerPLAccount.addTransferEntry(debit_category: account, amount: objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting, credit_category: "損益勘定")
+                            }
+                        }else if objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting {
+                            objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting =
+                                objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting -
+                                objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting // 差額を格納
+                            objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                            // 決算振替仕訳　損益勘定振替
+                            if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
+                                dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting, credit_category: account)
+                            }
+                        }else {
+                            objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                            objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                            // 決算振替仕訳　損益勘定振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
+                            dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: 0,credit_category: account)
+                        }
                     }
-                }else if objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting {
-                    objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting =
-                        objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting -
-                        objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting // 差額を格納
-                    objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
-                    // 決算振替仕訳　損益勘定振替
-                    if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
-                        dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting, credit_category: account)
-                    }
-                }else {
-                    objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
-                    // 決算振替仕訳　損益勘定振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
-                    dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: 0,credit_category: account)
                 }
             }else { // 損益勘定の場合
                 // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
-                objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting = objectss[0].dataBasePLAccount!.debit_total + objectss[0].dataBasePLAccount!.debit_total_Adjusting
-                objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting = objectss[0].dataBasePLAccount!.credit_total + objectss[0].dataBasePLAccount!.credit_total_Adjusting
-//                print(objectss[0].dataBasePLAccount!)
+                objectss!.dataBasePLAccount!.debit_total_AfterAdjusting = objectss!.dataBasePLAccount!.debit_total + objectss!.dataBasePLAccount!.debit_total_Adjusting
+                objectss!.dataBasePLAccount!.credit_total_AfterAdjusting = objectss!.dataBasePLAccount!.credit_total + objectss!.dataBasePLAccount!.credit_total_Adjusting
+//                print(objectss!.dataBasePLAccount!)
                 // 残高額　借方と貸方で金額が大きい方はどちらか
-                if objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting > objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting {
-                    objectss[0].dataBasePLAccount!.debit_balance_AfterAdjusting =
-                        objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting -
-                        objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting // 差額を格納
-                    objectss[0].dataBasePLAccount!.credit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                if objectss!.dataBasePLAccount!.debit_total_AfterAdjusting > objectss!.dataBasePLAccount!.credit_total_AfterAdjusting {
+                    objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting =
+                        objectss!.dataBasePLAccount!.debit_total_AfterAdjusting -
+                        objectss!.dataBasePLAccount!.credit_total_AfterAdjusting // 差額を格納
+                    objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                     // 決算振替仕訳　損益勘定の締切り
-                    dataBaseManagerPLAccount.addTransferEntryToNetWorth(debit_category: "損益勘定", amount: objectss[0].dataBasePLAccount!.debit_balance_AfterAdjusting, credit_category: "繰越利益")
-                }else if objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting < objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting {
-                    objectss[0].dataBasePLAccount!.credit_balance_AfterAdjusting =
-                        objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting -
-                        objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting // 差額を格納
-                    objectss[0].dataBasePLAccount!.debit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    dataBaseManagerPLAccount.addTransferEntryToNetWorth(debit_category: "損益勘定", amount: objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting, credit_category: "繰越利益")
+                }else if objectss!.dataBasePLAccount!.debit_total_AfterAdjusting < objectss!.dataBasePLAccount!.credit_total_AfterAdjusting {
+                    objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting =
+                        objectss!.dataBasePLAccount!.credit_total_AfterAdjusting -
+                        objectss!.dataBasePLAccount!.debit_total_AfterAdjusting // 差額を格納
+                    objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                     // 決算振替仕訳　損益勘定の締切り
-                    dataBaseManagerPLAccount.addTransferEntryToNetWorth(debit_category: "繰越利益", amount: objectss[0].dataBasePLAccount!.credit_balance_AfterAdjusting, credit_category: "損益勘定")
+                    dataBaseManagerPLAccount.addTransferEntryToNetWorth(debit_category: "繰越利益", amount: objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting, credit_category: "損益勘定")
                 }else {
-                    objectss[0].dataBasePLAccount!.debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
-                    objectss[0].dataBasePLAccount!.credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                    objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                    objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
                 }
             }
         }
@@ -406,47 +426,52 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0
         if account != "損益勘定" {
-            // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
-            let dataBaseManagerAccount = DataBaseManagerAccount()
-            var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-            number -= 1 // 0スタートに補正
-            switch leftOrRight {
-            case 0: // 合計　借方
-                result = objectss[0].dataBaseAccounts[number].debit_total
-                break
-            case 1: // 合計　貸方
-                result = objectss[0].dataBaseAccounts[number].credit_total
-                break
-            case 2: // 残高　借方
-                result = objectss[0].dataBaseAccounts[number].debit_balance
-                break
-            case 3: // 残高　貸方
-                result = objectss[0].dataBaseAccounts[number].credit_balance
-                break
-            default:
-                print("getTotalAmount")
-                break
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<objectss!.dataBaseAccounts.count {
+                if objectss!.dataBaseAccounts[i].accountName == account {
+//            // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
+//            let dataBaseManagerAccount = DataBaseManagerAccount()
+//            var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//            number -= 1 // 0スタートに補正
+                    switch leftOrRight {
+                    case 0: // 合計　借方
+                        result = objectss!.dataBaseAccounts[i].debit_total
+                        break
+                    case 1: // 合計　貸方
+                        result = objectss!.dataBaseAccounts[i].credit_total
+                        break
+                    case 2: // 残高　借方
+                        result = objectss!.dataBaseAccounts[i].debit_balance
+                        break
+                    case 3: // 残高　貸方
+                        result = objectss!.dataBaseAccounts[i].credit_balance
+                        break
+                    default:
+                        print("getTotalAmount")
+                        break
+                    }
+                }
             }
         }else {
             switch leftOrRight {
             case 0: // 合計　借方
-                result = objectss[0].dataBasePLAccount!.debit_total
+                result = objectss!.dataBasePLAccount!.debit_total
                 break
             case 1: // 合計　貸方
-                result = objectss[0].dataBasePLAccount!.credit_total
+                result = objectss!.dataBasePLAccount!.credit_total
                 break
             case 2: // 残高　借方
-                result = objectss[0].dataBasePLAccount!.debit_balance
+                result = objectss!.dataBasePLAccount!.debit_balance
                 break
             case 3: // 残高　貸方
-                result = objectss[0].dataBasePLAccount!.credit_balance
+                result = objectss!.dataBasePLAccount!.credit_balance
                 break
             default:
                 print("getTotalAmount 損益勘定")
@@ -460,50 +485,55 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
             result = 0
         }else{
             if account != "損益勘定" {
-                // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
-                let dataBaseManagerAccount = DataBaseManagerAccount()
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                switch leftOrRight {
-                case 0: // 合計　借方
-                    result = objectss[0].dataBaseAccounts[number].debit_total_Adjusting
-                    break
-                case 1: // 合計　貸方
-                    result = objectss[0].dataBaseAccounts[number].credit_total_Adjusting
-                    break
-                case 2: // 残高　借方
-                    result = objectss[0].dataBaseAccounts[number].debit_balance_Adjusting
-                    break
-                case 3: // 残高　貸方
-                    result = objectss[0].dataBaseAccounts[number].credit_balance_Adjusting
-                    break
-                default:
-                    print("getTotalAmountAdjusting")
-                    break
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count {
+                    if objectss!.dataBaseAccounts[i].accountName == account {
+//                // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
+//                let dataBaseManagerAccount = DataBaseManagerAccount()
+//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//                number -= 1 // 0スタートに補正
+                        switch leftOrRight {
+                        case 0: // 合計　借方
+                            result = objectss!.dataBaseAccounts[i].debit_total_Adjusting
+                            break
+                        case 1: // 合計　貸方
+                            result = objectss!.dataBaseAccounts[i].credit_total_Adjusting
+                            break
+                        case 2: // 残高　借方
+                            result = objectss!.dataBaseAccounts[i].debit_balance_Adjusting
+                            break
+                        case 3: // 残高　貸方
+                            result = objectss!.dataBaseAccounts[i].credit_balance_Adjusting
+                            break
+                        default:
+                            print("getTotalAmountAdjusting")
+                            break
+                        }
+                    }
                 }
             }else {
                 switch leftOrRight {
                 case 0: // 合計　借方
-                    result = objectss[0].dataBasePLAccount!.debit_total_Adjusting
+                    result = objectss!.dataBasePLAccount!.debit_total_Adjusting
                     break
                 case 1: // 合計　貸方
-                    result = objectss[0].dataBasePLAccount!.credit_total_Adjusting
+                    result = objectss!.dataBasePLAccount!.credit_total_Adjusting
                     break
                 case 2: // 残高　借方
-                    result = objectss[0].dataBasePLAccount!.debit_balance_Adjusting
+                    result = objectss!.dataBasePLAccount!.debit_balance_Adjusting
                     break
                 case 3: // 残高　貸方
-                    result = objectss[0].dataBasePLAccount!.credit_balance_Adjusting
+                    result = objectss!.dataBasePLAccount!.credit_balance_Adjusting
                     break
                 default:
                     print("getTotalAmountAdjusting 損益勘定")
@@ -518,50 +548,55 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
             result = 0
         }else{
             if account != "損益勘定" {
-                // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
-                let dataBaseManagerAccount = DataBaseManagerAccount()
-                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-                number -= 1 // 0スタートに補正
-                switch leftOrRight {
-                case 0: // 合計　借方
-                    result = objectss[0].dataBaseAccounts[number].debit_total_AfterAdjusting
-                    break
-                case 1: // 合計　貸方
-                    result = objectss[0].dataBaseAccounts[number].credit_total_AfterAdjusting
-                    break
-                case 2: // 残高　借方
-                    result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
-                    break
-                case 3: // 残高　貸方
-                    result = objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting
-                    break
-                default:
-                    print("getTotalAmountAfterAdjusting")
-                    break
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<objectss!.dataBaseAccounts.count {
+                    if objectss!.dataBaseAccounts[i].accountName == account {
+//                // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
+//                let dataBaseManagerAccount = DataBaseManagerAccount()
+//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//                number -= 1 // 0スタートに補正
+                        switch leftOrRight {
+                        case 0: // 合計　借方
+                            result = objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting
+                            break
+                        case 1: // 合計　貸方
+                            result = objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting
+                            break
+                        case 2: // 残高　借方
+                            result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                            break
+                        case 3: // 残高　貸方
+                            result = objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                            break
+                        default:
+                            print("getTotalAmountAfterAdjusting")
+                            break
+                        }
+                    }
                 }
             }else {
                 switch leftOrRight {
                 case 0: // 合計　借方
-                    result = objectss[0].dataBasePLAccount!.debit_total_AfterAdjusting
+                    result = objectss!.dataBasePLAccount!.debit_total_AfterAdjusting
                     break
                 case 1: // 合計　貸方
-                    result = objectss[0].dataBasePLAccount!.credit_total_AfterAdjusting
+                    result = objectss!.dataBasePLAccount!.credit_total_AfterAdjusting
                     break
                 case 2: // 残高　借方
-                    result = objectss[0].dataBasePLAccount!.debit_balance_AfterAdjusting
+                    result = objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting
                     break
                 case 3: // 残高　貸方
-                    result = objectss[0].dataBasePLAccount!.credit_balance_AfterAdjusting
+                    result = objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting
                     break
                 default:
                     print("getTotalAmountAfterAdjusting 損益勘定")
