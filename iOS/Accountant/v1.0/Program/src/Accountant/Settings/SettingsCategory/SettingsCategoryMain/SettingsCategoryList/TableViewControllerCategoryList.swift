@@ -83,9 +83,9 @@ class TableViewControllerCategoryList: UITableViewController {
         if editingStyle == .insert {
         // 対象セルの下に追加（先にリストに追加する）
 //        tableDataList.insert(0, at: indexPath.row + 1)
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .automatic)
-        tableView.endUpdates()
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .automatic)
+            tableView.endUpdates()
         }
     }
     // 削除機能 アラートのポップアップを表示
