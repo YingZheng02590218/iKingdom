@@ -27,7 +27,7 @@ class DataBaseManagerPLAccount  {
     }
     // 追加　決算振替仕訳　損益振替
     // 引数：日付、借方勘定、勘定残高額借方、貸方勘定、勘定残高貸方、小書き
-    func addTransferEntry(debit_category: String,amount: Int64,credit_category: String) {
+    func addTransferEntry(debit_category: String, amount: Int64,credit_category: String) {
         // 損益計算書に関する勘定科目のみに絞る
         var account: String = "" // 損益振替の相手勘定
         if debit_category == "損益勘定" {
@@ -64,7 +64,7 @@ class DataBaseManagerPLAccount  {
             // 損益振替仕訳　が存在する場合は　更新
             let objects = checkAdjustingEntryInPLAccount(account: account) // 損益勘定内に勘定が存在するか
             if objects.count >= 1 {
-//                if amount != 0 {
+                if amount != 0 {
                     number = updateAdjustingJournalEntry(
                         primaryKey: objects[0].number,
                         date: dataBaseJournalEntry.date,
@@ -74,6 +74,10 @@ class DataBaseManagerPLAccount  {
                         credit_amount: Int64(dataBaseJournalEntry.credit_amount),//カンマを削除してからデータベースに書き込む
                         smallWritting: dataBaseJournalEntry.smallWritting
                     )
+                }else{ // 貸借が0の場合　削除する
+                    let isInvalidated = deleteAdjustingJournalEntry(number: objects[0].number)
+                    print("損益振替仕訳　削除処理結果 \(isInvalidated)")
+                }
             }else {
                 if amount != 0 {
                     number = dataBaseJournalEntry.save() //仕訳番号　自動採番
@@ -227,5 +231,19 @@ class DataBaseManagerPLAccount  {
 //        dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category)//編集後の借方勘定と貸方勘定
         return primaryKey
     }
-
+    // 削除　決算整理仕訳 損益振替仕訳
+    func deleteAdjustingJournalEntry(number: Int) -> Bool {
+        let realm = try! Realm()
+        let object = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number)!
+//        // 再計算用に、勘定をメモしておく
+//        let account_left = object.debit_category
+//        let account_right = object.credit_category
+//        try! realm.write {
+            realm.delete(object)
+//        }
+//        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
+//        let dataBaseManager = DataBaseManagerTB()
+//        dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right) // 決算整理仕訳用にしないといけない
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
+    }
 }
