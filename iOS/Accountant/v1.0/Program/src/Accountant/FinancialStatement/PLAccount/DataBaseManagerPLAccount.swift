@@ -80,21 +80,33 @@ class DataBaseManagerPLAccount  {
                     // 仕訳帳に仕訳データを追加
                     object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                     //勘定へ転記 // オブジェクトを作成
-                    let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
-                    var left_number = 000
-                    var right_number = 000
+//                    let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
+//                    var left_number = 000
+//                    var right_number = 000
                     if credit_category == "損益勘定" {
-                        left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
-                        // 勘定に借方の仕訳データを追加
-                        object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+//                        left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
+                        let objectss = object.dataBaseGeneralLedger
+                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                        for i in 0..<objectss!.dataBaseAccounts.count {
+                            if objectss!.dataBaseAccounts[i].accountName == credit_category {
+                                // 勘定に借方の仕訳データを追加
+                                object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            }
+                        }
                         // 勘定に貸方の仕訳データを追加
                         object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                     }else if debit_category == "損益勘定" {
-                        right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
+//                        right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
                         // 勘定に借方の仕訳データを追加
                         object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                         // 勘定に貸方の仕訳データを追加
-                        object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                        let objectss = object.dataBaseGeneralLedger
+                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                        for i in 0..<objectss!.dataBaseAccounts.count {
+                            if objectss!.dataBaseAccounts[i].accountName == debit_category {
+                                object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            }
+                        }
                     }
                 }
             }
@@ -147,21 +159,33 @@ class DataBaseManagerPLAccount  {
                     // 仕訳帳に仕訳データを追加
                     object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                     //勘定へ転記 // オブジェクトを作成
-                    let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
-                    var left_number = 000
-                    var right_number = 000
+//                    let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
+//                    var left_number = 000
+//                    var right_number = 000
                     if credit_category == "損益勘定" {
-                        left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
+//                        left_number = dataBaseManagerAccount.getNumberOfAccount(accountName: debit_category)
                         // 勘定に借方の仕訳データを追加
-                        object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                        let objectss = object.dataBaseGeneralLedger
+                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                        for i in 0..<objectss!.dataBaseAccounts.count {
+                            if objectss!.dataBaseAccounts[i].accountName == credit_category {
+                                object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            }
+                        }
                         // 勘定に貸方の仕訳データを追加
                         object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                     }else if debit_category == "損益勘定" {
-                        right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
+//                        right_number = dataBaseManagerAccount.getNumberOfAccount(accountName: credit_category)
                         // 勘定に借方の仕訳データを追加
                         object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                         // 勘定に貸方の仕訳データを追加
-                        object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                        let objectss = object.dataBaseGeneralLedger
+                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                        for i in 0..<objectss!.dataBaseAccounts.count {
+                            if objectss!.dataBaseAccounts[i].accountName == debit_category {
+                                object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            }
+                        }
                     }
                 }
             }

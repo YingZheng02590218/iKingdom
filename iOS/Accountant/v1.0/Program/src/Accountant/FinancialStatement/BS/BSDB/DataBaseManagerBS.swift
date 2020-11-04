@@ -44,21 +44,21 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseBalanceSheet.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet //realm.objects(DataBaseBalanceSheet.self) // モデル
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             switch big5 {
             case 0: //資産
-                objectss[0].Asset_total = TotalAmountOfBig5
+                objectss!.Asset_total = TotalAmountOfBig5
                 break
             case 1: //負債
-                objectss[0].Liability_total = TotalAmountOfBig5
+                objectss!.Liability_total = TotalAmountOfBig5
                 break
             case 2: //純資産
-                objectss[0].Equity_total = TotalAmountOfBig5
+                objectss!.Equity_total = TotalAmountOfBig5
                 break
             default:
                 print("bigCategoryTotalAmount", TotalAmountOfBig5)
@@ -106,24 +106,24 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseBalanceSheet.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet //realm.objects(DataBaseBalanceSheet.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0            // 累計額
         switch big5 {
         case 0: //資産
-            result = objectss[0].Asset_total
+            result = objectss!.Asset_total
             break
         case 1: //負債
-            result = objectss[0].Liability_total
+            result = objectss!.Liability_total
             break
         case 2: //純資産
-            result = objectss[0].Equity_total
+            result = objectss!.Equity_total
             break
         case 3: //負債純資産
-            result = objectss[0].Liability_total+objectss[0].Equity_total
+            result = objectss!.Liability_total+objectss!.Equity_total
             break
         default:
             print(result)
@@ -153,33 +153,33 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseBalanceSheet.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet //realm.objects(DataBaseBalanceSheet.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             switch rank0 {
             case 0: //流動資産
-                objectss[0].CurrentAssets_total = TotalAmountOfRank0
+                objectss!.CurrentAssets_total = TotalAmountOfRank0
                 break
             case 1: //固定資産
-                objectss[0].FixedAssets_total = TotalAmountOfRank0
+                objectss!.FixedAssets_total = TotalAmountOfRank0
                 break
             case 2: //繰延資産
-                objectss[0].DeferredAssets_total = TotalAmountOfRank0
+                objectss!.DeferredAssets_total = TotalAmountOfRank0
                 break
             case 3: //流動負債
-                objectss[0].CurrentLiabilities_total = TotalAmountOfRank0
+                objectss!.CurrentLiabilities_total = TotalAmountOfRank0
                 break
             case 4: //固定負債
-                objectss[0].FixedLiabilities_total = TotalAmountOfRank0
+                objectss!.FixedLiabilities_total = TotalAmountOfRank0
                 break
             case 5: //株主資本
-                objectss[0].CapitalStock_total = TotalAmountOfRank0
+                objectss!.CapitalStock_total = TotalAmountOfRank0
                 break
             case 12: //その他の包括利益累計額 評価・換算差額等のこと？　　→  その通り2020/09/28
-                objectss[0].OtherCapitalSurpluses_total = TotalAmountOfRank0
+                objectss!.OtherCapitalSurpluses_total = TotalAmountOfRank0
                 break
             default:
                 print(TotalAmountOfRank0)
@@ -200,33 +200,33 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseBalanceSheet.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet //realm.objects(DataBaseBalanceSheet.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0            // 累計額
         switch rank0 {
         case 0: //流動資産
-            result = objectss[0].CurrentAssets_total
+            result = objectss!.CurrentAssets_total
             break
         case 1: //固定資産
-            result = objectss[0].FixedAssets_total
+            result = objectss!.FixedAssets_total
             break
         case 2: //繰延資産
-            result = objectss[0].DeferredAssets_total
+            result = objectss!.DeferredAssets_total
             break
         case 3: //流動負債
-            result = objectss[0].CurrentLiabilities_total
+            result = objectss!.CurrentLiabilities_total
             break
         case 4: //固定負債
-            result = objectss[0].FixedLiabilities_total
+            result = objectss!.FixedLiabilities_total
             break
         case 5: //株主資本
-            result = objectss[0].CapitalStock_total
+            result = objectss!.CapitalStock_total
             break
         case 12: //その他の包括利益累計額 評価・換算差額等のこと
-            result = objectss[0].OtherCapitalSurpluses_total
+            result = objectss!.OtherCapitalSurpluses_total
             break
         default:
             print(result)
@@ -264,25 +264,28 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
-        // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting
-        }else {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+        //        // 勘定の丁数(プライマリーキー)を取得
+        //        let dataBaseManagerAccount = DataBaseManagerAccount()
+        //        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+        //        number -= 1 // 0スタートに補正
+                // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                }else {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }
+            }
         }
         return result
     }
@@ -291,25 +294,28 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
+        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self) // モデル
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var DebitOrCredit:String = "" // 借又貸
-        // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "借"
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "貸"
-        }else {
-            DebitOrCredit = "-"
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+        //        // 勘定の丁数(プライマリーキー)を取得
+        //        let dataBaseManagerAccount = DataBaseManagerAccount()
+        //        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+        //        number -= 1 // 0スタートに補正
+                // 借方と貸方で金額が大きい方はどちらか
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "借"
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "貸"
+                }else {
+                    DebitOrCredit = "-"
+                }
+            }
         }
         var PositiveOrNegative:String = "" // 借又貸
         switch big_category {

@@ -263,6 +263,28 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             // 設定勘定科目を追加
             realm.add(dataBaseSettingsTaxonomyAccount)
         }
+        // オブジェクトを作成 勘定クラス
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        dataBaseManagerAccount.addGeneralLedgerAccount(number: number)
         return number
+    }
+    // 削除　設定勘定科目
+    func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
+        // 勘定クラス　勘定を削除
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
+        if isInvalidated {
+            // (1)Realmのインスタンスを生成する
+            let realm = try! Realm()
+            // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+            let object = realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)!
+            try! realm.write {
+                // 仕訳が残ってないか
+                // 勘定を削除
+                realm.delete(object)
+            }
+            return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+        }
+        return false // 勘定を削除できたら、設定勘定科目を削除する
     }
 }
