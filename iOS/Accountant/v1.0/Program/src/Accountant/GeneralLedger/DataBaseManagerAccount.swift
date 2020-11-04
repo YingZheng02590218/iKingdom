@@ -29,6 +29,25 @@ class DataBaseManagerAccount {
 //            realm.add(dataBaseAccount)
 //        }
 //    }
+    // 追加　勘定
+    func addGeneralLedgerAccount(number: Int){
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        // 設定画面の勘定科目一覧にある勘定を取得する
+        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+        let objectt = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number)
+        // (2)書き込みトランザクション内でデータを追加する
+        try! realm.write {
+            let dataBaseAccount = DataBaseAccount() // 勘定
+            dataBaseAccount.number = number //save() //　自動採番ではなく、設定勘定科目のプライマリーキーを使用する
+            print("dataBaseAccount",number)
+            dataBaseAccount.fiscalYear = object.fiscalYear
+            dataBaseAccount.accountName = objectt!.category
+            object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
+        }
+    }
     // 取得 仕訳　すべて　今期
     func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
         let realm = try! Realm()
@@ -177,6 +196,19 @@ class DataBaseManagerAccount {
         return object.dataBaseGeneralLedger?.dataBasePLAccount
     }
     // 取得 仕訳　勘定別
+    func getAllJournalEntryFromAccount(account: String) -> List<DataBaseJournalEntry> { // ResultではなくListを使う　問題ない？
+        let realm = try! Realm()
+        // 開いている会計帳簿の年度を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        var objects = object.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'") // 条件を間違えないように注意する
+//            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
+//        objects = objects?.sorted(byKeyPath: "date", ascending: true)
+        print(objects![0].dataBaseJournalEntries)
+        return objects![0].dataBaseJournalEntries
+    }
+    // 取得 仕訳　勘定別
     func getAllJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseJournalEntry.self)
@@ -277,5 +309,59 @@ class DataBaseManagerAccount {
         let number: Int = objects[0].number
         
         return number
+    }
+    // 取得　勘定名から勘定を取得
+    func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
+        let realm = try! Realm()
+        var objects = realm.objects(DataBaseAccount.self)
+        // 開いている会計帳簿の年度を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        objects = objects
+            .filter("fiscalYear == \(fiscalYear)")
+            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+        print(objects)
+        return objects[0]
+    }
+    // 削除　勘定　設定勘定科目を削除するときに呼ばれる
+    func deleteAccount(number: Int) -> Bool {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+        let object = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: number)!
+        // 勘定クラス　勘定ないの仕訳を取得
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: object.accountName)
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: object.accountName)
+        let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccount(account: object.accountName)
+        // 仕訳クラス　仕訳を削除
+        let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
+        var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
+        var isInvalidatedd = true
+        var isInvalidateddd = true
+        for _ in 0..<objectss.count {
+            isInvalidated = dataBaseManagerJournalEntry.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 仕訳クラス　決算整理仕訳仕訳を削除
+        for _ in 0..<objectsss.count {
+            isInvalidatedd = dataBaseManagerJournalEntry.deleteAdjustingJournalEntry(number: objectsss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 損益振替仕訳を削除
+        for _ in 0..<objectssss.count {
+            isInvalidateddd = dataBaseManagerJournalEntry.deleteAdjustingJournalEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        if isInvalidateddd {
+            if isInvalidatedd {
+                if isInvalidated {
+                    try! realm.write {
+                        // 仕訳が残ってないか
+                        realm.delete(object)
+                    }
+                    return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+                }
+            }
+        }
+        return false
     }
 }

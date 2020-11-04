@@ -150,8 +150,6 @@
 		F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCashFlowStatement.swift; sourceTree = "<group>"; };
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
-		F9367FF42539D93500E78DE8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		F9367FF52539D93500E78DE8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F94EDD8F237AEB3A0074D812 /* Accountant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountant.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -438,8 +436,8 @@
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
-				F93A630624FAD67000C1C2C1 /* AccountingBooks */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
+				F93A630624FAD67000C1C2C1 /* AccountingBooks */,
 				F9812F9223F2DC2E0076AD48 /* Journals */,
 				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
@@ -472,12 +470,12 @@
 			children = (
 				F955B606248FE6EF005E2C6D /* TableViewControllerFinancialStatement.swift */,
 				F9318AE224A60C5200CE45BE /* FinancialStatementDB */,
+				F9706847252AC631003307F8 /* PLAccount */,
 				F955B60E2490FCD6005E2C6D /* BS */,
 				F955B6082490E305005E2C6D /* PL */,
 				F955B60F2490FD1D005E2C6D /* CF */,
 				F955B61324910003005E2C6D /* WS */,
 				F955B6122490FF9A005E2C6D /* TB */,
-				F9706847252AC631003307F8 /* PLAccount */,
 			);
 			path = FinancialStatement;
 			sourceTree = "<group>";
@@ -592,12 +590,12 @@
 			isa = PBXGroup;
 			children = (
 				F98CD95F24DCA2C0001CBF94 /* TableViewControllerSettingsCategory.swift */,
+				F9F4607A24D1A298008FE62B /* SettingsTaxonomyDB */,
+				F9F934F52485EC6D00BF7AA7 /* SettingsTaxonomyAccountDB */,
 				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
 				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
 				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
 				F98CD95E24DCA134001CBF94 /* SettingsCategoryGroups */,
-				F9F4607A24D1A298008FE62B /* SettingsTaxonomyDB */,
-				F9F934F52485EC6D00BF7AA7 /* SettingsTaxonomyAccountDB */,
 			);
 			path = SettingsCategoryMain;
 			sourceTree = "<group>";
@@ -634,11 +632,11 @@
 		F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */ = {
 			isa = PBXGroup;
 			children = (
-				F97422DA253F091500FBA052 /* PickerTextFieldAccountDetail.swift */,
+				F9D08D9025444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift */,
 				F9D08D9225444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift */,
 				F97422D9253F091500FBA052 /* TableViewCellSettingAccountDetailAccount.swift */,
 				F97422D8253F091500FBA052 /* TableViewCellSettingAccountDetailTaxonomy.swift */,
-				F9D08D9025444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift */,
+				F97422DA253F091500FBA052 /* PickerTextFieldAccountDetail.swift */,
 			);
 			path = SettingsCategoryDetail;
 			sourceTree = "<group>";
@@ -895,7 +893,6 @@
 			knownRegions = (
 				en,
 				Base,
-				ja,
 			);
 			mainGroup = F94EDD86237AEB3A0074D812;
 			productRefGroup = F94EDD90237AEB3A0074D812 /* Products */;
@@ -1169,7 +1166,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				F94EDD9B237AEB3A0074D812 /* Base */,
-				F9367FF52539D93500E78DE8 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1178,7 +1174,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				F94EDDA0237AEB3B0074D812 /* Base */,
-				F9367FF42539D93500E78DE8 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
