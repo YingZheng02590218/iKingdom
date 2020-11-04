@@ -34,8 +34,88 @@ class TableViewControllerCategoryList: UITableViewController {
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
 //        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
 //        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
+        
+        // ↓のコードを記述する
+        // 複数選択を可能にする
+        // falseの場合は単一選択になる
+        tableView.allowsMultipleSelectionDuringEditing = false
+        // 編集ボタンの設定
+        navigationItem.rightBarButtonItem = editButtonItem
+        // 追加ボタンの初期値は、押下不可
+        Button_add.isEnabled = false
     }
-    
+    // 編集モード切り替え
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.isEditing = editing
+        print(editing)
+        // 追加ボタンは、編集モード中は押下可能とする
+        if editing {
+            Button_add.isEnabled = true
+        }else {
+            Button_add.isEnabled = false
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        // データベース
+        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: indexPath.section)
+        // デフォルトの勘定科目数（230）以上ある場合は、削除可能とし、それ以下の場合は削除不可とする。
+        if 230 > objects[indexPath.row].number {
+            return .none // 削除不可
+        }
+//        return .insert // これを設定しないと削除モードになる
+        return .delete
+    }
+    // セルの右側から出てくるdeleteボタンを押下した時
+    override func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+        // ユーザーが新規追加した勘定科目のみを削除可能とする。
+        if editingStyle == .delete {
+//            PersonStore.shared.remove(indexPath.row)
+            // 確認のポップアップを表示したい
+            self.showPopover(indexPath: indexPath)
+//            tableView.reloadData()
+        }
+        if editingStyle == .insert {
+        // 対象セルの下に追加（先にリストに追加する）
+//        tableDataList.insert(0, at: indexPath.row + 1)
+            tableView.beginUpdates()
+            tableView.insertRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    // 削除機能 アラートのポップアップを表示
+    private func showPopover(indexPath: IndexPath) {
+        // データベース
+        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: indexPath.section)
+        print(objects)
+        // 勘定クラス
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: objects[indexPath.row].category)
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: objects[indexPath.row].category)
+        let alert = UIAlertController(title: "削除", message: "「\(objects[indexPath.row].category)」を削除しますか？\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件あります", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            (action: UIAlertAction!) in
+            print("OK アクションをタップした時の処理")
+            // 設定勘定科目、勘定、仕訳、決算整理仕訳、損益勘定、損益振替仕訳　データを削除
+            let result = databaseManagerSettingsTaxonomyAccount.deleteSettingsTaxonomyAccount(number: objects[indexPath.row].number)
+            if result == true {
+                self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+            }else {
+                print("削除失敗　設定勘定科目")
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         // 勘定科目画面から、仕訳帳画面へ遷移して仕訳を追加した後に、戻ってきた場合はリロードする
         tableView.reloadData()
@@ -200,16 +280,25 @@ class TableViewControllerCategoryList: UITableViewController {
         dataBaseSettingsCategoryBSAndPL.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
     // 画面遷移の準備　勘定科目画面
+    @IBOutlet var Button_add: UIBarButtonItem!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // 選択されたセルを取得
-        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
-        // segue.destinationの型はUIViewController
-        let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
-        // 遷移先のコントローラに値を渡す
-        tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
-        // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
+        // セグエで場合分け
+        if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
+            // segue.destinationの型はUIViewController
+            let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
+            // 遷移先のコントローラに値を渡す
+            tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+        }else{ // 既存の設定勘定科目を選択された場合
+            // 選択されたセルを取得
+            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+            let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+            let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
+            // segue.destinationの型はUIViewController
+            let tableViewControllerSettingsCategoryDetail = segue.destination as! TableViewControllerSettingsCategoryDetail
+            // 遷移先のコントローラに値を渡す
+            tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
+            // セルの選択を解除
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }

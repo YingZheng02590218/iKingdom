@@ -77,7 +77,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // UIViewControllerの表示画面を更新・リロード
 //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         self.tableView.reloadData() // エラーが発生しないか心配
-        self.viewDidLoad() // 2020/07/31
+//        self.viewDidLoad() // 2020/07/31 コメントアウト　2020/10/29
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)

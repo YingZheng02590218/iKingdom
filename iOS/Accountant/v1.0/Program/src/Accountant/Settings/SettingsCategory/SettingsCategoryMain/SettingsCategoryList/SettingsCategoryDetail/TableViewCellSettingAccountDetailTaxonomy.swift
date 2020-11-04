@@ -1,5 +1,5 @@
 //
-//  TableViewCellSettingCategoryDetail.swift
+//  TableViewCellSettingAccountDetailTaxonomy.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/09/21.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class TableViewCellSettingCategoryDetail: UITableViewCell {
+// 勘定科目詳細セル　表示科目名
+class TableViewCellSettingAccountDetailTaxonomy: UITableViewCell {
 
     @IBOutlet var label: UILabel!
     
