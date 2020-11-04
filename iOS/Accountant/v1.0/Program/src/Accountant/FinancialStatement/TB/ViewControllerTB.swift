@@ -31,9 +31,9 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         TableView_TB.delegate = self
         TableView_TB.dataSource = self
-//        // 合計額を計算
-//        let databaseManager = DataBaseManagerTB()
-//        databaseManager.calculateAmountOfAllAccount()
+        // 合計額を計算
+        let databaseManager = DataBaseManagerTB()
+        databaseManager.calculateAmountOfAllAccount()
 //        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
 //        let databaseManagerWS = DataBaseManagerWS()
 //        databaseManagerWS.calculateAmountOfAllAccount()
@@ -58,9 +58,6 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // 合計額を計算
-        let databaseManager = DataBaseManagerTB()
-        databaseManager.calculateAmountOfAllAccount()
 //        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
     }
     
