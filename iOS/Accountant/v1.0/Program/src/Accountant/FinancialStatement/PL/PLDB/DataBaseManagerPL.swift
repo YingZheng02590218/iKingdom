@@ -99,7 +99,8 @@ class DataBaseManagerPL {
         default:
             print(result)
         }
-        return addComma(string: result.description)
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 計算　階層1 中区分
     func setTotalRank1(big5: Int, rank1: Int) {
@@ -180,14 +181,15 @@ class DataBaseManagerPL {
             print(result)
             break
         }
-        return addComma(string: result.description)
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 合計残高　勘定別の合計と借又貸 取得
-    func getAccountTotal(big_category: Int, account: String) -> String {
-        let totalAmount = getTotalAmount(account: account)  // 合計を取得
-        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
-        return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
-    }
+//    func getAccountTotal(big_category: Int, account: String) -> String {
+//        let totalAmount = getTotalAmount(account: account)  // 合計を取得
+//        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
+//        return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
+//    }
     // 利益　計算
     func setBenefitTotal() {
         // 開いている会計帳簿を取得
@@ -256,39 +258,23 @@ class DataBaseManagerPL {
             print(result)
             break
         }
-
-        return addComma(string: result.description)
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        // 三角形はマイナスの意味
-        if amount < 0 { //0の場合は、空白を表示する
-            let amauntFix = amount * -1
-            return "△ \(addComma(string: amauntFix.description))"
-        }else {
-            return addComma(string: amount.description)
-        }
+        return setComma(amount: result)
+//        return addComma(string: result.description)
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+//        // 勘定の丁数(プライマリーキー)を取得
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//        number -= 1 // 0スタートに補正
         var result:Int64 = 0
         // 借方と貸方で金額が大きい方はどちらか
 //        if objectss[0].dataBaseAccounts[number].debit_total > objectss[0].dataBaseAccounts[number].credit_total {
@@ -298,13 +284,18 @@ class DataBaseManagerPL {
 //        }else {
 //            result = objectss[0].dataBaseAccounts[number].debit_total
 //        }
-        // 決算整理後の値を利用する
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting
-        }else {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+                // 決算整理後の値を利用する
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                }else {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }
+            }
         }
         return result
     }
@@ -321,25 +312,28 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self) // モデル
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+//        // 勘定の丁数(プライマリーキー)を取得
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//        number -= 1 // 0スタートに補正
         var DebitOrCredit:String = "" // 借又貸
-        // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "借"
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "貸"
-        }else {
-            DebitOrCredit = "-"
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+                // 借方と貸方で金額が大きい方はどちらか
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "借"
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "貸"
+                }else {
+                    DebitOrCredit = "-"
+                }
+            }
         }
         var PositiveOrNegative:String = "" // 借又貸
         switch big_category {
@@ -363,6 +357,20 @@ class DataBaseManagerPL {
             }
         }
         return PositiveOrNegative
+    }
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        // 三角形はマイナスの意味
+        if amount < 0 { //0の場合は、空白を表示する
+            let amauntFix = amount * -1
+            return "△ \(addComma(string: amauntFix.description))"
+        }else {
+            return addComma(string: amount.description)
+        }
     }
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
