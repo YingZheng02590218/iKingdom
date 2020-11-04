@@ -320,9 +320,12 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
                 // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                 self.dismiss(animated: true, completion: {
                     [presentingViewController] () -> Void in
-                    let num = presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
-                    presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-                    presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
+                    presentingViewController.numberOfTaxonomy = objects[indexPath.row].number // 選択された表示科目の番号を渡す
+                    presentingViewController.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
+                    presentingViewController.showNumberOfTaxonomy() // 選択された表示科目名を表示
+//                    let num = presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
+//                    presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+//                    presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
                 })
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
