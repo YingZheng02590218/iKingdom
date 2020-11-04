@@ -278,17 +278,15 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+//        // 勘定の丁数(プライマリーキー)を取得
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//        number -= 1 // 0スタートに補正
         var result:Int64 = 0
         // 借方と貸方で金額が大きい方はどちらか
 //        if objectss[0].dataBaseAccounts[number].debit_total > objectss[0].dataBaseAccounts[number].credit_total {
@@ -298,13 +296,18 @@ class DataBaseManagerPL {
 //        }else {
 //            result = objectss[0].dataBaseAccounts[number].debit_total
 //        }
-        // 決算整理後の値を利用する
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            result = objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting
-        }else {
-            result = objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+                // 決算整理後の値を利用する
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                }else {
+                    result = objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                }
+            }
         }
         return result
     }
@@ -321,25 +324,28 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseGeneralLedger.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-        
-        // 勘定の丁数(プライマリーキー)を取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        number -= 1 // 0スタートに補正
-        
+        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self) // モデル
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+//        // 勘定の丁数(プライマリーキー)を取得
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//        number -= 1 // 0スタートに補正
         var DebitOrCredit:String = "" // 借又貸
-        // 借方と貸方で金額が大きい方はどちらか
-        if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting > objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "借"
-        }else if objectss[0].dataBaseAccounts[number].debit_balance_AfterAdjusting < objectss[0].dataBaseAccounts[number].credit_balance_AfterAdjusting {
-            DebitOrCredit = "貸"
-        }else {
-            DebitOrCredit = "-"
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+                // 借方と貸方で金額が大きい方はどちらか
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "借"
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "貸"
+                }else {
+                    DebitOrCredit = "-"
+                }
+            }
         }
         var PositiveOrNegative:String = "" // 借又貸
         switch big_category {
