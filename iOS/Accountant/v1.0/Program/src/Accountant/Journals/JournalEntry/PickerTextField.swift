@@ -272,7 +272,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big_8[row] as String
                 }
             case 9:
-                if big_10.count <= row {
+                if big_9.count <= row {
                     self.text = big_9[0] as String
                     return big_9[0] as String
                 }else {
