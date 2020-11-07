@@ -160,20 +160,20 @@ class DataBaseManagerTB {
 //                    // 勘定の丁数(プライマリーキー)を取得
 //                    var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
 //                    number -= 1 // 0スタートに補正
-                    objectss?.dataBaseAccounts[i].debit_total = 0
-                    objectss?.dataBaseAccounts[i].credit_total = 0
-                    objectss?.dataBaseAccounts[i].debit_balance = 0
-                    objectss?.dataBaseAccounts[i].credit_balance = 0
-                    
-                    objectss?.dataBaseAccounts[i].debit_total_Adjusting = 0
-                    objectss?.dataBaseAccounts[i].credit_total_Adjusting = 0
-                    objectss?.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
-                    objectss?.dataBaseAccounts[i].credit_balance_Adjusting = 0
-                    
-                    objectss?.dataBaseAccounts[i].debit_total_AfterAdjusting = 0
-                    objectss?.dataBaseAccounts[i].credit_total_AfterAdjusting = 0
-                    objectss?.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0
-                    objectss?.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0
+                        objectss?.dataBaseAccounts[i].debit_total = 0
+                        objectss?.dataBaseAccounts[i].credit_total = 0
+                        objectss?.dataBaseAccounts[i].debit_balance = 0
+                        objectss?.dataBaseAccounts[i].credit_balance = 0
+                        
+                        objectss?.dataBaseAccounts[i].debit_total_Adjusting = 0
+                        objectss?.dataBaseAccounts[i].credit_total_Adjusting = 0
+                        objectss?.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
+                        objectss?.dataBaseAccounts[i].credit_balance_Adjusting = 0
+                        
+                        objectss?.dataBaseAccounts[i].debit_total_AfterAdjusting = 0
+                        objectss?.dataBaseAccounts[i].credit_total_AfterAdjusting = 0
+                        objectss?.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0
+                        objectss?.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0
                     }
                 }
             }else { // 損益勘定の場合
@@ -355,7 +355,7 @@ class DataBaseManagerTB {
         try! realm.write {
             if account != "損益勘定" {//} && account != "繰越利益" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                for i in 0..<objectss!.dataBaseAccounts.count { 
+                for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
         //                // 勘定の丁数(プライマリーキー)を取得
         //                let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -387,7 +387,7 @@ class DataBaseManagerTB {
                             objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
                             objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
                             // 決算振替仕訳　損益勘定振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
-                            dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: 0,credit_category: account)
+                            dataBaseManagerPLAccount.addTransferEntry(debit_category: "損益勘定", amount: 0, credit_category: account)
                         }
                     }
                 }
@@ -414,6 +414,8 @@ class DataBaseManagerTB {
                 }else {
                     objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
                     objectss!.dataBasePLAccount!.credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                    // 決算振替仕訳　損益勘定の締切り 記述漏れ　2020/11/05
+                    dataBaseManagerPLAccount.addTransferEntryToNetWorth(debit_category: "繰越利益", amount: 0, credit_category: "損益勘定")
                 }
             }
         }
