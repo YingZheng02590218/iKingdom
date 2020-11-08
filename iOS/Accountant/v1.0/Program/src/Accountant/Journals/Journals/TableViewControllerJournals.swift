@@ -357,13 +357,13 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
                 if objectss[indexPath.row-objects.count].debit_category == "損益勘定" { // 損益勘定の場合
                     cell.label_list_number_left.text = ""
                 }else{
-                    let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")  // 丁数を取得
+                    let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].debit_category)")  // 丁数を取得 エラー2020/11/08
                     cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
                 }
                 if objectss[indexPath.row-objects.count].credit_category == "損益勘定" { // 損益勘定の場合
                     cell.label_list_number_right.text = ""
                 }else{
-                    let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")    // 丁数を取得
+                    let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objectss[indexPath.row-objects.count].credit_category)")    // 丁数を取得　エラー2020/11/08
                     cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
                 }
                 cell.label_list_debit.text = "\(addComma(string: String(objectss[indexPath.row-objects.count].debit_amount))) "        //借方金額
@@ -408,12 +408,14 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
                 if objects[indexPath.row].debit_category == "損益勘定" { // 損益勘定の場合
                     cell.label_list_number_left.text = ""
                 }else{
+                    print(objects[indexPath.row].debit_category)
                     let numberOfAccount_left = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].debit_category)")  // 丁数を取得
                     cell.label_list_number_left.text = numberOfAccount_left.description                                     // 丁数　借方
                 }
                 if objects[indexPath.row].credit_category == "損益勘定" { // 損益勘定の場合
                     cell.label_list_number_right.text = ""
                 }else{
+                    print(objects[indexPath.row].credit_category)
                     let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(objects[indexPath.row].credit_category)")    // 丁数を取得
                     cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
                 }
