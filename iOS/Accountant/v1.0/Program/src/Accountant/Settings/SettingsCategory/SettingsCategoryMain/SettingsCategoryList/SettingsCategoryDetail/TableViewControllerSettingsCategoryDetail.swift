@@ -26,13 +26,13 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         NotificationCenter.default.addObserver(self, selector: #selector(TableViewControllerSettingsCategoryDetail.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         // テキストフィールド作成
 //        createTextFieldForCategory()
-//        // 登録ボタンの　表示　非表示
-//        if addAccount {
-//            Button_input.isHidden = false
-//            Button_input.isEnabled = true
-//        }else {
-//            Button_input.isHidden = true
-//        }
+        // 登録ボタンの　表示　非表示
+        if addAccount {
+            Button_input.isHidden = false
+            Button_input.isEnabled = true
+        }else {
+            Button_input.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
