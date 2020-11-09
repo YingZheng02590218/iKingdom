@@ -18,13 +18,16 @@ class DataBaseManagerBS {
         setTotalBig5(big5: 0)//資産
         setTotalBig5(big5: 1)//負債
         setTotalBig5(big5: 2)//純資産
+        
         setTotalRank0(big5: 0, rank0: 0)//流動資産
         setTotalRank0(big5: 0, rank0: 1)//固定資産
         setTotalRank0(big5: 0, rank0: 2)//繰延資産
         setTotalRank0(big5: 1, rank0: 3)//流動負債
         setTotalRank0(big5: 1, rank0: 4)//固定負債
-        setTotalRank0(big5: 2, rank0: 5) //株主資本合計
-        setTotalRank0(big5: 2, rank0: 12)//その他の包括利益累計額
+//        setTotalRank0(big5: 2, rank0: 5) //株主資本合計
+//        setTotalRank0(big5: 2, rank0: 12)//その他の包括利益累計額
+        setTotalRank1(big5: 2, rank1: 10)//株主資本
+        setTotalRank1(big5: 2, rank1: 11)//その他の包括利益累計額
     }
     // 計算　五大区分
     func setTotalBig5(big5: Int) {
@@ -34,7 +37,7 @@ class DataBaseManagerBS {
         // オブジェクトを作成 勘定
         for i in 0..<objects.count{
             let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big5, account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCreditForBig5(big_category: big5, account: objects[i].category) // 5大区分用の貸又借を使用する　2020/11/09
             if totalDebitOrCredit == "-"{
                 TotalAmountOfBig5 -= totalAmount
             }else {
@@ -79,7 +82,7 @@ class DataBaseManagerBS {
             objects = objects.filter("Rank0 LIKE '\(3)' OR Rank0 LIKE '\(4)'") // 流動負債, 固定負債
             break
         case 2: // 純資産
-            objects = objects.filter("Rank0 LIKE '\(5)' OR Rank0 LIKE '\(12)'") // 資本, 評価・換算差額等
+            objects = objects.filter("Rank0 LIKE '\(5)'") // 資本, 2020/11/09 不使用　評価・換算差額等　 OR Rank0 LIKE '\(12)'
             break
         default:
             print("")
@@ -144,7 +147,7 @@ class DataBaseManagerBS {
         // オブジェクトを作成 勘定
         for i in 0..<objects.count{
             let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big5, account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: rank0, mid_category: Int(objects[i].Rank1) ?? 999, account: objects[i].category)
             if totalDebitOrCredit == "-"{
                 TotalAmountOfRank0 -= totalAmount
             }else {
@@ -175,12 +178,6 @@ class DataBaseManagerBS {
                 break
             case 4: //固定負債
                 objectss!.FixedLiabilities_total = TotalAmountOfRank0
-                break
-            case 5: //株主資本
-                objectss!.CapitalStock_total = TotalAmountOfRank0
-                break
-            case 12: //その他の包括利益累計額 評価・換算差額等のこと？　　→  その通り2020/09/28
-                objectss!.OtherCapitalSurpluses_total = TotalAmountOfRank0
                 break
             default:
                 print(TotalAmountOfRank0)
@@ -223,12 +220,6 @@ class DataBaseManagerBS {
         case 4: //固定負債
             result = objectss!.FixedLiabilities_total
             break
-        case 5: //株主資本
-            result = objectss!.CapitalStock_total
-            break
-        case 12: //その他の包括利益累計額 評価・換算差額等のこと
-            result = objectss!.OtherCapitalSurpluses_total
-            break
         default:
             print(result)
             break
@@ -246,14 +237,75 @@ class DataBaseManagerBS {
 //        }
         return setComma(amount: result)
     }
+    // 計算　階層1 中区分
+    func setTotalRank1(big5: Int, rank1: Int) {
+        var TotalAmountOfRank1:Int64 = 0            // 累計額
+        // 設定画面の勘定科目一覧にある勘定を取得する
+        let objects = getAccountsInRank1(rank1: rank1)
+        // オブジェクトを作成 勘定
+        for i in 0..<objects.count{
+            let totalAmount = getTotalAmount(account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: Int(objects[i].Rank0)!, mid_category: rank1, account: objects[i].category)
+            if totalDebitOrCredit == "-"{
+                TotalAmountOfRank1 -= totalAmount
+            }else {
+                TotalAmountOfRank1 += totalAmount
+            }
+        }
+        // 開いている会計帳簿の年度を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+
+        let realm = try! Realm()
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet
+        try! realm.write {
+            switch rank1 {
+            case 10: //株主資本
+                objectss!.CapitalStock_total = TotalAmountOfRank1
+                break
+            case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
+                objectss!.OtherCapitalSurpluses_total = TotalAmountOfRank1
+                break
+//            case 12: //新株予約権
+//            case 19: //非支配株主持分
+            default:
+                print()
+                break
+            }
+        }
+    }
     // 取得　設定勘定科目　中区分
-//    func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-//        let realm = try! Realm()
-//        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
-//        objects = objects.sorted(byKeyPath: "number", ascending: true)
-//        objects = objects.filter("Rank1 LIKE '\(rank1)'")
-//        return objects
-//    }
+    func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        let realm = try! Realm()
+        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        objects = objects.filter("Rank1 LIKE '\(rank1)'")
+        return objects
+    }
+    // 取得　階層1 中区分
+    func getTotalRank1(big5: Int, rank1: Int) -> String {
+        // 開いている会計帳簿の年度を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        
+        let realm = try! Realm()
+        let objectss = object.dataBaseFinancialStatements?.balanceSheet
+        var result:Int64 = 0            // 累計額
+        switch rank1 {
+            case 10: //株主資本
+                result = objectss!.CapitalStock_total
+                break
+            case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
+                result = objectss!.OtherCapitalSurpluses_total
+                break
+//            case 12: //新株予約権
+//            case 19: //非支配株主持分
+        default:
+            print(result)
+            break
+        }
+        return setComma(amount: result)
+    }
     // 合計残高　勘定別の合計と借又貸 取得
 //    func getAccountTotal(big_category: Int, account: String) -> String {
 //        let totalAmount = getTotalAmount(account: account)  // 合計を取得
@@ -292,7 +344,7 @@ class DataBaseManagerBS {
         return result
     }
     // 借又貸を取得
-    func getTotalDebitOrCredit(big_category: Int, account: String) ->String {
+    func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -301,14 +353,14 @@ class DataBaseManagerBS {
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self) // モデル
 //        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+//        // 勘定の丁数(プライマリーキー)を取得
+//        let dataBaseManagerAccount = DataBaseManagerAccount()
+//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
+//        number -= 1 // 0スタートに補正
         var DebitOrCredit:String = "" // 借又貸
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
         for i in 0..<objectss!.dataBaseAccounts.count {
             if objectss!.dataBaseAccounts[i].accountName == account {
-        //        // 勘定の丁数(プライマリーキー)を取得
-        //        let dataBaseManagerAccount = DataBaseManagerAccount()
-        //        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        //        number -= 1 // 0スタートに補正
                 // 借方と貸方で金額が大きい方はどちらか
                 if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
                     DebitOrCredit = "借"
@@ -321,7 +373,72 @@ class DataBaseManagerBS {
         }
         var PositiveOrNegative:String = "" // 借又貸
         switch big_category {
-        case 0,3:
+        case 0,1,2,7,8,11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
+            switch DebitOrCredit {
+            case "貸":
+                PositiveOrNegative = "-"
+                break
+            default:
+                PositiveOrNegative = ""
+                break
+            }
+        case 9,10: // 営業外損益 特別損益
+            if mid_category == 15 || mid_category == 17 {
+                switch DebitOrCredit {
+                case "借":
+                    PositiveOrNegative = "-"
+                    break
+                default:
+                    PositiveOrNegative = ""
+                    break
+                }
+            }else if mid_category == 16 || mid_category == 18 {
+                switch DebitOrCredit {
+                case "貸":
+                    PositiveOrNegative = "-"
+                    break
+                default:
+                    PositiveOrNegative = ""
+                    break
+                }
+            }
+            break
+        default: // 3,4,5,6（流動負債 固定負債 資本）, 売上
+            switch DebitOrCredit {
+            case "借":
+                PositiveOrNegative = "-"
+                break
+            default:
+                PositiveOrNegative = ""
+                break
+            }
+        }
+        return PositiveOrNegative
+    }
+    // 借又貸を取得 5大区分用
+    func getTotalDebitOrCreditForBig5(big_category: Int, account: String) ->String {
+        // 開いている会計帳簿の年度を取得
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let realm = try! Realm()
+        let objectss = object.dataBaseGeneralLedger
+        var DebitOrCredit:String = "" // 借又貸
+        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+        for i in 0..<objectss!.dataBaseAccounts.count {
+            if objectss!.dataBaseAccounts[i].accountName == account {
+                // 借方と貸方で金額が大きい方はどちらか
+                if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "借"
+                }else if objectss!.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss!.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    DebitOrCredit = "貸"
+                }else {
+                    DebitOrCredit = "-"
+                }
+            }
+        }
+        var PositiveOrNegative:String = "" // 借又貸
+        switch big_category {
+        case 0,3: // 資産　費用
             switch DebitOrCredit {
             case "貸":
                 PositiveOrNegative = "-"
