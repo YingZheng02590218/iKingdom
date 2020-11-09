@@ -144,7 +144,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
         // チェックマークを入れる
         cell?.accessoryType = .checkmark
         // ここからデータベースを更新する
-        pickAccountingBook(tag: cell!.tag)
+        pickAccountingBook(tag: cell!.tag) //会計帳簿の連番
         // 年度を選択時に会計期間画面を更新する
         tableView.reloadData()
     }
@@ -153,6 +153,9 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
         // データベース
         let databaseManager = DataBaseManagerPeriod() //データベースマネジャー
         databaseManager.setMainBooksOpenOrClose(tag: tag)
+        // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        dataBaseManagerAccount.addGeneralLedgerAccountLack() 
     }
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

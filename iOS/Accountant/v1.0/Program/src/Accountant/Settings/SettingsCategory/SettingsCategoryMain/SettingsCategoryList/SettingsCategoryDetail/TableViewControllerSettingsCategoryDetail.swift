@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 勘定科目　詳細画面
 class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFieldDelegate {
 
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = false
+    @IBOutlet var gADBannerView: GADBannerView!
+    
     var big = ""
     var mid = ""
     var small = ""
@@ -26,19 +36,64 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         NotificationCenter.default.addObserver(self, selector: #selector(TableViewControllerSettingsCategoryDetail.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         // テキストフィールド作成
 //        createTextFieldForCategory()
-//        // 登録ボタンの　表示　非表示
-//        if addAccount {
-//            Button_input.isHidden = false
-//            Button_input.isEnabled = true
-//        }else {
-//            Button_input.isHidden = true
-//        }
+        // 登録ボタンの　表示　非表示
+        if addAccount {
+            Button_input.isHidden = false
+            Button_input.isEnabled = true
+        }else {
+            Button_input.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // 表示科目を変更後に勘定科目詳細画面を更新する
         tableView.reloadData()
+        
+        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+        // GADBannerView を作成する
+        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+//        print(self.view.frame.size.height)
+//        print(gADBannerView.frame.height)
+//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            gADBannerView.adUnitID = TEST_ID
+        }
+        else{
+            gADBannerView.adUnitID = AdMobID
+        }
+        gADBannerView.rootViewController = self
+        // 広告を読み込む
+        gADBannerView.load(GADRequest())
+        print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
+        // GADBannerView を作成する
+//        addBannerViewToView(gADBannerView, constant: 0)
+        addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: constant),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
     
     // MARK: - Table view data source
 
@@ -59,7 +114,26 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             return 1
         }
     }
-
+    // セクションヘッダーのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "勘定科目"
+        case 1:
+            return "表示科目"
+        default:
+            return ""
+        }
+    }
+    // セクションフッターのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return "勘定科目を決算書上に表記される表示科目に紐付けることができます。"
+        default:
+            return ""
+        }
+    }
     var numberOfAccount :Int = 0 // 勘定科目番号
     var numberOfTaxonomy :Int = 0 // 表示科目番号
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -143,7 +217,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //                if cell.label.text != "表示科目を選択してください" && cell.label.text != "" {
                     let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                     let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
-                    cell.label.text! = object!.category
+                    cell.label.text! = "\(object!.number), \(object!.category)"
                     cell.label.textColor = UIColor.black // 文字色をブラックとする
                 }else {
                     cell.label.text = "表示科目を選択してください"
@@ -278,16 +352,16 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 cell.textLabel?.text = "表示科目名"
                 cell.textLabel?.textColor = .darkGray
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                    // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
-                    let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-                    if "" != object?.numberOfTaxonomy {
-                        let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
-                        cell.label.text = objectt!.category
-                        cell.label.textColor = .black
-                    }else {
-                        cell.label.text = "表示科目を選択してください"
-                        cell.label.textColor = .lightGray
-                    }
+                // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
+                let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+                if "" != object?.numberOfTaxonomy {
+                    let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
+                    cell.label.text = "\(objectt!.number), \(objectt!.category)"
+                    cell.label.textColor = .black
+                }else {
+                    cell.label.text = "表示科目を選択してください"
+                    cell.label.textColor = .lightGray
+                }
                 cell.label.textAlignment = NSTextAlignment.center
             }
             return cell
@@ -520,7 +594,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
             let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
             let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
-            cell_taxonomy.label.text! = object!.category
+            cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
             cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
             taxonomyname = cell_taxonomy.label.text!
         }

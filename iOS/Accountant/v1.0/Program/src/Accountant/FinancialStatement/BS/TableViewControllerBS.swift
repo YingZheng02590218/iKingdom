@@ -517,7 +517,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    株主資本合計"
                 print("BS", indexPath.row, "    株主資本合計"+"★")
-                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 5)
+                let text:String = dataBaseManagerBS.getTotalRank1(big5: indexPath.section, rank1: 10) // 中区分の合計を取得
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -541,7 +541,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.textLabel?.text = "    その他の包括利益累計額合計"
                 print("BS", indexPath.row, "    その他の包括利益累計額合計"+"★")
-                let text:String = dataBaseManagerBS.getTotalRank0(big5: indexPath.section, rank0: 12)
+                let text:String = dataBaseManagerBS.getTotalRank1(big5: indexPath.section, rank1: 11) // 中区分の合計を取得
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -820,6 +820,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
      */
     @IBAction func button_print(_ sender: UIButton) {
         printing = true
+        gADBannerView.isHidden = true
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableView.ScrollPosition.top, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.top, animated: false)
@@ -922,6 +923,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
+        gADBannerView.isHidden = false
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
