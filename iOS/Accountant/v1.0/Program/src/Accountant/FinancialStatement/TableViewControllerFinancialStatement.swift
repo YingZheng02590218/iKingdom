@@ -107,53 +107,70 @@ class TableViewControllerFinancialStatement: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 貸借対照表、損益計算書、キャッシュフロー計算書、精算書、試算表、損益勘定
-        return 5//6
+        switch section {
+        case 0:
+            // 貸借対照表、損益計算書、キャッシュフロー計算書
+            return 2//3
+        case 1:
+            // 精算書、試算表、損益勘定
+            return 3
+        default:
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
-            cell.textLabel?.text = "貸借対照表"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
-            cell.textLabel?.text = "損益計算書"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-//        case 2:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CF", for: indexPath)
-//            cell.textLabel?.text = "キャッシュフロー計算書"
-//            cell.textLabel?.textAlignment = NSTextAlignment.center
-//            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
-            cell.textLabel?.text = "精算表"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
-            cell.textLabel?.text = "試算表"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-        case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
-            cell.textLabel?.text = "損益勘定"
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
-            cell.textLabel?.text = ""
-            cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
-        }        
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
+                cell.textLabel?.text = "貸借対照表"
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
+                cell.textLabel?.text = "損益計算書"
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+//            case 2:
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "CF", for: indexPath)
+//                cell.textLabel?.text = "キャッシュフロー計算書"
+//                cell.textLabel?.textAlignment = NSTextAlignment.center
+//                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+                cell.textLabel?.text = ""
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            }
+        }else {
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
+                cell.textLabel?.text = "精算表"
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
+                cell.textLabel?.text = "試算表"
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
+                cell.textLabel?.text = "損益勘定"
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+                cell.textLabel?.text = ""
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+                return cell
+            }
+        }
     }
     
     // MARK: - Navigation

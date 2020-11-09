@@ -427,6 +427,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
 //        self.TableView_TB.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
         self.TableView_WS.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
+        gADBannerView.isHidden = true
         self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
@@ -457,6 +458,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
+        gADBannerView.isHidden = false
         self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、

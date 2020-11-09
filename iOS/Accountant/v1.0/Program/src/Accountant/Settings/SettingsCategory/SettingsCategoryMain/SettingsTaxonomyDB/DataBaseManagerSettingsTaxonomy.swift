@@ -47,6 +47,19 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
+    func getAllSettingsTaxonomySwitichON() -> Results<DataBaseSettingsTaxonomy> {
+        let realm = try! Realm()
+        var objects = realm.objects(DataBaseSettingsTaxonomy.self)
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
+                            .filter("abstract == \(false)")
+                            .filter("switching == \(true)")
+        if objects.count == 0 {
+            print("ゼロ　getAllSettingsTaxonomy")
+        }
+        return objects
+    }
     // 設定表示科目　取得 ONのみ
     func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy> {
         // (1)Realmのインスタンスを生成する

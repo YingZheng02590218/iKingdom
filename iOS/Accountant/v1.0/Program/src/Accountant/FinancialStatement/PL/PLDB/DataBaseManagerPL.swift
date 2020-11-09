@@ -36,36 +36,34 @@ class DataBaseManagerPL {
         // オブジェクトを作成 勘定
         for i in 0..<objects.count{
             let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big5, account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: rank0, mid_category: Int(objects[i].Rank1) ?? 999, account: objects[i].category)
             if totalDebitOrCredit == "-"{
                 TotalAmountOfRank0 -= totalAmount
-                print(i, TotalAmountOfRank0, "-=", totalAmount)
             }else {
                 TotalAmountOfRank0 += totalAmount
-                print(i, TotalAmountOfRank0, "+=", totalAmount)
             }
         }
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseProfitAndLossStatement.self)
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement//realm.objects(DataBaseProfitAndLossStatement.self)
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         try! realm.write {
             switch rank0 {
             case 6: //営業収益9     売上
-                objectss[0].NetSales = TotalAmountOfRank0
+                objectss!.NetSales = TotalAmountOfRank0
                 break
             case 7: //営業費用5     売上原価
-                objectss[0].CostOfGoodsSold = TotalAmountOfRank0
+                objectss!.CostOfGoodsSold = TotalAmountOfRank0
                 break
             case 8: //営業費用5     販売費及び一般管理費
-                objectss[0].SellingGeneralAndAdministrativeExpenses = TotalAmountOfRank0
+                objectss!.SellingGeneralAndAdministrativeExpenses = TotalAmountOfRank0
                 break
             case 11: //税等8 法人税等 税金
-                objectss[0].IncomeTaxes = TotalAmountOfRank0
+                objectss!.IncomeTaxes = TotalAmountOfRank0
                 break
             default:
                 print()
@@ -77,25 +75,25 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement//realm.objects(DataBaseProfitAndLossStatement.self) // モデル
+//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
         var result:Int64 = 0
         switch rank0 {
-            case 6: //営業収益9     売上
-                result = objectss[0].NetSales
-                break
-            case 7: //営業費用5     売上原価
-                result = objectss[0].CostOfGoodsSold
-                break
-            case 8: //営業費用5     販売費及び一般管理費
-                result = objectss[0].SellingGeneralAndAdministrativeExpenses
-                break
-            case 11: //税等8 法人税等 税金
-                result = objectss[0].IncomeTaxes
-                break
+        case 6: //営業収益9     売上
+            result = objectss!.NetSales
+            break
+        case 7: //営業費用5     売上原価
+            result = objectss!.CostOfGoodsSold
+            break
+        case 8: //営業費用5     販売費及び一般管理費
+            result = objectss!.SellingGeneralAndAdministrativeExpenses
+            break
+        case 11: //税等8 法人税等 税金
+            result = objectss!.IncomeTaxes
+            break
         default:
             print(result)
         }
@@ -110,7 +108,7 @@ class DataBaseManagerPL {
         // オブジェクトを作成 勘定
         for i in 0..<objects.count{
             let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big5, account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(big_category: Int(objects[i].Rank0)!, mid_category: rank1, account: objects[i].category)
             if totalDebitOrCredit == "-"{
                 TotalAmountOfRank1 -= totalAmount
             }else {
@@ -120,24 +118,22 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         try! realm.write {
             switch rank1 {
             case 15: //営業外収益10  営業外損益    営業外収益
-                objectss[0].NonOperatingIncome = TotalAmountOfRank1
+                objectss!.NonOperatingIncome = TotalAmountOfRank1
                 break
             case 16: //営業外費用6  営業外損益    営業外費用
-                objectss[0].NonOperatingExpenses = TotalAmountOfRank1
+                objectss!.NonOperatingExpenses = TotalAmountOfRank1
                 break
             case 17: //特別利益11   特別損益    特別利益
-                objectss[0].ExtraordinaryIncome = TotalAmountOfRank1
+                objectss!.ExtraordinaryIncome = TotalAmountOfRank1
                 break
             case 18: //特別損失7    特別損益    特別損失
-                objectss[0].ExtraordinaryLosses = TotalAmountOfRank1
+                objectss!.ExtraordinaryLosses = TotalAmountOfRank1
                 break
             default:
                 print()
@@ -158,24 +154,22 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0            // 累計額
         switch rank1 {
         case 15: //営業外収益10  営業外損益    営業外収益
-            result = objectss[0].NonOperatingIncome
+            result = objectss!.NonOperatingIncome
             break
         case 16: //営業外費用6  営業外損益    営業外費用
-            result = objectss[0].NonOperatingExpenses
+            result = objectss!.NonOperatingExpenses
             break
         case 17: //特別利益11   特別損益    特別利益
-            result = objectss[0].ExtraordinaryIncome
+            result = objectss!.ExtraordinaryIncome
             break
         case 18: //特別損失7    特別損益    特別損失
-            result = objectss[0].ExtraordinaryLosses
+            result = objectss!.ExtraordinaryLosses
             break
         default:
             print(result)
@@ -195,30 +189,27 @@ class DataBaseManagerPL {
         // 開いている会計帳簿を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        // 開いている会計帳簿の年度を取得
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        
+
         // 利益5種類　売上総利益、営業利益、経常利益、税金等調整前当期純利益、当期純利益
         for i in 0..<5 {
             let realm = try! Realm()
-            var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-            objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+            let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
             try! realm.write {
                 switch i {
                 case 0: //売上総利益
-                    objectss[0].GrossProfitOrLoss = objectss[0].NetSales - objectss[0].CostOfGoodsSold
+                    objectss!.GrossProfitOrLoss = objectss!.NetSales - objectss!.CostOfGoodsSold
                     break
                 case 1: //営業利益
-                    objectss[0].OtherCapitalSurpluses_total = objectss[0].GrossProfitOrLoss - objectss[0].SellingGeneralAndAdministrativeExpenses
+                    objectss!.OtherCapitalSurpluses_total = objectss!.GrossProfitOrLoss - objectss!.SellingGeneralAndAdministrativeExpenses
                     break
                 case 2: //経常利益
-                    objectss[0].OrdinaryIncomeOrLoss = objectss[0].OtherCapitalSurpluses_total + objectss[0].NonOperatingIncome - objectss[0].NonOperatingExpenses
+                    objectss!.OrdinaryIncomeOrLoss = objectss!.OtherCapitalSurpluses_total + objectss!.NonOperatingIncome - objectss!.NonOperatingExpenses
                     break
                 case 3: //税引前当期純利益（損失）
-                    objectss[0].IncomeOrLossBeforeIncomeTaxes = objectss[0].OrdinaryIncomeOrLoss + objectss[0].ExtraordinaryIncome - objectss[0].ExtraordinaryLosses
+                    objectss!.IncomeOrLossBeforeIncomeTaxes = objectss!.OrdinaryIncomeOrLoss + objectss!.ExtraordinaryIncome - objectss!.ExtraordinaryLosses
                     break
                 case 4: //当期純利益（損失）
-                    objectss[0].NetIncomeOrLoss = objectss[0].IncomeOrLossBeforeIncomeTaxes - objectss[0].IncomeTaxes
+                    objectss!.NetIncomeOrLoss = objectss!.IncomeOrLossBeforeIncomeTaxes - objectss!.IncomeTaxes
                     break
                 default:
                     print()
@@ -232,27 +223,25 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        var objectss = realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0            // 累計額
         switch benefit {
         case 0: //売上総利益
-            result = objectss[0].GrossProfitOrLoss
+            result = objectss!.GrossProfitOrLoss
             break
         case 1: //営業利益
-            result = objectss[0].OtherCapitalSurpluses_total
+            result = objectss!.OtherCapitalSurpluses_total
             break
         case 2: //経常利益
-            result = objectss[0].OrdinaryIncomeOrLoss
+            result = objectss!.OrdinaryIncomeOrLoss
             break
         case 3: //税引前当期純利益（損失）
-            result = objectss[0].IncomeOrLossBeforeIncomeTaxes
+            result = objectss!.IncomeOrLossBeforeIncomeTaxes
             break
         case 4: //当期純利益（損失）
-            result = objectss[0].NetIncomeOrLoss
+            result = objectss!.NetIncomeOrLoss
             break
         default:
             print(result)
@@ -308,7 +297,7 @@ class DataBaseManagerPL {
         return objects
     }
     // 借又貸を取得
-    func getTotalDebitOrCredit(big_category: Int, account: String) ->String {
+    func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
@@ -337,7 +326,7 @@ class DataBaseManagerPL {
         }
         var PositiveOrNegative:String = "" // 借又貸
         switch big_category {
-        case 0,3:
+        case 0,1,2,7,8,11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
             switch DebitOrCredit {
             case "貸":
                 PositiveOrNegative = "-"
@@ -346,7 +335,28 @@ class DataBaseManagerPL {
                 PositiveOrNegative = ""
                 break
             }
-        default: // 1,2,4（負債、純資産、収益）
+        case 9,10: // 営業外損益 特別損益
+            if mid_category == 15 || mid_category == 17 {
+                switch DebitOrCredit {
+                case "借":
+                    PositiveOrNegative = "-"
+                    break
+                default:
+                    PositiveOrNegative = ""
+                    break
+                }
+            }else if mid_category == 16 || mid_category == 18 {
+                switch DebitOrCredit {
+                case "貸":
+                    PositiveOrNegative = "-"
+                    break
+                default:
+                    PositiveOrNegative = ""
+                    break
+                }
+            }
+            break
+        default: // 3,4,5,6（流動負債 固定負債 資本）, 売上
             switch DebitOrCredit {
             case "借":
                 PositiveOrNegative = "-"
