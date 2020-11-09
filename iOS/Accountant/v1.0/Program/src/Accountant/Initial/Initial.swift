@@ -33,6 +33,8 @@ class Initial {
 //            masterData.readMasterDataFromCSVOfBSAndPL()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
+        // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
+        databaseManagerSettingsTaxonomyAccount.initializeSettingsTaxonomyAccount()
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
         let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()

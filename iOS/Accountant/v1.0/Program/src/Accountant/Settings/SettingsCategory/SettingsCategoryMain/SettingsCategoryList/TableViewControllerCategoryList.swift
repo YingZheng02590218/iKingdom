@@ -96,8 +96,8 @@ class TableViewControllerCategoryList: UITableViewController {
         print(objects)
         // 勘定クラス
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: objects[indexPath.row].category)
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: objects[indexPath.row].category)
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category) // 全年度の仕訳データを確認する
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category) // 全年度の仕訳データを確認する
         let alert = UIAlertController(title: "削除", message: "「\(objects[indexPath.row].category)」を削除しますか？\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件あります", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
