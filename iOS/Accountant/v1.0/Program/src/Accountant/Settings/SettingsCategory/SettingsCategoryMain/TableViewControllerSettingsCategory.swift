@@ -86,41 +86,78 @@ class TableViewControllerSettingsCategory: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3 //4
+        switch section {
+        case 0:
+            return 2
+        case 1:
+            return 1
+        default:
+            return 0
+        }
+    }
+    // セクションヘッダーのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "勘定科目"
+        case 1:
+            return "表示科目"
+//        case 2:
+//            return "情報"
+        default:
+            return ""
+        }
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//
-//    }
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "使用する勘定科目を設定することができます。"
+        case 1:
+            return "決算書上に表示される表示科目を参照することができます。"
+//        case 2:
+//            return "帳簿情報を設定することができます。"
+        default:
+            return ""
+        }
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        switch indexPath.row {
-        case 0:
-            //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-            cell.textLabel?.text = "勘定科目一覧"
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
-            cell.textLabel?.text = "表示科目別勘定科目一覧"
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
-            cell.textLabel?.text = "表示科目一覧"
-            return cell
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                //① UI部品を指定
+                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell.textLabel?.text = "勘定科目一覧"
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
+                cell.textLabel?.text = "表示科目別勘定科目一覧"
+                return cell
 //        case 3:
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
 //            cell.textLabel?.text =  "種類別勘定科目一覧"
 //            return cell
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-            cell.textLabel?.text =   ""
-            return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell.textLabel?.text =   ""
+                return cell
+            }
+        }else {
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
+                cell.textLabel?.text = "表示科目一覧"
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell.textLabel?.text =   ""
+                return cell
+            }
         }
     }
 }

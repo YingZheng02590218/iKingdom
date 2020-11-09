@@ -12,6 +12,18 @@ import RealmSwift // データベースのインポート
 // 設定勘定科目クラス
 class DatabaseManagerSettingsTaxonomyAccount  {
     
+    // 初期化
+    func initializeSettingsTaxonomyAccount(){
+        // 勘定科目のスイッチを設定する　表示科目科目が選択されていなければOFFにする
+        let objects = getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
+        for i in 0..<objects.count {
+            if objects[i].switching == true { // 設定勘定科目 スイッチ
+                if objects[i].numberOfTaxonomy == "" { // 表示科目に紐付けしていない場合
+                    updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
+                }
+            }
+        }
+    }
     // チェック
     func checkInitialising() -> Bool {
         // (1)Realmのインスタンスを生成する

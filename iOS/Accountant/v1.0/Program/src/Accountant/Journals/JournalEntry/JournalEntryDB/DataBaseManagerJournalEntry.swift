@@ -217,11 +217,13 @@ class DataBaseManagerJournalEntry {
             var objects = realm.objects(DataBasePLAccount.self)
             objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
             // 勘定のプライマリーキーを取得する
-            let numberOfAccount = objects[0].number
+            let numberOfAccount = objects[0].number // 損益勘定の丁数は不要ではないか？2020/11/08
             return numberOfAccount
         }else {
-            var objects = realm.objects(DataBaseAccount.self)
-            objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
+            var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)// 2020/11/08
+            objects = objects.filter("category LIKE '\(accountName)'")// 2020/11/08
+//            var objects = realm.objects(DataBaseAccount.self)
+//            objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
             // 勘定のプライマリーキーを取得する
             let numberOfAccount = objects[0].number
             return numberOfAccount
