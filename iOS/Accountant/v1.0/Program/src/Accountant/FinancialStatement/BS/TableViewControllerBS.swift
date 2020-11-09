@@ -820,6 +820,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
      */
     @IBAction func button_print(_ sender: UIButton) {
         printing = true
+        gADBannerView.isHidden = true
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableView.ScrollPosition.top, animated: false)
 //        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.top, animated: false)
@@ -922,6 +923,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
+        gADBannerView.isHidden = false
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、

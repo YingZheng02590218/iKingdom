@@ -285,6 +285,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         printing = true
+        gADBannerView.isHidden = true
         let newImage = self.TableView_TB.captureImagee()
 //        let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
 //        print("TableView_TB.indexPathsForVisibleRows: \(indexPath)")
@@ -293,6 +294,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
+        gADBannerView.isHidden = false
         self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
