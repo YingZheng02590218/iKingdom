@@ -59,7 +59,26 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             return 1
         }
     }
-
+    // セクションヘッダーのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "勘定科目"
+        case 1:
+            return "表示科目"
+        default:
+            return ""
+        }
+    }
+    // セクションフッターのテキスト決める
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return "勘定科目を決算書上に表記される表示科目に紐付けることができます。"
+        default:
+            return ""
+        }
+    }
     var numberOfAccount :Int = 0 // 勘定科目番号
     var numberOfTaxonomy :Int = 0 // 表示科目番号
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
