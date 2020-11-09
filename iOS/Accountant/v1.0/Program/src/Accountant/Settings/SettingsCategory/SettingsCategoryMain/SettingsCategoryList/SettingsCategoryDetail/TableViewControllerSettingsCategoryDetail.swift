@@ -162,7 +162,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //                if cell.label.text != "表示科目を選択してください" && cell.label.text != "" {
                     let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                     let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
-                    cell.label.text! = object!.category
+                    cell.label.text! = "\(object!.number), \(object!.category)"
                     cell.label.textColor = UIColor.black // 文字色をブラックとする
                 }else {
                     cell.label.text = "表示科目を選択してください"
@@ -297,16 +297,16 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 cell.textLabel?.text = "表示科目名"
                 cell.textLabel?.textColor = .darkGray
                 cell.textLabel?.textAlignment = NSTextAlignment.left
-                    // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
-                    let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-                    if "" != object?.numberOfTaxonomy {
-                        let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
-                        cell.label.text = objectt!.category
-                        cell.label.textColor = .black
-                    }else {
-                        cell.label.text = "表示科目を選択してください"
-                        cell.label.textColor = .lightGray
-                    }
+                // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
+                let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+                if "" != object?.numberOfTaxonomy {
+                    let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
+                    cell.label.text = "\(objectt!.number), \(objectt!.category)"
+                    cell.label.textColor = .black
+                }else {
+                    cell.label.text = "表示科目を選択してください"
+                    cell.label.textColor = .lightGray
+                }
                 cell.label.textAlignment = NSTextAlignment.center
             }
             return cell
@@ -539,7 +539,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
             let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
             let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
-            cell_taxonomy.label.text! = object!.category
+            cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
             cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
             taxonomyname = cell_taxonomy.label.text!
         }
