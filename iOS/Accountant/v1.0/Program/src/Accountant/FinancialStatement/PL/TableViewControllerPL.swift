@@ -432,6 +432,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         @IBAction func button_print(_ sender: UIButton) {
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = true
+            gADBannerView.isHidden = true
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             // 第三の方法
@@ -458,6 +459,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
             //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = false
+            gADBannerView.isHidden = false
             /*
             ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
              CGBitmapContextCreate関数を使用して、コンテキストを作成し、

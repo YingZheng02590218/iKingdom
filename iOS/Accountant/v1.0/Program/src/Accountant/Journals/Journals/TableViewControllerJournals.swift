@@ -587,6 +587,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         printing = true
+        gADBannerView.isHidden = true
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
@@ -615,6 +616,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         UIGraphicsEndImageContext()
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         printing = false
+        gADBannerView.isHidden = false
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
