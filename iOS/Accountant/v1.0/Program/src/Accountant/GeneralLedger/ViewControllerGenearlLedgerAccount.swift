@@ -60,12 +60,22 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
         // 空白行対応
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
-        let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
-        if objects.count + objectss.count >= 1 {
-            button_print.isEnabled = true
-        }else {
-            button_print.isEnabled = false
+        if account == "損益勘定" || account == "繰越利益" {
+            let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: account) // 決算整理仕訳　勘定別　損益勘定のみ　繰越利益を含む
+
+            if objectsss.count >= 1 {
+                button_print.isEnabled = true
+            }else {
+                button_print.isEnabled = false
+            }
+        }else{
+            let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
+            let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
+            if objects.count + objectss.count >= 1 {
+                button_print.isEnabled = true
+            }else {
+                button_print.isEnabled = false
+            }
         }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)

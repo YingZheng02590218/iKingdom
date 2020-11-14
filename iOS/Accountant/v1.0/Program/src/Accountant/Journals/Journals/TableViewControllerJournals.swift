@@ -525,6 +525,9 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             // nilでない場合
             tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
         }
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        printing = true
+        gADBannerView.isHidden = true
             pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
@@ -535,9 +538,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
 //        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        printing = true
-        gADBannerView.isHidden = true
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         let newImage = self.tableView.captureImagee()
