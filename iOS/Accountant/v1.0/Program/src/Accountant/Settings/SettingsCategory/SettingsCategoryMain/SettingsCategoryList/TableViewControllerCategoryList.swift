@@ -216,20 +216,21 @@ class TableViewControllerCategoryList: UITableViewController {
         cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
         // モデルオブフェクトの取得 勘定別に取得
         let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: objects[indexPath.row].category as String) // 通常仕訳　勘定別
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: objects[indexPath.row].category as String) // 決算整理仕訳　勘定別　損益勘定以外
-        // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
-        if objectss.count <= 0 && objectsss.count <= 0 {
-            //UIButtonを有効化
-            cell.ToggleButton.isEnabled = true
-        }else {
-            //UIButtonを無効化
-            cell.ToggleButton.isEnabled = false
-        }
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category as String) // 通常仕訳　勘定別 全年度にしてはいけない
+        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category as String) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
         // タクソノミに紐付けされていない勘定科目はスイッチをONにできないように無効化する
         if "" == objects[indexPath.row].numberOfTaxonomy {
             //UIButtonを無効化
             cell.ToggleButton.isEnabled = false
+        }else {
+            // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
+            if objectss.count <= 0 && objectsss.count <= 0 {
+                //UIButtonを有効化
+                cell.ToggleButton.isEnabled = true
+            }else {
+                //UIButtonを無効化
+                cell.ToggleButton.isEnabled = false
+            }
         }
         return cell
     }

@@ -354,28 +354,28 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                              indexPath.row <  objects0100.count + 1 + 1 {   // 流動資産合計　　　　中区分タイトル + 流動資産 + 合計
                         cell.textLabel?.text = "        "+objects0100[indexPath.row-(1)].category
                         print("BS", indexPath.row, "        "+objects0100[indexPath.row-(1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0100[indexPath.row-(1 )].number) // 勘定別の合計　計算
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0100[indexPath.row-(1 )].number) // 勘定別の合計　計算
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + 1 &&  // 有形固定資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 { // 無形固定資産
                         cell.textLabel?.text = "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1 && // 無形固定資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 { // 投資その他資産
                         cell.textLabel?.text = "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1 && // 投資その他資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 { // 固定資産合計
                         cell.textLabel?.text = "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else if indexPath.row >= objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1 && // 繰延資産タイトルの1行下
                               indexPath.row < objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1 { // 繰延資産合計
@@ -385,7 +385,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
 //                        print(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count+1+objects23.count)
                         cell.textLabel?.text = "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else {
                         cell.textLabel?.text = "default"
@@ -478,12 +478,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                              indexPath.row <  objects0114.count + 1 {  // 流動負債合計 中区分のタイトルより下の行から、中区分合計の行より上
                         cell.textLabel?.text = "        "+objects0114[indexPath.row-(1)].category
                         print("BS", indexPath.row, "        "+objects0114[indexPath.row-(1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0114[indexPath.row-(1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0114[indexPath.row-(1)].number)
                         cell.label_account.textAlignment = .right
                     }else if indexPath.row >= objects0114.count + 1 + 1 + 1 && // 固定負債タイトルの1行下
                               indexPath.row <  objects0114.count + 1 + 1 + objectsCounts3.count + 1 { // 固定負債合計
                         cell.textLabel?.text = "        "+objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].category
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else {
                         cell.textLabel?.text = "default"
@@ -588,7 +588,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                     
                     cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
                     print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
-                    let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
+                    let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
                     // テキストをカスタマイズするために、NSMutableAttributedStringにする
                     let attributeText = NSMutableAttributedString(string: text)
                     // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -602,7 +602,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 }
                 cell.textLabel?.text = "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category
                 print("BS", indexPath.row, "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category)
-                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -641,7 +641,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
                 print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
-                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -706,13 +706,13 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                          indexPath.row <  objects14.count + 1 {      // 株主資本合計
                     cell.textLabel?.text = "        "+objects14[indexPath.row-1].category
                     print("BS", indexPath.row, "        "+objects14[indexPath.row-1].category)
-                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects14[indexPath.row-1].number)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects14[indexPath.row-1].number)
                     cell.label_account.textAlignment = .right
                 }else if indexPath.row >= objects14.count + 2 + 1 &&                     //その他の包括利益累計額
                           indexPath.row <   objects14.count + 2 + objects15.count + 1 {    //その他の包括利益累計額合計
                     cell.textLabel?.text = "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category
                     print("BS", indexPath.row, "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category)
-                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects15[indexPath.row-(objects14.count + 2 + 1)].number)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects15[indexPath.row-(objects14.count + 2 + 1)].number)
                     cell.label_account.textAlignment = .right
                 }else {
                     print("??")

@@ -57,6 +57,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
                 let dataBaseTaxonomy = DataBaseTaxonomy() // 表示科目
                 let number = dataBaseTaxonomy.save() //　自動採番
                 dataBaseTaxonomy.fiscalYear = object.fiscalYear
+                dataBaseTaxonomy.numberOfTaxonomy = objects[i].number // 設定表示科目の連番を保持する　マイグレーション
                 dataBaseTaxonomy.accountName = objects[i].category
                 balanceSheet.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 表示科目を作成して貸借対照表に追加する
             }

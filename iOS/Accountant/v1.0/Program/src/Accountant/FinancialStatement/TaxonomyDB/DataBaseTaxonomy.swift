@@ -16,4 +16,5 @@ class DataBaseTaxonomy: RObject {
     @objc dynamic var accountName: String = ""         // 表示科目名
 //    let dataBaseAccounts = List<DataBaseAccount>() // 一対多の関連 勘定
     @objc dynamic var total: Int64 = 0                   // 合計額
+    @objc dynamic var numberOfTaxonomy: Int = 0        // 設定表示科目の連番　マイグレーション
 }

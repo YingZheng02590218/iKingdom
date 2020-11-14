@@ -21,6 +21,16 @@ class DatabaseManagerSettingsTaxonomyAccount  {
                 if objects[i].numberOfTaxonomy == "" { // 表示科目に紐付けしていない場合
                     updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
                 }
+            }else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
+                if objects[i].numberOfTaxonomy != "" { // 表示科目に紐付けしている場合
+                    // 勘定クラス　勘定ないの仕訳を取得
+                    let dataBaseManagerAccount = DataBaseManagerAccount()
+                    let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    if objectss.count > 0 || objectsss.count > 0 {
+                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
+                    }
+                }
             }
         }
     }
