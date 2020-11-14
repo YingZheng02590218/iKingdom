@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // 表示科目クラス
 class DataBaseTaxonomy: RObject {

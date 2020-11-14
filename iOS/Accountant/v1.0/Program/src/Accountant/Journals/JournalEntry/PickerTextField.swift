@@ -72,14 +72,6 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         self.inputView = picker
         self.inputAccessoryView = toolbar
         
-        //Segueを場合分け　初期値
-//        if identifier == "identifier_debit" {       //借方　費用　仕入
-//            picker.selectRow(0, inComponent: 0, animated: false) //大分類
-//            picker.selectRow(0, inComponent: 1, animated: false) //勘定科目
-//        }else if identifier == "identifier_credit" {//貸方　資産　現金
-//            picker.selectRow(0, inComponent: 0, animated: false)
-//            picker.selectRow(0, inComponent: 1, animated: false)
-//        }
         //借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
         picker.reloadAllComponents()
     }
@@ -397,30 +389,6 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                 self.text = ""
                 break
             }
-//            // UIPickerTextField 隣のテキストフィールドを探す
-//            var hoge = pickerView.superview // 親ビュー
-//            while(hoge!.isKind(of: ViewControllerJournalEntry.self) == false) {
-//                hoge = hoge!.superview
-//            }
-//            let viewControllerJournalEntry = hoge as! ViewControllerJournalEntry
-            
-//            let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-//            let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-//            let presentingViewController = navigationController.viewControllers[0] as! TableViewControllerJournals // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-//            //借方勘定科目と貸方勘定科目は同じか？
-//            if viewControllerJournalEntry.TextField_category_debit.text  == result ||
-//                viewControllerJournalEntry.TextField_category_credit.text  == result {
-//                if count > 2 { // ドラムロールのコンポーネントは2行以上あるか？
-//                    // ドラムロールの最大値か？
-//                    count -= 1
-//                    if count == row {
-//                        pickerView.selectRow(row - 1, inComponent: 1, animated: true)
-//                    }else{
-//                        pickerView.selectRow(row + 1, inComponent: 1, animated: true)
-//                        //            PickerView_category.selectRow(0, inComponent: 1, animated: false)
-//                    }
-//                }
-//            }
         }
         //一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
         pickerView.reloadAllComponents()
@@ -434,22 +402,4 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         self.text = "勘定科目"
         self.endEditing(true)
     }
-//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return dataList.count
-//    }
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return dataList[row]
-//    }
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        self.text = dataList[row]
-//    }
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//         return 1
-//    }
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return dataList.count
-//    }
 }

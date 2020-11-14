@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // 会計帳簿クラス
 // 会計帳簿 は 主要簿　と　補助簿 を 持つことができます。

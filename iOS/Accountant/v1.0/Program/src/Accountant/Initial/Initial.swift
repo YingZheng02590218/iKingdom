@@ -26,13 +26,12 @@ class Initial {
         // マイグレーション　CSVファイルに変更がある場合、一度作成したモデルオブジェクトを削除してから新たに作り直す　考える
         if !databaseManagerSettingsTaxonomyAccount.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
-//            masterData.readMasterDataFromCSV()   // マスターデータを作成する
+            // マスターデータを作成する
             masterData.readMasterDataFromCSVOfTaxonomyAccount()   
         }
         let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         if !dataBaseManagerSettingsTaxonomy.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
-//            masterData.readMasterDataFromCSVOfBSAndPL()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
         // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
@@ -47,12 +46,9 @@ class Initial {
         // データベースに会計帳簿があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
             let number = dataBaseManager.addAccountingBooksShelf(company: "事業者名")
-//            print("initializeAccountingBooksShelf",number)
         }
         // 会計帳簿
         initializeAccountingBooks()
-//            // 財務諸表
-//            initializeFinancialStatements()
     }
     // 初期値用の年月を取得
     func getTheTime() -> Int {
@@ -88,7 +84,7 @@ class Initial {
     }
     // 仕訳帳画面　仕訳帳を初期化
     func initialiseJournals(number: Int,fiscalYear: Int){
-         let dataBaseManager = DataBaseManagerJournals() //データベースマネジャー
+         let dataBaseManager = DataBaseManagerJournals()
         // データベースに仕訳帳画面の仕訳帳があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
@@ -96,7 +92,7 @@ class Initial {
     }
     // 総勘定元帳画面　総勘定元帳を初期化
     func initialiseAccounts(number: Int,fiscalYear: Int) {
-        let dataBaseManager = DataBaseManagerGeneralLedger() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerGeneralLedger()
         // データベースに勘定画面の勘定があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
             dataBaseManager.addGeneralLedger(number: number)

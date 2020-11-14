@@ -36,23 +36,14 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         longPressRecognizer.delegate = self
         // tableViewにrecognizerを設定
         tableView.addGestureRecognizer(longPressRecognizer)
-        
         // アプリ初期化
         let initial = Initial()
         initial.initialize()
-//        // 表示機能
-//        let databaseManager = DataBaseManagerTB() //データベースマネジャー
-//        databaseManager.calculateAmountOfAllAccount()
-//        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-//        let databaseManagerWS = DataBaseManagerWS()
-//        databaseManagerWS.calculateAmountOfAllAccount()
-//        databaseManagerWS.calculateAmountOfAllAccountForBS()
-//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() //データベースマネジャー
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
         label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
         label_title.text = "仕訳帳"
@@ -77,27 +68,15 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // UIViewControllerの表示画面を更新・リロード
 //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         self.tableView.reloadData() // エラーが発生しないか心配
-//        self.viewDidLoad() // 2020/07/31 コメントアウト　2020/10/29
-        // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 11), at: UITableView.ScrollPosition.bottom, animated: false)
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
-//        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
-        
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -110,7 +89,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         gADBannerView.load(GADRequest())
         print(tableView.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
          addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
     
@@ -147,17 +125,15 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             button_print.isEnabled = false
         }
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
-//        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         if indexPath != nil && indexPath!.count > 0 {
             self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
             self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
-//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //セクション0のロウ0は存在しないかもしれないのでこれは誤り
         }
     }
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -212,8 +188,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         let controller = segue.destination as! ViewControllerJournalEntry
         // 遷移先のコントローラに値を渡す
         if segue.identifier == "buttonTapped" {
-//        if sender != nil { // 型を判定　nil:セレクター UIBarButtonItem:仕訳追加ボタン Accountant.TableViewCell:セル
-//        if type(of: sender) is UIBarButtonItem.Type {
             controller.journalEntryType = "JournalEntries" // セルに表示した仕訳タイプを取得
         }else if segue.identifier == "longTapped" {
             if tappedIndexPath != nil { // nil:ロングタップではない
@@ -460,20 +434,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
                     self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: false) // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 }
             }
-            // ボツ　見えている範囲のみなので行数が増えると動かない
-//            if let lastVisibleIndexPath = tableView.indexPathsForVisibleRows?.last { // 見えている範囲のみなので行数が増えると動かない　.firstの意味は先頭行のこと　エラーがでている
-//                print("lastVisibleIndexPath \(lastVisibleIndexPath[0]),\(lastVisibleIndexPath[1])")
-//                print("           indexPath \(indexPath[0]),\(indexPath[1])")
-//                if indexPath != lastVisibleIndexPath {  // 表示しようとしているセルの行が、最後の行ではない場合
-//                    print("           indexPath.row \(indexPath.row), numberOfRows \(tableView.numberOfRows(inSection: indexPath[0]))")
-//                    if indexPath.row == tableView.numberOfRows(inSection: indexPath[0])-1 { // 表示しようとしているセル（行）とセルの数を比較。ゼロスタート補正　最大数まで表示した場合
-                        // テーブルビューの初期表示位置を指定 セルが表示されるたびにセルの最後尾までスクロールする
-//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.middle, animated: true)
-//                        self.tableView.scrollToRow(at: lastVisibleIndexPath, at: UITableView.ScrollPosition.none, animated: true)
-//                    }
-//                }
-//            }
         }
         if scroll_adding {     // 入力ボタン押下時の場合
             // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
@@ -506,7 +466,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース
-            let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
+            let dataBaseManager = DataBaseManagerJournalEntry()
             // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
             let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
             print(objects)
@@ -535,8 +495,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
     // disable sticky section header
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) 不要　2020/07/27
-//            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
             if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
                 // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
                 scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
@@ -544,35 +502,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         }else{
             // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
             scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            // マネタイズ対応　完了
-//            if self.tableView.contentSize.height > self.tableView.frame.size.height + scrollView.contentOffset.y {
-//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y) // スクロール時の、広告の位置を固定する
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: 0)
-//            }else {
-                // テーブルビューを一番下までスクロールされた場合は、広告を隠す
-//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y - 100) // スクロール時の、広告の位置を固定する
-//                gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - 100) // スクロール時の、広告の位置を固定する
-//                print(tableView.rowHeight)
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-//            }
-//            gADBannerView.frame.origin = CGPoint(x: 0, y: self.tableView.frame.size.height - gADBannerView.frame.height + scrollView.contentOffset.y) // スクロール時の、広告の位置を固定する
         }
-//            if scrollView.contentOffset.y <= tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // スクロールがセクション高さ以上かつ0以上
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-//            }else if scrollView.contentOffset.y > tableView.sectionHeaderHeight && scrollView.contentOffset.y >= 0 { // セクションの重複を防ぐ
-////                scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)// おかしくなる
-//                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)//上手く表示された
-////                scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight) * -1, left: 0, bottom: 0, right: 0) // sectionHeaderHeightをinsetに設定すると セクションが重複した
-//            }else if scrollView.contentOffset.y >= tableView.sectionHeaderHeight {
-//    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-//            }
-//        }else{
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        }
     }
     
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -596,9 +526,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             // nilでない場合
             tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
         }
-//        barButtonItem_add.isEnabled = false
-//        barButtonItem_add.tintColor = UIColor.clear
-//        button_print.isHidden = true
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
         pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
@@ -647,23 +574,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
            UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
         */
         //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
-//            // グラフィックスコンテキストを取得する
-//            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
-//            myImageView.layer.render(in: currentContext)
-//            if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
-//    //2ページ目
-//           UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-//            // グラフィックスコンテキストを取得する
-//            guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
-//            myImageView.layer.render(in: currentContext2)
-//            }
-//            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
-//    //3ページ目
-//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*2, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-//             // グラフィックスコンテキストを取得する
-//             guard let currentContext3 = UIGraphicsGetCurrentContext() else { return }
-//             myImageView.layer.render(in: currentContext3)
-//            }
         // ビューイメージを全て印刷できるページ数を用意する
         var pageCounts: CGFloat = 0
         while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
@@ -720,11 +630,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
-        // ボタンはNavigationBarに配置したので下記は不要となった2020/07/12
-//        button_print.isHidden = false
-//        barButtonItem_add.isEnabled = true
-//        barButtonItem_add.tintColor = UIColor.init(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
-//        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
         // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
         tableView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
         //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする

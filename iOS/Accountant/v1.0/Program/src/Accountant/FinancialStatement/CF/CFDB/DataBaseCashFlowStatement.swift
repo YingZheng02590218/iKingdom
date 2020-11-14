@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // キャッシュフロー計算書クラス
 class DataBaseCashFlowStatement: RObject {

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // 設定勘定科目クラス
 //class DataBaseSettingsCategory: RObject {

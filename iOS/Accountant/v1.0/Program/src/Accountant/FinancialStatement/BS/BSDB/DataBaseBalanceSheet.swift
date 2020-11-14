@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // 貸借対照表クラス
 class DataBaseBalanceSheet: RObject {
