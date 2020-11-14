@@ -393,7 +393,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
          * 印刷ボタン押下時メソッド
          */
         @IBAction func button_print(_ sender: UIButton) {
-//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = true
             gADBannerView.isHidden = true
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -405,7 +405,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
             }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-            pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
+            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
             //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
     //        var rect = self.view.bounds
             //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」

@@ -68,6 +68,16 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // UIViewControllerの表示画面を更新・リロード
 //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         self.tableView.reloadData() // エラーが発生しないか心配
+        // 仕訳データが0件の場合、印刷ボタンを不活性にする
+        // 空白行対応
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let objects = dataBaseManagerAccount.getJournalEntryAll() // 通常仕訳　全
+        let objectss = dataBaseManagerAccount.getAdjustingEntryAll() // 決算整理仕訳　全
+        if objects.count + objectss.count >= 1 {
+            button_print.isEnabled = true
+        }else {
+            button_print.isEnabled = false
+        }
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
         tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
@@ -118,12 +128,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         scroll = false
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
-        // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if indexPath!.count > 0 {
-            button_print.isEnabled = true
-        }else {
-            button_print.isEnabled = false
-        }
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
         if indexPath != nil && indexPath!.count > 0 {
             self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
@@ -242,9 +246,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             section_num -= 12
         }
         let mon = "月"
-//        if section_num > 9 {
-//            mon = "月"
-//        }
         let header_title = section_num.description + mon
         return header_title
     }
@@ -259,8 +260,8 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             let dataBaseManagerAccount = DataBaseManagerAccount()
             let objects = dataBaseManagerAccount.getJournalEntryAll() // 通常仕訳　全
             let objectss = dataBaseManagerAccount.getAdjustingEntryAll() // 決算整理仕訳　全
-            if objects.count + objectss.count <= 14 {
-                return 14 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
+            if objects.count + objectss.count <= 20 {
+                return 20 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
             }else {
                 return 0 // 8件以上ある場合　不足分は0
             }
@@ -514,10 +515,8 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
      */
     @IBAction func button_print(_ sender: UIButton) {
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
+//        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        printing = true
-        gADBannerView.isHidden = true
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
@@ -526,8 +525,8 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             // nilでない場合
             tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
         }
-//            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
+            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
+//        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
@@ -536,14 +535,17 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
             //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
 //        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        printing = true
+        gADBannerView.isHidden = true
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
-        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         printing = false
         gADBannerView.isHidden = false
+        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、

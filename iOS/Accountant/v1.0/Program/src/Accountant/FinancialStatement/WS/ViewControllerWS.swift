@@ -409,7 +409,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_TB.contentSize.width / 25.4 * 72, height: TableView_TB.contentSize.height / 25.4 * 72)
-        pageSize = CGSize(width: TableView_WS.contentSize.width, height: TableView_WS.contentSize.height)
+        pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
         print("TableView_WS.contentSize:\(TableView_WS.contentSize)")
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
