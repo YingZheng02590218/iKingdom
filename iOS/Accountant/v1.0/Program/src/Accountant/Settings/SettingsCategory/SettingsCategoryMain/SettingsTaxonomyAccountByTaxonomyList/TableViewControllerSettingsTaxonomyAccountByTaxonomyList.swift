@@ -282,8 +282,8 @@ class TableViewControllerSettingsTaxonomyAccountByTaxonomyList: UITableViewContr
             cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
             // モデルオブフェクトの取得 勘定別に取得
             let dataBaseManagerAccount = DataBaseManagerAccount()
-            let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: objects[indexPath.row].category as String)//通常仕訳
-            let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: objects[indexPath.row].category as String)//決算整理仕訳
+            let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category as String)//通常仕訳
+            let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category as String)//決算整理仕訳
             // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
             if objectss.count <= 0 && objectsss.count <= 0 {
                 //UIButtonを有効化

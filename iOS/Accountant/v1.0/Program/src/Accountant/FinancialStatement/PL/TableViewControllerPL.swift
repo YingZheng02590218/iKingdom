@@ -346,7 +346,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+objects9[indexPath.row - (3+1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects9[indexPath.row - (3+1)].number) // BSAndPL_category を number に変更する 2020/09/17
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects9[indexPath.row - (3+1)].number) // BSAndPL_category を number に変更する 2020/09/17
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > eigai &&             // 営業外収益10
@@ -355,7 +355,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category10[indexPath.row - (eigai + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category10[indexPath.row - (eigai + 1)].number) //収益:4
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category10[indexPath.row - (eigai + 1)].number) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > eigaih &&          // 営業外費用
@@ -364,7 +364,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category6[indexPath.row - (eigaih + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category6[indexPath.row - (eigaih + 1)].number)
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category6[indexPath.row - (eigaih + 1)].number)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > toku &&                       // 特別利益
@@ -373,7 +373,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category11[indexPath.row - (toku + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category11[indexPath.row - (toku+1)].number) //収益:4
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category11[indexPath.row - (toku+1)].number) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
             }else if indexPath.row > tokus &&                   // 特別損失
@@ -382,7 +382,7 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
                 cell.textLabel?.text = "    "+mid_category7[indexPath.row - (tokus + 1)].category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: mid_category7[indexPath.row - (tokus+1)].number)
+                cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category7[indexPath.row - (tokus+1)].number)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 15)
                 return cell
     // 税金　勘定科目を表示する必要はない

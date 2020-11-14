@@ -3192,17 +3192,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-RV-6l7" userLabel="ViewNumber">
-                                                    <rect key="frame" x="307" y="0.0" width="15.333333333333314" height="45"/>
+                                                    <rect key="frame" x="307" y="0.0" width="42" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MMI-DC-dNs" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="-1" width="15" height="21"/>
+                                                            <rect key="frame" x="0.0" y="-1" width="42" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZXH-0j-gOB" userLabel="list_number_2">
-                                                            <rect key="frame" x="0.0" y="25" width="15" height="19"/>
+                                                            <rect key="frame" x="0.0" y="25" width="42" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -3219,7 +3219,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp" userLabel="ViewDebit">
-                                                    <rect key="frame" x="322.33333333333331" y="0.0" width="64.666666666666686" height="45"/>
+                                                    <rect key="frame" x="349" y="0.0" width="64.666666666666686" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="xIO-Lc-Pc5" userLabel="list_debit">
                                                             <rect key="frame" x="-1" y="5" width="63" height="35"/>
@@ -4742,7 +4742,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="45" height="22"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iH3-BB-Aw3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="20.333333333333332" height="22"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KeE-Cg-kQ3" userLabel="list_date_month">
                                                                     <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
@@ -4763,7 +4763,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-XR-WCA">
-                                                            <rect key="frame" x="20.333333333333329" y="0.0" width="25" height="22"/>
+                                                            <rect key="frame" x="20" y="0.0" width="25" height="22"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="RJg-nz-fOc" userLabel="list_date_day">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="22"/>
@@ -4831,7 +4831,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-3p-95E">
-                                                    <rect key="frame" x="151.66666666666666" y="0.0" width="15" height="22"/>
+                                                    <rect key="frame" x="150" y="0.0" width="15" height="22"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="Zcc-G1-l6f" userLabel="list_number">
                                                             <rect key="frame" x="0.0" y="0.0" width="15" height="22"/>
@@ -4857,7 +4857,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxL-Qp-D6m">
-                                                    <rect key="frame" x="167" y="0.0" width="65" height="22"/>
+                                                    <rect key="frame" x="165" y="0.0" width="65" height="22"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="sQk-3N-gmX" userLabel="list_debit">
                                                             <rect key="frame" x="0.0" y="0.0" width="65" height="22"/>
@@ -4909,7 +4909,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgc-R4-jK9">
-                                                    <rect key="frame" x="298.33333333333331" y="0.0" width="15" height="22"/>
+                                                    <rect key="frame" x="295" y="0.0" width="15" height="22"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="XXk-V4-PMR" userLabel="list_debitOrCredit">
                                                             <rect key="frame" x="0.0" y="0.0" width="15" height="22"/>
@@ -5124,10 +5124,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vb-Is-had">
-                                                            <rect key="frame" x="91.666666666666671" y="0.0" width="0.6666666666666714" height="25"/>
+                                                            <rect key="frame" x="91.666666666666671" y="0.0" width="191.66666666666663" height="25"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="53G-4Y-TzC" userLabel="account_name">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="53G-4Y-TzC" userLabel="account_name">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="191" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -5230,10 +5230,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="56t-n0-Eon">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.33333333333333331" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="91.666666666666671" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="jMV-GR-zBr" userLabel="debit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="91" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -5255,10 +5255,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaB-oj-3OX">
-                                                    <rect key="frame" x="0.3333333333333286" y="0.0" width="0.66666666666666674" height="20"/>
+                                                    <rect key="frame" x="91.666666666666671" y="0.0" width="191.66666666666663" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="pPX-xu-CGo" userLabel="account">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="pPX-xu-CGo" userLabel="account">
+                                                            <rect key="frame" x="0.0" y="0.0" width="191" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -5280,10 +5280,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffJ-sQ-Qxc">
-                                                    <rect key="frame" x="1" y="0.0" width="0.33333333333333326" height="20"/>
+                                                    <rect key="frame" x="283.33333333333331" y="0.0" width="91.666666666666686" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="EfX-FX-eaV" userLabel="credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                             <nil key="textColor"/>
@@ -5581,7 +5581,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="KOA-LT-m2w"/>
-        <segue reference="QiK-F7-mNz"/>
+        <segue reference="uCQ-Hu-dfD"/>
         <segue reference="AIQ-cX-Uq3"/>
         <segue reference="9aZ-df-wqW"/>
         <segue reference="0Ca-r5-TXU"/>

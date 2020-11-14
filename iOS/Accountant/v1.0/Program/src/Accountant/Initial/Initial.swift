@@ -16,6 +16,8 @@ class Initial {
         initialiseMasterData()
         // 設定画面　会計帳簿棚　初期化
         initializeAccountingBooksShelf()
+        // 表示科目
+        initializeTaxonomy()
     }
     // 設定画面　勘定科目　勘定科目一覧を初期化
     func initialiseMasterData(){
@@ -27,8 +29,8 @@ class Initial {
 //            masterData.readMasterDataFromCSV()   // マスターデータを作成する
             masterData.readMasterDataFromCSVOfTaxonomyAccount()   
         }
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
-        if !dataBaseManagerSettingsCategoryBSAndPL.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
+        if !dataBaseManagerSettingsTaxonomy.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
             let masterData = MasterData()
 //            masterData.readMasterDataFromCSVOfBSAndPL()
             masterData.readMasterDataFromCSVOfTaxonomy()
@@ -36,7 +38,6 @@ class Initial {
         // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
         databaseManagerSettingsTaxonomyAccount.initializeSettingsTaxonomyAccount()
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
     }
     // 会計帳簿棚
@@ -107,6 +108,17 @@ class Initial {
         // データベースに財務諸表があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
             dataBaseManager.addFinancialStatements(number: number)
+        }
+    }
+    // 初期化　表示科目
+    func initializeTaxonomy() {
+        // 表示科目
+        let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
+        let isInvalidated = dataBaseManagerTaxonomy.deleteTaxonomyAll()
+        if isInvalidated {
+            dataBaseManagerTaxonomy.addTaxonomyAll()
+        }else {
+            print("deleteTaxonomyAll 失敗")
         }
     }
 }
