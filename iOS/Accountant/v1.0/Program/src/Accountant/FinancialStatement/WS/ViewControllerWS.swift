@@ -33,11 +33,11 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         TableView_WS.delegate = self
         TableView_WS.dataSource = self
         
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()

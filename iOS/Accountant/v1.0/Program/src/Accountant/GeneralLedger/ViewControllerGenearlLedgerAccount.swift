@@ -359,18 +359,15 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-//            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-//            print("scrollView.contentInset      : \(scrollView.contentInset)")
-//            print("view_top.bounds.height       : \(view_top.bounds.height)")
-//            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
-            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-            }else if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
-                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-            }else if scrollView.contentOffset.y >= 0{
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
+            print("scrollView.contentInset      : \(scrollView.contentInset)")
+            print("view_top.bounds.height       : \(view_top.bounds.height)")
+            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
+            if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
+                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
             }
         }else{
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
