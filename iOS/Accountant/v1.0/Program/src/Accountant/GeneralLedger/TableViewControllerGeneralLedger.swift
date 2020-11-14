@@ -18,7 +18,7 @@ class TableViewControllerGeneralLedger: UITableViewController {
     // テスト用広告ユニットID
     let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
     // true:テスト
-    let AdMobTest:Bool = false
+    let AdMobTest:Bool = true
     @IBOutlet var gADBannerView: GADBannerView!
     
     @IBOutlet var TableView_generalLedger: UITableView!
@@ -43,11 +43,6 @@ class TableViewControllerGeneralLedger: UITableViewController {
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -60,7 +55,6 @@ class TableViewControllerGeneralLedger: UITableViewController {
         gADBannerView.load(GADRequest())
         print(tableView.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
     
@@ -87,7 +81,7 @@ class TableViewControllerGeneralLedger: UITableViewController {
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -147,13 +141,13 @@ class TableViewControllerGeneralLedger: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: section) // どのセクションに表示するセルかを判別するため引数で渡す
         return objects.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath)
         // 勘定科目の名称をセルに表示する
@@ -201,17 +195,5 @@ class TableViewControllerGeneralLedger: UITableViewController {
         viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // マネタイズ対応　完了
-//        if self.tableView.contentSize.height > self.tableView.frame.size.height + scrollView.contentOffset.y {
-            // GADBannerView を作成する
-//            addBannerViewToView(gADBannerView, constant: 0)
-//        }else {
-            // テーブルビューを一番下までスクロールされた場合は、広告を隠す
-            // GADBannerView を作成する
-//            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-//        }
     }
 }

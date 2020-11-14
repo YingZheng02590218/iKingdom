@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 決算整理仕訳クラス
 // 仕訳クラス　と　クラス名が違うだけでその他は同じ

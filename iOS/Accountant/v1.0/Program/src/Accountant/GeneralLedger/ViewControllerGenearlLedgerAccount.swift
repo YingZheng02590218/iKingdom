@@ -18,7 +18,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     // テスト用広告ユニットID
     let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
     // true:テスト
-    let AdMobTest:Bool = false
+    let AdMobTest:Bool = true
     @IBOutlet var gADBannerView: GADBannerView!
     
     @IBOutlet weak var view_top: UIView!
@@ -66,11 +66,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -83,7 +78,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         gADBannerView.load(GADRequest())
         print(TableView_account.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: TableView_account!.rowHeight * -1)
     }
     
@@ -152,9 +146,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             section_num -= 12
         }
         let mon = "月"
-//        if section_num > 9 {
-//            mon = "月"
-//        }
         let header_title = section_num.description + mon
         return header_title
     }
@@ -374,31 +365,11 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
                 scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
             }else if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)
                 scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height + scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-//                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
-//                        TableView_account.contentInset = edgeInsets
-//                        TableView_account.scrollIndicatorInsets = edgeInsets
-            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
-    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
+            }else if scrollView.contentOffset.y >= 0{
                 scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
             }
-//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-//            print("scrollView.contentInset      :: \(scrollView.contentInset)")
-//            print("view_top.bounds.height       :: \(view_top.bounds.height)")
-//            print("TableView_account.bounds.height   :: \(TableView_account.bounds.height)")
         }else{
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            // マネタイズ対応　完了
-//            if self.TableView_account.contentSize.height > self.TableView_account.frame.size.height + scrollView.contentOffset.y {
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: 0)
-//            }else {
-                // テーブルビューを一番下までスクロールされた場合は、広告を隠す
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: TableView_account!.rowHeight * -1)
-//            }
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 class DataBaseManagerFinancialStatements: DataBaseManager {
     
@@ -37,17 +37,11 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             var number = balanceSheet.save()
-//            print("balanceSheet",number)
              number = profitAndLossStatement.save()
-//            print("profitAndLossStatement",number)
              number = cashFlowStatement.save()
-//            print("cashFlowStatement",number)
              number = workSheet.save()
-//            print("workSheet",number)
              number = compoundTrialBalance.save()
-//            print("compoundTrialBalance",number)
              number = dataBaseFinancialStatements.save() //　自動採番
-//            print("dataBaseFinancialStatements",number)
             // オブジェクトを作成して追加
             // 設定画面の勘定科目一覧にある勘定を取得する
             let dataBaseManager = DataBaseManagerSettingsTaxonomy()
@@ -66,8 +60,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             dataBaseFinancialStatements.cashFlowStatement = cashFlowStatement
             dataBaseFinancialStatements.workSheet = workSheet
             dataBaseFinancialStatements.compoundTrialBalance = compoundTrialBalance
-            // 年度　の数だけ増える　ToDo
-//            realm.add(dataBaseMainBooks)
+            // 年度　の数だけ増える
             object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
         }
     }

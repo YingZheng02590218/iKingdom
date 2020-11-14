@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift 
 
 // 設定表記名クラス
 //class DataBaseSettingsCategoryBSAndPL: RObject {

@@ -25,17 +25,6 @@ class TableViewControllerCategoryList: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        // データベース
-//        let databaseManagerSettings = DatabaseManagerSettingsCategory() //データベースマネジャー
-//        if !databaseManagerSettings.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
-//            let masterData = MasterData()
-//            masterData.readMasterDataFromCSV()   // マスターデータを作成する
-//        }
-        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-//        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-//        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
-        
-        // ↓のコードを記述する
         // 複数選択を可能にする
         // falseの場合は単一選択になる
         tableView.allowsMultipleSelectionDuringEditing = false
@@ -127,11 +116,6 @@ class TableViewControllerCategoryList: UITableViewController {
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -142,9 +126,7 @@ class TableViewControllerCategoryList: UITableViewController {
         gADBannerView.rootViewController = self
         // 広告を読み込む
         gADBannerView.load(GADRequest())
-        print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
     
@@ -244,7 +226,6 @@ class TableViewControllerCategoryList: UITableViewController {
         let cell = hoge as! TableViewCellCategoryList
         // touchIndexは選択したセルが何番目かを記録しておくプロパティ
         let touchIndex: IndexPath = self.tableView.indexPath(for: cell)!
-//        print("トグルスイッチが変更されたセルのIndexPath:　\(touchIndex)")
         // データベース
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: touchIndex.section)

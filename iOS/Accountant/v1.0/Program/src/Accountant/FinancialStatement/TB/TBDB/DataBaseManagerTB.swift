@@ -147,19 +147,13 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-//        let dataBaseManagerAccount = DataBaseManagerAccount()
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         try! realm.write {
             if account != "損益勘定" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-//                    // 勘定の丁数(プライマリーキー)を取得
-//                    var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//                    number -= 1 // 0スタートに補正
                         objectss?.dataBaseAccounts[i].debit_total = 0
                         objectss?.dataBaseAccounts[i].credit_total = 0
                         objectss?.dataBaseAccounts[i].debit_balance = 0
@@ -211,18 +205,13 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         try! realm.write {
             if account != "損益勘定" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-                // 勘定の丁数(プライマリーキー)を取得
-//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//                number -= 1 // 0スタートに補正
                         // 借方と貸方で金額が大きい方はどちらか
                         if left > right {
                             objectss?.dataBaseAccounts[i].debit_total = left
@@ -287,19 +276,14 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         try! realm.write {
             if account != "損益勘定" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-                // 勘定の丁数(プライマリーキー)を取得
-//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//                number -= 1 // 0スタートに補正
                         // 借方と貸方で金額が大きい方はどちらか
                         if left > right {
                             objectss?.dataBaseAccounts[i].debit_total_Adjusting = left
@@ -345,22 +329,16 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         // 決算振替仕訳　損益勘定振替
         let dataBaseManagerPLAccount = DataBaseManagerPLAccount()
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         try! realm.write {
             if account != "損益勘定" {//} && account != "繰越利益" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-        //                // 勘定の丁数(プライマリーキー)を取得
-        //                let dataBaseManagerAccount = DataBaseManagerAccount()
-        //                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-        //                number -= 1 // 0スタートに補正
                         // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
                         objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting = objectss!.dataBaseAccounts[i].debit_total + objectss!.dataBaseAccounts[i].debit_total_Adjusting
                         objectss!.dataBaseAccounts[i].credit_total_AfterAdjusting = objectss!.dataBaseAccounts[i].credit_total + objectss!.dataBaseAccounts[i].credit_total_Adjusting
@@ -395,7 +373,6 @@ class DataBaseManagerTB {
                 // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
                 objectss!.dataBasePLAccount!.debit_total_AfterAdjusting = objectss!.dataBasePLAccount!.debit_total + objectss!.dataBasePLAccount!.debit_total_Adjusting
                 objectss!.dataBasePLAccount!.credit_total_AfterAdjusting = objectss!.dataBasePLAccount!.credit_total + objectss!.dataBasePLAccount!.credit_total_Adjusting
-//                print(objectss!.dataBasePLAccount!)
                 // 残高額　借方と貸方で金額が大きい方はどちらか
                 if objectss!.dataBasePLAccount!.debit_total_AfterAdjusting > objectss!.dataBasePLAccount!.credit_total_AfterAdjusting {
                     objectss!.dataBasePLAccount!.debit_balance_AfterAdjusting =
@@ -428,20 +405,14 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account != "損益勘定" {
             // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
             for i in 0..<objectss!.dataBaseAccounts.count {
                 if objectss!.dataBaseAccounts[i].accountName == account {
-//            // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
-//            let dataBaseManagerAccount = DataBaseManagerAccount()
-//            var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//            number -= 1 // 0スタートに補正
                     switch leftOrRight {
                     case 0: // 合計　借方
                         result = objectss!.dataBaseAccounts[i].debit_total
@@ -487,11 +458,9 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
             result = 0
@@ -500,10 +469,6 @@ class DataBaseManagerTB {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-//                // 勘定の丁数(プライマリーキー)を取得  ※総勘定元帳の何行目にあるかを知るため
-//                let dataBaseManagerAccount = DataBaseManagerAccount()
-//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//                number -= 1 // 0スタートに補正
                         switch leftOrRight {
                         case 0: // 合計　借方
                             result = objectss!.dataBaseAccounts[i].debit_total_Adjusting
@@ -550,11 +515,9 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger //realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
             result = 0
@@ -563,10 +526,6 @@ class DataBaseManagerTB {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<objectss!.dataBaseAccounts.count {
                     if objectss!.dataBaseAccounts[i].accountName == account {
-//                // 勘定の丁数(プライマリーキー)を取得 ※総勘定元帳の何行目にあるかを知るため
-//                let dataBaseManagerAccount = DataBaseManagerAccount()
-//                var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//                number -= 1 // 0スタートに補正
                         switch leftOrRight {
                         case 0: // 合計　借方
                             result = objectss!.dataBaseAccounts[i].debit_total_AfterAdjusting
