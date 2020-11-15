@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 仕訳クラス
 class DataBaseJournalEntry: RObject {
@@ -22,11 +22,6 @@ class DataBaseJournalEntry: RObject {
     @objc dynamic var smallWritting: String = ""        //小書き
     @objc dynamic var balance_left: Int64 = 0           //差引残高
     @objc dynamic var balance_right: Int64 = 0          //差引残高
-//    let account = List<Account>()               //多対多の関連 勘定
-
-//    override static func ignoredProperties() -> [String] {
-//        return ["balance_left","balance_right"]
-//    }
 }
 
 class RObject: Object {
@@ -55,9 +50,3 @@ class RObject: Object {
         return "number"
     }
 }
-// 勘定クラス
-// 仕訳データ は 勘定 を 1 つ以上持っています。同じ 勘定 を持っている 仕訳データ を取得したい時に逆方向の関連を使用すると 勘定 から 仕訳データ の一覧を取得することができます。
-//class Account: Object {
-//    @objc dynamic var accountName: String = ""          // 勘定名
-//    let dataBaseJournalEntrys = LinkingObjects(fromType: DataBaseJournalEntry.self, property: "account") // 逆方向の関連　勘定→仕訳データ
-//}

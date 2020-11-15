@@ -111,7 +111,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース
-        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerPeriod() 
         let counts = dataBaseManager.getMainBooksAllCount()
         return counts
     }
@@ -119,7 +119,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         // データベース
-        let dataBaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let dataBaseManager = DataBaseManagerPeriod()
         // データベースから取得
         let objects = dataBaseManager.getMainBooksAll()
         // 会計帳簿の年度をセルに表示する
@@ -151,7 +151,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     // チェックマークの切り替え　データベースを更新
     func pickAccountingBook(tag: Int) {
         // データベース
-        let databaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let databaseManager = DataBaseManagerPeriod()
         databaseManager.setMainBooksOpenOrClose(tag: tag)
         // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
         let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -185,11 +185,11 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース
-            let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
+            let dataBaseManagerPeriod = DataBaseManagerPeriod()
             let objects = dataBaseManagerPeriod.getMainBooksAll()
             if objects.count > 1 {
                 // 会計帳簿を削除
-                let dataBaseManager = DataBaseManagerAccountingBooks() //データベースマネジャー
+                let dataBaseManager = DataBaseManagerAccountingBooks()
                 let result = dataBaseManager.deleteAccountingBooks(number: objects[indexPath.row].number)
                 if result == true {
                     self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする

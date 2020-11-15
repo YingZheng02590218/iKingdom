@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 仕訳クラス
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     var categories :[String] = Array<String>()
@@ -25,7 +26,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         createDatePicker()
         createTextFieldForCategory()
         createTextFieldForAmount()
@@ -80,9 +81,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -122,21 +123,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         timezone.dateFormat  = "MM-dd"
         timezone.timeZone = .current
         timezone.locale = Locale(identifier: "en_US_POSIX")
-//        var dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "YYYY-MM-DD"
-
-//        var now :Date = Date()
-//        let now1 = fffff.string(from: Calendar.current.date(byAdding: .month, value: -3, to: now)!)
-//        now = fffff.date(from: now1)!
-//        print("現在時刻 now      ：\(now)")
-//        print("現在時刻 f        ：\(f.string(from: now))") //年
-//        print("現在時刻 ff       ：\(ff.string(from: now))") //月
-//        print("現在時刻 fff      ：\(fff.string(from: now))") //月日
-//        print("現在時刻 ffff     ：\(ffff.string(from: now))") //年月日
-//        print("現在時刻 ffff2    ：\(ffff2.string(from: now))") //年月日
-//        print("現在時刻 fffff    ：\(fffff.string(from: now))") //年月日
-//        print("現在時刻 ffffff   ：\(ffffff.string(from: now))") //
-//        print("現在時刻 timezone ：\(timezone.string(from: now))")
 
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
@@ -146,11 +132,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
         let nowStringNextYear = (fiscalYear! + 1).description                  //年度
         
-//        let nowStringYear = f.string(from: now)                                                                 //年
-//        let nowStringPreviousYear = f.string(from: Calendar.current.date(byAdding: .year, value: -1, to: now)!) //年
-//        let nowStringNextYear = f.string(from: Calendar.current.date(byAdding: .year, value: 1, to: now)!)      //年
-//        let nowStringMonth = ff.string(from: now)                                                             //月
-        let nowStringMonthDay = fff.string(from: now)                                                           //月日
+        let nowStringMonthDay = fff.string(from: now)                             //月日
         
         let dayOfStartInYear :Date   = fff.date(from: "01/01")!
         let dayOfEndInPeriod :Date   = fff.date(from: "03/31")!
@@ -179,80 +161,36 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         // ピッカーの初期値
-//        print("年度+現在の月日    ： \(fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!)")
-//        print("年度+現在の月日    ： \(fff.string(from: now))")
-//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear)")
-//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + ",")")
-//        print("年度+現在の月日    ： \(fff.string(from: now) + "/" + nowStringYear + "," + ffffff.string(from: now))")
-
-        //        datePicker.date = timezone.date(from: timezone.string(from: now))!
         datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         // 背景色
         datePicker.backgroundColor = .systemBackground
-//        print("\(String(describing: datePicker.minimumDate))")
-//        print("\(String(describing: datePicker.maximumDate))")
-//
-//        print("\(String(describing: datePicker.date))")
-
-//        print(fff.string(from: dayOfStartInPeriod))
-//        print(fff.string(from: dayOfEndInYear))
-//        print(fff.string(from: dayOfStartInYear))
-//        print(fff.string(from: dayOfEndInPeriod))
-        
-//        print(nowStringYear)
-//        print(nowStringNextYear)
-//        Label_date.text = ffff.string(from: DatePicker.date)
     }
-//    var diff :Int = 0
     @IBOutlet weak var Button_Left: UIButton!
     @IBAction func Button_Left(_ sender: UIButton) {
-        //todo
         let min = datePicker.minimumDate!
         if datePicker.date > min {
-//            diff -= 1
             let modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: datePicker.date)! // 1日前へ
             datePicker.date = modifiedDate
         }
-//        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
-//        datePicker.date = modifiedDate
-//        print("\(String(describing: datePicker.date))")
     }
     @IBOutlet weak var Button_Right: UIButton!
     @IBAction func Button_Right(_ sender: UIButton) {
-        //todo
         let max = datePicker.maximumDate!
         if datePicker.date < max {
-//            diff += 1
             let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: datePicker.date)! // 1日次へ
             datePicker.date = modifiedDate
         }
-//        let modifiedDate = Calendar.current.date(byAdding: .day, value: diff, to: now)!
-//        datePicker.date = modifiedDate
-//        print("\(String(describing: datePicker.date))")
     }
     
 //TextField
     @IBOutlet weak var TextField_category_debit: PickerTextField!
     @IBOutlet weak var TextField_category_credit: PickerTextField!
     @IBAction func TextField_category_debit(_ sender: UITextField) {
-        //カーソルが当たったらすぐに終了させる　勘定科目画面に遷移させるため
-//         self.view.endEditing(true)
     }
     @IBAction func TextField_category_credit(_ sender: UITextField) {
-        //カーソルが当たったらすぐに終了させる　勘定科目画面に遷移させるため
-//        self.view.endEditing(true)
     }
     // TextField作成　勘定科目
     func createTextFieldForCategory() {
-        //TextFieldのキーボードを表示させないように、ダミーのViewを表示 TextField
-//        TextField_category_debit.inputView = UIView()
-//        TextField_category_credit.inputView = UIView()
-        //TextFieldのキーボードを出したくない 場合はfalse カーソルすら当たらなくなる
-//        TextField_category_debit.isUserInteractionEnabled = true
-//        TextField_category_credit.isUserInteractionEnabled = true
-        //仕訳画面を開いたら借方勘定科目TextFieldのキーボードを自動的に表示する
-//        self.TextField_category_debit.becomeFirstResponder() // 2020/07/09 17:24 不要だと指摘あり
-        
         TextField_category_debit.delegate = self
         TextField_category_credit.delegate = self
         TextField_category_debit.setup(identifier: "identifier_debit")
@@ -350,17 +288,17 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     let SCREEN_SIZE = UIScreen.main.bounds.size
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillShow(_ notification: NSNotification){
+//    @objc func keyboardWillShow(_ notification: NSNotification){
 //        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
 //        print("スクリーン高さ          " + "\(SCREEN_SIZE.height)")
 //        print("キーボードまでの高さ     " + "\(SCREEN_SIZE.height - keyboardHeight)")
 //        print("キーボード高さ          " + "\(keyboardHeight)")
 //        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - TextField_SmallWritting.frame.height
-    }
+//    }
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillHide(_ notification: NSNotification){
+//    @objc func keyboardWillHide(_ notification: NSNotification){
 //        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - TextField_SmallWritting.frame.height
-    }
+//    }
     // TextFieldのキーボードについているBarButtonが押下された時
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
         switch sender.tag {
@@ -437,28 +375,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     //    textFieldShouldEndEditing
     //    textFieldDidEndEditing
     //    textFieldShouldReturn
-    // キーボードが表示される前に呼ばれるDelegateメソッド
-//    var isShowKeyboard = false
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        // trueを返すとキーボードが表示される、falseを返すと表示されない
-//        if isShowKeyboard {
-//            // キーボードが出ていたら閉じる
-//            view.endEditing(true)
-//            isShowKeyboard = false
-//            return false
-//        } else {
-//            // キーボードを表示する
-//            isShowKeyboard = true
-//            return true
-//        }
-//    }
+    
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        //todo
-//        print(#function)
-//        print("テキストフィールがタップされ、入力可能になったあと")
-        //TextFieldのキーボードを自動的に閉じる
-//        self.view.endEditing(true)
         textField.textColor = UIColor.black // 文字色をブラックとする
     }
     // 文字クリア
@@ -477,7 +396,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // textFieldに文字が入力される際に呼ばれる　入力チェック(半角数字、文字数制限)
     // 戻り値にtrueを返すと入力した文字がTextFieldに反映され、falseを返すと入力した文字が反映されない。
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        print("テキストフィールド入力中")
         var resultForCharacter = false
         var resultForLength = false
         // 入力チェック　数字のみに制限
@@ -531,9 +449,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     }
     //リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("キーボードを閉じる前")
-//        self.view.endEditing(true) // キーボードを閉じる処理
-//        print("キーボードを閉じた後")
         switch textField.text {
         case "勘定科目":
             Label_Popup.text = "勘定科目を入力してください"
@@ -646,12 +561,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     @IBAction func Button_Input(_ sender: Any) {
         // シスログ出力
         // printによる出力はUTCになってしまうので、9時間ずれる
-//        print("\(datePicker.date)")
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current // UTC時刻を補正
-//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-//        print("\(formatter.string(from: datePicker.date))")
         formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
 //        print("\(formatter.string(from: datePicker.date))")
 //        print("日付　　　　 " + "\(formatter.string(from: datePicker.date))")

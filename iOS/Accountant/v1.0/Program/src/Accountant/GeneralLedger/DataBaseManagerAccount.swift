@@ -12,23 +12,6 @@ import RealmSwift
 // 勘定クラス
 class DataBaseManagerAccount {
 
-    // 総勘定元帳でモデルオブフェクトの追加を行うためコメントアウト
-    // モデルオブフェクトの追加　勘定
-//    func addAccount(name: String){
-//        // オブジェクトを作成
-//        let dataBaseAccount = DataBaseAccount() // 勘定
-//        dataBaseAccount.accountName = name // Todo
-//        // データベース　書き込み
-//        // (1)Realmのインスタンスを生成する
-//        let realm = try! Realm()
-//        // (2)書き込みトランザクション内でデータを追加する
-//        try! realm.write {
-//            let number = dataBaseAccount.save() //　自動採番
-//            print(number)
-//            // 勘定　の数だけ増える　ToDo
-//            realm.add(dataBaseAccount)
-//        }
-//    }
     // 追加　勘定
     func addGeneralLedgerAccount(number: Int){
         // (1)Realmのインスタンスを生成する
@@ -227,19 +210,6 @@ class DataBaseManagerAccount {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
 
         return object.dataBaseGeneralLedger?.dataBasePLAccount
-    }
-    // 取得 仕訳　勘定別
-    func getAllJournalEntryFromAccount(account: String) -> List<DataBaseJournalEntry> { // ResultではなくListを使う　問題ない？
-        let realm = try! Realm()
-        // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
-        var objects = object.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'") // 条件を間違えないように注意する
-//            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
-//        objects = objects?.sorted(byKeyPath: "date", ascending: true)
-        print(objects![0].dataBaseJournalEntries)
-        return objects![0].dataBaseJournalEntries
     }
     // 取得 仕訳　勘定別 全年度
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {

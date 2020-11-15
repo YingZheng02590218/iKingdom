@@ -29,12 +29,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-//        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-//        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
-//        if segmentedControl_switch.selectedSegmentIndex == 0 {
-//        }else if segmentedControl_switch.selectedSegmentIndex == 1 {
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +40,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -63,7 +52,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
         gADBannerView.load(GADRequest())
         print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
     
@@ -96,20 +84,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 0:
-//            return "資産の部"
-//        case 1:
-//            return "負債の部"
-//        case 2:
-//            return "純資産の部"
-//        case 3:
-//            return "費用の部"
-//        case 4:
-//            return "収益の部"
-//        default:
-//            return ""
-//        }
         switch segmentedControl_switch.selectedSegmentIndex {
         case 0:
             return "貸借対照表"
@@ -222,34 +196,6 @@ class TableViewControllerSettingsTaxonomyList: UITableViewController {
         while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
             hoge = hoge!.superview
         }
-//        let cell = hoge as! TableViewCellCategoryList
-        // touchIndexは選択したセルが何番目かを記録しておくプロパティ
-//        let touchIndex: IndexPath = self.tableView.indexPath(for: cell)!
-//        print("トグルスイッチが変更されたセルのIndexPath:　\(touchIndex)")
-//        // データベース
-//        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
-//        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: touchIndex.section)
-//        // セクション内でonとなっているスイッチが残りひとつの場合は、offにさせない
-//        if objects.count <= 1 {
-//            if !sender.isOn { // ON から　OFF に切り替えようとした時は効果音を鳴らす
-//                print(objects.count)
-//                // 効果音
-//                let soundIdRing: SystemSoundID = 1000 //
-//                AudioServicesPlaySystemSound(soundIdRing)
-//            }
-//            // ONに強制的に戻す
-//            sender.isOn = true
-//            changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効
-//            //UIButtonを無効化　はしないで、強制的にONに戻す
-////            sender.isEnabled = false
-//            sender.isEnabled = true
-//        }else {
-//            // ここからデータベースを更新する
-//            changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効
-//            //UIButtonを有効化
-//            sender.isEnabled = true
-//        }
-//        tableView.reloadData() // 不要　注意：ここでリロードすると、トグルスイッチが深緑色となり元の緑色に戻らなくなる
     }
     // トグルスイッチの切り替え　データベースを更新
     func changeSwitch(tag: Int, isOn: Bool) {
