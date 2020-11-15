@@ -25,9 +25,6 @@ class TableViewControllerFinancialStatement: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 設定表示科目　初期化 毎回行うと時間がかかる
-//        let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
-//        dataBaseManagerTaxonomy.initializeTaxonomy()
         // リロード機能
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -43,11 +40,6 @@ class TableViewControllerFinancialStatement: UITableViewController {
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -60,7 +52,6 @@ class TableViewControllerFinancialStatement: UITableViewController {
         gADBannerView.load(GADRequest())
         print(tableView.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1)
     }
     
@@ -87,7 +78,7 @@ class TableViewControllerFinancialStatement: UITableViewController {
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() //データベースマネジャー
+        let databaseManager = DataBaseManagerTB() 
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)

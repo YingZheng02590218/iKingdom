@@ -57,7 +57,26 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         // UIViewControllerの表示画面を更新・リロード 注意：iPadの画面ではレイアウトが合わなくなる。リロードしなければ問題ない。仕訳帳ではリロードしても問題ない。
 //        self.loadView()
 //        self.viewDidLoad()
-        
+        // 仕訳データが0件の場合、印刷ボタンを不活性にする
+        // 空白行対応
+        let dataBaseManagerAccount = DataBaseManagerAccount()
+        if account == "損益勘定" || account == "繰越利益" {
+            let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: account) // 決算整理仕訳　勘定別　損益勘定のみ　繰越利益を含む
+
+            if objectsss.count >= 1 {
+                button_print.isEnabled = true
+            }else {
+                button_print.isEnabled = false
+            }
+        }else{
+            let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
+            let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
+            if objects.count + objectss.count >= 1 {
+                button_print.isEnabled = true
+            }else {
+                button_print.isEnabled = false
+            }
+        }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         TableView_account.tableFooterView = tableFooterView
@@ -66,11 +85,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -83,7 +97,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         gADBannerView.load(GADRequest())
         print(TableView_account.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: TableView_account!.rowHeight * -1)
     }
     
@@ -109,14 +122,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
      }
 
     override func viewDidAppear(_ animated: Bool) {
-        let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
-        // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if indexPath!.count > 0 {
-            button_print.isEnabled = true
-        }else {
-            button_print.isEnabled = false
-        }
     }
     
     // セクションの数を設定する
@@ -125,7 +130,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         let dataBaseManagerAccount = DataBaseManagerAccount()
         let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
         let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
-        if objects.count + objectss.count <= 30 {
+        if objects.count + objectss.count <= 45 {
             return 13 // 空白行を表示するためセクションを1つ追加
         }else {
             return 12     // セクションの数はreturn 12 で 12ヶ月分に設定します。
@@ -152,9 +157,6 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             section_num -= 12
         }
         let mon = "月"
-//        if section_num > 9 {
-//            mon = "月"
-//        }
         let header_title = section_num.description + mon
         return header_title
     }
@@ -170,8 +172,8 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             let dataBaseManagerAccount = DataBaseManagerAccount()
             let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account) // 通常仕訳　勘定別
             let objectss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
-            if objects.count + objectss.count <= 39 {
-                return 39 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
+            if objects.count + objectss.count <= 45 {
+                return 45 - (objects.count + objectss.count) // 空白行を表示するため30行に満たない不足分を追加
             }else {
                 return 0 // 39件以上ある場合　不足分は0
             }
@@ -367,38 +369,15 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     // disable sticky section header
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
-//            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-//            print("scrollView.contentInset      : \(scrollView.contentInset)")
-//            print("view_top.bounds.height       : \(view_top.bounds.height)")
-//            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
-            if scrollView.contentOffset.y <= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // スクロールがview高さ以上かつ0以上
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-            }else if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0)
-                scrollView.contentInset = UIEdgeInsets(top: (scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-//                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height + scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-//                        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
-//                        TableView_account.contentInset = edgeInsets
-//                        TableView_account.scrollIndicatorInsets = edgeInsets
-            }else if scrollView.contentOffset.y >= 0{//view_top.bounds.height {
-    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
+            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
+            print("scrollView.contentInset      : \(scrollView.contentInset)")
+            print("view_top.bounds.height       : \(view_top.bounds.height)")
+            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
+            if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
+                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
             }
-//            print("scrollView.contentOffset.y   :: \(scrollView.contentOffset.y)")
-//            print("scrollView.contentInset      :: \(scrollView.contentInset)")
-//            print("view_top.bounds.height       :: \(view_top.bounds.height)")
-//            print("TableView_account.bounds.height   :: \(TableView_account.bounds.height)")
         }else{
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            // マネタイズ対応　完了
-//            if self.TableView_account.contentSize.height > self.TableView_account.frame.size.height + scrollView.contentOffset.y {
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: 0)
-//            }else {
-                // テーブルビューを一番下までスクロールされた場合は、広告を隠す
-                // GADBannerView を作成する
-//                addBannerViewToView(gADBannerView, constant: TableView_account!.rowHeight * -1)
-//            }
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -430,10 +409,10 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
 //        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         printing = true
         gADBannerView.isHidden = true
+        //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         let newImage = self.TableView_account.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()

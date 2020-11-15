@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 設定勘定科目クラス
 class DatabaseManagerSettingsTaxonomyAccount  {
@@ -20,6 +20,16 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             if objects[i].switching == true { // 設定勘定科目 スイッチ
                 if objects[i].numberOfTaxonomy == "" { // 表示科目に紐付けしていない場合
                     updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
+                }
+            }else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
+                if objects[i].numberOfTaxonomy != "" { // 表示科目に紐付けしている場合
+                    // 勘定クラス　勘定ないの仕訳を取得
+                    let dataBaseManagerAccount = DataBaseManagerAccount()
+                    let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    if objectss.count > 0 || objectsss.count > 0 {
+                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
+                    }
                 }
             }
         }
@@ -64,24 +74,9 @@ class DatabaseManagerSettingsTaxonomyAccount  {
     }
     // 取得 全ての勘定科目
     func getSettingsTaxonomyAccountAll() -> Results<DataBaseSettingsTaxonomyAccount> {
-        // マスターデータから読み取り
-        // .realmファイルを指定する
-//        let config = Realm.Configuration(   // 構造体
-//            fileURL: Bundle.main.url(forResource: "MasterData", withExtension:"realm"), // path: → fileURL 書き方が変更されていた
-//            readOnly: true) // 読み取り専用
-//        let realm = try! Realm(configuration: config)   // 構造体
-//        var objects = realm.objects(DataBaseSettingsCategory.self).filter("number > 0")
-
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-//                            .filter("category2 LIKE '\(section)'")
-//        switch section {
-//        case 0: // 資産
-//        case 1: // 負債
-//        case 2: // 純資産
-//        case 3: // 費用
-//        case 4: // 収益
         return objects
     }
     // 取得 大区分別に、スイッチONの勘定科目
@@ -177,9 +172,6 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         let realm = try! Realm()
         // 設定勘定科目連番から設定勘定科目を取得
         let object = realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)
-//        // 表示科目の連番から表示科目を取得
-//        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy()
-//        let objectt = dataBaseManagerSettingsCategoryBSAndPL.getTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 勘定科目から表示科目連番を参照
         // 勘定科目モデルの階層と同じ勘定科目モデルを取得
         var objects = getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: object!.numberOfTaxonomy)
         objects = objects.filter("switching == \(true)") // 勘定科目がONだけに絞る
@@ -198,10 +190,6 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         let realm = try! Realm()
         // 勘定科目モデルを取得
         let object = realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)
-        // 勘定科目モデルの階層と同じ表示科目モデルを取得
-//        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy()
-//        let object = dataBaseManagerSettingsCategoryBSAndPL.getTaxonomy(numberOfTaxonomy: object!.numberOfTaxonomy)
-//        print(objects)
         return Int(object!.numberOfTaxonomy)!
     }
     // 取得 勘定科目の連番から勘定科目を取得

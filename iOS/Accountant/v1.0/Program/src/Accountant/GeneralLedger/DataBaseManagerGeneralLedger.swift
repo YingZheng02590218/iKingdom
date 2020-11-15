@@ -20,7 +20,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self) // DataBaseSettingsCategoryモデル
+        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
@@ -33,7 +33,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // オブジェクトを作成
         let dataBaseGeneralLedger = DataBaseGeneralLedger() // 総勘定元帳
-        dataBaseGeneralLedger.fiscalYear = object.fiscalYear // Todo
+        dataBaseGeneralLedger.fiscalYear = object.fiscalYear
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = getObjects()
         // (2)書き込みトランザクション内でデータを追加する
@@ -54,8 +54,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
             dataBasePLAccount.fiscalYear = object.fiscalYear
             dataBasePLAccount.accountName = "損益勘定"
             dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する
-            // 年度　の数だけ増える　ToDo
-//            realm.add(dataBaseGeneralLedger)
+            // 年度　の数だけ増える
             object.dataBaseGeneralLedger = dataBaseGeneralLedger
         }
     }

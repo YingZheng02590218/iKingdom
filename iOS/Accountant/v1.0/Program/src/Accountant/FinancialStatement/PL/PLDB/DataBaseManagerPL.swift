@@ -46,11 +46,9 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement//realm.objects(DataBaseProfitAndLossStatement.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         try! realm.write {
             switch rank0 {
             case 6: //営業収益9     売上
@@ -75,11 +73,9 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
 
         let realm = try! Realm()
-        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement//realm.objects(DataBaseProfitAndLossStatement.self) // モデル
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
+        let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0
         switch rank0 {
         case 6: //営業収益9     売上
@@ -98,7 +94,6 @@ class DataBaseManagerPL {
             print(result)
         }
         return setComma(amount: result)
-//        return addComma(string: result.description)
     }
     // 計算　階層1 中区分
     func setTotalRank1(big5: Int, rank1: Int) {
@@ -176,14 +171,7 @@ class DataBaseManagerPL {
             break
         }
         return setComma(amount: result)
-//        return addComma(string: result.description)
     }
-    // 合計残高　勘定別の合計と借又貸 取得
-//    func getAccountTotal(big_category: Int, account: String) -> String {
-//        let totalAmount = getTotalAmount(account: account)  // 合計を取得
-//        let totalDebitOrCredit = getTotalDebitOrCredit(big_category: big_category, account: account) // 借又貸を取得
-//        return "\(totalDebitOrCredit) \(setComma(amount: totalAmount))"
-//    }
     // 利益　計算
     func setBenefitTotal() {
         // 開いている会計帳簿を取得
@@ -248,31 +236,16 @@ class DataBaseManagerPL {
             break
         }
         return setComma(amount: result)
-//        return addComma(string: result.description)
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self)
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-//        // 勘定の丁数(プライマリーキー)を取得
-//        let dataBaseManagerAccount = DataBaseManagerAccount()
-//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//        number -= 1 // 0スタートに補正
+        let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
-        // 借方と貸方で金額が大きい方はどちらか
-//        if objectss[0].dataBaseAccounts[number].debit_total > objectss[0].dataBaseAccounts[number].credit_total {
-//            result = objectss[0].dataBaseAccounts[number].debit_total
-//        }else if objectss[0].dataBaseAccounts[number].debit_total < objectss[0].dataBaseAccounts[number].credit_total {
-//            result = objectss[0].dataBaseAccounts[number].credit_total
-//        }else {
-//            result = objectss[0].dataBaseAccounts[number].debit_total
-//        }
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
         for i in 0..<objectss!.dataBaseAccounts.count {
             if objectss!.dataBaseAccounts[i].accountName == account {
@@ -301,15 +274,9 @@ class DataBaseManagerPL {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-//        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         
         let realm = try! Realm()
-        let objectss = object.dataBaseGeneralLedger//realm.objects(DataBaseGeneralLedger.self) // モデル
-//        objectss = objectss.filter("fiscalYear == \(fiscalYear)")
-//        // 勘定の丁数(プライマリーキー)を取得
-//        let dataBaseManagerAccount = DataBaseManagerAccount()
-//        var number = dataBaseManagerAccount.getNumberOfAccount(accountName: account)
-//        number -= 1 // 0スタートに補正
+        let objectss = object.dataBaseGeneralLedger
         var DebitOrCredit:String = "" // 借又貸
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
         for i in 0..<objectss!.dataBaseAccounts.count {
