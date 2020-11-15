@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
@@ -26,10 +26,8 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         var number = 0
         try! realm.write {
             number = dataBaseAccountingBooksShelf.save() //　自動採番
-//            print("addAccountingBooksShelf",number)
-            // 会社　の数だけ増える　ToDo
+            // 会社　の数だけ増える
             realm.add(dataBaseAccountingBooksShelf)
-//            object.dataBaseAccountingBooks.append(dataBaseAccountingBooks)
         }
         return number
     }
@@ -38,7 +36,7 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルをひとつ取得する
-        let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)! // モデル
+        let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)!
         return object.companyName // 事業者名を返す
     }
     // モデルオブフェクトの更新

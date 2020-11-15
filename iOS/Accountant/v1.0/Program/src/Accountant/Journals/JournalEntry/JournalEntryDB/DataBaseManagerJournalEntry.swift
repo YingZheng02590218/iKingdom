@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 仕訳クラス
 class DataBaseManagerJournalEntry {
@@ -24,12 +24,6 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
-//        let accountLeft = Account()                             //仕訳
-//        accountLeft.accountName = debit_category
-//        dataBaseJournalEntry.account.append(accountLeft)
-//        let accountRight = Account()                            //仕訳 ※Accountオブジェクトをひとつでプロパティを上書きはできなかった
-//        accountRight.accountName = credit_category
-//        dataBaseJournalEntry.account.append(accountRight)
         let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
         let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
         let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
@@ -43,26 +37,18 @@ class DataBaseManagerJournalEntry {
         try! realm.write {
             number = dataBaseJournalEntry.save() //仕訳番号　自動採番
             dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
-//            realm.add(dataBaseJournalEntry)
             // 仕訳帳に仕訳データを追加
-//            let object = realm.object(ofType: DataBaseJournals.self, forPrimaryKey: 1 ) // ToDo
             object.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
-            // 勘定へ転記
+            // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
             // 勘定に借方の仕訳データを追加
-//            let object_leftAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: left_number ) // ToDo
-//            object_leftAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
-            // 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
             left_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 勘定に貸方の仕訳データを追加
-//            let object_rightAccount = realm.object(ofType: DataBaseAccount.self, forPrimaryKey: right_number ) // 勘定科目のプライマリーキーを指定する
-//            object_rightAccount?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             right_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
         }
-        // 仕訳データを追加したら、試算表を再計算するためのフラグをここで立てる 2020/06/1614:47
-        //flag_journalEntryAdded = true
+        // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
         let dataBaseManager = DataBaseManagerTB()
-        dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category)//, debit_number: (object.dataBaseGeneralLedger?.dataBaseAccounts[left_number-1].number)!, credit_number: (object.dataBaseGeneralLedger?.dataBaseAccounts[right_number-1].number)!)
+        dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category)
         return number
     }
     // 追加　決算整理仕訳
@@ -97,8 +83,7 @@ class DataBaseManagerJournalEntry {
             // 勘定に貸方の仕訳データを追加
             right_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
         }
-        // 仕訳データを追加したら、試算表を再計算するためのフラグをここで立てる 2020/06/1614:47
-        //flag_journalEntryAdded = true
+        // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
         let dataBaseManager = DataBaseManagerTB()
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)
@@ -213,31 +198,12 @@ class DataBaseManagerJournalEntry {
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         let realm = try! Realm()
-        if accountName == "損益勘定" {
-            var objects = realm.objects(DataBasePLAccount.self)
-            objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-            // 勘定のプライマリーキーを取得する
-            let numberOfAccount = objects[0].number // 損益勘定の丁数は不要ではないか？2020/11/08
-            return numberOfAccount
-        }else {
-            var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)// 2020/11/08
-            objects = objects.filter("category LIKE '\(accountName)'")// 2020/11/08
-//            var objects = realm.objects(DataBaseAccount.self)
-//            objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-            // 勘定のプライマリーキーを取得する
-            let numberOfAccount = objects[0].number
-            return numberOfAccount
-        }
+        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)// 2020/11/08
+        objects = objects.filter("category LIKE '\(accountName)'")// 2020/11/08
+        // 設定勘定科目のプライマリーキーを取得する
+        let numberOfAccount = objects[0].number
+        return numberOfAccount
     }
-    // 丁数を取得　損益勘定
-//    func getNumberOfPLAccount(accountName: String) -> Int {
-//        let realm = try! Realm()
-//        var objects = realm.objects(DataBasePLAccount.self)
-//        objects = objects.filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-//        // 勘定のプライマリーキーを取得する
-//        let numberOfAccount = objects[0].number
-//        return numberOfAccount
-//    }
     // 勘定のプライマリーキーを取得　※丁数ではない
     func getPrimaryNumberOfAccount(accountName: String) -> Int {
         let realm = try! Realm()

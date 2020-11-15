@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 設定表示科目クラス
 class DataBaseManagerSettingsTaxonomy {
@@ -65,7 +65,7 @@ class DataBaseManagerSettingsTaxonomy {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = realm.objects(DataBaseSettingsTaxonomy.self) // DataBaseSettingsCategoryモデル
+        var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
 //        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
@@ -150,13 +150,7 @@ class DataBaseManagerSettingsTaxonomy {
         let numberOfTaxonomy = databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(number: number)
         print("勘定科目:", number)
         print("表示科目:", numberOfTaxonomy)
-
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
-        print(objects)
-//        for i in 0..<objects.count { // 繰り返す
-//            let oj = dm.getSettingsCategoryBSAndPL(number: objects[i].number)
-//            let oj = dm.getSettingsCategoryBSAndPLAll(category0: objects[i].category0, category1: objects[i].category1, category2: objects[i].category2, category3: objects[i].category3, category4: objects[i].category4, category5: objects[i].category5, category6: objects[i].category6, category7: objects[i].category7)
-//            print(oj)
             if objects.count <= 0 { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
                 // データベース　読み込み
                 // (1)Realmのインスタンスを生成する

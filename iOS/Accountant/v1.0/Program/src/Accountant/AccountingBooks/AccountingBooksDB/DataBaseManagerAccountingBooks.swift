@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 class DataBaseManagerAccountingBooks: DataBaseManager {
     
@@ -20,7 +20,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
-        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        var objects = realm.objects(DataBaseAccountingBooks.self)
         objects = objects.filter("openOrClose == \(true)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
     }
@@ -29,7 +29,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        let objects = realm.objects(DataBaseAccountingBooks.self) 
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // モデルオブフェクトの追加
@@ -48,9 +48,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         var number = 0
         try! realm.write {
             number = dataBaseAccountingBooks.save() //　自動採番
-            print("addAccountingBooks",number)
-            // 年度　の数だけ増える　ToDo
-//            realm.add(dataBaseMainBooks)
+            // 年度　の数だけ増える
             object.dataBaseAccountingBooks.append(dataBaseAccountingBooks) // 会計帳簿棚に会計帳簿を追加する
         }
         return number
@@ -62,24 +60,24 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
         let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        let objects = realm.objects(DataBaseAccountingBooks.self)
         // 会計帳簿が一つしかない場合は、削除しない
         if objects.count >= 1 {
         // 会計帳簿だけではなく、仕訳帳、総勘定元帳なども削除する
         // 仕訳帳画面
-            let dataBaseManagerJournals = DataBaseManagerJournals() //データベースマネジャー
+            let dataBaseManagerJournals = DataBaseManagerJournals()
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
             if dataBaseManagerJournals.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: object.fiscalYear) {
                 dataBaseManagerJournals.deleteJournals(number: object.number)
             }
         // 総勘定元帳画面
-            let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger() //データベースマネジャー
+            let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
             // データベースに勘定画面の勘定があるかをチェック
             if dataBaseManagerGeneralLedger.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: object.fiscalYear) {
                 dataBaseManagerGeneralLedger.deleteGeneralLedger(number: object.number)
             }
         // 決算書画面　
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements() //データベースマネジャー
+            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             // データベースに勘定画面の勘定があるかをチェック
             if dataBaseManagerFinancialStatements.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: object.fiscalYear) {
                 dataBaseManagerFinancialStatements.deleteFinancialStatements(number: object.number)
@@ -89,7 +87,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             realm.delete(object)
         }
         // 開く会計帳簿を最新の帳簿にする
-        let databaseManager = DataBaseManagerPeriod() //データベースマネジャー
+        let databaseManager = DataBaseManagerPeriod()
         for i in 0..<objects.count {
             databaseManager.setMainBooksOpenOrClose(tag: objects[i].number)
         }

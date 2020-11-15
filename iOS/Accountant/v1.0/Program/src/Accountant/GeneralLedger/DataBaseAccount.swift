@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 勘定クラス
 // 勘定 は 仕訳データ を 1 つ以上持っています。
