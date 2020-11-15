@@ -34,8 +34,6 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         super.viewDidLoad()
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(TableViewControllerSettingsCategoryDetail.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        // テキストフィールド作成
-//        createTextFieldForCategory()
         // 登録ボタンの　表示　非表示
         if addAccount {
             Button_input.isHidden = false
@@ -53,11 +51,6 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -68,9 +61,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         gADBannerView.rootViewController = self
         // 広告を読み込む
         gADBannerView.load(GADRequest())
-        print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
     
@@ -410,20 +401,6 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
     @objc func keyboardWillShow(_ notification: NSNotification){
         createTextFieldForCategory()
     }
-//    // テキストフィールへの入力されたとき 大区分が変更された場合
-//    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
-//        // 中区分
-//        let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
-//        if cell.textField_AccountDetail!.text != "選択してください" {
-//            cell.textField_AccountDetail.text = "選択してください"
-//            cell.textField_AccountDetail.textColor = .lightGray
-//            cell.textField_AccountDetail.textAlignment = NSTextAlignment.center
-//            // String型の番号に変換してあげる
-//            mid = ""
-//            // String型の番号に変換してあげる tagに中区分の番号を保持しておいたものを取得
-//            mid_num = ""
-//        }
-//    }
     // テキストフィールへの入力が終了したとき
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
         // 文字色をグレーアウトとする

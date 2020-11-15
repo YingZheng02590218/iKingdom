@@ -28,27 +28,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TableViewがNavigationBarの下に潜り込むのを防ぐ ※TableViewのセクションをGropedからPlainに変更したら不要になった　2020/07/02 19:53
-//        let edgeInsets = UIEdgeInsets(top: self.navigationController!.navigationBar.bounds.height, left: 0, bottom: 0, right: 0)
-//        tableView.contentInset = edgeInsets          // 上の余白部分
-//        tableView.scrollIndicatorInsets = edgeInsets //  スクロールバーの開始位置をずらす
-        // 貸借対照表のプロパティを計算する　todo
-//        let dataBaseManager = DataBaseManagerBS()
-//        dataBaseManager.setMiddleTotal(account_left: debit_category, account_right: credit_category)
-        
-        // 貸借対照表　計算
-//        dataBaseManagerBS.initializeBS()
-        // 設定表示科目　初期化
-//        dataBaseManagerTaxonomy.initializeTaxonomy()
-        
-//        // 試算表　計算
-//        let databaseManager = DataBaseManagerTB()
-//        databaseManager.calculateAmountOfAllAccount()
-//        // 精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-//        let databaseManagerWS = DataBaseManagerWS()
-//        databaseManagerWS.calculateAmountOfAllAccount()
-//        databaseManagerWS.calculateAmountOfAllAccountForBS()
-//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
@@ -77,11 +56,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -94,7 +68,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         gADBannerView.load(GADRequest())
         print(tableView.rowHeight)
         // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
     
@@ -170,11 +143,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // データベース DatabaseManagerSettingsCategory → DataBaseManagerBSAndPL 2020/07/19
         // データベース DataBaseManagerBSAndPL → DataBaseManagerSettingsTaxonomy 2020/07/22
         let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-//        let objects = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "0",category1: "1",category2: String(section)) // 階層0：貸借対照表、階層1：貸借対照表
-//        return objects.count + 5 // 分類名(流動資産,固定資産など)と合計の行
         switch section {
             // 大分類のタイトルはセクションヘッダーに表示する
         case 0://資産の部
@@ -354,38 +324,34 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                              indexPath.row <  objects0100.count + 1 + 1 {   // 流動資産合計　　　　中区分タイトル + 流動資産 + 合計
                         cell.textLabel?.text = "        "+objects0100[indexPath.row-(1)].category
                         print("BS", indexPath.row, "        "+objects0100[indexPath.row-(1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0100[indexPath.row-(1 )].number) // 勘定別の合計　計算
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0100[indexPath.row-(1 )].number) // 勘定別の合計　計算
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + 1 &&  // 有形固定資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 { // 無形固定資産
                         cell.textLabel?.text = "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects3[indexPath.row-(objects0100.count + 1 + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1 && // 無形固定資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 { // 投資その他資産
                         cell.textLabel?.text = "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects4[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                         
                     }else if indexPath.row >= objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1 && // 投資その他資産タイトルの1行下
                               indexPath.row <  objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 { // 固定資産合計
                         cell.textLabel?.text = "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects5[indexPath.row-(objects0100.count + 1 + 1 + 1 + objects3.count + 1 + objects4.count + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else if indexPath.row >= objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1 && // 繰延資産タイトルの1行下
                               indexPath.row < objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + objects0102.count + 1 { // 繰延資産合計
-//                        print(indexPath.row)
-//                        print(1 + objects0.count + objects1.count + objects2.count + 3 + 1 + objects3.count + 1 + objects4.count + 1 + 1)
-//                        print(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count)
-//                        print(4+objects0.count+1+objects1.count+1+objects2.count+1+objects3.count+1+objects4.count+1+objects5.count+1+objects23.count)
                         cell.textLabel?.text = "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category
                         print("BS", indexPath.row, "        "+objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0102[indexPath.row-(objects0100.count + 1 + 1 + objects3.count  + 1 + objects4.count  + 1 + objects5.count  + 1 + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else {
                         cell.textLabel?.text = "default"
@@ -478,12 +444,12 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                              indexPath.row <  objects0114.count + 1 {  // 流動負債合計 中区分のタイトルより下の行から、中区分合計の行より上
                         cell.textLabel?.text = "        "+objects0114[indexPath.row-(1)].category
                         print("BS", indexPath.row, "        "+objects0114[indexPath.row-(1)].category)
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects0114[indexPath.row-(1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects0114[indexPath.row-(1)].number)
                         cell.label_account.textAlignment = .right
                     }else if indexPath.row >= objects0114.count + 1 + 1 + 1 && // 固定負債タイトルの1行下
                               indexPath.row <  objects0114.count + 1 + 1 + objectsCounts3.count + 1 { // 固定負債合計
                         cell.textLabel?.text = "        "+objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].category
-                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].number)
+                        cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objectsCounts3[indexPath.row-(objects0114.count + 1 + 1 + 1)].number)
                         cell.label_account.textAlignment = .right
                     }else {
                         cell.textLabel?.text = "default"
@@ -588,7 +554,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                     
                     cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
                     print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
-                    let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
+                    let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
                     // テキストをカスタマイズするために、NSMutableAttributedStringにする
                     let attributeText = NSMutableAttributedString(string: text)
                     // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -602,7 +568,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 }
                 cell.textLabel?.text = "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category
                 print("BS", indexPath.row, "  "+objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].category)
-                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects16[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -641,7 +607,7 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                 } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
                 print("BS", indexPath.row, "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category)
-                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
+                let text:String = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].number)
                 // テキストをカスタマイズするために、NSMutableAttributedStringにする
                 let attributeText = NSMutableAttributedString(string: text)
                 // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
@@ -706,13 +672,13 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
                          indexPath.row <  objects14.count + 1 {      // 株主資本合計
                     cell.textLabel?.text = "        "+objects14[indexPath.row-1].category
                     print("BS", indexPath.row, "        "+objects14[indexPath.row-1].category)
-                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects14[indexPath.row-1].number)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects14[indexPath.row-1].number)
                     cell.label_account.textAlignment = .right
                 }else if indexPath.row >= objects14.count + 2 + 1 &&                     //その他の包括利益累計額
                           indexPath.row <   objects14.count + 2 + objects15.count + 1 {    //その他の包括利益累計額合計
                     cell.textLabel?.text = "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category
                     print("BS", indexPath.row, "        "+objects15[indexPath.row-(objects14.count + 2 + 1)].category)
-                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(number: objects15[indexPath.row-(objects14.count + 2 + 1)].number)
+                    cell.label_account.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects15[indexPath.row-(objects14.count + 2 + 1)].number)
                     cell.label_account.textAlignment = .right
                 }else {
                     print("??")
@@ -787,22 +753,9 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
             // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
             if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
-//                print("tableView.sectionHeaderHeight:: \(tableView.sectionHeaderHeight)")
-//            }else if scrollView.contentOffset.y >= 0 { // スクロールした分の高さを調整して行の重複を防ぐ
-                //「scrollView.contentOffset.y > tableView.sectionHeaderHeight && 」と条件をつけると仕訳データの途中が切り取られてしまう。？？？
-//                scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
-                // 仕訳データの途中が切り取られてしまうため、「self.navigationController!.navigationBar.bounds.height」 の高さをマイナスする
-//                scrollView.contentInset = UIEdgeInsets(top: -(scrollView.contentOffset.y-self.navigationController!.navigationBar.bounds.height-(self.tabBarController?.tabBar.frame.size.height)!), left: 0, bottom: 0, right: 0)
                 // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
                 scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-//            }else if scrollView.contentOffset.y >= tableView.sectionHeaderHeight {
-    //            scrollView.contentInset = UIEdgeInsets(top: (tableView.sectionHeaderHeight+scrollView.contentOffset.y) * -1, left: 0, bottom: 0, right: 0)
-//                scrollView.contentInset = UIEdgeInsets(top: scrollView.contentOffset.y * -1, left: 0, bottom: 0, right: 0)
             }
-//            if scrollView.contentOffset.y == 0 {
-//            scrollView.contentInset = UIEdgeInsets(top: -self.navigationController!.navigationBar.bounds.height-UIApplication.shared.statusBarFrame.height-tableView.sectionHeaderHeight, left: 0, bottom: 0, right: 0)
-//            }
         }else{
             if self.navigationController?.navigationBar.bounds.height != nil {
                 // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
@@ -821,51 +774,9 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     @IBAction func button_print(_ sender: UIButton) {
         printing = true
         gADBannerView.isHidden = true
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableView.ScrollPosition.top, animated: false)
-//        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.top, animated: false)
-//        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-//        print("tableView.indexPathsForVisibleRows: \(indexPath)")
-//        self.tableView.scrollToRow(at: IndexPath(row: indexPath![2].row , section: 2), at: UITableView.ScrollPosition.top, animated: false)// 一度、section 2 (純資産の部)の最下行までレイアウトを描画させる。TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
         // 画面上で印刷したい範囲のViewを全て描画させるために、TableViewを最下部まで段階的にスクロールさせる。＊段階的にしなくてもエラーは出なかった
 
-//ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        // インスタンス化
-//        let printPicker = UIPrinterPickerController(initiallySelectedPrinter: nil)
-        // プリンターリストをモーダル表示
-        //iPadの場合は、
-        //present(from:animated:completionHandler:)
-        //present(from:in:animated:completionHandler:)にする
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            printPicker.present(from: CGRect(x: 0, y: 0, width: 10, height: 30), in: self.view, animated: true, completionHandler: { (printerPickerController:UIPrinterPickerController, res:Bool, error:Error?) in
-//                if error == nil {
-//                    // 選択したプリンターを取得
-//                    if let printer: UIPrinter = printerPickerController.selectedPrinter {
-//                        print("Printer's URL : \(printer.url)")
-//                        self.printToPrinter(printer: printer)
-//                    } else {
-//                        print("Printer is not selected")
-//                    }
-//                }
-//            })
-//            print("iPadです")
-//        }
-//        else {
-//            printPicker.present(animated: true) { (printerPickerController:UIPrinterPickerController, res:Bool, error:Error?) in
-//                if error == nil {
-//                    // 選択したプリンターを取得
-//                    if let printer: UIPrinter = printerPickerController.selectedPrinter {
-//                        print("Printer's URL : \(printer.url)")
-//                        self.printToPrinter(printer: printer)
-//                    } else {
-//                        print("Printer is not selected")
-//                    }
-//                }
-//            }
-//            print("iPhoneです")
-//        }
-        
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         tableView.showsVerticalScrollIndicator = false
@@ -884,38 +795,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
         //1. UIGraphicsBeginImageContextWithOptions関数でビットマップコンテキストを生成し、グラフィックススタックにプッシュします。
         UIGraphicsBeginImageContextWithOptions(pageSize, false, 0.0)
-//        UIGraphicsBeginImageContextWithOptions(tableView.contentSize, false, 0.0)
-//        let context = UIGraphicsGetCurrentContext()
-//        tableView.layer.render(in: context!)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
         //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
 //        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
-        
-            //  (a) 画像もしくはPDFに変換する ※この方法では画面上に写っている範囲のみ印刷可能
-//            UIGraphicsBeginImageContextWithOptions(pageSize, false, 0.0)
-            // 帳票の上部が切れてしまうのでY軸の位置を補正する
-//        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
-//            let bounds = self.navigationController!.navigationBar.bounds
-            //bounds.height * -1 // 開始位置をNavigationBarの高さ分を補正すると、PDFの最下部に影響が出る
-            // 0
-//            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: bounds.height * -1), size: pageSizeee), afterScreenUpdates: false)
-            // データベース
-//            let databaseManagerSettings = DatabaseManagerSettingsCategory()
-            // 画面上で印刷したい範囲のViewを全て描画させるために、TableViewを最下部まで段階的にスクロールさせる。＊段階的にしなくてもエラーは出なかった
-//            let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: 1) // どのセクションに表示するセルかを判別するため引数で渡す
-//            self.tableView.scrollToRow(at: IndexPath(row: 5+2+objects.count-1, section: 1), at: UITableView.ScrollPosition.bottom, animated: false) //最後の行を画面の下方に表示する
-//            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: -bounds.height), size: pageSizeee), afterScreenUpdates: false)
-//            let objects2 = databaseManagerSettings.getSettingsTaxonomyAccount(section: 2) // どのセクションに表示するセルかを判別するため引数で渡す
-//            self.tableView.scrollToRow(at: IndexPath(row: 5+0+objects2.count-1, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
-//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false)
-//            tableView.drawHierarchy(in: CGRect(origin: .init(x: 0, y: 0), size: pageSizeee), afterScreenUpdates: false)
-
-//                let image = UIGraphicsGetImageFromCurrentImageContext()
-//                UIGraphicsEndImageContext()
-//                printInteractionController.printingItem = image
-        
-
         //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -935,12 +816,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         */
         let myImageView = UIImageView(image: newImage)
         myImageView.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
-//        print(" self.view.frame : \(self.view.frame)")
-//        print(" tableView_BS    : \(tableView_BS.bounds.size)")
-//        print(" tableView       : \(tableView.bounds.size)")
-       // CGPoint(x: self.view.bounds.width/2, y: 60)
-//        myImageView.layer.position = CGPoint(x: self.view.frame.maxX, y: self.view.frame.maxY)
-//        myImageView.layer.position = CGPoint(x: 0, y: 0)
 //PDF
         //p-49 リスト 4-2 ページ単位のコンテンツの描画
             let framePath = NSMutableData()
@@ -950,39 +825,9 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             //  UIGraphicsBeginPDFContextToData関数の場合、
             //  保存先はこの関数に渡される NSMutableDataオブジェクトです。
             UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
-//            print(" myImageView.bounds : \(myImageView.bounds)")
         //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
 //            UIGraphicsBeginPDFPage()
         // 新しいページを開始する
-//1ページ目
-//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:self.pageSize.width, height:self.pageSize.height), nil)
-//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-         /* PDFページの描画
-           UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
-           UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
-        */
-        //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
-//            // グラフィックスコンテキストを取得する
-//            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
-//            myImageView.layer.render(in: currentContext)
-//
-//        print(myImageView.bounds.height )
-//        print(myImageView.bounds.width*1.414516129)
-//        print((myImageView.bounds.width*1.414516129)*2)
-//        if myImageView.bounds.height > myImageView.bounds.width*1.414516129 {
-////2ページ目
-//       UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-myImageView.bounds.width*1.414516129, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-//        // グラフィックスコンテキストを取得する
-//        guard let currentContext2 = UIGraphicsGetCurrentContext() else { return }
-//        myImageView.layer.render(in: currentContext2)
-//        }
-//        if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
-////3ページ目
-//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*2, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-//         // グラフィックスコンテキストを取得する
-//         guard let currentContext3 = UIGraphicsGetCurrentContext() else { return }
-//         myImageView.layer.render(in: currentContext3)
-//        }
         // ビューイメージを全て印刷できるページ数を用意する
         var pageCounts: CGFloat = 0
         while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
@@ -1133,9 +978,6 @@ extension UIView {
 extension UITableView {
 
     var contentBottom: CGFloat {
-//        print("contentBottom")
-//        print(" contentSize.height: \(contentSize.height) - bounds.height: \(bounds.height) = \(contentSize.height - bounds.height)")
-//        print("contentSize.height - bounds.height: \(contentSize.height - bounds.height)\n")
         return contentSize.height - bounds.height
     }
     

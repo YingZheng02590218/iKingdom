@@ -35,8 +35,6 @@ class DataBaseManagerPeriod {
     func getSettingsPeriod() -> DataBaseAccountingBooks { // メソッド名を変更する
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルをひとつ取得する
-//        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
         // (2)データベース内に保存されているモデルを全て取得する
         var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
         // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
@@ -49,8 +47,6 @@ class DataBaseManagerPeriod {
     func getSettingsPeriodYear() -> Int {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        // (2)データベース内に保存されているモデルをひとつ取得する
-//        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: "ToDo")! // モデル
         // (2)データベース内に保存されているモデルを全て取得する
         var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
         // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿

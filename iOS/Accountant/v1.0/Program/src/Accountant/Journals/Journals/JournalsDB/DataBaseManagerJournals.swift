@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 class DataBaseManagerJournals: DataBaseManager {
     
@@ -23,13 +23,12 @@ class DataBaseManagerJournals: DataBaseManager {
         let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // オブジェクトを作成
         let dataBaseJournals = DataBaseJournals() // 仕訳帳
-        dataBaseJournals.fiscalYear = object.fiscalYear // Todo
+        dataBaseJournals.fiscalYear = object.fiscalYear
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             let number = dataBaseJournals.save() //ページ番号(一年で1ページ)　自動採番
             print("addJournals",number)
-            // 年度　の数だけ増える　ToDo
-//            realm.add(dataBaseJournals)
+            // 年度　の数だけ増える
             object.dataBaseJournals = dataBaseJournals
         }
     }

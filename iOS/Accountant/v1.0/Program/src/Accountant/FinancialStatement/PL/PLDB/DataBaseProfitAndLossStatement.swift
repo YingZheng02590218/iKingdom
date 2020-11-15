@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 損益計算書クラス
 class DataBaseProfitAndLossStatement: RObject {
