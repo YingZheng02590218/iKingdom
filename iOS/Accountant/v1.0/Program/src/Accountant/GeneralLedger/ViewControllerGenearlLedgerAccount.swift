@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds // マネタイズ対応
 
-// 総勘定元帳　勘定クラス
+// 勘定クラス
 class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
     
     // マネタイズ対応
@@ -82,7 +82,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
         TableView_account.tableFooterView = tableFooterView
 
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
         // GADBannerView プロパティを設定する

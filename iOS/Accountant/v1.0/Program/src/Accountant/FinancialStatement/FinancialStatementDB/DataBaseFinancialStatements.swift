@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 財務諸表クラス
 // 財務諸表 は 貸借対照表、損益計算書、キャッシュフロー計算書、精算表、試算表 を 持つことができます。

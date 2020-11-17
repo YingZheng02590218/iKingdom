@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+// マスターデータクラス
 class MasterData {
 
     func toBoolean(string:String) -> Bool {

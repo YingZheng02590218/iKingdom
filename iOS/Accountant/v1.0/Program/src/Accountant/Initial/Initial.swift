@@ -8,29 +8,34 @@
 
 import Foundation
 
+// 初期化クラス
 class Initial {
     
-    // 初期化処理
-    func initialize(){
-        // 設定画面　勘定科目　初期化
+    /**
+    * 初期化　初期化メソッド
+    * 設定勘定科目、会計帳簿棚、表示科目を初期化する。
+    */
+    func initialize() {
+        // 設定画面　設定勘定科目　初期化
         initialiseMasterData()
         // 設定画面　会計帳簿棚　初期化
         initializeAccountingBooksShelf()
-        // 表示科目
+        // 表示科目　初期化
         initializeTaxonomy()
     }
-    // 設定画面　勘定科目　勘定科目一覧を初期化
-    func initialiseMasterData(){
+    /**
+    * 初期化　初期化メソッド
+    * 設定勘定科目を初期化する。
+    */
+    func initialiseMasterData() {
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        // データベースに設定画面の勘定科目一覧があるかをチェック
-        // マイグレーション　CSVファイルに変更がある場合、一度作成したモデルオブジェクトを削除してから新たに作り直す　考える
-        if !databaseManagerSettingsTaxonomyAccount.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+        if !databaseManagerSettingsTaxonomyAccount.checkInitialising() {
             let masterData = MasterData()
             // マスターデータを作成する
             masterData.readMasterDataFromCSVOfTaxonomyAccount()   
         }
         let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-        if !dataBaseManagerSettingsTaxonomy.checkInitialising() { // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManagerSettingsTaxonomy.checkInitialising() {
             let masterData = MasterData()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
@@ -39,18 +44,23 @@ class Initial {
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
         dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
     }
-    // 会計帳簿棚
+    /**
+    * 初期化　初期化メソッド
+    * 会計帳簿棚を初期化する。
+    */
     func initializeAccountingBooksShelf() {
-        // オブジェクト作成
         let dataBaseManager = DataBaseManagerAccountingBooksShelf()
-        // データベースに会計帳簿があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
             let number = dataBaseManager.addAccountingBooksShelf(company: "事業者名")
+            print(number)
         }
         // 会計帳簿
         initializeAccountingBooks()
     }
-    // 初期値用の年月を取得
+    /**
+    * 初期化　年度メソッド
+    * 初期値用の年月を取得する。
+    */
     func getTheTime() -> Int {
         // 現在時刻を取得
         let now :Date = Date() // UTC時間なので　9時間ずれる
@@ -65,14 +75,15 @@ class Initial {
             return lastYear-1 // 1月から3月であれば去年の年に補正する
         }
     }
-    // 会計帳簿　会計期間画面
+    /**
+    * 初期化　初期化メソッド
+    * 会計帳簿を初期化する。
+    */
     func initializeAccountingBooks() {
-        // オブジェクト作成
         let dataBaseManager = DataBaseManagerAccountingBooks()
         var fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
         fiscalYear -= 1                     // デフォルトで現在の年月から前年度の会計帳簿を作成する
-        // データベースに会計帳簿があるかをチェック
-        if !dataBaseManager.checkInitializing() {           // データベースにモデルオブフェクトが存在しない場合
+        if !dataBaseManager.checkInitializing() {
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
             initialiseJournals(number: number,fiscalYear: fiscalYear)
@@ -82,15 +93,20 @@ class Initial {
             initializeFinancialStatements(number: number,fiscalYear: fiscalYear)
         }
     }
-    // 仕訳帳画面　仕訳帳を初期化
+    /**
+    * 初期化　初期化メソッド
+    * 仕訳帳を初期化する。
+    */
     func initialiseJournals(number: Int,fiscalYear: Int){
          let dataBaseManager = DataBaseManagerJournals()
-        // データベースに仕訳帳画面の仕訳帳があるかをチェック
         if !dataBaseManager.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
         }
     }
-    // 総勘定元帳画面　総勘定元帳を初期化
+    /**
+    * 初期化　初期化メソッド
+    * 総勘定元帳を初期化する。
+    */
     func initialiseAccounts(number: Int,fiscalYear: Int) {
         let dataBaseManager = DataBaseManagerGeneralLedger()
         // データベースに勘定画面の勘定があるかをチェック
@@ -98,7 +114,10 @@ class Initial {
             dataBaseManager.addGeneralLedger(number: number)
         }
     }
-    // 決算書画面　初期化
+    /**
+    * 初期化　初期化メソッド
+    * 財務諸表を初期化する。
+    */
     func initializeFinancialStatements(number: Int,fiscalYear: Int) {
         let dataBaseManager = DataBaseManagerFinancialStatements()
         // データベースに財務諸表があるかをチェック
@@ -106,7 +125,10 @@ class Initial {
             dataBaseManager.addFinancialStatements(number: number)
         }
     }
-    // 初期化　表示科目
+    /**
+    * 初期化　初期化メソッド
+    * 表示科目を初期化する。
+    */
     func initializeTaxonomy() {
         // 表示科目
         let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()

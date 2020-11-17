@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds // マネタイズ対応
 import AudioToolbox // 効果音
 
-// 表示科目別勘定科目一覧　画面
+// 表示科目別勘定科目一覧クラス
 class TableViewControllerSettingsTaxonomyAccountByTaxonomyList: UITableViewController {
 
     // マネタイズ対応
@@ -39,7 +39,7 @@ class TableViewControllerSettingsTaxonomyAccountByTaxonomyList: UITableViewContr
         tableView.tableFooterView = tableFooterView
 
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
         // GADBannerView プロパティを設定する
@@ -260,22 +260,6 @@ class TableViewControllerSettingsTaxonomyAccountByTaxonomyList: UITableViewContr
             hoge = hoge!.superview
         }
         let cell = hoge as! TableViewCellCategoryList
-        // touchIndexは選択したセルが何番目かを記録しておくプロパティ
-        let touchIndex: IndexPath = self.tableView.indexPath(for: cell)!
-        // データベース
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
-        var sheet = 0
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            sheet = 0 // BS
-        }else if segmentedControl_switch.selectedSegmentIndex == 1 {
-            sheet = 1 // PL
-//        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
-//            sheet = 4 // CF
-        }
-        let objectssss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet)
-        // データベース 勘定科目
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[touchIndex.section].number))
         // ここからデータベースを更新する
         print(cell.tag)
         changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効
