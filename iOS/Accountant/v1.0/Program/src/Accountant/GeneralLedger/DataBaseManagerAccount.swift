@@ -55,7 +55,7 @@ class DataBaseManagerAccount {
 //                    print("勘定が存在しない")
                     let dataBaseAccount = DataBaseAccount() // 勘定
                     let number = dataBaseAccount.save() //　自動採番
-//                    print("dataBaseAccount",number)
+                    print("dataBaseAccount",number)
                     dataBaseAccount.fiscalYear = object.fiscalYear
                     dataBaseAccount.accountName = objects[i].category
                     object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
@@ -394,7 +394,7 @@ class DataBaseManagerAccount {
             if isInvalidatedd {
                 if isInvalidated {
                     try! realm.write {
-                        for i in 0..<objectsssss.count {
+                        for _ in 0..<objectsssss.count {
                             // 仕訳が残ってないか
                             realm.delete(objectsssss[0])
                         }

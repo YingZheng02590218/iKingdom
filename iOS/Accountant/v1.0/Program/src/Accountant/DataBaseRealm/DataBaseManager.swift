@@ -7,11 +7,18 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
+// データベースマネジャー
 class DataBaseManager {
 
-    // データベースにモデルが存在するかどうかをチェックする
+    /**
+    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+    * モデルオブジェクトをデータベースから読み込む。
+    * @param DataBase モデルオブジェクト
+    * @param fiscalYear 年度
+    * @return モデルオブジェクトが存在するかどうか
+    */
     func checkInitialising<T>(DataBase: T, fiscalYear: Int) -> Bool {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()

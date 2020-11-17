@@ -7,11 +7,18 @@
 //
 
 import Foundation
-import RealmSwift 
+import RealmSwift
 
+// 決算書クラス
 class DataBaseManagerFinancialStatements: DataBaseManager {
     
-    // データベースにモデルが存在するかどうかをチェックする
+    /**
+    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+    * モデルオブジェクトをデータベースから読み込む。
+    * @param DataBase モデルオブジェクト
+    * @param fiscalYear 年度
+    * @return モデルオブジェクトが存在するかどうか
+    */
     func checkInitialising(DataBase: DataBaseFinancialStatements, fiscalYear: Int) -> Bool {
         super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }

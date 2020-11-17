@@ -11,7 +11,13 @@ import RealmSwift
 
 class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
-    // データベースにモデルが存在するかどうかをチェックする
+    /**
+    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+    * モデルオブジェクトをデータベースから読み込む。
+    * @param DataBase モデルオブジェクト
+    * @param fiscalYear 年度
+    * @return モデルオブジェクトが存在するかどうか
+    */
     func checkInitialising(DataBase: DataBaseAccountingBooksShelf, fiscalYear: Int) -> Bool {
         super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
