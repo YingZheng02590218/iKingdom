@@ -91,8 +91,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
         var result:Int64 = 0            // 累計額
         switch big5 {
@@ -171,8 +170,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
         var result:Int64 = 0            // 累計額
         switch rank0 {
@@ -247,8 +245,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
         var result:Int64 = 0            // 累計額
         switch rank1 {
@@ -271,8 +268,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
@@ -295,8 +291,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var DebitOrCredit:String = "" // 借又貸
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
@@ -361,7 +356,7 @@ class DataBaseManagerBS {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var DebitOrCredit:String = "" // 借又貸
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合

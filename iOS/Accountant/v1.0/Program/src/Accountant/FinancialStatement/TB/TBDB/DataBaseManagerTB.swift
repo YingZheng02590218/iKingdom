@@ -405,8 +405,7 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account != "損益勘定" {
@@ -458,8 +457,7 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
@@ -515,8 +513,7 @@ class DataBaseManagerTB {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
         if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。

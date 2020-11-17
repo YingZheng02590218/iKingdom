@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 補助元帳クラス
 // 補助元帳 は 補助簿 を 1 個以上持つことができます。

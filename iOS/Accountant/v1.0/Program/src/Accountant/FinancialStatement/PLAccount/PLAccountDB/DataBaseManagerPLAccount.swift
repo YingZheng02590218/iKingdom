@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+// 損益勘定クラス
 class DataBaseManagerPLAccount  {
 
     // チェック 決算整理仕訳　損益勘定内の勘定が存在するかを確認
@@ -75,6 +76,7 @@ class DataBaseManagerPLAccount  {
                     )
                 }else{ // 貸借が0の場合　削除する
                     let isInvalidated = deleteAdjustingJournalEntry(number: objects[0].number)
+                    print(isInvalidated)
                 }
             }else {
                 if amount != 0 {
