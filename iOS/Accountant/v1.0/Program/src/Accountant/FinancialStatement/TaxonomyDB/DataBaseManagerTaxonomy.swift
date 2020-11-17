@@ -53,8 +53,8 @@ class DataBaseManagerTaxonomy {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 設定表示科目の連番から表示科目の名称を取得
-        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
-        let realm = try! Realm()
+//        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
+//        let realm = try! Realm()
         // 表示科目クラス
         let objectss = object.dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy
         var result:Int64 = 0
@@ -81,7 +81,7 @@ class DataBaseManagerTaxonomy {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 設定表示科目の名称を取得
-        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
+//        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
 //        let category2 = getCategory2OfSettingsTaxonomy(number: number) // 2020/11/09 計算方法修正のため不使用
         // 計算
         let BSAndPLCategoryTotalAmount = culculatAmountOfTaxonomy(numberOfTaxonomy: numberOfSettingsTaxonomy) // 五大区分は表示科目の階層2ではなく、勘定科目の大区分を使用する
@@ -138,7 +138,7 @@ class DataBaseManagerTaxonomy {
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // (1)Realmのインスタンスを生成する
-        let realm = try! Realm()
+//        let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
@@ -168,8 +168,7 @@ class DataBaseManagerTaxonomy {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
-        
-        let realm = try! Realm()
+//        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var DebitOrCredit:String = "" // 借又貸
         // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
@@ -276,6 +275,7 @@ class DataBaseManagerTaxonomy {
                     try! realm.write {
                         let dataBaseTaxonomy = DataBaseTaxonomy() // 表示科目
                         let number = dataBaseTaxonomy.save() //　自動採番
+                        print(number)
                         dataBaseTaxonomy.fiscalYear = object.dataBaseAccountingBooks[y].fiscalYear // 帳簿ごとの年度
                         dataBaseTaxonomy.accountName = objects[i].category // 設定表示科目の表示科目名
                         dataBaseTaxonomy.numberOfTaxonomy = objects[i].number // 設定表示科目の連番を保持する　マイグレーション
@@ -296,7 +296,7 @@ class DataBaseManagerTaxonomy {
         for y in 0..<object.dataBaseAccountingBooks.count {
             if object.dataBaseAccountingBooks[y].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy[0].numberOfTaxonomy == 0 {
                 // 表示科目　オブジェクトを削除
-                for i in 0..<object.dataBaseAccountingBooks[y].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.count{
+                for _ in 0..<object.dataBaseAccountingBooks[y].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.count{
                     // (2)書き込みトランザクション内でデータを追加する
                     try! realm.write {
                         // 表示科目を削除

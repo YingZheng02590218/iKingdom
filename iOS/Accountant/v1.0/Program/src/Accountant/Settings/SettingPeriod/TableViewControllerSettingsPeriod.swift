@@ -36,7 +36,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
         tableView.tableFooterView = tableFooterView
 
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
         // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。

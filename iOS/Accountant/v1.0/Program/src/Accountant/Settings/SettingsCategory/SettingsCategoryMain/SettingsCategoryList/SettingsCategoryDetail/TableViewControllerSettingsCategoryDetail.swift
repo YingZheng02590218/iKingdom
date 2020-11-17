@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds // マネタイズ対応
 
-// 勘定科目　詳細画面
+// 勘定科目詳細クラス
 class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFieldDelegate {
 
     // マネタイズ対応
@@ -48,7 +48,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         tableView.reloadData()
         
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
         gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
         // GADBannerView プロパティを設定する
@@ -420,14 +420,14 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //            // String型の番号に変換してあげる tagに大区分の番号を保持しておいたものを取得
 //            big_num = String(cell_big.textField_AccountDetail_big.tag)
                 big = cell_big.textField_AccountDetail_big.AccountDetail_big
-                big_num = String(cell_big.textField_AccountDetail_big.selectedRank0)
+                big_num = cell_big.textField_AccountDetail_big.selectedRank0
                 mid = cell_big.textField_AccountDetail_big.AccountDetail
-                mid_num = String(cell_big.textField_AccountDetail_big.selectedRank1)
+                mid_num = cell_big.textField_AccountDetail_big.selectedRank1
             }else if textField.tag == 1 {
                 big = cell.textField_AccountDetail_big.AccountDetail_big
-                big_num = String(cell.textField_AccountDetail_big.selectedRank0)
+                big_num = cell.textField_AccountDetail_big.selectedRank0
                 mid = cell.textField_AccountDetail_big.AccountDetail
-                mid_num = String(cell.textField_AccountDetail_big.selectedRank1)
+                mid_num = cell.textField_AccountDetail_big.selectedRank1
             }
             print(big)
             cell_big.textField_AccountDetail_big.text = big
@@ -474,6 +474,14 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             taxonomyname = cell_taxonomy.label.text!
             cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
         }
+        print(big ,
+              mid ,
+              small ,
+              accountname ,
+              taxonomyname )
+        print(big_num ,
+              mid_num ,
+              small_num )
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

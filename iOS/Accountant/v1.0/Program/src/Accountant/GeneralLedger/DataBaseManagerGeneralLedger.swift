@@ -9,9 +9,16 @@
 import Foundation
 import RealmSwift
 
+// 総勘定元帳クラス
 class DataBaseManagerGeneralLedger: DataBaseManager {
     
-    // データベースにモデルが存在するかどうかをチェックする
+    /**
+    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+    * モデルオブジェクトをデータベースから読み込む。
+    * @param DataBase モデルオブジェクト
+    * @param fiscalYear 年度
+    * @return モデルオブジェクトが存在するかどうか
+    */
     func checkInitialising(DataBase: DataBaseGeneralLedger, fiscalYear: Int) -> Bool {
         super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
@@ -39,18 +46,19 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         // (2)書き込みトランザクション内でデータを追加する
         try! realm.write {
             let number = dataBaseGeneralLedger.save() //　自動採番
-            print("addGeneralLedger",number)
+            print("addGeneralLedger", number)
             // オブジェクトを作成 勘定
             for i in 0..<objects.count{
                 let dataBaseAccount = DataBaseAccount() // 勘定
                 let number = dataBaseAccount.save() //　自動採番
-                print("dataBaseAccount",number)
+                print("dataBaseAccount", number)
                 dataBaseAccount.fiscalYear = object.fiscalYear
                 dataBaseAccount.accountName = objects[i].category
                 dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
             }
             let dataBasePLAccount = DataBasePLAccount() // 損益勘定
             let numberr = dataBasePLAccount.save() //　自動採番
+            print("dataBasePLAccount", numberr)
             dataBasePLAccount.fiscalYear = object.fiscalYear
             dataBasePLAccount.accountName = "損益勘定"
             dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する

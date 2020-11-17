@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+// 会計期間クラス
 class DataBaseManagerPeriod {
 
     // すべてのモデルオブフェクトの取得

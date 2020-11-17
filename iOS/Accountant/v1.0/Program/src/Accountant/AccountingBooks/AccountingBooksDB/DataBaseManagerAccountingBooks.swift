@@ -11,7 +11,13 @@ import RealmSwift
 
 class DataBaseManagerAccountingBooks: DataBaseManager {
     
-    // データベースにモデルが存在するかどうかをチェックする
+    /**
+    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+    * モデルオブジェクトをデータベースから読み込む。
+    * @param DataBase モデルオブジェクト
+    * @param fiscalYear 年度
+    * @return モデルオブジェクトが存在するかどうか
+    */
     func checkInitialising(DataBase: DataBaseAccountingBooks, fiscalYear: Int) -> Bool { // 年度を追加する場合
         super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
     }
@@ -68,19 +74,22 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             let dataBaseManagerJournals = DataBaseManagerJournals()
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
             if dataBaseManagerJournals.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: object.fiscalYear) {
-                dataBaseManagerJournals.deleteJournals(number: object.number)
+                let isInvalidated = dataBaseManagerJournals.deleteJournals(number: object.number)
+                print(isInvalidated)
             }
         // 総勘定元帳画面
             let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
             // データベースに勘定画面の勘定があるかをチェック
             if dataBaseManagerGeneralLedger.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: object.fiscalYear) {
-                dataBaseManagerGeneralLedger.deleteGeneralLedger(number: object.number)
+                let isInvalidated = dataBaseManagerGeneralLedger.deleteGeneralLedger(number: object.number)
+                print(isInvalidated)
             }
         // 決算書画面　
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             // データベースに勘定画面の勘定があるかをチェック
             if dataBaseManagerFinancialStatements.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: object.fiscalYear) {
-                dataBaseManagerFinancialStatements.deleteFinancialStatements(number: object.number)
+                let isInvalidated = dataBaseManagerFinancialStatements.deleteFinancialStatements(number: object.number)
+                print(isInvalidated)
             }
         }
         try! realm.write {

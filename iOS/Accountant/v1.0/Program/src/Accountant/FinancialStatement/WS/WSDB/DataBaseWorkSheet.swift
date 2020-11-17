@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 精算表クラス
 // 精算表 は 合計残高試算表(残高試算表部分のみを使用) を 1 つ以上持っています。
