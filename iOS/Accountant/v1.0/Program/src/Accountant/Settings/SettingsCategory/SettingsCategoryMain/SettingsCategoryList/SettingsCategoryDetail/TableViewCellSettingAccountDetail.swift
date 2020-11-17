@@ -18,7 +18,7 @@ class TableViewCellSettingAccountDetail: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         // Initialization code
         // テキストフィールド作成
-        createTextFieldForCategory()
+        self.textField_AccountDetail_big.inputAssistantItem.leadingBarButtonGroups.removeAll()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,21 +26,4 @@ class TableViewCellSettingAccountDetail: UITableViewCell, UITextFieldDelegate {
 
         // Configure the view for the selected state
     }
-    // TextField作成
-    func createTextFieldForCategory() {
-        // 大区分　中区分　小区分
-        if self.reuseIdentifier == "identifier_category_big" {
-            textField_AccountDetail_big.delegate = self
-            textField_AccountDetail_big.setup(identifier: "identifier_category_big", component0: 0)
-            // previous, next, paste ボタンを消す
-            self.textField_AccountDetail_big.inputAssistantItem.leadingBarButtonGroups.removeAll()
-        }else if self.reuseIdentifier == "identifier_category" {
-            textField_AccountDetail_big.delegate = self
-            // コンポーネント0で大区分が何を選択されたかを、渡す
-            textField_AccountDetail_big.setup(identifier: "identifier_category", component0: 999)
-            // previous, next, paste ボタンを消す
-            self.textField_AccountDetail_big.inputAssistantItem.leadingBarButtonGroups.removeAll()
-        }
-    }
-
 }
