@@ -32,8 +32,6 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-        NotificationCenter.default.addObserver(self, selector: #selector(TableViewControllerSettingsCategoryDetail.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         // 登録ボタンの　表示　非表示
         if addAccount {
             Button_input.isHidden = false
@@ -46,7 +44,10 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
     override func viewWillAppear(_ animated: Bool) {
         // 表示科目を変更後に勘定科目詳細画面を更新する
         tableView.reloadData()
-        
+        // テキストフィールドを初期化
+        if addAccount { // 勘定科目追加の場合
+            createTextFieldForCategory()
+        }
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
 //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
@@ -258,7 +259,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     case "11": cell.label.text =   "税金"
                         break
                     default:
-                        cell.label.text = "選択してください"
+                        cell.label.text = "-"
                         cell.label.textColor = .lightGray
                         break
                     }
@@ -308,7 +309,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     case "18": cell.label.text =   "特別損失"
                         break
                     default:
-                        cell.label.text = "選択してください"
+                        cell.label.text = "-"
                         cell.label.textColor = .lightGray
                         break
                     }
@@ -362,26 +363,10 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
     func createTextFieldForCategory() {
         // 大区分
         let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
-        if cell_big.textField_AccountDetail_big.text == "選択してください" {
-            cell_big.textField_AccountDetail_big.setup(identifier: "identifier_category_big", component0: 0)
-        }
+            cell_big.textField_AccountDetail_big.setup(identifier: "identifier_category_big")
         // 中区分
         let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
-        if cell.textField_AccountDetail_big!.text == "選択してください" {
-            cell.textField_AccountDetail_big.setup(identifier: "identifier_category", component0: 999)// switch文でdefaultケースに通すため
-        }
-//        }else {
-//            // 勘定科目区分　大区分
-//            let Rank0 = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
-//            for i in 0..<Rank0.count {
-//                if Rank0[i] == cell_big.textField_AccountDetail_big!.text {
-//                    print(Rank0[i] , cell_big.textField_AccountDetail_big!.text)
-//                    // コンポーネント0で大区分が何を選択されたかを、渡す
-//                    cell.textField_AccountDetail.setup(identifier: "identifier_category", component0: i)
-//                    break
-//                }
-//            }
-//        }
+            cell.textField_AccountDetail_big.setup(identifier: "identifier_category")// switch文でdefaultケースに通すため
 //        // 小区分
 //        let cell_small = self.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! TableViewCellSettingAccountDetail
 //        cell_small.textField_AccountDetail.setup(identifier: "identifier_category_small", component0: 0)
@@ -396,10 +381,6 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         cell.textField_AccountDetail_big.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
 //        cell_small.textField_AccountDetail.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
         cell_category.textField_AccountDetail_Account.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
-    }
-    // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillShow(_ notification: NSNotification){
-        createTextFieldForCategory()
     }
     // テキストフィールへの入力が終了したとき
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
@@ -429,14 +410,14 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 mid = cell.textField_AccountDetail_big.AccountDetail
                 mid_num = cell.textField_AccountDetail_big.selectedRank1
             }
-            print(big)
+//            print(big)
             cell_big.textField_AccountDetail_big.text = big
             if cell_big.textField_AccountDetail_big.text != "選択してください" {
                 cell_big.textField_AccountDetail_big.textColor = UIColor.black // 文字色をブラックとする
             }else {
                 cell_big.textField_AccountDetail_big.textColor = .lightGray
             }
-            print(mid)
+//            print(mid)
             cell.textField_AccountDetail_big.text = mid
             if cell.textField_AccountDetail_big.text != "選択してください" {
                 cell.textField_AccountDetail_big.textColor = UIColor.black
@@ -474,12 +455,12 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             taxonomyname = cell_taxonomy.label.text!
             cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
         }
-        print(big ,
+        print("PickerTextFieldAccountDetail", big ,
               mid ,
               small ,
               accountname ,
               taxonomyname )
-        print(big_num ,
+        print("PickerTextFieldAccountDetail", big_num ,
               mid_num ,
               small_num )
     }
@@ -592,7 +573,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         var newnumber = 0
         // 入力チェック
         if big != "選択してください" && big != "" {
-//            if mid != "選択してください" && mid != "" {
+            if mid != "選択してください" && mid != "" {
 //                if small != "選択してください" && small != ""{
                     if accountname != "入力してください" && accountname != "" {
                         if taxonomyname != "表示科目を選択してください" && taxonomyname != "" {
@@ -610,7 +591,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                         }
                     }
 //                }
-//            }
+            }
         }
 
     }
