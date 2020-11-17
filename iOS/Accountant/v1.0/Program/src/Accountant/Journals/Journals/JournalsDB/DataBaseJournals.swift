@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift // データベースのインポート
+import RealmSwift
 
 // 仕訳帳クラス
 // 仕訳帳 は 仕訳データ を 1 個以上持つことができます。

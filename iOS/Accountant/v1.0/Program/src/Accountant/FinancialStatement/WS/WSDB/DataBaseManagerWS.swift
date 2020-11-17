@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+// 精算表クラス
 class DataBaseManagerWS {
     
     // 精算表　計算　合計、残高の合計値　修正記入、損益計算書、貸借対照表
