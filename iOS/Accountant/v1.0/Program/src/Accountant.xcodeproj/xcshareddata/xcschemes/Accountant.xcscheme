@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-               BuildableName = "Accountant.app"
+               BuildableName = "Accounting book.app"
                BlueprintName = "Accountant"
                ReferencedContainer = "container:Accountant.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-            BuildableName = "Accountant.app"
+            BuildableName = "Accounting book.app"
             BlueprintName = "Accountant"
             ReferencedContainer = "container:Accountant.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-            BuildableName = "Accountant.app"
+            BuildableName = "Accounting book.app"
             BlueprintName = "Accountant"
             ReferencedContainer = "container:Accountant.xcodeproj">
          </BuildableReference>
