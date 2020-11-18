@@ -151,7 +151,7 @@
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
-		F94EDD8F237AEB3A0074D812 /* Accountant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F94EDD8F237AEB3A0074D812 /* Accounting book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Accounting book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDD92237AEB3A0074D812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		F94EDD96237AEB3A0074D812 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -415,7 +415,7 @@
 		F94EDD90237AEB3A0074D812 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F94EDD8F237AEB3A0074D812 /* Accountant.app */,
+				F94EDD8F237AEB3A0074D812 /* Accounting book.app */,
 				F94EDDA7237AEB3B0074D812 /* AccountantTests.xctest */,
 				F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */,
 			);
@@ -829,7 +829,7 @@
 			);
 			name = Accountant;
 			productName = Accountant;
-			productReference = F94EDD8F237AEB3A0074D812 /* Accountant.app */;
+			productReference = F94EDD8F237AEB3A0074D812 /* Accounting book.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F94EDDA6237AEB3B0074D812 /* AccountantTests */ = {
@@ -1323,7 +1323,7 @@
 				);
 				MARKETING_VERSION = 1.1.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Accounting book";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1345,7 +1345,7 @@
 				);
 				MARKETING_VERSION = 1.1.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Accounting book";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
