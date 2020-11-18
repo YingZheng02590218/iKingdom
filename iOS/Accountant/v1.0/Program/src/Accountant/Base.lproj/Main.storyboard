@@ -1491,13 +1491,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-iy-hFX" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="77"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-sA-QrS" userLabel="ViewUpper">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="45"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="XGA-YM-hH0" userLabel="company_name">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1505,13 +1505,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJF-Xi-oRf" userLabel="title">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="45"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="1bt-wV-Yiq" userLabel="closingDate">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1534,13 +1534,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFB-1O-n66" userLabel="ViewLower">
-                                            <rect key="frame" x="0.0" y="35" width="1024" height="25"/>
+                                            <rect key="frame" x="0.0" y="45" width="1024" height="32"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJf-lh-io2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="32"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Vgb-8j-NQx" userLabel="list_debit">
-                                                            <rect key="frame" x="-1" y="-3" width="249" height="27"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Vgb-8j-NQx" userLabel="list_debit">
+                                                            <rect key="frame" x="-1" y="-3" width="0.0" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1559,10 +1559,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trY-nG-TqJ">
-                                                    <rect key="frame" x="250" y="0.0" width="524" height="25"/>
+                                                    <rect key="frame" x="1" y="0.0" width="524" height="32"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="sKb-lV-cZw" userLabel="account_name">
-                                                            <rect key="frame" x="-1" y="-1" width="520" height="26"/>
+                                                            <rect key="frame" x="-1" y="-1" width="520" height="33"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1581,10 +1581,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4n-W1-kMH">
-                                                    <rect key="frame" x="774" y="0.0" width="250" height="25"/>
+                                                    <rect key="frame" x="774" y="0.0" width="250" height="32"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Lai-CV-uHK" userLabel="list_credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="32"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2659,7 +2659,7 @@
         <scene sceneID="HIN-Pn-4Jn">
             <objects>
                 <tableViewController id="aRI-gC-FNF" customClass="TableViewControllerBS" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="25" id="S68-Kg-rKg">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="S68-Kg-rKg">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1316"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -2836,7 +2836,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="middleCategory" id="4Hz-ox-NEa">
-                                <rect key="frame" x="0.0" y="88" width="1024" height="25"/>
+                                <rect key="frame" x="0.0" y="115.5" width="1024" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Hz-ox-NEa" id="1Y1-pv-Pvd" userLabel="中区分">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="25"/>
@@ -2860,7 +2860,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="bLO-qn-s15">
-                                <rect key="frame" x="0.0" y="113" width="1024" height="25"/>
+                                <rect key="frame" x="0.0" y="140.5" width="1024" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bLO-qn-s15" id="LSJ-Ml-vev" userLabel="小区分">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="25"/>
@@ -2884,7 +2884,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="account" id="gPk-H7-Y6N" customClass="TableViewCellAccount" customModule="Accountant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="138" width="1024" height="25"/>
+                                <rect key="frame" x="0.0" y="165.5" width="1024" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gPk-H7-Y6N" id="J18-AL-bdd" userLabel="表示科目">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="25"/>
@@ -2923,7 +2923,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="totalOfMiddleCategory" id="t3H-Ag-WCc" customClass="TableViewCellTotalOfMiddleCategory" customModule="Accountant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="163" width="1024" height="25"/>
+                                <rect key="frame" x="0.0" y="190.5" width="1024" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t3H-Ag-WCc" id="xlF-pB-flK" userLabel="中区分の合計">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="25"/>
@@ -2962,7 +2962,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="totalOfBigCategory" id="Pbf-qR-QQq" customClass="TableViewCellTotalOfBigCategory" customModule="Accountant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="188" width="1024" height="25"/>
+                                <rect key="frame" x="0.0" y="215.5" width="1024" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pbf-qR-QQq" id="pt9-NQ-qqq" userLabel="大区分の合計">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="25"/>
@@ -5124,10 +5124,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vb-Is-had">
-                                                            <rect key="frame" x="250" y="0.0" width="0.5" height="25"/>
+                                                            <rect key="frame" x="250" y="0.0" width="524" height="25"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="53G-4Y-TzC" userLabel="account_name">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="53G-4Y-TzC" userLabel="account_name">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="524" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -5502,13 +5502,13 @@
         <scene sceneID="Y5e-Yq-6p2">
             <objects>
                 <tableViewController id="GLW-Xl-ppQ" customClass="TableViewControllerGeneralLedger" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="27" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MY0-PK-Yhc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="27" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="MY0-PK-Yhc">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="vbI-yM-du8" customClass="TableViewCellGeneralLedger" customModule="Accountant" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="1024" height="27"/>
+                                <rect key="frame" x="0.0" y="55.5" width="1024" height="27"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vbI-yM-du8" id="n7T-Mk-RNG">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="27"/>
@@ -5580,8 +5580,8 @@
         <image name="wrench.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KOA-LT-m2w"/>
-        <segue reference="cam-FC-EgK"/>
+        <segue reference="1SQ-6b-k8V"/>
+        <segue reference="QiK-F7-mNz"/>
         <segue reference="AIQ-cX-Uq3"/>
         <segue reference="9aZ-df-wqW"/>
         <segue reference="0Ca-r5-TXU"/>
