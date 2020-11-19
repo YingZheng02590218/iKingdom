@@ -463,17 +463,23 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
     }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section != 12 {
 //        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
-        // スタイルには、normal と　destructive がある
-        let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
-            // なんか処理
-            // 確認のポップアップを表示したい
-            self.showPopover(indexPath: indexPath)
-            completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
-        }
-        action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
-               let configuration = UISwipeActionsConfiguration(actions: [action])
+            // スタイルには、normal と　destructive がある
+            let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+                // なんか処理
+                // 確認のポップアップを表示したい
+                self.showPopover(indexPath: indexPath)
+                completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
+            }
+            action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
+            let configuration = UISwipeActionsConfiguration(actions: [action])
             return configuration
+        }else { // 空白行をスワイプした場合
+            let configuration = UISwipeActionsConfiguration(actions: [])
+            configuration.performsFirstActionWithFullSwipe = false
+            return configuration
+        }
     }
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
