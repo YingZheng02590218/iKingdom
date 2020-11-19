@@ -95,7 +95,25 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
                             constant: 0)
         ])
      }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_WorkSheet"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_WorkSheet") as! AnnotationViewController
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
+    }
+    
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
         let databaseManager = DataBaseManagerTB()

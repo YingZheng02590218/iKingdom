@@ -72,7 +72,24 @@ class TableViewControllerSettingsCategory: UITableViewController {
                             constant: 0)
         ])
      }
-
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_SettingsCategory"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
+    }
 
     // MARK: - Table view data source
 
