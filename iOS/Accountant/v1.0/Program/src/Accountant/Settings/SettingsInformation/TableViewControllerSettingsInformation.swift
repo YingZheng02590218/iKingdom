@@ -1,5 +1,5 @@
 //
-//  TableViewControllerSettingsInfomation.swift
+//  TableViewControllerSettingsInformation.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/07/28.
@@ -10,7 +10,7 @@ import UIKit
 import GoogleMobileAds // マネタイズ対応
 
 // 帳簿情報クラス
-class TableViewControllerSettingsInfomation: UITableViewController {
+class TableViewControllerSettingsInformation: UITableViewController {
 
     // マネタイズ対応
     // 広告ユニットID
@@ -18,7 +18,7 @@ class TableViewControllerSettingsInfomation: UITableViewController {
     // テスト用広告ユニットID
     let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
     // true:テスト
-    let AdMobTest:Bool = false
+    let AdMobTest:Bool = true
     @IBOutlet var gADBannerView: GADBannerView!
     
     override func viewDidLoad() {
@@ -68,7 +68,25 @@ class TableViewControllerSettingsInfomation: UITableViewController {
                             constant: 0)
         ])
      }
-
+    // ビューが表示された後に呼ばれる
+    override func viewDidAppear(_ animated: Bool){
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_SettingsInformation"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsInformation") as! AnnotationViewControllerSettingsInformation
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

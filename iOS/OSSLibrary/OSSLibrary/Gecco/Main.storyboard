@@ -24,7 +24,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-dw-II0">
                                 <rect key="frame" x="215" y="274" width="89" height="30"/>
                                 <state key="normal" title="Start Tutorial">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oPr-fu-9Rt"/>
@@ -117,17 +117,10 @@
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="320"/>
-                    <connections>
-                        <outletCollection property="annotationViews" destination="8GK-Uh-d0U" collectionClass="NSMutableArray" id="0Nm-VO-3m6"/>
-                        <outletCollection property="annotationViews" destination="fah-CI-bfM" collectionClass="NSMutableArray" id="rA1-ps-cYd"/>
-                        <outletCollection property="annotationViews" destination="j1A-yK-Ogk" collectionClass="NSMutableArray" id="K1g-Rd-kUL"/>
-                        <outletCollection property="annotationViews" destination="wa0-41-Snl" collectionClass="NSMutableArray" id="EWg-vW-RvL"/>
-                        <outletCollection property="annotationViews" destination="Qjx-3h-ych" collectionClass="NSMutableArray" id="wEc-OF-Wg9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNh-QX-ZIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="551" y="996"/>
+            <point key="canvasLocation" x="551" y="717"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Xw-SP-YLq">
