@@ -56,6 +56,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
+        // チュートリアル対応　初回起動時　4行を追加
+        let ud = UserDefaults.standard
+        // 仕訳帳
+        var firstLunchKey = "firstLunch_Journals"
+        var firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 仕訳
+        firstLunchKey = "firstLunch_JournalEntry"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 精算表
+        firstLunchKey = "firstLunch_WorkSheet"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 試算表
+        firstLunchKey = "firstLunch_TrialBalance"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 会計期間
+        firstLunchKey = "firstLunch_SettingPeriod"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 勘定科目
+        firstLunchKey = "firstLunch_SettingsCategory"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        // 帳簿情報
+        firstLunchKey = "firstLunch_SettingsInformation"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+        
         return true
     }
 
