@@ -108,6 +108,21 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
      }
     
     override func viewDidAppear(_ animated: Bool) {
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_TrialBalance"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
     }
     
     @objc func refreshTable() {

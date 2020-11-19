@@ -26,6 +26,7 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
     @IBOutlet var Label_list_date_year: UILabel!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +133,22 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         if indexPath != nil && indexPath!.count > 0 {
             self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
             self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
+            // チュートリアル対応　初回起動時　7行を追加
+            let ud = UserDefaults.standard
+            let firstLunchKey = "firstLunch_Journals"
+            if ud.bool(forKey: firstLunchKey) {
+                ud.set(false, forKey: firstLunchKey)
+                ud.synchronize()
+                // チュートリアル対応
+                presentAnnotation()
+            }
         }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
     }
     // リロード機能
     @objc func refreshTable() {
