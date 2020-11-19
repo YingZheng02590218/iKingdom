@@ -86,6 +86,24 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_JournalEntry"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
+    }
+    // チュートリアル対応
+    func presentAnnotation() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
+        viewController.alpha = 0.5
+        present(viewController, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
     // デートピッカー作成
