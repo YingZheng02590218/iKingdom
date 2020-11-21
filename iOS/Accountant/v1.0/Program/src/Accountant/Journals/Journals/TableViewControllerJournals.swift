@@ -133,6 +133,8 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         if indexPath != nil && indexPath!.count > 0 {
             self.tableView.scrollToRow(at: indexPath![indexPath!.count-1], at: UITableView.ScrollPosition.bottom, animated: false) //最下行
             self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //最上行
+            // タグを設定する　チュートリアル対応
+            tableView.visibleCells[0].tag = 33
             // チュートリアル対応　初回起動時　7行を追加
             let ud = UserDefaults.standard
             let firstLunchKey = "firstLunch_Journals"
