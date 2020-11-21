@@ -86,13 +86,13 @@ private extension AnnotationViewControllerSettingsCategory {
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
             case 1:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
             case 2:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 60
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
