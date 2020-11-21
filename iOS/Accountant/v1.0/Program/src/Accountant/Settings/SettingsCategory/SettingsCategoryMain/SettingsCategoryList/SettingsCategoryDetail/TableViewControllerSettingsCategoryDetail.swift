@@ -141,7 +141,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
                     // セルの選択
                     cell.selectionStyle = .none
-                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     // 勘定科目の名称をセルに表示する
                     cell.textLabel?.text = "大区分"
@@ -156,7 +156,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
                     // セルの選択
                     cell.selectionStyle = .none
-                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     cell.textLabel?.text = "中区分"
                     if cell.textField_AccountDetail_big.text != "選択してください" && cell.textField_AccountDetail_big.text != "" {
@@ -185,6 +185,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     // セルの選択
                     cell.selectionStyle = .none
                     cell.textLabel?.text = "勘定科目名"
+                    cell.textLabel?.textColor = .lightGray
                     if cell.textField_AccountDetail_Account.text != "入力してください" && cell.textField_AccountDetail_Account.text != "" {
                     }else {
                         cell.textField_AccountDetail_Account.text = "入力してください"
@@ -201,6 +202,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 // セルの選択
                 cell.selectionStyle = .default
                 cell.textLabel?.text = "表示科目名"
+                cell.textLabel?.textColor = .lightGray
                 // 表示科目名
 //                let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
                 if self.numberOfTaxonomy != 0 {
@@ -210,7 +212,15 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                     let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
                     cell.label.text! = "\(object!.number), \(object!.category)"
-                    cell.label.textColor = UIColor.black // 文字色をブラックとする
+                    // ダークモード対応
+                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                        /* ダークモード時の処理 */
+                        cell.label.textColor = .white
+                    } else {
+                        /* ライトモード時の処理 */
+                        // 文字色
+                        cell.label.textColor = .black
+                    }
                 }else {
                     cell.label.text = "表示科目を選択してください"
                     cell.label.textColor = .lightGray
@@ -231,7 +241,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 case 0:
                     // 勘定科目の名称をセルに表示する
                     cell.textLabel?.text = "大区分"
-                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     switch object?.Rank0 {
                     case "0": cell.label.text =   "流動資産"
@@ -267,7 +277,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     break
                 case 1:
                     cell.textLabel?.text = "中区分"
-                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     switch object?.Rank1 {
                     case "0": cell.label.text =   "当座資産"
@@ -323,11 +333,20 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //                    break
 //                case 3: // 勘定科目
                     cell.textLabel?.text = "勘定科目名"
-                    cell.textLabel?.textColor = .darkGray
+                    cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     //勘定科目
                     if object!.category != "" {
                         cell.label.text = object!.category
+                        // ダークモード対応
+                        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                            /* ダークモード時の処理 */
+                            cell.label.textColor = .white
+                        } else {
+                            /* ライトモード時の処理 */
+                            // 文字色
+                            cell.label.textColor = .black
+                        }
                     }else {
                         cell.label.text = "入力してください"
                         cell.label.textColor = .lightGray
@@ -342,14 +361,22 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 // セルの選択
                 cell.selectionStyle = .default
                 cell.textLabel?.text = "表示科目名"
-                cell.textLabel?.textColor = .darkGray
+                cell.textLabel?.textColor = .lightGray
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
                 let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                 if "" != object?.numberOfTaxonomy {
                     let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
                     cell.label.text = "\(objectt!.number), \(objectt!.category)"
-                    cell.label.textColor = .black
+                    // ダークモード対応
+                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                        /* ダークモード時の処理 */
+                        cell.label.textColor = .white
+                    } else {
+                        /* ライトモード時の処理 */
+                        // 文字色
+                        cell.label.textColor = .black
+                    }
                 }else {
                     cell.label.text = "表示科目を選択してください"
                     cell.label.textColor = .lightGray
@@ -413,14 +440,30 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //            print(big)
             cell_big.textField_AccountDetail_big.text = big
             if cell_big.textField_AccountDetail_big.text != "選択してください" {
-                cell_big.textField_AccountDetail_big.textColor = UIColor.black // 文字色をブラックとする
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    cell_big.textField_AccountDetail_big.textColor = .white
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    cell_big.textField_AccountDetail_big.textColor = .black // 文字色をブラックとする
+                }
             }else {
                 cell_big.textField_AccountDetail_big.textColor = .lightGray
             }
 //            print(mid)
             cell.textField_AccountDetail_big.text = mid
             if cell.textField_AccountDetail_big.text != "選択してください" {
-                cell.textField_AccountDetail_big.textColor = UIColor.black
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    cell.textField_AccountDetail_big.textColor = .white
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    cell.textField_AccountDetail_big.textColor = .black
+                }
             }else {
                 cell.textField_AccountDetail_big.textColor = .lightGray
             }
@@ -447,13 +490,29 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! TableViewCellSettingAccountDetailAccount
         if cell_category.textField_AccountDetail_Account!.text != "入力してください" {
             accountname = cell_category.textField_AccountDetail_Account.text!
-            cell_category.textField_AccountDetail_Account.textColor = UIColor.black // 文字色をブラックとする
+            // ダークモード対応
+            if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                /* ダークモード時の処理 */
+                cell_category.textField_AccountDetail_Account.textColor = .white
+            } else {
+                /* ライトモード時の処理 */
+                // 文字色
+                cell_category.textField_AccountDetail_Account.textColor = .black // 文字色をブラックとする
+            }
         }
         // 表示科目名
         let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
         if cell_taxonomy.label!.text != "表示科目を選択してください" {
             taxonomyname = cell_taxonomy.label.text!
-            cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
+            // ダークモード対応
+            if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                /* ダークモード時の処理 */
+                cell_taxonomy.label.textColor = .white
+            } else {
+                /* ライトモード時の処理 */
+                // 文字色
+                cell_taxonomy.label.textColor = .black // 文字色をブラックとする
+            }
         }
         print("PickerTextFieldAccountDetail", big ,
               mid ,
@@ -561,7 +620,14 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
             let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
             cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
-            cell_taxonomy.label.textColor = UIColor.black // 文字色をブラックとする
+            // ダークモード対応
+            if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                /* ダークモード時の処理 */
+                cell_taxonomy.label.textColor = .white
+            } else {
+                /* ライトモード時の処理 */
+                cell_taxonomy.label.textColor = .black // 文字色をブラックとする
+            }
             taxonomyname = cell_taxonomy.label.text!
         }
     }
