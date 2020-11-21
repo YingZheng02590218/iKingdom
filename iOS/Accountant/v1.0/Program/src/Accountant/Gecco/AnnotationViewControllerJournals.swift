@@ -99,10 +99,10 @@ private extension AnnotationViewControllerJournals {
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
                 annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
             case 3:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 20 + rightBarButtonFrames.third.height
             case 4:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 20 + rightBarButtonFrames.third.height
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
