@@ -86,13 +86,13 @@ private extension AnnotationViewControllerSettingsCategory {
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
             case 1:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
             case 2:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 60
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
@@ -103,9 +103,14 @@ private extension AnnotationViewControllerSettingsCategory {
     var navigationBarHeight: CGFloat { 44 }
     var viewControllerHasNavigationItem: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            print(controller.viewControllers[0]) // TableViewControllerSettings
-            print(controller.viewControllers[1]) // UINavigationController
-            return controller.viewControllers[1]
+            if controller.viewControllers[0] is TableViewControllerSettingsCategory {
+                let tableViewControllerSettingsCategory = controller.viewControllers[0]
+                return controller.viewControllers[0]
+            }else {
+                print(controller.viewControllers[0]) // TableViewControllerSettings
+                print(controller.viewControllers[1]) // UINavigationController
+                return controller.viewControllers[1]
+            }
         }
         print(presentingViewController)
         return presentingViewController
