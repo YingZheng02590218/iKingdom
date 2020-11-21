@@ -3390,7 +3390,7 @@
                             <viewLayoutGuide key="safeArea" id="Sbw-C3-BXX"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" tag="33" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="ml1-A7-SRY" customClass="TableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="ml1-A7-SRY" customClass="TableViewCell" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="123" width="1024" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ml1-A7-SRY" id="H9p-AI-sti">
