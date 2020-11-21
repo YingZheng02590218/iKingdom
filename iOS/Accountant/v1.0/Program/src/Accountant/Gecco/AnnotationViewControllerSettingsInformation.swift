@@ -88,7 +88,7 @@ private extension AnnotationViewControllerSettingsInformation {
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
                 annotationView.frame.origin.y = rightBarButtonFrames.origin.y + 60
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")

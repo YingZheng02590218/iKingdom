@@ -94,17 +94,17 @@ private extension AnnotationViewControllerJournalEntry {
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
                 annotationView.frame.origin.y = rightBarButtonFrames.zero.origin.y + rightBarButtonFrames.zero.height + 20
             case 1:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
-                annotationView.frame.origin.y = rightBarButtonFrames.firstLeft.origin.y + 60
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.y = rightBarButtonFrames.firstLeft.origin.y + rightBarButtonFrames.firstLeft.height + 20
             case 2:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
-                annotationView.frame.origin.y = rightBarButtonFrames.secondLeft.origin.y + 60
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.y = rightBarButtonFrames.secondLeft.origin.y + rightBarButtonFrames.secondLeft.height + 20
             case 3:
-                annotationView.frame.origin.x = UIScreen.main.bounds.width - annotationView.frame.size.width - 20
-                annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 60
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + rightBarButtonFrames.third.height + 20
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
             }
