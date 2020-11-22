@@ -564,10 +564,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccQ-nf-cYk" userLabel="ViewRight">
-                                                            <rect key="frame" x="324" y="0.0" width="100" height="25"/>
+                                                            <rect key="frame" x="324" y="0.0" width="1" height="25"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="LUl-zZ-2gF" userLabel="list_credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="25"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="LUl-zZ-2gF" userLabel="list_credit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -588,7 +588,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFA-k0-TNl" userLabel="ViewLeft1">
-                                                            <rect key="frame" x="424" y="0.0" width="100" height="25"/>
+                                                            <rect key="frame" x="325" y="0.0" width="100" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="gzM-vI-FWl" userLabel="list_debit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
@@ -610,7 +610,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdB-vN-T8q" userLabel="ViewRight1">
-                                                            <rect key="frame" x="524" y="0.0" width="100" height="25"/>
+                                                            <rect key="frame" x="425" y="0.0" width="100" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="pGI-nH-UVW" userLabel="list_credit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
@@ -634,7 +634,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8o-rB-91F" userLabel="ViewLeft2">
-                                                            <rect key="frame" x="624" y="0.0" width="100" height="25"/>
+                                                            <rect key="frame" x="525" y="0.0" width="100" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="YSk-Tz-1u3" userLabel="list_debit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
@@ -1491,13 +1491,13 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-iy-hFX" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="80"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-sA-QrS" userLabel="ViewUpper">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="46.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="XGA-YM-hH0" userLabel="company_name">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1505,13 +1505,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJF-Xi-oRf" userLabel="title">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="46.5"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="1bt-wV-Yiq" userLabel="closingDate">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="36"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="47"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1534,13 +1534,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFB-1O-n66" userLabel="ViewLower">
-                                            <rect key="frame" x="0.0" y="35" width="1024" height="25"/>
+                                            <rect key="frame" x="0.0" y="46.5" width="1024" height="33.5"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJf-lh-io2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="33.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Vgb-8j-NQx" userLabel="list_debit">
-                                                            <rect key="frame" x="-1" y="-3" width="249" height="28"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Vgb-8j-NQx" userLabel="list_debit">
+                                                            <rect key="frame" x="-1" y="-3" width="0.0" height="37"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1559,10 +1559,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="trY-nG-TqJ">
-                                                    <rect key="frame" x="250" y="0.0" width="524" height="25"/>
+                                                    <rect key="frame" x="1" y="0.0" width="524" height="33.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="sKb-lV-cZw" userLabel="account_name">
-                                                            <rect key="frame" x="-1" y="-1" width="520" height="27"/>
+                                                            <rect key="frame" x="-1" y="-1" width="520" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -1581,10 +1581,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4n-W1-kMH">
-                                                    <rect key="frame" x="774" y="0.0" width="250" height="25"/>
+                                                    <rect key="frame" x="774" y="0.0" width="250" height="33.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Lai-CV-uHK" userLabel="list_credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="26"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="35"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2785,10 +2785,10 @@
                                             <rect key="frame" x="0.0" y="35" width="1024" height="25"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIZ-aU-NnL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="25"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="T8x-wg-3SR" userLabel="list_debit">
-                                                            <rect key="frame" x="-2" y="-4" width="249" height="28"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="T8x-wg-3SR" userLabel="list_debit">
+                                                            <rect key="frame" x="-2" y="-4" width="0.0" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -2807,7 +2807,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hn-r4-mdH">
-                                                    <rect key="frame" x="250" y="0.0" width="524" height="25"/>
+                                                    <rect key="frame" x="1" y="0.0" width="524" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="Gya-Zc-rjQ" userLabel="account_name">
                                                             <rect key="frame" x="-2" y="-1" width="521" height="25"/>
@@ -3123,7 +3123,7 @@
         <scene sceneID="b3I-pg-ShW">
             <objects>
                 <navigationController id="PWY-gK-YFq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳帳" image="pencil" catalog="system" id="SGD-Of-XCK" userLabel="仕訳帳"/>
+                    <tabBarItem key="tabBarItem" title="仕訳帳" image="book" catalog="system" id="SGD-Of-XCK" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3mA-3C-Vc6">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
@@ -3136,6 +3136,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBD-as-DCq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="462" y="1344"/>
+        </scene>
+        <!--仕訳-->
+        <scene sceneID="8Yy-gm-rKf">
+            <objects>
+                <navigationController id="Mfv-1p-Kx7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="仕訳" image="pencil" catalog="system" id="9b3-49-6Uh"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="e0k-EA-w5f" kind="relationship" relationship="rootViewController" id="P3S-pm-BjA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RCL-bA-a4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111" y="1344"/>
         </scene>
         <!--仕訳帳-->
         <scene sceneID="mmb-Cj-hdI">
@@ -4639,7 +4656,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZIf-Y7-RAW"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SNU-Ar-YRy"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="nS9-ne-rc5"/>
+                    <navigationItem key="navigationItem" title="仕訳" id="SNU-Ar-YRy"/>
                     <connections>
                         <outlet property="Button_Left" destination="rEY-Dp-EYX" id="oy7-dU-jWa"/>
                         <outlet property="Button_Right" destination="PjN-lY-iO7" id="FOr-3K-heX"/>
@@ -5037,13 +5055,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSj-Ab-Mhh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="85.5" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iH3-BB-Aw3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KeE-Cg-kQ3" userLabel="list_date_month">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5061,10 +5079,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-XR-WCA">
-                                                            <rect key="frame" x="38" y="0.0" width="47.5" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="RJg-nz-fOc" userLabel="list_date_day">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="49" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5103,10 +5121,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-UI-PZr">
-                                                    <rect key="frame" x="85.5" y="0.0" width="199.5" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.5" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="UGS-za-XUB" userLabel="list_summary">
-                                                            <rect key="frame" x="0.0" y="0.0" width="199" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="UGS-za-XUB" userLabel="list_summary">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -5129,10 +5147,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-3p-95E">
-                                                    <rect key="frame" x="285" y="0.0" width="28.5" height="20"/>
+                                                    <rect key="frame" x="0.5" y="0.0" width="0.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="Zcc-G1-l6f" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <nil key="textColor"/>
@@ -5155,10 +5173,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxL-Qp-D6m">
-                                                    <rect key="frame" x="313.5" y="0.0" width="123" height="20"/>
+                                                    <rect key="frame" x="1" y="0.0" width="0.0" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="sQk-3N-gmX" userLabel="list_debit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="123" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -5180,10 +5198,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yx6-Xb-qZc">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yx6-Xb-qZc">
                                                     <rect key="frame" x="436.5" y="0.0" width="123.5" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="f47-Uo-MiR" userLabel="list_credit">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="f47-Uo-MiR" userLabel="list_credit">
                                                             <rect key="frame" x="0.0" y="0.0" width="123" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -5206,7 +5224,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgc-R4-jK9">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rgc-R4-jK9">
                                                     <rect key="frame" x="560" y="0.0" width="28.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="XXk-V4-PMR" userLabel="list_debitOrCredit">
@@ -5232,10 +5250,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-hj-q3L">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-hj-q3L">
                                                     <rect key="frame" x="588.5" y="0.0" width="123.5" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="bIo-8P-K6z" userLabel="list_balance">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="bIo-8P-K6z" userLabel="list_balance">
                                                             <rect key="frame" x="0.0" y="0.0" width="123" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -5333,7 +5351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppl-w0-X1D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="2783"/>
+            <point key="canvasLocation" x="1407" y="2768"/>
         </scene>
         <!--試算表-->
         <scene sceneID="k0O-5Y-79c">
@@ -5831,7 +5849,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="le2-FJ-lhI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="2049"/>
+            <point key="canvasLocation" x="1407" y="2034"/>
         </scene>
         <!--元帳-->
         <scene sceneID="1yU-Pm-tWx">
@@ -5848,7 +5866,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2x-og-Jck" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1670" y="1344"/>
+            <point key="canvasLocation" x="1407" y="1344"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="w44-HK-dgQ">
@@ -5862,6 +5880,7 @@
                     <connections>
                         <segue destination="PWY-gK-YFq" kind="relationship" relationship="viewControllers" id="zZi-43-dBB"/>
                         <segue destination="TNd-j8-cbF" kind="relationship" relationship="viewControllers" id="Q0o-vN-ivn"/>
+                        <segue destination="Mfv-1p-Kx7" kind="relationship" relationship="viewControllers" id="lfb-P1-Yq7"/>
                         <segue destination="dEp-Vg-nYV" kind="relationship" relationship="viewControllers" id="Txa-ce-S5v"/>
                         <segue destination="SZ1-CS-6Sk" kind="relationship" relationship="viewControllers" id="9pa-dc-TzK"/>
                     </connections>
@@ -5872,6 +5891,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book" catalog="system" width="64" height="50"/>
         <image name="book.fill" catalog="system" width="64" height="50"/>
         <image name="doc.text.fill" catalog="system" width="56" height="64"/>
         <image name="pencil" catalog="system" width="64" height="56"/>
