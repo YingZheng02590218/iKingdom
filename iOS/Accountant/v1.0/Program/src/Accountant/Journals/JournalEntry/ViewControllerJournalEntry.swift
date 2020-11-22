@@ -549,16 +549,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             if TextField_amount_credit.text != "" || TextField_amount_credit.text != "金額" {
                 TextField_amount_debit.text = TextField_amount_credit.text
             }
-//            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_credit.text == "" {
             if TextField_amount_debit.text != "" || TextField_amount_debit.text != "金額" {
                 TextField_amount_credit.text = TextField_amount_debit.text
             }
-//            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_SmallWritting.text == "" {
-//            TextField_SmallWritting.text = "取引内容"
             TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
     }
