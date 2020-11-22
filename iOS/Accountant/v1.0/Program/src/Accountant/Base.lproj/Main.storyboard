@@ -4151,10 +4151,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-oJ-oNf">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="1374.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwb-1T-DL8">
+                                        <rect key="frame" x="0.0" y="0.0" width="712" height="241"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hz-Mm-EA8">
+                                                <rect key="frame" x="0.0" y="0.0" width="712" height="241"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="7Hz-Mm-EA8" secondAttribute="height" multiplier="375:127" id="XUh-wy-1dM"/>
                                                 </constraints>
@@ -4186,10 +4189,13 @@
                                         </constraints>
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMK-1V-DLu" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="241" width="712" height="668.5"/>
                                         <subviews>
                                             <view tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSY-Tg-XKJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="712" height="245"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-xu-Rt7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="85.5" height="245"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dyW-xu-Rt7" secondAttribute="height" multiplier="15:43" id="Ygm-He-DY9"/>
@@ -4199,6 +4205,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-Dp-EYX" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="85.5" y="0.0" width="47.5" height="245"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rEY-Dp-EYX" secondAttribute="height" multiplier="25:129" id="7uL-gS-hdn"/>
@@ -4217,6 +4224,7 @@
                                                         </connections>
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="at7-za-9iH">
+                                                        <rect key="frame" x="133" y="0.0" width="531.5" height="245"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="at7-za-9iH" secondAttribute="height" multiplier="280:129" id="0xe-to-twg"/>
@@ -4233,6 +4241,7 @@
                                                         </connections>
                                                     </datePicker>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-lY-iO7" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="664.5" y="0.0" width="47.5" height="245"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="PjN-lY-iO7" secondAttribute="height" multiplier="25:129" id="X6X-Gl-5sQ"/>
@@ -4278,8 +4287,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdh-cC-ZYl">
+                                                <rect key="frame" x="0.0" y="245" width="712" height="233.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-CJ-jrm">
+                                                        <rect key="frame" x="0.0" y="0.0" width="357" height="233.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="CCJ-CJ-jrm" secondAttribute="height" multiplier="188:123" id="N4l-fu-Zv9"/>
@@ -4289,6 +4300,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0T-9p-Iin">
+                                                        <rect key="frame" x="357" y="0.0" width="355" height="233.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="X0T-9p-Iin" secondAttribute="height" multiplier="187:123" id="GZD-CX-hUu"/>
                                                         </constraints>
@@ -4315,8 +4327,10 @@
                                                 </constraints>
                                             </view>
                                             <view tag="3333" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQp-dM-FxA" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="478.5" width="712" height="95"/>
                                                 <subviews>
-                                                    <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                    <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="uJk-nd-XmN" secondAttribute="height" multiplier="187:50" id="sPM-UP-iOd"/>
@@ -4329,7 +4343,8 @@
                                                             <action selector="TextField_category_debit:" destination="e0k-EA-w5f" eventType="editingDidBegin" id="N3A-cj-49u"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                    <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="勘定科目" borderStyle="bezel" placeholder="勘定科目" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                        <rect key="frame" x="355" y="0.0" width="357" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="A6X-6C-QV3" secondAttribute="height" multiplier="94:25" id="B61-wO-iyZ"/>
@@ -4359,8 +4374,10 @@
                                                 </constraints>
                                             </view>
                                             <view tag="4444" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zms-dt-DJJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="573.5" width="712" height="95"/>
                                                 <subviews>
-                                                    <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
+                                                    <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="0n6-qv-73D" secondAttribute="height" multiplier="187:50" id="R4U-yF-LDb"/>
@@ -4373,7 +4390,8 @@
                                                             <action selector="TextField_amount_debit_valueChanged:" destination="e0k-EA-w5f" eventType="editingDidEndOnExit" id="tJR-Cb-BFS"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
+                                                    <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="金額" borderStyle="bezel" placeholder="金額" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
+                                                        <rect key="frame" x="355" y="0.0" width="357" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="Nl1-2I-b4z" secondAttribute="height" multiplier="187:50" id="TfW-Ne-s6s"/>
@@ -4429,8 +4447,10 @@
                                         </constraints>
                                     </view>
                                     <view tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-VF-Z7e" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="909.5" width="712" height="190"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3g-IS-J1T">
+                                                <rect key="frame" x="0.0" y="0.0" width="712" height="95"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="f3g-IS-J1T" secondAttribute="height" multiplier="15:2" id="Gwu-XZ-5qj"/>
@@ -4439,7 +4459,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="取引内容" borderStyle="bezel" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
+                                            <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="取引内容" borderStyle="bezel" placeholder="小書き" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
+                                                <rect key="frame" x="0.0" y="95" width="712" height="95"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rih-f4-HCX" secondAttribute="height" multiplier="15:2" id="yvc-zP-GuO"/>
@@ -4469,10 +4490,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2K-VP-AI3">
+                                        <rect key="frame" x="0.0" y="1099.5" width="712" height="275"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLb-AB-14U">
+                                                <rect key="frame" x="0.0" y="0.0" width="712" height="95"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-9b-Hzc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Yad-9b-Hzc" secondAttribute="height" multiplier="1:1" id="dsv-Lu-Lqn"/>
@@ -4497,6 +4521,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-R6-X65" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="95" y="0.0" width="522" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BQ1-R6-X65" secondAttribute="height" multiplier="11:2" id="L8I-Xj-Jpm"/>
@@ -4513,6 +4538,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQ7-uw-zkn">
+                                                        <rect key="frame" x="617" y="0.0" width="95" height="95"/>
                                                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -4536,8 +4562,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBw-es-IsB">
+                                                <rect key="frame" x="0.0" y="95" width="712" height="180"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="BLM-e1-tcf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="712" height="180"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BLM-e1-tcf" secondAttribute="height" multiplier="75:19" id="qKd-CN-C1m"/>
                                                         </constraints>
