@@ -644,6 +644,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
     }
     
+    private var timer: Timer?                           // Timerを保持する変数
     @IBOutlet weak var Label_Popup: UILabel!
     @IBOutlet var inputButton: UIButton!// 入力ボタン
     // 入力ボタン
@@ -743,6 +744,29 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                                     [presentingViewController] () -> Void in
                                     presentingViewController.autoScroll(number: number)
                             })
+                        }else if journalEntryType == "" { // タブバーの仕訳タブからの遷移の場合
+                            number = dataBaseManager.addJournalEntry(
+                                date: formatter.string(from: datePicker.date),
+                                debit_category: TextField_category_debit.text!,
+                                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                                credit_category: TextField_category_credit.text!,
+                                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                                smallWritting: TextField_SmallWritting.text!
+                            )
+                            self.dismiss(animated: true, completion: {
+                                [presentingViewController] () -> Void in
+                                self.Label_Popup.text = "仕訳を記帳しました" //ポップアップの文字表示
+                                // ⑤ Timer のスケジューリング重複を回避
+                                guard self.timer == nil else { return }
+                                // ① Timerのスケジューリングと保持
+                                self.timer = Timer.scheduledTimer(
+                                    timeInterval: 4, // 計測する時間を設定
+                                    target: self,
+                                    selector: #selector(self.handleTimer(_:)), // 一定時間経過した後に実行する関数を指定
+                                    userInfo: nil,
+                                    repeats: false // 繰り返し呼び出し
+                                )
+                            })
                         }
                     }else{
                         Label_Popup.text = "金額を入力してください"
@@ -764,6 +788,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             //未入力のTextFieldのキーボードを自動的に表示する
             TextField_category_debit.becomeFirstResponder()
         }
+    }
+    @objc private func handleTimer(_ timer: Timer) {
+        self.Label_Popup.text = "" //ポップアップの文字表示
+        // ③ Timer のスケジューリングを破棄
+        timer.invalidate()
     }
     @IBAction func Button_cancel(_ sender: UIButton) {
         // 終了させる　仕訳帳画面へ戻る
