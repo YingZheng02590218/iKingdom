@@ -67,17 +67,34 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            
-            TextField_category_debit.textColor = UIColor.black
-            TextField_category_credit.textColor = UIColor.black
-            TextField_amount_debit.textColor = UIColor.black
-            TextField_amount_credit.textColor = UIColor.black
+            // ダークモード対応
+            if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                /* ダークモード時の処理 */
+                TextField_category_debit.textColor = .white
+                TextField_category_credit.textColor = .white
+                TextField_amount_debit.textColor = .white
+                TextField_amount_credit.textColor = .white
+            } else {
+                /* ライトモード時の処理 */
+                // 文字色
+                TextField_category_debit.textColor = UIColor.black
+                TextField_category_credit.textColor = UIColor.black
+                TextField_amount_debit.textColor = UIColor.black
+                TextField_amount_credit.textColor = UIColor.black
+            }
             // 小書き　が空白だった場合
             if TextField_SmallWritting.text == "" {
                 TextField_SmallWritting.text = "取引内容"
                 TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             }else {
-                TextField_SmallWritting.textColor = UIColor.black
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    TextField_SmallWritting.textColor = .white
+                } else {
+                    /* ライトモード時の処理 */
+                    TextField_SmallWritting.textColor = UIColor.black
+                }
             }
         }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
@@ -327,8 +344,17 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_debit.text == ""{
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
-                TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
+                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
+                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+                }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_category_credit.text == "勘定科目" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
@@ -344,8 +370,17 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_credit.text == ""{
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
-                TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
+                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
+                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+                }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_SmallWritting.text == "取引内容" {
                     // カーソルを小書きへ移す
@@ -396,7 +431,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.textColor = UIColor.black // 文字色をブラックとする
+        // ダークモード対応
+        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+            /* ダークモード時の処理 */
+            textField.textColor = .white // 文字色をホワイトとする
+        } else {
+            /* ライトモード時の処理 */
+            // 文字色
+            textField.textColor = UIColor.black // 文字色をブラックとする
+        }
     }
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -533,7 +576,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_debit.text = "勘定科目"
             TextField_category_debit.textColor = UIColor.lightGray
                 }else {
-                TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    TextField_category_debit.textColor = .white // 文字色をホワイトとする
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
+                }
                 if TextField_amount_debit.text == "金額" {
                     TextField_amount_debit.becomeFirstResponder()
                 }
@@ -547,7 +598,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 TextField_category_credit.text = "勘定科目"
                 TextField_category_credit.textColor = UIColor.lightGray
             }else {
-                TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
+                // ダークモード対応
+                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+                    /* ダークモード時の処理 */
+                    TextField_category_credit.textColor = .white // 文字色をホワイトとする
+                } else {
+                    /* ライトモード時の処理 */
+                    // 文字色
+                    TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
+                }
 //                TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
                 if TextField_SmallWritting.text == "取引内容" {
                     TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
