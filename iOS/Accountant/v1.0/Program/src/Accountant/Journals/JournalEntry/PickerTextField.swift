@@ -399,7 +399,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @objc func cancel() {
-        self.text = "勘定科目"
+        self.text = ""
         self.endEditing(true)
     }
 }
