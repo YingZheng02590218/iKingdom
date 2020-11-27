@@ -241,9 +241,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_amount_credit.delegate = self
     // toolbar 借方 Done:Tag5 Cancel:Tag55
         let toolbar = UIToolbar()
-        toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-//        toolbar.backgroundColor = UIColor.clear// 名前で指定する
-        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
@@ -258,10 +256,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_amount_debit.inputAccessoryView = toolbar
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
-        toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-//        toolbar2.backgroundColor = UIColor.clear // バックグラウンドカラーをクリアにすると黒色になってしまう
-//        toolbar2.barTintColor = UIColor.clear
-        toolbar2.barTintColor = UIColor.white
+        toolbar2.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
         toolbar2.isTranslucent = true
         toolbar2.barStyle = .default
         let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
@@ -306,7 +301,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_SmallWritting.delegate = self
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
-       toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+       toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
 //       toolbar.backgroundColor = UIColor.clear// 名前で指定する
 //       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
        toolbar.isTranslucent = true
