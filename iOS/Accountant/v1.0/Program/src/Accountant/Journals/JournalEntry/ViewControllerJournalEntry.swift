@@ -350,7 +350,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
                 }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if TextField_category_credit.text == "勘定科目" {
+                if TextField_category_credit.text == "" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
                     TextField_category_credit.becomeFirstResponder()
                 }
@@ -376,7 +376,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
                 }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if TextField_SmallWritting.text == "取引内容" {
+                if TextField_SmallWritting.text == "" {
                     // カーソルを小書きへ移す
                     self.TextField_SmallWritting.becomeFirstResponder()
                 }
@@ -406,6 +406,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
         case 77://小書きの場合 Cancel
+            TextField_SmallWritting.text = ""
             TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             self.view.endEditing(true)
             break
@@ -438,11 +439,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         //todo
-        if textField.text == "勘定科目" {
+        if textField.text == "" {
             return true
-        }else if textField.text == "金額" {
+        }else if textField.text == "" {
             return true
-        }else if textField.text == "取引内容" {
+        }else if textField.text == "" {
             return true
         }else{
             return false
@@ -541,13 +542,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_debit.text == "" {
-            if TextField_amount_credit.text != "" || TextField_amount_credit.text != "金額" {
+            if TextField_amount_credit.text != "" || TextField_amount_credit.text != "" {
                 TextField_amount_debit.text = TextField_amount_credit.text
             }
             TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_credit.text == "" {
-            if TextField_amount_debit.text != "" || TextField_amount_debit.text != "金額" {
+            if TextField_amount_debit.text != "" || TextField_amount_debit.text != "" {
                 TextField_amount_credit.text = TextField_amount_debit.text
             }
             TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
@@ -569,7 +570,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //Segueを場合分け
         if textField.tag == 111 {
 //            TextField_category_debit.text = result  //ここで値渡し
-            if TextField_category_debit.text == "勘定科目" {
+            if TextField_category_debit.text == "" {
                 TextField_category_debit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 貸方と同じ勘定科目の場合
                 TextField_category_debit.text = ""
@@ -584,14 +585,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     // 文字色
                     TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
                 }
-                if TextField_amount_debit.text == "金額" {
+                if TextField_amount_debit.text == "" {
                     TextField_amount_debit.becomeFirstResponder()
                 }
             }
             Label_Popup.text = ""//ポップアップの文字表示をクリア
         }else if textField.tag == 222 {
 //            TextField_category_credit.text = result  //ここで値渡し
-            if TextField_category_credit.text == "勘定科目" {
+            if TextField_category_credit.text == "" {
                 TextField_category_credit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 借方と同じ勘定科目の場合
                 TextField_category_credit.text = ""
@@ -607,7 +608,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
                 }
 //                TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if TextField_SmallWritting.text == "取引内容" {
+                if TextField_SmallWritting.text == "" {
                     TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
                 }
             }
@@ -620,8 +621,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
             if TextField_amount_debit.text != "" {  // 初期値が代入されている
                 TextField_amount_credit.text = TextField_amount_debit.text          // 借方金額を貸方金額に表示
-                if  TextField_amount_debit.text != "金額" {                          // 借方金額が初期値ではない場合　かつ
-                    if TextField_category_credit.text == "勘定科目" {                 // 貸方勘定科目が未入力の場合に
+                if  TextField_amount_debit.text != "" {                          // 借方金額が初期値ではない場合　かつ
+                    if TextField_category_credit.text == "" {                 // 貸方勘定科目が未入力の場合に
                         //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
                         TextField_category_credit.becomeFirstResponder()            // カーソル移動
                     }
@@ -657,11 +658,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
 //        print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
         // 入力チェック
-        if TextField_category_debit.text != "勘定科目" && TextField_category_debit.text != "" {
-            if TextField_category_credit.text != "勘定科目" && TextField_category_credit.text != "" {
-                if TextField_amount_debit.text != "金額" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
-                    if TextField_amount_credit.text != "金額" && TextField_amount_credit.text != "" && TextField_amount_credit.text != "0" {
-                        if TextField_SmallWritting.text == "取引内容" {
+        if TextField_category_debit.text != "" && TextField_category_debit.text != "" {
+            if TextField_category_credit.text != "" && TextField_category_credit.text != "" {
+                if TextField_amount_debit.text != "" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
+                    if TextField_amount_credit.text != "" && TextField_amount_credit.text != "" && TextField_amount_credit.text != "0" {
+                        if TextField_SmallWritting.text == "" {
                             TextField_SmallWritting.text = ""
                         }
                         // データベース　仕訳データを追加
@@ -789,6 +790,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         timer.invalidate()
     }
     @IBAction func Button_cancel(_ sender: UIButton) {
+        TextField_category_debit.text = ""
+        TextField_category_credit.text = ""
+        TextField_amount_debit.text = ""
+        TextField_amount_credit.text = ""
+        TextField_SmallWritting.text = ""
         // 終了させる　仕訳帳画面へ戻る
         self.dismiss(animated: true, completion: nil)
     }
