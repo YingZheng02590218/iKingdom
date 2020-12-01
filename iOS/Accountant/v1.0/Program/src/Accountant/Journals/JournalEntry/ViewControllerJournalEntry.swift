@@ -26,6 +26,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // アプリ初期化
+        let initial = Initial()
+        initial.initialize()
 
         createDatePicker()
         createTextFieldForCategory()

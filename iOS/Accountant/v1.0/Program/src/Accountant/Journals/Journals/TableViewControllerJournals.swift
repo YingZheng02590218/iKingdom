@@ -37,9 +37,9 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         longPressRecognizer.delegate = self
         // tableViewにrecognizerを設定
         tableView.addGestureRecognizer(longPressRecognizer)
-        // アプリ初期化
-        let initial = Initial()
-        initial.initialize()
+//        // アプリ初期化 初期表示画面を仕訳画面に変更したため、初期化処理も移動　2020/12/01
+//        let initial = Initial()
+//        initial.initialize()
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
