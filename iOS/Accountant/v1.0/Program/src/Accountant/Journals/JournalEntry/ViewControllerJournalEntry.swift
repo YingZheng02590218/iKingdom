@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 仕訳クラス
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
+    
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
+    // true:テスト
+    let AdMobTest:Bool = false
+    @IBOutlet var interstitial: GADInterstitial!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -104,7 +114,22 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
 //        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
-    
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            // GADInterstitial を作成する
+            interstitial = GADInterstitial(adUnitID: TEST_ID)
+        }
+        else{
+            interstitial = GADInterstitial(adUnitID: AdMobID)
+        }
+
+        let request = GADRequest()
+        interstitial.load(request)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         // チュートリアル対応　初回起動時　7行を追加
         let ud = UserDefaults.standard
@@ -765,6 +790,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                                     repeats: false // 繰り返し呼び出し
                                 )
                             })
+                            // マネタイズ対応
+                            // 乱数　1から6までのIntを生成
+                            let iValue = Int.random(in: 1 ... 6)
+                            if iValue % 2 == 0 {
+                                if interstitial.isReady {
+                                    interstitial.present(fromRootViewController: self)
+                                }
+                            }
                         }
                     }else{
                         Label_Popup.text = "金額を入力してください"
