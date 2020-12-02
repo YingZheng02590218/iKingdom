@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 仕訳クラス
 class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
+    
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
+    // true:テスト
+    let AdMobTest:Bool = false
+    @IBOutlet var interstitial: GADInterstitial!
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -26,6 +36,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // アプリ初期化
+        let initial = Initial()
+        initial.initialize()
 
         createDatePicker()
         createTextFieldForCategory()
@@ -101,7 +114,22 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
 //        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
-    
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            // GADInterstitial を作成する
+            interstitial = GADInterstitial(adUnitID: TEST_ID)
+        }
+        else{
+            interstitial = GADInterstitial(adUnitID: AdMobID)
+        }
+
+        let request = GADRequest()
+        interstitial.load(request)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         // チュートリアル対応　初回起動時　7行を追加
         let ud = UserDefaults.standard
@@ -241,9 +269,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_amount_credit.delegate = self
     // toolbar 借方 Done:Tag5 Cancel:Tag55
         let toolbar = UIToolbar()
-        toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-//        toolbar.backgroundColor = UIColor.clear// 名前で指定する
-        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
@@ -258,10 +284,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_amount_debit.inputAccessoryView = toolbar
     // toolbar2 貸方 Done:Tag6 Cancel:Tag66
         let toolbar2 = UIToolbar()
-        toolbar2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
-//        toolbar2.backgroundColor = UIColor.clear // バックグラウンドカラーをクリアにすると黒色になってしまう
-//        toolbar2.barTintColor = UIColor.clear
-        toolbar2.barTintColor = UIColor.white
+        toolbar2.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
         toolbar2.isTranslucent = true
         toolbar2.barStyle = .default
         let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
@@ -306,7 +329,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         TextField_SmallWritting.delegate = self
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
-       toolbar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+       toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
 //       toolbar.backgroundColor = UIColor.clear// 名前で指定する
 //       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
        toolbar.isTranslucent = true
@@ -355,7 +378,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
                 }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if TextField_category_credit.text == "勘定科目" {
+                if TextField_category_credit.text == "" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
                     TextField_category_credit.becomeFirstResponder()
                 }
@@ -381,7 +404,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
                 }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if TextField_SmallWritting.text == "取引内容" {
+                if TextField_SmallWritting.text == "" {
                     // カーソルを小書きへ移す
                     self.TextField_SmallWritting.becomeFirstResponder()
                 }
@@ -411,6 +434,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
         case 77://小書きの場合 Cancel
+            TextField_SmallWritting.text = ""
             TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             self.view.endEditing(true)
             break
@@ -443,11 +467,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         //todo
-        if textField.text == "勘定科目" {
+        if textField.text == "" {
             return true
-        }else if textField.text == "金額" {
+        }else if textField.text == "" {
             return true
-        }else if textField.text == "取引内容" {
+        }else if textField.text == "" {
             return true
         }else{
             return false
@@ -546,13 +570,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_debit.text == "" {
-            if TextField_amount_credit.text != "" || TextField_amount_credit.text != "金額" {
+            if TextField_amount_credit.text != "" || TextField_amount_credit.text != "" {
                 TextField_amount_debit.text = TextField_amount_credit.text
             }
             TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_credit.text == "" {
-            if TextField_amount_debit.text != "" || TextField_amount_debit.text != "金額" {
+            if TextField_amount_debit.text != "" || TextField_amount_debit.text != "" {
                 TextField_amount_credit.text = TextField_amount_debit.text
             }
             TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
@@ -574,7 +598,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //Segueを場合分け
         if textField.tag == 111 {
 //            TextField_category_debit.text = result  //ここで値渡し
-            if TextField_category_debit.text == "勘定科目" {
+            if TextField_category_debit.text == "" {
                 TextField_category_debit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 貸方と同じ勘定科目の場合
                 TextField_category_debit.text = ""
@@ -589,14 +613,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     // 文字色
                     TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
                 }
-                if TextField_amount_debit.text == "金額" {
+                if TextField_amount_debit.text == "" {
                     TextField_amount_debit.becomeFirstResponder()
                 }
             }
             Label_Popup.text = ""//ポップアップの文字表示をクリア
         }else if textField.tag == 222 {
 //            TextField_category_credit.text = result  //ここで値渡し
-            if TextField_category_credit.text == "勘定科目" {
+            if TextField_category_credit.text == "" {
                 TextField_category_credit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 借方と同じ勘定科目の場合
                 TextField_category_credit.text = ""
@@ -612,7 +636,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                     TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
                 }
 //                TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if TextField_SmallWritting.text == "取引内容" {
+                if TextField_SmallWritting.text == "" {
                     TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
                 }
             }
@@ -625,8 +649,8 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
             if TextField_amount_debit.text != "" {  // 初期値が代入されている
                 TextField_amount_credit.text = TextField_amount_debit.text          // 借方金額を貸方金額に表示
-                if  TextField_amount_debit.text != "金額" {                          // 借方金額が初期値ではない場合　かつ
-                    if TextField_category_credit.text == "勘定科目" {                 // 貸方勘定科目が未入力の場合に
+                if  TextField_amount_debit.text != "" {                          // 借方金額が初期値ではない場合　かつ
+                    if TextField_category_credit.text == "" {                 // 貸方勘定科目が未入力の場合に
                         //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
                         TextField_category_credit.becomeFirstResponder()            // カーソル移動
                     }
@@ -662,11 +686,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 //        print("貸方金額　　 " + "\(String(describing: TextField_amount_credit.text))")
 //        print("小書き　　　 " + "\(String(describing: TextField_SmallWritting.text))")
         // 入力チェック
-        if TextField_category_debit.text != "勘定科目" && TextField_category_debit.text != "" {
-            if TextField_category_credit.text != "勘定科目" && TextField_category_credit.text != "" {
-                if TextField_amount_debit.text != "金額" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
-                    if TextField_amount_credit.text != "金額" && TextField_amount_credit.text != "" && TextField_amount_credit.text != "0" {
-                        if TextField_SmallWritting.text == "取引内容" {
+        if TextField_category_debit.text != "" && TextField_category_debit.text != "" {
+            if TextField_category_credit.text != "" && TextField_category_credit.text != "" {
+                if TextField_amount_debit.text != "" && TextField_amount_debit.text != "" && TextField_amount_debit.text != "0" {
+                    if TextField_amount_credit.text != "" && TextField_amount_credit.text != "" && TextField_amount_credit.text != "0" {
+                        if TextField_SmallWritting.text == "" {
                             TextField_SmallWritting.text = ""
                         }
                         // データベース　仕訳データを追加
@@ -766,6 +790,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                                     repeats: false // 繰り返し呼び出し
                                 )
                             })
+                            // マネタイズ対応
+                            // 乱数　1から6までのIntを生成
+                            let iValue = Int.random(in: 1 ... 6)
+                            if iValue % 2 == 0 {
+                                if interstitial.isReady {
+                                    interstitial.present(fromRootViewController: self)
+                                }
+                            }
                         }
                     }else{
                         Label_Popup.text = "金額を入力してください"
@@ -794,6 +826,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         timer.invalidate()
     }
     @IBAction func Button_cancel(_ sender: UIButton) {
+        TextField_category_debit.text = ""
+        TextField_category_credit.text = ""
+        TextField_amount_debit.text = ""
+        TextField_amount_credit.text = ""
+        TextField_SmallWritting.text = ""
         // 終了させる　仕訳帳画面へ戻る
         self.dismiss(animated: true, completion: nil)
     }

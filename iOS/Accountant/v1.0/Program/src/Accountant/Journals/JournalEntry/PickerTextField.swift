@@ -55,11 +55,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         picker.dataSource = self
         picker.showsSelectionIndicator = true
         // PickerView のサイズと位置 金額のTextfieldのキーボードの高さに合わせる
-        picker.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 350)
+        picker.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)!/3)
 //        picker.transform = CGAffineTransform(scaleX: 0.5, y: 0.5);
         
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width:0, height: 44))
-        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する alpha 0透明　1不透明
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44))
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
