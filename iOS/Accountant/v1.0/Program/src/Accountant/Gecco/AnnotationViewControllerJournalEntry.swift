@@ -123,7 +123,7 @@ private extension AnnotationViewControllerJournalEntry {
     
     func extractRightBarButtonConvertedFramess() -> (zero: CGRect,  firstLeft: CGRect, firstRight: CGRect, secondLeft: CGRect, secondRight: CGRect, third: CGRect) {
         guard
-            let zero        = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(111)?.viewWithTag(2222) as? UIDatePicker,
+            let zero        = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(11)!.viewWithTag(111)?.viewWithTag(2222) as? UIDatePicker,
             let firstLeft   = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(111) as? PickerTextField,
             let firstRight  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(222) as? PickerTextField,
             let secondLeft  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(4444)?.viewWithTag(333) as? UITextField,
