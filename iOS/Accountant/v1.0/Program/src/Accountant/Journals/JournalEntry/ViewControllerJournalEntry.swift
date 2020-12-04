@@ -820,11 +820,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             TextField_category_debit.becomeFirstResponder()
         }
     }
+    
     @objc private func handleTimer(_ timer: Timer) {
         self.Label_Popup.text = "" //ポップアップの文字表示
         // ③ Timer のスケジューリングを破棄
         timer.invalidate()
     }
+    
     @IBAction func Button_cancel(_ sender: UIButton) {
         TextField_category_debit.text = ""
         TextField_category_credit.text = ""
