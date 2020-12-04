@@ -39,7 +39,7 @@ class TableViewControllerFinancialStatement: UITableViewController {
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
 //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+        gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
