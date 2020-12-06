@@ -20,7 +20,12 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     // true:テスト
     let AdMobTest:Bool = false
     @IBOutlet var gADBannerView: GADBannerView!
-
+    // 広告ユニットID
+    let AdMobIDi = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
+    // テスト用広告ユニットID
+    let TEST_IDi = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
+    @IBOutlet var interstitial: GADInterstitial!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +34,6 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // 年度を追加後に会計期間画面を更新する
-        tableView.reloadData()
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
@@ -58,6 +61,26 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
         // GADBannerView を作成する
 //        addBannerViewToView(gADBannerView, constant: 0)
         addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
+        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+        // GADBannerView プロパティを設定する
+        if AdMobTest {
+            // GADInterstitial を作成する
+            interstitial = GADInterstitial(adUnitID: TEST_IDi)
+        }
+        else{
+            interstitial = GADInterstitial(adUnitID: AdMobIDi)
+        }
+        let request = GADRequest()
+        interstitial.load(request)
+    }
+    // インタースティシャル広告を表示　マネタイズ対応
+    func showAd() {
+        // 年度を追加後に会計期間画面を更新する
+        tableView.reloadData()
+        // マネタイズ対応
+        if self.interstitial.isReady {
+            self.interstitial.present(fromRootViewController: self)
+        }
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
