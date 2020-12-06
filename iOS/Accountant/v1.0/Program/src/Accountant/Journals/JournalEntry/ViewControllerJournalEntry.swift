@@ -489,7 +489,10 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             // 指定したスーパーセットの文字セットでないならfalseを返す
             resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
         }else{  // 小書き
-            resultForCharacter = true
+            let notAllowedCharacters = CharacterSet(charactersIn:",") // 除外したい文字。絵文字はInterface BuilderのKeyboardTypeで除外してある。
+            let characterSet = CharacterSet(charactersIn: string)
+            // 指定したスーパーセットの文字セットならfalseを返す
+            resultForCharacter = !(notAllowedCharacters.isSuperset(of: characterSet))
         }
         // 入力チェック　文字数最大数を設定
         var maxLength: Int = 0 // 文字数最大値を定義
@@ -507,6 +510,10 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let stringNumber = string.count
         // 最大文字数以上ならfalseを返す
         resultForLength = textFieldNumber + stringNumber <= maxLength
+        // 文字列が0文字の場合、backspaceキーが押下されたということなので一文字削除する
+        if(string == "") {
+            textField.deleteBackward()
+        }
         // 判定
         if !resultForCharacter { // 指定したスーパーセットの文字セットでないならfalseを返す
             return false
