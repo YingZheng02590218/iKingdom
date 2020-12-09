@@ -107,7 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 動作確認用
 //        ud.set(true, forKey: firstLunchKey)
 //        print(ud.bool(forKey: firstLunchKey))
-        
+        // 設定　仕訳帳
+        firstLunchKey = "firstLunch_SettingsJournals"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
+
         return true
     }
 
