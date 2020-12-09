@@ -22,6 +22,8 @@ class Initial {
         initializeAccountingBooksShelf()
         // 表示科目　初期化
         initializeTaxonomy()
+        // 設定操作　初期化
+        initializeSettingsOperating()
     }
     /**
     * 初期化　初期化メソッド
@@ -137,6 +139,16 @@ class Initial {
             dataBaseManagerTaxonomy.addTaxonomyAll()
         }else {
             print("deleteTaxonomyAll 失敗")
+        }
+    }
+    /**
+    * 初期化　初期化メソッド
+    * 設定操作を初期化する。
+    */
+    func initializeSettingsOperating() {
+        let dataBaseManager = DataBaseManagerSettingsOperating()
+        if !dataBaseManager.checkInitialising() {
+            dataBaseManager.addSettingsOperating()
         }
     }
 }
