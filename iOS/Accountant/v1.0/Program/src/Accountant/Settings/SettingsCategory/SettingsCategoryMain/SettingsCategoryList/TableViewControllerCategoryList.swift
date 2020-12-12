@@ -293,24 +293,24 @@ class TableViewControllerCategoryList: UITableViewController {
 //            return nil
 //        }
 //    }
-     // 削除機能 セルを左へスワイプ
-        override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            // 編集モードの場合
-            if tableView.isEditing {
-                // スタイルには、normal と　destructive がある
-                let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
-                    // なんか処理
-                    // 確認のポップアップを表示したい
-                    self.showPopover(indexPath: indexPath)
-                    completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
-                }
-                action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
-                let configuration = UISwipeActionsConfiguration(actions: [action])
-                return configuration
-            }else { // 編集モードではない状態でセルをスワイプした場合
-                let configuration = UISwipeActionsConfiguration(actions: [])
-                configuration.performsFirstActionWithFullSwipe = false
-                return configuration
+    // 削除機能 セルを左へスワイプ
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // 編集モードの場合
+        if tableView.isEditing {
+            // スタイルには、normal と　destructive がある
+            let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+                // なんか処理
+                // 確認のポップアップを表示したい
+                self.showPopover(indexPath: indexPath)
+                completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
             }
+            action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
+            let configuration = UISwipeActionsConfiguration(actions: [action])
+            return configuration
+        }else { // 編集モードではない状態でセルをスワイプした場合
+            let configuration = UISwipeActionsConfiguration(actions: [])
+            configuration.performsFirstActionWithFullSwipe = false
+            return configuration
         }
+    }
 }

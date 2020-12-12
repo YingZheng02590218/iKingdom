@@ -143,7 +143,7 @@ class DataBaseManagerJournalEntry {
         return objects
     }
     // 取得　決算整理仕訳
-    func getJournalAdjustingEntry(section: Int) -> Results<DataBaseAdjustingEntry> {
+    func getJournalAdjustingEntry(section: Int, EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry> {
         let realm = try! Realm()
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerPeriod()
@@ -151,6 +151,14 @@ class DataBaseManagerJournalEntry {
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         objects = objects.filter("fiscalYear == \(fiscalYear)")
+        // 設定操作
+        if !EnglishFromOfClosingTheLedger0 { // 損益振替仕訳
+            objects = objects.filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")') || (debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
+            print(objects)
+        }
+        if !EnglishFromOfClosingTheLedger1 { // 資本振替仕訳
+            objects = objects.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")
+        }
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         switch section {
         case 0: // April

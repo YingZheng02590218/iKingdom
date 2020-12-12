@@ -61,8 +61,10 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
             
             if tappedIndexPath.row >= objects.count {
-                let objectss = dataBaseManager.getJournalAdjustingEntry(section: tappedIndexPath.section)
-                
+                // 設定操作
+                let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
+                let object = dataBaseManagerSettingsOperating.getSettingsOperating()
+                let objectss = dataBaseManager.getJournalAdjustingEntry(section: tappedIndexPath.section, EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
                 primaryKey = objectss[tappedIndexPath.row-objects.count].number
                 datePicker.date = formatter.date(from: objectss[tappedIndexPath.row-objects.count].date)!// 注意：カンマの後にスペースがないとnilになる
                 TextField_category_debit.text = objectss[tappedIndexPath.row-objects.count].debit_category
