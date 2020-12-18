@@ -156,10 +156,10 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
     }
     // リロード機能
     @objc func refreshTable() {
-        // 全勘定の合計と残高を計算する
-//        let databaseManager = DataBaseManagerTB()
-//        databaseManager.setAllAccountTotal()
-//        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
+        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+        let databaseManager = DataBaseManagerTB()
+        databaseManager.setAllAccountTotal()
+        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
 //        let databaseManagerWS = DataBaseManagerWS()
 //        databaseManagerWS.calculateAmountOfAllAccount()

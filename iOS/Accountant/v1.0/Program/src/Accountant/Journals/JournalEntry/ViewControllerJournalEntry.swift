@@ -239,7 +239,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
             }
         }
         // ピッカーの初期値
-        datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+        if journalEntryType == "JournalEntriesFixing" { // 仕訳編集の場合
+            // 決算日設定機能　何もしない viewDidLoad()で値を設定している
+        }else {
+            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+        }
         // 背景色
         datePicker.backgroundColor = .systemBackground
     }
