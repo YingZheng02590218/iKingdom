@@ -24,6 +24,8 @@ class Initial {
         initializeTaxonomy()
         // 設定操作　初期化
         initializeSettingsOperating()
+        // 設定会計期間　決算日　初期化
+        initializePeriod()
     }
     /**
     * 初期化　初期化メソッド
@@ -149,6 +151,16 @@ class Initial {
         let dataBaseManager = DataBaseManagerSettingsOperating()
         if !dataBaseManager.checkInitialising() {
             dataBaseManager.addSettingsOperating()
+        }
+    }
+    /**
+    * 初期化　初期化メソッド
+    * 設定会計期間を初期化する。
+    */
+    func initializePeriod() {
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        if !dataBaseManager.checkInitialising() {
+            dataBaseManager.addSettingsPeriod()
         }
     }
 }

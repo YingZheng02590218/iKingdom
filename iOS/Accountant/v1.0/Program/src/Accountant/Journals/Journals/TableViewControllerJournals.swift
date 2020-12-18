@@ -40,16 +40,6 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
 //        // アプリ初期化 初期表示画面を仕訳画面に変更したため、初期化処理も移動　2020/12/01
 //        let initial = Initial()
 //        initial.initialize()
-        // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
-        label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
-        label_title.text = "仕訳帳"
-        // データベース　注意：Initialより後に記述する
-        Label_list_date_year.text = fiscalYear.description + "年"
         // 初期表示位置
 //        scroll = true
         //3桁ごとにカンマ区切りするフォーマット
@@ -69,6 +59,18 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // UIViewControllerの表示画面を更新・リロード
 //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         self.tableView.reloadData() // エラーが発生しないか心配
+        // 月末、年度末などの決算日をラベルに表示する
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        label_company_name.text = company // 社名
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
+        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        let object = dataBaseManager.getTheDayOfReckoning()
+        label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        label_title.text = "仕訳帳"
+        // データベース　注意：Initialより後に記述する
+        Label_list_date_year.text = fiscalYear.description + "年"
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
         // 空白行対応
         let dataBaseManagerAccount = DataBaseManagerAccount()

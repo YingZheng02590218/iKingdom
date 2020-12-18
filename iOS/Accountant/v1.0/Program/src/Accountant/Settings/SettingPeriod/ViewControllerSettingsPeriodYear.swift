@@ -22,7 +22,7 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
         // ドラムロールの初期位置 データベースに保存された年度の翌年
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         pickerView.selectRow(dataBaseManagerPeriod.getMainBooksAllCount(), inComponent: 0, animated: true) //翌年の分
     }
 
@@ -35,7 +35,7 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            let dataBaseManagerPeriod = DataBaseManagerPeriod()
+            let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
             return dataBaseManagerPeriod.getMainBooksAllCount() + 1 //翌年の分
         default:
             return 1
@@ -52,7 +52,7 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
      }
     // 年度の選択肢
     func getPeriodFromDB(row: Int) -> String {
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         
         let objects = dataBaseManagerPeriod.getMainBooksAll()
         if dataBaseManagerPeriod.getMainBooksAllCount() <= row {

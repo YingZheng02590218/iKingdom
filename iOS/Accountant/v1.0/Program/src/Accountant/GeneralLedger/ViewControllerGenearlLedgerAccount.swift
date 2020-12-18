@@ -40,7 +40,7 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
             label_list_heading.textColor = .black
         }
         // データベース
-        let dataBaseManager = DataBaseManagerPeriod()
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
         let fiscalYear = dataBaseManager.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
         label_date_year.text = fiscalYear.description + "年" 

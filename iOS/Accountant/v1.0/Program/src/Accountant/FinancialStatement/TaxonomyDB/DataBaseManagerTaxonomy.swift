@@ -50,7 +50,7 @@ class DataBaseManagerTaxonomy {
     // 取得 表示科目　表示名別の合計
     func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 設定表示科目の連番から表示科目の名称を取得
 //        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
@@ -78,7 +78,7 @@ class DataBaseManagerTaxonomy {
     */
     func setTotalOfTaxonomy(numberOfSettingsTaxonomy: Int) {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // 設定表示科目の名称を取得
 //        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
@@ -135,7 +135,7 @@ class DataBaseManagerTaxonomy {
     func getTotalAmount(account: String) -> Int64 {
         // 引数に空白が入るのでインデックスエラーとなる　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
         // 開いている会計帳簿を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         // (1)Realmのインスタンスを生成する
 //        let realm = try! Realm()
@@ -166,7 +166,7 @@ class DataBaseManagerTaxonomy {
     */
     func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
