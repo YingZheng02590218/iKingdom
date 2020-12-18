@@ -67,6 +67,8 @@
 		F99B65BF24B7A38F006BD3DD /* TableViewCellWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BE24B7A38F006BD3DD /* TableViewCellWS.swift */; };
 		F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */ = {isa = PBXBuildFile; fileRef = F99CF359251B2D18004295DE /* taxonomy.csv */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
+		F9A69B6D258A1D6A008E38B9 /* TableViewCellSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* TableViewCellSettingsPeriod.swift */; };
+		F9A69B6F258A65E1008E38B9 /* TableViewControllerSettingsTheDayOfReckoning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* TableViewControllerSettingsTheDayOfReckoning.swift */; };
 		F9AAB36224941F1A00AB2FBD /* TableViewCellAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AAB36124941F1A00AB2FBD /* TableViewCellAccount.swift */; };
 		F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED0D2566F56400678391 /* AnnotationViewControllerJournals.swift */; };
 		F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED0F2566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift */; };
@@ -82,7 +84,7 @@
 		F9D08D8F25444D2100CE3CB2 /* TableViewCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */; };
 		F9D08D9125444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9025444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift */; };
 		F9D08D9325444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9225444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift */; };
-		F9D224C62489208D006C6CD9 /* DataBaseManagerPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerPeriod.swift */; };
+		F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */; };
 		F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */; };
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
 		F9D34FB7248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D34FB6248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift */; };
@@ -93,6 +95,7 @@
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
+		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* DataBaseManagerWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */; };
 		F9F4605424BDD616008FE62B /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4605324BDD616008FE62B /* Migration.swift */; };
 		F9F4607424C9E0BD008FE62B /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603324AC679E0084A18B /* File2.swift */; };
@@ -202,6 +205,8 @@
 		F99B65BE24B7A38F006BD3DD /* TableViewCellWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellWS.swift; sourceTree = "<group>"; };
 		F99CF359251B2D18004295DE /* taxonomy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomy.csv; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
+		F9A69B6C258A1D6A008E38B9 /* TableViewCellSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellSettingsPeriod.swift; sourceTree = "<group>"; };
+		F9A69B6E258A65E1008E38B9 /* TableViewControllerSettingsTheDayOfReckoning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TableViewControllerSettingsTheDayOfReckoning.swift; path = SettingsTheDayOfReckoning/TableViewControllerSettingsTheDayOfReckoning.swift; sourceTree = "<group>"; };
 		F9AAB36124941F1A00AB2FBD /* TableViewCellAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellAccount.swift; sourceTree = "<group>"; };
 		F9BEED0D2566F56400678391 /* AnnotationViewControllerJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournals.swift; sourceTree = "<group>"; };
 		F9BEED0F2566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingPeriod.swift; sourceTree = "<group>"; };
@@ -214,7 +219,7 @@
 		F9CF22E62425016E00572070 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerSettingsCategoryDetail.swift; sourceTree = "<group>"; };
 		F9D08D9225444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellSettingAccountDetail.swift; sourceTree = "<group>"; };
-		F9D224C52489208D006C6CD9 /* DataBaseManagerPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPeriod.swift; sourceTree = "<group>"; };
+		F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
 		F9D34FB6248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettingsPeriodYear.swift; sourceTree = "<group>"; };
@@ -225,6 +230,7 @@
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
+		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerWS.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTaxonomy.swift; sourceTree = "<group>"; };
@@ -705,7 +711,8 @@
 		F9D224C424891ED3006C6CD9 /* SettingPeriodDB */ = {
 			isa = PBXGroup;
 			children = (
-				F9D224C52489208D006C6CD9 /* DataBaseManagerPeriod.swift */,
+				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
+				F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */,
 			);
 			path = SettingPeriodDB;
 			sourceTree = "<group>";
@@ -790,7 +797,9 @@
 			isa = PBXGroup;
 			children = (
 				F9F934EB248554DA00BF7AA7 /* TableViewControllerSettingsPeriod.swift */,
+				F9A69B6C258A1D6A008E38B9 /* TableViewCellSettingsPeriod.swift */,
 				F9D34FB6248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift */,
+				F9A69B6E258A65E1008E38B9 /* TableViewControllerSettingsTheDayOfReckoning.swift */,
 				F9D224C424891ED3006C6CD9 /* SettingPeriodDB */,
 			);
 			path = SettingPeriod;
@@ -1167,11 +1176,13 @@
 				F973981524A99D5F00A05C5F /* TableViewCellAmount.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift in Sources */,
+				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
 				F955B60C2490FB77005E2C6D /* TableViewControllerBS.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9354DB424989BAA007DB098 /* DataBaseTrialBalance.swift in Sources */,
+				F9A69B6F258A65E1008E38B9 /* TableViewControllerSettingsTheDayOfReckoning.swift in Sources */,
 				F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F92F4EF4249CCD5B00D50767 /* ViewControllerTB.swift in Sources */,
 				F9789A342475C49B00B62CAF /* TableViewControllerSettings.swift in Sources */,
@@ -1194,7 +1205,7 @@
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
 				F976798D24A8904B007A0D73 /* DataBaseManagerPL.swift in Sources */,
-				F9D224C62489208D006C6CD9 /* DataBaseManagerPeriod.swift in Sources */,
+				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* TableViewControllerSettingsInformation.swift in Sources */,
@@ -1212,6 +1223,7 @@
 				F955B6112490FD3E005E2C6D /* TableViewControllerCF.swift in Sources */,
 				F9D5D544247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift in Sources */,
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
+				F9A69B6D258A1D6A008E38B9 /* TableViewCellSettingsPeriod.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 			);

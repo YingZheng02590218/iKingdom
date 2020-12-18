@@ -27,14 +27,6 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf() 
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
-        label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerPeriod() //データベースマネジャー
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
-        label_title.text = "損益計算書"
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -42,6 +34,16 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
+        // 月末、年度末などの決算日をラベルに表示する
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        label_company_name.text = company // 社名
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod() //データベースマネジャー
+        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        let object = dataBaseManager.getTheDayOfReckoning()
+        label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        label_title.text = "損益計算書"
         // 損益計算書　初期化　再計算
         dataBaseManagerPL.initializeBenefits()
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため

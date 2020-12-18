@@ -28,14 +28,6 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
-        label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
-        label_title.text = "貸借対照表"
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -43,6 +35,16 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // 月末、年度末などの決算日をラベルに表示する
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        label_company_name.text = company // 社名
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
+        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        let object = dataBaseManager.getTheDayOfReckoning()
+        label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        label_title.text = "貸借対照表"
         // 貸借対照表　計算
         dataBaseManagerBS.initializeBS()
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
