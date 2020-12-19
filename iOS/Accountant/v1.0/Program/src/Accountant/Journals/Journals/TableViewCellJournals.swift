@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  TableViewCellJournals.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/03/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class TableViewCellJournals: UITableViewCell {
 
     @IBOutlet weak var label_list_summary_debit: UILabel!
     @IBOutlet weak var label_list_summary_credit: UILabel!

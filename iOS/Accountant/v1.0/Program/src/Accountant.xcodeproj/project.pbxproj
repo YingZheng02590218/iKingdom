@@ -78,7 +78,7 @@
 		F9C2BEBA250C9E8500825936 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.swift */; };
 		F9C2BEBD250CCF9E00825936 /* TableViewControllerSettingsTaxonomyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* TableViewControllerSettingsTaxonomyList.swift */; };
 		F9CF22E52424F46500572070 /* TableViewControllerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E42424F46500572070 /* TableViewControllerJournals.swift */; };
-		F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* TableViewCell.swift */; };
+		F9CF22E72425016E00572070 /* TableViewCellJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* TableViewCellJournals.swift */; };
 		F9D08D8D25444CF700CE3CB2 /* TableViewCellSettingAccountDetailAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422D9253F091500FBA052 /* TableViewCellSettingAccountDetailAccount.swift */; };
 		F9D08D8E25444CF700CE3CB2 /* TableViewCellSettingAccountDetailTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422D8253F091500FBA052 /* TableViewCellSettingAccountDetailTaxonomy.swift */; };
 		F9D08D8F25444D2100CE3CB2 /* TableViewCellSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* TableViewCellSettings.swift */; };
@@ -216,7 +216,7 @@
 		F9C2BEB9250C9E8500825936 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerSettingsTaxonomyAccountByTaxonomyList.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* TableViewControllerSettingsTaxonomyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerSettingsTaxonomyList.swift; sourceTree = "<group>"; };
 		F9CF22E42424F46500572070 /* TableViewControllerJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerJournals.swift; sourceTree = "<group>"; };
-		F9CF22E62425016E00572070 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		F9CF22E62425016E00572070 /* TableViewCellJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellJournals.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewControllerSettingsCategoryDetail.swift; sourceTree = "<group>"; };
 		F9D08D9225444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellSettingAccountDetail.swift; sourceTree = "<group>"; };
 		F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsPeriod.swift; sourceTree = "<group>"; };
@@ -656,7 +656,7 @@
 			isa = PBXGroup;
 			children = (
 				F9CF22E42424F46500572070 /* TableViewControllerJournals.swift */,
-				F9CF22E62425016E00572070 /* TableViewCell.swift */,
+				F9CF22E62425016E00572070 /* TableViewCellJournals.swift */,
 				F9F934F32485EC2300BF7AA7 /* JournalsDB */,
 			);
 			path = Journals;
@@ -1153,7 +1153,7 @@
 				F98EF6E0257CC03500CBCDDC /* TableViewControllerSettingsOperating.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F99112DF249514DB00E28BB9 /* TableViewCellTotalOfMiddleCategory.swift in Sources */,
-				F9CF22E72425016E00572070 /* TableViewCell.swift in Sources */,
+				F9CF22E72425016E00572070 /* TableViewCellJournals.swift in Sources */,
 				F9F934EC248554DA00BF7AA7 /* TableViewControllerSettingsPeriod.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9CF22E52424F46500572070 /* TableViewControllerJournals.swift in Sources */,
