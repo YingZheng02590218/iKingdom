@@ -99,47 +99,6 @@ class DataBaseManagerJournalEntry {
         var objects = realm.objects(DataBaseJournalEntry.self)
         objects = objects.filter("fiscalYear == \(fiscalYear)")
         objects = objects.sorted(byKeyPath: "date", ascending: true)
-        switch section {
-        case 0: // April
-            objects = objects.filter("date LIKE '*/04/*'")
-            break
-        case 1: // May
-            objects = objects.filter("date LIKE '*/05/*'")
-            break
-        case 2: // June
-            objects = objects.filter("date LIKE '*/06/*'")
-            break
-        case 3: // July
-            objects = objects.filter("date LIKE '*/07/*'")
-            break
-        case 4: // Ogust
-            objects = objects.filter("date LIKE '*/08/*'")
-            break
-        case 5: // September
-            objects = objects.filter("date LIKE '*/09/*'")
-            break
-        case 6: // October
-            objects = objects.filter("date LIKE '*/10/*'")
-            break
-        case 7: // Nobember
-            objects = objects.filter("date LIKE '*/11/*'")
-            break
-        case 8: // December
-            objects = objects.filter("date LIKE '*/12/*'")
-            break
-        case 9: // January
-            objects = objects.filter("date LIKE '*/01/*'")
-            break
-        case 10: // Feburary
-            objects = objects.filter("date LIKE '*/02/*'")
-            break
-        case 11: // March
-            objects = objects.filter("date LIKE '*/03/*'")
-            break
-        default:
-            // ありえない
-            break
-        }
         return objects
     }
     // 取得　決算整理仕訳
@@ -160,47 +119,6 @@ class DataBaseManagerJournalEntry {
             objects = objects.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")
         }
         objects = objects.sorted(byKeyPath: "date", ascending: true)
-        switch section {
-        case 0: // April
-            objects = objects.filter("date LIKE '*/04/*'")
-            break
-        case 1: // May
-            objects = objects.filter("date LIKE '*/05/*'")
-            break
-        case 2: // June
-            objects = objects.filter("date LIKE '*/06/*'")
-            break
-        case 3: // July
-            objects = objects.filter("date LIKE '*/07/*'")
-            break
-        case 4: // Ogust
-            objects = objects.filter("date LIKE '*/08/*'")
-            break
-        case 5: // September
-            objects = objects.filter("date LIKE '*/09/*'")
-            break
-        case 6: // October
-            objects = objects.filter("date LIKE '*/10/*'")
-            break
-        case 7: // Nobember
-            objects = objects.filter("date LIKE '*/11/*'")
-            break
-        case 8: // December
-            objects = objects.filter("date LIKE '*/12/*'")
-            break
-        case 9: // January
-            objects = objects.filter("date LIKE '*/01/*'")
-            break
-        case 10: // Feburary
-            objects = objects.filter("date LIKE '*/02/*'")
-            break
-        case 11: // March
-            objects = objects.filter("date LIKE '*/03/*'")
-            break
-        default:
-            // ありえない
-            break
-        }
         return objects
     }
     // 丁数を取得

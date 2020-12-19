@@ -58,7 +58,11 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         let dataBaseManager = DataBaseManagerSettingsPeriod()
         let object = dataBaseManager.getTheDayOfReckoning()
-        label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        if object == "12/31" { // 会計期間が年をまたがない場合
+            label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }else {
+            label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             label_title.text = "決算整理前合計試算表"
         }else {

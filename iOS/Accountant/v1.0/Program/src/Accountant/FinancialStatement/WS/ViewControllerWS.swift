@@ -52,7 +52,11 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
         let dataBaseManager = DataBaseManagerSettingsPeriod()
         let object = dataBaseManager.getTheDayOfReckoning()
-        label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        if object == "12/31" { // 会計期間が年をまたがない場合
+            label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }else {
+            label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }
         label_title.text = "精算表"
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
