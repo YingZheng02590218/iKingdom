@@ -1,5 +1,5 @@
 //
-//  DataBaseManagerPeriod.swift
+//  DataBaseManagerSettingsPeriod.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/06/04.
@@ -10,8 +10,82 @@ import Foundation
 import RealmSwift
 
 // 会計期間クラス
-class DataBaseManagerPeriod {
+class DataBaseManagerSettingsPeriod {
 
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkInitialising() -> Bool {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを全て取得する
+        let objects = realm.objects(DataBaseSettingsPeriod.self)
+        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
+    // 追加　会計期間
+    func addSettingsPeriod() {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)書き込みトランザクション内でデータを追加する
+        // オブジェクトを作成
+        let dataBaseSettingsPeriod = DataBaseSettingsPeriod() // 仕訳帳
+        try! realm.write {
+            let number = dataBaseSettingsPeriod.save() // 自動採番
+            realm.add(dataBaseSettingsPeriod)
+        }
+    }
+    // 取得　決算日
+    func getTheDayOfReckoning() -> String {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを全て取得する
+        let object = realm.object(ofType: DataBaseSettingsPeriod.self, forPrimaryKey: 1)
+        return object!.theDayOfReckoning
+    }
+    // 更新　決算日
+    func setTheDayOfReckoning(month: Bool, date: String) {
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        var dateChanged = ""
+        if date.count < 2 {
+           dateChanged = "0" + date
+        }else {
+            dateChanged = date
+        }
+        var theDayOfReckoning = ""
+        let d = getTheDayOfReckoning()
+        if !month {
+            theDayOfReckoning = String(d.prefix(2) + "/\(dateChanged)") // 先頭2文字
+        }else { // 月
+            // 月別に日数を調整する
+            var dayChanged = ""
+            switch dateChanged {
+            case "02":
+                if d.suffix(2) == "29" || d.suffix(2) == "30" || d.suffix(2) == "31" {
+                    dayChanged = "28"
+                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
+                }else {
+                    theDayOfReckoning = String("\(dateChanged)/" + d.suffix(2)) // 末尾2文字
+                }
+                break
+            case "04","06","09","11":
+                if d.suffix(2) == "31" {
+                    dayChanged = "30"
+                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
+                }else {
+                    theDayOfReckoning = String("\(dateChanged)/" + d.suffix(2)) // 末尾2文字
+                }
+                break
+            default:
+                theDayOfReckoning = String("\(dateChanged)/" + d.suffix(2)) // 末尾2文字
+                break
+            }
+        }
+        // (2)書き込みトランザクション内でデータを更新する
+        try! realm.write {
+            // 選択された月または日に更新する
+            let value: [String: Any] = ["number": 1, "theDayOfReckoning": theDayOfReckoning]
+            realm.create(DataBaseSettingsPeriod.self, value: value, update: .modified) // 一部上書き更新
+        }
+    }
     // すべてのモデルオブフェクトの取得
     func getMainBooksAllCount() -> Int {
         // (1)Realmのインスタンスを生成する
