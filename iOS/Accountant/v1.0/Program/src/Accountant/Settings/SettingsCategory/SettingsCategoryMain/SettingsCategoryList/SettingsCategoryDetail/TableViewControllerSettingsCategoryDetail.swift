@@ -130,6 +130,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
     var numberOfTaxonomy :Int = 0 // 表示科目番号
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+        cell.accessoryType = .none
         cell.label.text = "-"
         // セルの選択不可にする
         cell.selectionStyle = .none
@@ -139,6 +140,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 switch indexPath.row {
                 case 0:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
+                    cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
                     cell.textLabel?.textColor = .lightGray
@@ -154,6 +156,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     return cell
                 case 1:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
+                    cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
                     cell.textLabel?.textColor = .lightGray
@@ -182,6 +185,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
 //                    return cell
 //                case 3:
                     let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_Account", for: indexPath) as! TableViewCellSettingAccountDetailAccount
+                    cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
                     cell.textLabel?.text = "勘定科目名"
@@ -199,6 +203,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 }
             }else { // タクソノミ　表示科目
                 let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+                cell.accessoryType = .disclosureIndicator
                 // セルの選択
                 cell.selectionStyle = .default
                 cell.textLabel?.text = "表示科目名"
@@ -230,6 +235,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
             }
         }else { // 新規追加　以外
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+            cell.accessoryType = .none
             // セルの選択
             cell.selectionStyle = .none
             // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
@@ -358,6 +364,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     break
                 }
             }else { // タクソノミ　表示科目
+                cell.accessoryType = .disclosureIndicator
                 // セルの選択
                 cell.selectionStyle = .default
                 cell.textLabel?.text = "表示科目名"
@@ -661,5 +668,4 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         }
 
     }
-
 }

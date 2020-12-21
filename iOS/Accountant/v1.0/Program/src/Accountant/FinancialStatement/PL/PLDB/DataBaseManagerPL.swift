@@ -44,7 +44,7 @@ class DataBaseManagerPL {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         
         let realm = try! Realm()
@@ -71,7 +71,7 @@ class DataBaseManagerPL {
     // 取得　階層0 大区分
     func getTotalRank0(big5: Int, rank0: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
@@ -110,7 +110,7 @@ class DataBaseManagerPL {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 
         let realm = try! Realm()
@@ -146,7 +146,7 @@ class DataBaseManagerPL {
     // 取得　階層1 中区分
     func getTotalRank1(big5: Int, rank1: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
@@ -173,7 +173,7 @@ class DataBaseManagerPL {
     // 利益　計算
     func setBenefitTotal() {
         // 開いている会計帳簿を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 
         // 利益5種類　売上総利益、営業利益、経常利益、税金等調整前当期純利益、当期純利益
@@ -207,7 +207,7 @@ class DataBaseManagerPL {
     // 利益　取得
     func getBenefitTotal(benefit: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
@@ -237,7 +237,7 @@ class DataBaseManagerPL {
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
@@ -268,7 +268,7 @@ class DataBaseManagerPL {
     // 借又貸を取得
     func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
