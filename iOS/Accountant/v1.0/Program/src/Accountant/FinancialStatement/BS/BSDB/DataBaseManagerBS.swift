@@ -44,7 +44,7 @@ class DataBaseManagerBS {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 
         let realm = try! Realm()
@@ -89,7 +89,7 @@ class DataBaseManagerBS {
     // 取得　五大区分
     func getTotalBig5(big5: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
@@ -129,7 +129,7 @@ class DataBaseManagerBS {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 
         let realm = try! Realm()
@@ -168,7 +168,7 @@ class DataBaseManagerBS {
     // 取得　階層0 大区分
     func getTotalRank0(big5: Int, rank0: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
@@ -211,7 +211,7 @@ class DataBaseManagerBS {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 
         let realm = try! Realm()
@@ -243,7 +243,7 @@ class DataBaseManagerBS {
     // 取得　階層1 中区分
     func getTotalRank1(big5: Int, rank1: Int) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
@@ -266,7 +266,7 @@ class DataBaseManagerBS {
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     func getTotalAmount(account: String) ->Int64 {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
@@ -289,7 +289,7 @@ class DataBaseManagerBS {
     // 借又貸を取得
     func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
@@ -354,7 +354,7 @@ class DataBaseManagerBS {
     // 借又貸を取得 5大区分用
     func getTotalDebitOrCreditForBig5(big_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
