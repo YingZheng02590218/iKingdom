@@ -44,25 +44,30 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 合計額を計算
         let databaseManager = DataBaseManagerTB()
         databaseManager.calculateAmountOfAllAccount()
-        // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
-        label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        // どこで設定した年度のデータを参照するか考える
-        label_closingDate.text = String(fiscalYear+1) + "年3月31日" // 決算日を表示する
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "決算整理前合計試算表"
-        }else {
-            label_title.text = "決算整理前残高試算表"
-        }
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.TableView_TB.refreshControl = refreshControl
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
+        // 月末、年度末などの決算日をラベルに表示する
+        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
+        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        label_company_name.text = company // 社名
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
+        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        let object = dataBaseManager.getTheDayOfReckoning()
+        if object == "12/31" { // 会計期間が年をまたがない場合
+            label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }else {
+            label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
+        }
+        if segmentedControl_switch.selectedSegmentIndex == 0 {
+            label_title.text = "決算整理前合計試算表"
+        }else {
+            label_title.text = "決算整理前残高試算表"
+        }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         TableView_TB.tableFooterView = tableFooterView
@@ -131,10 +136,10 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        let databaseManagerWS = DataBaseManagerWS()
+//        databaseManagerWS.calculateAmountOfAllAccount()
+//        databaseManagerWS.calculateAmountOfAllAccountForBS()
+//        databaseManagerWS.calculateAmountOfAllAccountForPL()
         // 更新処理
         self.TableView_TB.reloadData()
         // クルクルを止める

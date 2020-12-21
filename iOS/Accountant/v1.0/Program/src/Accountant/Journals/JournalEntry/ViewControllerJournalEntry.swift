@@ -40,7 +40,6 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         let initial = Initial()
         initial.initialize()
 
-        createDatePicker()
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
@@ -118,6 +117,9 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
+        // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        createDatePicker()
+
         // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
         // GADBannerView プロパティを設定する
         if AdMobTest {
@@ -189,7 +191,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         timezone.locale = Locale(identifier: "en_US_POSIX")
 
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerPeriod()
+        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         let object = dataBaseManagerPeriod.getSettingsPeriod()
         let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
@@ -198,34 +200,66 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         
         let nowStringMonthDay = fff.string(from: now)                             //月日
         
+        // 設定決算日
+        let dataBaseManager = DataBaseManagerSettingsPeriod()
+        let theDayOfReckoning = dataBaseManager.getTheDayOfReckoning()
+
+        // 期間
         let dayOfStartInYear :Date   = fff.date(from: "01/01")!
-        let dayOfEndInPeriod :Date   = fff.date(from: "03/31")!
-        let dayOfStartInPeriod :Date = fff.date(from: "04/01")!
+        let dayOfEndInPeriod :Date   = fff.date(from: theDayOfReckoning)! // 決算日設定機能 注意：nowStringYearは、開始日の日付が存在するかどうかを確認するために記述した。閏年など
+        let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: fff.date(from: theDayOfReckoning)!)! // 決算日設定機能　年度開始日は決算日の翌日に設定する
+        let dayOfStartInPeriod :Date = fff.date(from: fff.string(from: modifiedDate))!//"04/01")! // 決算日設定機能　年度開始日
         let dayOfEndInYear :Date     = fff.date(from: "12/31")!
 
-        //一月以降か
-        let Interval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: fff.date(from: nowStringMonthDay)! )).month
-        //三月三十一日未満か
-        let Interval1 = (Calendar.current.dateComponents([.month], from: dayOfEndInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
-        //四月以降か
-        let Interval2 = (Calendar.current.dateComponents([.month], from: dayOfStartInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
-        //十二月と同じ、もしくはそれ以前か
-        let Interval3 = (Calendar.current.dateComponents([.month], from: dayOfEndInYear, to: fff.date(from: nowStringMonthDay)! )).month
-        
-        if  Interval! >= 0  {
-            if  Interval1! <= 0  { //第四四半期の場合
-                datePicker.minimumDate = ffff2.date(from: (nowStringPreviousYear + "-04-01"))
-                datePicker.maximumDate = ffff2.date(from: (nowStringYear + "-03-31"))
+        // デイトピッカーの最大値と最小値を設定
+        if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳の場合は日付を決算日に固定
+            if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
+                datePicker.minimumDate = ffff2.date(from: nowStringYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))")
+                datePicker.maximumDate = ffff2.date(from: nowStringYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))")
+            }else { // 会計期間が年をまたぐ場合
+                datePicker.minimumDate = ffff2.date(from: nowStringNextYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))")
+                datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))")
+            }
+        }else {
+            if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
+                datePicker.minimumDate = ffff2.date(from: nowStringYear + "-\(timezone.string(from: modifiedDate))")
+                datePicker.maximumDate = ffff2.date(from: nowStringYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))")
+            }else { // 会計期間が年をまたぐ場合
+                //一月以降か
+                let Interval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: fff.date(from: nowStringMonthDay)! )).month
+                //三月三十一日未満か
+                let Interval1 = (Calendar.current.dateComponents([.month], from: dayOfEndInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
                 //四月以降か
-            }else if Interval2! >= 0 { //第一四半期　以降
-                if Interval3! <= 0 { //第三四半期　以内
-                    datePicker.minimumDate = ffff2.date(from: nowStringYear + "-04-01")!    //04-02にすると04-01となる
-                    datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-03-31")!//04-01にすると03-31となる
+                let Interval2 = (Calendar.current.dateComponents([.month], from: dayOfStartInPeriod, to: fff.date(from: nowStringMonthDay)! )).month
+                //十二月と同じ、もしくはそれ以前か
+                let Interval3 = (Calendar.current.dateComponents([.month], from: dayOfEndInYear, to: fff.date(from: nowStringMonthDay)! )).month
+                
+                if  Interval! >= 0  {
+                    if  Interval1! <= 0  { //第四四半期の場合
+                        datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: fffff.date(from: theDayOfReckoning + "/" + nowStringPreviousYear + ", " + ffffff.string(from: now))!) // 決算日設定機能　注意：カンマの後にスペースがないとnilになる
+                        datePicker.maximumDate = ffff2.date(from: (nowStringYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))"))
+                        //四月以降か
+                    }else if Interval2! >= 0 { //第一四半期　以降
+                        if Interval3! <= 0 { //第三四半期　以内
+                            datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: fffff.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + ffffff.string(from: now))!) // 決算日設定機能　注意：カンマの後にスペースがないとnilになる 04-02にすると04-01となる
+                            datePicker.maximumDate = ffff2.date(from: nowStringNextYear + "-\(timezone.string(from: fff.date(from: theDayOfReckoning)!))") //04-01にすると03-31となる
+                        }
+                    }
                 }
             }
         }
         // ピッカーの初期値
-        datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+        if journalEntryType == "JournalEntriesFixing" { // 仕訳編集の場合
+            // 決算日設定機能　何もしない viewDidLoad()で値を設定している
+        }else if journalEntryType == "AdjustingAndClosingEntries" {
+            if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
+                datePicker.date = fffff.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+            }else {
+                datePicker.date = fffff.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+            }
+        }else {
+            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+        }
         // 背景色
         datePicker.backgroundColor = .systemBackground
     }
