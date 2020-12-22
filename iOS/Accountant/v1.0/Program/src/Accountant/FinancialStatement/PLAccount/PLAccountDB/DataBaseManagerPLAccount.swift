@@ -18,7 +18,7 @@ class DataBaseManagerPLAccount  {
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
                 .filter("fiscalYear == \(fiscalYear)")
@@ -43,7 +43,7 @@ class DataBaseManagerPLAccount  {
             var number = 0                                          //仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
             let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-            let object = dataBaseManagerPeriod.getSettingsPeriod()
+            let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
             let fiscalYear = object.dataBaseJournals?.fiscalYear
             dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
             // 決算日
@@ -136,7 +136,7 @@ class DataBaseManagerPLAccount  {
             var number = 0                                          //仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
             let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-            let object = dataBaseManagerPeriod.getSettingsPeriod()
+            let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
             let fiscalYear = object.dataBaseJournals?.fiscalYear
             dataBaseJournalEntry.fiscalYear = fiscalYear!                        //年度
             // 決算日

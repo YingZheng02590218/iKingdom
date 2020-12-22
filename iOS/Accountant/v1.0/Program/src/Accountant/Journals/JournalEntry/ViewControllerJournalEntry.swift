@@ -192,7 +192,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
