@@ -110,6 +110,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        // ダークモード対応
+        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+            /* ダークモード時の処理 */
+            label_title.textColor = .white
+        } else {
+            /* ライトモード時の処理 */
+            label_title.textColor = UIColor.black
+        }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
 //        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
