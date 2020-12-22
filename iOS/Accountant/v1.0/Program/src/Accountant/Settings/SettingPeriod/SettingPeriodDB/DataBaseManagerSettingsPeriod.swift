@@ -107,16 +107,39 @@ class DataBaseManagerSettingsPeriod {
         return objects
     }
     // 特定のモデルオブフェクトの取得　会計帳簿
-    func getSettingsPeriod() -> DataBaseAccountingBooks { // メソッド名を変更する
+    func getSettingsPeriod(lastYear: Bool) -> DataBaseAccountingBooks { // メソッド名を変更する
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
         // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
         objects = objects.filter("openOrClose == \(true)")
-        // (2)データベース内に保存されているモデルをひとつ取得する
-        let object = realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
-        return object // 会計帳簿を返す
+        // 前年度の会計帳簿をし取得する場合
+        if lastYear {
+            let objectss = realm.objects(DataBaseAccountingBooks.self)
+            for i in 0..<objectss.count {
+                if objects[0].fiscalYear - 1 == objectss[i].fiscalYear { // 前年度と同じ年の会計帳簿を判断
+                    return objectss[i] // 前年度の会計帳簿を返す
+                }
+            }
+        }
+        return objects[0] // 今年度の会計帳簿を返す
+    }
+    // チェック　会計帳簿　前年度の会計帳簿
+    func checkSettingsPeriod() -> Bool { // メソッド名を変更する
+        // (1)Realmのインスタンスを生成する
+        let realm = try! Realm()
+        // (2)データベース内に保存されているモデルを全て取得する
+        var objects = realm.objects(DataBaseAccountingBooks.self) // モデル
+        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+        objects = objects.filter("openOrClose == \(true)")
+        let objectss = realm.objects(DataBaseAccountingBooks.self)
+        for i in 0..<objectss.count {
+            if objects[0].fiscalYear - 1 == objectss[i].fiscalYear { // 前年度と同じ年の会計帳簿を判断
+                return true // 前年度の会計帳簿はある
+            }
+        }
+        return false // 前年度の会計帳簿はない
     }
     // 年度の取得　会計帳簿
     func getSettingsPeriodYear() -> Int {
