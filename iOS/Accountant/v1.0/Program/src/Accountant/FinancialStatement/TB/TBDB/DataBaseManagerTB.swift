@@ -146,7 +146,7 @@ class DataBaseManagerTB {
     func clearAccountTotal(account: String) {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         try! realm.write {
@@ -204,7 +204,7 @@ class DataBaseManagerTB {
         }
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         try! realm.write {
@@ -275,7 +275,7 @@ class DataBaseManagerTB {
         }
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
@@ -328,7 +328,7 @@ class DataBaseManagerTB {
     private func calculateAccountTotalAfterAdjusting(account: String) { // 損益勘定 用も作る
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         // 決算振替仕訳　損益勘定振替
         let dataBaseManagerPLAccount = DataBaseManagerPLAccount()
         
@@ -404,7 +404,7 @@ class DataBaseManagerTB {
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
@@ -456,7 +456,7 @@ class DataBaseManagerTB {
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
@@ -512,7 +512,7 @@ class DataBaseManagerTB {
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0

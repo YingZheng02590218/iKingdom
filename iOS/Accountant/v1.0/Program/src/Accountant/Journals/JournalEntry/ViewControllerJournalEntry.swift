@@ -110,6 +110,14 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        // ダークモード対応
+        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+            /* ダークモード時の処理 */
+            label_title.textColor = .white
+        } else {
+            /* ライトモード時の処理 */
+            label_title.textColor = UIColor.black
+        }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
 //        NotificationCenter.default.addObserver(self, selector: #selector(ViewControllerJournalEntry.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
@@ -192,7 +200,7 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
 
         // 開いている会計帳簿の年度を取得
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod()
+        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
         let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
