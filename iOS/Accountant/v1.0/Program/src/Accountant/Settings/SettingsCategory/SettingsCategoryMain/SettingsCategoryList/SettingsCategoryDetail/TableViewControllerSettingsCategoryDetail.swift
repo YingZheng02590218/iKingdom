@@ -51,7 +51,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
 //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
         // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
+        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
         // GADBannerView プロパティを設定する
         if AdMobTest {
             gADBannerView.adUnitID = TEST_ID
@@ -145,6 +145,8 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.selectionStyle = .none
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
+                    print(cell.textLabel?.font.pointSize)// = .systemFont(ofSize: 15))
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     // 勘定科目の名称をセルに表示する
                     cell.textLabel?.text = "大区分"
                     if cell.textField_AccountDetail_big.text != "選択してください" && cell.textField_AccountDetail_big.text != "" {
@@ -161,6 +163,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.selectionStyle = .none
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     cell.textLabel?.text = "中区分"
                     if cell.textField_AccountDetail_big.text != "選択してください" && cell.textField_AccountDetail_big.text != "" {
                     }else {
@@ -188,6 +191,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     cell.textLabel?.text = "勘定科目名"
                     cell.textLabel?.textColor = .lightGray
                     if cell.textField_AccountDetail_Account.text != "入力してください" && cell.textField_AccountDetail_Account.text != "" {
@@ -208,6 +212,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 cell.selectionStyle = .default
                 cell.textLabel?.text = "表示科目名"
                 cell.textLabel?.textColor = .lightGray
+                cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目名
 //                let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
                 if self.numberOfTaxonomy != 0 {
@@ -249,6 +254,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.textLabel?.text = "大区分"
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     switch object?.Rank0 {
                     case "0": cell.label.text =   "流動資産"
                         break
@@ -285,6 +291,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.textLabel?.text = "中区分"
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     switch object?.Rank1 {
                     case "0": cell.label.text =   "当座資産"
                         break
@@ -341,6 +348,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                     cell.textLabel?.text = "勘定科目名"
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
+                    cell.textLabel?.font = .systemFont(ofSize: 14)
                     //勘定科目
                     if object!.category != "" {
                         cell.label.text = object!.category
@@ -370,6 +378,7 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
                 cell.textLabel?.text = "表示科目名"
                 cell.textLabel?.textColor = .lightGray
                 cell.textLabel?.textAlignment = NSTextAlignment.left
+                cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
                 let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                 if "" != object?.numberOfTaxonomy {
