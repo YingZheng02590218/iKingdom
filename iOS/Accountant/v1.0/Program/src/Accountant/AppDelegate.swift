@@ -115,6 +115,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        ud.set(true, forKey: firstLunchKey)
 //        print(ud.bool(forKey: firstLunchKey))
 
+        // レビュー催促機能
+        let key = "startUpCount"
+        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
+        UserDefaults.standard.synchronize()
+        let count = UserDefaults.standard.integer(forKey: key)
+        if count == 15 { // 起動が15回目にレビューを催促する
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            }
+        }
+        
         return true
     }
 
