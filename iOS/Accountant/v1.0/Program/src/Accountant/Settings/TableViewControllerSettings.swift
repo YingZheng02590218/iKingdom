@@ -25,6 +25,7 @@ class TableViewControllerSettings: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
@@ -73,7 +74,7 @@ class TableViewControllerSettings: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,6 +83,8 @@ class TableViewControllerSettings: UITableViewController {
             return 3
         case 1:
             return 1
+        case 2:
+            return 2
         default:
             return 0
         }
@@ -92,7 +95,9 @@ class TableViewControllerSettings: UITableViewController {
         case 0:
             return "情報"
         case 1:
-            return "設定"
+            return "環境設定"
+        case 2:
+            return "ヘルプ"
         default:
             return ""
         }
@@ -128,12 +133,26 @@ class TableViewControllerSettings: UITableViewController {
             default:
                 return cell
             }
-        }else {
+        }else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
                 cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Journals", for: indexPath) as! TableViewCellSettings
                 cell.textLabel?.text = "仕訳帳"
+                return cell
+            default:
+                return cell
+            }
+        }else {
+            switch indexPath.row {
+            case 0:
+                //① UI部品を指定　TableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Help", for: indexPath) as! TableViewCellSettings
+                cell.textLabel?.text = "使い方ガイド"
+                return cell
+            case 1:
+                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Review", for: indexPath) as! TableViewCellSettings
+                cell.textLabel?.text = "レビューをする(要望・不具合報告など)"
                 return cell
             default:
                 return cell
@@ -145,10 +164,15 @@ class TableViewControllerSettings: UITableViewController {
         // 選択されたセルを取得
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings", for: indexPath) as! TableViewCellSettings
         // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         // 別の画面に遷移
 //        if indexPath.section == 0 {
 //            performSegue(withIdentifier: "identifier_term", sender: nil)
 //        }
+        if indexPath.section == 2 && indexPath.row == 1 {
+            if let url = URL(string: "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review") {
+                UIApplication.shared.open(url)
+            }
+        }
     }
 }

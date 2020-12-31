@@ -109,7 +109,7 @@ class TableViewControllerSettingsInformation: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "仕訳帳、勘定、財務諸表に表示されます。"
+            return "事業者名は、財務諸表や仕訳帳、精算表、試算表に表示されます。"
         default:
             return ""
         }

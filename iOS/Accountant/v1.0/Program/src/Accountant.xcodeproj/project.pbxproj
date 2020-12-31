@@ -48,6 +48,7 @@
 		F955B6112490FD3E005E2C6D /* TableViewControllerCF.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* TableViewControllerCF.swift */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
+		F96B62272595FE77000FC05F /* ViewControllerSettingsHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96B62262595FE77000FC05F /* ViewControllerSettingsHelp.swift */; };
 		F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */; };
 		F9711329249D12A1006258F7 /* TableViewCellTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9711328249D12A1006258F7 /* TableViewCellTB.swift */; };
 		F973981524A99D5F00A05C5F /* TableViewCellAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F973981424A99D5F00A05C5F /* TableViewCellAmount.swift */; };
@@ -88,6 +89,7 @@
 		F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */; };
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
 		F9D34FB7248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D34FB6248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift */; };
+		F9D38E96259618DE00364B45 /* ViewControllerSettingsHelpDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D38E95259618DE00364B45 /* ViewControllerSettingsHelpDetail.swift */; };
 		F9D5D544247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D543247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift */; };
 		F9D5D54A247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift */; };
 		F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */; };
@@ -185,6 +187,7 @@
 		F955B6092490E31E005E2C6D /* TableViewControllerPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerPL.swift; sourceTree = "<group>"; };
 		F955B60B2490FB77005E2C6D /* TableViewControllerBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerBS.swift; sourceTree = "<group>"; };
 		F955B6102490FD3E005E2C6D /* TableViewControllerCF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerCF.swift; sourceTree = "<group>"; };
+		F96B62262595FE77000FC05F /* ViewControllerSettingsHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettingsHelp.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
 		F9711328249D12A1006258F7 /* TableViewCellTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTB.swift; sourceTree = "<group>"; };
 		F973981424A99D5F00A05C5F /* TableViewCellAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellAmount.swift; sourceTree = "<group>"; };
@@ -223,6 +226,7 @@
 		F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
 		F9D34FB6248A324A00F8B403 /* ViewControllerSettingsPeriodYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettingsPeriodYear.swift; sourceTree = "<group>"; };
+		F9D38E95259618DE00364B45 /* ViewControllerSettingsHelpDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettingsHelpDetail.swift; sourceTree = "<group>"; };
 		F9D5D543247E2E7900EA35C7 /* TableViewCellGeneralLedgerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedgerAccount.swift; sourceTree = "<group>"; };
 		F9D5D549247E408C00EA35C7 /* ViewControllerGenearlLedgerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGenearlLedgerAccount.swift; sourceTree = "<group>"; };
 		F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccount.swift; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
 				F9134C222476BBC1002A0F77 /* SettingsCategory */,
 				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
+				F96B62232595ED75000FC05F /* SettingsHelp */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -565,6 +570,15 @@
 				F9354DB92498DD81007DB098 /* WSDB */,
 			);
 			path = WS;
+			sourceTree = "<group>";
+		};
+		F96B62232595ED75000FC05F /* SettingsHelp */ = {
+			isa = PBXGroup;
+			children = (
+				F96B62262595FE77000FC05F /* ViewControllerSettingsHelp.swift */,
+				F9D38E95259618DE00364B45 /* ViewControllerSettingsHelpDetail.swift */,
+			);
+			path = SettingsHelp;
 			sourceTree = "<group>";
 		};
 		F9706847252AC631003307F8 /* PLAccount */ = {
@@ -1179,6 +1193,7 @@
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
+				F9D38E96259618DE00364B45 /* ViewControllerSettingsHelpDetail.swift in Sources */,
 				F955B60C2490FB77005E2C6D /* TableViewControllerBS.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9354DB424989BAA007DB098 /* DataBaseTrialBalance.swift in Sources */,
@@ -1218,6 +1233,7 @@
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* TableViewControllerSettingsCategoryDetail.swift in Sources */,
 				F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */,
+				F96B62272595FE77000FC05F /* ViewControllerSettingsHelp.swift in Sources */,
 				F955B60A2490E31E005E2C6D /* TableViewControllerPL.swift in Sources */,
 				F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */,
 				F955B6112490FD3E005E2C6D /* TableViewControllerCF.swift in Sources */,
@@ -1404,7 +1420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5.01;
+				CURRENT_PROJECT_VERSION = 1.6.00;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = Accountant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1412,7 +1428,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "Accounting book";
 				SWIFT_VERSION = 5.0;
@@ -1426,7 +1442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.5.01;
+				CURRENT_PROJECT_VERSION = 1.6.00;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				INFOPLIST_FILE = Accountant/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1434,7 +1450,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "Accounting book";
 				SWIFT_VERSION = 5.0;
