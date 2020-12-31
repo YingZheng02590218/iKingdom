@@ -171,7 +171,7 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "決算日は、各決算書に表示されます。"
+            return "決算日は、財務諸表や仕訳帳、精算表、試算表に表示されます。"
         default:
             return ""
         }
