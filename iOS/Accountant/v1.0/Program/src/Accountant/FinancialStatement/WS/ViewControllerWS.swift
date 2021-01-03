@@ -44,6 +44,8 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+        TableView_WS.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
@@ -318,9 +320,9 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.label_debit.backgroundColor = .lightGray
             cell.label_credit.backgroundColor = .lightGray
             // 修正記入
-            cell.label_debit1.text = setComma(amount:object.workSheet!.debit_adjustingEntries_balance_total)
+            cell.label_debit1.text = setComma(amount:object.workSheet!.debit_adjustingEntries_total_total) // 残高ではなく合計
             cell.label_debit1.textAlignment = NSTextAlignment.right
-            cell.label_credit1.text = setComma(amount:object.workSheet!.credit_adjustingEntries_balance_total)
+            cell.label_credit1.text = setComma(amount:object.workSheet!.credit_adjustingEntries_total_total) // 残高ではなく合計
             cell.label_credit1.textAlignment = NSTextAlignment.right
             // 借方貸方の金額が不一致の場合、文字色を赤
             if cell.label_debit1.text != cell.label_credit1.text {
@@ -405,7 +407,7 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }else{
             // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
