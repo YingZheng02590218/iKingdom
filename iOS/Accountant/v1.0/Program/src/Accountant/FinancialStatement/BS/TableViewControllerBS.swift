@@ -1113,8 +1113,10 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
             }
         }else{
             if self.navigationController?.navigationBar.bounds.height != nil {
+//                // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+//                scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
                 // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-                scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+                scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
             }
         }
     }

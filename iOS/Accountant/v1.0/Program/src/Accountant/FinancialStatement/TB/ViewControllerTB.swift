@@ -50,6 +50,8 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
+        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+        TableView_TB.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
@@ -242,11 +244,13 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if printing {
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
+            if scrollView.contentOffset.y >= UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
+                scrollView.contentInset = UIEdgeInsets(top: -(UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
             }
         }else{
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         }
     }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -257,6 +261,7 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBAction func button_print(_ sender: UIButton) {
         let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
+        printing = true
         self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
@@ -279,7 +284,6 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        printing = true
         gADBannerView.isHidden = true
         let newImage = self.TableView_TB.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
