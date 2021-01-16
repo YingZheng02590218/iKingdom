@@ -281,6 +281,12 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
         // 背景色
         datePicker.backgroundColor = .systemBackground
+        //　iOS14対応　モード　ドラムロールはwheels
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
     }
     @IBOutlet weak var Button_Left: UIButton!
     @IBAction func Button_Left(_ sender: UIButton) {
