@@ -9,6 +9,7 @@
 import NeuKit
 import RealmSwift
 import Firebase // マネタイズ対応
+import SwiftyStoreKit // アップグレード機能　スタンダードプラン
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -125,7 +126,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SKStoreReviewController.requestReview()
             }
         }
-        
+        // アップグレード機能　スタンダードプラン　see notes below for the meaning of Atomic / Non-Atomic
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                default:
+                    break
+                }
+            }
+        }
         return true
     }
 

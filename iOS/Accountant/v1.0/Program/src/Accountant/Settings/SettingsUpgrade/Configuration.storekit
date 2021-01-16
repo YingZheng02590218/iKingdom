@@ -1,0 +1,60 @@
+{
+  "products" : [
+
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "ja",
+    "_storefront" : "JPN",
+    "_storeKitError" : 0,
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "FEBD1AAB",
+      "localizations" : [
+
+      ],
+      "name" : "Subscription group",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "1200",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "73214A83",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "テスト 一年間、広告を非表示にします。画面上での操作が快適になり、ストレスなくご利用いただ",
+              "displayName" : "スタンダードプラン",
+              "locale" : "ja"
+            },
+            {
+              "description" : "Test Ads is hidden for a year.",
+              "displayName" : "Standard Plan",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "自動更新型: 広告非表示(1年間)",
+          "subscriptionGroupID" : "FEBD1AAB",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "28708360",
+    "privateKey" : "MF8CAQEEGNgKFaW3skrsKbHYVxW417e2dxYHBe3YKaAKBggqhkjOPQMBAaE0AzIA\nBOI9DrwXXHdfWoWq24ay8XkoKGkXOZd5uVz2qvYkTLToHCb8remA7kBbeJ1bgzwR\nfg==",
+    "publicKey" : "MEkwEwYHKoZIzj0CAQYIKoZIzj0DAQEDMgAE4j0OvBdcd19aharbhrLxeSgoaRc5\nl3m5XPaq9iRMtOgcJvyt6YDuQFt4nVuDPBF+"
+  },
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}
