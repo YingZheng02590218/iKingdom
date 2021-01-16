@@ -48,22 +48,25 @@ class TableViewControllerSettingsCategoryDetail: UITableViewController, UITextFi
         if addAccount { // 勘定科目追加の場合
             createTextFieldForCategory()
         }
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        // GADBannerView を作成する
-        addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

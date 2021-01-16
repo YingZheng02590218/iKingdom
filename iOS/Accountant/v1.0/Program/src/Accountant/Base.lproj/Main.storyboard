@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XAj-k2-vBb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XAj-k2-vBb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cyD-oQ-wha">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="INd-CU-FWE" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -465,7 +467,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="Aoo-UZ-VXs" firstAttribute="height" secondItem="EDx-iM-Heo" secondAttribute="height" multiplier="0.294118" id="1SL-DH-CdM"/>
                                                 <constraint firstAttribute="bottom" secondItem="mek-IL-tMt" secondAttribute="bottom" id="1vi-1f-ZZP"/>
@@ -542,10 +544,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFl-Sp-Ghw" userLabel="ViewLeft">
-                                                            <rect key="frame" x="90.5" y="0.0" width="0.5" height="10"/>
+                                                            <rect key="frame" x="90.5" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="dYa-Aq-wEi" userLabel="list_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="10"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="dYa-Aq-wEi" userLabel="list_debit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
@@ -564,7 +566,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccQ-nf-cYk" userLabel="ViewRight">
-                                                            <rect key="frame" x="91" y="0.0" width="40.5" height="10"/>
+                                                            <rect key="frame" x="131" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="LUl-zZ-2gF" userLabel="list_credit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
@@ -588,7 +590,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFA-k0-TNl" userLabel="ViewLeft1">
-                                                            <rect key="frame" x="131.5" y="0.0" width="40.5" height="10"/>
+                                                            <rect key="frame" x="171.5" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="gzM-vI-FWl" userLabel="list_debit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
@@ -610,7 +612,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdB-vN-T8q" userLabel="ViewRight1">
-                                                            <rect key="frame" x="172" y="0.0" width="40.5" height="10"/>
+                                                            <rect key="frame" x="212" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="pGI-nH-UVW" userLabel="list_credit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="41" height="10"/>
@@ -634,10 +636,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8o-rB-91F" userLabel="ViewLeft2">
-                                                            <rect key="frame" x="212.5" y="0.0" width="40.5" height="10"/>
+                                                            <rect key="frame" x="252.5" y="0.0" width="40" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="YSk-Tz-1u3" userLabel="list_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="41" height="10"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
@@ -656,7 +658,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ual-bM-f4h" userLabel="ViewRight2">
-                                                            <rect key="frame" x="253" y="0.0" width="40" height="10"/>
+                                                            <rect key="frame" x="292.5" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="Rv3-c8-zcg" userLabel="list_credit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
@@ -680,7 +682,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9q-mN-vFK" userLabel="ViewLeft3">
-                                                            <rect key="frame" x="293" y="0.0" width="40.5" height="10"/>
+                                                            <rect key="frame" x="333" y="0.0" width="40.5" height="10"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.01" id="saC-ae-ouc" userLabel="list_debit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="10"/>
@@ -1376,7 +1378,8 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="8BK-yY-2f9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cyD-oQ-wha" firstAttribute="width" relation="lessThanOrEqual" secondItem="cyD-oQ-wha" secondAttribute="height" multiplier="512:567" id="74M-rF-XML"/>
                             <constraint firstAttribute="bottom" secondItem="cyD-oQ-wha" secondAttribute="bottom" id="DPg-P0-tQX"/>
@@ -1386,7 +1389,6 @@
                             <constraint firstItem="cyD-oQ-wha" firstAttribute="height" secondItem="8PC-hA-eB6" secondAttribute="height" id="wfT-e4-InE"/>
                             <constraint firstItem="cyD-oQ-wha" firstAttribute="leading" secondItem="8PC-hA-eB6" secondAttribute="leading" id="wnl-A7-kFc"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8BK-yY-2f9"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="精算表" id="k3l-gS-qlu">
@@ -1397,7 +1399,7 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="＊" style="done" id="DQc-6a-HdG">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K8N-iJ-o69">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="K8N-iJ-o69">
                                     <rect key="frame" x="164" y="7" width="83" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <state key="normal" title="印刷"/>
@@ -1429,7 +1431,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="gVc-aV-Ov5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_user" editingAccessoryType="disclosureIndicator" id="ocz-se-vON" customClass="TableViewCellSettings" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -1460,7 +1462,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <segue destination="WuM-LA-j8f" kind="showDetail" id="AIQ-cX-Uq3"/>
                                 </connections>
@@ -1472,7 +1474,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <segue destination="bLY-kQ-y5Y" kind="showDetail" id="mDi-gk-F0T"/>
                                 </connections>
@@ -1484,7 +1486,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <segue destination="FYZ-gm-H5P" kind="showDetail" id="6u2-ac-B91"/>
                                 </connections>
@@ -1493,10 +1495,34 @@
                                 <rect key="frame" x="0.0" y="273" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GJh-3x-JX6" id="yBZ-Ec-mGe">
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_upgrade" editingAccessoryType="disclosureIndicator" id="los-is-74h" customClass="TableViewCellSettings" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="316.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="los-is-74h" id="P68-Sz-oXr">
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <segue destination="s6L-i1-t2t" kind="showDetail" id="cZR-JF-gNF"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_restore" editingAccessoryType="disclosureIndicator" id="TVC-Uk-dEZ" customClass="TableViewCellSettings" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="360" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TVC-Uk-dEZ" id="C17-Lf-1XM">
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <segue destination="iN3-Tk-Wn6" kind="showDetail" id="UWZ-nO-UTp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1517,7 +1543,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gyN-oY-9xx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="ll6-GV-fDR" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -1551,7 +1577,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="JJF-Xi-oRf" firstAttribute="top" secondItem="Nj1-sA-QrS" secondAttribute="top" id="03Y-Cz-x9a"/>
                                                 <constraint firstAttribute="width" secondItem="Nj1-sA-QrS" secondAttribute="height" multiplier="75:7" id="COL-Hr-Gdc"/>
@@ -1653,7 +1679,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="vFB-1O-n66" secondAttribute="height" multiplier="15:1" id="25A-lq-Z8r"/>
@@ -1676,7 +1702,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="vFB-1O-n66" firstAttribute="top" secondItem="Nj1-sA-QrS" secondAttribute="bottom" id="8PQ-N6-bFA"/>
                                         <constraint firstAttribute="trailing" secondItem="vFB-1O-n66" secondAttribute="trailing" id="90X-tD-g4f"/>
@@ -1851,7 +1877,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="損益計算書" id="oae-6v-inS">
                         <barButtonItem key="rightBarButtonItem" title="＊" id="AQz-Gk-XUK">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bic-vo-8ZQ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="bic-vo-8ZQ">
                                 <rect key="frame" x="311" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <state key="normal" title="印刷"/>
@@ -1882,7 +1908,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Rm2-7e-Usw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="middleCategory" rowHeight="15" id="zpk-Ke-vGG">
                                 <rect key="frame" x="0.0" y="28" width="414" height="15"/>
@@ -2044,7 +2070,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="XUK-GN-bUm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="categories" id="Gkf-7s-ORD">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -2109,17 +2135,17 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="vOk-gQ-Qf4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category" id="ccm-b5-vvV" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ccm-b5-vvV" id="HzI-FV-yB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oVi-Fs-VZE">
-                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="ccm-b5-vvV" eventType="valueChanged" id="ssb-IG-aSf"/>
@@ -2165,17 +2191,17 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Pr0-GK-cen">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category_BSandPL" id="ddw-5v-apf" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddw-5v-apf" id="8ZI-XT-jCh">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-tB-ucm">
-                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="ddw-5v-apf" eventType="valueChanged" id="mKU-Go-a8V"/>
@@ -2183,7 +2209,7 @@
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="ToggleButton" destination="lGR-tB-ucm" id="AqQ-6H-7G9"/>
@@ -2199,7 +2225,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="表示科目別勘定科目一覧" id="1Um-Kg-ixt">
                         <barButtonItem key="rightBarButtonItem" id="T1V-6v-76O">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-bf-kcR">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mUb-bf-kcR">
                                 <rect key="frame" x="314" y="5.5" width="80" height="33"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <segments>
@@ -2233,17 +2259,17 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cKI-KK-yII">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category_BSandPL" id="xym-lQ-jIR" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="1"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xym-lQ-jIR" id="5zv-Hk-PSY">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4d-LT-PAH" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -2258,7 +2284,7 @@
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <outlet property="ToggleButton" destination="dae-sP-QaP" id="hmF-CC-qa0"/>
                                     <outlet property="label" destination="X4d-LT-PAH" id="bJ2-gs-Htr"/>
@@ -2304,16 +2330,16 @@
             <objects>
                 <tableViewController id="5Kg-oK-K0d" customClass="TableViewControllerSettingsCategoryDetail" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="W9H-Od-ekb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="aih-J0-Wza">
                             <rect key="frame" x="0.0" y="247.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpF-Pu-5ZT" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="fpF-Pu-5ZT" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="119" y="0.0" width="179" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="24"/>
                                     <state key="normal" title="登録"/>
                                     <userDefinedRuntimeAttributes>
@@ -2326,7 +2352,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category_big" id="SXQ-kh-2Cv" customClass="TableViewCellSettingAccountDetail" customModule="Accounting_book" customModuleProvider="target">
@@ -2399,7 +2425,7 @@
                                             <attributedString key="attributedText">
                                                 <fragment content="aaaaaaa">
                                                     <attributes>
-                                                        <font key="NSFont" size="13" name=".AppleSystemUIFont"/>
+                                                        <font key="NSFont" metaFont="system"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="70" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -2451,7 +2477,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Rdc-JV-4W5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_companyName" id="xhP-ER-DKH" customClass="TableViewCellCompanyName" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
@@ -2462,11 +2488,11 @@
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2mi-5V-nsG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="2mi-5V-nsG" secondAttribute="height" multiplier="375:44" id="hBM-oe-S7t"/>
                                             </constraints>
-                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="organization"/>
                                         </textView>
@@ -2480,7 +2506,7 @@
                                         <constraint firstItem="2mi-5V-nsG" firstAttribute="leading" secondItem="GZJ-oj-OND" secondAttribute="leading" id="zdC-9w-4BE"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <outlet property="textView_companyName" destination="2mi-5V-nsG" id="e7i-cM-0X8"/>
                                 </connections>
@@ -2504,7 +2530,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="5SA-bw-KnJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category" id="FPT-Qq-Qnk" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
@@ -2593,13 +2619,13 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="gIz-cK-sx7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" textLabel="lf1-LH-tou" detailTextLabel="UqG-UV-oLG" style="IBUITableViewCellStyleValue1" id="qT8-r9-xer" customClass="TableViewCellSettingsPeriod" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qT8-r9-xer" id="ej3-Hw-Cl4">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lf1-LH-tou">
@@ -2610,7 +2636,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UqG-UV-oLG">
-                                            <rect key="frame" x="301.5" y="14" width="33.5" height="16"/>
+                                            <rect key="frame" x="341.5" y="14" width="33.5" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -2623,10 +2649,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="T53-Ld-46V">
-                                <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T53-Ld-46V" id="IhN-gr-vZn">
-                                    <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2657,7 +2683,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ioA-UB-DqZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="EGd-9B-Syv">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -2709,8 +2735,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="FbP-ke-pb0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="wZS-p5-47f" collectionClass="NSMutableArray" id="ZLN-Nx-PDD"/>
@@ -2754,8 +2780,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wY0-5H-U1H"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="wMp-s6-P06" collectionClass="NSMutableArray" id="JD9-Ua-fdJ"/>
@@ -2796,8 +2822,8 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="yJA-FI-qdW"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -2815,7 +2841,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hOu-GL-sBv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BS" id="LLt-QL-sBY">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -2905,7 +2931,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="S68-Kg-rKg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
                         <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="ds0-8g-PJX" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -2940,7 +2966,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="kic-Lg-3le" firstAttribute="leading" secondItem="Loi-WI-eUM" secondAttribute="leading" id="7Ly-sk-haN"/>
                                                 <constraint firstAttribute="width" secondItem="Loi-WI-eUM" secondAttribute="height" multiplier="75:7" id="7Tj-jW-Dmq"/>
@@ -3041,7 +3067,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="2Hn-r4-mdH" firstAttribute="width" secondItem="dbp-EG-sKH" secondAttribute="width" multiplier="0.244141" id="7Qa-L5-W6l"/>
@@ -3064,7 +3090,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Loi-WI-eUM" secondAttribute="trailing" id="12n-fR-ycN"/>
                                         <constraint firstItem="dbp-EG-sKH" firstAttribute="top" secondItem="Loi-WI-eUM" secondAttribute="bottom" id="3Mw-kY-bDE"/>
@@ -3326,7 +3352,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="貸借対照表" id="s0i-Kc-gnx">
                         <barButtonItem key="rightBarButtonItem" title="＊" id="mrs-Ho-CdX">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sYc-7N-dv1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="sYc-7N-dv1">
                                 <rect key="frame" x="311" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="印刷"/>
@@ -3410,7 +3436,7 @@
                     <tableView key="view" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yew-EW-Qmi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="center" id="xxB-qN-E2e" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -3447,7 +3473,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="cYo-yn-hvb" firstAttribute="top" secondItem="e3c-3P-Qhw" secondAttribute="top" id="FDr-R1-YDk"/>
@@ -3528,17 +3554,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-RV-6l7" userLabel="ViewNumber">
-                                                    <rect key="frame" x="253.5" y="0.0" width="17" height="45"/>
+                                                    <rect key="frame" x="253.5" y="0.0" width="42" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MMI-DC-dNs" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="-1" width="16" height="21"/>
+                                                            <rect key="frame" x="0.0" y="-1" width="41" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZXH-0j-gOB" userLabel="list_number_2">
-                                                            <rect key="frame" x="0.0" y="25" width="16" height="19"/>
+                                                            <rect key="frame" x="0.0" y="25" width="41" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -3555,7 +3581,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp" userLabel="ViewDebit">
-                                                    <rect key="frame" x="270.5" y="0.0" width="71.5" height="45"/>
+                                                    <rect key="frame" x="295.5" y="0.0" width="71.5" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="xIO-Lc-Pc5" userLabel="list_debit">
                                                             <rect key="frame" x="-1" y="5" width="68" height="35"/>
@@ -3595,7 +3621,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="xOq-R1-al2" firstAttribute="top" secondItem="Wp9-Oh-Zng" secondAttribute="top" id="2pu-4b-H24"/>
                                                 <constraint firstAttribute="bottom" secondItem="gNc-RV-6l7" secondAttribute="bottom" id="8Fa-bY-CHU"/>
@@ -3645,6 +3671,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <viewLayoutGuide key="safeArea" id="Sbw-C3-BXX"/>
                             <constraints>
                                 <constraint firstItem="uQH-yF-xjc" firstAttribute="trailing" secondItem="xxB-qN-E2e" secondAttribute="trailing" id="04j-lG-W4g"/>
                                 <constraint firstItem="uQH-yF-xjc" firstAttribute="leading" secondItem="xxB-qN-E2e" secondAttribute="leading" id="DR1-Hr-LPb"/>
@@ -3653,7 +3680,6 @@
                                 <constraint firstItem="uQH-yF-xjc" firstAttribute="top" secondItem="xxB-qN-E2e" secondAttribute="top" id="VCP-Eh-ZCb"/>
                                 <constraint firstItem="uQH-yF-xjc" firstAttribute="height" secondItem="xxB-qN-E2e" secondAttribute="height" id="cDx-8q-RMB"/>
                             </constraints>
-                            <viewLayoutGuide key="safeArea" id="Sbw-C3-BXX"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="ml1-A7-SRY" customClass="TableViewCellJournals" customModule="Accounting_book" customModuleProvider="target">
@@ -3686,7 +3712,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Z6L-Mh-StP" secondAttribute="height" multiplier="2:3" id="5Sf-G0-LKt"/>
                                                             </constraints>
@@ -3707,7 +3733,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Qfu-8K-me9" secondAttribute="height" multiplier="5:6" id="mAy-f4-Nev"/>
                                                             </constraints>
@@ -3749,7 +3775,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="1gP-Ca-kgg" secondAttribute="height" multiplier="2:3" id="Bao-5Z-mHz"/>
                                                             </constraints>
@@ -3770,7 +3796,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="X7p-sG-9Ov" secondAttribute="height" multiplier="5:6" id="PeU-kl-RWK"/>
                                                             </constraints>
@@ -3811,7 +3837,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Fno-lT-V7M" secondAttribute="height" multiplier="9:5" id="Koa-id-v8h"/>
                                                             </constraints>
@@ -3832,7 +3858,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Vyt-mv-dVS" secondAttribute="height" multiplier="34:15" id="4uo-EV-fCz"/>
                                                             </constraints>
@@ -3931,7 +3957,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="VxD-kV-wBI" firstAttribute="height" secondItem="bkL-Dh-ed9" secondAttribute="height" multiplier="0.333333" id="00l-PH-V2v"/>
                                                 <constraint firstItem="Mk3-Ha-t3F" firstAttribute="top" secondItem="bkL-Dh-ed9" secondAttribute="top" id="113-UP-yFU"/>
@@ -3992,7 +4018,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="LnB-Zo-l5J" secondAttribute="height" multiplier="7:5" id="JoT-83-hgj"/>
                                             </constraints>
@@ -4042,7 +4068,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Y6V-Oo-hoJ" secondAttribute="height" multiplier="59:10" id="Oxi-Wz-3j8"/>
                                             </constraints>
@@ -4092,7 +4118,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="aJX-uJ-Vz7" secondAttribute="height" multiplier="89:15" id="zey-bH-dhO"/>
                                             </constraints>
@@ -4131,7 +4157,7 @@
                                         <constraint firstItem="bkL-Dh-ed9" firstAttribute="width" secondItem="H9p-AI-sti" secondAttribute="width" multiplier="0.493164" id="zE2-L2-fIC"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="label_list_credit" destination="XRV-I0-d5h" id="VJA-sn-L5Z"/>
@@ -4156,7 +4182,7 @@
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="＊" id="l6o-t3-GiC">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hHY-jR-CG0">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hHY-jR-CG0">
                                     <rect key="frame" x="201" y="10" width="31" height="30"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <state key="normal" title="印刷"/>
@@ -4228,8 +4254,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ZpW-Ah-FWj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="4NU-C7-q1W" collectionClass="NSMutableArray" id="iV3-S2-xrS"/>
@@ -4280,8 +4306,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="W0c-GD-gCr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="Bhh-zq-MZt" collectionClass="NSMutableArray" id="5w3-Vg-2em"/>
@@ -4301,17 +4327,17 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="n7T-DO-zFy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="mub-L7-54g" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mub-L7-54g" id="Hcf-cJ-85a">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k8v-J7-Y2J">
-                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="mub-L7-54g" eventType="valueChanged" id="PHg-lK-BaA"/>
@@ -4367,6 +4393,133 @@
             </objects>
             <point key="canvasLocation" x="8959" y="3494"/>
         </scene>
+        <!--アップグレード-->
+        <scene sceneID="eEk-Gd-bBb">
+            <objects>
+                <tableViewController id="VOZ-1P-KCk" customClass="TableViewControllerSettingsUpgrade" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ono-zL-ryw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="BmN-Rg-nrE" customClass="TableViewCellSettingUpgrade" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BmN-Rg-nrE" id="xtm-67-CGb">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-Uo-DGo" userLabel="label">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="aaaaaaa">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="AppleSymbols"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="Zor-Uo-DGo" id="N5O-pu-WUq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VOZ-1P-KCk" id="viY-Op-4iB"/>
+                            <outlet property="delegate" destination="VOZ-1P-KCk" id="8gW-YP-sl6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="アップグレード" id="z1S-V8-VdD"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1r-5Y-AEj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9826" y="4240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ueR-Ay-7an">
+            <objects>
+                <navigationController id="s6L-i1-t2t" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qm7-vh-gpH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VOZ-1P-KCk" kind="relationship" relationship="rootViewController" id="ADn-SR-g3o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ddU-r8-yfT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9826" y="3494"/>
+        </scene>
+        <!--リストア-->
+        <scene sceneID="1Kd-01-rh9">
+            <objects>
+                <tableViewController id="VJw-zL-XiX" customClass="TableViewControllerSettingsRestore" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="XSF-tj-xes">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="HLE-L2-ggf" customClass="TableViewCellSettingUpgrade" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HLE-L2-ggf" id="KA5-sg-xTV">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTz-EB-MoA" userLabel="label">
+                                            <rect key="frame" x="0.0" y="-1" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="aaaaaaa">
+                                                    <attributes>
+                                                        <font key="NSFont" size="16" name="AppleSymbols"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="LTz-EB-MoA" id="eDG-jK-Wxs"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VJw-zL-XiX" id="gex-ek-eLk"/>
+                            <outlet property="delegate" destination="VJw-zL-XiX" id="uJt-rc-4Dp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="リストア" id="6E9-Ew-BNt"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPI-fN-QaM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10728" y="4240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qoD-27-a4u">
+            <objects>
+                <navigationController id="iN3-Tk-Wn6" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Myp-n4-NYI"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dGF-ba-0Kn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VJw-zL-XiX" kind="relationship" relationship="rootViewController" id="l7V-wk-oL3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TKZ-oz-h2q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10726" y="3494"/>
+        </scene>
         <!--使い方ガイド-->
         <scene sceneID="9TI-QW-vU0">
             <objects>
@@ -4378,7 +4531,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQG-cV-HGA">
                                 <rect key="frame" x="-4" y="88" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">1. 概要
     1. このアプリについて
     2. 当アプリで採用した会計概念
@@ -4438,14 +4591,14 @@
     5. 仕訳帳を印刷しよう
 
 </string>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="wWq-qK-D9p"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="使い方ガイド" id="VQb-b5-5Wu"/>
                     <connections>
@@ -4467,7 +4620,7 @@
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEo-eU-Vg0">
                                 <rect key="frame" x="0.0" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">このアプリについて
 
 
@@ -4507,7 +4660,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRZ-My-y4C">
                                 <rect key="frame" x="0.0" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">当アプリで採用した会計概念
 
 □　簿記の分類
@@ -4542,7 +4695,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Acz-OA-264">
                                 <rect key="frame" x="0.0" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">1. 簿記の基礎
 
     1. 取引の発生から財務諸表までの流れ
@@ -4564,7 +4717,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llW-eL-Zc9">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">1. 初期設定の手順
     1. 基本情報の登録 
     2. 勘定科目体系の登録 
@@ -4578,7 +4731,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNc-Li-Ikl">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">2. 基本情報の登録をしよう
 
     * 事業者名を設定しよう
@@ -4614,7 +4767,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS0-ft-9FN">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">3. 勘定科目を設定しよう
 
 * 準備資料
@@ -4673,7 +4826,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1k-3H-nKa">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 勘定科目の編集しよう
 
     * 修正をする
@@ -4708,7 +4861,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCO-o4-aud">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">5. 環境設定を確認・変更しよう
 
     * 仕訳帳画面
@@ -4728,7 +4881,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NK-fr-WYK">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     1. 仕訳を入力する
 仕訳 &gt; 日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 入力ボタン
@@ -4759,7 +4912,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXx-NA-MkD">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     2. 仕訳を修正する
 仕訳帳 &gt; 任意の仕訳を長押し &gt; 仕訳
@@ -4781,7 +4934,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRe-LA-OCH">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     3. 仕訳を削除する
 仕訳帳 &gt; 任意の仕訳を右から左へスワイプ &gt; ゴミ箱ボタン &gt; OK
@@ -4806,7 +4959,7 @@ OKボタンをタップします。
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wZ-nc-kRF">
                                 <rect key="frame" x="-4" y="85" width="421" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     4. 入力した取引を確認しよう
 
@@ -4829,8 +4982,8 @@ OKボタンをタップします。
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="zn1-r2-XHv"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZMi-Au-3Et"/>
                     <connections>
@@ -4850,7 +5003,7 @@ OKボタンをタップします。
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w52-cJ-xxd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9713" y="4240"/>
+            <point key="canvasLocation" x="8958" y="4975"/>
         </scene>
         <!--Annotation View Controller Setting Period-->
         <scene sceneID="yYg-Kz-1EL">
@@ -4868,8 +5021,8 @@ OKボタンをタップします。
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="7JD-7X-Ipg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="f8E-dm-8fk" collectionClass="NSMutableArray" id="FZE-km-i8a"/>
@@ -4909,8 +5062,8 @@ OKボタンをタップします。
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="TA3-OJ-uYS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="3lg-ci-mC9" collectionClass="NSMutableArray" id="PEa-H4-34T"/>
@@ -4952,8 +5105,8 @@ OKボタンをタップします。
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="X64-BR-jcJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="lBA-01-eQh" collectionClass="NSMutableArray" id="7i0-2A-Yiu"/>
@@ -5013,7 +5166,7 @@ OKボタンをタップします。
                                             <view tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSY-Tg-XKJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-xu-Rt7">
-                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dyW-xu-Rt7" secondAttribute="height" multiplier="121:89" id="r66-1c-nHk"/>
                                                         </constraints>
@@ -5021,8 +5174,8 @@ OKボタンをタップします。
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-Dp-EYX" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-Dp-EYX" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rEY-Dp-EYX" secondAttribute="height" multiplier="32:89" id="lAV-Dh-7kN"/>
                                                         </constraints>
@@ -5040,7 +5193,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="at7-za-9iH">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="at7-za-9iH" secondAttribute="height" multiplier="643:178" id="re3-Ot-kn2"/>
                                                         </constraints>
@@ -5055,8 +5208,8 @@ OKボタンをタップします。
                                                             <action selector="DatePicker:" destination="e0k-EA-w5f" eventType="valueChanged" id="WBL-66-WbP"/>
                                                         </connections>
                                                     </datePicker>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-lY-iO7" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-lY-iO7" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="PjN-lY-iO7" secondAttribute="height" multiplier="66:245" id="X6X-Gl-5sQ"/>
                                                         </constraints>
@@ -5074,7 +5227,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="at7-za-9iH" firstAttribute="height" relation="greaterThanOrEqual" secondItem="uSY-Tg-XKJ" secondAttribute="height" id="0zn-KO-qwp"/>
                                                     <constraint firstItem="PjN-lY-iO7" firstAttribute="leading" secondItem="at7-za-9iH" secondAttribute="trailing" id="5Fl-Ox-Idn"/>
@@ -5101,7 +5254,7 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="uSY-Tg-XKJ" firstAttribute="width" secondItem="nAe-dG-Ra5" secondAttribute="width" id="BK3-dh-sqz"/>
                                             <constraint firstAttribute="trailing" secondItem="uSY-Tg-XKJ" secondAttribute="trailing" id="PXT-3e-bYj"/>
@@ -5148,7 +5301,7 @@ OKボタンをタップします。
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="X0T-9p-Iin" firstAttribute="height" relation="lessThanOrEqual" secondItem="Mt2-R9-JlZ" secondAttribute="height" id="7AS-3M-bhr"/>
                                                             <constraint firstAttribute="width" secondItem="Mt2-R9-JlZ" secondAttribute="height" multiplier="683:70" id="9LI-Fi-qae"/>
@@ -5160,7 +5313,7 @@ OKボタンをタップします。
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="Mt2-R9-JlZ" firstAttribute="top" secondItem="jdh-cC-ZYl" secondAttribute="top" id="2RF-tw-F9w"/>
                                                     <constraint firstAttribute="width" secondItem="jdh-cC-ZYl" secondAttribute="height" multiplier="1366:70" id="9yh-yE-ICY"/>
@@ -5179,7 +5332,7 @@ OKボタンをタップします。
                                             <view tag="3333" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQp-dM-FxA" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                                 <subviews>
                                                     <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="uJk-nd-XmN" secondAttribute="height" multiplier="683:70" id="sPM-UP-iOd"/>
                                                         </constraints>
@@ -5192,7 +5345,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="A6X-6C-QV3" secondAttribute="height" multiplier="683:70" id="B61-wO-iyZ"/>
                                                         </constraints>
@@ -5223,7 +5376,7 @@ OKボタンをタップします。
                                             <view tag="4444" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zms-dt-DJJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                                 <subviews>
                                                     <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="0n6-qv-73D" secondAttribute="height" multiplier="683:70" id="R4U-yF-LDb"/>
                                                         </constraints>
@@ -5236,7 +5389,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Nl1-2I-b4z" secondAttribute="height" multiplier="683:70" id="TfW-Ne-s6s"/>
                                                         </constraints>
@@ -5264,7 +5417,7 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Zms-dt-DJJ" secondAttribute="bottom" id="5co-v3-IUr"/>
                                             <constraint firstItem="dQp-dM-FxA" firstAttribute="leading" secondItem="aMK-1V-DLu" secondAttribute="leading" id="D1R-Td-3yw"/>
@@ -5288,7 +5441,7 @@ OKボタンをタップします。
                                     <view tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-VF-Z7e" userLabel="mid3_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="f3g-IS-J1T">
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="f3g-IS-J1T" secondAttribute="height" multiplier="1366:70" id="dZ9-tT-tzb"/>
                                                 </constraints>
@@ -5297,7 +5450,7 @@ OKボタンをタップします。
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rih-f4-HCX" secondAttribute="height" multiplier="1366:70" id="yvc-zP-GuO"/>
                                                 </constraints>
@@ -5329,9 +5482,9 @@ OKボタンをタップします。
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLb-AB-14U">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-9b-Hzc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-9b-Hzc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="0.0" y="3" width="0.0" height="0.0"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Yad-9b-Hzc" secondAttribute="height" multiplier="1:1" id="dsv-Lu-Lqn"/>
                                                         </constraints>
@@ -5354,9 +5507,9 @@ OKボタンをタップします。
                                                             <action selector="Button_cancel:" destination="e0k-EA-w5f" eventType="touchUpInside" id="eCk-qx-aK1"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-R6-X65" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ1-R6-X65" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="0.0" y="3" width="0.0" height="0.0"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BQ1-R6-X65" secondAttribute="height" multiplier="1226:70" id="L8I-Xj-Jpm"/>
                                                         </constraints>
@@ -5378,7 +5531,7 @@ OKボタンをタップします。
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="lQ7-uw-zkn" firstAttribute="height" secondItem="MLb-AB-14U" secondAttribute="height" id="4yr-ZI-aQA"/>
                                                     <constraint firstItem="Yad-9b-Hzc" firstAttribute="height" secondItem="MLb-AB-14U" secondAttribute="height" id="8JT-3B-iHB"/>
@@ -5426,7 +5579,7 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="FBw-es-IsB" firstAttribute="top" secondItem="MLb-AB-14U" secondAttribute="bottom" id="21P-TH-OpV"/>
                                             <constraint firstItem="MLb-AB-14U" firstAttribute="leading" secondItem="e2K-VP-AI3" secondAttribute="leading" id="7p5-a2-S4g"/>
@@ -5448,7 +5601,7 @@ OKボタンをタップします。
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="aMK-1V-DLu" firstAttribute="leading" secondItem="OEq-oJ-oNf" secondAttribute="leading" id="1LS-b8-Gy8"/>
@@ -5481,7 +5634,8 @@ OKボタンをタップします。
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="ZIf-Y7-RAW"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OEq-oJ-oNf" firstAttribute="top" secondItem="ZIf-Y7-RAW" secondAttribute="top" id="Ps8-uM-keM"/>
                             <constraint firstItem="OEq-oJ-oNf" firstAttribute="width" relation="lessThanOrEqual" secondItem="ZIf-Y7-RAW" secondAttribute="width" id="dfq-N4-2fd"/>
@@ -5490,7 +5644,6 @@ OKボタンをタップします。
                             <constraint firstItem="OEq-oJ-oNf" firstAttribute="trailing" secondItem="ZIf-Y7-RAW" secondAttribute="trailing" id="ptG-uX-bge"/>
                             <constraint firstItem="ZIf-Y7-RAW" firstAttribute="bottom" secondItem="OEq-oJ-oNf" secondAttribute="bottom" id="sFc-Px-JgD"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ZIf-Y7-RAW"/>
                     </view>
                     <navigationItem key="navigationItem" title="仕訳" id="SNU-Ar-YRy"/>
                     <connections>
@@ -5521,7 +5674,7 @@ OKボタンをタップします。
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jN9-PP-hg7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="bsf-O6-2lN" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -5532,7 +5685,7 @@ OKボタンをタップします。
                                             <subviews>
                                                 <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ0-sk-VHe">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="hJ0-sk-VHe" secondAttribute="height" multiplier="375:44" id="NMM-mz-P3l"/>
                                                         <constraint firstAttribute="width" secondItem="hJ0-sk-VHe" secondAttribute="height" multiplier="375:44" id="QoO-WA-Njk"/>
@@ -5560,7 +5713,7 @@ OKボタンをタップします。
                                                                     </label>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="tintColor" systemColor="systemBlueColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="gTs-kO-9oa" secondAttribute="bottom" id="BFn-wB-9KX"/>
                                                                     <constraint firstAttribute="trailing" secondItem="gTs-kO-9oa" secondAttribute="trailing" id="Enb-3y-lBE"/>
@@ -5571,7 +5724,7 @@ OKボタンをタップします。
                                                         </barButtonItem>
                                                         <barButtonItem style="plain" systemItem="flexibleSpace" id="2pG-fs-1Sc"/>
                                                         <barButtonItem style="plain" id="Aj5-Wi-NGi">
-                                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wJc-db-uwp">
+                                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="wJc-db-uwp">
                                                                 <rect key="frame" x="329" y="5" width="65" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <state key="normal" title="印刷"/>
@@ -5581,7 +5734,7 @@ OKボタンをタップします。
                                                             </button>
                                                         </barButtonItem>
                                                     </items>
-                                                    <color key="barTintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="barTintColor" systemColor="systemBackgroundColor"/>
                                                 </toolbar>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIl-du-nd2" userLabel="ViewLower">
                                                     <rect key="frame" x="0.0" y="40" width="414" height="50"/>
@@ -5600,7 +5753,7 @@ OKボタンをタップします。
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="hff-aa-wSQ" secondAttribute="height" multiplier="9:5" id="jPI-8z-2V1"/>
                                                                     </constraints>
@@ -5619,7 +5772,7 @@ OKボタンをタップします。
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="YCf-Jv-8p9" secondAttribute="height" multiplier="4:5" id="fO0-i8-WtH"/>
                                                                             </constraints>
@@ -5635,13 +5788,13 @@ OKボタンをタップします。
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" secondItem="XAT-95-GTB" secondAttribute="height" multiplier="1:1" id="moQ-VV-AVm"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="HcO-zX-h6R" secondAttribute="height" multiplier="9:5" id="5gp-rT-B0r"/>
                                                                         <constraint firstItem="XAT-95-GTB" firstAttribute="top" secondItem="HcO-zX-h6R" secondAttribute="top" id="7d2-bM-fCo"/>
@@ -5820,7 +5973,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="avl-I0-eLg" firstAttribute="width" secondItem="YIl-du-nd2" secondAttribute="width" multiplier="0.28" id="259-C3-43e"/>
                                                         <constraint firstItem="QX5-4V-aEX" firstAttribute="top" secondItem="YIl-du-nd2" secondAttribute="top" id="2yQ-49-ftX"/>
@@ -5863,7 +6016,7 @@ OKボタンをタップします。
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="hJ0-sk-VHe" firstAttribute="top" secondItem="Lw7-ht-AAI" secondAttribute="top" id="ABZ-nj-knn"/>
                                                 <constraint firstItem="YIl-du-nd2" firstAttribute="width" secondItem="Lw7-ht-AAI" secondAttribute="width" id="CUr-Ha-P1j"/>
@@ -5880,7 +6033,7 @@ OKボタンをタップします。
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger_account" id="dfB-Ka-NUI" userLabel="cell_list_generalLedger_account" customClass="TableViewCellGeneralLedgerAccount" customModule="Accounting_book" customModuleProvider="target">
@@ -5891,13 +6044,13 @@ OKボタンをタップします。
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSj-Ab-Mhh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.5" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="49.5" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iH3-BB-Aw3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="22" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="KeE-Cg-kQ3" userLabel="list_date_month">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="22" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5909,16 +6062,16 @@ OKボタンをタップします。
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="iH3-BB-Aw3" secondAttribute="height" multiplier="2:3" id="b7M-B3-0eK"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aM-XR-WCA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.5" height="20"/>
+                                                            <rect key="frame" x="22" y="0.0" width="27.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="RJg-nz-fOc" userLabel="list_date_day">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="3" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -5930,7 +6083,7 @@ OKボタンをタップします。
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="7aM-XR-WCA" secondAttribute="height" multiplier="5:6" id="L9M-4J-4Vw"/>
                                                             </constraints>
@@ -5957,10 +6110,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-UI-PZr">
-                                                    <rect key="frame" x="0.5" y="0.0" width="1" height="20"/>
+                                                    <rect key="frame" x="49.5" y="0.0" width="116" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="UGS-za-XUB" userLabel="list_summary">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="UGS-za-XUB" userLabel="list_summary">
+                                                            <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -5972,7 +6125,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="KfE-UI-PZr" secondAttribute="height" multiplier="7:2" id="ZET-Pm-nSU"/>
                                                     </constraints>
@@ -5983,10 +6136,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPR-3p-95E">
-                                                    <rect key="frame" x="1.5" y="0.0" width="0.0" height="20"/>
+                                                    <rect key="frame" x="165.5" y="0.0" width="16.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="Zcc-G1-l6f" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="0.0" width="2" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <nil key="textColor"/>
@@ -5998,7 +6151,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="dPR-3p-95E" secondAttribute="height" multiplier="1:2" id="3jn-ph-HV7"/>
                                                     </constraints>
@@ -6009,10 +6162,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxL-Qp-D6m">
-                                                    <rect key="frame" x="1.5" y="0.0" width="401" height="20"/>
+                                                    <rect key="frame" x="182" y="0.0" width="72" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="sQk-3N-gmX" userLabel="list_debit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="71" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -6024,7 +6177,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="OxL-Qp-D6m" secondAttribute="height" multiplier="13:6" id="eiU-bl-ZtQ"/>
                                                     </constraints>
@@ -6035,10 +6188,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yx6-Xb-qZc">
-                                                    <rect key="frame" x="402.5" y="0.0" width="1" height="20"/>
+                                                    <rect key="frame" x="254" y="0.0" width="71.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="f47-Uo-MiR" userLabel="list_credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="72" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -6050,7 +6203,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="yx6-Xb-qZc" secondAttribute="height" multiplier="13:6" id="Cyt-nF-8qO"/>
                                                     </constraints>
@@ -6061,10 +6214,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rgc-R4-jK9">
-                                                    <rect key="frame" x="403.5" y="0.0" width="10" height="20"/>
+                                                    <rect key="frame" x="325.5" y="0.0" width="16.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="XXk-V4-PMR" userLabel="list_debitOrCredit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="10" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -6076,7 +6229,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Rgc-R4-jK9" secondAttribute="height" multiplier="1:2" id="pjP-Hk-CqB"/>
                                                     </constraints>
@@ -6087,10 +6240,10 @@ OKボタンをタップします。
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-hj-q3L">
-                                                    <rect key="frame" x="413.5" y="0.0" width="0.5" height="20"/>
+                                                    <rect key="frame" x="342" y="0.0" width="72" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" id="bIo-8P-K6z" userLabel="list_balance">
-                                                            <rect key="frame" x="0.0" y="0.0" width="2" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="74" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -6102,7 +6255,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="AuW-hj-q3L" secondAttribute="height" multiplier="13:6" id="Dzh-6z-Gpm"/>
                                                     </constraints>
@@ -6168,13 +6321,13 @@ OKボタンをタップします。
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="UFS-3d-hhU"/>
                         <constraints>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="trailing" secondItem="f68-RU-gpP" secondAttribute="trailing" id="EIw-zn-wY8"/>
                             <constraint firstAttribute="bottom" secondItem="jN9-PP-hg7" secondAttribute="bottom" id="gix-Ic-QV9"/>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="leading" secondItem="f68-RU-gpP" secondAttribute="leading" id="nTd-4m-Eoh"/>
                             <constraint firstItem="jN9-PP-hg7" firstAttribute="height" secondItem="f68-RU-gpP" secondAttribute="height" id="xZf-v7-ZRb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="UFS-3d-hhU"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
@@ -6199,7 +6352,7 @@ OKボタンをタップします。
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q3D-4O-W0X">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="Q3D-4O-W0X" secondAttribute="height" multiplier="512:567" id="6Ev-Te-34g"/>
                                 </constraints>
@@ -6236,7 +6389,7 @@ OKボタンをタップします。
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="Wsc-zQ-PfW" firstAttribute="leading" secondItem="6cH-lx-m1M" secondAttribute="leading" id="8L6-QY-vJa"/>
                                                         <constraint firstAttribute="bottom" secondItem="Wsc-zQ-PfW" secondAttribute="bottom" id="Ahs-Th-QS7"/>
@@ -6322,7 +6475,7 @@ OKボタンをタップします。
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="8vb-Is-had" firstAttribute="leading" secondItem="9m2-Hb-z74" secondAttribute="trailing" id="42f-mn-O7b"/>
@@ -6345,7 +6498,7 @@ OKボタンをタップします。
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="6cH-lx-m1M" firstAttribute="leading" secondItem="779-BI-nn7" secondAttribute="leading" id="0BL-4h-EQd"/>
                                                 <constraint firstAttribute="trailing" secondItem="6cH-lx-m1M" secondAttribute="trailing" id="3Kk-Pa-PvZ"/>
@@ -6601,7 +6754,8 @@ OKボタンをタップします。
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hiu-xy-Icn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Q3D-4O-W0X" firstAttribute="trailing" secondItem="AgX-GP-Nd0" secondAttribute="trailing" id="H3b-AI-HrO"/>
                             <constraint firstItem="Q3D-4O-W0X" firstAttribute="height" secondItem="AgX-GP-Nd0" secondAttribute="height" id="KEq-8k-k1T"/>
@@ -6610,7 +6764,6 @@ OKボタンをタップします。
                             <constraint firstAttribute="bottom" secondItem="Q3D-4O-W0X" secondAttribute="bottom" id="jBg-Y7-pK1"/>
                             <constraint firstItem="Q3D-4O-W0X" firstAttribute="top" secondItem="AgX-GP-Nd0" secondAttribute="top" id="m0W-xv-lQJ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="hiu-xy-Icn"/>
                     </view>
                     <navigationItem key="navigationItem" title="試算表" id="Bq0-HH-9Ny">
                         <rightBarButtonItems>
@@ -6631,7 +6784,7 @@ OKボタンをタップします。
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="＊" id="lRx-oV-xTM">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Nrh-cq-nmk">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Nrh-cq-nmk">
                                     <rect key="frame" x="204" y="7" width="75" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -6664,7 +6817,7 @@ OKボタンをタップします。
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="27" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="MY0-PK-Yhc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="vbI-yM-du8" customClass="TableViewCellGeneralLedger" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="27"/>
@@ -6672,7 +6825,7 @@ OKボタンをタップします。
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vbI-yM-du8" id="n7T-Mk-RNG">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="27"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="gyd-Yg-A56" kind="presentation" identifier="identifier_generalLedger" trigger="accessoryAction" id="XvG-Hv-LU9"/>
@@ -6733,18 +6886,36 @@ OKボタンをタップします。
             <point key="canvasLocation" x="2335" y="566"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="book" catalog="system" width="64" height="50"/>
-        <image name="book.fill" catalog="system" width="64" height="50"/>
-        <image name="doc.text.fill" catalog="system" width="56" height="64"/>
-        <image name="pencil" catalog="system" width="64" height="56"/>
-        <image name="wrench.fill" catalog="system" width="64" height="60"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1SQ-6b-k8V"/>
         <segue reference="QiK-F7-mNz"/>
         <segue reference="6u2-ac-B91"/>
-        <segue reference="Alo-DG-4y7"/>
+        <segue reference="fUr-b9-Mnc"/>
         <segue reference="YpR-z2-jgd"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="book" catalog="system" width="128" height="102"/>
+        <image name="book.fill" catalog="system" width="128" height="102"/>
+        <image name="doc.text.fill" catalog="system" width="115" height="128"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="wrench.fill" catalog="system" width="128" height="125"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tableCellGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
