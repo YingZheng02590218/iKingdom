@@ -1437,7 +1437,7 @@
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ocz-se-vON" id="Uyc-k0-0Ju">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1448,7 +1448,7 @@
                                 <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hDM-UL-diA" id="cU2-Uc-3Va">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1459,7 +1459,7 @@
                                 <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8ux-06-Kon" id="knO-4b-odK">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
@@ -1471,7 +1471,7 @@
                                 <rect key="frame" x="0.0" y="186" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2UM-bs-lqY" id="Egh-Ut-i4P">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
@@ -1483,7 +1483,7 @@
                                 <rect key="frame" x="0.0" y="229.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7J-YX-Sh6" id="CPe-v8-i0b">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
@@ -1504,7 +1504,7 @@
                                 <rect key="frame" x="0.0" y="316.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="los-is-74h" id="P68-Sz-oXr">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
@@ -1516,7 +1516,7 @@
                                 <rect key="frame" x="0.0" y="360" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TVC-Uk-dEZ" id="C17-Lf-1XM">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
@@ -2076,7 +2076,7 @@
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gkf-7s-ORD" id="jrT-V4-uoi">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -2087,7 +2087,7 @@
                                 <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O8F-BV-UKh" id="0q3-qh-0pW">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -2098,7 +2098,7 @@
                                 <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tqJ-bQ-cup" id="SWu-Mv-BkK">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="395" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -2138,14 +2138,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category" id="ccm-b5-vvV" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ccm-b5-vvV" id="HzI-FV-yB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oVi-Fs-VZE">
-                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="ccm-b5-vvV" eventType="valueChanged" id="ssb-IG-aSf"/>
@@ -2194,14 +2194,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category_BSandPL" id="ddw-5v-apf" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddw-5v-apf" id="8ZI-XT-jCh">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-tB-ucm">
-                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="ddw-5v-apf" eventType="valueChanged" id="mKU-Go-a8V"/>
@@ -2262,14 +2262,14 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category_BSandPL" id="xym-lQ-jIR" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="1"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="1.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xym-lQ-jIR" id="5zv-Hk-PSY">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="1.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4d-LT-PAH" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="1"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -2599,7 +2599,7 @@
         <!--設定-->
         <scene sceneID="nKs-wx-s0s">
             <objects>
-                <splitViewController id="SZ1-CS-6Sk" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="設定" image="wrench.fill" catalog="system" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -2622,10 +2622,10 @@
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" textLabel="lf1-LH-tou" detailTextLabel="UqG-UV-oLG" style="IBUITableViewCellStyleValue1" id="qT8-r9-xer" customClass="TableViewCellSettingsPeriod" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qT8-r9-xer" id="ej3-Hw-Cl4">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lf1-LH-tou">
@@ -2636,7 +2636,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UqG-UV-oLG">
-                                            <rect key="frame" x="341.5" y="14" width="33.5" height="16"/>
+                                            <rect key="frame" x="301.5" y="14" width="33.5" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -2649,10 +2649,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="T53-Ld-46V">
-                                <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="99" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="T53-Ld-46V" id="IhN-gr-vZn">
-                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -3554,17 +3554,17 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNc-RV-6l7" userLabel="ViewNumber">
-                                                    <rect key="frame" x="253.5" y="0.0" width="42" height="45"/>
+                                                    <rect key="frame" x="253.5" y="0.0" width="17" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="丁" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="MMI-DC-dNs" userLabel="list_number">
-                                                            <rect key="frame" x="0.0" y="-1" width="41" height="21"/>
+                                                            <rect key="frame" x="0.0" y="-1" width="16" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZXH-0j-gOB" userLabel="list_number_2">
-                                                            <rect key="frame" x="0.0" y="25" width="41" height="19"/>
+                                                            <rect key="frame" x="0.0" y="25" width="16" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -3581,7 +3581,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHr-XB-bqp" userLabel="ViewDebit">
-                                                    <rect key="frame" x="295.5" y="0.0" width="71.5" height="45"/>
+                                                    <rect key="frame" x="270.5" y="0.0" width="71.5" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="xIO-Lc-Pc5" userLabel="list_debit">
                                                             <rect key="frame" x="-1" y="5" width="68" height="35"/>
@@ -4330,14 +4330,14 @@
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="mub-L7-54g" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mub-L7-54g" id="Hcf-cJ-85a">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k8v-J7-Y2J">
-                                            <rect key="frame" x="359" y="7" width="49" height="31"/>
+                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="mub-L7-54g" eventType="valueChanged" id="PHg-lK-BaA"/>
@@ -4403,14 +4403,14 @@
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="BmN-Rg-nrE" customClass="TableViewCellSettingUpgrade" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BmN-Rg-nrE" id="xtm-67-CGb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-Uo-DGo" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="aaaaaaa">
@@ -4445,7 +4445,6 @@
             <objects>
                 <navigationController id="s6L-i1-t2t" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qm7-vh-gpH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -4466,14 +4465,14 @@
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="HLE-L2-ggf" customClass="TableViewCellSettingUpgrade" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HLE-L2-ggf" id="KA5-sg-xTV">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTz-EB-MoA" userLabel="label">
-                                            <rect key="frame" x="0.0" y="-1" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="-1" width="374" height="44"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="aaaaaaa">
@@ -5123,14 +5122,17 @@ OKボタンをタップします。
             <objects>
                 <viewController id="e0k-EA-w5f" userLabel="仕訳" customClass="ViewControllerJournalEntry" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="dKZ-sY-dz7" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-oJ-oNf" userLabel="big_View">
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwb-1T-DL8" userLabel="mid0_View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Hz-Mm-EA8">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="7Hz-Mm-EA8" secondAttribute="height" multiplier="1366:245" id="XUh-wy-1dM"/>
                                                 </constraints>
@@ -5162,10 +5164,13 @@ OKボタンをタップします。
                                         </constraints>
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAe-dG-Ra5" userLabel="mid1_NeumorphicView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <subviews>
                                             <view tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSY-Tg-XKJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyW-xu-Rt7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dyW-xu-Rt7" secondAttribute="height" multiplier="121:89" id="r66-1c-nHk"/>
@@ -5175,6 +5180,7 @@ OKボタンをタップします。
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rEY-Dp-EYX" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rEY-Dp-EYX" secondAttribute="height" multiplier="32:89" id="lAV-Dh-7kN"/>
@@ -5193,6 +5199,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="at7-za-9iH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="at7-za-9iH" secondAttribute="height" multiplier="643:178" id="re3-Ot-kn2"/>
@@ -5209,6 +5216,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </datePicker>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PjN-lY-iO7" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="PjN-lY-iO7" secondAttribute="height" multiplier="66:245" id="X6X-Gl-5sQ"/>
@@ -5266,12 +5274,16 @@ OKボタンをタップします。
                                         </constraints>
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMK-1V-DLu" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdh-cC-ZYl">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="edP-WR-IE2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="CCJ-CJ-jrm">
+                                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="CCJ-CJ-jrm" secondAttribute="height" multiplier="683:70" id="Ksy-cj-buk"/>
                                                                 </constraints>
@@ -5291,8 +5303,10 @@ OKボタンをタップします。
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mt2-R9-JlZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="X0T-9p-Iin">
+                                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="X0T-9p-Iin" secondAttribute="height" multiplier="683:70" id="dee-79-1BU"/>
                                                                 </constraints>
@@ -5330,8 +5344,10 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                             <view tag="3333" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQp-dM-FxA" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJk-nd-XmN" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="uJk-nd-XmN" secondAttribute="height" multiplier="683:70" id="sPM-UP-iOd"/>
@@ -5345,6 +5361,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A6X-6C-QV3" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="A6X-6C-QV3" secondAttribute="height" multiplier="683:70" id="B61-wO-iyZ"/>
@@ -5374,8 +5391,10 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                             <view tag="4444" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zms-dt-DJJ" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0n6-qv-73D">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="0n6-qv-73D" secondAttribute="height" multiplier="683:70" id="R4U-yF-LDb"/>
@@ -5389,6 +5408,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nl1-2I-b4z">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Nl1-2I-b4z" secondAttribute="height" multiplier="683:70" id="TfW-Ne-s6s"/>
@@ -5439,8 +5459,10 @@ OKボタンをタップします。
                                         </constraints>
                                     </view>
                                     <view tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-VF-Z7e" userLabel="mid3_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="f3g-IS-J1T">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="f3g-IS-J1T" secondAttribute="height" multiplier="1366:70" id="dZ9-tT-tzb"/>
@@ -5450,6 +5472,7 @@ OKボタンをタップします。
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rih-f4-HCX">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rih-f4-HCX" secondAttribute="height" multiplier="1366:70" id="yvc-zP-GuO"/>
@@ -5479,8 +5502,10 @@ OKボタンをタップします。
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="e2K-VP-AI3" userLabel="mid4_View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLb-AB-14U">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yad-9b-Hzc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="0.0" y="3" width="0.0" height="0.0"/>
@@ -5525,6 +5550,7 @@ OKボタンをタップします。
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQ7-uw-zkn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="lQ7-uw-zkn" secondAttribute="height" multiplier="1:1" id="IPI-MI-aoy"/>
@@ -5553,8 +5579,10 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBw-es-IsB">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="BLM-e1-tcf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BLM-e1-tcf" secondAttribute="height" multiplier="1366:70" id="qKd-CN-C1m"/>
                                                         </constraints>
@@ -5574,6 +5602,7 @@ OKボタンをタップします。
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nR4-zu-uaN">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="nR4-zu-uaN" secondAttribute="height" multiplier="1366:371" id="rXr-pR-yS7"/>
                                                 </constraints>
@@ -5669,7 +5698,7 @@ OKボタンをタップします。
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="gyd-Yg-A56" customClass="ViewControllerGenearlLedgerAccount" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f68-RU-gpP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jN9-PP-hg7">
@@ -6889,7 +6918,7 @@ OKボタンをタップします。
     <inferredMetricsTieBreakers>
         <segue reference="1SQ-6b-k8V"/>
         <segue reference="QiK-F7-mNz"/>
-        <segue reference="6u2-ac-B91"/>
+        <segue reference="6gD-Ow-ae8"/>
         <segue reference="fUr-b9-Mnc"/>
         <segue reference="YpR-z2-jgd"/>
     </inferredMetricsTieBreakers>
