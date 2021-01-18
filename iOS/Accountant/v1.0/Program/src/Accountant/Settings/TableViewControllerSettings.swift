@@ -101,7 +101,7 @@ class TableViewControllerSettings: UITableViewController {
         case 1:
             return "環境設定"
         case 2:
-            return "ヘルプ"
+            return "サポート"
         case 3:
             return "アップグレード"
         default:
