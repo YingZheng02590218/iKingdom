@@ -37,7 +37,7 @@ class UpgradeManager {
     func verifyPurchase(PRODUCT_ID:String){
         print(UserDefaults.standard.string(forKey: "buy"))
         // 引数のserviceは.productionで常時OKです。サンドボックスへの分岐はSwiftyStoreKitがやってくれます。
-        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "9349cc33075f43b2a004db77b195afd9") // 共有シークレット
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "267511abfdf6422ea0cf43cf14046d95") // 共有シークレット
         // Apple持ちのレシートを指定 ローカルレシートを指定する場合は、SwiftyStoreKit.verifyReceipt(using: appleValidator,forcerefresh:false)とします。
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             print(result)
@@ -50,12 +50,17 @@ class UpgradeManager {
                     inReceipt: receipt)
                 print(purchaseResult)
                 switch purchaseResult {
-                case .purchased:
+                case .purchased(let expiryDate, let receiptItems):
+                    print("Product is valid until \(expiryDate)")
                     //リストアの成功
                     UserDefaults.standard.set(1, forKey: "buy")
                     inAppPurchaseFlag = true
                     break
+                case .expired(let expiryDate, let receiptItems):
+                    print("Product is expired since \(expiryDate)")
+                    break
                 case .notPurchased:
+                    print("This product has never been purchased")
                     //リストアの失敗
                     break
                 default:
