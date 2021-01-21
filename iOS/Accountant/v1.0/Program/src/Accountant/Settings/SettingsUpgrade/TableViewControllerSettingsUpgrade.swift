@@ -30,12 +30,22 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return products.count // 注意：ベタ書きで1と書くと、cellForRowAtでproductsが空の状態となる。
+        switch section {
+        case 0:
+            return products.count // 注意：ベタ書きで1と書くと、cellForRowAtでproductsが空の状態となる。
+        case 1: // リストア
+            return 1
+        case 2:
+            return 1
+        case 3:
+            return 1
+        default:
+            return 0
+        }
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -46,6 +56,10 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
 //            return "Optional Plan"
 //        case 2:
             return "Standard Plan"
+        case 1:
+            return "Restore"
+        case 2:
+            return ""
         default:
             return ""
         }
@@ -58,7 +72,29 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
 //        case 1:
 //            return "オプショナルプランは、さらにユーザービリティを高めるための、細かな操作設定が可能となります。\n(スタンダードプランの機能を含みます)"
 //        case 2:
-            return "無料版ではほぼすべての画面上に広告が表示されます。まずは無料版でお使いいただいた上で、有料版をご検討ください。\n\n●有料版：スタンダードプラン\n年間払い 1,200円 / 年\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n●機種変更時の復元\n機種変更時には、以前購入した有料版を無料で復元できます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。\n\n●確認と解約\nAppStoreアプリの最下部にある「おすすめ」を選択　> Apple IDを選択　>「Apple IDを表示」を選択　> 購読の中にある「管理」からこのアプリを選択。この画面から次回の自動更新タイミングの確認や、自動更新の解除/設定ができます。\n\n●自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n●注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。\n\n●利用規約\nhttps://www.facebook.com/The-Reckoning-103608024863220\n\n"
+            var localizedPrice = "1200円"
+            var localizedSubscriptionPeriod = "1年間"
+            if self.products.count > 0 {
+                localizedPrice = products[0].localizedPrice!
+                localizedSubscriptionPeriod = products[0].localizedSubscriptionPeriod
+            }
+            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
+            let language = Locale.preferredLanguages.first!
+            print(language) // ja-JP
+            if language == "ja-JP" {
+                return "無料版ではほぼすべての画面上に広告が表示されます。まずは無料版でお使いいただいた上で、有料版をご検討ください。\n\n●有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n●自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n●注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
+            }else {
+                return "The free version will display ads on almost every screen. First of all, please use the free version and then consider the paid version.\n\n● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing If you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
+            }
+        case 1:
+            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
+            let language = Locale.preferredLanguages.first!
+            print(language) // ja-JP
+            if language == "ja-JP" {
+                return "●機種変更時の復元\n機種変更時には、以前購入した有料版を無料で復元できます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。"
+            }else {
+                return "● Restoration when changing models\nWhen changing models, you can restore the previously purchased paid version for free. Please log in to iTunes on your iPhone / iPad device with the same Apple ID as when you purchased it."
+            }
         default:
             return ""
         }
@@ -94,6 +130,46 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
                 cell.accessoryType = .none
             }
             return cell
+        case 1:
+            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
+            let language = Locale.preferredLanguages.first!
+            print(language) // ja-JP
+            if language == "ja-JP" {
+                cell.textLabel?.text = "購入の復元"
+            }else {
+                cell.textLabel?.text = "Restore Purchases"
+            }
+            cell.label.text = ""
+            if inAppPurchaseFlag {
+                cell.accessoryType = .checkmark
+            }else {
+                cell.accessoryType = .disclosureIndicator
+            }
+            return cell
+        case 2:
+            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
+            let language = Locale.preferredLanguages.first!
+            print(language) // ja-JP
+            if language == "ja-JP" {
+                cell.textLabel?.text = "解約方法"
+            }else {
+                cell.textLabel?.text = "How to cancel"
+            }
+            cell.accessoryType = .disclosureIndicator
+            cell.label.text = ""
+            return cell
+        case 3:
+            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
+            let language = Locale.preferredLanguages.first!
+            print(language) // ja-JP
+            if language == "ja-JP" {
+                cell.textLabel?.text = "プライバシーポリシー"
+            }else {
+                cell.textLabel?.text = "Privacy Policy"
+            }
+            cell.accessoryType = .disclosureIndicator
+            cell.label.text = ""
+            return cell
         default:
             return cell
         }
@@ -111,11 +187,35 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
         } else {
             inAppPurchaseFlag = false
         }
-        guard inAppPurchaseFlag  else {
-            upgradeManager.purchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
-            return
+        switch indexPath.section {
+        case 0: // 購入
+            guard inAppPurchaseFlag  else {
+                upgradeManager.purchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
+                return
+            }
+            break
+        case 1: // リストア
+            print("InAppPurchaseがあります。inAppPurchaseFlagは\(inAppPurchaseFlag)です。")
+            break
+        case 2: // 解約
+            if Locale.current.regionCode == "JP" {
+                if let url = URL(string: "https://support.apple.com/ja-jp/HT202039#:~:text=%E3%80%8C%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8A%E3%82%88%E3%81%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%80%8D%E3%82%92%E9%81%B8%E6%8A%9E,%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93)%E3%80%82") {
+                    UIApplication.shared.open(url)
+                }
+            }else {
+                if let url = URL(string: "https://support.apple.com/en-us/HT202039") {
+                    UIApplication.shared.open(url)
+                }
+            }
+            break
+        case 3: // プライバシーポリシー
+            if let url = URL(string: "https://www.facebook.com/The-Reckoning-103608024863220") {
+                UIApplication.shared.open(url)
+            }
+            break
+        default:
+            break
         }
-        print("InAppPurchaseがあります。inAppPurchaseFlagは\(inAppPurchaseFlag)です。")
     }
 
     // 価格の取得
