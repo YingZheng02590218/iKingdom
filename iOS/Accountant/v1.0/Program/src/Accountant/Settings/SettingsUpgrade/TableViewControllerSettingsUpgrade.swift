@@ -21,9 +21,9 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
         super.viewDidLoad()
         // 価格を取得
         purchaseGetInfo(PRODUCT_ID: ["com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff"]) // 定数定義する
-        // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
-        let upgradeManager = UpgradeManager()
-        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
+//        // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
+//        let upgradeManager = UpgradeManager()
+//        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
     }
 
     // MARK: - Table view data source
@@ -84,7 +84,7 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
             if language == "ja-JP" {
                 return "無料版ではほぼすべての画面上に広告が表示されます。まずは無料版でお使いいただいた上で、有料版をご検討ください。\n\n●有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n●自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n●注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
             }else {
-                return "The free version will display ads on almost every screen. First of all, please use the free version and then consider the paid version.\n\n● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing If you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
+                return "The free version will display ads on almost every screen. First of all, please use the free version and then consider the paid version.\n\n● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing \nIf you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
             }
         case 1:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
@@ -178,7 +178,6 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
         let upgradeManager = UpgradeManager()
-        upgradeManager.verifyPurchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
         if UserDefaults.standard.object(forKey: "buy") != nil {
             let count = UserDefaults.standard.object(forKey: "buy") as! Int
             if count == 1 {
@@ -195,7 +194,9 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
             }
             break
         case 1: // リストア
+            upgradeManager.verifyPurchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
             print("InAppPurchaseがあります。inAppPurchaseFlagは\(inAppPurchaseFlag)です。")
+            self.tableView.reloadData()
             break
         case 2: // 解約
             if Locale.current.regionCode == "JP" {
