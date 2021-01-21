@@ -88,7 +88,7 @@ class TableViewControllerSettings: UITableViewController {
         case 2:
             return 2
         case 3:
-            return 1//2
+            return 1
         default:
             return 0
         }
@@ -170,10 +170,6 @@ class TableViewControllerSettings: UITableViewController {
                 //① UI部品を指定　TableViewCell
                 cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_upgrade", for: indexPath) as! TableViewCellSettings
                 cell.textLabel?.text = "アップグレード"
-                return cell
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_restore", for: indexPath) as! TableViewCellSettings
-                cell.textLabel?.text = "リストア"
                 return cell
             default:
                 return cell
