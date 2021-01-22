@@ -163,9 +163,9 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.textLabel?.text = "プライバシーポリシー"
+                cell.textLabel?.text = "プライバシーポリシー / 利用規約"
             }else {
-                cell.textLabel?.text = "Privacy Policy"
+                cell.textLabel?.text = "Privacy Policy / Terms of Use"
             }
             cell.accessoryType = .disclosureIndicator
             cell.label.text = ""
@@ -209,7 +209,7 @@ class TableViewControllerSettingsUpgrade: UITableViewController {
                 }
             }
             break
-        case 3: // プライバシーポリシー
+        case 3: // プライバシーポリシー　利用規約
             if let url = URL(string: "https://www.facebook.com/The-Reckoning-103608024863220") {
                 UIApplication.shared.open(url)
             }
