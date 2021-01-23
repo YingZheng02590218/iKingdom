@@ -73,24 +73,26 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         TableView_TB.tableFooterView = tableFooterView
-
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print(TableView_TB.rowHeight)
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: TableView_TB!.rowHeight * -1)
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        print(TableView_TB.rowHeight)
-        // GADBannerView を作成する
-        addBannerViewToView(gADBannerView, constant: TableView_TB!.rowHeight * -1)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -284,12 +286,18 @@ class ViewControllerTB: UIViewController, UITableViewDelegate, UITableViewDataSo
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        gADBannerView.isHidden = true
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = true
+        }
         let newImage = self.TableView_TB.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
-        gADBannerView.isHidden = false
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = false
+        }
         self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
