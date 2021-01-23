@@ -117,6 +117,7 @@ PODS:
   - Realm/Headers (5.3.3)
   - RealmSwift (5.3.3):
     - Realm (= 5.3.3)
+  - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
   - EMTNeumorphicView
@@ -128,6 +129,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - NeuKit
   - RealmSwift
+  - SwiftyStoreKit
 
 SPEC REPOS:
   trunk:
@@ -155,6 +157,7 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
+    - SwiftyStoreKit
 
 SPEC CHECKSUMS:
   EMTNeumorphicView: cb5e92953e43b1872ab47fefd451a9ce0c16fc77
@@ -181,7 +184,8 @@ SPEC CHECKSUMS:
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   Realm: 2d57ea355bf8ca2a0964d6bfb38d28d7ff2addf6
   RealmSwift: 0a709536ecea30eea1d3c514f6ade2ed078dee3c
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: df90a6123dd3fd907f51057462f2919595760464
+PODFILE CHECKSUM: bf1700c87edfd4197265520b5e05dbc5f27706aa
 
 COCOAPODS: 1.8.4

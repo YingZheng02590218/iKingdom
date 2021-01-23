@@ -62,24 +62,26 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print(tableView.rowHeight)
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        print(tableView.rowHeight)
-        // GADBannerView を作成する
-        addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -538,7 +540,10 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
         @IBAction func button_print(_ sender: UIButton) {
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = true
-            gADBannerView.isHidden = true
+            // アップグレード機能　スタンダードプラン
+            if !inAppPurchaseFlag {
+                gADBannerView.isHidden = true
+            }
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             // 第三の方法
@@ -565,7 +570,10 @@ class TableViewControllerPL: UITableViewController, UIPrintInteractionController
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
             //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = false
-            gADBannerView.isHidden = false
+            // アップグレード機能　スタンダードプラン
+            if !inAppPurchaseFlag {
+                gADBannerView.isHidden = false
+            }
             /*
             ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
              CGBitmapContextCreate関数を使用して、コンテキストを作成し、
