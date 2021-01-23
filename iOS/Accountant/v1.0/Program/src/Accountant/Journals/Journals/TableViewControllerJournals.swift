@@ -90,23 +90,26 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print(tableView.rowHeight)
+            // GADBannerView を作成する
+             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        print(tableView.rowHeight)
-        // GADBannerView を作成する
-         addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -590,8 +593,11 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         }
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         printing = true
-        gADBannerView.isHidden = true
-            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = true
+        }
+        pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
@@ -607,7 +613,10 @@ class TableViewControllerJournals: UITableViewController, UIGestureRecognizerDel
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
-        gADBannerView.isHidden = false
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = false
+        }
         self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、

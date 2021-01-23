@@ -39,7 +39,18 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // アプリ初期化
         let initial = Initial()
         initial.initialize()
-
+//        // アップグレード機能　スタンダードプラン　まずinAppPurchaseを判断する receiptチェックする
+//        let upgradeManager = UpgradeManager()
+//        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
+        if UserDefaults.standard.object(forKey: "buy") != nil {
+            let count = UserDefaults.standard.object(forKey: "buy") as! Int
+            if count == 1 {
+                inAppPurchaseFlag = true
+            }
+        } else {
+            inAppPurchaseFlag = false
+        }
+        
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
@@ -270,6 +281,12 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         }
         // 背景色
         datePicker.backgroundColor = .systemBackground
+        //　iOS14対応　モード　ドラムロールはwheels
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
     }
     @IBOutlet weak var Button_Left: UIButton!
     @IBAction func Button_Left(_ sender: UIButton) {
