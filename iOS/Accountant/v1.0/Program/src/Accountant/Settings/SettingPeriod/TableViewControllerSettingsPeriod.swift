@@ -39,49 +39,54 @@ class TableViewControllerSettingsPeriod: UITableViewController, UIPopoverPresent
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-//        print(self.view.frame.size.height)
-//        print(gADBannerView.frame.height)
-//        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-//        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
+    //        print(self.view.frame.size.height)
+    //        print(gADBannerView.frame.height)
+    //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+    //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
+            // GADBannerView を作成する
+    //        addBannerViewToView(gADBannerView, constant: 0)
+            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
+            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                // GADInterstitial を作成する
+                interstitial = GADInterstitial(adUnitID: TEST_IDi)
+            }
+            else{
+                interstitial = GADInterstitial(adUnitID: AdMobIDi)
+            }
+            let request = GADRequest()
+            interstitial.load(request)
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
-        // GADBannerView を作成する
-//        addBannerViewToView(gADBannerView, constant: 0)
-        addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
-        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            // GADInterstitial を作成する
-            interstitial = GADInterstitial(adUnitID: TEST_IDi)
-        }
-        else{
-            interstitial = GADInterstitial(adUnitID: AdMobIDi)
-        }
-        let request = GADRequest()
-        interstitial.load(request)
     }
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {
         // 年度を追加後に会計期間画面を更新する
         tableView.reloadData()
-        // マネタイズ対応
-        if self.interstitial.isReady {
-            self.interstitial.present(fromRootViewController: self)
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応
+            if self.interstitial.isReady {
+                self.interstitial.present(fromRootViewController: self)
+            }
         }
     }
     

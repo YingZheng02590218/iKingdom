@@ -63,23 +63,25 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         TableView_WS.tableFooterView = tableFooterView
-
-        // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-        // GADBannerView を作成する
-        gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            gADBannerView.adUnitID = TEST_ID
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: (self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-3].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-2].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
         }
-        else{
-            gADBannerView.adUnitID = AdMobID
-        }
-        gADBannerView.rootViewController = self
-        // 広告を読み込む
-        gADBannerView.load(GADRequest())
-        // GADBannerView を作成する
-        addBannerViewToView(gADBannerView, constant: (self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-3].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-2].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -423,7 +425,10 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
 //        self.TableView_TB.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
         self.TableView_WS.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
-        gADBannerView.isHidden = true
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = true
+        }
         self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
@@ -450,7 +455,10 @@ class ViewControllerWS: UIViewController, UITableViewDelegate, UITableViewDataSo
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
-        gADBannerView.isHidden = false
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            gADBannerView.isHidden = false
+        }
         self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
