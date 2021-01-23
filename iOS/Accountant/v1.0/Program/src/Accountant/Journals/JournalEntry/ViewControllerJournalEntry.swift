@@ -138,19 +138,21 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool){
         // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         createDatePicker()
-
-        // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        // GADBannerView プロパティを設定する
-        if AdMobTest {
-            // GADInterstitial を作成する
-            interstitial = GADInterstitial(adUnitID: TEST_ID)
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                // GADInterstitial を作成する
+                interstitial = GADInterstitial(adUnitID: TEST_ID)
+            }
+            else{
+                interstitial = GADInterstitial(adUnitID: AdMobID)
+            }
+            
+            let request = GADRequest()
+            interstitial.load(request)
         }
-        else{
-            interstitial = GADInterstitial(adUnitID: AdMobID)
-        }
-
-        let request = GADRequest()
-        interstitial.load(request)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -858,12 +860,15 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
                                     repeats: false // 繰り返し呼び出し
                                 )
                             })
-                            // マネタイズ対応
-                            // 乱数　1から6までのIntを生成
-                            let iValue = Int.random(in: 1 ... 6)
-                            if iValue % 2 == 0 {
-                                if interstitial.isReady {
-                                    interstitial.present(fromRootViewController: self)
+                            // アップグレード機能　スタンダードプラン
+                            if !inAppPurchaseFlag {
+                                // マネタイズ対応
+                                // 乱数　1から6までのIntを生成
+                                let iValue = Int.random(in: 1 ... 6)
+                                if iValue % 2 == 0 {
+                                    if interstitial.isReady {
+                                        interstitial.present(fromRootViewController: self)
+                                    }
                                 }
                             }
                         }
