@@ -39,13 +39,13 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
         // アプリ初期化
         let initial = Initial()
         initial.initialize()
-//        // アップグレード機能　スタンダードプラン　まずinAppPurchaseを判断する receiptチェックする
-//        let upgradeManager = UpgradeManager()
-//        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
+        // アップグレード機能
         if UserDefaults.standard.object(forKey: "buy") != nil {
             let count = UserDefaults.standard.object(forKey: "buy") as! Int
             if count == 1 {
-                inAppPurchaseFlag = true
+                // アップグレード機能　スタンダードプラン　まずinAppPurchaseを判断する receiptチェックする
+                let upgradeManager = UpgradeManager()
+                upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
             }
         } else {
             inAppPurchaseFlag = false
