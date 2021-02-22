@@ -54,15 +54,12 @@ class UpgradeManager {
                     print("Product is valid until \(expiryDate)")
                     //リストアの成功
                     UserDefaults.standard.set(1, forKey: "buy")
-                    inAppPurchaseFlag = true
                     break
                 case .expired(let expiryDate, let receiptItems):
                     print("Product is expired since \(expiryDate)")
-                    inAppPurchaseFlag = false
                     break
                 case .notPurchased:
                     print("This product has never been purchased")
-                    inAppPurchaseFlag = false
                     //リストアの失敗
                     break
                 default:
@@ -70,7 +67,6 @@ class UpgradeManager {
                 }
             case .error:
                 //エラー
-                inAppPurchaseFlag = false
                 break// Conformの場合 OK、Manageを押した場合エラーとなった
             }
         }
