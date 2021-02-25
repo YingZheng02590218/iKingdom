@@ -60,6 +60,8 @@ class TableViewControllerBS: UITableViewController, UIPrintInteractionController
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
+        // 画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
+        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView

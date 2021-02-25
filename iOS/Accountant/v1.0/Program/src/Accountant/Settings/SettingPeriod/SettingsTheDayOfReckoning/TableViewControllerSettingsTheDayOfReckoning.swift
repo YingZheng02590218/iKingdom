@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds // マネタイズ対応
 
 // 設定決算日
 class TableViewControllerSettingsTheDayOfReckoning: UITableViewController {
 
+    // マネタイズ対応
+    // 広告ユニットID
+    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
+    // テスト用広告ユニットID
+    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
+    // true:テスト
+    let AdMobTest:Bool = false
+    @IBOutlet var gADBannerView: GADBannerView!
+    
     var month: Bool = false // 決算日設定月
     
     override func viewDidLoad() {
@@ -22,7 +32,49 @@ class TableViewControllerSettingsTheDayOfReckoning: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: 30 * -1)
+        }
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: constant),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

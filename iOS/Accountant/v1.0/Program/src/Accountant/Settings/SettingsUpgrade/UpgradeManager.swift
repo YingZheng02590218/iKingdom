@@ -54,7 +54,6 @@ class UpgradeManager {
                     print("Product is valid until \(expiryDate)")
                     //リストアの成功
                     UserDefaults.standard.set(1, forKey: "buy")
-                    inAppPurchaseFlag = true
                     break
                 case .expired(let expiryDate, let receiptItems):
                     print("Product is expired since \(expiryDate)")

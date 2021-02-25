@@ -78,13 +78,20 @@ class ViewControllerSettingsPeriodYear: UIViewController,UIPickerViewDataSource,
         // iPadとiPhoneで動きが変わるので分岐する
         if UIDevice.current.userInterfaceIdiom == .pad { // iPad
 //        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
-             navigationController2 = splitViewController.viewControllers[1]  as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+            print(splitViewController.viewControllers.count)
+            let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+            print(navigationController0.viewControllers.count)
+            print(navigationController0.viewControllers[1])
+            navigationController2 = navigationController0.viewControllers[1] as! UINavigationController
+            print(navigationController2.viewControllers.count)
+            print(navigationController2.viewControllers[0])
             print("iPad ビューコントローラーの階層")
-            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
-            print("splitViewController[1]      :", splitViewController.viewControllers[1] )    // UINavigationController
-            print("  navigationController[0]   :", navigationController.viewControllers[0])    // TableViewControllerSettings
-            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // TableViewControllerSettingsPeriod
+//            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
+//            print("splitViewController[1]      :", splitViewController.viewControllers[1] )    // UINavigationController
+//            print("  navigationController[0]   :", navigationController.viewControllers[0])    // TableViewControllerSettings
+//            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // TableViewControllerSettingsPeriod
         }else { // iPhone
+            print(splitViewController.viewControllers.count)
             navigationController2 = navigationController.viewControllers[1] as! UINavigationController
 //             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
             print("iPhone ビューコントローラーの階層")
