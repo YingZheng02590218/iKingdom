@@ -17,8 +17,11 @@ class ViewControllerJournalEntry: UIViewController, UITextFieldDelegate {
     let AdMobID = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
     // テスト用広告ユニットID
     let TEST_ID = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
-    // true:テスト
+    #if DEBUG
+    let AdMobTest:Bool = true    // true:テスト
+    #else
     let AdMobTest:Bool = false
+    #endif
     @IBOutlet var interstitial: GADInterstitial!
     
     var categories :[String] = Array<String>()
