@@ -17,8 +17,11 @@ class ViewControllerGenearlLedgerAccount: UIViewController, UITableViewDelegate,
     let AdMobID = "ca-app-pub-7616440336243237/8565070944"
     // テスト用広告ユニットID
     let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    // true:テスト
+    #if DEBUG
+    let AdMobTest:Bool = true    // true:テスト
+    #else
     let AdMobTest:Bool = false
+    #endif
     @IBOutlet var gADBannerView: GADBannerView!
     
     @IBOutlet weak var view_top: UIView!
