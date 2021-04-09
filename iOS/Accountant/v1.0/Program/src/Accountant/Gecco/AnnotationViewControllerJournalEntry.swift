@@ -113,7 +113,7 @@ private extension AnnotationViewControllerJournalEntry {
     
     var navigationBarHeight: CGFloat { 44 }
     var viewControllerHasNavigationItemm: UIViewController? {
-        if let controller = presentingViewController as? ViewControllerJournalEntry {
+        if let controller = presentingViewController as? JournalEntryViewController {
             print(controller)
             return controller
         }

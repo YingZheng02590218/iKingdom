@@ -103,11 +103,11 @@ private extension AnnotationViewControllerSettingsCategory {
     var navigationBarHeight: CGFloat { 44 }
     var viewControllerHasNavigationItem: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            if controller.viewControllers[0] is TableViewControllerSettingsCategory {
+            if controller.viewControllers[0] is SettingsCategoryTableViewController {
                 let tableViewControllerSettingsCategory = controller.viewControllers[0]
                 return controller.viewControllers[0]
             }else {
-                print(controller.viewControllers[0]) // TableViewControllerSettings
+                print(controller.viewControllers[0]) // SettingsTableViewController
                 print(controller.viewControllers[1]) // UINavigationController
                 return controller.viewControllers[1]
             }
