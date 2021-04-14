@@ -186,9 +186,6 @@
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="RtK-tc-ENG" secondAttribute="height" multiplier="683:70" id="R7X-P1-mLO"/>
-                                                                </constraints>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -199,9 +196,6 @@
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="arY-VQ-0Zi" secondAttribute="height" multiplier="683:70" id="wkL-ig-8KM"/>
-                                                                </constraints>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -212,9 +206,16 @@
                                                             </textField>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="arY-VQ-0Zi" firstAttribute="top" secondItem="8Ew-8G-jdU" secondAttribute="top" id="EtZ-a4-jso"/>
+                                                            <constraint firstItem="RtK-tc-ENG" firstAttribute="leading" secondItem="8Ew-8G-jdU" secondAttribute="leading" id="LHe-bX-mQU"/>
+                                                            <constraint firstItem="arY-VQ-0Zi" firstAttribute="leading" secondItem="RtK-tc-ENG" secondAttribute="trailing" id="Ojk-Vd-GPb"/>
                                                             <constraint firstItem="arY-VQ-0Zi" firstAttribute="height" secondItem="8Ew-8G-jdU" secondAttribute="height" id="OnO-PE-CCn"/>
                                                             <constraint firstItem="RtK-tc-ENG" firstAttribute="width" secondItem="8Ew-8G-jdU" secondAttribute="width" multiplier="0.5" id="UVG-vd-7Ir"/>
+                                                            <constraint firstAttribute="bottom" secondItem="RtK-tc-ENG" secondAttribute="bottom" id="Xwt-ER-95q"/>
                                                             <constraint firstItem="arY-VQ-0Zi" firstAttribute="width" secondItem="8Ew-8G-jdU" secondAttribute="width" multiplier="0.5" id="eMG-Lx-8dB"/>
+                                                            <constraint firstAttribute="bottom" secondItem="arY-VQ-0Zi" secondAttribute="bottom" id="emV-xw-XC2"/>
+                                                            <constraint firstItem="RtK-tc-ENG" firstAttribute="top" secondItem="8Ew-8G-jdU" secondAttribute="top" id="pKZ-t6-5kj"/>
+                                                            <constraint firstAttribute="trailing" secondItem="arY-VQ-0Zi" secondAttribute="trailing" id="vsZ-xd-Z3L"/>
                                                             <constraint firstItem="RtK-tc-ENG" firstAttribute="height" secondItem="8Ew-8G-jdU" secondAttribute="height" id="xsu-uc-Vx2"/>
                                                         </constraints>
                                                     </stackView>
@@ -222,9 +223,6 @@
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-8K-hRw">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="b2F-8K-hRw" secondAttribute="height" multiplier="683:70" id="xIW-QX-krF"/>
-                                                                </constraints>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -235,9 +233,6 @@
                                                             </textField>
                                                             <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8YU-bl-bba">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="8YU-bl-bba" secondAttribute="height" multiplier="683:70" id="VDH-pP-u1L"/>
-                                                                </constraints>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>

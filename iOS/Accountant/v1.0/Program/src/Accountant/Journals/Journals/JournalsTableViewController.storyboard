@@ -238,7 +238,6 @@
                                         <constraint firstItem="2fR-pL-1Fc" firstAttribute="leading" secondItem="S0g-FO-HEj" secondAttribute="leading" id="12T-Cf-O9A"/>
                                         <constraint firstItem="DWi-OM-vKI" firstAttribute="leading" secondItem="S0g-FO-HEj" secondAttribute="leading" id="4mO-Xp-2yp"/>
                                         <constraint firstAttribute="trailing" secondItem="2fR-pL-1Fc" secondAttribute="trailing" id="FIJ-J2-JPA"/>
-                                        <constraint firstAttribute="width" secondItem="S0g-FO-HEj" secondAttribute="height" multiplier="75:19" id="Gh1-Gg-Pgm"/>
                                         <constraint firstItem="DWi-OM-vKI" firstAttribute="width" secondItem="S0g-FO-HEj" secondAttribute="width" id="Ibe-EC-xWK"/>
                                         <constraint firstAttribute="bottom" secondItem="DWi-OM-vKI" secondAttribute="bottom" id="J0A-HW-lfd"/>
                                         <constraint firstItem="DWi-OM-vKI" firstAttribute="height" secondItem="S0g-FO-HEj" secondAttribute="height" multiplier="0.526316" id="J8c-eV-obO"/>
@@ -524,9 +523,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="lMi-xJ-PXs" userLabel="list_summary">
-                                                    <rect key="frame" x="0.0" y="39" width="204" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="lMi-xJ-PXs" userLabel="list_summary">
+                                                    <rect key="frame" x="0.0" y="40" width="204" height="20"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -539,17 +537,23 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="lMi-xJ-PXs" secondAttribute="bottom" id="60G-Ue-FtX"/>
                                                 <constraint firstAttribute="width" secondItem="0rE-ny-0Ji" secondAttribute="height" multiplier="101:6" id="6tN-U5-JyG"/>
                                                 <constraint firstItem="SKF-Rc-gHU" firstAttribute="width" secondItem="0rE-ny-0Ji" secondAttribute="width" id="8UM-e1-KXG"/>
+                                                <constraint firstItem="lMi-xJ-PXs" firstAttribute="height" secondItem="0rE-ny-0Ji" secondAttribute="height" multiplier="0.333333" id="8ag-n1-cfp"/>
+                                                <constraint firstItem="lMi-xJ-PXs" firstAttribute="top" secondItem="SKF-Rc-gHU" secondAttribute="bottom" id="GH1-E8-mqB"/>
                                                 <constraint firstItem="SKF-Rc-gHU" firstAttribute="height" secondItem="0rE-ny-0Ji" secondAttribute="height" multiplier="0.333333" id="KY4-WO-x61"/>
                                                 <constraint firstAttribute="trailing" secondItem="3Xa-Ud-bLK" secondAttribute="trailing" id="Kiq-yY-58l"/>
                                                 <constraint firstItem="3Xa-Ud-bLK" firstAttribute="top" secondItem="0rE-ny-0Ji" secondAttribute="top" id="L94-at-AuX"/>
-                                                <constraint firstItem="lMi-xJ-PXs" firstAttribute="top" secondItem="SKF-Rc-gHU" secondAttribute="bottom" id="Ptm-LR-iwa"/>
+                                                <constraint firstItem="3Xa-Ud-bLK" firstAttribute="width" secondItem="0rE-ny-0Ji" secondAttribute="width" id="Pae-P8-ESQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="SKF-Rc-gHU" secondAttribute="trailing" id="S6D-jn-z6K"/>
+                                                <constraint firstItem="lMi-xJ-PXs" firstAttribute="width" secondItem="0rE-ny-0Ji" secondAttribute="width" id="ZKk-54-O4g"/>
                                                 <constraint firstItem="3Xa-Ud-bLK" firstAttribute="height" secondItem="0rE-ny-0Ji" secondAttribute="height" multiplier="0.333333" id="ZY7-SU-VI4"/>
+                                                <constraint firstAttribute="trailing" secondItem="lMi-xJ-PXs" secondAttribute="trailing" id="agK-ZQ-YvM"/>
                                                 <constraint firstItem="SKF-Rc-gHU" firstAttribute="leading" secondItem="0rE-ny-0Ji" secondAttribute="leading" id="g7x-qa-3eh"/>
                                                 <constraint firstItem="SKF-Rc-gHU" firstAttribute="top" secondItem="3Xa-Ud-bLK" secondAttribute="bottom" id="gCL-AP-jWW"/>
                                                 <constraint firstItem="lMi-xJ-PXs" firstAttribute="top" secondItem="SKF-Rc-gHU" secondAttribute="bottom" id="gql-za-s2B"/>
+                                                <constraint firstItem="lMi-xJ-PXs" firstAttribute="leading" secondItem="0rE-ny-0Ji" secondAttribute="leading" id="kpe-RM-6tb"/>
                                                 <constraint firstItem="3Xa-Ud-bLK" firstAttribute="leading" secondItem="0rE-ny-0Ji" secondAttribute="leading" id="q2j-rK-vEq"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -559,7 +563,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lf-Y4-AKI">
-                                            <rect key="frame" x="253.5" y="0.0" width="17" height="60"/>
+                                            <rect key="frame" x="181.5" y="0.0" width="17" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="xI9-2V-DH0" userLabel="list_number">
                                                     <rect key="frame" x="0.0" y="0.0" width="17" height="20"/>
@@ -609,10 +613,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qc6-0d-65N">
-                                            <rect key="frame" x="270.5" y="0.0" width="71.5" height="60"/>
+                                            <rect key="frame" x="122" y="0.0" width="32.5" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="fwU-Qs-cWS" userLabel="list_debit">
-                                                    <rect key="frame" x="0.0" y="0.0" width="71" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -624,7 +628,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="psO-gd-Hz7" userLabel="list_debit2">
-                                                    <rect key="frame" x="0.0" y="20" width="71" height="20"/>
+                                                    <rect key="frame" x="0.0" y="20" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -636,7 +640,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="gEZ-ff-yaQ" userLabel="list_debit3">
-                                                    <rect key="frame" x="0.0" y="40" width="71" height="20"/>
+                                                    <rect key="frame" x="0.0" y="40" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -659,10 +663,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7q-y5-hiY">
-                                            <rect key="frame" x="342" y="0.0" width="72" height="60"/>
+                                            <rect key="frame" x="154.5" y="0.0" width="32" height="60"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="RRM-uV-sqk" userLabel="list_credit1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -674,7 +678,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="kxe-6y-AeO" userLabel="list_credit">
-                                                    <rect key="frame" x="0.0" y="20" width="72" height="20"/>
+                                                    <rect key="frame" x="0.0" y="20" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -686,7 +690,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="tO1-Q1-nHm" userLabel="list_credit3">
-                                                    <rect key="frame" x="0.0" y="40" width="72" height="20"/>
+                                                    <rect key="frame" x="0.0" y="40" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>

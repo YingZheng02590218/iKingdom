@@ -103,6 +103,9 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: TableView_account!.rowHeight * -1)
         }
+        // ナビゲーションバーの半透明化（デフォルト）しない　storyboardでは設定が反映されなかった
+        navigationController?.navigationBar.isTranslucent = false
+
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

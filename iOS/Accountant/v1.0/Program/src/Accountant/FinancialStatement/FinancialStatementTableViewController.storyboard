@@ -79,7 +79,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="e1L-cz-Ix4" kind="presentation" identifier="segue_PLAccount" id="9o5-7H-8CF"/>
+                                    <segue destination="e1L-cz-Ix4" kind="show" identifier="segue_PLAccount" id="9o5-7H-8CF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -150,7 +150,9 @@
         <!--GenearlLedgerAccountViewController-->
         <scene sceneID="lAD-af-xv9">
             <objects>
-                <viewControllerPlaceholder storyboardName="GenearlLedgerAccountViewController" id="e1L-cz-Ix4" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GenearlLedgerAccountViewController" id="e1L-cz-Ix4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ivw-lE-gWd"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWR-Wj-3Nk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3376" y="1977"/>

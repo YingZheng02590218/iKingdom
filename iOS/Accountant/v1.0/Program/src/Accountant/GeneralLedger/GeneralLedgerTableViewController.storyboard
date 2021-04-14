@@ -26,7 +26,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="IxZ-Ph-4sn" kind="presentation" identifier="identifier_generalLedger" id="4hx-Ft-77Q"/>
+                                    <segue destination="IxZ-Ph-4sn" kind="show" identifier="identifier_generalLedger" id="4hx-Ft-77Q"/>
                                     <segue destination="IxZ-Ph-4sn" kind="presentation" trigger="accessoryAction" id="xpm-6T-RdN"/>
                                 </connections>
                             </tableViewCell>
@@ -48,7 +48,9 @@
         <!--GenearlLedgerAccountViewController-->
         <scene sceneID="R1b-xV-s9i">
             <objects>
-                <viewControllerPlaceholder storyboardName="GenearlLedgerAccountViewController" id="IxZ-Ph-4sn" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="GenearlLedgerAccountViewController" id="IxZ-Ph-4sn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="776-ZU-Eva"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dlh-Sr-Iqw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407" y="2444"/>

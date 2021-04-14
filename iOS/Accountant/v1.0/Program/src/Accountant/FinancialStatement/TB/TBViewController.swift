@@ -246,24 +246,25 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // disable sticky section header
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if printing {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-            if scrollView.contentOffset.y >= UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-                scrollView.contentInset = UIEdgeInsets(top: -(UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-            }
-        }else{
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if printing {
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
+////            if scrollView.contentOffset.y >= UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
+////                scrollView.contentInset = UIEdgeInsets(top: -(UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
+////            }
+//        }else{
+////            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+//            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
+//        }
+//    }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     @IBOutlet weak var button_print: UIButton!
     /**
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
+        TableView_TB.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
         let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
@@ -389,6 +390,7 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         TableView_TB.showsVerticalScrollIndicator = true
+        TableView_TB.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
     }
     
