@@ -79,10 +79,9 @@
         <!--仕訳-->
         <scene sceneID="8Yy-gm-rKf">
             <objects>
-                <navigationController id="Mfv-1p-Kx7" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="Mfv-1p-Kx7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="仕訳" image="pencil" catalog="system" id="9b3-49-6Uh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -113,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="1441" y="1766"/>
         </scene>
-        <!--SettingsHelpViewController-->
+        <!--SettingsPeriodTableViewController-->
         <scene sceneID="seR-UZ-aZK">
             <objects>
-                <viewControllerPlaceholder storyboardName="SettingsHelpViewController" id="YWM-yH-mN2" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="SettingsPeriodTableViewController" id="YWM-yH-mN2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tD6-fF-682" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4011" y="1766"/>
@@ -126,6 +125,7 @@
             <objects>
                 <navigationController id="TNd-j8-cbF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="総勘定元帳" image="book.fill" catalog="system" id="ek4-yK-Zyk"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZIn-vy-KXP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
