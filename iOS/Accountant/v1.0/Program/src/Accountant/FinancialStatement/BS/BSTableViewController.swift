@@ -64,7 +64,8 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: UITableView.ScrollPosition.bottom, animated: false)
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
         // 画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
-        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+//        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
@@ -1109,24 +1110,24 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
     
     @IBOutlet weak var view_top: UIView!
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // disable sticky section header
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if printing {
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
-            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-                // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
-                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-            }
-        }else{
-            if self.navigationController?.navigationBar.bounds.height != nil {
+//    // disable sticky section header
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if printing {
+//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
+//            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
+//            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
+//                // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
+//                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
+//            }
+//        }else{
+//            if self.navigationController?.navigationBar.bounds.height != nil {
+////                // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+////                scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
 //                // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-//                scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
-                // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-                scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-            }
-        }
-    }
+//                scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
+//            }
+//        }
+//    }
     @IBOutlet var tableView_BS: UITableView!
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     var pageSizee = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -1136,6 +1137,9 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
+        tableView.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
+//        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+
         printing = true
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
@@ -1254,8 +1258,9 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
 
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
     }
     /**
      * 印刷メソッド
