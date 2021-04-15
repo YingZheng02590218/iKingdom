@@ -91,7 +91,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
+        let viewController = UIStoryboard(name: "SettingsOperatingTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }

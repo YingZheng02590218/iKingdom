@@ -172,7 +172,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
+        let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }

@@ -124,10 +124,10 @@ private extension AnnotationViewControllerJournalEntry {
     func extractRightBarButtonConvertedFramess() -> (zero: CGRect,  firstLeft: CGRect, firstRight: CGRect, secondLeft: CGRect, secondRight: CGRect, third: CGRect) {
         guard
             let zero        = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(11)!.viewWithTag(111)?.viewWithTag(2222) as? UIDatePicker,
-            let firstLeft   = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(111) as? PickerTextField,
-            let firstRight  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(222) as? PickerTextField,
-            let secondLeft  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(4444)?.viewWithTag(333) as? UITextField,
-            let secondRight = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(4444)?.viewWithTag(444) as? UITextField,
+            let firstLeft   = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(11111)?.viewWithTag(111) as? PickerTextField,
+            let firstRight  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(11111)?.viewWithTag(222) as? PickerTextField,
+            let secondLeft  = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(22222)?.viewWithTag(333) as? UITextField,
+            let secondRight = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(22)!.viewWithTag(3333)?.viewWithTag(22222)?.viewWithTag(444) as? UITextField,
             let third       = viewControllerHasNavigationItemm?.view.viewWithTag(1)!.viewWithTag(33)!.viewWithTag(555) as? UITextField
             else {
                 fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")

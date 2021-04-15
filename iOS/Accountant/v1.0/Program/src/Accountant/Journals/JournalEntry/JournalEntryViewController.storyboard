@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Xe-Zw-HUf">
+                            <stackView tag="1" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Xe-Zw-HUf">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCd-Tw-HKo" userLabel="mid0_View">
                                         <subviews>
@@ -49,7 +49,7 @@
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
+                                            <stackView opaque="NO" tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDc-0D-SC8">
                                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
@@ -150,7 +150,7 @@
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14e-0l-xHx" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
+                                            <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZL-1o-tF1" userLabel="Stack View1">
                                                         <subviews>
@@ -182,9 +182,9 @@
                                                             <constraint firstItem="tVJ-HE-bM2" firstAttribute="top" secondItem="BZL-1o-tF1" secondAttribute="top" id="qwm-3H-udR"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-8G-jdU" userLabel="Stack View2">
+                                                    <stackView opaque="NO" tag="11111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-8G-jdU" userLabel="Stack View2">
                                                         <subviews>
-                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -219,7 +219,7 @@
                                                             <constraint firstItem="RtK-tc-ENG" firstAttribute="height" secondItem="8Ew-8G-jdU" secondAttribute="height" id="xsu-uc-Vx2"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-Lb-KwP" userLabel="Stack View3">
+                                                    <stackView opaque="NO" tag="22222" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-Lb-KwP" userLabel="Stack View3">
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-8K-hRw">
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -287,7 +287,7 @@
                                             <constraint firstItem="bza-Ia-eRI" firstAttribute="top" secondItem="14e-0l-xHx" secondAttribute="top" id="z2c-Bx-PwA"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9k-QYm" userLabel="mid3_Stack View">
+                                    <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9k-QYm" userLabel="mid3_Stack View">
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-b8-FIi">
                                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>

@@ -121,7 +121,7 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_WorkSheet") as! AnnotationViewController
+        let viewController = UIStoryboard(name: "WSViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_WorkSheet") as! AnnotationViewController
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }

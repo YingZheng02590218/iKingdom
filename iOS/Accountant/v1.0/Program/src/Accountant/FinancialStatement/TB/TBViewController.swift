@@ -132,7 +132,7 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
+        let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
