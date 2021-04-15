@@ -127,7 +127,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
+        let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }

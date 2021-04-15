@@ -87,7 +87,7 @@ class SettingsInformationTableViewController: UITableViewController {
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsInformation") as! AnnotationViewControllerSettingsInformation
+        let viewController = UIStoryboard(name: "SettingsInformationTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsInformation") as! AnnotationViewControllerSettingsInformation
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
