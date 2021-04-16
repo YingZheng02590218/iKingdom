@@ -119,7 +119,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="label" destination="zbZ-zd-LJt" id="hyL-NH-UK9"/>
-                                    <segue destination="B4C-gl-Hho" kind="presentation" id="IAu-Lh-II4"/>
+                                    <segue destination="B4C-gl-Hho" kind="presentation" identifier="segue_TaxonomyList" id="IAu-Lh-II4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
