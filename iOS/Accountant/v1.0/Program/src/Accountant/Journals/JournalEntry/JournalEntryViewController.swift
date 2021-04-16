@@ -8,6 +8,9 @@
 
 import UIKit
 import GoogleMobileAds // マネタイズ対応
+import AdSupport // IDFA対応
+import AppTrackingTransparency // IDFA対応
+
 
 // 仕訳クラス
 class JournalEntryViewController: UIViewController, UITextFieldDelegate {
@@ -137,6 +140,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
 //        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        // IDFA対応
+        askIDFA()
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
@@ -175,6 +180,48 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
+    }
+    // IDFA対応
+    func askIDFA() {
+        if #available(iOS 14, *) {
+            switch ATTrackingManager.trackingAuthorizationStatus {
+            case .authorized:
+                print("Allow Tracking")
+                print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
+            case .denied:
+                print("😭拒否")
+            case .restricted:
+                print("🥺制限")
+            case .notDetermined:
+                showRequestTrackingAuthorizationAlert()
+            @unknown default:
+                fatalError()
+            }
+        } else {// iOS14未満
+            if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+                print("Allow Tracking")
+                print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
+            } else {
+                print("🥺制限")
+            }
+        }
+    }
+    ///Alert表示
+    private func showRequestTrackingAuthorizationAlert() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                switch status {
+                case .authorized:
+                    print("🎉")
+                    //IDFA取得
+                    print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
+                case .denied, .restricted, .notDetermined:
+                    print("😭")
+                @unknown default:
+                    fatalError()
+                }
+            })
+        }
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
