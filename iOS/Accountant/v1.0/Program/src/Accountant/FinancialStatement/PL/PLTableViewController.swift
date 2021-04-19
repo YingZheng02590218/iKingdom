@@ -517,24 +517,6 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
     }
     @IBOutlet weak var view_top: UIView!
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-        // disable sticky section header
-//        override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//            if printing {
-////                scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//                // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
-//                if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
-//                    // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
-//                    scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
-//                }
-//            }else{
-//                if self.navigationController?.navigationBar.bounds.height != nil { //ナビゲーションバーが見えない状態で画面遷移をするとnilとなる　2020/07/12 22:45
-//                    // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-////                    scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
-//                    // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-//                    scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-//                }
-//            }
-//        }
     
         var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
         @IBOutlet weak var button_print: UIButton!
@@ -542,7 +524,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
          * 印刷ボタン押下時メソッド
          */
         @IBAction func button_print(_ sender: UIButton) {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            tableView.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
             printing = true
             // アップグレード機能　スタンダードプラン

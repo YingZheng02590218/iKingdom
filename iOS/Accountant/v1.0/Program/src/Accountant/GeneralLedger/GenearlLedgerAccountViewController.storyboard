@@ -204,11 +204,11 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N3X-yz-m71" userLabel="5View">
-                                                            <rect key="frame" x="364" y="0.0" width="507" height="47.5"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3X-yz-m71" userLabel="5View">
+                                                            <rect key="frame" x="364" y="0.0" width="103" height="47.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="CdL-gH-j17" userLabel="list_credit">
-                                                                    <rect key="frame" x="-1" y="-3" width="507" height="50"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="CdL-gH-j17" userLabel="list_credit">
+                                                                    <rect key="frame" x="-1" y="-3" width="103" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -225,10 +225,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5vE-PC-L8T" userLabel="6View">
-                                                            <rect key="frame" x="871" y="0.0" width="50" height="47.5"/>
+                                                            <rect key="frame" x="467" y="0.0" width="454" height="47.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="借又貸" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="KCv-5j-G8p" userLabel="list_debitOrCredit">
-                                                                    <rect key="frame" x="-1" y="-1" width="50" height="47"/>
+                                                                    <rect key="frame" x="-1" y="-1" width="454" height="47"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                     <nil key="textColor"/>
@@ -244,8 +244,8 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-sQ-xbA" userLabel="7View">
-                                                            <rect key="frame" x="921" y="0.0" width="103" height="47.5"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-sQ-xbA" userLabel="7View">
+                                                            <rect key="frame" x="904" y="0.0" width="103" height="47.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="差引残高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="0oP-Sy-ARH" userLabel="list_balance">
                                                                     <rect key="frame" x="-3" y="-3" width="103" height="50"/>
@@ -512,11 +512,11 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NjB-TJ-5Rz">
-                                                    <rect key="frame" x="805.5" y="0.0" width="41" height="20"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjB-TJ-5Rz">
+                                                    <rect key="frame" x="1023.5" y="0.0" width="10" height="20"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="hcM-2B-GuI" userLabel="list_debitOrCredit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="20"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="hcM-2B-GuI" userLabel="list_debitOrCredit">
+                                                            <rect key="frame" x="0.0" y="0.0" width="9" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -538,11 +538,11 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96k-6P-cYt">
-                                                    <rect key="frame" x="846.5" y="0.0" width="177.5" height="20"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96k-6P-cYt">
+                                                    <rect key="frame" x="1033.5" y="0.0" width="0.5" height="20"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="w6f-oe-WtV" userLabel="list_balance">
-                                                            <rect key="frame" x="0.0" y="0.0" width="179" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="2" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -650,12 +650,12 @@
                         <outlet property="button_print" destination="c2X-NV-EMg" id="CHe-cw-0Ki"/>
                         <outlet property="label_date_year" destination="Qxv-05-24e" id="JVp-B9-Z8e"/>
                         <outlet property="label_list_heading" destination="Ybo-Qi-Oqy" id="DC7-V7-tiP"/>
-                        <outlet property="view_top" destination="NXP-gg-dFY" id="FmZ-8t-GPp"/>
+                        <outlet property="view_top" destination="CaE-gn-ebO" id="sum-Op-cFZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBs-mw-eBu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1407" y="2768"/>
+            <point key="canvasLocation" x="1406.8359375" y="2767.6427525622253"/>
         </scene>
     </scenes>
     <resources>

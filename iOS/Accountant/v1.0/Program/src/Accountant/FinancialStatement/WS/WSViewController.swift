@@ -47,8 +47,6 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-        TableView_WS.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         // 月末、年度末などの決算日をラベルに表示する
         let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
         let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
@@ -85,6 +83,8 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: (self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-3].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-2].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
         }
+        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
+        TableView_WS.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -402,19 +402,6 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // disable sticky section header
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if printing {
-////            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-//            // スクロールのオフセットがヘッダー部分のビューとステータスバーの高さ以上　かつ　0以上
-//            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-//                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+TableView_WS.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-//            }
-//        }else{
-//            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-//            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-//        }
-//    }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     // 精算表画面で押下された場合は、決算整理仕訳とする
     @IBOutlet weak var barButtonItem_add: UIBarButtonItem!//ヘッダー部分の追加ボタン

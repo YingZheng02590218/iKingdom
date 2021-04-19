@@ -105,7 +105,8 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         }
         // ナビゲーションバーの半透明化（デフォルト）しない　storyboardでは設定が反映されなかった
         navigationController?.navigationBar.isTranslucent = false
-
+        // ナビゲーションバーの下からテーブルビューを配置する
+        TableView_account.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -400,31 +401,14 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         }
     }
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // disable sticky section header
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if printing {
-            print("scrollView.contentOffset.y   : \(scrollView.contentOffset.y)")
-            print("scrollView.contentInset      : \(scrollView.contentInset)")
-            print("view_top.bounds.height       : \(view_top.bounds.height)")
-            print("TableView_account.bounds.height   : \(TableView_account.bounds.height)")
-            if scrollView.contentOffset.y >= view_top.bounds.height && scrollView.contentOffset.y >= 0 { // viewの重複を防ぐ
-                scrollView.contentInset = UIEdgeInsets(top: (view_top.bounds.height) * -1, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-            }
-        }else{
-            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //注意：view_top.bounds.heightを指定するとテーブルの最下行が表示されなくなる
-        }
-    }
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     @IBOutlet weak var button_print: UIButton!
     /**
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
-        let indexPath = TableView_account.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_account.indexPathsForVisibleRows: \(String(describing: indexPath))")
-        self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)
-        self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
-//        self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        TableView_account.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
+        self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         TableView_account.showsVerticalScrollIndicator = false
@@ -458,7 +442,6 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
-       self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -563,8 +546,8 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         //余計なUIをキャプチャしないように隠したのを戻す
         TableView_account.showsVerticalScrollIndicator = true
         button_print.isHidden = false
-        self.TableView_account.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-
+        TableView_account.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
     }
     
     // MARK: - UIImageWriteToSavedPhotosAlbum

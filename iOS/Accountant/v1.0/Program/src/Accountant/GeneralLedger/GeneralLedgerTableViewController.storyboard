@@ -27,7 +27,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="IxZ-Ph-4sn" kind="show" identifier="identifier_generalLedger" id="4hx-Ft-77Q"/>
-                                    <segue destination="IxZ-Ph-4sn" kind="presentation" trigger="accessoryAction" id="xpm-6T-RdN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -56,9 +55,6 @@
             <point key="canvasLocation" x="1407" y="2444"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="xpm-6T-RdN"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -89,7 +89,7 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
             button_print.isEnabled = false
         }
         // 仕訳帳画面を表示する際に、インセットを設定する。top: ステータスバーとナビゲーションバーの高さより下からテーブルを描画するため
-        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
@@ -560,20 +560,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
     
     @IBOutlet weak var view_top: UIView!
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // disable sticky section header
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if printing {
-            if scrollView.contentOffset.y >= view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height && scrollView.contentOffset.y >= 0 {
-                // セクションヘッダーの高さをインセットに設定する　セクションヘッダーがテーブル上にとどまらないようにするため
-                scrollView.contentInset = UIEdgeInsets(top: -(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height+tableView.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-            }
-        }else{
-            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-//            scrollView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
-            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-        }
-    }
     
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     @IBOutlet weak var barButtonItem_add: UIBarButtonItem!//ヘッダー部分の追加ボタン
@@ -583,10 +569,8 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
      * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
      */
     @IBAction func button_print(_ sender: UIButton) {
-        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-//        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
-        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.top, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        tableView.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         tableView.showsVerticalScrollIndicator = false
@@ -594,7 +578,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
             // nilでない場合
             tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
         }
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         printing = true
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
@@ -620,7 +603,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
-        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -708,9 +690,9 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
         // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-        tableView.contentInset = UIEdgeInsets(top: +self.navigationController!.navigationBar.bounds.height+UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        self.tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
     }
     
     // MARK: - UIImageWriteToSavedPhotosAlbum
