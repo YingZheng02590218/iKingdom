@@ -204,7 +204,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         switch indexPath.section {
         case 0:
             // 決算日
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath) as! SettingsPeriodTableViewCell
             let dataBaseManager = DataBaseManagerSettingsPeriod()
             let object = dataBaseManager.getTheDayOfReckoning()
             // 会計帳簿の年度をセルに表示する
@@ -212,17 +212,17 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 cell.textLabel?.text = "月"
                 let d = object
                 let date = d[d.index(d.startIndex, offsetBy: 0)..<d.index(d.startIndex, offsetBy: 2)] // 日付の9文字目にある日の十の位を抽出
-                cell.detailTextLabel?.text = "\(date)"
+                cell.detailTextLabel2.text = "\(date)"
                 print(date)
             }else {
                 cell.textLabel?.text = "日"
                 let d = object
                 let date = d[d.index(d.startIndex, offsetBy: 3)..<d.index(d.startIndex, offsetBy: 5)] // 日付の9文字目にある日の十の位を抽出
-                cell.detailTextLabel?.text = "\(date)"
+                cell.detailTextLabel2.text = "\(date)"
                 print(date)
             }
             // 詳細テキストラベル
-            cell.detailTextLabel?.textColor = .lightGray
+            cell.detailTextLabel2.textColor = .lightGray
             return cell
         case 1:
             // 会計年度
