@@ -79,7 +79,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="e1L-cz-Ix4" kind="show" identifier="segue_PLAccount" id="9o5-7H-8CF"/>
+                                    <segue destination="e1L-cz-Ix4" kind="presentation" identifier="segue_PLAccount" id="9o5-7H-8CF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

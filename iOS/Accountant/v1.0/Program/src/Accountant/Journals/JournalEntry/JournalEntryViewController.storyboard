@@ -53,18 +53,12 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDc-0D-SC8">
                                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="HDc-0D-SC8" secondAttribute="height" multiplier="121:89" id="jJ9-Eg-OBQ"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="4fs-GK-JAo" secondAttribute="height" multiplier="32:89" id="rJ5-4k-roD"/>
-                                                        </constraints>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="&lt;">
@@ -80,9 +74,6 @@
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="Kpa-dQ-eBA" secondAttribute="height" multiplier="643:178" id="Ett-DX-5pv"/>
-                                                        </constraints>
                                                         <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                             <!--1970-01-01 11:00:00 +0000-->
                                                         </date>
@@ -96,9 +87,6 @@
                                                     </datePicker>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="4du-Lt-kP1" secondAttribute="height" multiplier="66:245" id="6aI-pc-hdD"/>
-                                                        </constraints>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="&gt;">
@@ -123,7 +111,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="4fs-GK-JAo" secondAttribute="bottom" id="GSw-Sh-xbb"/>
                                                     <constraint firstItem="4fs-GK-JAo" firstAttribute="height" secondItem="jHf-qD-M1U" secondAttribute="height" id="GVU-do-6Ts"/>
                                                     <constraint firstItem="HDc-0D-SC8" firstAttribute="leading" secondItem="jHf-qD-M1U" secondAttribute="leading" id="HA8-X3-VyH"/>
-                                                    <constraint firstItem="Kpa-dQ-eBA" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.6" id="Ljh-Q4-yb3"/>
+                                                    <constraint firstItem="Kpa-dQ-eBA" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.7" id="Ljh-Q4-yb3"/>
                                                     <constraint firstItem="4du-Lt-kP1" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.1" id="M16-OX-VPe"/>
                                                     <constraint firstAttribute="bottom" secondItem="4du-Lt-kP1" secondAttribute="bottom" id="MAy-5Y-Zad"/>
                                                     <constraint firstItem="Kpa-dQ-eBA" firstAttribute="top" secondItem="jHf-qD-M1U" secondAttribute="top" id="SOA-a2-LTJ"/>
@@ -133,7 +121,7 @@
                                                     <constraint firstItem="4fs-GK-JAo" firstAttribute="leading" secondItem="HDc-0D-SC8" secondAttribute="trailing" id="cSJ-jf-DUz"/>
                                                     <constraint firstAttribute="bottom" secondItem="Kpa-dQ-eBA" secondAttribute="bottom" id="g0E-Y2-11O"/>
                                                     <constraint firstItem="4fs-GK-JAo" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.1" id="npN-bD-uCA"/>
-                                                    <constraint firstItem="HDc-0D-SC8" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.2" id="s8X-8t-32k"/>
+                                                    <constraint firstItem="HDc-0D-SC8" firstAttribute="width" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.1" id="s8X-8t-32k"/>
                                                     <constraint firstItem="Kpa-dQ-eBA" firstAttribute="leading" secondItem="4fs-GK-JAo" secondAttribute="trailing" id="w4n-eX-su9"/>
                                                 </constraints>
                                             </stackView>
