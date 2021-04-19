@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsPeriodTableViewCell: UITableViewCell {
 
+    @IBOutlet var detailTextLabel2: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
