@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qc8-0Q-prr">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="p4j-te-6cQ">
+            <objects>
+                <navigationController id="qc8-0Q-prr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aj0-7Y-wVn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tdi-FX-Zhl" kind="relationship" relationship="rootViewController" id="W9e-H3-qmv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fY4-hn-egg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6838" y="3494"/>
+        </scene>
+        <!--会計期間-->
+        <scene sceneID="O5t-fn-bcl">
+            <objects>
+                <tableViewController id="tdi-FX-Zhl" customClass="SettingsPeriodTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2Ih-If-H5z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" id="xKP-jn-WXH" customClass="SettingsPeriodTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.5" width="374" height="38.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xKP-jn-WXH" id="6b8-am-Xxn">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="38.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIM-Fa-ojl">
+                                            <rect key="frame" x="20" y="11" width="150" height="17"/>
+                                            <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isq-wS-H05">
+                                            <rect key="frame" x="169" y="11" width="166" height="17"/>
+                                            <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Isq-wS-H05" secondAttribute="bottom" constant="11" id="CqU-RJ-JYT"/>
+                                        <constraint firstItem="LIM-Fa-ojl" firstAttribute="top" secondItem="6b8-am-Xxn" secondAttribute="top" constant="11" id="LVI-77-hzu"/>
+                                        <constraint firstItem="LIM-Fa-ojl" firstAttribute="leading" secondItem="6b8-am-Xxn" secondAttribute="leading" constant="20" id="Q07-wW-klI"/>
+                                        <constraint firstAttribute="bottom" secondItem="LIM-Fa-ojl" secondAttribute="bottom" constant="11" id="Yga-Jr-Rlf"/>
+                                        <constraint firstAttribute="trailing" secondItem="Isq-wS-H05" secondAttribute="trailing" constant="8" id="h0w-5h-QgD"/>
+                                        <constraint firstItem="Isq-wS-H05" firstAttribute="top" secondItem="6b8-am-Xxn" secondAttribute="top" constant="11" id="k0V-zB-nyW"/>
+                                        <constraint firstAttribute="trailing" secondItem="LIM-Fa-ojl" secondAttribute="trailing" constant="173" id="p3L-2j-XGi"/>
+                                        <constraint firstItem="Isq-wS-H05" firstAttribute="leading" secondItem="6b8-am-Xxn" secondAttribute="leading" constant="169" id="xVF-Vg-6Qs"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailTextLabel2" destination="Isq-wS-H05" id="iF5-At-Nb7"/>
+                                    <segue destination="NHq-SQ-q7O" kind="show" identifier="identifier_theDayOfReckoning" id="A99-wq-JJb"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="Asy-Zn-FCq">
+                                <rect key="frame" x="20" y="94" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Asy-Zn-FCq" id="pQW-Hp-4xQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tdi-FX-Zhl" id="M1a-4f-cMz"/>
+                            <outlet property="delegate" destination="tdi-FX-Zhl" id="Emj-qS-awT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="会計期間" id="4tR-uQ-Nvd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="08a-5E-Ugy">
+                            <connections>
+                                <segue destination="ZIu-qn-l0p" kind="popoverPresentation" popoverAnchorBarButtonItem="08a-5E-Ugy" id="jum-xl-JWk">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wlo-tY-wkR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6836.2318840579719" y="4239.5089285714284"/>
+        </scene>
+        <!--SettingsTheDayOfReckoningTableViewController-->
+        <scene sceneID="7S7-Jp-Bsd">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsTheDayOfReckoningTableViewController" id="NHq-SQ-q7O" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="35F-Hd-59p"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pxX-Qu-qcq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6221" y="4048"/>
+        </scene>
+        <!--SettingsPeriodYearViewController-->
+        <scene sceneID="wf7-e6-iaz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsPeriodYearViewController" id="ZIu-qn-l0p" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y9p-Bv-0nr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6285" y="4090"/>
+        </scene>
+        <!--Annotation View Controller Setting Period-->
+        <scene sceneID="P1k-8V-cKH">
+            <objects>
+                <viewController storyboardIdentifier="Annotation_SettingPeriod" id="yce-lO-LZ2" customClass="AnnotationViewControllerSettingPeriod" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j6f-44-hzO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新たな年度の会計帳簿を作成できます" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h9t-bX-Bu7">
+                                <rect key="frame" x="0.0" y="671" width="300" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="s7k-A7-7Sq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="annotationViews" destination="h9t-bX-Bu7" collectionClass="NSMutableArray" id="0fE-aV-lOS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R8o-n7-Yuk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7539" y="4240"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -99,12 +99,12 @@ private extension AnnotationViewControllerSettingPeriod {
     var navigationBarHeight: CGFloat { 44 }
     var viewControllerHasNavigationItem: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            if controller.viewControllers[0] is TableViewControllerSettings {
+            if controller.viewControllers[0] is SettingsTableViewController {
                 let navigationController = controller.viewControllers[1] // UINavigationController
                 print(navigationController)
                 return controller.viewControllers[1]
             }
-            print(controller.viewControllers[0]) // TableViewControllerSettings
+            print(controller.viewControllers[0]) // SettingsTableViewController
             return controller.viewControllers[0]
         }
         print(presentingViewController)
