@@ -113,7 +113,7 @@ private extension AnnotationViewControllerJournals {
     var navigationBarHeight: CGFloat { 44 }
     var viewControllerHasNavigationItem: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            if controller.viewControllers[0] is TableViewControllerFinancialStatement {
+            if controller.viewControllers[0] is FinancialStatementTableViewController {
                 let tableViewControllerFinancialStatement = controller.viewControllers[0]
                 print(tableViewControllerFinancialStatement)
                 let viewControllerTB = controller.viewControllers[1]
@@ -129,7 +129,7 @@ private extension AnnotationViewControllerJournals {
     // テーブルビューのセルを取得
     var tableViewControllerHasCell: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            if controller.viewControllers[0] is TableViewControllerJournals {
+            if controller.viewControllers[0] is JournalsTableViewController {
                 return controller.viewControllers[0]
             }
             print(controller.viewControllers[0])

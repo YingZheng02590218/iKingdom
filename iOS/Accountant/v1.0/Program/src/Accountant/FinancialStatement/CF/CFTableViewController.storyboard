@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZJX-jI-Bgc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--キャッシュフロー計算書-->
+        <scene sceneID="2DW-fl-7iL">
+            <objects>
+                <tableViewController id="ZJX-jI-Bgc" customClass="CFTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aDu-UX-w8c">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="middleCategory" rowHeight="15" id="wDk-co-5DR">
+                                <rect key="frame" x="0.0" y="28" width="414" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wDk-co-5DR" id="Rla-oI-zzL" userLabel="中分類">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZI-tu-5Qk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="SZI-tu-5Qk" secondAttribute="height" multiplier="25:1" id="lzX-e5-ASV"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="SZI-tu-5Qk" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Rla-oI-zzL" secondAttribute="width" id="Iwi-DV-14N"/>
+                                        <constraint firstItem="SZI-tu-5Qk" firstAttribute="leading" secondItem="Rla-oI-zzL" secondAttribute="leading" id="PBn-3z-kdn"/>
+                                        <constraint firstItem="SZI-tu-5Qk" firstAttribute="height" relation="lessThanOrEqual" secondItem="Rla-oI-zzL" secondAttribute="height" id="Qms-vj-0v5"/>
+                                        <constraint firstAttribute="bottom" secondItem="SZI-tu-5Qk" secondAttribute="bottom" id="WtQ-L4-GPc"/>
+                                        <constraint firstAttribute="trailing" secondItem="SZI-tu-5Qk" secondAttribute="trailing" id="Y2l-7u-mRU"/>
+                                        <constraint firstItem="SZI-tu-5Qk" firstAttribute="top" secondItem="Rla-oI-zzL" secondAttribute="top" id="wvj-QQ-7Sp"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="totalOfMiddleCategory" rowHeight="20" id="2tK-Ew-g7N" customClass="TableViewCellTotalOfMiddleCategory" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="43" width="414" height="20"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2tK-Ew-g7N" id="F4b-yO-XIP">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHf-cf-iM4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中分類の合計" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Of-oJ-z96">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                                    <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Of-oJ-z96" firstAttribute="top" secondItem="FHf-cf-iM4" secondAttribute="top" id="4Jc-fC-Bh2"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Of-oJ-z96" secondAttribute="trailing" id="62c-0s-vGB"/>
+                                                <constraint firstItem="9Of-oJ-z96" firstAttribute="leading" secondItem="FHf-cf-iM4" secondAttribute="leading" id="Cae-Du-kbR"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="FHf-cf-iM4" secondAttribute="height" multiplier="75:4" id="P3m-QB-jPE"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Of-oJ-z96" secondAttribute="bottom" id="zzo-ZV-Sgf"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FHf-cf-iM4" firstAttribute="width" relation="greaterThanOrEqual" secondItem="F4b-yO-XIP" secondAttribute="width" id="0Ch-ye-cis"/>
+                                        <constraint firstItem="FHf-cf-iM4" firstAttribute="leading" secondItem="F4b-yO-XIP" secondAttribute="leading" id="0zW-2v-xRe"/>
+                                        <constraint firstItem="FHf-cf-iM4" firstAttribute="top" secondItem="F4b-yO-XIP" secondAttribute="top" id="P1T-Yy-daN"/>
+                                        <constraint firstAttribute="trailing" secondItem="FHf-cf-iM4" secondAttribute="trailing" id="Py4-6n-zQk"/>
+                                        <constraint firstItem="FHf-cf-iM4" firstAttribute="height" relation="lessThanOrEqual" secondItem="F4b-yO-XIP" secondAttribute="height" id="TGM-lO-D41"/>
+                                        <constraint firstAttribute="bottom" secondItem="FHf-cf-iM4" secondAttribute="bottom" id="kl8-ar-6AF"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label_totalOfMiddleCategory" destination="9Of-oJ-z96" id="Dq4-nu-LRb"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="totalOfBigCategory" rowHeight="20" id="tFd-yY-006" customClass="TableViewCellTotalOfBigCategory" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="63" width="414" height="20"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tFd-yY-006" id="pAp-l1-tZc">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1N-Gj-wgO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大分類の合計" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ro8-f3-OJR" userLabel="Label total Of Big Category">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                                    <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ro8-f3-OJR" secondAttribute="trailing" id="9ro-x6-beK"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ro8-f3-OJR" secondAttribute="bottom" id="9sR-Xf-EWs"/>
+                                                <constraint firstItem="Ro8-f3-OJR" firstAttribute="top" secondItem="z1N-Gj-wgO" secondAttribute="top" id="NBp-uX-GlH"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="z1N-Gj-wgO" secondAttribute="height" multiplier="75:4" id="Ocr-7B-rxY"/>
+                                                <constraint firstItem="Ro8-f3-OJR" firstAttribute="leading" secondItem="z1N-Gj-wgO" secondAttribute="leading" id="ked-h0-O0L"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="z1N-Gj-wgO" firstAttribute="height" relation="lessThanOrEqual" secondItem="pAp-l1-tZc" secondAttribute="height" id="2gk-aF-2He"/>
+                                        <constraint firstItem="z1N-Gj-wgO" firstAttribute="leading" secondItem="pAp-l1-tZc" secondAttribute="leading" id="9XD-yf-E0m"/>
+                                        <constraint firstAttribute="bottom" secondItem="z1N-Gj-wgO" secondAttribute="bottom" id="GXA-vW-NTr"/>
+                                        <constraint firstItem="z1N-Gj-wgO" firstAttribute="top" secondItem="pAp-l1-tZc" secondAttribute="top" id="R7X-Wc-xz4"/>
+                                        <constraint firstAttribute="trailing" secondItem="z1N-Gj-wgO" secondAttribute="trailing" id="wPq-1h-has"/>
+                                        <constraint firstItem="z1N-Gj-wgO" firstAttribute="width" relation="greaterThanOrEqual" secondItem="pAp-l1-tZc" secondAttribute="width" id="xF0-j2-Mcf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label_totalOfBigCategory" destination="Ro8-f3-OJR" id="Y05-nv-6an"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="account" rowHeight="15" id="L9J-sB-UBy" customClass="AccountTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="83" width="414" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L9J-sB-UBy" id="M4m-rv-Dxl">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfx-be-1a4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="15"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kCe-Ui-fOg" userLabel="label_account">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="15"/>
+                                                    <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kCe-Ui-fOg" firstAttribute="top" secondItem="nfx-be-1a4" secondAttribute="top" id="3PD-54-byp"/>
+                                                <constraint firstAttribute="trailing" secondItem="kCe-Ui-fOg" secondAttribute="trailing" id="HJx-cY-CLi"/>
+                                                <constraint firstItem="kCe-Ui-fOg" firstAttribute="leading" secondItem="nfx-be-1a4" secondAttribute="leading" id="J2z-l3-pZh"/>
+                                                <constraint firstAttribute="bottom" secondItem="kCe-Ui-fOg" secondAttribute="bottom" id="Odx-GQ-9xB"/>
+                                                <constraint firstAttribute="width" secondItem="nfx-be-1a4" secondAttribute="height" multiplier="25:1" id="sbG-AN-ce1"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="nfx-be-1a4" firstAttribute="width" relation="greaterThanOrEqual" secondItem="M4m-rv-Dxl" secondAttribute="width" id="7Ib-We-hLi"/>
+                                        <constraint firstItem="nfx-be-1a4" firstAttribute="top" secondItem="M4m-rv-Dxl" secondAttribute="top" id="BAQ-IS-RLi"/>
+                                        <constraint firstItem="nfx-be-1a4" firstAttribute="height" relation="lessThanOrEqual" secondItem="M4m-rv-Dxl" secondAttribute="height" id="NTt-WV-18Q"/>
+                                        <constraint firstItem="nfx-be-1a4" firstAttribute="leading" secondItem="M4m-rv-Dxl" secondAttribute="leading" id="Vhx-zB-jzn"/>
+                                        <constraint firstAttribute="bottom" secondItem="nfx-be-1a4" secondAttribute="bottom" id="Z9D-Mj-Mn9"/>
+                                        <constraint firstAttribute="trailing" secondItem="nfx-be-1a4" secondAttribute="trailing" id="xbF-qD-epc"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label_account" destination="kCe-Ui-fOg" id="gkc-YS-mVg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZJX-jI-Bgc" id="4B1-sj-2MH"/>
+                            <outlet property="delegate" destination="ZJX-jI-Bgc" id="Ptp-qV-XgC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="キャッシュフロー計算書" id="f5A-xj-dgZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hMg-Y6-Cnr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3068" y="2982"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
