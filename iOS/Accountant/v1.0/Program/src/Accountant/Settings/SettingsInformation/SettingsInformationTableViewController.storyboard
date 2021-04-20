@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uKI-Rl-dwb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--帳簿情報-->
+        <scene sceneID="W4V-pN-Hua">
+            <objects>
+                <tableViewController id="2BP-RQ-zCN" customClass="SettingsInformationTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="GPH-0u-w0W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_companyName" id="zxT-0e-ac4" customClass="TableViewCellCompanyName" customModule="Accounting_book" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zxT-0e-ac4" id="cae-Ta-6bW">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="egq-Cv-uKw">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="egq-Cv-uKw" secondAttribute="height" multiplier="375:44" id="RVO-LH-ZJk"/>
+                                            </constraints>
+                                            <color key="textColor" systemColor="labelColor"/>
+                                            <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="organization"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="egq-Cv-uKw" firstAttribute="width" secondItem="cae-Ta-6bW" secondAttribute="width" id="MHc-dR-eTI"/>
+                                        <constraint firstItem="egq-Cv-uKw" firstAttribute="top" secondItem="cae-Ta-6bW" secondAttribute="top" id="Q7J-Cz-Lh7"/>
+                                        <constraint firstAttribute="trailing" secondItem="egq-Cv-uKw" secondAttribute="trailing" id="Srk-71-gqq"/>
+                                        <constraint firstAttribute="bottom" secondItem="egq-Cv-uKw" secondAttribute="bottom" id="XRX-Or-qlO"/>
+                                        <constraint firstItem="egq-Cv-uKw" firstAttribute="leading" secondItem="cae-Ta-6bW" secondAttribute="leading" id="iKT-uV-aYF"/>
+                                        <constraint firstItem="egq-Cv-uKw" firstAttribute="height" secondItem="cae-Ta-6bW" secondAttribute="height" id="qf5-DJ-Vyy"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="textView_companyName" destination="egq-Cv-uKw" id="jPE-1p-fgz"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2BP-RQ-zCN" id="DQt-tW-5ZW"/>
+                            <outlet property="delegate" destination="2BP-RQ-zCN" id="vK2-oV-neZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="帳簿情報" id="1WM-pt-pcM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k9k-37-2v2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5894" y="4240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="016-RA-xAo">
+            <objects>
+                <navigationController id="uKI-Rl-dwb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NlF-fR-Qf2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2BP-RQ-zCN" kind="relationship" relationship="rootViewController" id="ZBe-sS-WHz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P1Z-Nj-HMt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5894" y="3494"/>
+        </scene>
+        <!--Annotation View Controller Settings Information-->
+        <scene sceneID="r4X-yI-F54">
+            <objects>
+                <viewController storyboardIdentifier="Annotation_SettingsInformation" id="ZKo-gy-p1T" customClass="AnnotationViewControllerSettingsInformation" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2iX-qC-MNj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="事業者名を設定します" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iEx-EN-zSa">
+                                <rect key="frame" x="0.0" y="671" width="370" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sCo-VJ-BRq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="annotationViews" destination="iEx-EN-zSa" collectionClass="NSMutableArray" id="APA-qi-4Dr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q9V-6r-51D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6586" y="4240"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tableCellGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
