@@ -371,6 +371,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         TextField_category_credit.delegate = self
         TextField_category_debit.setup(identifier: "identifier_debit")
         TextField_category_credit.setup(identifier: "identifier_credit")
+        TextField_category_debit.textAlignment = .left
+        TextField_category_credit.textAlignment = .right
     }
     
     @IBOutlet weak var TextField_amount_debit: UITextField!
@@ -381,6 +383,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     func createTextFieldForAmount() {
         TextField_amount_debit.delegate = self
         TextField_amount_credit.delegate = self
+        TextField_amount_debit.textAlignment = .left
+        TextField_amount_credit.textAlignment = .right
     // toolbar 借方 Done:Tag5 Cancel:Tag55
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -441,6 +445,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
+        TextField_SmallWritting.textAlignment = .center
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
