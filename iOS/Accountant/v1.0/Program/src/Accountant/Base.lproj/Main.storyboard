@@ -19,7 +19,7 @@
         <scene sceneID="nKs-wx-s0s">
             <objects>
                 <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" image="wrench.fill" catalog="system" id="iV4-KT-KPX"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -45,7 +45,7 @@
         <scene sceneID="5eN-hT-QbF">
             <objects>
                 <navigationController id="dEp-Vg-nYV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="決算書" image="doc.text.fill" catalog="system" id="kQn-iU-qSb"/>
+                    <tabBarItem key="tabBarItem" title="決算書" image="icons8-雑誌-25" id="kQn-iU-qSb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGz-zt-TEe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -62,7 +62,7 @@
         <scene sceneID="b3I-pg-ShW">
             <objects>
                 <navigationController id="PWY-gK-YFq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳帳" image="book" catalog="system" id="SGD-Of-XCK" userLabel="仕訳帳"/>
+                    <tabBarItem key="tabBarItem" title="仕訳帳" image="icons8-開いた本-25" id="SGD-Of-XCK" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3mA-3C-Vc6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -80,7 +80,7 @@
         <scene sceneID="8Yy-gm-rKf">
             <objects>
                 <navigationController navigationBarHidden="YES" id="Mfv-1p-Kx7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳" image="pencil" catalog="system" id="9b3-49-6Uh"/>
+                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -124,7 +124,7 @@
         <scene sceneID="1yU-Pm-tWx">
             <objects>
                 <navigationController id="TNd-j8-cbF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="総勘定元帳" image="book.fill" catalog="system" id="ek4-yK-Zyk"/>
+                    <tabBarItem key="tabBarItem" title="総勘定元帳" image="icons8-saddle-stitched-booklet-25" id="ek4-yK-Zyk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZIn-vy-KXP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -171,10 +171,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book" catalog="system" width="128" height="102"/>
-        <image name="book.fill" catalog="system" width="128" height="102"/>
-        <image name="doc.text.fill" catalog="system" width="115" height="128"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="wrench.fill" catalog="system" width="128" height="125"/>
+        <image name="icons8-saddle-stitched-booklet-25" width="25" height="25"/>
+        <image name="icons8-ギア-25" width="25" height="25"/>
+        <image name="icons8-ペン-25" width="25" height="25"/>
+        <image name="icons8-開いた本-25" width="25" height="25"/>
+        <image name="icons8-雑誌-25" width="25" height="25"/>
     </resources>
 </document>

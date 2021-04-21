@@ -57,16 +57,10 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <state key="normal">
-                                                            <attributedString key="attributedTitle">
-                                                                <fragment content="&lt;">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="20" name="Futura-Bold"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
+                                                        <state key="normal" image="icons8-戻る-50">
+                                                            <attributedString key="attributedTitle"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="Button_Left:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="6f1-XI-9Jc"/>
@@ -85,16 +79,10 @@
                                                             <action selector="DatePicker:" destination="RxZ-JM-Gew" eventType="valueChanged" id="Af7-Vx-MfZ"/>
                                                         </connections>
                                                     </datePicker>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <state key="normal">
-                                                            <attributedString key="attributedTitle">
-                                                                <fragment content="&gt;">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="20" name="Futura-Bold"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
+                                                        <state key="normal" image="icons8-進む-50">
+                                                            <attributedString key="attributedTitle"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="Button_Right:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="woh-yq-CrX"/>
@@ -309,18 +297,11 @@
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-lr-FfW" userLabel="Stack View1">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="tintColor" systemColor="systemPinkColor"/>
-                                                        <state key="normal">
-                                                            <attributedString key="attributedTitle">
-                                                                <fragment content="×">
-                                                                    <attributes>
-                                                                        <font key="NSFont" size="23" name="AppleSymbols"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
+                                                        <state key="normal" image="icons8-削除-25-2">
+                                                            <attributedString key="attributedTitle"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -337,8 +318,8 @@
                                                             <attributedString key="attributedTitle">
                                                                 <fragment content="入力">
                                                                     <attributes>
-                                                                        <color key="NSColor" systemColor="linkColor"/>
-                                                                        <font key="NSFont" size="24" name="HiraginoSans-W3"/>
+                                                                        <color key="NSColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <font key="NSFont" size="29" name="HiraginoSans-W3"/>
                                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
@@ -535,11 +516,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-削除-25-2" width="25" height="25"/>
+        <image name="icons8-戻る-50" width="50" height="50"/>
+        <image name="icons8-進む-50" width="50" height="50"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
