@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
-                                <rect key="frame" x="0.0" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">このアプリについて
 
@@ -57,9 +56,8 @@ Reckoning とは、英語で「清算」を意味する単語です。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
-                                <rect key="frame" x="0.0" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">当アプリで採用した会計概念
 
@@ -92,9 +90,8 @@ Reckoning とは、英語で「清算」を意味する単語です。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
-                                <rect key="frame" x="0.0" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">1. 簿記の基礎
 
@@ -114,9 +111,8 @@ Reckoning とは、英語で「清算」を意味する単語です。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">1. 初期設定の手順
     1. 基本情報の登録 
@@ -128,9 +124,8 @@ Reckoning とは、英語で「清算」を意味する単語です。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">2. 基本情報の登録をしよう
 
@@ -164,9 +159,8 @@ Reckoning とは、英語で「清算」を意味する単語です。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">3. 勘定科目を設定しよう
 
@@ -223,9 +217,8 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 勘定科目の編集しよう
 
@@ -258,9 +251,8 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">5. 環境設定を確認・変更しよう
 
@@ -278,9 +270,8 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     1. 仕訳を入力する
@@ -310,9 +301,8 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     2. 仕訳を修正する
@@ -332,9 +322,8 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     3. 仕訳を削除する
@@ -357,9 +346,8 @@ OKボタンをタップします。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="-4" y="85" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <string key="text">4. 帳簿に記帳する
     4. 入力した取引を確認しよう
@@ -385,6 +373,80 @@ OKボタンをタップします。
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Gr-f2-rEh"/>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="09l-ag-K3K"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="trailing" secondItem="6Gr-f2-rEh" secondAttribute="trailing" id="0Lx-oV-3Uv"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="0hw-8P-gYU"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="1De-ae-84P"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="1GG-tu-XVZ"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="1TI-NI-krA"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="1tv-h1-9Zk"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="2sH-7s-YEd"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="36m-k7-RLi"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="3vG-hv-dcq"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="4sl-i9-dPS"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="5j3-8D-KU1"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="8u1-xZ-sTn"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="9V7-xl-sUY"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="ATU-Uc-lbI"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="CBB-HP-NHi"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="CxA-gR-w33"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="D2I-al-nfU"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="D86-k5-kNx"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="Do3-Mi-QIk"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="Ehh-3e-8we"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="Fet-5p-l5g"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="FqR-sW-AIm"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="GhP-KT-pKu"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="HYn-ul-szt"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="Htp-aQ-4ez"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="Ivt-A5-MLf"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="JWf-9Q-bwO"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="Jo0-w7-kDU"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="KSF-s7-6dV"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="MGq-EX-SEC"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="MyZ-IO-uui"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="OdN-Th-pDn"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="OhC-po-vxs"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="P4E-MU-33K"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="QMS-95-cU3"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="RQs-Js-bWs"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="TAP-ZM-8Vi"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="TzK-RG-RcC"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="UaY-YI-7MX"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="Uxo-8d-oLo"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="WbW-Oz-A7Q"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="WcV-AW-jtj"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="Wd5-8q-7iN"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="Wql-zH-Xrb"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="Wu6-ef-SXy"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="ZcE-Jh-ggm"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="auy-rQ-MCw"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="b6M-xa-yRK"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="eUu-Nw-JoO"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="eh8-Aa-NyJ"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="fDI-Le-B03"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="fIG-AS-u5b"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="fP7-Ki-nGX"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="fSY-SK-Igw"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="hSa-OH-328"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="hXp-B3-WaT"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="hb7-Ww-s6W"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="ioX-78-xx3"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="jIr-uB-DGi"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="jlj-df-vX9"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="kqb-lq-eAi"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="ozy-Vw-ILg"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="roK-uh-ZUh"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="sUi-0R-qHG"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="sww-Dt-5UQ"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="tLj-35-f8C"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="uOY-uA-jKQ"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="wYJ-b8-AlD"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="yMH-cz-0m5"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="yxB-es-BY4"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="zUl-Zq-Bui"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
