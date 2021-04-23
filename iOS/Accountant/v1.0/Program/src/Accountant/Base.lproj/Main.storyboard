@@ -19,7 +19,7 @@
         <scene sceneID="nKs-wx-s0s">
             <objects>
                 <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -80,7 +80,7 @@
         <scene sceneID="8Yy-gm-rKf">
             <objects>
                 <navigationController navigationBarHidden="YES" id="Mfv-1p-Kx7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
+                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -172,8 +172,8 @@
     </scenes>
     <resources>
         <image name="icons8-saddle-stitched-booklet-25" width="25" height="25"/>
-        <image name="icons8-ギア-25" width="25" height="25"/>
-        <image name="icons8-ペン-25" width="25" height="25"/>
+        <image name="icons8-ギア-25" width="25" height="25"/>
+        <image name="icons8-ペン-25" width="25" height="25"/>
         <image name="icons8-開いた本-25" width="25" height="25"/>
         <image name="icons8-雑誌-25" width="25" height="25"/>
     </resources>
