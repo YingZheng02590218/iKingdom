@@ -15,106 +15,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_user" editingAccessoryType="disclosureIndicator" id="cdn-0O-OZp" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cdn-0O-OZp" id="5va-nh-WkY">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="q12-zD-TI5" kind="showDetail" id="wXd-y9-YbX"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_term" editingAccessoryType="disclosureIndicator" id="icr-dv-dB0" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="icr-dv-dB0" id="daf-VI-6Bc">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="U0x-50-Lq1" kind="showDetail" id="sOC-EW-VSa"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings" editingAccessoryType="disclosureIndicator" id="eBh-oa-NVW" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eBh-oa-NVW" id="xBH-XQ-OEN">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                                <connections>
-                                    <segue destination="aCf-mA-B66" kind="showDetail" id="I7Q-8J-Ase"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_Journals" editingAccessoryType="disclosureIndicator" id="Rbc-JQ-8Bc" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="186" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rbc-JQ-8Bc" id="kAj-DB-sk0">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                                <connections>
-                                    <segue destination="3kE-mn-yeq" kind="showDetail" id="RZD-9W-9UM"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_Help" editingAccessoryType="disclosureIndicator" id="Do9-R4-Eor" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="229.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Do9-R4-Eor" id="BH4-i7-fPe">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                                <connections>
-                                    <segue destination="hjp-Wc-Ax9" kind="showDetail" id="ywP-ty-sFt"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_Review" editingAccessoryType="disclosureIndicator" id="0E0-wH-ZUC" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="273" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0E0-wH-ZUC" id="YuY-KI-q0I">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_upgrade" editingAccessoryType="disclosureIndicator" id="iwD-yZ-U49" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="316.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iwD-yZ-U49" id="swN-VA-s8d">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                                <connections>
-                                    <segue destination="dKv-K6-fHd" kind="showDetail" id="CmT-jP-JwF"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_list_settings_restore" editingAccessoryType="disclosureIndicator" id="agl-BL-KvM" customClass="SettingsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="360" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="agl-BL-KvM" id="Q7u-NE-kmV">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="P6q-PR-AAS" id="jt9-Wp-tCw"/>
                             <outlet property="delegate" destination="P6q-PR-AAS" id="f0M-tD-kSG"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="設定" id="XAJ-4X-3ur"/>
+                    <connections>
+                        <segue destination="q12-zD-TI5" kind="showDetail" identifier="SettingsInformationTableViewController" id="W9T-Ud-Oix"/>
+                        <segue destination="U0x-50-Lq1" kind="showDetail" identifier="SettingsPeriodTableViewController" id="8Lh-ko-arn"/>
+                        <segue destination="aCf-mA-B66" kind="showDetail" identifier="SettingsCategoryTableViewController" id="Ilp-Wc-fGu"/>
+                        <segue destination="3kE-mn-yeq" kind="showDetail" identifier="SettingsOperatingTableViewController" id="Xb8-Xy-taS"/>
+                        <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="v6X-fB-3aL"/>
+                        <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="3dq-0w-3Ni"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbi-Wz-XeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5894" y="2783"/>
+            <point key="canvasLocation" x="5381" y="2779"/>
         </scene>
         <!--SettingsUpgradeTableViewController-->
         <scene sceneID="NCX-IR-4NC">
@@ -184,9 +102,6 @@
     <resources>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tableCellGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
