@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,7 +20,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6rw-5E-QP2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="sheetColor"/>
                                 <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="E5P-3D-LGJ" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -40,6 +41,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V6T-5r-BCa" userLabel="title">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -467,7 +469,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" name="sheetColor"/>
                                             <constraints>
                                                 <constraint firstItem="MIW-Sn-Dr7" firstAttribute="leading" secondItem="uEG-Jz-uLr" secondAttribute="leading" id="1iO-AK-ShO"/>
                                                 <constraint firstItem="MIW-Sn-Dr7" firstAttribute="leading" secondItem="uEG-Jz-uLr" secondAttribute="leading" id="4Fp-eP-WP0"/>
@@ -528,12 +530,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="91" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="9"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="5tE-LS-LIy" secondAttribute="height" multiplier="224:25" id="QAy-0k-9AO"/>
                                                             </constraints>
@@ -550,12 +554,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="EFQ-x9-xwV" secondAttribute="height" multiplier="4:1" id="8h4-G7-nds"/>
                                                             </constraints>
@@ -596,12 +602,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="Ybe-4U-cTR" secondAttribute="height" multiplier="4:1" id="zjE-5f-1jE"/>
                                                             </constraints>
@@ -642,12 +650,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="b4f-7N-Cq4" secondAttribute="height" multiplier="4:1" id="yyV-5K-JIe"/>
                                                             </constraints>
@@ -688,12 +698,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="mS1-9H-k5g" secondAttribute="height" multiplier="4:1" id="caW-Pn-BYH"/>
                                                             </constraints>
@@ -785,6 +797,8 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="aJT-Lc-xmJ" secondAttribute="bottom" id="5Tv-SE-Pkv"/>
                                                 <constraint firstItem="aJT-Lc-xmJ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="Vrp-8N-QjW" secondAttribute="height" id="Vir-Ex-1Ey"/>
@@ -795,6 +809,8 @@
                                                 <constraint firstItem="aJT-Lc-xmJ" firstAttribute="width" secondItem="Vrp-8N-QjW" secondAttribute="width" id="uSS-lc-XjV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="Xpz-AY-jqc" id="Vir-ra-E2I"/>
                                             <outlet property="label_credit" destination="x4w-9d-hdK" id="Rek-jI-mLp"/>
@@ -824,12 +840,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="91" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="9"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="WUf-MP-UPk" secondAttribute="height" multiplier="224:25" id="Oet-7V-kAr"/>
                                                             </constraints>
@@ -846,12 +864,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="8"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="rWD-eJ-kXy" secondAttribute="height" multiplier="4:1" id="Cf7-TW-20e"/>
                                                             </constraints>
@@ -892,12 +912,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="OmO-7T-LqM" secondAttribute="height" multiplier="4:1" id="kVV-cO-Y7Q"/>
                                                             </constraints>
@@ -938,12 +960,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                     <real key="value" value="0.29999999999999999"/>
@@ -978,12 +1002,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                     <real key="value" value="0.29999999999999999"/>
@@ -1069,6 +1095,8 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="WAH-tf-FHo" firstAttribute="leading" secondItem="5kh-S3-4j9" secondAttribute="leading" id="7eb-ZH-I5X"/>
                                                 <constraint firstItem="WAH-tf-FHo" firstAttribute="width" secondItem="WAH-tf-FHo" secondAttribute="height" multiplier="1024:25" id="MvF-wY-si8"/>
@@ -1079,6 +1107,8 @@
                                                 <constraint firstItem="WAH-tf-FHo" firstAttribute="height" relation="greaterThanOrEqual" secondItem="5kh-S3-4j9" secondAttribute="height" id="z7q-eY-p4d"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="GCf-fO-CQ5" id="ecg-yB-C8g"/>
                                             <outlet property="label_credit" destination="L4Q-Wb-dUX" id="O2b-Dw-3iO"/>
@@ -1108,12 +1138,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="91" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="9"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="ncx-PI-IRU" secondAttribute="height" multiplier="224:25" id="X9v-3G-st8"/>
                                                             </constraints>
@@ -1130,12 +1162,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="KUr-Xn-tnk" secondAttribute="height" multiplier="4:1" id="U1K-K0-axe"/>
                                                             </constraints>
@@ -1176,12 +1210,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="8"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="Mzm-aQ-15B" secondAttribute="height" multiplier="4:1" id="16m-Iv-b0P"/>
                                                             </constraints>
@@ -1222,12 +1258,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="8"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                     <real key="value" value="0.29999999999999999"/>
@@ -1262,12 +1300,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="8"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                     <real key="value" value="0.29999999999999999"/>
@@ -1353,6 +1393,8 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="tvo-gc-V6d" firstAttribute="top" secondItem="Uup-2D-aLH" secondAttribute="top" id="Gss-42-E8M"/>
                                                 <constraint firstAttribute="bottom" secondItem="tvo-gc-V6d" secondAttribute="bottom" id="NYs-b5-OuU"/>
@@ -1363,6 +1405,8 @@
                                                 <constraint firstItem="tvo-gc-V6d" firstAttribute="width" secondItem="Uup-2D-aLH" secondAttribute="width" id="sJX-cs-uBB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="Gqp-WK-GlK" id="1Es-cb-dII"/>
                                             <outlet property="label_credit" destination="X2X-58-YDk" id="iC9-hc-IOn"/>
@@ -1379,7 +1423,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bro-Fi-PIg"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6rw-5E-QP2" firstAttribute="width" secondItem="Lfl-Db-LzH" secondAttribute="width" id="73Y-Wn-hhC"/>
                             <constraint firstAttribute="bottom" secondItem="6rw-5E-QP2" secondAttribute="bottom" id="Fig-Ub-ciB"/>
@@ -1477,6 +1521,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="sheetColor">
+            <color red="1" green="1" blue="0.88500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
