@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,10 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView tag="1" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Xe-Zw-HUf">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1346"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCd-Tw-HKo" userLabel="mid0_View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="269"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZD-WS-Sy8">
+                                                <rect key="frame" x="0.0" y="0.0" width="1501" height="269"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="SZD-WS-Sy8" secondAttribute="height" multiplier="1366:245" id="tLp-S5-DJL"/>
                                                 </constraints>
@@ -38,6 +43,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="SZD-WS-Sy8" firstAttribute="top" secondItem="VCd-Tw-HKo" secondAttribute="top" id="77Y-aP-eE6"/>
                                             <constraint firstAttribute="bottom" secondItem="SZD-WS-Sy8" secondAttribute="bottom" id="CVE-av-hIb"/>
@@ -48,16 +54,20 @@
                                         </constraints>
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="269" width="1024" height="269.5"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
+                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="269.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDc-0D-SC8">
-                                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="102.5" height="269.5"/>
+                                                        <color key="backgroundColor" name="Secondary"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="102.5" y="0.0" width="102.5" height="269.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <state key="normal" image="icons8-戻る-50">
                                                             <attributedString key="attributedTitle"/>
@@ -67,7 +77,8 @@
                                                         </connections>
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <rect key="frame" x="205" y="0.0" width="716.5" height="269.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                             <!--1970-01-01 11:00:00 +0000-->
                                                         </date>
@@ -80,6 +91,7 @@
                                                         </connections>
                                                     </datePicker>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="921.5" y="0.0" width="102.5" height="269.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <state key="normal" image="icons8-進む-50">
                                                             <attributedString key="attributedTitle"/>
@@ -89,6 +101,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="4fs-GK-JAo" firstAttribute="top" secondItem="jHf-qD-M1U" secondAttribute="top" id="85u-dv-I0W"/>
                                                     <constraint firstItem="4du-Lt-kP1" firstAttribute="height" secondItem="jHf-qD-M1U" secondAttribute="height" id="8Hc-oa-c9d"/>
@@ -114,7 +127,8 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="jHf-qD-M1U" secondAttribute="bottom" id="9TS-TM-bpZ"/>
                                             <constraint firstItem="jHf-qD-M1U" firstAttribute="width" secondItem="xaT-PY-SRA" secondAttribute="width" id="Gsm-Nl-kKX"/>
@@ -125,24 +139,33 @@
                                         </constraints>
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14e-0l-xHx" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <rect key="frame" x="0.0" y="538.5" width="1024" height="269"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
+                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="269"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZL-1o-tF1" userLabel="Stack View1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="107.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-HE-bM2">
-                                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="512" height="107.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-oH-5MC">
-                                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                                <rect key="frame" x="512" y="0.0" width="512" height="107.5"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
+                                                        <color key="backgroundColor" name="Secondary"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="tVJ-HE-bM2" firstAttribute="leading" secondItem="BZL-1o-tF1" secondAttribute="leading" id="4dz-rb-hgr"/>
                                                             <constraint firstItem="Icn-oH-5MC" firstAttribute="height" secondItem="BZL-1o-tF1" secondAttribute="height" id="61l-DX-AUn"/>
@@ -159,8 +182,10 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-8G-jdU" userLabel="Stack View2">
+                                                        <rect key="frame" x="0.0" y="107.5" width="1024" height="81"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="512" height="81"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -170,6 +195,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                                <rect key="frame" x="512" y="0.0" width="512" height="81"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -179,6 +205,7 @@
                                                                 </connections>
                                                             </textField>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="arY-VQ-0Zi" firstAttribute="top" secondItem="8Ew-8G-jdU" secondAttribute="top" id="EtZ-a4-jso"/>
                                                             <constraint firstItem="RtK-tc-ENG" firstAttribute="leading" secondItem="8Ew-8G-jdU" secondAttribute="leading" id="LHe-bX-mQU"/>
@@ -194,8 +221,10 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="22222" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-Lb-KwP" userLabel="Stack View3">
+                                                        <rect key="frame" x="0.0" y="188.5" width="1024" height="80.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-8K-hRw">
+                                                                <rect key="frame" x="0.0" y="0.0" width="512" height="80.5"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -205,6 +234,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8YU-bl-bba">
+                                                                <rect key="frame" x="512" y="0.0" width="512" height="80.5"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -213,6 +243,7 @@
                                                                 </connections>
                                                             </textField>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="8YU-bl-bba" firstAttribute="width" secondItem="2Ls-Lb-KwP" secondAttribute="width" multiplier="0.5" id="7wK-Sk-w4G"/>
                                                             <constraint firstItem="b2F-8K-hRw" firstAttribute="top" secondItem="2Ls-Lb-KwP" secondAttribute="top" id="Eao-h8-SsJ"/>
@@ -229,6 +260,8 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="BZL-1o-tF1" firstAttribute="height" secondItem="bza-Ia-eRI" secondAttribute="height" multiplier="0.4" id="9Qh-bX-GdV"/>
                                                     <constraint firstAttribute="trailing" secondItem="BZL-1o-tF1" secondAttribute="trailing" id="F9Q-D1-seS"/>
@@ -249,7 +282,8 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="bza-Ia-eRI" firstAttribute="height" secondItem="14e-0l-xHx" secondAttribute="height" id="2n1-nb-dPt"/>
                                             <constraint firstAttribute="bottom" secondItem="bza-Ia-eRI" secondAttribute="bottom" id="5Mq-PL-9BP"/>
@@ -260,14 +294,18 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9k-QYm" userLabel="mid3_Stack View">
+                                        <rect key="frame" x="0.0" y="807.5" width="1024" height="269.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-b8-FIi">
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="134.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
+                                                <rect key="frame" x="0.0" y="134.5" width="1024" height="135"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="nGT-71-Qqm" secondAttribute="height" multiplier="1366:70" id="YzH-Za-7Y5"/>
@@ -279,6 +317,8 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="nGT-71-Qqm" firstAttribute="top" secondItem="d8g-b8-FIi" secondAttribute="bottom" id="DjL-VG-TcT"/>
                                             <constraint firstItem="nGT-71-Qqm" firstAttribute="height" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.5" id="Dmu-Lv-sl7"/>
@@ -294,10 +334,13 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZEn-2B-SNs" userLabel="mid4_Stack View">
+                                        <rect key="frame" x="0.0" y="1077" width="1024" height="269"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-lr-FfW" userLabel="Stack View1">
+                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="134.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="205" height="134.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="tintColor" systemColor="systemPinkColor"/>
                                                         <state key="normal" image="icons8-削除-25-2">
@@ -313,6 +356,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="205" y="0.0" width="614" height="134.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <state key="normal">
                                                             <attributedString key="attributedTitle">
@@ -335,6 +379,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-If-ZvT">
+                                                        <rect key="frame" x="819" y="0.0" width="205" height="134.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
@@ -358,8 +403,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TE8-5H-hhQ" userLabel="Stack View2">
+                                                <rect key="frame" x="0.0" y="134.5" width="1024" height="134.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-Uj-doj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="134.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="mGz-Uj-doj" secondAttribute="height" multiplier="1366:70" id="3ks-7e-KKj"/>
                                                         </constraints>
@@ -368,6 +415,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-63-4nj">
+                                                        <rect key="frame" x="0.0" y="134.5" width="1024" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ft9-63-4nj" secondAttribute="height" multiplier="1366:371" id="Xxb-Ox-flt"/>
                                                         </constraints>
@@ -403,7 +451,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                <color key="backgroundColor" name="Secondary"/>
                                 <constraints>
                                     <constraint firstItem="ZEn-2B-SNs" firstAttribute="height" secondItem="7Xe-Zw-HUf" secondAttribute="height" multiplier="0.2" id="0lf-dF-SfT"/>
                                     <constraint firstItem="ZEn-2B-SNs" firstAttribute="leading" secondItem="7Xe-Zw-HUf" secondAttribute="leading" id="490-oD-J9l"/>
@@ -519,9 +567,9 @@
         <image name="icons8-削除-25-2" width="25" height="25"/>
         <image name="icons8-戻る-50" width="50" height="50"/>
         <image name="icons8-進む-50" width="50" height="50"/>
-        <systemColor name="groupTableViewBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="Secondary">
+            <color red="0.65100002288818359" green="0.75700002908706665" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
