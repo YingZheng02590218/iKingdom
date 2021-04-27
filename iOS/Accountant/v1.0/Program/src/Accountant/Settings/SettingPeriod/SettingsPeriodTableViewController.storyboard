@@ -86,7 +86,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="会計期間" id="4tR-uQ-Nvd">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="08a-5E-Ugy">
+                        <barButtonItem key="rightBarButtonItem" title="会計年度を追加" id="08a-5E-Ugy">
                             <connections>
                                 <segue destination="ZIu-qn-l0p" kind="popoverPresentation" popoverAnchorBarButtonItem="08a-5E-Ugy" id="jum-xl-JWk">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -147,7 +147,7 @@
     </scenes>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.899999988079071" green="0.899999988079071" blue="0.899999988079071" alpha="0.51985454559326172" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
