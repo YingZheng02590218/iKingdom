@@ -102,7 +102,7 @@
     </scenes>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.899999988079071" green="0.899999988079071" blue="0.899999988079071" alpha="0.51985454559326172" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999997615814213" green="0.94999997615814213" blue="0.94999997615814213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -24,14 +24,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-VA-DYY" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-VA-DYY" userLabel="label">
+                                            <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
                                             <attributedString key="attributedText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="width" secondItem="AEB-iM-co7" secondAttribute="width" multiplier="0.946524" id="37m-nE-0uh"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="leading" secondItem="AEB-iM-co7" secondAttribute="leading" id="4xE-tj-dKj"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="top" secondItem="AEB-iM-co7" secondAttribute="top" id="BH7-2e-Jhl"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="height" secondItem="AEB-iM-co7" secondAttribute="height" id="b9g-Vj-dXU"/>
+                                        <constraint firstAttribute="trailing" secondItem="bkA-VA-DYY" secondAttribute="trailing" constant="20" id="g2e-LH-GMM"/>
+                                        <constraint firstAttribute="bottom" secondItem="bkA-VA-DYY" secondAttribute="bottom" id="twK-S5-6ex"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="bkA-VA-DYY" id="1ct-Vw-Wc4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -43,7 +53,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiz-hc-axp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9826" y="4240"/>
+            <point key="canvasLocation" x="9824.6376811594218" y="4239.5089285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vad-GY-G8w">
@@ -64,7 +74,7 @@
     </scenes>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.899999988079071" green="0.899999988079071" blue="0.899999988079071" alpha="0.51985454559326172" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
