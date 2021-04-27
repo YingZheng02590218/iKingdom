@@ -87,13 +87,13 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 1
         case 1:
-            return 1
+            return 3
         case 2:
-            return 2
-        case 3:
             return 1
+        case 3:
+            return 2
         default:
             return 0
         }
@@ -102,13 +102,13 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "情報"
-        case 1:
-            return "環境設定"
-        case 2:
-            return "サポート"
-        case 3:
             return "アップグレード"
+        case 1:
+            return "情報"
+        case 2:
+            return "環境設定"
+        case 3:
+            return "サポート"
         default:
             return ""
         }
@@ -116,10 +116,8 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "帳簿情報を設定することができます。"
         case 1:
-            return ""
+            return "帳簿情報を設定することができます。"
         default:
             return ""
         }
@@ -127,6 +125,17 @@ class SettingsTableViewController: UITableViewController {
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                //① UI部品を指定　TableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "アップグレード"
+                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")
+                return cell
+            default:
+                return WithIconTableViewCell()
+            }
+        }else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -147,7 +156,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else if indexPath.section == 1 {
+        }else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -158,7 +167,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else if indexPath.section == 2 {
+        }else {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -174,17 +183,6 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else {
-            switch indexPath.row {
-            case 0:
-                //① UI部品を指定　TableViewCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
-                cell.centerLabel.text = "アップグレード"
-                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")
-                return cell
-            default:
-                return WithIconTableViewCell()
-            }
         }
     }
     // セルがタップされたとき
@@ -193,6 +191,14 @@ class SettingsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         // 別の画面に遷移
         if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            default:
+                break
+            }
+        }else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsInformationTableViewController", sender: tableView.cellForRow(at: indexPath))
@@ -206,7 +212,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-        }else if indexPath.section == 1 {
+        }else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
@@ -214,7 +220,7 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-        }else if indexPath.section == 2 {
+        }else {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
@@ -223,14 +229,6 @@ class SettingsTableViewController: UITableViewController {
                 if let url = URL(string: "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review") {
                     UIApplication.shared.open(url)
                 }
-                break
-            default:
-                break
-            }
-        }else {
-            switch indexPath.row {
-            case 0:
-                performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             default:
                 break
