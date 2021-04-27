@@ -537,10 +537,10 @@
         <image name="icons8-戻る-50" width="50" height="50"/>
         <image name="icons8-進む-50" width="50" height="50"/>
         <namedColor name="Foreground">
-            <color red="0.1787446141242981" green="0.2973954975605011" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17900000512599945" green="0.29699999094009399" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Secondary">
-            <color red="0.99999998807907109" green="0.99999998807907109" blue="0.99999998807907109" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

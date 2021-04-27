@@ -177,7 +177,7 @@
     </scenes>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.94999997615814213" green="0.94999997615814213" blue="0.94999997615814213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

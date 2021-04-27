@@ -898,7 +898,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="sheetColor">
-            <color red="1" green="1" blue="0.88500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
