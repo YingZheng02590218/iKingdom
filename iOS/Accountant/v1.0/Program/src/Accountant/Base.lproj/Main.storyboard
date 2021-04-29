@@ -19,7 +19,7 @@
         <scene sceneID="nKs-wx-s0s">
             <objects>
                 <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -74,13 +74,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBD-as-DCq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765" y="1344"/>
+            <point key="canvasLocation" x="1432" y="1344"/>
         </scene>
         <!--仕訳-->
         <scene sceneID="8Yy-gm-rKf">
             <objects>
                 <navigationController navigationBarHidden="YES" id="Mfv-1p-Kx7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
+                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -90,7 +90,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCL-bA-a4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2111" y="1344"/>
+            <point key="canvasLocation" x="751" y="1344"/>
         </scene>
         <!--JournalsTableViewController-->
         <scene sceneID="Zl9-70-OeS">
@@ -100,7 +100,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g71-IL-04Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="1766"/>
+            <point key="canvasLocation" x="1432" y="1766"/>
         </scene>
         <!--GeneralLedgerTableViewController-->
         <scene sceneID="4hp-TM-FfB">
@@ -110,7 +110,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Akv-US-neH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1441" y="1766"/>
+            <point key="canvasLocation" x="2108" y="1766"/>
         </scene>
         <!--SettingsPeriodTableViewController-->
         <scene sceneID="seR-UZ-aZK">
@@ -136,7 +136,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F2x-og-Jck" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442" y="1344"/>
+            <point key="canvasLocation" x="2109" y="1344"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="w44-HK-dgQ">
@@ -167,13 +167,13 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGH-8W-Sku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2110" y="1766"/>
+            <point key="canvasLocation" x="748" y="1766"/>
         </scene>
     </scenes>
     <resources>
         <image name="icons8-saddle-stitched-booklet-25" width="25" height="25"/>
-        <image name="icons8-ギア-25" width="25" height="25"/>
-        <image name="icons8-ペン-25" width="25" height="25"/>
+        <image name="icons8-ギア-25" width="25" height="25"/>
+        <image name="icons8-ペン-25" width="25" height="25"/>
         <image name="icons8-開いた本-25" width="25" height="25"/>
         <image name="icons8-雑誌-25" width="25" height="25"/>
     </resources>
