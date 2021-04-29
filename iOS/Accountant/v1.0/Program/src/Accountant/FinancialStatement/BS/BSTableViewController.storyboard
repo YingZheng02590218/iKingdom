@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +15,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="eh6-98-cla">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="sheetColor"/>
                         <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
                         <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="Mnd-2h-BZY" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -31,12 +31,15 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzF-bd-msO" userLabel="title">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -45,12 +48,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" name="sheetColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="AzF-bd-msO" secondAttribute="bottom" id="0dy-iS-jCI"/>
                                                 <constraint firstItem="AzF-bd-msO" firstAttribute="top" secondItem="Qww-rZ-pmm" secondAttribute="top" id="HzC-6M-CO8"/>
@@ -80,6 +84,7 @@
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="4MG-mK-Uen" secondAttribute="height" multiplier="212:25" id="a87-Zg-5F5"/>
                                                     </constraints>
@@ -104,6 +109,7 @@
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="hYz-P3-TKg" secondAttribute="height" multiplier="101:25" id="0wf-pb-tPQ"/>
                                                         <constraint firstItem="Q2g-rK-EXR" firstAttribute="width" secondItem="hYz-P3-TKg" secondAttribute="width" id="5bw-qj-kVB"/>
@@ -151,7 +157,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" name="sheetColor"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="4MG-mK-Uen" secondAttribute="bottom" id="3Nx-Pl-u3z"/>
@@ -174,7 +180,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="Qww-rZ-pmm" firstAttribute="leading" secondItem="DNG-jm-it5" secondAttribute="leading" id="0I5-Xm-cox"/>
                                         <constraint firstAttribute="trailing" secondItem="Qww-rZ-pmm" secondAttribute="trailing" id="5f9-PJ-fn6"/>
@@ -226,6 +232,7 @@
                                         <constraint firstItem="bfo-zU-g6Z" firstAttribute="top" secondItem="LIf-Ba-Obn" secondAttribute="top" id="sAX-aa-jaX"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="JBL-yI-K68">
                                 <rect key="frame" x="0.0" y="140.5" width="414" height="25"/>
@@ -250,6 +257,7 @@
                                         <constraint firstItem="CHW-1h-sfr" firstAttribute="width" relation="greaterThanOrEqual" secondItem="dTo-Xg-tT9" secondAttribute="width" id="hks-Kq-P7A"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="account" id="Xtm-aL-CL6" customClass="AccountTableViewCell" customModule="Accounting_book" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="165.5" width="414" height="25"/>
@@ -305,6 +313,7 @@
                                         <constraint firstAttribute="bottom" secondItem="Ham-Qa-bCd" secondAttribute="bottom" id="yZy-1W-CG8"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="label_account" destination="EkK-Qz-MJg" id="vxu-Nd-939"/>
                                     <outlet property="label_account_previous" destination="At8-lj-tkS" id="T1N-2U-l7Z"/>
@@ -364,6 +373,7 @@
                                         <constraint firstAttribute="trailing" secondItem="VFI-nQ-w0r" secondAttribute="trailing" id="zqO-DA-EqU"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="label_totalOfMiddleCategory" destination="XhQ-pg-J0t" id="vZ2-Sx-mA0"/>
                                     <outlet property="label_totalOfMiddleCategory_previous" destination="Shc-Eq-sgS" id="lRm-zz-r6s"/>
@@ -423,6 +433,7 @@
                                         <constraint firstItem="Y8J-Vj-eKx" firstAttribute="height" relation="lessThanOrEqual" secondItem="P0S-dP-EpO" secondAttribute="height" id="qNd-kq-QGg"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="label_totalOfBigCategory" destination="NTF-Lj-bRj" id="wve-3i-GkC"/>
                                     <outlet property="label_totalOfBigCategory_previous" destination="4mh-7e-7D4" id="07z-g0-eKr"/>
@@ -463,8 +474,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="sheetColor">
+            <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

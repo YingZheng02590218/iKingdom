@@ -284,7 +284,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
         if indexPath.section == 1 { // 空白行
             //① UI部品を指定　TableViewCell
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! JournalsTableViewCell
-            cell.backgroundColor = .white // 目印を消す
             cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
             cell.label_list_date.text = ""     // 末尾2文字の「日」         //日付
             cell.label_list_summary_debit.text = ""     //借方勘定
@@ -309,7 +308,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
                 let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
                 let object = dataBaseManagerSettingsOperating.getSettingsOperating()
                 let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section, EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
-                cell.backgroundColor = .lightGray // 目印
                 //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
                 // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
                 if Number == objectss[indexPath.row-objects.count].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
@@ -388,7 +386,6 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
             }else { // 通常仕訳
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_journalEntry", for: indexPath) as! JournalsTableViewCell
-                cell.backgroundColor = .white // 目印を消す
                 //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
                 // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
                 if Number == objects[indexPath.row].number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
