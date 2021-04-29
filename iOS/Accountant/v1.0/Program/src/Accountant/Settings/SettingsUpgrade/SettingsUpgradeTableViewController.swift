@@ -24,6 +24,8 @@ class SettingsUpgradeTableViewController: UITableViewController {
 //        // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
 //        let upgradeManager = UpgradeManager()
 //        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
+        // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
+        tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
 
     // MARK: - Table view data source
@@ -101,9 +103,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingUpgradeTableViewCell else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
         switch indexPath.section {
         case 0:
 //            //① UI部品を指定　TableViewCell
@@ -117,6 +117,9 @@ class SettingsUpgradeTableViewController: UITableViewController {
 //            cell.label.textColor = .darkGray
 //            return cell
 //        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingUpgradeTableViewCell else {
+                return UITableViewCell()
+            }
             let product = self.products[indexPath.row]
             cell.textLabel?.text = product.localizedTitle
             cell.label.text = "\(products[indexPath.row].localizedPrice!) / \(products[indexPath.row].localizedSubscriptionPeriod)　" // 円マークも付く
@@ -135,40 +138,38 @@ class SettingsUpgradeTableViewController: UITableViewController {
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.textLabel?.text = "購入の復元"
+                cell.centerLabel.text = "購入の復元"
             }else {
-                cell.textLabel?.text = "Restore Purchases"
+                cell.centerLabel.text = "Restore Purchases"
             }
-            cell.label.text = ""
             if inAppPurchaseFlag {
                 cell.accessoryType = .checkmark
             }else {
                 cell.accessoryType = .disclosureIndicator
             }
+            cell.leftImageView.image = UIImage(named: "icons8-復元-25")
             return cell
         case 2:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.textLabel?.text = "解約方法"
+                cell.centerLabel.text = "解約方法"
             }else {
-                cell.textLabel?.text = "How to cancel"
+                cell.centerLabel.text = "How to cancel"
             }
-            cell.accessoryType = .disclosureIndicator
-            cell.label.text = ""
+            cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")
             return cell
         case 3:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.textLabel?.text = "プライバシーポリシー / 利用規約"
+                cell.centerLabel.text = "プライバシーポリシー / 利用規約"
             }else {
-                cell.textLabel?.text = "Privacy Policy / Terms of Use"
+                cell.centerLabel.text = "Privacy Policy / Terms of Use"
             }
-            cell.accessoryType = .disclosureIndicator
-            cell.label.text = ""
+            cell.leftImageView.image = UIImage(named: "icons8-ポリシー文書-25")
             return cell
         default:
             return cell

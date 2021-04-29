@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,10 +18,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">このアプリについて
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="plt-2K-23p">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66n-TV-T0D" userLabel="View1">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riC-hX-lir">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="riC-hX-lir" secondAttribute="height" multiplier="1:1" id="9XL-bf-t0Q"/>
+                                                </constraints>
+                                                <state key="normal" image="icons8-削除-25-2">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="closeButton:" destination="0EX-ri-3LQ" eventType="touchUpInside" id="z3C-FJ-ZHE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Secondary"/>
+                                        <constraints>
+                                            <constraint firstItem="riC-hX-lir" firstAttribute="leading" secondItem="66n-TV-T0D" secondAttribute="leading" id="0kB-64-x6F"/>
+                                            <constraint firstItem="riC-hX-lir" firstAttribute="centerY" secondItem="66n-TV-T0D" secondAttribute="centerY" id="4mw-EZ-jMY"/>
+                                            <constraint firstItem="riC-hX-lir" firstAttribute="top" secondItem="66n-TV-T0D" secondAttribute="top" id="bs6-eM-giQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="riC-hX-lir" secondAttribute="bottom" id="oND-v0-Ut1"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="riC-hX-lir" secondAttribute="trailing" constant="370" id="xZa-Si-5C9"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNq-i0-uCM" userLabel="View2">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="768"/>
+                                        <subviews>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">このアプリについて
 
 
 概要：
@@ -52,14 +84,14 @@
 Reckoning とは、英語で「清算」を意味する単語です。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">当アプリで採用した会計概念
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">当アプリで採用した会計概念
 
 □　簿記の分類
 　　* 複式簿記
@@ -86,14 +118,14 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 □　経済活動の種類による分類
 　　* 商業簿記</string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">1. 簿記の基礎
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">1. 簿記の基礎
 
     1. 取引の発生から財務諸表までの流れ
         1. 取引の発生
@@ -107,27 +139,27 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">1. 初期設定の手順
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">1. 初期設定の手順
     1. 基本情報の登録 
     2. 勘定科目体系の登録 
 
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">2. 基本情報の登録をしよう
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">2. 基本情報の登録をしよう
 
     * 事業者名を設定しよう
 帳簿情報 &gt; 事業者名 &gt; 任意の名称
@@ -155,14 +187,14 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">3. 勘定科目を設定しよう
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">3. 勘定科目を設定しよう
 
 * 準備資料
     * 以前使用していた会計帳簿や前年度の決算書
@@ -213,14 +245,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">4. 勘定科目の編集しよう
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">4. 勘定科目の編集しよう
 
     * 修正をする
 勘定科目 &gt; 勘定科目一覧 &gt; 任意の勘定科目 &gt; 表示科目名 &gt; 任意の表示科目 &gt; OK
@@ -247,14 +279,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 新規で追加した勘定科目のみ削除が可能です。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">5. 環境設定を確認・変更しよう
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">5. 環境設定を確認・変更しよう
 
     * 仕訳帳画面
 勘定科目 &gt; 仕訳帳
@@ -266,14 +298,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 損益振替仕訳と資本振替仕訳の表示と非表示を切り替えることができます。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">4. 帳簿に記帳する
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">4. 帳簿に記帳する
     1. 仕訳を入力する
 仕訳 &gt; 日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 入力ボタン
 
@@ -297,14 +329,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 ボタンをタップすると仕訳が記帳されます。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">4. 帳簿に記帳する
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">4. 帳簿に記帳する
     2. 仕訳を修正する
 仕訳帳 &gt; 任意の仕訳を長押し &gt; 仕訳
 
@@ -318,14 +350,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 仕訳をすると同様の手順です。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">4. 帳簿に記帳する
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">4. 帳簿に記帳する
     3. 仕訳を削除する
 仕訳帳 &gt; 任意の仕訳を右から左へスワイプ &gt; ゴミ箱ボタン &gt; OK
 
@@ -342,14 +374,14 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 OKボタンをタップします。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
-                                <string key="text">4. 帳簿に記帳する
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">4. 帳簿に記帳する
     4. 入力した取引を確認しよう
 
 * 仕訳帳
@@ -366,86 +398,85 @@ OKボタンをタップします。
 仕訳データが一件も存在しない勘定は、勘定名がグレーとなっています。
 
 </string>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
+                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Secondary"/>
+                                        <constraints>
+                                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="1It-HW-kAs"/>
+                                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="2bP-AH-ftJ"/>
+                                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="3NS-sF-fak"/>
+                                            <constraint firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="3Y4-EA-5rQ"/>
+                                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="3s1-17-1fd"/>
+                                            <constraint firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="46d-iF-5gr"/>
+                                            <constraint firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="5pA-j6-qYi"/>
+                                            <constraint firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="6Rh-8s-hlr"/>
+                                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="9rg-Em-q5y"/>
+                                            <constraint firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="9vd-gr-Kr6"/>
+                                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="D1r-OD-Kwf"/>
+                                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="D9h-1j-qvM"/>
+                                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="ELT-Qa-tIs"/>
+                                            <constraint firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="Gt6-Vl-p24"/>
+                                            <constraint firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="I67-mL-FQk"/>
+                                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="JVI-jZ-eVQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="KeS-oL-4mE"/>
+                                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="QJI-EV-RAU"/>
+                                            <constraint firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="Qdw-CL-05S"/>
+                                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="QoW-Gs-FjV"/>
+                                            <constraint firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="RDC-ax-ZcW"/>
+                                            <constraint firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="RpQ-WE-SQn"/>
+                                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="Rtp-Ix-z6K"/>
+                                            <constraint firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="TTb-8L-EG5"/>
+                                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="Tqy-0v-8gZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="V34-Uu-sXu"/>
+                                            <constraint firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="Wxp-ug-vW1"/>
+                                            <constraint firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="b5h-S3-izq"/>
+                                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="bVP-80-QHe"/>
+                                            <constraint firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="chQ-0b-POO"/>
+                                            <constraint firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="e1L-Fq-wwg"/>
+                                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="eIl-3t-RzO"/>
+                                            <constraint firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="hiy-CT-ckW"/>
+                                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="jRW-La-tiD"/>
+                                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="jSs-WH-yfA"/>
+                                            <constraint firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="lPj-1M-jyV"/>
+                                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="lfn-Bi-3KB"/>
+                                            <constraint firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="m3z-lz-6cj"/>
+                                            <constraint firstAttribute="trailing" secondItem="flD-rt-n5l" secondAttribute="trailing" id="nnb-mu-d3B"/>
+                                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="oRY-SA-86q"/>
+                                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="qvk-bS-kl3"/>
+                                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="vgt-Nz-ena"/>
+                                            <constraint firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="vva-TO-ytV"/>
+                                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="eNq-i0-uCM" secondAttribute="leading" id="vzS-me-PWl"/>
+                                            <constraint firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="xGi-uN-JLv"/>
+                                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="xUi-hd-osr"/>
+                                            <constraint firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="yPV-2y-6Ry"/>
+                                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="eNq-i0-uCM" secondAttribute="top" id="zzY-ET-kVh"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eNq-i0-uCM" firstAttribute="height" secondItem="plt-2K-23p" secondAttribute="height" multiplier="0.938875" id="9Pf-AC-p8F"/>
+                                    <constraint firstItem="66n-TV-T0D" firstAttribute="leading" secondItem="plt-2K-23p" secondAttribute="leading" id="GhZ-V2-vw0"/>
+                                    <constraint firstItem="66n-TV-T0D" firstAttribute="width" secondItem="plt-2K-23p" secondAttribute="width" id="biA-dv-ULA"/>
+                                    <constraint firstAttribute="trailing" secondItem="66n-TV-T0D" secondAttribute="trailing" id="dEe-P6-vWB"/>
+                                    <constraint firstItem="eNq-i0-uCM" firstAttribute="width" secondItem="plt-2K-23p" secondAttribute="width" id="hgn-xi-3AW"/>
+                                    <constraint firstItem="66n-TV-T0D" firstAttribute="height" secondItem="plt-2K-23p" secondAttribute="height" multiplier="0.0537897" id="kfj-W4-Iu8"/>
+                                    <constraint firstItem="eNq-i0-uCM" firstAttribute="top" secondItem="66n-TV-T0D" secondAttribute="bottom" id="uiW-6H-F2z"/>
+                                    <constraint firstItem="66n-TV-T0D" firstAttribute="top" secondItem="plt-2K-23p" secondAttribute="top" id="veG-97-Yxx"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Gr-f2-rEh"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" name="Secondary"/>
                         <constraints>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="09l-ag-K3K"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="trailing" secondItem="6Gr-f2-rEh" secondAttribute="trailing" id="0Lx-oV-3Uv"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="0hw-8P-gYU"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="1De-ae-84P"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="1GG-tu-XVZ"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="1TI-NI-krA"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="1tv-h1-9Zk"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="2sH-7s-YEd"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="36m-k7-RLi"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="3vG-hv-dcq"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="4sl-i9-dPS"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="5j3-8D-KU1"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="8u1-xZ-sTn"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="9V7-xl-sUY"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="ATU-Uc-lbI"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="CBB-HP-NHi"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="CxA-gR-w33"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="D2I-al-nfU"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="D86-k5-kNx"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="Do3-Mi-QIk"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="Ehh-3e-8we"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="Fet-5p-l5g"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="FqR-sW-AIm"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="GhP-KT-pKu"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="HYn-ul-szt"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="Htp-aQ-4ez"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="Ivt-A5-MLf"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="JWf-9Q-bwO"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="Jo0-w7-kDU"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="KSF-s7-6dV"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="MGq-EX-SEC"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="MyZ-IO-uui"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="OdN-Th-pDn"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="OhC-po-vxs"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="P4E-MU-33K"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="QMS-95-cU3"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="RQs-Js-bWs"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="TAP-ZM-8Vi"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="TzK-RG-RcC"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="UaY-YI-7MX"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="Uxo-8d-oLo"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="WbW-Oz-A7Q"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="WcV-AW-jtj"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="Wd5-8q-7iN"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="Wql-zH-Xrb"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="Wu6-ef-SXy"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="ZcE-Jh-ggm"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="auy-rQ-MCw"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="b6M-xa-yRK"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="eUu-Nw-JoO"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="eh8-Aa-NyJ"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="fDI-Le-B03"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="fIG-AS-u5b"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="fP7-Ki-nGX"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="fSY-SK-Igw"/>
-                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="hSa-OH-328"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="hXp-B3-WaT"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="hb7-Ww-s6W"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="ioX-78-xx3"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="jIr-uB-DGi"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="jlj-df-vX9"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="kqb-lq-eAi"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="ozy-Vw-ILg"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="roK-uh-ZUh"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" constant="20" id="sUi-0R-qHG"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="sww-Dt-5UQ"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="tLj-35-f8C"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="uOY-uA-jKQ"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="wYJ-b8-AlD"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="yMH-cz-0m5"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="yxB-es-BY4"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" constant="-20" id="zUl-Zq-Bui"/>
+                            <constraint firstItem="plt-2K-23p" firstAttribute="height" secondItem="6Gr-f2-rEh" secondAttribute="height" id="RPq-NS-2JY"/>
+                            <constraint firstItem="plt-2K-23p" firstAttribute="top" secondItem="6Gr-f2-rEh" secondAttribute="top" id="dSP-f0-FuC"/>
+                            <constraint firstItem="plt-2K-23p" firstAttribute="width" secondItem="6Gr-f2-rEh" secondAttribute="width" id="iEU-7V-cwm"/>
+                            <constraint firstItem="plt-2K-23p" firstAttribute="leading" secondItem="6Gr-f2-rEh" secondAttribute="leading" id="j72-eS-iNr"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="trailing" secondItem="plt-2K-23p" secondAttribute="trailing" id="uDb-BW-NhA"/>
+                            <constraint firstItem="6Gr-f2-rEh" firstAttribute="bottom" secondItem="plt-2K-23p" secondAttribute="bottom" id="xMI-IM-Tmi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
@@ -466,12 +497,16 @@ OKボタンをタップします。
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8958" y="4975"/>
+            <point key="canvasLocation" x="8957.971014492754" y="4974.7767857142853"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="icons8-削除-25-2" width="25" height="25"/>
+        <namedColor name="Secondary">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

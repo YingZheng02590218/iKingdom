@@ -27,6 +27,8 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
+        tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,13 +87,13 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return 1
         case 1:
-            return 1
+            return 3
         case 2:
-            return 2
-        case 3:
             return 1
+        case 3:
+            return 2
         default:
             return 0
         }
@@ -100,13 +102,13 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "情報"
-        case 1:
-            return "環境設定"
-        case 2:
-            return "サポート"
-        case 3:
             return "アップグレード"
+        case 1:
+            return "情報"
+        case 2:
+            return "環境設定"
+        case 3:
+            return "サポート"
         default:
             return ""
         }
@@ -114,84 +116,122 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return "帳簿情報を設定することができます。"
         case 1:
-            return ""
+            return "帳簿情報を設定することができます。"
         default:
             return ""
         }
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> SettingsTableViewCell {
-        var cell = SettingsTableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "帳簿情報" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
-                return cell
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_term", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "会計期間"
-                return cell
-            case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "勘定科目"
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "アップグレード"
+                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")
                 return cell
             default:
-                return cell
+                return WithIconTableViewCell()
             }
         }else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Journals", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "仕訳帳"
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "帳簿情報" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+                cell.leftImageView.image = UIImage(named: "icons8-会社-25")
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "会計期間"
+                cell.leftImageView.image = UIImage(named: "icons8-カレンダー10-25")
+                return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "勘定科目"
+                cell.leftImageView.image = UIImage(named: "icons8-スタック組織図-25")
                 return cell
             default:
-                return cell
+                return WithIconTableViewCell()
             }
         }else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Help", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "使い方ガイド"
-                return cell
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_Review", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "レビューをする(要望・不具合報告など)"
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "仕訳帳"
+                cell.leftImageView.image = UIImage(named: "icons8-saddle-stitched-booklet-25")
                 return cell
             default:
-                return cell
+                return WithIconTableViewCell()
             }
         }else {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings_upgrade", for: indexPath) as! SettingsTableViewCell
-                cell.textLabel?.text = "アップグレード"
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "使い方ガイド"
+                cell.leftImageView.image = UIImage(named: "icons8-情報-25")
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "レビューをする(要望・不具合報告など)"
+                cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")
                 return cell
             default:
-                return cell
+                return WithIconTableViewCell()
             }
         }
     }
-// 不採用
+    // セルがタップされたとき
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 選択されたセルを取得
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_settings", for: indexPath) as! SettingsTableViewCell
         // セルの選択を解除
-//        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         // 別の画面に遷移
-//        if indexPath.section == 0 {
-//            performSegue(withIdentifier: "identifier_term", sender: nil)
-//        }
-        if indexPath.section == 2 && indexPath.row == 1 {
-            if let url = URL(string: "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review") {
-                UIApplication.shared.open(url)
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            default:
+                break
+            }
+        }else if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "SettingsInformationTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 1:
+                performSegue(withIdentifier: "SettingsPeriodTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 2:
+                performSegue(withIdentifier: "SettingsCategoryTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            default:
+                break
+            }
+        }else if indexPath.section == 2 {
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            default:
+                break
+            }
+        }else {
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 1:
+                if let url = URL(string: "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review") {
+                    UIApplication.shared.open(url)
+                }
+                break
+            default:
+                break
             }
         }
     }

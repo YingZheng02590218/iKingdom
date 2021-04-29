@@ -37,6 +37,10 @@ class SettingsHelpDetailViewController: UIViewController {
     @IBOutlet var textView_journals: UITextView!
     
     
+    @IBAction func closeButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     var textView_switch: Int = 0
     
     override func viewDidLoad() {
