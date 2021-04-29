@@ -58,6 +58,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             inAppPurchaseFlag = false
         }
         
+        createCarousel() // カルーセルを作成
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
@@ -222,6 +223,13 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    // カルーセル作成
+    @IBOutlet var carouselCollectionView: UICollectionView!
+    func createCarousel() {
+        //xib読み込み
+        let nib = UINib(nibName: "CarouselCollectionViewCell", bundle: .main)
+        carouselCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -965,4 +973,61 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         // 終了させる　仕訳帳画面へ戻る
         self.dismiss(animated: true, completion: nil)
     }
+}
+// プロトコル定義
+extension JournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    //collectionViewの要素の数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5//.count
+    }
+    //collectionViewのセルを返す（セルの内容を決める）
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CarouselCollectionViewCell
+        return cell
+    }
+//    //セル間の間隔を指定
+//    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 20
+//    }
+    //セルのサイズ(CGSize)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.height * 2, height: collectionView.frame.height - 15)
+    }
+    //余白の調整（UIImageを拡大、縮小している）
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        //top:ナビゲーションバーの高さ分上に移動
+        return UIEdgeInsets(top: 0,left: 3,bottom: 3,right: 3)
+    }
+    ///セルの選択時に背景色を変化させる
+    ///今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
+    ///以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        print("Highlighted: \(indexPath)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        print("Unhighlighted: \(indexPath)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true  // 変更
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected: \(indexPath)")
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("Deselected: \(indexPath)")
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+//        return true  // 変更
+//    }
+    
 }
