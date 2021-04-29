@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,28 +12,35 @@
         <scene sceneID="j1W-d1-RmZ">
             <objects>
                 <tableViewController id="kPB-3s-6pt" customClass="SettingsUpgradeTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cvJ-Zi-yFZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cvJ-Zi-yFZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <color key="backgroundColor" name="Secondary"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="pVW-gq-uJC" customClass="SettingUpgradeTableViewCell" customModule="Accounting_book" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pVW-gq-uJC" id="AEB-iM-co7">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-VA-DYY" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-VA-DYY" userLabel="label">
+                                            <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
                                             <attributedString key="attributedText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="width" secondItem="AEB-iM-co7" secondAttribute="width" multiplier="0.946524" id="37m-nE-0uh"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="leading" secondItem="AEB-iM-co7" secondAttribute="leading" id="4xE-tj-dKj"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="top" secondItem="AEB-iM-co7" secondAttribute="top" id="BH7-2e-Jhl"/>
+                                        <constraint firstItem="bkA-VA-DYY" firstAttribute="height" secondItem="AEB-iM-co7" secondAttribute="height" id="b9g-Vj-dXU"/>
+                                        <constraint firstAttribute="trailing" secondItem="bkA-VA-DYY" secondAttribute="trailing" constant="20" id="g2e-LH-GMM"/>
+                                        <constraint firstAttribute="bottom" secondItem="bkA-VA-DYY" secondAttribute="bottom" id="twK-S5-6ex"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="label" destination="bkA-VA-DYY" id="irC-ix-0eg"/>
+                                    <outlet property="label" destination="bkA-VA-DYY" id="1ct-Vw-Wc4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -46,7 +53,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiz-hc-axp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9826" y="4240"/>
+            <point key="canvasLocation" x="9824.6376811594218" y="4239.5089285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vad-GY-G8w">
@@ -66,8 +73,8 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="Secondary">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

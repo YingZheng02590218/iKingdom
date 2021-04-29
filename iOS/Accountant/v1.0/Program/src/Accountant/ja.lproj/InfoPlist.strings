@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  Accountant
+
+  Created by Hisashi Ishihara on 2021/04/29.
+  Copyright © 2021 Hisashi Ishihara. All rights reserved.
+*/
+NSUserTrackingUsageDescription = "この識別子は、パーソナライズされた広告を配信するために使用されます。";
