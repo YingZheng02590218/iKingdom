@@ -91,7 +91,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             return 3
         case 2:
-            return 1
+            return 2
         case 3:
             return 2
         default:
@@ -161,6 +161,11 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "仕訳"
+                cell.leftImageView.image = UIImage(named: "icons8-ペン-25")
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳帳"
                 cell.leftImageView.image = UIImage(named: "icons8-saddle-stitched-booklet-25")
                 return cell
@@ -215,6 +220,9 @@ class SettingsTableViewController: UITableViewController {
         }else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
+                performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 1:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             default:

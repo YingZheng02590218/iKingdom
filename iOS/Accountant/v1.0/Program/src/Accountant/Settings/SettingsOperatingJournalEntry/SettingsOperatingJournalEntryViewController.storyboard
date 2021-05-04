@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XqM-EL-yIQ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--設定　仕訳画面-->
+        <scene sceneID="K5M-eL-0TU">
+            <objects>
+                <viewController id="AqH-TQ-WTZ" customClass="SettingsOperatingJournalEntryViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Ua-Ra-N1O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5R-zz-sdu">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" name="Secondary"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="qwU-IE-fQd">
+                                    <size key="itemSize" width="414" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AqH-TQ-WTZ" id="LNn-96-tcc"/>
+                                    <outlet property="delegate" destination="AqH-TQ-WTZ" id="NLj-6x-pLx"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KN3-ez-inu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="i5R-zz-sdu" firstAttribute="width" secondItem="KN3-ez-inu" secondAttribute="width" id="A8p-sP-pfY"/>
+                            <constraint firstItem="i5R-zz-sdu" firstAttribute="height" secondItem="KN3-ez-inu" secondAttribute="height" id="IEu-1L-zoK"/>
+                            <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="IYr-Ba-wbW"/>
+                            <constraint firstItem="i5R-zz-sdu" firstAttribute="top" secondItem="KN3-ez-inu" secondAttribute="top" id="acv-3h-kK5"/>
+                            <constraint firstItem="KN3-ez-inu" firstAttribute="trailing" secondItem="i5R-zz-sdu" secondAttribute="trailing" id="bt1-hb-HDl"/>
+                            <constraint firstItem="i5R-zz-sdu" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="pIl-pq-C3b"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa"/>
+                    <connections>
+                        <outlet property="listCollectionView" destination="i5R-zz-sdu" id="5BI-kw-ieS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xHt-WQ-lKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7979.7101449275369" y="4229.4642857142853"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="raN-UQ-rCq">
+            <objects>
+                <navigationController id="XqM-EL-yIQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BWk-ru-4h5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AqH-TQ-WTZ" kind="relationship" relationship="rootViewController" id="Gla-LR-sLP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x0E-cL-GSt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7980" y="3494"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Secondary">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
