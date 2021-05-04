@@ -62,10 +62,14 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
-       
+        createTextFieldForNickname()
+        
         // 仕訳タイプ判定
         if journalEntryType == "JournalEntries" {
             label_title.text = "仕　訳"
+        }else if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" {
+            label_title.text = "仕訳テンプレート"
+            inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         }else if journalEntryType == "AdjustingAndClosingEntries" {
             label_title.text = "決算整理仕訳"
         }else if journalEntryType == "JournalEntriesFixing" {
@@ -230,6 +234,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         //xib読み込み
         let nib = UINib(nibName: "CarouselCollectionViewCell", bundle: .main)
         carouselCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
+    
+        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // 仕訳テンプレートの場合
+            carouselCollectionView.isHidden = true
+        }
+        
     }
     
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -348,7 +357,19 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         } else {
             // Fallback on earlier versions
         }
+        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // 仕訳テンプレートの場合
+            Button_Left.isHidden = true
+            datePicker.isHidden = true
+            Button_Right.isHidden = true
+            dateLabel.isHidden = true
+            nicknameTextField.isHidden = false
+        }else {
+            nicknameTextField.isHidden = true
+        }
+        
     }
+
+    @IBOutlet var dateLabel: UILabel!
     @IBOutlet weak var Button_Left: UIButton!
     @IBAction func Button_Left(_ sender: UIButton) {
         let min = datePicker.minimumDate!
@@ -432,17 +453,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
     }
-    // TextFieldに入力され値が変化した時の処理の関数
-    @objc func textFieldDidChange(_ sender: UITextField) {
-//    func textFieldEditingChanged(_ sender: UITextField){
-        if sender.text != "" {
-            // カンマを追加する
-            if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
-                sender.text = "\(addComma(string: String(sender.text!)))"
-            }
-            print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
-        }
-    }
     // TextFieldをタップしても呼ばれない
     @IBAction func TapGestureRecognizer(_ sender: Any) {// この前に　touchesBegan が呼ばれている
         self.view.endEditing(true)
@@ -470,6 +480,28 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
        TextField_SmallWritting.inputAccessoryView = toolbar
     }
     
+    @IBOutlet var nicknameTextField: UITextField!
+    // TextField作成 ニックネーム
+    func createTextFieldForNickname() {
+        nicknameTextField.delegate = self
+        nicknameTextField.textAlignment = .center
+// toolbar 小書き Done:Tag Cancel:Tag
+       let toolbar = UIToolbar()
+       toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
+//       toolbar.backgroundColor = UIColor.clear// 名前で指定する
+//       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+       toolbar.isTranslucent = true
+//       toolbar.barStyle = .default
+       let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
+       doneButtonItem.tag = 8
+       let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+       let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+       cancelItem.tag = 88
+       toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+        nicknameTextField.inputAccessoryView = toolbar
+        
+    }
+    
     let SCREEN_SIZE = UIScreen.main.bounds.size
     // UIKeyboardWillShow通知を受けて、実行される関数
 //    @objc func keyboardWillShow(_ notification: NSNotification){
@@ -483,6 +515,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //    @objc func keyboardWillHide(_ notification: NSNotification){
 //        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - TextField_SmallWritting.frame.height
 //    }
+    // TextFieldに入力され値が変化した時の処理の関数
+    @objc func textFieldDidChange(_ sender: UITextField) {
+//    func textFieldEditingChanged(_ sender: UITextField){
+        if sender.text != "" {
+            // カンマを追加する
+            if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
+                sender.text = "\(addComma(string: String(sender.text!)))"
+            }
+            print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
+        }
+    }
     // TextFieldのキーボードについているBarButtonが押下された時
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
         switch sender.tag {
@@ -512,6 +555,14 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 Label_Popup.text = ""
             }
             break
+        case 55://借方金額の場合 Cancel
+            TextField_amount_debit.text = ""
+            TextField_amount_credit.text = ""
+            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            Label_Popup.text = ""
+            self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
+            break
         case 6://貸方金額の場合 Done
             if TextField_amount_credit.text == "0"{
                 TextField_amount_credit.text = ""
@@ -538,20 +589,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 Label_Popup.text = ""
             }
             break
-        case 7://小書きの場合 Done
-            self.view.endEditing(true)
-            if TextField_SmallWritting.text == "" {
-                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            }
-            break
-        case 55://借方金額の場合 Cancel
-            TextField_amount_debit.text = ""
-            TextField_amount_credit.text = ""
-            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            Label_Popup.text = ""
-            self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
-            break
         case 66://貸方金額の場合 Cancel
             TextField_amount_debit.text = ""
             TextField_amount_credit.text = ""
@@ -560,10 +597,28 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
+        case 7://小書きの場合 Done
+            self.view.endEditing(true)
+            if TextField_SmallWritting.text == "" {
+                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            }
+            break
         case 77://小書きの場合 Cancel
             TextField_SmallWritting.text = ""
             TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             self.view.endEditing(true)
+            break
+        case 8://ニックネームの場合 Done
+            self.view.endEditing(true)
+            if nicknameTextField.text == "" {
+                nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            }
+            break
+        case 88://ニックネームの場合 Cancel
+            nicknameTextField.text = ""
+            nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
+            Label_Popup.text = ""
+            self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
         default:
             self.view.endEditing(true)
@@ -615,7 +670,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             let characterSet = CharacterSet(charactersIn: string)
             // 指定したスーパーセットの文字セットでないならfalseを返す
             resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
-        }else{  // 小書き
+        }else{  // 小書き　ニックネーム
             let notAllowedCharacters = CharacterSet(charactersIn:",") // 除外したい文字。絵文字はInterface BuilderのKeyboardTypeで除外してある。
             let characterSet = CharacterSet(charactersIn: string)
             // 指定したスーパーセットの文字セットならfalseを返す
@@ -627,6 +682,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         case 333,444: // 金額の文字数 + カンマの数 (100万円の位まで入力可能とする)
             maxLength = 7 + 2
         case 555: // 小書きの文字数
+            maxLength = 25
+        case 888: // ニックネームの文字数
             maxLength = 25
         default:
             break

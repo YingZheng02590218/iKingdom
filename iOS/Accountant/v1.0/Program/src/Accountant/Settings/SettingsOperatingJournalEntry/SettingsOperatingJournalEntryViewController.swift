@@ -8,13 +8,21 @@
 
 import UIKit
 
-class SettingsOperatingJournalEntryViewController: UIViewController {
+class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         createList() // リストを作成
+        // 更新機能　編集機能
+        // UILongPressGestureRecognizer宣言
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent:") → うまくできなかった。2020/07/26
+        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        longPressRecognizer.delegate = self
+        // tableViewにrecognizerを設定
+        listCollectionView.addGestureRecognizer(longPressRecognizer)
+
     }
    
     // MARK: - Create View
@@ -26,7 +34,58 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         let nib = UINib(nibName: "ListCollectionViewCell", bundle: .main)
         listCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
-
+    // 編集機能　長押しした際に呼ばれるメソッド
+    @objc func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+        // 押された位置でcellのPathを取得
+        let point = recognizer.location(in: listCollectionView)
+        let indexPath = listCollectionView.indexPathForItem(at: point)
+        
+        if indexPath?.section == 1 {
+            print("空白行を長押し")
+        }else {
+            if indexPath == nil {
+                
+            } else if recognizer.state == UIGestureRecognizer.State.began  {
+                // 長押しされた場合の処理
+                print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
+                // ロングタップされたセルの位置をフィールドで保持する
+                self.tappedIndexPath = indexPath
+                // 別の画面に遷移 仕訳画面
+                let controller = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "JournalEntryViewController") as! JournalEntryViewController
+                if tappedIndexPath != nil { // nil:ロングタップではない
+                    controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                    controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+                }
+                self.present(controller, animated: true, completion: nil)
+            }
+        }
+    }
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        if identifier == "longTapped" { // segueがタップ
+            if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
+                if let _:IndexPath = self.tappedIndexPath { //代入に成功したら、ロングタップだと判断できる
+                    return true //true: 画面遷移させる
+                }
+            }
+        }else if identifier == "buttonTapped" {
+            return true
+        }
+        return false //false:画面遷移させない
+    }
+    // 追加機能　画面遷移の準備　仕訳画面
+    var tappedIndexPath: IndexPath?
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue.destinationの型はUIViewController
+        let controller = segue.destination as! JournalEntryViewController
+        // 遷移先のコントローラに値を渡す
+        if segue.identifier == "buttonTapped" {
+            controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
+        }
+    }
+    
 }
 // プロトコル定義
 extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
