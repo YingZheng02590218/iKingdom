@@ -30,9 +30,23 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
 }
 // プロトコル定義
 extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    // ヘッダーセル
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionReusableView", for: indexPath) as? CollectionReusableView else {
+            fatalError("Could not find proper header")
+        }
+        if kind == UICollectionView.elementKindSectionHeader {
+            if indexPath.section == 0 {
+                header.sectionLabel.text = "仕訳テンプレート"//"section \(indexPath.section)"
+            }
+            return header
+        }
+        return UICollectionReusableView()
+    }
     //collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30//.count
+        return 28//.count
     }
     //collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
