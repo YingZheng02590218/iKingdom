@@ -48,7 +48,7 @@
                                                 <color key="titleColor" systemColor="linkColor"/>
                                             </state>
                                             <connections>
-                                                <segue destination="lgc-ER-CXx" kind="presentation" id="Rzt-vn-hlB"/>
+                                                <segue destination="lgc-ER-CXx" kind="presentation" identifier="buttonTapped" id="Rzt-vn-hlB"/>
                                             </connections>
                                         </button>
                                     </subviews>
