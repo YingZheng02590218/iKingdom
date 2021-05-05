@@ -121,9 +121,9 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         print(collectionView.frame)
         print(view.frame)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return CGSize(width: collectionView.frame.width / 3 - 6, height: 50)
+            return CGSize(width: collectionView.frame.width / 3 - 6, height: 100)
         }else {
-            return CGSize(width: collectionView.frame.width - 6, height: 50)
+            return CGSize(width: collectionView.frame.width - 6, height: 100)
         }
     }
     //余白の調整（UIImageを拡大、縮小している）
