@@ -904,25 +904,21 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //                            let presentingViewController = navigationController.viewControllers[0] as! FinancialStatementTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true)
-                        }else if journalEntryType == "JournalEntries" {
+                        }else if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" {
+                            // データベース　仕訳テンプレートを追加
+                            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
                             number = dataBaseManager.addJournalEntry(
-                                date: formatter.string(from: datePicker.date),
+                                nickname: nicknameTextField.text!,
                                 debit_category: TextField_category_debit.text!,
                                 debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                                 credit_category: TextField_category_credit.text!,
                                 credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                                 smallWritting: TextField_SmallWritting.text!
                             )
-                            let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-                            let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-    //                        let nc = viewController.presentingViewController as! UINavigationController
-                            let presentingViewController = navigationController.viewControllers[0] as! JournalsTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                            // 画面を閉じる
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in
-                                        // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
-    //                                    presentingViewController.viewWillAppear(true)
-                                    presentingViewController.autoScroll(number: number)
+                                presentingViewController?.viewWillAppear(true)
                             })
                         }else if journalEntryType == "JournalEntriesFixing" {
                             //
@@ -956,6 +952,26 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in
+                                    presentingViewController.autoScroll(number: number)
+                            })
+                        }else if journalEntryType == "JournalEntries" {
+                            number = dataBaseManager.addJournalEntry(
+                                date: formatter.string(from: datePicker.date),
+                                debit_category: TextField_category_debit.text!,
+                                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                                credit_category: TextField_category_credit.text!,
+                                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                                smallWritting: TextField_SmallWritting.text!
+                            )
+                            let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
+                            let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
+    //                        let nc = viewController.presentingViewController as! UINavigationController
+                            let presentingViewController = navigationController.viewControllers[0] as! JournalsTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                            self.dismiss(animated: true, completion: {
+                                    [presentingViewController] () -> Void in
+                                        // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
+    //                                    presentingViewController.viewWillAppear(true)
                                     presentingViewController.autoScroll(number: number)
                             })
                         }else if journalEntryType == "" { // タブバーの仕訳タブからの遷移の場合

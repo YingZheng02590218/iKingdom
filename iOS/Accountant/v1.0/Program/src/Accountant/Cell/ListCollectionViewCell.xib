@@ -22,7 +22,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udJ-72-ccu" userLabel="View1">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -35,7 +35,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOu-X6-DsE" userLabel="View2">
                         <rect key="frame" x="200" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="ldB-M9-50t" userLabel="Label1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="ldB-M9-50t" userLabel="Label1">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,7 +56,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krb-UI-Ia8" userLabel="View3">
                         <rect key="frame" x="307" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="Bfa-gt-A71" userLabel="Label3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="Bfa-gt-A71" userLabel="Label3">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -97,6 +97,13 @@
                 <constraint firstAttribute="bottom" secondItem="krb-UI-Ia8" secondAttribute="bottom" id="ogd-82-Td4"/>
             </constraints>
             <size key="customSize" width="421" height="164"/>
+            <connections>
+                <outlet property="creditLabel" destination="Bfa-gt-A71" id="rvI-MZ-gJo"/>
+                <outlet property="creditamauntLabel" destination="9g8-AA-six" id="Fxb-rL-BAP"/>
+                <outlet property="debitLabel" destination="ldB-M9-50t" id="4Fa-6d-X2y"/>
+                <outlet property="debitamauntLabel" destination="3pa-R5-Qko" id="U5j-9i-e2m"/>
+                <outlet property="nicknameLabel" destination="YCs-Ju-wTq" id="c2E-hb-NqH"/>
+            </connections>
             <point key="canvasLocation" x="179.71014492753625" y="127.23214285714285"/>
         </collectionViewCell>
     </objects>

@@ -24,6 +24,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         listCollectionView.addGestureRecognizer(longPressRecognizer)
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        listCollectionView.reloadData()
+    }
    
     // MARK: - Create View
 
@@ -105,11 +109,22 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     }
     //collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 28//.count
+        // データベース　仕訳テンプレートを追加
+        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+        let objects = dataBaseManager.getJournalEntry()
+        return objects.count
     }
     //collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ListCollectionViewCell
+        // データベース　仕訳テンプレートを追加
+        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+        let objects = dataBaseManager.getJournalEntry()
+        cell.nicknameLabel.text = objects[indexPath.row].nickname
+        cell.debitLabel.text = objects[indexPath.row].debit_category
+        cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
+        cell.creditLabel.text = objects[indexPath.row].credit_category
+        cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
         return cell
     }
 //    //セル間の間隔を指定
