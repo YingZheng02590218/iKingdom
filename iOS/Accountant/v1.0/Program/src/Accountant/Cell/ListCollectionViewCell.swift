@@ -10,6 +10,12 @@ import UIKit
 
 class ListCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var nicknameLabel: UILabel!
+    @IBOutlet var debitLabel: UILabel!
+    @IBOutlet var debitamauntLabel: UILabel!
+    @IBOutlet var creditLabel: UILabel!
+    @IBOutlet var creditamauntLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // セルの背景色を変える
