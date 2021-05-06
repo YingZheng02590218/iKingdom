@@ -10,7 +10,8 @@ import UIKit
 
 class CarouselCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var nicknameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // セルの背景色を変える

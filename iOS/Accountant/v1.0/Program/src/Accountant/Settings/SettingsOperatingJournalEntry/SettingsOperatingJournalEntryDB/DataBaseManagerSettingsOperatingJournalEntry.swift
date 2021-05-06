@@ -38,5 +38,13 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         let objects = realm.objects(DataBaseSettingsOperatingJournalEntry.self)
         return objects
     }
-
+    // 更新 仕訳
+    func updateJournalEntry(primaryKey: Int, nickname: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
+        let realm = try! Realm()
+        try! realm.write {
+            let value: [String: Any] = ["number": primaryKey, "nickname": nickname, "debit_category":debit_category, "debit_amount":debit_amount, "credit_category":credit_category, "credit_amount":credit_amount, "smallWritting":smallWritting]
+            realm.create(DataBaseSettingsOperatingJournalEntry.self, value: value, update: .modified) // 一部上書き更新
+        }
+        return primaryKey
+    }
 }
