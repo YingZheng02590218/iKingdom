@@ -67,9 +67,16 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         // 仕訳タイプ判定
         if journalEntryType == "JournalEntries" {
             label_title.text = "仕　訳"
-        }else if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" {
+        }else if journalEntryType == "SettingsJournalEntries" {
             label_title.text = "仕訳テンプレート"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        }else if journalEntryType == "SettingsJournalEntriesFixing" {
+            label_title.text = "仕訳テンプレート"
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+            // データベース　仕訳テンプレートを追加
+            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+            let objects = dataBaseManager.getJournalEntry()
+            primaryKey = objects[tappedIndexPath.row].number
         }else if journalEntryType == "AdjustingAndClosingEntries" {
             label_title.text = "決算整理仕訳"
         }else if journalEntryType == "JournalEntriesFixing" {
@@ -166,6 +173,18 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             
             let request = GADRequest()
             interstitial.load(request)
+        }
+        
+        if journalEntryType == "SettingsJournalEntriesFixing" {
+            // データベース　仕訳テンプレートを追加
+            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+            let objects = dataBaseManager.getJournalEntry()
+            nicknameTextField.text = objects[tappedIndexPath.row].nickname
+            TextField_category_debit.text = objects[tappedIndexPath.row].debit_category
+            TextField_amount_debit.text = String(objects[tappedIndexPath.row].debit_amount)
+            TextField_category_credit.text = objects[tappedIndexPath.row].credit_category
+            TextField_amount_credit.text = String(objects[tappedIndexPath.row].credit_amount)
+            TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
         }
     }
 
@@ -904,10 +923,27 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //                            let presentingViewController = navigationController.viewControllers[0] as! FinancialStatementTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true)
-                        }else if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" {
+                        }else if journalEntryType == "SettingsJournalEntries" {
                             // データベース　仕訳テンプレートを追加
                             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
                             number = dataBaseManager.addJournalEntry(
+                                nickname: nicknameTextField.text!,
+                                debit_category: TextField_category_debit.text!,
+                                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                                credit_category: TextField_category_credit.text!,
+                                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                                smallWritting: TextField_SmallWritting.text!
+                            )
+                            // 画面を閉じる
+                            self.dismiss(animated: true, completion: {
+                                    [presentingViewController] () -> Void in
+                                presentingViewController?.viewWillAppear(true)
+                            })
+                        }else if journalEntryType == "SettingsJournalEntriesFixing" {
+                            // データベース　仕訳テンプレートを更新
+                            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+                            number = dataBaseManager.updateJournalEntry(
+                                primaryKey: primaryKey,
                                 nickname: nicknameTextField.text!,
                                 debit_category: TextField_category_debit.text!,
                                 debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
@@ -1051,11 +1087,18 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 extension JournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5//.count
+        // データベース　仕訳テンプレートを追加
+        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+        let objects = dataBaseManager.getJournalEntry()
+        return objects.count
     }
     //collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CarouselCollectionViewCell
+        // データベース　仕訳テンプレートを追加
+        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+        let objects = dataBaseManager.getJournalEntry()
+        cell.nicknameLabel.text = objects[indexPath.row].nickname
         return cell
     }
 //    //セル間の間隔を指定
@@ -1080,6 +1123,14 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
+        // データベース　仕訳テンプレートを追加
+        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+        let objects = dataBaseManager.getJournalEntry()
+        TextField_category_debit.text = objects[indexPath.row].debit_category
+        TextField_amount_debit.text = String(objects[indexPath.row].debit_amount)
+        TextField_category_credit.text = objects[indexPath.row].credit_category
+        TextField_amount_credit.text = String(objects[indexPath.row].credit_amount)
+        TextField_SmallWritting.text = objects[indexPath.row].smallWritting
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {

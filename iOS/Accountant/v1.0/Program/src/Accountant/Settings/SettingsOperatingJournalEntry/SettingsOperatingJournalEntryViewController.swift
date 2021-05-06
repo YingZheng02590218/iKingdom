@@ -13,8 +13,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        createList() // リストを作成
         // 更新機能　編集機能
         // UILongPressGestureRecognizer宣言
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent:") → うまくできなかった。2020/07/26
@@ -25,7 +23,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
 
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        createList() // リストを作成
         listCollectionView.reloadData()
     }
    

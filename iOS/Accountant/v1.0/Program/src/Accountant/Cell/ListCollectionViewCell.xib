@@ -12,9 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="playback" reuseIdentifier="cell" id="gTV-IL-0wX" customClass="ListCollectionViewCell" customModule="Accounting_book" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="playback" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="ListCollectionViewCell" customModule="Accounting_book" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -22,7 +21,7 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udJ-72-ccu" userLabel="View1">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -31,11 +30,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="udJ-72-ccu" secondAttribute="height" multiplier="2:1" id="eIi-MU-QW3"/>
+                        </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOu-X6-DsE" userLabel="View2">
                         <rect key="frame" x="200" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="ldB-M9-50t" userLabel="Label1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="ldB-M9-50t" userLabel="Label1">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -43,7 +45,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="3pa-R5-Qko" userLabel="Label2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="3pa-R5-Qko" userLabel="Label2">
                                 <rect key="frame" x="0.0" y="50" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -52,11 +54,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="107:100" id="tqU-OR-jIC"/>
+                        </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krb-UI-Ia8" userLabel="View3">
                         <rect key="frame" x="307" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="Bfa-gt-A71" userLabel="Label3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="Bfa-gt-A71" userLabel="Label3">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -64,7 +69,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="107" id="9g8-AA-six" userLabel="Label4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="9g8-AA-six" userLabel="Label4">
                                 <rect key="frame" x="0.0" y="50" width="107" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -73,6 +78,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="107:100" id="rHc-oE-ECi"/>
+                        </constraints>
                     </view>
                 </subviews>
             </view>
@@ -80,20 +88,20 @@
             <color key="backgroundColor" name="Secondary"/>
             <constraints>
                 <constraint firstItem="udJ-72-ccu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5Q2-6h-FEC"/>
-                <constraint firstItem="krb-UI-Ia8" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="6JT-5t-n6h"/>
-                <constraint firstItem="krb-UI-Ia8" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" multiplier="1.78571" id="A48-zK-co1"/>
-                <constraint firstItem="udJ-72-ccu" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.483092" id="KXm-k3-Zs3"/>
+                <constraint firstItem="krb-UI-Ia8" firstAttribute="width" relation="lessThanOrEqual" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="6JT-5t-n6h"/>
+                <constraint firstItem="krb-UI-Ia8" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" id="A48-zK-co1"/>
+                <constraint firstItem="udJ-72-ccu" firstAttribute="width" relation="lessThanOrEqual" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.483092" id="KXm-k3-Zs3"/>
                 <constraint firstItem="HOu-X6-DsE" firstAttribute="leading" secondItem="udJ-72-ccu" secondAttribute="trailing" id="Kpr-3z-zG4"/>
                 <constraint firstItem="udJ-72-ccu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MCr-FQ-STY"/>
                 <constraint firstAttribute="bottom" secondItem="HOu-X6-DsE" secondAttribute="bottom" id="PFG-lH-f3g"/>
                 <constraint firstAttribute="trailing" secondItem="krb-UI-Ia8" secondAttribute="trailing" id="RBX-py-WgU"/>
                 <constraint firstItem="krb-UI-Ia8" firstAttribute="leading" secondItem="HOu-X6-DsE" secondAttribute="trailing" id="Uu9-Tn-r0P"/>
-                <constraint firstItem="udJ-72-ccu" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" multiplier="1.78571" id="fCp-Yg-0Xc"/>
+                <constraint firstItem="udJ-72-ccu" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" id="fCp-Yg-0Xc"/>
                 <constraint firstItem="krb-UI-Ia8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="giu-GH-sqn"/>
                 <constraint firstAttribute="bottom" secondItem="udJ-72-ccu" secondAttribute="bottom" id="hrS-1W-4I7"/>
-                <constraint firstItem="HOu-X6-DsE" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" multiplier="1.78571" id="iVr-7M-VKH"/>
+                <constraint firstItem="HOu-X6-DsE" firstAttribute="height" secondItem="mu5-kb-Wdz" secondAttribute="height" id="iVr-7M-VKH"/>
                 <constraint firstItem="HOu-X6-DsE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="lZO-IA-5Kv"/>
-                <constraint firstItem="HOu-X6-DsE" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="nXK-Z0-41V"/>
+                <constraint firstItem="HOu-X6-DsE" firstAttribute="width" relation="lessThanOrEqual" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="nXK-Z0-41V"/>
                 <constraint firstAttribute="bottom" secondItem="krb-UI-Ia8" secondAttribute="bottom" id="ogd-82-Td4"/>
             </constraints>
             <size key="customSize" width="421" height="164"/>
