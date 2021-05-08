@@ -186,6 +186,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             TextField_amount_credit.text = String(objects[tappedIndexPath.row].credit_amount)
             TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
         }
+        if let _ = self.navigationController {
+            // ナビゲーションを透明にする処理
+            self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController!.navigationBar.shadowImage = UIImage()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -1131,6 +1136,21 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         TextField_category_credit.text = objects[indexPath.row].credit_category
         TextField_amount_credit.text = String(objects[indexPath.row].credit_amount)
         TextField_SmallWritting.text = objects[indexPath.row].smallWritting
+        // ダークモード対応
+        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+            /* ダークモード時の処理 */
+            TextField_category_debit.textColor = .white
+            TextField_category_credit.textColor = .white
+            TextField_amount_debit.textColor = .white
+            TextField_amount_credit.textColor = .white
+        } else {
+            /* ライトモード時の処理 */
+            // 文字色
+            TextField_category_debit.textColor = UIColor.black
+            TextField_category_credit.textColor = UIColor.black
+            TextField_amount_debit.textColor = UIColor.black
+            TextField_amount_credit.textColor = UIColor.black
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {

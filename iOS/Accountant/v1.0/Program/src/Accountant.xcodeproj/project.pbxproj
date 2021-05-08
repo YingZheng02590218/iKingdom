@@ -78,6 +78,7 @@
 		F99112E124951F8700E28BB9 /* TableViewCellTotalOfBigCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E024951F8700E28BB9 /* TableViewCellTotalOfBigCategory.swift */; };
 		F99112E42495290000E28BB9 /* DataBaseManagerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E32495290000E28BB9 /* DataBaseManagerBS.swift */; };
 		F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */; };
+		F9941D6A26458259008B3970 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
 		F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */; };
 		F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
 		F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */; };
@@ -265,6 +266,7 @@
 		F99112E024951F8700E28BB9 /* TableViewCellTotalOfBigCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTotalOfBigCategory.swift; sourceTree = "<group>"; };
 		F99112E32495290000E28BB9 /* DataBaseManagerBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerBS.swift; sourceTree = "<group>"; };
 		F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseBalanceSheet.swift; sourceTree = "<group>"; };
+		F9941D6926458259008B3970 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpViewController.storyboard; sourceTree = "<group>"; };
 		F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsUpgradeTableViewController.storyboard; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 		F93A630624FAD67000C1C2C1 /* AccountingBooks */ = {
 			isa = PBXGroup;
 			children = (
+				F9941D6926458259008B3970 /* TabBarController.swift */,
 				F93A630524FAD63E00C1C2C1 /* AccountingBooksDB */,
 			);
 			path = AccountingBooks;
@@ -1408,6 +1411,7 @@
 				F92ABDEF25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
+				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
 				F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */,

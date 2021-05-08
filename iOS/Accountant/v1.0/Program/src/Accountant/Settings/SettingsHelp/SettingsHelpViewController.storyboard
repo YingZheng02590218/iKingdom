@@ -36,9 +36,9 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paz-Ef-xD1">
                                 <rect key="frame" x="-4" y="88" width="421" height="725"/>
-                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">1. 概要
+                                <mutableString key="text">1. 概要
     1. このアプリについて
     2. 当アプリで採用した会計概念
 
@@ -96,7 +96,12 @@
     4. 総勘定元帳を印刷しよう
     5. 仕訳帳を印刷しよう
 
-</string>
+
+
+
+
+
+</mutableString>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -109,11 +114,22 @@
                     <navigationItem key="navigationItem" title="使い方ガイド" id="dG6-wq-wCS"/>
                     <connections>
                         <outlet property="textView" destination="Paz-Ef-xD1" id="Mm4-nk-lXJ"/>
+                        <segue destination="uim-bX-imD" kind="show" identifier="toDetailScreen" id="OfI-Pf-r9n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewl-g6-bBI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8958" y="4240"/>
+        </scene>
+        <!--SettingsHelpDetailViewController-->
+        <scene sceneID="q0J-j2-Rpx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsHelpDetailViewController" id="uim-bX-imD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="iEu-Qr-dZi"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mc7-h9-ME1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9717" y="4071"/>
         </scene>
     </scenes>
     <resources>

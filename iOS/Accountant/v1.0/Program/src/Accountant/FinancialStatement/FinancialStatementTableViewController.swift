@@ -58,6 +58,9 @@ class FinancialStatementTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -187,8 +190,9 @@ class FinancialStatementTableViewController: UITableViewController {
         switch segue.identifier {
             // 損益勘定
         case "segue_PLAccount": //“セグウェイにつけた名称”:
-            // segue.destinationの型はUIViewController
-            let viewControllerGenearlLedgerAccount = segue.destination as! GenearlLedgerAccountViewController
+            // ③遷移先ViewCntrollerの取得
+            let navigationController = segue.destination as! UINavigationController
+            let viewControllerGenearlLedgerAccount = navigationController.topViewController as! GenearlLedgerAccountViewController
             // 遷移先のコントローラに値を渡す
             viewControllerGenearlLedgerAccount.account = "損益勘定" // セルに表示した勘定名を設定
             // 遷移先のコントローラー.条件用の属性 = “条件”

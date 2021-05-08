@@ -26,6 +26,14 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
         let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
         pickerView.selectRow(dataBaseManagerPeriod.getMainBooksAllCount() + 1, inComponent: 0, animated: true) //翌年の分
     }
+    
+    override func viewWillAppear(_ animated: Bool){
+        if let _ = self.navigationController {
+            // ナビゲーションを透明にする処理
+            self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController!.navigationBar.shadowImage = UIImage()
+        }
+    }
 
 //UIPickerView
     //UIPickerViewの列の数 コンポーネントの数

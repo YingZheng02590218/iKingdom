@@ -54,6 +54,9 @@ class SettingsTableViewController: UITableViewController {
 //            // GADBannerView を作成する
 //            addBannerViewToView(gADBannerView, constant:  self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1) // 一番したから3行分のスペースを空ける
 //        }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
 //    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

@@ -20,7 +20,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5R-zz-sdu">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" name="Secondary"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="qwU-IE-fQd">
                                     <size key="itemSize" width="414" height="100"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -52,7 +52,6 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" name="Secondary"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="feI-2L-Egh" secondAttribute="bottom" constant="10" id="4C4-sw-4Ze"/>
                                         <constraint firstItem="P8v-Vy-rqW" firstAttribute="width" secondItem="5G0-YR-Wrs" secondAttribute="width" id="4Ru-XF-eB9"/>
@@ -76,7 +75,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KN3-ez-inu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Secondary"/>
                         <constraints>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="width" secondItem="KN3-ez-inu" secondAttribute="width" id="A8p-sP-pfY"/>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="height" secondItem="KN3-ez-inu" secondAttribute="height" id="IEu-1L-zoK"/>
@@ -126,9 +125,6 @@
         </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

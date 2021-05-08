@@ -357,7 +357,6 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-lr-FfW" userLabel="Stack View1">
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <color key="backgroundColor" name="Foreground"/>
                                                         <color key="tintColor" systemColor="systemPinkColor"/>
                                                         <state key="normal" image="icons8-削除-25-2">
                                                             <attributedString key="attributedTitle"/>
@@ -372,7 +371,6 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <color key="backgroundColor" name="Foreground"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="29"/>
                                                         <state key="normal" title="入力">
                                                             <color key="titleColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -486,7 +484,6 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qiy-ix-sdg"/>
-                        <color key="backgroundColor" name="Secondary"/>
                         <constraints>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" id="44Z-PX-lTp"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="height" secondItem="qiy-ix-sdg" secondAttribute="height" id="4wc-Jw-atD"/>

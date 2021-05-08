@@ -85,6 +85,9 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
         TableView_WS.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
