@@ -25,6 +25,9 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     override func viewWillAppear(_ animated: Bool) {
         createList() // リストを作成
         listCollectionView.reloadData()
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
    
     // MARK: - Create View

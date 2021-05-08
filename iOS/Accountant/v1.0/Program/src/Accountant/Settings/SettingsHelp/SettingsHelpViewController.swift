@@ -25,6 +25,8 @@ class SettingsHelpViewController: UIViewController {
     
     @IBOutlet var textView: UITextView!
     
+    var urlString: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -128,6 +130,9 @@ class SettingsHelpViewController: UIViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: 30 * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -150,16 +155,11 @@ class SettingsHelpViewController: UIViewController {
                             constant: 0)
         ])
      }
-}
-
-extension UIViewController: UITextViewDelegate {
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        // Storyboardを呼び出し
-        let storyboard = UIStoryboard(name: "SettingsHelpDetailViewController", bundle: nil)
-        // Storyboard内のViewControllerをIDから呼び出し
-        let viewController = storyboard.instantiateViewController(withIdentifier: "TermOfUse") as! SettingsHelpDetailViewController
-
-        let urlString = URL.absoluteString
+    // 画面遷移の準備　勘定科目画面
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // ③遷移先ViewCntrollerの取得
+        let navigationController = segue.destination as! UINavigationController
+        let viewController = navigationController.topViewController as! SettingsHelpDetailViewController
         
         if urlString == "Link0" {
             print("このアプリについてのリンクがタップされました")
@@ -248,9 +248,17 @@ extension UIViewController: UITextViewDelegate {
             viewController.navigationItem.title = "入力した取引を確認しよう"
             viewController.textView_switch = 11
         }
-        // 画面遷移
-        present(viewController, animated: true, completion: nil)
+    }
+}
+
+extension SettingsHelpViewController: UITextViewDelegate {
+    
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         
+        self.urlString = URL.absoluteString
+        // 別の画面に遷移
+        performSegue(withIdentifier: "toDetailScreen", sender: nil)
+
         return false // 通常のURL遷移を行わない
     }
 }
