@@ -88,6 +88,7 @@
                     <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa"/>
                     <connections>
                         <outlet property="listCollectionView" destination="i5R-zz-sdu" id="5BI-kw-ieS"/>
+                        <segue destination="lgc-ER-CXx" kind="presentation" identifier="longTapped" id="c5P-u2-Wh3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHt-WQ-lKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,6 +120,9 @@
             <point key="canvasLocation" x="7980" y="3494"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="c5P-u2-Wh3"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="Secondary">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

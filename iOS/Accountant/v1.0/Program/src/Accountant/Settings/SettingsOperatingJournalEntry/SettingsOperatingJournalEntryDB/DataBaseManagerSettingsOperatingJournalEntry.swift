@@ -38,7 +38,7 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         let objects = realm.objects(DataBaseSettingsOperatingJournalEntry.self)
         return objects
     }
-    // 更新 仕訳
+    // 更新 仕訳テンプレート
     func updateJournalEntry(primaryKey: Int, nickname: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
         let realm = try! Realm()
         try! realm.write {
@@ -47,4 +47,15 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         }
         return primaryKey
     }
+    // 削除　仕訳テンプレート
+    func deleteJournalEntry(number: Int) -> Bool {
+        let realm = try! Realm()
+        let object = realm.object(ofType: DataBaseSettingsOperatingJournalEntry.self, forPrimaryKey: number)!
+        try! realm.write {
+            realm.delete(object)
+            print("object.isInvalidated: \(object.isInvalidated)")
+        }
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
+    }
+    
 }

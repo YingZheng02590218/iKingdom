@@ -384,26 +384,48 @@
                                                             <action selector="Button_Input:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="397-Hw-OfY"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-If-ZvT">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oY8-qm-N3q">
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SFS-tj-6Pp" userLabel="Button2" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                                <state key="normal" image="icons8-削除-25">
+                                                                    <attributedString key="attributedTitle"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="deleteButton:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="CAu-nq-14S"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="SFS-tj-6Pp" secondAttribute="trailing" id="S55-GX-BNb"/>
+                                                            <constraint firstItem="SFS-tj-6Pp" firstAttribute="top" secondItem="oY8-qm-N3q" secondAttribute="top" id="eeu-4T-Uv0"/>
+                                                            <constraint firstAttribute="bottom" secondItem="SFS-tj-6Pp" secondAttribute="bottom" id="fel-BK-foq"/>
+                                                            <constraint firstItem="SFS-tj-6Pp" firstAttribute="leading" secondItem="oY8-qm-N3q" secondAttribute="leading" id="rlp-4W-eUD"/>
+                                                        </constraints>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="kmr-j8-KMb" firstAttribute="leading" secondItem="Ef0-Vy-bhy" secondAttribute="trailing" id="1Ic-Se-5yd"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ef0-Vy-bhy" secondAttribute="bottom" id="1oI-nt-pb4"/>
+                                                    <constraint firstItem="oY8-qm-N3q" firstAttribute="leading" secondItem="kmr-j8-KMb" secondAttribute="trailing" id="6av-v5-bk8"/>
                                                     <constraint firstItem="kmr-j8-KMb" firstAttribute="top" secondItem="ON3-lr-FfW" secondAttribute="top" id="9BN-tp-PD9"/>
-                                                    <constraint firstItem="fAt-If-ZvT" firstAttribute="height" secondItem="ON3-lr-FfW" secondAttribute="height" id="9cA-l5-7fT"/>
                                                     <constraint firstItem="kmr-j8-KMb" firstAttribute="width" secondItem="ON3-lr-FfW" secondAttribute="width" multiplier="0.6" id="Emt-tz-PJq"/>
-                                                    <constraint firstItem="fAt-If-ZvT" firstAttribute="top" secondItem="ON3-lr-FfW" secondAttribute="top" id="FcT-Xz-HyE"/>
-                                                    <constraint firstItem="fAt-If-ZvT" firstAttribute="leading" secondItem="kmr-j8-KMb" secondAttribute="trailing" id="Uzx-qZ-l45"/>
+                                                    <constraint firstItem="oY8-qm-N3q" firstAttribute="top" secondItem="ON3-lr-FfW" secondAttribute="top" id="HXV-BN-BDS"/>
+                                                    <constraint firstAttribute="trailing" secondItem="oY8-qm-N3q" secondAttribute="trailing" id="Jj5-u3-Esj"/>
                                                     <constraint firstItem="kmr-j8-KMb" firstAttribute="height" secondItem="ON3-lr-FfW" secondAttribute="height" id="V7E-s1-Ntm"/>
                                                     <constraint firstItem="Ef0-Vy-bhy" firstAttribute="width" secondItem="ON3-lr-FfW" secondAttribute="width" multiplier="0.2" id="YlB-Xs-7ah"/>
                                                     <constraint firstItem="Ef0-Vy-bhy" firstAttribute="leading" secondItem="ON3-lr-FfW" secondAttribute="leading" id="cE2-DS-w8F"/>
-                                                    <constraint firstAttribute="bottom" secondItem="fAt-If-ZvT" secondAttribute="bottom" id="cQt-Gc-l0Y"/>
                                                     <constraint firstAttribute="bottom" secondItem="kmr-j8-KMb" secondAttribute="bottom" id="eWq-ho-YpN"/>
-                                                    <constraint firstItem="fAt-If-ZvT" firstAttribute="width" secondItem="ON3-lr-FfW" secondAttribute="width" multiplier="0.2" id="izt-34-yEf"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fAt-If-ZvT" secondAttribute="trailing" id="soA-HG-shx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="oY8-qm-N3q" secondAttribute="bottom" id="izY-81-zLg"/>
+                                                    <constraint firstItem="oY8-qm-N3q" firstAttribute="height" secondItem="ON3-lr-FfW" secondAttribute="height" id="kRx-TW-SBa"/>
                                                     <constraint firstItem="Ef0-Vy-bhy" firstAttribute="top" secondItem="ON3-lr-FfW" secondAttribute="top" id="wyb-De-q5s"/>
+                                                    <constraint firstItem="oY8-qm-N3q" firstAttribute="width" secondItem="ON3-lr-FfW" secondAttribute="width" multiplier="0.2" id="xOn-v4-8bA"/>
                                                     <constraint firstItem="Ef0-Vy-bhy" firstAttribute="height" secondItem="ON3-lr-FfW" secondAttribute="height" id="xZF-vM-Wh2"/>
                                                 </constraints>
                                             </stackView>
@@ -507,6 +529,7 @@
                         <outlet property="carouselCollectionView" destination="7RC-03-hT4" id="Zw8-9E-bXQ"/>
                         <outlet property="dateLabel" destination="HDc-0D-SC8" id="7RC-UH-FOf"/>
                         <outlet property="datePicker" destination="Kpa-dQ-eBA" id="Oa7-eh-kgx"/>
+                        <outlet property="deleteButton" destination="SFS-tj-6Pp" id="ay5-SJ-tAl"/>
                         <outlet property="inputButton" destination="kmr-j8-KMb" id="Cl5-WC-WJy"/>
                         <outlet property="label_title" destination="SZD-WS-Sy8" id="6rF-vt-NWa"/>
                         <outlet property="nicknameTextField" destination="nb0-VP-n15" id="4hs-E6-sNe"/>
@@ -569,6 +592,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-削除-25" width="25" height="25"/>
         <image name="icons8-削除-25-2" width="25" height="25"/>
         <image name="icons8-戻る-50" width="50" height="50"/>
         <image name="icons8-進む-50" width="50" height="50"/>
