@@ -284,32 +284,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             present(alert, animated: true, completion: nil)
             addAccount = false // 新規追加後にフラグを倒す
         }else { // 既存の設定勘定科目を選択された場合
-            let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、スプリットコントローラを取得する
-    //        let navigationController1 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-    //        let navigationController2 = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-    //            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! SettingsCategoryTableViewController // ナビゲーションコントローラから、勘定科目コントローラを取得する
-    //            let tableViewControllerCategoryList = navigationController.viewControllers[1] as! CategoryListTableViewController // ナビゲーションコントローラから、勘定科目一覧コントローラを取得する
-            // iPadとiPhoneで動きが変わるので分岐する
-            
-            var navigationController: UINavigationController
-    //        if UIDevice.current.userInterfaceIdiom == .pad { // iPad
-                let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-    //            let tableViewControllerSettings = navigationController0.viewControllers[0]  as! SettingsTableViewController
-                if navigationController0.viewControllers.count > 1 {
-                    // 画面　画面分割表示して幅を1/4に狭めると配列要素[1]にナビゲーションコントローラがある　（横向き）
-                    navigationController = navigationController0.viewControllers[1]  as! UINavigationController
-                }else {
-                    // 画面　画面分割表示して幅を1/2に狭めると配列要素[0]にナビゲーションコントローラがある　（横向き）
-                    navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-                }
-    //            let tableViewControllerSettingsCategory = navigationController.viewControllers[0] as! SettingsCategoryTableViewController
-    //            let tableViewControllerCategoryList1 = navigationController.viewControllers[1] as! CategoryListTableViewController
-    //            let tableViewControllerSettingsCategoryDetail = navigationController.viewControllers[2] as! SettingsCategoryDetailTableViewController
-    //        }else { // iPhone
-    //            navigationController = splitViewController.viewControllers[1]  as! UINavigationController // スプリットコントローラから、ナビゲーションコントローラを取得する
-    //        }
-            let presentingViewController = navigationController.viewControllers[2] as! SettingsCategoryDetailTableViewController // ナビゲーションコントローラから、勘定科目詳細コントローラーを取得
+            let presentingViewController = self.presentingViewController as! SettingsCategoryDetailTableViewController // 勘定科目詳細コントローラーを取得
         let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
