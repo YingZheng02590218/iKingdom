@@ -57,13 +57,23 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         } else {
             inAppPurchaseFlag = false
         }
-        
+        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
+//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        // IDFA対応
+        askIDFA()
+    }
+    // ビューが表示される直前に呼ばれる
+    override func viewWillAppear(_ animated: Bool){
+        // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
         createCarousel() // カルーセルを作成
         createTextFieldForCategory()
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
         createTextFieldForNickname()
-        
+        // 削除ボタン
+        deleteButton.isHidden = true
         // 仕訳タイプ判定
         if journalEntryType == "JournalEntries" {
             label_title.text = "仕　訳"
@@ -73,6 +83,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }else if journalEntryType == "SettingsJournalEntriesFixing" {
             label_title.text = "仕訳テンプレート"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+            deleteButton.isHidden = false
             // データベース　仕訳テンプレートを追加
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
             let objects = dataBaseManager.getJournalEntry()
@@ -148,15 +159,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             /* ライトモード時の処理 */
             label_title.textColor = UIColor.black
         }
-        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
-//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
-        // IDFA対応
-        askIDFA()
-    }
-    // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
+        
         // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         createDatePicker()
         // アップグレード機能　スタンダードプラン
@@ -939,10 +942,19 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                                 credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                                 smallWritting: TextField_SmallWritting.text!
                             )
+                            let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+                            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+                            let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+                            print(navigationController.viewControllers[0])
+                            print(navigationController.viewControllers[1])
+                            let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+                            let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             // 画面を閉じる
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in
-                                presentingViewController?.viewWillAppear(true)
+                                presentingViewController.viewReload = true
+                                presentingViewController.viewWillAppear(true)
                             })
                         }else if journalEntryType == "SettingsJournalEntriesFixing" {
                             // データベース　仕訳テンプレートを更新
@@ -956,10 +968,19 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                                 credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                                 smallWritting: TextField_SmallWritting.text!
                             )
+                            let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+                            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+                            let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+                            print(navigationController.viewControllers[0])
+                            print(navigationController.viewControllers[1])
+                            let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+                            let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                             // 画面を閉じる
                             self.dismiss(animated: true, completion: {
                                     [presentingViewController] () -> Void in
-                                presentingViewController?.viewWillAppear(true)
+                                presentingViewController.viewReload = true
+                                presentingViewController.viewWillAppear(true)
                             })
                         }else if journalEntryType == "JournalEntriesFixing" {
                             //
@@ -1087,6 +1108,42 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         // 終了させる　仕訳帳画面へ戻る
         self.dismiss(animated: true, completion: nil)
     }
+    // 削除ボタン
+    @IBOutlet var deleteButton: UIButton!
+    @IBAction func deleteButton(_ sender: Any) {
+        // 確認のポップアップを表示したい
+        self.showPopover()
+    }
+    // 削除機能 アラートのポップアップを表示
+    private func showPopover() {
+        let alert = UIAlertController(title: "削除", message: "仕訳テンプレートを削除しますか？", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self]
+            (action: UIAlertAction!) in
+            print("OK アクションをタップした時の処理")
+            // データベース　仕訳テンプレートを削除
+            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+            if dataBaseManager.deleteJournalEntry(number: primaryKey) {
+                let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+                let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+                let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+                print(navigationController.viewControllers[0])
+                print(navigationController.viewControllers[1])
+                let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+                let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: {
+                        [presentingViewController] () -> Void in
+                    presentingViewController.viewReload = true
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 // プロトコル定義
 extension JournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -1103,7 +1160,9 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         // データベース　仕訳テンプレートを追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
-        cell.nicknameLabel.text = objects[indexPath.row].nickname
+        if "" != objects[indexPath.row].nickname {
+            cell.nicknameLabel.text = objects[indexPath.row].nickname
+        }
         return cell
     }
 //    //セル間の間隔を指定

@@ -22,9 +22,16 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         listCollectionView.addGestureRecognizer(longPressRecognizer)
 
     }
+    var viewReload = false
     override func viewWillAppear(_ animated: Bool) {
-        createList() // リストを作成
-        listCollectionView.reloadData()
+        self.createList() // リストを作成
+        // 仕訳テンプレートを追加や削除して、仕訳テンプレート画面に戻ってきてもリロードされない。reloadData()は、仕訳テンプレート画面に戻ってきた時のみ実行するように修正
+        if viewReload {
+            DispatchQueue.main.async {
+                self.listCollectionView.reloadData()
+                self.viewReload = false
+            }
+        }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
@@ -48,21 +55,16 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         if indexPath?.section == 1 {
             print("空白行を長押し")
         }else {
-            if indexPath == nil {
-                
-            } else if recognizer.state == UIGestureRecognizer.State.began  {
+            guard let _ = indexPath else {
+                return
+            }
+            if recognizer.state == UIGestureRecognizer.State.began  {
                 // 長押しされた場合の処理
                 print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
                 // ロングタップされたセルの位置をフィールドで保持する
                 self.tappedIndexPath = indexPath
                 // 別の画面に遷移 仕訳画面
-                let controller = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "JournalEntryViewController") as! JournalEntryViewController
-                if tappedIndexPath != nil { // nil:ロングタップではない
-                    controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
-                    controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
-                }
-                self.present(controller, animated: true, completion: nil)
+                performSegue(withIdentifier: "longTapped", sender: nil)
             }
         }
     }
@@ -88,6 +90,12 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         // 遷移先のコントローラに値を渡す
         if segue.identifier == "buttonTapped" {
             controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
+        }else if segue.identifier == "longTapped" {
+            if tappedIndexPath != nil { // nil:ロングタップではない
+                controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+            }
         }
     }
     
