@@ -95,10 +95,10 @@
             </objects>
             <point key="canvasLocation" x="7979.7101449275369" y="4229.4642857142853"/>
         </scene>
-        <!--JournalEntryViewController-->
+        <!--JournalEntryTemplateViewController-->
         <scene sceneID="AGN-7B-KVm">
             <objects>
-                <viewControllerPlaceholder storyboardName="JournalEntryViewController" id="lgc-ER-CXx" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="JournalEntryTemplateViewController" id="lgc-ER-CXx" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G1P-gZ-awP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8564" y="4012"/>
