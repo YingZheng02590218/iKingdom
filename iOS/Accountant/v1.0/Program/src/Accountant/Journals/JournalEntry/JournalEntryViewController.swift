@@ -76,12 +76,27 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             label_title.text = "仕　訳"
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
             createCarousel() // カルーセルを作成
+            if JournalEntryViewController.viewReload {
+                DispatchQueue.main.async {
+                    self.carouselCollectionView.reloadData()
+                    JournalEntryViewController.viewReload = false
+                }
+            }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         }else if journalEntryType == "AdjustingAndClosingEntries" {
             label_title.text = "決算整理仕訳"
+            createCarousel() // カルーセルを作成
+            if JournalEntryViewController.viewReload {
+                DispatchQueue.main.async {
+                    self.carouselCollectionView.reloadData()
+                    JournalEntryViewController.viewReload = false
+                }
+            }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         }else if journalEntryType == "JournalEntriesFixing" {
             label_title.text = "仕訳編集"
+            createCarousel() // カルーセルを作成
+            carouselCollectionView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 仕訳データを取得
             let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
@@ -145,6 +160,12 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             label_title.text = "仕　訳"
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
             createCarousel() // カルーセルを作成
+            if JournalEntryViewController.viewReload {
+                DispatchQueue.main.async {
+                    self.carouselCollectionView.reloadData()
+                    JournalEntryViewController.viewReload = false
+                }
+            }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         }
         // ダークモード対応
@@ -168,12 +189,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
             let request = GADRequest()
             interstitial.load(request)
-        }
-        if JournalEntryViewController.viewReload {
-            DispatchQueue.main.async {
-                self.carouselCollectionView.reloadData()
-                JournalEntryViewController.viewReload = false
-            }
         }
         if let _ = self.navigationController {
             // ナビゲーションを透明にする処理
