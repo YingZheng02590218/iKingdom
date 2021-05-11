@@ -22,7 +22,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         listCollectionView.addGestureRecognizer(longPressRecognizer)
 
     }
-    var viewReload = false
+    var viewReload = false // リロードするかどうか
     override func viewWillAppear(_ animated: Bool) {
         self.createList() // リストを作成
         // 仕訳テンプレートを追加や削除して、仕訳テンプレート画面に戻ってきてもリロードされない。reloadData()は、仕訳テンプレート画面に戻ってきた時のみ実行するように修正
@@ -30,6 +30,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
             DispatchQueue.main.async {
                 self.listCollectionView.reloadData()
                 self.viewReload = false
+                JournalEntryViewController.viewReload = true
             }
         }
         // ナビゲーションを透明にする処理
