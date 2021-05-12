@@ -27,6 +27,12 @@ class SettingsUpgradeTableViewController: UITableViewController {
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+    }
 
     // MARK: - Table view data source
 

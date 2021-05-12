@@ -107,6 +107,11 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         navigationController?.navigationBar.isTranslucent = false
         // ナビゲーションバーの下からテーブルビューを配置する
         TableView_account.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if let _ = self.navigationController {
+            // ナビゲーションを透明にする処理
+            self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController!.navigationBar.shadowImage = UIImage()
+        }
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

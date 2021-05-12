@@ -96,6 +96,9 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: TableView_TB!.rowHeight * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

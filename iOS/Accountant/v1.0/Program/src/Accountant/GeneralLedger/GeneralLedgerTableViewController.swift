@@ -61,6 +61,9 @@ class GeneralLedgerTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -194,8 +197,9 @@ class GeneralLedgerTableViewController: UITableViewController {
         let indexPath: IndexPath = self.TableView_generalLedger.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
-        // segue.destinationの型はUIViewController
-        let viewControllerGenearlLedgerAccount = segue.destination as! GenearlLedgerAccountViewController
+        // ③遷移先ViewCntrollerの取得
+        let navigationController = segue.destination as! UINavigationController
+        let viewControllerGenearlLedgerAccount = navigationController.topViewController as! GenearlLedgerAccountViewController
         // 遷移先のコントローラに値を渡す
         viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
         // セルの選択を解除

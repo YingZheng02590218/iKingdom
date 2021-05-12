@@ -55,6 +55,9 @@ class SettingsOperatingTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
