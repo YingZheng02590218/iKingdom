@@ -29,11 +29,12 @@
                         <segue destination="3kE-mn-yeq" kind="showDetail" identifier="SettingsOperatingTableViewController" id="Xb8-Xy-taS"/>
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="v6X-fB-3aL"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="3dq-0w-3Ni"/>
+                        <segue destination="ez5-Hg-R91" kind="showDetail" identifier="SettingsOperatingJournalEntryViewController" id="h0J-BW-b9e"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbi-Wz-XeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5381" y="2779"/>
+            <point key="canvasLocation" x="5743" y="2769"/>
         </scene>
         <!--SettingsUpgradeTableViewController-->
         <scene sceneID="NCX-IR-4NC">
@@ -49,7 +50,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsHelpViewController" id="hjp-Wc-Ax9" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EU-fS-0VG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6449" y="2711"/>
+            <point key="canvasLocation" x="6449" y="2742"/>
         </scene>
         <!--SettingsInformationTableViewController-->
         <scene sceneID="xeG-aV-jzo">
@@ -97,12 +98,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMz-qP-n3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5895" y="2049"/>
+            <point key="canvasLocation" x="5743" y="2049"/>
+        </scene>
+        <!--SettingsOperatingJournalEntryViewController-->
+        <scene sceneID="yZZ-z4-wEJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsOperatingJournalEntryViewController" id="ez5-Hg-R91" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hpk-sM-J9M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6530" y="2713"/>
         </scene>
     </scenes>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.94999997615814213" green="0.94999997615814213" blue="0.94999997615814213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
