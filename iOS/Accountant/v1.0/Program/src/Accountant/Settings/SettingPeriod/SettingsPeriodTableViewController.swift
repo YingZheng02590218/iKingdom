@@ -79,6 +79,9 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             let request = GADRequest()
             interstitial.load(request)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {
@@ -135,15 +138,16 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
         if segue.identifier == "identifier_theDayOfReckoning"{ // 決算日設定
-            // segue.destinationの型はUIViewController
-            let tableViewControllerSettingsTheDayOfReckoning = segue.destination as! SettingsTheDayOfReckoningTableViewController
+            // ③遷移先ViewCntrollerの取得
+            let navigationController = segue.destination as! UINavigationController
+            let viewController = navigationController.topViewController as! SettingsTheDayOfReckoningTableViewController
             // 選択されたセルを取得
             let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
             // 遷移先のコントローラに値を渡す
             if indexPath.row == 0 {
-                tableViewControllerSettingsTheDayOfReckoning.month = true // 決算日　月
+                viewController.month = true // 決算日　月
             }else if indexPath.row == 1 {
-                tableViewControllerSettingsTheDayOfReckoning.month = false // 決算日　日
+                viewController.month = false // 決算日　日
             }
         }else{
             // セグエのポップオーバー接続先を取得

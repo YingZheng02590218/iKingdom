@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xL2-fB-zxg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3bt-r9-Wbk">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,7 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Settings Period Year View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="BXy-rW-eIN">
+            <objects>
+                <navigationController id="3bt-r9-Wbk" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mmb-3A-Xxi">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="xL2-fB-zxg" kind="relationship" relationship="rootViewController" id="fqj-Sz-aD1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KlC-ia-j5s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6549" y="4797"/>
+        </scene>
+        <!--会計帳簿追加-->
         <scene sceneID="Yvi-iK-aK3">
             <objects>
                 <viewController id="xL2-fB-zxg" customClass="SettingsPeriodYearViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,23 +33,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="280" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flM-mC-4KZ">
-                                <rect key="frame" x="0.0" y="44" width="280" height="44"/>
-                                <items>
-                                    <navigationItem title="会計帳簿追加" id="1P3-ih-DBX">
-                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="YXf-YX-Src">
-                                            <connections>
-                                                <action selector="cancel:" destination="xL2-fB-zxg" id="Yr1-3u-0hd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="ufU-dE-9Vi">
-                                            <connections>
-                                                <action selector="save:" destination="xL2-fB-zxg" id="tZG-pB-spm"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPc-dy-tx4">
                                 <rect key="frame" x="0.0" y="88" width="280" height="279"/>
                             </pickerView>
@@ -43,14 +42,22 @@
                         <constraints>
                             <constraint firstItem="EPc-dy-tx4" firstAttribute="bottom" secondItem="EiD-9U-YW2" secondAttribute="bottom" id="2Vp-wY-qKt"/>
                             <constraint firstItem="EiD-9U-YW2" firstAttribute="trailing" secondItem="EPc-dy-tx4" secondAttribute="trailing" id="FC0-Ry-yfx"/>
-                            <constraint firstItem="EPc-dy-tx4" firstAttribute="top" secondItem="flM-mC-4KZ" secondAttribute="bottom" id="IqB-Q5-qgP"/>
-                            <constraint firstItem="flM-mC-4KZ" firstAttribute="leading" secondItem="EiD-9U-YW2" secondAttribute="leading" id="LEV-zC-bPh"/>
                             <constraint firstItem="EPc-dy-tx4" firstAttribute="leading" secondItem="EiD-9U-YW2" secondAttribute="leading" id="MOt-ye-rdD"/>
-                            <constraint firstItem="EiD-9U-YW2" firstAttribute="trailing" secondItem="flM-mC-4KZ" secondAttribute="trailing" id="RKV-Bt-uh1"/>
-                            <constraint firstItem="flM-mC-4KZ" firstAttribute="bottom" secondItem="EPc-dy-tx4" secondAttribute="top" id="ZzY-iY-1eL"/>
-                            <constraint firstItem="flM-mC-4KZ" firstAttribute="top" secondItem="EiD-9U-YW2" secondAttribute="top" id="mfg-Y5-Cof"/>
+                            <constraint firstItem="EPc-dy-tx4" firstAttribute="top" secondItem="EiD-9U-YW2" secondAttribute="top" id="XVE-Vm-G78"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="会計帳簿追加" id="1P3-ih-DBX">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="YXf-YX-Src">
+                            <connections>
+                                <action selector="cancel:" destination="xL2-fB-zxg" id="Yr1-3u-0hd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="ufU-dE-9Vi">
+                            <connections>
+                                <action selector="save:" destination="xL2-fB-zxg" id="tZG-pB-spm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="280" height="367"/>
                     <connections>

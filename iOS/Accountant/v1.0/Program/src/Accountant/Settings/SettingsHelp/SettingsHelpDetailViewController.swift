@@ -84,6 +84,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_aboutThisApp.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_aboutThisApp.setContentOffset(
+                CGPoint(x: 0, y: -textView_aboutThisApp.contentInset.top),
+                animated: false)
             break
         case 1:
             textView_thought.isHidden = false
@@ -126,6 +130,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_thought.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_thought.setContentOffset(
+                CGPoint(x: 0, y: -textView_thought.contentInset.top),
+                animated: false)
             break
         case 2:
             textView_basicOfBookkeeping.isHidden = false
@@ -164,6 +172,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_basicOfBookkeeping.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_basicOfBookkeeping.setContentOffset(
+                CGPoint(x: 0, y: -textView_basicOfBookkeeping.contentInset.top),
+                animated: false)
             break
         case 3: // 初期設定の手順
             textView_setUp.isHidden = false
@@ -193,6 +205,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_setUp.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_setUp.setContentOffset(
+                CGPoint(x: 0, y: -textView_setUp.contentInset.top),
+                animated: false)
             break
         case 4: // 基本情報の登録をしよう
             textView_setUp_basicInfo.isHidden = false
@@ -291,6 +307,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_setUp_basicInfo.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_setUp_basicInfo.setContentOffset(
+                CGPoint(x: 0, y: -textView_setUp_basicInfo.contentInset.top),
+                animated: false)
             break
         case 5: // 勘定科目を設定しよう
             textView_setUp_account.isHidden = false
@@ -434,6 +454,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_setUp_account.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_setUp_account.setContentOffset(
+                CGPoint(x: 0, y: -textView_setUp_account.contentInset.top),
+                animated: false)
             break
         case 6: // 勘定科目の編集しよう
             textView_setUp_accountEdit.isHidden = false
@@ -581,6 +605,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_setUp_accountEdit.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_setUp_accountEdit.setContentOffset(
+                CGPoint(x: 0, y: -textView_setUp_accountEdit.contentInset.top),
+                animated: false)
             break
         case 7: // 環境設定を確認・変更しよう
             textView_configuration.isHidden = false
@@ -625,6 +653,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_configuration.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_configuration.setContentOffset(
+                CGPoint(x: 0, y: -textView_configuration.contentInset.top),
+                animated: false)
             break
         case 8: // 仕訳を入力する
             textView_journalEntry.isHidden = false
@@ -660,6 +692,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_journalEntry.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_journalEntry.setContentOffset(
+                CGPoint(x: 0, y: -textView_journalEntry.contentInset.top),
+                animated: false)
             break
         case 9: // 仕訳を修正する
             textView_journalEntry_edit.isHidden = false
@@ -704,6 +740,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_journalEntry_edit.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_journalEntry_edit.setContentOffset(
+                CGPoint(x: 0, y: -textView_journalEntry_edit.contentInset.top),
+                animated: false)
             break
         case 10: // 仕訳を削除する
             textView_journalEntry_delete.isHidden = false
@@ -757,6 +797,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_journalEntry_delete.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_journalEntry_delete.setContentOffset(
+                CGPoint(x: 0, y: -textView_journalEntry_delete.contentInset.top),
+                animated: false)
             break
         case 11: // 入力した取引を確認しよう
             textView_journals.isHidden = false
@@ -810,6 +854,10 @@ class SettingsHelpDetailViewController: UIViewController {
                 /* ライトモード時の処理 */
                 textView_journals.textColor = .black
             }
+            self.view.layoutIfNeeded()    // 追加
+            textView_journals.setContentOffset(
+                CGPoint(x: 0, y: -textView_journals.contentInset.top),
+                animated: false)
             break
         default:
             break
@@ -835,6 +883,9 @@ class SettingsHelpDetailViewController: UIViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: 50 * -1)
         }
+        // ナビゲーションを透明にする処理
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
