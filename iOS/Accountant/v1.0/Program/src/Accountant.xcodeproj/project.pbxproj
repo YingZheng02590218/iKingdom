@@ -51,8 +51,6 @@
 		F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9A237AEB3A0074D812 /* Main.storyboard */; };
 		F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9D237AEB3B0074D812 /* Assets.xcassets */; };
 		F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
-		F94EDDAC237AEB3C0074D812 /* AccountantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDAB237AEB3C0074D812 /* AccountantTests.swift */; };
-		F94EDDB7237AEB3C0074D812 /* AccountantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */; };
 		F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */; };
 		F955B60A2490E31E005E2C6D /* PLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6092490E31E005E2C6D /* PLTableViewController.swift */; };
 		F955B60C2490FB77005E2C6D /* BSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B60B2490FB77005E2C6D /* BSTableViewController.swift */; };
@@ -227,7 +225,7 @@
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F94E79EA259DF8C7004726F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		F94EDD8F237AEB3A0074D812 /* Accounting book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Accounting book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F94EDD8F237AEB3A0074D812 /* Accountant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDD92237AEB3A0074D812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		F94EDD96237AEB3A0074D812 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -236,12 +234,6 @@
 		F94EDD9D237AEB3B0074D812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F94EDDA0237AEB3B0074D812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F94EDDA2237AEB3B0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F94EDDA7237AEB3B0074D812 /* AccountantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F94EDDAB237AEB3C0074D812 /* AccountantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountantTests.swift; sourceTree = "<group>"; };
-		F94EDDAD237AEB3C0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountantUITests.swift; sourceTree = "<group>"; };
-		F94EDDB8237AEB3C0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6092490E31E005E2C6D /* PLTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLTableViewController.swift; sourceTree = "<group>"; };
 		F955B60B2490FB77005E2C6D /* BSTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +241,8 @@
 		F95D44FF25ADE5F00044493A /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F95D450325AECAE80044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F95D450425AECAE90044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		F969EFDB264EA6610052D3AF /* AccountantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F969EFDC264EA6610052D3AF /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
 		F9711328249D12A1006258F7 /* TableViewCellTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTB.swift; sourceTree = "<group>"; };
@@ -559,8 +553,6 @@
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
-				F94EDDAA237AEB3B0074D812 /* AccountantTests */,
-				F94EDDB5237AEB3C0074D812 /* AccountantUITests */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
 				F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */,
@@ -571,9 +563,9 @@
 		F94EDD90237AEB3A0074D812 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F94EDD8F237AEB3A0074D812 /* Accounting book.app */,
-				F94EDDA7237AEB3B0074D812 /* AccountantTests.xctest */,
-				F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */,
+				F94EDD8F237AEB3A0074D812 /* Accountant.app */,
+				F969EFDB264EA6610052D3AF /* AccountantTests.xctest */,
+				F969EFDC264EA6610052D3AF /* AccountantUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -604,24 +596,6 @@
 				F9E620FA256527E000C2C3B3 /* Gecco */,
 			);
 			path = Accountant;
-			sourceTree = "<group>";
-		};
-		F94EDDAA237AEB3B0074D812 /* AccountantTests */ = {
-			isa = PBXGroup;
-			children = (
-				F94EDDAB237AEB3C0074D812 /* AccountantTests.swift */,
-				F94EDDAD237AEB3C0074D812 /* Info.plist */,
-			);
-			path = AccountantTests;
-			sourceTree = "<group>";
-		};
-		F94EDDB5237AEB3C0074D812 /* AccountantUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F94EDDB6237AEB3C0074D812 /* AccountantUITests.swift */,
-				F94EDDB8237AEB3C0074D812 /* Info.plist */,
-			);
-			path = AccountantUITests;
 			sourceTree = "<group>";
 		};
 		F955B605248FE5F2005E2C6D /* FinancialStatement */ = {
@@ -1093,7 +1067,7 @@
 			);
 			name = Accountant;
 			productName = Accountant;
-			productReference = F94EDD8F237AEB3A0074D812 /* Accounting book.app */;
+			productReference = F94EDD8F237AEB3A0074D812 /* Accountant.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F94EDDA6237AEB3B0074D812 /* AccountantTests */ = {
@@ -1112,7 +1086,7 @@
 			);
 			name = AccountantTests;
 			productName = AccountantTests;
-			productReference = F94EDDA7237AEB3B0074D812 /* AccountantTests.xctest */;
+			productReference = F969EFDB264EA6610052D3AF /* AccountantTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F94EDDB1237AEB3C0074D812 /* AccountantUITests */ = {
@@ -1132,7 +1106,7 @@
 			);
 			name = AccountantUITests;
 			productName = AccountantUITests;
-			productReference = F94EDDB2237AEB3C0074D812 /* AccountantUITests.xctest */;
+			productReference = F969EFDC264EA6610052D3AF /* AccountantUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1486,7 +1460,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F94EDDAC237AEB3C0074D812 /* AccountantTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1494,7 +1467,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F94EDDB7237AEB3C0074D812 /* AccountantUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1680,7 +1652,7 @@
 				);
 				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
-				PRODUCT_NAME = "Accounting book";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1703,7 +1675,7 @@
 				);
 				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
-				PRODUCT_NAME = "Accounting book";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
