@@ -107,62 +107,75 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         formatter.locale = Locale.current
         formatter.timeZone = TimeZone.current // UTC時刻を補正
         formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
-        // 入力チェック
-        if textInputCheck() {
-            // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-            var number = 0
-            if journalEntryType == "SettingsJournalEntries" {
-                // データベース　仕訳テンプレートを追加
-                let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-                number = dataBaseManager.addJournalEntry(
-                    nickname: nicknameTextField.text!,
-                    debit_category: TextField_category_debit.text!,
-                    debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-                    credit_category: TextField_category_credit.text!,
-                    credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
-                    smallWritting: TextField_SmallWritting.text!
-                )
-                let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
-                let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
-                let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
-                print(navigationController.viewControllers[0])
-                print(navigationController.viewControllers[1])
-                let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
-                let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: {
-                    [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
-                    presentingViewController.viewWillAppear(true)
-                })
-            }else if journalEntryType == "SettingsJournalEntriesFixing" {
-                // データベース　仕訳テンプレートを更新
-                let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-                number = dataBaseManager.updateJournalEntry(
-                    primaryKey: primaryKey,
-                    nickname: nicknameTextField.text!,
-                    debit_category: TextField_category_debit.text!,
-                    debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-                    credit_category: TextField_category_credit.text!,
-                    credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
-                    smallWritting: TextField_SmallWritting.text!
-                )
-                let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
-                let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
-                let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
-                print(navigationController.viewControllers[0])
-                print(navigationController.viewControllers[1])
-                let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
-                let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: {
-                    [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
-                    presentingViewController.viewWillAppear(true)
-                })
+        // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
+        var number = 0
+        if journalEntryType == "SettingsJournalEntries" {
+            var textField_amount_debit = ""
+            if let _ = TextField_amount_debit.text {
+                textField_amount_debit = removeComma(string: TextField_amount_debit.text!)
             }
+            var textField_amount_credit = ""
+            if let _ = TextField_amount_credit.text {
+                textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
+            }
+            // データベース　仕訳テンプレートを追加
+            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+            number = dataBaseManager.addJournalEntry(
+                nickname: nicknameTextField.text!,
+                debit_category: TextField_category_debit.text!,
+                debit_amount: Int64(textField_amount_debit) ?? 0, //カンマを削除してからデータベースに書き込む
+                credit_category: TextField_category_credit.text!,
+                credit_amount: Int64(textField_amount_credit) ?? 0,//カンマを削除してからデータベースに書き込む
+                smallWritting: TextField_SmallWritting.text!
+            )
+            let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+            let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+            print(navigationController.viewControllers[0])
+            print(navigationController.viewControllers[1])
+            let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+            let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            // 画面を閉じる
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                presentingViewController.viewReload = true
+                presentingViewController.viewWillAppear(true)
+            })
+        }else if journalEntryType == "SettingsJournalEntriesFixing" {
+            var textField_amount_debit = ""
+            if let _ = TextField_amount_debit.text {
+                textField_amount_debit = removeComma(string: TextField_amount_debit.text!)
+            }
+            var textField_amount_credit = ""
+            if let _ = TextField_amount_credit.text {
+                textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
+            }
+            // データベース　仕訳テンプレートを更新
+            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
+            number = dataBaseManager.updateJournalEntry(
+                primaryKey: primaryKey,
+                nickname: nicknameTextField.text!,
+                debit_category: TextField_category_debit.text!,
+                debit_amount: Int64(textField_amount_debit) ?? 0, //カンマを削除してからデータベースに書き込む
+                credit_category: TextField_category_credit.text!,
+                credit_amount: Int64(textField_amount_credit) ?? 0,//カンマを削除してからデータベースに書き込む
+                smallWritting: TextField_SmallWritting.text!
+            )
+            let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+            let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+            print(navigationController.viewControllers[0])
+            print(navigationController.viewControllers[1])
+            let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+            let presentingViewController = navigationController2.viewControllers[0] as! SettingsOperatingJournalEntryViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            // 画面を閉じる
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                presentingViewController.viewReload = true
+                presentingViewController.viewWillAppear(true)
+            })
         }
     }
     // 削除ボタン
