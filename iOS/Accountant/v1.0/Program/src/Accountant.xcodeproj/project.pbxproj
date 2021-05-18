@@ -55,6 +55,12 @@
 		F955B60A2490E31E005E2C6D /* PLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6092490E31E005E2C6D /* PLTableViewController.swift */; };
 		F955B60C2490FB77005E2C6D /* BSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B60B2490FB77005E2C6D /* BSTableViewController.swift */; };
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
+		F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59812650273200EFE522 /* CarouselAndPageViewController.swift */; };
+		F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A0265027A000EFE522 /* CarouselAndPageViewController.storyboard */; };
+		F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */; };
+		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
+		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
+		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */; };
@@ -243,6 +249,12 @@
 		F95D44FF25ADE5F00044493A /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F95D450325AECAE80044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F95D450425AECAE90044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		F95F59812650273200EFE522 /* CarouselAndPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselAndPageViewController.swift; sourceTree = "<group>"; };
+		F95F59A0265027A000EFE522 /* CarouselAndPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CarouselAndPageViewController.storyboard; sourceTree = "<group>"; };
+		F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTabCollectionViewCell.swift; sourceTree = "<group>"; };
+		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
+		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
+		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
 		F969EFDB264EA6610052D3AF /* AccountantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F969EFDC264EA6610052D3AF /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
@@ -587,7 +599,7 @@
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */,
-				F9A3A6462631AB2C006E0FA0 /* Cell */,
+				F95F597F2650266300EFE522 /* UIParts */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
 				F93A630624FAD67000C1C2C1 /* AccountingBooks */,
@@ -673,6 +685,28 @@
 				F9354DB92498DD81007DB098 /* WSDB */,
 			);
 			path = WS;
+			sourceTree = "<group>";
+		};
+		F95F597F2650266300EFE522 /* UIParts */ = {
+			isa = PBXGroup;
+			children = (
+				F95F5980265026B100EFE522 /* ViewController */,
+				F9A3A6462631AB2C006E0FA0 /* Cell */,
+			);
+			path = UIParts;
+			sourceTree = "<group>";
+		};
+		F95F5980265026B100EFE522 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F95F59812650273200EFE522 /* CarouselAndPageViewController.swift */,
+				F95F59A0265027A000EFE522 /* CarouselAndPageViewController.storyboard */,
+				F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */,
+				F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */,
+				F95F59AC26503E0600EFE522 /* PageContentViewController.swift */,
+				F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		F96B62232595ED75000FC05F /* SettingsHelp */ = {
@@ -1172,6 +1206,7 @@
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
+				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F99BAEAA261C930E0038FBB2 /* JournalsTableViewController.storyboard in Resources */,
@@ -1197,7 +1232,9 @@
 				F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
 				F99BE7B4261DD84E004611E4 /* SettingsInformationTableViewController.storyboard in Resources */,
+				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
+				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
@@ -1383,8 +1420,10 @@
 				F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */,
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
+				F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */,
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
+				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F99112E124951F8700E28BB9 /* TableViewCellTotalOfBigCategory.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
@@ -1461,6 +1500,7 @@
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
+				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
