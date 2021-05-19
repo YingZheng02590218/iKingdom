@@ -112,6 +112,8 @@
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
+		F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */; };
+		F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */; };
 		F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */; };
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
 		F9AAB36224941F1A00AB2FBD /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */; };
@@ -307,6 +309,8 @@
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithIconTableViewCell.swift; sourceTree = "<group>"; };
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
+		F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCarouselAndPageViewController.swift; sourceTree = "<group>"; };
+		F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListCarouselAndPageViewController.storyboard; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTheDayOfReckoningTableViewController.swift; path = SettingsTheDayOfReckoning/SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
 		F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -767,6 +771,8 @@
 		F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */ = {
 			isa = PBXGroup;
 			children = (
+				F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */,
+				F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */,
 				F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */,
 				F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */,
 				F9134C252476BCE6002A0F77 /* TableViewCellCategoryList.swift */,
@@ -1235,6 +1241,7 @@
 				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
 				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
+				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
@@ -1437,6 +1444,7 @@
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
+				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9AAB36224941F1A00AB2FBD /* AccountTableViewCell.swift in Sources */,
 				F973981524A99D5F00A05C5F /* TableViewCellAmount.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,

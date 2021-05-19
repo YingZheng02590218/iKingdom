@@ -29,8 +29,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="haM-6t-Rle">
-                                                <rect key="frame" x="3" y="0.0" width="44" height="45"/>
-                                                <color key="backgroundColor" name="AccentLight"/>
+                                                <rect key="frame" x="5" y="11" width="40" height="23"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -38,15 +38,15 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="haM-6t-Rle" secondAttribute="bottom" id="5nT-bc-iOg"/>
-                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="3" id="Ehl-C1-PZ4"/>
-                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="3" id="gXz-tr-lNO"/>
-                                            <constraint firstItem="haM-6t-Rle" firstAttribute="top" secondItem="Ubm-rX-3lc" secondAttribute="top" id="kOq-rJ-8Lv"/>
+                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="5" id="Ehl-C1-PZ4"/>
+                                            <constraint firstItem="haM-6t-Rle" firstAttribute="centerY" secondItem="Ubm-rX-3lc" secondAttribute="centerY" id="Swr-jg-ZK2"/>
+                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="5" id="gXz-tr-lNO"/>
+                                            <constraint firstItem="haM-6t-Rle" firstAttribute="centerX" secondItem="Ubm-rX-3lc" secondAttribute="centerX" id="zQL-B3-wKb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otb-hx-fnL" userLabel="View2">
                                         <rect key="frame" x="0.0" y="45" width="50" height="5"/>
-                                        <color key="backgroundColor" name="AccentRed"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -72,16 +72,25 @@
                             <constraint firstItem="kpP-10-K0p" firstAttribute="leading" secondItem="XdI-fp-zHX" secondAttribute="leading" id="rbN-yA-GFX"/>
                         </constraints>
                     </view>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr9-4p-WtX" userLabel="View2">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" name="Secondary"/>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="Qr9-4p-WtX" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="Jdb-kR-7Ca"/>
                 <constraint firstAttribute="top" secondItem="XdI-fp-zHX" secondAttribute="top" id="Q0v-7C-vKb"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="Qr9-4p-WtX" secondAttribute="trailing" id="YGa-uW-kGh"/>
                 <constraint firstItem="XdI-fp-zHX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="au4-8G-CDy"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="Qr9-4p-WtX" secondAttribute="top" constant="44" id="cac-dI-tZz"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="Qr9-4p-WtX" secondAttribute="bottom" id="ifc-mM-9gp"/>
                 <constraint firstAttribute="trailing" secondItem="XdI-fp-zHX" secondAttribute="trailing" id="mov-xS-acu"/>
                 <constraint firstAttribute="bottom" secondItem="XdI-fp-zHX" secondAttribute="bottom" id="t1V-qf-sMu"/>
             </constraints>
             <connections>
+                <outlet property="coverEfect" destination="Qr9-4p-WtX" id="6s6-8Y-puZ"/>
                 <outlet property="label" destination="haM-6t-Rle" id="L5H-QP-l3F"/>
                 <outlet property="view" destination="otb-hx-fnL" id="UI2-Ub-IIY"/>
             </connections>
@@ -89,11 +98,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="AccentLight">
-            <color red="0.47499999403953552" green="1" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="AccentRed">
-            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Secondary">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

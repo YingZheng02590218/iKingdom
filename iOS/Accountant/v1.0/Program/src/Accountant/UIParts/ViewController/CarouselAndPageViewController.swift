@@ -14,15 +14,15 @@ class CarouselAndPageViewController: UIViewController {
 
     @IBOutlet var carouselCollectionView: UICollectionView!
     var pageTabItems: [String] = [] // タブに表示する文言
-    private var selectedIndex: Int = 0 // 選択されたカルーセルのタブのRow
-    private var pageViewController: UIPageViewController { return self.children.compactMap { $0 as? UIPageViewController }.first! } // 中央のView
+    var selectedIndex: Int = 0 // 選択されたカルーセルのタブのRow private
+    var pageViewController: UIPageViewController { return self.children.compactMap { $0 as? UIPageViewController }.first! } // 中央のView private
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // タブに表示する文言
-        pageTabItems = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
+        // サブクラスでせっていする
         // ビューを設定
         settingCollectionView()
         settingPageView()
@@ -55,6 +55,9 @@ class CarouselAndPageViewController: UIViewController {
         // Storyboardから遷移先のViewControllerを生成
         selectTab(selectedIndex)
     }
+    
+    // MARK: - Action
+
     // カルーセルのタブをタップされたときに中央のビューをスクロールさせる
     func selectTab(_ index: Int) {
         // 選択されたタブのViewControllerをセットする
@@ -66,6 +69,10 @@ class CarouselAndPageViewController: UIViewController {
     }
     
 }
+
+// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDataSource
+
 // カルーセル
 extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -90,6 +97,9 @@ extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionV
         
     }
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
 // カルーセル　セルのサイズ、位置
 extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
     
@@ -102,27 +112,27 @@ extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
     }
     // セルを中央寄せにする
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
-              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
-              dataSourceCount > 0 else {
-            return .zero
-        }
-        let cellCount = CGFloat(dataSourceCount)
-        let itemSpacing = flowLayout.minimumLineSpacing
-        let cellWidth = flowLayout.itemSize.width + itemSpacing
-        let cellSpacing = flowLayout.minimumInteritemSpacing
-        var insets = flowLayout.sectionInset
-        
-        let totalCellWidth = cellWidth * cellCount - itemSpacing
-        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
-
-        guard totalCellWidth < contentWidth else {
-            return insets
-        }
-        let padding = (contentWidth - totalCellWidth) / 2.0
-        insets.left = padding
-        insets.right = padding
+//
+//        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
+//              let dataSourceCount = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: section),
+//              dataSourceCount > 0 else {
+//            return .zero
+//        }
+//        let cellCount = CGFloat(dataSourceCount)
+//        let itemSpacing = flowLayout.minimumLineSpacing
+//        let cellWidth = flowLayout.itemSize.width + itemSpacing
+//        let cellSpacing = flowLayout.minimumInteritemSpacing
+//        var insets = flowLayout.sectionInset
+//
+//        let totalCellWidth = cellWidth * cellCount - itemSpacing
+//        let contentWidth = collectionView.frame.size.width - collectionView.contentInset.left - collectionView.contentInset.right
+//
+//        guard totalCellWidth < contentWidth else {
+//            return insets
+//        }
+//        let padding = (contentWidth - totalCellWidth) / 2.0
+//        insets.left = padding
+//        insets.right = padding
 //        return insets
 
 //        let inset = (collectionView.bounds.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
@@ -132,6 +142,10 @@ extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+// MARK: - UIPageViewControllerDelegate
+// MARK: - UIPageViewControllerDataSource
+
 // 中央のビュー
 extension CarouselAndPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     

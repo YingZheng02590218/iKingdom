@@ -12,6 +12,7 @@ class CarouselTabCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var label: UILabel!
     @IBOutlet var view: UIView! // 洗濯中のマーク
+    @IBOutlet var coverEfect: UIView! // 選択中以外にエフェクトをかける
     
     
     override func awakeFromNib() {
@@ -28,7 +29,8 @@ class CarouselTabCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.view.backgroundColor = self.isSelected ? .blue : .clear
+            self.view.backgroundColor = self.isSelected ? .link : .clear
+            self.coverEfect.isHidden = self.isSelected ? true : false
         }
     }
 
