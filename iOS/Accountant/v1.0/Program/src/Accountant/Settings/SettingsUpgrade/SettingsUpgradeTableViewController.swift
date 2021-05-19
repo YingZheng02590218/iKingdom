@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyStoreKit // アップグレード機能
 import StoreKit // アップグレード機能
+import SafariServices // アプリ内でブラウザ表示
 
 // アップグレード
 class SettingsUpgradeTableViewController: UITableViewController {
@@ -206,19 +207,28 @@ class SettingsUpgradeTableViewController: UITableViewController {
             self.tableView.reloadData()
             break
         case 2: // 解約
+            // アプリ内でブラウザを開く
             if Locale.current.regionCode == "JP" {
-                if let url = URL(string: "https://support.apple.com/ja-jp/HT202039#:~:text=%E3%80%8C%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8A%E3%82%88%E3%81%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%80%8D%E3%82%92%E9%81%B8%E6%8A%9E,%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93)%E3%80%82") {
-                    UIApplication.shared.open(url)
+                let url = URL(string:"https://support.apple.com/ja-jp/HT202039#:~:text=%E3%80%8C%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%8A%E3%82%88%E3%81%B3%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%80%8D%E3%82%92%E9%81%B8%E6%8A%9E,%E3%81%95%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93)%E3%80%82")
+                if let url = url{
+                    let vc = SFSafariViewController(url: url)
+                    present(vc, animated: true, completion: nil)
                 }
             }else {
-                if let url = URL(string: "https://support.apple.com/en-us/HT202039") {
-                    UIApplication.shared.open(url)
+                // アプリ内でブラウザを開く
+                let url = URL(string:"https://support.apple.com/en-us/HT202039")
+                if let url = url{
+                    let vc = SFSafariViewController(url: url)
+                    present(vc, animated: true, completion: nil)
                 }
             }
             break
         case 3: // プライバシーポリシー　利用規約
-            if let url = URL(string: "https://www.facebook.com/The-Reckoning-103608024863220") {
-                UIApplication.shared.open(url)
+            // アプリ内でブラウザを開く
+            let url = URL(string:"https://www.facebook.com/The-Reckoning-103608024863220")
+            if let url = url{
+                let vc = SFSafariViewController(url: url)
+                present(vc, animated: true, completion: nil)
             }
             break
         default:
