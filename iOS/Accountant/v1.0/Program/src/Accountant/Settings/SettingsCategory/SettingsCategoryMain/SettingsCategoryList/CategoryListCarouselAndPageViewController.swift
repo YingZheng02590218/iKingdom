@@ -1,0 +1,76 @@
+//
+//  CategoryListCarouselAndPageViewController.swift
+//  Accountant
+//
+//  Created by Hisashi Ishihara on 2021/05/19.
+//  Copyright © 2021 Hisashi Ishihara. All rights reserved.
+//
+
+import UIKit
+
+class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
+
+    // MARK: - LifeCycle
+
+    override func viewDidLoad() {
+        // タブに表示する文言
+        pageTabItems = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
+        super.viewDidLoad()
+    }
+    
+    // MARK: - Action
+
+    // カルーセルのタブをタップされたときに中央のビューをスクロールさせる
+    override func selectTab(_ index: Int) {
+        // 選択されたタブのViewControllerをセットする
+        let viewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
+        viewController.index = index
+        pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
+        // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
+        self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+    }
+
+    // MARK: - UIPageViewControllerDelegate
+    // MARK: - UIPageViewControllerDataSource
+    
+    // 右にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
+    override func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        // 遷移先のViewControllerを生成
+        let beforeViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
+        if let viewController = viewController as? CategoryListTableViewController {
+            let beforeIndex: Int = viewController.index - 1
+            if beforeIndex < 0 {
+                // これ以上戻らない
+                return nil
+            }
+            beforeViewController.index = beforeIndex
+        }
+        return beforeViewController
+    }
+    // 左にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
+    override func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let afterViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
+        if let viewController = viewController as? CategoryListTableViewController {
+            let afterIndex: Int = viewController.index + 1
+            let maxCount = pageTabItems.count
+            if afterIndex >= maxCount {
+                // これ以上戻らない
+                return nil
+            }
+            afterViewController.index = afterIndex
+        }
+        return afterViewController
+    }
+    
+    override func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        // viewControllerBefore と viewControllerAfter　は2回処理が走ってインデックスがずれるので、アニメーション完了後にインデックスを取得
+        if let currentVC = pageViewController.viewControllers?.first as? CategoryListTableViewController {
+            let currentIndex = currentVC.index
+            selectedIndex = currentIndex
+            // タブの選択位置を更新する
+            // セルを選択して、コレクションビューの中の中心へスクロールさせる
+            self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+
+        }
+    }
+}

@@ -13,6 +13,8 @@ import AudioToolbox // 効果音
 // 勘定科目一覧　画面
 class CategoryListTableViewController: UITableViewController {
     
+    // MARK: - Variable/Let
+
     // マネタイズ対応
     // 広告ユニットID
     let AdMobID = "ca-app-pub-7616440336243237/8565070944"
@@ -24,6 +26,7 @@ class CategoryListTableViewController: UITableViewController {
     let AdMobTest:Bool = false
     #endif
     @IBOutlet var gADBannerView: GADBannerView!
+    var index: Int = 0 // カルーセルのタブの識別
 
 
     override func viewDidLoad() {
@@ -162,11 +165,11 @@ class CategoryListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 12
+        return 1
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
+        switch index {
         case 0: return    "流動資産"
         case 1: return    "固定資産"
         case 2: return    "繰延資産"
@@ -185,14 +188,14 @@ class CategoryListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: section)
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: index)
         return objects.count
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
         // データベース
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: indexPath.section)
+        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: index)
         //① UI部品を指定　TableViewCellCategory
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category", for: indexPath) as! TableViewCellCategoryList
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
