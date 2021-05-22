@@ -10,6 +10,10 @@ import UIKit
 
 class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
 
+    // MARK: - Variable/Let
+    
+    @IBOutlet var Button_add: UIBarButtonItem!
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -29,7 +33,24 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
         // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
         self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
+    // 画面遷移の準備　勘定科目画面
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // セグエで場合分け
+        if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
+            // segue.destinationの型はUIViewController
+            let tableViewControllerSettingsCategoryDetail = segue.destination as! SettingsCategoryDetailTableViewController
+            // 遷移先のコントローラに値を渡す
+            tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+        }
+    }
 
+    @IBAction func editButtonTapped(_ sender: Any) {
+        // 編集モードを切り替える
+        if let currentVC = pageViewController.viewControllers?.first as? CategoryListTableViewController {
+            currentVC.setEditing(!currentVC.isEditing, animated: true)
+        }
+    }
+    
     // MARK: - UIPageViewControllerDelegate
     // MARK: - UIPageViewControllerDataSource
     
@@ -73,4 +94,5 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
 
         }
     }
+    
 }

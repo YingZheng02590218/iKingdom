@@ -13,7 +13,7 @@
         <!--仕訳帳-->
         <scene sceneID="VDa-sm-VFH">
             <objects>
-                <tableViewController id="JmQ-hF-fQb" customClass="JournalsTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="JmQ-hF-fQb" customClass="JournalsTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hEr-rT-Okx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,7 +273,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="qmy-kH-9Cx" customClass="JournalsTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="qmy-kH-9Cx" customClass="JournalsTableViewCell" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="123" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qmy-kH-9Cx" id="dT7-2h-gHh">
@@ -828,7 +828,7 @@
         <!--Annotation View Controller Journals-->
         <scene sceneID="req-8u-Kw5">
             <objects>
-                <viewController storyboardIdentifier="Annotation_Journals" id="dD6-nC-PlQ" customClass="AnnotationViewControllerJournals" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_Journals" id="dD6-nC-PlQ" customClass="AnnotationViewControllerJournals" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u1g-Hw-7D3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
