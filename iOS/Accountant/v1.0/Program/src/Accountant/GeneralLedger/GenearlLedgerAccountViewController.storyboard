@@ -12,15 +12,14 @@
         <!--勘定-->
         <scene sceneID="bAR-0X-l9B">
             <objects>
-                <viewController id="zo1-pw-cz2" customClass="GenearlLedgerAccountViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zo1-pw-cz2" customClass="GenearlLedgerAccountViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NdX-B2-gPL">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nHh-F0-HdC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nHh-F0-HdC">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <color key="backgroundColor" name="sheetColor"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="CaE-gn-ebO" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="95"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -86,7 +85,7 @@
                                                                             <rect key="frame" x="0.0" y="0.0" width="19" height="23.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="Dbw-O2-3hQ" userLabel="list_date_month">
-                                                                                    <rect key="frame" x="-1" y="-2" width="18.5" height="25"/>
+                                                                                    <rect key="frame" x="-1" y="-2" width="19" height="25"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -103,7 +102,7 @@
                                                                             <rect key="frame" x="19" y="0.0" width="52.5" height="23.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="hLV-Jf-ehI" userLabel="list_date_day">
-                                                                                    <rect key="frame" x="-1" y="-2" width="52.5" height="25"/>
+                                                                                    <rect key="frame" x="-1" y="-2" width="53" height="25"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -243,10 +242,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5vE-PC-L8T" userLabel="6View">
-                                                            <rect key="frame" x="467" y="0.0" width="454" height="47.5"/>
+                                                            <rect key="frame" x="467" y="0.0" width="357" height="47.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="借又貸" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="KCv-5j-G8p" userLabel="list_debitOrCredit">
-                                                                    <rect key="frame" x="-1" y="-1" width="453" height="47"/>
+                                                                    <rect key="frame" x="-1" y="-1" width="356" height="47"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
@@ -265,10 +264,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGK-sQ-xbA" userLabel="7View">
-                                                            <rect key="frame" x="921" y="0.0" width="103" height="47.5"/>
+                                                            <rect key="frame" x="824" y="0.0" width="200" height="47.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="差引残高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="0oP-Sy-ARH" userLabel="list_balance">
-                                                                    <rect key="frame" x="-3" y="-3" width="102" height="50"/>
+                                                                    <rect key="frame" x="-3" y="-3" width="199" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -357,7 +356,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger_account" id="OSk-A3-Opf" userLabel="cell_list_generalLedger_account" customClass="TableViewCellGeneralLedgerAccount" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger_account" id="OSk-A3-Opf" userLabel="cell_list_generalLedger_account" customClass="TableViewCellGeneralLedgerAccount" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="123" width="1024" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OSk-A3-Opf" id="buf-wr-Vs3">
@@ -596,7 +595,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="sheetColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="XFQ-g5-vZz" secondAttribute="bottom" id="1Vd-9S-2yA"/>
                                                 <constraint firstItem="XFQ-g5-vZz" firstAttribute="leading" secondItem="RKJ-jf-jS6" secondAttribute="trailing" id="4be-oD-dLA"/>
@@ -622,7 +621,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="96k-6P-cYt" secondAttribute="trailing" id="tZ7-Xe-1bL"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="96k-6P-cYt" firstAttribute="height" secondItem="OSk-A3-Opf" secondAttribute="height" id="6j9-R9-GyU"/>
                                             <constraint firstItem="RKJ-jf-jS6" firstAttribute="height" relation="greaterThanOrEqual" secondItem="OSk-A3-Opf" secondAttribute="height" id="6mF-Mc-3Ac"/>
