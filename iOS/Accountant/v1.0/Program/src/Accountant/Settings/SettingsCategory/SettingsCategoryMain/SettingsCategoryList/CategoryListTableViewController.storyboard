@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--勘定科目一覧-->
+        <!--Category List Table View Controller-->
         <scene sceneID="oPN-a5-ecL">
             <objects>
                 <tableViewController id="uls-Qf-erl" customClass="CategoryListTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
@@ -45,20 +45,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="勘定科目一覧" id="hI8-CU-RYh">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="edit" id="pGd-A0-rQZ"/>
-                            <barButtonItem title="勘定科目追加" id="JgP-LV-OgC">
-                                <connections>
-                                    <segue destination="Wcu-Ps-cZd" kind="presentation" identifier="segue_add_account" id="9Mx-4K-JCO"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="Button_add" destination="JgP-LV-OgC" id="dyO-N1-VzI"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vi-eT-zTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,9 +62,6 @@
             <point key="canvasLocation" x="4893" y="5353"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="9Mx-4K-JCO"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="Secondary">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

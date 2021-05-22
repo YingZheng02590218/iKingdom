@@ -36,20 +36,12 @@ class CategoryListTableViewController: UITableViewController {
         tableView.allowsMultipleSelectionDuringEditing = false
         // 編集ボタンの設定
         navigationItem.rightBarButtonItem = editButtonItem
-        // 追加ボタンの初期値は、押下不可
-        Button_add.isEnabled = false
     }
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.isEditing = editing
         print(editing)
-        // 追加ボタンは、編集モード中は押下可能とする
-        if editing {
-            Button_add.isEnabled = true
-        }else {
-            Button_add.isEnabled = false
-        }
     }
 
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -136,9 +128,6 @@ class CategoryListTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -273,26 +262,19 @@ class CategoryListTableViewController: UITableViewController {
         dataBaseSettingsCategoryBSAndPL.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
     // 画面遷移の準備　勘定科目画面
-    @IBOutlet var Button_add: UIBarButtonItem!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
-        if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
-            // segue.destinationの型はUIViewController
-            let tableViewControllerSettingsCategoryDetail = segue.destination as! SettingsCategoryDetailTableViewController
-            // 遷移先のコントローラに値を渡す
-            tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
-        }else{ // 既存の設定勘定科目を選択された場合
-            // 選択されたセルを取得
-            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-            let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-            let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
-            // segue.destinationの型はUIViewController
-            let tableViewControllerSettingsCategoryDetail = segue.destination as! SettingsCategoryDetailTableViewController
-            // 遷移先のコントローラに値を渡す
-            tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
-            // セルの選択を解除
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        // 既存の設定勘定科目を選択された場合
+        // 選択されたセルを取得
+        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettings.getSettingsTaxonomyAccount(section: indexPath.section)
+        // segue.destinationの型はUIViewController
+        let tableViewControllerSettingsCategoryDetail = segue.destination as! SettingsCategoryDetailTableViewController
+        // 遷移先のコントローラに値を渡す
+        tableViewControllerSettingsCategoryDetail.numberOfAccount = objects[indexPath.row].number // セルに表示した勘定科目の連番を取得
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 //    // セル選択不可
 //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

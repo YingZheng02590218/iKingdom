@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +22,7 @@
                                 <subviews>
                                     <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oNy-pg-jSr">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <color key="backgroundColor" name="Secondary"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YYT-l1-rxd">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -32,7 +32,7 @@
                                         <cells/>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="backgroundColor" name="Secondary"/>
                                 <constraints>
                                     <constraint firstItem="oNy-pg-jSr" firstAttribute="top" secondItem="YKG-Wt-OaB" secondAttribute="top" id="7F8-4k-JkE"/>
                                     <constraint firstAttribute="trailing" secondItem="oNy-pg-jSr" secondAttribute="trailing" id="865-Uf-FZ0"/>
@@ -44,15 +44,15 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-ua-LeE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" red="1" green="0.52120530610000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" name="Secondary"/>
                                 <connections>
                                     <segue destination="43I-6N-3lI" kind="embed" id="f3f-QX-3NS"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gpG-pZ-w4x"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Secondary"/>
                         <constraints>
                             <constraint firstItem="gpG-pZ-w4x" firstAttribute="trailing" secondItem="aH1-ua-LeE" secondAttribute="trailing" id="72U-tL-DUH"/>
                             <constraint firstItem="aH1-ua-LeE" firstAttribute="width" secondItem="gpG-pZ-w4x" secondAttribute="width" id="9JB-ux-qXs"/>
@@ -66,10 +66,26 @@
                             <constraint firstItem="aH1-ua-LeE" firstAttribute="top" secondItem="YKG-Wt-OaB" secondAttribute="bottom" id="xl3-2p-S4i"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NFT-2f-UH9"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="NFT-2f-UH9">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="avs-VZ-7NF">
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="qWJ-fX-ARW" id="X8w-5k-6Ei"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="勘定科目追加" id="xU2-W2-fCt">
+                                <connections>
+                                    <segue destination="wUu-3j-g8E" kind="presentation" identifier="segue_add_account" id="8ws-jh-2AV"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
+                        <outlet property="Button_add" destination="xU2-W2-fCt" id="hkM-Rh-4Ti"/>
                         <outlet property="carouselCollectionView" destination="oNy-pg-jSr" id="8tD-fG-6kc"/>
                     </connections>
                 </viewController>
@@ -80,21 +96,25 @@
         <!--Page View Controller-->
         <scene sceneID="gLV-A4-VNg">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="43I-6N-3lI" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="43I-6N-3lI" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEy-lh-Hip" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="897" y="102"/>
         </scene>
+        <!--SettingsCategoryDetailTableViewController-->
+        <scene sceneID="xab-x5-fvX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsCategoryDetailTableViewController" id="wUu-3j-g8E" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WKU-o9-Pmp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sd8-vd-Uli" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="500"/>
+        </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="Secondary">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
