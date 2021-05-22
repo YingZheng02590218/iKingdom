@@ -182,7 +182,7 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as! TableViewCellGeneralLedgerAccount
 
         if indexPath.section == 1 { // 空白行
-            cell.backgroundColor = .white // 目印を消す
+//            cell.backgroundColor = .white // 目印を消す
             cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
             cell.label_list_date_day.text = ""     // 末尾2文字の「日」         //日付
             cell.label_list_summary.text = ""      //摘要　相手方勘定なので借方
@@ -208,7 +208,7 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
                     objectss = object
                     indexPathRowFixed = indexPath.row - (objects.count + objectsss.count)
                 }
-                cell.backgroundColor = .lightGray // 目印
+//                cell.backgroundColor = .lightGray // 目印
                 //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
                 print(indexPathRowFixed, objectss)
                 let d = "\(objectss[indexPathRowFixed].date)" // 日付
@@ -309,7 +309,7 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
                 cell.selectionStyle = .default
             }else { // 通常仕訳
                 //② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
-                cell.backgroundColor = .white // 目印を消す
+//                cell.backgroundColor = .white // 目印を消す
                 let d = "\(objects[indexPath.row].date)" // 日付
                 // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
