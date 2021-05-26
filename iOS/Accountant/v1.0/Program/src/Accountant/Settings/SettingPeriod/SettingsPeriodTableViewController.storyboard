@@ -29,13 +29,13 @@
         <!--会計期間-->
         <scene sceneID="O5t-fn-bcl">
             <objects>
-                <tableViewController id="tdi-FX-Zhl" customClass="SettingsPeriodTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="tdi-FX-Zhl" customClass="SettingsPeriodTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2Ih-If-H5z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="Secondary"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" id="xKP-jn-WXH" customClass="SettingsPeriodTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" id="xKP-jn-WXH" customClass="SettingsPeriodTableViewCell" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="38.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xKP-jn-WXH" id="6b8-am-Xxn">
@@ -71,7 +71,7 @@
                                     <segue destination="NHq-SQ-q7O" kind="show" identifier="identifier_theDayOfReckoning" id="A99-wq-JJb"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="Asy-Zn-FCq">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="reuseIdentifier" translatesAutoresizingMaskIntoConstraints="NO" id="Asy-Zn-FCq" customClass="SettingsPeriodTableViewCell" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="94" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Asy-Zn-FCq" id="pQW-Hp-4xQ">
@@ -120,7 +120,7 @@
         <!--Annotation View Controller Setting Period-->
         <scene sceneID="P1k-8V-cKH">
             <objects>
-                <viewController storyboardIdentifier="Annotation_SettingPeriod" id="yce-lO-LZ2" customClass="AnnotationViewControllerSettingPeriod" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_SettingPeriod" id="yce-lO-LZ2" customClass="AnnotationViewControllerSettingPeriod" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j6f-44-hzO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

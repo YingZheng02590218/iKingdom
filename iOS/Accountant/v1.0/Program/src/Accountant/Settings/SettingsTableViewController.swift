@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds // マネタイズ対応
+import SafariServices // アプリ内でブラウザ表示
 
 // 設定クラス
 class SettingsTableViewController: UITableViewController {
@@ -237,8 +238,11 @@ class SettingsTableViewController: UITableViewController {
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             case 1:
-                if let url = URL(string: "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review") {
-                    UIApplication.shared.open(url)
+                // アプリ内でブラウザを開く
+                let url = URL(string:"https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
+                if let url = url{
+                    let vc = SFSafariViewController(url: url)
+                    present(vc, animated: true, completion: nil)
                 }
                 break
             default:

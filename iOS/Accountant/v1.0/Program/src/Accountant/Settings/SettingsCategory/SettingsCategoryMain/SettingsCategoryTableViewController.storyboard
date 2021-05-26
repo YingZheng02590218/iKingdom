@@ -13,7 +13,7 @@
         <!--勘定科目-->
         <scene sceneID="xVF-Xk-E5N">
             <objects>
-                <tableViewController id="50f-JZ-N5i" customClass="SettingsCategoryTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="50f-JZ-N5i" customClass="SettingsCategoryTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="6Xg-jB-YdT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="4894" y="4240"/>
         </scene>
-        <!--CategoryListTableViewController-->
+        <!--CategoryListCarouselAndPageViewController-->
         <scene sceneID="x6Q-yI-6Z5">
             <objects>
-                <viewControllerPlaceholder storyboardName="CategoryListTableViewController" id="le0-yC-HVc" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="CategoryListCarouselAndPageViewController" id="le0-yC-HVc" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="H8a-ol-krv"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2f-xg-xWq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -118,7 +118,7 @@
         <!--Annotation View Controller Settings Category-->
         <scene sceneID="xWL-ph-rR8">
             <objects>
-                <viewController storyboardIdentifier="Annotation_SettingsCategory" id="cMs-cH-MEL" customClass="AnnotationViewControllerSettingsCategory" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_SettingsCategory" id="cMs-cH-MEL" customClass="AnnotationViewControllerSettingsCategory" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AqI-hd-Iyr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

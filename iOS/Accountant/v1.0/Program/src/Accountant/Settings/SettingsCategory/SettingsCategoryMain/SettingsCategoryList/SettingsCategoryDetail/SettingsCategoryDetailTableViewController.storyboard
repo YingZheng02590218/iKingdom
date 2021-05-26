@@ -12,7 +12,7 @@
         <!--勘定科目　詳細-->
         <scene sceneID="ajk-NH-7Qn">
             <objects>
-                <tableViewController id="cje-Si-hva" customClass="SettingsCategoryDetailTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cje-Si-hva" customClass="SettingsCategoryDetailTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="EgU-fO-mJF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,14 +40,14 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category_big" id="LBG-EM-5r1" customClass="TableViewCellSettingAccountDetail" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category_big" id="LBG-EM-5r1" customClass="TableViewCellSettingAccountDetail" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBG-EM-5r1" id="qGA-GO-u7y">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="PickerTextFieldAccountDetail" customModule="Accounting_book" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="PickerTextFieldAccountDetail" customModule="Accountant" customModuleProvider="target">
                                             <rect key="frame" x="123" y="4" width="181" height="34"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
@@ -59,14 +59,14 @@
                                     <outlet property="textField_AccountDetail_big" destination="4Cm-FI-Chr" id="tAG-oH-RUH"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category" id="7R0-uJ-Cbn" customClass="TableViewCellSettingAccountDetail" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category" id="7R0-uJ-Cbn" customClass="TableViewCellSettingAccountDetail" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="99" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7R0-uJ-Cbn" id="hJa-cr-wfc">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iv9-Ab-XG0" customClass="PickerTextFieldAccountDetail" customModule="Accounting_book" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iv9-Ab-XG0" customClass="PickerTextFieldAccountDetail" customModule="Accountant" customModuleProvider="target">
                                             <rect key="frame" x="123" y="4" width="181" height="34"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
@@ -78,7 +78,7 @@
                                     <outlet property="textField_AccountDetail" destination="Iv9-Ab-XG0" id="rwd-Pg-ucx"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_Account" id="QPs-Yn-bhd" customClass="TableViewCellSettingAccountDetailAccount" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_Account" id="QPs-Yn-bhd" customClass="TableViewCellSettingAccountDetailAccount" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="142.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QPs-Yn-bhd" id="VE0-w9-hmH">
@@ -97,7 +97,7 @@
                                     <outlet property="textField_AccountDetail_Account" destination="3XR-6k-myl" id="pAj-5O-p8o"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="0KT-tB-STM" customClass="TableViewCellSettingAccountDetailTaxonomy" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="0KT-tB-STM" customClass="TableViewCellSettingAccountDetailTaxonomy" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="186" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0KT-tB-STM" id="dBs-Vr-npS">
@@ -148,9 +148,20 @@
             <point key="canvasLocation" x="5530" y="5853"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="4Cm-FI-Chr">
+            <size key="intrinsicContentSize" width="33" height="34"/>
+        </designable>
+        <designable name="Iv9-Ab-XG0">
+            <size key="intrinsicContentSize" width="33" height="34"/>
+        </designable>
+        <designable name="htm-3x-yix">
+            <size key="intrinsicContentSize" width="48" height="36"/>
+        </designable>
+    </designables>
     <resources>
         <namedColor name="Secondary">
-            <color red="0.899999988079071" green="0.899999988079071" blue="0.899999988079071" alpha="0.51985454559326172" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
