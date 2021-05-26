@@ -32,7 +32,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // テーブルビューセル　作成
+        createTableViewCell()
         tableView.allowsMultipleSelection = false
     }
     
@@ -162,6 +163,16 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         }
     }
     
+    // MARK: - Setting
+    
+    // セルを登録
+    func createTableViewCell() {
+        //xib読み込み
+        let nib = UINib(nibName: "WithLabelTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
+        
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -230,13 +241,14 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return cell
         case 1:
             // 会計年度
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
             // データベース
             let dataBaseManager = DataBaseManagerSettingsPeriod()
             let objects = dataBaseManager.getMainBooksAll()
             // 会計帳簿の年度をセルに表示する
-            cell.textLabel?.text = " \(objects[indexPath.row].fiscalYear as Int)"
-            cell.textLabel?.textAlignment = .center
+            cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
+            cell.rightdetailTextLabel.text = "仕訳データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int)"
+            cell.rightdetailTextLabel.textColor = .lightGray
             // 会計帳簿の連番
             cell.tag = objects[indexPath.row].number
             // 開いている帳簿にチェックマークをつける
@@ -249,7 +261,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             }
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
             return cell
         }
     }

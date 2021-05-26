@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HJ2-mf-qL7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="UD7-OL-8j9">
+            <objects>
+                <navigationController id="HJ2-mf-qL7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WPi-6m-uue">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="z1o-YR-1pz" kind="relationship" relationship="rootViewController" id="Eb8-tm-kCT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cCQ-E4-h0G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-762" y="102"/>
+        </scene>
+        <!--Carousel And Page View Controller-->
+        <scene sceneID="NEV-q9-Uef">
+            <objects>
+                <viewController storyboardIdentifier="PageContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z1o-YR-1pz" customClass="CarouselAndPageViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F4s-vN-v5D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eig-qz-EFL">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <subviews>
+                                    <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g7P-rB-31c">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="djr-Lr-GEF">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="g7P-rB-31c" secondAttribute="bottom" id="0fp-rS-6gW"/>
+                                    <constraint firstItem="g7P-rB-31c" firstAttribute="width" secondItem="eig-qz-EFL" secondAttribute="width" id="5SV-tF-hjn"/>
+                                    <constraint firstItem="g7P-rB-31c" firstAttribute="leading" secondItem="eig-qz-EFL" secondAttribute="leading" id="9g6-2Y-jeq"/>
+                                    <constraint firstAttribute="trailing" secondItem="g7P-rB-31c" secondAttribute="trailing" id="Iid-ph-Dgd"/>
+                                    <constraint firstItem="g7P-rB-31c" firstAttribute="height" secondItem="eig-qz-EFL" secondAttribute="height" id="iEh-cL-C75"/>
+                                    <constraint firstAttribute="height" constant="44" id="suC-w8-OUP"/>
+                                    <constraint firstItem="g7P-rB-31c" firstAttribute="top" secondItem="eig-qz-EFL" secondAttribute="top" id="uBD-nB-KWH"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltT-qb-Bq8">
+                                <rect key="frame" x="0.0" y="132" width="414" height="730"/>
+                                <color key="backgroundColor" red="1" green="0.52120530610000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <segue destination="Rm0-1Z-FAh" kind="embed" id="lcj-R6-GZE"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6PK-Ny-WRW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ltT-qb-Bq8" firstAttribute="leading" secondItem="6PK-Ny-WRW" secondAttribute="leading" id="1oT-eu-BKj"/>
+                            <constraint firstItem="6PK-Ny-WRW" firstAttribute="trailing" secondItem="ltT-qb-Bq8" secondAttribute="trailing" id="4xC-qF-lg9"/>
+                            <constraint firstItem="ltT-qb-Bq8" firstAttribute="top" secondItem="eig-qz-EFL" secondAttribute="bottom" id="8sb-Th-YMr"/>
+                            <constraint firstItem="eig-qz-EFL" firstAttribute="top" secondItem="6PK-Ny-WRW" secondAttribute="top" id="FY4-WW-3i0"/>
+                            <constraint firstItem="eig-qz-EFL" firstAttribute="width" secondItem="6PK-Ny-WRW" secondAttribute="width" id="KjJ-pm-RKg"/>
+                            <constraint firstItem="6PK-Ny-WRW" firstAttribute="trailing" secondItem="eig-qz-EFL" secondAttribute="trailing" id="gUU-Am-8JW"/>
+                            <constraint firstItem="ltT-qb-Bq8" firstAttribute="height" relation="greaterThanOrEqual" secondItem="6PK-Ny-WRW" secondAttribute="height" multiplier="0.9" id="jO4-qx-hUM"/>
+                            <constraint firstItem="6PK-Ny-WRW" firstAttribute="bottom" secondItem="ltT-qb-Bq8" secondAttribute="bottom" id="kFC-Jp-1sn"/>
+                            <constraint firstItem="ltT-qb-Bq8" firstAttribute="width" secondItem="6PK-Ny-WRW" secondAttribute="width" id="nGc-Ax-zlt"/>
+                            <constraint firstItem="eig-qz-EFL" firstAttribute="leading" secondItem="6PK-Ny-WRW" secondAttribute="leading" id="nLq-2y-C2L"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="U4E-WI-aVc"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="carouselCollectionView" destination="g7P-rB-31c" id="iAQ-t8-Dcp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VWy-nd-wGW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="73.913043478260875" y="101.78571428571428"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="m8i-rz-v2A">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Rm0-1Z-FAh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w2B-MN-RlM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="897" y="102"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

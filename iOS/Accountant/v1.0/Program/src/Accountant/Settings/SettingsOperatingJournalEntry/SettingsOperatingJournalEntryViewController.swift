@@ -87,7 +87,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     var tappedIndexPath: IndexPath?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
-        let controller = segue.destination as! JournalEntryViewController
+        let controller = segue.destination as! JournalEntryTemplateViewController
         // 遷移先のコントローラに値を渡す
         if segue.identifier == "buttonTapped" {
             controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
