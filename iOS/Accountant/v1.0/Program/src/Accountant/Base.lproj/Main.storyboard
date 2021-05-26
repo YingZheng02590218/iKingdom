@@ -141,7 +141,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="w44-HK-dgQ">
             <objects>
-                <tabBarController id="XAj-k2-vBb" customClass="TabBarController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="XAj-k2-vBb" customClass="TabBarController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="632-gT-nm6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

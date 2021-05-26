@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--勘定科目一覧-->
+        <!--Category List Table View Controller-->
         <scene sceneID="oPN-a5-ecL">
             <objects>
-                <tableViewController id="uls-Qf-erl" customClass="CategoryListTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="uls-Qf-erl" customClass="CategoryListTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2Yx-eD-8R2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="Secondary"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category" id="vhk-G4-CWP" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_list_category" id="vhk-G4-CWP" customClass="TableViewCellCategoryList" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vhk-G4-CWP" id="cZ8-iU-a1N">
@@ -45,20 +45,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="勘定科目一覧" id="hI8-CU-RYh">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="edit" id="pGd-A0-rQZ"/>
-                            <barButtonItem title="勘定科目追加" id="JgP-LV-OgC">
-                                <connections>
-                                    <segue destination="Wcu-Ps-cZd" kind="presentation" identifier="segue_add_account" id="9Mx-4K-JCO"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="Button_add" destination="JgP-LV-OgC" id="dyO-N1-VzI"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vi-eT-zTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,9 +62,6 @@
             <point key="canvasLocation" x="4893" y="5353"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="9Mx-4K-JCO"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="Secondary">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
