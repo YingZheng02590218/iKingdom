@@ -29,18 +29,18 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="47.5"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="haM-6t-Rle">
-                                                <rect key="frame" x="5" y="12.5" width="40" height="23"/>
+                                                <rect key="frame" x="10" y="15.5" width="30" height="17"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="5" id="Ehl-C1-PZ4"/>
+                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="10" id="Ehl-C1-PZ4"/>
                                             <constraint firstItem="haM-6t-Rle" firstAttribute="centerY" secondItem="Ubm-rX-3lc" secondAttribute="centerY" id="Swr-jg-ZK2"/>
-                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="5" id="gXz-tr-lNO"/>
+                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="10" id="gXz-tr-lNO"/>
                                             <constraint firstItem="haM-6t-Rle" firstAttribute="centerX" secondItem="Ubm-rX-3lc" secondAttribute="centerX" id="zQL-B3-wKb"/>
                                         </constraints>
                                     </view>
@@ -72,9 +72,9 @@
                             <constraint firstItem="kpP-10-K0p" firstAttribute="leading" secondItem="XdI-fp-zHX" secondAttribute="leading" id="rbN-yA-GFX"/>
                         </constraints>
                     </view>
-                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr9-4p-WtX" userLabel="View2">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qr9-4p-WtX" userLabel="View2">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="CellCoverColor"/>
                     </view>
                 </subviews>
             </view>
@@ -98,8 +98,11 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="Secondary">
-            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="CellCoverColor">
+            <color red="0.1289999932050705" green="0.1289999932050705" blue="0.1289999932050705" alpha="0.1550000011920929" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.95157092809677124" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JournalEntryTemplateViewController" customModule="Accounting_book" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JournalEntryTemplateViewController" customModule="Accountant" customModuleProvider="target">
             <connections>
                 <outlet property="Label_Popup" destination="RYP-9m-Jjj" id="iqz-SC-CdW"/>
                 <outlet property="TextField_SmallWritting" destination="5zR-80-8gz" id="yRB-0A-U6L"/>
@@ -146,12 +146,12 @@
                                         </stackView>
                                         <stackView opaque="NO" tag="11111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VF-Dc-nt4" userLabel="Stack View2">
                                             <subviews>
-                                                <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Um-FX-ghO" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Um-FX-ghO" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <attributedString key="attributedText"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
-                                                <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zSg-JJ-Hcm" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
+                                                <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zSg-JJ-Hcm" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <attributedString key="attributedText"/>
                                                     <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -435,6 +435,23 @@
             <point key="canvasLocation" x="58" y="50"/>
         </view>
     </objects>
+    <designables>
+        <designable name="0Um-FX-ghO">
+            <size key="intrinsicContentSize" width="97.5" height="32"/>
+        </designable>
+        <designable name="C7A-Sb-7YO">
+            <size key="intrinsicContentSize" width="58" height="41"/>
+        </designable>
+        <designable name="X2X-9o-oR9">
+            <size key="intrinsicContentSize" width="25" height="25"/>
+        </designable>
+        <designable name="wki-bc-gfL">
+            <size key="intrinsicContentSize" width="25" height="25"/>
+        </designable>
+        <designable name="zSg-JJ-Hcm">
+            <size key="intrinsicContentSize" width="97.5" height="32"/>
+        </designable>
+    </designables>
     <resources>
         <image name="icons8-削除-25" width="25" height="25"/>
         <image name="icons8-削除-25-2" width="25" height="25"/>

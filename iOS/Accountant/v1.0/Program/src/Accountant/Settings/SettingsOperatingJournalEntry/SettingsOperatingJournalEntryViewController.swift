@@ -18,7 +18,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent:") → うまくできなかった。2020/07/26
         // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
         longPressRecognizer.delegate = self
-        // tableViewにrecognizerを設定
+        // CollectionViewにrecognizerを設定
         listCollectionView.addGestureRecognizer(longPressRecognizer)
 
     }
@@ -38,6 +38,13 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // 画面の回転に合わせてCellのサイズを変更する
+        listCollectionView.collectionViewLayout.invalidateLayout()
+        listCollectionView.reloadData()
+    }
+    
     // MARK: - Create View
 
     // リスト作成

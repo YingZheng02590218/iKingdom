@@ -419,6 +419,8 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
 //        self.TableView_TB.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
         self.TableView_WS.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
+        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
+        TableView_WS.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
@@ -428,8 +430,10 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         TableView_WS.showsVerticalScrollIndicator = false
-        if let tappedIndexPath: IndexPath = self.TableView_WS.indexPathForSelectedRow { // タップされたセルの位置を取得
-            TableView_WS.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        while self.TableView_WS.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.TableView_WS.indexPathForSelectedRow { // タップされたセルの位置を取得
+                TableView_WS.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+            }
         }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_TB.contentSize.width / 25.4 * 72, height: TableView_TB.contentSize.height / 25.4 * 72)
@@ -541,6 +545,8 @@ class WSViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         TableView_WS.showsVerticalScrollIndicator = true
+        // ダークモード回避を解除
+        TableView_WS.overrideUserInterfaceStyle = .unspecified
         TableView_WS.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
         self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
     }

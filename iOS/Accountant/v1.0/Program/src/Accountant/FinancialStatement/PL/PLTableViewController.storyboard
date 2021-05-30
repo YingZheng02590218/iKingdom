@@ -11,16 +11,16 @@
         <!--損益計算書-->
         <scene sceneID="9Zu-nk-2Yl">
             <objects>
-                <tableViewController id="2EV-vH-7xf" customClass="PLTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fA3-UV-q7M">
+                <tableViewController id="2EV-vH-7xf" customClass="PLTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fA3-UV-q7M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="sheetColor"/>
-                        <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="iib-UL-el0" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                        <color key="backgroundColor" name="SheetColor"/>
+                        <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="iib-UL-el0" userLabel="ViewBase">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-WY-EIo" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxy-WY-EIo">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AgX-PW-pxf" userLabel="ViewUpper">
@@ -53,7 +53,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="sheetColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="bKD-m3-ECr" secondAttribute="trailing" id="51d-W5-v2E"/>
@@ -160,7 +160,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="sheetColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="nl5-E4-V99" firstAttribute="height" secondItem="eTC-t5-2Or" secondAttribute="height" id="2gj-mE-xOk"/>
@@ -213,7 +213,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="plus" id="TgE-PC-oz9" customClass="TableViewCellAmount" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="plus" id="TgE-PC-oz9" customClass="TableViewCellAmount" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.89999997615814209" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TgE-PC-oz9" id="piK-uf-JwT" userLabel="＋">
@@ -266,7 +266,7 @@
                                     <outlet property="label_amount_previous" destination="MQR-uM-l5t" id="dv2-kQ-oMA"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="minus" id="qAJ-bz-o0D" customClass="TableViewCellAmount" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="minus" id="qAJ-bz-o0D" customClass="TableViewCellAmount" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="113" width="414" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qAJ-bz-o0D" id="fSX-Rd-0lh" userLabel="−">
@@ -320,7 +320,7 @@
                                     <outlet property="label_amount_previous" destination="K1P-G5-eci" id="nmz-h1-7iB"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="equal" id="UFt-4S-5MX" userLabel="equal" customClass="TableViewCellAmount" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="equal" id="UFt-4S-5MX" userLabel="equal" customClass="TableViewCellAmount" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="138" width="414" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UFt-4S-5MX" id="Gzm-NU-3vD" userLabel="＝">
@@ -386,7 +386,9 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ouV-tk-Yyb">
                                 <rect key="frame" x="311" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <state key="normal" title="印刷"/>
+                                <state key="normal" title="印刷">
+                                    <color key="titleColor" name="AccentOrange"/>
+                                </state>
                                 <connections>
                                     <action selector="button_print:" destination="2EV-vH-7xf" eventType="touchUpInside" id="O0g-bs-faz"/>
                                 </connections>
@@ -409,7 +411,10 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="sheetColor">
+        <namedColor name="AccentOrange">
+            <color red="1" green="0.48693716526031494" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SheetColor">
             <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

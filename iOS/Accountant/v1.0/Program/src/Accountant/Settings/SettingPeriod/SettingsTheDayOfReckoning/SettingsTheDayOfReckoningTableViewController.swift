@@ -122,37 +122,39 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
                 if "\(indexPath.row+1)" == "29" || "\(indexPath.row+1)" == "30" || "\(indexPath.row+1)" == "31" {
                     cell.textLabel?.textColor = .lightGray
                 }else {
-                    // ダークモード対応
-                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                        /* ダークモード時の処理 */
-                        cell.textLabel?.textColor = .white
-                    } else {
-                        /* ライトモード時の処理 */
-                        cell.textLabel?.textColor = .black
-                    }                }
+//                    // ダークモード対応
+//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                        /* ダークモード時の処理 */
+//                        cell.textLabel?.textColor = .white
+//                    } else {
+//                        /* ライトモード時の処理 */
+//                        cell.textLabel?.textColor = .black
+//                    }
+                }
                 break
             case "04","06","09","11":
                 if "\(indexPath.row+1)" == "31" {
                     cell.textLabel?.textColor = .lightGray
                 }else {
-                    // ダークモード対応
-                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                        /* ダークモード時の処理 */
-                        cell.textLabel?.textColor = .white
-                    } else {
-                        /* ライトモード時の処理 */
-                        cell.textLabel?.textColor = .black
-                    }                }
+//                    // ダークモード対応
+//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                        /* ダークモード時の処理 */
+//                        cell.textLabel?.textColor = .white
+//                    } else {
+//                        /* ライトモード時の処理 */
+//                        cell.textLabel?.textColor = .black
+//                    }
+                }
                 break
             default:
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    cell.textLabel?.textColor = .white
-                } else {
-                    /* ライトモード時の処理 */
-                    cell.textLabel?.textColor = .black
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    cell.textLabel?.textColor = .white
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    cell.textLabel?.textColor = .black
+//                }
                 break
             }
         }

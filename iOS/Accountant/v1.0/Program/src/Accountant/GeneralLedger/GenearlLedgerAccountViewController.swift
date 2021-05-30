@@ -35,13 +35,13 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         TableView_account.dataSource = self
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            label_list_heading.textColor = .white
-        } else {
-            /* ライトモード時の処理 */
-            label_list_heading.textColor = .black
-        }
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+//            label_list_heading.textColor = .white
+//        } else {
+//            /* ライトモード時の処理 */
+//            label_list_heading.textColor = .black
+//        }
         // データベース
         let dataBaseManager = DataBaseManagerSettingsPeriod()
         let fiscalYear = dataBaseManager.getSettingsPeriodYear()
@@ -412,14 +412,19 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
+        printing = true
+        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
+        TableView_account.overrideUserInterfaceStyle = .light
         TableView_account.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
         self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         TableView_account.showsVerticalScrollIndicator = false
         button_print.isHidden = true
-        if let tappedIndexPath: IndexPath = self.TableView_account.indexPathForSelectedRow { // タップされたセルの位置を取得
-            TableView_account.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        while self.TableView_account.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.TableView_account.indexPathForSelectedRow { // タップされたセルの位置を取得
+                TableView_account.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+            }
         }
             pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width: TableView_account.contentSize.width / 25.4 * 72, height: TableView_account.contentSize.height+view_top.bounds.height / 25.4 * 72) //先頭行の高さを考慮する
@@ -432,7 +437,6 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
             //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
 //        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        printing = true
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
@@ -550,6 +554,8 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         TableView_account.showsVerticalScrollIndicator = true
+        // ダークモード回避を解除
+        TableView_account.overrideUserInterfaceStyle = .unspecified
         button_print.isHidden = false
         TableView_account.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.TableView_account.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
