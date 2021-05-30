@@ -13,15 +13,15 @@
         <!--精算表-->
         <scene sceneID="IGL-Qx-Ozr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="a9q-bv-lX8" customClass="WSViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="a9q-bv-lX8" customClass="WSViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lfl-Db-LzH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6rw-5E-QP2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6rw-5E-QP2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" name="sheetColor"/>
-                                <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="E5P-3D-LGJ" userLabel="ViewBase" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                <color key="backgroundColor" name="SheetColor"/>
+                                <view key="tableHeaderView" opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" id="E5P-3D-LGJ" userLabel="ViewBase">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
@@ -469,7 +469,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="sheetColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="MIW-Sn-Dr7" firstAttribute="leading" secondItem="uEG-Jz-uLr" secondAttribute="leading" id="1iO-AK-ShO"/>
                                                 <constraint firstItem="MIW-Sn-Dr7" firstAttribute="leading" secondItem="uEG-Jz-uLr" secondAttribute="leading" id="4Fp-eP-WP0"/>
@@ -513,7 +513,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS" rowHeight="20" id="Kg0-aE-VWr" userLabel="cell_WS" customClass="WSTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS" rowHeight="20" id="Kg0-aE-VWr" userLabel="cell_WS" customClass="WSTableViewCell" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="113" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kg0-aE-VWr" id="Vrp-8N-QjW">
@@ -809,7 +809,7 @@
                                                 <constraint firstItem="aJT-Lc-xmJ" firstAttribute="width" secondItem="Vrp-8N-QjW" secondAttribute="width" id="uSS-lc-XjV"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="Xpz-AY-jqc" id="Vir-ra-E2I"/>
@@ -823,7 +823,7 @@
                                             <outlet property="label_debit3" destination="G8V-Z8-h1c" id="IAI-wD-hhS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total" rowHeight="20" id="zfU-xi-kkN" userLabel="cell_WS_total" customClass="WSTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total" rowHeight="20" id="zfU-xi-kkN" userLabel="cell_WS_total" customClass="WSTableViewCell" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="133" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zfU-xi-kkN" id="5kh-S3-4j9">
@@ -1107,7 +1107,7 @@
                                                 <constraint firstItem="WAH-tf-FHo" firstAttribute="height" relation="greaterThanOrEqual" secondItem="5kh-S3-4j9" secondAttribute="height" id="z7q-eY-p4d"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="GCf-fO-CQ5" id="ecg-yB-C8g"/>
@@ -1121,7 +1121,7 @@
                                             <outlet property="label_debit3" destination="FfS-ou-gka" id="fZd-oE-qHb"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total_2" rowHeight="20" id="BE1-L0-5Ot" customClass="WSTableViewCell" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total_2" rowHeight="20" id="BE1-L0-5Ot" customClass="WSTableViewCell" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="153" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BE1-L0-5Ot" id="Uup-2D-aLH">
@@ -1405,7 +1405,7 @@
                                                 <constraint firstItem="tvo-gc-V6d" firstAttribute="width" secondItem="Uup-2D-aLH" secondAttribute="width" id="sJX-cs-uBB"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="Gqp-WK-GlK" id="1Es-cb-dII"/>
@@ -1438,6 +1438,7 @@
                     <navigationItem key="navigationItem" title="精算表" id="ewJ-sp-MtQ">
                         <rightBarButtonItems>
                             <barButtonItem title="決算整理仕訳入力" id="Okf-WO-9Ds">
+                                <color key="tintColor" name="AccentOrange"/>
                                 <connections>
                                     <segue destination="mIG-7s-Qse" kind="presentation" id="dIK-LN-U8V"/>
                                 </connections>
@@ -1446,7 +1447,9 @@
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ZhV-n2-BVT">
                                     <rect key="frame" x="164" y="7" width="83" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <state key="normal" title="印刷"/>
+                                    <state key="normal" title="印刷">
+                                        <color key="titleColor" name="AccentOrange"/>
+                                    </state>
                                     <connections>
                                         <action selector="button_print:" destination="a9q-bv-lX8" eventType="touchUpInside" id="iQL-0F-3VB"/>
                                     </connections>
@@ -1479,7 +1482,7 @@
         <!--Annotation View Controller-->
         <scene sceneID="KdW-rO-oPh">
             <objects>
-                <viewController storyboardIdentifier="Annotation_WorkSheet" id="Q8N-Nz-uvw" customClass="AnnotationViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_WorkSheet" id="Q8N-Nz-uvw" customClass="AnnotationViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zhL-fF-pcp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1521,7 +1524,10 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="sheetColor">
+        <namedColor name="AccentOrange">
+            <color red="1" green="0.48693716526031494" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SheetColor">
             <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">

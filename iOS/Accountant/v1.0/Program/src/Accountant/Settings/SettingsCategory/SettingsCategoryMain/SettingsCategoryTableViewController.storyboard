@@ -17,7 +17,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="6Xg-jB-YdT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="categories" id="9N0-0b-jiO">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -26,6 +26,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="le0-yC-HVc" kind="show" id="pqv-Zy-Mss"/>
                                 </connections>
@@ -37,6 +38,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="eB0-WZ-jtL" kind="show" id="K3G-c7-bs0"/>
                                 </connections>
@@ -48,6 +50,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="vsF-TL-2s7" kind="show" id="OO8-rV-lsJ"/>
                                 </connections>
@@ -59,6 +62,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="CKg-83-9K8" kind="show" id="OVZ-hs-IQA"/>
                                 </connections>
@@ -165,6 +169,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="12n-0Y-LYM">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="TextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="50f-JZ-N5i" kind="relationship" relationship="rootViewController" id="5Gh-TX-1DG"/>
@@ -176,8 +183,14 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Secondary">
+        <namedColor name="Background">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CellBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.95157092809677124" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
