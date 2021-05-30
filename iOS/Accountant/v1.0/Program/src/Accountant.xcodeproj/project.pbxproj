@@ -114,6 +114,7 @@
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
 		F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */; };
 		F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */; };
+		F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6686C266247C7008E9137 /* UIColor+extension.swift */; };
 		F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */; };
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
 		F9AAB36224941F1A00AB2FBD /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */; };
@@ -312,6 +313,7 @@
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
 		F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCarouselAndPageViewController.swift; sourceTree = "<group>"; };
 		F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListCarouselAndPageViewController.storyboard; sourceTree = "<group>"; };
+		F9A6686C266247C7008E9137 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTheDayOfReckoningTableViewController.swift; path = SettingsTheDayOfReckoning/SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
 		F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */,
+				F9A668712662483D008E9137 /* Extension */,
 				F95F597F2650266300EFE522 /* UIParts */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
@@ -886,6 +889,14 @@
 				F97422DA253F091500FBA052 /* PickerTextFieldAccountDetail.swift */,
 			);
 			path = SettingsCategoryDetail;
+			sourceTree = "<group>";
+		};
+		F9A668712662483D008E9137 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */ = {
@@ -1513,6 +1524,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
+				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
