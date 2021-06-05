@@ -236,8 +236,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 cell.detailTextLabel2.text = "\(date)"
                 print(date)
             }
-//            // 詳細テキストラベル
-//            cell.detailTextLabel2.textColor = .lightGray
             return cell
         case 1:
             // 会計年度
@@ -248,7 +246,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // 会計帳簿の年度をセルに表示する
             cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
             cell.rightdetailTextLabel.text = "仕訳データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int)"
-//            cell.rightdetailTextLabel.textColor = .lightGray
             // 会計帳簿の連番
             cell.tag = objects[indexPath.row].number
             // 開いている帳簿にチェックマークをつける

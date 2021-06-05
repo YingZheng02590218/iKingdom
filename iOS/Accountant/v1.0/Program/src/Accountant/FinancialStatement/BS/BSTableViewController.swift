@@ -145,15 +145,7 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-//        // ダークモード対応
-//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//            /* ダークモード時の処理 */
-//            header.textLabel?.textColor = .white
-//        } else {
-//            /* ライトモード時の処理 */
-//            header.textLabel?.textColor = .black
         header.textLabel?.textColor = .TextColor
-//        }
         header.textLabel?.textAlignment = .left
         // システムフォントのサイズを設定
         header.textLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -404,14 +396,7 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 if dataBaseManagerBS.getTotalBig5(big5: 0, lastYear: false) != dataBaseManagerBS.getTotalBig5(big5: 3, lastYear: false) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
-//                    // ダークモード対応
-//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                        /* ダークモード時の処理 */
-//                        cell.label_totalOfBigCategory.textColor = .white
-//                    } else {
-//                        /* ライトモード時の処理 */
-//                        cell.label_totalOfBigCategory.textColor = .black
-//                    }
+
                 }
                 return cell
             default:
@@ -602,15 +587,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                 cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-//                // ダークモード対応
-//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                    /* ダークモード時の処理 */
-//                    cell.label_totalOfBigCategory.textColor = .white
-//                } else {
-//                    /* ライトモード時の処理 */
-//                    // 文字色
-//                    cell.label_totalOfBigCategory.textColor = .black
-//                }
                 return cell
             default:
                     // 勘定科目
@@ -781,16 +757,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                         )
                         cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                         cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-//                        // ダークモード対応
-//                        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                            /* ダークモード時の処理 */
-//                            // 文字色
-//                            cell.label_totalOfBigCategory.textColor = .white
-//                        } else {
-//                            /* ライトモード時の処理 */
-//                            // 文字色
-//                            cell.label_totalOfBigCategory.textColor = .black
-//                        }
                         return cell
                     } // 1. array.count（要素数）を利用する
                     
@@ -889,15 +855,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                     )
                     cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                     cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-//                    // ダークモード対応
-//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                        /* ダークモード時の処理 */
-//                        cell.label_totalOfBigCategory.textColor = .white
-//                    } else {
-//                        /* ライトモード時の処理 */
-//                        // 文字色
-//                        cell.label_totalOfBigCategory.textColor = .black
-//                    }
                     return cell
                 } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
@@ -960,15 +917,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                 cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-//                // ダークモード対応
-//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                    /* ダークモード時の処理 */
-//                    cell.label_totalOfBigCategory.textColor = .white
-//                } else {
-//                    /* ライトモード時の処理 */
-//                    // 文字色
-//                    cell.label_totalOfBigCategory.textColor = .black
-//                }
                 return cell
             case objects14.count + 2 + objects15.count + 1 + 1 + objects16.count + objects22.count + 1: //最後の行の下
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
@@ -1008,14 +956,7 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 if dataBaseManagerBS.getTotalBig5(big5: 0, lastYear: false) != dataBaseManagerBS.getTotalBig5(big5: 3, lastYear: false) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
-//                    // ダークモード対応
-//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                        /* ダークモード時の処理 */
-//                        cell.label_totalOfBigCategory.textColor = .white
-//                    } else {
-//                        /* ライトモード時の処理 */
-//                        cell.label_totalOfBigCategory.textColor = .black
-//                    }
+
                 }
                 return cell
             default:
