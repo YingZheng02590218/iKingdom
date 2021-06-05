@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -46,9 +47,13 @@
             <objects>
                 <navigationController id="dEp-Vg-nYV" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="決算書" image="icons8-雑誌-25" id="kQn-iU-qSb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGz-zt-TEe">
+                    <navigationBar key="navigationBar" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGz-zt-TEe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="AccentOrange"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="TextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="RSV-bT-bya" kind="relationship" relationship="rootViewController" id="qoW-5E-NUu"/>
@@ -67,6 +72,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3mA-3C-Vc6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="TextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="zUH-Hl-Fqe" kind="relationship" relationship="rootViewController" id="LpX-2K-woD"/>
@@ -129,6 +137,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZIn-vy-KXP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="TextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="HsL-9u-YX8" kind="relationship" relationship="rootViewController" id="drm-o8-o6r"/>
@@ -146,6 +157,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="AccentOrange"/>
                     </tabBar>
                     <connections>
                         <segue destination="Mfv-1p-Kx7" kind="relationship" relationship="viewControllers" id="lfb-P1-Yq7"/>
@@ -176,5 +188,11 @@
         <image name="icons8-ペン-25" width="25" height="25"/>
         <image name="icons8-開いた本-25" width="25" height="25"/>
         <image name="icons8-雑誌-25" width="25" height="25"/>
+        <namedColor name="AccentOrange">
+            <color red="1" green="0.4869999885559082" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.95157092809677124" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

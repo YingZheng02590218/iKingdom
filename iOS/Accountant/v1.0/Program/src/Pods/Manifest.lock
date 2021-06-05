@@ -112,11 +112,11 @@ PODS:
   - NeuKit (0.0.3)
   - PromisesObjC (1.2.11)
   - Protobuf (3.14.0)
-  - Realm (5.3.3):
-    - Realm/Headers (= 5.3.3)
-  - Realm/Headers (5.3.3)
-  - RealmSwift (5.3.3):
-    - Realm (= 5.3.3)
+  - Realm (3.18.0):
+    - Realm/Headers (= 3.18.0)
+  - Realm/Headers (3.18.0)
+  - RealmSwift (3.18.0):
+    - Realm (= 3.18.0)
   - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
@@ -128,7 +128,7 @@ DEPENDENCIES:
   - Gecco
   - Google-Mobile-Ads-SDK
   - NeuKit
-  - RealmSwift
+  - RealmSwift (~> 3.18.0)
   - SwiftyStoreKit
 
 SPEC REPOS:
@@ -182,10 +182,10 @@ SPEC CHECKSUMS:
   NeuKit: 466248b6c52fabfe4ddc04f38506c4ea802580fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
-  Realm: 2d57ea355bf8ca2a0964d6bfb38d28d7ff2addf6
-  RealmSwift: 0a709536ecea30eea1d3c514f6ade2ed078dee3c
+  Realm: 7b3d04740facf45e958a514b466a32b04f1113d6
+  RealmSwift: c817b5f374668cf08f649afb05f55d92a787649c
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: bf1700c87edfd4197265520b5e05dbc5f27706aa
+PODFILE CHECKSUM: f403f0c0d5ec8587af1f859cf2a26cd9f4116c05
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

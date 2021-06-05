@@ -12,7 +12,7 @@
         <!--Settings Help Detail View Controller-->
         <scene sceneID="lAS-3p-qfQ">
             <objects>
-                <viewController storyboardIdentifier="SettingsHelpDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0EX-ri-3LQ" customClass="SettingsHelpDetailViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsHelpDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0EX-ri-3LQ" customClass="SettingsHelpDetailViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="78T-2F-2CX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,6 +59,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -101,6 +102,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -130,7 +132,9 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 
+
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -156,6 +160,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -198,6 +203,7 @@ Reckoning とは、英語で「清算」を意味する単語です。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -263,6 +269,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -304,6 +311,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -335,6 +343,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -373,6 +382,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -403,6 +413,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -434,6 +445,7 @@ OKボタンをタップします。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -465,13 +477,14 @@ OKボタンをタップします。
 
 
 </string>
+                                <color key="textColor" name="TextColor"/>
                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yXR-Mj-B82"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="3oC-yC-dlZ"/>
                             <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="633-KG-GqZ"/>
@@ -562,8 +575,11 @@ OKボタンをタップします。
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Secondary">
+        <namedColor name="Background">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.050000000000000003" green="0.050000000000000003" blue="0.050000000000000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

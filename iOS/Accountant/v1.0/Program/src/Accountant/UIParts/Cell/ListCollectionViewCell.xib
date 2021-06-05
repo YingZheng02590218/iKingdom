@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,15 +20,16 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udJ-72-ccu" userLabel="View1">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" name="CellBackground"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="udJ-72-ccu" secondAttribute="height" multiplier="2:1" id="eIi-MU-QW3"/>
                         </constraints>
@@ -37,66 +37,85 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOu-X6-DsE" userLabel="View2">
                         <rect key="frame" x="200" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="ldB-M9-50t" userLabel="Label1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="ldB-M9-50t" userLabel="Label1">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="3pa-R5-Qko" userLabel="Label2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-R5-Qko" userLabel="Label2">
                                 <rect key="frame" x="0.0" y="50" width="107" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" name="CellBackground"/>
                         <constraints>
+                            <constraint firstItem="ldB-M9-50t" firstAttribute="leading" secondItem="HOu-X6-DsE" secondAttribute="leading" id="FnJ-Py-Cli"/>
+                            <constraint firstItem="3pa-R5-Qko" firstAttribute="height" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="0.5" id="KzN-Op-XJ3"/>
+                            <constraint firstItem="3pa-R5-Qko" firstAttribute="leading" secondItem="HOu-X6-DsE" secondAttribute="leading" id="Naq-Wx-J4N"/>
+                            <constraint firstItem="3pa-R5-Qko" firstAttribute="top" secondItem="ldB-M9-50t" secondAttribute="bottom" id="UpG-VT-iKS"/>
+                            <constraint firstAttribute="trailing" secondItem="3pa-R5-Qko" secondAttribute="trailing" id="VP4-9g-rc7"/>
+                            <constraint firstItem="ldB-M9-50t" firstAttribute="top" secondItem="HOu-X6-DsE" secondAttribute="top" id="d4h-vp-kZc"/>
+                            <constraint firstItem="ldB-M9-50t" firstAttribute="height" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="0.5" id="dRy-aZ-lI3"/>
+                            <constraint firstAttribute="bottom" secondItem="3pa-R5-Qko" secondAttribute="bottom" id="mBc-Gp-PGg"/>
                             <constraint firstAttribute="width" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="107:100" id="tqU-OR-jIC"/>
+                            <constraint firstAttribute="trailing" secondItem="ldB-M9-50t" secondAttribute="trailing" id="yf6-JE-YX5"/>
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krb-UI-Ia8" userLabel="View3">
                         <rect key="frame" x="307" y="0.0" width="107" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="Bfa-gt-A71" userLabel="Label3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="Bfa-gt-A71" userLabel="Label3">
                                 <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.050000000000000003" preferredMaxLayoutWidth="107" id="9g8-AA-six" userLabel="Label4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-AA-six" userLabel="Label4">
                                 <rect key="frame" x="0.0" y="50" width="107" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="TextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" name="CellBackground"/>
                         <constraints>
+                            <constraint firstItem="Bfa-gt-A71" firstAttribute="top" secondItem="krb-UI-Ia8" secondAttribute="top" id="0YX-sT-Clq"/>
+                            <constraint firstItem="9g8-AA-six" firstAttribute="height" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="0.5" id="a8G-N3-zqx"/>
+                            <constraint firstAttribute="trailing" secondItem="Bfa-gt-A71" secondAttribute="trailing" id="bf2-Xd-G47"/>
+                            <constraint firstItem="Bfa-gt-A71" firstAttribute="leading" secondItem="krb-UI-Ia8" secondAttribute="leading" id="dOr-E7-p2h"/>
+                            <constraint firstAttribute="bottom" secondItem="9g8-AA-six" secondAttribute="bottom" id="dfX-Y6-uzt"/>
+                            <constraint firstItem="9g8-AA-six" firstAttribute="top" secondItem="Bfa-gt-A71" secondAttribute="bottom" id="gwy-Sd-ypB"/>
+                            <constraint firstItem="9g8-AA-six" firstAttribute="leading" secondItem="krb-UI-Ia8" secondAttribute="leading" id="jvP-Tk-KoJ"/>
+                            <constraint firstAttribute="trailing" secondItem="9g8-AA-six" secondAttribute="trailing" id="q2w-Lq-VXO"/>
                             <constraint firstAttribute="width" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="107:100" id="rHc-oE-ECi"/>
+                            <constraint firstItem="Bfa-gt-A71" firstAttribute="height" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="0.5" id="uvc-yX-b7O"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="mu5-kb-Wdz"/>
-            <color key="backgroundColor" name="Secondary"/>
+            <color key="backgroundColor" name="CellBackground"/>
             <constraints>
                 <constraint firstItem="udJ-72-ccu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5Q2-6h-FEC"/>
                 <constraint firstItem="HOu-X6-DsE" firstAttribute="leading" secondItem="udJ-72-ccu" secondAttribute="trailing" id="Kpr-3z-zG4"/>
                 <constraint firstItem="udJ-72-ccu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MCr-FQ-STY"/>
                 <constraint firstAttribute="bottom" secondItem="HOu-X6-DsE" secondAttribute="bottom" id="PFG-lH-f3g"/>
+                <constraint firstItem="krb-UI-Ia8" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="Pbl-68-rOd"/>
                 <constraint firstAttribute="trailing" secondItem="krb-UI-Ia8" secondAttribute="trailing" id="RBX-py-WgU"/>
                 <constraint firstItem="krb-UI-Ia8" firstAttribute="leading" secondItem="HOu-X6-DsE" secondAttribute="trailing" id="Uu9-Tn-r0P"/>
                 <constraint firstItem="krb-UI-Ia8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="giu-GH-sqn"/>
                 <constraint firstAttribute="bottom" secondItem="udJ-72-ccu" secondAttribute="bottom" id="hrS-1W-4I7"/>
                 <constraint firstItem="HOu-X6-DsE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="lZO-IA-5Kv"/>
                 <constraint firstAttribute="bottom" secondItem="krb-UI-Ia8" secondAttribute="bottom" id="ogd-82-Td4"/>
+                <constraint firstItem="udJ-72-ccu" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.483092" id="p4S-Do-WK2"/>
+                <constraint firstItem="HOu-X6-DsE" firstAttribute="width" secondItem="mu5-kb-Wdz" secondAttribute="width" multiplier="0.258454" id="zKp-WU-tss"/>
             </constraints>
             <size key="customSize" width="421" height="164"/>
             <userDefinedRuntimeAttributes>
@@ -115,11 +134,11 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="Secondary">
-            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="CellBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="TextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
