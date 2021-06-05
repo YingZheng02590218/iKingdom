@@ -149,10 +149,12 @@ class SettingsCategoryTableViewController: UITableViewController {
                 //① UI部品を指定
                 let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text = "勘定科目一覧"
+                cell.textLabel?.textColor = .TextColor
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目別勘定科目一覧"
+                cell.textLabel?.textColor = .TextColor
                 return cell
 //        case 3:
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
@@ -161,6 +163,7 @@ class SettingsCategoryTableViewController: UITableViewController {
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text =   ""
+                cell.textLabel?.textColor = .TextColor
                 return cell
             }
         }else {
@@ -168,9 +171,11 @@ class SettingsCategoryTableViewController: UITableViewController {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目一覧"
+                cell.textLabel?.textColor = .TextColor
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.text =   ""
                 return cell
             }

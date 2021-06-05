@@ -6,7 +6,7 @@ target 'Accountant' do
   use_frameworks!
 
   # Pods for Accountant
-    pod 'RealmSwift'
+    pod 'RealmSwift', '~> 3.18.0'
     pod 'NeuKit'
     pod 'EMTNeumorphicView'
     pod 'Firebase/Analytics'
