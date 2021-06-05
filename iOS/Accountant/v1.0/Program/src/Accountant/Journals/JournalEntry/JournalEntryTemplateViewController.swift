@@ -84,13 +84,13 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         switch sender.tag {
         case 8://ニックネームの場合 Done
             self.view.endEditing(true)
-            if nicknameTextField.text == "" {
-                nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            }
+//            if nicknameTextField.text == "" {
+//                nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            }
             break
         case 88://ニックネームの場合 Cancel
             nicknameTextField.text = ""
-            nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            nicknameTextField.textColor = UIColor.lightGray // 文字色をライトグレーとする
             Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break

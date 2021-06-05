@@ -11,11 +11,11 @@
         <!--決算書-->
         <scene sceneID="JOg-cY-o12">
             <objects>
-                <tableViewController id="FrM-sg-T37" customClass="FinancialStatementTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="FrM-sg-T37" customClass="FinancialStatementTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="SS9-qa-GsB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BS" id="FWa-KH-aiN">
                                 <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
@@ -24,6 +24,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="G5j-FW-ePv" kind="show" id="kOy-yz-LhG"/>
                                 </connections>
@@ -35,6 +36,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="aG5-fd-7SD" kind="show" id="vB4-2t-W0h"/>
                                 </connections>
@@ -46,6 +48,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="Mfb-hg-pfy" kind="show" id="Z6Z-Az-gEf"/>
                                 </connections>
@@ -57,6 +60,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="20t-xC-U17" kind="show" id="ymt-T8-Xvs"/>
                                 </connections>
@@ -68,6 +72,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="MQX-qc-poq" kind="show" identifier="" id="e3y-vQ-JFd"/>
                                 </connections>
@@ -79,6 +84,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="e1L-cz-Ix4" kind="show" identifier="segue_PLAccount" id="9o5-7H-8CF"/>
                                 </connections>
@@ -160,8 +166,11 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Secondary">
+        <namedColor name="Background">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CellBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -114,6 +114,7 @@
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
 		F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */; };
 		F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */; };
+		F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6686C266247C7008E9137 /* UIColor+extension.swift */; };
 		F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */; };
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
 		F9AAB36224941F1A00AB2FBD /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */; };
@@ -129,6 +130,7 @@
 		F9C245C926497E4400DD9C9B /* JournalEntryTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
+		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
 		F9CF22E52424F46500572070 /* JournalsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E42424F46500572070 /* JournalsTableViewController.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
 		F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */; };
@@ -311,6 +313,7 @@
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
 		F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCarouselAndPageViewController.swift; sourceTree = "<group>"; };
 		F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListCarouselAndPageViewController.storyboard; sourceTree = "<group>"; };
+		F9A6686C266247C7008E9137 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTheDayOfReckoningTableViewController.swift; path = SettingsTheDayOfReckoning/SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
 		F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
@@ -326,6 +329,7 @@
 		F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalEntryTemplateViewController.xib; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
+		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		F9CF22E42424F46500572070 /* JournalsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalsTableViewController.swift; sourceTree = "<group>"; };
 		F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalsTableViewCell.swift; sourceTree = "<group>"; };
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
@@ -438,6 +442,11 @@
 			isa = PBXGroup;
 			children = (
 				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
+				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
+				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
+				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
+				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
+				F98CD95E24DCA134001CBF94 /* SettingsCategoryGroups */,
 			);
 			path = SettingsCategory;
 			sourceTree = "<group>";
@@ -474,13 +483,6 @@
 				F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */,
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
-				F9F4607524CF64BA008FE62B /* SettingsInformation */,
-				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
-				F9134C222476BBC1002A0F77 /* SettingsCategory */,
-				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
-				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
-				F96B62232595ED75000FC05F /* SettingsHelp */,
-				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -600,9 +602,11 @@
 				F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */,
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
+				F9C7371F265E7D7E00A9F287 /* Color.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */,
+				F9A668712662483D008E9137 /* Extension */,
 				F95F597F2650266300EFE522 /* UIParts */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
@@ -736,6 +740,13 @@
 			isa = PBXGroup;
 			children = (
 				F929C0252478365E0034FAAF /* Settings */,
+				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9F4607524CF64BA008FE62B /* SettingsInformation */,
+				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
+				F9134C222476BBC1002A0F77 /* SettingsCategory */,
+				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
+				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
+				F96B62232595ED75000FC05F /* SettingsHelp */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -776,7 +787,6 @@
 				F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */,
 				F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */,
 				F9134C252476BCE6002A0F77 /* TableViewCellCategoryList.swift */,
-				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
 			);
 			path = SettingsCategoryList;
 			sourceTree = "<group>";
@@ -797,10 +807,6 @@
 				F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */,
 				F9F4607A24D1A298008FE62B /* SettingsTaxonomyDB */,
 				F9F934F52485EC6D00BF7AA7 /* SettingsTaxonomyAccountDB */,
-				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
-				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
-				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
-				F98CD95E24DCA134001CBF94 /* SettingsCategoryGroups */,
 			);
 			path = SettingsCategoryMain;
 			sourceTree = "<group>";
@@ -883,6 +889,14 @@
 				F97422DA253F091500FBA052 /* PickerTextFieldAccountDetail.swift */,
 			);
 			path = SettingsCategoryDetail;
+			sourceTree = "<group>";
+		};
+		F9A668712662483D008E9137 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */ = {
@@ -1223,6 +1237,7 @@
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
+				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F99BE781261DCE4C004611E4 /* BSTableViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
@@ -1509,6 +1524,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
+				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

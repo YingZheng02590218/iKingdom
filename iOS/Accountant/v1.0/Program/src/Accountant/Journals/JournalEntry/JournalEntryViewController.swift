@@ -128,34 +128,34 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            // ダークモード対応
-            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                /* ダークモード時の処理 */
-                TextField_category_debit.textColor = .white
-                TextField_category_credit.textColor = .white
-                TextField_amount_debit.textColor = .white
-                TextField_amount_credit.textColor = .white
-            } else {
-                /* ライトモード時の処理 */
-                // 文字色
-                TextField_category_debit.textColor = UIColor.black
-                TextField_category_credit.textColor = UIColor.black
-                TextField_amount_debit.textColor = UIColor.black
-                TextField_amount_credit.textColor = UIColor.black
-            }
-            // 小書き　が空白だった場合
-            if TextField_SmallWritting.text == "" {
-                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            }else {
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    TextField_SmallWritting.textColor = .white
-                } else {
-                    /* ライトモード時の処理 */
-                    TextField_SmallWritting.textColor = UIColor.black
-                }
-            }
+//            // ダークモード対応
+//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                /* ダークモード時の処理 */
+//                TextField_category_debit.textColor = .white
+//                TextField_category_credit.textColor = .white
+//                TextField_amount_debit.textColor = .white
+//                TextField_amount_credit.textColor = .white
+//            } else {
+//                /* ライトモード時の処理 */
+//                // 文字色
+//                TextField_category_debit.textColor = UIColor.black
+//                TextField_category_credit.textColor = UIColor.black
+//                TextField_amount_debit.textColor = UIColor.black
+//                TextField_amount_credit.textColor = UIColor.black
+//            }
+//            // 小書き　が空白だった場合
+//            if TextField_SmallWritting.text == "" {
+//                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            }else {
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    TextField_SmallWritting.textColor = .white
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    TextField_SmallWritting.textColor = UIColor.black
+//                }
+//            }
         }else if journalEntryType == "" {
             label_title.text = "仕　訳"
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
@@ -168,14 +168,14 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         }
-        // ダークモード対応
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            label_title.textColor = .white
-        } else {
-            /* ライトモード時の処理 */
-            label_title.textColor = UIColor.black
-        }
+//        // ダークモード対応
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+//            label_title.textColor = .white
+//        } else {
+//            /* ライトモード時の処理 */
+//            label_title.textColor = UIColor.black
+//        }
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
@@ -269,9 +269,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
     // デートピッカー作成
     func createDatePicker() {
-        // ボタンの背景色　ダークモード対応
-        Button_Left.backgroundColor = .systemBackground
-        Button_Right.backgroundColor = .systemBackground
+//        // ボタンの背景色　ダークモード対応
+//        Button_Left.backgroundColor = .systemBackground
+//        Button_Right.backgroundColor = .systemBackground
         // 現在時刻を取得
         let now :Date = Date() // UTC時間なので　9時間ずれる
 
@@ -373,8 +373,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }else {
             datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         }
-        // 背景色
-        datePicker.backgroundColor = .systemBackground
+//        // 背景色
+//        datePicker.backgroundColor = .systemBackground
         //　iOS14対応　モード　ドラムロールはwheels
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
@@ -433,6 +433,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
         toolbar.isTranslucent = true
+//        toolbar.textColor = UIColor.AccentOrange
         toolbar.barStyle = .default
         let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
         doneButtonItem.tag = 5
@@ -529,17 +530,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_debit.text == ""{
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
-                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
-                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
+//                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
+//                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+//                }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_category_credit.text == "" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
@@ -551,8 +552,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         case 55://借方金額の場合 Cancel
             TextField_amount_debit.text = ""
             TextField_amount_credit.text = ""
-            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
             Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
@@ -563,17 +564,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }else if TextField_amount_credit.text == "" {
                 Label_Popup.text = "金額が空白となっています"
             }else{
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
-                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
-                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    TextField_amount_debit.textColor = .white // 文字色をホワイトとする 借方金額の文字色
+//                    TextField_amount_credit.textColor = .white // 文字色をホワイトとする 貸方金額の文字色
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    TextField_amount_debit.textColor = UIColor.black // 文字色をブラックとする 借方金額の文字色
+//                    TextField_amount_credit.textColor = UIColor.black // 文字色をブラックとする 貸方金額の文字色
+//                }
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_SmallWritting.text == "" {
                     // カーソルを小書きへ移す
@@ -585,20 +586,20 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         case 66://貸方金額の場合 Cancel
             TextField_amount_debit.text = ""
             TextField_amount_credit.text = ""
-            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
             Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
         case 7://小書きの場合 Done
             self.view.endEditing(true)
-            if TextField_SmallWritting.text == "" {
-                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
-            }
+//            if TextField_SmallWritting.text == "" {
+//                TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            }
             break
         case 77://小書きの場合 Cancel
             TextField_SmallWritting.text = ""
-            TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
             self.view.endEditing(true)
             break
         default:
@@ -617,15 +618,15 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        // ダークモード対応
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            textField.textColor = .white // 文字色をホワイトとする
-        } else {
-            /* ライトモード時の処理 */
-            // 文字色
-            textField.textColor = UIColor.black // 文字色をブラックとする
-        }
+//        // ダークモード対応
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+//            textField.textColor = .white // 文字色をホワイトとする
+//        } else {
+//            /* ライトモード時の処理 */
+//            // 文字色
+//            textField.textColor = UIColor.black // 文字色をブラックとする
+//        }
     }
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -735,27 +736,27 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     }
     // 初期値を再設定
     func setInitialData() {
-        if TextField_category_debit.text == "" {
-            TextField_category_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-        }
-        if TextField_category_credit.text == "" {
-            TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
-        }
+//        if TextField_category_debit.text == "" {
+//            TextField_category_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//        }
+//        if TextField_category_credit.text == "" {
+//            TextField_category_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//        }
         if TextField_amount_debit.text == "" {
             if TextField_amount_credit.text != "" || TextField_amount_credit.text != "" {
                 TextField_amount_debit.text = TextField_amount_credit.text
             }
-            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_debit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
         if TextField_amount_credit.text == "" {
             if TextField_amount_debit.text != "" || TextField_amount_debit.text != "" {
                 TextField_amount_credit.text = TextField_amount_debit.text
             }
-            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//            TextField_amount_credit.textColor = UIColor.lightGray // 文字色をライトグレーとする
         }
-        if TextField_SmallWritting.text == "" {
-            TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
-        }
+//        if TextField_SmallWritting.text == "" {
+//            TextField_SmallWritting.textColor = UIColor.lightGray // 文字色をライトグレーとする
+//        }
     }
     //キーボードを閉じる前
     func textFieldShouldEndEditing(_ textField:UITextField) -> Bool {
@@ -771,20 +772,20 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         if textField.tag == 111 {
 //            TextField_category_debit.text = result  //ここで値渡し
             if TextField_category_debit.text == "" {
-                TextField_category_debit.textColor = UIColor.lightGray
+//                TextField_category_debit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 貸方と同じ勘定科目の場合
                 TextField_category_debit.text = ""
-                TextField_category_debit.textColor = UIColor.lightGray
+//                TextField_category_debit.textColor = UIColor.lightGray
             }else {
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    TextField_category_debit.textColor = .white // 文字色をホワイトとする
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    TextField_category_debit.textColor = .white // 文字色をホワイトとする
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    TextField_category_debit.textColor = UIColor.black // 文字色をブラックとする
+//                }
                 if TextField_amount_debit.text == "" {
                     TextField_amount_debit.becomeFirstResponder()
                 }
@@ -793,20 +794,20 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }else if textField.tag == 222 {
 //            TextField_category_credit.text = result  //ここで値渡し
             if TextField_category_credit.text == "" {
-                TextField_category_credit.textColor = UIColor.lightGray
+//                TextField_category_credit.textColor = UIColor.lightGray
             }else if TextField_category_credit.text == TextField_category_debit.text { // 借方と同じ勘定科目の場合
                 TextField_category_credit.text = ""
-                TextField_category_credit.textColor = UIColor.lightGray
+//                TextField_category_credit.textColor = UIColor.lightGray
             }else {
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    TextField_category_credit.textColor = .white // 文字色をホワイトとする
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    TextField_category_credit.textColor = .white // 文字色をホワイトとする
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    TextField_category_credit.textColor = UIColor.black // 文字色をブラックとする
+//                }
 //                TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
                 if TextField_SmallWritting.text == "" {
                     TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
@@ -1062,21 +1063,21 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         TextField_category_credit.text = objects[indexPath.row].credit_category
         TextField_amount_credit.text = String(objects[indexPath.row].credit_amount)
         TextField_SmallWritting.text = objects[indexPath.row].smallWritting
-        // ダークモード対応
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            TextField_category_debit.textColor = .white
-            TextField_category_credit.textColor = .white
-            TextField_amount_debit.textColor = .white
-            TextField_amount_credit.textColor = .white
-        } else {
-            /* ライトモード時の処理 */
-            // 文字色
-            TextField_category_debit.textColor = UIColor.black
-            TextField_category_credit.textColor = UIColor.black
-            TextField_amount_debit.textColor = UIColor.black
-            TextField_amount_credit.textColor = UIColor.black
-        }
+//        // ダークモード対応
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+//            TextField_category_debit.textColor = .white
+//            TextField_category_credit.textColor = .white
+//            TextField_amount_debit.textColor = .white
+//            TextField_amount_credit.textColor = .white
+//        } else {
+//            /* ライトモード時の処理 */
+//            // 文字色
+//            TextField_category_debit.textColor = UIColor.black
+//            TextField_category_credit.textColor = UIColor.black
+//            TextField_amount_debit.textColor = UIColor.black
+//            TextField_amount_credit.textColor = UIColor.black
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {

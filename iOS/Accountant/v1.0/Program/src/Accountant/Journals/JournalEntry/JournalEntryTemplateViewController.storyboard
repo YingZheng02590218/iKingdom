@@ -6,14 +6,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--仕訳-->
         <scene sceneID="SOl-7u-fS9">
             <objects>
-                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hqY-Er-sb3" userLabel="仕訳" customClass="JournalEntryTemplateViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hqY-Er-sb3" userLabel="仕訳" customClass="JournalEntryTemplateViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h8X-GH-Dax">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,21 +26,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZFU-aV-4EV">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-5Z-3Q8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仕訳" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-5Z-3Q8">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dHz-5Z-3Q8" secondAttribute="height" multiplier="1366:245" id="8hb-SA-rqt"/>
                                                         </constraints>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="仕訳">
-                                                                <attributes>
-                                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                    <font key="NSFont" size="29" name="HiraginoSans-W6"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="29"/>
+                                                        <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -66,20 +58,21 @@
                                             <constraint firstAttribute="trailing" secondItem="ZFU-aV-4EV" secondAttribute="trailing" id="z5q-I5-1NX"/>
                                         </constraints>
                                     </view>
-                                    <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-tk-7SU" userLabel="mid1_NeumorphicView" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                    <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-tk-7SU" userLabel="mid1_NeumorphicView">
                                         <rect key="frame" x="0.0" y="163.5" width="414" height="163.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" tag="111" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogC-wt-ekK">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="163.5"/>
+                                            <stackView opaque="NO" tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogC-wt-ekK">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" tag="888" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="ニックネームを入力してください。" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-8m-lNH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="163.5"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <attributedString key="attributedText"/>
+                                                    <textField opaque="NO" tag="888" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="ニックネームを入力してください。" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-8m-lNH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
+                                                        <color key="backgroundColor" name="TextFieldColor"/>
+                                                        <color key="textColor" name="TextColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                     </textField>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Secondary"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="B0t-8m-lNH" firstAttribute="top" secondItem="ogC-wt-ekK" secondAttribute="top" id="027-KG-Olu"/>
                                                     <constraint firstItem="B0t-8m-lNH" firstAttribute="leading" secondItem="ogC-wt-ekK" secondAttribute="leading" id="4o2-bH-s1t"/>
@@ -101,33 +94,33 @@
                                             <constraint firstItem="ogC-wt-ekK" firstAttribute="height" secondItem="6VJ-tk-7SU" secondAttribute="height" id="tY6-x5-ctE"/>
                                         </constraints>
                                     </view>
-                                    <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZK-fP-q1I" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                    <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZK-fP-q1I" userLabel="mid2_Neumorphic View">
                                         <rect key="frame" x="0.0" y="327" width="414" height="164"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xFW-Je-FVV">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="164"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OET-ln-1vY" userLabel="Stack View1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="65.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="b67-5e-WOV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="16"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="65.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-ft-npg">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="16"/>
+                                                                <rect key="frame" x="207" y="0.0" width="207" height="65.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Secondary"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="b67-5e-WOV" firstAttribute="height" secondItem="OET-ln-1vY" secondAttribute="height" id="4M4-z2-0e7"/>
@@ -144,18 +137,18 @@
                                                             <constraint firstItem="b67-5e-WOV" firstAttribute="leading" secondItem="OET-ln-1vY" secondAttribute="leading" id="zFx-Zr-3D9"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" tag="11111" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-TC-Ket" userLabel="Stack View2">
-                                                        <rect key="frame" x="0.0" y="16" width="414" height="116"/>
+                                                    <stackView opaque="NO" tag="11111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-TC-Ket" userLabel="Stack View2">
+                                                        <rect key="frame" x="0.0" y="65.5" width="414" height="49"/>
                                                         <subviews>
-                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="116"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="49"/>
+                                                                <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
-                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-8r-tSO" customClass="PickerTextField" customModule="Accounting_book" customModuleProvider="target">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="116"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-8r-tSO" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                                <rect key="frame" x="207" y="0.0" width="207" height="49"/>
+                                                                <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
@@ -175,18 +168,18 @@
                                                             <constraint firstItem="LOQ-8r-tSO" firstAttribute="top" secondItem="qFa-TC-Ket" secondAttribute="top" id="lHn-fR-wlF"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" tag="22222" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Noz-lB-7r7" userLabel="Stack View3">
-                                                        <rect key="frame" x="0.0" y="132" width="414" height="32"/>
+                                                    <stackView opaque="NO" tag="22222" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Noz-lB-7r7" userLabel="Stack View3">
+                                                        <rect key="frame" x="0.0" y="114.5" width="414" height="49.5"/>
                                                         <subviews>
-                                                            <textField opaque="NO" tag="333" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-ak-kF6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="32"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-ak-kF6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="49.5"/>
+                                                                <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
-                                                            <textField opaque="NO" tag="444" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-cG-vmJ">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="32"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-cG-vmJ">
+                                                                <rect key="frame" x="207" y="0.0" width="207" height="49.5"/>
+                                                                <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
@@ -249,12 +242,12 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
                                                 <rect key="frame" x="0.0" y="81.5" width="414" height="82"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" name="TextFieldColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QrX-gP-fQs" secondAttribute="height" multiplier="1366:70" id="Zb6-TQ-Fkz"/>
                                                 </constraints>
@@ -284,12 +277,10 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F09-67-1oL" userLabel="Stack View1">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="81.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-hR-U9P" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-hR-U9P" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="0.0" y="0.0" width="83" height="81.5"/>
-                                                        <color key="tintColor" systemColor="systemPinkColor"/>
-                                                        <state key="normal" image="icons8-削除-25-2">
-                                                            <attributedString key="attributedTitle"/>
-                                                        </state>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="" image="icons8-削除-25-2"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -299,11 +290,12 @@
                                                             <action selector="Button_cancel:" destination="hqY-Er-sb3" eventType="touchUpInside" id="OMK-K1-ywu"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-8B-VTU" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-8B-VTU" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="83" y="0.0" width="248" height="81.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="29"/>
                                                         <state key="normal" title="入力">
-                                                            <color key="titleColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -314,15 +306,13 @@
                                                             <action selector="Button_Input:" destination="hqY-Er-sb3" eventType="touchUpInside" id="Wtq-fb-j3g"/>
                                                         </connections>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77c-Y9-S4K">
+                                                    <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77c-Y9-S4K">
                                                         <rect key="frame" x="331" y="0.0" width="83" height="81.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fvo-vA-Ese" userLabel="Button2" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fvo-vA-Ese" userLabel="Button2" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="83" height="81.5"/>
-                                                                <color key="tintColor" systemColor="systemPinkColor"/>
-                                                                <state key="normal" image="icons8-削除-25">
-                                                                    <attributedString key="attributedTitle"/>
-                                                                </state>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" title="" image="icons8-削除-25"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                         <integer key="value" value="10"/>
@@ -333,7 +323,6 @@
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="Fvo-vA-Ese" firstAttribute="top" secondItem="77c-Y9-S4K" secondAttribute="top" id="LN3-HU-XZk"/>
                                                             <constraint firstAttribute="trailing" secondItem="Fvo-vA-Ese" secondAttribute="trailing" id="fcA-ks-QhG"/>
@@ -342,6 +331,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="aOv-8B-VTU" firstAttribute="top" secondItem="F09-67-1oL" secondAttribute="top" id="AEA-36-oUm"/>
                                                     <constraint firstAttribute="trailing" secondItem="77c-Y9-S4K" secondAttribute="trailing" id="B8D-zD-RMg"/>
@@ -396,6 +386,7 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="F09-67-1oL" secondAttribute="trailing" id="6tw-dW-nMb"/>
                                             <constraint firstItem="1Wf-M6-ASE" firstAttribute="top" secondItem="F09-67-1oL" secondAttribute="bottom" id="EEZ-fh-WEt"/>
@@ -410,7 +401,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="Secondary"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="6VJ-tk-7SU" firstAttribute="top" secondItem="wap-wf-vUW" secondAttribute="bottom" id="5tP-Fc-HaW"/>
                                     <constraint firstItem="G7q-Qp-ZIP" firstAttribute="height" secondItem="VwS-Cb-coL" secondAttribute="height" multiplier="0.2" id="64L-Nh-a7C"/>
@@ -441,7 +432,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hYF-QM-pGb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="VwS-Cb-coL" firstAttribute="width" secondItem="hYF-QM-pGb" secondAttribute="width" id="0hh-G1-hhM"/>
                             <constraint firstItem="hYF-QM-pGb" firstAttribute="top" secondItem="VwS-Cb-coL" secondAttribute="top" id="2Bz-uD-hVq"/>
@@ -471,17 +462,37 @@
             <point key="canvasLocation" x="460" y="2782.03125"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Fvo-vA-Ese">
+            <size key="intrinsicContentSize" width="25" height="25"/>
+        </designable>
+        <designable name="LOQ-8r-tSO">
+            <size key="intrinsicContentSize" width="97.5" height="32"/>
+        </designable>
+        <designable name="XUS-hR-U9P">
+            <size key="intrinsicContentSize" width="25" height="25"/>
+        </designable>
+        <designable name="aOv-8B-VTU">
+            <size key="intrinsicContentSize" width="58" height="41"/>
+        </designable>
+        <designable name="ue5-SW-9cy">
+            <size key="intrinsicContentSize" width="97.5" height="32"/>
+        </designable>
+    </designables>
     <resources>
         <image name="icons8-削除-25" width="25" height="25"/>
         <image name="icons8-削除-25-2" width="25" height="25"/>
-        <namedColor name="Secondary">
+        <namedColor name="Background">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="ButtonTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextFieldColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

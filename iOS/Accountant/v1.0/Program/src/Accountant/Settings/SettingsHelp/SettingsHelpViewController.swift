@@ -94,14 +94,14 @@ class SettingsHelpViewController: UIViewController {
                                       value: "Link11",
                                       range: NSString(string: baseString!).range(of: "入力した取引を確認しよう"))
         textView.attributedText = attributedString
-        // ダークモード対応
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            textView.textColor = .white
-        } else {
-            /* ライトモード時の処理 */
-            textView.textColor = .black
-        }
+//        // ダークモード対応
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+            textView.textColor = .TextColor
+//        } else {
+//            /* ライトモード時の処理 */
+//            textView.textColor = .black
+//        }
         textView.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)!)
         textView.center = view.center
         textView.isSelectable = true

@@ -15,7 +15,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cvJ-Zi-yFZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="pVW-gq-uJC" customClass="SettingUpgradeTableViewCell" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="44"/>
@@ -26,6 +26,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-VA-DYY" userLabel="label">
                                             <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <attributedString key="attributedText"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -39,6 +40,7 @@
                                         <constraint firstAttribute="bottom" secondItem="bkA-VA-DYY" secondAttribute="bottom" id="twK-S5-6ex"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <outlet property="label" destination="bkA-VA-DYY" id="1ct-Vw-Wc4"/>
                                 </connections>
@@ -73,7 +75,10 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Secondary">
+        <namedColor name="Background">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CellBackground">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

@@ -128,11 +128,13 @@ class FinancialStatementTableViewController: UITableViewController {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
                 cell.textLabel?.text = "貸借対照表"
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
                 cell.textLabel?.text = "損益計算書"
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
 //            case 2:
@@ -143,6 +145,7 @@ class FinancialStatementTableViewController: UITableViewController {
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             }
@@ -151,21 +154,25 @@ class FinancialStatementTableViewController: UITableViewController {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
                 cell.textLabel?.text = "精算表"
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
                 cell.textLabel?.text = "試算表"
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
                 cell.textLabel?.text = "損益勘定"
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
+                cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             }
