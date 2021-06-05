@@ -11,13 +11,13 @@
         <!--設定　仕訳帳画面-->
         <scene sceneID="vnW-Fq-hBy">
             <objects>
-                <tableViewController id="v7G-SR-b55" customClass="SettingsOperatingTableViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="v7G-SR-b55" customClass="SettingsOperatingTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="yg4-4c-tZM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Secondary"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="cKr-RX-8Jr" customClass="TableViewCellCategoryList" customModule="Accounting_book" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="cKr-RX-8Jr" customClass="TableViewCellCategoryList" customModule="Accountant" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cKr-RX-8Jr" id="K6l-KB-QGG">
@@ -27,12 +27,14 @@
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Sh-nA-Ee1">
                                             <rect key="frame" x="319" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                            <color key="onTintColor" name="AccentDark"/>
                                             <connections>
                                                 <action selector="ToggleButton:" destination="cKr-RX-8Jr" eventType="valueChanged" id="kIO-kT-ccm"/>
                                             </connections>
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <outlet property="ToggleButton" destination="1Sh-nA-Ee1" id="tVz-VI-wEM"/>
                                 </connections>
@@ -67,7 +69,13 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Secondary">
+        <namedColor name="AccentDark">
+            <color red="0.0" green="0.89800000190734863" blue="0.87099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Background">
+            <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CellBackground">
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

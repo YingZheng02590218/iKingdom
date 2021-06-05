@@ -33,7 +33,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
@@ -146,14 +145,15 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        // ダークモード対応
-        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-            /* ダークモード時の処理 */
-            header.textLabel?.textColor = .white
-        } else {
-            /* ライトモード時の処理 */
-            header.textLabel?.textColor = .black
-        }
+//        // ダークモード対応
+//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//            /* ダークモード時の処理 */
+//            header.textLabel?.textColor = .white
+//        } else {
+//            /* ライトモード時の処理 */
+//            header.textLabel?.textColor = .black
+        header.textLabel?.textColor = .TextColor
+//        }
         header.textLabel?.textAlignment = .left
         // システムフォントのサイズを設定
         header.textLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -404,14 +404,14 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 if dataBaseManagerBS.getTotalBig5(big5: 0, lastYear: false) != dataBaseManagerBS.getTotalBig5(big5: 3, lastYear: false) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
-                    // ダークモード対応
-                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                        /* ダークモード時の処理 */
-                        cell.label_totalOfBigCategory.textColor = .white
-                    } else {
-                        /* ライトモード時の処理 */
-                        cell.label_totalOfBigCategory.textColor = .black
-                    }
+//                    // ダークモード対応
+//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                        /* ダークモード時の処理 */
+//                        cell.label_totalOfBigCategory.textColor = .white
+//                    } else {
+//                        /* ライトモード時の処理 */
+//                        cell.label_totalOfBigCategory.textColor = .black
+//                    }
                 }
                 return cell
             default:
@@ -602,15 +602,15 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                 cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    cell.label_totalOfBigCategory.textColor = .white
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    cell.label_totalOfBigCategory.textColor = .black
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    cell.label_totalOfBigCategory.textColor = .white
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    cell.label_totalOfBigCategory.textColor = .black
+//                }
                 return cell
             default:
                     // 勘定科目
@@ -781,16 +781,16 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                         )
                         cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                         cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-                        // ダークモード対応
-                        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                            /* ダークモード時の処理 */
-                            // 文字色
-                            cell.label_totalOfBigCategory.textColor = .white
-                        } else {
-                            /* ライトモード時の処理 */
-                            // 文字色
-                            cell.label_totalOfBigCategory.textColor = .black
-                        }
+//                        // ダークモード対応
+//                        if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                            /* ダークモード時の処理 */
+//                            // 文字色
+//                            cell.label_totalOfBigCategory.textColor = .white
+//                        } else {
+//                            /* ライトモード時の処理 */
+//                            // 文字色
+//                            cell.label_totalOfBigCategory.textColor = .black
+//                        }
                         return cell
                     } // 1. array.count（要素数）を利用する
                     
@@ -889,15 +889,15 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                     )
                     cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                     cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-                    // ダークモード対応
-                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                        /* ダークモード時の処理 */
-                        cell.label_totalOfBigCategory.textColor = .white
-                    } else {
-                        /* ライトモード時の処理 */
-                        // 文字色
-                        cell.label_totalOfBigCategory.textColor = .black
-                    }
+//                    // ダークモード対応
+//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                        /* ダークモード時の処理 */
+//                        cell.label_totalOfBigCategory.textColor = .white
+//                    } else {
+//                        /* ライトモード時の処理 */
+//                        // 文字色
+//                        cell.label_totalOfBigCategory.textColor = .black
+//                    }
                     return cell
                 } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+objects22[indexPath.row-(objects14.count + 2 + objects15.count + 1 + 1 + objects16.count)].category
@@ -960,15 +960,15 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 )
                 cell.label_totalOfBigCategory_previous.attributedText = attributeTextt
                 cell.label_totalOfBigCategory_previous.font = UIFont.boldSystemFont(ofSize: 14)
-                // ダークモード対応
-                if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                    /* ダークモード時の処理 */
-                    cell.label_totalOfBigCategory.textColor = .white
-                } else {
-                    /* ライトモード時の処理 */
-                    // 文字色
-                    cell.label_totalOfBigCategory.textColor = .black
-                }
+//                // ダークモード対応
+//                if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                    /* ダークモード時の処理 */
+//                    cell.label_totalOfBigCategory.textColor = .white
+//                } else {
+//                    /* ライトモード時の処理 */
+//                    // 文字色
+//                    cell.label_totalOfBigCategory.textColor = .black
+//                }
                 return cell
             case objects14.count + 2 + objects15.count + 1 + 1 + objects16.count + objects22.count + 1: //最後の行の下
                 let cell = tableView.dequeueReusableCell(withIdentifier: "totalOfBigCategory", for: indexPath) as! TableViewCellTotalOfBigCategory
@@ -1008,14 +1008,14 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 if dataBaseManagerBS.getTotalBig5(big5: 0, lastYear: false) != dataBaseManagerBS.getTotalBig5(big5: 3, lastYear: false) {
                     cell.label_totalOfBigCategory.textColor = .red
                 }else {
-                    // ダークモード対応
-                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
-                        /* ダークモード時の処理 */
-                        cell.label_totalOfBigCategory.textColor = .white
-                    } else {
-                        /* ライトモード時の処理 */
-                        cell.label_totalOfBigCategory.textColor = .black
-                    }
+//                    // ダークモード対応
+//                    if (UITraitCollection.current.userInterfaceStyle == .dark) {
+//                        /* ダークモード時の処理 */
+//                        cell.label_totalOfBigCategory.textColor = .white
+//                    } else {
+//                        /* ライトモード時の処理 */
+//                        cell.label_totalOfBigCategory.textColor = .black
+//                    }
                 }
                 return cell
             default:
@@ -1112,7 +1112,19 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
     }
     
     @IBOutlet weak var view_top: UIView!
-    var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
+    var printing: Bool = false { // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
+        didSet(oldValue){
+            if !(oldValue) {
+//                if self.overrideUserInterfaceStyle != .light  {
+//                    // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
+//                    tableView.overrideUserInterfaceStyle = .light
+//                }
+//            }else {
+//                // ダークモード回避を解除
+//                tableView.overrideUserInterfaceStyle = .unspecified
+            }
+        }
+    }
 //    // disable sticky section header
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        if printing {
@@ -1140,10 +1152,12 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
+        
+        printing = true
+        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
+        tableView.overrideUserInterfaceStyle = .light
         tableView.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
 //        tableView.contentInset = UIEdgeInsets(top: +(view_top.bounds.height+UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
-
-        printing = true
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
@@ -1154,8 +1168,10 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         tableView.showsVerticalScrollIndicator = false
-        if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
-            tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
+                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+            }
         }
 //        CGRectMake(0, 0, tableView.contentSize.width, tableView.contentSize.height)
         //A4, 210x297mm, 8.27x11.68インチ,595x841ピクセル
@@ -1177,7 +1193,6 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
         let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
-        printing = false
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = false
@@ -1259,8 +1274,12 @@ class BSTableViewController: UITableViewController, UIPrintInteractionController
                 print("iPhoneです")
             }
         }
+        printing = false
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
+        // ダークモード回避を解除
+        tableView.overrideUserInterfaceStyle = .unspecified
+
         tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
 
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする

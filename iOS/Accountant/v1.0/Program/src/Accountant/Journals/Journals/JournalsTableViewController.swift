@@ -569,16 +569,20 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
      * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
      */
     @IBAction func button_print(_ sender: UIButton) {
+        printing = true
+        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
+        tableView.overrideUserInterfaceStyle = .light
         tableView.contentInset = UIEdgeInsets(top: view_top.bounds.height, left: 0, bottom: 0, right: 0)
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
         tableView.showsVerticalScrollIndicator = false
-        if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow {// タップされたセルの位置を取得
-            // nilでない場合
-            tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow {// タップされたセルの位置を取得
+                // nilでない場合
+                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+            }
         }
-        printing = true
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
@@ -689,6 +693,8 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
         }
         //余計なUIをキャプチャしないように隠したのを戻す
         tableView.showsVerticalScrollIndicator = true
+        // ダークモード回避を解除
+        tableView.overrideUserInterfaceStyle = .unspecified
         // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
         tableView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: 0, right: 0)
         //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする

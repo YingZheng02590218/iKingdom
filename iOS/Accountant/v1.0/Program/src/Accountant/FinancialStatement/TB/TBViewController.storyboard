@@ -13,14 +13,14 @@
         <!--試算表-->
         <scene sceneID="waC-Ug-l0h">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="TBViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="TBViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y7z-Dz-h6M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" name="sheetColor"/>
+                                <color key="backgroundColor" name="SheetColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="fNc-Jo-BVR" secondAttribute="height" multiplier="512:567" id="Kbe-eX-2fe"/>
                                 </constraints>
@@ -28,7 +28,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
@@ -58,7 +58,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" name="sheetColor"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="aHQ-AM-Ixh" secondAttribute="trailing" id="E1N-Ko-gGN"/>
                                                         <constraint firstItem="aHQ-AM-Ixh" firstAttribute="top" secondItem="wqe-TZ-AuG" secondAttribute="top" id="EzB-aG-kYP"/>
@@ -133,7 +133,6 @@
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="UJg-go-Uex" secondAttribute="height" multiplier="125:34" id="nz1-lA-Fsf"/>
                                                             </constraints>
@@ -144,7 +143,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" name="sheetColor"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="ifW-Bi-RUu" firstAttribute="height" secondItem="nLx-ow-noB" secondAttribute="height" id="1FV-zb-hnf"/>
                                                         <constraint firstItem="UJg-go-Uex" firstAttribute="leading" secondItem="ifW-Bi-RUu" secondAttribute="trailing" id="1P2-fL-Zgf"/>
@@ -195,7 +194,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TableViewCellTB" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TableViewCellTB" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="88" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sQ5-fY-wHT" id="ZN2-d6-xhu">
@@ -319,7 +318,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="9DZ-Ly-bo4" secondAttribute="trailing" id="wbp-Ab-scE"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="TJb-yI-iLr" id="HOP-wh-ahW"/>
@@ -327,7 +326,7 @@
                                             <outlet property="label_debit" destination="n6c-eZ-lsk" id="vXw-Ki-r7W"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TableViewCellTB" customModule="Accounting_book" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TableViewCellTB" customModule="Accountant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYL-Wy-4Zu" id="aIN-To-wMj">
@@ -443,7 +442,7 @@
                                                 <constraint firstItem="7VK-So-Bab" firstAttribute="width" secondItem="aIN-To-wMj" secondAttribute="width" multiplier="0.244141" id="tfF-iC-8Fy"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="sheetColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="label_account" destination="Jac-nZ-whg" id="EpS-tt-gQB"/>
@@ -488,7 +487,9 @@
                                     <rect key="frame" x="204" y="7" width="75" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="印刷"/>
+                                    <state key="normal" title="印刷">
+                                        <color key="titleColor" name="AccentOrange"/>
+                                    </state>
                                     <connections>
                                         <action selector="button_print:" destination="mqU-Yd-p1X" eventType="touchUpInside" id="mjZ-LK-YQA"/>
                                     </connections>
@@ -513,7 +514,7 @@
         <!--Annotation View Controller-->
         <scene sceneID="la3-oc-wdN">
             <objects>
-                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewController" customModule="Accounting_book" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n94-lm-BM6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -555,8 +556,11 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="sheetColor">
-            <color red="1" green="1" blue="0.88500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="AccentOrange">
+            <color red="1" green="0.48693716526031494" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SheetColor">
+            <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
