@@ -35,13 +35,6 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         TableView_account.dataSource = self
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
-//        if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//            /* ダークモード時の処理 */
-//            label_list_heading.textColor = .white
-//        } else {
-//            /* ライトモード時の処理 */
-//            label_list_heading.textColor = .black
-//        }
         // データベース
         let dataBaseManager = DataBaseManagerSettingsPeriod()
         let fiscalYear = dataBaseManager.getSettingsPeriodYear()

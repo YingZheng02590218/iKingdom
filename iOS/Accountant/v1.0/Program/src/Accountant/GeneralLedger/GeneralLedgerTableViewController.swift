@@ -169,14 +169,6 @@ class GeneralLedgerTableViewController: UITableViewController {
         let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
         if objectss.count > 0 || objectsss.count > 0 || objectssss.count > 0 || objectsssss.count > 0 {
             cell.textLabel?.textColor = .TextColor
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                cell.textLabel?.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                cell.textLabel?.textColor = .black
-//            }
         }else {
             cell.textLabel?.textColor = .lightGray
         }

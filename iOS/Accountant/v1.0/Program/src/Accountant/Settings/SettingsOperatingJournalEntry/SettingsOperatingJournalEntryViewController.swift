@@ -38,7 +38,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
    
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // 画面の回転に合わせてCellのサイズを変更する
         listCollectionView.collectionViewLayout.invalidateLayout()

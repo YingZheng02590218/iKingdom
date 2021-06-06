@@ -39,9 +39,6 @@ class TableViewCellSettingAccountDetailAccount: UITableViewCell, UITextFieldDele
     }
     //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc func done() {
-//        if textField_AccountDetail_Account!.text == "" {
-//            textField_AccountDetail_Account.textColor = .lightGray // 文字色をグレーアウトとする
-//        }
         self.endEditing(true)
     }
     

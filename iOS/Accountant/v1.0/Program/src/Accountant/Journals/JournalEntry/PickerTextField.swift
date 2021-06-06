@@ -294,7 +294,6 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // 文字色
-//        self.textColor = UIColor.black
         if component == 0 {
             self.text = categories[row] as String
         }else if component == 1 { // ドラムロールの2列目か？
