@@ -76,14 +76,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "作成書類："))
             textView_aboutThisApp.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-                textView_aboutThisApp.textColor = .TextColor
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_aboutThisApp.textColor = .black
-//            }
+            textView_aboutThisApp.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_aboutThisApp.setContentOffset(
                 CGPoint(x: 0, y: -textView_aboutThisApp.contentInset.top),
@@ -122,14 +115,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "□　経済活動の種類による分類"))
             textView_thought.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_thought.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_thought.textColor = .black
-//            }
             textView_thought.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_thought.setContentOffset(
@@ -165,14 +150,6 @@ class SettingsHelpDetailViewController: UIViewController {
             ], range: NSString(string: baseString!).range(of: "1. 取引の発生から財務諸表までの流れ"))
             attributedString.replaceCharacters(in: NSMakeRange(150, 1), with: attrStringWithImage)
             textView_basicOfBookkeeping.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_basicOfBookkeeping.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_basicOfBookkeeping.textColor = .black
-//            }
             textView_basicOfBookkeeping.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_basicOfBookkeeping.setContentOffset(
@@ -199,14 +176,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "    2. 勘定科目体系の登録 "))
             textView_setUp.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_setUp.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_setUp.textColor = .black
-//            }
             textView_setUp.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp.setContentOffset(
@@ -302,14 +271,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 会計帳簿を作成しよう"))
             textView_setUp_basicInfo.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_setUp_basicInfo.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_setUp_basicInfo.textColor = .black
-//            }
             textView_setUp_basicInfo.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_basicInfo.setContentOffset(
@@ -450,14 +411,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 新規に追加登録する"))
             textView_setUp_account.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_setUp_account.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_setUp_account.textColor = .black
-//            }
             textView_setUp_account.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_account.setContentOffset(
@@ -602,14 +555,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 削除をする"))
             textView_setUp_accountEdit.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_setUp_accountEdit.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_setUp_accountEdit.textColor = .black
-//            }
             textView_setUp_accountEdit.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_accountEdit.setContentOffset(
@@ -651,14 +596,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 仕訳帳画面"))
             textView_configuration.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_configuration.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_configuration.textColor = .black
-//            }
             textView_configuration.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_configuration.setContentOffset(
@@ -691,14 +628,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "1. 仕訳を入力する"))
             textView_journalEntry.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_journalEntry.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_journalEntry.textColor = .black
-//            }
             textView_journalEntry.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry.setContentOffset(
@@ -740,14 +669,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "2. 仕訳を修正する"))
             textView_journalEntry_edit.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_journalEntry_edit.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_journalEntry_edit.textColor = .black
-//            }
             textView_journalEntry_edit.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry_edit.setContentOffset(
@@ -798,14 +719,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "3. 仕訳を削除する"))
             textView_journalEntry_delete.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_journalEntry_delete.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_journalEntry_delete.textColor = .black
-//            }
             textView_journalEntry_delete.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry_delete.setContentOffset(
@@ -856,15 +769,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "4. 入力した取引を確認しよう"))
             textView_journals.attributedText = attributedString
-//            // ダークモード対応
-//            if (UITraitCollection.current.userInterfaceStyle == .dark) {
-//                /* ダークモード時の処理 */
-//                textView_journals.textColor = .white
-//            } else {
-//                /* ライトモード時の処理 */
-//                textView_journals.textColor = .black
-//            }
-            textView_journals.textColor = .TextColor
             textView_journals.textColor = .TextColor
             self.view.layoutIfNeeded()    // 追加
             textView_journals.setContentOffset(

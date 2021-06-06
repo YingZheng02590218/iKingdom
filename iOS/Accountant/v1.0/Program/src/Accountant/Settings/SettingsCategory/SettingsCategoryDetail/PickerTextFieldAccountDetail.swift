@@ -401,12 +401,10 @@ class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerV
                     return big_11[row] as String // エラー　2020/10/15
                 }
             default:
-                self.text = "選択してください" // 中区分
+                self.text = "" // 中区分
                 return "-"
             }
         }
-//        self.text = "選択してください" // 小区分
-//        return "-"
     }
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -421,10 +419,8 @@ class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerV
     }
     
     @objc func cancel() {
-        AccountDetail_big = "選択してください"
-        AccountDetail = "選択してください"
-//        AccountDetail_big = ""
-//        AccountDetail = ""
+        AccountDetail_big = ""
+        AccountDetail = ""
         self.selectedRank0 = ""
         self.selectedRank1 = ""
         self.endEditing(true)
