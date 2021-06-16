@@ -6,16 +6,18 @@ target 'Accountant' do
   use_frameworks!
 
   # Pods for Accountant
-    pod 'RealmSwift', '~> 3.18.0'
-    pod 'NeuKit'
-    pod 'EMTNeumorphicView'
-    pod 'Firebase/Analytics'
-    pod 'Firebase/AdMob'
     pod 'Google-Mobile-Ads-SDK'
-    pod 'Gecco'
+    pod 'GoogleAnalytics'
+    pod 'GoogleUtilities'
+    pod 'Firebase/AdMob'
+    pod 'Firebase/Core'
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
     pod 'SwiftyStoreKit'
+    pod 'RealmSwift', ' > 3.19.0'
+    pod 'NeuKit'
+    pod 'EMTNeumorphicView'
+    pod 'Gecco'
 
   target 'AccountantTests' do
     inherit! :search_paths
@@ -25,5 +27,11 @@ target 'Accountant' do
   target 'AccountantUITests' do
     # Pods for testing
   end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+end
 
 end
