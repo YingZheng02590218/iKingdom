@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 import AdSupport // IDFA対応
 import AppTrackingTransparency // IDFA対応
@@ -179,6 +180,12 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             presentAnnotation()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        // 日付　ボタン作成
+        createButtons()
+    }
+    
     // チュートリアル対応
     func presentAnnotation() {
         let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
@@ -351,9 +358,64 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    // ボタンのデザインを指定する
+    private func createButtons() {
+//        Button_Left.setTitle("1", for: .normal)
+        Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_Left.neumorphicLayer?.cornerRadius = Button_Left.frame.width / 2.2
+//        Button_Left.contentVerticalAlignment = .fill
+//        Button_Left.contentHorizontalAlignment = .fill
+        Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        Button_Left.neumorphicLayer?.edged = true
+        Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        
+//        Button_Right.setTitle("1", for: .normal)
+        Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_Right.neumorphicLayer?.cornerRadius = Button_Right.frame.width / 2.2
+//        Button_Right.contentVerticalAlignment = .fill
+//        Button_Right.contentHorizontalAlignment = .fill
+        Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        Button_Right.neumorphicLayer?.edged = true
+        Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        
+        inputButton.setTitle("入力", for: .normal)
+        inputButton.setTitleColor(.ButtonTextColor, for: .normal)
+        inputButton.neumorphicLayer?.cornerRadius = inputButton.frame.height / 2.2
+//        inputButton.contentVerticalAlignment = .fill
+//        inputButton.contentHorizontalAlignment = .fill
+        inputButton.setTitleColor(.ButtonTextColor, for: .selected)
+        inputButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        inputButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        inputButton.neumorphicLayer?.edged = true
+        inputButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        
+//        Button_cancel.setTitle("入力", for: .normal)
+        Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_cancel.neumorphicLayer?.cornerRadius = Button_cancel.frame.height / 2.2
+//        Button_cancel.contentVerticalAlignment = .fill
+//        Button_cancel.contentHorizontalAlignment = .fill
+        Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_cancel.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.edged = true
+        Button_cancel.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+    }
 
+    let LIGHTSHADOWOPACITY: Float = 0.2
+    let DARKSHADOWOPACITY: Float = 0.7
+    let ELEMENTDEPTH: CGFloat = 12
+    
     @IBOutlet var dateLabel: UILabel!
-    @IBOutlet weak var Button_Left: UIButton!
+    @IBOutlet weak var Button_Left: EMTNeumorphicButton!
     @IBAction func Button_Left(_ sender: UIButton) {
         let min = datePicker.minimumDate!
         if datePicker.date > min {
@@ -361,7 +423,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             datePicker.date = modifiedDate
         }
     }
-    @IBOutlet weak var Button_Right: UIButton!
+    @IBOutlet weak var Button_Right: EMTNeumorphicButton!
     @IBAction func Button_Right(_ sender: UIButton) {
         let max = datePicker.maximumDate!
         if datePicker.date < max {
@@ -740,7 +802,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     private var timer: Timer?                           // Timerを保持する変数
     @IBOutlet weak var Label_Popup: UILabel!
-    @IBOutlet var inputButton: UIButton!// 入力ボタン
+    @IBOutlet var inputButton: EMTNeumorphicButton!// 入力ボタン
     // 入力ボタン
     @IBAction func Button_Input(_ sender: Any) {
         // シスログ出力
@@ -900,6 +962,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         timer.invalidate()
     }
     
+    @IBOutlet var Button_cancel: EMTNeumorphicButton!
     @IBAction func Button_cancel(_ sender: UIButton) {
         TextField_category_debit.text = ""
         TextField_category_credit.text = ""

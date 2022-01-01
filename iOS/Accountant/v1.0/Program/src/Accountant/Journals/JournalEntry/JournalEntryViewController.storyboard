@@ -80,26 +80,29 @@
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView">
                                         <rect key="frame" x="0.0" y="264.5" width="1024" height="264.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
-                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="264.5"/>
+                                            <stackView opaque="NO" tag="111" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="264.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDc-0D-SC8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="102.5" height="264.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="264.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="102.5" y="0.0" width="102.5" height="264.5"/>
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="264.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-戻る-50"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="" image="icons8-戻る-50">
+                                                            <color key="titleColor" name="ButtonTextColor"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="Button_Left:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="6f1-XI-9Jc"/>
                                                         </connections>
                                                     </button>
                                                     <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                        <rect key="frame" x="205" y="0.0" width="716.5" height="264.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="264.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                             <!--1970-01-01 11:00:00 +0000-->
@@ -112,10 +115,13 @@
                                                             <action selector="DatePicker:" destination="RxZ-JM-Gew" eventType="valueChanged" id="Af7-Vx-MfZ"/>
                                                         </connections>
                                                     </datePicker>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="921.5" y="0.0" width="102.5" height="264.5"/>
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="264.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-進む-50"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="" image="icons8-進む-50">
+                                                            <color key="titleColor" name="ButtonTextColor"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="Button_Right:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="woh-yq-CrX"/>
                                                         </connections>
@@ -323,8 +329,8 @@
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" tag="555" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
-                                                <rect key="frame" x="0.0" y="264.5" width="0.0" height="0.0"/>
+                                            <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
+                                                <rect key="frame" x="0.0" y="264.5" width="1024" height="0.0"/>
                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="nGT-71-Qqm" secondAttribute="height" multiplier="1366:70" id="YzH-Za-7Y5"/>
@@ -359,10 +365,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-lr-FfW" userLabel="Stack View1">
                                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="132.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ef0-Vy-bhy" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="0.0" y="0.0" width="205" height="132.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-削除-25-2"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="" image="icons8-削除-25-2">
+                                                            <color key="titleColor" name="ButtonTextColor"/>
+                                                        </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="10"/>
@@ -372,7 +381,7 @@
                                                             <action selector="Button_cancel:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="J5G-Cv-Xf7"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="205" y="0.0" width="614" height="132.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="29"/>
@@ -513,6 +522,7 @@
                     <connections>
                         <outlet property="Button_Left" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
                         <outlet property="Button_Right" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
+                        <outlet property="Button_cancel" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
                         <outlet property="Label_Popup" destination="mGz-Uj-doj" id="fIP-T4-fD8"/>
                         <outlet property="TextField_SmallWritting" destination="nGT-71-Qqm" id="zsw-dM-nKu"/>
                         <outlet property="TextField_amount_credit" destination="8YU-bl-bba" id="9e8-Jc-Q7E"/>
