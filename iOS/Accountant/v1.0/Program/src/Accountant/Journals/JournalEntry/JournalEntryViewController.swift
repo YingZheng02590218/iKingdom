@@ -39,6 +39,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     var journalEntryType :String = "" // Journal Entries、Adjusting and Closing Entries
     var tappedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
     var primaryKey: Int = 0
+    /// 電卓画面で入力された金額の値
+    var numbersOnDisplay: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +141,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        }
+        // 金額　電卓画面で入力した値を表示させる
+        if let numbersOnDisplay = numbersOnDisplay {
+            TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
+            TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
         }
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
@@ -548,6 +555,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == TextField_amount_debit || textField == TextField_amount_credit { // 借方金額　貸方金額
+            self.view.endEditing(true)
+        }
     }
     // 文字クリア
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
@@ -569,10 +579,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         var resultForLength = false
         // 入力チェック　数字のみに制限
         if textField == TextField_amount_debit || textField == TextField_amount_credit { // 借方金額仮　貸方金額
-            let allowedCharacters = CharacterSet(charactersIn:",0123456789")//Here change this characters based on your requirement
-            let characterSet = CharacterSet(charactersIn: string)
-            // 指定したスーパーセットの文字セットでないならfalseを返す
-            resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
+//            let allowedCharacters = CharacterSet(charactersIn:",0123456789")//Here change this characters based on your requirement
+//            let characterSet = CharacterSet(charactersIn: string)
+//            // 指定したスーパーセットの文字セットでないならfalseを返す
+//            resultForCharacter = allowedCharacters.isSuperset(of: characterSet)
         }else{  // 小書き　ニックネーム
             let notAllowedCharacters = CharacterSet(charactersIn:",") // 除外したい文字。絵文字はInterface BuilderのKeyboardTypeで除外してある。
             let characterSet = CharacterSet(charactersIn: string)

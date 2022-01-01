@@ -18,4 +18,12 @@ extension UIColor {
     class var TextColor: UIColor {
         return UIColor(named: "TextColor")!
     }
+    
+    class var Background: UIColor {
+        return UIColor(named: "Background")!
+    }
+    
+    class var ButtonTextColor: UIColor {
+        return UIColor(named: "ButtonTextColor")!
+    }
 }

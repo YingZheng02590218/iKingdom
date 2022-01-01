@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="DSEG14Classic-Regular.ttf">
+            <string>DSEG14Classic-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Classic Calcuator View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ClassicCalcuatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ClassicCalcuatorViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEw-up-ONi" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                                <rect key="frame" x="41.5" y="355" width="331" height="83"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-9W-jBt">
+                                        <rect key="frame" x="1" y="1" width="329" height="81"/>
+                                        <color key="backgroundColor" name="CalculatorDisplay"/>
+                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="34"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8888888888" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51w-gh-DUF">
+                                        <rect key="frame" x="1" y="1" width="329" height="81"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="34"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tT-4k-ZbO">
+                                        <rect key="frame" x="1" y="1" width="329" height="81"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="DSEG14Classic-Regular" family="DSEG14 Classic" pointSize="34"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="51w-gh-DUF" secondAttribute="trailing" constant="1" id="2Yh-Jl-eSy"/>
+                                    <constraint firstItem="mnV-9W-jBt" firstAttribute="bottom" secondItem="51w-gh-DUF" secondAttribute="bottom" id="Ayy-dS-GXZ"/>
+                                    <constraint firstItem="51w-gh-DUF" firstAttribute="top" secondItem="NEw-up-ONi" secondAttribute="top" constant="1" id="GzQ-AV-Ryz"/>
+                                    <constraint firstItem="mnV-9W-jBt" firstAttribute="trailing" secondItem="51w-gh-DUF" secondAttribute="trailing" id="Hww-MP-abt"/>
+                                    <constraint firstItem="51w-gh-DUF" firstAttribute="height" secondItem="NEw-up-ONi" secondAttribute="height" constant="-2" id="J7W-vF-p3Y"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="width" secondItem="51w-gh-DUF" secondAttribute="width" id="Mrp-8K-4hf"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="bottom" secondItem="51w-gh-DUF" secondAttribute="bottom" id="Ovb-yr-1Ix"/>
+                                    <constraint firstItem="mnV-9W-jBt" firstAttribute="top" secondItem="51w-gh-DUF" secondAttribute="top" id="ScP-z6-BvQ"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="height" secondItem="51w-gh-DUF" secondAttribute="height" id="WEd-7K-D4F"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="trailing" secondItem="51w-gh-DUF" secondAttribute="trailing" id="XUH-Pi-tfh"/>
+                                    <constraint firstAttribute="bottom" secondItem="51w-gh-DUF" secondAttribute="bottom" constant="1" id="eJV-ol-Nsr"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="top" secondItem="51w-gh-DUF" secondAttribute="top" id="egD-Vd-shv"/>
+                                    <constraint firstItem="mnV-9W-jBt" firstAttribute="leading" secondItem="51w-gh-DUF" secondAttribute="leading" id="fhc-U6-gfQ"/>
+                                    <constraint firstItem="8tT-4k-ZbO" firstAttribute="leading" secondItem="51w-gh-DUF" secondAttribute="leading" id="iFC-Rq-tgh"/>
+                                    <constraint firstItem="51w-gh-DUF" firstAttribute="leading" secondItem="NEw-up-ONi" secondAttribute="leading" constant="1" id="kLI-SN-UbN"/>
+                                    <constraint firstItem="51w-gh-DUF" firstAttribute="width" secondItem="NEw-up-ONi" secondAttribute="width" constant="-2" id="oKJ-pc-dKr"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pSz-jE-Ldt">
+                                <rect key="frame" x="41.5" y="448" width="331" height="414"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="8iQ-OX-yiS">
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozs-kB-vrZ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ert-Vx-pe6">
+                                                <rect key="frame" x="116" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                            </button>
+                                            <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRW-11-hJ6">
+                                                <rect key="frame" x="232" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Cd-qd-ggp" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="331" y="0.0" width="0.0" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ozs-kB-vrZ" firstAttribute="height" secondItem="8iQ-OX-yiS" secondAttribute="height" id="5hC-BT-PmH"/>
+                                            <constraint firstItem="ozs-kB-vrZ" firstAttribute="width" relation="lessThanOrEqual" secondItem="8iQ-OX-yiS" secondAttribute="width" multiplier="0.33" id="E3g-AQ-wdd"/>
+                                            <constraint firstItem="2Cd-qd-ggp" firstAttribute="height" secondItem="8iQ-OX-yiS" secondAttribute="height" id="Quu-it-SMi"/>
+                                            <constraint firstItem="ert-Vx-pe6" firstAttribute="height" secondItem="8iQ-OX-yiS" secondAttribute="height" id="SrJ-1C-5Jr"/>
+                                            <constraint firstItem="2Cd-qd-ggp" firstAttribute="width" relation="lessThanOrEqual" secondItem="8iQ-OX-yiS" secondAttribute="width" multiplier="0.25" id="Zxu-o0-nIf"/>
+                                            <constraint firstItem="vRW-11-hJ6" firstAttribute="width" relation="lessThanOrEqual" secondItem="8iQ-OX-yiS" secondAttribute="width" multiplier="0.33" id="aoS-2l-h8b"/>
+                                            <constraint firstItem="vRW-11-hJ6" firstAttribute="height" secondItem="8iQ-OX-yiS" secondAttribute="height" id="sqa-bc-AzT"/>
+                                            <constraint firstItem="ert-Vx-pe6" firstAttribute="width" relation="lessThanOrEqual" secondItem="8iQ-OX-yiS" secondAttribute="width" multiplier="0.33" id="zgS-rK-CJB"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="smt-VA-re2">
+                                        <rect key="frame" x="0.0" y="85" width="331" height="74.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGJ-Rv-ASn" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbN-Ae-bv0" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="116" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4E-cl-ePJ" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="232" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEQ-ie-NaC" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="331" y="0.0" width="0.0" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="lGJ-Rv-ASn" firstAttribute="height" secondItem="smt-VA-re2" secondAttribute="height" id="83x-Wx-pa6"/>
+                                            <constraint firstItem="TbN-Ae-bv0" firstAttribute="height" secondItem="smt-VA-re2" secondAttribute="height" id="Gjx-rv-P7q"/>
+                                            <constraint firstItem="TbN-Ae-bv0" firstAttribute="width" relation="lessThanOrEqual" secondItem="smt-VA-re2" secondAttribute="width" multiplier="0.33" id="HMJ-hb-xYp"/>
+                                            <constraint firstItem="T4E-cl-ePJ" firstAttribute="height" secondItem="smt-VA-re2" secondAttribute="height" id="cIE-NG-CK1"/>
+                                            <constraint firstItem="bEQ-ie-NaC" firstAttribute="width" relation="lessThanOrEqual" secondItem="smt-VA-re2" secondAttribute="width" multiplier="0.25" id="cz2-IA-UoD"/>
+                                            <constraint firstItem="T4E-cl-ePJ" firstAttribute="width" relation="lessThanOrEqual" secondItem="smt-VA-re2" secondAttribute="width" multiplier="0.33" id="k6y-jL-guL"/>
+                                            <constraint firstItem="lGJ-Rv-ASn" firstAttribute="width" relation="lessThanOrEqual" secondItem="smt-VA-re2" secondAttribute="width" multiplier="0.33" id="mCS-jT-cvC"/>
+                                            <constraint firstItem="bEQ-ie-NaC" firstAttribute="height" secondItem="smt-VA-re2" secondAttribute="height" id="te6-hd-zvX"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="aR9-3d-z8n">
+                                        <rect key="frame" x="0.0" y="169.5" width="331" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfd-5o-4hk" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zkI-S1-e2h" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="116" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onc-Be-L77" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="232" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-ll-UGe" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="331" y="0.0" width="0.0" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="onc-Be-L77" firstAttribute="width" relation="lessThanOrEqual" secondItem="aR9-3d-z8n" secondAttribute="width" multiplier="0.33" id="7bp-W0-XbF"/>
+                                            <constraint firstItem="zkI-S1-e2h" firstAttribute="width" relation="lessThanOrEqual" secondItem="aR9-3d-z8n" secondAttribute="width" multiplier="0.33" id="FZm-Q0-ucR"/>
+                                            <constraint firstItem="Aos-ll-UGe" firstAttribute="height" secondItem="aR9-3d-z8n" secondAttribute="height" id="Jx8-Pa-bK6"/>
+                                            <constraint firstItem="zkI-S1-e2h" firstAttribute="height" secondItem="aR9-3d-z8n" secondAttribute="height" id="Nae-yL-eDd"/>
+                                            <constraint firstItem="Aos-ll-UGe" firstAttribute="width" relation="lessThanOrEqual" secondItem="aR9-3d-z8n" secondAttribute="width" multiplier="0.25" id="gDJ-68-DHf"/>
+                                            <constraint firstItem="Wfd-5o-4hk" firstAttribute="width" relation="lessThanOrEqual" secondItem="aR9-3d-z8n" secondAttribute="width" multiplier="0.33" id="jKy-R3-ahI"/>
+                                            <constraint firstItem="onc-Be-L77" firstAttribute="height" secondItem="aR9-3d-z8n" secondAttribute="height" id="kLh-If-Fth"/>
+                                            <constraint firstItem="Wfd-5o-4hk" firstAttribute="height" secondItem="aR9-3d-z8n" secondAttribute="height" id="znx-h3-jE9"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="cSu-ig-ZLa">
+                                        <rect key="frame" x="0.0" y="254.5" width="331" height="74.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2c-tX-Vp6" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFi-WZ-mJ4" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="116" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpw-Zk-Sz2" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="232" y="0.0" width="99" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ps-Ns-tEG" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="331" y="0.0" width="0.0" height="74.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="QFi-WZ-mJ4" firstAttribute="height" secondItem="cSu-ig-ZLa" secondAttribute="height" id="7tP-WY-InR"/>
+                                            <constraint firstItem="Bpw-Zk-Sz2" firstAttribute="width" relation="lessThanOrEqual" secondItem="cSu-ig-ZLa" secondAttribute="width" multiplier="0.33" id="O1x-Pn-4wM"/>
+                                            <constraint firstItem="y2c-tX-Vp6" firstAttribute="height" secondItem="cSu-ig-ZLa" secondAttribute="height" id="TvQ-H3-hln"/>
+                                            <constraint firstItem="Bpw-Zk-Sz2" firstAttribute="height" secondItem="cSu-ig-ZLa" secondAttribute="height" id="UAC-Kp-vjY"/>
+                                            <constraint firstItem="2Ps-Ns-tEG" firstAttribute="width" relation="lessThanOrEqual" secondItem="cSu-ig-ZLa" secondAttribute="width" multiplier="0.25" id="dQo-W6-Bha"/>
+                                            <constraint firstItem="y2c-tX-Vp6" firstAttribute="width" relation="lessThanOrEqual" secondItem="cSu-ig-ZLa" secondAttribute="width" multiplier="0.33" id="lpy-Lh-Vlb"/>
+                                            <constraint firstItem="QFi-WZ-mJ4" firstAttribute="width" relation="lessThanOrEqual" secondItem="cSu-ig-ZLa" secondAttribute="width" multiplier="0.33" id="tIb-f2-qvR"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-z7-voY">
+                                        <rect key="frame" x="0.0" y="339" width="331" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4m-ax-9CK" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4X-2h-9kQ">
+                                                <rect key="frame" x="116" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wr-33-QJ4" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                                <rect key="frame" x="232" y="0.0" width="99" height="75"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="8">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="37"/>
+                                                    <color key="baseForegroundColor" name="ButtonTextColor"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0Wr-33-QJ4" firstAttribute="width" relation="lessThanOrEqual" secondItem="4i4-z7-voY" secondAttribute="width" multiplier="0.33" id="Fkx-hb-8KG"/>
+                                            <constraint firstItem="Z4m-ax-9CK" firstAttribute="width" relation="lessThanOrEqual" secondItem="4i4-z7-voY" secondAttribute="width" multiplier="0.33" id="KAD-kG-ARP"/>
+                                            <constraint firstItem="Z4m-ax-9CK" firstAttribute="height" secondItem="4i4-z7-voY" secondAttribute="height" id="Ry6-tu-WsK"/>
+                                            <constraint firstItem="Y4X-2h-9kQ" firstAttribute="height" secondItem="4i4-z7-voY" secondAttribute="height" id="Z0i-vm-Skj"/>
+                                            <constraint firstItem="Y4X-2h-9kQ" firstAttribute="width" relation="lessThanOrEqual" secondItem="4i4-z7-voY" secondAttribute="width" multiplier="0.33" id="t47-er-D1H"/>
+                                            <constraint firstItem="0Wr-33-QJ4" firstAttribute="height" secondItem="4i4-z7-voY" secondAttribute="height" id="vA9-R4-lVD"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="aR9-3d-z8n" firstAttribute="height" relation="lessThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="Gqm-bn-R3Z"/>
+                                    <constraint firstItem="4i4-z7-voY" firstAttribute="height" relation="lessThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="ZcY-Yc-FvP"/>
+                                    <constraint firstAttribute="width" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="1:1.25" id="aqU-Qf-k9v"/>
+                                    <constraint firstItem="smt-VA-re2" firstAttribute="height" relation="lessThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="hBB-Vr-KrR"/>
+                                    <constraint firstItem="8iQ-OX-yiS" firstAttribute="height" relation="lessThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="nMV-yr-1hG"/>
+                                    <constraint firstItem="cSu-ig-ZLa" firstAttribute="height" relation="lessThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="qdQ-8H-geL"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pSz-jE-Ldt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FIu-I4-hIe"/>
+                            <constraint firstItem="pSz-jE-Ldt" firstAttribute="top" secondItem="NEw-up-ONi" secondAttribute="bottom" constant="10" id="Hly-go-Y4V"/>
+                            <constraint firstItem="NEw-up-ONi" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="Ina-OK-j7T"/>
+                            <constraint firstItem="pSz-jE-Ldt" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.8" id="LhR-Jn-Egm"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NEw-up-ONi" secondAttribute="trailing" id="Qpw-5P-zPh"/>
+                            <constraint firstItem="NEw-up-ONi" firstAttribute="height" secondItem="pSz-jE-Ldt" secondAttribute="height" multiplier="0.2" id="Rmd-9f-AEx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="pSz-jE-Ldt" secondAttribute="bottom" id="gKy-MV-JP9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pSz-jE-Ldt" secondAttribute="trailing" id="j4K-gP-SxN"/>
+                            <constraint firstItem="NEw-up-ONi" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="lrS-Xa-hzf"/>
+                            <constraint firstItem="pSz-jE-Ldt" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="poc-7h-Ehj"/>
+                            <constraint firstItem="NEw-up-ONi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="qnM-Tu-4qD"/>
+                            <constraint firstItem="NEw-up-ONi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="w3Y-Cx-JYD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="5EZ-qb-Rvc" id="9iT-jZ-hx1"/>
+                        <outlet property="button0" destination="Z4m-ax-9CK" id="u9r-k6-pdR"/>
+                        <outlet property="button1" destination="y2c-tX-Vp6" id="M8N-go-Nhe"/>
+                        <outlet property="button2" destination="QFi-WZ-mJ4" id="ul6-kU-dZo"/>
+                        <outlet property="button3" destination="Bpw-Zk-Sz2" id="biw-Fx-leI"/>
+                        <outlet property="button4" destination="Wfd-5o-4hk" id="j2O-UF-1Vf"/>
+                        <outlet property="button5" destination="zkI-S1-e2h" id="WZq-64-P75"/>
+                        <outlet property="button6" destination="onc-Be-L77" id="8Nb-9e-svf"/>
+                        <outlet property="button7" destination="lGJ-Rv-ASn" id="Nl4-Bi-dGi"/>
+                        <outlet property="button8" destination="TbN-Ae-bv0" id="MVz-5d-oxx"/>
+                        <outlet property="button9" destination="T4E-cl-ePJ" id="gCH-cN-wR8"/>
+                        <outlet property="buttonAc" destination="ozs-kB-vrZ" id="fW4-Li-qdJ"/>
+                        <outlet property="buttonDivied" destination="2Cd-qd-ggp" id="ORt-pz-s1o"/>
+                        <outlet property="buttonDot" destination="Y4X-2h-9kQ" id="kb3-XU-xnc"/>
+                        <outlet property="buttonEqual" destination="0Wr-33-QJ4" id="eiq-oY-1n0"/>
+                        <outlet property="buttonMinus" destination="Aos-ll-UGe" id="XJx-pm-TXU"/>
+                        <outlet property="buttonMultiple" destination="bEQ-ie-NaC" id="v7H-SU-ucE"/>
+                        <outlet property="buttonPercent" destination="vRW-11-hJ6" id="saS-mG-1Jg"/>
+                        <outlet property="buttonPlus" destination="2Ps-Ns-tEG" id="xgB-6F-bIG"/>
+                        <outlet property="buttonPlusMinus" destination="ert-Vx-pe6" id="cQZ-Rf-tUN"/>
+                        <outlet property="label" destination="8tT-4k-ZbO" id="052-XK-Uk7"/>
+                        <outlet property="labelView" destination="NEw-up-ONi" id="nDw-bd-02j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="35" y="66"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="ButtonTextColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CalculatorDisplay">
+            <color red="0.58823529411764708" green="0.64313725490196072" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
