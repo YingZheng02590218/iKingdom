@@ -17,14 +17,19 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
+
+#import <realm/table_ref.hpp>
+#import <realm/util/optional.hpp>
+
 #import <unordered_map>
 #import <vector>
 
 namespace realm {
     class ObjectSchema;
     class Schema;
-    class Table;
     struct Property;
+    struct ColKey;
+    struct TableKey;
 }
 
 class RLMObservationInfo;
@@ -50,7 +55,11 @@ template<> struct equal_to<NSString *> {
 // reference, handles table column lookups, and tracks observed objects
 class RLMClassInfo {
 public:
-    RLMClassInfo(RLMRealm *, RLMObjectSchema *, const realm::ObjectSchema *);
+    RLMClassInfo(RLMRealm *, RLMObjectSchema *,
+                 const realm::ObjectSchema *);
+
+    RLMClassInfo(RLMRealm *realm, RLMObjectSchema *rlmObjectSchema,
+                 std::unique_ptr<realm::ObjectSchema> objectSchema);
 
     __unsafe_unretained RLMRealm *const realm;
     __unsafe_unretained RLMObjectSchema *const rlmObjectSchema;
@@ -62,11 +71,11 @@ public:
 
     // Get the table for this object type. Will return nullptr only if it's a
     // read-only Realm that is missing the table entirely.
-    realm::Table *_Nullable table() const;
+    realm::TableRef table() const;
 
     // Get the RLMProperty for a given table column, or `nil` if it is a column
     // not used by the current schema
-    RLMProperty *_Nullable propertyForTableColumn(NSUInteger) const noexcept;
+    RLMProperty *_Nullable propertyForTableColumn(realm::ColKey) const noexcept;
 
     // Get the RLMProperty that's used as the primary key, or `nil` if there is
     // no primary key for the current schema
@@ -74,8 +83,8 @@ public:
 
     // Get the table column for the given property. The property must be a valid
     // persisted property.
-    NSUInteger tableColumn(NSString *propertyName) const;
-    NSUInteger tableColumn(RLMProperty *property) const;
+    realm::ColKey tableColumn(NSString *propertyName) const;
+    realm::ColKey tableColumn(RLMProperty *property) const;
 
     // Get the info for the target of the link at the given property index.
     RLMClassInfo &linkTargetType(size_t propertyIndex);
@@ -83,11 +92,17 @@ public:
     // Get the info for the target of the given property
     RLMClassInfo &linkTargetType(realm::Property const& property);
 
-    void releaseTable() { m_table = nullptr; }
+    // Get the corresponding ClassInfo for the given Realm
+    RLMClassInfo &resolve(RLMRealm *);
+
+    // Return true if the RLMObjectSchema is for a Swift class
+    bool isSwiftClass();
 
 private:
-    mutable realm::Table *_Nullable m_table = nullptr;
-    std::vector<RLMClassInfo *> m_linkTargets;
+    // If the ObjectSchema is not owned by the realm instance
+    // we need to manually manage the ownership of the object.
+    std::unique_ptr<realm::ObjectSchema> dynamicObjectSchema;
+    [[maybe_unused]] __strong RLMObjectSchema * dynamicRLMObjectSchema;
 };
 
 // A per-RLMRealm object schema map which stores RLMClassInfo keyed on the name
@@ -101,6 +116,15 @@ public:
 
     // Look up by name, throwing if it's not present
     RLMClassInfo& operator[](NSString *name);
+    // Look up by table key, return none if its not present.
+    RLMClassInfo* operator[](realm::TableKey const& tableKey);
+
+    // Emplaces a locally derived object schema into RLMSchemaInfo. This is used
+    // when creating objects dynamically that are not registered in the Cocoa schema.
+    // Note: `RLMClassInfo` assumes ownership of `schema`.
+    void appendDynamicObjectSchema(std::unique_ptr<realm::ObjectSchema> schema,
+                                   RLMObjectSchema *objectSchema,
+                                   RLMRealm *const target_realm);
 
     impl::iterator begin() noexcept;
     impl::iterator end() noexcept;
