@@ -51,14 +51,13 @@ class ClassicCalcuatorViewController: UIViewController {
 //    var turn = true
 //    var count = 0
 
-    let LIGHTSHADOWOPACITY: Float = 0.2
-    let DARKSHADOWOPACITY: Float = 0.7
-    let ELEMENTDEPTH: CGFloat = 12
+    let LIGHTSHADOWOPACITY: Float = 0.3
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        layout()
         numAction()
 //        hugoAction()
 //        plusMinusAction()
@@ -67,22 +66,27 @@ class ClassicCalcuatorViewController: UIViewController {
         equalAction()
         acAction()
     }
+    
+    override func viewWillLayoutSubviews() {
+        layout()
+    }
 
+    
     func layout() {
         
         backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         // Default is 1.
-        labelView.neumorphicLayer?.lightShadowOpacity = 0.5
+        labelView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         // Default is 0.3.
-        labelView.neumorphicLayer?.darkShadowOpacity = 2.9
+        labelView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
         // Adding a thin border on the edge of the element.
         labelView.neumorphicLayer?.edged = true
-        labelView.neumorphicLayer?.elementDepth = 19
+        labelView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         labelView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
-        label.text = numbersOnDisplay.description
         label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
+        label.text = numbersOnDisplay.description
         label.textAlignment = .right
         
         button1.setTitle("1", for: .normal)

@@ -417,9 +417,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 
     }
 
-    let LIGHTSHADOWOPACITY: Float = 0.2
-    let DARKSHADOWOPACITY: Float = 0.6
-    let ELEMENTDEPTH: CGFloat = 12
+    let LIGHTSHADOWOPACITY: Float = 0.3
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 6
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet weak var Button_Left: EMTNeumorphicButton!
