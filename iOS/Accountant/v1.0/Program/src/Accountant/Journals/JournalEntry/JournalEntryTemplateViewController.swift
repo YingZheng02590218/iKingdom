@@ -56,6 +56,12 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
 //            nicknameTextField.isHidden = true
 //        }
         
+        // 金額　電卓画面で入力した値を表示させる
+        if let numbersOnDisplay = numbersOnDisplay {
+            TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
+            TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+        }
+        
     }
     
     @IBOutlet var nicknameTextField: UITextField!

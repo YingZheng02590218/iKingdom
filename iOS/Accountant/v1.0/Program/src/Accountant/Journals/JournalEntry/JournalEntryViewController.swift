@@ -363,30 +363,36 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     // ボタンのデザインを指定する
     private func createButtons() {
         
-        datePickerView.neumorphicLayer?.cornerRadius = 15
-        datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        datePickerView.neumorphicLayer?.edged = true
-        datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-        datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
-                
-        Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
-        Button_Left.neumorphicLayer?.cornerRadius = 10
-        Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
-        Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_Left.neumorphicLayer?.edged = true
-        Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-        Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        if let datePickerView = datePickerView {
+            datePickerView.neumorphicLayer?.cornerRadius = 15
+            datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            datePickerView.neumorphicLayer?.edged = true
+            datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        }
         
-        Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
-        Button_Right.neumorphicLayer?.cornerRadius = 10
-        Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
-        Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_Right.neumorphicLayer?.edged = true
-        Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-        Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        if let Button_Left = Button_Left {
+            Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Left.neumorphicLayer?.cornerRadius = 10
+            Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            Button_Left.neumorphicLayer?.edged = true
+            Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        }
+        
+        if let Button_Right = Button_Right {
+            Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Right.neumorphicLayer?.cornerRadius = 10
+            Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            Button_Right.neumorphicLayer?.edged = true
+            Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        }
         
 //        inputButton.setTitle("入力", for: .normal)
         inputButton.setTitleColor(.ButtonTextColor, for: .normal)
@@ -1001,7 +1007,7 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
 //    }
     //セルのサイズ(CGSize)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.height * 2, height: collectionView.frame.height - 15)
+        return CGSize(width: collectionView.frame.height * 1.5, height: collectionView.frame.height - 15)
     }
     //余白の調整（UIImageを拡大、縮小している）
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

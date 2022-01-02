@@ -14,10 +14,13 @@ class CarouselCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func layoutSubviews() {
         // セルの背景色を変える
-        self.contentView.backgroundColor = .white
+//        self.contentView.backgroundColor = .white
         // セルの枠線の太さを変える
-        self.contentView.layer.borderWidth = 0
+        self.contentView.layer.borderWidth = self.isSelected ? 1 : 0
         self.contentView.layer.borderColor = UIColor.gray.cgColor
         // セルを角丸にする
         self.contentView.layer.cornerRadius = 10
@@ -36,7 +39,7 @@ class CarouselCollectionViewCell: UICollectionViewCell {
     }
     
     private func onUpdateSelection() {
-        self.contentView.layer.borderWidth = self.isSelected ? 2 : 0
+        self.contentView.layer.borderWidth = self.isSelected ? 1 : 0
     }
     
 }
