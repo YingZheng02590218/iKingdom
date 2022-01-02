@@ -243,6 +243,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBOutlet var datePickerView: EMTNeumorphicView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func DatePicker(_ sender: UIDatePicker) {}
     // デートピッカー作成
@@ -361,11 +362,16 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     // ボタンのデザインを指定する
     private func createButtons() {
-//        Button_Left.setTitle("1", for: .normal)
+        
+        datePickerView.neumorphicLayer?.cornerRadius = 15
+        datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        datePickerView.neumorphicLayer?.edged = true
+        datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+                
         Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
-        Button_Left.neumorphicLayer?.cornerRadius = Button_Left.frame.width / 2.2
-//        Button_Left.contentVerticalAlignment = .fill
-//        Button_Left.contentHorizontalAlignment = .fill
+        Button_Left.neumorphicLayer?.cornerRadius = 10
         Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
         Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
@@ -373,11 +379,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
-//        Button_Right.setTitle("1", for: .normal)
         Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
-        Button_Right.neumorphicLayer?.cornerRadius = Button_Right.frame.width / 2.2
-//        Button_Right.contentVerticalAlignment = .fill
-//        Button_Right.contentHorizontalAlignment = .fill
+        Button_Right.neumorphicLayer?.cornerRadius = 10
         Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
         Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
@@ -385,11 +388,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
-        inputButton.setTitle("入力", for: .normal)
+//        inputButton.setTitle("入力", for: .normal)
         inputButton.setTitleColor(.ButtonTextColor, for: .normal)
-        inputButton.neumorphicLayer?.cornerRadius = inputButton.frame.height / 2.2
-//        inputButton.contentVerticalAlignment = .fill
-//        inputButton.contentHorizontalAlignment = .fill
+        inputButton.neumorphicLayer?.cornerRadius = 15
         inputButton.setTitleColor(.ButtonTextColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
@@ -397,21 +398,21 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         inputButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
-//        Button_cancel.setTitle("入力", for: .normal)
         Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
-        Button_cancel.neumorphicLayer?.cornerRadius = Button_cancel.frame.height / 2.2
-//        Button_cancel.contentVerticalAlignment = .fill
-//        Button_cancel.contentHorizontalAlignment = .fill
+        Button_cancel.neumorphicLayer?.cornerRadius = 15
         Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
         Button_cancel.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         Button_cancel.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
         Button_cancel.neumorphicLayer?.edged = true
         Button_cancel.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
+        // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
+        Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
+
     }
 
     let LIGHTSHADOWOPACITY: Float = 0.2
-    let DARKSHADOWOPACITY: Float = 0.7
+    let DARKSHADOWOPACITY: Float = 0.6
     let ELEMENTDEPTH: CGFloat = 12
     
     @IBOutlet var dateLabel: UILabel!
