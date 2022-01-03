@@ -68,85 +68,94 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         askIDFA()
     }
     static var viewReload = false // リロードするかどうか
+    /// 電卓画面から仕訳画面へ遷移したか
+    var isFromClassicCalcuatorViewController = false
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
-        // UIパーツを作成
-        createTextFieldForCategory()
-        createTextFieldForAmount()
-        createTextFieldForSmallwritting()
-        // 仕訳タイプ判定
-        if journalEntryType == "JournalEntries" {
-            label_title.text = "仕　訳"
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
-            if JournalEntryViewController.viewReload {
-                DispatchQueue.main.async {
-                    self.carouselCollectionView.reloadData()
-                    JournalEntryViewController.viewReload = false
-                }
+        // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
+        if isFromClassicCalcuatorViewController {
+            // 金額　電卓画面で入力した値を表示させる
+            if let numbersOnDisplay = numbersOnDisplay {
+                TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
+                TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
             }
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        }else if journalEntryType == "AdjustingAndClosingEntries" {
-            label_title.text = "決算整理仕訳"
-            createCarousel() // カルーセルを作成
-            if JournalEntryViewController.viewReload {
-                DispatchQueue.main.async {
-                    self.carouselCollectionView.reloadData()
-                    JournalEntryViewController.viewReload = false
-                }
-            }
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        }else if journalEntryType == "JournalEntriesFixing" {
-            label_title.text = "仕訳編集"
-            createCarousel() // カルーセルを作成
-            carouselCollectionView.isHidden = true
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            // 仕訳データを取得
-            let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
-            let objects = dataBaseManager.getJournalEntry(section: tappedIndexPath.section)
-            let formatter = DateFormatter()
-            formatter.locale = Locale.current
-            formatter.timeZone = TimeZone.current // UTC時刻を補正
-            formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
-            
-            if tappedIndexPath.row >= objects.count {
-                // 設定操作
-                let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
-                let object = dataBaseManagerSettingsOperating.getSettingsOperating()
-                let objectss = dataBaseManager.getJournalAdjustingEntry(section: tappedIndexPath.section, EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
-                primaryKey = objectss[tappedIndexPath.row-objects.count].number
-                datePicker.date = formatter.date(from: objectss[tappedIndexPath.row-objects.count].date)!// 注意：カンマの後にスペースがないとnilになる
-                TextField_category_debit.text = objectss[tappedIndexPath.row-objects.count].debit_category
-                TextField_category_credit.text = objectss[tappedIndexPath.row-objects.count].credit_category
-                TextField_amount_debit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].debit_amount))
-                TextField_amount_credit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].credit_amount))
-                TextField_SmallWritting.text = objectss[tappedIndexPath.row-objects.count].smallWritting
-            }else {
-                primaryKey = objects[tappedIndexPath.row].number
-                datePicker.date = formatter.date(from: objects[tappedIndexPath.row].date)!// 注意：カンマの後にスペースがないとnilになる
-                TextField_category_debit.text = objects[tappedIndexPath.row].debit_category
-                TextField_category_credit.text = objects[tappedIndexPath.row].credit_category
-                TextField_amount_debit.text = addComma(string: String(objects[tappedIndexPath.row].debit_amount))
-                TextField_amount_credit.text = addComma(string: String(objects[tappedIndexPath.row].credit_amount))
-                TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
-            }
-            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        }else if journalEntryType == "" {
-            label_title.text = "仕　訳"
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
-            if JournalEntryViewController.viewReload {
-                DispatchQueue.main.async {
-                    self.carouselCollectionView.reloadData()
-                    JournalEntryViewController.viewReload = false
-                }
-            }
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            // フラグを倒す
+            isFromClassicCalcuatorViewController = false
         }
-        // 金額　電卓画面で入力した値を表示させる
-        if let numbersOnDisplay = numbersOnDisplay {
-            TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
-            TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+        else {
+            // UIパーツを作成
+            createTextFieldForCategory()
+            createTextFieldForAmount()
+            createTextFieldForSmallwritting()
+            // 仕訳タイプ判定
+            if journalEntryType == "JournalEntries" {
+                label_title.text = "仕　訳"
+                // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+                createCarousel() // カルーセルを作成
+                if JournalEntryViewController.viewReload {
+                    DispatchQueue.main.async {
+                        self.carouselCollectionView.reloadData()
+                        JournalEntryViewController.viewReload = false
+                    }
+                }
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            }else if journalEntryType == "AdjustingAndClosingEntries" {
+                label_title.text = "決算整理仕訳"
+                createCarousel() // カルーセルを作成
+                if JournalEntryViewController.viewReload {
+                    DispatchQueue.main.async {
+                        self.carouselCollectionView.reloadData()
+                        JournalEntryViewController.viewReload = false
+                    }
+                }
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            }else if journalEntryType == "JournalEntriesFixing" {
+                label_title.text = "仕訳編集"
+                createCarousel() // カルーセルを作成
+                carouselCollectionView.isHidden = true
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+                // 仕訳データを取得
+                let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
+                let objects = dataBaseManager.getJournalEntry(section: tappedIndexPath.section)
+                let formatter = DateFormatter()
+                formatter.locale = Locale.current
+                formatter.timeZone = TimeZone.current // UTC時刻を補正
+                formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
+                
+                if tappedIndexPath.row >= objects.count {
+                    // 設定操作
+                    let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
+                    let object = dataBaseManagerSettingsOperating.getSettingsOperating()
+                    let objectss = dataBaseManager.getJournalAdjustingEntry(section: tappedIndexPath.section, EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+                    primaryKey = objectss[tappedIndexPath.row-objects.count].number
+                    datePicker.date = formatter.date(from: objectss[tappedIndexPath.row-objects.count].date)!// 注意：カンマの後にスペースがないとnilになる
+                    TextField_category_debit.text = objectss[tappedIndexPath.row-objects.count].debit_category
+                    TextField_category_credit.text = objectss[tappedIndexPath.row-objects.count].credit_category
+                    TextField_amount_debit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].debit_amount))
+                    TextField_amount_credit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].credit_amount))
+                    TextField_SmallWritting.text = objectss[tappedIndexPath.row-objects.count].smallWritting
+                }else {
+                    primaryKey = objects[tappedIndexPath.row].number
+                    datePicker.date = formatter.date(from: objects[tappedIndexPath.row].date)!// 注意：カンマの後にスペースがないとnilになる
+                    TextField_category_debit.text = objects[tappedIndexPath.row].debit_category
+                    TextField_category_credit.text = objects[tappedIndexPath.row].credit_category
+                    TextField_amount_debit.text = addComma(string: String(objects[tappedIndexPath.row].debit_amount))
+                    TextField_amount_credit.text = addComma(string: String(objects[tappedIndexPath.row].credit_amount))
+                    TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
+                }
+                inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+            }else if journalEntryType == "" {
+                label_title.text = "仕　訳"
+                // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+                createCarousel() // カルーセルを作成
+                if JournalEntryViewController.viewReload {
+                    DispatchQueue.main.async {
+                        self.carouselCollectionView.reloadData()
+                        JournalEntryViewController.viewReload = false
+                    }
+                }
+                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            }
         }
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
@@ -367,7 +376,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             datePickerView.neumorphicLayer?.cornerRadius = 15
             datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = true
+            datePickerView.neumorphicLayer?.edged = edged
             datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
@@ -378,7 +387,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
             Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Left.neumorphicLayer?.edged = true
+            Button_Left.neumorphicLayer?.edged = edged
             Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
@@ -389,7 +398,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
             Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Right.neumorphicLayer?.edged = true
+            Button_Right.neumorphicLayer?.edged = edged
             Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
@@ -400,7 +409,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         inputButton.setTitleColor(.ButtonTextColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        inputButton.neumorphicLayer?.edged = true
+        inputButton.neumorphicLayer?.edged = edged
         inputButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
@@ -409,7 +418,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
         Button_cancel.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         Button_cancel.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_cancel.neumorphicLayer?.edged = true
+        Button_cancel.neumorphicLayer?.edged = edged
         Button_cancel.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
@@ -420,6 +429,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     let LIGHTSHADOWOPACITY: Float = 0.3
     let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 6
+    let edged = false
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet weak var Button_Left: EMTNeumorphicButton!

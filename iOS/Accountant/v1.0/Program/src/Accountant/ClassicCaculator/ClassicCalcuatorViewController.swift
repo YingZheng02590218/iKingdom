@@ -54,7 +54,8 @@ class ClassicCalcuatorViewController: UIViewController {
     let LIGHTSHADOWOPACITY: Float = 0.3
     let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 6
-    
+    let edged = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,11 +82,11 @@ class ClassicCalcuatorViewController: UIViewController {
         // Default is 0.3.
         labelView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
         // Adding a thin border on the edge of the element.
-        labelView.neumorphicLayer?.edged = true
+        labelView.neumorphicLayer?.edged = edged
         labelView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         labelView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
-        label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
+//        label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
         label.text = numbersOnDisplay.description
         label.textAlignment = .right
         
@@ -97,7 +98,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button1.setTitleColor(.ButtonTextColor, for: .selected)
         button1.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button1.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button1.neumorphicLayer?.edged = true
+        button1.neumorphicLayer?.edged = edged
         button1.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button1.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
@@ -109,7 +110,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button2.setTitleColor(.ButtonTextColor, for: .selected)
         button2.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button2.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button2.neumorphicLayer?.edged = true
+        button2.neumorphicLayer?.edged = edged
         button2.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button2.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -121,7 +122,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button3.setTitleColor(.ButtonTextColor, for: .selected)
         button3.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button3.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button3.neumorphicLayer?.edged = true
+        button3.neumorphicLayer?.edged = edged
         button3.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button3.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -135,7 +136,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button4.setTitleColor(.ButtonTextColor, for: .selected)
         button4.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button4.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button4.neumorphicLayer?.edged = true
+        button4.neumorphicLayer?.edged = edged
         button4.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button4.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -147,7 +148,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button5.setTitleColor(.ButtonTextColor, for: .selected)
         button5.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button5.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button5.neumorphicLayer?.edged = true
+        button5.neumorphicLayer?.edged = edged
         button5.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button5.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -159,7 +160,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button6.setTitleColor(.ButtonTextColor, for: .selected)
         button6.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button6.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button6.neumorphicLayer?.edged = true
+        button6.neumorphicLayer?.edged = edged
         button6.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button6.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -173,7 +174,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button7.setTitleColor(.ButtonTextColor, for: .selected)
         button7.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button7.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button7.neumorphicLayer?.edged = true
+        button7.neumorphicLayer?.edged = edged
         button7.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button7.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -185,7 +186,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button8.setTitleColor(.ButtonTextColor, for: .selected)
         button8.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button8.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button8.neumorphicLayer?.edged = true
+        button8.neumorphicLayer?.edged = edged
         button8.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button8.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -197,7 +198,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button9.setTitleColor(.ButtonTextColor, for: .selected)
         button9.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button9.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button9.neumorphicLayer?.edged = true
+        button9.neumorphicLayer?.edged = edged
         button9.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button9.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -211,7 +212,7 @@ class ClassicCalcuatorViewController: UIViewController {
         button0.setTitleColor(.ButtonTextColor, for: .selected)
         button0.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         button0.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button0.neumorphicLayer?.edged = true
+        button0.neumorphicLayer?.edged = edged
         button0.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         button0.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -243,7 +244,7 @@ class ClassicCalcuatorViewController: UIViewController {
         buttonEqual.setTitleColor(.ButtonTextColor, for: .selected)
         buttonEqual.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         buttonEqual.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        buttonEqual.neumorphicLayer?.edged = true
+        buttonEqual.neumorphicLayer?.edged = edged
         buttonEqual.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         buttonEqual.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -255,7 +256,7 @@ class ClassicCalcuatorViewController: UIViewController {
         buttonAc.setTitleColor(.ButtonTextColor, for: .selected)
         buttonAc.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
         buttonAc.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        buttonAc.neumorphicLayer?.edged = true
+        buttonAc.neumorphicLayer?.edged = edged
         buttonAc.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         buttonAc.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
@@ -271,13 +272,14 @@ class ClassicCalcuatorViewController: UIViewController {
         
     }
     
+    @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
+    
     // 数字ボタンを押下
     @objc func numClick(_ sender: EMTNeumorphicButton) {
         // 選択されていたボタンを選択解除する
-        let arrayHugo = [buttonAc,button0,button1,button2,button3,button4,button5,button6,button7,button8,button9]
-        let newArray = arrayHugo.filter { $0?.isSelected == true}
+        let newArray = arrayHugo.filter { $0.isSelected == true}
         for i in newArray {
-            i?.isSelected = false
+            i.isSelected = false
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
@@ -468,6 +470,8 @@ class ClassicCalcuatorViewController: UIViewController {
                 [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
                 presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
+                // フラグを立てる
+                presentingViewController2.isFromClassicCalcuatorViewController = true
                 presentingViewController2.viewWillAppear(true)
             })
             return
@@ -491,6 +495,8 @@ class ClassicCalcuatorViewController: UIViewController {
                 [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
                 presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
+                // フラグを立てる
+                presentingViewController2.isFromClassicCalcuatorViewController = true
                 presentingViewController2.viewWillAppear(true)
             })
               return
@@ -503,10 +509,9 @@ class ClassicCalcuatorViewController: UIViewController {
     
     @objc func clickAc(_ sender: EMTNeumorphicButton) {
         // 選択されていたボタンを選択解除する
-        let arrayHugo = [buttonAc,button0,button1,button2,button3,button4,button5,button6,button7,button8,button9]
-        let newArray = arrayHugo.filter { $0?.isSelected == true}
+        let newArray = arrayHugo.filter { $0.isSelected == true}
         for i in newArray {
-            i?.isSelected = false
+            i.isSelected = false
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
