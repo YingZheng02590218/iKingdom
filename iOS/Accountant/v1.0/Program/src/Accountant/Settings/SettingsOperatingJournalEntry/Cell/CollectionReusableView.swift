@@ -7,26 +7,33 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 
 class CollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var sectionLabel: UILabel!
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet var addButton: EMTNeumorphicButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // セルの背景色を変える
-        addButton.backgroundColor = .white
-        // セルの枠線の太さを変える
-        addButton.layer.borderWidth = 0
-        addButton.layer.borderColor = UIColor.gray.cgColor
-        // セルを角丸にする
-        addButton.layer.cornerRadius = 5
-//        // セルに影をつける
-//        addButton.layer.shadowColor = UIColor.lightGray.cgColor     // 影の色
-//        addButton.layer.shadowOffset = CGSize(width: 0,height: 0) // 影の位置
-//        addButton.layer.shadowOpacity = 1                       // 影の透明度
-//        addButton.layer.shadowRadius = 10                         // 影の広がり
+        // 日付　ボタン作成
+        createButtons()
+    }
+    
+    let LIGHTSHADOWOPACITY: Float = 0.3
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 6
+    let edged = false
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        addButton.setTitleColor(.ButtonTextColor, for: .normal)
+        addButton.neumorphicLayer?.cornerRadius = 10
+        addButton.setTitleColor(.ButtonTextColor, for: .selected)
+        addButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        addButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        addButton.neumorphicLayer?.edged = edged
+        addButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        addButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
     }
     
 }
