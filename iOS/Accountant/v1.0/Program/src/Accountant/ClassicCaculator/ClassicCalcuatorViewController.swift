@@ -28,15 +28,15 @@ class ClassicCalcuatorViewController: UIViewController {
     @IBOutlet var button0: EMTNeumorphicButton!
     
     @IBOutlet var buttonAc: EMTNeumorphicButton!
-    @IBOutlet var buttonPlusMinus: EMTNeumorphicButton!
-    @IBOutlet var buttonPercent: EMTNeumorphicButton!
+    @IBOutlet var buttonPlusMinus: UIButton!
+    @IBOutlet var buttonPercent: UIButton!
     
     @IBOutlet var buttonDivied: EMTNeumorphicButton!
     @IBOutlet var buttonMultiple: EMTNeumorphicButton!
     @IBOutlet var buttonMinus: EMTNeumorphicButton!
     @IBOutlet var buttonPlus: EMTNeumorphicButton!
     
-    @IBOutlet var buttonDot: EMTNeumorphicButton!
+    @IBOutlet var buttonDot: UIButton!
     @IBOutlet var buttonEqual: EMTNeumorphicButton!
     
     /// 演算の種類
@@ -75,6 +75,14 @@ class ClassicCalcuatorViewController: UIViewController {
     
     func layout() {
         
+        //　左上と右上を角丸にする設定
+        backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        backgroundView.layer.cornerRadius = 20
+        backgroundView.clipsToBounds = true
+        backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        backgroundView.neumorphicLayer?.edged = edged
+        backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         // Default is 1.
@@ -82,7 +90,7 @@ class ClassicCalcuatorViewController: UIViewController {
         // Default is 0.3.
         labelView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
         // Adding a thin border on the edge of the element.
-        labelView.neumorphicLayer?.edged = edged
+        labelView.neumorphicLayer?.edged = true
         labelView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
         labelView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
