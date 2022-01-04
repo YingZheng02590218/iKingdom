@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hqY-Er-sb3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hqY-Er-sb3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,16 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView tag="1" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VwS-Cb-coL">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="0.0" height="0.0"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wap-wf-vUW" userLabel="mid0_View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZFU-aV-4EV">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仕訳" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHz-5Z-3Q8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dHz-5Z-3Q8" secondAttribute="height" multiplier="1366:245" id="8hb-SA-rqt"/>
@@ -59,13 +56,10 @@
                                         </constraints>
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-tk-7SU" userLabel="mid1_NeumorphicView">
-                                        <rect key="frame" x="0.0" y="163.5" width="414" height="163.5"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogC-wt-ekK">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="888" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="ニックネームを入力してください。" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-8m-lNH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
                                                         <color key="backgroundColor" name="TextFieldColor"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -95,16 +89,12 @@
                                         </constraints>
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZK-fP-q1I" userLabel="mid2_Neumorphic View">
-                                        <rect key="frame" x="0.0" y="327" width="414" height="164"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xFW-Je-FVV">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="164"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OET-ln-1vY" userLabel="Stack View1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="65.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="b67-5e-WOV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="65.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -112,7 +102,6 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-ft-npg">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="65.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -138,16 +127,13 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-TC-Ket" userLabel="Stack View2">
-                                                        <rect key="frame" x="0.0" y="65.5" width="414" height="49"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="49"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-8r-tSO" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="49"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -169,19 +155,22 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="22222" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Noz-lB-7r7" userLabel="Stack View3">
-                                                        <rect key="frame" x="0.0" y="114.5" width="414" height="49.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-ak-kF6">
-                                                                <rect key="frame" x="0.0" y="0.0" width="207" height="49.5"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                                <connections>
+                                                                    <segue destination="2La-2Y-4JS" kind="presentation" id="l7h-iT-0oa"/>
+                                                                </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-cG-vmJ">
-                                                                <rect key="frame" x="207" y="0.0" width="207" height="49.5"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                                <connections>
+                                                                    <segue destination="2La-2Y-4JS" kind="presentation" id="c1k-EM-Xgx"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -235,10 +224,8 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="krV-Tn-xWh" userLabel="mid3_Stack View">
-                                        <rect key="frame" x="0.0" y="491" width="414" height="163.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Ku-UqX">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="81.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -246,7 +233,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
-                                                <rect key="frame" x="0.0" y="81.5" width="414" height="82"/>
                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QrX-gP-fQs" secondAttribute="height" multiplier="1366:70" id="Zb6-TQ-Fkz"/>
@@ -272,13 +258,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G7q-Qp-ZIP" userLabel="mid4_Stack View">
-                                        <rect key="frame" x="0.0" y="654.5" width="414" height="163.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F09-67-1oL" userLabel="Stack View1">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="81.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUS-hR-U9P" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="83" height="81.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="" image="icons8-削除-25-2"/>
                                                         <userDefinedRuntimeAttributes>
@@ -291,7 +274,6 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-8B-VTU" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="83" y="0.0" width="248" height="81.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="29"/>
                                                         <state key="normal" title="入力">
@@ -307,10 +289,8 @@
                                                         </connections>
                                                     </button>
                                                     <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77c-Y9-S4K">
-                                                        <rect key="frame" x="331" y="0.0" width="83" height="81.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fvo-vA-Ese" userLabel="Button2" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="83" height="81.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="" image="icons8-削除-25"/>
                                                                 <userDefinedRuntimeAttributes>
@@ -352,10 +332,8 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Wf-M6-ASE" userLabel="Stack View2">
-                                                <rect key="frame" x="0.0" y="81.5" width="414" height="82"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="cI2-rb-hrh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="cI2-rb-hrh" secondAttribute="height" multiplier="1366:70" id="bGU-JK-lgY"/>
                                                         </constraints>
@@ -364,7 +342,6 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaT-XT-YuL">
-                                                        <rect key="frame" x="0.0" y="82" width="414" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="JaT-XT-YuL" secondAttribute="height" multiplier="1366:371" id="I4y-zj-46i"/>
                                                         </constraints>
@@ -445,6 +422,7 @@
                     <navigationItem key="navigationItem" title="仕訳" id="356-I7-npU"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="Button_cancel" destination="XUS-hR-U9P" id="oNf-tl-mSe"/>
                         <outlet property="Label_Popup" destination="cI2-rb-hrh" id="yr1-2n-QjM"/>
                         <outlet property="TextField_SmallWritting" destination="QrX-gP-fQs" id="wbX-eG-Mxn"/>
                         <outlet property="TextField_amount_credit" destination="Wld-cG-vmJ" id="n1z-Jn-bfb"/>
@@ -461,24 +439,18 @@
             </objects>
             <point key="canvasLocation" x="460" y="2782.03125"/>
         </scene>
+        <!--ClassicCalcuatorViewController-->
+        <scene sceneID="caS-0Q-kgN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ClassicCalcuatorViewController" id="2La-2Y-4JS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="asL-vQ-jEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="460" y="3163"/>
+        </scene>
     </scenes>
-    <designables>
-        <designable name="Fvo-vA-Ese">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="LOQ-8r-tSO">
-            <size key="intrinsicContentSize" width="97.5" height="32"/>
-        </designable>
-        <designable name="XUS-hR-U9P">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="aOv-8B-VTU">
-            <size key="intrinsicContentSize" width="58" height="41"/>
-        </designable>
-        <designable name="ue5-SW-9cy">
-            <size key="intrinsicContentSize" width="97.5" height="32"/>
-        </designable>
-    </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="l7h-iT-0oa"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="icons8-削除-25" width="25" height="25"/>
         <image name="icons8-削除-25-2" width="25" height="25"/>
@@ -486,10 +458,10 @@
             <color red="0.94999998807907104" green="0.94999998807907104" blue="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextFieldColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

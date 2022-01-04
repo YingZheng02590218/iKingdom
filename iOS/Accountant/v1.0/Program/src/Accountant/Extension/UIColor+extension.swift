@@ -18,4 +18,23 @@ extension UIColor {
     class var TextColor: UIColor {
         return UIColor(named: "TextColor")!
     }
+    
+    class var Background: UIColor {
+        return UIColor(named: "Background")!
+    }
+    
+    class var ButtonTextColor: UIColor {
+        return UIColor(named: "ButtonTextColor")!
+    }
+    
+    class var Background_light: UIColor {
+        return UIColor(named: "Background_light")!
+    }
+    
+    class var Background_dark: UIColor {
+        return UIColor(named: "Background_dark")!
+    }
+
+    static let theme = UIColor(named: "C1D2EB")
+
 }
