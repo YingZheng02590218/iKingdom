@@ -60,13 +60,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         } else {
             inAppPurchaseFlag = false
         }
-        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
-//        NotificationCenter.default.addObserver(self, selector: #selector(JournalEntryViewController.keyboardWillHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+
         // IDFA対応
         askIDFA()
     }
+    
     static var viewReload = false // リロードするかどうか
     /// 電卓画面から仕訳画面へ遷移したか
     var isFromClassicCalcuatorViewController = false
@@ -78,6 +76,18 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             if let numbersOnDisplay = numbersOnDisplay {
                 TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
                 TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+                // TextField 貸方金額　入力後
+                if TextField_amount_debit.text == "0"{
+                    TextField_amount_debit.text = ""
+                    TextField_amount_credit.text = ""
+                }
+                if TextField_amount_credit.text == "0"{
+                    TextField_amount_credit.text = ""
+                    TextField_amount_debit.text = ""
+                }
+                if TextField_SmallWritting.text == "" {
+                    TextField_SmallWritting.becomeFirstResponder()// カーソルを移す
+                }
             }
             // フラグを倒す
             isFromClassicCalcuatorViewController = false
@@ -188,6 +198,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             // チュートリアル対応
             presentAnnotation()
         }
+        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -195,6 +209,12 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         createButtons()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     // チュートリアル対応
     func presentAnnotation() {
         let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
@@ -541,20 +561,53 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
        TextField_SmallWritting.inputAccessoryView = toolbar
     }
-    
-    let SCREEN_SIZE = UIScreen.main.bounds.size
+        
     // UIKeyboardWillShow通知を受けて、実行される関数
-//    @objc func keyboardWillShow(_ notification: NSNotification){
-//        let keyboardHeight = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
-//        print("スクリーン高さ          " + "\(SCREEN_SIZE.height)")
-//        print("キーボードまでの高さ     " + "\(SCREEN_SIZE.height - keyboardHeight)")
-//        print("キーボード高さ          " + "\(keyboardHeight)")
-//        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - keyboardHeight - TextField_SmallWritting.frame.height
-//    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        // 小書きを入力中は、画面を上げる
+        if TextField_SmallWritting.isEditing {
+            guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+            animateWithKeyboard(notification: notification) { keyboardFrame in
+                if self.view.frame.origin.y == 0 {
+                    self.view.frame.origin.y -= keyboardSize.height - 150
+                } else {
+                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height
+                    self.view.frame.origin.y -= suggestionHeight - 150
+                }
+            }
+        }
+    }
     // UIKeyboardWillShow通知を受けて、実行される関数
-//    @objc func keyboardWillHide(_ notification: NSNotification){
-//        TextField_SmallWritting.frame.origin.y = SCREEN_SIZE.height - TextField_SmallWritting.frame.height
-//    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        animateWithKeyboard(notification: notification) { _ in
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    // キーボードのアニメーションに合わせてViewをアニメーションさせる
+    func animateWithKeyboard(notification: NSNotification, animations: ((_ keyboardFrame: CGRect) -> Void)?) {
+        // キーボードのdurationを抽出 *1
+        let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
+        let duration = notification.userInfo![durationKey] as! Double
+
+        // キーボードのframeを抽出する *2
+        let frameKey = UIResponder.keyboardFrameEndUserInfoKey
+        let keyboardFrameValue = notification.userInfo![frameKey] as! NSValue
+
+        // アニメーション曲線を抽出する *3
+        let curveKey = UIResponder.keyboardAnimationCurveUserInfoKey
+        let curveValue = notification.userInfo![curveKey] as! Int
+        let curve = UIView.AnimationCurve(rawValue: curveValue)!
+
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) {
+            // ここにアニメーション化したいレイアウト変更を記述する
+            animations?(keyboardFrameValue.cgRectValue)
+            self.view?.layoutIfNeeded()
+        }
+        animator.startAnimation()
+    }
+
     // TextFieldに入力され値が変化した時の処理の関数
     @objc func textFieldDidChange(_ sender: UITextField) {
 //    func textFieldEditingChanged(_ sender: UITextField){
@@ -774,8 +827,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }else if TextField_category_credit.text == TextField_category_debit.text { // 貸方と同じ勘定科目の場合
                 TextField_category_debit.text = ""
             }else {
-                if TextField_amount_debit.text == "" {
-                    TextField_amount_debit.becomeFirstResponder()
+                if TextField_category_credit.text == "" {
+                    TextField_category_credit.becomeFirstResponder()
                 }
             }
             Label_Popup.text = ""//ポップアップの文字表示をクリア
@@ -786,34 +839,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 TextField_category_credit.text = ""
             }else {
 //                TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if TextField_SmallWritting.text == "" {
-                    TextField_SmallWritting.becomeFirstResponder()// カーソルを小書きへ移す
+                if TextField_amount_debit.text == "" {
+                    TextField_amount_debit.becomeFirstResponder()// カーソルを金額へ移す
                 }
             }
             Label_Popup.text = ""//ポップアップの文字表示をクリア
-            // TextField 貸方金額　入力後
-        }else if textField.tag == 333 {
-            if TextField_amount_debit.text == "0"{
-                TextField_amount_debit.text = ""
-                TextField_amount_credit.text = ""
-            }
-            if TextField_amount_debit.text != "" {  // 初期値が代入されている
-                TextField_amount_credit.text = TextField_amount_debit.text          // 借方金額を貸方金額に表示
-                if  TextField_amount_debit.text != "" {                          // 借方金額が初期値ではない場合　かつ
-                    if TextField_category_credit.text == "" {                 // 貸方勘定科目が未入力の場合に
-                        //次のTextFieldのキーボードを自動的に表示する 借方金額　→ 貸方勘定科目
-                        TextField_category_credit.becomeFirstResponder()            // カーソル移動
-                    }
-                }
-            }
-        }else if textField.tag == 444 {
-            if TextField_amount_credit.text == "0"{
-                TextField_amount_credit.text = ""
-                TextField_amount_debit.text = ""
-            }
-            if TextField_amount_credit.text != "" {
-                TextField_amount_debit.text = TextField_amount_credit.text // 貸方金額を借方金額に表示
-            }
         }
     }
     

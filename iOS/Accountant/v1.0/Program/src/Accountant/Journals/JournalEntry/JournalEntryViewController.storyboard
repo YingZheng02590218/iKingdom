@@ -425,14 +425,14 @@
                                                 <rect key="frame" x="0.0" y="158.5" width="1024" height="106"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-Uj-doj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="106"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-63-4nj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="106"/>
+                                                        <rect key="frame" x="0.0" y="106" width="1024" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
@@ -501,7 +501,7 @@
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" id="PHA-oa-TGH"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="width" secondItem="qiy-ix-sdg" secondAttribute="width" id="R85-ta-jx5"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="top" secondItem="qiy-ix-sdg" secondAttribute="top" id="UvS-Lh-qpO"/>
-                            <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="7Xe-Zw-HUf" secondAttribute="bottom" id="ZBU-FR-Frw"/>
+                            <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="7Xe-Zw-HUf" secondAttribute="bottom" constant="20" id="ZBU-FR-Frw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="仕訳" id="8ln-1Z-2oy"/>
