@@ -131,12 +131,12 @@
 		F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC1F277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC20277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
-		F9C2BC25277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC26277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC27277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC29277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
-		F9C2BC2A277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
-		F9C2BC2B277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
+		F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC26277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC27277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
+		F9C2BC2A277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
+		F9C2BC2B277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
@@ -339,8 +339,8 @@
 		F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DSEG14Classic-Regular.ttf"; sourceTree = "<group>"; };
 		F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantUITests-Bridging-Header.h"; sourceTree = "<group>"; };
-		F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicCalcuatorViewController.swift; sourceTree = "<group>"; };
-		F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalcuatorViewController.storyboard; sourceTree = "<group>"; };
+		F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicCalculatorViewController.swift; sourceTree = "<group>"; };
+		F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalculatorViewController.storyboard; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -622,7 +622,7 @@
 				F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */,
 				F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */,
 				F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */,
-				F9C2BC21277DEE80006334D0 /* ClassicCaculator */,
+				F9C2BC21277DEE80006334D0 /* ClassicCalculator */,
 				F9A668712662483D008E9137 /* Extension */,
 				F95F597F2650266300EFE522 /* UIParts */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
@@ -916,14 +916,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		F9C2BC21277DEE80006334D0 /* ClassicCaculator */ = {
+		F9C2BC21277DEE80006334D0 /* ClassicCalculator */ = {
 			isa = PBXGroup;
 			children = (
 				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
-				F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */,
-				F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */,
+				F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */,
+				F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */,
 			);
-			path = ClassicCaculator;
+			path = ClassicCalculator;
 			sourceTree = "<group>";
 		};
 		F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */ = {
@@ -1262,7 +1262,7 @@
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
-				F9C2BC29277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
@@ -1303,7 +1303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C2BC1F277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
-				F9C2BC2A277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC2A277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1312,7 +1312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C2BC20277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
-				F9C2BC2B277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC2B277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1448,7 +1448,7 @@
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
-				F9C2BC25277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* TableViewCellSettingAccountDetailAccount.swift in Sources */,
 				F9D08D8E25444CF700CE3CB2 /* TableViewCellSettingAccountDetailTaxonomy.swift in Sources */,
 				F97422E0253F091500FBA052 /* PickerTextFieldAccountDetail.swift in Sources */,
@@ -1568,7 +1568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9C2BC26277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC26277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1576,7 +1576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9C2BC27277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC27277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

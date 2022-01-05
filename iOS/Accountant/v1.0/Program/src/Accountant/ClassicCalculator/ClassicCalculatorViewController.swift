@@ -1,5 +1,5 @@
 //
-//  ClassicCalcuatorViewController.swift
+//  ClassicCalculatorViewController.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2021/12/30.
@@ -9,7 +9,7 @@
 import UIKit
 import EMTNeumorphicView
 
-class ClassicCalcuatorViewController: UIViewController {
+class ClassicCalculatorViewController: UIViewController {
 
     
     @IBOutlet var backgroundView: EMTNeumorphicView!

@@ -439,10 +439,10 @@
             </objects>
             <point key="canvasLocation" x="460" y="2782.03125"/>
         </scene>
-        <!--ClassicCalcuatorViewController-->
+        <!--ClassicCalculatorViewController-->
         <scene sceneID="caS-0Q-kgN">
             <objects>
-                <viewControllerPlaceholder storyboardName="ClassicCalcuatorViewController" id="2La-2Y-4JS" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ClassicCalculatorViewController" id="2La-2Y-4JS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="asL-vQ-jEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="460" y="3163"/>

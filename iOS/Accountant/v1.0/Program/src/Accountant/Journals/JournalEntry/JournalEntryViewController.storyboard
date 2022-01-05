@@ -527,10 +527,10 @@
             </objects>
             <point key="canvasLocation" x="460" y="2782.03125"/>
         </scene>
-        <!--ClassicCalcuatorViewController-->
+        <!--ClassicCalculatorViewController-->
         <scene sceneID="9Qz-34-iAt">
             <objects>
-                <viewControllerPlaceholder storyboardName="ClassicCalcuatorViewController" id="p6n-20-9Qz" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ClassicCalculatorViewController" id="p6n-20-9Qz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H52-Sz-PtC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="460" y="3163"/>
