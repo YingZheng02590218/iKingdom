@@ -68,7 +68,8 @@ class ClassicCalculatorViewController: UIViewController {
         acAction()
     }
     
-    override func viewWillLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
+        
         layout()
     }
 
@@ -291,8 +292,9 @@ class ClassicCalculatorViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
-
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            sender.isSelected = !sender.isSelected
+        }
         let sentText = numbersOnDisplay// ?? DecimalNumbers.zero.rawValue
 
         // 入力チェック 文字数最大数を設定
@@ -523,6 +525,9 @@ class ClassicCalculatorViewController: UIViewController {
         }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            sender.isSelected = !sender.isSelected
+        }
         
 //        label.text = "0"
         numbersOnDisplay = DecimalNumbers.zero.rawValue

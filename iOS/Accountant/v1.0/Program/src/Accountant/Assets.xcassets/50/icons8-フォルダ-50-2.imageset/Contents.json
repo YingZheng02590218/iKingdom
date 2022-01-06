@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "icons8-フォルダ-50-2.png",
+      "filename" : "icons8-フォルダ-50-2.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }

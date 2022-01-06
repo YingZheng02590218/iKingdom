@@ -1,12 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "icons8-左の並べ替え-50.png",
+      "filename" : "icons8-左の並べ替え-50.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }
