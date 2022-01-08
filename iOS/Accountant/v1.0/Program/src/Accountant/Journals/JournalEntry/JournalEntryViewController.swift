@@ -388,6 +388,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    @IBOutlet var textFieldView: EMTNeumorphicView!
+    @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
     
     // ボタンのデザインを指定する
     private func createButtons() {
@@ -423,6 +425,26 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
         
+        if let textFieldView = textFieldView {
+            textFieldView.neumorphicLayer?.cornerRadius = 15
+            textFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            textFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            textFieldView.neumorphicLayer?.edged = edged
+            textFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            textFieldView.neumorphicLayer?.depthType = .concave
+        }
+        
+        if let smallWrittingTextFieldView = smallWrittingTextFieldView {
+            smallWrittingTextFieldView.neumorphicLayer?.cornerRadius = 15
+            smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.edged = edged
+            smallWrittingTextFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
+        }
+        
 //        inputButton.setTitle("入力", for: .normal)
         inputButton.setTitleColor(.ButtonTextColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
@@ -454,6 +476,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet weak var Button_Left: EMTNeumorphicButton!
     @IBAction func Button_Left(_ sender: UIButton) {
+        // 選択されていたボタンを選択解除する
+        let newArray = arrayHugo.filter { $0.isSelected == true}
+        for i in newArray {
+            i.isSelected = false
+        }
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            sender.isSelected = !sender.isSelected
+        }
+        
         let min = datePicker.minimumDate!
         if datePicker.date > min {
             let modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: datePicker.date)! // 1日前へ
@@ -462,6 +495,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     }
     @IBOutlet weak var Button_Right: EMTNeumorphicButton!
     @IBAction func Button_Right(_ sender: UIButton) {
+        // 選択されていたボタンを選択解除する
+        let newArray = arrayHugo.filter { $0.isSelected == true}
+        for i in newArray {
+            i.isSelected = false
+        }
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            sender.isSelected = !sender.isSelected
+        }
+        
         let max = datePicker.maximumDate!
         if datePicker.date < max {
             let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: datePicker.date)! // 1日次へ
@@ -847,11 +891,24 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
+
+    
     private var timer: Timer?                           // Timerを保持する変数
     @IBOutlet weak var Label_Popup: UILabel!
     @IBOutlet var inputButton: EMTNeumorphicButton!// 入力ボタン
     // 入力ボタン
-    @IBAction func Button_Input(_ sender: Any) {
+    @IBAction func Button_Input(_ sender: EMTNeumorphicButton) {
+        // 選択されていたボタンを選択解除する
+        let newArray = arrayHugo.filter { $0.isSelected == true}
+        for i in newArray {
+            i.isSelected = false
+        }
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            sender.isSelected = !sender.isSelected
+        }
         // シスログ出力
         // printによる出力はUTCになってしまうので、9時間ずれる
         let formatter = DateFormatter()
@@ -1011,6 +1068,16 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var Button_cancel: EMTNeumorphicButton!
     @IBAction func Button_cancel(_ sender: UIButton) {
+        // 選択されていたボタンを選択解除する
+        let newArray = arrayHugo.filter { $0.isSelected == true}
+        for i in newArray {
+            i.isSelected = false
+        }
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            sender.isSelected = !sender.isSelected
+        }
         TextField_category_debit.text = ""
         TextField_category_credit.text = ""
         TextField_amount_debit.text = ""

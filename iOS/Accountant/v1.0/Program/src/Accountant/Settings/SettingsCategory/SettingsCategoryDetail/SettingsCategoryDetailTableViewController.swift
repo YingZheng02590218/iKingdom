@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 
 // 勘定科目詳細クラス
@@ -70,6 +71,11 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -349,6 +355,24 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             return cell
         }
     }
+    
+    let LIGHTSHADOWOPACITY: Float = 0.3
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 6
+    let edged = false
+    
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        Button_input.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_input.neumorphicLayer?.cornerRadius = 15
+        Button_input.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_input.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        Button_input.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        Button_input.neumorphicLayer?.edged = edged
+        Button_input.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+    }
+    
     // TextField作成
     func createTextFieldForCategory() {
         // 大区分
@@ -492,7 +516,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         }
     }
     // 入力ボタン
-    @IBOutlet var Button_input: UIButton!// 入力ボタン
+    @IBOutlet var Button_input: EMTNeumorphicButton!// 入力ボタン
     @IBAction func Button_Input(_ sender: Any) {
         // 勘定科目　追加か編集か
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
