@@ -126,7 +126,6 @@
 		F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED1325671D6700678391 /* AnnotationViewControllerSettingsInformation.swift */; };
 		F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */; };
 		F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */; };
-		F9C245C926497E4400DD9C9B /* JournalEntryTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */; };
 		F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC1F277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC20277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
@@ -344,7 +343,6 @@
 		F9BEED1325671D6700678391 /* AnnotationViewControllerSettingsInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingsInformation.swift; sourceTree = "<group>"; };
 		F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewController.swift; sourceTree = "<group>"; };
 		F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTemplateViewController.swift; sourceTree = "<group>"; };
-		F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalEntryTemplateViewController.xib; sourceTree = "<group>"; };
 		F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DSEG14Classic-Regular.ttf"; sourceTree = "<group>"; };
 		F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantUITests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -884,7 +882,6 @@
 				F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */,
 				F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */,
 				F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */,
-				F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */,
 				F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */,
 				F9F4608024D1ED15008FE62B /* PickerTextField.swift */,
 				F9F934F42485EC3600BF7AA7 /* JournalEntryDB */,
@@ -1267,7 +1264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
-				F9C245C926497E4400DD9C9B /* JournalEntryTemplateViewController.xib in Resources */,
 				F99BE789261DCF3D004611E4 /* PLTableViewController.storyboard in Resources */,
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
