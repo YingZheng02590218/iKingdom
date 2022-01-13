@@ -84,10 +84,10 @@
                                                 <rect key="frame" x="5" y="0.0" width="418" height="169.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="5" width="50" height="159.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="5" width="25" height="159.66666666666666"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-戻る-50">
+                                                        <state key="normal" title="" image="icons8-戻る-25">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -95,10 +95,10 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcr-5P-JyB" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="67.666666666666657" y="5" width="282.66666666666674" height="159.66666666666666"/>
+                                                        <rect key="frame" x="67.666666666666657" y="0.0" width="282.66666666666674" height="169.66666666666666"/>
                                                         <subviews>
                                                             <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                                <rect key="frame" x="5" y="5" width="272.66666666666669" height="216"/>
+                                                                <rect key="frame" x="5" y="5" width="272.66666666666669" height="159.66666666666666"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                                     <!--1970-01-01 11:00:00 +0000-->
@@ -125,10 +125,10 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="368" y="5" width="50" height="159.66666666666666"/>
+                                                        <rect key="frame" x="393" y="5" width="25" height="159.66666666666666"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-進む-50">
+                                                        <state key="normal" title="" image="icons8-進む-25">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -148,12 +148,12 @@
                                                     <constraint firstItem="wcr-5P-JyB" firstAttribute="width" relation="lessThanOrEqual" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.7" constant="-10" id="H1c-cj-ane"/>
                                                     <constraint firstItem="4du-Lt-kP1" firstAttribute="width" relation="lessThanOrEqual" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.15" constant="-10" id="M16-OX-VPe"/>
                                                     <constraint firstAttribute="bottom" secondItem="4du-Lt-kP1" secondAttribute="bottom" constant="5" id="MAy-5Y-Zad"/>
-                                                    <constraint firstAttribute="trailing" secondItem="4du-Lt-kP1" secondAttribute="trailing" constant="5" id="XcE-vy-Ifo"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4du-Lt-kP1" secondAttribute="trailing" constant="5" id="XcE-vy-Ifo"/>
                                                     <constraint firstItem="4du-Lt-kP1" firstAttribute="top" secondItem="jHf-qD-M1U" secondAttribute="top" constant="5" id="bYa-0O-scZ"/>
-                                                    <constraint firstItem="4fs-GK-JAo" firstAttribute="leading" secondItem="jHf-qD-M1U" secondAttribute="leading" constant="5" id="cSJ-jf-DUz"/>
-                                                    <constraint firstItem="wcr-5P-JyB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4fs-GK-JAo" secondAttribute="trailing" constant="5" id="deY-3L-7Ue"/>
+                                                    <constraint firstItem="4fs-GK-JAo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jHf-qD-M1U" secondAttribute="leading" constant="5" id="cSJ-jf-DUz"/>
+                                                    <constraint firstItem="wcr-5P-JyB" firstAttribute="leading" secondItem="4fs-GK-JAo" secondAttribute="trailing" constant="5" id="deY-3L-7Ue"/>
                                                     <constraint firstItem="4fs-GK-JAo" firstAttribute="width" relation="lessThanOrEqual" secondItem="jHf-qD-M1U" secondAttribute="width" multiplier="0.15" constant="-10" id="npN-bD-uCA"/>
-                                                    <constraint firstItem="4du-Lt-kP1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wcr-5P-JyB" secondAttribute="trailing" constant="5" id="sn4-YE-pHZ"/>
+                                                    <constraint firstItem="4du-Lt-kP1" firstAttribute="leading" secondItem="wcr-5P-JyB" secondAttribute="trailing" constant="5" id="sn4-YE-pHZ"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -384,7 +384,7 @@
                                                             <constraint firstAttribute="width" secondItem="Ef0-Vy-bhy" secondAttribute="height" multiplier="1:1" id="DOV-L2-MHc"/>
                                                         </constraints>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-削除-44-2">
+                                                        <state key="normal" title="" image="icons8-削除-25-2">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -400,7 +400,7 @@
                                                         <rect key="frame" x="95.666666666666671" y="0.0" width="236.66666666666663" height="65.666666666666671"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="icons8-記録-44">
+                                                        <state key="normal" title="入力">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -615,13 +615,13 @@
     </scenes>
     <designables>
         <designable name="4du-Lt-kP1">
-            <size key="intrinsicContentSize" width="50" height="50"/>
+            <size key="intrinsicContentSize" width="25" height="25"/>
         </designable>
         <designable name="4fs-GK-JAo">
-            <size key="intrinsicContentSize" width="50" height="50"/>
+            <size key="intrinsicContentSize" width="25" height="25"/>
         </designable>
         <designable name="Ef0-Vy-bhy">
-            <size key="intrinsicContentSize" width="44" height="44"/>
+            <size key="intrinsicContentSize" width="25" height="25"/>
         </designable>
         <designable name="RtK-tc-ENG">
             <size key="intrinsicContentSize" width="97.333333333333329" height="32"/>
@@ -630,19 +630,18 @@
             <size key="intrinsicContentSize" width="97.333333333333329" height="32"/>
         </designable>
         <designable name="kmr-j8-KMb">
-            <size key="intrinsicContentSize" width="44" height="44"/>
+            <size key="intrinsicContentSize" width="37" height="34"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="oNm-xH-Kw5"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="icons8-削除-44-2" width="44" height="44"/>
-        <image name="icons8-戻る-50" width="50" height="50"/>
-        <image name="icons8-記録-44" width="44" height="44"/>
-        <image name="icons8-進む-50" width="50" height="50"/>
+        <image name="icons8-削除-25-2" width="25" height="25"/>
+        <image name="icons8-戻る-25" width="25" height="25"/>
+        <image name="icons8-進む-25" width="25" height="25"/>
         <namedColor name="Background">
-            <color red="0.92549019607843142" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
