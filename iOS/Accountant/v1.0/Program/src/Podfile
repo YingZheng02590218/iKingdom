@@ -11,7 +11,7 @@
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
     pod 'SwiftyStoreKit'
-    pod 'RealmSwift', ' > 3.19.0'
+    pod 'RealmSwift', ' ~> 10.21'
     pod 'NeuKit'
     pod 'EMTNeumorphicView'
     pod 'Gecco'
@@ -41,5 +41,3 @@
       config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
     end
   end
-
-
