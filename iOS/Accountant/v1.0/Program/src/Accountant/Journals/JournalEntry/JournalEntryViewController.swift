@@ -26,7 +26,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     #else
     let AdMobTest:Bool = false
     #endif
-    @IBOutlet var interstitial: GADInterstitial!
+    private var interstitial: GADInterstitialAd?
     
     var categories :[String] = Array<String>()
     var subCategories_assets :[String] = Array<String>()
@@ -173,13 +173,31 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             // GADBannerView プロパティを設定する
             if AdMobTest {
                 // GADInterstitial を作成する
-                interstitial = GADInterstitial(adUnitID: TEST_ID)
+                let request = GADRequest()
+                GADInterstitialAd.load(withAdUnitID:TEST_ID,
+                                       request: request,
+                                       completionHandler: { [self] ad, error in
+                    if let error = error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    interstitial = ad
+                }
+                )
             }
             else{
-                interstitial = GADInterstitial(adUnitID: AdMobID)
+                let request = GADRequest()
+                GADInterstitialAd.load(withAdUnitID:AdMobID,
+                                       request: request,
+                                       completionHandler: { [self] ad, error in
+                    if let error = error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    interstitial = ad
+                }
+                )
             }
-            let request = GADRequest()
-            interstitial.load(request)
         }
         if let _ = self.navigationController {
             // ナビゲーションを透明にする処理
@@ -1015,8 +1033,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     // 乱数　1から6までのIntを生成
                     let iValue = Int.random(in: 1 ... 6)
                     if iValue % 2 == 0 {
-                        if interstitial.isReady {
-                            interstitial.present(fromRootViewController: self)
+                        if interstitial != nil {
+                            interstitial?.present(fromRootViewController: self)
+                        } else {
+                          print("Ad wasn't ready")
                         }
                     }
                 }

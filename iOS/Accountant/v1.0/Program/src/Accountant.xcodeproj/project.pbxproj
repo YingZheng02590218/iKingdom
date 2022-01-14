@@ -20,7 +20,7 @@
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
-		F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; };
+		F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */; };
