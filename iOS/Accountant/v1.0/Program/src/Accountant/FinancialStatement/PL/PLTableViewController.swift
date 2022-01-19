@@ -91,6 +91,11 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+        view.bringSubviewToFront(gADBannerView)
+    }
+    
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
       bannerView.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(bannerView)
@@ -111,9 +116,6 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                             constant: 0)
         ])
      }
-    // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
-    }
     
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
@@ -134,7 +136,12 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
     }
 
     // MARK: - Table view data source
-
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+        tableView.bringSubviewToFront(gADBannerView)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

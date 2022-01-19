@@ -238,6 +238,7 @@ class SettingsTableViewController: UITableViewController {
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             case 1:
+                /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
                 let url = URL(string:"https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
                 if let url = url{

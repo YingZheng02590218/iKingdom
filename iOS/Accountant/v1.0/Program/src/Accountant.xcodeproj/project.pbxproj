@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		522318B0EE4F539BA11D8AFE /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; };
-		9BDB671CB0D8BBA854E16604 /* Pods_AccountantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC6138EA740D75AAB1DD259 /* Pods_AccountantTests.framework */; };
-		F57BFBC12EF00163D781E050 /* Pods_Accountant_AccountantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF36BAF969D04BE9BB741A1D /* Pods_Accountant_AccountantUITests.framework */; };
+		55CE98C40D81B1F934D1099B /* libPods-AccountantTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */; };
+		BF157994A9DA48822F25C601 /* libPods-AccountantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
 		F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */; };
 		F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */; };
@@ -21,6 +20,7 @@
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
+		F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */; };
@@ -120,23 +120,21 @@
 		F9AAB36224941F1A00AB2FBD /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AAB36124941F1A00AB2FBD /* AccountTableViewCell.swift */; };
 		F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */; };
 		F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
-		F9B778E725A09D0100300B7A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B778E625A09D0000300B7A /* StoreKit.framework */; };
 		F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED0D2566F56400678391 /* AnnotationViewControllerJournals.swift */; };
 		F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED0F2566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift */; };
 		F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED11256704A800678391 /* AnnotationViewControllerSettingsCategory.swift */; };
 		F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BEED1325671D6700678391 /* AnnotationViewControllerSettingsInformation.swift */; };
 		F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */; };
 		F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */; };
-		F9C245C926497E4400DD9C9B /* JournalEntryTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */; };
 		F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC1F277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
 		F9C2BC20277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */; };
-		F9C2BC25277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC26277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC27277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */; };
-		F9C2BC29277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
-		F9C2BC2A277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
-		F9C2BC2B277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */; };
+		F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC26277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC27277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */; };
+		F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
+		F9C2BC2A277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
+		F9C2BC2B277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
@@ -202,13 +200,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0578B27B5D3F0965D2D68CE5 /* Pods-AccountantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantUITests.release.xcconfig"; path = "Target Support Files/Pods-AccountantUITests/Pods-AccountantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0607E6C6A3527AD59D0F557D /* Pods-Accountant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant.release.xcconfig"; path = "Target Support Files/Pods-Accountant/Pods-Accountant.release.xcconfig"; sourceTree = "<group>"; };
 		1F51C0A378B805DC283D9A49 /* Pods-Accountant-AccountantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant-AccountantUITests.release.xcconfig"; path = "Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests.release.xcconfig"; sourceTree = "<group>"; };
+		209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccountantTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccountantUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3947D5A43F0563FFA12C14FA /* Pods-AccountantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.debug.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.debug.xcconfig"; sourceTree = "<group>"; };
 		47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FA03775975FDD94B320E777 /* Pods-AccountantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantUITests.debug.xcconfig"; path = "Target Support Files/Pods-AccountantUITests/Pods-AccountantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		83B54E7192BB1D0790175288 /* Pods-Accountant-AccountantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant-AccountantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		84DA037E2BAF912127067D70 /* Pods-Accountant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant.debug.xcconfig"; path = "Target Support Files/Pods-Accountant/Pods-Accountant.debug.xcconfig"; sourceTree = "<group>"; };
-		CBC6138EA740D75AAB1DD259 /* Pods_AccountantTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccountantTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.release.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.release.xcconfig"; sourceTree = "<group>"; };
 		F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournalEntry.swift; sourceTree = "<group>"; };
 		F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +323,13 @@
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
 		F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListCarouselAndPageViewController.swift; sourceTree = "<group>"; };
 		F9A3C82F26552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListCarouselAndPageViewController.storyboard; sourceTree = "<group>"; };
+		F9A46A2C2785F7DE006CC162 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyStoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A302785F800006CC162 /* NeuKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NeuKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A342785F844006CC162 /* EMTNeumorphicView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EMTNeumorphicView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A382785F851006CC162 /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A3B2785F8DC006CC162 /* Gecco.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Gecco.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A472785F931006CC162 /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A46A4A2785FDDE006CC162 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A6686C266247C7008E9137 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTheDayOfReckoningTableViewController.swift; path = SettingsTheDayOfReckoning/SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
@@ -335,12 +343,11 @@
 		F9BEED1325671D6700678391 /* AnnotationViewControllerSettingsInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingsInformation.swift; sourceTree = "<group>"; };
 		F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewController.swift; sourceTree = "<group>"; };
 		F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTemplateViewController.swift; sourceTree = "<group>"; };
-		F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JournalEntryTemplateViewController.xib; sourceTree = "<group>"; };
 		F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DSEG14Classic-Regular.ttf"; sourceTree = "<group>"; };
 		F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccountantUITests-Bridging-Header.h"; sourceTree = "<group>"; };
-		F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicCalcuatorViewController.swift; sourceTree = "<group>"; };
-		F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalcuatorViewController.storyboard; sourceTree = "<group>"; };
+		F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicCalculatorViewController.swift; sourceTree = "<group>"; };
+		F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalculatorViewController.storyboard; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
@@ -364,6 +371,8 @@
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
+		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
 		F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerWS.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTaxonomy.swift; sourceTree = "<group>"; };
@@ -385,7 +394,6 @@
 		F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooks.swift; sourceTree = "<group>"; };
 		F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooks.swift; sourceTree = "<group>"; };
 		F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaxonomyAccount.csv; sourceTree = "<group>"; };
-		FF36BAF969D04BE9BB741A1D /* Pods_Accountant_AccountantUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountant_AccountantUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,8 +401,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9B778E725A09D0100300B7A /* StoreKit.framework in Frameworks */,
-				522318B0EE4F539BA11D8AFE /* Pods_Accountant.framework in Frameworks */,
+				F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,7 +409,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BDB671CB0D8BBA854E16604 /* Pods_AccountantTests.framework in Frameworks */,
+				55CE98C40D81B1F934D1099B /* libPods-AccountantTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +417,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F57BFBC12EF00163D781E050 /* Pods_Accountant_AccountantUITests.framework in Frameworks */,
+				BF157994A9DA48822F25C601 /* libPods-AccountantUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +433,8 @@
 				1F51C0A378B805DC283D9A49 /* Pods-Accountant-AccountantUITests.release.xcconfig */,
 				3947D5A43F0563FFA12C14FA /* Pods-AccountantTests.debug.xcconfig */,
 				E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */,
+				6FA03775975FDD94B320E777 /* Pods-AccountantUITests.debug.xcconfig */,
+				0578B27B5D3F0965D2D68CE5 /* Pods-AccountantUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -433,10 +442,19 @@
 		F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */,
+				F9F164B22786021B0044665A /* GoogleDataTransport.framework */,
+				F9A46A4A2785FDDE006CC162 /* Realm.framework */,
+				F9A46A472785F931006CC162 /* RealmSwift.framework */,
+				F9A46A3B2785F8DC006CC162 /* Gecco.framework */,
+				F9A46A382785F851006CC162 /* RealmSwift.framework */,
+				F9A46A342785F844006CC162 /* EMTNeumorphicView.framework */,
+				F9A46A302785F800006CC162 /* NeuKit.framework */,
+				F9A46A2C2785F7DE006CC162 /* SwiftyStoreKit.framework */,
 				F9B778E625A09D0000300B7A /* StoreKit.framework */,
 				47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */,
-				FF36BAF969D04BE9BB741A1D /* Pods_Accountant_AccountantUITests.framework */,
-				CBC6138EA740D75AAB1DD259 /* Pods_AccountantTests.framework */,
+				209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */,
+				213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -622,7 +640,7 @@
 				F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */,
 				F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */,
 				F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */,
-				F9C2BC21277DEE80006334D0 /* ClassicCaculator */,
+				F9C2BC21277DEE80006334D0 /* ClassicCalculator */,
 				F9A668712662483D008E9137 /* Extension */,
 				F95F597F2650266300EFE522 /* UIParts */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
@@ -864,7 +882,6 @@
 				F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */,
 				F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */,
 				F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */,
-				F9C245C726497E4400DD9C9B /* JournalEntryTemplateViewController.xib */,
 				F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */,
 				F9F4608024D1ED15008FE62B /* PickerTextField.swift */,
 				F9F934F42485EC3600BF7AA7 /* JournalEntryDB */,
@@ -916,14 +933,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		F9C2BC21277DEE80006334D0 /* ClassicCaculator */ = {
+		F9C2BC21277DEE80006334D0 /* ClassicCalculator */ = {
 			isa = PBXGroup;
 			children = (
 				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
-				F9C2BC24277DEF08006334D0 /* ClassicCalcuatorViewController.swift */,
-				F9C2BC28277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard */,
+				F9C2BC24277DEF08006334D0 /* ClassicCalculatorViewController.swift */,
+				F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */,
 			);
-			path = ClassicCaculator;
+			path = ClassicCalculator;
 			sourceTree = "<group>";
 		};
 		F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */ = {
@@ -1145,8 +1162,8 @@
 				F94EDD8B237AEB3A0074D812 /* Sources */,
 				F94EDD8C237AEB3A0074D812 /* Frameworks */,
 				F94EDD8D237AEB3A0074D812 /* Resources */,
-				79E824EF775E8AB3AC9EFFDE /* [CP] Embed Pods Frameworks */,
 				F91878C9258300DB00D2E793 /* ShellScript */,
+				490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1184,7 +1201,6 @@
 				F94EDDAE237AEB3C0074D812 /* Sources */,
 				F94EDDAF237AEB3C0074D812 /* Frameworks */,
 				F94EDDB0237AEB3C0074D812 /* Resources */,
-				212F3689F67AA74F3761F0C8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1248,7 +1264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
-				F9C245C926497E4400DD9C9B /* JournalEntryTemplateViewController.xib in Resources */,
 				F99BE789261DCF3D004611E4 /* PLTableViewController.storyboard in Resources */,
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
@@ -1262,7 +1277,7 @@
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
-				F9C2BC29277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
@@ -1303,7 +1318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C2BC1F277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
-				F9C2BC2A277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC2A277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1312,30 +1327,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C2BC20277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
-				F9C2BC2B277DEF4B006334D0 /* ClassicCalcuatorViewController.storyboard in Resources */,
+				F9C2BC2B277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		212F3689F67AA74F3761F0C8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3824B7B9BA656AD13B6800D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1358,7 +1356,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		79E824EF775E8AB3AC9EFFDE /* [CP] Embed Pods Frameworks */ = {
+		490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1412,7 +1410,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Accountant-AccountantUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AccountantUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1448,7 +1446,7 @@
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
-				F9C2BC25277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* TableViewCellSettingAccountDetailAccount.swift in Sources */,
 				F9D08D8E25444CF700CE3CB2 /* TableViewCellSettingAccountDetailTaxonomy.swift in Sources */,
 				F97422E0253F091500FBA052 /* PickerTextFieldAccountDetail.swift in Sources */,
@@ -1568,7 +1566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9C2BC26277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC26277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1576,7 +1574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9C2BC27277DEF08006334D0 /* ClassicCalcuatorViewController.swift in Sources */,
+				F9C2BC27277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1659,7 +1657,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1721,6 +1719,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1749,12 +1748,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 84DA037E2BAF912127067D70 /* Pods-Accountant.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.9.01;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Accountant/Info.plist;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1763,6 +1768,7 @@
 				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1772,12 +1778,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0607E6C6A3527AD59D0F557D /* Pods-Accountant.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.9.01;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Accountant/Info.plist;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1786,6 +1798,7 @@
 				MARKETING_VERSION = 1.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1837,7 +1850,7 @@
 		};
 		F94EDDC2237AEB3C0074D812 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83B54E7192BB1D0790175288 /* Pods-Accountant-AccountantUITests.debug.xcconfig */;
+			baseConfigurationReference = 6FA03775975FDD94B320E777 /* Pods-AccountantUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1862,7 +1875,7 @@
 		};
 		F94EDDC3237AEB3C0074D812 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F51C0A378B805DC283D9A49 /* Pods-Accountant-AccountantUITests.release.xcconfig */;
+			baseConfigurationReference = 0578B27B5D3F0965D2D68CE5 /* Pods-AccountantUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;

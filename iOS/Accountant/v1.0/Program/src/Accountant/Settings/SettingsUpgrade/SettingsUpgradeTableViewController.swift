@@ -224,6 +224,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }
             break
         case 3: // プライバシーポリシー　利用規約
+            /// TODO: -  アプリ名変更
             // アプリ内でブラウザを開く
             let url = URL(string:"https://www.facebook.com/The-Reckoning-103608024863220")
             if let url = url{
