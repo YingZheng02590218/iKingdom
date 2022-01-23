@@ -27,8 +27,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     let AdMobIDi = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
     // テスト用広告ユニットID
     let TEST_IDi = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
-    @IBOutlet var interstitial: GADInterstitial!
-    
+    private var interstitial: GADInterstitialAd?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +72,31 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // GADBannerView プロパティを設定する
             if AdMobTest {
                 // GADInterstitial を作成する
-                interstitial = GADInterstitial(adUnitID: TEST_IDi)
+                let request = GADRequest()
+                GADInterstitialAd.load(withAdUnitID:TEST_IDi,
+                                       request: request,
+                                       completionHandler: { [self] ad, error in
+                    if let error = error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    interstitial = ad
+                }
+                )
             }
             else{
-                interstitial = GADInterstitial(adUnitID: AdMobIDi)
+                let request = GADRequest()
+                GADInterstitialAd.load(withAdUnitID:AdMobIDi,
+                                       request: request,
+                                       completionHandler: { [self] ad, error in
+                    if let error = error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    interstitial = ad
+                }
+                )
             }
-            let request = GADRequest()
-            interstitial.load(request)
         }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -91,8 +109,10 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             // マネタイズ対応
-            if self.interstitial.isReady {
-                self.interstitial.present(fromRootViewController: self)
+            if interstitial != nil {
+                interstitial?.present(fromRootViewController: self)
+            } else {
+              print("Ad wasn't ready")
             }
         }
     }

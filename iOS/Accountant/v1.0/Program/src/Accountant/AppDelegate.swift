@@ -9,7 +9,9 @@
 import NeuKit
 import RealmSwift
 import Firebase // マネタイズ対応
+import GoogleMobileAds
 import SwiftyStoreKit // アップグレード機能　スタンダードプラン
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 
 // 仕訳テンプレートクラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
@@ -56,6 +57,12 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
 //            nicknameTextField.isHidden = true
 //        }
         
+        // 金額　電卓画面で入力した値を表示させる
+        if let numbersOnDisplay = numbersOnDisplay {
+            TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
+            TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+        }
+        
     }
     
     @IBOutlet var nicknameTextField: UITextField!
@@ -96,7 +103,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }
     }
     
-    @IBAction override func Button_Input(_ sender: Any) {
+    @IBAction override func Button_Input(_ sender: EMTNeumorphicButton) {
         // シスログ出力
         // printによる出力はUTCになってしまうので、9時間ずれる
         let formatter = DateFormatter()
@@ -175,7 +182,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }
     }
     // 削除ボタン
-    @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var deleteButton: EMTNeumorphicButton!
     @IBAction func deleteButton(_ sender: Any) {
         // 確認のポップアップを表示したい
         self.showPopover()
@@ -209,5 +216,28 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // 日付　ボタン作成
+        createButtons()
+    }
+    
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let deleteButton = deleteButton {
+            deleteButton.setTitleColor(.ButtonTextColor, for: .normal)
+            deleteButton.neumorphicLayer?.cornerRadius = 15
+            deleteButton.setTitleColor(.ButtonTextColor, for: .selected)
+            deleteButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            deleteButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            deleteButton.neumorphicLayer?.edged = edged
+            deleteButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
+            // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
+            deleteButton.neumorphicLayer?.elementColor = UIColor.Background.cgColor
+        }
     }
 }

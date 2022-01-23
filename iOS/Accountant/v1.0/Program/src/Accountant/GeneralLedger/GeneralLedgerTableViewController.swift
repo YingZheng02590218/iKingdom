@@ -66,6 +66,11 @@ class GeneralLedgerTableViewController: UITableViewController {
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+        view.bringSubviewToFront(gADBannerView)
+    }
+    
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
       bannerView.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(bannerView)
@@ -146,6 +151,11 @@ class GeneralLedgerTableViewController: UITableViewController {
         default:
             return ""
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+        tableView.bringSubviewToFront(gADBannerView)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 
 class ListCollectionViewCell: UICollectionViewCell {
 
@@ -16,15 +17,16 @@ class ListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var creditLabel: UILabel!
     @IBOutlet var creditamauntLabel: UILabel!
     
+    @IBOutlet var backgroundViewForNeumorphism: EMTNeumorphicView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // セルの背景色を変える
-        self.contentView.backgroundColor = .white
-        // セルの枠線の太さを変える
-        self.contentView.layer.borderWidth = 0
-        self.contentView.layer.borderColor = UIColor.gray.cgColor
-        // セルを角丸にする
-        self.contentView.layer.cornerRadius = 10
+
+    }
+    
+    override func layoutSubviews() {
+        
+        createViewDesign()
     }
     
     override var isSelected: Bool {
@@ -35,7 +37,27 @@ class ListCollectionViewCell: UICollectionViewCell {
     }
     
     private func onUpdateSelection() {
-        self.contentView.layer.borderWidth = self.isSelected ? 2 : 0
+        // セルの枠線の太さを変える
+        backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 2 : 0
+    }
+    
+    let LIGHTSHADOWOPACITY: Float = 0.3
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 6
+    let edged = false
+    
+    // ビューのデザインを指定する
+    private func createViewDesign() {
+        backgroundViewForNeumorphism.neumorphicLayer?.borderColor = UIColor.gray.cgColor
+        // セルを角丸にする
+        self.contentView.layer.cornerRadius = 10
+        
+        backgroundViewForNeumorphism.neumorphicLayer?.cornerRadius = 10
+        backgroundViewForNeumorphism.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        backgroundViewForNeumorphism.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        backgroundViewForNeumorphism.neumorphicLayer?.edged = edged
+        backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
     }
     
 }
