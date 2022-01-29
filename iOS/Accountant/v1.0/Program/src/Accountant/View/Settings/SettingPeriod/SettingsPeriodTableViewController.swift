@@ -227,8 +227,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return 2
         case 1:
             // 会計年度
-            let dataBaseManager = DataBaseManagerSettingsPeriod()
-            let counts = dataBaseManager.getMainBooksAllCount()
+            let counts = DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount()
             return counts
         default:
             return 0
@@ -240,8 +239,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         case 0:
             // 決算日
             let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath) as! SettingsPeriodTableViewCell
-            let dataBaseManager = DataBaseManagerSettingsPeriod()
-            let object = dataBaseManager.getTheDayOfReckoning()
+            let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             // 会計帳簿の年度をセルに表示する
             if indexPath.row == 0 {
                 cell.textLabel?.text = "月"
@@ -261,8 +259,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // 会計年度
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
             // データベース
-            let dataBaseManager = DataBaseManagerSettingsPeriod()
-            let objects = dataBaseManager.getMainBooksAll()
+            let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
             // 会計帳簿の年度をセルに表示する
             cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
             cell.rightdetailTextLabel.text = "仕訳データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int)"
@@ -303,8 +300,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     // チェックマークの切り替え　データベースを更新
     func pickAccountingBook(tag: Int) {
         // データベース
-        let databaseManager = DataBaseManagerSettingsPeriod()
-        databaseManager.setMainBooksOpenOrClose(tag: tag)
+        DataBaseManagerSettingsPeriod.shared.setMainBooksOpenOrClose(tag: tag)
         // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
         let dataBaseManagerAccount = DataBaseManagerAccount()
         dataBaseManagerAccount.addGeneralLedgerAccountLack() 
@@ -339,8 +335,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース
-            let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-            let objects = dataBaseManagerPeriod.getMainBooksAll()
+            let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
             if objects.count > 1 {
                 // 会計帳簿を削除
                 let dataBaseManager = DataBaseManagerAccountingBooks()

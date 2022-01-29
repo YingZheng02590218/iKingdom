@@ -179,6 +179,24 @@ class FinancialStatementTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(viewController, animated: true)
+                }else{
+                    let navigation = UINavigationController(rootViewController:viewController)
+                    self.present(navigation, animated: true, completion: nil)
+                }
+                break
+            default:
+                break
+            }
+        }
+    }
+    
     // MARK: - Navigation
     
     // 追加機能　画面遷移の準備の前に入力検証
@@ -204,6 +222,12 @@ class FinancialStatementTableViewController: UITableViewController {
             viewControllerGenearlLedgerAccount.account = "損益勘定" // セルに表示した勘定名を設定
             // 遷移先のコントローラー.条件用の属性 = “条件”
             break
+//        case "BS":
+//            let navigationController = segue.destination as! UINavigationController
+//            let viewController = navigationController.topViewController as! BSTableViewController
+//            // 遷移先のコントローラに値を渡す
+//            viewController.inject(presenter: BSPresenterInput.self)
+//            break
         default:
             break
         }

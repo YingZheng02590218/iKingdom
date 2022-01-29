@@ -98,8 +98,7 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManager.getTheDayOfReckoning()
+        let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         var date = ""
         let d = object
         if month {
@@ -157,8 +156,7 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
             tableView.reloadData()
         }else { // 日
             // 月別に日数を調整する
-            let dataBaseManager = DataBaseManagerSettingsPeriod()
-            let object = dataBaseManager.getTheDayOfReckoning()
+            let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             var date = ""
             let d = object
             // 月別に日数を調整する
@@ -201,8 +199,7 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
     // チェックマークの切り替え　データベースを更新
     func pickDate(date: String) {
         // データベース
-        let databaseManager = DataBaseManagerSettingsPeriod()
-        databaseManager.setTheDayOfReckoning(month: month, date: date)
+        DataBaseManagerSettingsPeriod.shared.setTheDayOfReckoning(month: month, date: date)
     }
     
     /*

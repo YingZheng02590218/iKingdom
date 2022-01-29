@@ -12,6 +12,10 @@ import RealmSwift
 // 会計期間クラス
 class DataBaseManagerSettingsPeriod {
 
+    public static let shared = DataBaseManagerSettingsPeriod()
+    private init() {
+    }
+    
     // データベースにモデルが存在するかどうかをチェックする
     func checkInitialising() -> Bool {
         // (1)Realmのインスタンスを生成する

@@ -11,12 +11,13 @@ import RealmSwift
 
 // 表示科目クラス
 class DataBaseManagerTaxonomy {
+    
+    public static let shared = DataBaseManagerTaxonomy()
 
     // 初期化
     func initializeTaxonomy(){
         // 設定表示科目
-        let dataBaseManager = DataBaseManagerSettingsTaxonomy()
-        let objects = dataBaseManager.getAllSettingsTaxonomySwitichON()
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomySwitichON()
         // 設定表示科目に存在する表示科目の数だけ、計算とDBへの書き込みを行う
         for i in 0..<objects.count {
             setTotalOfTaxonomy(numberOfSettingsTaxonomy: objects[i].number)
@@ -50,8 +51,7 @@ class DataBaseManagerTaxonomy {
     // 取得 表示科目　表示名別の合計
     func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: lastYear)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         // 設定表示科目の連番から表示科目の名称を取得
 //        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
 //        let realm = try! Realm()
@@ -78,8 +78,7 @@ class DataBaseManagerTaxonomy {
     */
     func setTotalOfTaxonomy(numberOfSettingsTaxonomy: Int) {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 設定表示科目の名称を取得
 //        let accountName = getNameOfSettingsTaxonomy(number: numberOfSettingsTaxonomy)
 //        let category2 = getCategory2OfSettingsTaxonomy(number: number) // 2020/11/09 計算方法修正のため不使用
@@ -135,8 +134,7 @@ class DataBaseManagerTaxonomy {
     func getTotalAmount(account: String) -> Int64 {
         // 引数に空白が入るのでインデックスエラーとなる　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
         // 開いている会計帳簿を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // (1)Realmのインスタンスを生成する
 //        let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
@@ -166,8 +164,7 @@ class DataBaseManagerTaxonomy {
     */
     func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) -> String {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var DebitOrCredit:String = "" // 借又貸
@@ -264,8 +261,7 @@ class DataBaseManagerTaxonomy {
         // 会計帳簿棚　を取得
         let object = realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)!
         // 設定表示科目　を取得
-        let dataBaseManager = DataBaseManagerSettingsTaxonomy()
-        let objects = dataBaseManager.getAllSettingsTaxonomy()
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
         // 会計帳簿　の数の分だけ表示科目を作成
         for y in 0..<object.dataBaseAccountingBooks.count {
             if object.dataBaseAccountingBooks[y].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.count == 0 {

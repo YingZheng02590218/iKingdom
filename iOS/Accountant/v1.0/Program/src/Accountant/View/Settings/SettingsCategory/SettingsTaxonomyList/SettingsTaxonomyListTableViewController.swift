@@ -107,7 +107,6 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース　表示科目
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             sheet = 0 // BS
@@ -116,13 +115,12 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
         return objects.count
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
         // 決算書別に表示科目を取得
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             sheet = 0 // BS
@@ -131,7 +129,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsTaxonomy.getBigCategoryAll(section: sheet)
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
     
         //① UI部品を指定　TableViewCellCategory
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! TableViewCellCategoryList
@@ -251,7 +249,6 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     private func showPopover(indexPath: IndexPath) {
         // 選択されたセルに表示された表示科目のプライマリーキーを取得
         // 決算書別に表示科目を取得
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             sheet = 0 // BS
@@ -260,7 +257,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsTaxonomy.getBigCategoryAll(section: sheet)
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
         // 呼び出し元のコントローラを取得
         if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
             let presentingViewController = self.presentingViewController as! SettingsCategoryDetailTableViewController // 勘定科目詳細コントローラーを取得

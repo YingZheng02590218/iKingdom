@@ -145,8 +145,7 @@ class DataBaseManagerTB {
     //　クリア　勘定クラス　決算整理前、決算整理仕訳、決算整理後（合計、残高）
     func clearAccountTotal(account: String) {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         try! realm.write {
@@ -203,8 +202,7 @@ class DataBaseManagerTB {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         try! realm.write {
@@ -274,8 +272,7 @@ class DataBaseManagerTB {
             }
         }
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         
         let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
@@ -327,8 +324,7 @@ class DataBaseManagerTB {
     // 計算　決算整理後　勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後
     private func calculateAccountTotalAfterAdjusting(account: String) { // 損益勘定 用も作る
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 決算振替仕訳　損益勘定振替
         let dataBaseManagerPLAccount = DataBaseManagerPLAccount()
         
@@ -403,8 +399,7 @@ class DataBaseManagerTB {
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
@@ -455,8 +450,7 @@ class DataBaseManagerTB {
     // 取得　決算整理仕訳　勘定クラス　合計、残高　勘定別の決算整理仕訳の合計額
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0
@@ -511,8 +505,7 @@ class DataBaseManagerTB {
     // 取得　決算整理後　勘定クラス　合計、残高　勘定別の決算整理後の合計額
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> Int64 {
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
         let objectss = object.dataBaseGeneralLedger
         var result:Int64 = 0

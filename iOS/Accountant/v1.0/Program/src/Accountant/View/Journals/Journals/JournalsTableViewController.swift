@@ -63,13 +63,10 @@ class JournalsTableViewController: UITableViewController, UIGestureRecognizerDel
 //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         self.tableView.reloadData() // エラーが発生しないか心配
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManager.getTheDayOfReckoning()
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         if object == "12/31" { // 会計期間が年をまたがない場合
             label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
         }else {

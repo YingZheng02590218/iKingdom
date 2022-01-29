@@ -47,10 +47,10 @@ public final class RealmProperty<Value: RealmPropertyType>: RLMSwiftValueStorage
      */
     public var value: Value {
         get {
-            dynamicBridgeCast(fromObjectiveC: RLMGetSwiftValueStorage(self) ?? NSNull())
+            staticBridgeCast(fromObjectiveC: RLMGetSwiftValueStorage(self) ?? NSNull())
         }
         set {
-            RLMSetSwiftValueStorage(self, dynamicBridgeCast(fromSwift: newValue))
+            RLMSetSwiftValueStorage(self, staticBridgeCast(fromSwift: newValue))
         }
     }
 
@@ -69,10 +69,7 @@ extension RealmProperty: Equatable where Value: Equatable {
 extension RealmProperty: Codable where Value: Codable {
     public convenience init(from decoder: Decoder) throws {
         self.init()
-        // `try decoder.singleValueContainer().decode(Value?.self)` incorrectly
-        // rejects null values: https://bugs.swift.org/browse/SR-7404
-        let container = try decoder.singleValueContainer()
-        self.value = try container.decode(Value.self)
+        self.value = try decoder.decodeOptional(Value.self)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -81,7 +78,7 @@ extension RealmProperty: Codable where Value: Codable {
 }
 
 /// A protocol describing types that can parameterize a `RealmPropertyType`.
-public protocol RealmPropertyType {}
+public protocol RealmPropertyType: _ObjcBridgeable, _RealmSchemaDiscoverable { }
 
-extension AnyRealmValue: RealmPropertyType {}
-extension Optional: RealmPropertyType where Wrapped: RealmOptionalType {}
+extension AnyRealmValue: RealmPropertyType { }
+extension Optional: RealmPropertyType where Wrapped: RealmOptionalType & _RealmSchemaDiscoverable { }

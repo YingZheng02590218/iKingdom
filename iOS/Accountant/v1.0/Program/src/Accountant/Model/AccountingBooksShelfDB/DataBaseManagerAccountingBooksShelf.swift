@@ -11,6 +11,8 @@ import RealmSwift
 
 class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
+    public static let shared = DataBaseManagerAccountingBooksShelf()
+    
     /**
     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
     * モデルオブジェクトをデータベースから読み込む。

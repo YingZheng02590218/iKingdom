@@ -41,13 +41,10 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
         // 月末、年度末などの決算日をラベルに表示する
-        let dataBaseManagerAccountingBooksShelf = DataBaseManagerAccountingBooksShelf()
-        let company = dataBaseManagerAccountingBooksShelf.getCompanyName()
+        let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         label_company_name.text = company // 社名
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod() //データベースマネジャー
-        let fiscalYear = dataBaseManagerPeriod.getSettingsPeriodYear()
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManager.getTheDayOfReckoning()
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         if object == "12/31" { // 会計期間が年をまたがない場合
             label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
             label_closingDate_previous.text = "前年度\n(" + String(fiscalYear-1) + "年\(object.prefix(2))月\(object.suffix(2))日)" // 前年度　決算日を表示する
@@ -147,12 +144,11 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
-        let mid_category10 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
-        let mid_category6 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
-        let mid_category11 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
-        let mid_category7 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
-        let objects9 = dataBaseManagerSettingsTaxonomy.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
+        let mid_category10 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
+        let mid_category6 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
+        let mid_category11 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
+        let mid_category7 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
+        let objects9 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
 
         return 7 + 8 + 5 + mid_category10.count + objects9.count + mid_category6.count + mid_category11.count + mid_category7.count    // 7:5大利益　8:小分類のタイトル　5:小分類の合計
     }
@@ -160,12 +156,11 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
     let dataBaseManagerPL = DataBaseManagerPL()
     let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy() // Use of undeclared type ''が発生した。2020/07/24
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() 
-        let mid_category10 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
-        let mid_category6 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
-        let mid_category11 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
-        let mid_category7 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
-        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
+        let mid_category10 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
+        let mid_category6 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
+        let mid_category11 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
+        let mid_category7 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
+        let objects9 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
 
 //        let objects9 = dataBaseManagerSettingsCategoryBSAndPL.getMiddleCategory(section: indexPath.section, small_category: 9)//販売費及び一般管理費9
         
@@ -186,9 +181,6 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
         let htouki =        3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 15 //非支配株主に帰属する当期純利益
         let otouki =        3 + objects9.count + mid_category10.count + mid_category6.count + mid_category11.count + mid_category7.count + 16 //親会社株主に帰属する当期純利益
 
-        // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-
         switch indexPath.row {
         case 0: //売上高10
             let cell = tableView.dequeueReusableCell(withIdentifier: "plus", for: indexPath) as! TableViewCellAmount
@@ -197,7 +189,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する 
             cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 4, rank0: 6, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank0(big5: 4, rank0: 6, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -211,7 +203,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 7, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 7, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -225,7 +217,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 0, lastYear: false)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getBenefitTotal(benefit: 0, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -247,7 +239,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 8, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 8, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -261,7 +253,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 1, lastYear: false)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getBenefitTotal(benefit: 1, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -283,7 +275,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 15, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -305,7 +297,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 16, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 16, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -319,7 +311,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 2, lastYear: false)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getBenefitTotal(benefit: 2, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -341,7 +333,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 17, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank1(big5: 4, rank1: 17, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -363,7 +355,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 18, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank1(big5: 3, rank1: 18, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -377,7 +369,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 3, lastYear: false)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getBenefitTotal(benefit: 3, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -391,7 +383,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 11, lastYear: false)
             cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getTotalRank0(big5: 3, rank0: 11, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -405,7 +397,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = dataBaseManagerPL.getBenefitTotal(benefit: 4, lastYear: false)
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = dataBaseManagerPL.getBenefitTotal(benefit: 4, lastYear: true)
             }else {
                 cell.label_amount_previous.text = "-"
@@ -419,7 +411,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
             }else {
                 cell.label_amount_previous.text = "-"
@@ -433,7 +425,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
             //ラベルを置いて金額を表示する
             cell.label_amount.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
             cell.label_amount.font = UIFont.boldSystemFont(ofSize: 14)
-            if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 cell.label_amount_previous.text = "0"//dataBaseManagerPL.getBenefitTotal(benefit: 4) //todo
             }else {
                 cell.label_amount_previous.text = "-"
@@ -450,7 +442,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                 //ラベルを置いて金額を表示する
                 cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects9[indexPath.row - (3+1)].number, lastYear: false) // BSAndPL_category を number に変更する 2020/09/17
                 cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-                if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.label_amount_previous.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: objects9[indexPath.row - (3+1)].number, lastYear: true)
                 }else {
                     cell.label_amount_previous.text = "-"
@@ -465,7 +457,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                 //ラベルを置いて金額を表示する
                 cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category10[indexPath.row - (eigai + 1)].number, lastYear: false) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-                if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.label_amount_previous.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category10[indexPath.row - (eigai + 1)].number, lastYear: true) //収益:4
                 }else {
                     cell.label_amount_previous.text = "-"
@@ -480,7 +472,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                 //ラベルを置いて金額を表示する
                 cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category6[indexPath.row - (eigaih + 1)].number, lastYear: false)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-                if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.label_amount_previous.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category6[indexPath.row - (eigaih + 1)].number, lastYear: true)
                 }else {
                     cell.label_amount_previous.text = "-"
@@ -495,7 +487,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                 //ラベルを置いて金額を表示する
                 cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category11[indexPath.row - (toku+1)].number, lastYear: false) //収益:4
                 cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-                if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.label_amount_previous.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category11[indexPath.row - (toku+1)].number, lastYear: true) //収益:4
                 }else {
                     cell.label_amount_previous.text = "-"
@@ -510,7 +502,7 @@ class PLTableViewController: UITableViewController, UIPrintInteractionController
                 //ラベルを置いて金額を表示する
                 cell.label_amount.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category7[indexPath.row - (tokus+1)].number, lastYear: false)
                 cell.label_amount.font = UIFont.systemFont(ofSize: 13)
-                if dataBaseManagerPeriod.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.label_amount_previous.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: mid_category7[indexPath.row - (tokus+1)].number, lastYear: true)
                 }else {
                     cell.label_amount_previous.text = "-"

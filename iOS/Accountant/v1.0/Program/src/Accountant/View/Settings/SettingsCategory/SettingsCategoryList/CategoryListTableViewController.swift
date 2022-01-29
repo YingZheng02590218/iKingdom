@@ -259,8 +259,7 @@ class CategoryListTableViewController: UITableViewController {
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         databaseManagerSettingsTaxonomyAccount.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
         // 表示科目のスイッチを設定する　勘定科目がひとつもなければOFFにする
-        let dataBaseSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy()
-        dataBaseSettingsCategoryBSAndPL.updateSettingsCategoryBSAndPLSwitching(number: tag)
+        DataBaseManagerSettingsTaxonomy.shared.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

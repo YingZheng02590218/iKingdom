@@ -36,8 +36,7 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
         // データベース
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        let fiscalYear = dataBaseManager.getSettingsPeriodYear()
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         // ToDo どこで設定した年度のデータを参照するか考える
         label_date_year.text = fiscalYear.description + "年" 
         //3桁ごとにカンマ区切りするフォーマット

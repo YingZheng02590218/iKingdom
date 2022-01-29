@@ -30,7 +30,6 @@
 
 namespace realm {
 class DB;
-class Replication;
 class Schema;
 class StringData;
 class SyncSession;
@@ -74,6 +73,12 @@ public:
     // This is also created as part of opening a Realm, so only use this
     // method if the session needs to exist before the Realm does.
     void create_session(const Realm::Config& config) REQUIRES(!m_realm_mutex, !m_schema_cache_mutex);
+
+    std::shared_ptr<SyncSession> sync_session() REQUIRES(!m_realm_mutex)
+    {
+        util::CheckedLockGuard lock(m_realm_mutex);
+        return m_sync_session;
+    }
 #endif
 
     // Get the existing cached Realm if it exists for the specified scheduler or config.scheduler
@@ -178,16 +183,13 @@ public:
     // Deliver any notifications which are ready for the Realm's version
     void process_available_async(Realm& realm) REQUIRES(!m_notifier_mutex);
 
-    // Register a function which is called whenever sync makes a write to the Realm
-    void set_transaction_callback(std::function<void(VersionID, VersionID)>) REQUIRES(!m_transaction_callback_mutex);
-
     // Deliver notifications for the Realm, blocking if some aren't ready yet
     // The calling Realm must be in a write transaction
     void promote_to_write(Realm& realm) REQUIRES(!m_notifier_mutex);
 
     // Commit a Realm's current write transaction and send notifications to all
     // other Realm instances for that path, including in other processes
-    void commit_write(Realm& realm) REQUIRES(!m_notifier_mutex);
+    void commit_write(Realm& realm, bool commit_to_disk = true) REQUIRES(!m_notifier_mutex);
 
     void enable_wait_for_change();
     bool wait_for_change(std::shared_ptr<Transaction> tr);
@@ -200,6 +202,11 @@ public:
     template <typename Pred>
     util::CheckedUniqueLock wait_for_notifiers(Pred&& wait_predicate) REQUIRES(!m_notifier_mutex);
 
+    void async_request_write_mutex(TransactionRef& tr, util::UniqueFunction<void()> when_acquired = nullptr)
+    {
+        m_db->async_request_write_mutex(tr, when_acquired);
+    }
+
     AuditInterface* audit_context() const noexcept
     {
         return m_audit_context.get();
@@ -208,7 +215,6 @@ public:
 private:
     friend Realm::Internal;
     Realm::Config m_config;
-    std::unique_ptr<Replication> m_history;
     std::shared_ptr<DB> m_db;
 
     mutable util::CheckedMutex m_schema_cache_mutex;
@@ -233,8 +239,6 @@ private:
     std::exception_ptr m_async_error;
 
     std::unique_ptr<_impl::ExternalCommitHelper> m_notifier;
-    util::CheckedMutex m_transaction_callback_mutex;
-    std::function<void(VersionID, VersionID)> m_transaction_callback GUARDED_BY(m_transaction_callback_mutex);
 
 #if REALM_ENABLE_SYNC
     std::shared_ptr<SyncSession> m_sync_session;
@@ -245,7 +249,7 @@ private:
     void open_db();
 
     void set_config(const Realm::Config&) REQUIRES(m_realm_mutex, !m_schema_cache_mutex);
-    void create_sync_session(bool force_client_resync);
+    void create_sync_session();
     std::shared_ptr<Realm> do_get_cached_realm(Realm::Config const& config,
                                                std::shared_ptr<util::Scheduler> scheduler = nullptr)
         REQUIRES(m_realm_mutex);

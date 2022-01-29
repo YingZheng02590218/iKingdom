@@ -205,8 +205,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 if self.numberOfTaxonomy != 0 {
 //                    taxonomyname = cell_taxonomy.label.text!
 //                    cell.label.text = taxonomyname
-                    let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-                    let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
+                    let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
                     cell.label.text! = "\(object!.number), \(object!.category)"
                 }else {
                     cell.label.text = "表示科目を選択してください"
@@ -343,9 +342,8 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
-                let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
                 if "" != object?.numberOfTaxonomy {
-                    let objectt = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
+                    let objectt = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
                     cell.label.text = "\(objectt!.number), \(objectt!.category)"
                 }else {
                     cell.label.text = ""
@@ -508,8 +506,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         // 表示科目名
         if self.numberOfTaxonomy != 0 { // 表示科目が選択されて、表示科目番号が詳細画面に戻ってきた場合
             let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
-            let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-            let object = dataBaseManagerSettingsTaxonomy.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
+            let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
             cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
             cell_taxonomy.label.textColor = .TextColor
             taxonomyname = cell_taxonomy.label.text!

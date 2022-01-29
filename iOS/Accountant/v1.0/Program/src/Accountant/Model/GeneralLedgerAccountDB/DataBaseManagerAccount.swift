@@ -16,8 +16,7 @@ class DataBaseManagerAccount {
     func addGeneralLedgerAccount(number: Int){
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 設定画面の勘定科目一覧にある勘定を取得する
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let objectt = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number)
@@ -37,8 +36,7 @@ class DataBaseManagerAccount {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 総勘定元帳　取得
         let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
         // 設定画面の勘定科目一覧にある勘定を取得する
@@ -69,8 +67,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseJournalEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects.filter("fiscalYear == \(fiscalYear)")
             objects = objects.sorted(byKeyPath: "date", ascending: true)
@@ -81,8 +78,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects.filter("fiscalYear == \(fiscalYear)")
             objects = objects.sorted(byKeyPath: "date", ascending: true)
@@ -95,8 +91,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseJournalEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -109,8 +104,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -125,8 +119,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBasePLAccount.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects.filter("fiscalYear == \(fiscalYear)")
         objects = objects.sorted(byKeyPath: "date", ascending: true)
@@ -173,8 +166,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseJournalEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -188,8 +180,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -203,8 +194,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -219,8 +209,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -235,8 +224,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -263,8 +251,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAccount.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")
@@ -278,8 +265,7 @@ class DataBaseManagerAccount {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseAccount.self)
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         objects = objects
             .filter("fiscalYear == \(fiscalYear)")

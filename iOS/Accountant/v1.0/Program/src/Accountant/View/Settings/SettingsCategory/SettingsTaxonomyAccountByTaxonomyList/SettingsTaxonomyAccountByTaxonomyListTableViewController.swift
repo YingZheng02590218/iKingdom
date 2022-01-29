@@ -91,7 +91,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // データベース
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
 //        let objects = dataBaseManagerSettingsCategoryBSAndPL.getAllSettingsCategoryBSAndPLSwitichON() // どのセクションに表示するセルかを判別するため引数で渡す
         var sheet = 0
@@ -102,7 +101,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
         return objects.count
     }
@@ -113,7 +112,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         // データベース
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             sheet = 0 // BS
@@ -122,7 +120,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
         let header = view as! UITableViewHeaderFooterView
 //        header.textLabel?.textColor = UIColor.gray
         // 階層毎にスペースをつける
@@ -161,7 +159,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // データベース
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
 //        let objects = dataBaseManagerSettingsCategoryBSAndPL.getAllSettingsCategoryBSAndPLSwitichON() // どのセクションに表示するセルかを判別するため引数で渡す
         var sheet = 0
@@ -172,7 +169,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
         // 階層毎にスペースをつける
         if objects[section].category1 as String == "" {
@@ -198,7 +195,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース　表示科目
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
 //        let objects = dataBaseManagerSettingsCategoryBSAndPL.getAllSettingsCategoryBSAndPLSwitichON() // どのセクションに表示するセルかを判別するため引数で渡す
         var sheet = 0
@@ -209,7 +205,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 //        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
-        let objects = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
         // データベース　勘定科目
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
@@ -220,7 +216,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
             // データベース　表示科目
-            let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
             var sheet = 0
             if segmentedControl_switch.selectedSegmentIndex == 0 {
                 sheet = 0 // BS
@@ -229,7 +224,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             }else if segmentedControl_switch.selectedSegmentIndex == 2 {
                 sheet = 4 // CF
             }
-            let objectssss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
+            let objectssss = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
             // データベース 勘定科目
             let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
@@ -283,15 +278,13 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         let databaseManagerSettingsCategory = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         databaseManagerSettingsCategory.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
         // 表示科目のスイッチを設定する　勘定科目がひとつもなければOFFにする
-        let dataBaseSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy() //データベースマネジャー
-        dataBaseSettingsCategoryBSAndPL.updateSettingsCategoryBSAndPLSwitching(number: tag)
+        DataBaseManagerSettingsTaxonomy.shared.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
         // 表示科目
-        let dataBaseManagerSettingsCategoryBSAndPL = DataBaseManagerSettingsTaxonomy()
 //        let objects = dataBaseManagerSettingsCategoryBSAndPL.getAllSettingsCategoryBSAndPLSwitichON() // どのセクションに表示するセルかを判別するため引数で渡す
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
@@ -301,7 +294,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         }else if segmentedControl_switch.selectedSegmentIndex == 2 {
             sheet = 4 // CF
         }
-        let objectssss = dataBaseManagerSettingsCategoryBSAndPL.getBigCategoryAll(section: sheet)
+        let objectssss = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
         // 勘定科目
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
 //        let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.row].number))

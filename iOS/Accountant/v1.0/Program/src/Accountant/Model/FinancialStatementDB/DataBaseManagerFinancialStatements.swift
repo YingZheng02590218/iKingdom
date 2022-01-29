@@ -51,8 +51,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
              number = dataBaseFinancialStatements.save() //　自動採番
             // オブジェクトを作成して追加
             // 設定画面の勘定科目一覧にある勘定を取得する
-            let dataBaseManager = DataBaseManagerSettingsTaxonomy()
-            let objects = dataBaseManager.getAllSettingsTaxonomy()
+            let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
             // オブジェクトを作成 表示科目
             for i in 0..<objects.count{
                 let dataBaseTaxonomy = DataBaseTaxonomy() // 表示科目
@@ -93,8 +92,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     func getFinancialStatements() -> DataBaseFinancialStatements {
         let realm = try! Realm()
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
         var objects = realm.objects(DataBaseFinancialStatements.self)
         objects = objects.filter("fiscalYear == \(fiscalYear)")

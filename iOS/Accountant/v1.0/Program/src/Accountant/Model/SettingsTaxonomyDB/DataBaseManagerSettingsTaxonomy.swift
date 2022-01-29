@@ -9,11 +9,60 @@
 import Foundation
 import RealmSwift
 
+//protocol DataBaseManagerSettingsTaxonomyModelInput {
+//    func initializeSettingsTaxonomy()
+//    func checkInitialising() -> Bool
+//    func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy>
+//    func getAllSettingsTaxonomySwitichON() -> Results<DataBaseSettingsTaxonomy>
+//    func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy>
+//    func getBigCategoryAll(section: Int) -> Results<DataBaseSettingsTaxonomy>
+//    func getBigCategory(category0: String,category1: String,category2: String) -> Results<DataBaseSettingsTaxonomy>
+//    func getMiddleCategory(category0: String,category1: String,category2: String,category3: String) -> Results<DataBaseSettingsTaxonomy>
+//    func getSmallCategory(category0: String,category1: String,category2: String,category3: String,category4: String) -> Results<DataBaseSettingsTaxonomy>
+//    func getSettingsTaxonomy(numberOfTaxonomy: Int) -> DataBaseSettingsTaxonomy?
+//    func updateSettingsCategoryBSAndPLSwitching(number: Int) //勘定科目　連番
+//}
 // 設定表示科目クラス
-class DataBaseManagerSettingsTaxonomy {
+class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelInput {
     
+    public static let shared = DataBaseManagerSettingsTaxonomy()
+    private let serialQueue = DispatchQueue(label: "serialQueue")
+
+//    let objects0100:Results<DataBaseSettingsTaxonomy>?
+//    let objects0102:Results<DataBaseSettingsTaxonomy>?
+//    let objects0114:Results<DataBaseSettingsTaxonomy>?
+//    let objects0115:Results<DataBaseSettingsTaxonomy>?
+//    let objects0129:Results<DataBaseSettingsTaxonomy>?
+//    let objects01210:Results<DataBaseSettingsTaxonomy>?
+//    let objects01211:Results<DataBaseSettingsTaxonomy>?
+//    let objects01213:Results<DataBaseSettingsTaxonomy>?
+//    let objects010142:Results<DataBaseSettingsTaxonomy>?
+//    let objects010143:Results<DataBaseSettingsTaxonomy>?
+//    let objects010144:Results<DataBaseSettingsTaxonomy>?
+//
+//    private init() {
+//        // 階層3　中区分ごとの数を取得
+//        objects0100 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "0") // 流動資産
+//        objects0102 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "2") // 繰延資産
+//        objects0114 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "4") // 流動負債
+//        objects0115 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "5") // 固定負債
+//        objects0129 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "9") //株主資本14
+//        objects01210 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "10") //評価・換算差額等15
+//        //            0    1    2    11                    新株予約権
+//        //            0    1    2    12                    自己新株予約権
+//        //            0    1    2    13                    非支配株主持分
+//        //            0    1    2    14                    少数株主持分
+//        objects01211 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "11")//新株予約権16
+//        objects01213 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "13")//非支配株主持分22
+//        // 階層4 小区分
+//        objects010142 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "42") // 有形固定資産3
+//        objects010143 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
+//        objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
+//    }
+//
     // 初期化
     func initializeSettingsTaxonomy(){
+        self.serialQueue.sync {
         // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
@@ -24,18 +73,21 @@ class DataBaseManagerSettingsTaxonomy {
                 }
             }
         }
+        }
     }
     // データベースにモデルが存在するかどうかをチェックする　設定表示科目クラス
     func checkInitialising() -> Bool {
+        self.serialQueue.sync {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomy.self)
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+        }
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
-        let realm = try! Realm()
+        self.serialQueue.sync {let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
@@ -47,8 +99,10 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomySwitichON() -> Results<DataBaseSettingsTaxonomy> {
+        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -60,8 +114,10 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 設定表示科目　取得 ONのみ
     func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy> {
+        self.serialQueue.sync {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -75,9 +131,11 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 取得 設定表示科目　大区分別　全て
     func getBigCategoryAll(section: Int) -> Results<DataBaseSettingsTaxonomy> {
-        let realm = try! Realm()
+        self.serialQueue.sync {
+            let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category0 LIKE '\(section)'") // 決算書の種類　貸借対照表とか損益計算書に絞る
@@ -88,8 +146,10 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 取得 設定表示科目　大区分別　階層2
     func getBigCategory(category0: String,category1: String,category2: String) -> Results<DataBaseSettingsTaxonomy> {
+        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -103,8 +163,10 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 取得　設定表示科目 中区分別　階層3 抽象区分以外
     func getMiddleCategory(category0: String,category1: String,category2: String,category3: String) -> Results<DataBaseSettingsTaxonomy> {
+        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self) // モデル
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
@@ -120,8 +182,10 @@ class DataBaseManagerSettingsTaxonomy {
         }
         return objects
     }
+    }
     // 取得　設定表示科目　小区分別　階層4 抽象区分以外
     func getSmallCategory(category0: String,category1: String,category2: String,category3: String,category4: String) -> Results<DataBaseSettingsTaxonomy> {
+        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -133,15 +197,18 @@ class DataBaseManagerSettingsTaxonomy {
                         .filter("switching == \(true)") // 2020/09/29
                         .filter("abstract == \(false)")
         if objects.count == 0 {
-            print("ゼロ　getSmallCategory")
+            print("ゼロ　getSmallCategory", category0, category1, category2, category3, category4)
         }
         return objects
     }
+    }
     // 取得　設定表示科目　表示科目の連番から設定表示科目を取得
     func getSettingsTaxonomy(numberOfTaxonomy: Int) -> DataBaseSettingsTaxonomy? {
+        self.serialQueue.sync {
         let realm = try! Realm()
         let object = realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: numberOfTaxonomy)
         return object
+        }
     }
     // モデルオブフェクトの更新　スイッチの切り替え
     func updateSettingsCategoryBSAndPLSwitching(number: Int){ //勘定科目　連番

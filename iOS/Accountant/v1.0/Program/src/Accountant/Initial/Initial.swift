@@ -38,24 +38,22 @@ class Initial {
             // マスターデータを作成する
             masterData.readMasterDataFromCSVOfTaxonomyAccount()   
         }
-        let dataBaseManagerSettingsTaxonomy = DataBaseManagerSettingsTaxonomy()
-        if !dataBaseManagerSettingsTaxonomy.checkInitialising() {
+        if !DataBaseManagerSettingsTaxonomy.shared.checkInitialising() {
             let masterData = MasterData()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
         // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
         databaseManagerSettingsTaxonomyAccount.initializeSettingsTaxonomyAccount()
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        dataBaseManagerSettingsTaxonomy.initializeSettingsTaxonomy()
+        DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
     }
     /**
     * 初期化　初期化メソッド
     * 会計帳簿棚を初期化する。
     */
     func initializeAccountingBooksShelf() {
-        let dataBaseManager = DataBaseManagerAccountingBooksShelf()
-        if !dataBaseManager.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
-            let number = dataBaseManager.addAccountingBooksShelf(company: "事業者名")
+        if !DataBaseManagerAccountingBooksShelf.shared.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
+            let number = DataBaseManagerAccountingBooksShelf.shared.addAccountingBooksShelf(company: "事業者名")
             print(number)
         }
         // 会計帳簿
@@ -158,9 +156,8 @@ class Initial {
     * 設定会計期間を初期化する。
     */
     func initializePeriod() {
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        if !dataBaseManager.checkInitialising() {
-            dataBaseManager.addSettingsPeriod()
+        if !DataBaseManagerSettingsPeriod.shared.checkInitialising() {
+            DataBaseManagerSettingsPeriod.shared.addSettingsPeriod()
         }
     }
 }

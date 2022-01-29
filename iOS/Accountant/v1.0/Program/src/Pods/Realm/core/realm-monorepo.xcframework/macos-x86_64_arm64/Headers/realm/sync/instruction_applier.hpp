@@ -21,7 +21,6 @@
 
 #include <realm/sync/instructions.hpp>
 #include <realm/sync/changeset.hpp>
-#include <realm/sync/object.hpp>
 #include <realm/util/logger.hpp>
 #include <realm/list.hpp>
 #include <realm/dictionary.hpp>
@@ -78,12 +77,13 @@ private:
     const Changeset* m_log = nullptr;
     util::Logger* m_logger = nullptr;
 
-    TableNameBuffer m_table_name_buffer;
+    Group::TableNameBuffer m_table_name_buffer;
     InternString m_last_table_name;
     InternString m_last_field_name;
     TableRef m_last_table;
     ColKey m_last_field;
     util::Optional<Instruction::PrimaryKey> m_last_object_key;
+    util::Optional<Instruction::Path> m_current_path;
     util::Optional<Obj> m_last_object;
     std::unique_ptr<LstBase> m_last_list;
 
@@ -119,6 +119,10 @@ private:
 
     template <class F>
     void visit_payload(const Instruction::Payload&, F&& visitor);
+
+    REALM_NORETURN void bad_transaction_log(const std::string& msg) const;
+    template <class... Params>
+    REALM_NORETURN void bad_transaction_log(const char* msg, Params&&... params) const;
 };
 
 
@@ -144,6 +148,7 @@ inline void InstructionApplier::end_apply() noexcept
     m_last_table = TableRef{};
     m_last_field = ColKey{};
     m_last_object.reset();
+    m_last_object_key.reset();
     m_last_list.reset();
 }
 

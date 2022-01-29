@@ -23,8 +23,7 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
         // ドラムロールの初期位置 データベースに保存された年度の翌年
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        pickerView.selectRow(dataBaseManagerPeriod.getMainBooksAllCount() + 1, inComponent: 0, animated: true) //翌年の分
+        pickerView.selectRow(DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount() + 1, inComponent: 0, animated: true) //翌年の分
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -44,8 +43,7 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-            return dataBaseManagerPeriod.getMainBooksAllCount() + 2 // 前年、翌年の分
+            return DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount() + 2 // 前年、翌年の分
         default:
             return 1
         }
@@ -60,15 +58,13 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
         }
      }
     // 年度の選択肢
-    func getPeriodFromDB(row: Int) -> String {
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        
-        let objects = dataBaseManagerPeriod.getMainBooksAll()
+    func getPeriodFromDB(row: Int) -> String {        
+        let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
         if 0 == row {
             var firstfisvalYear = objects[row].fiscalYear
             firstfisvalYear -= 1
             return firstfisvalYear.description // 前年の分
-        }else if row >= 1 && dataBaseManagerPeriod.getMainBooksAllCount() + 1 > row {
+        }else if row >= 1 && DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount() + 1 > row {
             var lastRow = row
             lastRow -= 1
             return objects[lastRow].fiscalYear.description

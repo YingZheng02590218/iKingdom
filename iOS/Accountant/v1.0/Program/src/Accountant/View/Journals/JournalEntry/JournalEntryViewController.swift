@@ -327,8 +327,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         timezone.locale = Locale(identifier: "en_US_POSIX")
 
         // 開いている会計帳簿の年度を取得
-        let dataBaseManagerPeriod = DataBaseManagerSettingsPeriod()
-        let object = dataBaseManagerPeriod.getSettingsPeriod(lastYear: false)
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear = object.dataBaseJournals?.fiscalYear
         let nowStringYear = fiscalYear!.description                            //年度
         let nowStringPreviousYear = (fiscalYear! - 1).description              //年度
@@ -337,8 +336,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         let nowStringMonthDay = fff.string(from: now)                             //月日
         
         // 設定決算日
-        let dataBaseManager = DataBaseManagerSettingsPeriod()
-        let theDayOfReckoning = dataBaseManager.getTheDayOfReckoning()
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
 
         // 期間
         let dayOfStartInYear :Date   = fff.date(from: "01/01")!

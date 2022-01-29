@@ -54,11 +54,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GTMSessionFetcher.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Gecco.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -84,11 +79,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleToolboxForMac.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>GoogleUserMessagingPlatform.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -104,11 +94,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Accountant-AccountantUITests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Accountant.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -119,12 +104,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PromisesObjC.xcscheme</key>
+		<key>Pods-AccountantUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Protobuf.xcscheme</key>
+		<key>PromisesObjC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
