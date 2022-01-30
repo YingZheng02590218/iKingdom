@@ -109,14 +109,14 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                     </button>
                                                     <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
                                                         <rect key="frame" x="232" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQA-Db-dfL" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="331" y="0.0" width="0.0" height="65"/>
@@ -320,7 +320,7 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erw-G6-iSV" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="232" y="0.0" width="99" height="65"/>
@@ -365,7 +365,7 @@
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="height" relation="greaterThanOrEqual" secondItem="qaE-hJ-5UJ" secondAttribute="height" multiplier="0.2" id="XiT-EE-nWI"/>
                                     <constraint firstItem="qaE-hJ-5UJ" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="bottom" constant="10" id="dwN-gE-d2y"/>
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="width" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.8" id="i69-FH-AlC"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="top" constant="5" id="kys-pM-hyo"/>
+                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="top" constant="10" id="kys-pM-hyo"/>
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="leading" id="tUw-ao-KaE"/>
                                 </constraints>
                             </view>
@@ -475,7 +475,7 @@
     </designables>
     <resources>
         <namedColor name="Background">
-            <color red="0.94300001859664917" green="0.94700002670288086" blue="0.9440000057220459" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

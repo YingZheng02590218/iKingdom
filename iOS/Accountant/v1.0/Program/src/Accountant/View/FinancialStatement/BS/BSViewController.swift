@@ -99,7 +99,14 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
                             constant: 0)
         ])
      }
-
+    
+    // MARK: - Action
+    
+    @objc private func refreshTable() {
+        
+        presenter.refreshTable()
+    }
+    
     var printing: Bool = false { // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
         didSet(oldValue){
             if !(oldValue) {
@@ -112,15 +119,6 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
 //                tableView.overrideUserInterfaceStyle = .unspecified
             }
         }
-    }
-    
-    // MARK: - Action
-    
-    @objc private func refreshTable() {
-        
-        presenter.refreshTable()
-        // クルクルを止める
-        refreshControl.endRefreshing()
     }
     /**
      * 印刷ボタン押下時メソッド
@@ -1172,6 +1170,8 @@ extension BSViewController: BSPresenterOutput {
     func reloadData() {
         
         tableView.reloadData()
+        // クルクルを止める
+        refreshControl.endRefreshing()
     }
     
     func setupViewForViewDidLoad() {
@@ -1198,7 +1198,8 @@ extension BSViewController: BSPresenterOutput {
                     label_closingDate.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
                     label_closingDate_previous.text = "前年度\n(" + String(fiscalYear-1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
                     label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する
-                }else {
+                }
+                else {
                     label_closingDate.text = String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
                     label_closingDate_previous.text = "前年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
                     label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する

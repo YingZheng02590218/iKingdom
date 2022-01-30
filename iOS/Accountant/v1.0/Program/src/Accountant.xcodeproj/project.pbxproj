@@ -79,6 +79,7 @@
 		F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */; };
 		F98D8A5127A534BD009560AA /* Printout+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+extension.swift */; };
+		F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5227A55F27009560AA /* WSPresenter.swift */; };
 		F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */; };
 		F99112E42495290000E28BB9 /* BSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E32495290000E28BB9 /* BSModel.swift */; };
 		F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */; };
@@ -162,7 +163,7 @@
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
-		F9F26EFF24D6C1DC00241DB4 /* DataBaseManagerWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */; };
+		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F4605424BDD616008FE62B /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4605324BDD616008FE62B /* Migration.swift */; };
 		F9F4607424C9E0BD008FE62B /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603324AC679E0084A18B /* File2.swift */; };
 		F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */; };
@@ -289,6 +290,7 @@
 		F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithLabelTableViewCell.xib; sourceTree = "<group>"; };
 		F98D8A5027A534BD009560AA /* Printout+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Printout+extension.swift"; sourceTree = "<group>"; };
+		F98D8A5227A55F27009560AA /* WSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSPresenter.swift; sourceTree = "<group>"; };
 		F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingTableViewController.swift; sourceTree = "<group>"; };
 		F99112E32495290000E28BB9 /* BSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSModel.swift; sourceTree = "<group>"; };
 		F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseBalanceSheet.swift; sourceTree = "<group>"; };
@@ -375,7 +377,7 @@
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
-		F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerWS.swift; sourceTree = "<group>"; };
+		F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSModel.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTaxonomy.swift; sourceTree = "<group>"; };
 		F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerTaxonomy.swift; sourceTree = "<group>"; };
@@ -542,7 +544,7 @@
 		F9354DB92498DD81007DB098 /* WSDB */ = {
 			isa = PBXGroup;
 			children = (
-				F9F26EFE24D6C1DC00241DB4 /* DataBaseManagerWS.swift */,
+				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
 				F9354DBA2498DDF4007DB098 /* DataBaseWorkSheet.swift */,
 				F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */,
 			);
@@ -969,6 +971,7 @@
 			isa = PBXGroup;
 			children = (
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
+				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 			);
 			name = Presenter;
 			path = View/Presenter;
@@ -1566,7 +1569,7 @@
 				F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */,
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
-				F9F26EFF24D6C1DC00241DB4 /* DataBaseManagerWS.swift in Sources */,
+				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */,
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
@@ -1593,6 +1596,7 @@
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
+				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,

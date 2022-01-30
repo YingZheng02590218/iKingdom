@@ -66,13 +66,13 @@ class ClassicCalculatorViewController: UIViewController {
 //        percentAction()
         equalAction()
         acAction()
+        // viewDidLayoutSubviews()に書くと何度も呼ばれて、落ちる
+        layout()
     }
     
     override func viewDidLayoutSubviews() {
-        
-        layout()
-    }
 
+    }
     
     func layout() {
         

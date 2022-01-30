@@ -98,10 +98,10 @@ class GeneralLedgerTableViewController: UITableViewController {
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-//        let databaseManagerWS = DataBaseManagerWS()
-//        databaseManagerWS.calculateAmountOfAllAccount()
-//        databaseManagerWS.calculateAmountOfAllAccountForBS()
-//        databaseManagerWS.calculateAmountOfAllAccountForPL()
+//        let WSModel = WSModel()
+//        WSModel.calculateAmountOfAllAccount()
+//        WSModel.calculateAmountOfAllAccountForBS()
+//        WSModel.calculateAmountOfAllAccountForPL()
         // 更新処理
         self.tableView.reloadData()
         // クルクルを止める

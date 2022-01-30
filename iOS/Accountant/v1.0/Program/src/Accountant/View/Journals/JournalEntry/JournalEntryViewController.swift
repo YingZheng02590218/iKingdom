@@ -947,7 +947,14 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                     smallWritting: TextField_SmallWritting.text!
                 )
-                self.dismiss(animated: true)
+                let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
+                let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
+                let presentingViewController = navigationController.viewControllers[1] as! WSViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                // viewWillAppearを呼び出す　更新のため
+                self.dismiss(animated: true, completion: {
+                    [presentingViewController] () -> Void in
+                    presentingViewController.reloadData()
+                })
             }else if journalEntryType == "JournalEntriesFixing" {
                 //
                 let objects = dataBaseManager.getJournalEntry(section: tappedIndexPath.section)

@@ -15,6 +15,7 @@ protocol BSPresenterInput {
     var company: String? { get }
     var fiscalYear: Int? { get }
     var theDayOfReckoning: String? { get }
+    
     var numberOfobjects0100: Int { get }
     func objects0100(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects0102: Int { get }
@@ -233,6 +234,7 @@ final class BSPresenter: BSPresenterInput {
     func checkSettingsPeriod() -> Bool {
         return DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() // 前年度の会計帳簿の存在有無を確認
     }
+    
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
         return model.getTotalRank1(big5: big5, rank1: rank1, lastYear: lastYear) // 中区分の合計を取得
 

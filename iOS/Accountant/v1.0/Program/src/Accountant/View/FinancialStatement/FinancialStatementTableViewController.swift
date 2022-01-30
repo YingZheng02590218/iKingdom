@@ -90,10 +90,8 @@ class FinancialStatementTableViewController: UITableViewController {
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let databaseManagerWS = DataBaseManagerWS()
-        databaseManagerWS.calculateAmountOfAllAccount()
-        databaseManagerWS.calculateAmountOfAllAccountForBS()
-        databaseManagerWS.calculateAmountOfAllAccountForPL()
+        let WSModel = WSModel()
+        WSModel.initialize()
         // 設定表示科目　初期化
         let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
         dataBaseManagerTaxonomy.initializeTaxonomy()
@@ -180,6 +178,9 @@ class FinancialStatementTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // セルの選択を解除
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -222,12 +223,6 @@ class FinancialStatementTableViewController: UITableViewController {
             viewControllerGenearlLedgerAccount.account = "損益勘定" // セルに表示した勘定名を設定
             // 遷移先のコントローラー.条件用の属性 = “条件”
             break
-//        case "BS":
-//            let navigationController = segue.destination as! UINavigationController
-//            let viewController = navigationController.topViewController as! BSTableViewController
-//            // 遷移先のコントローラに値を渡す
-//            viewController.inject(presenter: BSPresenterInput.self)
-//            break
         default:
             break
         }
