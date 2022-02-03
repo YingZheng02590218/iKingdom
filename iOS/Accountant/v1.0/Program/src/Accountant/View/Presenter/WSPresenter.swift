@@ -140,12 +140,12 @@ final class WSPresenter: WSPresenterInput {
     //借方　合計　集計
     func debit_total_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+        return model.setComma(amount:object.compoundTrialBalance!.debit_total_total)
     }
     //貸方　合計　集計
     func credit_total_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+        return model.setComma(amount:object.compoundTrialBalance!.credit_total_total)
     }
     //借方　残高　集計
     func debit_balance_total() -> String {
@@ -155,7 +155,7 @@ final class WSPresenter: WSPresenterInput {
     //貸方　残高　集計
     func credit_balance_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+        return model.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
     }
     
     func netIncomeOrNetLossLoss() -> String {

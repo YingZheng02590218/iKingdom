@@ -100,7 +100,7 @@ class Initial {
     * 仕訳帳を初期化する。
     */
     func initialiseJournals(number: Int,fiscalYear: Int){
-         let dataBaseManager = DataBaseManagerJournals()
+         let dataBaseManager = JournalsModel()
         if !dataBaseManager.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
         }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellGeneralLedgerAccount: UITableViewCell {
+class GeneralLedgerAccountTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label_list_date_month: UILabel!
     @IBOutlet weak var label_list_date_day: UILabel!

@@ -29,16 +29,16 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view opaque="NO" alpha="0.94999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-6f-4Jp" userLabel="ViewBase">
-                            <rect key="frame" x="3" y="0.0" width="408" height="66"/>
+                            <rect key="frame" x="3" y="0.0" width="408" height="122.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ey4-Yn-mpu">
-                                    <rect key="frame" x="0.0" y="0.0" width="408" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="408" height="122.5"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgp-3a-sxS" userLabel="ViewUpper">
-                                            <rect key="frame" x="0.0" y="0.0" width="408" height="38.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="408" height="71.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="rMP-Jy-6S1" userLabel="company_name">
-                                                    <rect key="frame" x="0.0" y="-1" width="408" height="38"/>
+                                                    <rect key="frame" x="0.0" y="-1" width="408" height="71"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -47,7 +47,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qY-bs-PZm" userLabel="title">
-                                                    <rect key="frame" x="0.0" y="0.0" width="408" height="38.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="408" height="71.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
@@ -55,7 +55,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="I7f-Kl-jRy" userLabel="closingDate">
-                                                    <rect key="frame" x="0.0" y="-1" width="408" height="39"/>
+                                                    <rect key="frame" x="0.0" y="-1" width="408" height="72"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,13 +78,13 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHe-NK-hlZ" userLabel="ViewLower">
-                                            <rect key="frame" x="0.0" y="38.5" width="408" height="27.5"/>
+                                            <rect key="frame" x="0.0" y="71.5" width="408" height="51"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zG-m0-YQm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="27.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="51"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="sqg-S9-V6f" userLabel="list_debit">
-                                                            <rect key="frame" x="-2" y="-5" width="209" height="31"/>
+                                                            <rect key="frame" x="-2" y="-5" width="209" height="54"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -101,10 +101,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Bn-ul-C7V">
-                                                    <rect key="frame" x="209" y="0.0" width="99.5" height="27.5"/>
+                                                    <rect key="frame" x="209" y="0.0" width="99.5" height="51"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="6ut-u0-rpf" userLabel="closingDate_previous">
-                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="27.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="51"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="10"/>
                                                             <nil key="textColor"/>
@@ -128,10 +128,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghM-SI-ipv">
-                                                    <rect key="frame" x="308.5" y="0.0" width="99.5" height="27.5"/>
+                                                    <rect key="frame" x="308.5" y="0.0" width="99.5" height="51"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="lSL-GZ-mwn" userLabel="closingDate">
-                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="27.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="51"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="10"/>
                                                             <nil key="textColor"/>
@@ -198,7 +198,6 @@
                             <constraints>
                                 <constraint firstItem="ey4-Yn-mpu" firstAttribute="width" secondItem="FUh-6f-4Jp" secondAttribute="width" id="GT0-Oh-gzE"/>
                                 <constraint firstAttribute="bottom" secondItem="ey4-Yn-mpu" secondAttribute="bottom" id="NGi-hQ-due"/>
-                                <constraint firstAttribute="height" constant="66" id="SKL-Ue-wiW"/>
                                 <constraint firstItem="ey4-Yn-mpu" firstAttribute="leading" secondItem="FUh-6f-4Jp" secondAttribute="leading" id="ab5-kh-cP2"/>
                                 <constraint firstAttribute="trailing" secondItem="ey4-Yn-mpu" secondAttribute="trailing" id="ftj-nw-RTt"/>
                                 <constraint firstItem="ey4-Yn-mpu" firstAttribute="top" secondItem="FUh-6f-4Jp" secondAttribute="top" id="xu4-28-z1R"/>
@@ -206,7 +205,7 @@
                             </constraints>
                         </view>
                         <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="grouped" allowsMultipleSelection="YES" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="amu-yF-bgn">
-                            <rect key="frame" x="3" y="66" width="408" height="752"/>
+                            <rect key="frame" x="3" y="122.5" width="408" height="695.5"/>
                             <color key="backgroundColor" name="SheetColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -220,10 +219,13 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="FUh-6f-4Jp" secondAttribute="trailing" constant="3" id="40g-EI-iyn"/>
                         <constraint firstAttribute="trailing" secondItem="amu-yF-bgn" secondAttribute="trailing" constant="3" id="5lz-HC-lFW"/>
+                        <constraint firstItem="FUh-6f-4Jp" firstAttribute="width" secondItem="UwG-Bq-bnT" secondAttribute="width" constant="-6" id="8t8-PH-46s"/>
+                        <constraint firstItem="amu-yF-bgn" firstAttribute="width" secondItem="UwG-Bq-bnT" secondAttribute="width" constant="-6" id="Aef-oX-WCP"/>
                         <constraint firstAttribute="bottom" secondItem="amu-yF-bgn" secondAttribute="bottom" id="G3j-8B-jQx"/>
                         <constraint firstItem="amu-yF-bgn" firstAttribute="top" secondItem="FUh-6f-4Jp" secondAttribute="bottom" id="PJs-oU-20I"/>
-                        <constraint firstItem="amu-yF-bgn" firstAttribute="height" secondItem="UwG-Bq-bnT" secondAttribute="height" multiplier="0.919315" id="RUe-ub-z30"/>
+                        <constraint firstItem="amu-yF-bgn" firstAttribute="height" secondItem="UwG-Bq-bnT" secondAttribute="height" multiplier="0.85" id="RUe-ub-z30"/>
                         <constraint firstItem="amu-yF-bgn" firstAttribute="leading" secondItem="UwG-Bq-bnT" secondAttribute="leading" constant="3" id="aiT-dY-tnh"/>
+                        <constraint firstItem="FUh-6f-4Jp" firstAttribute="height" secondItem="UwG-Bq-bnT" secondAttribute="height" multiplier="0.15" id="oCC-1r-UH5"/>
                         <constraint firstItem="FUh-6f-4Jp" firstAttribute="leading" secondItem="UwG-Bq-bnT" secondAttribute="leading" constant="3" id="t8o-cy-IlQ"/>
                         <constraint firstItem="FUh-6f-4Jp" firstAttribute="top" secondItem="UwG-Bq-bnT" secondAttribute="top" id="udr-CI-VeC"/>
                     </constraints>
@@ -233,8 +235,10 @@
             <color key="backgroundColor" name="SheetColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="UwG-Bq-bnT" secondAttribute="bottom" id="6jm-iR-hgQ"/>
+                <constraint firstItem="UwG-Bq-bnT" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="BPU-o5-wEQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UwG-Bq-bnT" secondAttribute="trailing" id="GtI-ff-cy0"/>
                 <constraint firstItem="UwG-Bq-bnT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="SYl-Dm-glL"/>
+                <constraint firstItem="UwG-Bq-bnT" firstAttribute="height" secondItem="fnl-2z-Ty3" secondAttribute="height" id="UXJ-Ow-6mo"/>
                 <constraint firstItem="UwG-Bq-bnT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ye9-mG-4Cw"/>
             </constraints>
             <point key="canvasLocation" x="133" y="110"/>

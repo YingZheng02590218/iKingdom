@@ -10,7 +10,9 @@ import UIKit
 import GoogleMobileAds // マネタイズ対応
 
 // 合計残高試算表クラス　決算整理前
-class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPrintInteractionControllerDelegate {
+class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
+
+    // MARK: - var let
 
     // マネタイズ対応
     // 広告ユニットID
@@ -23,82 +25,56 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     let AdMobTest:Bool = false
     #endif
     @IBOutlet var gADBannerView: GADBannerView!
-
-    @IBOutlet weak var view_top: UIView!
-    @IBOutlet weak var TableView_TB: UITableView!
+    /// 合計残高試算表　上部
     @IBOutlet weak var label_company_name: UILabel!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
     @IBOutlet weak var segmentedControl_switch: UISegmentedControl!
-    @IBAction func segmentedControl(_ sender: Any) {
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "決算整理前合計試算表"
-        }else {
-            label_title.text = "決算整理前残高試算表"
-        }
-        TableView_TB.reloadData()
+    /// 合計残高試算表　下部
+    @IBOutlet weak var tableView: UITableView!
+    fileprivate let refreshControl = UIRefreshControl()
+
+    var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
+    /// GUIアーキテクチャ　MVP
+    private var presenter: TBPresenterInput!
+    func inject(presenter: TBPresenterInput) {
+        self.presenter = presenter
     }
     
+    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        TableView_TB.delegate = self
-        TableView_TB.dataSource = self
-        // 合計額を計算
-        let databaseManager = DataBaseManagerTB()
-        databaseManager.calculateAmountOfAllAccount()
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
-        self.TableView_TB.refreshControl = refreshControl
+        
+        presenter = TBPresenter.init(view: self, model: TBModel())
+        inject(presenter: presenter)
+        
+        presenter.viewDidLoad()
     }
-    // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
-        // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-        TableView_TB.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-        // 月末、年度末などの決算日をラベルに表示する
-        let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
-        label_company_name.text = company // 社名
-        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
-        if object == "12/31" { // 会計期間が年をまたがない場合
-            label_closingDate.text = String(fiscalYear) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
-        }else {
-            label_closingDate.text = String(fiscalYear+1) + "年\(object.prefix(2))月\(object.suffix(2))日" // 決算日を表示する
-        }
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
-            label_title.text = "決算整理前合計試算表"
-        }else {
-            label_title.text = "決算整理前残高試算表"
-        }
-        // 要素数が少ないUITableViewで残りの部分や余白を消す
-        let tableFooterView = UIView(frame: CGRect.zero)
-        TableView_TB.tableFooterView = tableFooterView
-        // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            print(TableView_TB.rowHeight)
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: TableView_TB!.rowHeight * -1)
-        }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        presenter.viewWillAppear()
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
+    override func viewDidAppear(_ animated: Bool) {
+        
+        presenter.viewDidAppear()
+    }
+    
+    // MARK: - Setting
+
+    private func setTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func setRefreshControl() {
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
+    }
+    
+    private func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
       bannerView.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(bannerView)
       view.addConstraints(
@@ -118,172 +94,54 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
                             constant: 0)
         ])
      }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // チュートリアル対応　初回起動時　7行を追加
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch_TrialBalance"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
-            // チュートリアル対応
-            presentAnnotation()
-        }
-    }
     // チュートリアル対応
-    func presentAnnotation() {
+    private func presentAnnotation() {
         let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
     
-    @objc func refreshTable() {
-        // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB()
-        databaseManager.setAllAccountTotal()
-        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-//        let WSModel = WSModel()
-//        WSModel.calculateAmountOfAllAccount()
-//        WSModel.calculateAmountOfAllAccountForBS()
-//        WSModel.calculateAmountOfAllAccountForPL()
-        // 更新処理
-        self.TableView_TB.reloadData()
-        // クルクルを止める
-        TableView_TB.refreshControl?.endRefreshing()
-    }
-    //セルの数
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
-        return objects.count + 1 //合計額の行の分
-    }
+    // MARK: - Action
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
-        let databaseManager = DataBaseManagerTB()
-        if indexPath.row < objects.count {
-            //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TableViewCellTB
-            // 勘定科目をセルに表示する
-            //        cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
-            cell.label_account.text = "\(objects[indexPath.row].category as String)"
-            cell.label_account.textAlignment = NSTextAlignment.center
-            switch segmentedControl_switch.selectedSegmentIndex {
-            case 0: // 合計　借方
-                cell.label_debit.text = setComma(amount: databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 0))
-                    // 合計　貸方
-                cell.label_credit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 1))
-                break
-            case 1: // 残高　借方
-                cell.label_debit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 2))
-                    // 残高　貸方
-                cell.label_credit.text = setComma(amount:databaseManager.getTotalAmount(account: "\(objects[indexPath.row].category as String)", leftOrRight: 3))
-                break
-            default:
-                print("cell_TB")
-                break
-            }
-            return cell
-        }else {
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-            let object = dataBaseManagerFinancialStatements.getFinancialStatements()
-            //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as! TableViewCellTB
-//            let r = 0
-//            switch r {
-            switch segmentedControl_switch.selectedSegmentIndex {
-            case 0: // 合計　借方
-                cell.label_debit.text = setComma(amount: object.compoundTrialBalance!.debit_total_total)
-                    // 合計　貸方
-                cell.label_credit.text = setComma(amount: object.compoundTrialBalance!.credit_total_total)
-                break
-            case 1: // 残高　借方
-                cell.label_debit.text = setComma(amount:object.compoundTrialBalance!.debit_balance_total)
-                    // 残高　貸方
-                cell.label_credit.text = setComma(amount:object.compoundTrialBalance!.credit_balance_total)
-                break
-            default:
-                print("cell_last_TB")
-                break
-            }
-            // 借方貸方の金額が不一致の場合、文字色を赤
-            if cell.label_debit.text != cell.label_credit.text {
-                cell.label_debit.textColor = .red
-                cell.label_credit.textColor = .red
-            }
-            return cell
-        }
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
-            return ""
-        }else {
-            return addComma(string: amount.description)
-        }
-    }
-    //カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
+    @objc private func refreshTable() {
+        
+        presenter.refreshTable()
     }
     
+    @IBAction func segmentedControl(_ sender: Any) {
+        if segmentedControl_switch.selectedSegmentIndex == 0 {
+            label_title.text = "決算整理前合計試算表"
+        }else {
+            label_title.text = "決算整理前残高試算表"
+        }
+                tableView.reloadData()
+    }
+
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // disable sticky section header
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if printing {
-//            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-////            if scrollView.contentOffset.y >= UIApplication.shared.statusBarFrame.height && scrollView.contentOffset.y >= 0 {
-////                scrollView.contentInset = UIEdgeInsets(top: -(UIApplication.shared.statusBarFrame.height+TableView_TB.sectionHeaderHeight), left: 0, bottom: 0, right: 0)
-////            }
-//        }else{
-////            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//            // インセットを設定する　ステータスバーとナビゲーションバーより下からテーブルビューを配置するため
-//            scrollView.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-//        }
-//    }
-    var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     @IBOutlet weak var button_print: UIButton!
     /**
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
-        TableView_TB.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // ここがポイント。画面表示用にインセットを設定した、ステータスバーとナビゲーションバーの高さの分をリセットするために0を設定する。
-        let indexPath = TableView_TB.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        self.TableView_TB.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
+        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        self.tableView.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
         // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
-        TableView_TB.overrideUserInterfaceStyle = .light
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        tableView.overrideUserInterfaceStyle = .light
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
-        TableView_TB.showsVerticalScrollIndicator = false
-        while self.TableView_TB.indexPathForSelectedRow?.count ?? 0 > 0 {
-            if let tappedIndexPath: IndexPath = self.TableView_TB.indexPathForSelectedRow { // タップされたセルの位置を取得
-                TableView_TB.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        tableView.showsVerticalScrollIndicator = false
+        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
+                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
             }
         }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-//        pageSize = CGSize(width: TableView_TB.contentSize.width / 25.4 * 72, height: TableView_TB.contentSize.height / 25.4 * 72)
+//        pageSize = CGSize(width:         tableView.contentSize.width / 25.4 * 72, height:         tableView.contentSize.height / 25.4 * 72)
         pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-        print("TableView_TB.contentSize:\(TableView_TB.contentSize)")
+        print("tableView.contentSize:\(tableView.contentSize)")
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
@@ -298,7 +156,7 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
         }
-        let newImage = self.TableView_TB.captureImagee()
+        let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
@@ -306,7 +164,7 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -393,11 +251,10 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
         //余計なUIをキャプチャしないように隠したのを戻す
-        TableView_TB.showsVerticalScrollIndicator = true
+        tableView.showsVerticalScrollIndicator = true
         // ダークモード回避を解除
-        TableView_TB.overrideUserInterfaceStyle = .unspecified
-        TableView_TB.contentInset = UIEdgeInsets(top: +(UIApplication.shared.statusBarFrame.height+self.navigationController!.navigationBar.bounds.height), left: 0, bottom: (self.tabBarController?.tabBar.frame.size.height)!, right: 0)
-        self.TableView_TB.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
+        tableView.overrideUserInterfaceStyle = .unspecified
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
     }
     
     // MARK: - UIImageWriteToSavedPhotosAlbum
@@ -424,23 +281,151 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 }
 
-extension UIScrollView {
+extension TBViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Table view data source
 
-    func getContentImage(captureSize: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(captureSize, false, 0.0)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    //セルの数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 合計額の行の分
+        return presenter.numberOfobjects + 1
+    }
 
-        // 元の frame.size を記憶
-        let originalSize = self.frame.size
-        // frame.size を一時的に変更
-        self.frame.size = self.contentSize
-        self.layer.render(in: context)
-        // 元に戻す
-        self.frame.size = originalSize
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row < presenter.numberOfobjects {
+            //① UI部品を指定
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TableViewCellTB
+            // 勘定科目をセルに表示する
+            //        cell.textLabel?.text = "\(presenter.objects(forRow:indexPath.row].category as String)"
+            cell.label_account.text = "\(presenter.objects(forRow:indexPath.row).category as String)"
+            cell.label_account.textAlignment = NSTextAlignment.center
+            switch segmentedControl_switch.selectedSegmentIndex {
+            case 0: // 合計　借方
+                cell.label_debit.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow:indexPath.row).category as String)", leftOrRight: 0)
+                    // 合計　貸方
+                cell.label_credit.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow:indexPath.row).category as String)", leftOrRight: 1)
+                break
+            case 1: // 残高　借方
+                cell.label_debit.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow:indexPath.row).category as String)", leftOrRight: 2)
+                    // 残高　貸方
+                cell.label_credit.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow:indexPath.row).category as String)", leftOrRight: 3)
+                break
+            default:
+                print("cell_TB")
+                break
+            }
+            return cell
+        }
+        else {
+            //① UI部品を指定
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as! TableViewCellTB
+//            let r = 0
+//            switch r {
+            switch segmentedControl_switch.selectedSegmentIndex {
+            case 0: // 合計　借方
+                cell.label_debit.text =  presenter.debit_total_total()
+                    // 合計　貸方
+                cell.label_credit.text =  presenter.credit_total_total()
+                break
+            case 1: // 残高　借方
+                cell.label_debit.text = presenter.debit_balance_total()
+                    // 残高　貸方
+                cell.label_credit.text = presenter.credit_balance_total()
+                break
+            default:
+                print("cell_last_TB")
+                break
+            }
+            // 借方貸方の金額が不一致の場合、文字色を赤
+            if cell.label_debit.text != cell.label_credit.text {
+                cell.label_debit.textColor = .red
+                cell.label_credit.textColor = .red
+            }
+            return cell
+        }
+    }
+}
 
-        let capturedImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
-
-        return capturedImage
+extension TBViewController: TBPresenterOutput {
+    
+    func reloadData() {
+        
+        tableView.reloadData()
+        // クルクルを止める
+        refreshControl.endRefreshing()
+    }
+    
+    func setupViewForViewDidLoad() {
+        // UI
+        setTableView()
+        setRefreshControl()
+        // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
+//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
+//        //ナビゲーションに定義したボタンを置く
+//        self.navigationItem.rightBarButtonItem = printoutButton
+        self.navigationItem.title = "合計残高試算表"
+    }
+    
+    func setupViewForViewWillAppear() {
+        if let company = presenter.company {
+            // 月末、年度末などの決算日をラベルに表示する
+            label_company_name.text = company // 社名
+        }
+        
+        if let theDayOfReckoning = presenter.theDayOfReckoning {
+            if let fiscalYear = presenter.fiscalYear {
+                if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
+                    label_closingDate.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
+                }
+                else {
+                    label_closingDate.text = String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
+                }
+            }
+        }
+        if segmentedControl_switch.selectedSegmentIndex == 0 {
+            label_title.text = "決算整理前合計試算表"
+        }else {
+            label_title.text = "決算整理前残高試算表"
+        }
+        // 要素数が少ないUITableViewで残りの部分や余白を消す
+        let tableFooterView = UIView(frame: CGRect.zero)
+        tableView.tableFooterView = tableFooterView
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+            //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
+            // GADBannerView を作成する
+            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            if AdMobTest {
+                gADBannerView.adUnitID = TEST_ID
+            }
+            else{
+                gADBannerView.adUnitID = AdMobID
+            }
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print(tableView.rowHeight)
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant:         tableView!.rowHeight * -1)
+        }
+        // ナビゲーションを透明にする処理
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
+    }
+    
+    func setupViewForViewDidAppear() {
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_TrialBalance"
+        if ud.bool(forKey: firstLunchKey) {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+            // チュートリアル対応
+            presentAnnotation()
+        }
     }
 }

@@ -98,3 +98,24 @@ extension UITableView {
         return images.flatMap{ $0 } // exclude nil
     }
 }
+
+extension UIScrollView {
+
+    func getContentImage(captureSize: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(captureSize, false, 0.0)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+
+        // 元の frame.size を記憶
+        let originalSize = self.frame.size
+        // frame.size を一時的に変更
+        self.frame.size = self.contentSize
+        self.layer.render(in: context)
+        // 元に戻す
+        self.frame.size = originalSize
+
+        let capturedImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+
+        return capturedImage
+    }
+}

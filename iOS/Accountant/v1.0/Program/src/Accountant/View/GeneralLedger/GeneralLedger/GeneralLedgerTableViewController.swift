@@ -12,6 +12,8 @@ import GoogleMobileAds // マネタイズ対応
 // 総勘定元帳クラス
 class GeneralLedgerTableViewController: UITableViewController {
 
+    // MARK: - var let
+
     // マネタイズ対応
     // 広告ユニットID
     let AdMobID = "ca-app-pub-7616440336243237/8565070944"
@@ -24,8 +26,8 @@ class GeneralLedgerTableViewController: UITableViewController {
     #endif
     @IBOutlet var gADBannerView: GADBannerView!
     
-    @IBOutlet var TableView_generalLedger: UITableView!
-    
+    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // リロード機能
@@ -94,7 +96,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB()
+        let databaseManager = TBModel()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -197,7 +199,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
-        let indexPath: IndexPath = self.TableView_generalLedger.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() //データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(section: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         // ③遷移先ViewCntrollerの取得

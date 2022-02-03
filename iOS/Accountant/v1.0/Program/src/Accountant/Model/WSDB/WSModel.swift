@@ -32,17 +32,17 @@ class WSModel: WSModelInput {
     }
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> String { // TODO: 戻り値をカンマ追加後のStringに変換してから返す
-        let databaseManager = DataBaseManagerTB()
+        let databaseManager = TBModel()
         return setComma(amount:databaseManager.getTotalAmount(account: account, leftOrRight: leftOrRight))
     }
     // 取得　決算整理仕訳　勘定クラス　合計、残高　勘定別の決算整理仕訳の合計額
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> String {
-        let databaseManager = DataBaseManagerTB()
+        let databaseManager = TBModel()
         return setComma(amount:databaseManager.getTotalAmountAdjusting(account: account, leftOrRight: leftOrRight))
     }
     // 取得　決算整理後　勘定クラス　合計、残高　勘定別の決算整理後の合計額
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> String {
-        let databaseManager = DataBaseManagerTB()
+        let databaseManager = TBModel()
         return setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: account, leftOrRight: leftOrRight))
     }
     
@@ -54,7 +54,7 @@ class WSModel: WSModelInput {
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let object = dataBaseManagerFinancialStatements.getFinancialStatements()
         
-        let dataBaseManagerTB = DataBaseManagerTB()
+        let dataBaseManagerTB = TBModel()
 
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -93,7 +93,7 @@ class WSModel: WSModelInput {
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let object = dataBaseManagerFinancialStatements.getFinancialStatements()
         
-        let dataBaseManagerTB = DataBaseManagerTB()
+        let dataBaseManagerTB = TBModel()
 
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
@@ -140,7 +140,7 @@ class WSModel: WSModelInput {
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let object = dataBaseManagerFinancialStatements.getFinancialStatements()
         
-        let dataBaseManagerTB = DataBaseManagerTB()
+        let dataBaseManagerTB = TBModel()
 
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()

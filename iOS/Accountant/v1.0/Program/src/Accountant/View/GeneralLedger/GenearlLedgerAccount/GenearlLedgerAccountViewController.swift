@@ -171,7 +171,7 @@ class GenearlLedgerAccountViewController: UIViewController, UITableViewDelegate,
 //    var indexPathForAutoScroll: IndexPath = IndexPath(row: 0, section: 0)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //① UI部品を指定　TableViewCell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as! TableViewCellGeneralLedgerAccount
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as! GeneralLedgerAccountTableViewCell
 
         if indexPath.section == 1 { // 空白行
 //            cell.backgroundColor = .white // 目印を消す

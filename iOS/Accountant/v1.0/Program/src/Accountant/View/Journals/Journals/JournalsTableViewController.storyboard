@@ -413,13 +413,13 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-04-sE7">
-                                                    <rect key="frame" x="0.0" y="39.5" width="49.5" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="40" width="49.5" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yqm-zv-LNg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="22" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="22" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="tpa-Nq-Z9n" userLabel="list_date3">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="23" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="23" height="19"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -438,10 +438,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZmC-iM-G58">
-                                                            <rect key="frame" x="22" y="0.0" width="27.5" height="20.5"/>
+                                                            <rect key="frame" x="22" y="0.0" width="27.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="Wrz-Lx-O5a" userLabel="list_date3">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="28" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="28" height="19"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -773,18 +773,6 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="label_list_credit" destination="kxe-6y-AeO" id="sJz-pM-rNg"/>
-                                    <outlet property="label_list_date" destination="Qw6-Y5-wgC" id="G8H-Lf-JhB"/>
-                                    <outlet property="label_list_date_month" destination="XNp-eA-RDs" id="jEd-Ke-HRd"/>
-                                    <outlet property="label_list_debit" destination="fwU-Qs-cWS" id="8KE-lY-ZwB"/>
-                                    <outlet property="label_list_number_left" destination="xI9-2V-DH0" id="qbY-yT-Bkt"/>
-                                    <outlet property="label_list_number_right" destination="m3M-Er-Ldf" id="KtT-f1-JnE"/>
-                                    <outlet property="label_list_summary" destination="lMi-xJ-PXs" id="Xb9-W5-Ykp"/>
-                                    <outlet property="label_list_summary_credit" destination="SKF-Rc-gHU" id="nm9-hH-sYS"/>
-                                    <outlet property="label_list_summary_debit" destination="3Xa-Ud-bLK" id="Zqz-HE-chq"/>
-                                    <segue destination="H54-l7-KVK" kind="presentation" identifier="longTapped" id="rBz-HN-PbV"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
@@ -895,9 +883,6 @@
             <point key="canvasLocation" x="461" y="2494"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="rBz-HN-PbV"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentOrange">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

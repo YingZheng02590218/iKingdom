@@ -1,5 +1,5 @@
 //
-//  DataBaseManagerTB.swift
+//  TBModel.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/06/16.
@@ -9,8 +9,18 @@
 import Foundation
 import RealmSwift
 
+/// GUIアーキテクチャ　MVP
+protocol TBModelInput {
+    
+    func calculateAmountOfAllAccount()
+    func setAllAccountTotal()
+    
+    func getTotalAmount(account: String, leftOrRight: Int) -> Int64
+    
+    func setComma(amount: Int64) -> String
+}
 // 合計残高試算表クラス
-class DataBaseManagerTB {
+class TBModel: TBModelInput {
     
     // 計算　合計残高試算表クラス　合計（借方、貸方）、残高（借方、貸方）の集計
     func calculateAmountOfAllAccount(){
@@ -49,7 +59,7 @@ class DataBaseManagerTB {
         }
     }
     // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
-    func setAllAccountTotal(){
+    func setAllAccountTotal() {
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
         for i in 0..<objects.count{
@@ -143,7 +153,7 @@ class DataBaseManagerTB {
         // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
     }
     //　クリア　勘定クラス　決算整理前、決算整理仕訳、決算整理後（合計、残高）
-    func clearAccountTotal(account: String) {
+    private func clearAccountTotal(account: String) {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let realm = try! Realm()
@@ -188,7 +198,7 @@ class DataBaseManagerTB {
         }
     }
     //　計算 決算整理前　勘定クラス　勘定別に仕訳データを集計
-    func calculateAccountTotal(account: String) {
+    private func calculateAccountTotal(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -251,7 +261,7 @@ class DataBaseManagerTB {
         }
     }
     //　計算 決算整理仕訳　勘定クラス　勘定別に決算整理仕訳データを集計
-    func calculateAccountTotalAdjusting(account: String) {
+    private func calculateAccountTotalAdjusting(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -426,7 +436,8 @@ class DataBaseManagerTB {
                     }
                 }
             }
-        }else {
+        }
+        else {
             switch leftOrRight {
             case 0: // 合計　借方
                 result = objectss!.dataBasePLAccount!.debit_total
@@ -557,4 +568,33 @@ class DataBaseManagerTB {
         }
         return result
     }
+    
+    private let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+    // コンマを追加
+    func setComma(amount: Int64) -> String {
+        //3桁ごとにカンマ区切りするフォーマット
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
+            return ""
+        }else {
+            return addComma(string: amount.description)
+        }
+    }
+    //カンマ区切りに変換（表示用）
+    private func addComma(string :String) -> String{
+        if(string != "") { // ありえないでしょう
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            return formatter.string(from: NSNumber(value: Double(string)!))!
+        }else{
+            return ""
+        }
+    }
+    //カンマ区切りを削除（計算用）
+    private func removeComma(string :String) -> String{
+        let string = string.replacingOccurrences(of: ",", with: "")
+        return string
+    }
+    
 }

@@ -129,7 +129,7 @@ private extension AnnotationViewControllerJournals {
     // テーブルビューのセルを取得
     var tableViewControllerHasCell: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
-            if controller.viewControllers[0] is JournalsTableViewController {
+            if controller.viewControllers[0] is JournalsViewController {
                 return controller.viewControllers[0]
             }
             print(controller.viewControllers[0])

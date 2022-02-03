@@ -46,7 +46,7 @@ class DataBaseManagerJournalEntry {
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category)
         return number
     }
@@ -83,7 +83,7 @@ class DataBaseManagerJournalEntry {
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)
         return number
     }
@@ -153,7 +153,7 @@ class DataBaseManagerJournalEntry {
             realm.create(DataBaseJournalEntry.self, value: value, update: .modified) // 一部上書き更新
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(account_left: account_left  , account_right: account_right  ) //編集前の借方勘定と貸方勘定
         dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category) //編集後の借方勘定と貸方勘定
         return primaryKey
@@ -174,7 +174,7 @@ class DataBaseManagerJournalEntry {
             realm.create(DataBaseAdjustingEntry.self, value: value, update: .modified) // 一部上書き更新
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right)//編集前の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)//編集後の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         return primaryKey
@@ -191,7 +191,7 @@ class DataBaseManagerJournalEntry {
             print("object.isInvalidated: \(object.isInvalidated)")
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(account_left: account_left, account_right: account_right)
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
@@ -206,7 +206,7 @@ class DataBaseManagerJournalEntry {
             realm.delete(object)
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = DataBaseManagerTB()
+        let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right) // 決算整理仕訳用にしないといけない
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }

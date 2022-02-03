@@ -100,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="751" y="1344"/>
         </scene>
-        <!--JournalsTableViewController-->
+        <!--JournalsViewController-->
         <scene sceneID="Zl9-70-OeS">
             <objects>
-                <viewControllerPlaceholder storyboardName="JournalsTableViewController" id="zUH-Hl-Fqe" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="JournalsViewController" id="zUH-Hl-Fqe" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KjX-7L-6Dw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g71-IL-04Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

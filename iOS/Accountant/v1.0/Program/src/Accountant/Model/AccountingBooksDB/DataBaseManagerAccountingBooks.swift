@@ -71,7 +71,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         if objects.count >= 1 {
         // 会計帳簿だけではなく、仕訳帳、総勘定元帳なども削除する
         // 仕訳帳画面
-            let dataBaseManagerJournals = DataBaseManagerJournals()
+            let dataBaseManagerJournals = JournalsModel()
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
             if dataBaseManagerJournals.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: object.fiscalYear) {
                 let isInvalidated = dataBaseManagerJournals.deleteJournals(number: object.number)

@@ -983,7 +983,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 }
                 let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
                 let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-                let presentingViewController = navigationController.viewControllers[0] as! JournalsTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                let presentingViewController = navigationController.viewControllers[0] as! JournalsViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                 // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                 self.dismiss(animated: true, completion: {
                     [presentingViewController] () -> Void in
@@ -1001,7 +1001,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
                 let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
                 //                        let nc = viewController.presentingViewController as! UINavigationController
-                let presentingViewController = navigationController.viewControllers[0] as! JournalsTableViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                let presentingViewController = navigationController.viewControllers[0] as! JournalsViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
                 // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
                 self.dismiss(animated: true, completion: {
                     [presentingViewController] () -> Void in

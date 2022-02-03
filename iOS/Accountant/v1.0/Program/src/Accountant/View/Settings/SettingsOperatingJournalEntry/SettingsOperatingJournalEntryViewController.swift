@@ -161,7 +161,7 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     //余白の調整（UIImageを拡大、縮小している）
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         //top:ナビゲーションバーの高さ分上に移動
-        return UIEdgeInsets(top: 3,left: 3,bottom: 3,right: 3)
+        return UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
     }
     ///セルの選択時に背景色を変化させる
     ///今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。

@@ -1,5 +1,5 @@
 //
-//  DataBaseManagerPL.swift
+//  PLModel.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/06/28.
@@ -9,11 +9,20 @@
 import Foundation
 import RealmSwift
 
+/// GUIアーキテクチャ　MVP
+protocol PLModelInput {
+    
+    func initializeBenefits()
+
+    func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String
+    func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String
+    func getBenefitTotal(benefit: Int, lastYear: Bool) -> String
+}
 // 損益計算書クラス
-class DataBaseManagerPL {
+class PLModel: PLModelInput {
     
     // 初期化　中区分、大区分　ごとに計算
-    func initializeBenefits(){
+    func initializeBenefits() {
         // データベースに書き込み　//4:収益 3:費用
         setTotalRank0(big5: 4,rank0:  6) //営業収益9     売上
         setTotalRank0(big5: 3,rank0:  7) //営業費用5     売上原価
@@ -29,7 +38,7 @@ class DataBaseManagerPL {
         setBenefitTotal()
     }
     // 計算　階層0 大区分
-    func setTotalRank0(big5: Int, rank0: Int) {
+    private func setTotalRank0(big5: Int, rank0: Int) {
         var TotalAmountOfRank0:Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = getAccountsInRank0(rank0: rank0)
@@ -93,7 +102,7 @@ class DataBaseManagerPL {
         return setComma(amount: result)
     }
     // 計算　階層1 中区分
-    func setTotalRank1(big5: Int, rank1: Int) {
+    private func setTotalRank1(big5: Int, rank1: Int) {
         var TotalAmountOfRank1:Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = getAccountsInRank1(rank1: rank1)
@@ -133,7 +142,7 @@ class DataBaseManagerPL {
         }
     }
     // 取得　設定勘定科目　中区分
-    func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+    private func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -167,7 +176,7 @@ class DataBaseManagerPL {
         return setComma(amount: result)
     }
     // 利益　計算
-    func setBenefitTotal() {
+    private func setBenefitTotal() {
         // 開いている会計帳簿を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 
@@ -229,7 +238,7 @@ class DataBaseManagerPL {
         return setComma(amount: result)
     }
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
-    func getTotalAmount(account: String) ->Int64 {
+    private func getTotalAmount(account: String) ->Int64 {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
@@ -251,7 +260,7 @@ class DataBaseManagerPL {
         return result
     }
     // 取得　設定勘定科目　大区分
-    func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+    private func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -259,7 +268,7 @@ class DataBaseManagerPL {
         return objects
     }
     // 借又貸を取得
-    func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
+    private func getTotalDebitOrCredit(big_category: Int, mid_category: Int, account: String) ->String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
 //        let realm = try! Realm()
@@ -322,8 +331,11 @@ class DataBaseManagerPL {
         }
         return PositiveOrNegative
     }
+    
+    
+    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
     // コンマを追加
-    func setComma(amount: Int64) -> String {
+    private func setComma(amount: Int64) -> String {
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
@@ -337,8 +349,7 @@ class DataBaseManagerPL {
         }
     }
     //カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String{
+    private func addComma(string :String) -> String{
         //3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
@@ -351,7 +362,7 @@ class DataBaseManagerPL {
         }
     }
     //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
+    private func removeComma(string :String) -> String{
         let string = string.replacingOccurrences(of: ",", with: "")
         return string
     }

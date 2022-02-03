@@ -65,12 +65,12 @@ class DataBaseManagerAccount {
     // 取得 仕訳　すべて　今期
     func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
         let realm = try! Realm()
-        var objects = realm.objects(DataBaseJournalEntry.self)
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        var objects = realm.objects(DataBaseJournalEntry.self)
         objects = objects.filter("fiscalYear == \(fiscalYear)")
-            objects = objects.sorted(byKeyPath: "date", ascending: true)
+        objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
     // 取得 決算整理仕訳　すべて　今期

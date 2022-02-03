@@ -86,7 +86,7 @@ class FinancialStatementTableViewController: UITableViewController {
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する
-        let databaseManager = DataBaseManagerTB() 
+        let databaseManager = TBModel() 
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
         //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
@@ -185,6 +185,15 @@ class FinancialStatementTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(viewController, animated: true)
+                }else{
+                    let navigation = UINavigationController(rootViewController:viewController)
+                    self.present(navigation, animated: true, completion: nil)
+                }
+                break
+            case 1:
+                let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)
                 if let navigator = self.navigationController {
                     navigator.pushViewController(viewController, animated: true)
                 }else{
