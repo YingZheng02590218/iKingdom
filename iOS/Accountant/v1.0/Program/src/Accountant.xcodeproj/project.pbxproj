@@ -145,6 +145,8 @@
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
+		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
+		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
 		F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */; };
 		F9D08D8D25444CF700CE3CB2 /* TableViewCellSettingAccountDetailAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422D9253F091500FBA052 /* TableViewCellSettingAccountDetailAccount.swift */; };
@@ -162,6 +164,8 @@
 		F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
+		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
+		F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */; };
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
@@ -363,6 +367,8 @@
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		F9CD5899266B963600F27E80 /* HTMLhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelper.swift; sourceTree = "<group>"; };
+		F9CD589B266B980A00F27E80 /* PDFMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMaker.swift; sourceTree = "<group>"; };
 		F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalsTableViewCell.swift; sourceTree = "<group>"; };
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +383,8 @@
 		F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedger.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
+		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
+		F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PDFMakerViewController.storyboard; sourceTree = "<group>"; };
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
@@ -578,7 +586,7 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = AccountingBooksShelf;
+			name = AccountingBooksShelf;
 			sourceTree = "<group>";
 		};
 		F93A630424FAD5FB00C1C2C1 /* AccountingBooksShelfDB */ = {
@@ -643,6 +651,10 @@
 				F9B209E6279D034500F7EA8D /* Model */,
 				F9B209EA279D0AF700F7EA8D /* View */,
 				F9B209EB279D38A900F7EA8D /* Presenter */,
+				F9CD5899266B963600F27E80 /* HTMLhelper.swift */,
+				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
+				F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */,
+				F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */,
 				F9A668712662483D008E9137 /* Extension */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
@@ -1334,6 +1346,7 @@
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
+				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -1509,7 +1522,9 @@
 				F98CD97724DCB49D001CBF94 /* SettingsCategoryTableViewController.swift in Sources */,
 				F98CD97224DCB1CC001CBF94 /* SettingsGroupsTableViewController.swift in Sources */,
 				F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */,
+				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* TableViewCellCategoryList.swift in Sources */,
+				F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */,
 				F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9F4607424C9E0BD008FE62B /* File2.swift in Sources */,
 				F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */,
@@ -1526,6 +1541,7 @@
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9354DB224989895007DB098 /* TBModel.swift in Sources */,
 				F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */,
+				F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */,
 				F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */,
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
