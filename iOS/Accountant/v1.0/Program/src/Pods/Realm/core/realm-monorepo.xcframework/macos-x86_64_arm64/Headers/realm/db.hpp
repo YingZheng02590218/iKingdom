@@ -19,22 +19,22 @@
 #ifndef REALM_GROUP_SHARED_HPP
 #define REALM_GROUP_SHARED_HPP
 
-#include <functional>
-#include <cstdint>
-#include <limits>
-#include <unordered_map>
-#include <realm/util/features.h>
-#include <realm/util/thread.hpp>
-#include <realm/util/interprocess_condvar.hpp>
-#include <realm/util/interprocess_mutex.hpp>
+#include <realm/db_options.hpp>
 #include <realm/group.hpp>
 #include <realm/handover_defs.hpp>
 #include <realm/impl/transact_log.hpp>
 #include <realm/metrics/metrics.hpp>
 #include <realm/replication.hpp>
+#include <realm/util/features.h>
+#include <realm/util/functional.hpp>
+#include <realm/util/interprocess_condvar.hpp>
+#include <realm/util/interprocess_mutex.hpp>
 #include <realm/version_id.hpp>
-#include <realm/db_options.hpp>
-#include <realm/util/logger.hpp>
+
+#include <functional>
+#include <cstdint>
+#include <limits>
+#include <condition_variable>
 
 namespace realm {
 
@@ -114,9 +114,12 @@ public:
     // Create a DB and associate it with a file. DB Objects can only be associated with one file,
     // the association determined on creation of the DB Object. The association can be broken by
     // calling DB::close(), but after that no new association can be established. To reopen the
-    // file (or another file), a new DB object is needed.
+    // file (or another file), a new DB object is needed. The specified Replication instance, if
+    // any, must remain in existence for as long as the DB.
     static DBRef create(const std::string& file, bool no_create = false, const DBOptions options = DBOptions());
-    static DBRef create(Replication& repl, const DBOptions options = DBOptions());
+    static DBRef create(Replication& repl, const std::string& file, const DBOptions options = DBOptions());
+    static DBRef create(std::unique_ptr<Replication> repl, const std::string& file,
+                        const DBOptions options = DBOptions());
     static DBRef create(BinaryData, bool take_ownership = true);
 
     ~DB() noexcept;
@@ -161,6 +164,10 @@ public:
         m_replication = repl;
     }
 
+    const std::string& get_path() const noexcept
+    {
+        return m_db_path;
+    }
 
 #ifdef REALM_DEBUG
     /// Deprecated method, only called from a unit test
@@ -194,7 +201,7 @@ public:
     /// and changes done by another thread in the same process as the caller.
     ///
     /// Has db been changed ?
-    bool has_changed(TransactionRef);
+    bool has_changed(TransactionRef&);
 
     /// The calling thread goes to sleep until the database is changed, or
     /// until wait_for_change_release() is called. After a call to
@@ -202,7 +209,7 @@ public:
     /// immediately. To restore the ability to wait for a change, a call to
     /// enable_wait_for_change() is required. Return true if the database has
     /// changed, false if it might have.
-    bool wait_for_change(TransactionRef);
+    bool wait_for_change(TransactionRef&);
 
     /// release any thread waiting in wait_for_change().
     void wait_for_change_release();
@@ -230,6 +237,10 @@ public:
     // an invalid TransactionRef is returned.
     TransactionRef start_write(bool nonblocking = false);
 
+    // ask for write mutex. Callback takes place when mutex has been acquired.
+    // callback may occur on ANOTHER THREAD. Must not be called if write mutex
+    // has already been acquired.
+    void async_request_write_mutex(TransactionRef& tr, util::UniqueFunction<void()>& when_acquired);
 
     // report statistics of last commit done on THIS DB.
     // The free space reported is what can be expected to be freed
@@ -348,7 +359,7 @@ public:
         return m_metrics;
     }
 
-    // Try to grab a exclusive lock of the given realm path's lock file. If the lock
+    // Try to grab an exclusive lock of the given realm path's lock file. If the lock
     // can be acquired, the callback will be executed with the lock and then return true.
     // Otherwise false will be returned directly.
     // The lock taken precludes races with other threads or processes accessing the
@@ -358,37 +369,45 @@ public:
     using CallbackWithLock = std::function<void(const std::string& realm_path)>;
     static bool call_with_lock(const std::string& realm_path, CallbackWithLock callback);
 
-    enum CoreFileType : uint64_t {
+    enum CoreFileType : uint8_t {
         Lock,
         Storage,
         Management,
         Note,
         Log,
-        LogA, // This is a legacy version of `Log`.
-        LogB, // This is a legacy version of `Log`.
     };
-    /// Return a list of files and directories core may use in the given realm file path.
-    /// The first element of the pair in the returned list is the path as string,
-    /// the second one indicates if the path is a directory or not.
-    /// It is safe to delete those returned files/directories in the call_with_lock's callback except for the lock
-    /// itself.
+
+    /// Get the path for the given type of file for a base Realm file path.
+    /// \param realm_path The path for the main Realm file.
+    /// \param type The type of associated file to get the path for.
+    /// \return The base path with the appropriate type-specific suffix appended to it.
+    static std::string get_core_file(const std::string& realm_path, CoreFileType type);
+
+    /// Delete a Realm file and all associated control files.
     ///
-    /// \param realm_path If provided the full path to the file including
-    ///                   the given path will be returned by this function.
+    /// This function does not perform any locking and requires external
+    /// synchronization to ensure that it is safe to call. If called within
+    /// call_with_lock(), \p delete_lockfile must be false as the lockfile is not
+    /// safe to delete while it is in use.
     ///
-    /// \return A map of all core files, providing the path (first) and an indicator
-    ///         if they are a folder or not (second).
-    static std::unordered_map<CoreFileType, std::pair<std::string, bool>>
-    get_core_files(const std::string& realm_path = "");
+    /// \param base_path The Realm file to delete, which auxiliary file paths will be derived from.
+    /// \param[out] did_delete_realm If non-null, will be set to true if the Realm file was deleted (even if a
+    ///             subsequent deletion failed)
+    /// \param delete_lockfile By default the lock file is not deleted as it is unsafe to
+    ///        do so. If this is true, the lock file is deleted along with the other files.
+    static void delete_files(const std::string& base_path, bool* did_delete_realm = nullptr,
+                             bool delete_lockfile = false);
+
+    /// Mark this DB as the sync agent for the file.
+    /// \throw MultipleSyncAgents if another DB is already the sync agent.
+    void claim_sync_agent();
+    void release_sync_agent();
 
 protected:
     explicit DB(const DBOptions& options); // Is this ever used?
 
 private:
-    std::recursive_mutex m_mutex;
-    int m_transaction_count = 0;
-    SlabAlloc m_alloc;
-    Replication* m_replication = nullptr;
+    class AsyncCommitHelper;
     struct SharedInfo;
     struct ReadCount;
     struct ReadLockInfo {
@@ -405,10 +424,20 @@ private:
             res->m_file_size = file_size;
             return res;
         }
+        void check() const noexcept
+        {
+            REALM_ASSERT_RELEASE_EX((m_top_ref & 7) == 0 && m_top_ref < m_file_size, m_version, m_reader_idx,
+                                    m_top_ref, m_file_size);
+        }
     };
     class ReadLockGuard;
 
     // Member variables
+    std::recursive_mutex m_mutex;
+    int m_transaction_count = 0;
+    SlabAlloc m_alloc;
+    std::unique_ptr<Replication> m_history;
+    Replication* m_replication = nullptr;
     size_t m_free_space = 0;
     size_t m_locked_space = 0;
     size_t m_used_space = 0;
@@ -427,20 +456,14 @@ private:
     int m_file_format_version = 0;
     util::InterprocessMutex m_writemutex;
     std::unique_ptr<ReadLockInfo> m_fake_read_lock_if_immutable;
-#ifdef REALM_ASYNC_DAEMON
-    util::InterprocessMutex m_balancemutex;
-#endif
     util::InterprocessMutex m_controlmutex;
-#ifdef REALM_ASYNC_DAEMON
-    util::InterprocessCondVar m_room_to_write;
-    util::InterprocessCondVar m_work_to_do;
-    util::InterprocessCondVar m_daemon_becomes_ready;
-#endif
     util::InterprocessCondVar m_new_commit_available;
     util::InterprocessCondVar m_pick_next_writer;
     std::function<void(int, int)> m_upgrade_callback;
-
     std::shared_ptr<metrics::Metrics> m_metrics;
+    std::unique_ptr<AsyncCommitHelper> m_commit_helper;
+    bool m_is_sync_agent = false;
+
     /// Attach this DB instance to the specified database file.
     ///
     /// While at least one instance of DB exists for a specific
@@ -475,13 +498,9 @@ private:
     /// how to migrate from.
     void open(const std::string& file, bool no_create = false, const DBOptions options = DBOptions());
     void open(BinaryData, bool take_ownership = true);
+    void open(Replication&, const std::string& file, const DBOptions options = DBOptions());
 
-    /// Open this group in replication mode. The specified Replication instance
-    /// must remain in existence for as long as the DB.
-    void open(Replication&, const DBOptions options = DBOptions());
-
-
-    void do_open(const std::string& file, bool no_create, bool is_backend, const DBOptions options);
+    void do_open(const std::string& file, bool no_create, const DBOptions options);
 
     Replication* const* get_repl() const noexcept
     {
@@ -521,7 +540,7 @@ private:
     /// return true if write transaction can commence, false otherwise.
     bool do_try_begin_write();
     void do_begin_write();
-    version_type do_commit(Transaction&);
+    version_type do_commit(Transaction&, bool commit_to_disk = true);
     void do_end_write() noexcept;
 
     // make sure the given index is within the currently mapped area.
@@ -529,7 +548,7 @@ private:
     bool grow_reader_mapping(uint_fast32_t index);
 
     // Must be called only by someone that has a lock on the write mutex.
-    void low_level_commit(uint_fast64_t new_version, Transaction& transaction);
+    void low_level_commit(uint_fast64_t new_version, Transaction& transaction, bool commit_to_disk = true);
 
     void do_async_commits();
 
@@ -548,6 +567,11 @@ private:
     }
 
     void close_internal(std::unique_lock<util::InterprocessMutex>, bool allow_open_read_transactions);
+
+    void async_begin_write(util::UniqueFunction<void()> fn);
+    void async_end_write();
+    void async_sync_to_disk(util::UniqueFunction<void()> fn);
+
     friend class Transaction;
 };
 
@@ -575,6 +599,19 @@ public:
     {
         return db->get_version_of_latest_snapshot();
     }
+    DB::VersionID get_oldest_version_not_persisted()
+    {
+        if (m_oldest_version_not_persisted) {
+            return VersionID(m_oldest_version_not_persisted->m_version, m_oldest_version_not_persisted->m_reader_idx);
+        }
+        return {};
+    }
+    /// Get a version id which may be used to request a different transaction locked to specific version.
+    DB::VersionID get_version_of_current_transaction() const noexcept
+    {
+        return VersionID(m_read_lock.m_version, m_read_lock.m_reader_idx);
+    }
+
     void close();
     bool is_attached()
     {
@@ -592,7 +629,7 @@ public:
     void end_read();
 
     // Live transactions state changes, often taking an observer functor:
-    VersionID commit_and_continue_as_read();
+    VersionID commit_and_continue_as_read(bool commit_to_disk = true);
     template <class O>
     void rollback_and_continue_as_read(O* observer);
     void rollback_and_continue_as_read()
@@ -620,6 +657,11 @@ public:
     {
         return m_transact_stage == DB::transact_Frozen;
     }
+    bool is_async() noexcept
+    {
+        std::unique_lock<std::mutex> lck(mtx);
+        return m_async_stage != AsyncState::Idle;
+    }
     TransactionRef duplicate();
 
     _impl::History* get_history() const;
@@ -639,17 +681,61 @@ public:
     // handover of the heavier Query and TableView
     std::unique_ptr<Query> import_copy_of(Query&, PayloadPolicy);
     std::unique_ptr<TableView> import_copy_of(TableView&, PayloadPolicy);
-    std::unique_ptr<ConstTableView> import_copy_of(ConstTableView&, PayloadPolicy);
 
     /// Get the current transaction type
     DB::TransactStage get_transact_stage() const noexcept;
 
-    /// Get a version id which may be used to request a different transaction locked to specific version.
-    VersionID get_version_of_current_transaction();
-
     void upgrade_file_format(int target_file_format_version);
 
+    /// Task oriented/async interface for continuous transactions.
+    // true if this transaction already holds the write mutex
+    bool holds_write_mutex() const noexcept
+    {
+        return m_async_stage == AsyncState::HasLock || m_async_stage == AsyncState::HasCommits;
+    }
+
+    // request full synchronization to stable storage for all writes done since
+    // last sync - or just release write mutex.
+    // The write mutex is released after full synchronization.
+    void async_end(util::UniqueFunction<void()> when_synchronized = nullptr);
+
+    // true if sync to disk has been requested
+    bool is_synchronizing() noexcept
+    {
+        std::unique_lock<std::mutex> lck(mtx);
+        return m_async_stage == AsyncState::Syncing;
+    }
+
+    // Wait for any async operation to complete.
+    // Returns TRUE if async stage is Idle
+    bool wait_for_async_completion()
+    {
+        std::unique_lock<std::mutex> lck(mtx);
+        if (m_async_stage == Transaction::AsyncState::Syncing) {
+            waiting_for_sync = true;
+            do {
+                cv.wait(lck);
+            } while (waiting_for_sync);
+        }
+        else if (m_async_stage == Transaction::AsyncState::Requesting) {
+            waiting_for_write_lock = true;
+            do {
+                cv.wait(lck);
+            } while (waiting_for_write_lock);
+        }
+        if (m_commit_exception)
+            throw m_commit_exception;
+        return m_async_stage == Transaction::AsyncState::Idle;
+    }
+
+    std::exception_ptr get_commit_exception()
+    {
+        return m_commit_exception;
+    }
+
 private:
+    enum class AsyncState { Idle, Requesting, HasLock, HasCommits, Syncing };
+
     DBRef get_db() const
     {
         return db;
@@ -672,6 +758,16 @@ private:
     mutable _impl::History* m_history = nullptr;
 
     DB::ReadLockInfo m_read_lock;
+    util::Optional<DB::ReadLockInfo> m_oldest_version_not_persisted;
+    std::exception_ptr m_commit_exception;
+
+    // Mutex is protecting access to members just below
+    std::mutex mtx;
+    std::condition_variable cv;
+    AsyncState m_async_stage = AsyncState::Idle;
+    bool waiting_for_write_lock = false;
+    bool waiting_for_sync = false;
+
     DB::TransactStage m_transact_stage = DB::transact_Ready;
 
     friend class DB;
@@ -845,14 +941,14 @@ inline DB::TransactStage Transaction::get_transact_stage() const noexcept
 class DB::ReadLockGuard {
 public:
     ReadLockGuard(DB& shared_group, ReadLockInfo& read_lock) noexcept
-        : m_shared_group(shared_group)
+        : m_db(shared_group)
         , m_read_lock(&read_lock)
     {
     }
     ~ReadLockGuard() noexcept
     {
         if (m_read_lock)
-            m_shared_group.release_read_lock(*m_read_lock);
+            m_db.release_read_lock(*m_read_lock);
     }
     void release() noexcept
     {
@@ -860,7 +956,7 @@ public:
     }
 
 private:
-    DB& m_shared_group;
+    DB& m_db;
     ReadLockInfo* m_read_lock;
 };
 
@@ -887,14 +983,16 @@ inline bool Transaction::promote_to_write(O* observer, bool nonblocking)
     if (m_transact_stage != DB::transact_Reading)
         throw LogicError(LogicError::wrong_transact_state);
 
-    if (nonblocking) {
-        bool succes = db->do_try_begin_write();
-        if (!succes) {
-            return false;
+    if (!holds_write_mutex()) {
+        if (nonblocking) {
+            bool succes = db->do_try_begin_write();
+            if (!succes) {
+                return false;
+            }
         }
-    }
-    else {
-        db->do_begin_write(); // Throws
+        else {
+            db->do_begin_write(); // Throws
+        }
     }
     try {
         Replication* repl = db->get_replication();
@@ -917,7 +1015,8 @@ inline bool Transaction::promote_to_write(O* observer, bool nonblocking)
             create_empty_group(); // Throws
     }
     catch (...) {
-        db->do_end_write();
+        if (!holds_write_mutex())
+            db->do_end_write();
         m_history = nullptr;
         throw;
     }
@@ -955,16 +1054,17 @@ inline void Transaction::rollback_and_continue_as_read(O* observer)
     // Mark all managed space (beyond the attached file) as free.
     db->reset_free_space_tracking(); // Throws
 
+    m_read_lock.check();
     ref_type top_ref = m_read_lock.m_top_ref;
     size_t file_size = m_read_lock.m_file_size;
+
     _impl::ReversedNoCopyInputStream reversed_in(reverser);
     m_alloc.update_reader_view(file_size); // Throws
     update_allocator_wrappers(false);
     advance_transact(top_ref, reversed_in, false); // Throws
 
-    db->do_end_write();
-
-    repl->abort_transact();
+    if (!holds_write_mutex())
+        db->do_end_write();
 
     m_history = nullptr;
     set_transact_stage(DB::transact_Reading);

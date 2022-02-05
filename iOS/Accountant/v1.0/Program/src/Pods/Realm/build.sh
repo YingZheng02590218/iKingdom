@@ -69,6 +69,7 @@ command:
   test-catalyst-swift:  tests RealmSwift Mac Catalyst framework
   test-swiftpm:         tests ObjC and Swift macOS frameworks via SwiftPM
   test-swiftui-ios:         tests SwiftUI framework UI tests
+  test-swiftui-server-osx:  tests Server Sync in SwiftUI
   verify:               verifies docs, osx, osx-swift, ios-static, ios-dynamic, ios-swift, ios-device, swiftui-ios in both Debug and Release configurations, swiftlint
   verify-osx-object-server:  downloads the Realm Object Server and runs the Objective-C and Swift integration tests
   docs:                 builds docs in docs/output
@@ -257,12 +258,12 @@ build_docs() {
       --clean \
       --author Realm \
       --author_url https://realm.io \
-      --github_url https://github.com/realm/realm-cocoa \
-      --github-file-prefix "https://github.com/realm/realm-cocoa/tree/v${version}" \
+      --github_url https://github.com/realm/realm-swift \
+      --github-file-prefix "https://github.com/realm/realm-swift/tree/v${version}" \
       --module-version "${version}" \
       --xcodebuild-arguments "${xcodebuild_arguments}" \
       --module "${module}" \
-      --root-url "https://realm.io/docs/${language}/${version}/api/" \
+      --root-url "https://docs.mongodb.com/realm-sdks/${language}/${version}/" \
       --output "docs/${language}_output" \
       --head "$(cat docs/custom_head.html)" \
       --exclude 'RealmSwift/Impl/*'
@@ -643,13 +644,13 @@ case "$COMMAND" in
 
     test-swiftpm*)
         SANITIZER=$(echo "$COMMAND" | cut -d - -f 3)
+        SWIFT_TEST_FLAGS=(-Xcc -g0)
         if [ -n "$SANITIZER" ]; then
-            SANITIZER="--sanitize $SANITIZER"
+            SWIFT_TEST_FLAGS+=(--sanitize "$SANITIZER")
             export ASAN_OPTIONS='check_initialization_order=true:detect_stack_use_after_return=true'
         fi
         xcrun swift package resolve
-        find .build -name views.cpp -delete
-        xcrun swift test --configuration "$(echo "$CONFIGURATION" | tr "[:upper:]" "[:lower:]")" $SANITIZER
+        xcrun swift test --configuration "$(echo "$CONFIGURATION" | tr "[:upper:]" "[:lower:]")" "${SWIFT_TEST_FLAGS[@]}"
         exit 0
         ;;
 
@@ -667,6 +668,11 @@ case "$COMMAND" in
     "test-catalyst-swift")
         export REALM_SDKROOT=iphoneos
         xctest RealmSwift -configuration "$CONFIGURATION" -destination 'platform=macOS,variant=Mac Catalyst' CODE_SIGN_IDENTITY=''
+        exit 0
+        ;;
+
+    "test-swiftui-server-osx")
+        xctest 'SwiftUISyncTestHost' -configuration "$CONFIGURATION" -sdk macosx -destination 'platform=macOS'
         exit 0
         ;;
 
@@ -698,6 +704,7 @@ case "$COMMAND" in
         sh build.sh verify-catalyst
         sh build.sh verify-catalyst-swift
         sh build.sh verify-swiftui-ios
+        sh build.sh verify-swiftui-server-osx
         ;;
 
     "verify-cocoapods")
@@ -775,6 +782,11 @@ case "$COMMAND" in
 
     "verify-swiftui-ios")
         sh build.sh test-swiftui-ios
+        exit 0
+        ;;
+
+    "verify-swiftui-server-osx")
+        sh build.sh test-swiftui-server-osx
         exit 0
         ;;
 
@@ -941,7 +953,7 @@ case "$COMMAND" in
             workspace="${workspace/swift/swift-$REALM_XCODE_VERSION}"
         fi
 
-        examples="Simple TableView Migration Backlink GroupedTableView Encryption"
+        examples="Simple TableView Migration Backlink GroupedTableView Encryption AppClip AppClipParent"
         versions="0 1 2 3 4 5"
         for example in $examples; do
             if [ "$example" = "Migration" ]; then
@@ -1100,6 +1112,8 @@ case "$COMMAND" in
             export REALM_SKIP_PRELAUNCH=1
 
             if [[ "$target" = *"server"* ]] || [[ "$target" = "swiftpm"* ]]; then
+                mkdir .baas
+                mv build/stitch .baas
                 source "$(brew --prefix nvm)/nvm.sh" --no-use
                 nvm install 13.14.0
                 sh build.sh setup-baas
@@ -1289,8 +1303,8 @@ EOF
         WORKSPACE="$(cd "$WORKSPACE" && pwd)"
         export WORKSPACE
         cd "$WORKSPACE"
-        git clone --recursive "$REALM_SOURCE" realm-cocoa
-        cd realm-cocoa
+        git clone --recursive "$REALM_SOURCE" realm-swift
+        cd realm-swift
 
         echo 'Packaging iOS'
         sh build.sh package-ios-static
@@ -1318,7 +1332,7 @@ EOF
         sh build.sh package-examples
 
         echo 'Building final release packages'
-        export WORKSPACE="${WORKSPACE}/realm-cocoa"
+        export WORKSPACE="${WORKSPACE}/realm-swift"
         sh build.sh package-release objc
         sh build.sh package-release swift
 
@@ -1343,17 +1357,17 @@ x.y.z Release notes (yyyy-MM-dd)
 * None.
 
 ### Fixed
-* <How to hit and notice issue? what was the impact?> ([#????](https://github.com/realm/realm-cocoa/issues/????), since v?.?.?)
+* <How to hit and notice issue? what was the impact?> ([#????](https://github.com/realm/realm-swift/issues/????), since v?.?.?)
 * None.
 
 <!-- ### Breaking Changes - ONLY INCLUDE FOR NEW MAJOR version -->
 
 ### Compatibility
-* Realm Studio: 10.0.0 or later.
+* Realm Studio: 11.0.0 or later.
 * APIs are backwards compatible with all previous releases in the 10.x.y series.
-* Carthage release for Swift is built with Xcode 12.5.
+* Carthage release for Swift is built with Xcode 13.2.1.
 * CocoaPods: 1.10 or later.
-* Xcode: 12.2-13.0 beta 1.
+* Xcode: 12.4-13.2.1.
 
 ### Internal
 * Upgraded realm-core from ? to ?

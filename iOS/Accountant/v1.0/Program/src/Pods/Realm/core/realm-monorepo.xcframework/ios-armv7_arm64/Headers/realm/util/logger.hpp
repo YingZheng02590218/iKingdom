@@ -75,7 +75,8 @@ public:
     ///             attention to efficiency.
     ///     trace   A version of 'debug' that allows for very high volume
     ///             output.
-    enum class Level { all, trace, debug, detail, info, warn, error, fatal, off };
+    // equivalent to realm_log_level_e in realm.h and must be kept in sync
+    enum class Level { all = 0, trace = 1, debug = 2, detail = 3, info = 4, warn = 5, error = 6, fatal = 7, off = 8 };
 
     template <class... Params>
     void log(Level, const char* message, Params&&...);
@@ -266,6 +267,13 @@ inline void Logger::log(Level level, const char* message, Params&&... params)
 {
     if (would_log(level))
         do_log(level, message, std::forward<Params>(params)...); // Throws
+#if REALM_DEBUG
+    else {
+        // Do the string formatting even if it won't be logged to hopefully
+        // catch invalid format strings
+        static_cast<void>(format(message, std::forward<Params>(params)...)); // Throws
+    }
+#endif
 }
 
 inline bool Logger::would_log(Level level) const noexcept

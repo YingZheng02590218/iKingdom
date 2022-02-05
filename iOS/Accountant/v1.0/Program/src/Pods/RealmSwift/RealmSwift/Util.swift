@@ -75,123 +75,63 @@ extension ObjectBase {
     }
 }
 
+internal func coerceToNil(_ value: Any) -> Any? {
+    if value is NSNull {
+        return nil
+    }
+    // nil in Any is bridged to obj-c as NSNull. In the obj-c code we usually
+    // convert NSNull back to nil, which ends up as Optional<Any>.none
+    if case Optional<Any>.none = value {
+        return nil
+    }
+    return value
+}
+
 // MARK: CustomObjectiveCBridgeable
 
+internal extension _ObjcBridgeable {
+    static func _rlmFromObjc(_ value: Any) -> Self? { _rlmFromObjc(value, insideOptional: false) }
+}
 /// :nodoc:
 public func dynamicBridgeCast<T>(fromObjectiveC x: Any) -> T {
-    if T.self == DynamicObject.self {
-        return unsafeBitCast(x as AnyObject, to: T.self)
-    } else if let bridgeableType = T.self as? CustomObjectiveCBridgeable.Type {
-        return bridgeableType.bridging(objCValue: x) as! T
-    } else if let bridgeableType = T.self as? RealmEnum.Type {
-        return bridgeableType._rlmFromRawValue(x) as! T
-    } else {
-        return x as! T
+    if let bridged = failableDynamicBridgeCast(fromObjectiveC: x) as T? {
+        return bridged
     }
+    fatalError("Could not convert value '\(x)' to type '\(T.self)'")
+}
+
+/// :nodoc:
+@usableFromInline
+internal func failableDynamicBridgeCast<T>(fromObjectiveC x: Any) -> T? {
+    if let bridgeableType = T.self as? _ObjcBridgeable.Type {
+        return bridgeableType._rlmFromObjc(x).flatMap { $0 as? T }
+    }
+    if let value = x as? T {
+        return value
+    }
+    return nil
 }
 
 /// :nodoc:
 public func dynamicBridgeCast<T>(fromSwift x: T) -> Any {
-    if let x = x as? CustomObjectiveCBridgeable {
-        return x.objCValue
-    } else if let bridgeableType = T.self as? RealmEnum.Type {
-        return bridgeableType._rlmToRawValue(x)
-    } else {
-        return x
+    if let x = x as? _ObjcBridgeable {
+        return x._rlmObjcValue
     }
+    return x
 }
 
-// Used for conversion from Objective-C types to Swift types
-internal protocol CustomObjectiveCBridgeable {
-    static func bridging(objCValue: Any) -> Self
-    var objCValue: Any { get }
+@usableFromInline
+internal func staticBridgeCast<T: _ObjcBridgeable>(fromSwift x: T) -> Any {
+    return x._rlmObjcValue
 }
-
-// `NSNumber as? Float` fails if the value can't be exactly represented as a float,
-// unlike the other NSNumber conversions
-extension Float: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Float {
-        return (objCValue as! NSNumber).floatValue
+@usableFromInline
+internal func staticBridgeCast<T: _ObjcBridgeable>(fromObjectiveC x: Any) -> T {
+    if let value = T._rlmFromObjc(x) {
+        return value
     }
-    internal var objCValue: Any {
-        return NSNumber(value: self)
-    }
+    throwRealmException("Could not convert value '\(x)' to type '\(T.self)'.")
 }
-
-extension Int8: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Int8 {
-        return (objCValue as! NSNumber).int8Value
-    }
-    internal var objCValue: Any {
-        return NSNumber(value: self)
-    }
-}
-extension Int16: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Int16 {
-        return (objCValue as! NSNumber).int16Value
-    }
-    internal var objCValue: Any {
-        return NSNumber(value: self)
-    }
-}
-extension Int32: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Int32 {
-        return (objCValue as! NSNumber).int32Value
-    }
-    internal var objCValue: Any {
-        return NSNumber(value: self)
-    }
-}
-extension Int64: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Int64 {
-        return (objCValue as! NSNumber).int64Value
-    }
-    internal var objCValue: Any {
-        return NSNumber(value: self)
-    }
-}
-extension Optional: CustomObjectiveCBridgeable {
-    internal static func bridging(objCValue: Any) -> Optional {
-        if objCValue as AnyObject is NSNull {
-            return nil
-        } else {
-            return .some(dynamicBridgeCast(fromObjectiveC: objCValue))
-        }
-    }
-    internal var objCValue: Any {
-        if let value = self {
-            return dynamicBridgeCast(fromSwift: value)
-        } else {
-            return NSNull()
-        }
-    }
-}
-extension Decimal128: CustomObjectiveCBridgeable {
-    static func bridging(objCValue: Any) -> Decimal128 {
-        if let number = objCValue as? NSNumber {
-            return Decimal128(number: number)
-        }
-        return objCValue as! Decimal128
-    }
-    var objCValue: Any {
-        return self
-    }
-}
-extension AnyRealmValue: CustomObjectiveCBridgeable {
-    static func bridging(objCValue: Any) -> AnyRealmValue {
-        if let any = objCValue as? RLMValue {
-            return ObjectiveCSupport.convert(value: any)
-        }
-        throwRealmException("objCValue is not bridgable to AnyRealmValue")
-    }
-    var objCValue: Any {
-        return ObjectiveCSupport.convert(value: self) ?? NSNull()
-    }
-}
-
-// MARK: AssistedObjectiveCBridgeable
-
-internal protocol AssistedObjectiveCBridgeable {
-    static func bridging(from objectiveCValue: Any, with metadata: Any?) -> Self
-    var bridged: (objectiveCValue: Any, metadata: Any?) { get }
+@usableFromInline
+internal func failableStaticBridgeCast<T: _ObjcBridgeable>(fromObjectiveC x: Any) -> T? {
+    return T._rlmFromObjc(x)
 }

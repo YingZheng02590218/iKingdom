@@ -17,21 +17,61 @@
 ////////////////////////////////////////////////////////////////////////////
 
 import Foundation
+import Realm
 import Realm.Private
 
+// A type which we can get the runtime schema information from
 public protocol _RealmSchemaDiscoverable {
+    // The Realm property type associated with this type
     static var _rlmType: PropertyType { get }
     static var _rlmOptional: Bool { get }
+    // Does this type require @objc for legacy declarations? Not used for modern
+    // declarations as no types use @objc.
+    static var _rlmRequireObjc: Bool { get }
+
+    // Set any fields of the property applicable to this type other than type/optional.
+    // There are both static and non-static versions of this function because
+    // some times need data from an instance (e.g. LinkingObjects, where the
+    // source property name is runtime data and not part of the type), while
+    // wrappers like Optional need to be able to recur to the wrapped type
+    // without creating an instance of that.
     func _rlmPopulateProperty(_ prop: RLMProperty)
     static func _rlmPopulateProperty(_ prop: RLMProperty)
-    static var _rlmRequireObjc: Bool { get }
 }
 
-extension _RealmSchemaDiscoverable {
+internal protocol SchemaDiscoverable: _RealmSchemaDiscoverable {}
+extension SchemaDiscoverable {
     public static var _rlmOptional: Bool { false }
     public static var _rlmRequireObjc: Bool { true }
     public func _rlmPopulateProperty(_ prop: RLMProperty) { }
     public static func _rlmPopulateProperty(_ prop: RLMProperty) { }
+}
+
+internal extension RLMProperty {
+    convenience init(name: String, value: _RealmSchemaDiscoverable) {
+        let valueType = Swift.type(of: value)
+        self.init()
+        self.name = name
+        self.type = valueType._rlmType
+        self.optional = valueType._rlmOptional
+        value._rlmPopulateProperty(self)
+        valueType._rlmPopulateProperty(self)
+        if valueType._rlmRequireObjc {
+            self.updateAccessors()
+        }
+    }
+}
+
+private func getModernProperties(_ object: ObjectBase) -> [RLMProperty] {
+    return Mirror(reflecting: object).children.compactMap { prop in
+        guard let label = prop.label else { return nil }
+        guard let value = prop.value as? DiscoverablePersistedProperty else {
+            return nil
+        }
+        let property = RLMProperty(name: label, value: value)
+        property.swiftIvar = ivar_getOffset(class_getInstanceVariable(type(of: object), label)!)
+        return property
+    }
 }
 
 // If the property is a storage property for a lazy Swift property, return
@@ -45,22 +85,11 @@ private func baseName(forLazySwiftProperty name: String) -> String? {
     return nil
 }
 
-internal extension RLMProperty {
-    convenience init(name: String, value: _RealmSchemaDiscoverable) {
-        let valueType = Swift.type(of: value)
-        self.init(name: name, createSelectors: valueType._rlmRequireObjc)
-        self.type = valueType._rlmType
-        self.optional = valueType._rlmOptional
-        valueType._rlmPopulateProperty(self)
-        value._rlmPopulateProperty(self)
-    }
-}
-
-private func getProperties(_ cls: RLMObjectBase.Type) -> [RLMProperty] {
-    let object = cls.init()
+private func getLegacyProperties(_ object: ObjectBase, _ cls: ObjectBase.Type) -> [RLMProperty] {
     let indexedProperties: Set<String>
     let ignoredPropNames: Set<String>
     let columnNames = cls._realmColumnNames()
+    // FIXME: ignored properties on EmbeddedObject appear to not be supported?
     if let realmObject = object as? Object {
         indexedProperties = Set(type(of: realmObject).indexedProperties())
         ignoredPropNames = Set(type(of: realmObject).ignoredProperties())
@@ -85,7 +114,7 @@ private func getProperties(_ cls: RLMObjectBase.Type) -> [RLMProperty] {
         guard let label = prop.label else { return nil }
         var rawValue = prop.value
         if let value = rawValue as? RealmEnum {
-            rawValue = type(of: value)._rlmToRawValue(value)
+            rawValue = value._rlmObjcValue
         }
 
         guard let value = rawValue as? _RealmSchemaDiscoverable else {
@@ -138,20 +167,33 @@ private func getProperties(_ cls: RLMObjectBase.Type) -> [RLMProperty] {
             // Implicitly ignore non-@objc dynamic properties
             return nil
         } else {
-            property.swiftIvar = class_getInstanceVariable(cls, label)
+            property.swiftIvar = ivar_getOffset(class_getInstanceVariable(cls, label)!)
         }
 
+        property.isLegacy = true
         property.updateAccessors()
         return property
     }
 }
 
+private func getProperties(_ cls: RLMObjectBase.Type) -> [RLMProperty] {
+    // Check for any modern properties and only scan for legacy properties if
+    // none are found.
+    let object = cls.init()
+    let props = getModernProperties(object)
+    if props.count > 0 {
+        return props
+    }
+    return getLegacyProperties(object, cls)
+}
+
 internal class ObjectUtil {
     private static let runOnce: Void = {
-        RLMSwiftAsFastEnumeration = { (obj: Any) -> Any? in
-            // Intermediate cast to AnyObject due to https://bugs.swift.org/browse/SR-8651
-            if let collection = obj as AnyObject as? UntypedCollection {
-                return collection.asNSFastEnumerator()
+        RLMSwiftBridgeValue = { (value: Any) -> Any? in
+            // `as AnyObject` required on iOS <= 13; it will compile but silently
+            // fail to cast otherwise
+            if let value = value as AnyObject as? _ObjcBridgeable {
+                return value._rlmObjcValue
             }
             return nil
         }

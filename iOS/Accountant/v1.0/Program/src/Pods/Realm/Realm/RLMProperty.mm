@@ -134,24 +134,6 @@ static bool rawTypeShouldBeTreatedAsComputedProperty(NSString *rawType) {
     return self;
 }
 
-- (instancetype)initWithName:(NSString *)name
-             createSelectors:(BOOL)createSelectors {
-    self = [super init];
-    if (self) {
-        _name = name;
-        if (createSelectors) {
-            [self updateAccessors];
-        }
-    }
-
-    return self;
-}
-
-- (void)setName:(NSString *)name {
-    _name = name;
-    [self updateAccessors];
-}
-
 - (void)updateAccessors {
     // populate getter/setter names if generic
     if (!_getterName) {
@@ -755,6 +737,24 @@ static realm::util::Optional<RLMPropertyType> typeFromProtocolString(const char 
         p.type |= realm::PropertyType::Nullable;
     }
     return p;
+}
+
+- (NSString *)typeName {
+    if (!self.collection) {
+        return RLMTypeToString(_type);
+    }
+    NSString *collectionName;
+    if (_swiftAccessor) {
+        collectionName = _array ? @"List" :
+                         _set   ? @"MutableSet" :
+                                  @"Map";
+    }
+    else {
+        collectionName = _array ? @"RLMArray" :
+                         _set   ? @"RLMSet" :
+                                  @"RLMDictionary";
+    }
+    return [NSString stringWithFormat:@"%@<%@>", collectionName, RLMTypeToString(_type)];
 }
 
 @end

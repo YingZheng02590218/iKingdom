@@ -372,7 +372,7 @@ public:
 
     /// Set the path used for emulating file locks. If not set explicitly,
     /// the emulation will use the path of the file itself suffixed by ".fifo"
-    void set_fifo_path(const std::string& fifo_path);
+    void set_fifo_path(const std::string& fifo_dir_path, const std::string& fifo_file_name);
     enum {
         /// If possible, disable opportunistic flushing of dirted
         /// pages of a memory mapped file to physical medium. On some
@@ -617,6 +617,7 @@ private:
 #ifdef REALM_FILELOCK_EMULATION
     int m_pipe_fd = -1; // -1 if no pipe has been allocated for emulation
     bool m_has_exclusive_lock = false;
+    std::string m_fifo_dir_path;
     std::string m_fifo_path;
 #endif
 #endif
@@ -651,6 +652,12 @@ private:
         void map(const File&, AccessMode, size_t size, int map_flags, size_t offset = 0);
         void remap(const File&, AccessMode, size_t size, int map_flags);
         void unmap() noexcept;
+        // fully update any process shared representation (e.g. buffer cache).
+        // other processes will be able to see changes, but a full platform crash
+        // may loose data
+        void flush();
+        // fully synchronize any underlying storage. After completion, a full platform
+        // crash will *not* have lost data.
         void sync();
 #if REALM_ENABLE_ENCRYPTION
         mutable util::EncryptedFileMapping* m_encrypted_mapping = nullptr;
@@ -735,8 +742,6 @@ public:
     /// mapped file.
     Map() noexcept;
 
-    ~Map() noexcept;
-
     // Disable copying. Copying an opened Map will create a scenario
     // where the same memory will be mapped once but unmapped twice.
     Map(const Map&) = delete;
@@ -793,6 +798,7 @@ public:
     /// attached to a memory mapped file, has undefined behavior.
     void sync();
 
+    void flush();
     /// Check whether this Map instance is currently attached to a
     /// memory mapped file.
     bool is_attached() const noexcept;
@@ -1010,12 +1016,14 @@ inline File::~File() noexcept
     close();
 }
 
-inline void File::set_fifo_path(const std::string& fifo_path)
+inline void File::set_fifo_path(const std::string& fifo_dir_path, const std::string& fifo_file_name)
 {
 #ifdef REALM_FILELOCK_EMULATION
-    m_fifo_path = fifo_path;
+    m_fifo_dir_path = fifo_dir_path;
+    m_fifo_path = fifo_dir_path + "/" + fifo_file_name;
 #else
-    static_cast<void>(fifo_path);
+    static_cast<void>(fifo_dir_path);
+    static_cast<void>(fifo_file_name);
 #endif
 }
 
@@ -1164,11 +1172,6 @@ inline File::Map<T>::Map() noexcept
 }
 
 template <class T>
-inline File::Map<T>::~Map() noexcept
-{
-}
-
-template <class T>
 inline T* File::Map<T>::map(const File& f, AccessMode a, size_t size, int map_flags, size_t offset)
 {
     MapBase::map(f, a, size, map_flags, offset);
@@ -1184,7 +1187,7 @@ inline void File::Map<T>::unmap() noexcept
 template <class T>
 inline T* File::Map<T>::remap(const File& f, AccessMode a, size_t size, int map_flags)
 {
-    //MapBase::remap(f, a, size, map_flags);
+    // MapBase::remap(f, a, size, map_flags);
     // missing sync() here?
     unmap();
     map(f, a, size, map_flags);
@@ -1196,6 +1199,12 @@ template <class T>
 inline void File::Map<T>::sync()
 {
     MapBase::sync();
+}
+
+template <class T>
+inline void File::Map<T>::flush()
+{
+    MapBase::flush();
 }
 
 template <class T>

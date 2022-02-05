@@ -45,18 +45,18 @@ import Realm.Private
 
  ```swift
  class Owner: Object {
-     @objc dynamic var name: String = ""
-     let dogs = List<Dog>()
+     @Persisted var name: String
+     @Persisted var dogs: List<Dog>
  }
  class Dog: EmbeddedObject {
-     @objc dynamic var name: String = ""
-     @objc dynamic var adopted: Bool = false
-     let owner = LinkingObjects(fromType: Owner.self, property: "dogs")
+     @Persisted var name: String
+     @Persisted var adopted: Bool
+     @Persisted(originProperty: "dogs") var owner: LinkingObjects<Owner>
  }
  ```
  */
 public typealias EmbeddedObject = RealmSwiftEmbeddedObject
-extension EmbeddedObject: RealmCollectionValue {
+extension EmbeddedObject: _RealmCollectionValueInsideOptional {
     /// :nodoc:
     public class override final func isEmbedded() -> Bool {
         return true
@@ -124,6 +124,9 @@ extension EmbeddedObject: RealmCollectionValue {
      Override this method to specify the names of properties to ignore. These properties will not be managed by
      the Realm that manages the object.
 
+     - warning: This function is only applicable to legacy property declarations
+                using `@objc`. When using `@Persisted`, any properties not
+                marked with `@Persisted` are automatically ignored.
      - returns: An array of property names to ignore.
      */
     @objc open class func ignoredProperties() -> [String] { return [] }
@@ -133,7 +136,7 @@ extension EmbeddedObject: RealmCollectionValue {
     /// Returns or sets the value of the property with the given name.
     @objc open subscript(key: String) -> Any? {
         get {
-            return dynamicGet(object: self, key: key)
+            return RLMDynamicGetByName(self, key)
         }
         set {
             dynamicSet(object: self, key: key, value: newValue)
@@ -199,8 +202,8 @@ extension EmbeddedObject: RealmCollectionValue {
      :nodoc:
      */
     public func dynamicList(_ propertyName: String) -> List<DynamicObject> {
-        return noWarnUnsafeBitCast(dynamicGet(object: self, key: propertyName) as! RLMSwiftCollectionBase,
-                                   to: List<DynamicObject>.self)
+        let list = RLMDynamicGetByName(self, propertyName) as! RLMSwiftCollectionBase
+        return List<DynamicObject>(collection: list._rlmCollection as! RLMArray<AnyObject>)
     }
 
     // MARK: Comparison
@@ -257,23 +260,5 @@ extension EmbeddedObject: ThreadConfined {
      */
     public func thaw() -> Self? {
         return realm?.thaw(self)
-    }
-}
-
-
-// MARK: AssistedObjectiveCBridgeable
-
-// FIXME: Remove when `as! Self` can be written
-private func forceCastToInferred<T, V>(_ x: T) -> V {
-    return x as! V
-}
-
-extension EmbeddedObject: AssistedObjectiveCBridgeable {
-    static func bridging(from objectiveCValue: Any, with metadata: Any?) -> Self {
-        return forceCastToInferred(objectiveCValue)
-    }
-
-    var bridged: (objectiveCValue: Any, metadata: Any?) {
-        return (objectiveCValue: unsafeBitCast(self, to: RLMObject.self), metadata: nil)
     }
 }

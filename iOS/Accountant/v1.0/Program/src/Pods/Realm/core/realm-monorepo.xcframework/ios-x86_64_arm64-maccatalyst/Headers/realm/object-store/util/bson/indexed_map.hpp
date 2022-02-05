@@ -48,9 +48,13 @@ public:
         iterator operator++(int);
         iterator operator--(int);
 
-        bool operator!=(const typename IndexedMap<T>::iterator& rhs) noexcept
+        bool operator!=(const typename IndexedMap<T>::iterator& rhs) const noexcept
         {
             return !(m_idx == rhs.m_idx);
+        }
+        bool operator==(const typename IndexedMap<T>::iterator& rhs) const noexcept
+        {
+            return m_idx == rhs.m_idx;
         }
     };
 
@@ -78,7 +82,7 @@ public:
 
     entry back();
 
-    iterator find(const std::string& k);
+    iterator find(const std::string& k) const;
 
     /// Find or add a given key
     T& operator[](const std::string& k);
@@ -218,7 +222,7 @@ std::pair<std::string, T> IndexedMap<T>::back()
 }
 
 template <typename T>
-typename IndexedMap<T>::iterator IndexedMap<T>::find(const std::string& k)
+typename IndexedMap<T>::iterator IndexedMap<T>::find(const std::string& k) const
 {
     auto it = begin();
     while (it != end()) {

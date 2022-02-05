@@ -106,13 +106,27 @@ public:
         return m_obj.is_valid();
     }
 
-    // Returns a frozen copy of this object.
+    // Freeze a copy of this object in the context of the frozen Realm.
+    // Equivalent to producing a thread-safe reference and resolving it in the frozen realm.
     Object freeze(std::shared_ptr<Realm> frozen_realm) const;
 
     // Returns whether or not this Object is frozen.
     bool is_frozen() const noexcept;
 
-    NotificationToken add_notification_callback(CollectionChangeCallback callback) &;
+    /**
+     * Adds a `CollectionChangeCallback` to this `Collection`. The `CollectionChangeCallback` is exectuted when
+     * insertions, modifications or deletions happen on this `Collection`.
+     *
+     * @param callback The function to execute when a insertions, modification or deletion in this `Collection` was
+     * detected.
+     * @param key_path_array A filter that can be applied to make sure the `CollectionChangeCallback` is only executed
+     * when the property in the filter is changed but not otherwise.
+     *
+     * @return A `NotificationToken` that is used to identify this callback. This token can be used to remove the
+     * callback via `remove_callback`.
+     */
+    NotificationToken add_notification_callback(CollectionChangeCallback callback,
+                                                KeyPathArray key_path_array = {}) &;
 
     template <typename ValueType>
     void set_column_value(StringData prop_name, ValueType&& value)

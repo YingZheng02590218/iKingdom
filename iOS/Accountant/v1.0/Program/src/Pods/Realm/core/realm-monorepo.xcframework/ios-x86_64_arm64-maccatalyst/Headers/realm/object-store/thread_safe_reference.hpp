@@ -44,6 +44,10 @@ public:
     template <typename T>
     T resolve(std::shared_ptr<Realm> const&);
 
+    // Is the payload of a certain type
+    template <typename T>
+    bool is() const;
+
     explicit operator bool() const noexcept
     {
         return !!m_payload;
@@ -51,6 +55,8 @@ public:
 
 private:
     class Payload;
+    template <typename>
+    class CollectionPayload;
     template <typename>
     class PayloadImpl;
     std::unique_ptr<Payload> m_payload;

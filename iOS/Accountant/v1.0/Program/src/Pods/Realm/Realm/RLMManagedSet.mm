@@ -290,13 +290,30 @@ static void ensureInWriteTransaction(NSString *message, RLMManagedSet *set, RLMM
     });
 }
 
+- (void)replaceAllObjectsWithObjects:(NSArray *)objects {
+    changeSet(self, ^{
+        RLMAccessorContext context(*_objectInfo);
+        _backingSet.assign(context, objects);
+    });
+}
+
 - (RLMManagedSet *)managedObjectFrom:(RLMSet *)set {
     auto managedSet = RLMDynamicCast<RLMManagedSet>(set);
     if (!managedSet) {
         @throw RLMException(@"Right hand side value must be a managed Set.");
     }
-    if (_type != managedSet->_type || _objectInfo != managedSet->_objectInfo) {
-        @throw RLMException(@"Set must match type of \"self\" '%@'", RLMTypeToString(_type));
+    if (_type != managedSet->_type) {
+        @throw RLMException(@"Cannot intersect sets of type '%@' and '%@'.",
+                            RLMTypeToString(_type), RLMTypeToString(managedSet->_type));
+    }
+    if (_realm != managedSet->_realm) {
+        @throw RLMException(@"Cannot insersect sets managed by different Realms.");
+    }
+    if (_objectInfo != managedSet->_objectInfo) {
+        @throw RLMException(@"Cannot intersect sets of type '%@' and '%@'.",
+                            _objectInfo->rlmObjectSchema.className,
+                            managedSet->_objectInfo->rlmObjectSchema.className);
+
     }
     return managedSet;
 }
@@ -360,6 +377,34 @@ static void ensureInWriteTransaction(NSString *message, RLMManagedSet *set, RLMM
     return translateErrors([&] {
         RLMAccessorContext context(*_objectInfo);
         return _backingSet.get(context, index);
+    });
+}
+
+- (NSArray *)objectsAtIndexes:(NSIndexSet *)indexes {
+    size_t count = self.count;
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:indexes.count];
+    RLMAccessorContext context(*_objectInfo);
+    for (NSUInteger i = indexes.firstIndex; i != NSNotFound; i = [indexes indexGreaterThanIndex:i]) {
+        if (i >= count) {
+            return nil;
+        }
+        [result addObject:_backingSet.get(context, i)];
+    }
+    return result;
+}
+
+- (id)firstObject {
+    return translateErrors([&] {
+        RLMAccessorContext context(*_objectInfo);
+        return _backingSet.size() ? _backingSet.get(context, 0) : nil;
+    });
+}
+
+- (id)lastObject {
+    return translateErrors([&] {
+        RLMAccessorContext context(*_objectInfo);
+        size_t size = _backingSet.size();
+        return size ? _backingSet.get(context, size - 1) : nil;
     });
 }
 
@@ -490,32 +535,27 @@ static void ensureInWriteTransaction(NSString *message, RLMManagedSet *set, RLMM
     return _realm.isFrozen;
 }
 
+- (instancetype)resolveInRealm:(RLMRealm *)realm {
+    auto& parentInfo = _ownerInfo->resolve(realm);
+    return translateRLMResultsErrors([&] {
+        return [[self.class alloc] initWithBackingCollection:_backingSet.freeze(realm->_realm)
+                                                  parentInfo:&parentInfo
+                                                    property:parentInfo.rlmObjectSchema[_key]];
+    });
+}
+
 - (instancetype)freeze {
     if (self.frozen) {
         return self;
     }
-
-    RLMRealm *frozenRealm = [_realm freeze];
-    auto& parentInfo = _ownerInfo->resolve(frozenRealm);
-    return translateRLMResultsErrors([&] {
-        return [[self.class alloc] initWithBackingCollection:_backingSet.freeze(frozenRealm->_realm)
-                                                  parentInfo:&parentInfo
-                                                    property:parentInfo.rlmObjectSchema[_key]];
-    });
+    return [self resolveInRealm:_realm.freeze];
 }
 
 - (instancetype)thaw {
     if (!self.frozen) {
         return self;
     }
-
-    RLMRealm *liveRealm = [_realm thaw];
-    auto& parentInfo = _ownerInfo->resolve(liveRealm);
-    return translateRLMResultsErrors([&] {
-        return [[self.class alloc] initWithBackingCollection:_backingSet.freeze(liveRealm->_realm)
-                                                  parentInfo:&parentInfo
-                                                    property:parentInfo.rlmObjectSchema[_key]];
-    });
+    return [self resolveInRealm:_realm.thaw];
 }
 
 // The compiler complains about the method's argument type not matching due to
@@ -525,10 +565,20 @@ static void ensureInWriteTransaction(NSString *message, RLMManagedSet *set, RLMM
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmismatched-parameter-types"
 - (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMSet *, RLMCollectionChange *, NSError *))block {
-    return RLMAddNotificationBlock(self, block, nil);
+    return RLMAddNotificationBlock(self, block, nil, nil);
 }
 - (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMSet *, RLMCollectionChange *, NSError *))block queue:(dispatch_queue_t)queue {
-    return RLMAddNotificationBlock(self, block, queue);
+    return RLMAddNotificationBlock(self, block, nil, queue);
+}
+- (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMSet *, RLMCollectionChange *, NSError *))block
+                                      keyPaths:(nullable NSArray<NSString *> *)keyPaths
+                                         queue:(nullable dispatch_queue_t)queue {
+    return RLMAddNotificationBlock(self, block, keyPaths, queue);
+}
+
+- (RLMNotificationToken *)addNotificationBlock:(void (^)(RLMSet *, RLMCollectionChange *, NSError *))block
+                                      keyPaths:(nullable NSArray<NSString *> *)keyPaths {
+    return RLMAddNotificationBlock(self, block, keyPaths, nil);
 }
 #pragma clang diagnostic pop
 
