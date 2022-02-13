@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */; };
 		55CE98C40D81B1F934D1099B /* libPods-AccountantTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */; };
+		952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */; };
 		BF157994A9DA48822F25C601 /* libPods-AccountantUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
 		F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */; };
@@ -20,7 +22,6 @@
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
 		F919603224AC53890084A18B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603124AC53890084A18B /* File.swift */; };
 		F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
-		F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */; };
@@ -294,7 +295,6 @@
 		F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */; };
 		F9EC670927B90BC60003FBB6 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6686C266247C7008E9137 /* UIColor+extension.swift */; };
 		F9EC670B27B90BC60003FBB6 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
-		F9EC670C27B90BC60003FBB6 /* Pods_Accountant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
 		F9EC670F27B90BC60003FBB6 /* FinancialStatementTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */; };
 		F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
@@ -345,8 +345,14 @@
 		F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */; };
+		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
+		F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
+		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
+		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
+		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
+		F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9F4605424BDD616008FE62B /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4605324BDD616008FE62B /* Migration.swift */; };
 		F9F4607424C9E0BD008FE62B /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603324AC679E0084A18B /* File2.swift */; };
 		F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */; };
@@ -390,12 +396,17 @@
 		1F51C0A378B805DC283D9A49 /* Pods-Accountant-AccountantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant-AccountantUITests.release.xcconfig"; path = "Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests.release.xcconfig"; sourceTree = "<group>"; };
 		209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccountantTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AccountantUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24B019FB635FB5CEF76A02CC /* Pods-PaciolistSTG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaciolistSTG.release.xcconfig"; path = "Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG.release.xcconfig"; sourceTree = "<group>"; };
+		2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaciolistSTG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3947D5A43F0563FFA12C14FA /* Pods-AccountantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.debug.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.debug.xcconfig"; sourceTree = "<group>"; };
-		47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39BB083924E3DF054BD9CB2A /* Pods-Paciolist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paciolist.debug.xcconfig"; path = "Target Support Files/Pods-Paciolist/Pods-Paciolist.debug.xcconfig"; sourceTree = "<group>"; };
+		48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Paciolist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FA03775975FDD94B320E777 /* Pods-AccountantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantUITests.debug.xcconfig"; path = "Target Support Files/Pods-AccountantUITests/Pods-AccountantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		83B54E7192BB1D0790175288 /* Pods-Accountant-AccountantUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant-AccountantUITests.debug.xcconfig"; path = "Target Support Files/Pods-Accountant-AccountantUITests/Pods-Accountant-AccountantUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		84DA037E2BAF912127067D70 /* Pods-Accountant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountant.debug.xcconfig"; path = "Target Support Files/Pods-Accountant/Pods-Accountant.debug.xcconfig"; sourceTree = "<group>"; };
+		B4E71F0C10598DD47284262D /* Pods-PaciolistSTG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaciolistSTG.debug.xcconfig"; path = "Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG.debug.xcconfig"; sourceTree = "<group>"; };
 		E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.release.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.release.xcconfig"; sourceTree = "<group>"; };
+		ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paciolist.release.xcconfig"; path = "Target Support Files/Pods-Paciolist/Pods-Paciolist.release.xcconfig"; sourceTree = "<group>"; };
 		F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournalEntry.swift; sourceTree = "<group>"; };
 		F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryViewController.swift; sourceTree = "<group>"; };
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
@@ -567,6 +578,9 @@
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaciolistSTG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		F9EC675027B95DDD0003FBB6 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EMTNeumorphicView.framework; path = Carthage/Build/iOS/EMTNeumorphicView.framework; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -598,8 +612,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
-				F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */,
+				F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */,
+				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
+				F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,8 +640,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F9EC670B27B90BC60003FBB6 /* PDFKit.framework in Frameworks */,
-				F9EC670C27B90BC60003FBB6 /* Pods_Accountant.framework in Frameworks */,
+				F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */,
+				952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */,
+				F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +662,10 @@
 				E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */,
 				6FA03775975FDD94B320E777 /* Pods-AccountantUITests.debug.xcconfig */,
 				0578B27B5D3F0965D2D68CE5 /* Pods-AccountantUITests.release.xcconfig */,
+				39BB083924E3DF054BD9CB2A /* Pods-Paciolist.debug.xcconfig */,
+				ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */,
+				B4E71F0C10598DD47284262D /* Pods-PaciolistSTG.debug.xcconfig */,
+				24B019FB635FB5CEF76A02CC /* Pods-PaciolistSTG.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -649,6 +673,9 @@
 		F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */,
+				F9EC675027B95DDD0003FBB6 /* Realm.framework */,
+				F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */,
 				F966371227B2930A00475CC7 /* PDFKit.framework */,
 				F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */,
 				F9F164B22786021B0044665A /* GoogleDataTransport.framework */,
@@ -660,9 +687,10 @@
 				F9A46A302785F800006CC162 /* NeuKit.framework */,
 				F9A46A2C2785F7DE006CC162 /* SwiftyStoreKit.framework */,
 				F9B778E625A09D0000300B7A /* StoreKit.framework */,
-				47268BE9267E04BF5DFFF33F /* Pods_Accountant.framework */,
 				209EB59DA4692E72BA153981 /* libPods-AccountantTests.a */,
 				213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */,
+				48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */,
+				2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1438,8 +1466,9 @@
 				F94EDD8B237AEB3A0074D812 /* Sources */,
 				F94EDD8C237AEB3A0074D812 /* Frameworks */,
 				F94EDD8D237AEB3A0074D812 /* Resources */,
-				F91878C9258300DB00D2E793 /* ShellScript */,
+				F91878C9258300DB00D2E793 /* Run Script */,
 				490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */,
+				F9EC675A27B960F70003FBB6 /* Run Script Carthage */,
 			);
 			buildRules = (
 			);
@@ -1498,6 +1527,7 @@
 				F9EC670D27B90BC60003FBB6 /* Resources */,
 				F9EC674027B90BC60003FBB6 /* ShellScript */,
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
+				F9EC675927B95E240003FBB6 /* Run Script Carthage */,
 			);
 			buildRules = (
 			);
@@ -1719,15 +1749,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paciolist/Pods-Paciolist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		828FA24E64D3395B5836D3CF /* [CP] Check Pods Manifest.lock */ = {
@@ -1745,7 +1775,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Accountant-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Paciolist-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1774,7 +1804,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F91878C9258300DB00D2E793 /* ShellScript */ = {
+		F91878C9258300DB00D2E793 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1784,6 +1814,7 @@
 			inputPaths = (
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1807,7 +1838,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Accountant-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PaciolistSTG-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1838,16 +1869,58 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Accountant/Pods-Accountant-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F9EC675927B95E240003FBB6 /* Run Script Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/EMTNeumorphicView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			name = "Run Script Carthage";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		F9EC675A27B960F70003FBB6 /* Run Script Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/EMTNeumorphicView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			name = "Run Script Carthage";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2296,9 +2369,8 @@
 		};
 		F94EDDBC237AEB3C0074D812 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84DA037E2BAF912127067D70 /* Pods-Accountant.debug.xcconfig */;
+			baseConfigurationReference = 39BB083924E3DF054BD9CB2A /* Pods-Paciolist.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2306,6 +2378,10 @@
 				CURRENT_PROJECT_VERSION = 2.0.12;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Accountant/Resources/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2327,9 +2403,8 @@
 		};
 		F94EDDBD237AEB3C0074D812 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0607E6C6A3527AD59D0F557D /* Pods-Accountant.release.xcconfig */;
+			baseConfigurationReference = ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
@@ -2337,6 +2412,10 @@
 				CURRENT_PROJECT_VERSION = 2.0.12;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Accountant/Resources/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2451,9 +2530,8 @@
 		};
 		F9EC674327B90BC60003FBB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84DA037E2BAF912127067D70 /* Pods-Accountant.debug.xcconfig */;
+			baseConfigurationReference = B4E71F0C10598DD47284262D /* Pods-PaciolistSTG.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2461,6 +2539,10 @@
 				CURRENT_PROJECT_VERSION = 2.0.12;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Accountant/Resources/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2482,9 +2564,8 @@
 		};
 		F9EC674427B90BC60003FBB6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0607E6C6A3527AD59D0F557D /* Pods-Accountant.release.xcconfig */;
+			baseConfigurationReference = 24B019FB635FB5CEF76A02CC /* Pods-PaciolistSTG.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
@@ -2492,6 +2573,10 @@
 				CURRENT_PROJECT_VERSION = 2.0.12;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Accountant/Resources/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

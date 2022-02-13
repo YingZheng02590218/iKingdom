@@ -11,13 +11,21 @@
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
     pod 'SwiftyStoreKit'
-    pod 'RealmSwift', ' ~> 10.21'
-    pod 'NeuKit'
-    pod 'EMTNeumorphicView'
+#    pod 'RealmSwift', ' ~> 10.21'
+#    pod 'NeuKit'
+#    pod 'EMTNeumorphicView'
     pod 'Gecco'
   end
 
-  target 'Accountant' do
+  target 'Paciolist' do
+    # Comment the next line if you don't want to use dynamic frameworks
+    use_frameworks!
+
+    # Pods for Accountant
+    common_pods
+  end
+
+  target 'PaciolistSTG' do
     # Comment the next line if you don't want to use dynamic frameworks
     use_frameworks!
 
