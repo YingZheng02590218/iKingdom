@@ -59,6 +59,7 @@
 		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
 		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
+		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */; };
@@ -276,6 +277,7 @@
 		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
 		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
+		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F969EFDB264EA6610052D3AF /* AccountantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F969EFDC264EA6610052D3AF /* AccountantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
 				F91FEAC127870D2800E26435 /* Pods_Accountant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +463,7 @@
 		F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F966371227B2930A00475CC7 /* PDFKit.framework */,
 				F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */,
 				F9F164B22786021B0044665A /* GoogleDataTransport.framework */,
 				F9A46A4A2785FDDE006CC162 /* Realm.framework */,
