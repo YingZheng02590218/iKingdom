@@ -79,7 +79,7 @@ final class JournalsPresenter: JournalsPresenterInput {
 
     func viewDidLoad() {
         
-        model.initializeJournals()
+//        model.initializeJournals()
         
         view.setupViewForViewDidLoad()
     }
