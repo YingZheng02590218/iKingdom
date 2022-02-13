@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icons8-サブノードを追加-25.png",
+      "filename" : "icons8-サブノードを追加-25.png",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,7 @@
     "version" : 1
   },
   "properties" : {
+    "compression-type" : "automatic",
     "preserves-vector-representation" : true
   }
 }
