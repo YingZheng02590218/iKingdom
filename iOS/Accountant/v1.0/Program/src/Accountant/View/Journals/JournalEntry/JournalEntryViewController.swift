@@ -220,6 +220,14 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        // TODO: 動作確認用
+//        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
+//        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
+//
+//        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
+//        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
+//
+//        self.present(fourthViewController, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
