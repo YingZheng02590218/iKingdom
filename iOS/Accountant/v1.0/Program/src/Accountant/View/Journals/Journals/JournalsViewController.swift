@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PDFKit
 import GoogleMobileAds // マネタイズ対応
 
 // 仕訳帳クラス
@@ -42,7 +43,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
     // スクロール
     var Number = 0
     
-    var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
+    let pDFMaker = PDFMaker()
+    let paperSize = CGSize(width: 192 / 25.4 * 72, height: 262 / 25.4 * 72) // B5 192×262mm
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
     func inject(presenter: JournalsPresenterInput) {
@@ -215,156 +217,63 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
      * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
      */
     @IBAction func button_print(_ sender: UIButton) {
-        printing = true
-        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
-        tableView.overrideUserInterfaceStyle = .light
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        // 第三の方法
-        //余計なUIをキャプチャしないように隠す
-        tableView.showsVerticalScrollIndicator = false
-        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
-            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow {// タップされたセルの位置を取得
-                // nilでない場合
-                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
-            }
-        }
-        // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            gADBannerView.isHidden = true
-        }
-        pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-//        pageSize = CGSize(width: tableView.contentSize.width / 25.4 * 72, height: tableView.contentSize.height / 25.4 * 72)
-        //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
-//        var rect = self.view.bounds
-        //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
-        //1. UIGraphicsBeginImageContextWithOptions関数でビットマップコンテキストを生成し、グラフィックススタックにプッシュします。
-        UIGraphicsBeginImageContextWithOptions(pageSize, true, 0.0)
-            //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
-//        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
-            //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        let newImage = self.tableView.captureImagee()
-        //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
-        UIGraphicsEndImageContext()
-        printing = false
-        // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            gADBannerView.isHidden = false
-        }
-        /*
-        ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
-         CGBitmapContextCreate関数を使用して、コンテキストを作成し、
-         それに画像コンテンツを描画します。
-         描画が完了したら、CGBitmapContextCreateImage関数を使用し、そのビットマップコンテキストからCGImageRefを作成します。
-         Core Graphicsの画像を直接描画したり、この画像を使用して UIImageオブジェクトを初期化することができます。
-         完了したら、グラフィックスコンテキストに対 してCGContextRelease関数を呼び出します。
-        */
-        let myImageView = UIImageView(image: newImage)
-        myImageView.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
+        // 初期化
+        pDFMaker.initialize()
         
-//PDF
-        //p-49 リスト 4-2 ページ単位のコンテンツの描画
-            let framePath = NSMutableData()
-        //p-45 「PDFコンテキストの作成と設定」
-            // PDFグラフィックスコンテキストは、UIGraphicsBeginPDFContextToData関数、
-            //  または UIGraphicsBeginPDFContextToFile関数のいずれかを使用して作成します。
-            //  UIGraphicsBeginPDFContextToData関数の場合、
-            //  保存先はこの関数に渡される NSMutableDataオブジェクトです。
-            UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
-        print(" myImageView.bounds : \(myImageView.bounds)")
-        //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-//            UIGraphicsBeginPDFPage()
-//        UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+        let printController = UIPrintInteractionController.shared
+        let printInfo = UIPrintInfo(dictionary:nil)
+        printInfo.outputType = .general
+        printInfo.jobName = "Journals"
+        printInfo.duplex = .none
+        printInfo.orientation = .portrait
+        printController.printInfo = printInfo
+        printController.printingItem = self.resizePrintingPaper()
+        printController.present(animated: true, completionHandler: nil)
+    }
 
-         /* PDFページの描画
-           UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
-           UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
-        */
-        //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
-        // ビューイメージを全て印刷できるページ数を用意する
-        var pageCounts: CGFloat = 0
-        while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
-            //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
-            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-            // グラフィックスコンテキストを取得する
-            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
-            myImageView.layer.render(in: currentContext)
-            // ページを増加
-            pageCounts += 1
-        }
-        //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
-            UIGraphicsEndPDFContext()
+    private func resizePrintingPaper() -> NSData? {
+        // CGPDFDocumentを取得
+        if let PDFpath = pDFMaker.PDFpath?[0] {
+            let document = PDFDocument(url: PDFpath)
+            guard let documentRef = document?.documentRef else { return nil }
             
-//ここからプリントです
-        //p-63 リスト 5-1 ページ範囲の選択が可能な単一のPDFドキュメント
-        let pic = UIPrintInteractionController.shared
-        if UIPrintInteractionController.canPrint(framePath as Data) {
-            //pic.delegate = self;
-            pic.delegate = self
+            var pageImages: [UIImage] = []
             
-            let printInfo = UIPrintInfo.printInfo()
-            printInfo.outputType = .general
-            printInfo.jobName = "Journals"
-            printInfo.duplex = .none
-            pic.printInfo = printInfo
-            //'showsPageRange' was deprecated in iOS 10.0: Pages can be removed from the print preview, so page range is always shown.
-            pic.printingItem = framePath
-    
-            let completionHandler: (UIPrintInteractionController, Bool, NSError) -> Void = { (pic: UIPrintInteractionController, completed: Bool, error: Error?) in
-                
-                if !completed && (error != nil) {
-                    print("FAILED! due to error in domain %@ with error code %u \(String(describing: error))")
+            // 表示しているPDFPageをUIImageに変換
+            for pageCount in 0 ..< documentRef.numberOfPages {
+                // CGPDFDocument -> CGPDFPage -> UIImage
+                if let page = documentRef.page(at: pageCount + 1) {
+                    let pageRect = page.getBoxRect(.mediaBox)
+                    let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+                    let pageImage = renderer.image { context in
+                        UIColor.white.set()
+                        context.fill(pageRect)
+                        
+                        context.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+                        context.cgContext.scaleBy(x: 1.0, y: -1.0)
+                        
+                        context.cgContext.drawPDFPage(page)
+                    }
+                    // Image配列に格納
+                    pageImages.append(pageImage)
                 }
             }
-            //p-79 印刷インタラクションコントローラを使って印刷オプションを提示
-            //UIPrintInteractionControllerには、ユーザに印刷オプションを表示するために次の3つのメソッ ドが宣言されており、それぞれアニメーションが付属しています。
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                //これらのうちの2つは、iPadデバイス上で呼び出されることを想定しています。
-                //・presentFromBarButtonItem:animated:completionHandler:は、ナビゲーションバーまたは ツールバーのボタン(通常は印刷ボタン)からアニメーションでPopover Viewを表示します。
-//                print("通過・printButton.frame -> \(button_print.frame)")
-//                print("通過・printButton.bounds -> \(button_print.bounds)")
-                //UIBarButtonItemの場合
-                //pic.present(from: printUIButton, animated: true, completionHandler: nil)
-                //・presentFromRect:inView:animated:completionHandler:は、アプリケーションのビューの任意の矩形からアニメーションでPopover Viewを表示します。
-                pic.present(from: CGRect(x: 0, y: 0, width: 0, height: 0), in: self.view, animated: true, completionHandler: nil)
-                print("iPadです")
-            } else {
-                //モーダル表示
-                //・presentAnimated:completionHandler:は、画面の下端からスライドアップするページをアニ メーション化します。これはiPhoneおよびiPod touchデバイス上で呼び出されることを想定しています。
-                pic.present(animated: true, completionHandler: completionHandler as? UIPrintInteractionController.CompletionHandler)
-                print("iPhoneです")
+            // UIImageにしたPDFPageをNSDataに変換
+            let pdfData: NSMutableData = NSMutableData()
+            let pdfConsumer: CGDataConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
+            
+            var mediaBox: CGRect = CGRect(origin: .zero, size: paperSize) // ここに印刷したいサイズを入れる
+            let pdfContext: CGContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
+            
+            pageImages.forEach { image in
+                pdfContext.beginPage(mediaBox: &mediaBox)
+                pdfContext.draw(image.cgImage!, in: mediaBox)
+                pdfContext.endPage()
             }
+            
+            return pdfData
         }
-        //余計なUIをキャプチャしないように隠したのを戻す
-        tableView.showsVerticalScrollIndicator = true
-        // ダークモード回避を解除
-        tableView.overrideUserInterfaceStyle = .unspecified
-        //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)//セルが存在する行を指定しないと0行だとエラーとなる //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-    }
-    
-    // MARK: - UIImageWriteToSavedPhotosAlbum
-    
-    @objc func didFinishWriteImage(_ image: UIImage, error: NSError?, contextInfo: UnsafeMutableRawPointer) {
-        if let error = error {
-        print("Image write error: \(error)")
-        }
-    }
-
-    func printInteractionController ( _ printInteractionController: UIPrintInteractionController, choosePaper paperList: [UIPrintPaper]) -> UIPrintPaper {
-        print("printInteractionController")
-        for i in 0..<paperList.count {
-            let paper: UIPrintPaper = paperList[i]
-        print(" paperListのビクセル is \(paper.paperSize.width) \(paper.paperSize.height)")
-        }
-        //ピクセル
-        print(" pageSizeピクセル    -> \(pageSize)")
-        let bestPaper = UIPrintPaper.bestPaper(forPageSize: pageSize, withPapersFrom: paperList)
-        //mmで用紙サイズと印刷可能範囲を表示
-        print(" paperSizeミリ      -> \(bestPaper.paperSize.width / 72.0 * 25.4), \(bestPaper.paperSize.height / 72.0 * 25.4)")
-        print(" bestPaper         -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4), \(bestPaper.printableRect.origin.y / 72.0 * 25.4), \(bestPaper.printableRect.size.width / 72.0 * 25.4), \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
-        return bestPaper
+        return nil
     }
     
     // MARK: - Navigation
