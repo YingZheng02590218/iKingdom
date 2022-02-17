@@ -6,7 +6,7 @@
 //  Copyright © 2019 Hisashi Ishihara. All rights reserved.
 //
 
-import NeuKit
+//import NeuKit
 import RealmSwift
 import Firebase // マネタイズ対応
 import GoogleMobileAds

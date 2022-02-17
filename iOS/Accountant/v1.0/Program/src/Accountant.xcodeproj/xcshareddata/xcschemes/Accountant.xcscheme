@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-               BuildableName = "Accountant.app"
-               BlueprintName = "Accountant"
+               BuildableName = "Paciolist.app"
+               BlueprintName = "Paciolist"
                ReferencedContainer = "container:Accountant.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -65,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-            BuildableName = "Accountant.app"
-            BlueprintName = "Accountant"
+            BuildableName = "Paciolist.app"
+            BlueprintName = "Paciolist"
             ReferencedContainer = "container:Accountant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,8 +82,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F94EDD8E237AEB3A0074D812"
-            BuildableName = "Accountant.app"
-            BlueprintName = "Accountant"
+            BuildableName = "Paciolist.app"
+            BlueprintName = "Paciolist"
             ReferencedContainer = "container:Accountant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

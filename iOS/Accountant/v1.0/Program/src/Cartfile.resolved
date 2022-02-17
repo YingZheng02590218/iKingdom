@@ -1,0 +1,4 @@
+github "bizz84/SwiftyStoreKit" "0.16.4"
+github "hirokimu/EMTNeumorphicView" "1.0.4"
+github "realm/realm-cocoa" "v10.21.0"
+github "yukiasai/Gecco" "2.0.0"
