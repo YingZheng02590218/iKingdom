@@ -13,7 +13,7 @@
         <!--仕訳-->
         <scene sceneID="SOl-7u-fS9">
             <objects>
-                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hqY-Er-sb3" userLabel="仕訳" customClass="JournalEntryTemplateViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hqY-Er-sb3" userLabel="仕訳" customClass="JournalEntryTemplateViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="h8X-GH-Dax">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,13 +111,13 @@
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-TC-Ket" userLabel="Stack View2">
                                                         <rect key="frame" x="0.0" y="60.5" width="394" height="46"/>
                                                         <subviews>
-                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="196" height="46"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                             </textField>
-                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-8r-tSO" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-8r-tSO" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="198" y="0.0" width="196" height="46"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
@@ -358,13 +358,13 @@
                                                         <rect key="frame" x="0.0" y="59" width="394" height="125.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="cI2-rb-hrh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="394" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="394" height="62.5"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaT-XT-YuL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="394" height="125.5"/>
+                                                                <rect key="frame" x="0.0" y="62.5" width="394" height="63"/>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
@@ -372,10 +372,10 @@
                                                             <constraint firstItem="JaT-XT-YuL" firstAttribute="top" secondItem="cI2-rb-hrh" secondAttribute="bottom" id="F4p-iF-SO7"/>
                                                             <constraint firstAttribute="trailing" secondItem="JaT-XT-YuL" secondAttribute="trailing" id="JTz-c2-Wug"/>
                                                             <constraint firstItem="cI2-rb-hrh" firstAttribute="leading" secondItem="1Wf-M6-ASE" secondAttribute="leading" id="MrW-1G-VLp"/>
-                                                            <constraint firstItem="JaT-XT-YuL" firstAttribute="height" secondItem="1Wf-M6-ASE" secondAttribute="height" id="QHo-ZH-sV5"/>
+                                                            <constraint firstItem="JaT-XT-YuL" firstAttribute="height" secondItem="1Wf-M6-ASE" secondAttribute="height" multiplier="0.5" id="QHo-ZH-sV5"/>
                                                             <constraint firstItem="JaT-XT-YuL" firstAttribute="leading" secondItem="1Wf-M6-ASE" secondAttribute="leading" id="WMx-ZY-83Y"/>
                                                             <constraint firstAttribute="trailing" secondItem="cI2-rb-hrh" secondAttribute="trailing" id="dCT-6a-RVD"/>
-                                                            <constraint firstItem="cI2-rb-hrh" firstAttribute="height" secondItem="1Wf-M6-ASE" secondAttribute="height" id="gLZ-nm-tfy"/>
+                                                            <constraint firstItem="cI2-rb-hrh" firstAttribute="height" secondItem="1Wf-M6-ASE" secondAttribute="height" multiplier="0.5" id="gLZ-nm-tfy"/>
                                                             <constraint firstAttribute="bottom" secondItem="JaT-XT-YuL" secondAttribute="bottom" id="jsp-Qb-7Um"/>
                                                             <constraint firstItem="JaT-XT-YuL" firstAttribute="width" secondItem="1Wf-M6-ASE" secondAttribute="width" id="mKf-jd-Zbd"/>
                                                             <constraint firstItem="cI2-rb-hrh" firstAttribute="width" secondItem="1Wf-M6-ASE" secondAttribute="width" id="mbM-fA-3pf"/>
@@ -480,23 +480,6 @@
             <point key="canvasLocation" x="460" y="3163"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="Fvo-vA-Ese">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="LOQ-8r-tSO">
-            <size key="intrinsicContentSize" width="97.5" height="32"/>
-        </designable>
-        <designable name="XUS-hR-U9P">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="aOv-8B-VTU">
-            <size key="intrinsicContentSize" width="58" height="41"/>
-        </designable>
-        <designable name="ue5-SW-9cy">
-            <size key="intrinsicContentSize" width="97.5" height="32"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="l7h-iT-0oa"/>
     </inferredMetricsTieBreakers>
