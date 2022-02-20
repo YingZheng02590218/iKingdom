@@ -93,7 +93,6 @@
 		F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
 		F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BC24B781E3006BD3DD /* WSViewController.swift */; };
 		F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */; };
-		F99BAEAA261C930E0038FBB2 /* JournalsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */; };
 		F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */; };
 		F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */; };
 		F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
@@ -304,7 +303,6 @@
 		F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CE326208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard */; };
 		F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
-		F9EC671727B90BC60003FBB6 /* JournalsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */; };
 		F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
 		F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
@@ -497,7 +495,6 @@
 		F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryTemplateViewController.storyboard; sourceTree = "<group>"; };
 		F99B65BC24B781E3006BD3DD /* WSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSViewController.swift; sourceTree = "<group>"; };
 		F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSTableViewCell.swift; sourceTree = "<group>"; };
-		F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalsTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenearlLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
@@ -1084,7 +1081,6 @@
 			children = (
 				F9BDCBB527A9602D00BD8770 /* JournalsViewController.swift */,
 				F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */,
-				F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */,
 				F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */,
 			);
 			path = Journals;
@@ -1599,7 +1595,6 @@
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
-				F99BAEAA261C930E0038FBB2 /* JournalsTableViewController.storyboard in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
@@ -1674,7 +1669,6 @@
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
-				F9EC671727B90BC60003FBB6 /* JournalsTableViewController.storyboard in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */,
