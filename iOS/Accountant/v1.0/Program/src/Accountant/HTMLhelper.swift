@@ -19,173 +19,197 @@ struct HTMLhelper {
     <html>
 
     <style type="text/css" media="all">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
     /*　位置　*/
-    .center {
-      text-align: center;
-    }
-    .left {
-      text-align: left;
-    }
-    .right {
-      text-align: right;
-    }
+        .center {
+            text-align: center;
+        }
+        .left {
+            text-align: left;
+        }
+        .right {
+        /*　text-align: right;を指定すると改ページされてしまう　*/
+        }
     /*　色　*/
-    .white {
-      color: #FFFFFF;
-    }
-    .black {
-      color: #000000;
-    }
-    .clearColor {
-      color: #FFFFFF;
-    }
+        .white {
+            color: #FFFFFF;
+        }
+        .black {
+            color: #000000;
+        }
+        .clearColor {
+            color: #FFFFFF;
+        }
     /*　罫線　*/
-    .line_double_red_top {
-      border-top: 1px double #f66;
-    }
-    .line_double_red_right {
-      border-right: 1px double #f66;
-    }
-    .line_single_red_left {
-      border-left: : 1px solid #f66;
-    }
-    .line_single_red_right {
-      border-right: 1px solid #f66;
-    }
-    .line_single_red_bottom {
-      border-bottom: 1px solid #f66;
-    }
-    .line_single_blue_right {
-      border-right: 1px solid #66b3ff;
-    }
-    .line_single_blue_bottom {
-      border-bottom: 1px solid #66b3ff;
-    }
+        .line_single_gray_bottom {
+            border-bottom: 1px solid #888;
+        }
+        .line_double_red_top {
+            border-top: 3px double #f66;
+        }
+        .line_double_red_right {
+            border-right: 3px double #f66;
+        }
+        .line_single_red_left {
+            border-left: : 1px solid #f66;
+        }
+        .line_single_red_right {
+            border-right: 1px solid #f66;
+        }
+        .line_single_red_bottom {
+            border-bottom: 1px solid #f66;
+        }
+        .line_single_blue_right {
+            border-right: 1px solid #66b3ff;
+        }
+        .line_single_blue_bottom {
+            border-bottom: 1px solid #66b3ff;
+        }
     /*　サイズ　フォント　*/
-    .fontsize40 {
-      font-size: 40%;
-    }
-    .fontsize60 {
-      font-size: 40%;
-    }
-    .fontsize80 {
-      font-size: 80%;
-    }
+        .fontsize40 {
+            font-size: 40%;
+        }
+        .fontsize60 {
+            font-size: 40%;
+        }
+        .fontsize80 {
+            font-size: 80%;
+        }
 
-    .flex-colum {
-      display: flex;
-      flex-direction: column;
-      margin: 0px;
-    }
+        .flex-colum {
+            display: flex;
+            flex-direction: column;
+            margin: 0px;
+        }
     /*　サイズ　幅　*/
-    .date {
-      width: 22mm;
-    }
-    .smallWritting {
-      width: 78mm;
-    }
-    .numberOfAccount {
-      width: 10mm;
-    }
-    .amount {
-      width: 37mm;
-    }
+        .date {
+            width: 5.8823529412%;/*　11mm　*/
+        }
+        .smallWritting {
+            width: 41.7112299465%;/*　78mm　*/
+        }
+        .numberOfAccount {
+            width: 5.3475935829%;/*　10mm　*/
+        }
+        .amount {
+            width: 19.7860962567%;/*　37mm　*/
+        }
     /*　サイズ　高さ　*/
-    .rowHeight {
-      height: 4mm;
-    }
+        .rowHeight {
+            height: auto;/*  2.7237354086% 7mm　*/
+        }
 
     html {
-      margin: auto;
     }
     body {
-      margin: auto;
     }
-    section {
-    }
-    h2 {
-      margin: auto;
-      height: 22mm;
-    }
-    table {
-      margin: auto;
-      height: 235mm;
-    }
-    thead {
-      margin: auto;
-      height: 13mm;
-    }
-    tbody {
-      margin: auto;
-      height: 217mm;
-    }
-    .height3 {
-      margin: auto;
-      height: 5mm;
-    }
+        section {
+        }
+            h2 {
+                width: 100%;
+                height: 8.560311284%;/*   22mm　*/
+            }
+            table {
+                width: 100%;
+                height: 91.439688716%;/*   235mm　*/
+            }
+                thead {
+                    height: 5.0583657588%;/*　13mm　*/
+                }
+                tbody {
+                    height: 84.4357976654%;/*　217mm　*/
+                }
+                tfoot {
+                    height: auto;/*　1.9455252918% 5mm　*/
+                }
     .page{
-      margin: auto;
-      width: 187mm;
-      height: 257mm;
-      box-sizing: border-box;
-      padding: 0mm;
-      break-after: always;
-    }
-    .page:last-child{
-      break-after: auto;
+        width: 210mm;/*　210mm 187mm B5 182mm×257mm　*/
+        height: 296mm;/*　297mm 257mm　*/
+        box-sizing: border-box;
+        padding: 10mm;
+        display: block;
+        break-after: always;
     }
     @page {
-      size: B5 portrait;
+        size: A4 portrait;/*　A4 B5　*/
+        margin: auto;
     }
+    .page:last-child{
+        break-after: auto;
+    }
+    /* ■ テーブル全体、セルの横幅、高さを%で指定
+    width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
+
+    テーブルの横幅と高さを指定してある時でセルの横幅、高さを%で指定した場合、 それらの大きさはテーブル全体に対する割合の大きさになります。 */
     </style>
     <body>
     """
     }
     
-    func headerstring(title: String, fiscalYear: Int) -> String {
+    func headerstring(title: String, fiscalYear: Int, pageNumber: Int) -> String {
+        // let margin = pageNumber % 2 == 0 ? "margin-right" : "margin-left"
+        // style="\(margin): 5.8823529412%;"
 
         return """
-    <section class="page">
-      <div class="center">
-        <div class="center">
-          <h2 class="center">\(title)</h2>
-        </div>
-        <table>
-          <thead>
-            <tr class="line_double_red_top line_single_red_bottom">
-              <td class="date line_double_red_right line_double_red_top line_single_red_bottom" colspan="2">
-                <div class="center">
-                  <span class="fontsize60">\(fiscalYear)年</span>
-                </div>
-                <div>
-                  <span class="fontsize60"> 月</span>
-                  <span class="fontsize60 right"> 日</span>
-                </div>
-              </td>
-              <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_single_red_right">
-                <div class="center">
-                  <span class="fontsize80 center">摘　</span>
-                  <span class="fontsize80 center">　要</span>
-                </div>
-              </td>
-              <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
-                <div class="center flex-colum">
-                  <span class="fontsize60">丁</span><span class="fontsize60">数</span>
-                </div>
-              </td>
-              <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
-                <div class="center">
-                  <span class="fontsize80">借　</span><span class="fontsize80">　方</span>
-                </div>
-              </td>
-              <td class="line_double_red_top line_single_red_bottom amount">
-                <div class="center">
-                  <span class="fontsize80">貸　</span><span class="fontsize80">　方</span>
-                </div>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
+        <section class="page">
+            <h2 class="center">\(title)</h2>
+            <table>
+              <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="6" class="fontsize60 line_single_gray_bottom" style="text-align: start; width: 10%;">No.　\(pageNumber)</td>
+                </tr>
+                <tr class="line_double_red_top line_single_red_bottom">
+                  <td class="line_double_red_right line_double_red_top line_single_red_bottom date" colspan="2">
+                    <div class="center">
+                      <span class="fontsize60">\(fiscalYear)年</span>
+                    </div>
+                    <div>
+                      <span class="fontsize60"> 月</span>
+                      <span class="fontsize60"> 日</span>
+                    </div>
+                  </td>
+                  <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_single_red_right">
+                    <div class="center">
+                      <span class="fontsize80 center">摘　</span>
+                      <span class="fontsize80 center">　要</span>
+                    </div>
+                  </td>
+                  <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
+                    <div class="center flex-colum">
+                      <span class="fontsize60">丁</span><span class="fontsize60">数</span>
+                    </div>
+                  </td>
+                  <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
+                    <div class="center">
+                      <span class="fontsize80">借　</span><span class="fontsize80">　方</span>
+                    </div>
+                  </td>
+                  <td class="line_double_red_top line_single_red_bottom amount">
+                    <div class="center">
+                      <span class="fontsize80">貸　</span><span class="fontsize80">　方</span>
+                    </div>
+                  </td>
+                </tr>
+              </thead>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="6" class="fontsize60">©複式簿記の会計帳簿 Paciolist</td>
+                    </tr>
+                </tfoot>
+              <tbody>
     """
     }
     
@@ -196,24 +220,24 @@ struct HTMLhelper {
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_single_red_right left fontsize60">\(debit_category)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(99)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 right">\(String(debit_amount))</td>
-                  <td class="line_single_blue_bottom right"></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60">\(String(debit_amount))</td>
+                  <td class="line_single_blue_bottom"></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_single_red_right right fontsize60">\(credit_category)</td>
+                  <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60">\(credit_category)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(11)</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom fontsize60 right">\(String(credit_amount))</td>
+                  <td class="line_single_blue_bottom fontsize60">\(String(credit_amount))</td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom"></td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="smallWritting line_single_blue_bottom line_single_red_right left fontsize40">\(smallWritting)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom right"></td>
+                  <td class="line_single_blue_bottom"></td>
                 </tr>
     """
     }
@@ -221,58 +245,51 @@ struct HTMLhelper {
     func getSingleRowEmpty() -> String {
         return """
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize60 center clearColor">a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor">a</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60 clearColor">a </td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 right clearColor"> a</td>
-                   <td class="line_single_blue_bottom right fontsize60 clearColor"> a</td>
+                   <td class="line_single_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
                  </tr>
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom center fontsize60 clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom center fontsize60 clearColor"> a</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right right fontsize60 clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                   <td class="line_single_blue_bottom fontsize60 right clearColor"> a</td>
+                   <td class="line_single_red_right line_single_blue_bottom center fontsize60 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom center fontsize60 clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
                  </tr>
                  <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                   <td class="line_single_blue_bottom right fontsize60 clearColor"> a</td>
+                   <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                   <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
                  </tr>
-
     """
     }
 
     func footerstring(debit_amount: Int64, credit_amount: Int64) -> String {
         return """
-                  <tr class="rowHeight">
-                    <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                    <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> a</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> a</td>
-                    <td class="line_single_blue_bottom right fontsize60 clearColor"> a</td>
+                 <tr class="rowHeight">
+                    <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                    <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> あ</td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                    <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
                   </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr class="height3">
-                      <td colspan="6" class="right fontsize60">©複式簿記の会計帳簿 Paciolist パチョーリ主義</td>
-                    </tr>
-                  </tfoot>
-                  </table>
-                  </div>
-                  </section>
-                  </body>
+              </tbody>
+            </table>
+        </section>
         """
     }
 
     func footerHTMLstring() -> String {
         return """
+        </body>
     </html>
     """
     }
