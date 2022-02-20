@@ -674,9 +674,11 @@ extension JournalsViewController: JournalsPresenterOutput {
     }
     
     func setupViewForViewDidAppear() {
-        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-        view.bringSubviewToFront(gADBannerView)
-        
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
         // 初期表示位置 OFF
         scroll = false
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
