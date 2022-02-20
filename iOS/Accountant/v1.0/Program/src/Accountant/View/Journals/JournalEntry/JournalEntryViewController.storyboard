@@ -13,7 +13,7 @@
         <!--仕訳-->
         <scene sceneID="Hln-Lv-ONQ">
             <objects>
-                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RxZ-JM-Gew" userLabel="仕訳" customClass="JournalEntryViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JournalEntryViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RxZ-JM-Gew" userLabel="仕訳" customClass="JournalEntryViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="SFY-X8-JI8">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,7 +98,7 @@
                                                         <rect key="frame" x="67.666666666666657" y="5" width="282.66666666666674" height="159.66666666666666"/>
                                                         <subviews>
                                                             <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                                <rect key="frame" x="5" y="5" width="272.66666666666669" height="216"/>
+                                                                <rect key="frame" x="5" y="5" width="272.66666666666669" height="149.66666666666666"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                                     <!--1970-01-01 11:00:00 +0000-->
@@ -214,7 +214,7 @@
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-8G-jdU" userLabel="Stack View2">
                                                         <rect key="frame" x="0.0" y="46.666666666666629" width="408" height="56"/>
                                                         <subviews>
-                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                            <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="203" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
@@ -224,7 +224,7 @@
                                                                     <action selector="TextField_category_debit:" destination="RxZ-JM-Gew" eventType="editingDidEndOnExit" id="dVX-hB-VZf"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Accountant" customModuleProvider="target">
+                                                            <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="205" y="0.0" width="203" height="56"/>
                                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                                 <attributedString key="attributedText"/>
@@ -445,14 +445,14 @@
                                                 <rect key="frame" x="0.0" y="65.666666666666629" width="428" height="104"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="mGz-Uj-doj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="428" height="104"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="428" height="52"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-63-4nj">
-                                                        <rect key="frame" x="0.0" y="104" width="428" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="52" width="428" height="52"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
@@ -464,11 +464,11 @@
                                                     <constraint firstAttribute="bottom" secondItem="ft9-63-4nj" secondAttribute="bottom" id="NYQ-My-pTD"/>
                                                     <constraint firstItem="ft9-63-4nj" firstAttribute="width" secondItem="TE8-5H-hhQ" secondAttribute="width" id="RlM-Pu-xPO"/>
                                                     <constraint firstAttribute="trailing" secondItem="ft9-63-4nj" secondAttribute="trailing" id="WoY-ih-rWI"/>
-                                                    <constraint firstItem="ft9-63-4nj" firstAttribute="height" secondItem="TE8-5H-hhQ" secondAttribute="height" id="c2Z-Qb-tsc"/>
+                                                    <constraint firstItem="ft9-63-4nj" firstAttribute="height" secondItem="TE8-5H-hhQ" secondAttribute="height" multiplier="0.5" id="c2Z-Qb-tsc"/>
                                                     <constraint firstItem="ft9-63-4nj" firstAttribute="leading" secondItem="TE8-5H-hhQ" secondAttribute="leading" id="f6M-WF-ZAT"/>
                                                     <constraint firstItem="mGz-Uj-doj" firstAttribute="width" secondItem="TE8-5H-hhQ" secondAttribute="width" id="ksK-H3-dU8"/>
                                                     <constraint firstItem="ft9-63-4nj" firstAttribute="top" secondItem="mGz-Uj-doj" secondAttribute="bottom" id="uTn-MQ-b55"/>
-                                                    <constraint firstItem="mGz-Uj-doj" firstAttribute="height" secondItem="TE8-5H-hhQ" secondAttribute="height" id="yCh-D2-S2V"/>
+                                                    <constraint firstItem="mGz-Uj-doj" firstAttribute="height" secondItem="TE8-5H-hhQ" secondAttribute="height" multiplier="0.5" id="yCh-D2-S2V"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -564,7 +564,7 @@
         <!--Annotation View Controller Journal Entry-->
         <scene sceneID="SFB-0a-hZ1">
             <objects>
-                <viewController storyboardIdentifier="Annotation_JournalEntry" id="goZ-I5-8Sk" customClass="AnnotationViewControllerJournalEntry" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_JournalEntry" id="goZ-I5-8Sk" customClass="AnnotationViewControllerJournalEntry" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UdN-fF-DRM">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -613,26 +613,6 @@
             <point key="canvasLocation" x="1236" y="2782"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="4du-Lt-kP1">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="4fs-GK-JAo">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="Ef0-Vy-bhy">
-            <size key="intrinsicContentSize" width="25" height="25"/>
-        </designable>
-        <designable name="RtK-tc-ENG">
-            <size key="intrinsicContentSize" width="97.333333333333329" height="32"/>
-        </designable>
-        <designable name="arY-VQ-0Zi">
-            <size key="intrinsicContentSize" width="97.333333333333329" height="32"/>
-        </designable>
-        <designable name="kmr-j8-KMb">
-            <size key="intrinsicContentSize" width="37" height="34"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="oNm-xH-Kw5"/>
     </inferredMetricsTieBreakers>
