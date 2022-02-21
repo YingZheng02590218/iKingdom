@@ -122,7 +122,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
      }
     // チュートリアル対応
     private func presentAnnotation() {
-        let viewController = UIStoryboard(name: "JournalsTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
+        let viewController = UIStoryboard(name: "JournalsViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
