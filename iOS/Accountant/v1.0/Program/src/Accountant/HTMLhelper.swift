@@ -31,7 +31,9 @@ struct HTMLhelper {
             text-align: left;
         }
         .right {
-        /*　text-align: right;を指定すると改ページされてしまう　*/
+            margin-left: auto;
+            width: 50%;
+            text-align: right; /*　rightを指定すると改ページされてしまう　*/
         }
     /*　色　*/
         .white {
@@ -86,7 +88,7 @@ struct HTMLhelper {
         }
     /*　サイズ　幅　*/
         .date {
-            width: 5.8823529412%;/*　11mm　*/
+            width: 11.7647058824%;/*　22mm　5.8823529412% 11mm　*/
         }
         .smallWritting {
             width: 41.7112299465%;/*　78mm　*/
@@ -171,9 +173,8 @@ struct HTMLhelper {
                     <div class="center">
                       <span class="fontsize60">\(fiscalYear)年</span>
                     </div>
-                    <div>
-                      <span class="fontsize60"> 月</span>
-                      <span class="fontsize60"> 日</span>
+                    <div class="center">
+                      <p class="fontsize60 center">　月  日</p>
                     </div>
                   </td>
                   <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_single_red_right">
@@ -226,7 +227,7 @@ struct HTMLhelper {
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60">\(credit_category)</td>
+                  <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60"><p class="right">\(credit_category)</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(11)</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="line_single_blue_bottom fontsize60">\(String(credit_amount))</td>

@@ -92,7 +92,7 @@ class PDFMaker {
             //    @objc dynamic var balance_left: Int64 = 0           //差引残高
             //    @objc dynamic var balance_right: Int64 = 0          //差引残高
             let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 9)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
             let debit_category = item.debit_category
             let debit_amount = item.debit_amount
             let credit_category = item.credit_category
