@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -146,6 +146,7 @@
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
+		F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
 		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
@@ -343,8 +344,7 @@
 		F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */; };
-		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
-		F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
+		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
 		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
@@ -611,7 +611,7 @@
 			files = (
 				F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
-				F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */,
+				F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */,
 				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
 				F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */,
 			);
