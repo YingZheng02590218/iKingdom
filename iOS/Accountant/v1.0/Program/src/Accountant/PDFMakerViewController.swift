@@ -122,7 +122,7 @@ class PDFMakerViewController: UIViewController, QLPreviewControllerDataSource, U
             
             let fiscalYear = item.fiscalYear
             if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear)
+                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear, pageNumber: 9)
                 htmlString.append(tableHeader)
             }
             // 仕訳クラス                // モデル定義

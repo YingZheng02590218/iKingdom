@@ -86,7 +86,14 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         ])
      }
 
-
+    override func viewDidAppear(_ animated: Bool) {
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -191,6 +198,14 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         }
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
 //        return "\(objects[section].category as String)"
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

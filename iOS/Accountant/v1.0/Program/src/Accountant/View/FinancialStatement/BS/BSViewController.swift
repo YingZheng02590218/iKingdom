@@ -341,8 +341,11 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-        tableView.bringSubviewToFront(gADBannerView)
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -1240,8 +1243,11 @@ extension BSViewController: BSPresenterOutput {
     }
     
     func setupViewForViewDidAppear() {
-        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-        view.bringSubviewToFront(gADBannerView)
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
     }
 }
 

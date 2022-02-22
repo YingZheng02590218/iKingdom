@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -93,7 +93,6 @@
 		F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
 		F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BC24B781E3006BD3DD /* WSViewController.swift */; };
 		F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */; };
-		F99BAEAA261C930E0038FBB2 /* JournalsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */; };
 		F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */; };
 		F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */; };
 		F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
@@ -147,6 +146,7 @@
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
+		F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
 		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
@@ -304,7 +304,6 @@
 		F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CE326208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard */; };
 		F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
-		F9EC671727B90BC60003FBB6 /* JournalsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */; };
 		F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
 		F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
@@ -345,8 +344,7 @@
 		F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */; };
-		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
-		F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; platformFilter = ios; };
+		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
 		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
@@ -497,7 +495,6 @@
 		F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryTemplateViewController.storyboard; sourceTree = "<group>"; };
 		F99B65BC24B781E3006BD3DD /* WSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSViewController.swift; sourceTree = "<group>"; };
 		F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSTableViewCell.swift; sourceTree = "<group>"; };
-		F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalsTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenearlLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
@@ -614,7 +611,7 @@
 			files = (
 				F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
-				F9EC675B27B961AB0003FBB6 /* EMTNeumorphicView.framework in Frameworks */,
+				F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */,
 				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
 				F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */,
 			);
@@ -1084,7 +1081,6 @@
 			children = (
 				F9BDCBB527A9602D00BD8770 /* JournalsViewController.swift */,
 				F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */,
-				F99BAEA9261C930E0038FBB2 /* JournalsTableViewController.storyboard */,
 				F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */,
 			);
 			path = Journals;
@@ -1599,7 +1595,6 @@
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
-				F99BAEAA261C930E0038FBB2 /* JournalsTableViewController.storyboard in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
@@ -1674,7 +1669,6 @@
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
-				F9EC671727B90BC60003FBB6 /* JournalsTableViewController.storyboard in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */,
@@ -2375,7 +2369,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.21;
+				CURRENT_PROJECT_VERSION = 2.0.39;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2391,7 +2385,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2409,7 +2403,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.0.21;
+				CURRENT_PROJECT_VERSION = 2.0.39;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2425,7 +2419,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2536,7 +2530,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.21;
+				CURRENT_PROJECT_VERSION = 2.0.39;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2552,7 +2546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2570,7 +2564,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.0.21;
+				CURRENT_PROJECT_VERSION = 2.0.39;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2586,7 +2580,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";

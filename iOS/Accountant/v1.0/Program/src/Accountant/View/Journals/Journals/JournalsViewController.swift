@@ -122,7 +122,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
      }
     // チュートリアル対応
     private func presentAnnotation() {
-        let viewController = UIStoryboard(name: "JournalsTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
+        let viewController = UIStoryboard(name: "JournalsViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
@@ -674,9 +674,11 @@ extension JournalsViewController: JournalsPresenterOutput {
     }
     
     func setupViewForViewDidAppear() {
-        // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-        view.bringSubviewToFront(gADBannerView)
-        
+        // アップグレード機能　スタンダードプラン
+        if !inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
         // 初期表示位置 OFF
         scroll = false
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
