@@ -14,8 +14,10 @@ class PDFMaker {
     
     
     var PDFpath: [URL]?
+    
     let hTMLhelper = HTMLhelper()
-    let paperSize = CGSize(width: 192 / 25.4 * 72, height: 262 / 25.4 * 72) // B5 192×262mm
+//    let paperSize = CGSize(width: 182 / 25.4 * 72, height: 257 / 25.4 * 72) // B5 192×262mm 182mm×257mm
+    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     
     func initialize() {
@@ -59,6 +61,10 @@ class PDFMaker {
         let objects = dataBaseManager.getJournalEntry(section: 0)
         
         var htmlString = ""
+        
+        // ページ数
+        var pageNumber = 1
+
         // 行を取得する
         var totalDebit_amount:Int64 = 0
         var totalCredit_amount:Int64 = 0
@@ -66,11 +72,12 @@ class PDFMaker {
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
+        // 行数分繰り返す
         for item in objects {
             
             let fiscalYear = item.fiscalYear
             if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear)
+                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
             // 仕訳クラス                // モデル定義
@@ -85,7 +92,7 @@ class PDFMaker {
             //    @objc dynamic var balance_left: Int64 = 0           //差引残高
             //    @objc dynamic var balance_right: Int64 = 0          //差引残高
             let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 9)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
             let debit_category = item.debit_category
             let debit_amount = item.debit_amount
             let credit_category = item.credit_category
@@ -107,6 +114,7 @@ class PDFMaker {
             counter += 1
             if counter >= 10 {
                 counter = 0
+                pageNumber += 1
             }
         }
         if counter > 0 && counter <= 10 {
@@ -119,6 +127,7 @@ class PDFMaker {
                     htmlString.append(tableFooter)
                 }
                 counter += 1
+                pageNumber += 1
             }
         }
         // フッターを取得する
@@ -148,7 +157,7 @@ class PDFMaker {
         
         let pdfData = NSMutableData()
         
-        UIGraphicsBeginPDFContextToData(pdfData, paperFrame, nil)
+        UIGraphicsBeginPDFContextToData(pdfData, paperFrame, [:])
         for pageI in 0..<renderer.numberOfPages {
             UIGraphicsBeginPDFPage()
             print(UIGraphicsGetPDFContextBounds())
