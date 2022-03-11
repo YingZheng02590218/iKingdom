@@ -123,8 +123,12 @@ class DataBaseManagerJournalEntry {
         var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)// 2020/11/08
         objects = objects.filter("category LIKE '\(accountName)'")// 2020/11/08
         // 設定勘定科目のプライマリーキーを取得する
-        let numberOfAccount = objects[0].number
-        return numberOfAccount
+        if let numberOfAccount = objects.first {
+            return numberOfAccount.number
+        }
+        else {
+            return 0 // クラッシュ対応
+        }
     }
     // 勘定のプライマリーキーを取得　※丁数ではない
     func getPrimaryNumberOfAccount(accountName: String) -> Int {

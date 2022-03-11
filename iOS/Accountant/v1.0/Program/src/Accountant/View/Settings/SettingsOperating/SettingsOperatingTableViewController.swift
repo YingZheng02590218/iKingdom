@@ -141,8 +141,10 @@ class SettingsOperatingTableViewController: UITableViewController {
             //① UI部品を指定
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
             cell.textLabel?.text = "損益振替仕訳を表示"
-            // 勘定科目の有効無効
-            cell.ToggleButton.isOn = object?.EnglishFromOfClosingTheLedger0 as! Bool
+            if let EnglishFromOfClosingTheLedger0 = object?.EnglishFromOfClosingTheLedger0 {
+                // 勘定科目の有効無効
+                cell.ToggleButton.isOn = EnglishFromOfClosingTheLedger0
+            }
             // 勘定科目の有効無効　変更時のアクションを指定
             cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
             cell.ToggleButton.tag = 0
@@ -150,8 +152,10 @@ class SettingsOperatingTableViewController: UITableViewController {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
             cell.textLabel?.text = "資本振替仕訳を表示"
-            // 勘定科目の有効無効
-            cell.ToggleButton.isOn = object?.EnglishFromOfClosingTheLedger1 as! Bool
+            if let EnglishFromOfClosingTheLedger1 = object?.EnglishFromOfClosingTheLedger1 {
+                // 勘定科目の有効無効
+                cell.ToggleButton.isOn = EnglishFromOfClosingTheLedger1
+            }
             // 勘定科目の有効無効　変更時のアクションを指定
             cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
             cell.ToggleButton.tag = 1
