@@ -91,14 +91,37 @@ class SettingsCategoryTableViewController: UITableViewController {
             // チュートリアル対応
             presentAnnotation()
         }
+        else {
+            // チュートリアル対応
+            finishAnnotation()
+        }
     }
     // チュートリアル対応
     func presentAnnotation() {
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         let viewController = UIStoryboard(name: "SettingsCategoryTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
-
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
