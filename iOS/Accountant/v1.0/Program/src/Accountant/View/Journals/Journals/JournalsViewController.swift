@@ -538,26 +538,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var indexPath_local = IndexPath(row: 0, section: 0)
-        if scroll || scroll_adding {     // 初回起動時の場合 入力ボタン押下時の場合
-            for s in 0..<tableView.numberOfSections {            //セクション数　ゼロスタート補正は不要
-                if tableView.numberOfRows(inSection: s) > 0 {
-                    let r = tableView.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
-                    indexPath_local = IndexPath(row: r, section: s)
-                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: false) // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
-                }
-            }
-        }
-        if scroll_adding {     // 入力ボタン押下時の場合
-            // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
-            if indexPath == indexPath_local { // 最後のセルまで表示しされたかどうか
-                self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.bottom, animated: false) // 追加した仕訳データの行を画面の下方に表示する
-                // 入力ボタン押下時の表示位置 OFF
-                scroll_adding = false
-            }
-        }
-    }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
