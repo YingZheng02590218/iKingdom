@@ -391,7 +391,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
         else {
-            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + f.string(from: now) + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         }
 //        // 背景色
 //        datePicker.backgroundColor = .systemBackground
