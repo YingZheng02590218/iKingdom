@@ -26,7 +26,7 @@ import RealmSwift
 class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelInput {
     
     public static let shared = DataBaseManagerSettingsTaxonomy()
-    private let serialQueue = DispatchQueue(label: "serialQueue")
+    // private let serialQueue = DispatchQueue(label: "serialQueue") 2022/03/15 修正　v2.0.2の変更でこのコードが書かれているので、v2.0.6までの間に初期化処理を行なったユーザーの初期化処理は失敗しているはず。
 
 //    let objects0100:Results<DataBaseSettingsTaxonomy>?
 //    let objects0102:Results<DataBaseSettingsTaxonomy>?
@@ -62,7 +62,6 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
 //
     // 初期化
     func initializeSettingsTaxonomy(){
-        self.serialQueue.sync {
         // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
@@ -73,21 +72,18 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
                 }
             }
         }
-        }
     }
     // データベースにモデルが存在するかどうかをチェックする　設定表示科目クラス
     func checkInitialising() -> Bool {
-        self.serialQueue.sync {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomy.self)
         return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
-        }
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {let realm = try! Realm()
+            let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
@@ -99,10 +95,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomySwitichON() -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -114,10 +108,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 設定表示科目　取得 ONのみ
     func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
@@ -131,10 +123,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得 設定表示科目　大区分別　全て
     func getBigCategoryAll(section: Int) -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
             let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -146,10 +136,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得 設定表示科目　大区分別　階層2
     func getBigCategory(category0: String,category1: String,category2: String) -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -163,10 +151,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得　設定表示科目 中区分別　階層3 抽象区分以外
     func getMiddleCategory(category0: String,category1: String,category2: String,category3: String) -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self) // モデル
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
@@ -182,10 +168,8 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得　設定表示科目　小区分別　階層4 抽象区分以外
     func getSmallCategory(category0: String,category1: String,category2: String,category3: String,category4: String) -> Results<DataBaseSettingsTaxonomy> {
-        self.serialQueue.sync {
         let realm = try! Realm()
         var objects = realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
@@ -201,14 +185,11 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         }
         return objects
     }
-    }
     // 取得　設定表示科目　表示科目の連番から設定表示科目を取得
     func getSettingsTaxonomy(numberOfTaxonomy: Int) -> DataBaseSettingsTaxonomy? {
-        self.serialQueue.sync {
         let realm = try! Realm()
         let object = realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: numberOfTaxonomy)
         return object
-        }
     }
     // モデルオブフェクトの更新　スイッチの切り替え
     func updateSettingsCategoryBSAndPLSwitching(number: Int){ //勘定科目　連番
@@ -218,23 +199,23 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         print("勘定科目:", number)
         print("表示科目:", numberOfTaxonomy)
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
-            if objects.count <= 0 { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
-                // データベース　読み込み
-                // (1)Realmのインスタンスを生成する
-                let realm = try! Realm()
-                // (2)書き込みトランザクション内でデータを更新する
-                try! realm.write {
-                    let value: [String: Any] = ["number": numberOfTaxonomy, "switching": false]
-                    realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
-                }
-            }else {
-                // データベース　読み込み
-                let realm = try! Realm()
-                try! realm.write {
-                    let value: [String: Any] = ["number": numberOfTaxonomy, "switching": true]
-                    realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
-                }
+        if objects.count <= 0 { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
+            // データベース　読み込み
+            // (1)Realmのインスタンスを生成する
+            let realm = try! Realm()
+            // (2)書き込みトランザクション内でデータを更新する
+            try! realm.write {
+                let value: [String: Any] = ["number": numberOfTaxonomy, "switching": false]
+                realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
             }
-//        }
+        }
+        else {
+            // データベース　読み込み
+            let realm = try! Realm()
+            try! realm.write {
+                let value: [String: Any] = ["number": numberOfTaxonomy, "switching": true]
+                realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
+            }
+        }
     }
 }
