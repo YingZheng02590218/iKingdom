@@ -79,7 +79,19 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomy.self)
-        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+        print(objects.count)
+        return objects.count == 2068 // モデルオブフェクトが2068ある場合はtrueを返す
+    }
+    // 削除 表示科目
+    func deleteAllOfSettingsTaxonomy() {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseSettingsTaxonomy.self)
+        // 表示科目　オブジェクトを削除
+        for object in objects {
+            try! realm.write {
+                realm.delete(object)
+            }
+        }
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {

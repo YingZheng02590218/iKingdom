@@ -23,7 +23,7 @@ class MasterData {
         }
     }
     
-    // CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
+    // 勘定科目　CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
     func readMasterDataFromCSVOfTaxonomyAccount() {
         if let csvPath = Bundle.main.path(forResource: "TaxonomyAccount", ofType: "csv") {
             var csvString = ""
@@ -54,7 +54,7 @@ class MasterData {
             }
         }
     }
-    // CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
+    // 表示科目　CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
     func readMasterDataFromCSVOfTaxonomy() {
         if let csvPath = Bundle.main.path(forResource: "taxonomy", ofType: "csv") {
             var csvString = ""

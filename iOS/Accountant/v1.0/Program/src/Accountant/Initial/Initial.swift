@@ -34,11 +34,15 @@ class Initial {
     func initialiseMasterData() {
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         if !databaseManagerSettingsTaxonomyAccount.checkInitialising() {
+            // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
+            databaseManagerSettingsTaxonomyAccount.deleteAllOfSettingsTaxonomyAccount()
             let masterData = MasterData()
             // マスターデータを作成する
-            masterData.readMasterDataFromCSVOfTaxonomyAccount()   
+            masterData.readMasterDataFromCSVOfTaxonomyAccount()
         }
         if !DataBaseManagerSettingsTaxonomy.shared.checkInitialising() {
+            // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
+            DataBaseManagerSettingsTaxonomy.shared.deleteAllOfSettingsTaxonomy()
             let masterData = MasterData()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
