@@ -90,9 +90,28 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
      }
     // チュートリアル対応
     private func presentAnnotation() {
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         let viewController = UIStoryboard(name: "WSViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_WorkSheet") as! AnnotationViewController
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
+    }
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
     }
     
     // MARK: - Action
@@ -566,6 +585,10 @@ extension WSViewController: WSPresenterOutput {
             ud.synchronize()
             // チュートリアル対応
             presentAnnotation()
+        }
+        else {
+            // チュートリアル対応
+            finishAnnotation()
         }
     }
     

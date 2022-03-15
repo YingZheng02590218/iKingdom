@@ -122,9 +122,28 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
      }
     // チュートリアル対応
     private func presentAnnotation() {
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         let viewController = UIStoryboard(name: "JournalsViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
+    }
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
     }
     //カンマ区切りに変換（表示用）
     private let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
@@ -678,6 +697,10 @@ extension JournalsViewController: JournalsPresenterOutput {
                 ud.synchronize()
                 // チュートリアル対応
                 presentAnnotation()
+            }
+            else {
+                // チュートリアル対応
+                finishAnnotation()
             }
         }
     }

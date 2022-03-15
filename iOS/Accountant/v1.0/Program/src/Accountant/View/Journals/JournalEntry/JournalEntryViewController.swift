@@ -211,6 +211,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             // チュートリアル対応
             presentAnnotation()
         }
+        else {
+            // チュートリアル対応
+            finishAnnotation()
+        }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
@@ -238,9 +242,28 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 
     // チュートリアル対応
     func presentAnnotation() {
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
+    }
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
     }
     // カルーセル作成
     @IBOutlet var carouselCollectionView: UICollectionView!
@@ -368,7 +391,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
         else {
-            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + nowStringYear + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
+            datePicker.date = fffff.date(from: fff.string(from: now) + "/" + f.string(from: now) + ", " + ffffff.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         }
 //        // 背景色
 //        datePicker.backgroundColor = .systemBackground

@@ -148,12 +148,35 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // チュートリアル対応
             presentAnnotation()
         }
+        else {
+            // チュートリアル対応
+            finishAnnotation()
+        }
     }
     // チュートリアル対応
     func presentAnnotation() {
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
         let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
+    }
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
     }
     // 前準備
     override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
