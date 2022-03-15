@@ -44,7 +44,7 @@
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6VJ-tk-7SU" userLabel="mid1_NeumorphicView">
                                         <rect key="frame" x="0.0" y="163.5" width="414" height="163.5"/>
                                         <subviews>
-                                            <textField opaque="NO" tag="888" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="ニックネームを入力してください。" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-8m-lNH">
+                                            <textField opaque="NO" tag="888" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="仕訳の概要を入力してください" clearsOnBeginEditing="YES" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="B0t-8m-lNH">
                                                 <rect key="frame" x="10" y="10" width="394" height="143.5"/>
                                                 <color key="backgroundColor" name="TextFieldColor"/>
                                                 <color key="textColor" name="TextColor"/>

@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMobileAds // マネタイズ対応
 import SafariServices // アプリ内でブラウザ表示
+import MessageUI // お問い合わせ機能
 
 // 設定クラス
 class SettingsTableViewController: UITableViewController {
@@ -97,7 +98,7 @@ class SettingsTableViewController: UITableViewController {
         case 2:
             return 2
         case 3:
-            return 2
+            return 3
         default:
             return 0
         }
@@ -120,8 +121,8 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 1:
-            return "帳簿情報を設定することができます。"
+        case 3:
+            return "開発者へメールを送信することができます。"
         default:
             return ""
         }
@@ -139,7 +140,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else if indexPath.section == 1 {
+        }
+        else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -160,7 +162,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else if indexPath.section == 2 {
+        }
+        else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -186,7 +189,13 @@ class SettingsTableViewController: UITableViewController {
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
-                cell.centerLabel.text = "レビューをする(要望・不具合報告など)"
+                cell.centerLabel.text = "評価・レビュー"
+                cell.leftImageView.image = UIImage(named: "icons8-いいね-25")
+                return cell
+            case 2:
+                // お問い合わせ機能
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "問い合わせ(要望・不具合報告など)"
                 cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")
                 return cell
             default:
@@ -207,7 +216,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-        }else if indexPath.section == 1 {
+        }
+        else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsInformationTableViewController", sender: tableView.cellForRow(at: indexPath))
@@ -221,7 +231,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-        }else if indexPath.section == 2 {
+        }
+        else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
@@ -232,7 +243,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 break
             }
-        }else {
+        }
+        else {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
@@ -247,9 +259,42 @@ class SettingsTableViewController: UITableViewController {
                     present(vc, animated: true, completion: nil)
                 }
                 break
+            case 2:
+                // お問い合わせ機能
+                if MFMailComposeViewController.canSendMail() {
+                    let mail = MFMailComposeViewController()
+                    mail.mailComposeDelegate = self
+                    mail.setToRecipients(["paciolist@gmail.com"])   // 宛先アドレス
+                    mail.setSubject("問い合わせ")                          // 件名
+                    mail.setMessageBody("", isHTML: false)             // 本文
+                    present(mail, animated: true, completion: nil)
+                }
+                else {
+                    print("送信できません")
+                }
+                break
             default:
                 break
             }
         }
+    }
+}
+
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
+    // お問い合わせ機能
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        switch result {
+        case .cancelled:
+            print("キャンセル")
+        case .saved:
+            print("下書き保存")
+        case .sent:
+            print("送信成功")
+        default:
+            print("送信失敗")
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 }

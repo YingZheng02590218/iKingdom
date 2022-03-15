@@ -81,24 +81,48 @@ class SettingsOperatingTableViewController: UITableViewController {
         ])
      }
     // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
+    override func viewDidAppear(_ animated: Bool) {
         // チュートリアル対応　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsJournals"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // FIXME: チュートリアル対応
 //            presentAnnotation()
+        }
+        else {
+            // チュートリアル対応
+            finishAnnotation()
         }
     }
     // チュートリアル対応
     func presentAnnotation() {
-        let viewController = UIStoryboard(name: "SettingsOperatingTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
+        //タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
+        // FIXME: 設定仕訳帳画面のためのAnnotationViewControllerクラスを作成する
+        let viewController = UIStoryboard(name: "SettingsOperatingTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingJournals") as! AnnotationViewControllerSettingJournals
         viewController.alpha = 0.5
         present(viewController, animated: true, completion: nil)
     }
-
+    
+    func finishAnnotation() {
+        //タブの有効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = true
+                }
+            }
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

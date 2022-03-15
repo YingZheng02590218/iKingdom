@@ -12,7 +12,7 @@
         <!--勘定科目一覧-->
         <scene sceneID="YG4-Rw-AQ2">
             <objects>
-                <viewController storyboardIdentifier="PageContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qWJ-fX-ARW" customClass="CategoryListCarouselAndPageViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qWJ-fX-ARW" customClass="CategoryListCarouselAndPageViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kQn-vl-nx6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,7 +74,7 @@
                                     <action selector="editButtonTapped:" destination="qWJ-fX-ARW" id="X8w-5k-6Ei"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="勘定科目追加" id="xU2-W2-fCt">
+                            <barButtonItem systemItem="add" id="xU2-W2-fCt">
                                 <connections>
                                     <segue destination="wUu-3j-g8E" kind="presentation" identifier="segue_add_account" id="8ws-jh-2AV"/>
                                 </connections>
