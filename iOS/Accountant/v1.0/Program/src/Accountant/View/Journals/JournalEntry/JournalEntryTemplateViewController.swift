@@ -97,7 +97,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             break
         case 88://ニックネームの場合 Cancel
             nicknameTextField.text = ""
-            Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
         default:

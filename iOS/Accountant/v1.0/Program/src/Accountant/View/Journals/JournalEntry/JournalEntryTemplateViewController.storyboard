@@ -451,7 +451,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="Button_cancel" destination="XUS-hR-U9P" id="oNf-tl-mSe"/>
-                        <outlet property="Label_Popup" destination="cI2-rb-hrh" id="yr1-2n-QjM"/>
                         <outlet property="TextField_SmallWritting" destination="QrX-gP-fQs" id="wbX-eG-Mxn"/>
                         <outlet property="TextField_amount_credit" destination="Wld-cG-vmJ" id="n1z-Jn-bfb"/>
                         <outlet property="TextField_amount_debit" destination="8mw-ak-kF6" id="XRD-FK-s8a"/>
