@@ -41,7 +41,7 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
-        print(objects.count)
+        print("DataBaseSettingsTaxonomyAccount", objects.count)
         return objects.count >= 229 // モデルオブフェクトが229以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
     }
     // 削除 勘定科目

@@ -79,7 +79,7 @@ class DataBaseManagerSettingsTaxonomy{//}: DataBaseManagerSettingsTaxonomyModelI
         let realm = try! Realm()
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomy.self)
-        print(objects.count)
+        print("DataBaseSettingsTaxonomy", objects.count)
         return objects.count == 2068 // モデルオブフェクトが2068ある場合はtrueを返す
     }
     // 削除 表示科目
