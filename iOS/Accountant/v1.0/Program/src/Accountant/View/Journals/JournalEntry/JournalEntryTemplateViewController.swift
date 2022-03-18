@@ -12,6 +12,8 @@ import EMTNeumorphicView
 // 仕訳テンプレートクラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
 
+//    @IBOutlet var label_title: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +29,8 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             label_title.text = "仕訳テンプレート"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = true
-        }else if journalEntryType == "SettingsJournalEntriesFixing" {
+        }
+        else if journalEntryType == "SettingsJournalEntriesFixing" {
             label_title.text = "仕訳テンプレート"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
@@ -94,7 +97,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             break
         case 88://ニックネームの場合 Cancel
             nicknameTextField.text = ""
-            Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
         default:

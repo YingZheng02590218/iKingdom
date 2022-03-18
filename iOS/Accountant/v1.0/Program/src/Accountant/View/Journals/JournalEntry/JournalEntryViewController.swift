@@ -40,11 +40,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     /// 電卓画面で入力された金額の値
     var numbersOnDisplay: Int?
 
+    fileprivate let refreshControl = UIRefreshControl()
+
+    // ロゴ
+    @IBOutlet weak var logoLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIView!
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // アプリ初期化
-        let initial = Initial()
-        initial.initialize()
 //        // アップグレード機能　スタンダードプラン　まずinAppPurchaseを判断する receiptチェックする
 //        let upgradeManager = UpgradeManager()
 //        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
@@ -57,9 +63,44 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         } else {
             inAppPurchaseFlag = false
         }
+        // 仕訳タイプ判定
+        if journalEntryType == "" {
+            // 初期化処理
+            initialize()
+        }
+    }
 
+    func initialize() {
+        // インジゲーターを開始
+        showActivityIndicatorView()
+        // アプリ初期化
+        let initial = Initial()
+        initial.initialize()
+        // インジケーターを終了
+        finishActivityIndicatorView()
     }
     
+    func showAnnotation() {
+        // チュートリアル対応　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_JournalEntry"
+        if ud.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+                // 非同期処理などを実行（今回は3秒間待つだけ）
+                Thread.sleep(forTimeInterval: 3)
+                DispatchQueue.main.async {
+                    // チュートリアル対応
+                    self.presentAnnotation()
+                }
+            }
+        }
+        else {
+            // チュートリアル対応
+            self.finishAnnotation()
+        }
+    }
     static var viewReload = false // リロードするかどうか
     /// 電卓画面から仕訳画面へ遷移したか
     var isFromClassicCalcuatorViewController = false
@@ -139,7 +180,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     TextField_amount_debit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].debit_amount))
                     TextField_amount_credit.text = addComma(string: String(objectss[tappedIndexPath.row-objects.count].credit_amount))
                     TextField_SmallWritting.text = objectss[tappedIndexPath.row-objects.count].smallWritting
-                }else {
+                }
+                else {
                     primaryKey = objects[tappedIndexPath.row].number
                     datePicker.date = formatter.date(from: objects[tappedIndexPath.row].date)!// 注意：カンマの後にスペースがないとnilになる
                     TextField_category_debit.text = objects[tappedIndexPath.row].debit_category
@@ -149,8 +191,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
                 }
                 inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            }else if journalEntryType == "" {
-                label_title.text = "仕　訳"
+            }
+            else if journalEntryType == "" {
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
@@ -202,19 +244,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        // チュートリアル対応　初回起動時　7行を追加
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch_JournalEntry"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
-            // チュートリアル対応
-            presentAnnotation()
-        }
-        else {
-            // チュートリアル対応
-            finishAnnotation()
-        }
         //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
@@ -227,6 +256,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
 //
 //        self.present(fourthViewController, animated: true, completion: nil)
+
+        // コーチマーク
+        showAnnotation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -239,7 +271,59 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    func showActivityIndicatorView() {
+        if let logoImageView = logoImageView {
+            logoImageView.isHidden = false
+            // 表示位置を設定（画面中央）
+            activityIndicatorView.center = CGPoint(x:view.center.x, y: view.center.y + 60)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            view.addSubview(activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            activityIndicatorView.startAnimating()
+        }
+    }
 
+    func finishActivityIndicatorView() {
+        DispatchQueue.global(qos: .default).async {
+            // 非同期処理などが終了したらメインスレッドでアニメーション終了
+            DispatchQueue.main.async {
+                // 非同期処理などを実行（今回は2秒間待つだけ）
+                Thread.sleep(forTimeInterval: 2)
+                // アニメーションをする
+                self.showAnimation()
+                // アニメーション終了
+                self.activityIndicatorView.stopAnimating()
+            }
+        }
+    }
+    
+    func showAnimation() {
+        // 少し縮小するアニメーション
+        if let logoLabel = self.logoLabel {
+            UIView.animate(withDuration: 0.3,
+                           delay: 0.5,
+                           options: UIView.AnimationOptions.curveEaseOut,
+                           animations: { () in
+                logoLabel.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            }, completion: { (Bool) in
+                
+            })
+            
+            // 拡大させて、消えるアニメーション
+            UIView.animate(withDuration: 0.2,
+                           delay: 0.8,
+                           options: UIView.AnimationOptions.curveEaseOut,
+                           animations: { () in
+                self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self.logoLabel.alpha = 0
+            }, completion: { (Bool) in
+                self.logoImageView.removeFromSuperview()
+            })
+        }
+    }
     // チュートリアル対応
     func presentAnnotation() {
         //タブの無効化
@@ -685,43 +769,39 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         case 5://借方金額の場合 Done
             if TextField_amount_debit.text == "0"{
                 TextField_amount_debit.text = ""
-                Label_Popup.text = "金額が0となっています"
-            }else if TextField_amount_debit.text == ""{
-                Label_Popup.text = "金額が空白となっています"
-            }else{
+            }
+            else if TextField_amount_debit.text == ""{
+            }
+            else{
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_category_credit.text == "" {
                     //TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
                     TextField_category_credit.becomeFirstResponder()
                 }
-                Label_Popup.text = ""
             }
             break
         case 55://借方金額の場合 Cancel
             TextField_amount_debit.text = ""
             TextField_amount_credit.text = ""
-            Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
             break
         case 6://貸方金額の場合 Done
             if TextField_amount_credit.text == "0"{
                 TextField_amount_credit.text = ""
-                Label_Popup.text = "金額が0となっています"
-            }else if TextField_amount_credit.text == "" {
-                Label_Popup.text = "金額が空白となっています"
-            }else{
+            }
+            else if TextField_amount_credit.text == "" {
+            }
+            else{
                 self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
                 if TextField_SmallWritting.text == "" {
                     // カーソルを小書きへ移す
                     self.TextField_SmallWritting.becomeFirstResponder()
                 }
-                Label_Popup.text = ""
             }
             break
         case 66://貸方金額の場合 Cancel
             TextField_amount_debit.text = ""
             TextField_amount_credit.text = ""
-            Label_Popup.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
             break
         case 7://小書きの場合 Done
@@ -827,29 +907,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         let string = string.replacingOccurrences(of: ",", with: "")
         return string
     }
-    //リターンキーが押されたとき
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField.text {
-        case "勘定科目":
-            Label_Popup.text = "勘定科目を入力してください"
-            return false
-        case "":// ありえない　リターンキーを押せないため
-            Label_Popup.text = "空白となっています"
-            return false
-        case "金額":
-            Label_Popup.text = "金額を入力してください"
-            return false
-        case "0":
-            textField.text = ""
-            Label_Popup.text = "金額が0となっています"
-            return false
-        default:
-            Label_Popup.text = ""//ポップアップの文字表示をクリア
-            //resignFirstResponder()メソッドを利用します。
-            textField.resignFirstResponder()
-            return true
-        }
-    }
     //TextField キーボード以外の部分をタッチ　 TextFieldをタップしても呼ばれない
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {// この後に TapGestureRecognizer が呼ばれている
         // 初期値を再設定
@@ -891,7 +948,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     TextField_category_credit.becomeFirstResponder()
                 }
             }
-            Label_Popup.text = ""//ポップアップの文字表示をクリア
         }else if textField.tag == 222 {
 //            TextField_category_credit.text = result  //ここで値渡し
             if TextField_category_credit.text == "" {
@@ -903,7 +959,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     TextField_amount_debit.becomeFirstResponder()// カーソルを金額へ移す
                 }
             }
-            Label_Popup.text = ""//ポップアップの文字表示をクリア
         }
     }
     
@@ -911,7 +966,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 
     
     private var timer: Timer?                           // Timerを保持する変数
-    @IBOutlet weak var Label_Popup: UILabel!
     @IBOutlet var inputButton: EMTNeumorphicButton!// 入力ボタン
     // 入力ボタン
     @IBAction func Button_Input(_ sender: EMTNeumorphicButton) {
@@ -955,7 +1009,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     [presentingViewController] () -> Void in
                     presentingViewController.reloadData()
                 })
-            }else if journalEntryType == "JournalEntriesFixing" {
+            }
+            else if journalEntryType == "JournalEntriesFixing" {
                 //
                 let objects = dataBaseManager.getJournalEntry(section: tappedIndexPath.section)
                 if tappedIndexPath.row >= objects.count {
@@ -989,7 +1044,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     [presentingViewController] () -> Void in
                     presentingViewController.autoScroll(number: number)
                 })
-            }else if journalEntryType == "JournalEntries" {
+            }
+            else if journalEntryType == "JournalEntries" {
                 number = dataBaseManager.addJournalEntry(
                     date: formatter.string(from: datePicker.date),
                     debit_category: TextField_category_debit.text!,
@@ -1009,7 +1065,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                     //                                    presentingViewController.viewWillAppear(true)
                     presentingViewController.autoScroll(number: number)
                 })
-            }else if journalEntryType == "" { // タブバーの仕訳タブからの遷移の場合
+            }
+            else if journalEntryType == "" { // タブバーの仕訳タブからの遷移の場合
                 number = dataBaseManager.addJournalEntry(
                     date: formatter.string(from: datePicker.date),
                     debit_category: TextField_category_debit.text!,
@@ -1020,17 +1077,12 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 )
                 self.dismiss(animated: true, completion: {
                     [presentingViewController] () -> Void in
-                    self.Label_Popup.text = "仕訳を記帳しました" //ポップアップの文字表示
-                    // ⑤ Timer のスケジューリング重複を回避
-                    guard self.timer == nil else { return }
-                    // ① Timerのスケジューリングと保持
-                    self.timer = Timer.scheduledTimer(
-                        timeInterval: 4, // 計測する時間を設定
-                        target: self,
-                        selector: #selector(self.handleTimer(_:)), // 一定時間経過した後に実行する関数を指定
-                        userInfo: nil,
-                        repeats: false // 繰り返し呼び出し
-                    )
+                    let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
                 })
                 // アップグレード機能　スタンダードプラン
                 if !inAppPurchaseFlag {
@@ -1049,7 +1101,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
-    // 入力チェック
+    // 入力チェック　バリデーション
     func textInputCheck() -> Bool {
         if TextField_category_debit.text != "" && TextField_category_debit.text != "" {
             if TextField_category_credit.text != "" && TextField_category_credit.text != "" {
@@ -1059,36 +1111,54 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                             TextField_SmallWritting.text = ""
                         }
                         return true // OK
-                    }else{
-                        Label_Popup.text = "金額を入力してください"
-                        //未入力のTextFieldのキーボードを自動的に表示する
-                        TextField_amount_credit.becomeFirstResponder()
+                    }
+                    else{
+                        let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                self.dismiss(animated: true, completion: nil)
+                                //未入力のTextFieldのキーボードを自動的に表示する
+                                self.TextField_amount_credit.becomeFirstResponder()
+                            }
+                        }
                         return false // NG
                     }
-                }else{
-                    Label_Popup.text = "金額を入力してください"
-                    //未入力のTextFieldのキーボードを自動的に表示する
-                    TextField_amount_debit.becomeFirstResponder()
+                }
+                else{
+                    let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.dismiss(animated: true, completion: nil)
+                            //未入力のTextFieldのキーボードを自動的に表示する
+                            self.TextField_amount_debit.becomeFirstResponder()
+                        }
+                    }
                     return false // NG
                 }
-            }else{
-                Label_Popup.text = "貸方勘定科目を入力してください"
-                //未入力のTextFieldのキーボードを自動的に表示する
-                TextField_category_credit.becomeFirstResponder()
+            }
+            else{
+                let alert = UIAlertController(title: "貸方勘定科目", message: "入力してください", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.dismiss(animated: true, completion: nil)
+                        //未入力のTextFieldのキーボードを自動的に表示する
+                        self.TextField_category_credit.becomeFirstResponder()
+                    }
+                }
                 return false // NG
             }
-        }else{
-            Label_Popup.text = "借方勘定科目を入力してください"
-            //未入力のTextFieldのキーボードを自動的に表示する
-            TextField_category_debit.becomeFirstResponder()
+        }
+        else {
+            let alert = UIAlertController(title: "借方勘定科目", message: "入力してください", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: nil)
+                    //未入力のTextFieldのキーボードを自動的に表示する
+                    self.TextField_category_debit.becomeFirstResponder()
+                }
+            }
             return false // NG
         }
-    }
-    
-    @objc private func handleTimer(_ timer: Timer) {
-        self.Label_Popup.text = "" //ポップアップの文字表示
-        // ③ Timer のスケジューリングを破棄
-        timer.invalidate()
     }
     
     @IBOutlet var Button_cancel: EMTNeumorphicButton!
@@ -1111,7 +1181,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         // 終了させる　仕訳帳画面へ戻る
         self.dismiss(animated: true, completion: nil)
     }
-
 }
 // プロトコル定義
 extension JournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

@@ -109,7 +109,7 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return "アップグレード"
         case 1:
-            return "情報"
+            return "帳簿情報"
         case 2:
             return "環境設定"
         case 3:
@@ -146,7 +146,7 @@ class SettingsTableViewController: UITableViewController {
             case 0:
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
-                cell.centerLabel.text = "帳簿情報" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
+                cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
                 cell.leftImageView.image = UIImage(named: "icons8-会社-25")
                 return cell
             case 1:
