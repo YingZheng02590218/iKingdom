@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -14,28 +14,38 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paciolist" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vzr-xD-3U1">
-                                <rect key="frame" x="0.0" y="373.33333333333331" width="375" height="65.666666666666686"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="48"/>
-                                <color key="textColor" name="TextColor"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="0.0" height="3"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpY-GR-a9V">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paciolist" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0u-1I-Qwx">
+                                        <rect key="frame" x="0.0" y="430.33333333333331" width="428" height="65.666666666666686"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="48"/>
+                                        <color key="textColor" name="TextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="shadowOffset" width="0.0" height="3"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstItem="Z0u-1I-Qwx" firstAttribute="centerY" secondItem="fpY-GR-a9V" secondAttribute="centerY" id="7yS-B6-RJ9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z0u-1I-Qwx" secondAttribute="trailing" id="kyJ-yN-QXn"/>
+                                    <constraint firstItem="Z0u-1I-Qwx" firstAttribute="centerX" secondItem="fpY-GR-a9V" secondAttribute="centerX" id="pwT-nV-LHO"/>
+                                    <constraint firstItem="Z0u-1I-Qwx" firstAttribute="leading" secondItem="fpY-GR-a9V" secondAttribute="leading" id="slR-nX-dBm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="Vzr-xD-3U1" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Hyz-Vw-xoh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Vzr-xD-3U1" secondAttribute="bottom" id="YYp-Yc-4Ck"/>
-                            <constraint firstItem="Vzr-xD-3U1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZCF-yr-sLm"/>
-                            <constraint firstItem="Vzr-xD-3U1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jbr-Ck-qhw"/>
-                            <constraint firstItem="Vzr-xD-3U1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ree-xx-jaz"/>
-                            <constraint firstItem="Vzr-xD-3U1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="y4G-uj-Fk2"/>
+                            <constraint firstItem="fpY-GR-a9V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1ab-f7-Jto"/>
+                            <constraint firstAttribute="bottom" secondItem="fpY-GR-a9V" secondAttribute="bottom" id="LRk-YI-uKS"/>
+                            <constraint firstItem="fpY-GR-a9V" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Qig-NC-xB8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fpY-GR-a9V" secondAttribute="trailing" id="r9U-NC-N0t"/>
                         </constraints>
                     </view>
                 </viewController>

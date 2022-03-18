@@ -21,7 +21,8 @@ class DatabaseManagerSettingsTaxonomyAccount  {
                 if objects[i].numberOfTaxonomy == "" { // 表示科目に紐付けしていない場合
                     updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
                 }
-            }else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
+            }
+            else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
                 if objects[i].numberOfTaxonomy != "" { // 表示科目に紐付けしている場合
                     // 勘定クラス　勘定ないの仕訳を取得
                     let dataBaseManagerAccount = DataBaseManagerAccount()
@@ -40,7 +41,19 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         let realm = try! Realm()
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
-        return objects.count > 0 // モデルオブフェクトが1以上ある場合はtrueを返す
+        print("DataBaseSettingsTaxonomyAccount", objects.count)
+        return objects.count >= 229 // モデルオブフェクトが229以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
+    }
+    // 削除 勘定科目
+    func deleteAllOfSettingsTaxonomyAccount() {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        // 表示科目　オブジェクトを削除
+        for object in objects {
+            try! realm.write {
+                realm.delete(object)
+            }
+        }
     }
     // チェック　勘定科目名から大区分が損益計算書の区分かを参照する
     func checkSettingsTaxonomyAccountRank0(account: String) -> Bool {
