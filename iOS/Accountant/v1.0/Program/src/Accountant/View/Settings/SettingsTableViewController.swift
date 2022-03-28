@@ -129,13 +129,14 @@ class SettingsTableViewController: UITableViewController {
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "アップグレード"
-                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")
+                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
                 return WithIconTableViewCell()
@@ -147,17 +148,17 @@ class SettingsTableViewController: UITableViewController {
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
-                cell.leftImageView.image = UIImage(named: "icons8-会社-25")
+                cell.leftImageView.image = UIImage(named: "icons8-会社-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "会計期間"
-                cell.leftImageView.image = UIImage(named: "icons8-カレンダー10-25")
+                cell.leftImageView.image = UIImage(named: "icons8-カレンダー10-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "勘定科目"
-                cell.leftImageView.image = UIImage(named: "icons8-スタック組織図-25")
+                cell.leftImageView.image = UIImage(named: "icons8-スタック組織図-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
                 return WithIconTableViewCell()
@@ -169,12 +170,12 @@ class SettingsTableViewController: UITableViewController {
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳"
-                cell.leftImageView.image = UIImage(named: "icons8-ペン-25")
+                cell.leftImageView.image = UIImage(named: "icons8-ペン-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳帳"
-                cell.leftImageView.image = UIImage(named: "icons8-saddle-stitched-booklet-25")
+                cell.leftImageView.image = UIImage(named: "icons8-開いた本-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
                 return WithIconTableViewCell()
@@ -185,18 +186,18 @@ class SettingsTableViewController: UITableViewController {
                 //① UI部品を指定　TableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "使い方ガイド"
-                cell.leftImageView.image = UIImage(named: "icons8-情報-25")
+                cell.leftImageView.image = UIImage(named: "icons8-情報-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "評価・レビュー"
-                cell.leftImageView.image = UIImage(named: "icons8-いいね-25")
+                cell.leftImageView.image = UIImage(named: "icons8-いいね-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             case 2:
                 // お問い合わせ機能
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "問い合わせ(要望・不具合報告など)"
-                cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")
+                cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
                 return WithIconTableViewCell()

@@ -32,7 +32,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     var subCategories_expends :[String] = Array<String>()
     var subCategories_revenue :[String] = Array<String>()
     @IBOutlet var label_title: UILabel!
-    
+    @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
+    private var timer: Timer?                           // Timerを保持する変数
+    @IBOutlet var inputButton: EMTNeumorphicButton!// 入力ボタン
     // 仕訳タイプ(仕訳or決算整理仕訳or編集)
     var journalEntryType :String = "" // Journal Entries、Adjusting and Closing Entries
     var tappedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
@@ -512,6 +514,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Button_Left.neumorphicLayer?.edged = edged
             Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
+            Button_Left.setImage(backImage, for: UIControl.State.normal)
+            // アイコン画像の色を指定する
+            Button_Left.tintColor = .TextColor
         }
         
         if let Button_Right = Button_Right {
@@ -523,6 +529,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             Button_Right.neumorphicLayer?.edged = edged
             Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
+            Button_Right.setImage(backImage, for: UIControl.State.normal)
+            // アイコン画像の色を指定する
+            Button_Right.tintColor = .TextColor
         }
         
         if let textFieldView = textFieldView {
@@ -565,7 +575,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
         Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
-
+        let backImage = UIImage(named: "icons8-削除-25-2")?.withRenderingMode(.alwaysTemplate)
+        Button_cancel.setImage(backImage, for: UIControl.State.normal)
+        // アイコン画像の色を指定する
+        Button_cancel.tintColor = .TextColor
     }
 
     let LIGHTSHADOWOPACITY: Float = 0.3
@@ -961,12 +974,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
-    @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
-
-    
-    private var timer: Timer?                           // Timerを保持する変数
-    @IBOutlet var inputButton: EMTNeumorphicButton!// 入力ボタン
     // 入力ボタン
     @IBAction func Button_Input(_ sender: EMTNeumorphicButton) {
         // 選択されていたボタンを選択解除する
