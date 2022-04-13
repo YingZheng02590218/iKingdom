@@ -18,8 +18,6 @@ protocol JournalsPresenterInput {
     
     var numberOfobjects: Int { get }
     func objects(forRow row: Int) -> DataBaseJournalEntry
-    var numberOfobjectss: Int { get }
-    func objectss(forRow row: Int) -> DataBaseAdjustingEntry
     var numberOfobjectsss: Int { get }
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
     
@@ -49,9 +47,7 @@ final class JournalsPresenter: JournalsPresenterInput {
     var theDayOfReckoning: String?
     // 通常仕訳　全
     private var objects:Results<DataBaseJournalEntry>
-    // 決算整理仕訳　全
-    private var objectss:Results<DataBaseAdjustingEntry>
-    // 決算整理仕訳 決算整理仕訳 損益振替仕訳 資本振替仕訳
+    // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
     private var objectsss:Results<DataBaseAdjustingEntry>
     // 財務諸表
     private var object:DataBaseFinancialStatements
@@ -66,11 +62,9 @@ final class JournalsPresenter: JournalsPresenterInput {
         self.model = model
                 
         objects = model.getJournalEntryAll() // 通常仕訳　全
-        objectss = model.getAdjustingEntryAll() // 決算整理仕訳　全
         // 設定操作
         objectettingsOperating = model.getSettingsOperating()
-        objectsss = model.getJournalAdjustingEntry(section: 0000,
-                                                             EnglishFromOfClosingTheLedger0: objectettingsOperating!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: objectettingsOperating!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+        objectsss = model.getJournalAdjustingEntry(EnglishFromOfClosingTheLedger0: objectettingsOperating!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: objectettingsOperating!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         
         object = model.getFinancialStatements()
     }
@@ -104,12 +98,6 @@ final class JournalsPresenter: JournalsPresenterInput {
     func objects(forRow row: Int) -> DataBaseJournalEntry {
         return objects[row]
     }
-    var numberOfobjectss: Int {
-        return objectss.count
-    }
-    func objectss(forRow row: Int) -> DataBaseAdjustingEntry {
-        return objectss[row]
-    }
     var numberOfobjectsss: Int {
         return objectsss.count
     }
@@ -119,11 +107,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     func refreshTable() {
         objects = model.getJournalEntryAll() // 通常仕訳　全
-        objectss = model.getAdjustingEntryAll() // 決算整理仕訳　全
         // 設定操作
         objectettingsOperating = model.getSettingsOperating()
-        objectsss = model.getJournalAdjustingEntry(section: 0000,
-                                                             EnglishFromOfClosingTheLedger0: objectettingsOperating!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: objectettingsOperating!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+        objectsss = model.getJournalAdjustingEntry(EnglishFromOfClosingTheLedger0: objectettingsOperating!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: objectettingsOperating!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         
         object = model.getFinancialStatements()
         // 全勘定の合計と残高を計算する

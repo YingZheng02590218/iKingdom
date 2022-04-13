@@ -21,7 +21,7 @@ protocol JournalsModelInput {
     func getAdjustingEntryAll() -> Results<DataBaseAdjustingEntry>
     func getSettingsOperating() -> DataBaseSettingsOperating?
     func getFinancialStatements() -> DataBaseFinancialStatements
-    func getJournalAdjustingEntry(section: Int, EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry>
+    func getJournalAdjustingEntry(EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry>
 }
 // 仕訳帳クラス TODO:
 class JournalsModel: DataBaseManager, JournalsModelInput {
@@ -113,7 +113,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         return objects[0]
     }
     // 取得　決算整理仕訳
-    func getJournalAdjustingEntry(section: Int, EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry> {
+    func getJournalAdjustingEntry(EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry> {
         let realm = try! Realm()
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
