@@ -29,7 +29,7 @@ class CarouselTabCollectionViewCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.view.backgroundColor = self.isSelected ? .AccentOrange : .clear
+            self.view.backgroundColor = self.isSelected ? .AccentBlue : .clear
         }
     }
 
