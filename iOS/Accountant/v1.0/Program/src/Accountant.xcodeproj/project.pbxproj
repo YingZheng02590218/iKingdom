@@ -108,6 +108,10 @@
 		F99BE7B4261DD84E004611E4 /* SettingsInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7B3261DD84E004611E4 /* SettingsInformationTableViewController.storyboard */; };
 		F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7C3261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard */; };
+		F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */; };
+		F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */; };
+		F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
+		F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
 		F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */ = {isa = PBXBuildFile; fileRef = F99CF359251B2D18004295DE /* taxonomy.csv */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
@@ -390,6 +394,13 @@
 			remoteGlobalIDString = F94EDD8E237AEB3A0074D812;
 			remoteInfo = Accountant;
 		};
+		F9D06021281FA72500EA55AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F94EDD87237AEB3A0074D812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9EC668C27B90BC60003FBB6;
+			remoteInfo = PaciolistSTG;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -512,6 +523,8 @@
 		F99BE7B3261DD84E004611E4 /* SettingsInformationTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsInformationTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsCategoryTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE7C3261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsPeriodTableViewController.storyboard; sourceTree = "<group>"; };
+		F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PeriodYearViewController.storyboard; sourceTree = "<group>"; };
+		F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodYearViewController.swift; sourceTree = "<group>"; };
 		F99CF359251B2D18004295DE /* taxonomy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomy.csv; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithIconTableViewCell.swift; sourceTree = "<group>"; };
@@ -1085,6 +1098,15 @@
 			path = BSDB;
 			sourceTree = "<group>";
 		};
+		F99C6B9C280DAFBA00E99080 /* PeriodYear */ = {
+			isa = PBXGroup;
+			children = (
+				F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */,
+				F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */,
+			);
+			path = PeriodYear;
+			sourceTree = "<group>";
+		};
 		F99EDE0E246C00F500334FF4 /* Journals */ = {
 			isa = PBXGroup;
 			children = (
@@ -1104,6 +1126,7 @@
 				F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */,
 				F9F4608024D1ED15008FE62B /* PickerTextField.swift */,
 				F9C2BC21277DEE80006334D0 /* ClassicCalculator */,
+				F99C6B9C280DAFBA00E99080 /* PeriodYear */,
 			);
 			path = JournalEntry;
 			sourceTree = "<group>";
@@ -1517,6 +1540,7 @@
 			);
 			dependencies = (
 				F94EDDB4237AEB3C0074D812 /* PBXTargetDependency */,
+				F9D06022281FA72500EA55AF /* PBXTargetDependency */,
 			);
 			name = AccountantUITests;
 			productName = AccountantUITests;
@@ -1565,7 +1589,7 @@
 					F94EDDB1237AEB3C0074D812 = {
 						CreatedOnToolsVersion = 11.1;
 						LastSwiftMigration = 1320;
-						TestTargetID = F94EDD8E237AEB3A0074D812;
+						TestTargetID = F9EC668C27B90BC60003FBB6;
 					};
 				};
 			};
@@ -1621,6 +1645,7 @@
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
+				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9227729261F33010080B746 /* SettingsGroupsTableViewController.storyboard in Resources */,
@@ -1695,6 +1720,7 @@
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
 				F9EC672627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
+				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC672A27B90BC60003FBB6 /* SettingsGroupsTableViewController.storyboard in Resources */,
@@ -1955,6 +1981,7 @@
 				F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */,
 				F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9F4607424C9E0BD008FE62B /* File2.swift in Sources */,
+				F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */,
 				F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
@@ -2102,6 +2129,7 @@
 				F9EC66A227B90BC60003FBB6 /* PDFMaker.swift in Sources */,
 				F9EC66A327B90BC60003FBB6 /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */,
+				F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F9EC66A527B90BC60003FBB6 /* JournalEntryViewController.swift in Sources */,
 				F9EC66A627B90BC60003FBB6 /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */,
@@ -2219,6 +2247,11 @@
 			isa = PBXTargetDependency;
 			target = F94EDD8E237AEB3A0074D812 /* Paciolist */;
 			targetProxy = F94EDDB3237AEB3C0074D812 /* PBXContainerItemProxy */;
+		};
+		F9D06022281FA72500EA55AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9EC668C27B90BC60003FBB6 /* PaciolistSTG */;
+			targetProxy = F9D06021281FA72500EA55AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
