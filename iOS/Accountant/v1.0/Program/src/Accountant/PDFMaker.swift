@@ -58,7 +58,7 @@ class PDFMaker {
     
     func readDB() {
         let dataBaseManager = DataBaseManagerJournalEntry()
-        let objects = dataBaseManager.getJournalEntry(section: 0)
+        let objects = dataBaseManager.getJournalEntryAll()
         
         var htmlString = ""
         

@@ -786,7 +786,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" name="AccentBlue"/>
                                                 <connections>
                                                     <outlet property="label_list_credit" destination="Mgu-8l-mZZ" id="r3u-NU-glb"/>
                                                     <outlet property="label_list_date" destination="RMB-BR-qah" id="tdQ-BK-ZkH"/>
@@ -823,43 +823,63 @@
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="top" secondItem="iWJ-SB-FwY" secondAttribute="top" id="zKp-NY-DFI"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaW-QJ-s9A">
+                                <rect key="frame" x="103.5" y="809.5" width="207" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Haf-gE-g6w">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
+                                        <color key="tintColor" name="AccentBlue"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="選択した項目を編集"/>
+                                        <connections>
+                                            <action selector="barButtonItem_move:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V7e-Ga-oou"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Haf-gE-g6w" secondAttribute="bottom" id="28G-YQ-XaN"/>
+                                    <constraint firstItem="Haf-gE-g6w" firstAttribute="leading" secondItem="IaW-QJ-s9A" secondAttribute="leading" id="aZC-KG-qn5"/>
+                                    <constraint firstAttribute="trailing" secondItem="Haf-gE-g6w" secondAttribute="trailing" id="pAU-Je-SCM"/>
+                                    <constraint firstItem="Haf-gE-g6w" firstAttribute="top" secondItem="IaW-QJ-s9A" secondAttribute="top" id="vJa-DX-eeH"/>
+                                    <constraint firstAttribute="height" constant="50" id="vmV-Da-kKb"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="SheetColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="iWJ-SB-FwY" secondAttribute="trailing" id="9jz-TG-M44"/>
                             <constraint firstItem="iWJ-SB-FwY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="DU7-P5-mbK"/>
+                            <constraint firstItem="IaW-QJ-s9A" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.5" id="J4q-1s-tGB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iWJ-SB-FwY" secondAttribute="bottom" id="LEl-2g-Bym"/>
                             <constraint firstItem="iWJ-SB-FwY" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" id="XhF-UL-5P0"/>
                             <constraint firstItem="iWJ-SB-FwY" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" id="Y4d-ev-sjM"/>
                             <constraint firstItem="iWJ-SB-FwY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="eMA-ly-d8k"/>
+                            <constraint firstItem="IaW-QJ-s9A" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="xSC-Xi-jUt"/>
+                            <constraint firstItem="IaW-QJ-s9A" firstAttribute="bottom" secondItem="iWJ-SB-FwY" secondAttribute="bottom" constant="-2.5" id="xqe-B5-MQq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="仕訳帳" id="dv7-m9-iZ3">
                         <rightBarButtonItems>
                             <barButtonItem title=" 仕訳入力" id="uJC-kS-QV3">
-                                <color key="tintColor" name="AccentOrange"/>
+                                <color key="tintColor" name="AccentBlue"/>
                                 <connections>
                                     <segue destination="TR8-pc-zuU" kind="presentation" identifier="buttonTapped" id="plG-Re-WNv"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="＊" id="qhY-TF-kLs">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ebV-Ur-3xx">
-                                    <rect key="frame" x="201" y="10" width="31" height="30"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <state key="normal" title="印刷">
-                                        <color key="titleColor" name="AccentOrange"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="button_print:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Rq0-N4-usL"/>
-                                    </connections>
-                                </button>
+                            <barButtonItem title="印刷" id="i4W-ZZ-FXk">
+                                <color key="tintColor" name="AccentBlue"/>
+                                <connections>
+                                    <action selector="button_print:" destination="Y6W-OH-hqX" id="WjU-Dg-tl6"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="Label_list_date_year" destination="uc9-bY-flm" id="bfs-5c-RHb"/>
-                        <outlet property="button_print" destination="ebV-Ur-3xx" id="qCA-ly-Z9q"/>
+                        <outlet property="barButtonItem_add" destination="uJC-kS-QV3" id="ZB0-Rc-Gyf"/>
+                        <outlet property="barButtonItem_print" destination="i4W-ZZ-FXk" id="Lar-Wc-LrD"/>
+                        <outlet property="button_edit" destination="Haf-gE-g6w" id="Rbb-dU-Oll"/>
                         <outlet property="label_closingDate" destination="O7L-5s-hJI" id="zKE-dF-zr8"/>
                         <outlet property="label_company_name" destination="eWE-1V-x9k" id="OVf-0F-YBd"/>
                         <outlet property="label_title" destination="aIP-xT-tcO" id="xpB-EK-qaq"/>
@@ -943,9 +963,6 @@
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentBlue">
-            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="AccentOrange">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SheetColor">

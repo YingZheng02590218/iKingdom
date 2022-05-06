@@ -23,6 +23,48 @@ class DataBaseJournalEntry: RObject {
     @objc dynamic var balance_left: Int64 = 0           //差引残高
     @objc dynamic var balance_right: Int64 = 0          //差引残高
 }
+// 構造体定義
+struct DBJournalEntry {
+    // ストアドプロパティ定義（初期値なし）
+    let date: String?
+    let debit_category: String?
+    let debit_amount: Int64?
+    let credit_category: String?
+    let credit_amount: Int64?
+    let smallWritting: String?
+    // initを使用することでイニシャライザ定義
+    init(date: String?, debit_category: String?, debit_amount: Int64?, credit_category: String?, credit_amount: Int64?, smallWritting: String?) {
+        self.date = date
+        self.debit_category = debit_category
+        self.debit_amount = debit_amount
+        self.credit_category = credit_category
+        self.credit_amount = credit_amount
+        self.smallWritting = smallWritting
+    }
+    // 値が入っているプロパティがあるかどうかをチェックする
+    func checkPropertyIsNil() -> Bool {
+        if let _ = date {
+            return false
+        }
+        if let _ = debit_category {
+            return false
+        }
+        if let _ = debit_amount {
+            return false
+        }
+        if let _ = credit_category {
+            return false
+        }
+        if let _ = credit_amount {
+            return false
+        }
+        if let _ = smallWritting {
+            return false
+        }
+        
+        return true
+    }
+}
 
 class RObject: Object {
     @objc dynamic var number: Int = 0                   //非オプショナル型

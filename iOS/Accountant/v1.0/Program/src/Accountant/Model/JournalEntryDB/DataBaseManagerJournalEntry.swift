@@ -24,7 +24,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
         let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 
@@ -40,9 +40,9 @@ class DataBaseManagerJournalEntry {
             object.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
             // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
             // 勘定に借方の仕訳データを追加
-            left_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+            left_object?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
             // 勘定に貸方の仕訳データを追加
-            right_object?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+            right_object?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
@@ -62,7 +62,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = DataBaseManagerAccount()       //仕訳
+        let dataBaseManagerAccount = DataBaseManagerAccount()
         let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
         let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 
@@ -77,9 +77,9 @@ class DataBaseManagerJournalEntry {
             object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
             //勘定へ転記
             // 勘定に借方の仕訳データを追加
-            left_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+            left_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
             // 勘定に貸方の仕訳データを追加
-            right_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+            right_object?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
@@ -87,35 +87,34 @@ class DataBaseManagerJournalEntry {
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)
         return number
     }
-    // 取得　仕訳
-    func getJournalEntry(section: Int) -> Results<DataBaseJournalEntry> {
-        let realm = try! Realm()
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        var objects = realm.objects(DataBaseJournalEntry.self)
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
+    
+    /**
+    * 会計帳簿.仕訳帳.仕訳[ ] オブジェクトを取得するメソッド
+    * 開いている帳簿の仕訳帳から通常仕訳を取得する
+    * 日付を降順にソートする
+    * @param -
+    * @return 仕訳[ ]
+    */
+    func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
+        
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
+                        .sorted(byKeyPath: "date", ascending: true)
+        return dataBaseJournalEntries
     }
-    // 取得　決算整理仕訳
-    func getJournalAdjustingEntry(section: Int, EnglishFromOfClosingTheLedger0: Bool, EnglishFromOfClosingTheLedger1: Bool) -> Results<DataBaseAdjustingEntry> {
+    // 取得　仕訳 編集する仕訳をプライマリーキーで取得
+    func getJournalEntryWithNumber(number: Int) -> DataBaseJournalEntry? {
         let realm = try! Realm()
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        var objects = realm.objects(DataBaseAdjustingEntry.self)
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        // 設定操作
-        if !EnglishFromOfClosingTheLedger0 { // 損益振替仕訳
-            objects = objects.filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")') || (debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
-            print(objects)
-        }
-        if !EnglishFromOfClosingTheLedger1 { // 資本振替仕訳
-            objects = objects.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")
-        }
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
+        guard let dataBaseJournalEntry = realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: number) else { return nil }
+    
+        return dataBaseJournalEntry
+    }
+    // 取得　決算整理仕訳 編集する仕訳をプライマリーキーで取得
+    func getAdjustingEntryWithNumber(number: Int) -> DataBaseAdjustingEntry? {
+        let realm = try! Realm()
+        guard let dataBaseJournalEntry = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number) else { return nil }
+    
+        return dataBaseJournalEntry
     }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
@@ -143,46 +142,141 @@ class DataBaseManagerJournalEntry {
         let number: Int = objects[0].number
         return number
     }
-    // 更新 仕訳
-    func updateJournalEntry(primaryKey: Int, date: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
+    
+    
+    /**
+    * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
+    * 年度を指定して勘定を取得する
+    * @param  勘定名
+    * @return  勘定
+    */
+    private func getAccountByAccountNameWithFiscalYear(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
         let realm = try! Realm()
-        // 編集前の借方勘定と貸方勘定をメモする
-        // プライマリーキーを指定してオブジェクトを取得
-        let object = realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: primaryKey)!
+        
+        let dataBaseAccountingBooks = realm.objects(DataBaseAccountingBooks.self)
+                                        .filter("fiscalYear == \(fiscalYear)")
+        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else { return nil }
+        
+        let dataBaseAccounts = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts
+                                .filter("accountName LIKE '\(accountName)'")
+        guard let dataBaseAccount = dataBaseAccounts?.first else { return nil }
+
+        return dataBaseAccount
+    }
+    
+    // 更新 仕訳
+    func updateJournalEntry(primaryKey: Int, date: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, completion: (Int) -> Void) {
+        let realm = try! Realm()
+        // 編集する仕訳
+        guard let dataBaseJournalEntry = realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
-        let account_left = object.debit_category
-        let account_right = object.credit_category
+        let account_left = dataBaseJournalEntry.debit_category
+        let account_right = dataBaseJournalEntry.credit_category
+        // 編集前の仕訳帳と借方勘定と貸方勘定
+        guard let oldLeft_object = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let oldRight_object = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        // 編集後の仕訳帳と借方勘定と貸方勘定
+        guard let left_object = getAccountByAccountNameWithFiscalYear(accountName: debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let right_object = getAccountByAccountNameWithFiscalYear(accountName: credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        // 編集する仕訳
         try! realm.write {
             let value: [String: Any] = ["number": primaryKey, "date": date, "debit_category":debit_category, "debit_amount":debit_amount, "credit_category":credit_category, "credit_amount":credit_amount, "smallWritting":smallWritting]
             realm.create(DataBaseJournalEntry.self, value: value, update: .modified) // 一部上書き更新
+        }
+        // 編集前の勘定から借方の仕訳データを削除
+    outerLoop: while true {
+        for i in 0..<oldLeft_object.dataBaseJournalEntries.count where oldLeft_object.dataBaseJournalEntries[i].number == primaryKey ||
+        oldLeft_object.dataBaseJournalEntries[i].isInvalidated {
+            try! realm.write {
+                oldLeft_object.dataBaseJournalEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            }
+            continue outerLoop
+        }
+        break
+    }
+        // 編集前の勘定から貸方の仕訳データを削除
+    outerLoop: while true {
+        for i in 0..<oldRight_object.dataBaseJournalEntries.count where oldRight_object.dataBaseJournalEntries[i].number == primaryKey ||
+        oldRight_object.dataBaseJournalEntries[i].isInvalidated {
+            try! realm.write {
+                oldRight_object.dataBaseJournalEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            }
+            continue outerLoop
+        }
+        break
+    }
+        // 編集後の仕訳帳と借方勘定と貸方勘定へ関連を追加する
+        try! realm.write {
+            // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
+            // 勘定に借方の仕訳データを追加
+            left_object.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            // 勘定に貸方の仕訳データを追加
+            right_object.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(account_left: account_left  , account_right: account_right  ) //編集前の借方勘定と貸方勘定
         dataBaseManager.setAccountTotal(account_left: debit_category, account_right: credit_category) //編集後の借方勘定と貸方勘定
-        return primaryKey
+        
+        completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
     }
     // 更新 決算整理仕訳
-    func updateAdjustingJournalEntry(primaryKey: Int, date: String,debit_category: String,debit_amount: Int64,credit_category: String,credit_amount: Int64,smallWritting: String) -> Int {
-        // (1)Realmのインスタンスを生成する
+    func updateAdjustingJournalEntry(primaryKey: Int, date: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, completion: (Int) -> Void) {
         let realm = try! Realm()
-        // 編集前の借方勘定と貸方勘定をメモする
-        // プライマリーキーを指定してオブジェクトを取得
-        let object = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey)!
+        // 編集する仕訳
+        guard let dataBaseJournalEntry = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
-        let account_left = object.debit_category
-        let account_right = object.credit_category
-        // (2)書き込みトランザクション内でデータを更新する
+        let account_left = dataBaseJournalEntry.debit_category
+        let account_right = dataBaseJournalEntry.credit_category
+        // 編集前の仕訳帳と借方勘定と貸方勘定
+        guard let oldLeft_object = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let oldRight_object = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        // 編集後の仕訳帳と借方勘定と貸方勘定
+        guard let left_object = getAccountByAccountNameWithFiscalYear(accountName: debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let right_object = getAccountByAccountNameWithFiscalYear(accountName: credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        // 編集する仕訳
         try! realm.write {
             let value: [String: Any] = ["number": primaryKey, "date": date, "debit_category":debit_category, "debit_amount":debit_amount, "credit_category":credit_category, "credit_amount":credit_amount, "smallWritting":smallWritting]
             realm.create(DataBaseAdjustingEntry.self, value: value, update: .modified) // 一部上書き更新
+        }
+        // 編集前の勘定から借方の仕訳データを削除
+    outerLoop: while true {
+        for i in 0..<oldLeft_object.dataBaseAdjustingEntries.count where oldLeft_object.dataBaseAdjustingEntries[i].number == primaryKey ||
+        oldLeft_object.dataBaseAdjustingEntries[i].isInvalidated {
+            try! realm.write {
+                oldLeft_object.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            }
+            continue outerLoop
+        }
+        break
+    }
+        // 編集前の勘定から貸方の仕訳データを削除
+    outerLoop: while true {
+        for i in 0..<oldRight_object.dataBaseAdjustingEntries.count where oldRight_object.dataBaseAdjustingEntries[i].number == primaryKey ||
+        oldRight_object.dataBaseAdjustingEntries[i].isInvalidated {
+            try! realm.write {
+                oldRight_object.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            }
+            continue outerLoop
+        }
+        break
+    }
+        // 編集後の仕訳帳と借方勘定と貸方勘定へ関連を追加する
+        try! realm.write {
+            // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
+            // 勘定に借方の仕訳データを追加
+            left_object.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+            // 勘定に貸方の仕訳データを追加
+            right_object.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotalAdjusting(account_left: account_left, account_right: account_right)//編集前の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)//編集後の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
-        return primaryKey
+        
+        completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
     }
+    
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
         let realm = try! Realm()

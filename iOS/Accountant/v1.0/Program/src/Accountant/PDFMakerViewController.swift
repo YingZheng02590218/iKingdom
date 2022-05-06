@@ -108,7 +108,7 @@ class PDFMakerViewController: UIViewController, QLPreviewControllerDataSource, U
     
     func readDB() {
         let dataBaseManager = DataBaseManagerJournalEntry()
-        let objects = dataBaseManager.getJournalEntry(section: 0)
+        let objects = dataBaseManager.getJournalEntryAll()
         
         var htmlString = ""
         // 行を取得する
