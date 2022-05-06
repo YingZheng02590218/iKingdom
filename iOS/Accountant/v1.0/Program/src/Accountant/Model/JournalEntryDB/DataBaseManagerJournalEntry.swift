@@ -116,6 +116,18 @@ class DataBaseManagerJournalEntry {
     
         return dataBaseJournalEntry
     }
+    // 仕訳　総数
+    func getJournalEntryCount() -> Results<DataBaseJournalEntry> {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseJournalEntry.self)
+        return objects
+    }
+    // 決算整理仕訳　総数
+    func getAdjustingEntryCount() -> Results<DataBaseAdjustingEntry> {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseAdjustingEntry.self)
+        return objects
+    }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         let realm = try! Realm()

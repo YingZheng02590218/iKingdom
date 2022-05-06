@@ -238,6 +238,11 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         switch section {
         case 0:
             return "決算日は、財務諸表や仕訳帳、精算表、試算表に表示されます。"
+        case 1:
+            let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
+            let results = dataBaseManagerJournalEntry.getJournalEntryCount()
+            let resultss = dataBaseManagerJournalEntry.getAdjustingEntryCount()
+            return "データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
         default:
             return ""
         }
@@ -283,9 +288,15 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
             // データベース
             let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+            let objectsJournalEntry = DataBaseManagerSettingsPeriod.shared.getJournalEntryCount(fiscalYear: objects[indexPath.row].fiscalYear)
+            let objectsAdjustingEntry = DataBaseManagerSettingsPeriod.shared.getAdjustingEntryCount(fiscalYear: objects[indexPath.row].fiscalYear)
             // 会計帳簿の年度をセルに表示する
             cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
-            cell.rightdetailTextLabel.text = "仕訳データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int)"
+#if DEBUG
+            cell.rightdetailTextLabel.text = "データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int):\(objectsJournalEntry.count),  \((objects[indexPath.row].dataBaseJournals?.dataBaseAdjustingEntries.count)! as Int):\(objectsAdjustingEntry.count)"
+#else
+            cell.rightdetailTextLabel.text = "データ数:　\(objectsJournalEntry.count), \(objectsAdjustingEntry.count)"
+#endif
             // 会計帳簿の連番
             cell.tag = objects[indexPath.row].number
             // 開いている帳簿にチェックマークをつける
