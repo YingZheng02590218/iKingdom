@@ -201,8 +201,9 @@ class TBModel: TBModelInput {
     private func calculateAccountTotal(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objects = dataBaseManagerAccount.getAllJournalEntryInAccount(account: account)
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: account) // 勘定別に取得
+
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if account == "\(objects[i].debit_category)" { // 借方
@@ -264,7 +265,7 @@ class TBModel: TBModelInput {
     private func calculateAccountTotalAdjusting(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         var objects:Results<DataBaseAdjustingEntry>
         if account != "損益勘定" && account != "繰越利益" {
             objects = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account)

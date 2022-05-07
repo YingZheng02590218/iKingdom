@@ -180,8 +180,8 @@ class GeneralLedgerTableViewController: UITableViewController {
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
-        let dataBaseManagerAccount = DataBaseManagerAccount()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 仕訳
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let objectss = dataBaseManagerAccount.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
         let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
         let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益

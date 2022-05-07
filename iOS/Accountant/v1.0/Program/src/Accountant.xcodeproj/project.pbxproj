@@ -123,6 +123,8 @@
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
 		F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */; };
 		F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
+		F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
+		F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
 		F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */; };
 		F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */; };
 		F9B209F027A4377000F7EA8D /* BSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EE27A4377000F7EA8D /* BSViewController.swift */; };
@@ -170,7 +172,7 @@
 		F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */; };
 		F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */; };
 		F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
-		F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */; };
+		F9D5D54D247E48D600EA35C7 /* GenearlLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */; };
 		F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
@@ -214,7 +216,7 @@
 		F9EC66AF27B90BC60003FBB6 /* TBPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */; };
 		F9EC66B027B90BC60003FBB6 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */; };
 		F9EC66B127B90BC60003FBB6 /* TBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DB124989895007DB098 /* TBModel.swift */; };
-		F9EC66B227B90BC60003FBB6 /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */; };
+		F9EC66B227B90BC60003FBB6 /* GenearlLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */; };
 		F9EC66B327B90BC60003FBB6 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9EC66B427B90BC60003FBB6 /* GeneralLedgerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */; };
 		F9EC66B527B90BC60003FBB6 /* SettingUpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */; };
@@ -543,6 +545,7 @@
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTheDayOfReckoningTableViewController.swift; path = SettingsTheDayOfReckoning/SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
 		F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselCollectionViewCell.xib; sourceTree = "<group>"; };
+		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
 		F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPresenter.swift; sourceTree = "<group>"; };
 		F9B209EE27A4377000F7EA8D /* BSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSViewController.swift; sourceTree = "<group>"; };
@@ -583,7 +586,7 @@
 		F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodYearViewController.swift; sourceTree = "<group>"; };
 		F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpDetailViewController.swift; sourceTree = "<group>"; };
 		F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountViewController.swift; sourceTree = "<group>"; };
-		F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccount.swift; sourceTree = "<group>"; };
+		F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedger.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
@@ -1236,6 +1239,7 @@
 			isa = PBXGroup;
 			children = (
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
+				F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */,
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
@@ -1441,7 +1445,7 @@
 		F9F934F12485EB5B00BF7AA7 /* GeneralLedgerAccountDB */ = {
 			isa = PBXGroup;
 			children = (
-				F9D5D54C247E48D600EA35C7 /* DataBaseManagerAccount.swift */,
+				F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */,
 				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
 				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
 			);
@@ -1995,7 +1999,7 @@
 				F9BDCBB427A80FA400BD8770 /* TBPresenter.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9354DB224989895007DB098 /* TBModel.swift in Sources */,
-				F9D5D54D247E48D600EA35C7 /* DataBaseManagerAccount.swift in Sources */,
+				F9D5D54D247E48D600EA35C7 /* GenearlLedgerAccountModel.swift in Sources */,
 				F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */,
 				F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */,
@@ -2068,6 +2072,7 @@
 				F9F4607924D06F6C008FE62B /* TableViewCellCompanyName.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
+				F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
 				F99112E42495290000E28BB9 /* BSModel.swift in Sources */,
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
@@ -2143,7 +2148,7 @@
 				F9EC66AF27B90BC60003FBB6 /* TBPresenter.swift in Sources */,
 				F9EC66B027B90BC60003FBB6 /* DocumentBrowserViewController.swift in Sources */,
 				F9EC66B127B90BC60003FBB6 /* TBModel.swift in Sources */,
-				F9EC66B227B90BC60003FBB6 /* DataBaseManagerAccount.swift in Sources */,
+				F9EC66B227B90BC60003FBB6 /* GenearlLedgerAccountModel.swift in Sources */,
 				F9EC66B327B90BC60003FBB6 /* HTMLhelper.swift in Sources */,
 				F9EC66B427B90BC60003FBB6 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9EC66B527B90BC60003FBB6 /* SettingUpgradeTableViewCell.swift in Sources */,
@@ -2216,6 +2221,7 @@
 				F9EC66F727B90BC60003FBB6 /* TableViewCellCompanyName.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
+				F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
 				F9EC66FA27B90BC60003FBB6 /* BSModel.swift in Sources */,
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,

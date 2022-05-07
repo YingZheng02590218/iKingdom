@@ -59,17 +59,11 @@ class DataBaseManagerPLAccount: DataBaseManager {
             var fiscalYearFixed = ""
             if theDayOfReckoning == "12/31" {
                 fiscalYearFixed = String(fiscalYear!)
-            }else {
+            }
+            else {
                 fiscalYearFixed = String(fiscalYear!+1)
             }
-            // 現在時刻を取得
-            let now :Date = Date() // UTC時間なので　9時間ずれる
-            let f     = DateFormatter() //年
-            let fff   = DateFormatter() //月日
-            f.dateFormat    = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-            f.timeZone = .current
-            fff.dateFormat  = DateFormatter.dateFormat(fromTemplate: "MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-            fff.timeZone = .current
+
             dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
             dataBaseJournalEntry.debit_category = credit_category    //借方勘定　＊引数の貸方勘定を振替える
             dataBaseJournalEntry.debit_amount = amount        //借方金額
@@ -172,10 +166,6 @@ class DataBaseManagerPLAccount: DataBaseManager {
             else {
                 fiscalYearFixed = String(fiscalYear!+1)
             }
-            // 現在時刻を取得
-            let f     = DateFormatter() //年
-            f.dateFormat    = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-            f.timeZone = .current
             dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
             dataBaseJournalEntry.debit_category = credit_category    //借方勘定　＊引数の貸方勘定を振替える
             dataBaseJournalEntry.debit_amount = amount        //借方金額
@@ -259,8 +249,6 @@ class DataBaseManagerPLAccount: DataBaseManager {
     func deleteAdjustingJournalEntry(primaryKey: Int) -> Bool {
         let realm = try! Realm()
         guard let dataBaseJournalEntry = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey) else { return false }
-        print(dataBaseJournalEntry)
-        // TODO: 勘定の決算整理仕訳リストへの関連も削除する
         // 削除前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return false }
         // 損益計算書に関する勘定科目のみに絞る
@@ -318,8 +306,6 @@ class DataBaseManagerPLAccount: DataBaseManager {
     func removeAdjustingJournalEntry(primaryKey: Int) -> Bool {
         let realm = try! Realm()
         guard let dataBaseJournalEntry = realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey) else { return false }
-        print(dataBaseJournalEntry)
-        // TODO: 勘定の決算整理仕訳リストへの関連も削除する
         // 削除前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return false }
         // 損益計算書に関する勘定科目のみに絞る
@@ -334,8 +320,8 @@ class DataBaseManagerPLAccount: DataBaseManager {
         guard let dataBasePLAccount: DataBasePLAccount = getAccountByAccountNameWithFiscalYear(accountName: "損益勘定", fiscalYear: dataBaseJournalEntry.fiscalYear) else { return false }
         // 仕訳帳から削除前仕訳データの関連を削除
     outerLoop: while oldJournals.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-                                    .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-                                    .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'").count > 1 {
+                        .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+                        .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'").count > 1 {
         for i in 0..<oldJournals.dataBaseAdjustingEntries.count where oldJournals.dataBaseAdjustingEntries[i].number == primaryKey ||
         oldJournals.dataBaseAdjustingEntries[i].isInvalidated {
             try! realm.write {

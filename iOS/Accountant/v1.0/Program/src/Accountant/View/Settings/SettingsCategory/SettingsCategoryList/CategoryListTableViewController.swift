@@ -82,7 +82,7 @@ class CategoryListTableViewController: UITableViewController {
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(section: index)
         print(objects)
         // 勘定クラス
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category) // 全年度の仕訳データを確認する
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category) // 全年度の仕訳データを確認する
         let alert = UIAlertController(title: "削除", message: "「\(objects[indexPath.row].category)」を削除しますか？\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件あります", preferredStyle: .alert)
@@ -198,7 +198,7 @@ class CategoryListTableViewController: UITableViewController {
         // 勘定科目の有効無効　変更時のアクションを指定
         cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
         // モデルオブフェクトの取得 勘定別に取得
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category as String) // 通常仕訳　勘定別 全年度にしてはいけない
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category as String) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
         // タクソノミに紐付けされていない勘定科目はスイッチをONにできないように無効化する

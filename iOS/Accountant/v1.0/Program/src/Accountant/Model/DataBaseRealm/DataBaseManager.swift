@@ -74,6 +74,7 @@ class DataBaseManager {
         // 決算整理仕訳 開いている帳簿の年度と同じ仕訳に絞り込む
         let dataBaseJournalAdjustingEntries = realm.objects(DataBaseAdjustingEntry.self)
                                                 .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
+                                                .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
                                                 .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 借方勘定が損益勘定の場合
         let dataBasePLAccountJournalAdjustingEntriesDebit = realm.objects(DataBaseAdjustingEntry.self)
@@ -114,6 +115,7 @@ class DataBaseManager {
                 right_object.dataBaseJournalEntries.append(dataBaseJournalEntry)
             }
         }
+        // 勘定へ転記 損益勘定以外
         for dataBaseJournalEntry in dataBaseJournalAdjustingEntries {
             guard let journals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
             guard let left_object: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }

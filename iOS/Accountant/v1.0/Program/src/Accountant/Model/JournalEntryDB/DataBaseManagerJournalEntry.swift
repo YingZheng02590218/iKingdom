@@ -24,7 +24,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
         let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 
@@ -62,7 +62,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = credit_amount      //貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      //小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         let left_object = dataBaseManagerAccount.getAccountByAccountName(accountName: debit_category)
         let right_object = dataBaseManagerAccount.getAccountByAccountName(accountName: credit_category)
 

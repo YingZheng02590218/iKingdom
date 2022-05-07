@@ -336,7 +336,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // データベース
         DataBaseManagerSettingsPeriod.shared.setMainBooksOpenOrClose(tag: tag)
         // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         dataBaseManagerAccount.addGeneralLedgerAccountLack() 
     }
     // セルの選択が外れた時に呼び出される

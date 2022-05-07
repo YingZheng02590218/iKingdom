@@ -25,7 +25,7 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
                 if objects[i].numberOfTaxonomy != "" { // 表示科目に紐付けしている場合
                     // 勘定クラス　勘定ないの仕訳を取得
-                    let dataBaseManagerAccount = DataBaseManagerAccount()
+                    let dataBaseManagerAccount = GenearlLedgerAccountModel()
                     let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
                     let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
                     if objectss.count > 0 || objectsss.count > 0 {
@@ -277,14 +277,14 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             realm.add(dataBaseSettingsTaxonomyAccount)
         }
         // オブジェクトを作成 勘定クラス
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         dataBaseManagerAccount.addGeneralLedgerAccount(number: number)
         return number
     }
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
         // 勘定クラス　勘定を削除
-        let dataBaseManagerAccount = DataBaseManagerAccount()
+        let dataBaseManagerAccount = GenearlLedgerAccountModel()
         let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
         if isInvalidated {
             // (1)Realmのインスタンスを生成する
