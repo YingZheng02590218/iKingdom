@@ -38,7 +38,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     private func onUpdateSelection() {
         // セルの枠線の太さを変える
-        backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 2 : 0
+        backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 1 : 0
     }
     
     let LIGHTSHADOWOPACITY: Float = 0.3
