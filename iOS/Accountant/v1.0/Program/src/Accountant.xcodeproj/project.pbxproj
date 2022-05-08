@@ -361,6 +361,10 @@
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
+		F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
+		F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
+		F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */; };
+		F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */; };
 		F9F4605424BDD616008FE62B /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4605324BDD616008FE62B /* Migration.swift */; };
 		F9F4607424C9E0BD008FE62B /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603324AC679E0084A18B /* File2.swift */; };
 		F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */; };
@@ -604,6 +608,8 @@
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
 		F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSModel.swift; sourceTree = "<group>"; };
+		F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperAccount.swift; sourceTree = "<group>"; };
+		F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerAccount.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTaxonomy.swift; sourceTree = "<group>"; };
 		F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerTaxonomy.swift; sourceTree = "<group>"; };
@@ -754,6 +760,8 @@
 			children = (
 				F919603124AC53890084A18B /* File.swift */,
 				F919603324AC679E0084A18B /* File2.swift */,
+				F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */,
+				F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */,
 			);
 			path = PrintOut;
 			sourceTree = "<group>";
@@ -893,9 +901,9 @@
 				F9B209EA279D0AF700F7EA8D /* View */,
 				F9B209EB279D38A900F7EA8D /* Presenter */,
 				F9CD5899266B963600F27E80 /* HTMLhelper.swift */,
+				F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
-				F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */,
-				F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */,
+				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
 				F9A668712662483D008E9137 /* Extension */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
@@ -1988,6 +1996,7 @@
 				F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */,
 				F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
+				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
@@ -2084,6 +2093,7 @@
 				F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */,
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
@@ -2137,6 +2147,7 @@
 				F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F9EC66A527B90BC60003FBB6 /* JournalEntryViewController.swift in Sources */,
 				F9EC66A627B90BC60003FBB6 /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
+				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
@@ -2233,6 +2244,7 @@
 				F9EC670227B90BC60003FBB6 /* CFTableViewController.swift in Sources */,
 				F9EC670327B90BC60003FBB6 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9EC670427B90BC60003FBB6 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,

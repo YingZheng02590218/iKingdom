@@ -16,7 +16,6 @@ class PDFMaker {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelper()
-//    let paperSize = CGSize(width: 182 / 25.4 * 72, height: 257 / 25.4 * 72) // B5 192×262mm 182mm×257mm
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     

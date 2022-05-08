@@ -58,7 +58,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     // 印刷機能
     let pDFMaker = PDFMaker()
-    let paperSize = CGSize(width: 192 / 25.4 * 72, height: 262 / 25.4 * 72) // B5 192×262mm
+    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
+
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
     func inject(presenter: JournalsPresenterInput) {
@@ -382,15 +383,17 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // 初期化
         pDFMaker.initialize()
         
-        let printController = UIPrintInteractionController.shared
-        let printInfo = UIPrintInfo(dictionary:nil)
-        printInfo.outputType = .general
-        printInfo.jobName = "Journals"
-        printInfo.duplex = .none
-        printInfo.orientation = .portrait
-        printController.printInfo = printInfo
-        printController.printingItem = self.resizePrintingPaper()
-        printController.present(animated: true, completionHandler: nil)
+        if let fiscalYear = presenter.fiscalYear {
+            let printController = UIPrintInteractionController.shared
+            let printInfo = UIPrintInfo(dictionary:nil)
+            printInfo.outputType = .general
+            printInfo.jobName = "\(fiscalYear)-Journals"
+            printInfo.duplex = .none
+            printInfo.orientation = .portrait
+            printController.printInfo = printInfo
+            printController.printingItem = self.resizePrintingPaper()
+            printController.present(animated: true, completionHandler: nil)
+        }
     }
 
     private func resizePrintingPaper() -> NSData? {

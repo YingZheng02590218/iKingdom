@@ -125,22 +125,29 @@ struct HTMLhelper {
                     height: 84.4357976654%;/*　217mm　*/
                 }
                 tfoot {
-                    height: auto;/*　1.9455252918% 5mm　*/
+                    height: 10.5058365758%;/*　1.9455252918% 5mm　*/
                 }
     .page{
-        width: 210mm;/*　210mm 187mm B5 182mm×257mm　*/
-        height: 296mm;/*　297mm 257mm　*/
+        width: 210mm;
+        height: 297mm;
         box-sizing: border-box;
         padding: 10mm;
         display: block;
         break-after: always;
     }
     @page {
-        size: A4 portrait;/*　A4 B5　*/
-        margin: auto;
+        size: A4 portrait;/*　A4　*/
+        margin: 0; /* auto; */
     }
     .page:last-child{
         break-after: auto;
+    }
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+      }
+      /* ... the rest of the rules ... */
     }
     /* ■ テーブル全体、セルの横幅、高さを%で指定
     width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
