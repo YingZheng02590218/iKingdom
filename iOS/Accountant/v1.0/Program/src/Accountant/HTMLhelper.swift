@@ -177,7 +177,7 @@ struct HTMLhelper {
                       <p class="fontsize60 center">　月  日</p>
                     </div>
                   </td>
-                  <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_single_red_right">
+                  <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_double_red_right">
                     <div class="center">
                       <span class="fontsize80 center">摘　</span>
                       <span class="fontsize80 center">　要</span>
@@ -214,28 +214,28 @@ struct HTMLhelper {
     """
     }
     
-    func getSingleRow(month: String, day: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String) -> String {
+    func getSingleRow(month: String, day: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, numberOfAccountCredit: Int, numberOfAccountDebit: Int) -> String {
         return """
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom fontsize60 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_single_red_right left fontsize60">\(debit_category)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(99)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize60">\(debit_category)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountDebit)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60">\(String(debit_amount))</td>
                   <td class="line_single_blue_bottom"></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60"><p class="right">\(credit_category)</p></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(11)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60"><p class="right">\(credit_category)</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountCredit)</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="line_single_blue_bottom fontsize60">\(String(credit_amount))</td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom"></td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="smallWritting line_single_blue_bottom line_single_red_right left fontsize40">\(smallWritting)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize40">\(smallWritting)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="line_single_blue_bottom"></td>
@@ -248,7 +248,7 @@ struct HTMLhelper {
                  <tr class="rowHeight">
                    <td class="line_single_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60 clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                    <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
@@ -256,7 +256,7 @@ struct HTMLhelper {
                  <tr class="rowHeight">
                    <td class="line_single_red_right line_single_blue_bottom center fontsize60 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom center fontsize60 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize60 clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                    <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
@@ -264,7 +264,7 @@ struct HTMLhelper {
                  <tr class="rowHeight">
                    <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> あ</td>
+                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize40 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                    <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
@@ -277,7 +277,7 @@ struct HTMLhelper {
                  <tr class="rowHeight">
                     <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                     <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                    <td class="smallWritting line_single_blue_bottom line_single_red_right fontsize40 clearColor"> あ</td>
+                    <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize40 clearColor"> あ</td>
                     <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                     <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
                     <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>

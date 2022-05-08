@@ -17,7 +17,7 @@ protocol JournalsModelInput {
     func addJournals(number: Int)
     func deleteJournals(number: Int) -> Bool
     
-    func getJournalEntryAll() -> Results<DataBaseJournalEntry>
+    func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
@@ -87,14 +87,14 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     * @param -
     * @return 仕訳[ ]
     */
-    func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
+    func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry> {
         
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
                         .sorted(byKeyPath: "date", ascending: true)
         return dataBaseJournalEntries
     }
-
+    
     /**
     * 会計帳簿.仕訳帳.決算整理仕訳[ ] オブジェクトを取得するメソッド\
     * 決算整理仕訳

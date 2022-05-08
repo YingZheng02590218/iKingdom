@@ -87,21 +87,6 @@ class DataBaseManagerJournalEntry {
         dataBaseManager.setAccountTotalAdjusting(account_left: debit_category, account_right: credit_category)
         return number
     }
-    
-    /**
-    * 会計帳簿.仕訳帳.仕訳[ ] オブジェクトを取得するメソッド
-    * 開いている帳簿の仕訳帳から通常仕訳を取得する
-    * 日付を降順にソートする
-    * @param -
-    * @return 仕訳[ ]
-    */
-    func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
-        
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
-                        .sorted(byKeyPath: "date", ascending: true)
-        return dataBaseJournalEntries
-    }
     // 取得　仕訳 編集する仕訳をプライマリーキーで取得
     func getJournalEntryWithNumber(number: Int) -> DataBaseJournalEntry? {
         let realm = try! Realm()

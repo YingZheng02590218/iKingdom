@@ -11,7 +11,7 @@ import PDFKit
 import GoogleMobileAds // マネタイズ対応
 
 // 仕訳帳クラス
-class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIPrintInteractionControllerDelegate {
+class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - var let
 
@@ -57,7 +57,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate, UIP
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     // 印刷機能
-    var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     let pDFMaker = PDFMaker()
     let paperSize = CGSize(width: 192 / 25.4 * 72, height: 262 / 25.4 * 72) // B5 192×262mm
     /// GUIアーキテクチャ　MVP

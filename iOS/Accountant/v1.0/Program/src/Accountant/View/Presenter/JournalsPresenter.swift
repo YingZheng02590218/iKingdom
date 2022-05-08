@@ -63,7 +63,7 @@ final class JournalsPresenter: JournalsPresenterInput {
         self.view = view
         self.model = model
                 
-        objects = model.getJournalEntryAll() // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
         objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
     }
     
@@ -80,7 +80,7 @@ final class JournalsPresenter: JournalsPresenterInput {
         fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
-        objects = model.getJournalEntryAll() // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
         objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         
         view.setupViewForViewWillAppear()
@@ -109,7 +109,7 @@ final class JournalsPresenter: JournalsPresenterInput {
             // 全勘定の合計と残高を計算する
             model.initializeJournals(completion: { isFinished in
                 print("Result is \(isFinished)")
-                objects = model.getJournalEntryAll() // 通常仕訳　全
+                objects = model.getJournalEntriesInJournals() // 通常仕訳　全
                 objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
                 // 更新処理
                 view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
@@ -207,7 +207,7 @@ final class JournalsPresenter: JournalsPresenterInput {
                 // 空白行
             }
         }
-        objects = model.getJournalEntryAll() // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
         objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         // view にリロードさせる
         self.view.reloadData(primaryKeys: primaryKeys, primaryKeysAdjusting: primaryKeysAdjusting)
