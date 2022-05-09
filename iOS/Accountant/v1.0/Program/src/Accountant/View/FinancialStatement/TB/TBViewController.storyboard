@@ -13,7 +13,7 @@
         <!--試算表-->
         <scene sceneID="waC-Ug-l0h">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="TBViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="TBViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y7z-Dz-h6M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,14 +79,14 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
+                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
                                                         <rect key="frame" x="0.0" y="61.5" width="408" height="61"/>
                                                         <subviews>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFW-fO-F9C">
-                                                                <rect key="frame" x="0.0" y="0.0" width="99.5" height="61"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="3vn-4g-NqC" userLabel="list_debit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -102,10 +102,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifW-Bi-RUu">
-                                                                <rect key="frame" x="99.5" y="0.0" width="209" height="61"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="hkT-8r-06u" userLabel="account_name">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -121,10 +121,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJg-go-Uex">
-                                                                <rect key="frame" x="308.5" y="0.0" width="99.5" height="61"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="XXs-8w-VdH" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="2" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -189,11 +189,11 @@
                                             <constraint firstAttribute="trailing" secondItem="erp-bX-L3k" secondAttribute="trailing" id="ej0-zx-Dp1"/>
                                         </constraints>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
+                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
                                         <rect key="frame" x="3" y="122.5" width="408" height="695.5"/>
                                         <color key="backgroundColor" name="SheetColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TableViewCellTB" customModule="Accountant" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TableViewCellTB" customModule="Paciolist" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="44.5" width="408" height="20"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sQ5-fY-wHT" id="ZN2-d6-xhu">
@@ -201,10 +201,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM6-OM-ZCk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.5" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-eZ-lsk" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -227,10 +227,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjM-aC-taG">
-                                                            <rect key="frame" x="0.5" y="0.0" width="0.0" height="20"/>
+                                                            <rect key="frame" x="99.5" y="0.0" width="209" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="TJb-yI-iLr" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -253,10 +253,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DZ-Ly-bo4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                            <rect key="frame" x="308.5" y="0.0" width="99.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-DI-dCK" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="99.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -315,7 +315,7 @@
                                                     <outlet property="label_debit" destination="n6c-eZ-lsk" id="vXw-Ki-r7W"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TableViewCellTB" customModule="Accountant" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TableViewCellTB" customModule="Paciolist" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="64.5" width="408" height="20"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYL-Wy-4Zu" id="aIN-To-wMj">
@@ -323,10 +323,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxx-op-Kzi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.5" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="99.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="6P4-4f-eyC" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -349,10 +349,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-Lf-sGX">
-                                                            <rect key="frame" x="0.5" y="0.0" width="1" height="20"/>
+                                                            <rect key="frame" x="99.5" y="0.0" width="209" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Jac-nZ-whg" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="208" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -375,10 +375,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-So-Bab">
-                                                            <rect key="frame" x="1.5" y="0.0" width="0.5" height="20"/>
+                                                            <rect key="frame" x="308.5" y="0.0" width="99.5" height="20"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="BEj-TK-Fun" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="1" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -490,7 +490,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="印刷">
-                                        <color key="titleColor" name="AccentOrange"/>
+                                        <color key="titleColor" name="AccentBlue"/>
                                     </state>
                                     <connections>
                                         <action selector="button_print:" destination="mqU-Yd-p1X" eventType="touchUpInside" id="mjZ-LK-YQA"/>
@@ -515,7 +515,7 @@
         <!--Annotation View Controller-->
         <scene sceneID="la3-oc-wdN">
             <objects>
-                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n94-lm-BM6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -557,7 +557,7 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentOrange">
+        <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SheetColor">

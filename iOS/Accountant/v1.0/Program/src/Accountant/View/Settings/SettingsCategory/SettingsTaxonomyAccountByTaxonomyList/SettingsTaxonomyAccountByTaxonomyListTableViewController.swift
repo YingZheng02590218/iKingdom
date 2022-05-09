@@ -261,7 +261,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             // 勘定科目の有効無効　変更時のアクションを指定
             cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
             // モデルオブフェクトの取得 勘定別に取得
-            let dataBaseManagerAccount = DataBaseManagerAccount()
+            let dataBaseManagerAccount = GenearlLedgerAccountModel()
             let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[indexPath.row].category as String)//通常仕訳
             let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[indexPath.row].category as String)//決算整理仕訳
             // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する

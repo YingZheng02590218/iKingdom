@@ -240,6 +240,10 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
             // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
             deleteButton.neumorphicLayer?.elementColor = UIColor.Background.cgColor
+            let backImage = UIImage(named: "icons8-削除-25")?.withRenderingMode(.alwaysTemplate)
+            deleteButton.setImage(backImage, for: UIControl.State.normal)
+            // アイコン画像の色を指定する
+            deleteButton.tintColor = .TextColor
         }
     }
 }

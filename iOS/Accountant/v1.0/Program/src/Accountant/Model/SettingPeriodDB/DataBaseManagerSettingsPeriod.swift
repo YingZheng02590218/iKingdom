@@ -110,6 +110,18 @@ class DataBaseManagerSettingsPeriod {
         objects = objects.sorted(byKeyPath: "fiscalYear", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
     }
+    // 仕訳　年度別
+    func getJournalEntryCount(fiscalYear: Int) -> Results<DataBaseJournalEntry> {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseJournalEntry.self).filter("fiscalYear == \(fiscalYear)")
+        return objects
+    }
+    // 決算整理仕訳　年度別
+    func getAdjustingEntryCount(fiscalYear: Int) -> Results<DataBaseAdjustingEntry> {
+        let realm = try! Realm()
+        let objects = realm.objects(DataBaseAdjustingEntry.self).filter("fiscalYear == \(fiscalYear)")
+        return objects
+    }
     // 特定のモデルオブフェクトの取得　会計帳簿
     func getSettingsPeriod(lastYear: Bool) -> DataBaseAccountingBooks { // メソッド名を変更する
         // (1)Realmのインスタンスを生成する

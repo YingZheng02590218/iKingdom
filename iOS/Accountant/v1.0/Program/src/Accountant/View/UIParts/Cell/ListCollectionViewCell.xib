@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="playback" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="ListCollectionViewCell" customModule="Accountant" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="playback" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="ListCollectionViewCell" customModule="Paciolist" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -24,10 +24,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="404" height="90"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udJ-72-ccu" userLabel="View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="202" height="90"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="200" id="YCs-Ju-wTq">
-                                                <rect key="frame" x="0.0" y="0.0" width="180" height="90"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="202" height="90"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -36,22 +36,19 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="udJ-72-ccu" secondAttribute="height" multiplier="2:1" id="eIi-MU-QW3"/>
-                                        </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOu-X6-DsE" userLabel="View2">
-                                        <rect key="frame" x="180" y="0.0" width="96.5" height="90"/>
+                                        <rect key="frame" x="202" y="0.0" width="101" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="debit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="ldB-M9-50t" userLabel="Label1">
-                                                <rect key="frame" x="0.0" y="0.0" width="96.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="3pa-R5-Qko" userLabel="Label2">
-                                                <rect key="frame" x="0.0" y="45" width="96.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="45" width="101" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="TextColor"/>
@@ -68,22 +65,21 @@
                                             <constraint firstItem="ldB-M9-50t" firstAttribute="top" secondItem="HOu-X6-DsE" secondAttribute="top" id="d4h-vp-kZc"/>
                                             <constraint firstItem="ldB-M9-50t" firstAttribute="height" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="0.5" id="dRy-aZ-lI3"/>
                                             <constraint firstAttribute="bottom" secondItem="3pa-R5-Qko" secondAttribute="bottom" id="mBc-Gp-PGg"/>
-                                            <constraint firstAttribute="width" secondItem="HOu-X6-DsE" secondAttribute="height" multiplier="107:100" id="tqU-OR-jIC"/>
                                             <constraint firstAttribute="trailing" secondItem="ldB-M9-50t" secondAttribute="trailing" id="yf6-JE-YX5"/>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="krb-UI-Ia8" userLabel="View3">
-                                        <rect key="frame" x="276.5" y="0.0" width="127.5" height="90"/>
+                                        <rect key="frame" x="303" y="0.0" width="101" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="credit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="Bfa-gt-A71" userLabel="Label3">
-                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="101" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" preferredMaxLayoutWidth="107" translatesAutoresizingMaskIntoConstraints="NO" id="9g8-AA-six" userLabel="Label4">
-                                                <rect key="frame" x="0.0" y="45" width="127.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="45" width="101" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="TextColor"/>
@@ -100,16 +96,18 @@
                                             <constraint firstItem="9g8-AA-six" firstAttribute="top" secondItem="Bfa-gt-A71" secondAttribute="bottom" id="gwy-Sd-ypB"/>
                                             <constraint firstItem="9g8-AA-six" firstAttribute="leading" secondItem="krb-UI-Ia8" secondAttribute="leading" id="jvP-Tk-KoJ"/>
                                             <constraint firstAttribute="trailing" secondItem="9g8-AA-six" secondAttribute="trailing" id="q2w-Lq-VXO"/>
-                                            <constraint firstAttribute="width" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="107:100" id="rHc-oE-ECi"/>
                                             <constraint firstItem="Bfa-gt-A71" firstAttribute="height" secondItem="krb-UI-Ia8" secondAttribute="height" multiplier="0.5" id="uvc-yX-b7O"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="HOu-X6-DsE" firstAttribute="leading" secondItem="udJ-72-ccu" secondAttribute="trailing" id="5Rz-UM-X0R"/>
+                                    <constraint firstItem="udJ-72-ccu" firstAttribute="width" secondItem="BhF-dX-pXM" secondAttribute="width" multiplier="0.5" id="HIt-5N-TFl"/>
                                     <constraint firstItem="udJ-72-ccu" firstAttribute="leading" secondItem="BhF-dX-pXM" secondAttribute="leading" id="St6-4d-x2o"/>
                                     <constraint firstItem="udJ-72-ccu" firstAttribute="top" secondItem="BhF-dX-pXM" secondAttribute="top" id="TNE-NH-hih"/>
+                                    <constraint firstItem="krb-UI-Ia8" firstAttribute="width" secondItem="BhF-dX-pXM" secondAttribute="width" multiplier="0.25" id="auG-Nq-pPy"/>
                                     <constraint firstAttribute="bottom" secondItem="udJ-72-ccu" secondAttribute="bottom" id="fws-R8-8UQ"/>
+                                    <constraint firstItem="HOu-X6-DsE" firstAttribute="width" secondItem="BhF-dX-pXM" secondAttribute="width" multiplier="0.25" id="z9d-zQ-ZJZ"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -152,7 +150,7 @@
     </objects>
     <resources>
         <namedColor name="Background">
-            <color red="0.92549019607843142" green="0.94117647058823528" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

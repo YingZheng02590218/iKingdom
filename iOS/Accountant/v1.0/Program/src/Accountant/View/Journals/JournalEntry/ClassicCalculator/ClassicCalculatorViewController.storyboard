@@ -16,7 +16,7 @@
         <!--Classic Calculator View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ClassicCalcuatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ClassicCalculatorViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClassicCalcuatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ClassicCalculatorViewController" customModule="AccountantTests" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="364.5" width="414" height="531.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xY-0v-zIO" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                        <rect key="frame" x="41.5" y="54.5" width="331" height="72.5"/>
+                                        <rect key="frame" x="41.5" y="44.5" width="331" height="72.5"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAD-qk-30y">
                                                 <rect key="frame" x="1" y="1" width="329" height="70.5"/>
@@ -363,9 +363,9 @@
                                     <constraint firstAttribute="bottom" secondItem="qaE-hJ-5UJ" secondAttribute="bottom" constant="30" id="F54-Zu-Ge5"/>
                                     <constraint firstItem="qaE-hJ-5UJ" firstAttribute="width" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.8" id="JEn-qv-Dtf"/>
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="height" relation="greaterThanOrEqual" secondItem="qaE-hJ-5UJ" secondAttribute="height" multiplier="0.2" id="XiT-EE-nWI"/>
-                                    <constraint firstItem="qaE-hJ-5UJ" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="bottom" constant="10" id="dwN-gE-d2y"/>
+                                    <constraint firstItem="qaE-hJ-5UJ" firstAttribute="top" secondItem="2xY-0v-zIO" secondAttribute="bottom" constant="20" id="dwN-gE-d2y"/>
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="width" secondItem="hrN-O8-LWP" secondAttribute="width" multiplier="0.8" id="i69-FH-AlC"/>
-                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="top" constant="10" id="kys-pM-hyo"/>
+                                    <constraint firstItem="2xY-0v-zIO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="top" constant="20" id="kys-pM-hyo"/>
                                     <constraint firstItem="2xY-0v-zIO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="leading" id="tUw-ao-KaE"/>
                                 </constraints>
                             </view>
@@ -423,56 +423,6 @@
             <point key="canvasLocation" x="35" y="66"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="0xa-9U-hff">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="67Q-c1-Utk">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="6Vk-6h-Mug">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="Bqw-my-Qin">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="Erw-G6-iSV">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="KZq-cq-dco">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="OUl-ck-MAZ">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="XoO-4n-QWe">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="YHG-r9-gOZ">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="aDU-k4-flG">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="jfa-w0-7A1">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="q3X-KY-UT0">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="qVe-2f-Doy">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="t7R-DU-4BS">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="vQA-Db-dfL">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-        <designable name="xXE-2f-HKE">
-            <size key="intrinsicContentSize" width="47" height="58.5"/>
-        </designable>
-    </designables>
     <resources>
         <namedColor name="Background">
             <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
