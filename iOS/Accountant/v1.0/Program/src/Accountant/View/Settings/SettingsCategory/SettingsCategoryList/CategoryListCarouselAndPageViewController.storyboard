@@ -70,11 +70,13 @@
                     <navigationItem key="navigationItem" title="勘定科目一覧" id="NFT-2f-UH9">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="edit" id="avs-VZ-7NF">
+                                <color key="tintColor" name="AccentBlue"/>
                                 <connections>
                                     <action selector="editButtonTapped:" destination="qWJ-fX-ARW" id="X8w-5k-6Ei"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="xU2-W2-fCt">
+                                <color key="tintColor" name="AccentBlue"/>
                                 <connections>
                                     <segue destination="wUu-3j-g8E" kind="presentation" identifier="segue_add_account" id="8ws-jh-2AV"/>
                                 </connections>
@@ -113,6 +115,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentBlue">
+            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Background">
             <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

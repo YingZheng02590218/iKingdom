@@ -107,8 +107,9 @@ class PDFMakerViewController: UIViewController, QLPreviewControllerDataSource, U
     }
     
     func readDB() {
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        let objects = dataBaseManager.getJournalEntry(section: 0)
+
+        let dataBaseManager = JournalsModel()
+        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
         
         var htmlString = ""
         // 行を取得する
@@ -118,7 +119,7 @@ class PDFMakerViewController: UIViewController, QLPreviewControllerDataSource, U
         // HTMLのヘッダーを取得する
          let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
-        for item in objects {
+        for item in dataBaseJournalEntries {
             
             let fiscalYear = item.fiscalYear
             if counter == 0 {
@@ -145,8 +146,11 @@ class PDFMakerViewController: UIViewController, QLPreviewControllerDataSource, U
             let smallWritting = item.smallWritting
             let balance_left = item.balance_left
             let balance_right = item.balance_right
+            let genearlLedgerAccountModel = GenearlLedgerAccountModel()
+            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(credit_category)")// 損益勘定の場合はエラーになる
+            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debit_category)")// 損益勘定の場合はエラーになる
             
-            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting)
+            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting, numberOfAccountCredit: numberOfAccountCredit, numberOfAccountDebit: numberOfAccountDebit)
             htmlString.append(rowString)
             
             totalDebit_amount += item.debit_amount

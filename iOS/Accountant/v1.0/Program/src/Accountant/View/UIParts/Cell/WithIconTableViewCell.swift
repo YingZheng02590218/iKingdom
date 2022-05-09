@@ -15,7 +15,8 @@ class WithIconTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // アイコン画像の色を指定する
+        leftImageView.tintColor = .TextColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

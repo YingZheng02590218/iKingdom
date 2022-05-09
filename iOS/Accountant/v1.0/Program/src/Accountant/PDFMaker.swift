@@ -16,7 +16,6 @@ class PDFMaker {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelper()
-//    let paperSize = CGSize(width: 182 / 25.4 * 72, height: 257 / 25.4 * 72) // B5 192×262mm 182mm×257mm
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     
@@ -57,8 +56,10 @@ class PDFMaker {
     }
     
     func readDB() {
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        let objects = dataBaseManager.getJournalEntry(section: 0)
+        
+        let dataBaseManager = JournalsModel()
+        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
+        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
         
         var htmlString = ""
         
@@ -72,8 +73,8 @@ class PDFMaker {
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
-        // 行数分繰り返す
-        for item in objects {
+        // 行数分繰り返す 仕訳
+        for item in dataBaseJournalEntries {
             
             let fiscalYear = item.fiscalYear
             if counter == 0 {
@@ -100,8 +101,48 @@ class PDFMaker {
             let smallWritting = item.smallWritting
             let balance_left = item.balance_left
             let balance_right = item.balance_right
+            let genearlLedgerAccountModel = GenearlLedgerAccountModel()
+            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(credit_category)")// 損益勘定の場合はエラーになる
+            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debit_category)")// 損益勘定の場合はエラーになる
+
+            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting, numberOfAccountCredit: numberOfAccountCredit, numberOfAccountDebit: numberOfAccountDebit)
+            htmlString.append(rowString)
             
-            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting)
+            totalDebit_amount += item.debit_amount
+            totalCredit_amount += item.credit_amount
+            
+            if counter >= 9 {
+                let tableFooter = hTMLhelper.footerstring(debit_amount: totalDebit_amount, credit_amount: totalCredit_amount)
+                htmlString.append(tableFooter)
+            }
+            counter += 1
+            if counter >= 10 {
+                counter = 0
+                pageNumber += 1
+            }
+        }
+        // 行数分繰り返す 決算整理仕訳
+        for item in dataBaseAdjustingEntries {
+            
+            let fiscalYear = item.fiscalYear
+            if counter == 0 {
+                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
+                htmlString.append(tableHeader)
+            }
+            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
+            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            let debit_category = item.debit_category
+            let debit_amount = item.debit_amount
+            let credit_category = item.credit_category
+            let credit_amount = item.credit_amount
+            let smallWritting = item.smallWritting
+            let balance_left = item.balance_left
+            let balance_right = item.balance_right
+            let genearlLedgerAccountModel = GenearlLedgerAccountModel()
+            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(credit_category)")// 損益勘定の場合はエラーになる
+            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debit_category)")// 損益勘定の場合はエラーになる
+            
+            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting, numberOfAccountCredit: numberOfAccountCredit, numberOfAccountDebit: numberOfAccountDebit)
             htmlString.append(rowString)
             
             totalDebit_amount += item.debit_amount

@@ -10,6 +10,10 @@ import UIKit
 
 class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    @IBOutlet var listCollectionView: UICollectionView!
+    var tappedIndexPath: IndexPath?
+    var viewReload = false // リロードするかどうか
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +26,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         listCollectionView.addGestureRecognizer(longPressRecognizer)
 
     }
-    var viewReload = false // リロードするかどうか
+    
     override func viewWillAppear(_ animated: Bool) {
         self.createList() // リストを作成
         // 仕訳テンプレートを追加や削除して、仕訳テンプレート画面に戻ってきてもリロードされない。reloadData()は、仕訳テンプレート画面に戻ってきた時のみ実行するように修正
@@ -48,7 +52,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     // MARK: - Create View
 
     // リスト作成
-    @IBOutlet var listCollectionView: UICollectionView!
     func createList() {
         //xib読み込み
         let nib = UINib(nibName: "ListCollectionViewCell", bundle: .main)
@@ -62,11 +65,12 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         
         if indexPath?.section == 1 {
             print("空白行を長押し")
-        }else {
+        }
+        else {
             guard let _ = indexPath else {
                 return
             }
-            if recognizer.state == UIGestureRecognizer.State.began  {
+            if recognizer.state == UIGestureRecognizer.State.began {
                 // 長押しされた場合の処理
                 print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
                 // ロングタップされたセルの位置をフィールドで保持する
@@ -85,20 +89,21 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
                     return true //true: 画面遷移させる
                 }
             }
-        }else if identifier == "buttonTapped" {
+        }
+        else if identifier == "buttonTapped" {
             return true
         }
         return false //false:画面遷移させない
     }
     // 追加機能　画面遷移の準備　仕訳画面
-    var tappedIndexPath: IndexPath?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
         let controller = segue.destination as! JournalEntryTemplateViewController
         // 遷移先のコントローラに値を渡す
         if segue.identifier == "buttonTapped" {
             controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
-        }else if segue.identifier == "longTapped" {
+        }
+        else if segue.identifier == "longTapped" {
             if tappedIndexPath != nil { // nil:ロングタップではない
                 controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
                 controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
@@ -153,9 +158,10 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         print(collectionView.frame)
         print(view.frame)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return CGSize(width: collectionView.frame.width / 3 - 6, height: 100)
-        }else {
-            return CGSize(width: collectionView.frame.width - 6, height: 100)
+            return CGSize(width: (collectionView.frame.width / 3) - 20, height: 100)
+        }
+        else {
+            return CGSize(width: collectionView.frame.width - 20, height: 100)
         }
     }
     //余白の調整（UIImageを拡大、縮小している）

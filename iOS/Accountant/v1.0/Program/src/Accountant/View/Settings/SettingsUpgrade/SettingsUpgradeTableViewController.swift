@@ -154,7 +154,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }else {
                 cell.accessoryType = .disclosureIndicator
             }
-            cell.leftImageView.image = UIImage(named: "icons8-復元-25")
+            cell.leftImageView.image = UIImage(named: "icons8-復元-25")?.withRenderingMode(.alwaysTemplate)
             return cell
         case 2:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
@@ -165,7 +165,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }else {
                 cell.centerLabel.text = "How to cancel"
             }
-            cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")
+            cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")?.withRenderingMode(.alwaysTemplate)
             return cell
         case 3:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
@@ -176,7 +176,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }else {
                 cell.centerLabel.text = "Privacy Policy / Terms of Use"
             }
-            cell.leftImageView.image = UIImage(named: "icons8-ポリシー文書-25")
+            cell.leftImageView.image = UIImage(named: "icons8-ポリシー文書-25")?.withRenderingMode(.alwaysTemplate)
             return cell
         default:
             return cell

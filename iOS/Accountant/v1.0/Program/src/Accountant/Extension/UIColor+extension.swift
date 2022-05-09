@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    /// AccentOrange RGB:#xxxx
-    class var AccentOrange: UIColor {
-        return UIColor(named: "AccentOrange")!
+    /// AccentBlue RGB:#xxxx
+    class var AccentBlue: UIColor {
+        return UIColor(named: "AccentBlue")!
     }
     
     class var TextColor: UIColor {

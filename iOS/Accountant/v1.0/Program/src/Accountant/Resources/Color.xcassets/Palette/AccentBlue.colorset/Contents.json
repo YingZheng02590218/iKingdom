@@ -16,7 +16,7 @@
       ],
       "color" : {
         "platform" : "ios",
-        "reference" : "systemGray5Color"
+        "reference" : "linkColor"
       },
       "idiom" : "universal"
     }
