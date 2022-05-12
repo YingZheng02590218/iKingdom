@@ -127,7 +127,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 3:
-            return "開発者へメールを送信することができます。"
+            return "開発者へメールを送ることができます。メールを受信できるように受信拒否設定は解除してください。"
         default:
             return ""
         }
@@ -185,7 +185,8 @@ class SettingsTableViewController: UITableViewController {
             default:
                 return WithIconTableViewCell()
             }
-        }else {
+        }
+        else {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定　TableViewCell
@@ -201,7 +202,7 @@ class SettingsTableViewController: UITableViewController {
             case 2:
                 // お問い合わせ機能
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
-                cell.centerLabel.text = "問い合わせ(要望・不具合報告など)"
+                cell.centerLabel.text = "お問い合わせ(要望・不具合報告など)"
                 cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
@@ -270,9 +271,9 @@ class SettingsTableViewController: UITableViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
                     mail.mailComposeDelegate = self
-                    mail.setToRecipients(["paciolist@gmail.com"])   // 宛先アドレス
-                    mail.setSubject("問い合わせ")                          // 件名
-                    mail.setMessageBody("", isHTML: false)             // 本文
+                    mail.setToRecipients(["paciolist@gmail.com"])     // 宛先アドレス
+                    mail.setSubject("お問い合わせ")                     // 件名
+                    mail.setMessageBody("", isHTML: false)            // 本文
                     present(mail, animated: true, completion: nil)
                 }
                 else {

@@ -467,7 +467,7 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
         
         if let navigationController = self.navigationController {
             // ナビゲーションバーの半透明化（デフォルト）しない　storyboardでは設定が反映されなかった
-            navigationController.navigationBar.isTranslucent = false
+//            navigationController.navigationBar.isTranslucent = false
             // ナビゲーションを透明にする処理
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
             navigationController.navigationBar.shadowImage = UIImage()
