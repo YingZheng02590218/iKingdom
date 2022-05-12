@@ -33,10 +33,6 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     @IBOutlet weak var button_print: UIButton!
     /// 勘定　下部
     @IBOutlet weak var tableView: UITableView!
-    // 年度変更機能
-    let dateFormatter = DateFormatter()
-    let fffff = DateFormatter()
-    let ffffff = DateFormatter()
     // 勘定名
     var account :String = ""
     // 印刷機能
@@ -78,14 +74,6 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
-        // 年度変更機能
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
-        dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
-        fffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        fffff.timeZone = .current
-        ffffff.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        ffffff.timeZone = .current
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -258,12 +246,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-                let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
-                let dayOfStartInPeriod = fffff.date(from: theDayOfReckoning + "/" + String(dataBaseAccountingBook.fiscalYear) + ", " + ffffff.string(from: Date()))!// 注意：カンマの後にスペースがないとnilになる
-                let fullTheDayOfReckoning = Calendar.current.date(byAdding: .year, value: 1, to: dayOfStartInPeriod)! // 決算日設定機能　年度開始日は決算日の翌日に設定する
-                if dayOfStartInPeriod < dateFormatter.date(from: presenter.databaseJournalEntries(forRow:indexPath.row).date)! &&
-                    dateFormatter.date(from: presenter.databaseJournalEntries(forRow:indexPath.row).date)! < fullTheDayOfReckoning {
+                if DateManager.shared.isInPeriod(date: presenter.databaseJournalEntries(forRow: indexPath.row).date) {
                     cell.label_list_date_month.textColor = .TextColor
                     cell.label_list_date_day.textColor = .TextColor
                     cell.label_list_summary.textColor = .TextColor
@@ -303,12 +286,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 balanceDebitOrCredit = presenter.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-                let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
-                let dayOfStartInPeriod = fffff.date(from: theDayOfReckoning + "/" + String(dataBaseAccountingBook.fiscalYear) + ", " + ffffff.string(from: Date()))!// 注意：カンマの後にスペースがないとnilになる
-                let fullTheDayOfReckoning = Calendar.current.date(byAdding: .year, value: 1, to: dayOfStartInPeriod)! // 決算日設定機能　年度開始日は決算日の翌日に設定する
-                if dayOfStartInPeriod < dateFormatter.date(from: presenter.dataBaseAdjustingEntries(forRow:indexPath.row).date)! &&
-                    dateFormatter.date(from: presenter.dataBaseAdjustingEntries(forRow:indexPath.row).date)! < fullTheDayOfReckoning {
+                if DateManager.shared.isInPeriod(date: presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date) {
                     cell.label_list_date_month.textColor = .TextColor
                     cell.label_list_date_day.textColor = .TextColor
                     cell.label_list_summary.textColor = .TextColor

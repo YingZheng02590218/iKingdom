@@ -166,6 +166,8 @@
 		F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
 		F9D5D54D247E48D600EA35C7 /* GenearlLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */; };
 		F9D5D54F247E783C00EA35C7 /* TableViewCellGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */; };
+		F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
+		F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -554,6 +556,7 @@
 		F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountViewController.swift; sourceTree = "<group>"; };
 		F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* TableViewCellGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellGeneralLedger.swift; sourceTree = "<group>"; };
+		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -844,6 +847,7 @@
 				F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
+				F9DA6CB4282D03B50016A1A7 /* Utils */,
 				F9A668712662483D008E9137 /* Extension */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F93A630324FAD5D500C1C2C1 /* AccountingBooksShelf */,
@@ -1256,6 +1260,14 @@
 				F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */,
 			);
 			path = GenearlLedgerAccount;
+			sourceTree = "<group>";
+		};
+		F9DA6CB4282D03B50016A1A7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F9E0F43526413E2700085CC0 /* Cell */ = {
@@ -1905,6 +1917,7 @@
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
+				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
 				F9F4607924D06F6C008FE62B /* TableViewCellCompanyName.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
@@ -2040,6 +2053,7 @@
 				F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */,
 				F9EC66F527B90BC60003FBB6 /* DocumentView.swift in Sources */,
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
+				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
 				F9EC66F727B90BC60003FBB6 /* TableViewCellCompanyName.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
