@@ -31,6 +31,11 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        
+        self.navigationItem.title = "設定"
+        //largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -94,6 +94,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             // 初期化処理
             initialize()
         }
+        self.navigationItem.title = "仕訳"
+        //largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func initialize() {

@@ -424,6 +424,9 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
         initializeGenearlLedgerAccount()
 
         self.navigationItem.title = "勘定"
+        //largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     func setupViewForViewWillAppear() {
