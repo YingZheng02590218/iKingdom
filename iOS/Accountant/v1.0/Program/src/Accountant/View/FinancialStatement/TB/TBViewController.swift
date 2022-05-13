@@ -385,6 +385,7 @@ extension TBViewController: TBPresenterOutput {
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
+        button_print.isHidden = true
         self.navigationItem.title = "合計残高試算表"
     }
     
