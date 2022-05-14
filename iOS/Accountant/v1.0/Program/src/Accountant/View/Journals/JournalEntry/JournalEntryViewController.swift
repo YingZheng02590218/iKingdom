@@ -98,6 +98,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        // 日付　ボタン作成
+        createButtons()
     }
 
     func initialize() {
@@ -1337,9 +1339,7 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         // データベース　よく使う仕訳を追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
-        if "" != objects[indexPath.row].nickname {
-            cell.nicknameLabel.text = objects[indexPath.row].nickname
-        }
+        cell.nicknameLabel.text = objects[indexPath.row].nickname
         return cell
     }
 //    //セル間の間隔を指定

@@ -22,6 +22,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        createViewDesign()
     }
     
     override func layoutSubviews() {
