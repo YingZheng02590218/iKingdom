@@ -9,7 +9,7 @@
 import UIKit
 
 // 勘定科目詳細セル　テキストフィールド入力　勘定科目名
-class TableViewCellSettingAccountDetailAccount: UITableViewCell, UITextFieldDelegate {
+class TableViewCellSettingAccountDetailAccount: UITableViewCell {
 
     @IBOutlet var textField_AccountDetail_Account: UITextField!
 
@@ -46,6 +46,10 @@ class TableViewCellSettingAccountDetailAccount: UITableViewCell, UITextFieldDele
         self.textField_AccountDetail_Account.text = ""
         self.endEditing(true)
     }
+}
+
+extension TableViewCellSettingAccountDetailAccount: UITextFieldDelegate {
+
     // textFieldに文字が入力される際に呼ばれる　入力チェック(文字列、文字数制限)
     // 戻り値にtrueを返すと入力した文字がTextFieldに反映され、falseを返すと入力した文字が反映されない。
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -53,7 +57,8 @@ class TableViewCellSettingAccountDetailAccount: UITableViewCell, UITextFieldDele
         var resultForLength = false
         // 入力チェック　カンマを除外
         if textField == textField_AccountDetail_Account { // 勘定科目名
-            let notAllowedCharacters = CharacterSet(charactersIn:",")//Here change this characters based on your requirement
+            // 除外したい文字　(半角空白、全角空白)
+            let notAllowedCharacters = CharacterSet(charactersIn:", 　") //Here change this characters based on your requirement
             let characterSet = CharacterSet(charactersIn: string)
             // 指定したスーパーセットの文字セットでないならfalseを返す
             resultForCharacter = !(notAllowedCharacters.isSuperset(of: characterSet))
@@ -73,9 +78,11 @@ class TableViewCellSettingAccountDetailAccount: UITableViewCell, UITextFieldDele
         // 判定
         if !resultForCharacter { // 指定したスーパーセットの文字セットならfalseを返す
             return false
-        }else if !resultForLength { // 最大文字数以上ならfalseを返す
+        }
+        else if !resultForLength { // 最大文字数以上ならfalseを返す
             return false
-        }else {
+        }
+        else {
             return true
         }
     }

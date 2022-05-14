@@ -258,6 +258,18 @@ class DatabaseManagerSettingsTaxonomyAccount  {
             realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
         }
     }
+    // 存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
+    func isExistSettingsTaxonomyAccount(category: String) -> Bool {
+        let realm = try! Realm()
+        let dataBaseSettingsTaxonomyAccounts = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+                        .filter("category LIKE '\(category)'") // 勘定科目を絞る
+        if dataBaseSettingsTaxonomyAccounts.count > 0 {
+            return true // ある
+        }
+        else {
+            return false // ない
+        }
+    }
     // 追加　設定勘定科目　新規作成
     func addSettingsTaxonomyAccount(Rank0: String, Rank1: String, Rank2: String, numberOfTaxonomy: String, category: String, switching: Bool) -> Int {
         // オブジェクトを作成

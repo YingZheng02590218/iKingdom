@@ -42,6 +42,8 @@
 		F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
+		F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
+		F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
 		F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94DE33627DC9C020022F739 /* MessageUI.framework */; };
@@ -427,6 +429,7 @@
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		F9482EAC282F9E20008B82E1 /* UIString+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+extension.swift"; sourceTree = "<group>"; };
 		F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingJournals.swift; sourceTree = "<group>"; };
 		F94DE33627DC9C020022F739 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F94E79EA259DF8C7004726F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -1127,6 +1130,7 @@
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
+				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1830,6 +1834,7 @@
 				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* TableViewCellCategoryList.swift in Sources */,
 				F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */,
+				F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */,
 				F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9F4607424C9E0BD008FE62B /* File2.swift in Sources */,
 				F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
@@ -1966,6 +1971,7 @@
 				F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */,
 				F9EC66A127B90BC60003FBB6 /* TableViewCellCategoryList.swift in Sources */,
 				F9EC66A227B90BC60003FBB6 /* PDFMaker.swift in Sources */,
+				F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */,
 				F9EC66A327B90BC60003FBB6 /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */,
 				F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
