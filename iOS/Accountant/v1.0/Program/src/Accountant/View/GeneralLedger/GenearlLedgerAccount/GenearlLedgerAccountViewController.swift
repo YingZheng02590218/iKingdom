@@ -432,6 +432,8 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
     func setupViewForViewWillAppear() {
         // ヘッダー部分　勘定名を表示
         label_list_heading.text = account
+        label_list_heading.font = UIFont.boldSystemFont(ofSize: 21)
+
         if let fiscalYear = presenter.fiscalYear {
             label_date_year.text = fiscalYear.description + "年"
         }

@@ -670,6 +670,7 @@ extension PLViewController: PLPresenterOutput {
             }
         }
         label_title.text = "損益計算書"
+        label_title.font = UIFont.boldSystemFont(ofSize: 21)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView

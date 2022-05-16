@@ -413,6 +413,8 @@ extension TBViewController: TBPresenterOutput {
             label_title.text = "決算整理前残高試算表"
             self.navigationItem.title = "決算整理前残高試算表"
         }
+        label_title.font = UIFont.boldSystemFont(ofSize: 18)
+
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView

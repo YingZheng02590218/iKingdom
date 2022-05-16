@@ -31,9 +31,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="408" height="31"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -45,9 +45,9 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="408" height="31"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -55,22 +55,18 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="Fc2-HD-pSV" secondAttribute="trailing" id="3CS-ny-que"/>
-                                                            <constraint firstItem="aHQ-AM-Ixh" firstAttribute="width" secondItem="wqe-TZ-AuG" secondAttribute="width" id="AQF-A0-FsB"/>
-                                                            <constraint firstItem="aHQ-AM-Ixh" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" id="B5m-4F-Kld"/>
                                                             <constraint firstAttribute="trailing" secondItem="aHQ-AM-Ixh" secondAttribute="trailing" id="E1N-Ko-gGN"/>
                                                             <constraint firstItem="5dR-qc-gzB" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="EaI-bZ-0Js"/>
                                                             <constraint firstItem="aHQ-AM-Ixh" firstAttribute="top" secondItem="wqe-TZ-AuG" secondAttribute="top" id="EzB-aG-kYP"/>
                                                             <constraint firstItem="5dR-qc-gzB" firstAttribute="width" secondItem="wqe-TZ-AuG" secondAttribute="width" id="GRi-eW-aVt"/>
                                                             <constraint firstAttribute="bottom" secondItem="Fc2-HD-pSV" secondAttribute="bottom" id="HQ8-PJ-uqr"/>
-                                                            <constraint firstItem="5dR-qc-gzB" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" id="I5r-pP-W4O"/>
+                                                            <constraint firstItem="5dR-qc-gzB" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" multiplier="0.5" id="I5r-pP-W4O"/>
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="width" secondItem="wqe-TZ-AuG" secondAttribute="width" id="LBC-Gy-lMq"/>
                                                             <constraint firstAttribute="bottom" secondItem="aHQ-AM-Ixh" secondAttribute="bottom" id="Nfa-bS-8lk"/>
-                                                            <constraint firstItem="Fc2-HD-pSV" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" id="TRf-nm-sb7"/>
+                                                            <constraint firstItem="Fc2-HD-pSV" firstAttribute="height" secondItem="wqe-TZ-AuG" secondAttribute="height" multiplier="0.5" id="TRf-nm-sb7"/>
                                                             <constraint firstAttribute="bottom" secondItem="5dR-qc-gzB" secondAttribute="bottom" id="TcZ-WT-1ZG"/>
-                                                            <constraint firstItem="5dR-qc-gzB" firstAttribute="top" secondItem="wqe-TZ-AuG" secondAttribute="top" id="ZxW-rX-ZCx"/>
                                                             <constraint firstAttribute="trailing" secondItem="5dR-qc-gzB" secondAttribute="trailing" id="cc0-ot-57d"/>
                                                             <constraint firstItem="aHQ-AM-Ixh" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="eX2-Ur-Zxl"/>
-                                                            <constraint firstItem="Fc2-HD-pSV" firstAttribute="top" secondItem="wqe-TZ-AuG" secondAttribute="top" id="vIy-Zd-IGx"/>
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="xzc-SF-r6b"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
@@ -79,14 +75,14 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
                                                         <rect key="frame" x="0.0" y="61.5" width="408" height="61"/>
                                                         <subviews>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFW-fO-F9C">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="99.5" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="3vn-4g-NqC" userLabel="list_debit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -102,10 +98,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifW-Bi-RUu">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
+                                                                <rect key="frame" x="99.5" y="0.0" width="209" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="hkT-8r-06u" userLabel="account_name">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -121,10 +117,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJg-go-Uex">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="61"/>
+                                                                <rect key="frame" x="308.5" y="0.0" width="99.5" height="61"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="XXs-8w-VdH" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="2" height="61"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="101" height="61"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
