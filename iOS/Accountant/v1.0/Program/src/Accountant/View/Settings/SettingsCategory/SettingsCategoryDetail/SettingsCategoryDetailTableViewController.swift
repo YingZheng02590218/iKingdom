@@ -433,14 +433,17 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 let removeWhitesSpacesString = str.removeWhitespacesAndNewlines
                 print("##", "「" + removeWhitesSpacesString + "」")
                 cell_category.textField_AccountDetail_Account!.text = removeWhitesSpacesString
+                
                 // 存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
                 let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
                 if databaseManagerSettingsTaxonomyAccount.isExistSettingsTaxonomyAccount(category: removeWhitesSpacesString) {
                     // テキストフィールドの枠線を赤色とする。
                     cell_category.textField_AccountDetail_Account.layer.borderColor = UIColor.red.cgColor
                     cell_category.textField_AccountDetail_Account.layer.borderWidth = 1.0
+                    
+                    accountname = ""
                     // アラートを表示する
-                    let alert = UIAlertController(title: "勘定科目名", message: "すでに存在しています", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "勘定科目名", message: "同名が既に存在しています", preferredStyle: .alert)
                     self.present(alert, animated: true) { () -> Void in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                             self.dismiss(animated: true, completion: nil)
