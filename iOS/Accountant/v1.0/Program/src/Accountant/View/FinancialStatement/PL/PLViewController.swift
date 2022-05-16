@@ -298,6 +298,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as! BSTableViewCell
+        cell.labelForThisYear.font = UIFont.systemFont(ofSize: 14)
+        cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
+        cell.labelForThisYear.attributedText = nil
+        cell.labelForPrevious.attributedText = nil
         // TODO: Model へ移動
         let han =           3 + presenter.numberOfobjects9 + 1 //販売費及び一般管理費合計
         let ei =            3 + presenter.numberOfobjects9 + 2 //営業利益
@@ -347,13 +351,33 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "売上総利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getBenefitTotal(benefit: 0, lastYear: false)
+            let text:String = presenter.getBenefitTotal(benefit: 0, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getBenefitTotal(benefit: 0, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getBenefitTotal(benefit: 0, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
         case 3: //販売費及び一般管理費9
@@ -367,26 +391,66 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "販売費及び一般管理費合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank0(big5: 3, rank0: 8, lastYear: false)
+            let text:String = presenter.getTotalRank0(big5: 3, rank0: 8, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank0(big5: 3, rank0: 8, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank0(big5: 3, rank0: 8, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case ei: //営業利益
             cell.textLabel?.text = "営業利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getBenefitTotal(benefit: 1, lastYear: false)
+            let text:String = presenter.getBenefitTotal(benefit: 1, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getBenefitTotal(benefit: 1, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getBenefitTotal(benefit: 1, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
         case eigai: //営業外収益10
@@ -400,13 +464,33 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "営業外収益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
+            let text:String = presenter.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank1(big5: 4, rank1: 15, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank1(big5: 4, rank1: 15, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case eigaih: //営業外費用6
@@ -420,26 +504,66 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "営業外費用合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank1(big5: 3, rank1: 16, lastYear: false)
+            let text:String = presenter.getTotalRank1(big5: 3, rank1: 16, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank1(big5: 3, rank1: 16, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank1(big5: 3, rank1: 16, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case kei: //経常利益
             cell.textLabel?.text = "経常利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getBenefitTotal(benefit: 2, lastYear: false)
+            let text:String = presenter.getBenefitTotal(benefit: 2, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getBenefitTotal(benefit: 2, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getBenefitTotal(benefit: 2, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
         case toku: //特別利益11
@@ -453,13 +577,33 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "特別利益合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank1(big5: 4, rank1: 17, lastYear: false)
+            let text:String = presenter.getTotalRank1(big5: 4, rank1: 17, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank1(big5: 4, rank1: 17, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank1(big5: 4, rank1: 17, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case tokus: //特別損失7
@@ -473,62 +617,142 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "特別損失合計"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank1(big5: 3, rank1: 18, lastYear: false)
+            let text:String = presenter.getTotalRank1(big5: 3, rank1: 18, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank1(big5: 3, rank1: 18, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank1(big5: 3, rank1: 18, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case zei: //税金等調整前当期純利益
             cell.textLabel?.text = "税金等調整前当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getBenefitTotal(benefit: 3, lastYear: false)
+            let text:String = presenter.getBenefitTotal(benefit: 3, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getBenefitTotal(benefit: 3, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getBenefitTotal(benefit: 3, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
         case zeikin: //税等8
             cell.textLabel?.text = "法人税等"
             cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getTotalRank0(big5: 3, rank0: 11, lastYear: false)
+            let text:String = presenter.getTotalRank0(big5: 3, rank0: 11, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getTotalRank0(big5: 3, rank0: 11, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getTotalRank0(big5: 3, rank0: 11, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.systemFont(ofSize: 13)
             return cell
         case touki: //当期純利益
             cell.textLabel?.text = "当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = presenter.getBenefitTotal(benefit: 4, lastYear: false)
+            let text:String = presenter.getBenefitTotal(benefit: 4, lastYear: false)
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeText = NSMutableAttributedString(string: text)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeText.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, text.count)
+            )
+            cell.labelForThisYear.attributedText = attributeText
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+            var textt:String = ""
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = presenter.getBenefitTotal(benefit: 4, lastYear: true)
-            }else {
-                cell.labelForPrevious.text = "-"
+                textt = presenter.getBenefitTotal(benefit: 4, lastYear: true)
             }
+            else {
+                textt = "-"
+            }
+            // テキストをカスタマイズするために、NSMutableAttributedStringにする
+            let attributeTextt = NSMutableAttributedString(string: textt)
+            // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
+            attributeTextt.addAttribute(
+                NSAttributedString.Key.underlineStyle,
+                value: NSUnderlineStyle.single.rawValue,
+                range: NSMakeRange(0, textt.count)
+            )
+            cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
         case htouki: //非支配株主に帰属する当期純利益
             cell.textLabel?.text = "非支配株主に帰属する当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"//presenter.getBenefitTotal(benefit: 4) //todo
+            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"//presenter.getBenefitTotal(benefit: 4) //todo
+                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
             }else {
                 cell.labelForPrevious.text = "-"
             }
@@ -538,10 +762,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "親会社株主に帰属する当期純利益"
             cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"//presenter.getBenefitTotal(benefit: 4) //todo
+            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
             cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"//presenter.getBenefitTotal(benefit: 4) //todo
+                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4) 
             }else {
                 cell.labelForPrevious.text = "-"
             }
