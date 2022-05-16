@@ -79,9 +79,9 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         // 勘定科目区分　大区分
         categories = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
         // データベース
-        let databaseManager = DatabaseManagerSettingsTaxonomyAccount()
+        let databaseManager = CategoryListModel()
         for i in 0..<categories.count {
-            let objects = databaseManager.getSettingsSwitchingOn(section: i) // どのセクションに表示するセルかを判別するため引数で渡す
+            let objects = databaseManager.getSettingsSwitchingOn(Rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
 //            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
             var items: Array<String> = Array<String>()
             for y in 0..<objects.count {    // 勘定

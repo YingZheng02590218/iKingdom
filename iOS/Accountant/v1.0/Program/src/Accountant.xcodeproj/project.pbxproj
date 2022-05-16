@@ -44,6 +44,10 @@
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
 		F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
 		F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
+		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
+		F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
+		F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */; };
+		F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */; };
 		F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */; };
 		F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94DE33627DC9C020022F739 /* MessageUI.framework */; };
@@ -430,6 +434,8 @@
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* UIString+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+extension.swift"; sourceTree = "<group>"; };
+		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
+		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
 		F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingJournals.swift; sourceTree = "<group>"; };
 		F94DE33627DC9C020022F739 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F94E79EA259DF8C7004726F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -1200,6 +1206,7 @@
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 				F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */,
+				F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */,
 			);
 			name = Presenter;
 			path = View/Presenter;
@@ -1447,6 +1454,7 @@
 			isa = PBXGroup;
 			children = (
 				F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */,
+				F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */,
 				F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */,
 			);
 			path = SettingsTaxonomyAccountDB;
@@ -1909,6 +1917,7 @@
 				F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */,
 				F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */,
 				F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */,
+				F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
@@ -1930,6 +1939,7 @@
 				F99112E42495290000E28BB9 /* BSModel.swift in Sources */,
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
+				F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */,
 				F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */,
@@ -2046,6 +2056,7 @@
 				F9EC66E727B90BC60003FBB6 /* FinancialStatementTableViewController.swift in Sources */,
 				F9EC66E827B90BC60003FBB6 /* GeneralLedgerAccountTableViewCell.swift in Sources */,
 				F9EC66E927B90BC60003FBB6 /* DataBaseManagerFinancialStatements.swift in Sources */,
+				F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
@@ -2067,6 +2078,7 @@
 				F9EC66FA27B90BC60003FBB6 /* BSModel.swift in Sources */,
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,
+				F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F9EC66FD27B90BC60003FBB6 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9EC66FE27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.swift in Sources */,
 				F9EC66FF27B90BC60003FBB6 /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */,

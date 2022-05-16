@@ -92,15 +92,6 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }
-    // 取得 大区分別に、スイッチONの勘定科目
-    func getSettingsSwitchingOn(section: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        let realm = try! Realm()
-        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("Rank0 LIKE '\(section)'")
-                        .filter("switching == \(true)") // 勘定科目がONだけに絞る
-        return objects
-    }
     // 取得 設定勘定科目 BSとPLで切り分ける　スイッチON
     func getSettingsSwitchingOnBSorPL(BSorPL: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         let realm = try! Realm()
@@ -292,24 +283,5 @@ class DatabaseManagerSettingsTaxonomyAccount  {
         let dataBaseManagerAccount = GenearlLedgerAccountModel()
         dataBaseManagerAccount.addGeneralLedgerAccount(number: number)
         return number
-    }
-    // 削除　設定勘定科目
-    func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
-        // 勘定クラス　勘定を削除
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
-        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
-        if isInvalidated {
-            // (1)Realmのインスタンスを生成する
-            let realm = try! Realm()
-            // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-            let object = realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number)!
-            try! realm.write {
-                // 仕訳が残ってないか
-                // 勘定を削除
-                realm.delete(object)
-            }
-            return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
-        }
-        return false // 勘定を削除できたら、設定勘定科目を削除する
     }
 }
