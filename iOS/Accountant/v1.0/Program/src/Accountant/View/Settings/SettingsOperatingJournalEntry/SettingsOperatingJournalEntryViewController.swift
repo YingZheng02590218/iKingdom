@@ -29,7 +29,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     
     override func viewWillAppear(_ animated: Bool) {
         self.createList() // リストを作成
-        // 仕訳テンプレートを追加や削除して、仕訳テンプレート画面に戻ってきてもリロードされない。reloadData()は、仕訳テンプレート画面に戻ってきた時のみ実行するように修正
+        // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
             DispatchQueue.main.async {
                 self.listCollectionView.reloadData()
@@ -123,7 +123,7 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         }
         if kind == UICollectionView.elementKindSectionHeader {
             if indexPath.section == 0 {
-                header.sectionLabel.text = "仕訳テンプレート"//"section \(indexPath.section)"
+                header.sectionLabel.text = "よく使う仕訳"//"section \(indexPath.section)"
             }
             return header
         }
@@ -131,7 +131,7 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     }
     //collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // データベース　仕訳テンプレートを追加
+        // データベース　よく使う仕訳を追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         return objects.count
@@ -139,7 +139,7 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     //collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ListCollectionViewCell
-        // データベース　仕訳テンプレートを追加
+        // データベース　よく使う仕訳を追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         cell.nicknameLabel.text = objects[indexPath.row].nickname

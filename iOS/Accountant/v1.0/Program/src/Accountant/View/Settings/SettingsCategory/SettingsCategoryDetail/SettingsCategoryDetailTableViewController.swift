@@ -133,7 +133,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 1:
-            return "勘定科目を決算書上に表記される表示科目に紐付けることができます。"
+            return "勘定科目を、決算書上に表記される表示科目に紐付けてください。"
         default:
             return ""
         }
@@ -427,8 +427,37 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         }
         // 勘定科目名
         let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! TableViewCellSettingAccountDetailAccount
-        if cell_category.textField_AccountDetail_Account!.text != "入力してください" {
-            accountname = cell_category.textField_AccountDetail_Account.text!
+        if let str = cell_category.textField_AccountDetail_Account!.text {
+            if str != "" {
+                // 文字列中の全ての空白や改行を削除する
+                let removeWhitesSpacesString = str.removeWhitespacesAndNewlines
+                print("##", "「" + removeWhitesSpacesString + "」")
+                cell_category.textField_AccountDetail_Account!.text = removeWhitesSpacesString
+                
+                // 存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
+                let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+                if databaseManagerSettingsTaxonomyAccount.isExistSettingsTaxonomyAccount(category: removeWhitesSpacesString) {
+                    // テキストフィールドの枠線を赤色とする。
+                    cell_category.textField_AccountDetail_Account.layer.borderColor = UIColor.red.cgColor
+                    cell_category.textField_AccountDetail_Account.layer.borderWidth = 1.0
+                    
+                    accountname = ""
+                    // アラートを表示する
+                    let alert = UIAlertController(title: "勘定科目名", message: "同名が既に存在しています", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                }
+                else {
+                    // テキストフィールドの枠線を非表示とする。
+                    cell_category.textField_AccountDetail_Account.layer.borderColor = UIColor.lightGray.cgColor
+                    cell_category.textField_AccountDetail_Account.layer.borderWidth = 0.0
+
+                    accountname = cell_category.textField_AccountDetail_Account.text!
+                }
+            }
         }
         // 表示科目名
         let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
@@ -519,27 +548,68 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         var newnumber = 0
         // 入力チェック
+        if textInputCheck() {
+            // TableViewControllerのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(Rank0: self.big_num, Rank1: self.mid_num, Rank2: self.small_num, numberOfTaxonomy: String(self.numberOfTaxonomy), category: self.accountname, switching: true)
+                // 新規追加　を終了するためにフラグを倒す
+                if newnumber != 0 {
+                    self.addAccount = false
+                    //                                presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                    presentingViewController!.viewWillAppear(true) // TableViewをリロードする処理がある
+                }
+            })
+        }
+    }
+    // 入力チェック　バリデーション
+    func textInputCheck() -> Bool {
         if big != "選択してください" && big != "" {
             if mid != "選択してください" && mid != "" {
 //                if small != "選択してください" && small != ""{
-                    if accountname != "入力してください" && accountname != "" {
-                        if taxonomyname != "表示科目を選択してください" && taxonomyname != "" {
-                        // TableViewControllerのviewWillAppearを呼び出す　更新のため
-                        self.dismiss(animated: true, completion: {
-                            [presentingViewController] () -> Void in
-                            newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(Rank0: self.big_num, Rank1: self.mid_num, Rank2: self.small_num, numberOfTaxonomy: String(self.numberOfTaxonomy), category: self.accountname, switching: true)
-                            // 新規追加　を終了するためにフラグを倒す
-                            if newnumber != 0 {
-                                self.addAccount = false
-//                                presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-                                presentingViewController!.viewWillAppear(true) // TableViewをリロードする処理がある
+                if accountname != "入力してください" && accountname != "" {
+                    if taxonomyname != "表示科目を選択してください" && taxonomyname != "" {
+                        return true // OK
+                    }
+                    else {
+                        let alert = UIAlertController(title: "表示科目名", message: "入力してください", preferredStyle: .alert)
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                self.dismiss(animated: true, completion: nil)
                             }
-                        })
+                        }
+                        return false // NG
+                    }
+                }
+                else {
+                    let alert = UIAlertController(title: "勘定科目名", message: "入力してください", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
-//                }
+                    return false // NG
+                }
+            }
+            else {
+                let alert = UIAlertController(title: "中区分", message: "入力してください", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+                return false // NG
             }
         }
-
+        else {
+            let alert = UIAlertController(title: "大区分", message: "入力してください", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+            return false // NG
+        }
     }
 }
+

@@ -20,6 +20,11 @@ class CollectionReusableView: UICollectionReusableView {
         createButtons()
     }
     
+    override func layoutSubviews() {
+        
+        createButtons()
+    }
+    
     let LIGHTSHADOWOPACITY: Float = 0.3
     let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 6

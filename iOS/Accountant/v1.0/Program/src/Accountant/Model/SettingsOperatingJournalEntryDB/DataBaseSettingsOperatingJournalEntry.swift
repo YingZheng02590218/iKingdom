@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-// 設定仕訳画面 仕訳テンプレート
+// 設定仕訳画面 よく使う仕訳
 class DataBaseSettingsOperatingJournalEntry: RObject {
     // モデル定義
     // 連番　プライマリーキー

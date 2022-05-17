@@ -31,9 +31,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-1V-x9k" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="408" height="31"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -46,10 +46,10 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-5s-hJI" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="0.0" width="408" height="61.5"/>
+                                                                <rect key="frame" x="0.0" y="30.5" width="408" height="31"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -60,13 +60,13 @@
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="top" secondItem="fVB-HA-sb7" secondAttribute="top" id="AQk-mu-JIv"/>
                                                             <constraint firstAttribute="bottom" secondItem="O7L-5s-hJI" secondAttribute="bottom" id="Ba4-Xg-uE4"/>
                                                             <constraint firstItem="eWE-1V-x9k" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="KA0-JR-D0Q"/>
-                                                            <constraint firstItem="O7L-5s-hJI" firstAttribute="top" secondItem="fVB-HA-sb7" secondAttribute="top" id="VEH-cB-geg"/>
+                                                            <constraint firstItem="O7L-5s-hJI" firstAttribute="height" secondItem="fVB-HA-sb7" secondAttribute="height" multiplier="0.5" id="Vud-u5-yTX"/>
                                                             <constraint firstAttribute="bottom" secondItem="eWE-1V-x9k" secondAttribute="bottom" id="a1U-X9-kU0"/>
                                                             <constraint firstItem="O7L-5s-hJI" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="bnb-Zx-nsX"/>
                                                             <constraint firstAttribute="trailing" secondItem="O7L-5s-hJI" secondAttribute="trailing" id="iUc-1C-K2r"/>
                                                             <constraint firstAttribute="trailing" secondItem="eWE-1V-x9k" secondAttribute="trailing" id="jNn-b5-HbL"/>
-                                                            <constraint firstItem="eWE-1V-x9k" firstAttribute="top" secondItem="fVB-HA-sb7" secondAttribute="top" id="sD1-KP-5pW"/>
                                                             <constraint firstAttribute="bottom" secondItem="aIP-xT-tcO" secondAttribute="bottom" id="tdE-9R-JQ5"/>
+                                                            <constraint firstItem="eWE-1V-x9k" firstAttribute="height" secondItem="fVB-HA-sb7" secondAttribute="height" multiplier="0.5" id="wIn-k1-tnH"/>
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="wgo-5U-IVM"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>

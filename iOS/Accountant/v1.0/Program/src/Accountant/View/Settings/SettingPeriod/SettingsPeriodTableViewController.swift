@@ -35,6 +35,10 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // テーブルビューセル　作成
         createTableViewCell()
         tableView.allowsMultipleSelection = false
+        self.navigationItem.title = "会計期間"
+        //largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
