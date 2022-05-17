@@ -130,10 +130,13 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBAction func segmentedControl(_ sender: Any) {
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             label_title.text = "決算整理前合計試算表"
-        }else {
-            label_title.text = "決算整理前残高試算表"
+            self.navigationItem.title = "決算整理前合計試算表"
         }
-                tableView.reloadData()
+        else {
+            label_title.text = "決算整理前残高試算表"
+            self.navigationItem.title = "決算整理前残高試算表"
+        }
+        tableView.reloadData()
     }
 
     var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
@@ -382,6 +385,7 @@ extension TBViewController: TBPresenterOutput {
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
+        button_print.isHidden = true
         self.navigationItem.title = "合計残高試算表"
     }
     
@@ -403,9 +407,14 @@ extension TBViewController: TBPresenterOutput {
         }
         if segmentedControl_switch.selectedSegmentIndex == 0 {
             label_title.text = "決算整理前合計試算表"
-        }else {
-            label_title.text = "決算整理前残高試算表"
+            self.navigationItem.title = "決算整理前合計試算表"
         }
+        else {
+            label_title.text = "決算整理前残高試算表"
+            self.navigationItem.title = "決算整理前残高試算表"
+        }
+        label_title.font = UIFont.boldSystemFont(ofSize: 18)
+
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView

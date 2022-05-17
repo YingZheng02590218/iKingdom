@@ -116,7 +116,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     }
     // セクションヘッダーの高さを決める
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight )
+        return 13 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight )
     }
     // セクションヘッダーの色とか調整する
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

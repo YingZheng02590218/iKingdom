@@ -150,6 +150,6 @@ final class PLPresenter: PLPresenterInput {
     }
     // 取得　階層1 中区分　前年度表示対応
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
-        return model.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
+        return model.getTotalRank1(big5: big5, rank1: rank1, lastYear: lastYear)
     }
 }

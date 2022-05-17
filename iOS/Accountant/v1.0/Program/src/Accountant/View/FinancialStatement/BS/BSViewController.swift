@@ -316,7 +316,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セクションヘッダーの高さを決める
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
+        return 35 //セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける セル(Row Hight 30)
     }
     // セクションヘッダーの色とか調整する
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -352,14 +352,36 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
         switch section {
             // 大分類のタイトルはセクションヘッダーに表示する
         case 0://資産の部
-            print("資産の部", 1+6+3+presenter.numberOfobjects0100+presenter.numberOfobjects0102+presenter.numberOfobjects010142+presenter.numberOfobjects010143+presenter.numberOfobjects010144)
-            return 1+6+3+presenter.numberOfobjects0100+presenter.numberOfobjects0102+presenter.numberOfobjects010142+presenter.numberOfobjects010143+presenter.numberOfobjects010144 // 大分類合計1・中分類(タイトル、合計)6・小分類(タイトル、合計)6・表示科目の数
+            print("資産の部", 1 + 6 + 3 +
+                  presenter.numberOfobjects0100 +
+                  presenter.numberOfobjects0102 +
+                  presenter.numberOfobjects010142 +
+                  presenter.numberOfobjects010143 +
+                  presenter.numberOfobjects010144 )
+            return 1 + 6 + 3 +
+            presenter.numberOfobjects0100 +
+            presenter.numberOfobjects0102 +
+            presenter.numberOfobjects010142 +
+            presenter.numberOfobjects010143 +
+            presenter.numberOfobjects010144 // 大分類合計1・中分類(タイトル、合計)6・小分類(タイトル、合計)6・表示科目の数
         case 1://負債の部
-            print("負債の部", 1+4+presenter.numberOfobjects0114+presenter.numberOfobjects0115)
-            return 1+4+presenter.numberOfobjects0114+presenter.numberOfobjects0115
+            print("負債の部", 1 + 4 +
+                  presenter.numberOfobjects0114 +
+                  presenter.numberOfobjects0115 )
+            return 1 + 4 +
+            presenter.numberOfobjects0114 +
+            presenter.numberOfobjects0115
         case 2://純資産の部
-            print("純資産の部", 1+4+0+presenter.numberOfobjects0129+presenter.numberOfobjects01210+presenter.numberOfobjects01211+presenter.numberOfobjects01213+1)
-            return 1+4+0+presenter.numberOfobjects0129+presenter.numberOfobjects01210+presenter.numberOfobjects01211+presenter.numberOfobjects01213+1 //+1は、負債純資産合計　の分
+            print("純資産の部", 1 + 4 + 0 +
+                  presenter.numberOfobjects0129 +
+                  presenter.numberOfobjects01210 +
+                  presenter.numberOfobjects01211 +
+                  presenter.numberOfobjects01213 + 1)
+            return 1 + 4 + 0 +
+            presenter.numberOfobjects0129 +
+            presenter.numberOfobjects01210 +
+            presenter.numberOfobjects01211 +
+            presenter.numberOfobjects01213 + 1 //+1は、負債純資産合計　の分
         default:
             print("default")
             return 0
@@ -367,19 +389,23 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20
+        return 22
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as! BSTableViewCell
+        cell.labelForThisYear.font = UIFont.systemFont(ofSize: 14)
+        cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
+        cell.labelForThisYear.attributedText = nil
+        cell.labelForPrevious.attributedText = nil
         
-        switch indexPath.section {
-//大区分
-        case 0: // 資産の部
-// 中区分
-            switch indexPath.row {
+        switch indexPath.section { // 大区分
+        case 0: // MARK: - 資産の部
+            
+            switch indexPath.row { // 中区分
             case 0:
+                // MARK: - "  流動資産"
                 cell.textLabel?.text = "  流動資産" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
                 print("BS", indexPath.row, "  流動資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -388,6 +414,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    流動資産合計"
                 cell.textLabel?.text = "    流動資産合計"
                 print("BS", indexPath.row, "    流動資産合計"+"★")
                 let text:String = presenter.getTotalRank0(big5: indexPath.section, rank0: 0, lastYear: false)
@@ -417,33 +444,35 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
             case presenter.numberOfobjects0100 + 1 + 1:
+                // MARK: - "  固定資産"
                 cell.textLabel?.text = "  固定資産"
                 print("BS", indexPath.row, "  固定資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
 // 小区分
-                // 有形固定資産3
+                // MARK: - 有形固定資産3
             case presenter.numberOfobjects0100 + 1 + 1 + 1: // 112
                 cell.textLabel?.text = "        "+translateSmallCategory(small_category: 3)
                 print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 3)+"★")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 return cell
-                // 無形固定資産
+                // MARK: - 無形固定資産
             case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1:
                 cell.textLabel?.text = "        "+translateSmallCategory(small_category: 4)
                 print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 4)+"★")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 return cell
-                // 投資その他資産　投資その他の資産
+                // MARK: - 投資その他資産　投資その他の資産
             case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1:
                 cell.textLabel?.text = "        "+translateSmallCategory(small_category: 5)
                 print("BS", indexPath.row, "        "+translateSmallCategory(small_category: 5)+"★")
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 return cell
-            case presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1: //最後の行の前
+            case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144 + 1: //最後の行の前
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    固定資産合計"
                 cell.textLabel?.text = "    固定資産合計"
                 print("BS", indexPath.row, "    固定資産合計"+"★")
                 let text:String = presenter.getTotalRank0(big5: indexPath.section, rank0: 1, lastYear: false)
@@ -472,15 +501,17 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 )
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
-            case presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1:
+            case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144 + 1 + 1:
+                // MARK: - "  繰越資産"
                 cell.textLabel?.text = "  繰越資産"
                 print("BS", indexPath.row, "  繰越資産"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
                 return cell
-            case presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + presenter.numberOfobjects0102 + 1:
+            case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144 + 1 + 1 + presenter.numberOfobjects0102 + 1:
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    繰越資産合計"
                 cell.textLabel?.text = "    繰越資産合計"
                 print("BS", indexPath.row, "    繰越資産合計"+"★")
                 let text:String = presenter.getTotalRank0(big5: indexPath.section, rank0: 2, lastYear: false)
@@ -509,7 +540,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 )
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
-            case presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + presenter.numberOfobjects0102 + 1 + 1: //最後の行
+            case presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144 + 1 + 1 + presenter.numberOfobjects0102 + 1 + 1: //最後の行
+                // MARK: - "資産合計"
                 cell.textLabel?.text = "資産合計"
                 print("BS", indexPath.row, "資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -563,7 +595,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.labelForPrevious.text = "-"
                     }
                     cell.labelForThisYear.textAlignment = .right
-                }else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + 1 &&  // 有形固定資産タイトルの1行下
+                }
+                else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + 1 &&  // 有形固定資産タイトルの1行下
                             indexPath.row <  presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 { // 無形固定資産
                     cell.textLabel?.text = "        "+presenter.objects010142(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + 1)).category
                     print("BS", indexPath.row, "        "+presenter.objects010142(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + 1)).category)
@@ -575,7 +608,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     cell.labelForThisYear.textAlignment = .right
                     
-                }else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + 1 && // 無形固定資産タイトルの1行下
+                }
+                else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + 1 && // 無形固定資産タイトルの1行下
                             indexPath.row <  presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1 { // 投資その他資産
                     cell.textLabel?.text = "        "+presenter.objects010143(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + 1)).category
                     print("BS", indexPath.row, "        "+presenter.objects010143(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + 1)).category)
@@ -587,7 +621,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     cell.labelForThisYear.textAlignment = .right
                     
-                }else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1 + 1 && // 投資その他資産タイトルの1行下
+                }
+                else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1 + 1 && // 投資その他資産タイトルの1行下
                             indexPath.row <  presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 { // 固定資産合計
                     cell.textLabel?.text = "        "+presenter.objects010144(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1 + 1)).category
                     print("BS", indexPath.row, "        "+presenter.objects010144(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + 1 + presenter.numberOfobjects010142 + 1 + presenter.numberOfobjects010143 + 1 + 1)).category)
@@ -598,7 +633,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.labelForPrevious.text = "-"
                     }
                     cell.labelForThisYear.textAlignment = .right
-                }else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + 1 && // 繰延資産タイトルの1行下
+                }
+                else if indexPath.row >= presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + 1 && // 繰延資産タイトルの1行下
                             indexPath.row < presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + presenter.numberOfobjects0102 + 1 { // 繰延資産合計
                     cell.textLabel?.text = "        "+presenter.objects0102(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + 1)).category
                     print("BS", indexPath.row, "        "+presenter.objects0102(forRow: indexPath.row-(presenter.numberOfobjects0100 + 1 + 1 + presenter.numberOfobjects010142  + 1 + presenter.numberOfobjects010143  + 1 + presenter.numberOfobjects010144  + 1 + 1 + 1 + 1)).category)
@@ -618,9 +654,10 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
             }
-        case 1: // 負債の部
+        case 1: // MARK: - 負債の部
             switch indexPath.row {
             case 0:
+                // MARK: - "  流動負債"
                 cell.textLabel?.text = "  流動負債"
                 print("BS", indexPath.row, "  流動負債"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -629,6 +666,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    流動負債合計"
                 cell.textLabel?.text = "    流動負債合計"
                 print("BS", indexPath.row, "    流動負債合計"+"★")
                 let text:String = presenter.getTotalRank0(big5: indexPath.section, rank0: 3, lastYear: false)
@@ -658,6 +696,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
             case presenter.numberOfobjects0114 + 1 + 1: // 中分類名の分を1行追加 合計の行を追加
+                // MARK: - "  固定負債"
                 cell.textLabel?.text = "  固定負債"
                 print("BS", indexPath.row, "  固定負債"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -666,6 +705,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    固定負債合計"
                 cell.textLabel?.text = "    固定負債合計"
                 print("BS", indexPath.row, "    固定負債合計"+"★")
                 let text:String = presenter.getTotalRank0(big5: indexPath.section, rank0: 4, lastYear: false)
@@ -695,6 +735,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
             case presenter.numberOfobjects0114 + 1 + 1 + presenter.numberOfobjects0115 + 1 + 1: //最後の行
+                // MARK: - "負債合計"
                 cell.textLabel?.text = "負債合計"
                 print("BS", indexPath.row, "負債合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -742,7 +783,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.labelForPrevious.text = "-"
                     }
                     cell.labelForThisYear.textAlignment = .right
-                }else if indexPath.row >= presenter.numberOfobjects0114 + 1 + 1 + 1 && // 固定負債タイトルの1行下
+                }
+                else if indexPath.row >= presenter.numberOfobjects0114 + 1 + 1 + 1 && // 固定負債タイトルの1行下
                             indexPath.row <  presenter.numberOfobjects0114 + 1 + 1 + presenter.numberOfobjects0115 + 1 { // 固定負債合計
                     cell.textLabel?.text = "        "+presenter.objects0115(forRow: indexPath.row-(presenter.numberOfobjects0114 + 1 + 1 + 1)).category
                     cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects0115(forRow: indexPath.row-(presenter.numberOfobjects0114 + 1 + 1 + 1)).number, lastYear: false)
@@ -752,7 +794,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.labelForPrevious.text = "-"
                     }
                     cell.labelForThisYear.textAlignment = .right
-                }else {
+                }
+                else {
                     cell.textLabel?.text = "default"
                     print("BS", indexPath.row, "default")
                     cell.labelForThisYear.text = "default"
@@ -760,10 +803,11 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
             }
-        case 2: // 純資産の部
+        case 2: // MARK: - 純資産の部
 // 中区分
             switch indexPath.row {
             case 0:
+                // MARK: - "  株主資本"
                 cell.textLabel?.text = "  株主資本"
                 print("BS", indexPath.row, "  株主資本"+"★")
                 //                cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -773,6 +817,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    株主資本合計"
                 cell.textLabel?.text = "    株主資本合計"
                 print("BS", indexPath.row, "    株主資本合計"+"★")
                 let text:String = presenter.getTotalRank1(big5: indexPath.section, rank1: 10, lastYear: false) // 中区分の合計を取得
@@ -802,6 +847,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.labelForPrevious.attributedText = attributeTextt
                 return cell
             case presenter.numberOfobjects0129 + 2: // 中分類名の分を1行追加 合計の行を追加
+                // MARK: - "  その他の包括利益累計額"
                 cell.textLabel?.text = "  その他の包括利益累計額"
                 print("BS", indexPath.row, "  その他の包括利益累計額"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -810,6 +856,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
+                // MARK: - "    その他の包括利益累計額合計"
                 cell.textLabel?.text = "    その他の包括利益累計額合計"
                 print("BS", indexPath.row, "    その他の包括利益累計額合計"+"★")
                 let text:String = presenter.getTotalRank1(big5: indexPath.section, rank1: 11, lastYear: false) // 中区分の合計を取得
@@ -850,6 +897,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/08/03
                     guard 0 < presenter.numberOfobjects01213 else { //非支配株主持分22 が0件の場合
+                        // MARK: - "純資産合計"
                         cell.textLabel?.text = "純資産合計"
                         print("BS", indexPath.row, "純資産合計"+"★")
                         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -885,60 +933,26 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.textLabel?.text = "  "+presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category
                     print("BS", indexPath.row, "  "+presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category)
-                    let text:String = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
-                    // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                    let attributeText = NSMutableAttributedString(string: text)
-                    // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                    attributeText.addAttribute(
-                        NSAttributedString.Key.underlineStyle,
-                        value: NSUnderlineStyle.single.rawValue,
-                        range: NSMakeRange(0, text.count)
-                    )
-                    cell.labelForThisYear.attributedText = attributeText
-                    var textt:String = ""
+
+                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
                     if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                        textt = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
+                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
                     }else {
-                        textt = "-"
+                        cell.labelForPrevious.text = "-"
                     }
-                    // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                    let attributeTextt = NSMutableAttributedString(string: textt)
-                    // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                    attributeTextt.addAttribute(
-                        NSAttributedString.Key.underlineStyle,
-                        value: NSUnderlineStyle.single.rawValue,
-                        range: NSMakeRange(0, textt.count)
-                    )
-                    cell.labelForPrevious.attributedText = attributeTextt
+                    cell.labelForThisYear.textAlignment = .right
                     return cell
                 }
                 cell.textLabel?.text = "  "+presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).category
                 print("BS", indexPath.row, "  "+presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).category)
-                let text:String = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: false)
-                // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                let attributeText = NSMutableAttributedString(string: text)
-                // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                attributeText.addAttribute(
-                    NSAttributedString.Key.underlineStyle,
-                    value: NSUnderlineStyle.single.rawValue,
-                    range: NSMakeRange(0, text.count)
-                )
-                cell.labelForThisYear.attributedText = attributeText
-                var textt:String = ""
+
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: false)
                 if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    textt = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: true)
                 }else {
-                    textt = "-"
+                    cell.labelForPrevious.text = "-"
                 }
-                // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                let attributeTextt = NSMutableAttributedString(string: textt)
-                // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                attributeTextt.addAttribute(
-                    NSAttributedString.Key.underlineStyle,
-                    value: NSUnderlineStyle.single.rawValue,
-                    range: NSMakeRange(0, textt.count)
-                )
-                cell.labelForPrevious.attributedText = attributeTextt
+                cell.labelForThisYear.textAlignment = .right
                 return cell
             case presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211: //非支配株主持分22
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -946,6 +960,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/10/19
                 guard 0 < presenter.numberOfobjects01213 else {
+                    // MARK: - "純資産合計"
                     cell.textLabel?.text = "純資産合計"
                     print("BS", indexPath.row, "純資産合計"+"★")
                     cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -980,33 +995,17 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 } // 1. array.count（要素数）を利用する
                 cell.textLabel?.text = "  "+presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category
                 print("BS", indexPath.row, "  "+presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category)
-                let text:String = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
-                // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                let attributeText = NSMutableAttributedString(string: text)
-                // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                attributeText.addAttribute(
-                    NSAttributedString.Key.underlineStyle,
-                    value: NSUnderlineStyle.single.rawValue,
-                    range: NSMakeRange(0, text.count)
-                )
-                cell.labelForThisYear.attributedText = attributeText
-                var textt:String = ""
+                
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
                 if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    textt = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row-(presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
                 }else {
-                    textt = "-"
+                    cell.labelForPrevious.text = "-"
                 }
-                // テキストをカスタマイズするために、NSMutableAttributedStringにする
-                let attributeTextt = NSMutableAttributedString(string: textt)
-                // styleをunderLineに。valueをrawValueに。該当箇所を0-text.count文字目まで
-                attributeTextt.addAttribute(
-                    NSAttributedString.Key.underlineStyle,
-                    value: NSUnderlineStyle.single.rawValue,
-                    range: NSMakeRange(0, textt.count)
-                )
-                cell.labelForPrevious.attributedText = attributeTextt
+                cell.labelForThisYear.textAlignment = .right
                 return cell
             case presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211 + presenter.numberOfobjects01213: //最後の行
+                // MARK: - "純資産合計"
                 cell.textLabel?.text = "純資産合計"
                 print("BS", indexPath.row, "純資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -1039,6 +1038,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
                 return cell
             case presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211 + presenter.numberOfobjects01213 + 1: //最後の行の下
+                // MARK: - "負債純資産合計"
                 cell.textLabel?.text = "負債純資産合計"
                 print("BS", indexPath.row, "負債純資産合計"+"★")
                 cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
@@ -1210,6 +1210,7 @@ extension BSViewController: BSPresenterOutput {
             }
         }
         label_title.text = "貸借対照表"
+        label_title.font = UIFont.boldSystemFont(ofSize: 21)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView

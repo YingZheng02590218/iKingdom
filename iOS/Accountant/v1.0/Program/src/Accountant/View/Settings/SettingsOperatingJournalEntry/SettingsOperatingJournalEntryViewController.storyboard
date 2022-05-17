@@ -17,6 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="長押しで編集ができます。" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lJj-Ho-CQv">
+                                <rect key="frame" x="0.0" y="842" width="414" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="nxz-Yz-kFf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5R-zz-sdu">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,12 +85,15 @@
                         <viewLayoutGuide key="safeArea" id="KN3-ez-inu"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
+                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="trailing" secondItem="i5R-zz-sdu" secondAttribute="trailing" id="4bK-at-Vjr"/>
+                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="6Ck-Ky-l4E"/>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="width" secondItem="KN3-ez-inu" secondAttribute="width" id="A8p-sP-pfY"/>
+                            <constraint firstItem="lJj-Ho-CQv" firstAttribute="leading" secondItem="i5R-zz-sdu" secondAttribute="leading" id="C02-tL-avo"/>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="height" secondItem="KN3-ez-inu" secondAttribute="height" id="IEu-1L-zoK"/>
-                            <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="IYr-Ba-wbW"/>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="top" secondItem="KN3-ez-inu" secondAttribute="top" id="acv-3h-kK5"/>
                             <constraint firstItem="KN3-ez-inu" firstAttribute="trailing" secondItem="i5R-zz-sdu" secondAttribute="trailing" id="bt1-hb-HDl"/>
                             <constraint firstItem="i5R-zz-sdu" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="pIl-pq-C3b"/>
+                            <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="yCP-qJ-FOM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa"/>

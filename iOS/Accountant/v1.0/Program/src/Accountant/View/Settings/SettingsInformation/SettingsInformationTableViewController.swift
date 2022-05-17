@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds // マネタイズ対応
 
-// 帳簿情報クラス
+// 事業者名クラス
 class SettingsInformationTableViewController: UITableViewController {
 
     // マネタイズ対応
@@ -26,6 +26,10 @@ class SettingsInformationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "事業者名"
+        //largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){

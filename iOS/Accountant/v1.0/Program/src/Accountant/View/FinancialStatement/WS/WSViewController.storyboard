@@ -30,11 +30,10 @@
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9QB-yb-zEv" userLabel="ViewUpper">
                                                         <rect key="frame" x="0.0" y="0.0" width="408" height="50.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="GyC-lX-wDV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="0.0" width="409" height="50"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="GyC-lX-wDV" userLabel="company_name">
+                                                                <rect key="frame" x="0.0" y="25.5" width="408" height="25"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -45,11 +44,10 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="KfI-wU-39M" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="0.0" width="409" height="50"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="KfI-wU-39M" userLabel="closingDate">
+                                                                <rect key="frame" x="0.0" y="25.5" width="408" height="25"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -58,7 +56,15 @@
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="V6T-5r-BCa" secondAttribute="trailing" id="AyV-jX-RK7"/>
                                                             <constraint firstItem="V6T-5r-BCa" firstAttribute="leading" secondItem="9QB-yb-zEv" secondAttribute="leading" id="ByF-a0-dOY"/>
+                                                            <constraint firstAttribute="bottom" secondItem="KfI-wU-39M" secondAttribute="bottom" id="DN4-PL-51R"/>
+                                                            <constraint firstAttribute="trailing" secondItem="GyC-lX-wDV" secondAttribute="trailing" id="NjE-LP-nDo"/>
                                                             <constraint firstItem="V6T-5r-BCa" firstAttribute="top" secondItem="9QB-yb-zEv" secondAttribute="top" id="P2s-TG-XiI"/>
+                                                            <constraint firstItem="GyC-lX-wDV" firstAttribute="height" secondItem="9QB-yb-zEv" secondAttribute="height" multiplier="0.5" id="TK4-oZ-146"/>
+                                                            <constraint firstItem="KfI-wU-39M" firstAttribute="height" secondItem="9QB-yb-zEv" secondAttribute="height" multiplier="0.5" id="byw-zL-TuV"/>
+                                                            <constraint firstItem="KfI-wU-39M" firstAttribute="leading" secondItem="9QB-yb-zEv" secondAttribute="leading" id="caQ-Xg-eQ2"/>
+                                                            <constraint firstAttribute="trailing" secondItem="KfI-wU-39M" secondAttribute="trailing" id="hZf-eZ-JlB"/>
+                                                            <constraint firstItem="GyC-lX-wDV" firstAttribute="leading" secondItem="9QB-yb-zEv" secondAttribute="leading" id="kRq-Mu-8bj"/>
+                                                            <constraint firstAttribute="bottom" secondItem="GyC-lX-wDV" secondAttribute="bottom" id="lPp-Bu-aBJ"/>
                                                             <constraint firstAttribute="bottom" secondItem="V6T-5r-BCa" secondAttribute="bottom" id="s0q-yr-rgS"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>

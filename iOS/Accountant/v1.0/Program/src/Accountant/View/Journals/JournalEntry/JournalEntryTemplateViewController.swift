@@ -9,7 +9,7 @@
 import UIKit
 import EMTNeumorphicView
 
-// 仕訳テンプレートクラス
+// よく使う仕訳クラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
 
 //    @IBOutlet var label_title: UILabel!
@@ -26,15 +26,15 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         createTextFieldForNickname() // テキストフィールド　ニックネームを作成
 
         if journalEntryType == "SettingsJournalEntries" {
-            label_title.text = "仕訳テンプレート"
+            label_title.text = "よく使う仕訳"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = true
         }
         else if journalEntryType == "SettingsJournalEntriesFixing" {
-            label_title.text = "仕訳テンプレート"
+            label_title.text = "よく使う仕訳"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
-            // データベース　仕訳テンプレートを追加
+            // データベース　よく使う仕訳を追加
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
             let objects = dataBaseManager.getJournalEntry()
             primaryKey = objects[tappedIndexPath.row].number
@@ -46,11 +46,11 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             TextField_SmallWritting.text = objects[tappedIndexPath.row].smallWritting
         }
         
-//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // 仕訳テンプレートの場合
+//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
 //            carouselCollectionView.isHidden = true
 //        }
         
-//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // 仕訳テンプレートの場合
+//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
 //            Button_Left.isHidden = true
 //            datePicker.isHidden = true
 //            Button_Right.isHidden = true
@@ -123,7 +123,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             if let _ = TextField_amount_credit.text {
                 textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
             }
-            // データベース　仕訳テンプレートを追加
+            // データベース　よく使う仕訳を追加
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
             number = dataBaseManager.addJournalEntry(
                 nickname: nicknameTextField.text!,
@@ -156,7 +156,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             if let _ = TextField_amount_credit.text {
                 textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
             }
-            // データベース　仕訳テンプレートを更新
+            // データベース　よく使う仕訳を更新
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
             number = dataBaseManager.updateJournalEntry(
                 primaryKey: primaryKey,
@@ -191,12 +191,12 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     }
     // 削除機能 アラートのポップアップを表示
     private func showPopover() {
-        let alert = UIAlertController(title: "削除", message: "仕訳テンプレートを削除しますか？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "削除", message: "よく使う仕訳を削除しますか？", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self]
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
-            // データベース　仕訳テンプレートを削除
+            // データベース　よく使う仕訳を削除
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
             if dataBaseManager.deleteJournalEntry(number: primaryKey) {
                 let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
