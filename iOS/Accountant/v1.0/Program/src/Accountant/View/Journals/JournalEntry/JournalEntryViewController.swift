@@ -349,10 +349,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.global(qos: .default).async {
             // 非同期処理などが終了したらメインスレッドでアニメーション終了
             DispatchQueue.main.async {
-                // 非同期処理などを実行（今回は2秒間待つだけ）
-                Thread.sleep(forTimeInterval: 2)
                 // アニメーションをする
                 self.showAnimation()
+                // 非同期処理などを実行（今回は2秒間待つだけ）
+                Thread.sleep(forTimeInterval: 0.5)
                 // アニメーション終了
                 self.activityIndicatorView.stopAnimating()
             }
@@ -362,18 +362,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     func showAnimation() {
         // 少し縮小するアニメーション
         if let logoLabel = self.logoLabel {
-            UIView.animate(withDuration: 0.3,
-                           delay: 0.5,
+            UIView.animate(withDuration: 0.9,
+                           delay: 0.2,
                            options: UIView.AnimationOptions.curveEaseOut,
                            animations: { () in
-                logoLabel.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             }, completion: { (Bool) in
                 
             })
-            
             // 拡大させて、消えるアニメーション
-            UIView.animate(withDuration: 0.2,
-                           delay: 0.8,
+            UIView.animate(withDuration: 0.4,
+                           delay: 0.2,
                            options: UIView.AnimationOptions.curveEaseOut,
                            animations: { () in
                 self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
