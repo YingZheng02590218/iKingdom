@@ -120,6 +120,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 動作確認用
 //        ud.set(true, forKey: firstLunchKey)
 //        print(ud.bool(forKey: firstLunchKey))
+        // ウォークスルー機能
+        firstLunchKey = "firstLunch_WalkThrough"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+//        ud.set(true, forKey: firstLunchKey)
+//        print(ud.bool(forKey: firstLunchKey))
 
         // レビュー催促機能
         let key = "startUpCount"

@@ -15,6 +15,7 @@
 #    pod 'NeuKit'
 #    pod 'EMTNeumorphicView'
     pod 'Gecco'
+    pod 'EAIntroView'
   end
 
   target 'Paciolist' do
@@ -33,16 +34,16 @@
     common_pods
   end
 
-  target 'AccountantTests' do
-    inherit! :search_paths
-    # Pods for testing
+#  target 'AccountantTests' do
+#    inherit! :search_paths
+#    # Pods for testing
 #    common_pods
-  end
+#  end
 
-  target 'AccountantUITests' do
-    # Pods for testing
+#  target 'AccountantUITests' do
+#    # Pods for testing
 #    common_pods
-  end
+#  end
 
   post_install do |installer|
     installer.pods_project.build_configurations.each do |config|

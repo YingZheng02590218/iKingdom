@@ -300,8 +300,24 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //
 //        self.present(fourthViewController, animated: true, completion: nil)
 
-        // コーチマーク
-        showAnnotation()
+        // ウォークスルー機能　初回起動時
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_WalkThrough"
+        if ud.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+                // 非同期処理などを実行（今回は3秒間待つだけ）
+                Thread.sleep(forTimeInterval: 1)
+                DispatchQueue.main.async {
+                    // ウォークスルー機能
+                    let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as! WalkThroughViewController
+                    self.present(viewController, animated: true, completion: nil)
+                }
+            }
+        }
+        else {
+            // コーチマーク
+            showAnnotation()
+        }
     }
     
     override func viewDidLayoutSubviews() {

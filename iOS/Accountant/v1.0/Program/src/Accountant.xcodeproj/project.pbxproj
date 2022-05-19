@@ -360,6 +360,10 @@
 		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
+		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
+		F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
+		F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
+		F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
 		F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
 		F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
@@ -582,6 +586,8 @@
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
 		F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSModel.swift; sourceTree = "<group>"; };
+		F9F324532833A5D900DA813E /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
+		F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WalkThroughViewController.storyboard; sourceTree = "<group>"; };
 		F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperAccount.swift; sourceTree = "<group>"; };
 		F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerAccount.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
@@ -1191,6 +1197,7 @@
 				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
 				F9789A322475C41700B62CAF /* Settings */,
+				F9F324522833A5A400DA813E /* WalkThrough */,
 				F9E620FA256527E000C2C3B3 /* Gecco */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
@@ -1327,6 +1334,15 @@
 				F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */,
 			);
 			path = STG;
+			sourceTree = "<group>";
+		};
+		F9F324522833A5A400DA813E /* WalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				F9F324532833A5D900DA813E /* WalkThroughViewController.swift */,
+				F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */,
+			);
+			path = WalkThrough;
 			sourceTree = "<group>";
 		};
 		F9F4605224BDD5D5008FE62B /* DataBaseRealm */ = {
@@ -1569,6 +1585,7 @@
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
+				F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -1626,6 +1643,7 @@
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
 				F9EC672627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
+				F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -1932,6 +1950,7 @@
 				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
 				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9F4607924D06F6C008FE62B /* TableViewCellCompanyName.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
@@ -2071,6 +2090,7 @@
 				F9EC66F527B90BC60003FBB6 /* DocumentView.swift in Sources */,
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
 				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9EC66F727B90BC60003FBB6 /* TableViewCellCompanyName.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
