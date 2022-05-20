@@ -34,7 +34,7 @@ class WalkThroughViewController: UIViewController {
         
         page1.titlePositionY = self.view.bounds.size.height * 0.8
         // ディスクリプションのテキスト
-        page1.desc = "日々の取引を仕訳する\nやることはこれだけ\n\nよく使う仕訳テンプレートを準備しておくと、最速で入力が完了"
+        page1.desc = "日々の取引を仕訳する\nやることはこれだけ\n\nよく使う仕訳のテンプレートを準備しておくと、最速で入力が完了"
         // ディスクリプションの色変更
         page1.descColor = UIColor.lightGray
         // ディスクリプションのフォントの設定
