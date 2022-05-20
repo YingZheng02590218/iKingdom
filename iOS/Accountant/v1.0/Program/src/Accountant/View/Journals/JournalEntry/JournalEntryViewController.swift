@@ -120,8 +120,8 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.global(qos: .default).async {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-                // 非同期処理などを実行（今回は3秒間待つだけ）
-                Thread.sleep(forTimeInterval: 3)
+                // 非同期処理などを実行（待つ）
+                Thread.sleep(forTimeInterval: 0.5)
                 DispatchQueue.main.async {
                     // チュートリアル対応
                     self.presentAnnotation()

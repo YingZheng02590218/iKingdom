@@ -952,6 +952,8 @@ extension JournalsViewController: JournalsPresenterOutput {
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "仕訳帳"
+        // 初期表示位置 ON
+        scroll = true
     }
     
     func setupViewForViewWillAppear() {
