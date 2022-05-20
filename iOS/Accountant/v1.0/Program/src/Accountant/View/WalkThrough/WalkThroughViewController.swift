@@ -51,7 +51,7 @@ class WalkThroughViewController: UIViewController {
         page2.titleColor = UIColor.TextColor
         page2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         page2.titlePositionY = self.view.bounds.size.height * 0.8
-        page2.desc = "紙の帳簿と同じデザインで\n仕訳帳と総勘定元帳を確認\n\n仕訳帳で、仕訳を編集や削除ができる"
+        page2.desc = "紙の帳簿と同じデザインで\n仕訳帳と総勘定元帳を確認\n\n仕訳帳で、仕訳の編集や削除ができる"
         page2.descColor = UIColor.lightGray
         page2.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
         page2.descPositionY = self.view.bounds.size.height * 0.8
