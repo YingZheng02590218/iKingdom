@@ -30,7 +30,7 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     @IBOutlet weak var label_date_year: UILabel!
     @IBOutlet weak var view_top: UIView!
     @IBOutlet weak var label_list_heading: UILabel!
-    @IBOutlet weak var button_print: UIButton!
+    @IBOutlet weak var button_print: UIBarButtonItem!
     /// 勘定　下部
     @IBOutlet weak var tableView: UITableView!
     // 勘定名
@@ -119,7 +119,7 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     /**
      * 印刷ボタン押下時メソッド
      */
-    @IBAction func button_print(_ sender: UIButton) {
+    @IBAction func button_print(_ sender: Any) {
         // 初期化
         pDFMaker.initialize(account: account)
         
