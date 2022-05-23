@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 
 // 精算表クラス
@@ -30,7 +31,15 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
     /// 精算表　下部
-    @IBOutlet weak var TableView_WS: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+
     fileprivate let refreshControl = UIRefreshControl()
 
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -61,10 +70,29 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
 
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
+        }
+    }
+    
     private func setRefreshControl() {
-        TableView_WS.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
     }
     
@@ -129,31 +157,31 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
      * 印刷ボタン押下時メソッド
      */
     @IBAction func button_print(_ sender: UIButton) {
-        let indexPath = TableView_WS.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
-        print("TableView_WS.indexPathsForVisibleRows: \(String(describing: indexPath))")
+        let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
+        print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
 //        self.        tableView.scrollToRow(at: indexPath![0], at: UITableView.ScrollPosition.bottom, animated: false)
-        self.TableView_WS.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
+        self.tableView.scrollToRow(at: IndexPath(row: indexPath!.count-1, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 一度最下行までレイアウトを描画させる
         printing = true
         // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
-        TableView_WS.overrideUserInterfaceStyle = .light
+        tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = true
         }
-        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
-        TableView_WS.showsVerticalScrollIndicator = false
-        while self.TableView_WS.indexPathForSelectedRow?.count ?? 0 > 0 {
-            if let tappedIndexPath: IndexPath = self.TableView_WS.indexPathForSelectedRow { // タップされたセルの位置を取得
-                TableView_WS.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
+        tableView.showsVerticalScrollIndicator = false
+        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
+            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
+                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
             }
         }
 //            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
 //        pageSize = CGSize(width:         tableView.contentSize.width / 25.4 * 72, height:         tableView.contentSize.height / 25.4 * 72)
         pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-        print("TableView_WS.contentSize:\(TableView_WS.contentSize)")
+        print("TableView_WS.contentSize:\(tableView.contentSize)")
         //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
 //        var rect = self.view.bounds
         //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
@@ -164,7 +192,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        let newImage = self.TableView_WS.captureImagee()
+        let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
@@ -172,7 +200,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         if !inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
-        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         /*
         ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
          CGBitmapContextCreate関数を使用して、コンテキストを作成し、
@@ -259,10 +287,10 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             }
         }
         //余計なUIをキャプチャしないように隠したのを戻す
-        TableView_WS.showsVerticalScrollIndicator = true
+        tableView.showsVerticalScrollIndicator = true
         // ダークモード回避を解除
-        TableView_WS.overrideUserInterfaceStyle = .unspecified
-        self.TableView_WS.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
+        tableView.overrideUserInterfaceStyle = .unspecified
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) // 元の位置に戻す
     }
     
     // MARK: - UIImageWriteToSavedPhotosAlbum
@@ -513,7 +541,7 @@ extension WSViewController: WSPresenterOutput {
 
     func reloadData() {
         // 更新処理
-        TableView_WS.reloadData()
+        tableView.reloadData()
         // クルクルを止める
         refreshControl.endRefreshing()
     }
@@ -521,6 +549,7 @@ extension WSViewController: WSPresenterOutput {
     func setupViewForViewDidLoad() {
         // UI
 //        setTableView()
+        createButtons() // ボタン作成
         setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
@@ -550,7 +579,7 @@ extension WSViewController: WSPresenterOutput {
         label_title.font = UIFont.boldSystemFont(ofSize: 18)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
-        TableView_WS.tableFooterView = tableFooterView
+        tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
         if !inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
@@ -568,7 +597,7 @@ extension WSViewController: WSPresenterOutput {
             // 広告を読み込む
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: (self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-3].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-2].frame.height + self.TableView_WS.visibleCells[self.TableView_WS.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
+            addBannerViewToView(gADBannerView, constant: (self.tableView.visibleCells[self.tableView.visibleCells.count-3].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-2].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

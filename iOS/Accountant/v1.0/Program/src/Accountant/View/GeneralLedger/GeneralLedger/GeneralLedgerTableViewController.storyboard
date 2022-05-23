@@ -11,13 +11,13 @@
         <!--総勘定元帳-->
         <scene sceneID="ylT-Hv-b5L">
             <objects>
-                <tableViewController id="26Q-bf-jqW" customClass="GeneralLedgerTableViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="26Q-bf-jqW" customClass="GeneralLedgerTableViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="30" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Uho-0Y-A44">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="SheetColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="7JM-sQ-uRI" customClass="TableViewCellGeneralLedger" customModule="Accountant" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_generalLedger" id="7JM-sQ-uRI" customClass="TableViewCellGeneralLedger" customModule="Paciolist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="49.5" width="414" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottom" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7JM-sQ-uRI" id="nn6-cQ-gbm">
@@ -26,7 +26,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" name="SheetColor"/>
+                                <color key="backgroundColor" name="CellBackground"/>
                                 <connections>
                                     <segue destination="IxZ-Ph-4sn" kind="show" identifier="identifier_generalLedger" id="4hx-Ft-77Q"/>
                                 </connections>
@@ -55,8 +55,11 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="SheetColor">
-            <color red="1" green="1" blue="0.97000002861022949" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Background">
+            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="CellBackground">
+            <color red="0.97500002384185791" green="0.99099999666213989" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

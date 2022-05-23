@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import PDFKit
 import GoogleMobileAds // マネタイズ対応
 
@@ -37,6 +38,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var Label_list_date_year: UILabel!
     /// 仕訳帳　下部
     @IBOutlet var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+
     fileprivate let refreshControl = UIRefreshControl()
     // まとめて編集機能
     var indexPaths: [IndexPath] = []
@@ -86,6 +94,11 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
     
     private func setTableView() {
@@ -120,6 +133,19 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             // ボタンを不活性にする
             barButtonItem_print.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
+        }
+    }
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
     
@@ -944,6 +970,7 @@ extension JournalsViewController: JournalsPresenterOutput {
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
+        createButtons() // ボタン作成
         setRefreshControl()
         setLongPressRecognizer()
         initializeJournals()
