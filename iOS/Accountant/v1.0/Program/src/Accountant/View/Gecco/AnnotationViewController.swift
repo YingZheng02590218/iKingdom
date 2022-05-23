@@ -34,13 +34,29 @@ class AnnotationViewController: SpotlightViewController {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         switch stepIndex {
         case 0:
-            spotlightView.appear([Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY), size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height), cornerRadius: 6), Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50)])
+            spotlightView.appear(
+                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                                       size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                                       cornerRadius: 6)
+            )
+            break
         case 1:
-            spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY), size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height), cornerRadius: 6), moveType: .disappear)
+            spotlightView.move(
+                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                                      size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                                      cornerRadius: 6),
+                moveType: .disappear)
+            break
         case 2:
-            spotlightView.move(Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50), moveType: .direct)
-        case 3:
+            // FIXME: 印刷ボタン
+//            spotlightView.move(
+//                Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50),
+//                moveType: .direct)
             dismiss(animated: true, completion: nil)
+            break
+//        case 3:
+//            dismiss(animated: true, completion: nil)
+//            break
         default:
             break
         }
@@ -58,6 +74,7 @@ class AnnotationViewController: SpotlightViewController {
 }
 
 extension AnnotationViewController: SpotlightViewDelegate {
+    
     func spotlightWillAppear(spotlightView: SpotlightView, spotlight: SpotlightType) {
         print("\(#function): \(spotlight)")
     }
@@ -67,6 +84,7 @@ extension AnnotationViewController: SpotlightViewDelegate {
 }
 
 extension AnnotationViewController: SpotlightViewControllerDelegate {
+    
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
         next(false)
     }
@@ -81,25 +99,27 @@ extension AnnotationViewController: SpotlightViewControllerDelegate {
 }
 
 private extension AnnotationViewController {
+    
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
+                break
             case 1:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
+                break
             case 2:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
-                annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
-            case 3:
-                annotationView.center = CGPoint(x: UIScreen.main.bounds.size.width / 2, y: UIApplication.shared.statusBarFrame.height + navigationBarHeight + 20)
-            case 4:
-                annotationView.center = CGPoint(x: UIScreen.main.bounds.size.width / 2, y: 200 + view.safeAreaInsets.top)
+                // FIXME: 印刷ボタン
+//                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+//                annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
+                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
+                break
             }
         }
     }

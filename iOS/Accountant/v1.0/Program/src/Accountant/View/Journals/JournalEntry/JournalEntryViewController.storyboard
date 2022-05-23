@@ -598,29 +598,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="① 日付を選択します" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shQ-zm-UsH">
-                                <rect key="frame" x="0.0" y="671" width="215" height="50"/>
+                                <rect key="frame" x="5" y="671" width="418" height="50"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsJ-AI-N5w">
-                                <rect key="frame" x="0.0" y="671" width="215" height="50"/>
+                                <rect key="frame" x="5" y="671" width="418" height="50"/>
                                 <string key="text">② 勘定科目を選択します
 
 まずは設定画面で
-　　勘定科目をセットして下さい</string>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+勘定科目をセットして下さい</string>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="③ 金額を入力します" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSd-sb-EXb">
-                                <rect key="frame" x="0.0" y="671" width="260" height="50"/>
+                                <rect key="frame" x="5" y="671" width="418" height="50"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="④ 小書きに取引内容を記入します" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKC-ez-C4T">
-                                <rect key="frame" x="0.0" y="671" width="360" height="50"/>
+                                <rect key="frame" x="5" y="671" width="418" height="50"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -629,10 +629,18 @@
                         <viewLayoutGuide key="safeArea" id="vBb-hU-V8z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="shQ-zm-UsH" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" id="8Z4-W7-qPg"/>
-                            <constraint firstItem="DsJ-AI-N5w" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" id="M4D-yO-W9l"/>
-                            <constraint firstItem="nSd-sb-EXb" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" id="pYY-5T-4Vs"/>
-                            <constraint firstItem="JKC-ez-C4T" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" id="syF-8p-7YT"/>
+                            <constraint firstItem="shQ-zm-UsH" firstAttribute="leading" secondItem="vBb-hU-V8z" secondAttribute="leading" constant="5" id="02H-c4-WFv"/>
+                            <constraint firstItem="shQ-zm-UsH" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" constant="-10" id="8Z4-W7-qPg"/>
+                            <constraint firstItem="JKC-ez-C4T" firstAttribute="leading" secondItem="vBb-hU-V8z" secondAttribute="leading" constant="5" id="Hph-yD-lAI"/>
+                            <constraint firstItem="DsJ-AI-N5w" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" constant="-10" id="M4D-yO-W9l"/>
+                            <constraint firstItem="vBb-hU-V8z" firstAttribute="trailing" secondItem="DsJ-AI-N5w" secondAttribute="trailing" constant="5" id="OXI-XA-HFX"/>
+                            <constraint firstItem="vBb-hU-V8z" firstAttribute="trailing" secondItem="shQ-zm-UsH" secondAttribute="trailing" constant="5" id="Ua7-CL-7P8"/>
+                            <constraint firstItem="vBb-hU-V8z" firstAttribute="trailing" secondItem="JKC-ez-C4T" secondAttribute="trailing" constant="5" id="gQ5-2W-Abf"/>
+                            <constraint firstItem="vBb-hU-V8z" firstAttribute="trailing" secondItem="nSd-sb-EXb" secondAttribute="trailing" constant="5" id="isU-Mg-NSO"/>
+                            <constraint firstItem="nSd-sb-EXb" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" constant="-10" id="pYY-5T-4Vs"/>
+                            <constraint firstItem="DsJ-AI-N5w" firstAttribute="leading" secondItem="vBb-hU-V8z" secondAttribute="leading" constant="5" id="rNw-oH-Fku"/>
+                            <constraint firstItem="JKC-ez-C4T" firstAttribute="width" secondItem="vBb-hU-V8z" secondAttribute="width" constant="-10" id="syF-8p-7YT"/>
+                            <constraint firstItem="nSd-sb-EXb" firstAttribute="leading" secondItem="vBb-hU-V8z" secondAttribute="leading" constant="5" id="wDk-f9-f0K"/>
                         </constraints>
                     </view>
                     <connections>

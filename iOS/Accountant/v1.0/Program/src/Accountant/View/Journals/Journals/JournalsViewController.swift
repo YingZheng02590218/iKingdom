@@ -1029,7 +1029,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             gADBannerView.load(GADRequest())
             print(tableView.rowHeight)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+            addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

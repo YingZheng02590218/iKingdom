@@ -35,12 +35,16 @@ class AnnotationViewControllerSettingsCategory: SpotlightViewController {
         switch stepIndex {
         case 0:
             spotlightView.appear(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY), size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height), cornerRadius: 6))
+            break
         case 1:
             spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), size: CGSize(width: rightBarButtonFrames.second.width, height: rightBarButtonFrames.second.height), cornerRadius: 6), moveType: .direct)
+            break
         case 2:
             spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.third.midX, y: rightBarButtonFrames.third.midY), size: CGSize(width: rightBarButtonFrames.third.width, height: rightBarButtonFrames.third.height), cornerRadius: 6), moveType: .direct)
+            break
         case 3:
             dismiss(animated: true, completion: nil)
+            break
         default:
             break
         }
@@ -58,6 +62,7 @@ class AnnotationViewControllerSettingsCategory: SpotlightViewController {
 }
 
 extension AnnotationViewControllerSettingsCategory: SpotlightViewDelegate {
+    
     func spotlightWillAppear(spotlightView: SpotlightView, spotlight: SpotlightType) {
         print("\(#function): \(spotlight)")
     }
@@ -67,6 +72,7 @@ extension AnnotationViewControllerSettingsCategory: SpotlightViewDelegate {
 }
 
 extension AnnotationViewControllerSettingsCategory: SpotlightViewControllerDelegate {
+    
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
         next(false)
     }
@@ -81,21 +87,26 @@ extension AnnotationViewControllerSettingsCategory: SpotlightViewControllerDeleg
 }
 
 private extension AnnotationViewControllerSettingsCategory {
+    
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
+                break
             case 1:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
+                break
             case 2:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 60
+                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
+                break
             }
         }
     }
@@ -106,7 +117,8 @@ private extension AnnotationViewControllerSettingsCategory {
             if controller.viewControllers[0] is SettingsCategoryTableViewController {
                 let tableViewControllerSettingsCategory = controller.viewControllers[0]
                 return controller.viewControllers[0]
-            }else {
+            }
+            else {
                 print(controller.viewControllers[0]) // SettingsTableViewController
                 print(controller.viewControllers[1]) // UINavigationController
                 return controller.viewControllers[1]

@@ -521,30 +521,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ここにボタンがあります" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pk9-MN-wHJ">
-                                <rect key="frame" x="418" y="671" width="187" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ここにボタンがあります" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pk9-MN-wHJ">
+                                <rect key="frame" x="5" y="671" width="404" height="30"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合計試算表と残高試算表を切り替えられます" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w3D-at-1TR">
-                                <rect key="frame" x="0.0" y="671" width="360" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3D-at-1TR">
+                                <rect key="frame" x="5" y="671" width="404" height="30"/>
+                                <string key="text">合計試算表と残高試算表を
+切り替えられます</string>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="印刷するときはこちら" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ukb-oB-q3U">
-                                <rect key="frame" x="382" y="671" width="260" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="印刷するときはこちら" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-oB-q3U">
+                                <rect key="frame" x="5" y="671" width="404" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="roj-iB-rdK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ukb-oB-q3U" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="0gd-KJ-njH"/>
+                            <constraint firstItem="w3D-at-1TR" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="EGe-aI-5mL"/>
+                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="LwE-PC-MHO"/>
+                            <constraint firstItem="w3D-at-1TR" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="VZo-2H-In7"/>
+                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="Vxv-AZ-Bx7"/>
+                            <constraint firstItem="ukb-oB-q3U" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="kCG-mW-0ZO"/>
+                            <constraint firstItem="ukb-oB-q3U" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="rXz-Vi-F8R"/>
+                            <constraint firstItem="w3D-at-1TR" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="rq4-dw-7qP"/>
+                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="vrf-Gl-vML"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="Pk9-MN-wHJ" collectionClass="NSMutableArray" id="3qc-LV-fZn"/>

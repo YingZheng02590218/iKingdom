@@ -34,17 +34,45 @@ class AnnotationViewControllerJournals: SpotlightViewController {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         switch stepIndex {
         case 0:
-            spotlightView.appear([Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY), size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height), cornerRadius: 6), Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50)])
+            spotlightView.appear(
+                [Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                                       size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                                       cornerRadius: 6),
+                 Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY),
+                                diameter: 50)]
+            )
+            break
         case 1:
-            spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY), size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height), cornerRadius: 6), moveType: .disappear)
+            spotlightView.move(
+                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                                      size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                                      cornerRadius: 6),
+                moveType: .disappear)
+            break
         case 2:
-            spotlightView.move(Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50), moveType: .direct)
+            spotlightView.move(
+                Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50),
+                moveType: .direct)
+            break
         case 3:
-            spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.third.midX, y: rightBarButtonFrames.third.midY), size: CGSize(width: rightBarButtonFrames.third.width, height: rightBarButtonFrames.third.height), cornerRadius: 6), moveType: .direct)
+            spotlightView.move(
+                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.third.midX, y: rightBarButtonFrames.third.midY),
+                                      size: CGSize(width: rightBarButtonFrames.third.width, height: rightBarButtonFrames.third.height),
+                                      cornerRadius: 6),
+                moveType: .direct)
+            break
         case 4:
-            spotlightView.move(Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.third.midX, y: rightBarButtonFrames.third.midY), size: CGSize(width: rightBarButtonFrames.third.width, height: rightBarButtonFrames.third.height), cornerRadius: 6), moveType: .disappear)
+            spotlightView.appear(
+                [Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.third.midX, y: rightBarButtonFrames.third.midY),
+                                       size: CGSize(width: rightBarButtonFrames.third.width, height: rightBarButtonFrames.third.height),
+                                       cornerRadius: 6),
+                 Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.forth.midX, y: rightBarButtonFrames.forth.midY),
+                                diameter: 50)]
+            )
+            break
         case 5:
             dismiss(animated: true, completion: nil)
+            break
         default:
             break
         }
@@ -62,6 +90,7 @@ class AnnotationViewControllerJournals: SpotlightViewController {
 }
 
 extension AnnotationViewControllerJournals: SpotlightViewDelegate {
+    
     func spotlightWillAppear(spotlightView: SpotlightView, spotlight: SpotlightType) {
         print("\(#function): \(spotlight)")
     }
@@ -71,6 +100,7 @@ extension AnnotationViewControllerJournals: SpotlightViewDelegate {
 }
 
 extension AnnotationViewControllerJournals: SpotlightViewControllerDelegate {
+    
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
         next(false)
     }
@@ -85,27 +115,34 @@ extension AnnotationViewControllerJournals: SpotlightViewControllerDelegate {
 }
 
 private extension AnnotationViewControllerJournals {
+    
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
+                break
             case 1:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
+                break
             case 2:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
+                break
             case 3:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 20 + rightBarButtonFrames.third.height
+                break
             case 4:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! / 15
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + 20 + rightBarButtonFrames.third.height
+                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
+                break
             }
         }
     }
@@ -139,18 +176,20 @@ private extension AnnotationViewControllerJournals {
         return presentingViewController
     }
 
-    func extractRightBarButtonConvertedFrames() -> (first: CGRect, second: CGRect, third: CGRect) {
+    func extractRightBarButtonConvertedFrames() -> (first: CGRect, second: CGRect, third: CGRect, forth: CGRect) {
         guard
             let first  = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[0].value(forKey: "view") as? UIView,
             let second = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[1].value(forKey: "view") as? UIView,
-            let third  = tableViewControllerHasCell?.view.viewWithTag(0)!.viewWithTag(33)
+            let third  = tableViewControllerHasCell?.view.viewWithTag(0)!.viewWithTag(33),
+            let forth = viewControllerHasNavigationItem?.navigationItem.leftBarButtonItems?[0].value(forKey: "view") as? UIView
             else {
                 fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
         return (
             first:  first.convert(first.bounds, to: view),
             second: second.convert(second.bounds, to: view),
-            third:  third.convert(third.bounds, to: view)
+            third:  third.convert(third.bounds, to: view),
+            forth:  forth.convert(forth.bounds, to: view)
         )
     }
 }
