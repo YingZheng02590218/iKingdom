@@ -168,7 +168,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             }
         }
         let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

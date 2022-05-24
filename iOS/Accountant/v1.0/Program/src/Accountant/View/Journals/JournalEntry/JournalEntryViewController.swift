@@ -111,7 +111,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         // インジケーターを終了
         finishActivityIndicatorView()
     }
-    
+    // コーチマークを開始
     func showAnnotation() {
         // チュートリアル対応　初回起動時　7行を追加
         let ud = UserDefaults.standard
@@ -393,10 +393,10 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
         let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
-    
+    // コーチマークを終了
     func finishAnnotation() {
         //タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {

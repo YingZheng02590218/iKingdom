@@ -107,9 +107,10 @@ class WalkThroughViewController: UIViewController {
         if UITraitCollection.isDarkMode {
         }
         else {
-            introView?.pageControl.currentPageIndicatorTintColor = .gray
             introView?.pageControl.pageIndicatorTintColor = .lightGray
         }
+        introView?.pageControl.currentPageIndicatorTintColor = .AccentBlue
+
         introView?.pageControlY = self.view.bounds.size.height * 0.9
         
         introView?.delegate = self

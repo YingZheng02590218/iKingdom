@@ -230,11 +230,11 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
+                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
                                                                 <rect key="frame" x="330.5" y="0.0" width="69.5" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PgD-xW-kCT" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                         <color key="textColor" name="TextColor"/>
@@ -315,7 +315,7 @@
                                             <constraint firstItem="x1g-F1-sE4" firstAttribute="height" secondItem="3WR-VZ-ahH" secondAttribute="height" id="vKy-MG-Bft"/>
                                         </constraints>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
+                                    <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
                                         <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -916,7 +916,7 @@
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-qp-mtz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-qp-mtz" userLabel="右から左へスワイプすると、仕訳を削除できます">
                                 <rect key="frame" x="5" y="0.0" width="404" height="23"/>
                                 <string key="text">右から左へスワイプすると
 仕訳を削除できます</string>
@@ -924,8 +924,22 @@
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="長押しすると仕訳を編集できます" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wy-Ts-SQF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wy-Ts-SQF" userLabel="長押しすると、仕訳を編集できます">
                                 <rect key="frame" x="5" y="0.0" width="404" height="23"/>
+                                <string key="text">長押しすると
+仕訳を編集できます</string>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="下へ引っ張ると再計算されます" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OH9-DP-xQ7">
+                                <rect key="frame" x="5" y="436" width="404" height="23"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="複数の仕訳をまとめて編集できます" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9M-bI-3ZM" userLabel="複数の仕訳をまとめて編集できます">
+                                <rect key="frame" x="5" y="436" width="404" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -935,14 +949,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Z46-Ct-3Zp" secondAttribute="trailing" constant="5" id="70M-AP-BbG"/>
+                            <constraint firstItem="FEH-Bg-X3f" firstAttribute="trailing" secondItem="b9M-bI-3ZM" secondAttribute="trailing" constant="5" id="7vp-yq-XDR"/>
                             <constraint firstItem="Z46-Ct-3Zp" firstAttribute="leading" secondItem="gOJ-HK-RaD" secondAttribute="leading" constant="5" id="B7M-bZ-aB8"/>
+                            <constraint firstItem="b9M-bI-3ZM" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="Ec8-fH-sWR"/>
                             <constraint firstItem="1Wy-Ts-SQF" firstAttribute="leading" secondItem="gOJ-HK-RaD" secondAttribute="leading" constant="5" id="HgX-IN-t3P"/>
                             <constraint firstItem="8CW-Rm-IHR" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="JGU-QP-a6O"/>
+                            <constraint firstItem="FEH-Bg-X3f" firstAttribute="trailing" secondItem="OH9-DP-xQ7" secondAttribute="trailing" constant="5" id="YZB-uz-hSS"/>
                             <constraint firstItem="1Wy-Ts-SQF" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="awn-2c-3rf"/>
+                            <constraint firstItem="b9M-bI-3ZM" firstAttribute="leading" secondItem="FEH-Bg-X3f" secondAttribute="leading" constant="5" id="bEJ-FR-TQK"/>
                             <constraint firstAttribute="trailing" secondItem="Y4I-qp-mtz" secondAttribute="trailing" constant="5" id="cYW-bd-5b8"/>
                             <constraint firstItem="8CW-Rm-IHR" firstAttribute="leading" secondItem="gOJ-HK-RaD" secondAttribute="leading" constant="5" id="g3Z-X9-D4x"/>
+                            <constraint firstItem="OH9-DP-xQ7" firstAttribute="leading" secondItem="FEH-Bg-X3f" secondAttribute="leading" constant="5" id="i4N-Iz-Ycd"/>
                             <constraint firstItem="Y4I-qp-mtz" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="jRY-wV-Wjb"/>
                             <constraint firstItem="rFS-JY-pC1" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="kRn-F0-hzt"/>
+                            <constraint firstItem="OH9-DP-xQ7" firstAttribute="width" secondItem="FEH-Bg-X3f" secondAttribute="width" constant="-10" id="ljh-0e-MXZ"/>
                             <constraint firstItem="Y4I-qp-mtz" firstAttribute="leading" secondItem="gOJ-HK-RaD" secondAttribute="leading" constant="5" id="nic-iG-SST"/>
                             <constraint firstAttribute="trailing" secondItem="rFS-JY-pC1" secondAttribute="trailing" constant="5" id="tZu-55-hwC"/>
                             <constraint firstAttribute="trailing" secondItem="8CW-Rm-IHR" secondAttribute="trailing" constant="5" id="uSW-MD-iTd"/>
@@ -957,6 +977,8 @@
                         <outletCollection property="annotationViews" destination="rFS-JY-pC1" collectionClass="NSMutableArray" id="JTA-4R-gjj"/>
                         <outletCollection property="annotationViews" destination="Y4I-qp-mtz" collectionClass="NSMutableArray" id="WxD-iM-Z3a"/>
                         <outletCollection property="annotationViews" destination="1Wy-Ts-SQF" collectionClass="NSMutableArray" id="I0l-gY-EYI"/>
+                        <outletCollection property="annotationViews" destination="OH9-DP-xQ7" collectionClass="NSMutableArray" id="5eX-Zy-yGq"/>
+                        <outletCollection property="annotationViews" destination="b9M-bI-3ZM" collectionClass="NSMutableArray" id="80v-ME-paL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qS5-Tl-coE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

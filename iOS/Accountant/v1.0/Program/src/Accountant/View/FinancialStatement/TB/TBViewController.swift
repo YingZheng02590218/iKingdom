@@ -133,7 +133,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
             }
         }
         let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

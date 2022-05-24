@@ -195,7 +195,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         let viewController = UIStoryboard(name: "JournalsViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

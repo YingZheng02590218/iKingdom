@@ -127,24 +127,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="使用する勘定科目を設定して下さい" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2B-Ii-80h">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2B-Ii-80h">
                                 <rect key="frame" x="5" y="671" width="404" height="23"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qf-Xl-80R">
-                                <rect key="frame" x="5" y="671" width="404" height="23"/>
-                                <string key="text">表示科目別に、
-勘定科目を一覧で表示します</string>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUy-Uw-K19">
-                                <rect key="frame" x="5" y="671" width="404" height="23"/>
-                                <string key="text">財務諸表上で表示される科目を
-一覧で表示します</string>
+                                <string key="text">まず最初に、使用する勘定科目を
+セットアップして下さい</string>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -154,20 +140,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="MvY-3y-98v" firstAttribute="trailing" secondItem="X2B-Ii-80h" secondAttribute="trailing" constant="5" id="3EG-aq-ues"/>
-                            <constraint firstItem="2qf-Xl-80R" firstAttribute="width" secondItem="MvY-3y-98v" secondAttribute="width" constant="-10" id="Axd-X4-82b"/>
-                            <constraint firstItem="MvY-3y-98v" firstAttribute="trailing" secondItem="2qf-Xl-80R" secondAttribute="trailing" constant="5" id="Ml5-pc-W9U"/>
                             <constraint firstItem="X2B-Ii-80h" firstAttribute="leading" secondItem="MvY-3y-98v" secondAttribute="leading" constant="5" id="Qwn-li-lDc"/>
                             <constraint firstItem="X2B-Ii-80h" firstAttribute="width" secondItem="MvY-3y-98v" secondAttribute="width" constant="-10" id="R24-o5-U6i"/>
-                            <constraint firstItem="2qf-Xl-80R" firstAttribute="leading" secondItem="MvY-3y-98v" secondAttribute="leading" constant="5" id="RXy-T8-exj"/>
-                            <constraint firstItem="UUy-Uw-K19" firstAttribute="width" secondItem="MvY-3y-98v" secondAttribute="width" constant="-10" id="mzO-er-DZa"/>
-                            <constraint firstItem="UUy-Uw-K19" firstAttribute="leading" secondItem="MvY-3y-98v" secondAttribute="leading" constant="5" id="oz3-SQ-TSN"/>
-                            <constraint firstItem="MvY-3y-98v" firstAttribute="trailing" secondItem="UUy-Uw-K19" secondAttribute="trailing" constant="5" id="w5K-rD-CeR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outletCollection property="annotationViews" destination="X2B-Ii-80h" collectionClass="NSMutableArray" id="rVg-mU-O65"/>
-                        <outletCollection property="annotationViews" destination="2qf-Xl-80R" collectionClass="NSMutableArray" id="SW6-ez-VxD"/>
-                        <outletCollection property="annotationViews" destination="UUy-Uw-K19" collectionClass="NSMutableArray" id="wVG-zd-iMK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0EJ-q5-Jf0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

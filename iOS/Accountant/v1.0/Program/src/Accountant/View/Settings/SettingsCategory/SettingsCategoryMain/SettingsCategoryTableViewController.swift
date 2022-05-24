@@ -107,7 +107,7 @@ class SettingsCategoryTableViewController: UITableViewController {
             }
         }
         let viewController = UIStoryboard(name: "SettingsCategoryTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

@@ -108,7 +108,7 @@ class SettingsOperatingTableViewController: UITableViewController {
         }
         // FIXME: 設定仕訳帳画面のためのAnnotationViewControllerクラスを作成する
         let viewController = UIStoryboard(name: "SettingsOperatingTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingJournals") as! AnnotationViewControllerSettingJournals
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

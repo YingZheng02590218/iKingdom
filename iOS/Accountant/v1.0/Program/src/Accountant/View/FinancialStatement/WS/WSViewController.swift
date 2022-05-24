@@ -127,7 +127,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             }
         }
         let viewController = UIStoryboard(name: "WSViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_WorkSheet") as! AnnotationViewController
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     
