@@ -103,8 +103,14 @@ class WalkThroughViewController: UIViewController {
         introView?.skipButton.isHidden = true
 
         introView?.limitPageIndex = (introView?.pages.count ?? 1) - 1
-        introView?.pageControl.currentPageIndicatorTintColor = .gray
-        introView?.pageControl.pageIndicatorTintColor = .lightGray
+        // ダークモード対応
+        if UITraitCollection.isDarkMode {
+        }
+        else {
+            introView?.pageControl.currentPageIndicatorTintColor = .gray
+            introView?.pageControl.pageIndicatorTintColor = .lightGray
+        }
+        introView?.pageControlY = self.view.bounds.size.height * 0.9
         
         introView?.delegate = self
         // アニメーション設定

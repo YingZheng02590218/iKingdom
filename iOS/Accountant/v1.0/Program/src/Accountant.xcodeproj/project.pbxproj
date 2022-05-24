@@ -135,6 +135,8 @@
 		F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209EF27A4377000F7EA8D /* BSViewController.xib */; };
 		F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */; };
 		F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */; };
+		F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */; };
+		F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */; };
 		F9BDCBAF27A6CCC000BD8770 /* PLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */; };
 		F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BDCBAE27A6CCC000BD8770 /* PLViewController.xib */; };
 		F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */; };
@@ -534,6 +536,7 @@
 		F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSTableViewCell.xib; sourceTree = "<group>"; };
 		F9B778E625A09D0000300B7A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+extension.swift"; sourceTree = "<group>"; };
 		F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLViewController.swift; sourceTree = "<group>"; };
 		F9BDCBAE27A6CCC000BD8770 /* PLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PLViewController.xib; sourceTree = "<group>"; };
 		F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLPresenter.swift; sourceTree = "<group>"; };
@@ -1141,6 +1144,7 @@
 			isa = PBXGroup;
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
 				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
 			);
@@ -1944,6 +1948,7 @@
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
 				F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F98D8A5127A534BD009560AA /* Printout+extension.swift in Sources */,
+				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
 				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
@@ -2084,6 +2089,7 @@
 				F9EC66EF27B90BC60003FBB6 /* DataBaseJournals.swift in Sources */,
 				F9EC66F027B90BC60003FBB6 /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66F127B90BC60003FBB6 /* Printout+extension.swift in Sources */,
+				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
 				F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */,
