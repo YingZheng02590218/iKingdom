@@ -23,6 +23,18 @@ class WalkThroughViewController: UIViewController {
 
     // TODO: ライセンス表記
     func showIntroWithCrossDissolve() {
+        
+        let page = EAIntroPage()
+        page.title = "Paciolist"
+        page.titleColor = UIColor.TextColor
+        page.titleFont = UIFont(name: "Futura-Bold", size: 48.0)
+        page.titlePositionY = self.view.bounds.size.height/2
+        page.desc = "複式簿記の会計帳簿\n\n紙の帳簿と同じデザインを表現した\n複式簿記で記帳ができるアプリ"
+        page.descColor = UIColor.lightGray
+        page.descFont = UIFont(name: "HiraMaruProN-W4", size: 18)
+        page.descPositionY = self.view.bounds.size.height/2
+        page.bgColor = UIColor.clear
+        
         // 各ページはEAIntroPageというクラスがあるので、それで作りましょう。
         let page1 = EAIntroPage()
         // タイトルのテキスト
@@ -51,13 +63,25 @@ class WalkThroughViewController: UIViewController {
         page2.titleColor = UIColor.TextColor
         page2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         page2.titlePositionY = self.view.bounds.size.height * 0.8
-        page2.desc = "紙の帳簿と同じデザインで\n仕訳帳と総勘定元帳を確認\n\n仕訳帳で、仕訳の編集や削除ができる"
+        page2.desc = "仕訳帳と総勘定元帳を確認\n\n仕訳帳で、仕訳の編集や削除ができる"
         page2.descColor = UIColor.lightGray
         page2.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
         page2.descPositionY = self.view.bounds.size.height * 0.8
         page2.bgColor = UIColor.clear
         page2.bgImage = UIImage(named: "bg2")
-
+        
+        let page1of2 = EAIntroPage()
+        page1of2.title = " "
+        page1of2.titleColor = UIColor.TextColor
+        page1of2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
+        page1of2.titlePositionY = self.view.bounds.size.height * 0.8
+        page1of2.desc = "プリンターで印刷や\nPDFファイルを出力することができる"
+        page1of2.descColor = UIColor.lightGray
+        page1of2.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
+        page1of2.descPositionY = self.view.bounds.size.height * 0.8
+        page1of2.bgColor = UIColor.clear
+        page1of2.bgImage = UIImage(named: "bg1of2")
+        
         let page3 = EAIntroPage()
         page3.title = "決算"
         page3.titleColor = UIColor.TextColor
@@ -94,7 +118,7 @@ class WalkThroughViewController: UIViewController {
         page5.bgColor = UIColor.clear
         
         // ここでページを追加
-        let introView = EAIntroView(frame: self.view.bounds, andPages: [page1, page2, page3, page4, page5])
+        let introView = EAIntroView(frame: self.view.bounds, andPages: [page, page1, page2, page1of2, page3, page4, page5])
         // スキップボタンのテキスト
         // introView?.skipButton.setTitle("skip", for: UIControl.State.normal)
         // スキップボタンの色変更
