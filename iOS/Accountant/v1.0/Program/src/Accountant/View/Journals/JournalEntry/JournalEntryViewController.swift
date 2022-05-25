@@ -1383,9 +1383,9 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         TextField_category_debit.text = objects[indexPath.row].debit_category
-        TextField_amount_debit.text = String(objects[indexPath.row].debit_amount)
+        TextField_amount_debit.text = addComma(string: String(objects[indexPath.row].debit_amount))
         TextField_category_credit.text = objects[indexPath.row].credit_category
-        TextField_amount_credit.text = String(objects[indexPath.row].credit_amount)
+        TextField_amount_credit.text = addComma(string: String(objects[indexPath.row].credit_amount))
         TextField_SmallWritting.text = objects[indexPath.row].smallWritting
     }
     
