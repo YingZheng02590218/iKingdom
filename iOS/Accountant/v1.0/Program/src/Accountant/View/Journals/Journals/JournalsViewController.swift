@@ -538,7 +538,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             // 空白行
-            return 5 // 空白行を表示するため+5行を追加
+            return 7 // 空白行を表示するため+7行を追加
         }
     }
     //セルを生成して返却するメソッド

@@ -226,7 +226,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         }
         else {
             // 空白行
-            return 15 // 空白行を表示するため+15行を追加
+            return 21 // 空白行を表示するため+21行を追加
         }
     }
     //セルを生成して返却するメソッド

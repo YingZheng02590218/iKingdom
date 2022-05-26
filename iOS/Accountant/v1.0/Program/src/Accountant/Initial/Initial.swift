@@ -26,6 +26,31 @@ class Initial {
         initializeSettingsOperating()
         // 設定会計期間　決算日　初期化
         initializePeriod()
+        // チュートリアル対応 コーチマーク型　初回起動時
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_JournalEntry"
+        if ud.bool(forKey: firstLunchKey) {
+            // 仕訳のサンプルデータを作成する
+            let dataBaseManager = DataBaseManagerJournalEntry()
+            let _ = dataBaseManager.addJournalEntry(
+                date: "\(getTheTime())/04/01",
+                debit_category: "現金",
+                debit_amount: 1000000, //カンマを削除してからデータベースに書き込む
+                credit_category: "売上高",
+                credit_amount: 1000000,//カンマを削除してからデータベースに書き込む
+                smallWritting: "ゾウ商店"
+            )
+            // よく使う仕訳のサンプルデータを作成する
+            let dataBaseManagerSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry()
+            let _ = dataBaseManagerSettingsOperatingJournalEntry.addJournalEntry(
+                nickname: "よく使う仕訳1",
+                debit_category: "現金",
+                debit_amount: 1000000, //カンマを削除してからデータベースに書き込む
+                credit_category: "売上高",
+                credit_amount: 1000000,//カンマを削除してからデータベースに書き込む
+                smallWritting: "ゾウ商店"
+            )
+        }
     }
     /**
     * 初期化　初期化メソッド
@@ -87,8 +112,7 @@ class Initial {
     */
     func initializeAccountingBooks() {
         let dataBaseManager = DataBaseManagerAccountingBooks()
-        var fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
-        fiscalYear -= 1                     // デフォルトで現在の年月から前年度の会計帳簿を作成する
+        let fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
         if !dataBaseManager.checkInitializing() {
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
