@@ -82,21 +82,21 @@ class SettingsInformationTableViewController: UITableViewController {
      }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
-        // チュートリアル対応　初回起動時　7行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsInformation"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
         else {
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -107,7 +107,7 @@ class SettingsInformationTableViewController: UITableViewController {
             }
         }
         let viewController = UIStoryboard(name: "SettingsInformationTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsInformation") as! AnnotationViewControllerSettingsInformation
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

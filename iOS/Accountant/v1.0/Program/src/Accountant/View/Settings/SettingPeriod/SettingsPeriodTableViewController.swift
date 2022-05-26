@@ -143,21 +143,21 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
      }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
-        // チュートリアル対応　初回起動時　7行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingPeriod"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
         else {
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -168,7 +168,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             }
         }
         let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     

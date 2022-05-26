@@ -1,4 +1,7 @@
 PODS:
+  - EAIntroView (2.13.0):
+    - EARestrictedScrollView (~> 1.1.0)
+  - EARestrictedScrollView (1.1.0)
   - Firebase/Core (8.12.1):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 8.12.0)
@@ -138,6 +141,7 @@ PODS:
   - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
+  - EAIntroView
   - Firebase/Core (~> 8.10)
   - Firebase/Crashlytics
   - Firebase/Performance
@@ -149,6 +153,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - EAIntroView
+    - EARestrictedScrollView
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -170,6 +176,8 @@ SPEC REPOS:
     - SwiftyStoreKit
 
 SPEC CHECKSUMS:
+  EAIntroView: 9adedfc6b5c3fd3ebe19766da01dae573e6ce053
+  EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
   FirebaseABTesting: 1b05c92327b3f0a9545cea3bab4d93e82550e29b
   FirebaseAnalytics: bd10d7706ba8d6e01ea2816f8fe9e9b881cb0918
@@ -190,6 +198,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 2f4700edae2327e761d1e59cd67be55736b30445
+PODFILE CHECKSUM: 97dc52d5a8d74373f20687a0d62307659aeab96c
 
 COCOAPODS: 1.11.2

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import PDFKit
 import GoogleMobileAds // マネタイズ対応
 
@@ -30,9 +31,16 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     @IBOutlet weak var label_date_year: UILabel!
     @IBOutlet weak var view_top: UIView!
     @IBOutlet weak var label_list_heading: UILabel!
-    @IBOutlet weak var button_print: UIButton!
+    @IBOutlet weak var button_print: UIBarButtonItem!
     /// 勘定　下部
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+    
     // 勘定名
     var account :String = ""
     // 印刷機能
@@ -66,6 +74,11 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
     
     private func setTableView() {
@@ -73,6 +86,19 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
         tableView.delegate = self
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
+        }
+    }
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
     
@@ -119,7 +145,7 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     /**
      * 印刷ボタン押下時メソッド
      */
-    @IBAction func button_print(_ sender: UIButton) {
+    @IBAction func button_print(_ sender: Any) {
         // 初期化
         pDFMaker.initialize(account: account)
         
@@ -200,7 +226,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         }
         else {
             // 空白行
-            return 15 // 空白行を表示するため+15行を追加
+            return 21 // 空白行を表示するため+21行を追加
         }
     }
     //セルを生成して返却するメソッド
@@ -421,6 +447,7 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
+        createButtons() // ボタン作成
         initializeGenearlLedgerAccount()
 
         self.navigationItem.title = "勘定"

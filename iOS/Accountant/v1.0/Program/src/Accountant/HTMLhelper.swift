@@ -227,7 +227,7 @@ struct HTMLhelper {
                   <td class="line_single_red_right line_single_blue_bottom fontsize60 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize60">\(debit_category)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountDebit)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountDebit == 0 ? "" : String(numberOfAccountDebit))</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize60">\(String(debit_amount))</td>
                   <td class="line_single_blue_bottom"></td>
                 </tr>
@@ -235,7 +235,7 @@ struct HTMLhelper {
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60"><p class="right">\(credit_category)</p></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountCredit)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccountCredit == 0 ? "" : String(numberOfAccountCredit))</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
                   <td class="line_single_blue_bottom fontsize60">\(String(credit_amount))</td>
                 </tr>
