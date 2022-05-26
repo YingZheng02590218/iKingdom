@@ -122,7 +122,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
                             constant: 0)
         ])
      }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -474,17 +474,17 @@ extension TBViewController: TBPresenterOutput {
     }
     
     func setupViewForViewDidAppear() {
-        // チュートリアル対応　初回起動時　7行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_TrialBalance"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
         else {
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }

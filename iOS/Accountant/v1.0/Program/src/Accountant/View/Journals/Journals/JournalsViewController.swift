@@ -184,7 +184,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                             constant: 0)
         ])
      }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -198,7 +198,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
-    
+    // チュートリアル対応 コーチマーク型
     func finishAnnotation() {
         //タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -1050,20 +1050,20 @@ extension JournalsViewController: JournalsPresenterOutput {
         print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
         if indexPath != nil && indexPath!.count > 0 {
-            // タグを設定する　チュートリアル対応
+            // チュートリアル対応 コーチマーク型　タグを設定する
             tableView.visibleCells[0].tag = 33
             
-            // チュートリアル対応　初回起動時　7行を追加
+            // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
             let ud = UserDefaults.standard
             let firstLunchKey = "firstLunch_Journals"
             if ud.bool(forKey: firstLunchKey) {
                 ud.set(false, forKey: firstLunchKey)
                 ud.synchronize()
-                // チュートリアル対応
+                // チュートリアル対応 コーチマーク型
                 presentAnnotation()
             }
             else {
-                // チュートリアル対応
+                // チュートリアル対応 コーチマーク型
                 finishAnnotation()
             }
         }

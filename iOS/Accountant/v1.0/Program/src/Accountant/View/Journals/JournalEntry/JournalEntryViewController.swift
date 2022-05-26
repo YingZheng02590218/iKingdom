@@ -105,33 +105,11 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     func initialize() {
         // インジゲーターを開始
         showActivityIndicatorView()
-        // アプリ初期化
+        // データベース初期化
         let initial = Initial()
         initial.initialize()
         // インジケーターを終了
         finishActivityIndicatorView()
-    }
-    // コーチマークを開始
-    func showAnnotation() {
-        // チュートリアル対応　初回起動時　7行を追加
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch_JournalEntry"
-        if ud.bool(forKey: firstLunchKey) {
-            DispatchQueue.global(qos: .default).async {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
-                // 非同期処理などを実行（待つ）
-                Thread.sleep(forTimeInterval: 0.5)
-                DispatchQueue.main.async {
-                    // チュートリアル対応
-                    self.presentAnnotation()
-                }
-            }
-        }
-        else {
-            // チュートリアル対応
-            self.finishAnnotation()
-        }
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
@@ -299,25 +277,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
 //        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
 //
 //        self.present(fourthViewController, animated: true, completion: nil)
-
-        // ウォークスルー機能　初回起動時
-        let ud = UserDefaults.standard
-        let firstLunchKey = "firstLunch_WalkThrough"
-        if ud.bool(forKey: firstLunchKey) {
-            DispatchQueue.global(qos: .default).async {
-                // 非同期処理などを実行（今回は3秒間待つだけ）
-                Thread.sleep(forTimeInterval: 1)
-                DispatchQueue.main.async {
-                    // ウォークスルー機能
-                    let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as! WalkThroughViewController
-                    self.present(viewController, animated: true, completion: nil)
-                }
-            }
-        }
-        else {
-            // コーチマーク
-            showAnnotation()
-        }
+        
+        // チュートリアル対応 ウォークスルー型
+        showWalkThrough()
     }
     
     override func viewDidLayoutSubviews() {
@@ -331,6 +293,9 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // MARK: - ロゴとインジゲーターのアニメーション
+
+    // インジゲーターを開始
     func showActivityIndicatorView() {
         if let logoImageView = logoImageView {
             logoImageView.isHidden = false
@@ -344,12 +309,12 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             activityIndicatorView.startAnimating()
         }
     }
-
+    // インジケーターを終了
     func finishActivityIndicatorView() {
         DispatchQueue.global(qos: .default).async {
             // 非同期処理などが終了したらメインスレッドでアニメーション終了
             DispatchQueue.main.async {
-                // アニメーションをする
+                // ロゴをアニメーションさせる
                 self.showAnimation()
                 // 非同期処理などを実行（今回は2秒間待つだけ）
                 Thread.sleep(forTimeInterval: 0.5)
@@ -358,7 +323,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    
+    // ロゴをアニメーションさせる
     func showAnimation() {
         // 少し縮小するアニメーション
         if let logoLabel = self.logoLabel {
@@ -382,7 +347,52 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             })
         }
     }
-    // チュートリアル対応
+    
+    // MARK: - チュートリアル対応 ウォークスルー型
+
+    // チュートリアル対応 ウォークスルー型
+    func showWalkThrough() {
+        // チュートリアル対応 ウォークスルー型　初回起動時
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_WalkThrough"
+        if ud.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+                // 非同期処理などを実行（今回は3秒間待つだけ）
+                Thread.sleep(forTimeInterval: 1)
+                DispatchQueue.main.async {
+                    // チュートリアル対応 ウォークスルー型
+                    let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as! WalkThroughViewController
+                    viewController.modalPresentationStyle = .fullScreen
+                    self.present(viewController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    // MARK: - チュートリアル対応 コーチマーク型
+    
+    // チュートリアル対応 コーチマーク型
+    // ウォークスルーが終了後に、呼び出される
+    func showAnnotation() {
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_JournalEntry"
+        if ud.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+            ud.set(false, forKey: firstLunchKey)
+            ud.synchronize()
+                DispatchQueue.main.async {
+                    // コーチマークを開始
+                    self.presentAnnotation()
+                }
+            }
+        }
+        else {
+            // コーチマークを終了
+            self.finishAnnotation()
+        }
+    }
+    // チュートリアル対応 コーチマーク型　コーチマークを開始
     func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -396,7 +406,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
         viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
-    // コーチマークを終了
+    // チュートリアル対応 コーチマーク型　コーチマークを終了
     func finishAnnotation() {
         //タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -406,7 +416,17 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+        // チュートリアル対応 赤ポチ型　初回起動時　7行を追加
+        let ud = UserDefaults.standard
+        let firstLunchKey = "firstLunch_SettingsCategory"
+        if ud.bool(forKey: firstLunchKey) { // 設定勘定科目のコーチマークが表示されていない場合
+            DispatchQueue.main.async {
+                // 赤ポチを開始
+                self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = ""
+            }
+        }
     }
+    
     // カルーセル作成
     func createCarousel() {
         //xib読み込み

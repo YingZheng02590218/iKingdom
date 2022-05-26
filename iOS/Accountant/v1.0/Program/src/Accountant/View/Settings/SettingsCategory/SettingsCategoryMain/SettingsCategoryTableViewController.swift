@@ -82,21 +82,21 @@ class SettingsCategoryTableViewController: UITableViewController {
      }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
-        // チュートリアル対応　初回起動時　7行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsCategory"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
         else {
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -120,6 +120,9 @@ class SettingsCategoryTableViewController: UITableViewController {
                 }
             }
         }
+        // チュートリアル対応 赤ポチ型
+        // 赤ポチを終了
+        self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = nil
     }
     
     // MARK: - Table view data source

@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
-        // チュートリアル対応　初回起動時　4行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
         let ud = UserDefaults.standard
         // 仕訳帳
         var firstLunchKey = "firstLunch_Journals"
@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ud.register(defaults: firstLunch)
         // 動作確認用
 //        ud.set(true, forKey: firstLunchKey)
-        // ウォークスルー機能
+        // チュートリアル対応 ウォークスルー型
         firstLunchKey = "firstLunch_WalkThrough"
         firstLunch = [firstLunchKey: true]
         ud.register(defaults: firstLunch)
