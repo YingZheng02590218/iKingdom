@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 
 // 損益計算書クラス
@@ -33,6 +34,14 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet var label_closingDate_thisYear: UILabel!
     /// 損益計算書　下部
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+
     fileprivate let refreshControl = UIRefreshControl()
     
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -64,6 +73,11 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
     
     private func setTableView() {
@@ -72,6 +86,19 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         tableView.register(UINib(nibName: "BSTableViewCell", bundle: nil), forCellReuseIdentifier: "BSTableViewCell")
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
+        }
+    }
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
     
@@ -865,6 +892,7 @@ extension PLViewController: PLPresenterOutput {
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
+        createButtons() // ボタン作成
         setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))

@@ -127,7 +127,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 3:
-            return "開発者へメールを送ることができます。メールを受信できるように受信拒否設定は解除してください。"
+            return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
         default:
             return ""
         }
@@ -202,7 +202,7 @@ class SettingsTableViewController: UITableViewController {
             case 2:
                 // お問い合わせ機能
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
-                cell.centerLabel.text = "お問い合わせ(要望・不具合報告など)"
+                cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
             default:
@@ -271,9 +271,15 @@ class SettingsTableViewController: UITableViewController {
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
                     mail.mailComposeDelegate = self
-                    mail.setToRecipients(["paciolist@gmail.com"])     // 宛先アドレス
-                    mail.setSubject("お問い合わせ")                     // 件名
-                    mail.setMessageBody("", isHTML: false)            // 本文
+                    // 宛先アドレス
+                    mail.setToRecipients(["paciolist@gmail.com"])
+                    // 件名
+                    mail.setSubject("お問い合わせ")
+                    // 本文　末尾に、iPhoneのモデルとOSとバージョンを表示
+                    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+                       let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
+                        mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(version) Buld: \(build)", isHTML: false)
+                    }
                     present(mail, animated: true, completion: nil)
                 }
                 else {

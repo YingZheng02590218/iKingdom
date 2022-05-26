@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 
 // 合計残高試算表クラス　決算整理前
@@ -32,6 +33,14 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet weak var segmentedControl_switch: UISegmentedControl!
     /// 合計残高試算表　下部
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+
     fileprivate let refreshControl = UIRefreshControl()
 
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
@@ -62,11 +71,30 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
 
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
+        }
     }
     
     private func setRefreshControl() {
@@ -94,7 +122,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
                             constant: 0)
         ])
      }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -105,7 +133,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
             }
         }
         let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as! AnnotationViewController
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
     
@@ -380,13 +408,13 @@ extension TBViewController: TBPresenterOutput {
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
+        createButtons() // ボタン作成
         setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
         button_print.isHidden = true
-        self.navigationItem.title = "合計残高試算表"
     }
     
     func setupViewForViewWillAppear() {
@@ -446,17 +474,17 @@ extension TBViewController: TBPresenterOutput {
     }
     
     func setupViewForViewDidAppear() {
-        // チュートリアル対応　初回起動時　7行を追加
+        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_TrialBalance"
         if ud.bool(forKey: firstLunchKey) {
             ud.set(false, forKey: firstLunchKey)
             ud.synchronize()
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
         else {
-            // チュートリアル対応
+            // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }

@@ -109,17 +109,40 @@ class FinancialStatementTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 4
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+            // 決算報告手続き
+        case 0: return    "財務諸表"
+            // 決算本手続き 帳簿の締切
+        case 1: return    "決算振替仕訳"
+        case 2: return    "決算整理仕訳"
+            // 決算予備手続き
+        case 3: return    "試算表"
+            // TODO: 開始手続き
+        // case 4: return    "再振替仕訳"
+        // case 5: return    "開始仕訳"
+        default:
+            return ""
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             // 貸借対照表、損益計算書、キャッシュフロー計算書
             return 2//3
         case 1:
-            // 精算書、試算表、損益勘定
-            return 3
+            // 損益勘定
+            return 1
+        case 2:
+            // 精算書
+            return 1
+        case 3:
+            // 試算表
+            return 1
         default:
             return 0
         }
@@ -152,33 +175,27 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.textLabel?.textAlignment = NSTextAlignment.center
                 return cell
             }
-        }else {
-            switch indexPath.row {
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
-                cell.textLabel?.text = "精算表"
-                cell.textLabel?.textColor = .TextColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
-            case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
-                cell.textLabel?.text = "試算表"
-                cell.textLabel?.textColor = .TextColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
-            case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
-                cell.textLabel?.text = "損益勘定"
-                cell.textLabel?.textColor = .TextColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
-                cell.textLabel?.text = ""
-                cell.textLabel?.textColor = .TextColor
-                cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
-            }
+        }
+        else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
+            cell.textLabel?.text = "損益勘定"
+            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textAlignment = NSTextAlignment.center
+            return cell
+        }
+        else if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
+            cell.textLabel?.text = "精算表"
+            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textAlignment = NSTextAlignment.center
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
+            cell.textLabel?.text = "試算表"
+            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textAlignment = NSTextAlignment.center
+            return cell
         }
     }
     

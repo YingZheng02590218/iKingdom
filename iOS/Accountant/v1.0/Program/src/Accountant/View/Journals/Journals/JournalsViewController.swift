@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EMTNeumorphicView
 import PDFKit
 import GoogleMobileAds // マネタイズ対応
 
@@ -37,6 +38,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var Label_list_date_year: UILabel!
     /// 仕訳帳　下部
     @IBOutlet var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
+    @IBOutlet var backgroundView: EMTNeumorphicView!
+    
+    let LIGHTSHADOWOPACITY: Float = 0.5
+    let DARKSHADOWOPACITY: Float = 0.5
+    let ELEMENTDEPTH: CGFloat = 4
+    let edged = false
+
     fileprivate let refreshControl = UIRefreshControl()
     // まとめて編集機能
     var indexPaths: [IndexPath] = []
@@ -86,6 +94,11 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         presenter.viewDidAppear()
     }
     
+    override func viewDidLayoutSubviews() {
+        // ボタン作成
+        createButtons()
+    }
+    
     // MARK: - Setting
     
     private func setTableView() {
@@ -120,6 +133,19 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             // ボタンを不活性にする
             barButtonItem_print.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
+        }
+    }
+    // ボタンのデザインを指定する
+    private func createButtons() {
+        
+        if let backgroundView = backgroundView {
+            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
     
@@ -158,7 +184,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                             constant: 0)
         ])
      }
-    // チュートリアル対応
+    // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         //タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -169,10 +195,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         let viewController = UIStoryboard(name: "JournalsViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_Journals") as! AnnotationViewControllerJournals
-        viewController.alpha = 0.5
+        viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
     }
-    
+    // チュートリアル対応 コーチマーク型
     func finishAnnotation() {
         //タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -512,7 +538,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             // 空白行
-            return 5 // 空白行を表示するため+5行を追加
+            return 7 // 空白行を表示するため+7行を追加
         }
     }
     //セルを生成して返却するメソッド
@@ -944,6 +970,7 @@ extension JournalsViewController: JournalsPresenterOutput {
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
+        createButtons() // ボタン作成
         setRefreshControl()
         setLongPressRecognizer()
         initializeJournals()
@@ -952,6 +979,8 @@ extension JournalsViewController: JournalsPresenterOutput {
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "仕訳帳"
+        // 初期表示位置 ON
+        scroll = true
     }
     
     func setupViewForViewWillAppear() {
@@ -1000,7 +1029,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             gADBannerView.load(GADRequest())
             print(tableView.rowHeight)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+            addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
@@ -1021,20 +1050,20 @@ extension JournalsViewController: JournalsPresenterOutput {
         print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
         if indexPath != nil && indexPath!.count > 0 {
-            // タグを設定する　チュートリアル対応
+            // チュートリアル対応 コーチマーク型　タグを設定する
             tableView.visibleCells[0].tag = 33
             
-            // チュートリアル対応　初回起動時　7行を追加
+            // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
             let ud = UserDefaults.standard
             let firstLunchKey = "firstLunch_Journals"
             if ud.bool(forKey: firstLunchKey) {
                 ud.set(false, forKey: firstLunchKey)
                 ud.synchronize()
-                // チュートリアル対応
+                // チュートリアル対応 コーチマーク型
                 presentAnnotation()
             }
             else {
-                // チュートリアル対応
+                // チュートリアル対応 コーチマーク型
                 finishAnnotation()
             }
         }

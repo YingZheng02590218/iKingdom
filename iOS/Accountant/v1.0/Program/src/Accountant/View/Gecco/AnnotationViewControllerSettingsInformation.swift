@@ -41,8 +41,10 @@ class AnnotationViewControllerSettingsInformation: SpotlightViewController {
                     cornerRadius: 6
                 )
             )
+            break
         case 1:
             dismiss(animated: true, completion: nil)
+            break
         default:
             break
         }
@@ -60,6 +62,7 @@ class AnnotationViewControllerSettingsInformation: SpotlightViewController {
 }
 
 extension AnnotationViewControllerSettingsInformation: SpotlightViewDelegate {
+    
     func spotlightWillAppear(spotlightView: SpotlightView, spotlight: SpotlightType) {
         print("\(#function): \(spotlight)")
     }
@@ -69,6 +72,7 @@ extension AnnotationViewControllerSettingsInformation: SpotlightViewDelegate {
 }
 
 extension AnnotationViewControllerSettingsInformation: SpotlightViewControllerDelegate {
+    
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
         next(false)
     }
@@ -83,15 +87,18 @@ extension AnnotationViewControllerSettingsInformation: SpotlightViewControllerDe
 }
 
 private extension AnnotationViewControllerSettingsInformation {
+    
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         annotationViews.enumerated().forEach { (offset, annotationView) in
             switch offset {
             case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.origin.y + 60
+                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
+                break
             }
         }
     }
