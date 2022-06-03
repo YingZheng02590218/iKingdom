@@ -10,6 +10,12 @@
 		43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */; };
 		952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
+		F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
+		F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
+		F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8792849C97200290DFD /* PassCodeLockViewController.swift */; };
+		F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8792849C97200290DFD /* PassCodeLockViewController.swift */; };
+		F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F901E87C2849CC2900290DFD /* PassCodeLockViewController.storyboard */; };
+		F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F901E87C2849CC2900290DFD /* PassCodeLockViewController.storyboard */; };
 		F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */; };
 		F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */; };
 		F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */; };
@@ -405,6 +411,9 @@
 		E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.release.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.release.xcconfig"; sourceTree = "<group>"; };
 		ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paciolist.release.xcconfig"; path = "Target Support Files/Pods-Paciolist/Pods-Paciolist.release.xcconfig"; sourceTree = "<group>"; };
 		F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournalEntry.swift; sourceTree = "<group>"; };
+		F901E8762848BA8B00290DFD /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
+		F901E8792849C97200290DFD /* PassCodeLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassCodeLockViewController.swift; sourceTree = "<group>"; };
+		F901E87C2849CC2900290DFD /* PassCodeLockViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PassCodeLockViewController.storyboard; sourceTree = "<group>"; };
 		F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryViewController.swift; sourceTree = "<group>"; };
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -684,6 +693,16 @@
 				2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F901E8752848BA7A00290DFD /* Biometrics */ = {
+			isa = PBXGroup;
+			children = (
+				F901E8762848BA8B00290DFD /* Biometrics.swift */,
+				F901E8792849C97200290DFD /* PassCodeLockViewController.swift */,
+				F901E87C2849CC2900290DFD /* PassCodeLockViewController.storyboard */,
+			);
+			path = Biometrics;
 			sourceTree = "<group>";
 		};
 		F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */ = {
@@ -1098,6 +1117,7 @@
 				F9C245C626497E4400DD9C9B /* JournalEntryTemplateViewController.swift */,
 				F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */,
 				F9F4608024D1ED15008FE62B /* PickerTextField.swift */,
+				F901E8752848BA7A00290DFD /* Biometrics */,
 				F9C2BC21277DEE80006334D0 /* ClassicCalculator */,
 				F99C6B9C280DAFBA00E99080 /* PeriodYear */,
 			);
@@ -1607,6 +1627,7 @@
 				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
 				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
+				F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
@@ -1665,6 +1686,7 @@
 				F9EC673327B90BC60003FBB6 /* SettingsInformationTableViewController.storyboard in Resources */,
 				F9EC673427B90BC60003FBB6 /* PageContentViewController.storyboard in Resources */,
 				F9EC673527B90BC60003FBB6 /* InfoPlist.strings in Resources */,
+				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F9EC673627B90BC60003FBB6 /* CarouselAndPageViewController.storyboard in Resources */,
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
@@ -1928,6 +1950,7 @@
 				F9711329249D12A1006258F7 /* TableViewCellTB.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
+				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
 				F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
@@ -1941,6 +1964,7 @@
 				F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */,
 				F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
+				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
@@ -2069,6 +2093,7 @@
 				F9EC66DC27B90BC60003FBB6 /* TableViewCellTB.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
+				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
 				F9EC66DF27B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
@@ -2082,6 +2107,7 @@
 				F9EC66E927B90BC60003FBB6 /* DataBaseManagerFinancialStatements.swift in Sources */,
 				F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
+				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,

@@ -86,7 +86,13 @@ class SettingsTableViewController: UITableViewController {
 //                            constant: 0)
 //        ])
 //     }
-
+    
+    // 生体認証パスコードロック　設定スイッチ 切り替え
+    @objc func switchTriggered(sender: UISwitch){
+        // 生体認証パスコードロック　設定スイッチ
+        UserDefaults.standard.set(sender.isOn, forKey: "biometrics_switch")
+        UserDefaults.standard.synchronize()
+    }
 
     // MARK: - Table view data source
 
@@ -101,7 +107,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             return 3
         case 2:
-            return 2
+            return 3
         case 3:
             return 3
         default:
@@ -171,13 +177,26 @@ class SettingsTableViewController: UITableViewController {
         }
         else if indexPath.section == 2 {
             switch indexPath.row {
-            case 0:
+                case 0:
                 //① UI部品を指定　TableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "パスコードロックを利用する"
+                cell.leftImageView.image = UIImage(systemName: "key.fill")?.withRenderingMode(.alwaysTemplate)
+                if cell.accessoryView == nil {
+                    let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                    // 生体認証パスコードロック　設定スイッチ
+                    switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
+                    switchView.tag = indexPath.row
+                    switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
+                    cell.accessoryView = switchView
+                }
+                return cell
+            case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "icons8-ペン-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳帳"
                 cell.leftImageView.image = UIImage(named: "icons8-開いた本-25")?.withRenderingMode(.alwaysTemplate)
@@ -242,9 +261,12 @@ class SettingsTableViewController: UITableViewController {
         else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
+                
                 break
             case 1:
+                performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 2:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             default:
