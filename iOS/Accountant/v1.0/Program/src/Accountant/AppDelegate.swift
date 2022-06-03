@@ -131,16 +131,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ロック中
         ud.set(true, forKey: firstLunchKey)
         
-        
         // レビュー催促機能
         let key = "startUpCount"
-        UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
-        UserDefaults.standard.synchronize()
         let count = UserDefaults.standard.integer(forKey: key)
-        if count == 15 { // 起動が15回目にレビューを催促する
+        if count == 5 { // 起動が5回目にレビューを催促する
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
+        }
+        if count < 6 {
+            // 永遠にインクリメントするのを防ぐ
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
+            UserDefaults.standard.synchronize()
         }
         // アップグレード機能　スタンダードプラン　see notes below for the meaning of Atomic / Non-Atomic
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
