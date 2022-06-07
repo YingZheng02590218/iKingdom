@@ -95,8 +95,8 @@ class SettingsRestoreTableViewController: UITableViewController {
 //
 //        }else {
             // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
-            let upgradeManager = UpgradeManager()
-            upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
+//            let upgradeManager = UpgradeManager()
+//            upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
             print(UserDefaults.standard.object(forKey: "buy"))
             if UserDefaults.standard.object(forKey: "buy") != nil {
                 let count = UserDefaults.standard.object(forKey: "buy") as! Int

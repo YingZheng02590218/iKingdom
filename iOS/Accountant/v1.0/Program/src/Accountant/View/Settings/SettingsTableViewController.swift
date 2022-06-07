@@ -14,18 +14,6 @@ import MessageUI // お問い合わせ機能
 // 設定クラス
 class SettingsTableViewController: UITableViewController {
     
-//    // マネタイズ対応
-//    // 広告ユニットID
-//    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-//    // テスト用広告ユニットID
-//    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-//    #if DEBUG
-//    let AdMobTest:Bool = true    // true:テスト
-//    #else
-//    let AdMobTest:Bool = false
-//    #endif
-//    @IBOutlet var gADBannerView: GADBannerView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,50 +30,11 @@ class SettingsTableViewController: UITableViewController {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-//        // アップグレード機能　スタンダードプラン
-//        if !inAppPurchaseFlag {
-//            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-//            // GADBannerView を作成する
-//            gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
-//            // GADBannerView プロパティを設定する
-//            if AdMobTest {
-//                gADBannerView.adUnitID = TEST_ID
-//            }
-//            else{
-//                gADBannerView.adUnitID = AdMobID
-//            }
-//            gADBannerView.rootViewController = self
-//            // 広告を読み込む
-//            gADBannerView.load(GADRequest())
-//            // GADBannerView を作成する
-//            addBannerViewToView(gADBannerView, constant:  self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1) // 一番したから3行分のスペースを空ける
-//        }
+
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
-    
-//    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-//      bannerView.translatesAutoresizingMaskIntoConstraints = false
-//      view.addSubview(bannerView)
-//      view.addConstraints(
-//        [NSLayoutConstraint(item: bannerView,
-//                            attribute: .bottom,
-//                            relatedBy: .equal,
-//                            toItem: bottomLayoutGuide,
-//                            attribute: .top,
-//                            multiplier: 1,
-//                            constant: constant),
-//         NSLayoutConstraint(item: bannerView,
-//                            attribute: .centerX,
-//                            relatedBy: .equal,
-//                            toItem: view,
-//                            attribute: .centerX,
-//                            multiplier: 1,
-//                            constant: 0)
-//        ])
-//     }
     
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc func switchTriggered(sender: UISwitch){

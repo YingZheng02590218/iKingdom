@@ -91,17 +91,19 @@ class SettingsUpgradeTableViewController: UITableViewController {
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                return "無料版ではほぼすべての画面上に広告が表示されます。まずは無料版でお使いいただいた上で、有料版をご検討ください。\n\n●有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n●自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n●注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
-            }else {
-                return "The free version will display ads on almost every screen. First of all, please use the free version and then consider the paid version.\n\n● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing \nIf you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
+                return "● 有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n● 自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n● 注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
+            }
+            else {
+                return "● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing \nIf you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
             }
         case 1:
             print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                return "●機種変更時の復元\n機種変更時には、以前購入した有料版を無料で復元できます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。"
-            }else {
+                return "● 機種変更時の復元\n機種変更時には、以前購入した有料版を復元することができます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。"
+            }
+            else {
                 return "● Restoration when changing models\nWhen changing models, you can restore the previously purchased paid version for free. Please log in to iTunes on your iPhone / iPad device with the same Apple ID as when you purchased it."
             }
         default:
@@ -134,10 +136,13 @@ class SettingsUpgradeTableViewController: UITableViewController {
             cell.label.textAlignment = .right
             if inAppPurchaseFlag {
                 // チェックマークを入れる
-                cell.accessoryType = .checkmark
-            }else {
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "checkmark.seal.fill")?.withRenderingMode(.alwaysTemplate))
+                cell.accessoryView?.tintColor = .green
+            }
+            else {
                 // チェックマークを外す
-                cell.accessoryType = .none
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "checkmark.seal")?.withRenderingMode(.alwaysTemplate))
+                cell.accessoryView?.tintColor = .gray
             }
             return cell
         case 1:
@@ -145,14 +150,16 @@ class SettingsUpgradeTableViewController: UITableViewController {
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.centerLabel.text = "購入の復元"
-            }else {
+                cell.centerLabel.text = "購入の復元をする"
+            }
+            else {
                 cell.centerLabel.text = "Restore Purchases"
             }
             if inAppPurchaseFlag {
-                cell.accessoryType = .checkmark
-            }else {
-                cell.accessoryType = .disclosureIndicator
+                cell.accessoryType = .none
+            }
+            else {
+                cell.accessoryType = .none
             }
             cell.leftImageView.image = UIImage(named: "icons8-復元-25")?.withRenderingMode(.alwaysTemplate)
             return cell
@@ -194,17 +201,24 @@ class SettingsUpgradeTableViewController: UITableViewController {
         } else {
             inAppPurchaseFlag = false
         }
+        
         switch indexPath.section {
         case 0: // 購入
-            guard inAppPurchaseFlag  else {
-                upgradeManager.purchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
-                return
-            }
+            upgradeManager.purchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff", completion: { returning in
+                // 購入済みを表すアイコンの色を緑色へ切り替えるためにリロードする
+                self.tableView.reloadData()
+            })
             break
         case 1: // リストア
-            upgradeManager.verifyPurchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
-            print("InAppPurchaseがあります。inAppPurchaseFlagは\(inAppPurchaseFlag)です。")
-            self.tableView.reloadData()
+            upgradeManager.verifyPurchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff", completion: { returning in // 定数定義する
+                let alert = UIAlertController(title: "復元", message: "\(returning ? "成功しました" : "失敗しました")", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+                self.tableView.reloadData()
+            })
             break
         case 2: // 解約
             // アプリ内でブラウザを開く
@@ -214,7 +228,8 @@ class SettingsUpgradeTableViewController: UITableViewController {
                     let vc = SFSafariViewController(url: url)
                     present(vc, animated: true, completion: nil)
                 }
-            }else {
+            }
+            else {
                 // アプリ内でブラウザを開く
                 let url = URL(string:"https://support.apple.com/en-us/HT202039")
                 if let url = url{
