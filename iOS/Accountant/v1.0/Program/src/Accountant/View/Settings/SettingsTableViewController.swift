@@ -38,9 +38,30 @@ class SettingsTableViewController: UITableViewController {
     
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc func switchTriggered(sender: UISwitch){
-        // 生体認証パスコードロック　設定スイッチ
-        UserDefaults.standard.set(sender.isOn, forKey: "biometrics_switch")
-        UserDefaults.standard.synchronize()
+        // 生体認証かパスコードのいずれかが使用可能かを確認する
+        if LocalAuthentication.canEvaluatePolicy() {
+            // 認証成功時の処理
+            DispatchQueue.main.async {
+                // 生体認証パスコードロック　設定スイッチ
+                UserDefaults.standard.set(sender.isOn, forKey: "biometrics_switch")
+                UserDefaults.standard.synchronize()
+            }
+        }
+        else {
+            // 認証失敗時の処理
+            DispatchQueue.main.async {
+                // スイッチを元に戻す
+                sender.isOn = !sender.isOn
+                // アラート画面を表示する
+                let alert = UIAlertController(title: "エラー", message: "パスコードを利用できるよう設定してください", preferredStyle: .alert)
+                
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source

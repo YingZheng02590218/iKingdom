@@ -53,18 +53,19 @@ class PassCodeLockViewController: UIViewController {
                 }
             },
             errorHandler: { errorReason in
-//                // 認証失敗時の処理
-//                DispatchQueue.main.async {
-//                    // アラート画面を表示する
-//                    if errorReason != "" {
-//                        let alert = UIAlertController(title: "エラー", message: errorReason, preferredStyle: .alert)
-//                        self.present(alert, animated: true) { () -> Void in
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-//                                self.dismiss(animated: true, completion: nil)
-//                            }
-//                        }
-//                    }
-//                }
+                // 認証失敗時の処理
+                DispatchQueue.main.async {
+                    // アラート画面を表示する
+                    // Paciolistの設定画面でパスコードロックをONにしている状態で、iPhoneの設定画面でパスコードをオフにした場合
+                    if errorReason != "" {
+                        let alert = UIAlertController(title: "エラー", message: errorReason, preferredStyle: .alert)
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
             }
         )
     }
