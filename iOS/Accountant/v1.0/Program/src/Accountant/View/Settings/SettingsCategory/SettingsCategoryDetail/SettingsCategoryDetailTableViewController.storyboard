@@ -48,7 +48,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="PickerTextFieldAccountDetail" customModule="Paciolist" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="PickerTextFieldAccountDetail" customModule="Paciolist" customModuleProvider="target">
                                             <rect key="frame" x="115" y="5" width="181" height="34"/>
                                             <color key="backgroundColor" name="TextFieldColor"/>
                                             <color key="textColor" name="TextColor"/>
@@ -75,7 +75,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iv9-Ab-XG0" customClass="PickerTextFieldAccountDetail" customModule="Paciolist" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iv9-Ab-XG0" customClass="PickerTextFieldAccountDetail" customModule="Paciolist" customModuleProvider="target">
                                             <rect key="frame" x="115" y="5" width="181" height="34"/>
                                             <color key="backgroundColor" name="TextFieldColor"/>
                                             <color key="textColor" name="TextColor"/>
@@ -102,7 +102,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="入力してください" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3XR-6k-myl">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="入力してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3XR-6k-myl">
                                             <rect key="frame" x="115" y="5" width="181" height="34"/>
                                             <color key="backgroundColor" name="TextFieldColor"/>
                                             <color key="textColor" name="TextColor"/>
