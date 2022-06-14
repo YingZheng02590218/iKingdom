@@ -145,7 +145,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             gADBannerView.isHidden = true
         }
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
@@ -176,7 +176,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         printing = false
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
         /*
@@ -306,7 +306,7 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             tableView.bringSubviewToFront(gADBannerView)
         }
@@ -927,7 +927,7 @@ extension PLViewController: PLPresenterOutput {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -955,7 +955,7 @@ extension PLViewController: PLPresenterOutput {
     
     func setupViewForViewDidAppear() {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }

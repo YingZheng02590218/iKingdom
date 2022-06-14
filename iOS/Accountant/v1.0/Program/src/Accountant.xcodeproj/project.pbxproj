@@ -34,7 +34,6 @@
 		F929C00B247708CF0034FAAF /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929C00A247708CF0034FAAF /* MasterData.swift */; };
 		F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */; };
 		F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */; };
-		F92ABDEF25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92ABDEE25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift */; };
 		F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */; };
 		F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F4EF3249CCD5B00D50767 /* TBViewController.swift */; };
 		F9354DB224989895007DB098 /* TBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DB124989895007DB098 /* TBModel.swift */; };
@@ -249,7 +248,6 @@
 		F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3C82A26552033001218F1 /* CategoryListCarouselAndPageViewController.swift */; };
 		F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */; };
-		F9EC66CB27B90BC60003FBB6 /* SettingsRestoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92ABDEE25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift */; };
 		F9EC66CC27B90BC60003FBB6 /* TableViewCellSettingAccountDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9225444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift */; };
 		F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
@@ -434,7 +432,6 @@
 		F9227728261F33010080B746 /* SettingsGroupsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsGroupsTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsCategoryDetailTableViewController.storyboard; sourceTree = "<group>"; };
 		F929C00A247708CF0034FAAF /* MasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
-		F92ABDEE25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsRestoreTableViewController.swift; path = Accountant/View/Settings/SettingsRestore/SettingsRestoreTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewController.swift; sourceTree = "<group>"; };
 		F92F4EF3249CCD5B00D50767 /* TBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBViewController.swift; sourceTree = "<group>"; };
 		F9354DB124989895007DB098 /* TBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBModel.swift; sourceTree = "<group>"; };
@@ -1412,7 +1409,6 @@
 			children = (
 				F9F7992F25A8647B0037EC50 /* SettingsUpgradeTableViewController.swift */,
 				F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */,
-				F92ABDEE25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift */,
 				F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */,
 				F97AC19C25A976000077B667 /* UpgradeManager.swift */,
 				F95D44FF25ADE5F00044493A /* Configuration.storekit */,
@@ -1929,7 +1925,6 @@
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
-				F92ABDEF25AF3EAF0071C470 /* SettingsRestoreTableViewController.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* TableViewCellSettingAccountDetail.swift in Sources */,
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
@@ -2072,7 +2067,6 @@
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
-				F9EC66CB27B90BC60003FBB6 /* SettingsRestoreTableViewController.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* TableViewCellSettingAccountDetail.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,

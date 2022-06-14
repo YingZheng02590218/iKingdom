@@ -62,75 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
-        // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
-        let ud = UserDefaults.standard
-        // 仕訳帳
-        var firstLunchKey = "firstLunch_Journals"
-        var firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 仕訳
-        firstLunchKey = "firstLunch_JournalEntry"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 精算表
-        firstLunchKey = "firstLunch_WorkSheet"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 試算表
-        firstLunchKey = "firstLunch_TrialBalance"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 会計期間
-        firstLunchKey = "firstLunch_SettingPeriod"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 勘定科目
-        firstLunchKey = "firstLunch_SettingsCategory"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 帳簿情報
-        firstLunchKey = "firstLunch_SettingsInformation"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 設定　仕訳帳
-        firstLunchKey = "firstLunch_SettingsJournals"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // チュートリアル対応 ウォークスルー型
-        firstLunchKey = "firstLunch_WalkThrough"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 生体認証パスコードロック設定スイッチ
-        firstLunchKey = "biometrics_switch"
-        firstLunch = [firstLunchKey: false] // 初期値はOFFとする
-        ud.register(defaults: firstLunch)
-        // 動作確認用
-//        ud.set(true, forKey: firstLunchKey)
-        // 生体認証パスコードロック
-        firstLunchKey = "biometrics"
-        firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
-        // ロック中
-        ud.set(true, forKey: firstLunchKey)
-        
+        // UserDefaultsをセットアップ
+        setupUserDefaults()
+
         // レビュー催促機能
         let key = "startUpCount"
         let count = UserDefaults.standard.integer(forKey: key)
@@ -144,23 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
             UserDefaults.standard.synchronize()
         }
-        // アップグレード機能　スタンダードプラン　see notes below for the meaning of Atomic / Non-Atomic
-        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
-            for purchase in purchases {
-                switch purchase.transaction.transactionState {
-                case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
-                    // Unlock content
-                case .failed, .purchasing, .deferred:
-                    break // do nothing
-                default:
-                    break
-                }
-            }
-        }
+        
+        // アップグレード機能
+        // アプリ起動時にトランザクションの監視を開始します
+        initSwiftyStorekit()
+        // アプリ起動時にネットに繋いでAppStoreで購入済みか確認する（1件のみ有料アイテムを登録）
+        UpgradeManager.shared.isPurchasedWhenAppStart()
+
         return true
     }
 
@@ -233,6 +157,100 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+    // UserDefaultsをセットアップ
+    func setupUserDefaults() {
+        // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
+        let ud = UserDefaults.standard
+        // 仕訳帳
+        var firstLunchKey = "firstLunch_Journals"
+        var firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 仕訳
+        firstLunchKey = "firstLunch_JournalEntry"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 精算表
+        firstLunchKey = "firstLunch_WorkSheet"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 試算表
+        firstLunchKey = "firstLunch_TrialBalance"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 会計期間
+        firstLunchKey = "firstLunch_SettingPeriod"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 勘定科目
+        firstLunchKey = "firstLunch_SettingsCategory"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 帳簿情報
+        firstLunchKey = "firstLunch_SettingsInformation"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 設定　仕訳帳
+        firstLunchKey = "firstLunch_SettingsJournals"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // チュートリアル対応 ウォークスルー型
+        firstLunchKey = "firstLunch_WalkThrough"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 生体認証パスコードロック設定スイッチ
+        firstLunchKey = "biometrics_switch"
+        firstLunch = [firstLunchKey: false] // 初期値はOFFとする
+        ud.register(defaults: firstLunch)
+        // 動作確認用
+    //        ud.set(true, forKey: firstLunchKey)
+        // 生体認証パスコードロック
+        firstLunchKey = "biometrics"
+        firstLunch = [firstLunchKey: true]
+        ud.register(defaults: firstLunch)
+        // ロック中
+        ud.set(true, forKey: firstLunchKey)
+    }
+    
+    // MARK: - アップグレード機能
+    
+    // アップグレード機能　アプリ起動時にトランザクションの監視を開始します
+    func initSwiftyStorekit() {
+        // see notes below for the meaning of Atomic / Non-Atomic
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                @unknown default:
+                    break
+                }
+            }
+        }
     }
 
     // MARK: - IDFA対応

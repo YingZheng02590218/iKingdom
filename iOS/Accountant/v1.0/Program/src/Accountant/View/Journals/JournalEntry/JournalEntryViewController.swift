@@ -76,19 +76,6 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        // アップグレード機能　スタンダードプラン　まずinAppPurchaseを判断する receiptチェックする
-//        let upgradeManager = UpgradeManager()
-//        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
-        // アップグレード機能
-        if UserDefaults.standard.object(forKey: "buy") != nil {
-            let count = UserDefaults.standard.object(forKey: "buy") as! Int
-            if count == 1 {
-                inAppPurchaseFlag = true
-            }
-        }
-        else {
-            inAppPurchaseFlag = false
-        }
         // 仕訳タイプ判定
         if journalEntryType == "" {
             // 初期化処理
@@ -226,7 +213,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
             }
         }
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView プロパティを設定する
             if AdMobTest {
@@ -1263,7 +1250,7 @@ class JournalEntryViewController: UIViewController, UITextFieldDelegate {
                         }
                     })
                     // アップグレード機能　スタンダードプラン
-                    if !inAppPurchaseFlag {
+                    if !UpgradeManager.shared.inAppPurchaseFlag {
                         // マネタイズ対応
                         // 乱数　1から6までのIntを生成
                         let iValue = Int.random(in: 1 ... 6)

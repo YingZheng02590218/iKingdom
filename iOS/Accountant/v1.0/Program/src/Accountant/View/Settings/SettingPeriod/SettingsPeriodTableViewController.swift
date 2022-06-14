@@ -48,7 +48,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -111,7 +111,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // 年度を追加後に会計期間画面を更新する
         tableView.reloadData()
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応
             if interstitial != nil {
                 interstitial?.present(fromRootViewController: self)
