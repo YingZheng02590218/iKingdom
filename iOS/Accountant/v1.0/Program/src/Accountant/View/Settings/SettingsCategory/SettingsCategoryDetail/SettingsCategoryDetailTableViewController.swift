@@ -71,6 +71,11 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

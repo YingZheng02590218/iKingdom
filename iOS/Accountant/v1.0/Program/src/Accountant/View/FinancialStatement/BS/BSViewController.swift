@@ -156,7 +156,9 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
@@ -1262,6 +1264,11 @@ extension BSViewController: BSPresenterOutput {
                 print("rowHeight", tableView.rowHeight)
                 // GADBannerView を作成する
                 addBannerViewToView(gADBannerView, constant: tableView.rowHeight * -1)
+            }
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
             }
         }
         // ナビゲーションを透明にする処理

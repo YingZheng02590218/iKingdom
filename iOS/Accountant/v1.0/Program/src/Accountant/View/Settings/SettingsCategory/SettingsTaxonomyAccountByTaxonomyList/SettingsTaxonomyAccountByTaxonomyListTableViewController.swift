@@ -60,6 +60,11 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)

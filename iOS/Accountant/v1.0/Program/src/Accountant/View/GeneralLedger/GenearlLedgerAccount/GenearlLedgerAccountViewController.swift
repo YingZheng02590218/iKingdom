@@ -493,6 +493,11 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         
         if let navigationController = self.navigationController {
             // ナビゲーションバーの半透明化（デフォルト）しない　storyboardでは設定が反映されなかった

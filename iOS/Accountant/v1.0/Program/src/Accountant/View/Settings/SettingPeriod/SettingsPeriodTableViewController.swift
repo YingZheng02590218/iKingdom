@@ -75,6 +75,11 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // セットアップ AdMob
         setupAdMob()
 

@@ -1031,6 +1031,11 @@ extension JournalsViewController: JournalsPresenterOutput {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)

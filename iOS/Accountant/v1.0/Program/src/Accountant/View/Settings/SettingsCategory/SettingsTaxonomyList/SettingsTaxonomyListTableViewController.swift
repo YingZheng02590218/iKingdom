@@ -58,6 +58,11 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {

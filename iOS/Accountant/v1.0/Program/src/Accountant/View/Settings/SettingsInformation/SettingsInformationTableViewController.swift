@@ -55,6 +55,11 @@ class SettingsInformationTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GoogleMobileAds // マネタイズ対応
 import AudioToolbox // 効果音
 
 // 勘定科目一覧　画面
@@ -15,17 +14,6 @@ class CategoryListTableViewController: UITableViewController {
     
     // MARK: - Variable/Let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
-    @IBOutlet var gADBannerView: GADBannerView!
     var index: Int = 0 // カルーセルのタブの識別
     
     /// GUIアーキテクチャ　MVP
@@ -61,27 +49,6 @@ class CategoryListTableViewController: UITableViewController {
         // 編集ボタンの設定
         navigationItem.rightBarButtonItem = editButtonItem
     }
-    
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
 
     // MARK: - Action
     
@@ -291,25 +258,5 @@ extension CategoryListTableViewController: CategoryListPresenterOutput {
     func setupViewForViewWillAppear() {
         // 勘定科目画面から、仕訳帳画面へ遷移して仕訳を追加した後に、戻ってきた場合はリロードする
         tableView.reloadData()
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
-            gADBannerView.isHidden = true
-        }
     }
 }

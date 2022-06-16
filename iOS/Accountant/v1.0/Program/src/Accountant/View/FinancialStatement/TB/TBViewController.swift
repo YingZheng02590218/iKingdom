@@ -204,7 +204,9 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
@@ -464,7 +466,12 @@ extension TBViewController: TBPresenterOutput {
             gADBannerView.load(GADRequest())
             print(tableView.rowHeight)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant:         tableView!.rowHeight * -1)
+            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

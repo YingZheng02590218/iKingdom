@@ -146,7 +146,9 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
         // 第三の方法
@@ -945,6 +947,11 @@ extension PLViewController: PLPresenterOutput {
             print(tableView.rowHeight)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

@@ -166,7 +166,9 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
@@ -598,6 +600,11 @@ extension WSViewController: WSPresenterOutput {
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: (self.tableView.visibleCells[self.tableView.visibleCells.count-3].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-2].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
