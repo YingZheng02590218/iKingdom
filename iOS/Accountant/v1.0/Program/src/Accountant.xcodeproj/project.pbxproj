@@ -29,7 +29,6 @@
 		F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */; };
-		F9227729261F33010080B746 /* SettingsGroupsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227728261F33010080B746 /* SettingsGroupsTableViewController.storyboard */; };
 		F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */; };
 		F929C00B247708CF0034FAAF /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929C00A247708CF0034FAAF /* MasterData.swift */; };
 		F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */; };
@@ -91,7 +90,6 @@
 		F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */; };
 		F98CD96C24DCB071001CBF94 /* TableViewCellCategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* TableViewCellCategoryList.swift */; };
 		F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
-		F98CD97224DCB1CC001CBF94 /* SettingsGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD96F24DCB13E001CBF94 /* SettingsGroupsTableViewController.swift */; };
 		F98CD97724DCB49D001CBF94 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */; };
 		F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */; };
@@ -207,7 +205,6 @@
 		F9EC669B27B90BC60003FBB6 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F9EC669C27B90BC60003FBB6 /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */; };
 		F9EC669D27B90BC60003FBB6 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */; };
-		F9EC669E27B90BC60003FBB6 /* SettingsGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD96F24DCB13E001CBF94 /* SettingsGroupsTableViewController.swift */; };
 		F9EC669F27B90BC60003FBB6 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
 		F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
 		F9EC66A127B90BC60003FBB6 /* TableViewCellCategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* TableViewCellCategoryList.swift */; };
@@ -342,7 +339,6 @@
 		F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209EF27A4377000F7EA8D /* BSViewController.xib */; };
 		F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7A3261DD0EA004611E4 /* TBViewController.storyboard */; };
-		F9EC672A27B90BC60003FBB6 /* SettingsGroupsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227728261F33010080B746 /* SettingsGroupsTableViewController.storyboard */; };
 		F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
 		F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */; };
 		F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */; };
@@ -433,7 +429,6 @@
 		F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CategoryListTableViewController.storyboard; sourceTree = "<group>"; };
 		F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
-		F9227728261F33010080B746 /* SettingsGroupsTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsGroupsTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsCategoryDetailTableViewController.storyboard; sourceTree = "<group>"; };
 		F929C00A247708CF0034FAAF /* MasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
 		F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewController.swift; sourceTree = "<group>"; };
@@ -491,7 +486,6 @@
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsCategoryTableViewController.swift; path = Accountant/View/Settings/SettingsCategory/SettingsCategoryMain/SettingsCategoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
-		F98CD96F24DCB13E001CBF94 /* SettingsGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsGroupsTableViewController.swift; sourceTree = "<group>"; };
 		F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithLabelTableViewCell.xib; sourceTree = "<group>"; };
 		F98D8A5027A534BD009560AA /* Printout+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Printout+extension.swift"; sourceTree = "<group>"; };
@@ -729,7 +723,6 @@
 				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
 				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
 				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
-				F98CD95E24DCA134001CBF94 /* SettingsCategoryGroups */,
 			);
 			path = SettingsCategory;
 			sourceTree = "<group>";
@@ -1067,15 +1060,6 @@
 				F9134C252476BCE6002A0F77 /* TableViewCellCategoryList.swift */,
 			);
 			path = SettingsCategoryList;
-			sourceTree = "<group>";
-		};
-		F98CD95E24DCA134001CBF94 /* SettingsCategoryGroups */ = {
-			isa = PBXGroup;
-			children = (
-				F98CD96F24DCB13E001CBF94 /* SettingsGroupsTableViewController.swift */,
-				F9227728261F33010080B746 /* SettingsGroupsTableViewController.storyboard */,
-			);
-			path = SettingsCategoryGroups;
 			sourceTree = "<group>";
 		};
 		F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */ = {
@@ -1628,7 +1612,6 @@
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
-				F9227729261F33010080B746 /* SettingsGroupsTableViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
@@ -1687,7 +1670,6 @@
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
-				F9EC672A27B90BC60003FBB6 /* SettingsGroupsTableViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
@@ -1896,7 +1878,6 @@
 				F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */,
 				F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */,
 				F98CD97724DCB49D001CBF94 /* SettingsCategoryTableViewController.swift in Sources */,
-				F98CD97224DCB1CC001CBF94 /* SettingsGroupsTableViewController.swift in Sources */,
 				F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */,
 				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* TableViewCellCategoryList.swift in Sources */,
@@ -2039,7 +2020,6 @@
 				F9EC669B27B90BC60003FBB6 /* WithLabelTableViewCell.swift in Sources */,
 				F9EC669C27B90BC60003FBB6 /* BSTableViewCell.swift in Sources */,
 				F9EC669D27B90BC60003FBB6 /* SettingsCategoryTableViewController.swift in Sources */,
-				F9EC669E27B90BC60003FBB6 /* SettingsGroupsTableViewController.swift in Sources */,
 				F9EC669F27B90BC60003FBB6 /* CategoryListTableViewController.swift in Sources */,
 				F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */,
 				F9EC66A127B90BC60003FBB6 /* TableViewCellCategoryList.swift in Sources */,
