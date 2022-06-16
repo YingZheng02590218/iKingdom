@@ -84,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initSwiftyStorekit()
         // アプリ起動時にネットに繋いでAppStoreで購入済みか確認する（1件のみ有料アイテムを登録）
         UpgradeManager.shared.isPurchasedWhenAppStart()
+        Network.shared.setUp() // 初期化対応
 
         return true
     }

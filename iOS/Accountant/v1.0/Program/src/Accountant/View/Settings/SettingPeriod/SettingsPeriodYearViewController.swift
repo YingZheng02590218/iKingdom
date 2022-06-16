@@ -78,49 +78,82 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     }
     
     @IBAction func save(_ sender: Any) {
-        // 選択した年度の会計帳簿を作成する
-        let row = pickerView.selectedRow(inComponent: 0)
-        let fiscalYear = getPeriodFromDB(row: row)
-        createNewPeriod(fiscalYear: Int(fiscalYear)!)
-        let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
-        let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
-        let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
-        let navigationController2: UINavigationController
-        // iPadとiPhoneで動きが変わるので分岐する
-        if UIDevice.current.userInterfaceIdiom == .pad { // iPad
-//        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
-            print(splitViewController.viewControllers.count)
-            let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
-            print(navigationController0.viewControllers.count)
-            print(navigationController0.viewControllers[1])
-            navigationController2 = navigationController0.viewControllers[1] as! UINavigationController
-            print(navigationController2.viewControllers.count)
-            print(navigationController2.viewControllers[0])
-            print("iPad ビューコントローラーの階層")
-//            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
-//            print("splitViewController[1]      :", splitViewController.viewControllers[1] )    // UINavigationController
-//            print("  navigationController[0]   :", navigationController.viewControllers[0])    // SettingsTableViewController
-//            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // SettingsPeriodTableViewController
-        }else { // iPhone
-            print(splitViewController.viewControllers.count)
-            navigationController2 = navigationController.viewControllers[1] as! UINavigationController
-//             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
-            print("iPhone ビューコントローラーの階層")
-            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
-            print("  navigationController[0]   :", navigationController.viewControllers[0])    // SettingsTableViewController
-            print("  navigationController[1]   :", navigationController.viewControllers[1])    // UINavigationController
-            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // SettingsPeriodTableViewController
+        
+        // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
+        if Network.shared.isOnline() ||
+            // アップグレード機能　スタンダードプラン サブスクリプション購読済み
+            UpgradeManager.shared.inAppPurchaseFlag {
+            
+            // 選択した年度の会計帳簿を作成する
+            let row = pickerView.selectedRow(inComponent: 0)
+            let fiscalYear = getPeriodFromDB(row: row)
+            createNewPeriod(fiscalYear: Int(fiscalYear)!)
+            let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
+            let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
+            let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
+            let navigationController2: UINavigationController
+            // iPadとiPhoneで動きが変わるので分岐する
+            if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+                //        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
+                print(splitViewController.viewControllers.count)
+                let navigationController0 = splitViewController.viewControllers[0]  as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                print(navigationController0.viewControllers.count)
+                print(navigationController0.viewControllers[1])
+                navigationController2 = navigationController0.viewControllers[1] as! UINavigationController
+                print(navigationController2.viewControllers.count)
+                print(navigationController2.viewControllers[0])
+                print("iPad ビューコントローラーの階層")
+                //            print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
+                //            print("splitViewController[1]      :", splitViewController.viewControllers[1] )    // UINavigationController
+                //            print("  navigationController[0]   :", navigationController.viewControllers[0])    // SettingsTableViewController
+                //            print("    navigationController2[0]:", navigationController2.viewControllers[0])   // SettingsPeriodTableViewController
+            }else { // iPhone
+                print(splitViewController.viewControllers.count)
+                navigationController2 = navigationController.viewControllers[1] as! UINavigationController
+                //             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                print("iPhone ビューコントローラーの階層")
+                print("splitViewController[0]      :", splitViewController.viewControllers[0])     // UINavigationController
+                print("  navigationController[0]   :", navigationController.viewControllers[0])    // SettingsTableViewController
+                print("  navigationController[1]   :", navigationController.viewControllers[1])    // UINavigationController
+                print("    navigationController2[0]:", navigationController2.viewControllers[0])   // SettingsPeriodTableViewController
+            }
+            
+            let presentingViewController = navigationController2.viewControllers[0] as! SettingsPeriodTableViewController // 呼び出し元のビューコントローラーを取得
+            
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                // ViewController(年度選択画面)を閉じた時に、遷移元であるViewController(会計期間画面)で行いたい処理
+                presentingViewController.showAd()// TableViewをリロードする処理がある
+            })
         }
-
-        let presentingViewController = navigationController2.viewControllers[0] as! SettingsPeriodTableViewController // 呼び出し元のビューコントローラーを取得
-
-        // viewWillAppearを呼び出す　更新のため
-        self.dismiss(animated: true, completion: {
-            [presentingViewController] () -> Void in
-            // ViewController(年度選択画面)を閉じた時に、遷移元であるViewController(会計期間画面)で行いたい処理
-            presentingViewController.showAd()// TableViewをリロードする処理がある
-        })
+        else {
+            //ネットワークなし
+            let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
+            
+            // 選択肢の作成と追加
+            // titleに選択肢のテキストを、styleに.defaultを
+            // handlerにボタンが押された時の処理をクロージャで実装する
+            alertController.addAction(
+                UIAlertAction(title: "OK",
+                              style: .default,
+                              handler: {
+                                  (action: UIAlertAction!) -> Void in
+                                  // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
+                                  if Network.shared.isOnline() {
+                                      // アップグレード画面を表示
+                                      let viewController = UIStoryboard(name: "SettingsUpgradeTableViewController", bundle: nil).instantiateViewController(withIdentifier: "SettingsUpgradeTableViewController") as! SettingsUpgradeTableViewController
+                                      self.present(viewController, animated: true, completion: nil)
+                                  }
+                                  else {
+                                      
+                                  }
+                              })
+            )
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
+
     
     func createNewPeriod(fiscalYear: Int){
         // オブジェクト作成
