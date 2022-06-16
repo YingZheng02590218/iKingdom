@@ -205,7 +205,7 @@ class GeneralLedgerTableViewController: UITableViewController {
 //    var account :String = "" // 勘定名
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        // 選択されたセルを取得
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath) as! TableViewCellGeneralLedger
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath) as! GeneralLedgerTableViewCell
 //        account = String(cell.textLabel!.text!) // セルに表示した勘定名を取得
 //        // セルの選択を解除
 //        tableView.deselectRow(at: indexPath, animated: true)

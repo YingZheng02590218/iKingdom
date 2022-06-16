@@ -1,5 +1,5 @@
 //
-//  TableViewCellGeneralLedger.swift
+//  GeneralLedgerTableViewCell.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/05/27.

@@ -21,21 +21,24 @@ class PassCodeLockViewController: UIViewController {
 
     }
 
-    // MARK: - Action
-
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // 文言を指定
         let type = LocalAuthentication.getDeviceOwnerLocalAuthenticationType()
         label.text = type.getDescriptionTitle() + "を使って\n認証して下さい"
         // 生体認証パスコードロック　認証処理
         authrizePassCode()
     }
+    
+    // MARK: - Action
+
     // 認証をするボタンがタップ
     @IBAction func buttonTapped(_ sender: Any) {
         // 生体認証パスコードロック　認証処理
         authrizePassCode()
     }
     
+    // MARK: - Function
+
     // 生体認証パスコードロック　認証処理
     func authrizePassCode() {
         // TouchID/FaceIDによる認証を実行し、成功した場合にはパスコードロックを解除する

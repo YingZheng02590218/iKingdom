@@ -56,10 +56,10 @@ class CategoryListTableViewController: UITableViewController {
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
+        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
             hoge = hoge!.superview
         }
-        let cell = hoge as! TableViewCellCategoryList
+        let cell = hoge as! CategoryListTableViewCell
 
         // 大区分の内でonとなっているスイッチが残りひとつの場合は、offにさせない
         if presenter.dataBaseSettingsTaxonomyAccount.count <= 1 {
@@ -147,9 +147,9 @@ class CategoryListTableViewController: UITableViewController {
         return presenter.numberOfobjects(section: section)
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
         //① UI部品を指定　TableViewCellCategory
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category", for: indexPath) as! TableViewCellCategoryList
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category", for: indexPath) as! CategoryListTableViewCell
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         cell.textLabel?.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).number). \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
         cell.textLabel?.textColor = .TextColor

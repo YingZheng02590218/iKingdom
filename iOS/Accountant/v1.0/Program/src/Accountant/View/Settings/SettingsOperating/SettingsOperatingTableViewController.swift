@@ -168,7 +168,7 @@ class SettingsOperatingTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text = "損益振替仕訳を表示"
             if let EnglishFromOfClosingTheLedger0 = object?.EnglishFromOfClosingTheLedger0 {
                 // 勘定科目の有効無効
@@ -179,7 +179,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.ToggleButton.tag = 0
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text = "資本振替仕訳を表示"
             if let EnglishFromOfClosingTheLedger1 = object?.EnglishFromOfClosingTheLedger1 {
                 // 勘定科目の有効無効
@@ -190,7 +190,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.ToggleButton.tag = 1
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text =   ""
             return cell
         }

@@ -236,7 +236,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         return objectss.count
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
             // データベース　表示科目
             var sheet = 0
             if segmentedControl_switch.selectedSegmentIndex == 0 {
@@ -252,7 +252,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
             let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
             //① UI部品を指定　TableViewCellCategory
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
             // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
             cell.textLabel?.text = " \(objects[indexPath.row].number). \(objects[indexPath.row].category as String)"
             cell.textLabel?.textColor = .TextColor
@@ -283,10 +283,10 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
+        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
             hoge = hoge!.superview
         }
-        let cell = hoge as! TableViewCellCategoryList
+        let cell = hoge as! CategoryListTableViewCell
         // ここからデータベースを更新する
         print(cell.tag)
         changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効

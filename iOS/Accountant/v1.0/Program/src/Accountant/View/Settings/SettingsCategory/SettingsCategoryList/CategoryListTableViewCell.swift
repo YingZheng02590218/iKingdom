@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellCategoryList: UITableViewCell {
+class CategoryListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ToggleButton: UISwitch!
     @IBAction func ToggleButton(_ sender: UISwitch) {}

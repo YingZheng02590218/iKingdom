@@ -1,5 +1,5 @@
 //
-//  TableViewCellSettingAccountDetail.swift
+//  SettingAccountDetailTableViewCell.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/10/18.
@@ -9,10 +9,10 @@
 import UIKit
 
 // 勘定科目詳細セル　テキストフィールド入力　大区分　中区分　小区分
-class TableViewCellSettingAccountDetail: UITableViewCell, UITextFieldDelegate {
+class SettingAccountDetailTableViewCell: UITableViewCell, UITextFieldDelegate {
     
-    @IBOutlet var textField_AccountDetail_big: PickerTextFieldAccountDetail!
-//    @IBOutlet var textField_AccountDetail: PickerTextFieldAccountDetail!
+    @IBOutlet var textField_AccountDetail_big: AccountDetailPickerTextField!
+//    @IBOutlet var textField_AccountDetail: AccountDetailPickerTextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()

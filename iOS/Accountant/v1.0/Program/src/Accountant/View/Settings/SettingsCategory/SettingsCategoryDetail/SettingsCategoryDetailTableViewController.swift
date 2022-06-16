@@ -146,7 +146,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     var numberOfAccount :Int = 0 // 勘定科目番号
     var numberOfTaxonomy :Int = 0 // 表示科目番号
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingAccountDetailTaxonomyTableViewCell
         cell.accessoryType = .none
         cell.label.text = "-"
         // セルの選択不可にする
@@ -156,7 +156,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             if indexPath.section == 0 { // 勘定科目
                 switch indexPath.row {
                 case 0:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! SettingAccountDetailTableViewCell
                     cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
@@ -168,7 +168,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.textLabel?.text = "大区分"
                     return cell
                 case 1:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! TableViewCellSettingAccountDetail
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category_big", for: indexPath) as! SettingAccountDetailTableViewCell
                     cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
@@ -178,7 +178,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.textLabel?.text = "中区分"
                     return cell
                 case 2:
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category", for: indexPath) as! TableViewCellSettingAccountDetail
+//                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_category", for: indexPath) as! SettingAccountDetailTableViewCell
 //                    // セルの選択
 //                    cell.selectionStyle = .none
 //                    cell.textLabel?.textColor = .darkGray
@@ -186,7 +186,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
 //                    cell.textLabel?.text = "小区分"
 //                    return cell
 //                case 3:
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_Account", for: indexPath) as! TableViewCellSettingAccountDetailAccount
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_Account", for: indexPath) as! SettingAccountDetailAccountTableViewCell
                     cell.accessoryType = .none
                     // セルの選択
                     cell.selectionStyle = .none
@@ -198,7 +198,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     return cell
                 }
             }else { // タクソノミ　表示科目
-                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+                let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingAccountDetailTaxonomyTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 // セルの選択
                 cell.selectionStyle = .default
@@ -206,7 +206,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 cell.textLabel?.textColor = .lightGray
                 cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目名
-//                let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
+//                let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingAccountDetailTaxonomyTableViewCell
                 if self.numberOfTaxonomy != 0 {
 //                    taxonomyname = cell_taxonomy.label.text!
 //                    cell.label.text = taxonomyname
@@ -219,7 +219,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 return cell
             }
         }else { // 新規追加　以外
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellSettingAccountDetailTaxonomy
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingAccountDetailTaxonomyTableViewCell
             cell.accessoryType = .none
             // セルの選択
             cell.selectionStyle = .none
@@ -379,16 +379,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     // TextField作成
     func createTextFieldForCategory() {
         // 大区分
-        let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
+        let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SettingAccountDetailTableViewCell
             cell_big.textField_AccountDetail_big.setup(identifier: "identifier_category_big")
         // 中区分
-        let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SettingAccountDetailTableViewCell
             cell.textField_AccountDetail_big.setup(identifier: "identifier_category")// switch文でdefaultケースに通すため
 //        // 小区分
-//        let cell_small = self.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! TableViewCellSettingAccountDetail
+//        let cell_small = self.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! SettingAccountDetailTableViewCell
 //        cell_small.textField_AccountDetail.setup(identifier: "identifier_category_small", component0: 0)
         // 勘定科目名
-        let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! TableViewCellSettingAccountDetailAccount
+        let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! SettingAccountDetailAccountTableViewCell
         
         // TextFieldに入力された値に反応
         // 入力開始
@@ -404,11 +404,11 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         // 取得　TextField 入力テキスト
         
         // 勘定科目区分選択　の場合
-        if textField is PickerTextFieldAccountDetail {
+        if textField is AccountDetailPickerTextField {
             // 大区分
-            let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! TableViewCellSettingAccountDetail
+            let cell_big = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SettingAccountDetailTableViewCell
             // 中区分
-            let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! TableViewCellSettingAccountDetail
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SettingAccountDetailTableViewCell
             if textField.tag == 0 {
 //            // String型の番号に変換してあげる
 //            big = cell_big.textField_AccountDetail_big.text!
@@ -431,7 +431,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             cell.textField_AccountDetail_big.text = mid
         }
         // 勘定科目名
-        let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! TableViewCellSettingAccountDetailAccount
+        let cell_category = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as! SettingAccountDetailAccountTableViewCell
         if let str = cell_category.textField_AccountDetail_Account!.text {
             if str != "" {
                 // 文字列中の全ての空白や改行を削除する
@@ -465,16 +465,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             }
         }
         // 表示科目名
-        let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
+        let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingAccountDetailTaxonomyTableViewCell
         if cell_taxonomy.label!.text != "表示科目を選択してください" {
             taxonomyname = cell_taxonomy.label.text!
         }
-        print("PickerTextFieldAccountDetail", big ,
+        print("AccountDetailPickerTextField", big ,
               mid ,
               small ,
               accountname ,
               taxonomyname )
-        print("PickerTextFieldAccountDetail", big_num ,
+        print("AccountDetailPickerTextField", big_num ,
               mid_num ,
               small_num )
     }
@@ -539,7 +539,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     func showNumberOfTaxonomy() {
         // 表示科目名
         if self.numberOfTaxonomy != 0 { // 表示科目が選択されて、表示科目番号が詳細画面に戻ってきた場合
-            let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! TableViewCellSettingAccountDetailTaxonomy
+            let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingAccountDetailTaxonomyTableViewCell
             let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
             cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
             cell_taxonomy.label.textColor = .TextColor

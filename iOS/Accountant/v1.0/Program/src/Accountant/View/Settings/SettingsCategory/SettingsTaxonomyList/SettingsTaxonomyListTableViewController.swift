@@ -124,7 +124,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         return objects.count
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
         // 決算書別に表示科目を取得
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
@@ -137,7 +137,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
     
         //① UI部品を指定　TableViewCellCategory
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! TableViewCellCategoryList
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         // 表示科目に紐づけられている勘定科目の数を表示する
         // 勘定科目モデルの階層と同じ勘定科目モデルを取得
@@ -202,7 +202,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
+        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
             hoge = hoge!.superview
         }
     }
