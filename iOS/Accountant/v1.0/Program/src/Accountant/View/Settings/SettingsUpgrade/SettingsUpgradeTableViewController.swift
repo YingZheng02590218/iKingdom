@@ -83,14 +83,14 @@ class SettingsUpgradeTableViewController: UITableViewController {
 //        case 1:
 //            return "オプショナルプランは、さらにユーザービリティを高めるための、細かな操作設定が可能となります。\n(スタンダードプランの機能を含みます)"
 //        case 2:
-            var localizedPrice = "----円"
-            var localizedSubscriptionPeriod = "-年間"
-            if self.products.count > 0 {
-                localizedPrice = products[0].localizedPrice!
-                localizedSubscriptionPeriod = products[0].localizedSubscriptionPeriod
-            }
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
+            var localizedPrice = language == "ja-JP" ? "----円" : "¥----"
+            var localizedSubscriptionPeriod = language == "ja-JP" ? "-年間" : "-yr"
+            if self.products.count > 0 {
+                localizedPrice = products[section].localizedPrice!
+                localizedSubscriptionPeriod = products[section].localizedSubscriptionPeriod
+            }
             if language == "ja-JP" {
                 return "● 有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n● 自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n● 注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
             }
