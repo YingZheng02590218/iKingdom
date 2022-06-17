@@ -92,7 +92,7 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     private func createButtons() {
         
         if let backgroundView = backgroundView {
-            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = edged
