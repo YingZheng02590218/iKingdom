@@ -81,7 +81,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     private func createButtons() {
         
         if let backgroundView = backgroundView {
-            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = edged
@@ -165,8 +165,10 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
 
@@ -197,7 +199,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         UIGraphicsEndImageContext()
         printing = false
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
@@ -581,7 +583,7 @@ extension WSViewController: WSPresenterOutput {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -598,6 +600,11 @@ extension WSViewController: WSPresenterOutput {
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: (self.tableView.visibleCells[self.tableView.visibleCells.count-3].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-2].frame.height + self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height) * -1) // 一番したから3行分のスペースを空ける
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

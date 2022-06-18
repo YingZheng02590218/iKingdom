@@ -1,18 +1,15 @@
 //
-//  TableViewCellSettingAccountDetailTaxonomy.swift
+//  GeneralLedgerTableViewCell.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2020/09/21.
+//  Created by Hisashi Ishihara on 2020/05/27.
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
 import UIKit
 
-// 勘定科目詳細セル　表示科目名
-class TableViewCellSettingAccountDetailTaxonomy: UITableViewCell {
+class GeneralLedgerTableViewCell: UITableViewCell {
 
-    @IBOutlet var label: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

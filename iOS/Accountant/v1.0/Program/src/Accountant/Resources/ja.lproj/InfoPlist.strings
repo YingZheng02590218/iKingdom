@@ -6,3 +6,4 @@
   Copyright © 2021 Hisashi Ishihara. All rights reserved.
 */
 NSUserTrackingUsageDescription = "この識別子は、パーソナライズされた広告を配信するために使用されます。";
+NSFaceIDUsageDescription = "ロックを解除するために、認証を使用します。";

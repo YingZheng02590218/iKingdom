@@ -49,7 +49,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -68,6 +68,11 @@ class GeneralLedgerTableViewController: UITableViewController {
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
@@ -75,7 +80,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }
@@ -165,7 +170,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             tableView.bringSubviewToFront(gADBannerView)
         }
@@ -200,7 +205,7 @@ class GeneralLedgerTableViewController: UITableViewController {
 //    var account :String = "" // 勘定名
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        // 選択されたセルを取得
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath) as! TableViewCellGeneralLedger
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath) as! GeneralLedgerTableViewCell
 //        account = String(cell.textLabel!.text!) // セルに表示した勘定名を取得
 //        // セルの選択を解除
 //        tableView.deselectRow(at: indexPath, animated: true)

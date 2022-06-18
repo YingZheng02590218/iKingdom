@@ -36,7 +36,7 @@ class SettingsOperatingTableViewController: UITableViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -54,6 +54,11 @@ class SettingsOperatingTableViewController: UITableViewController {
             print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -163,7 +168,7 @@ class SettingsOperatingTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text = "損益振替仕訳を表示"
             if let EnglishFromOfClosingTheLedger0 = object?.EnglishFromOfClosingTheLedger0 {
                 // 勘定科目の有効無効
@@ -174,7 +179,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.ToggleButton.tag = 0
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text = "資本振替仕訳を表示"
             if let EnglishFromOfClosingTheLedger1 = object?.EnglishFromOfClosingTheLedger1 {
                 // 勘定科目の有効無効
@@ -185,7 +190,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.ToggleButton.tag = 1
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! CategoryListTableViewCell
             cell.textLabel?.text =   ""
             return cell
         }

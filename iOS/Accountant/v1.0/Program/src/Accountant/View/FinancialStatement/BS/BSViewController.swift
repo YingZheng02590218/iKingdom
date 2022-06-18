@@ -91,7 +91,7 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     private func createButtons() {
         
         if let backgroundView = backgroundView {
-            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = edged
@@ -155,8 +155,10 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
         tableView.overrideUserInterfaceStyle = .light
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // 第三の方法
         //余計なUIをキャプチャしないように隠す
@@ -183,7 +185,7 @@ class BSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
         /*
@@ -369,7 +371,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             tableView.bringSubviewToFront(gADBannerView)
         }
@@ -1243,7 +1245,7 @@ extension BSViewController: BSPresenterOutput {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -1264,6 +1266,11 @@ extension BSViewController: BSPresenterOutput {
                 addBannerViewToView(gADBannerView, constant: tableView.rowHeight * -1)
             }
         }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
             navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -1273,7 +1280,7 @@ extension BSViewController: BSPresenterOutput {
     
     func setupViewForViewDidAppear() {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }

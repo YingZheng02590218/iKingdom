@@ -39,7 +39,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -57,6 +57,16 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
+        }
+        // ナビゲーションを透明にする処理
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
     
@@ -119,7 +129,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         return objects.count
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
         // 決算書別に表示科目を取得
         var sheet = 0
         if segmentedControl_switch.selectedSegmentIndex == 0 {
@@ -132,7 +142,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
     
         //① UI部品を指定　TableViewCellCategory
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! TableViewCellCategoryList
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         // 表示科目に紐づけられている勘定科目の数を表示する
         // 勘定科目モデルの階層と同じ勘定科目モデルを取得
@@ -197,7 +207,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
+        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
             hoge = hoge!.superview
         }
     }

@@ -1,5 +1,5 @@
 //
-//  TableViewCellTB.swift
+//  TBTableViewCell.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/06/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellTB: UITableViewCell {
+class TBTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label_debit: UILabel!
     @IBOutlet weak var label_account: UILabel! 

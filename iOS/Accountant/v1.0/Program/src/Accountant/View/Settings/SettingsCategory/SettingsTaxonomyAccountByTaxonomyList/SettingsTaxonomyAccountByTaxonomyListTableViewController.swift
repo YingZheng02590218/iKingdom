@@ -41,7 +41,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -59,6 +59,11 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {
@@ -90,7 +95,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
 
     override func viewDidAppear(_ animated: Bool) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }
@@ -204,7 +209,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             tableView.bringSubviewToFront(gADBannerView)
         }
@@ -231,7 +236,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         return objectss.count
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> TableViewCellCategoryList {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
             // データベース　表示科目
             var sheet = 0
             if segmentedControl_switch.selectedSegmentIndex == 0 {
@@ -247,7 +252,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
             let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
             //① UI部品を指定　TableViewCellCategory
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! TableViewCellCategoryList
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
             // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
             cell.textLabel?.text = " \(objects[indexPath.row].number). \(objects[indexPath.row].category as String)"
             cell.textLabel?.textColor = .TextColor
@@ -278,10 +283,10 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: TableViewCellCategoryList.self) == false) {
+        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
             hoge = hoge!.superview
         }
-        let cell = hoge as! TableViewCellCategoryList
+        let cell = hoge as! CategoryListTableViewCell
         // ここからデータベースを更新する
         print(cell.tag)
         changeSwitch(tag: cell.tag, isOn: sender.isOn) // 引数：連番、トグルスイッチ.有効無効

@@ -1,5 +1,5 @@
 //
-//  TableViewCellSettingAccountDetailAccount.swift
+//  SettingAccountDetailAccountTableViewCell.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/10/18.
@@ -9,7 +9,7 @@
 import UIKit
 
 // 勘定科目詳細セル　テキストフィールド入力　勘定科目名
-class TableViewCellSettingAccountDetailAccount: UITableViewCell {
+class SettingAccountDetailAccountTableViewCell: UITableViewCell {
 
     @IBOutlet var textField_AccountDetail_Account: UITextField!
 
@@ -48,7 +48,7 @@ class TableViewCellSettingAccountDetailAccount: UITableViewCell {
     }
 }
 
-extension TableViewCellSettingAccountDetailAccount: UITextFieldDelegate {
+extension SettingAccountDetailAccountTableViewCell: UITextFieldDelegate {
 
     // textFieldに文字が入力される際に呼ばれる　入力チェック(文字列、文字数制限)
     // 戻り値にtrueを返すと入力した文字がTextFieldに反映され、falseを返すと入力した文字が反映されない。
