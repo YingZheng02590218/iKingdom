@@ -14,18 +14,6 @@ import MessageUI // お問い合わせ機能
 // 設定クラス
 class SettingsTableViewController: UITableViewController {
     
-//    // マネタイズ対応
-//    // 広告ユニットID
-//    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-//    // テスト用広告ユニットID
-//    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-//    #if DEBUG
-//    let AdMobTest:Bool = true    // true:テスト
-//    #else
-//    let AdMobTest:Bool = false
-//    #endif
-//    @IBOutlet var gADBannerView: GADBannerView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,51 +30,41 @@ class SettingsTableViewController: UITableViewController {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-//        // アップグレード機能　スタンダードプラン
-//        if !inAppPurchaseFlag {
-//            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-//    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
-//            // GADBannerView を作成する
-//            gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
-//            // GADBannerView プロパティを設定する
-//            if AdMobTest {
-//                gADBannerView.adUnitID = TEST_ID
-//            }
-//            else{
-//                gADBannerView.adUnitID = AdMobID
-//            }
-//            gADBannerView.rootViewController = self
-//            // 広告を読み込む
-//            gADBannerView.load(GADRequest())
-//            // GADBannerView を作成する
-//            addBannerViewToView(gADBannerView, constant:  self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1) // 一番したから3行分のスペースを空ける
-//        }
+
         // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
     }
     
-//    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-//      bannerView.translatesAutoresizingMaskIntoConstraints = false
-//      view.addSubview(bannerView)
-//      view.addConstraints(
-//        [NSLayoutConstraint(item: bannerView,
-//                            attribute: .bottom,
-//                            relatedBy: .equal,
-//                            toItem: bottomLayoutGuide,
-//                            attribute: .top,
-//                            multiplier: 1,
-//                            constant: constant),
-//         NSLayoutConstraint(item: bannerView,
-//                            attribute: .centerX,
-//                            relatedBy: .equal,
-//                            toItem: view,
-//                            attribute: .centerX,
-//                            multiplier: 1,
-//                            constant: 0)
-//        ])
-//     }
-
+    // 生体認証パスコードロック　設定スイッチ 切り替え
+    @objc func switchTriggered(sender: UISwitch){
+        // 生体認証かパスコードのいずれかが使用可能かを確認する
+        if LocalAuthentication.canEvaluatePolicy() {
+            // 認証使用可能時の処理
+            DispatchQueue.main.async {
+                // 生体認証パスコードロック　設定スイッチ
+                UserDefaults.standard.set(sender.isOn, forKey: "biometrics_switch")
+                UserDefaults.standard.synchronize()
+            }
+        }
+        else {
+            // 認証使用可能時の処理
+            DispatchQueue.main.async {
+                // スイッチを元に戻す
+                sender.isOn = !sender.isOn
+                // アラート画面を表示する
+                let alert = UIAlertController(title: "エラー", message: "パスコードを利用できるよう設定してください", preferredStyle: .alert)
+                
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -101,7 +79,7 @@ class SettingsTableViewController: UITableViewController {
         case 1:
             return 3
         case 2:
-            return 2
+            return 3
         case 3:
             return 3
         default:
@@ -171,13 +149,26 @@ class SettingsTableViewController: UITableViewController {
         }
         else if indexPath.section == 2 {
             switch indexPath.row {
-            case 0:
+                case 0:
                 //① UI部品を指定　TableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell.centerLabel.text = "パスコードロックを利用する"
+                cell.leftImageView.image = UIImage(systemName: "key.fill")?.withRenderingMode(.alwaysTemplate)
+                if cell.accessoryView == nil {
+                    let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                    // 生体認証パスコードロック　設定スイッチ
+                    switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
+                    switchView.tag = indexPath.row
+                    switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
+                    cell.accessoryView = switchView
+                }
+                return cell
+            case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "icons8-ペン-25")?.withRenderingMode(.alwaysTemplate)
                 return cell
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳帳"
                 cell.leftImageView.image = UIImage(named: "icons8-開いた本-25")?.withRenderingMode(.alwaysTemplate)
@@ -242,9 +233,12 @@ class SettingsTableViewController: UITableViewController {
         else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
+                
                 break
             case 1:
+                performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
+                break
+            case 2:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
                 break
             default:

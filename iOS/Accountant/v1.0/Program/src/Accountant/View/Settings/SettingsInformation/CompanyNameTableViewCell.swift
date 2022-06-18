@@ -1,5 +1,5 @@
 //
-//  TableViewCellCompanyName.swift
+//  CompanyNameTableViewCell.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/07/28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellCompanyName: UITableViewCell, UITextViewDelegate { //プロトコルを追加
+class CompanyNameTableViewCell: UITableViewCell, UITextViewDelegate { //プロトコルを追加
 
     @IBOutlet var textView_companyName: UITextView!
     

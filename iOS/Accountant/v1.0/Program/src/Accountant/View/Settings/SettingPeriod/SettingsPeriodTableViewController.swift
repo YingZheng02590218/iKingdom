@@ -47,8 +47,9 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
+        
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -73,52 +74,36 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     //        addBannerViewToView(gADBannerView, constant: 0)
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView プロパティを設定する
-            if AdMobTest {
-                // GADInterstitial を作成する
-                let request = GADRequest()
-                GADInterstitialAd.load(withAdUnitID:TEST_IDi,
-                                       request: request,
-                                       completionHandler: { [self] ad, error in
-                    if let error = error {
-                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                        return
-                    }
-                    interstitial = ad
-                }
-                )
-            }
-            else{
-                let request = GADRequest()
-                GADInterstitialAd.load(withAdUnitID:AdMobIDi,
-                                       request: request,
-                                       completionHandler: { [self] ad, error in
-                    if let error = error {
-                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                        return
-                    }
-                    interstitial = ad
-                }
-                )
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
             }
         }
+        // セットアップ AdMob
+        setupAdMob()
+
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {
-        // 年度を追加後に会計期間画面を更新する
-        tableView.reloadData()
+        
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応
             if interstitial != nil {
                 interstitial?.present(fromRootViewController: self)
-            } else {
-              print("Ad wasn't ready")
+            }
+            else {
+                print("Ad wasn't ready")
+                // セットアップ AdMob
+                setupAdMob()
             }
         }
+        // 年度を追加後に会計期間画面を更新する
+        tableView.reloadData()
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
@@ -220,6 +205,29 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         
     }
     
+    // MARK: GADInterstitialAd
+    // セットアップ AdMob
+    func setupAdMob() {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
+            // GADBannerView プロパティを設定する
+            // GADInterstitial を作成する
+            let request = GADRequest()
+            GADInterstitialAd.load(withAdUnitID: AdMobTest ? TEST_ID : AdMobID,
+                                   request: request,
+                                   completionHandler: { [self] ad, error in
+                if let error = error {
+                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    return
+                }
+                interstitial = ad
+                interstitial?.fullScreenContentDelegate = self
+            }
+            )
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -235,6 +243,14 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return "会計年度"
         default:
             return ""
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
         }
     }
     // セクションフッターのテキスト決める
@@ -391,5 +407,27 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         // .noneを設定することで、設定したサイズでポップオーバーされる
         return .none
+    }
+}
+
+// MARK: - GADFullScreenContentDelegate
+
+extension SettingsPeriodTableViewController: GADFullScreenContentDelegate {
+    
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+      print("Ad did fail to present full screen content.")
+    }
+
+    /// Tells the delegate that the ad will present full screen content.
+    func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+      print("Ad will present full screen content.")
+    }
+
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+      print("Ad did dismiss full screen content.")
+        // セットアップ AdMob
+        setupAdMob()
     }
 }

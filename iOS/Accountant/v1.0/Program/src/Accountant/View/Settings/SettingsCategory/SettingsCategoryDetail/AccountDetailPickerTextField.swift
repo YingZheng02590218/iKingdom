@@ -1,5 +1,5 @@
 //
-//  PickerTextFieldAccountDetail.swift
+//  AccountDetailPickerTextField.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/10/18.
@@ -9,7 +9,7 @@
 import UIKit
 
 // ドラムロール　勘定科目区分選択　勘定科目詳細画面　新規追加
-class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
+class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // 選択された項目
     var selectedRank0 = ""
@@ -145,12 +145,12 @@ class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerV
 //UIPickerView
     //UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        print("PickerTextFieldAccountDetail numberOfComponents")
+        print("AccountDetailPickerTextField numberOfComponents")
         return 2
     }
     //UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print("PickerTextFieldAccountDetail numberOfRowsInComponent", component)
+        print("AccountDetailPickerTextField numberOfRowsInComponent", component)
         if component == 0 {
             return Rank0.count
         }else {
@@ -186,7 +186,7 @@ class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerV
     }
     //UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        print("PickerTextFieldAccountDetail titleForRow", component, row)
+        print("AccountDetailPickerTextField titleForRow", component, row)
 // 1列目　初期値
         if component == 0 {
             if identifier == "identifier_category_big" {
@@ -408,7 +408,7 @@ class PickerTextFieldAccountDetail: UITextField, UIPickerViewDelegate, UIPickerV
     }
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("PickerTextFieldAccountDetail didSelectRow", component, row)
+        print("AccountDetailPickerTextField didSelectRow", component, row)
         //一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
         pickerView.reloadAllComponents()
 //        pickerView.reloadComponent(1)

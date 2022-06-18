@@ -38,7 +38,7 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool){
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
@@ -54,6 +54,11 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: 30 * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)

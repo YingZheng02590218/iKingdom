@@ -11,28 +11,30 @@ import SwiftyStoreKit // アップグレード機能
 import StoreKit // アップグレード機能
 import SafariServices // アプリ内でブラウザ表示
 
-// アップグレード
+// アップグレード画面
 class SettingsUpgradeTableViewController: UITableViewController {
 
-//    private var stateInAppPurchaseFlag = false
+    
     private var products: [SKProduct] = []
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // 価格を取得
-        purchaseGetInfo(PRODUCT_ID: ["com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff"]) // 定数定義する
-//        // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
-//        let upgradeManager = UpgradeManager()
-//        upgradeManager.verifyPurchase(PRODUCT_ID:"com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
+        UpgradeManager.shared.purchaseGetInfo(PRODUCT_ID: [UpgradeManager.PRODUCT_ID_STANDARD_PLAN],
+                                              completion: { products in
+            self.products = products
+            self.tableView.reloadData()
+        })
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
     }
 
     // MARK: - Table view data source
@@ -81,27 +83,27 @@ class SettingsUpgradeTableViewController: UITableViewController {
 //        case 1:
 //            return "オプショナルプランは、さらにユーザービリティを高めるための、細かな操作設定が可能となります。\n(スタンダードプランの機能を含みます)"
 //        case 2:
-            var localizedPrice = "1200円"
-            var localizedSubscriptionPeriod = "1年間"
-            if self.products.count > 0 {
-                localizedPrice = products[0].localizedPrice!
-                localizedSubscriptionPeriod = products[0].localizedSubscriptionPeriod
-            }
-            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
+            var localizedPrice = language == "ja-JP" ? "----円" : "¥----"
+            var localizedSubscriptionPeriod = language == "ja-JP" ? "-年間" : "-yr"
+            if self.products.count > 0 {
+                localizedPrice = products[section].localizedPrice!
+                localizedSubscriptionPeriod = products[section].localizedSubscriptionPeriod
+            }
             if language == "ja-JP" {
-                return "無料版ではほぼすべての画面上に広告が表示されます。まずは無料版でお使いいただいた上で、有料版をご検討ください。\n\n●有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n●自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n●注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
-            }else {
-                return "The free version will display ads on almost every screen. First of all, please use the free version and then consider the paid version.\n\n● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing \nIf you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
+                return "● 有料版：スタンダードプラン\n年間払い \(localizedPrice) / \(localizedSubscriptionPeriod)\nスタンダードプランは、アプリ内の全ての広告が表示されなくなり、ユーザービリティを高めることができます。\n\n● 自動継続課金について\n期間終了日の24時間以上前に自動更新の解除をされない場合、契約期間が自動更新されます。自動更新の課金は、契約期間の終了後24時間以内に行われます。\n\n● 注意点\n・アプリ内で課金された方は上記以外の方法での解約できません\n・当月分のキャンセルについては受け付けておりません。\n・iTunesアカウントを経由して課金されます。"
+            }
+            else {
+                return "● Paid version: Standard plan\nAnnual payment \(localizedPrice) / \(localizedSubscriptionPeriod) With the standard plan, all advertisements in the app will not be displayed, and usability can be improved.\n\n● About automatic renewal billing \nIf you do not cancel the automatic renewal more than 24 hours before the end date of the period, the contract period will be automatically renewed. You will be charged for automatic renewal within 24 hours of the end of the contract period.\n\n● Notes\n・ Those who have been charged within the app cannot cancel the contract by any method other than the above.\n・ We do not accept cancellations for the current month.\n・ You will be charged via your iTunes account."
             }
         case 1:
-            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                return "●機種変更時の復元\n機種変更時には、以前購入した有料版を無料で復元できます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。"
-            }else {
+                return "● 機種変更時の復元\n機種変更時には、以前購入した有料版を復元することができます。購入時と同じAppleIDでiPhone・iPad端末のiTunesにログインしてください。"
+            }
+            else {
                 return "● Restoration when changing models\nWhen changing models, you can restore the previously purchased paid version for free. Please log in to iTunes on your iPhone / iPad device with the same Apple ID as when you purchased it."
             }
         default:
@@ -129,35 +131,38 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }
             let product = self.products[indexPath.row]
             cell.textLabel?.text = product.localizedTitle
-            cell.label.text = "\(products[indexPath.row].localizedPrice!) / \(products[indexPath.row].localizedSubscriptionPeriod)　" // 円マークも付く
+            cell.label.text = "\(product.localizedPrice!) / \(product.localizedSubscriptionPeriod)　" // 円マークも付く
             cell.label.textColor = .darkGray
             cell.label.textAlignment = .right
-            if inAppPurchaseFlag {
+            if UpgradeManager.shared.inAppPurchaseFlag {
                 // チェックマークを入れる
-                cell.accessoryType = .checkmark
-            }else {
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "checkmark.seal.fill")?.withRenderingMode(.alwaysTemplate))
+                cell.accessoryView?.tintColor = .green
+            }
+            else {
                 // チェックマークを外す
-                cell.accessoryType = .none
+                cell.accessoryView = UIImageView(image: UIImage(systemName: "checkmark.seal")?.withRenderingMode(.alwaysTemplate))
+                cell.accessoryView?.tintColor = .gray
             }
             return cell
         case 1:
-            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
-                cell.centerLabel.text = "購入の復元"
-            }else {
+                cell.centerLabel.text = "購入の復元をする"
+            }
+            else {
                 cell.centerLabel.text = "Restore Purchases"
             }
-            if inAppPurchaseFlag {
-                cell.accessoryType = .checkmark
-            }else {
-                cell.accessoryType = .disclosureIndicator
+            if UpgradeManager.shared.inAppPurchaseFlag {
+                cell.accessoryType = .none
+            }
+            else {
+                cell.accessoryType = .none
             }
             cell.leftImageView.image = UIImage(named: "icons8-復元-25")?.withRenderingMode(.alwaysTemplate)
             return cell
         case 2:
-            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
@@ -168,7 +173,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
             cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")?.withRenderingMode(.alwaysTemplate)
             return cell
         case 3:
-            print(Locale.preferredLanguages) // ["ja-JP", "en-JP"]
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
             if language == "ja-JP" {
@@ -184,27 +188,24 @@ class SettingsUpgradeTableViewController: UITableViewController {
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // アップグレード機能　まずinAppPurchaseを判断する　receiptチェックする
-        let upgradeManager = UpgradeManager()
-        if UserDefaults.standard.object(forKey: "buy") != nil {
-            let count = UserDefaults.standard.object(forKey: "buy") as! Int
-            if count == 1 {
-                inAppPurchaseFlag = true
-            }
-        } else {
-            inAppPurchaseFlag = false
-        }
+        
         switch indexPath.section {
         case 0: // 購入
-            guard inAppPurchaseFlag  else {
-                upgradeManager.purchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff")
-                return
-            }
+            UpgradeManager.shared.purchase(PRODUCT_ID: UpgradeManager.PRODUCT_ID_STANDARD_PLAN, completion: { isSuccess in
+                // 購入済みを表すアイコンの色を緑色へ切り替えるためにリロードする
+                self.tableView.reloadData()
+            })
             break
         case 1: // リストア
-            upgradeManager.verifyPurchase(PRODUCT_ID: "com.ikingdom.Accountant.autoRenewableSubscriptions.advertisingOff") // 定数定義する
-            print("InAppPurchaseがあります。inAppPurchaseFlagは\(inAppPurchaseFlag)です。")
-            self.tableView.reloadData()
+            UpgradeManager.shared.verifyPurchase(PRODUCT_ID: UpgradeManager.PRODUCT_ID_STANDARD_PLAN, completion: { isSuccess in
+                let alert = UIAlertController(title: "復元", message: "\(isSuccess ? "成功しました" : "失敗しました")", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+                self.tableView.reloadData()
+            })
             break
         case 2: // 解約
             // アプリ内でブラウザを開く
@@ -214,7 +215,8 @@ class SettingsUpgradeTableViewController: UITableViewController {
                     let vc = SFSafariViewController(url: url)
                     present(vc, animated: true, completion: nil)
                 }
-            }else {
+            }
+            else {
                 // アプリ内でブラウザを開く
                 let url = URL(string:"https://support.apple.com/en-us/HT202039")
                 if let url = url{
@@ -237,42 +239,4 @@ class SettingsUpgradeTableViewController: UITableViewController {
         }
     }
 
-    // 価格の取得
-    private func purchaseGetInfo(PRODUCT_ID: Set<String>) { // Set<>は、重複を許さない配列のようなもの
-        SwiftyStoreKit.retrieveProductsInfo(PRODUCT_ID) { [weak self] result in // [weak self] を追加
-            print(result)
-            if let error = result.error {
-                //購入済みの場合
-                print("Error: \(result.error)")
-//                self.showErrorAlert("情報取得に失敗　\(error.localizedDescription)")
-                return // リターン
-            }
-            print("valid",result.retrievedProducts)
-            print("invalid",result.invalidProductIDs)
-            let products = Array(result.retrievedProducts) //
-//            products.sort(by: { (lh, rh) -> Bool in
-//                return lh.localizedPrice! < rh.localizedPrice!
-//            })
-
-            DispatchQueue.main.async {
-                self?.products = products
-                self?.tableView.reloadData()
-            }
-            if let product = result.retrievedProducts.first { // プロダクトは一種類なので、firstでよい
-                //未購入の場合
-                let priceString = product.localizedPrice! // 地域別の価格
-                print("localizedTitle       : \(product.localizedTitle)")
-                print("price                : \(priceString)")
-                print("priceLocale          : \(product.priceLocale)")
-                print("Product              : \(product.localizedDescription)")
-                print("subscriptionPeriod   : \(product.subscriptionPeriod!.unit)")
-                print("productIdentifier    : \(product.productIdentifier)")
-                    
-                return // リターンしてよい
-            }
-//            else if let invalidProductId = result.invalidProductIDs.first { // 不要？
-//                print("Invalid product identifier: \(invalidProductId)")
-//            }
-        }
-    }
 }

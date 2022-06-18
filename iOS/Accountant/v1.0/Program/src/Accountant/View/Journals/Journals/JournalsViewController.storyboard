@@ -69,11 +69,6 @@
                                                             <constraint firstItem="eWE-1V-x9k" firstAttribute="height" secondItem="fVB-HA-sb7" secondAttribute="height" multiplier="0.5" id="wIn-k1-tnH"/>
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="wgo-5U-IVM"/>
                                                         </constraints>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                <real key="value" value="0.5"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
                                                         <rect key="frame" x="0.0" y="60.5" width="400" height="60"/>
@@ -230,11 +225,11 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
                                                                 <rect key="frame" x="330.5" y="0.0" width="69.5" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PgD-xW-kCT" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="60"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                         <color key="textColor" name="TextColor"/>
@@ -315,8 +310,8 @@
                                             <constraint firstItem="x1g-F1-sE4" firstAttribute="height" secondItem="3WR-VZ-ahH" secondAttribute="height" id="vKy-MG-Bft"/>
                                         </constraints>
                                     </view>
-                                    <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
-                                        <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
+                                    <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
+                                        <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -479,18 +474,13 @@
                                                                 <constraint firstAttribute="trailing" secondItem="a1T-kT-1d6" secondAttribute="trailing" id="or6-fO-dPg"/>
                                                                 <constraint firstItem="2Km-8O-N10" firstAttribute="leading" secondItem="d4e-rD-eCp" secondAttribute="leading" id="p2S-oI-eWu"/>
                                                                 <constraint firstItem="4R9-6c-PCn" firstAttribute="leading" secondItem="d4e-rD-eCp" secondAttribute="leading" id="pHf-Mr-eVd"/>
-                                                                <constraint firstItem="4R9-6c-PCn" firstAttribute="height" relation="greaterThanOrEqual" secondItem="d4e-rD-eCp" secondAttribute="height" multiplier="0.333333" id="pTw-oR-K4J"/>
+                                                                <constraint firstItem="4R9-6c-PCn" firstAttribute="height" secondItem="d4e-rD-eCp" secondAttribute="height" multiplier="0.333333" id="pTw-oR-K4J"/>
                                                                 <constraint firstItem="2Km-8O-N10" firstAttribute="width" secondItem="d4e-rD-eCp" secondAttribute="width" id="qo9-3I-z0o"/>
                                                                 <constraint firstAttribute="trailing" secondItem="2Km-8O-N10" secondAttribute="trailing" id="s7x-bD-bHC"/>
                                                                 <constraint firstItem="2Km-8O-N10" firstAttribute="height" secondItem="d4e-rD-eCp" secondAttribute="height" multiplier="0.333333" id="uxd-ZL-YD4"/>
                                                                 <constraint firstItem="a1T-kT-1d6" firstAttribute="top" secondItem="d4e-rD-eCp" secondAttribute="top" id="wel-UU-q06"/>
                                                                 <constraint firstItem="4R9-6c-PCn" firstAttribute="width" secondItem="d4e-rD-eCp" secondAttribute="width" id="xmG-rq-TML"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.10000000000000001"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-6A-ZcG" userLabel="View2">
                                                             <rect key="frame" x="47.5" y="0.0" width="197.5" height="55"/>
@@ -552,17 +542,12 @@
                                                                 <constraint firstItem="cYm-xa-3Nl" firstAttribute="top" secondItem="MzK-ht-71v" secondAttribute="bottom" id="xhE-eu-rMd"/>
                                                                 <constraint firstItem="cYm-xa-3Nl" firstAttribute="top" secondItem="MzK-ht-71v" secondAttribute="bottom" id="ztg-zn-pcL"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.10000000000000001"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztb-J0-tJf" userLabel="View3">
-                                                            <rect key="frame" x="245" y="0.0" width="16.5" height="55"/>
+                                                            <rect key="frame" x="245" y="0.0" width="16" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="C07-dQ-fgX" userLabel="list_number">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="16.5" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -574,7 +559,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="mVa-QV-im9" userLabel="list_number2">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="16.5" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="16" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -586,7 +571,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="frX-9m-Dcl" userLabel="list_number3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="16.5" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -619,14 +604,9 @@
                                                                 <constraint firstItem="frX-9m-Dcl" firstAttribute="top" secondItem="mVa-QV-im9" secondAttribute="bottom" id="qrK-gJ-aFC"/>
                                                                 <constraint firstItem="C07-dQ-fgX" firstAttribute="leading" secondItem="ztb-J0-tJf" secondAttribute="leading" id="zUk-RS-Ig8"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.10000000000000001"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJB-9h-cYP" userLabel="View4">
-                                                            <rect key="frame" x="261.5" y="0.0" width="69" height="55"/>
+                                                            <rect key="frame" x="261" y="0.0" width="69" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="aPd-Oj-5kn" userLabel="list_debit">
                                                                     <rect key="frame" x="0.0" y="0.0" width="69" height="18.5"/>
@@ -684,11 +664,6 @@
                                                                 <constraint firstItem="G5I-PJ-D79" firstAttribute="top" secondItem="Hwh-81-pnL" secondAttribute="bottom" id="v23-8F-ue2"/>
                                                                 <constraint firstItem="Hwh-81-pnL" firstAttribute="width" secondItem="XJB-9h-cYP" secondAttribute="width" id="yaL-gR-J6s"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.10000000000000001"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vct-je-qo4" userLabel="View5">
                                                             <rect key="frame" x="330.5" y="0.0" width="69.5" height="55"/>
@@ -749,11 +724,6 @@
                                                                 <constraint firstItem="uMm-yx-HU4" firstAttribute="height" secondItem="vct-je-qo4" secondAttribute="height" multiplier="0.333333" id="oeL-4r-8rM"/>
                                                                 <constraint firstItem="Mgu-8l-mZZ" firstAttribute="height" secondItem="vct-je-qo4" secondAttribute="height" multiplier="0.333333" id="pbr-QZ-8cC"/>
                                                             </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <real key="value" value="0.10000000000000001"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -761,7 +731,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="3c9-6A-ZcG" secondAttribute="bottom" id="2KA-I9-bh3"/>
                                                         <constraint firstAttribute="bottom" secondItem="vct-je-qo4" secondAttribute="bottom" id="2a7-jc-Ez4"/>
-                                                        <constraint firstItem="ztb-J0-tJf" firstAttribute="width" relation="greaterThanOrEqual" secondItem="CDS-uX-WNE" secondAttribute="width" multiplier="0.04" id="4hL-FD-YlA"/>
+                                                        <constraint firstItem="ztb-J0-tJf" firstAttribute="width" secondItem="CDS-uX-WNE" secondAttribute="width" multiplier="0.04" id="4hL-FD-YlA"/>
                                                         <constraint firstItem="3c9-6A-ZcG" firstAttribute="top" secondItem="CDS-uX-WNE" secondAttribute="top" id="72q-Pk-uLc"/>
                                                         <constraint firstItem="XJB-9h-cYP" firstAttribute="leading" secondItem="ztb-J0-tJf" secondAttribute="trailing" id="7E9-Cq-78p"/>
                                                         <constraint firstItem="XJB-9h-cYP" firstAttribute="top" secondItem="CDS-uX-WNE" secondAttribute="top" id="7L2-J4-fiQ"/>
@@ -800,11 +770,6 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -812,10 +777,10 @@
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="width" secondItem="iWJ-SB-FwY" secondAttribute="width" id="27Z-Jt-LOR"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="width" secondItem="iWJ-SB-FwY" secondAttribute="width" id="39P-Oa-RL0"/>
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.15" id="EAE-VE-JvT"/>
-                                    <constraint firstAttribute="bottom" secondItem="V3Q-kP-pLv" secondAttribute="bottom" id="MNb-xt-b8z"/>
+                                    <constraint firstAttribute="bottom" secondItem="V3Q-kP-pLv" secondAttribute="bottom" constant="15" id="MNb-xt-b8z"/>
                                     <constraint firstAttribute="trailing" secondItem="3WR-VZ-ahH" secondAttribute="trailing" id="NA7-TK-Ceh"/>
                                     <constraint firstAttribute="trailing" secondItem="V3Q-kP-pLv" secondAttribute="trailing" id="ZGc-nS-FMz"/>
-                                    <constraint firstItem="V3Q-kP-pLv" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.85" id="ZLI-pe-Dq8"/>
+                                    <constraint firstItem="V3Q-kP-pLv" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.85" constant="-15" id="ZLI-pe-Dq8"/>
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="leading" secondItem="iWJ-SB-FwY" secondAttribute="leading" id="cSf-Ih-uXO"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="leading" secondItem="iWJ-SB-FwY" secondAttribute="leading" id="wHQ-HZ-pVO"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="top" secondItem="3WR-VZ-ahH" secondAttribute="bottom" id="wU9-QU-oaa"/>

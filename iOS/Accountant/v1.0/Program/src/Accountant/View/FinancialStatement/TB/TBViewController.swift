@@ -87,7 +87,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     private func createButtons() {
         
         if let backgroundView = backgroundView {
-            backgroundView.neumorphicLayer?.cornerRadius = 0.1
+            backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
             backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = edged
@@ -203,15 +203,17 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
         //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
 //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
-            gADBannerView.isHidden = true
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         let newImage = self.tableView.captureImagee()
         //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         printing = false
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             gADBannerView.isHidden = false
         }
         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)// 元の位置に戻す //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
@@ -344,7 +346,7 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < presenter.numberOfobjects {
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TableViewCellTB
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as! TBTableViewCell
             // 勘定科目をセルに表示する
             //        cell.textLabel?.text = "\(presenter.objects(forRow:indexPath.row].category as String)"
             cell.label_account.text = "\(presenter.objects(forRow:indexPath.row).category as String)"
@@ -368,7 +370,7 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             //① UI部品を指定
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as! TableViewCellTB
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as! TBTableViewCell
 //            let r = 0
 //            switch r {
             switch segmentedControl_switch.selectedSegmentIndex {
@@ -447,7 +449,7 @@ extension TBViewController: TBPresenterOutput {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
-        if !inAppPurchaseFlag {
+        if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
@@ -464,7 +466,12 @@ extension TBViewController: TBPresenterOutput {
             gADBannerView.load(GADRequest())
             print(tableView.rowHeight)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant:         tableView!.rowHeight * -1)
+            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+        }
+        else {
+            if let gADBannerView = gADBannerView {
+                gADBannerView.isHidden = true
+            }
         }
         // ナビゲーションを透明にする処理
         if let navigationController = self.navigationController {

@@ -67,11 +67,6 @@
                                                             <constraint firstAttribute="bottom" secondItem="GyC-lX-wDV" secondAttribute="bottom" id="lPp-Bu-aBJ"/>
                                                             <constraint firstAttribute="bottom" secondItem="V6T-5r-BCa" secondAttribute="bottom" id="s0q-yr-rgS"/>
                                                         </constraints>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                <real key="value" value="0.5"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozo-Vd-eMp" userLabel="ViewCenter">
                                                         <rect key="frame" x="0.0" y="49.5" width="400" height="35.5"/>
@@ -464,11 +459,6 @@
                                                     <constraint firstItem="ozo-Vd-eMp" firstAttribute="top" secondItem="9QB-yb-zEv" secondAttribute="bottom" id="vSm-PG-PDT"/>
                                                     <constraint firstItem="9QB-yb-zEv" firstAttribute="height" relation="lessThanOrEqual" secondItem="uEG-Jz-uLr" secondAttribute="height" multiplier="0.411765" id="vX0-48-bgR"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                        <real key="value" value="0.5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -482,8 +472,8 @@
                                             <constraint firstAttribute="bottom" secondItem="uEG-Jz-uLr" secondAttribute="bottom" id="w4L-KG-xiX"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="18" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6rw-5E-QP2">
-                                        <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="18" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="6rw-5E-QP2">
+                                        <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS" rowHeight="20" id="Kg0-aE-VWr" userLabel="cell_WS" customClass="WSTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -858,10 +848,10 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6C-sV-ux8" userLabel="ViewRight1">
-                                                                    <rect key="frame" x="204.5" y="0.0" width="39.5" height="20"/>
+                                                                    <rect key="frame" x="204.5" y="0.0" width="39" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="vSe-WT-wS8" userLabel="list_credit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="41" height="20"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1320,11 +1310,6 @@
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="dataSource" destination="a9q-bv-lX8" id="ZKd-Kg-Xwg"/>
                                             <outlet property="delegate" destination="a9q-bv-lX8" id="nG5-7S-qGN"/>
@@ -1337,9 +1322,9 @@
                                     <constraint firstItem="E5P-3D-LGJ" firstAttribute="top" secondItem="tnR-Gd-3dv" secondAttribute="top" id="84t-gl-QhZ"/>
                                     <constraint firstAttribute="trailing" secondItem="E5P-3D-LGJ" secondAttribute="trailing" id="CFZ-7Q-IQo"/>
                                     <constraint firstAttribute="trailing" secondItem="6rw-5E-QP2" secondAttribute="trailing" id="JoA-uH-2P8"/>
-                                    <constraint firstItem="6rw-5E-QP2" firstAttribute="height" secondItem="tnR-Gd-3dv" secondAttribute="height" multiplier="0.85" id="NAB-Zj-oGx"/>
+                                    <constraint firstItem="6rw-5E-QP2" firstAttribute="height" secondItem="tnR-Gd-3dv" secondAttribute="height" multiplier="0.85" constant="-15" id="NAB-Zj-oGx"/>
                                     <constraint firstItem="6rw-5E-QP2" firstAttribute="width" secondItem="tnR-Gd-3dv" secondAttribute="width" id="dXF-GU-Nl8"/>
-                                    <constraint firstAttribute="bottom" secondItem="6rw-5E-QP2" secondAttribute="bottom" id="kKb-TD-Oof"/>
+                                    <constraint firstAttribute="bottom" secondItem="6rw-5E-QP2" secondAttribute="bottom" constant="15" id="kKb-TD-Oof"/>
                                     <constraint firstItem="E5P-3D-LGJ" firstAttribute="height" secondItem="tnR-Gd-3dv" secondAttribute="height" multiplier="0.15" id="psh-uS-4FE"/>
                                     <constraint firstItem="E5P-3D-LGJ" firstAttribute="width" secondItem="tnR-Gd-3dv" secondAttribute="width" id="tjE-fu-6xJ"/>
                                     <constraint firstItem="6rw-5E-QP2" firstAttribute="leading" secondItem="tnR-Gd-3dv" secondAttribute="leading" id="xTX-KC-OVg"/>
