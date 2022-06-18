@@ -217,7 +217,7 @@
                             </constraints>
                         </view>
                         <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="plain" allowsMultipleSelection="YES" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uaA-Ma-J7h">
-                            <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
+                            <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
@@ -227,13 +227,13 @@
                         <constraint firstItem="uaA-Ma-J7h" firstAttribute="leading" secondItem="Igp-Bm-Hf7" secondAttribute="leading" id="2u7-Yy-hK5"/>
                         <constraint firstAttribute="trailing" secondItem="uaA-Ma-J7h" secondAttribute="trailing" id="Aci-hV-Xoi"/>
                         <constraint firstItem="uaA-Ma-J7h" firstAttribute="width" secondItem="Igp-Bm-Hf7" secondAttribute="width" id="DGG-g9-XRI"/>
-                        <constraint firstAttribute="bottom" secondItem="uaA-Ma-J7h" secondAttribute="bottom" id="DtI-qO-6gW"/>
+                        <constraint firstAttribute="bottom" secondItem="uaA-Ma-J7h" secondAttribute="bottom" constant="15" id="DtI-qO-6gW"/>
                         <constraint firstItem="uaA-Ma-J7h" firstAttribute="top" secondItem="qBy-WR-uCh" secondAttribute="bottom" id="E0J-SE-HtV"/>
                         <constraint firstItem="qBy-WR-uCh" firstAttribute="width" secondItem="Igp-Bm-Hf7" secondAttribute="width" id="IXn-Ck-r0a"/>
                         <constraint firstItem="qBy-WR-uCh" firstAttribute="height" secondItem="Igp-Bm-Hf7" secondAttribute="height" multiplier="0.15" id="Kbl-zW-9cY"/>
                         <constraint firstAttribute="trailing" secondItem="qBy-WR-uCh" secondAttribute="trailing" id="eiR-Oa-iSn"/>
                         <constraint firstItem="qBy-WR-uCh" firstAttribute="top" secondItem="Igp-Bm-Hf7" secondAttribute="top" id="hDD-dv-0Ng"/>
-                        <constraint firstItem="uaA-Ma-J7h" firstAttribute="height" secondItem="Igp-Bm-Hf7" secondAttribute="height" multiplier="0.85" id="ndR-QU-Nzk"/>
+                        <constraint firstItem="uaA-Ma-J7h" firstAttribute="height" secondItem="Igp-Bm-Hf7" secondAttribute="height" multiplier="0.85" constant="-15" id="ndR-QU-Nzk"/>
                         <constraint firstItem="qBy-WR-uCh" firstAttribute="leading" secondItem="Igp-Bm-Hf7" secondAttribute="leading" id="sKx-Im-Ev4"/>
                     </constraints>
                 </view>

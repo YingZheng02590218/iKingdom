@@ -181,7 +181,7 @@
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
-                                        <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
+                                        <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TBTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -433,9 +433,9 @@
                                     <constraint firstItem="dDs-6j-Ntr" firstAttribute="top" secondItem="14z-DW-9U7" secondAttribute="top" id="AHr-J6-pCp"/>
                                     <constraint firstItem="fNc-Jo-BVR" firstAttribute="leading" secondItem="14z-DW-9U7" secondAttribute="leading" id="AaS-bA-wzZ"/>
                                     <constraint firstItem="dDs-6j-Ntr" firstAttribute="height" secondItem="14z-DW-9U7" secondAttribute="height" multiplier="0.15" id="LlX-LB-b63"/>
-                                    <constraint firstAttribute="bottom" secondItem="fNc-Jo-BVR" secondAttribute="bottom" id="WNq-1w-m4Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="fNc-Jo-BVR" secondAttribute="bottom" constant="15" id="WNq-1w-m4Y"/>
                                     <constraint firstItem="dDs-6j-Ntr" firstAttribute="width" secondItem="14z-DW-9U7" secondAttribute="width" id="eXa-yu-Ojd"/>
-                                    <constraint firstItem="fNc-Jo-BVR" firstAttribute="height" secondItem="14z-DW-9U7" secondAttribute="height" multiplier="0.85" id="mG1-cs-gUe"/>
+                                    <constraint firstItem="fNc-Jo-BVR" firstAttribute="height" secondItem="14z-DW-9U7" secondAttribute="height" multiplier="0.85" constant="-15" id="mG1-cs-gUe"/>
                                     <constraint firstAttribute="trailing" secondItem="dDs-6j-Ntr" secondAttribute="trailing" id="vCC-B6-0KV"/>
                                     <constraint firstItem="fNc-Jo-BVR" firstAttribute="width" secondItem="14z-DW-9U7" secondAttribute="width" id="zjX-D4-JhJ"/>
                                 </constraints>

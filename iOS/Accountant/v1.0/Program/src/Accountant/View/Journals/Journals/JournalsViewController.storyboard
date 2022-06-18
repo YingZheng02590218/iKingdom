@@ -27,18 +27,18 @@
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-1V-x9k" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIP-xT-tcO" userLabel="title">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
@@ -46,7 +46,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-5s-hJI" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -311,7 +311,7 @@
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
-                                        <rect key="frame" x="0.0" y="120.5" width="400" height="683.5"/>
+                                        <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
@@ -421,6 +421,11 @@
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
                                                                             <nil key="highlightedColor"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                                    <real key="value" value="0.29999999999999999"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="m2y-a0-Raj" userLabel="list_date3">
                                                                             <rect key="frame" x="21" y="0.0" width="26.5" height="18.5"/>
@@ -693,6 +698,11 @@
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                            <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -767,10 +777,10 @@
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="width" secondItem="iWJ-SB-FwY" secondAttribute="width" id="27Z-Jt-LOR"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="width" secondItem="iWJ-SB-FwY" secondAttribute="width" id="39P-Oa-RL0"/>
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.15" id="EAE-VE-JvT"/>
-                                    <constraint firstAttribute="bottom" secondItem="V3Q-kP-pLv" secondAttribute="bottom" id="MNb-xt-b8z"/>
+                                    <constraint firstAttribute="bottom" secondItem="V3Q-kP-pLv" secondAttribute="bottom" constant="15" id="MNb-xt-b8z"/>
                                     <constraint firstAttribute="trailing" secondItem="3WR-VZ-ahH" secondAttribute="trailing" id="NA7-TK-Ceh"/>
                                     <constraint firstAttribute="trailing" secondItem="V3Q-kP-pLv" secondAttribute="trailing" id="ZGc-nS-FMz"/>
-                                    <constraint firstItem="V3Q-kP-pLv" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.85" id="ZLI-pe-Dq8"/>
+                                    <constraint firstItem="V3Q-kP-pLv" firstAttribute="height" secondItem="iWJ-SB-FwY" secondAttribute="height" multiplier="0.85" constant="-15" id="ZLI-pe-Dq8"/>
                                     <constraint firstItem="3WR-VZ-ahH" firstAttribute="leading" secondItem="iWJ-SB-FwY" secondAttribute="leading" id="cSf-Ih-uXO"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="leading" secondItem="iWJ-SB-FwY" secondAttribute="leading" id="wHQ-HZ-pVO"/>
                                     <constraint firstItem="V3Q-kP-pLv" firstAttribute="top" secondItem="3WR-VZ-ahH" secondAttribute="bottom" id="wU9-QU-oaa"/>
