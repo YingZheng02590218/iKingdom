@@ -32,8 +32,10 @@ class SettingsTableViewController: UITableViewController {
         tableView.tableFooterView = tableFooterView
 
         // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
     }
     
     // 生体認証パスコードロック　設定スイッチ 切り替え

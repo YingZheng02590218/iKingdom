@@ -1276,7 +1276,11 @@ class JournalEntryViewController: UIViewController {
             // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
             let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
             let results = dataBaseManagerJournalEntry.getJournalEntryCount()
-            if results.count <= 50 {
+            if results.count <= 10 {
+                // 仕訳10件以下　広告を表示しない
+                iValue = 1
+            }
+            else if results.count <= 50 {
                 // 乱数　1から6までのIntを生成
                 iValue = Int.random(in: 1 ... 6)
             }

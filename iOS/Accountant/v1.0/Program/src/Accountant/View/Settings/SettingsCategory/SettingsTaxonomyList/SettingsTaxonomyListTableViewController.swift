@@ -63,6 +63,11 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
+        // ナビゲーションを透明にする処理
+        if let navigationController = self.navigationController {
+            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController.navigationBar.shadowImage = UIImage()
+        }
     }
     
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
