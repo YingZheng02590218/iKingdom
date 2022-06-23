@@ -421,7 +421,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             // 表示しているPDFPageをUIImageに変換
             for pageCount in 0 ..< documentRef.numberOfPages {
                 // CGPDFDocument -> CGPDFPage -> UIImage
-                if let page = documentRef.page(at: pageCount + 1) {
+                if let page = documentRef.page(at: pageCount) { // 毎回空白ページが生成されていた原因。なぜか+1をしていた
                     let pageRect = page.getBoxRect(.mediaBox)
                     let renderer = UIGraphicsImageRenderer(size: pageRect.size)
                     let pageImage = renderer.image { context in

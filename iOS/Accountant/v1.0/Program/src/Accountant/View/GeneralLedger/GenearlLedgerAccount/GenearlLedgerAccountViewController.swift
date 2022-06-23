@@ -173,7 +173,7 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
             // 表示しているPDFPageをUIImageに変換
             for pageCount in 0 ..< documentRef.numberOfPages {
                 // CGPDFDocument -> CGPDFPage -> UIImage
-                if let page = documentRef.page(at: pageCount + 1) {
+                if let page = documentRef.page(at: pageCount) {
                     let pageRect = page.getBoxRect(.mediaBox)
                     let renderer = UIGraphicsImageRenderer(size: pageRect.size)
                     let pageImage = renderer.image { context in
