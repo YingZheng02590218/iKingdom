@@ -8,7 +8,7 @@
 
 import UIKit
 import EMTNeumorphicView
-import PDFKit
+import QuickLook
 import GoogleMobileAds // マネタイズ対応
 
 // 仕訳帳クラス
@@ -62,7 +62,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     // 印刷機能
     let pDFMaker = PDFMaker()
-    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
@@ -397,62 +396,22 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // 初期化
         pDFMaker.initialize()
         
-        if let fiscalYear = presenter.fiscalYear {
-            let printController = UIPrintInteractionController.shared
-            let printInfo = UIPrintInfo(dictionary:nil)
-            printInfo.outputType = .general
-            printInfo.jobName = "\(fiscalYear)-Journals"
-            printInfo.duplex = .none
-            printInfo.orientation = .portrait
-            printController.printInfo = printInfo
-            printController.printingItem = self.resizePrintingPaper()
-            printController.present(animated: true, completionHandler: nil)
-        }
-    }
-
-    private func resizePrintingPaper() -> NSData? {
-        // CGPDFDocumentを取得
-        if let PDFpath = pDFMaker.PDFpath?[0] {
-            let document = PDFDocument(url: PDFpath)
-            guard let documentRef = document?.documentRef else { return nil }
-            
-            var pageImages: [UIImage] = []
-            
-            // 表示しているPDFPageをUIImageに変換
-            for pageCount in 0 ..< documentRef.numberOfPages {
-                // CGPDFDocument -> CGPDFPage -> UIImage
-                if let page = documentRef.page(at: pageCount) { // 毎回空白ページが生成されていた原因。なぜか+1をしていた
-                    let pageRect = page.getBoxRect(.mediaBox)
-                    let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-                    let pageImage = renderer.image { context in
-                        UIColor.white.set()
-                        context.fill(pageRect)
-                        
-                        context.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-                        context.cgContext.scaleBy(x: 1.0, y: -1.0)
-                        
-                        context.cgContext.drawPDFPage(page)
-                    }
-                    // Image配列に格納
-                    pageImages.append(pageImage)
-                }
-            }
-            // UIImageにしたPDFPageをNSDataに変換
-            let pdfData: NSMutableData = NSMutableData()
-            let pdfConsumer: CGDataConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-            
-            var mediaBox: CGRect = CGRect(origin: .zero, size: paperSize) // ここに印刷したいサイズを入れる
-            let pdfContext: CGContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-            
-            pageImages.forEach { image in
-                pdfContext.beginPage(mediaBox: &mediaBox)
-                pdfContext.draw(image.cgImage!, in: mediaBox)
-                pdfContext.endPage()
-            }
-            
-            return pdfData
-        }
-        return nil
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+        
+//        // TODO: 動作確認用
+//        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
+//        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
+//        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
+//        if let navigator = self.navigationController {
+//            navigator.pushViewController(viewController, animated: true)
+//        }
+//        else{
+//            let navigation = UINavigationController(rootViewController:viewController)
+//            self.present(navigation, animated: true, completion: nil)
+//        }
     }
     
     func updateFiscalYear(fiscalYear: Int) {
@@ -1088,5 +1047,30 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.tableView.reloadData()
         // ボタンを更新
         setButtons()
+    }
+}
+
+/*
+ `QLPreviewController` にPDFデータを提供する
+ */
+
+extension JournalsViewController: QLPreviewControllerDataSource {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        
+        if let PDFpath = pDFMaker.PDFpath {
+            return PDFpath.count
+        }
+        else {
+            return 0
+        }
+    }
+
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        
+        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+            return "" as! QLPreviewItem
+        }
+        return pdfFilePath as QLPreviewItem
     }
 }

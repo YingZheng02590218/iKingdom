@@ -8,11 +8,11 @@
 
 import UIKit
 import EMTNeumorphicView
-import PDFKit
+import QuickLook
 import GoogleMobileAds // マネタイズ対応
 
 // 勘定クラス
-class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionControllerDelegate {
+class GenearlLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
 
@@ -45,7 +45,6 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
     var account :String = ""
     // 印刷機能
     let pDFMaker = PDFMakerAccount()
-    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     /// GUIアーキテクチャ　MVP
     private var presenter: GenearlLedgerAccountPresenterInput!
@@ -149,62 +148,9 @@ class GenearlLedgerAccountViewController: UIViewController, UIPrintInteractionCo
         // 初期化
         pDFMaker.initialize(account: account)
         
-        if let fiscalYear = presenter.fiscalYear {
-            let printController = UIPrintInteractionController.shared
-            let printInfo = UIPrintInfo(dictionary:nil)
-            printInfo.outputType = .general
-            printInfo.jobName = "\(fiscalYear)-Account-\(account)"
-            printInfo.duplex = .none
-            printInfo.orientation = .portrait
-            printController.printInfo = printInfo
-            printController.printingItem = self.resizePrintingPaper()
-            printController.present(animated: true, completionHandler: nil)
-        }
-    }
-    
-    private func resizePrintingPaper() -> NSData? {
-        // CGPDFDocumentを取得
-        if let PDFpath = pDFMaker.PDFpath?[0] {
-            let document = PDFDocument(url: PDFpath)
-            guard let documentRef = document?.documentRef else { return nil }
-            
-            var pageImages: [UIImage] = []
-            
-            // 表示しているPDFPageをUIImageに変換
-            for pageCount in 0 ..< documentRef.numberOfPages {
-                // CGPDFDocument -> CGPDFPage -> UIImage
-                if let page = documentRef.page(at: pageCount) {
-                    let pageRect = page.getBoxRect(.mediaBox)
-                    let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-                    let pageImage = renderer.image { context in
-                        UIColor.white.set()
-                        context.fill(pageRect)
-                        
-                        context.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-                        context.cgContext.scaleBy(x: 1.0, y: -1.0)
-                        
-                        context.cgContext.drawPDFPage(page)
-                    }
-                    // Image配列に格納
-                    pageImages.append(pageImage)
-                }
-            }
-            // UIImageにしたPDFPageをNSDataに変換
-            let pdfData: NSMutableData = NSMutableData()
-            let pdfConsumer: CGDataConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-            
-            var mediaBox: CGRect = CGRect(origin: .zero, size: paperSize) // ここに印刷したいサイズを入れる
-            let pdfContext: CGContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-            
-            pageImages.forEach { image in
-                pdfContext.beginPage(mediaBox: &mediaBox)
-                pdfContext.draw(image.cgImage!, in: mediaBox)
-                pdfContext.endPage()
-            }
-            
-            return pdfData
-        }
-        return nil
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
     }
 }
 
@@ -510,5 +456,30 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
 
     func setupViewForViewDidAppear() {
     
+    }
+}
+
+/*
+ `QLPreviewController` にPDFデータを提供する
+ */
+
+extension GenearlLedgerAccountViewController: QLPreviewControllerDataSource {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        
+        if let PDFpath = pDFMaker.PDFpath {
+            return PDFpath.count
+        }
+        else {
+            return 0
+        }
+    }
+
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        
+        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+            return "" as! QLPreviewItem
+        }
+        return pdfFilePath as QLPreviewItem
     }
 }

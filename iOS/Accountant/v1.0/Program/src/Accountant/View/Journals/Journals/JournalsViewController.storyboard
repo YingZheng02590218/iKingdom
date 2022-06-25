@@ -831,7 +831,7 @@
                                     <segue destination="TR8-pc-zuU" kind="presentation" identifier="buttonTapped" id="plG-Re-WNv"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="印刷" id="i4W-ZZ-FXk">
+                            <barButtonItem title="PDF" id="i4W-ZZ-FXk">
                                 <color key="tintColor" name="AccentBlue"/>
                                 <connections>
                                     <action selector="button_print:" destination="Y6W-OH-hqX" id="WjU-Dg-tl6"/>

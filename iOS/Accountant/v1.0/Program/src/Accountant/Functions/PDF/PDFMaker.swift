@@ -17,9 +17,11 @@ class PDFMaker {
     
     let hTMLhelper = HTMLhelper()
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
-
+    var fiscalYear = 0
     
     func initialize() {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
         PDFpath = []
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
@@ -220,7 +222,9 @@ class PDFMaker {
         catch {
             print("失敗した")
         }
-        let filePath = pDFsDirectory.appendingPathComponent("receipt-" + UUID().uuidString + ".pdf")
+        
+        // "receipt-" + UUID().uuidString
+        let filePath = pDFsDirectory.appendingPathComponent("Paciolist-\(fiscalYear)-Journals" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)
