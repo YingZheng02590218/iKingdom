@@ -224,7 +224,7 @@ class PDFMaker {
         }
         
         // "receipt-" + UUID().uuidString
-        let filePath = pDFsDirectory.appendingPathComponent("Paciolist-\(fiscalYear)-Journals" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-Journals" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)
