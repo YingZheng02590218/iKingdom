@@ -141,7 +141,7 @@ struct HTMLhelperAccount {
                     }
         .page{
             width: 210mm;
-            height: 297mm;
+            height: 296mm;
             box-sizing: border-box;
             padding: 10mm;
             display: block;
@@ -157,7 +157,7 @@ struct HTMLhelperAccount {
         @media print {
           html, body {
             width: 210mm;
-            height: 297mm;
+            height: 296mm;
           }
           /* ... the rest of the rules ... */
         }
