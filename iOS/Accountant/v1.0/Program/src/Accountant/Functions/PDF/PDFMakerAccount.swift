@@ -19,8 +19,11 @@ class PDFMakerAccount {
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
     // 勘定名
     var account: String = ""
-    
+    var fiscalYear = 0
+
     func initialize(account: String) {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
         self.account = account
         PDFpath = []
@@ -235,7 +238,11 @@ class PDFMakerAccount {
         catch {
             print("失敗した")
         }
-        let filePath = pDFsDirectory.appendingPathComponent("receipt-" + UUID().uuidString + ".pdf")
+        
+        // "receipt-" + UUID().uuidString
+       // "\(fiscalYear)-Account-\(account)"
+
+        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GenearlLedger-\(account)" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)

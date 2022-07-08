@@ -31,6 +31,7 @@ struct HTMLhelperAccount {
                 text-align: left;
             }
             .right {
+                margin-right: 5px;
                 margin-left: auto;
                 width: 50%;
                 text-align: right; /*　rightを指定すると改ページされてしまう　*/
@@ -74,16 +75,16 @@ struct HTMLhelperAccount {
                 border-bottom: 4px double #888;
             }
         /*　サイズ　フォント　*/
-            .fontsize40 {
-                font-size: 40%;
-            }
             .fontsize60 {
-                font-size: 40%;
+                font-size: 60%;
             }
             .fontsize80 {
                 font-size: 80%;
             }
-
+            .fontsize95 {
+                font-size: 95%;
+            }
+    
             .flex-colum {
                 display: flex;
                 flex-direction: column;
@@ -140,7 +141,7 @@ struct HTMLhelperAccount {
                     }
         .page{
             width: 210mm;
-            height: 297mm;
+            height: 296mm;
             box-sizing: border-box;
             padding: 10mm;
             display: block;
@@ -156,7 +157,7 @@ struct HTMLhelperAccount {
         @media print {
           html, body {
             width: 210mm;
-            height: 297mm;
+            height: 296mm;
           }
           /* ... the rest of the rules ... */
         }
@@ -184,21 +185,21 @@ struct HTMLhelperAccount {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="8" class="fontsize60 line_single_gray_bottom" style="text-align: start; width: 10%;">No.　\(pageNumber)</td>
+                        <td colspan="8" class="fontsize95 line_single_gray_bottom" style="text-align: start; width: 10%;">No.　　　\(pageNumber)</td>
                     </tr>
                     <tr class="line_double_red_top line_single_red_bottom">
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom date" colspan="2">
                         <div class="center">
-                          <span class="fontsize60">\(fiscalYear)年</span>
+                          <span class="fontsize95">\(fiscalYear)年</span>
                         </div>
                         <div class="center">
-                          <p class="fontsize60 center">　月  日</p>
+                          <p class="fontsize95 center">　月  　日</p>
                         </div>
                       </td>
                       <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_double_red_right">
                         <div class="center">
-                          <span class="fontsize80 center">摘　</span>
-                          <span class="fontsize80 center">　要</span>
+                          <span class="fontsize95 center">摘　</span>
+                          <span class="fontsize95 center">　要</span>
                         </div>
                       </td>
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
@@ -208,12 +209,12 @@ struct HTMLhelperAccount {
                       </td>
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
                         <div class="center">
-                          <span class="fontsize80">借　</span><span class="fontsize80">　方</span>
+                          <span class="fontsize95">借　</span><span class="fontsize95">　方</span>
                         </div>
                       </td>
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
                         <div class="center">
-                          <span class="fontsize80">貸　</span><span class="fontsize80">　方</span>
+                          <span class="fontsize95">貸　</span><span class="fontsize95">　方</span>
                         </div>
                       </td>
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
@@ -223,7 +224,7 @@ struct HTMLhelperAccount {
                       </td>
                       <td class="line_double_red_top line_single_red_bottom balanceAmount">
                         <div class="center">
-                          <span class="fontsize80">差引残高</span>
+                          <span class="fontsize95">差引残高</span>
                         </div>
                       </td>
                     </tr>
@@ -249,28 +250,28 @@ struct HTMLhelperAccount {
         if correspondingAccounts == debit_category {
             return """
             　<tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom fontsize60 center">\(month)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize60">\(debit_category)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60"></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60">\(String(credit_amount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize60">\(String(balanceAmount))</td>
+                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debit_category)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(credit_amount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
                 </tr>
     """
         }
         else {
             return """
                 <tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom fontsize60 center">\(month)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60">\(credit_category)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60">\(String(debit_amount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60"></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize60 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize60">\(String(balanceAmount))</td>
+                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95">\(credit_category)</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debit_amount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
                 </tr>
     """
         }
@@ -279,14 +280,14 @@ struct HTMLhelperAccount {
     func getSingleRowEmpty() -> String {
         return """
                                    <tr class="rowHeight">
-                                     <td class="line_single_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
-                                     <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
-                                     <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize60 clearColor"> あ</td>
-                                     <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
-                                     <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                     <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                     <td class="line_double_red_right line_single_blue_bottom fontsize60 center clearColor"> あ</td>
-                                     <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                                     <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
+                                     <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
+                                     <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
+                                     <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
+                                     <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                     <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                     <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
+                                     <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
                                    </tr>
     """
     }
@@ -294,14 +295,14 @@ struct HTMLhelperAccount {
     func footerstring(debit_amount: Int64, credit_amount: Int64) -> String {
         return """
                                    <tr class="rowHeight">
-                                      <td class="line_single_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize40 clearColor"> あ</td>
-                                      <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="line_double_red_right line_single_blue_bottom fontsize60 clearColor"> あ</td>
-                                      <td class="line_single_blue_bottom fontsize60 clearColor"> あ</td>
+                                      <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
+                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
+                                      <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
                                     </tr>
                                 </tbody>
                               </table>
