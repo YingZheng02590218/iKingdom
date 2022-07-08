@@ -12,51 +12,50 @@
         <!--Maker View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="PDFMakerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PDFMakerViewController" customModule="Accountant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PDFMakerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PDFMakerViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="avY-D4-tpq">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="a" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="avY-D4-tpq">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="esl-i9-ieX" customClass="PDFView">
                                 <rect key="frame" x="10" y="44" width="394" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCk-yk-cvb">
-                                <rect key="frame" x="146" y="387.5" width="122" height="31"/>
+                                <rect key="frame" x="184.5" y="387.5" width="45" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Read Database"/>
+                                <buttonConfiguration key="configuration" style="plain" title="tap"/>
                                 <connections>
                                     <action selector="tap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n0p-1l-Idf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yiz-3L-D3Z">
-                                <rect key="frame" x="169.5" y="432.5" width="75" height="31"/>
+                                <rect key="frame" x="166" y="432.5" width="82" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Preview"/>
+                                <buttonConfiguration key="configuration" style="filled" title="PDFView"/>
                                 <connections>
                                     <action selector="tappedPreview:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="p0v-9f-1ZG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbO-pq-Z9y">
-                                <rect key="frame" x="173.5" y="477.5" width="67" height="31"/>
+                                <rect key="frame" x="106.5" y="477.5" width="201.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="UIPrintInteractionController"/>
                                 <connections>
                                     <action selector="button_print:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="2TS-cf-d9w"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="So7-H0-6uX">
-                                <rect key="frame" x="160" y="522" width="94" height="31"/>
+                                <rect key="frame" x="128.5" y="522" width="157.5" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="QLPreview"/>
+                                <buttonConfiguration key="configuration" style="gray" title="QLPreviewController"/>
                                 <connections>
                                     <action selector="tappedQLPreview:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8Qi-2G-1oh"/>
                                 </connections>

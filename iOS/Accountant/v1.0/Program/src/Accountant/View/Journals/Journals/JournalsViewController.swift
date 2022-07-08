@@ -8,7 +8,7 @@
 
 import UIKit
 import EMTNeumorphicView
-import PDFKit
+import QuickLook
 import GoogleMobileAds // マネタイズ対応
 
 // 仕訳帳クラス
@@ -57,12 +57,12 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     var Number: Int? // 編集した仕訳の連番
     var TappedIndexPathSection: Int? // 通常仕訳か決算整理仕訳か
     private var indexPathForAutoScroll: IndexPath?
+    var indexPath_local = IndexPath(row: 0, section: 0) // 初期表示オートスクロール
     // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     // 印刷機能
     let pDFMaker = PDFMaker()
-    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
 
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
@@ -397,62 +397,22 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // 初期化
         pDFMaker.initialize()
         
-        if let fiscalYear = presenter.fiscalYear {
-            let printController = UIPrintInteractionController.shared
-            let printInfo = UIPrintInfo(dictionary:nil)
-            printInfo.outputType = .general
-            printInfo.jobName = "\(fiscalYear)-Journals"
-            printInfo.duplex = .none
-            printInfo.orientation = .portrait
-            printController.printInfo = printInfo
-            printController.printingItem = self.resizePrintingPaper()
-            printController.present(animated: true, completionHandler: nil)
-        }
-    }
-
-    private func resizePrintingPaper() -> NSData? {
-        // CGPDFDocumentを取得
-        if let PDFpath = pDFMaker.PDFpath?[0] {
-            let document = PDFDocument(url: PDFpath)
-            guard let documentRef = document?.documentRef else { return nil }
-            
-            var pageImages: [UIImage] = []
-            
-            // 表示しているPDFPageをUIImageに変換
-            for pageCount in 0 ..< documentRef.numberOfPages {
-                // CGPDFDocument -> CGPDFPage -> UIImage
-                if let page = documentRef.page(at: pageCount + 1) {
-                    let pageRect = page.getBoxRect(.mediaBox)
-                    let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-                    let pageImage = renderer.image { context in
-                        UIColor.white.set()
-                        context.fill(pageRect)
-                        
-                        context.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-                        context.cgContext.scaleBy(x: 1.0, y: -1.0)
-                        
-                        context.cgContext.drawPDFPage(page)
-                    }
-                    // Image配列に格納
-                    pageImages.append(pageImage)
-                }
-            }
-            // UIImageにしたPDFPageをNSDataに変換
-            let pdfData: NSMutableData = NSMutableData()
-            let pdfConsumer: CGDataConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-            
-            var mediaBox: CGRect = CGRect(origin: .zero, size: paperSize) // ここに印刷したいサイズを入れる
-            let pdfContext: CGContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-            
-            pageImages.forEach { image in
-                pdfContext.beginPage(mediaBox: &mediaBox)
-                pdfContext.draw(image.cgImage!, in: mediaBox)
-                pdfContext.endPage()
-            }
-            
-            return pdfData
-        }
-        return nil
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+        
+//        // TODO: 動作確認用
+//        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
+//        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
+//        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
+//        if let navigator = self.navigationController {
+//            navigator.pushViewController(viewController, animated: true)
+//        }
+//        else{
+//            let navigation = UINavigationController(rootViewController:viewController)
+//            self.present(navigation, animated: true, completion: nil)
+//        }
     }
     
     func updateFiscalYear(fiscalYear: Int) {
@@ -538,7 +498,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else {
             // 空白行
-            return 7 // 空白行を表示するため+7行を追加
+            return 5 // 空白行を表示するため+5行を追加
         }
     }
     //セルを生成して返却するメソッド
@@ -769,23 +729,40 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        var indexPath_local = IndexPath(row: 0, section: 0)
-        if scroll || scroll_adding {     // 初回起動時の場合 入力ボタン押下時の場合
-            for s in 0..<tableView.numberOfSections {            //セクション数　ゼロスタート補正は不要
-                if tableView.numberOfRows(inSection: s) > 0 {
-                    let r = tableView.numberOfRows(inSection: s)-1 //セル数　ゼロスタート補正
+        // 初回起動時の場合
+        if scroll {
+            // セクション数　ゼロスタート補正は不要
+            for s in 0..<tableView.numberOfSections {
+                for r in 0..<tableView.numberOfRows(inSection: s) {
                     indexPath_local = IndexPath(row: r, section: s)
-                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: true) // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
+                    self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: false) // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 }
             }
+            // 最後のセルまで表示しされたかどうか
+            if indexPath == indexPath_local {
+                // 初期表示位置 OFF
+                scroll = false
+            }
         }
-        if scroll_adding {     // 入力ボタン押下時の場合
-            // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
-            if indexPath == indexPath_local { // 最後のセルまで表示しされたかどうか
-                if let indexPathForAutoScroll = indexPathForAutoScroll {
-                    self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.middle, animated: true) // 追加した仕訳データの行を画面の下方に表示する
+        // 入力ボタン押下時の場合
+        if scroll_adding {
+            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+            if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                cell.setHighlighted(true, animated: true)
+                indexPathForAutoScroll = indexPath
+            }
+            // 最後のセルまで表示しされたかどうか
+            if indexPath == indexPath_local {
+                // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
+                if let indexPathForAutoScroll = self.indexPathForAutoScroll {
+                    self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.top, animated: true) // 追加した仕訳データの行を画面の下方に表示する
                     // 入力ボタン押下時の表示位置 OFF
-                    scroll_adding = false
+                    self.scroll_adding = false
+                    self.indexPathForAutoScroll = nil
+                }
+                else {
+                    // 上へスクロールする
+                    scrollToTop()
                 }
             }
         }
@@ -825,6 +802,34 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     if primaryKeysAdjusting[i] == presenter.objectsss(forRow:indexPath.row).number {
                         cell.setHighlighted(true, animated: true)
                     }
+                }
+            }
+        }
+    }
+    // 下へスクロールする
+    func scrollToBottom() {
+        // セクション数　ゼロスタート補正は不要
+        for s in 0..<tableView.numberOfSections {
+            for r in 0..<tableView.numberOfRows(inSection: s) {
+                indexPath_local = IndexPath(row: r, section: s)
+                self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.top, animated: true)
+                // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
+                if let _ = self.indexPathForAutoScroll {
+                    break
+                }
+            }
+        }
+    }
+    // 上へスクロールする
+    func scrollToTop() {
+        // セクション数　ゼロスタート補正は不要
+        for s in (0..<tableView.numberOfSections).reversed() {
+            for r in (0..<tableView.numberOfRows(inSection: s)).reversed() {
+                indexPath_local = IndexPath(row: r, section: s)
+                self.tableView.scrollToRow(at: indexPath_local, at: UITableView.ScrollPosition.bottom, animated: true)
+                // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
+                if let _ = self.indexPathForAutoScroll {
+                    break
                 }
             }
         }
@@ -1049,8 +1054,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }
-        // 初期表示位置 OFF
-        scroll = false
         let indexPath = tableView.indexPathsForVisibleRows // テーブル上で見えているセルを取得する
         print("tableView.indexPathsForVisibleRows: \(String(describing: indexPath))")
         // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
@@ -1077,7 +1080,7 @@ extension JournalsViewController: JournalsPresenterOutput {
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
         // TabBarControllerから遷移してきした時のみ、テーブルビューの更新と初期表示位置を指定
         scroll_adding = true
-        
+        // 仕訳帳から仕訳入力
         Number = number
         TappedIndexPathSection = tappedIndexPathSection // 編集で選択されたセルのセクション
         // 前回の、まとめて編集後のセルのハイライトを戻す
@@ -1088,5 +1091,32 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.tableView.reloadData()
         // ボタンを更新
         setButtons()
+        // 下へスクロールする
+        scrollToBottom()
+    }
+}
+
+/*
+ `QLPreviewController` にPDFデータを提供する
+ */
+
+extension JournalsViewController: QLPreviewControllerDataSource {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        
+        if let PDFpath = pDFMaker.PDFpath {
+            return PDFpath.count
+        }
+        else {
+            return 0
+        }
+    }
+
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        
+        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+            return "" as! QLPreviewItem
+        }
+        return pdfFilePath as QLPreviewItem
     }
 }

@@ -34,6 +34,8 @@ class JournalEntryViewController: UIViewController {
     var activityIndicatorView = UIActivityIndicatorView()
     // タイトルラベル
     @IBOutlet var label_title: UILabel!
+    // 仕訳/決算整理仕訳　切り替え
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     // コレクションビュー　カルーセル　よく使う仕訳
     @IBOutlet var carouselCollectionView: UICollectionView!
     static var viewReload = false // カルーセル　リロードするかどうか
@@ -200,6 +202,7 @@ class JournalEntryViewController: UIViewController {
                 inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             }
             else if journalEntryType == "" {
+                label_title.text = ""
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
@@ -748,6 +751,23 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: - Action
 
+    // MARK: UISegmentedControl
+    @IBAction func segmentedControl(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            // 仕訳タイプ判定
+            journalEntryType = "" // 仕訳
+            label_title.text = ""
+            self.navigationItem.title = "仕訳"
+        }
+        else {
+            journalEntryType = "AdjustingAndClosingEntries" // 決算整理仕訳
+            label_title.text = ""
+            self.navigationItem.title = "決算整理仕訳"
+        }
+        // デイトピッカー作成
+        createDatePicker()
+    }
+    
     // MARK: UIButton
     // デイトピッカーのマスク
     @IBAction func maskDatePickerButtonTapped(_ sender: Any) {
@@ -1100,14 +1120,28 @@ class JournalEntryViewController: UIViewController {
             credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
-        let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-        let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-        let presentingViewController = navigationController.viewControllers[1] as! WSViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-        // viewWillAppearを呼び出す　更新のため
-        self.dismiss(animated: true, completion: {
-            [presentingViewController] () -> Void in
-            presentingViewController.reloadData()
-        })
+        // 精算表画面から入力の場合
+        if let tabBarController = self.presentingViewController as? UITabBarController { // 一番基底となっているコントローラ
+            let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
+            let presentingViewController = navigationController.viewControllers[1] as! WSViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                presentingViewController.reloadData()
+            })
+        }
+        // タブバーの仕訳タブから入力の場合
+        else {
+            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: {
+                        [self] () -> Void in
+                        self.showAd()
+                    })
+                }
+            }
+        }
     }
     
     // 仕訳編集　の処理
