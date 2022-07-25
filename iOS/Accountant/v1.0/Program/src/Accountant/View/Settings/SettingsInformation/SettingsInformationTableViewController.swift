@@ -54,6 +54,11 @@ class SettingsInformationTableViewController: UITableViewController {
 
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool){
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsInformation"
