@@ -810,12 +810,16 @@ class JournalEntryViewController: UIViewController {
         // 小書きを入力中は、画面を上げる
         if TextField_SmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+            // テキストフィールドの下辺
+            let txtLimit = TextField_SmallWritting.frame.origin.y + TextField_SmallWritting.frame.height + 8.0
+
             animateWithKeyboard(notification: notification) { keyboardFrame in
                 if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height - 150
-                } else {
-                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height
-                    self.view.frame.origin.y -= suggestionHeight - 150
+                    print(self.view.frame.origin.y)
+                    print(keyboardSize.height - txtLimit)
+                    print(keyboardSize.height)
+                    print(txtLimit)
+                    self.view.frame.origin.y -= keyboardSize.height - txtLimit
                 }
             }
         }
@@ -824,6 +828,7 @@ class JournalEntryViewController: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         animateWithKeyboard(notification: notification) { _ in
             if self.view.frame.origin.y != 0 {
+                print(self.view.frame.origin.y)
                 self.view.frame.origin.y = 0
             }
         }
