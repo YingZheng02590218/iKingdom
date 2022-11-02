@@ -471,23 +471,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                 // 一行上のセルに表示した月とこの行の月を比較する
                 let upperCellMonth = "\(presenter.objects(forRow:indexPath.row - 1).date)" // 日付
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
-                else {
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
+                // 日付の6文字目にある月の十の位を抽出
+                cell.label_list_date_month.text = StringUtility.shared.pickupMonth(d: d, upperCellMonth: upperCellMonth)
             }
             else { // 先頭行は月を表示
                 let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
@@ -498,13 +483,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
                 }
             }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(presenter.objects(forRow:indexPath.row).date.suffix(1))" // 末尾1文字の「日」         //日付
-            }
-            else {
-                cell.label_list_date.text = "\(presenter.objects(forRow:indexPath.row).date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
+            // 日付の9文字目にある日の十の位を抽出
+            cell.label_list_date.text = StringUtility.shared.pickupDay(d: d)
             cell.label_list_date.textAlignment = NSTextAlignment.right
 /// 借方勘定
             cell.label_list_summary_debit.text = " (\(presenter.objects(forRow:indexPath.row).debit_category))"
@@ -537,28 +517,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow:indexPath.row).credit_amount))) "      //貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-            if DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date) {
-                cell.label_list_summary_debit.textColor = .TextColor
-                cell.label_list_summary_credit.textColor = .TextColor
-                cell.label_list_summary.textColor = .TextColor
-                cell.label_list_date_month.textColor = .TextColor
-                cell.label_list_date.textColor = .TextColor
-                cell.label_list_number_left.textColor = .TextColor
-                cell.label_list_number_right.textColor = .TextColor
-                cell.label_list_debit.textColor = .TextColor
-                cell.label_list_credit.textColor = .TextColor
-            }
-            else {
-                cell.label_list_summary_debit.textColor = .red
-                cell.label_list_summary_credit.textColor = .red
-                cell.label_list_summary.textColor = .red
-                cell.label_list_date_month.textColor = .red
-                cell.label_list_date.textColor = .red
-                cell.label_list_number_left.textColor = .red
-                cell.label_list_number_right.textColor = .red
-                cell.label_list_debit.textColor = .red
-                cell.label_list_credit.textColor = .red
-            }
+            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
         }
@@ -572,23 +531,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                 // 一行上のセルに表示した月とこの行の月を比較する
                 let upperCellMonth = "\(presenter.objectsss(forRow:indexPath.row - 1).date)" // 日付
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
-                else{
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
+                // 日付の6文字目にある月の十の位を抽出
+                cell.label_list_date_month.text = StringUtility.shared.pickupMonth(d: d, upperCellMonth: upperCellMonth)
             }
             else { // 先頭行は月を表示
                 let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
@@ -599,13 +543,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
                 }
             }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(presenter.objectsss(forRow:indexPath.row).date.suffix(1))" // 末尾1文字の「日」         //日付
-            }
-            else {
-                cell.label_list_date.text = "\(presenter.objectsss(forRow:indexPath.row).date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
+            // 日付の9文字目にある日の十の位を抽出
+            cell.label_list_date.text = StringUtility.shared.pickupDay(d: d)
             cell.label_list_date.textAlignment = NSTextAlignment.right
 /// 借方勘定
             cell.label_list_summary_debit.text = " (\(presenter.objectsss(forRow:indexPath.row).debit_category))"
@@ -638,43 +577,15 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow:indexPath.row).credit_amount))) "      //貸方金額
 
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-            if DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date) {
-                cell.label_list_summary_debit.textColor = .TextColor
-                cell.label_list_summary_credit.textColor = .TextColor
-                cell.label_list_summary.textColor = .TextColor
-                cell.label_list_date_month.textColor = .TextColor
-                cell.label_list_date.textColor = .TextColor
-                cell.label_list_number_left.textColor = .TextColor
-                cell.label_list_number_right.textColor = .TextColor
-                cell.label_list_debit.textColor = .TextColor
-                cell.label_list_credit.textColor = .TextColor
-            }
-            else {
-                cell.label_list_summary_debit.textColor = .red
-                cell.label_list_summary_credit.textColor = .red
-                cell.label_list_summary.textColor = .red
-                cell.label_list_date_month.textColor = .red
-                cell.label_list_date.textColor = .red
-                cell.label_list_number_left.textColor = .red
-                cell.label_list_number_right.textColor = .red
-                cell.label_list_debit.textColor = .red
-                cell.label_list_credit.textColor = .red
-            }
+            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
         }
         else {
 // 空白行
             print("空白行", indexPath)
-            cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
-            cell.label_list_date.text = ""     // 末尾2文字の「日」         //日付
-            cell.label_list_summary_debit.text = ""     //借方勘定
-            cell.label_list_summary_credit.text = ""   //貸方勘定
-            cell.label_list_summary.text = ""      //小書き
-            cell.label_list_number_left.text = ""       // 丁数
-            cell.label_list_number_right.text = ""
-            cell.label_list_debit.text = ""        //借方金額 注意：空白を代入しないと、変な値が入る。
-            cell.label_list_credit.text = ""       //貸方金額
+            
+            cell.prepareForReuse()
             // セルの選択不可にする
             cell.selectionStyle = .none
         }

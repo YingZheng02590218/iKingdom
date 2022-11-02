@@ -62,4 +62,38 @@ class StringUtility {
         let string = string.replacingOccurrences(of: ",", with: "")
         return string
     }
+    
+    // MARK: 日付
+
+    // 日付の6文字目にある月の十の位を抽出
+    func pickupMonth(d: String, upperCellMonth: String) -> String {
+
+        let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
+        if dateMonth == "0" { // 日の十の位が0の場合は表示しない
+            if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
+                return "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+            }
+            else {
+                return "" // 注意：空白を代入しないと、変な値が入る。
+            }
+        }
+        else {
+            if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
+                return "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
+            }
+            else {
+                return "" // 注意：空白を代入しないと、変な値が入る。
+            }
+        }
+    }
+    // 日付の9文字目にある日の十の位を抽出
+    func pickupDay(d: String) -> String {
+        let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
+        if date == "0" { // 日の十の位が0の場合は表示しない
+            return "\(d.suffix(1))" // 末尾1文字の「日」         //日付
+        }
+        else {
+            return "\(d.suffix(2))" // 末尾2文字の「日」         //日付
+        }
+    }
 }
