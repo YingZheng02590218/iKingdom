@@ -325,20 +325,15 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         }
     }
     
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
-    
     // ボタンのデザインを指定する
     private func createButtons() {
         Button_input.setTitleColor(.ButtonTextColor, for: .normal)
         Button_input.neumorphicLayer?.cornerRadius = 15
         Button_input.setTitleColor(.ButtonTextColor, for: .selected)
-        Button_input.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        Button_input.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_input.neumorphicLayer?.edged = edged
-        Button_input.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_input.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        Button_input.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        Button_input.neumorphicLayer?.edged = Constant.edged
+        Button_input.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
     }
     

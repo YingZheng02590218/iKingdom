@@ -233,10 +233,10 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             deleteButton.setTitleColor(.ButtonTextColor, for: .normal)
             deleteButton.neumorphicLayer?.cornerRadius = 15
             deleteButton.setTitleColor(.ButtonTextColor, for: .selected)
-            deleteButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            deleteButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            deleteButton.neumorphicLayer?.edged = edged
-            deleteButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            deleteButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            deleteButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            deleteButton.neumorphicLayer?.edged = Constant.edged
+            deleteButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
             // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
             deleteButton.neumorphicLayer?.elementColor = UIColor.Background.cgColor

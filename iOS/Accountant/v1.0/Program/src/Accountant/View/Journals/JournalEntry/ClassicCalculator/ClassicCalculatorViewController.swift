@@ -51,11 +51,6 @@ class ClassicCalculatorViewController: UIViewController {
 //    var turn = true
 //    var count = 0
 
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,19 +75,19 @@ class ClassicCalculatorViewController: UIViewController {
         backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         backgroundView.layer.cornerRadius = 20
         backgroundView.clipsToBounds = true
-        backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        backgroundView.neumorphicLayer?.edged = edged
-        backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        backgroundView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        backgroundView.neumorphicLayer?.edged = Constant.edged
+        backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         // Default is 1.
-        labelView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
+        labelView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         // Default is 0.3.
-        labelView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
+        labelView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         // Adding a thin border on the edge of the element.
         labelView.neumorphicLayer?.edged = true
-        labelView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        labelView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         labelView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
 //        label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
@@ -105,10 +100,10 @@ class ClassicCalculatorViewController: UIViewController {
         button1.contentVerticalAlignment = .fill
 //        button1.contentHorizontalAlignment = .fill
         button1.setTitleColor(.ButtonTextColor, for: .selected)
-        button1.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button1.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button1.neumorphicLayer?.edged = edged
-        button1.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button1.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button1.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button1.neumorphicLayer?.edged = Constant.edged
+        button1.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button1.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
         button2.setTitle("2", for: .normal)
@@ -117,10 +112,10 @@ class ClassicCalculatorViewController: UIViewController {
         button2.contentVerticalAlignment = .fill
 //        button2.contentHorizontalAlignment = .fill
         button2.setTitleColor(.ButtonTextColor, for: .selected)
-        button2.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button2.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button2.neumorphicLayer?.edged = edged
-        button2.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button2.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button2.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button2.neumorphicLayer?.edged = Constant.edged
+        button2.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button2.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         button3.setTitle("3", for: .normal)
@@ -129,10 +124,10 @@ class ClassicCalculatorViewController: UIViewController {
         button3.contentVerticalAlignment = .fill
 //        button3.contentHorizontalAlignment = .fill
         button3.setTitleColor(.ButtonTextColor, for: .selected)
-        button3.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button3.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button3.neumorphicLayer?.edged = edged
-        button3.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button3.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button3.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button3.neumorphicLayer?.edged = Constant.edged
+        button3.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button3.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         
@@ -143,10 +138,10 @@ class ClassicCalculatorViewController: UIViewController {
         button4.contentVerticalAlignment = .fill
 //        button4.contentHorizontalAlignment = .fill
         button4.setTitleColor(.ButtonTextColor, for: .selected)
-        button4.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button4.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button4.neumorphicLayer?.edged = edged
-        button4.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button4.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button4.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button4.neumorphicLayer?.edged = Constant.edged
+        button4.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button4.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         button5.setTitle("5", for: .normal)
@@ -155,10 +150,10 @@ class ClassicCalculatorViewController: UIViewController {
         button5.contentVerticalAlignment = .fill
 //        button5.contentHorizontalAlignment = .fill
         button5.setTitleColor(.ButtonTextColor, for: .selected)
-        button5.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button5.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button5.neumorphicLayer?.edged = edged
-        button5.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button5.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button5.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button5.neumorphicLayer?.edged = Constant.edged
+        button5.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button5.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         button6.setTitle("6", for: .normal)
@@ -167,10 +162,10 @@ class ClassicCalculatorViewController: UIViewController {
         button6.contentVerticalAlignment = .fill
 //        button6.contentHorizontalAlignment = .fill
         button6.setTitleColor(.ButtonTextColor, for: .selected)
-        button6.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button6.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button6.neumorphicLayer?.edged = edged
-        button6.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button6.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button6.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button6.neumorphicLayer?.edged = Constant.edged
+        button6.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button6.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         
@@ -181,10 +176,10 @@ class ClassicCalculatorViewController: UIViewController {
         button7.contentVerticalAlignment = .fill
 //        button7.contentHorizontalAlignment = .fill
         button7.setTitleColor(.ButtonTextColor, for: .selected)
-        button7.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button7.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button7.neumorphicLayer?.edged = edged
-        button7.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button7.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button7.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button7.neumorphicLayer?.edged = Constant.edged
+        button7.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button7.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         button8.setTitle("8", for: .normal)
@@ -193,10 +188,10 @@ class ClassicCalculatorViewController: UIViewController {
         button8.contentVerticalAlignment = .fill
 //        button8.contentHorizontalAlignment = .fill
         button8.setTitleColor(.ButtonTextColor, for: .selected)
-        button8.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button8.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button8.neumorphicLayer?.edged = edged
-        button8.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button8.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button8.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button8.neumorphicLayer?.edged = Constant.edged
+        button8.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button8.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         button9.setTitle("9", for: .normal)
@@ -205,10 +200,10 @@ class ClassicCalculatorViewController: UIViewController {
         button9.contentVerticalAlignment = .fill
 //        button9.contentHorizontalAlignment = .fill
         button9.setTitleColor(.ButtonTextColor, for: .selected)
-        button9.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button9.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button9.neumorphicLayer?.edged = edged
-        button9.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button9.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button9.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button9.neumorphicLayer?.edged = Constant.edged
+        button9.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button9.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         
@@ -219,10 +214,10 @@ class ClassicCalculatorViewController: UIViewController {
         button0.contentVerticalAlignment = .fill
 //        button0.contentHorizontalAlignment = .fill
         button0.setTitleColor(.ButtonTextColor, for: .selected)
-        button0.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        button0.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        button0.neumorphicLayer?.edged = edged
-        button0.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        button0.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button0.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button0.neumorphicLayer?.edged = Constant.edged
+        button0.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button0.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
 //        buttonDivied.setTitle("÷", for: .normal)
@@ -251,10 +246,10 @@ class ClassicCalculatorViewController: UIViewController {
         buttonEqual.contentVerticalAlignment = .fill
 //        buttonEqual.contentHorizontalAlignment = .fill
         buttonEqual.setTitleColor(.ButtonTextColor, for: .selected)
-        buttonEqual.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        buttonEqual.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        buttonEqual.neumorphicLayer?.edged = edged
-        buttonEqual.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        buttonEqual.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        buttonEqual.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        buttonEqual.neumorphicLayer?.edged = Constant.edged
+        buttonEqual.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         buttonEqual.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
         buttonAc.setTitle("AC", for: .normal)
@@ -263,10 +258,10 @@ class ClassicCalculatorViewController: UIViewController {
         buttonAc.contentVerticalAlignment = .fill
 //        buttonAc.contentHorizontalAlignment = .fill
         buttonAc.setTitleColor(.ButtonTextColor, for: .selected)
-        buttonAc.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        buttonAc.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        buttonAc.neumorphicLayer?.edged = edged
-        buttonAc.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        buttonAc.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        buttonAc.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        buttonAc.neumorphicLayer?.edged = Constant.edged
+        buttonAc.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         buttonAc.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
 
 //        buttonPlusMinus.setTitle("+/-", for: .normal)

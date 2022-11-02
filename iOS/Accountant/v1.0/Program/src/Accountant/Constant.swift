@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constant {
     
@@ -24,4 +25,9 @@ struct Constant {
     static let ADMOB_ID_INTERSTITIAL = "ca-app-pub-7616440336243237/4964823000"
 #endif
     
+    // ニューモフィズム
+    static let LIGHTSHADOWOPACITY: Float = 0.3
+    static let DARKSHADOWOPACITY: Float = 0.5
+    static let ELEMENTDEPTH: CGFloat = 6
+    static let edged = false
 }

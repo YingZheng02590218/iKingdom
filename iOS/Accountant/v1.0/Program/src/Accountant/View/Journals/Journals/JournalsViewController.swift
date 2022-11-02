@@ -31,9 +31,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
-    let DARKSHADOWOPACITY: Float = 0.5
+//    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
-    let edged = false
+//    let edged = false
 
     fileprivate let refreshControl = UIRefreshControl()
     // まとめて編集機能
@@ -131,8 +131,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex

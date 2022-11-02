@@ -51,11 +51,7 @@ class JournalEntryViewController: UIViewController {
     // テキストフィールド　小書き
     @IBOutlet weak var TextField_SmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
-    // ニューモフィズム
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
+
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳or決算整理仕訳or編集)
@@ -542,10 +538,10 @@ class JournalEntryViewController: UIViewController {
 
         if let datePickerView = datePickerView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = edged
-            datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            datePickerView.neumorphicLayer?.edged = Constant.edged
+            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
         
@@ -553,10 +549,10 @@ class JournalEntryViewController: UIViewController {
             Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
             Button_Left.neumorphicLayer?.cornerRadius = 10
             Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
-            Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Left.neumorphicLayer?.edged = edged
-            Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            Button_Left.neumorphicLayer?.edged = Constant.edged
+            Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
@@ -568,10 +564,10 @@ class JournalEntryViewController: UIViewController {
             Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
             Button_Right.neumorphicLayer?.cornerRadius = 10
             Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
-            Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Right.neumorphicLayer?.edged = edged
-            Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            Button_Right.neumorphicLayer?.edged = Constant.edged
+            Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
@@ -581,20 +577,20 @@ class JournalEntryViewController: UIViewController {
         
         if let textFieldView = textFieldView {
             textFieldView.neumorphicLayer?.cornerRadius = 15
-            textFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            textFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            textFieldView.neumorphicLayer?.edged = edged
-            textFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            textFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            textFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            textFieldView.neumorphicLayer?.edged = Constant.edged
+            textFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
         
         if let smallWrittingTextFieldView = smallWrittingTextFieldView {
             smallWrittingTextFieldView.neumorphicLayer?.cornerRadius = 15
-            smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            smallWrittingTextFieldView.neumorphicLayer?.edged = edged
-            smallWrittingTextFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.edged = Constant.edged
+            smallWrittingTextFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
@@ -603,19 +599,19 @@ class JournalEntryViewController: UIViewController {
         inputButton.setTitleColor(.ButtonTextColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
         inputButton.setTitleColor(.ButtonTextColor, for: .selected)
-        inputButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        inputButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        inputButton.neumorphicLayer?.edged = edged
-        inputButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        inputButton.neumorphicLayer?.edged = Constant.edged
+        inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
         Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
         Button_cancel.neumorphicLayer?.cornerRadius = 15
         Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
-        Button_cancel.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        Button_cancel.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_cancel.neumorphicLayer?.edged = edged
-        Button_cancel.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_cancel.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.edged = Constant.edged
+        Button_cancel.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
         Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
