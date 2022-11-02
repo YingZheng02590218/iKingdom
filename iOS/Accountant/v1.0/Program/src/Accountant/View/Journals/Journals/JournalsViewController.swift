@@ -199,22 +199,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    //カンマ区切りに変換（表示用）
-    private let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
-    private func initializeJournals() {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-    }
-    
-    private func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
 
     // MARK: - Action
     
@@ -569,8 +553,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(presenter.objects(forRow:indexPath.row).credit_category)")    // 丁数を取得
                 cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             }
-            cell.label_list_debit.text = "\(addComma(string: String(presenter.objects(forRow:indexPath.row).debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(presenter.objects(forRow:indexPath.row).credit_amount))) "      //貸方金額
+            cell.label_list_debit.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow:indexPath.row).debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow:indexPath.row).credit_amount))) "      //貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             if DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date) {
@@ -670,8 +654,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow:indexPath.row).credit_category)")    // 丁数を取得
                 cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             }
-            cell.label_list_debit.text = "\(addComma(string: String(presenter.objectsss(forRow:indexPath.row).debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(presenter.objectsss(forRow:indexPath.row).credit_amount))) "      //貸方金額
+            cell.label_list_debit.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow:indexPath.row).debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow:indexPath.row).credit_amount))) "      //貸方金額
 
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             if DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date) {
@@ -968,7 +952,6 @@ extension JournalsViewController: JournalsPresenterOutput {
         createButtons() // ボタン作成
         setRefreshControl()
         setLongPressRecognizer()
-        initializeJournals()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
 //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(barButtonItem_print))
 //        //ナビゲーションに定義したボタンを置く

@@ -48,7 +48,6 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet weak var TextField_amount_debit: UITextField!
     @IBOutlet weak var TextField_amount_credit: UITextField!
     @IBOutlet var textFieldView: EMTNeumorphicView!
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
     // テキストフィールド　小書き
     @IBOutlet weak var TextField_SmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
@@ -100,8 +99,8 @@ class JournalEntryViewController: UIViewController {
         if isFromClassicCalcuatorViewController {
             // 金額　電卓画面で入力した値を表示させる
             if let numbersOnDisplay = numbersOnDisplay {
-                TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
-                TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+                TextField_amount_debit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
+                TextField_amount_credit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
                 // TextField 貸方金額　入力後
                 if TextField_amount_debit.text == "0"{
                     TextField_amount_debit.text = ""
@@ -172,8 +171,8 @@ class JournalEntryViewController: UIViewController {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         TextField_category_debit.text = dataBaseJournalEntry.debit_category
                         TextField_category_credit.text = dataBaseJournalEntry.credit_category
-                        TextField_amount_debit.text = addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        TextField_amount_credit.text = addComma(string: String(dataBaseJournalEntry.credit_amount))
+                        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
                         TextField_SmallWritting.text = dataBaseJournalEntry.smallWritting
                     }
                 }
@@ -184,8 +183,8 @@ class JournalEntryViewController: UIViewController {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         TextField_category_debit.text = dataBaseJournalEntry.debit_category
                         TextField_category_credit.text = dataBaseJournalEntry.credit_category
-                        TextField_amount_debit.text = addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        TextField_amount_credit.text = addComma(string: String(dataBaseJournalEntry.credit_amount))
+                        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
                         TextField_SmallWritting.text = dataBaseJournalEntry.smallWritting
                     }
                 }
@@ -678,10 +677,6 @@ class JournalEntryViewController: UIViewController {
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
     }
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
@@ -808,24 +803,7 @@ class JournalEntryViewController: UIViewController {
     @IBAction func TextField_category_debit(_ sender: UITextField) {}
     @IBAction func TextField_category_credit(_ sender: UITextField) {}
     @IBAction func TextField_SmallWritting(_ sender: UITextField) {}
-    
-    // MARK: NumberFormatter
-    //カンマ区切りに変換（表示用）
-    func addComma(string :String) -> String {
-        if (string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }
-        else {
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String {
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
-    }
-    
+        
     // MARK: キーボード
     // TextFieldをタップしても呼ばれない
     @IBAction func TapGestureRecognizer(_ sender: Any) {// この前に　touchesBegan が呼ばれている
@@ -1040,11 +1018,11 @@ class JournalEntryViewController: UIViewController {
         }
         var textField_amount_debit: Int64? = nil
         if let _ = self.TextField_amount_debit.text {
-            textField_amount_debit = Int64(self.removeComma(string: self.TextField_amount_debit.text!))
+            textField_amount_debit = Int64(StringUtility.shared.removeComma(string: self.TextField_amount_debit.text!))
         }
         var textField_amount_credit: Int64? = nil
         if let _ = self.TextField_amount_credit.text {
-            textField_amount_credit = Int64(self.removeComma(string: self.TextField_amount_credit.text!))
+            textField_amount_credit = Int64(StringUtility.shared.removeComma(string: self.TextField_amount_credit.text!))
         }
         var textField_SmallWritting: String? = nil
         if let _ = self.TextField_SmallWritting.text {
@@ -1105,9 +1083,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addAdjustingJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         // 精算表画面から入力の場合
@@ -1146,9 +1124,9 @@ class JournalEntryViewController: UIViewController {
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                 credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1161,9 +1139,9 @@ class JournalEntryViewController: UIViewController {
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                 credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1189,9 +1167,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
@@ -1216,9 +1194,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
@@ -1410,9 +1388,9 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         TextField_category_debit.text = objects[indexPath.row].debit_category
-        TextField_amount_debit.text = addComma(string: String(objects[indexPath.row].debit_amount))
+        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))
         TextField_category_credit.text = objects[indexPath.row].credit_category
-        TextField_amount_credit.text = addComma(string: String(objects[indexPath.row].credit_amount))
+        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].credit_amount))
         TextField_SmallWritting.text = objects[indexPath.row].smallWritting
     }
     
@@ -1567,7 +1545,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         if sender.text != "" {
             // カンマを追加する
             if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
-                sender.text = "\(addComma(string: String(sender.text!)))"
+                sender.text = "\(StringUtility.shared.addComma(string: String(sender.text!)))"
             }
             print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }

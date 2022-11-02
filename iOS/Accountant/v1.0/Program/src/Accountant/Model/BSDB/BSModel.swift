@@ -98,7 +98,7 @@ class BSModel: BSModelInput {
             print(result)
             break
         }
-        return setComma(amount: result)
+        return StringUtility.shared.setComma(amount: result)
     }
     // 計算　階層0 大区分
     private func setTotalRank0(big5: Int, rank0: Int) {
@@ -170,7 +170,7 @@ class BSModel: BSModelInput {
             print(result)
             break
         }
-        return setComma(amount: result)
+        return StringUtility.shared.setComma(amount: result)
     }
     // 計算　階層1 中区分
     private func setTotalRank1(big5: Int, rank1: Int) {
@@ -228,7 +228,7 @@ class BSModel: BSModelInput {
             print(result)
             break
         }
-        return setComma(amount: result)
+        return StringUtility.shared.setComma(amount: result)
     }
     
     // MARK: Local method
@@ -397,39 +397,5 @@ class BSModel: BSModelInput {
             }
         }
         return PositiveOrNegative
-    }
-    
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        // 三角形はマイナスの意味
-        if amount < 0 { //0の場合は、空白を表示する
-            let amauntFix = amount * -1
-            return "△ \(addComma(string: amauntFix.description))"
-        }else {
-            return addComma(string: amount.description)
-        }
-    }
-    //カンマ区切りに変換（表示用）
-    func addComma(string :String) -> String{
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
     }
 }

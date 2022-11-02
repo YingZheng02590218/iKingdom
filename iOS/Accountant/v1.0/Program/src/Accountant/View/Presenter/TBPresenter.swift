@@ -99,22 +99,22 @@ final class TBPresenter: TBPresenterInput {
     //借方　合計　集計
     func debit_total_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.debit_total_total)
+        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_total_total)
     }
     //貸方　合計　集計
     func credit_total_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.credit_total_total)
+        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_total_total)
     }
     //借方　残高　集計
     func debit_balance_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_balance_total)
     }
     //貸方　残高　集計
     func credit_balance_total() -> String {
         
-        return model.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
+        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_balance_total)
     }
     
     func refreshTable() {
@@ -127,8 +127,8 @@ final class TBPresenter: TBPresenterInput {
         view.reloadData()
     }
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
-    func getTotalAmount(account: String, leftOrRight: Int) -> String { // TODO: 戻り値をカンマ追加後のStringに変換してから返す
+    func getTotalAmount(account: String, leftOrRight: Int) -> String {
 
-        return model.setComma(amount:model.getTotalAmount(account: account, leftOrRight: leftOrRight))
+        return StringUtility.shared.setCommaForTB(amount: model.getTotalAmount(account: account, leftOrRight: leftOrRight))
     }
 }
