@@ -70,27 +70,7 @@ class GeneralLedgerTableViewController: UITableViewController {
             view.bringSubviewToFront(gADBannerView)
         }
     }
-    
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
+
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する

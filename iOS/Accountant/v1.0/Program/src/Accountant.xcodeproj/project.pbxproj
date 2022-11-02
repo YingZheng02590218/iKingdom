@@ -136,6 +136,10 @@
 		F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
 		F9AD64DA2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
 		F9AD64DB2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
+		F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
+		F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
+		F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
+		F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
 		F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
 		F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
 		F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */; };
@@ -537,6 +541,8 @@
 		F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselCollectionViewCell.xib; sourceTree = "<group>"; };
 		F9AD64D92912961900B9F50B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F9AD64E22912B66B00B9F50B /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
+		F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
 		F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPresenter.swift; sourceTree = "<group>"; };
@@ -1191,6 +1197,7 @@
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
 				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
+				F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1339,6 +1346,7 @@
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
+				F9AD64E22912B66B00B9F50B /* StringUtility.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1960,6 +1968,7 @@
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
+				F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9354DB424989BAA007DB098 /* DataBaseTrialBalance.swift in Sources */,
@@ -1972,6 +1981,7 @@
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
+				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2103,6 +2113,7 @@
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
+				F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9EC66D127B90BC60003FBB6 /* SettingsHelpDetailViewController.swift in Sources */,
 				F9EC66D227B90BC60003FBB6 /* MasterData.swift in Sources */,
 				F9EC66D327B90BC60003FBB6 /* DataBaseTrialBalance.swift in Sources */,
@@ -2115,6 +2126,7 @@
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
+				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,

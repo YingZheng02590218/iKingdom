@@ -90,27 +90,7 @@ class GenearlLedgerAccountViewController: UIViewController {
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
-    
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
+
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
     func addComma(string :String) -> String {
