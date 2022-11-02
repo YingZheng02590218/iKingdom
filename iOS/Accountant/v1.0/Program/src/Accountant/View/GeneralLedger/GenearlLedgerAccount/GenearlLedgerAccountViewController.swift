@@ -16,16 +16,6 @@ class GenearlLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     @IBOutlet var gADBannerView: GADBannerView!
     /// 勘定　上部
     @IBOutlet weak var label_date_year: UILabel!
@@ -426,12 +416,7 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())

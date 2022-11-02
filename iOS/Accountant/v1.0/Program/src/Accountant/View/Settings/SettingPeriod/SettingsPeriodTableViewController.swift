@@ -12,21 +12,9 @@ import GoogleMobileAds // マネタイズ対応
 // 会計期間クラス
 class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
+
     @IBOutlet var gADBannerView: GADBannerView!
-    // 広告ユニットID
-    let AdMobIDi = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
-    // テスト用広告ユニットID
-    let TEST_IDi = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
+
     private var interstitial: GADInterstitialAd?
 
     
@@ -60,12 +48,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
     //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
+            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -214,7 +198,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: AdMobTest ? TEST_ID : AdMobID,
+            GADInterstitialAd.load(withAdUnitID: Constant.ADMOB_ID_INTERSTITIAL,
                                    request: request,
                                    completionHandler: { [self] ad, error in
                 if let error = error {

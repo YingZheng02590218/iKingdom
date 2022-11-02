@@ -15,16 +15,6 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     private var interstitial: GADInterstitialAd?
  
     // 初期化画面　ロゴ
@@ -735,7 +725,7 @@ class JournalEntryViewController: UIViewController {
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: AdMobTest ? TEST_ID : AdMobID,
+            GADInterstitialAd.load(withAdUnitID: Constant.ADMOB_ID_INTERSTITIAL,
                                    request: request,
                                    completionHandler: { [self] ad, error in
                 if let error = error {
