@@ -30,7 +30,7 @@ class PDFMakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 初期化
-        pDFMaker.initialize()
+//        pDFMaker.initialize()
     }
     
     

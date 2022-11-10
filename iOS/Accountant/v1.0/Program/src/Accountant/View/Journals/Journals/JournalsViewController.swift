@@ -21,7 +21,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // まとめて編集機能
     @IBOutlet weak var button_edit: UIButton! // 選択した項目を編集ボタン
     @IBOutlet weak var barButtonItem_add: UIBarButtonItem!
-    @IBOutlet weak var barButtonItem_print: UIBarButtonItem!
+    @IBOutlet weak var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var label_company_name: UILabel!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
@@ -51,8 +51,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
-    // 印刷機能
-    let pDFMaker = PDFMaker()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
@@ -115,13 +113,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         if presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 { // 仕訳が1件以上ある場合
             // ボタンを活性にする
             if !tableView.isEditing { // 編集モードではない場合
-                barButtonItem_print.isEnabled = true
+                pdfBarButtonItem.isEnabled = true
             }
             navigationItem.leftBarButtonItem?.isEnabled = true
         }
         else { // 仕訳が0件の場合
             // ボタンを不活性にする
-            barButtonItem_print.isEnabled = false // 印刷ボタン
+            pdfBarButtonItem.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
         }
     }
@@ -347,26 +345,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
      * 印刷ボタン押下時メソッド
      * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
      */
-    @IBAction func button_print(_ sender: UIBarButtonItem) {
-        // 初期化
-        pDFMaker.initialize()
+    @IBAction func pdfBarButtonItemTapped(_ sender: UIBarButtonItem) {
         
-        let previewController = QLPreviewController()
-        previewController.dataSource = self
-        present(previewController, animated: true, completion: nil)
-        
-//        // TODO: 動作確認用
-//        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
-//        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
-//        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
-//        if let navigator = self.navigationController {
-//            navigator.pushViewController(viewController, animated: true)
-//        }
-//        else{
-//            let navigation = UINavigationController(rootViewController:viewController)
-//            self.present(navigation, animated: true, completion: nil)
-//        }
+        presenter.pdfBarButtonItemTapped()
     }
     
     func updateFiscalYear(fiscalYear: Int) {
@@ -747,7 +728,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         button_edit.isHidden = !editing
         button_edit.isEnabled = false // まとめて編集ボタン
         button_edit.tintColor = editing ? .AccentBlue : UIColor.clear // 色
-        barButtonItem_print.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
+        pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         barButtonItem_add.isEnabled = !editing // 仕訳入力ボタン
         // 編集中の場合
         if editing {
@@ -844,7 +825,7 @@ extension JournalsViewController: JournalsPresenterOutput {
         setRefreshControl()
         setLongPressRecognizer()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
-//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(barButtonItem_print))
+//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(pdfBarButtonItem))
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "仕訳帳"
@@ -953,6 +934,13 @@ extension JournalsViewController: JournalsPresenterOutput {
         // 下へスクロールする
         scrollToBottom()
     }
+    
+    // PDFのプレビューを表示させる
+    func showPreview() {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+    }
 }
 
 /*
@@ -963,7 +951,7 @@ extension JournalsViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = pDFMaker.PDFpath {
+        if let PDFpath = presenter.PDFpath {
             return PDFpath.count
         }
         else {
@@ -973,7 +961,7 @@ extension JournalsViewController: QLPreviewControllerDataSource {
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+        guard let pdfFilePath = presenter.PDFpath?[index] else {
             return "" as! QLPreviewItem
         }
         return pdfFilePath as QLPreviewItem
