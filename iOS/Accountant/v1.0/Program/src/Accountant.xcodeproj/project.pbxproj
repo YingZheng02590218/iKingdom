@@ -132,10 +132,16 @@
 		F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6686C266247C7008E9137 /* UIColor+extension.swift */; };
 		F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */; };
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
+		F9AC55192927ACDA003966E4 /* BSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC55182927ACDA003966E4 /* BSData.swift */; };
+		F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC55182927ACDA003966E4 /* BSData.swift */; };
 		F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */; };
 		F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
 		F9AD64DA2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
 		F9AD64DB2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
+		F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */; };
+		F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */; };
+		F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */; };
+		F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */; };
 		F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
 		F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
 		F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
@@ -538,9 +544,12 @@
 		F9A6686C266247C7008E9137 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
+		F9AC55182927ACDA003966E4 /* BSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSData.swift; sourceTree = "<group>"; };
 		F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselCollectionViewCell.xib; sourceTree = "<group>"; };
 		F9AD64D92912961900B9F50B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerBS.swift; sourceTree = "<group>"; };
+		F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperBS.swift; sourceTree = "<group>"; };
 		F9AD64E22912B66B00B9F50B /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
 		F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
@@ -946,8 +955,10 @@
 			children = (
 				F9CD5899266B963600F27E80 /* HTMLhelper.swift */,
 				F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */,
+				F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
+				F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */,
 			);
 			path = PDF;
 			sourceTree = "<group>";
@@ -1116,6 +1127,7 @@
 			isa = PBXGroup;
 			children = (
 				F99112E32495290000E28BB9 /* BSModel.swift */,
+				F9AC55182927ACDA003966E4 /* BSData.swift */,
 				F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */,
 			);
 			path = BSDB;
@@ -1927,6 +1939,7 @@
 				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
+				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
@@ -1944,6 +1957,7 @@
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
 				F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */,
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
@@ -1977,6 +1991,7 @@
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
 				F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
@@ -2072,6 +2087,7 @@
 				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
+				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
@@ -2089,6 +2105,7 @@
 				F9EC66B627B90BC60003FBB6 /* AnnotationViewController.swift in Sources */,
 				F9EC66B727B90BC60003FBB6 /* PageContentViewController.swift in Sources */,
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
@@ -2122,6 +2139,7 @@
 				F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */,
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
 				F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
