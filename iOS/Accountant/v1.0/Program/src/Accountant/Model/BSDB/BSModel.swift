@@ -64,6 +64,25 @@ class BSModel: BSModelInput {
         let objects010143 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
         let objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
         
+        // MARK: - "    株主資本合計"
+        let CapitalStock_total = self.getTotalRank1(big5: 2, rank1: 10, lastYear: false) // 中区分の合計を取得
+        var lastCapitalStock_total = ""
+        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            lastCapitalStock_total = self.getTotalRank1(big5: 2, rank1: 10, lastYear: true)
+        }
+        else {
+            lastCapitalStock_total = "-"
+        }
+        // MARK: - "    その他の包括利益累計額合計"
+        let OtherCapitalSurpluses_total = self.getTotalRank1(big5: 2, rank1: 11, lastYear: false) // 中区分の合計を取得
+        var lastOtherCapitalSurpluses_total = ""
+        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            lastOtherCapitalSurpluses_total = self.getTotalRank1(big5: 2, rank1: 11, lastYear: true)
+        }
+        else {
+            lastOtherCapitalSurpluses_total = "-"
+        }
+        
         // MARK: - "    流動資産合計"
         let CurrentAssets_total = self.getTotalRank0(big5: 0, rank0: 0, lastYear: false)
         var lastCurrentAssets_total = ""
@@ -173,7 +192,11 @@ class BSModel: BSModelInput {
                       Liability_total: Liability_total,
                       lastLiability_total: lastLiability_total,
                       objects0129: objects0129,
+                      CapitalStock_total: CapitalStock_total,
+                      lastCapitalStock_total: lastCapitalStock_total,
                       objects01210: objects01210,
+                      OtherCapitalSurpluses_total: OtherCapitalSurpluses_total,
+                      lastOtherCapitalSurpluses_total: lastCapitalStock_total,
                       objects01211: objects01211,
                       objects01213: objects01213,
                       Equity_total: Equity_total,

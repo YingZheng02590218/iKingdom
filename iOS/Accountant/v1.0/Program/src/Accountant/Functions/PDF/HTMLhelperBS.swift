@@ -10,296 +10,433 @@ import Foundation
 import UIKit
 
 struct HTMLhelperBS {
-    
+    // PDFごとに1回コール
     func headerHTMLstring() -> String {
         //htmlヘッダーを生成します。
         //たとえば、ここに店の名前を入力できます
         return """
     <!DOCTYPE html>
-    <html>
+        <html>
 
-    <style type="text/css" media="all">
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-    /*　位置　*/
-        .center {
-            text-align: center;
-        }
-        .left {
-            text-align: left;
-        }
-        .right {
-            margin-right: 5px;
-            margin-left: auto;
-            width: 50%;
-            text-align: right; /*　rightを指定すると改ページされてしまう　*/
-        }
-    /*　色　*/
-        .white {
-            color: #FFFFFF;
-        }
-        .black {
-            color: #000000;
-        }
-        .clearColor {
-            color: #FFFFFF;
-        }
-    /*　罫線　*/
-        .line_single_gray_bottom {
-            border-bottom: 1px solid #888;
-        }
-        .line_double_red_top {
-            border-top: 3px double #f66;
-        }
-        .line_double_red_right {
-            border-right: 3px double #f66;
-        }
-        .line_single_red_left {
-            border-left: : 1px solid #f66;
-        }
-        .line_single_red_right {
-            border-right: 1px solid #f66;
-        }
-        .line_single_red_bottom {
-            border-bottom: 1px solid #f66;
-        }
-        .line_single_blue_right {
-            border-right: 1px solid #66b3ff;
-        }
-        .line_single_blue_bottom {
-            border-bottom: 1px solid #66b3ff;
-        }
-    /*　サイズ　フォント　*/
-        .fontsize60 {
-            font-size: 60%;
-        }
-        .fontsize80 {
-            font-size: 80%;
-        }
-        .fontsize95 {
-            font-size: 95%;
-        }
+        <style type="text/css" media="all">
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+    <!--     /*　位置　*/ -->
+            .center {
+                text-align: center;
+            }
+            .left {
+                text-align: left;
+            }
+            .textIndent1 {
+                  text-indent: 20px; }
+            .textIndent2 {
+                  text-indent: 40px; }
+            .textIndent3 {
+                  text-indent: 60px; }
+            .textIndent4 {
+                  text-indent: 80px; }
+            .textIndent5 {
+                  text-indent: 100px; }
     
-        .flex-colum {
-            display: flex;
-            flex-direction: column;
-            margin: 0px;
-        }
-    /*　サイズ　幅　*/
-        .date {
-            width: 11.7647058824%;/*　22mm　5.8823529412% 11mm　*/
-        }
-        .smallWritting {
-            width: 41.7112299465%;/*　78mm　*/
-        }
-        .numberOfAccount {
-            width: 5.3475935829%;/*　10mm　*/
-        }
-        .amount {
-            width: 19.7860962567%;/*　37mm　*/
-        }
-    /*　サイズ　高さ　*/
-        .rowHeight {
-            height: auto;/*  2.7237354086% 7mm　*/
-        }
+            .right {
+                margin-right: 5px;
+                margin-left: auto;
+                width: 70%;
+                text-align: right; /*　rightを指定すると改ページされてしまう　*/
+            }
+    <!--     /*　色　*/ -->
+            .white {
+                color: #FFFFFF;
+            }
+            .black {
+                color: #000000;
+            }
+            .clearColor {
+                color: #FFFFFF;
+            }
+            .skyBlueBackgroundColor {
+                  background-color: #e5f0fa;
+    }
+    <!--     /*　罫線　*/ -->
+            .line_single_gray_bottom {
+                border-bottom: 1px solid #888;
+            }
+            .line_double_red_top {
+                border-top: 3px double #f66;
+            }
+            .line_double_red_right {
+                border-right: 3px double #f66;
+            }
+            .line_single_red_left {
+                border-left: : 1px solid #f66;
+            }
+            .line_single_red_right {
+                border-right: 1px solid #f66;
+            }
+            .line_single_red_bottom {
+                border-bottom: 1px solid #f66;
+            }
+            .line_single_blue_right {
+                border-right: 1px solid #66b3ff;
+            }
+            .line_single_blue_bottom {
+                border-bottom: 1px solid #66b3ff;
+            }
+            .line_single_black_all {
+                border: 1px solid #05203a;
+            }
+    <!--     /*　サイズ　フォント　*/ -->
+            .fontsize60 {
+                font-size: 60%;
+            }
+            .fontsize80 {
+                font-size: 80%;
+            }
+            .fontsize95 {
+                font-size: 95%;
+            }
+        
+            .flex-colum {
+                display: flex;
+                flex-direction: column;
+                margin: 0px;
+            }
+    <!--     /*　サイズ　幅　*/ -->
+            .date {
+                width: 11.7647058824%;/*　22mm　5.8823529412% 11mm　*/
+            }
+            .smallWritting {
+                width: 41.7112299465%;/*　78mm　*/
+            }
+            .numberOfAccount {
+                width: 5.3475935829%;/*　10mm　*/
+            }
+            .amount {
+                width: 19.7860962567%;/*　37mm　*/
+            }
+    <!--     /*　サイズ　高さ　*/ -->
+            .rowHeight {
+                height: auto;/*  2.7237354086% 7mm　*/
+            }
 
-    html {
-    }
-    body {
-    }
-        section {
+        html {
         }
-            h2 {
-                width: 100%;
-                height: 8.560311284%;/*   22mm　*/
+        body {
+        }
+            section {
             }
-            table {
-                width: 100%;
-                height: 91.439688716%;/*   235mm　*/
-            }
-                thead {
-                    height: 5.0583657588%;/*　13mm　*/
+                h2 {
+                    width: 50%;
+    <!--                 height: 8.560311284%;/*   22mm　*/ -->
                 }
-                tbody {
-                    height: 84.4357976654%;/*　217mm　*/
+                table {
+                    width: 100%;
+    <!--                 height: 91.439688716%;/*   235mm　*/ -->
                 }
-                tfoot {
-                    height: 10.5058365758%;/*　1.9455252918% 5mm　*/
-                }
-    .page{
-        width: 210mm;
-        height: 296mm;
-        box-sizing: border-box;
-        padding: 10mm;
-        display: block;
-        break-after: always;
-    }
-    @page {
-        size: A4 portrait;/*　A4　*/
-        margin: 0; /* auto; */
-    }
-    .page:last-child{
-        break-after: auto;
-    }
-    @media print {
-      html, body {
-        width: 210mm;
-        height: 296mm;
+                    thead {
+    <!--                     height: 5.0583657588%;/*　13mm　*/ -->
+                    }
+                    tbody {
+    <!--                     height: 84.4357976654%;/*　217mm　*/ -->
+                    }
+                    tfoot {
+    <!--                     height: 10.5058365758%;/*　1.9455252918% 5mm　*/ -->
+                    }
+        .page{
+            width: 210mm;
+            height: 296mm;
+            box-sizing: border-box;
+            padding: 10mm;
+            display: block;
+            break-after: always;
+        }
+        @page {
+            size: A4 portrait;/*　A4　*/
+            margin: 0; /* auto; */
+        }
+        .page:last-child{
+            break-after: auto;
+        }
+        @media print {
+          html, body {
+            width: 210mm;
+            height: 296mm;
+          }
+    <!--       /* ... the rest of the rules ... */ -->
+        }
+    <!--     /* ■ テーブル全体、セルの横幅、高さを%で指定
+        width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
+
+        テーブルの横幅と高さを指定してある時でセルの横幅、高さを%で指定した場合、 それらの大きさはテーブル全体に対する割合の大きさになります。 */ -->
+        
+        .richediter {
+      line-height: 1.0; }
+       .richediter ul, .richediter ol {
+        margin: 20px 10px; }
+        .richediter ul li, .richediter ol li {
+          margin-bottom: 15px; }
+      .richediter [class^="col-"] > ul,
+      .richediter [class^="col-"] > ol {
+        margin: 0 15px; }
+      .richediter ul li {
+        padding-left: 20px;
+        text-indent: -20px; }
+        .richediter ul li:before {
+          content: '';
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          margin-right: 14px;
+          vertical-align: 2px;
+          background-color: #384d61; }
+      .richediter ol {
+        list-style-type: decimal; }
+        .richediter ol li {
+          margin-left: 2em; }
+      .richediter dl {
+        margin: 30px 0; }
+      .richediter dt {
+        font-weight: normal; }
+      .richediter dd {
+        margin: 12px 0 24px 1em; }
+        
+        .richediter h2 {
+      display: table;
+      font-family: "FOT-ロダン Pro DB", sans-serif;
+      font-size: 20px;
+      text-align: center;
+      line-height: 1.28;
+      margin: 0 auto;
+      padding: 0 0.6em 10px;
+      border-bottom: 1px solid; }
+      
+    .borderBottom {
+        border-bottom: 1px solid; }
+    
+       .richediter th, td {
+    <!--   border: 1px solid #05203a; -->
+      padding: 5px; }
+      
+      .l-container {
+      max-width: 880px;
+      margin: auto;
+      padding-left: 15px;
+      padding-right: 15px; }
+      
+      table {
+            border: 1px solid #05203a;
+      border-collapse: collapse;
+      border-spacing: 0; }
+      
+        table{
+        margin: 0px 0; }
+        
+      th, td {
+              font-size: 15px;
+      border: 0px solid #05203a;
+      padding: 5px; }
+      
+      th {
+      width: 70%;
+      <!--   テーブルレコードの色 -->
+      background-color: #e5f0fa;
       }
-      /* ... the rest of the rules ... */
+      
+    <!--   body {
+        font-size: 13px;
+    } -->
+      .text-right {
+        text-align: right;
     }
-    /* ■ テーブル全体、セルの横幅、高さを%で指定
-    width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
-
-    テーブルの横幅と高さを指定してある時でセルの横幅、高さを%で指定した場合、 それらの大きさはテーブル全体に対する割合の大きさになります。 */
-    </style>
-    <body>
+    .public-notice td {
+        text-align: right;
+    }
+    .flex{
+        display: flex;
+    <!--     border: 1px solid #333; -->
+    }
+     .margin5 {
+            margin-top: 5px;}
+     .margin10 {
+            margin-top: 10px;}
+     .margin20 {
+            margin-top: 20px;}
+     .marginBottomAuto {
+            margin-bottom: auto;}
+            
+    .halfWidth {
+        width: 50%;
+    }
+        </style>
+        <body>
     """
     }
-    
-    func headerstring(title: String, fiscalYear: Int, pageNumber: Int) -> String {
-        // let margin = pageNumber % 2 == 0 ? "margin-right" : "margin-left"
-        // style="\(margin): 5.8823529412%;"
-
-        return """
-        <section class="page">
-            <h2 class="center">\(title)</h2>
-            <table>
-              <thead>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan="6" class="fontsize95 line_single_gray_bottom" style="text-align: start; width: 10%;">No.　　　\(pageNumber)</td>
-                </tr>
-                <tr class="line_double_red_top line_single_red_bottom">
-                  <td class="line_double_red_right line_double_red_top line_single_red_bottom date" colspan="2">
-                    <div class="center">
-                      <span class="fontsize95">\(fiscalYear)年</span>
-                    </div>
-                    <div class="center">
-                      <p class="fontsize95 center">　月  　日</p>
-                    </div>
-                  </td>
-                  <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_double_red_right">
-                    <div class="center">
-                      <span class="fontsize95 center">摘　</span>
-                      <span class="fontsize95 center">　要</span>
-                    </div>
-                  </td>
-                  <td class="line_double_red_right line_double_red_top line_single_red_bottom numberOfAccount">
-                    <div class="center flex-colum">
-                      <span class="fontsize60">丁</span><span class="fontsize60">数</span>
-                    </div>
-                  </td>
-                  <td class="line_double_red_right line_double_red_top line_single_red_bottom amount">
-                    <div class="center">
-                      <span class="fontsize95">借　</span><span class="fontsize95">　方</span>
-                    </div>
-                  </td>
-                  <td class="line_double_red_top line_single_red_bottom amount">
-                    <div class="center">
-                      <span class="fontsize95">貸　</span><span class="fontsize95">　方</span>
-                    </div>
-                  </td>
-                </tr>
-              </thead>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td colspan="6" class="fontsize60">©複式簿記の会計帳簿 Paciolist</td>
-                    </tr>
-                </tfoot>
-              <tbody>
-    """
-    }
-    
-    func getSingleRow(month: String, day: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, numberOfAccountCredit: Int, numberOfAccountDebit: Int) -> String {
-        return """
-                <tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debit_category)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountDebit == 0 ? "" : String(numberOfAccountDebit))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debit_amount))</p></td>
-                  <td class="line_single_blue_bottom"></td>
-                </tr>
-                <tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom center"></td>
-                  <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95"><p class="right">\(credit_category)</p></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountCredit == 0 ? "" : String(numberOfAccountCredit))</td>
-                  <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(credit_amount))</p></td>
-                </tr>
-                <tr class="rowHeight">
-                  <td class="line_single_red_right line_single_blue_bottom"></td>
-                  <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize80">\(smallWritting)</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                  <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom"></td>
-                </tr>
-    """
-    }
-
-    func getSingleRowEmpty() -> String {
-        return """
-                 <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                 </tr>
-                 <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom center fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom center fontsize95 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                 </tr>
-                 <tr class="rowHeight">
-                   <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                   <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                 </tr>
-    """
-    }
-
-    func footerstring(debit_amount: Int64, credit_amount: Int64) -> String {
-        return """
-                 <tr class="rowHeight">
-                    <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                    <td class="line_single_blue_bottom fontsize95 clearColor"> あ</td>
-                  </tr>
-              </tbody>
-            </table>
-        </section>
-        """
-    }
-
+    // PDFごとに1回コール
     func footerHTMLstring() -> String {
         return """
         </body>
     </html>
     """
     }
+    
+    // ページごとに1回コール
+    func headerstring(fiscalYear: Int) -> String {
+        return """
+                <section class="page">
+        <div class="richediter public-notice l-container">
+
+        <p class="text-right margin20">令和4年11月31日</p>
+        <h2>貸借対照表</h2>
+        <div class="flex margin20">
+        <span class="halfWidth">株式会社iKingdom 代表取締役 氏名</span>
+        <span class="halfWidth"><p class="right"> (令和4年08月31日現在)<br> (単位:円)</p></span>
+        </div>
+
+        <div class="flex line_single_black_all margin5">
+    """
+    }
+    // ページごとに1回コール
+    func footerstring() -> String {
+        return """
+        <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
+        </div>
+        </section>
+        """
+    }
+    
+    // テーブル　トップ 資産の部
+    func tableTopString() -> String {
+        return """
+        <table class="halfWidth marginBottomAuto">
+                <tbody>
+                <tr>
+                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(BalanceSheet.Block.assets.rawValue)</strong></th>
+                </tr>
+    """
+    }
+    // テーブル　トップ 負債の部、資本の部
+    func tableTopString(block: String) -> String {
+        return """
+                <table style="width:100%">
+                <tbody>
+                <tr>
+                <th class="skyBlueBackgroundColor" scope="col" colspan="2" id="assets" style="width:50%"><strong>\(block)</strong></th>
+                </tr>
+    """
+    }
+    // テーブル　エンド 資産の部 合計
+    func tableEndString(title: String, amount: String) -> String {
+        return """
+    <tr class="skyBlueBackgroundColor line_single_black_all">
+    <th id="capital-4"><strong>\(title)</strong></th>
+    <td headers="capital capital-4">\(amount)</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    <div class="halfWidth">
+    """
+    }
+    // テーブル　エンド 負債の部 合計
+    func tableEndString(amount: String) -> String {
+        return """
+    <tr class="skyBlueBackgroundColor line_single_black_all">
+    <th id="capital-4"><strong>負債合計</strong></th>
+    <td headers="capital capital-4">\(amount)</td>
+    </tr>
+    </tbody>
+    </table>
+    """
+    }
+    // テーブル　エンド 負債・純資産の部 合計
+    func tableEndString(capitalAmount: String, amount: String) -> String {
+        return """
+    <tr class="skyBlueBackgroundColor line_single_black_all">
+    <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
+    <td headers="capital capital-3">\(capitalAmount)</td>
+    </tr>
+    <tr class="skyBlueBackgroundColor line_single_black_all">
+    <th id="assets-capital"><strong>\(BalanceSheet.Block.liabilityAndEquity.getTotalAmount())</strong></th>
+    <td headers="assets assets-capital">\(amount)</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    </div>
+
+    </div>
+    """
+    }
+
+    // 中区分 段落0　流動資産、固定資産、繰越資産、流動負債、固定負債、株主資本、その他の包括利益累計額、
+    func middleRowTop(title: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left">\(title)</th>
+                <td headers="assets asset-1"></td>
+                </tr>
+    """
+    }
+    // 中区分 合計 段落1
+    func middleRowEnd(title: String, amount: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left textIndent1">\(title)</th>
+                <td headers="assets asset-1" class="borderBottom">\(amount)</td>
+                </tr>
+    """
+    }
+    
+    // 中区分 合計 段落0　新株予約権、TODO、非支配株主持分、TODO
+    func middleRowEndIndent0space(title: String, amount: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left">\(title)</th>
+                <td headers="assets asset-1" class="borderBottom">\(amount)</td>
+                </tr>
+    """
+    }
+    
+    // 小区分 有形固定資産、無形固定資産、投資その他資産
+    func smallRowTop(title: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left textIndent1">\(title)</th>
+                <td headers="assets asset-1"></td>
+                </tr>
+    """
+    }
+//    // 小区分 合計 不使用
+//    func smallRowEnd(title: String, amount: String) -> String {
+//        return """
+//                <tr>
+//                <th id="asset-1" class="left textIndent20">\(title)</th>
+//                <td headers="assets asset-1">\(amount)</td>
+//                </tr>
+//    """
+//    }
+    
+    
+    // レコードごとに1回コール 段落1 現金
+    func getSingleRow(title: String, amount: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left textIndent1">\(title)</th>
+                <td headers="assets asset-1">\(amount)</td>
+                </tr>
+    """
+    }
+    // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する表示科目
+    func getSingleRowIndent2space(title: String, amount: String) -> String {
+        return """
+                <tr>
+                <th id="asset-1" class="left textIndent2">\(title)</th>
+                <td headers="assets asset-1">\(amount)</td>
+                </tr>
+    """
+    }
+
 }

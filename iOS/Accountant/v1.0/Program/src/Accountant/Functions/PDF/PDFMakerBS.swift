@@ -54,119 +54,159 @@ class PDFMakerBS {
             print(error)
         }
         
-        let url = readDB(bSData: bSData)
+        let url = createHTML(bSData: bSData)
         completion(url)
     }
     
-    func readDB(bSData: BSData) -> [URL]? {
-
-        let dataBaseManager = JournalsModel()
-        let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
-        let dataBaseAdjustingEntries = dataBaseManager.getJournalAdjustingEntry()
-        
+    func createHTML(bSData: BSData) -> [URL]? {
+        // HTML
         var htmlString = ""
         
-        // ページ数
-        var pageNumber = 1
-
-        // 行を取得する
-        var totalDebit_amount:Int64 = 0
-        var totalCredit_amount:Int64 = 0
-        var counter = 0
-        // HTMLのヘッダーを取得する
-        let htmlHeader = hTMLhelper.headerHTMLstring()
-        htmlString.append(htmlHeader)
-        // 行数分繰り返す 仕訳
-        for item in dataBaseJournalEntries {
-            
-            let fiscalYear = item.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-
-            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
-            let debit_category = item.debit_category
-            let debit_amount = item.debit_amount
-            let credit_category = item.credit_category
-            let credit_amount = item.credit_amount
-            let smallWritting = item.smallWritting
-            let balance_left = item.balance_left
-            let balance_right = item.balance_right
-            let genearlLedgerAccountModel = GenearlLedgerAccountModel()
-            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(credit_category)")// 損益勘定の場合はエラーになる
-            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debit_category)")// 損益勘定の場合はエラーになる
-
-            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting, numberOfAccountCredit: numberOfAccountCredit, numberOfAccountDebit: numberOfAccountDebit)
+        // PDFごとに1回コール
+        let headerHTMLstring = hTMLhelper.headerHTMLstring()
+        htmlString.append(headerHTMLstring)
+        // ページごとに1回コール
+        let headerstring = hTMLhelper.headerstring(fiscalYear: bSData.fiscalYear)
+        htmlString.append(headerstring)
+        
+        // テーブル　トップ 資産の部
+        var tableTopString = hTMLhelper.tableTopString()
+        htmlString.append(tableTopString)
+        // 流動資産
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.currentAssets.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects0100 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
-            
-            totalDebit_amount += item.debit_amount
-            totalCredit_amount += item.credit_amount
-            
-            if counter >= 9 {
-                let tableFooter = hTMLhelper.footerstring(debit_amount: totalDebit_amount, credit_amount: totalCredit_amount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 10 {
-                counter = 0
-                pageNumber += 1
-            }
         }
-        // 行数分繰り返す 決算整理仕訳
-        for item in dataBaseAdjustingEntries {
-            
-            let fiscalYear = item.fiscalYear
-            if counter == 0 {
-                let tableHeader = hTMLhelper.headerstring(title:"仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
-                htmlString.append(tableHeader)
-            }
-            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
-            let debit_category = item.debit_category
-            let debit_amount = item.debit_amount
-            let credit_category = item.credit_category
-            let credit_amount = item.credit_amount
-            let smallWritting = item.smallWritting
-            let balance_left = item.balance_left
-            let balance_right = item.balance_right
-            let genearlLedgerAccountModel = GenearlLedgerAccountModel()
-            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(credit_category)")// 損益勘定の場合はエラーになる
-            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debit_category)")// 損益勘定の場合はエラーになる
-            
-            let rowString = hTMLhelper.getSingleRow(month: String(month), day: String(date), debit_category: debit_category, debit_amount: debit_amount, credit_category: credit_category, credit_amount: credit_amount, smallWritting: smallWritting, numberOfAccountCredit: numberOfAccountCredit, numberOfAccountDebit: numberOfAccountDebit)
+        // 流動資産
+        var middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.currentAssets.getTotalAmount(), amount: bSData.CurrentAssets_total)
+        htmlString.append(middleRowEnd)
+        // 固定資産
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.nonCurrentAssets.rawValue)
+        htmlString.append(tableTopString)
+        tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.tangibleFixedAssets.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects010142 {
+            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
-            
-            totalDebit_amount += item.debit_amount
-            totalCredit_amount += item.credit_amount
-            
-            if counter >= 9 {
-                let tableFooter = hTMLhelper.footerstring(debit_amount: totalDebit_amount, credit_amount: totalCredit_amount)
-                htmlString.append(tableFooter)
-            }
-            counter += 1
-            if counter >= 10 {
-                counter = 0
-                pageNumber += 1
-            }
         }
-        if counter > 0 && counter <= 10 {
-            for _ in counter ..< 10 {
-                let rowString = hTMLhelper.getSingleRowEmpty()
+        tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.intangibleAssets.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects010143 {
+            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.investments.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects010144 {
+            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        // 固定資産
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.nonCurrentAssets.getTotalAmount(), amount: bSData.FixedAssets_total)
+        htmlString.append(middleRowEnd)
+        // 繰延資産
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Assets.deferredAssets.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects0102 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        // 繰延資産
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Assets.deferredAssets.getTotalAmount(), amount: bSData.DeferredAssets_total)
+        htmlString.append(middleRowEnd)
+        
+        // テーブル　エンド 資産の部 合計
+        var tableEndString = hTMLhelper.tableEndString(title: BalanceSheet.Block.assets.getTotalAmount(), amount: bSData.Asset_total)
+        htmlString.append(tableEndString)
+        
+        
+        // テーブル　トップ 負債の部
+        tableTopString = hTMLhelper.tableTopString(block: BalanceSheet.Block.liabilities.rawValue)
+        htmlString.append(tableTopString)
+        
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Liabilities.currentLiabilities.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects0114 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.currentLiabilities.getTotalAmount(), amount: bSData.CurrentLiabilities_total)
+        htmlString.append(middleRowEnd)
+        
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Liabilities.fixedLiabilities.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects0115 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.fixedLiabilities.getTotalAmount(), amount: bSData.FixedLiabilities_total)
+        htmlString.append(middleRowEnd)
+        // テーブル　エンド 負債の部 合計
+        tableEndString = hTMLhelper.tableEndString(amount: bSData.Liability_total)
+        htmlString.append(tableEndString)
+        
+        
+        // テーブル　トップ 資本の部
+        tableTopString = hTMLhelper.tableTopString(block: BalanceSheet.Block.netAssets.rawValue)
+        htmlString.append(tableTopString)
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.NetAssets.cashAndCashEquivalents.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects0129 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.NetAssets.cashAndCashEquivalents.getTotalAmount(), amount: bSData.CapitalStock_total)
+        htmlString.append(middleRowEnd)
+        
+        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.NetAssets.accumulatedOtherComprehensiveIncome.rawValue)
+        htmlString.append(tableTopString)
+        // tableMiddle 行数分繰り返す
+        for item in bSData.objects01210 {
+            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+        middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.NetAssets.accumulatedOtherComprehensiveIncome.getTotalAmount(), amount: bSData.OtherCapitalSurpluses_total)
+        htmlString.append(middleRowEnd)
+        
+        if 0 < bSData.objects01211.count { //新株予約権16 が0件の場合
+            // tableMiddle 行数分繰り返す
+            for item in bSData.objects01211 {
+                let rowString = hTMLhelper.middleRowEndIndent0space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
                 htmlString.append(rowString)
-                
-                if counter >= 9 {
-                    let tableFooter = hTMLhelper.footerstring(debit_amount: totalDebit_amount, credit_amount: totalCredit_amount)
-                    htmlString.append(tableFooter)
-                }
-                counter += 1
-                pageNumber += 1
             }
         }
-        // フッターを取得する
-        let footerString = hTMLhelper.footerHTMLstring()
-        htmlString.append(footerString)
+        
+        if 0 < bSData.objects01213.count { //非支配株主持分22 が0件の場合
+            // tableMiddle 行数分繰り返す
+            for item in bSData.objects01213 {
+                let rowString = hTMLhelper.middleRowEndIndent0space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+                htmlString.append(rowString)
+            }
+        }
+        
+        // テーブル　エンド 負債・純資産の部 合計
+        tableEndString = hTMLhelper.tableEndString(capitalAmount: bSData.Equity_total, amount: bSData.Liability_and_Equity_total)
+        htmlString.append(tableEndString)
+        
+        
+        // ページごとに1回コール
+        let footerstring = hTMLhelper.footerstring()
+        htmlString.append(footerstring)
+        // PDFごとに1回コール
+        let footerHTMLstring = hTMLhelper.footerHTMLstring()
+        htmlString.append(footerHTMLstring)
+        
+        
         //HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
         //PDFデータを一時ディレクトリに保存する
@@ -220,7 +260,7 @@ class PDFMakerBS {
         }
         
         // "receipt-" + UUID().uuidString
-        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-Journals" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-BalanceSheet" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)
