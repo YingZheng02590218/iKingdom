@@ -12,17 +12,18 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol PLModelInput {
     
-    func initializeBenefits()
+    func initializeBenefits() -> PLData
 
-    func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String
-    func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String
-    func getBenefitTotal(benefit: Int, lastYear: Bool) -> String
+    func initializePDFMaker(pLData: PLData, completion: ([URL]?) -> Void)
 }
 // 損益計算書クラス
 class PLModel: PLModelInput {
     
+    // 印刷機能
+    let pDFMaker = PDFMakerPL()
+
     // 初期化　中区分、大区分　ごとに計算
-    func initializeBenefits() {
+    func initializeBenefits() -> PLData {
         // データベースに書き込み　//4:収益 3:費用
         setTotalRank0(big5: 4,rank0:  6) //営業収益9     売上
         setTotalRank0(big5: 3,rank0:  7) //営業費用5     売上原価
@@ -36,7 +37,67 @@ class PLModel: PLModelInput {
         
         // 利益を計算する関数を呼び出す todo
         setBenefitTotal()
+        
+        let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+
+        let mid_category10 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "6")//営業外収益10
+        let mid_category6 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "7")//営業外費用6
+        let mid_category11 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "9")//特別利益11
+        let mid_category7 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "10")//特別損失7
+        let objects9 = DataBaseManagerSettingsTaxonomy.shared.getBigCategory(category0: "1",category1: "1",category2: "4")//販売費及び一般管理費9
+
+        // MARK: - 営業収益9     売上
+        let NetSales = self.getTotalRank0(big5: 4, rank0: 6, lastYear: false)
+        let lastNetSales = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 4, rank0: 6, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 営業費用5     売上原価
+        let CostOfGoodsSold = self.getTotalRank0(big5: 3, rank0: 7, lastYear: false)
+        let lastCostOfGoodsSold = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 3, rank0: 7, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 営業費用5     販売費及び一般管理費
+        let SellingGeneralAndAdministrativeExpenses = self.getTotalRank0(big5: 3, rank0: 8, lastYear: false)
+        let lastSellingGeneralAndAdministrativeExpenses = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 3, rank0: 8, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 税等8 法人税等 税金
+        let IncomeTaxes = self.getTotalRank0(big5: 3, rank0: 11, lastYear: false)
+        let lastIncomeTaxes = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 3, rank0: 11, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        
+        // MARK: - 営業外収益10  営業外損益    営業外収益
+        let NonOperatingIncome = self.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
+        let lastNonOperatingIncome = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 4, rank1: 15, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 営業外費用6  営業外損益    営業外費用
+        let NonOperatingExpenses = self.getTotalRank1(big5: 3, rank1: 16, lastYear: false)
+        let lastNonOperatingExpenses = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 3, rank1: 16, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 特別利益11   特別損益    特別利益
+        let ExtraordinaryIncome = self.getTotalRank1(big5: 4, rank1: 17, lastYear: false)
+        let lastExtraordinaryIncome = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 4, rank1: 17, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 特別損失7    特別損益    特別損失
+        let ExtraordinaryLosses = self.getTotalRank1(big5: 3, rank1: 18, lastYear: false)
+        let lastExtraordinaryLosses = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 3, rank1: 18, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        
+        // MARK: - 売上総利益
+        let GrossProfitOrLoss = self.getBenefitTotal(benefit: 0, lastYear: false)
+        let lastGrossProfitOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 営業利益
+        let OtherCapitalSurpluses_total = self.getBenefitTotal(benefit: 1, lastYear: false)
+        let lastOtherCapitalSurpluses_total = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 経常利益
+        let OrdinaryIncomeOrLoss = self.getBenefitTotal(benefit: 2, lastYear: false)
+        let lastOrdinaryIncomeOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 税引前当期純利益（損失）
+        let IncomeOrLossBeforeIncomeTaxes = self.getBenefitTotal(benefit: 3, lastYear: false)
+        let lastIncomeOrLossBeforeIncomeTaxes = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        // MARK: - 当期純利益（損失）
+        let NetIncomeOrLoss = self.getBenefitTotal(benefit: 4, lastYear: false)
+        let lastNetIncomeOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 4, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
+
+        return PLData(company: company, fiscalYear: fiscalYear, theDayOfReckoning: theDayOfReckoning, CostOfGoodsSold: CostOfGoodsSold, lastCostOfGoodsSold: lastCostOfGoodsSold, objects9: objects9, SellingGeneralAndAdministrativeExpenses: SellingGeneralAndAdministrativeExpenses, lastSellingGeneralAndAdministrativeExpenses: lastSellingGeneralAndAdministrativeExpenses, mid_category6: mid_category6, NonOperatingExpenses: NonOperatingExpenses, lastNonOperatingExpenses: lastNonOperatingExpenses, mid_category7: mid_category7, ExtraordinaryLosses: ExtraordinaryLosses, lastExtraordinaryLosses: lastExtraordinaryLosses, IncomeTaxes: IncomeTaxes, lastIncomeTaxes: lastIncomeTaxes, NetSales: NetSales, lastNetSales: lastNetSales, mid_category10: mid_category10, NonOperatingIncome: NonOperatingIncome, lastNonOperatingIncome: lastNonOperatingIncome, mid_category11: mid_category11, ExtraordinaryIncome: ExtraordinaryIncome, lastExtraordinaryIncome: lastExtraordinaryIncome, GrossProfitOrLoss: GrossProfitOrLoss, lastGrossProfitOrLoss: lastGrossProfitOrLoss, OtherCapitalSurpluses_total: OtherCapitalSurpluses_total, lastOtherCapitalSurpluses_total: lastOtherCapitalSurpluses_total, OrdinaryIncomeOrLoss: OrdinaryIncomeOrLoss, lastOrdinaryIncomeOrLoss: lastOrdinaryIncomeOrLoss, IncomeOrLossBeforeIncomeTaxes: IncomeOrLossBeforeIncomeTaxes, lastIncomeOrLossBeforeIncomeTaxes: lastIncomeOrLossBeforeIncomeTaxes, NetIncomeOrLoss: NetIncomeOrLoss, lastNetIncomeOrLoss: lastNetIncomeOrLoss)
     }
+                        // 前年度の会計帳簿の存在有無を確認
+                      func checkSettingsPeriod() -> Bool {
+            return DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
+        }
+                      
     // 計算　階層0 大区分
     private func setTotalRank0(big5: Int, rank0: Int) {
         var TotalAmountOfRank0:Int64 = 0            // 累計額
@@ -80,7 +141,6 @@ class PLModel: PLModelInput {
     func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
-//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0
         switch rank0 {
@@ -153,7 +213,6 @@ class PLModel: PLModelInput {
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
-//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0            // 累計額
         switch rank1 {
@@ -212,7 +271,6 @@ class PLModel: PLModelInput {
     func getBenefitTotal(benefit: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
-//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.profitAndLossStatement
         var result:Int64 = 0            // 累計額
         switch benefit {
@@ -330,5 +388,13 @@ class PLModel: PLModelInput {
             }
         }
         return PositiveOrNegative
+    }
+    
+    // 初期化 PDFメーカー
+    func initializePDFMaker(pLData: PLData, completion: ([URL]?) -> Void) {
+
+        pDFMaker.initialize(pLData: pLData, completion: { PDFpath in
+            completion(PDFpath)
+        })
     }
 }

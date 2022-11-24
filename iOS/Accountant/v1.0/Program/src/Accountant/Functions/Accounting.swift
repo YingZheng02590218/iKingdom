@@ -150,3 +150,67 @@ public enum BalanceSheet: Hashable {
     }
         
 }
+// 損益計算書
+public enum ProfitAndLossStatement: Hashable {
+
+    case block(Block)
+
+
+    // MARK: - 大区分
+
+//    public enum Block: String, CaseIterable, Hashable {
+//        // 費用　Expense
+//        case expense = "費用"
+//        // 収益　Income
+//        case income = "収益"
+//    }
+
+    // MARK: - 中区分
+
+    public enum Block: String, CaseIterable, Hashable {
+        // 売上高    Sales
+        case Sales = "売上高"
+        // 売上原価    Cost of goods sold
+        case CostOfGoodsSold = "売上原価"
+        // 販売費及び一般管理費    Selling, general and administrative expenses
+        case SellingGeneralAndAdministrativeExpenses = "販売費及び一般管理費"
+        // 営業外収益    Non-operating income
+        case NonOperatingIncome = "営業外収益"
+        // 営業外費用    Non-operating expenses
+        case NonOperatingExpenses = "営業外費用"
+        // 特別利益    Extraordinary profits
+        case ExtraordinaryProfits = "特別利益"
+        // 特別損失    Extraordinary loss
+        case ExtraordinaryLoss = "特別損失"
+        // 法人税、住民税及び事業税    Corporation tax, residential tax and business tax
+        case IncomeTaxes = "法人税等"
+
+        func getTotalAmount() -> String {
+            switch self {
+            case .Sales: return ""
+            case .CostOfGoodsSold: return ""
+            case .SellingGeneralAndAdministrativeExpenses: return "販売費及び一般管理費合計"
+            case .NonOperatingIncome: return "営業外収益合計"
+            case .NonOperatingExpenses: return "営業外費用合計"
+            case .ExtraordinaryProfits: return "特別利益合計"
+            case .ExtraordinaryLoss: return "特別損失合計"
+            case .IncomeTaxes: return ""
+            }
+        }
+    }
+
+    // MARK: - 利益
+
+    public enum Benefits: String, CaseIterable, Hashable {
+        //売上総利益（損失）Gross profit (loss)
+        case GrossProfitOrLoss = "売上総利益"
+        //営業利益（損失）⇒ Operating income (loss)
+        case OtherCapitalSurpluses_total = "営業利益"
+        //経常利益（損失）⇒ Ordinary income (loss)
+        case OrdinaryIncomeOrLoss = "経常利益"
+        //税引前当期純利益（損失）⇒ Income (loss) before income taxes
+        case IncomeOrLossBeforeIncomeTaxes = "税引前当期純利益"
+        //当期純利益（損失）⇒ Net income (loss)
+        case NetIncomeOrLoss = "当期純利益"
+    }
+}
