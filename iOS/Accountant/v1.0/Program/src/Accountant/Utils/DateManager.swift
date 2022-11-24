@@ -64,5 +64,11 @@ class DateManager {
             return true // 範囲内
         }
     }
-    
+
+    func getDate() -> String {
+        dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatteryyyyMMddHHmmss.timeZone = .current
+
+        return dateFormatteryyyyMMddHHmmss.string(from: Date())
+    }
 }

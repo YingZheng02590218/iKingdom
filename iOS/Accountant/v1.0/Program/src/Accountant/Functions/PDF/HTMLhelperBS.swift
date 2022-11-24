@@ -19,10 +19,7 @@ struct HTMLhelperBS {
         <html>
 
         <style type="text/css" media="all">
-            * {
-                margin: 0px;
-                padding: 0px;
-            }
+
     <!--     /*　位置　*/ -->
             .center {
                 text-align: center;
@@ -58,8 +55,9 @@ struct HTMLhelperBS {
                 color: #FFFFFF;
             }
             .skyBlueBackgroundColor {
-                  background-color: #e5f0fa;
-    }
+                  background-color: #e5f0fa;}
+            .BlueBackgroundColor {
+                  background-color: #008080;}
     <!--     /*　罫線　*/ -->
             .line_single_gray_bottom {
                 border-bottom: 1px solid #888;
@@ -149,23 +147,9 @@ struct HTMLhelperBS {
             width: 210mm;
             height: 296mm;
             box-sizing: border-box;
-            padding: 10mm;
+            padding: 0mm 10mm;
             display: block;
-            break-after: always;
-        }
-        @page {
-            size: A4 portrait;/*　A4　*/
-            margin: 0; /* auto; */
-        }
-        .page:last-child{
-            break-after: auto;
-        }
-        @media print {
-          html, body {
-            width: 210mm;
-            height: 296mm;
-          }
-    <!--       /* ... the rest of the rules ... */ -->
+    <!--         break-after: always; -->
         }
     <!--     /* ■ テーブル全体、セルの横幅、高さを%で指定
         width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
@@ -283,24 +267,25 @@ struct HTMLhelperBS {
     }
     
     // ページごとに1回コール
-    func headerstring(fiscalYear: Int) -> String {
+    func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
         return """
                 <section class="page">
         <div class="richediter public-notice l-container">
 
-        <p class="text-right margin20">令和4年11月31日</p>
+        <p class="text-right">\(DateManager.shared.getDate())</p>
         <h2>貸借対照表</h2>
         <div class="flex margin20">
-        <span class="halfWidth">株式会社iKingdom 代表取締役 氏名</span>
-        <span class="halfWidth"><p class="right"> (令和4年08月31日現在)<br> (単位:円)</p></span>
+        <span class="halfWidth">\(company)</span>
+        <span class="halfWidth"><p class="right"> (\(fiscalYear)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
         </div>
 
-        <div class="flex line_single_black_all margin5">
+        <div class="flex line_single_black_all">
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
         return """
+            </div>
         <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
         </div>
         </section>
@@ -344,7 +329,7 @@ struct HTMLhelperBS {
     func tableEndString(amount: String) -> String {
         return """
     <tr class="skyBlueBackgroundColor line_single_black_all">
-    <th id="capital-4"><strong>負債合計</strong></th>
+    <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
     <td headers="capital capital-4">\(amount)</td>
     </tr>
     </tbody>
@@ -367,7 +352,6 @@ struct HTMLhelperBS {
     
     </div>
 
-    </div>
     """
     }
 

@@ -16,7 +16,7 @@ class PDFMakerBS {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelperBS()
-    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
+    let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm
     var fiscalYear = 0
     
     func initialize(bSData: BSData, completion: ([URL]?) -> Void) {
@@ -66,7 +66,7 @@ class PDFMakerBS {
         let headerHTMLstring = hTMLhelper.headerHTMLstring()
         htmlString.append(headerHTMLstring)
         // ページごとに1回コール
-        let headerstring = hTMLhelper.headerstring(fiscalYear: bSData.fiscalYear)
+        let headerstring = hTMLhelper.headerstring(company: bSData.company, fiscalYear: bSData.fiscalYear, theDayOfReckoning: bSData.theDayOfReckoning)
         htmlString.append(headerstring)
         
         // テーブル　トップ 資産の部
@@ -206,7 +206,7 @@ class PDFMakerBS {
         let footerHTMLstring = hTMLhelper.footerHTMLstring()
         htmlString.append(footerHTMLstring)
         
-        
+        print(htmlString)
         //HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
         //PDFデータを一時ディレクトリに保存する
@@ -232,6 +232,7 @@ class PDFMakerBS {
         renderer.setValue(paperFrame, forKey: "printableRect")
         
         let formatter = UIMarkupTextPrintFormatter(markupText: fromHTML)
+        formatter.perPageContentInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         renderer.addPrintFormatter(formatter, startingAtPageAt: 0)
         
         let pdfData = NSMutableData()
@@ -240,7 +241,7 @@ class PDFMakerBS {
         for pageI in 0..<renderer.numberOfPages {
             UIGraphicsBeginPDFPage()
             print(UIGraphicsGetPDFContextBounds())
-            renderer.drawPage(at: pageI, in:paperFrame)
+            renderer.drawPage(at: pageI, in: paperFrame)
         }
         UIGraphicsEndPDFContext()
         return pdfData

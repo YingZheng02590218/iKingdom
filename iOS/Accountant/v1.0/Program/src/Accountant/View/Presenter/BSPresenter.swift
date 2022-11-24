@@ -199,9 +199,34 @@ final class BSPresenter: BSPresenterInput {
     
     // 中区分の合計を取得
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
-        return model.getTotalRank1(big5: big5, rank1: rank1, lastYear: lastYear) // 中区分の合計を取得
-
+        if lastYear {
+            // 前年度
+            switch rank1 {
+            case 10: //株主資本
+                return bSData.lastCapitalStock_total
+            case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
+                return bSData.lastOtherCapitalSurpluses_total
+                //　case 12: //新株予約権
+                //　case 19: //非支配株主持分
+            default:
+                return ""
+            }
+        }
+        else {
+            // 今年度
+            switch rank1 {
+            case 10: //株主資本
+                return bSData.CapitalStock_total
+            case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
+                return bSData.OtherCapitalSurpluses_total
+                //　case 12: //新株予約権
+                //　case 19: //非支配株主持分
+            default:
+                return ""
+            }
+        }
     }
+    // 取得　階層0 大区分 前年度表示対応
     func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String {
         if lastYear {
             // 前年度
@@ -238,6 +263,7 @@ final class BSPresenter: BSPresenterInput {
             }
         }
     }
+    // 取得　五大区分　前年度表示対応
     func getTotalBig5(big5: Int, lastYear: Bool) -> String {
         if lastYear {
             switch big5 {

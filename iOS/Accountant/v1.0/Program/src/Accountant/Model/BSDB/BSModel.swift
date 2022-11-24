@@ -14,10 +14,6 @@ protocol BSModelInput {
     
     func initializeBS() -> BSData
     
-    func getTotalBig5(big5: Int, lastYear: Bool) -> String
-    func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String
-    func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String
-    
     func initializePDFMaker(bSData: BSData, completion: ([URL]?) -> Void)
 }
 // 貸借対照表クラス
@@ -196,7 +192,7 @@ class BSModel: BSModelInput {
                       lastCapitalStock_total: lastCapitalStock_total,
                       objects01210: objects01210,
                       OtherCapitalSurpluses_total: OtherCapitalSurpluses_total,
-                      lastOtherCapitalSurpluses_total: lastCapitalStock_total,
+                      lastOtherCapitalSurpluses_total: lastOtherCapitalSurpluses_total,
                       objects01211: objects01211,
                       objects01213: objects01213,
                       Equity_total: Equity_total,
@@ -328,8 +324,8 @@ class BSModel: BSModelInput {
             case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
                 objectss!.OtherCapitalSurpluses_total = TotalAmountOfRank1
                 break
-//            case 12: //新株予約権
-//            case 19: //非支配株主持分
+                //　case 12: //新株予約権
+                //　case 19: //非支配株主持分
             default:
                 print()
                 break
@@ -399,18 +395,17 @@ class BSModel: BSModelInput {
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
-//        let realm = try! Realm()
         let objectss = object.dataBaseFinancialStatements?.balanceSheet
         var result:Int64 = 0            // 累計額
         switch rank1 {
-            case 10: //株主資本
-                result = objectss!.CapitalStock_total
-                break
-            case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
-                result = objectss!.OtherCapitalSurpluses_total
-                break
-//            case 12: //新株予約権
-//            case 19: //非支配株主持分
+        case 10: //株主資本
+            result = objectss!.CapitalStock_total
+            break
+        case 11: //評価・換算差額等 /その他の包括利益累計額 評価・換算差額等のこと
+            result = objectss!.OtherCapitalSurpluses_total
+            break
+            // case 12: //新株予約権
+            // case 19: //非支配株主持分
         default:
             print(result)
             break
