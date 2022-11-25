@@ -206,7 +206,7 @@ class PDFMaker {
         renderer.setValue(paperFrame, forKey: "printableRect")
         
         let formatter = UIMarkupTextPrintFormatter(markupText: fromHTML)
-        formatter.perPageContentInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        formatter.perPageContentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         renderer.addPrintFormatter(formatter, startingAtPageAt: 0)
         
         let pdfData = NSMutableData()

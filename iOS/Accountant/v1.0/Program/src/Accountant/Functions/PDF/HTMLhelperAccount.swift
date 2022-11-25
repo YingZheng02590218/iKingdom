@@ -33,7 +33,7 @@ struct HTMLhelperAccount {
             .right {
                 margin-right: 5px;
                 margin-left: auto;
-                width: 50%;
+                width: 80%;
                 text-align: right; /*　rightを指定すると改ページされてしまう　*/
             }
         /*　色　*/
@@ -119,7 +119,7 @@ struct HTMLhelperAccount {
             }
         /*　サイズ　高さ　*/
             .rowHeight {
-                height: auto;/*  2.7237354086% 7mm　*/
+                height: 7mm;/*  2.7237354086% 7mm　*/
             }
 
         html {
@@ -130,20 +130,20 @@ struct HTMLhelperAccount {
             }
                 h2 {
                     width: 100%;
-                    height: 8.560311284%;/*   22mm　*/
+                height: 12mm;/*  8.560311284% 22mm　*/
                 }
                 table {
                     width: 100%;
-                    height: 91.439688716%;/*   235mm　*/
+                height: 235mm;/*  91.439688716% 235mm　*/
                 }
                     thead {
-                        height: 5.0583657588%;/*　13mm　*/
+                    height: 13mm;/*　5.0583657588% 13mm　*/
                     }
                     tbody {
-                        height: 84.4357976654%;/*　217mm　*/
+                    height: 217mm;/* 84.4357976654%　217mm　*/
                     }
                     tfoot {
-                        height: 10.5058365758%;/*　1.9455252918% 5mm　*/
+                    height: 5mm;/*　10.5058365758% 1.9455252918% 5mm　*/
                     }
         .page{
             width: 210mm;
@@ -159,7 +159,7 @@ struct HTMLhelperAccount {
         テーブルの横幅と高さを指定してある時でセルの横幅、高さを%で指定した場合、 それらの大きさはテーブル全体に対する割合の大きさになります。 */
 
         .richediter {
-      line-height: 1.4; }
+      line-height: 1.1; }
                .richediter ul, .richediter ol {
                 margin: 20px 10px; }
                 .richediter ul li, .richediter ol li {
@@ -258,7 +258,7 @@ struct HTMLhelperAccount {
             <section class="page">
                 <div class="richediter l-container">
 
-                <p class="text-right margin5">\(DateManager.shared.getDate())</p>
+                <p class="text-right">\(DateManager.shared.getDate())</p>
 
                 <h2 class="center">
                     <div class="center titleUnderLine line_double_gray_bottom">\(title)</div>
@@ -273,15 +273,15 @@ struct HTMLhelperAccount {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td colspan="8" class="fontsize95 line_single_gray_bottom" style="font-size: 18px; text-align: start; width: 10%;">No.　　　\(pageNumber)</td>
+                        <td colspan="8" class="fontsize95 line_single_gray_bottom" style="font-size: 17px; text-align: start; width: 10%;">No.　　　\(pageNumber)</td>
                     </tr>
                     <tr class="line_double_red_top line_single_red_bottom">
                       <td class="line_double_red_right line_double_red_top line_single_red_bottom date" colspan="2">
-                        <div class="center">
+                <div class="right">
                           <span class="fontsize95">\(fiscalYear)年</span>
                         </div>
-                        <div class="center">
-                          <p class="fontsize95 center">　月  　日</p>
+                <div class="right">
+                          <p class="fontsize95">月  　日</p>
                         </div>
                       </td>
                       <td class="smallWritting line_double_red_top line_single_red_bottom line_single_red_left line_double_red_right">
@@ -324,9 +324,7 @@ struct HTMLhelperAccount {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td colspan="8" class="fontsize60">©複式簿記の会計帳簿 Paciolist</td>
+                            <td colspan="3" class="fontsize80"><p class="right">©複式簿記の会計帳簿 Paciolist</p></td>
                         </tr>
                     </tfoot>
                   <tbody>
