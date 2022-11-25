@@ -62,107 +62,48 @@ class BSModel: BSModelInput {
         
         // MARK: - "    株主資本合計"
         let CapitalStock_total = self.getTotalRank1(big5: 2, rank1: 10, lastYear: false) // 中区分の合計を取得
-        var lastCapitalStock_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastCapitalStock_total = self.getTotalRank1(big5: 2, rank1: 10, lastYear: true)
-        }
-        else {
-            lastCapitalStock_total = "-"
-        }
+        let lastCapitalStock_total = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 2, rank1: 10, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    その他の包括利益累計額合計"
         let OtherCapitalSurpluses_total = self.getTotalRank1(big5: 2, rank1: 11, lastYear: false) // 中区分の合計を取得
-        var lastOtherCapitalSurpluses_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastOtherCapitalSurpluses_total = self.getTotalRank1(big5: 2, rank1: 11, lastYear: true)
-        }
-        else {
-            lastOtherCapitalSurpluses_total = "-"
-        }
-        
+        let lastOtherCapitalSurpluses_total = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 2, rank1: 11, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    流動資産合計"
         let CurrentAssets_total = self.getTotalRank0(big5: 0, rank0: 0, lastYear: false)
-        var lastCurrentAssets_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastCurrentAssets_total = self.getTotalRank0(big5: 0, rank0: 0, lastYear: true)
-        }
-        else {
-            lastCurrentAssets_total = "-"
-        }
+        let lastCurrentAssets_total = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    固定資産合計"
         let FixedAssets_total = self.getTotalRank0(big5: 0, rank0: 1, lastYear: false)
-        var lastFixedAssets_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastFixedAssets_total = self.getTotalRank0(big5: 0, rank0: 1, lastYear: true)
-        }
-        else {
-            lastFixedAssets_total = "-"
-        }
+        let lastFixedAssets_total = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    繰越資産合計"
         let DeferredAssets_total = self.getTotalRank0(big5: 0, rank0: 2, lastYear: false)
-        var lastDeferredAssets_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastDeferredAssets_total = self.getTotalRank0(big5: 0, rank0: 2, lastYear: true)
-        }
-        else {
-            lastDeferredAssets_total = "-"
-        }
+        let lastDeferredAssets_total = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    流動負債合計"
         let CurrentLiabilities_total = self.getTotalRank0(big5: 1, rank0: 3, lastYear: false)
-        var lastCurrentLiabilities_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastCurrentLiabilities_total = self.getTotalRank0(big5: 1, rank0: 3, lastYear: true)
-        }
-        else {
-            lastCurrentLiabilities_total = "-"
-        }
+        let lastCurrentLiabilities_total = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 1, rank0: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "    固定負債合計"
         let FixedLiabilities_total = self.getTotalRank0(big5: 1, rank0: 4, lastYear: false)
-        var lastFixedLiabilities_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastFixedLiabilities_total = self.getTotalRank0(big5: 1, rank0: 4, lastYear: true)
-        }
-        else {
-            lastFixedLiabilities_total = "-"
-        }
-        
+        let lastFixedLiabilities_total = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 1, rank0: 4, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "資産合計"
         let Asset_total = self.getTotalBig5(big5: 0, lastYear: false)
-        var lastAsset_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastAsset_total = self.getTotalBig5(big5: 0, lastYear: true)
-        }
-        else {
-            lastAsset_total = "-"
-        }
+        let lastAsset_total = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "負債合計"
         let Liability_total = self.getTotalBig5(big5: 1, lastYear: false)
-        var lastLiability_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastLiability_total = self.getTotalBig5(big5: 1, lastYear: true)
-        }
-        else {
-            lastLiability_total = "-"
-        }
+        let lastLiability_total = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "純資産合計"
         let Equity_total = self.getTotalBig5(big5: 2, lastYear: false)
-        var lastEquity_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastEquity_total = self.getTotalBig5(big5: 2, lastYear: true)
-        }
-        else {
-            lastEquity_total = "-"
-        }
+        let lastEquity_total = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "負債純資産合計"
         let Liability_and_Equity_total = self.getTotalBig5(big5: 3, lastYear: false)
-        var lastLiability_and_Equity_total = ""
-        if self.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-            lastLiability_and_Equity_total = self.getTotalBig5(big5: 3, lastYear: true)
-        }
-        else {
-            lastLiability_and_Equity_total = "-"
-        }
-        
+        let lastLiability_and_Equity_total = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+
         return BSData(company: company,
                       fiscalYear: fiscalYear,
                       theDayOfReckoning: theDayOfReckoning,
