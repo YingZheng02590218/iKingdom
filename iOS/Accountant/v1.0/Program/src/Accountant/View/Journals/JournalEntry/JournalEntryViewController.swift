@@ -134,7 +134,7 @@ class JournalEntryViewController: UIViewController {
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             }
             else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
-                label_title.text = "決算整理仕訳"
+//                label_title.text = "決算整理仕訳"
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
                     DispatchQueue.main.async {
