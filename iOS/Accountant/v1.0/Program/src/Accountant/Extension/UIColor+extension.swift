@@ -35,6 +35,10 @@ extension UIColor {
         return UIColor(named: "Background_dark")!
     }
 
+    class var CalculatorDisplay: UIColor {
+        return UIColor(named: "CalculatorDisplay")!
+    }
+
     static let theme = UIColor(named: "C1D2EB")
 
 }

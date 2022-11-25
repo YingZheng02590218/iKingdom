@@ -134,7 +134,7 @@ class JournalEntryViewController: UIViewController {
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             }
             else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
-                label_title.text = "決算整理仕訳"
+//                label_title.text = "決算整理仕訳"
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
                     DispatchQueue.main.async {
@@ -678,6 +678,9 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
+        // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
+        TextField_SmallWritting.tintColor = UIColor.black
+
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -810,12 +813,16 @@ class JournalEntryViewController: UIViewController {
         // 小書きを入力中は、画面を上げる
         if TextField_SmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+            // テキストフィールドの下辺
+            let txtLimit = TextField_SmallWritting.frame.origin.y + TextField_SmallWritting.frame.height + 8.0
+
             animateWithKeyboard(notification: notification) { keyboardFrame in
                 if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height - 150
-                } else {
-                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height
-                    self.view.frame.origin.y -= suggestionHeight - 150
+                    print(self.view.frame.origin.y)
+                    print(keyboardSize.height - txtLimit)
+                    print(keyboardSize.height)
+                    print(txtLimit)
+                    self.view.frame.origin.y -= keyboardSize.height - txtLimit
                 }
             }
         }
@@ -824,6 +831,7 @@ class JournalEntryViewController: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         animateWithKeyboard(notification: notification) { _ in
             if self.view.frame.origin.y != 0 {
+                print(self.view.frame.origin.y)
                 self.view.frame.origin.y = 0
             }
         }
@@ -1428,6 +1436,12 @@ extension JournalEntryViewController: UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        // フォーカス　効果　ドロップシャドウをかける
+        textField.layer.shadowOpacity = 1.4
+        textField.layer.shadowRadius = 4
+        textField.layer.shadowColor = UIColor.CalculatorDisplay.cgColor
+        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+
         // 借方金額　貸方金額
         if textField == TextField_amount_debit || textField == TextField_amount_credit {
             self.view.endEditing(true)
@@ -1504,6 +1518,9 @@ extension JournalEntryViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField:UITextField) {
 //        print(#function)
 //        print("キーボードを閉じた後")
+        // フォーカス　効果　フォーカスが外れたら色を消す
+        textField.layer.shadowColor = UIColor.clear.cgColor
+
         //Segueを場合分け
         if textField.tag == 111 {
             if TextField_category_debit.text == "" {
