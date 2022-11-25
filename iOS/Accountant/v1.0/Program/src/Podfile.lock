@@ -142,13 +142,13 @@ PODS:
 
 DEPENDENCIES:
   - EAIntroView
-  - Firebase/Core (~> 8.10)
+  - Firebase/Core
   - Firebase/Crashlytics
   - Firebase/Performance
   - Gecco
-  - Google-Mobile-Ads-SDK (~> 8.13.0)
+  - Google-Mobile-Ads-SDK (= 8.13.0)
   - GoogleAnalytics
-  - GoogleUtilities
+  - GoogleUtilities (= 7.7.0)
   - SwiftyStoreKit
 
 SPEC REPOS:
@@ -198,6 +198,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 97dc52d5a8d74373f20687a0d62307659aeab96c
+PODFILE CHECKSUM: 13faf3a0e95fbee3c3b2467e7c72bea2e64edd7a
 
 COCOAPODS: 1.11.2

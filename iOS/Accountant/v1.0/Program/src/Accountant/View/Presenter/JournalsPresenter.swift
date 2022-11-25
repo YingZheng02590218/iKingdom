@@ -21,12 +21,15 @@ protocol JournalsPresenterInput {
     var numberOfobjectsss: Int { get }
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
     
+    var PDFpath: [URL]? { get }
+
     func viewDidLoad()
     func viewWillAppear()
     func viewDidAppear()
     
     func refreshTable(isEditing: Bool)
     func cellLongPressed(indexPath: IndexPath)
+    func pdfBarButtonItemTapped()
     func deleteJournalEntry(number: Int) -> Bool
     func deleteAdjustingJournalEntry(number: Int) -> Bool
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int)
@@ -42,6 +45,7 @@ protocol JournalsPresenterOutput: AnyObject {
     func setupViewForViewDidAppear()
     func setupCellLongPressed(indexPath: IndexPath)
     func autoScroll(number: Int, tappedIndexPathSection: Int)
+    func showPreview()
 }
 
 final class JournalsPresenter: JournalsPresenterInput {
@@ -55,7 +59,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     private var objects:Results<DataBaseJournalEntry>
     // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
     private var objectsss:Results<DataBaseAdjustingEntry>
-        
+    // PDFのパス
+    var PDFpath: [URL]?
+
     private weak var view: JournalsPresenterOutput!
     private var model: JournalsModelInput
     
@@ -124,6 +130,15 @@ final class JournalsPresenter: JournalsPresenterInput {
     func cellLongPressed(indexPath: IndexPath) {
         
         view.setupCellLongPressed(indexPath: indexPath)
+    }
+    // 印刷機能
+    func pdfBarButtonItemTapped() {
+        // 初期化 PDFメーカー
+        model.initializePDFMaker(completion: { PDFpath in
+            
+            self.PDFpath = PDFpath
+            self.view.showPreview()
+        })
     }
 
     func autoScroll(number: Int, tappedIndexPathSection: Int) {

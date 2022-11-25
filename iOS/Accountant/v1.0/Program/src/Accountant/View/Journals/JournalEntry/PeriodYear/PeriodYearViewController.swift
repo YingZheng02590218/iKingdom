@@ -18,12 +18,6 @@ class PeriodYearViewController: UIViewController {
     @IBOutlet weak var doneButton: EMTNeumorphicButton!
     @IBOutlet weak var cancelButton: EMTNeumorphicButton!
     
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -46,19 +40,19 @@ class PeriodYearViewController: UIViewController {
         
         if let datePickerView = pickerViewView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = edged
-            datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            datePickerView.neumorphicLayer?.edged = Constant.edged
+            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
         
         if let datePickerView = pickerViewViewView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = edged
-            datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            datePickerView.neumorphicLayer?.edged = Constant.edged
+            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
         
@@ -67,10 +61,10 @@ class PeriodYearViewController: UIViewController {
         doneButton.neumorphicLayer?.cornerRadius = doneButton.frame.height / 2.2
         doneButton.contentVerticalAlignment = .fill
         doneButton.setTitleColor(.ButtonTextColor, for: .selected)
-        doneButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        doneButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        doneButton.neumorphicLayer?.edged = edged
-        doneButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        doneButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        doneButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        doneButton.neumorphicLayer?.edged = Constant.edged
+        doneButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         doneButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
 //        cancelButton.setTitle("Cancel", for: .normal)
@@ -78,10 +72,10 @@ class PeriodYearViewController: UIViewController {
         cancelButton.neumorphicLayer?.cornerRadius = cancelButton.frame.height / 2.2
         cancelButton.contentVerticalAlignment = .fill
         cancelButton.setTitleColor(.ButtonTextColor, for: .selected)
-        cancelButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        cancelButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        cancelButton.neumorphicLayer?.edged = edged
-        cancelButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        cancelButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        cancelButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        cancelButton.neumorphicLayer?.edged = Constant.edged
+        cancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
     }
     

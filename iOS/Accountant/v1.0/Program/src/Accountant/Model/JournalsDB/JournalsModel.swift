@@ -23,10 +23,16 @@ protocol JournalsModelInput {
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(primaryKey: Int, date: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, completion: (Int) -> Void)
     func updateAdjustingJournalEntry(primaryKey: Int, date: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, completion: (Int) -> Void)
+    
+    func initializePDFMaker(completion: ([URL]?) -> Void)
 }
 
 // 仕訳帳クラス
 class JournalsModel: DataBaseManager, JournalsModelInput {
+    
+    // 印刷機能
+    let pDFMaker = PDFMaker()
+    
     // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
     func initializeJournals(completion: (Bool) -> Void) {
         // 転記　仕訳から勘定への関連を付け直す
@@ -276,5 +282,12 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
                 print("Result is \(primaryKey)")
                 completion(primaryKey)
             })
+    }
+    // 初期化 PDFメーカー
+    func initializePDFMaker(completion: ([URL]?) -> Void) {
+
+        pDFMaker.initialize(completion: { PDFpath in
+            completion(PDFpath)
+        })
     }
 }

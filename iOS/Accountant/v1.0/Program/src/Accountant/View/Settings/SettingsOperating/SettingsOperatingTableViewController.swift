@@ -12,16 +12,7 @@ import GoogleMobileAds // マネタイズ対応
 // 操作設定クラス
 class SettingsOperatingTableViewController: UITableViewController {
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
+
     @IBOutlet var gADBannerView: GADBannerView!
 
     
@@ -42,12 +33,8 @@ class SettingsOperatingTableViewController: UITableViewController {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
+            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -65,26 +52,6 @@ class SettingsOperatingTableViewController: UITableViewController {
         self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool) {
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
