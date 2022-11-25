@@ -678,6 +678,9 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
+        // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
+        TextField_SmallWritting.tintColor = UIColor.black
+
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -1433,6 +1436,12 @@ extension JournalEntryViewController: UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        // フォーカス　効果　ドロップシャドウをかける
+        textField.layer.shadowOpacity = 1.4
+        textField.layer.shadowRadius = 4
+        textField.layer.shadowColor = UIColor.CalculatorDisplay.cgColor
+        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+
         // 借方金額　貸方金額
         if textField == TextField_amount_debit || textField == TextField_amount_credit {
             self.view.endEditing(true)
@@ -1509,6 +1518,9 @@ extension JournalEntryViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField:UITextField) {
 //        print(#function)
 //        print("キーボードを閉じた後")
+        // フォーカス　効果　フォーカスが外れたら色を消す
+        textField.layer.shadowColor = UIColor.clear.cgColor
+
         //Segueを場合分け
         if textField.tag == 111 {
             if TextField_category_debit.text == "" {
