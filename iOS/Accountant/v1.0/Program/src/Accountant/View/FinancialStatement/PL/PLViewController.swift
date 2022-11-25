@@ -128,8 +128,8 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 7:5大利益　8:小分類のタイトル　5:小分類の合計
-        return 7 + 8 + 5 +
+        // 5:五大利益(+2 非支配株主に帰属する当期純利益,親会社株主に帰属する当期純利益)　8:小分類のタイトル　5:小分類の合計
+        return 5 + 8 + 5 +
         presenter.numberOfmid_category10 +
         presenter.numberOfobjects9 +
         presenter.numberOfmid_category6 +
@@ -159,8 +159,8 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
         let zei =           3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 12 //税金等調整前当期純利益
         let zeikin =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 13 //法人税等8
         let touki =         3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 14 //当期純利益
-        let htouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 15 //非支配株主に帰属する当期純利益
-        let otouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 16 //親会社株主に帰属する当期純利益
+//        let htouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 15 //非支配株主に帰属する当期純利益
+//        let otouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 16 //親会社株主に帰属する当期純利益
 
         switch indexPath.row {
         case 0: //売上高10
@@ -587,32 +587,32 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
-        case htouki: //非支配株主に帰属する当期純利益
-            cell.textLabel?.text = "非支配株主に帰属する当期純利益"
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
-            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            }else {
-                cell.labelForPrevious.text = "-"
-            }
-            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
-            return cell
-        case otouki: //親会社株主に帰属する当期純利益
-            cell.textLabel?.text = "親会社株主に帰属する当期純利益"
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
-            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4) 
-            }else {
-                cell.labelForPrevious.text = "-"
-            }
-            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
-            return cell
+//        case htouki: //非支配株主に帰属する当期純利益
+//            cell.textLabel?.text = "非支配株主に帰属する当期純利益"
+//            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            //ラベルを置いて金額を表示する
+//            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+//            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+//                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            }else {
+//                cell.labelForPrevious.text = "-"
+//            }
+//            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
+//            return cell
+//        case otouki: //親会社株主に帰属する当期純利益
+//            cell.textLabel?.text = "親会社株主に帰属する当期純利益"
+//            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            //ラベルを置いて金額を表示する
+//            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+//            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+//                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            }else {
+//                cell.labelForPrevious.text = "-"
+//            }
+//            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
+//            return cell
         default:
             // 勘定科目
             if       indexPath.row > 3 &&                // 販売費及び一般管理費9
