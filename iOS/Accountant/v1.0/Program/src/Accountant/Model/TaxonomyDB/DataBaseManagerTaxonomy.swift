@@ -68,7 +68,7 @@ class DataBaseManagerTaxonomy {
             }
         }
         //カンマを追加して文字列に変換した値を返す
-        return setComma(amount: result)
+        return StringUtility.shared.setComma(amount: result)
     }
     /**
     * 表示科目　書込みメソッド
@@ -224,35 +224,6 @@ class DataBaseManagerTaxonomy {
             }
         }
         return PositiveOrNegative
-    }
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        // 三角形はマイナスの意味
-        if amount < 0 { //0の場合は、空白を表示する
-            let amauntFix = amount * -1
-            return "△ \(addComma(string: amauntFix.description))"
-        }else {
-            return addComma(string: amount.description)
-        }
-    }
-    //カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    func addComma(string :String) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
     }
     // 追加 表示科目　マイグレーション
     func addTaxonomyAll() {

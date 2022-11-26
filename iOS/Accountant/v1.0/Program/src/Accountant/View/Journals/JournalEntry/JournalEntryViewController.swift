@@ -15,16 +15,6 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/4964823000" // インタースティシャル
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/4411468910" // インタースティシャル
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     private var interstitial: GADInterstitialAd?
  
     // 初期化画面　ロゴ
@@ -58,15 +48,10 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet weak var TextField_amount_debit: UITextField!
     @IBOutlet weak var TextField_amount_credit: UITextField!
     @IBOutlet var textFieldView: EMTNeumorphicView!
-    let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
     // テキストフィールド　小書き
     @IBOutlet weak var TextField_SmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
-    // ニューモフィズム
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
+
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳or決算整理仕訳or編集)
@@ -110,8 +95,8 @@ class JournalEntryViewController: UIViewController {
         if isFromClassicCalcuatorViewController {
             // 金額　電卓画面で入力した値を表示させる
             if let numbersOnDisplay = numbersOnDisplay {
-                TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
-                TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+                TextField_amount_debit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
+                TextField_amount_credit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
                 // TextField 貸方金額　入力後
                 if TextField_amount_debit.text == "0"{
                     TextField_amount_debit.text = ""
@@ -149,7 +134,7 @@ class JournalEntryViewController: UIViewController {
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             }
             else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
-                label_title.text = "決算整理仕訳"
+//                label_title.text = "決算整理仕訳"
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
                     DispatchQueue.main.async {
@@ -182,8 +167,8 @@ class JournalEntryViewController: UIViewController {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         TextField_category_debit.text = dataBaseJournalEntry.debit_category
                         TextField_category_credit.text = dataBaseJournalEntry.credit_category
-                        TextField_amount_debit.text = addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        TextField_amount_credit.text = addComma(string: String(dataBaseJournalEntry.credit_amount))
+                        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
                         TextField_SmallWritting.text = dataBaseJournalEntry.smallWritting
                     }
                 }
@@ -194,8 +179,8 @@ class JournalEntryViewController: UIViewController {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         TextField_category_debit.text = dataBaseJournalEntry.debit_category
                         TextField_category_credit.text = dataBaseJournalEntry.credit_category
-                        TextField_amount_debit.text = addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        TextField_amount_credit.text = addComma(string: String(dataBaseJournalEntry.credit_amount))
+                        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
                         TextField_SmallWritting.text = dataBaseJournalEntry.smallWritting
                     }
                 }
@@ -553,10 +538,10 @@ class JournalEntryViewController: UIViewController {
 
         if let datePickerView = datePickerView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
-            datePickerView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            datePickerView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            datePickerView.neumorphicLayer?.edged = edged
-            datePickerView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            datePickerView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            datePickerView.neumorphicLayer?.edged = Constant.edged
+            datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         }
         
@@ -564,10 +549,10 @@ class JournalEntryViewController: UIViewController {
             Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
             Button_Left.neumorphicLayer?.cornerRadius = 10
             Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
-            Button_Left.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            Button_Left.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Left.neumorphicLayer?.edged = edged
-            Button_Left.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            Button_Left.neumorphicLayer?.edged = Constant.edged
+            Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
@@ -579,10 +564,10 @@ class JournalEntryViewController: UIViewController {
             Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
             Button_Right.neumorphicLayer?.cornerRadius = 10
             Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
-            Button_Right.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            Button_Right.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            Button_Right.neumorphicLayer?.edged = edged
-            Button_Right.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            Button_Right.neumorphicLayer?.edged = Constant.edged
+            Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
@@ -592,20 +577,20 @@ class JournalEntryViewController: UIViewController {
         
         if let textFieldView = textFieldView {
             textFieldView.neumorphicLayer?.cornerRadius = 15
-            textFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            textFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            textFieldView.neumorphicLayer?.edged = edged
-            textFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            textFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            textFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            textFieldView.neumorphicLayer?.edged = Constant.edged
+            textFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
         
         if let smallWrittingTextFieldView = smallWrittingTextFieldView {
             smallWrittingTextFieldView.neumorphicLayer?.cornerRadius = 15
-            smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            smallWrittingTextFieldView.neumorphicLayer?.edged = edged
-            smallWrittingTextFieldView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            smallWrittingTextFieldView.neumorphicLayer?.edged = Constant.edged
+            smallWrittingTextFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
@@ -614,19 +599,19 @@ class JournalEntryViewController: UIViewController {
         inputButton.setTitleColor(.ButtonTextColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
         inputButton.setTitleColor(.ButtonTextColor, for: .selected)
-        inputButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        inputButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        inputButton.neumorphicLayer?.edged = edged
-        inputButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        inputButton.neumorphicLayer?.edged = Constant.edged
+        inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
         
         Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
         Button_cancel.neumorphicLayer?.cornerRadius = 15
         Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
-        Button_cancel.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        Button_cancel.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        Button_cancel.neumorphicLayer?.edged = edged
-        Button_cancel.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        Button_cancel.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        Button_cancel.neumorphicLayer?.edged = Constant.edged
+        Button_cancel.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
         Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
@@ -688,15 +673,14 @@ class JournalEntryViewController: UIViewController {
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
     }
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
+        // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
+        TextField_SmallWritting.tintColor = UIColor.black
+
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -735,7 +719,7 @@ class JournalEntryViewController: UIViewController {
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: AdMobTest ? TEST_ID : AdMobID,
+            GADInterstitialAd.load(withAdUnitID: Constant.ADMOB_ID_INTERSTITIAL,
                                    request: request,
                                    completionHandler: { [self] ad, error in
                 if let error = error {
@@ -818,24 +802,7 @@ class JournalEntryViewController: UIViewController {
     @IBAction func TextField_category_debit(_ sender: UITextField) {}
     @IBAction func TextField_category_credit(_ sender: UITextField) {}
     @IBAction func TextField_SmallWritting(_ sender: UITextField) {}
-    
-    // MARK: NumberFormatter
-    //カンマ区切りに変換（表示用）
-    func addComma(string :String) -> String {
-        if (string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }
-        else {
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    func removeComma(string :String) -> String {
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
-    }
-    
+        
     // MARK: キーボード
     // TextFieldをタップしても呼ばれない
     @IBAction func TapGestureRecognizer(_ sender: Any) {// この前に　touchesBegan が呼ばれている
@@ -846,12 +813,16 @@ class JournalEntryViewController: UIViewController {
         // 小書きを入力中は、画面を上げる
         if TextField_SmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+            // テキストフィールドの下辺
+            let txtLimit = TextField_SmallWritting.frame.origin.y + TextField_SmallWritting.frame.height + 8.0
+
             animateWithKeyboard(notification: notification) { keyboardFrame in
                 if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height - 150
-                } else {
-                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height
-                    self.view.frame.origin.y -= suggestionHeight - 150
+                    print(self.view.frame.origin.y)
+                    print(keyboardSize.height - txtLimit)
+                    print(keyboardSize.height)
+                    print(txtLimit)
+                    self.view.frame.origin.y -= keyboardSize.height - txtLimit
                 }
             }
         }
@@ -860,6 +831,7 @@ class JournalEntryViewController: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         animateWithKeyboard(notification: notification) { _ in
             if self.view.frame.origin.y != 0 {
+                print(self.view.frame.origin.y)
                 self.view.frame.origin.y = 0
             }
         }
@@ -1050,11 +1022,11 @@ class JournalEntryViewController: UIViewController {
         }
         var textField_amount_debit: Int64? = nil
         if let _ = self.TextField_amount_debit.text {
-            textField_amount_debit = Int64(self.removeComma(string: self.TextField_amount_debit.text!))
+            textField_amount_debit = Int64(StringUtility.shared.removeComma(string: self.TextField_amount_debit.text!))
         }
         var textField_amount_credit: Int64? = nil
         if let _ = self.TextField_amount_credit.text {
-            textField_amount_credit = Int64(self.removeComma(string: self.TextField_amount_credit.text!))
+            textField_amount_credit = Int64(StringUtility.shared.removeComma(string: self.TextField_amount_credit.text!))
         }
         var textField_SmallWritting: String? = nil
         if let _ = self.TextField_SmallWritting.text {
@@ -1115,9 +1087,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addAdjustingJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         // 精算表画面から入力の場合
@@ -1156,9 +1128,9 @@ class JournalEntryViewController: UIViewController {
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                 credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1171,9 +1143,9 @@ class JournalEntryViewController: UIViewController {
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
                 credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1199,9 +1171,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
@@ -1226,9 +1198,9 @@ class JournalEntryViewController: UIViewController {
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
             credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
@@ -1420,9 +1392,9 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         TextField_category_debit.text = objects[indexPath.row].debit_category
-        TextField_amount_debit.text = addComma(string: String(objects[indexPath.row].debit_amount))
+        TextField_amount_debit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))
         TextField_category_credit.text = objects[indexPath.row].credit_category
-        TextField_amount_credit.text = addComma(string: String(objects[indexPath.row].credit_amount))
+        TextField_amount_credit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].credit_amount))
         TextField_SmallWritting.text = objects[indexPath.row].smallWritting
     }
     
@@ -1464,6 +1436,12 @@ extension JournalEntryViewController: UITextFieldDelegate {
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        // フォーカス　効果　ドロップシャドウをかける
+        textField.layer.shadowOpacity = 1.4
+        textField.layer.shadowRadius = 4
+        textField.layer.shadowColor = UIColor.CalculatorDisplay.cgColor
+        textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+
         // 借方金額　貸方金額
         if textField == TextField_amount_debit || textField == TextField_amount_credit {
             self.view.endEditing(true)
@@ -1540,6 +1518,9 @@ extension JournalEntryViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField:UITextField) {
 //        print(#function)
 //        print("キーボードを閉じた後")
+        // フォーカス　効果　フォーカスが外れたら色を消す
+        textField.layer.shadowColor = UIColor.clear.cgColor
+
         //Segueを場合分け
         if textField.tag == 111 {
             if TextField_category_debit.text == "" {
@@ -1577,7 +1558,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         if sender.text != "" {
             // カンマを追加する
             if sender == TextField_amount_debit || sender == TextField_amount_credit { // 借方金額仮　貸方金額
-                sender.text = "\(addComma(string: String(sender.text!)))"
+                sender.text = "\(StringUtility.shared.addComma(string: String(sender.text!)))"
             }
             print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }

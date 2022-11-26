@@ -16,22 +16,12 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     @IBOutlet var gADBannerView: GADBannerView!
     /// 仕訳帳　上部
     // まとめて編集機能
     @IBOutlet weak var button_edit: UIButton! // 選択した項目を編集ボタン
     @IBOutlet weak var barButtonItem_add: UIBarButtonItem!
-    @IBOutlet weak var barButtonItem_print: UIBarButtonItem!
+    @IBOutlet weak var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var label_company_name: UILabel!
     @IBOutlet weak var label_title: UILabel!
     @IBOutlet weak var label_closingDate: UILabel!
@@ -41,9 +31,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
-    let DARKSHADOWOPACITY: Float = 0.5
+//    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
-    let edged = false
+//    let edged = false
 
     fileprivate let refreshControl = UIRefreshControl()
     // まとめて編集機能
@@ -61,8 +51,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scroll_adding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
-    // 印刷機能
-    let pDFMaker = PDFMaker()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
@@ -125,13 +113,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         if presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 { // 仕訳が1件以上ある場合
             // ボタンを活性にする
             if !tableView.isEditing { // 編集モードではない場合
-                barButtonItem_print.isEnabled = true
+                pdfBarButtonItem.isEnabled = true
             }
             navigationItem.leftBarButtonItem?.isEnabled = true
         }
         else { // 仕訳が0件の場合
             // ボタンを不活性にする
-            barButtonItem_print.isEnabled = false // 印刷ボタン
+            pdfBarButtonItem.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
         }
     }
@@ -141,8 +129,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
@@ -164,26 +152,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         tableView.addGestureRecognizer(longPressRecognizer)
     }
     
-    private func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
     // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         //タブの無効化
@@ -207,22 +175,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                     tabBarItem.isEnabled = true
                 }
             }
-        }
-    }
-    //カンマ区切りに変換（表示用）
-    private let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
-    private func initializeJournals() {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-    }
-    
-    private func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
         }
     }
 
@@ -393,26 +345,9 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
      * 印刷ボタン押下時メソッド
      * 仕訳帳画面　Extend Edges: Under Top Bar, Under Bottom Bar のチェックを外すと,仕訳データの行が崩れてしまう。
      */
-    @IBAction func button_print(_ sender: UIBarButtonItem) {
-        // 初期化
-        pDFMaker.initialize()
+    @IBAction func pdfBarButtonItemTapped(_ sender: UIBarButtonItem) {
         
-        let previewController = QLPreviewController()
-        previewController.dataSource = self
-        present(previewController, animated: true, completion: nil)
-        
-//        // TODO: 動作確認用
-//        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
-//        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
-//        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
-//        if let navigator = self.navigationController {
-//            navigator.pushViewController(viewController, animated: true)
-//        }
-//        else{
-//            let navigation = UINavigationController(rootViewController:viewController)
-//            self.present(navigation, animated: true, completion: nil)
-//        }
+        presenter.pdfBarButtonItemTapped()
     }
     
     func updateFiscalYear(fiscalYear: Int) {
@@ -517,23 +452,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                 // 一行上のセルに表示した月とこの行の月を比較する
                 let upperCellMonth = "\(presenter.objects(forRow:indexPath.row - 1).date)" // 日付
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
-                else {
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
+                // 日付の6文字目にある月の十の位を抽出
+                cell.label_list_date_month.text = StringUtility.shared.pickupMonth(d: d, upperCellMonth: upperCellMonth)
             }
             else { // 先頭行は月を表示
                 let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
@@ -544,13 +464,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
                 }
             }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(presenter.objects(forRow:indexPath.row).date.suffix(1))" // 末尾1文字の「日」         //日付
-            }
-            else {
-                cell.label_list_date.text = "\(presenter.objects(forRow:indexPath.row).date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
+            // 日付の9文字目にある日の十の位を抽出
+            cell.label_list_date.text = StringUtility.shared.pickupDay(d: d)
             cell.label_list_date.textAlignment = NSTextAlignment.right
 /// 借方勘定
             cell.label_list_summary_debit.text = " (\(presenter.objects(forRow:indexPath.row).debit_category))"
@@ -579,32 +494,11 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(presenter.objects(forRow:indexPath.row).credit_category)")    // 丁数を取得
                 cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             }
-            cell.label_list_debit.text = "\(addComma(string: String(presenter.objects(forRow:indexPath.row).debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(presenter.objects(forRow:indexPath.row).credit_amount))) "      //貸方金額
+            cell.label_list_debit.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow:indexPath.row).debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow:indexPath.row).credit_amount))) "      //貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-            if DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date) {
-                cell.label_list_summary_debit.textColor = .TextColor
-                cell.label_list_summary_credit.textColor = .TextColor
-                cell.label_list_summary.textColor = .TextColor
-                cell.label_list_date_month.textColor = .TextColor
-                cell.label_list_date.textColor = .TextColor
-                cell.label_list_number_left.textColor = .TextColor
-                cell.label_list_number_right.textColor = .TextColor
-                cell.label_list_debit.textColor = .TextColor
-                cell.label_list_credit.textColor = .TextColor
-            }
-            else {
-                cell.label_list_summary_debit.textColor = .red
-                cell.label_list_summary_credit.textColor = .red
-                cell.label_list_summary.textColor = .red
-                cell.label_list_date_month.textColor = .red
-                cell.label_list_date.textColor = .red
-                cell.label_list_number_left.textColor = .red
-                cell.label_list_number_right.textColor = .red
-                cell.label_list_debit.textColor = .red
-                cell.label_list_credit.textColor = .red
-            }
+            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
         }
@@ -618,23 +512,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                 // 一行上のセルに表示した月とこの行の月を比較する
                 let upperCellMonth = "\(presenter.objectsss(forRow:indexPath.row - 1).date)" // 日付
-                let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 6)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
-                else{
-                    if upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)] != "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" {
-                        cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
-                    }
-                    else {
-                        cell.label_list_date_month.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
-                }
+                // 日付の6文字目にある月の十の位を抽出
+                cell.label_list_date_month.text = StringUtility.shared.pickupMonth(d: d, upperCellMonth: upperCellMonth)
             }
             else { // 先頭行は月を表示
                 let dateMonth = d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
@@ -645,13 +524,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.label_list_date_month.text = "\(d[d.index(d.startIndex, offsetBy: 5)..<d.index(d.startIndex, offsetBy: 7)])" // 「月」
                 }
             }
-            let date = d[d.index(d.startIndex, offsetBy: 8)..<d.index(d.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.label_list_date.text = "\(presenter.objectsss(forRow:indexPath.row).date.suffix(1))" // 末尾1文字の「日」         //日付
-            }
-            else {
-                cell.label_list_date.text = "\(presenter.objectsss(forRow:indexPath.row).date.suffix(2))" // 末尾2文字の「日」         //日付
-            }
+            // 日付の9文字目にある日の十の位を抽出
+            cell.label_list_date.text = StringUtility.shared.pickupDay(d: d)
             cell.label_list_date.textAlignment = NSTextAlignment.right
 /// 借方勘定
             cell.label_list_summary_debit.text = " (\(presenter.objectsss(forRow:indexPath.row).debit_category))"
@@ -680,47 +554,19 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 let numberOfAccount_right = dataBaseManager.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow:indexPath.row).credit_category)")    // 丁数を取得
                 cell.label_list_number_right.text = numberOfAccount_right.description                                   // 丁数　貸方
             }
-            cell.label_list_debit.text = "\(addComma(string: String(presenter.objectsss(forRow:indexPath.row).debit_amount))) "        //借方金額
-            cell.label_list_credit.text = "\(addComma(string: String(presenter.objectsss(forRow:indexPath.row).credit_amount))) "      //貸方金額
+            cell.label_list_debit.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow:indexPath.row).debit_amount))) "        //借方金額
+            cell.label_list_credit.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow:indexPath.row).credit_amount))) "      //貸方金額
 
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-            if DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date) {
-                cell.label_list_summary_debit.textColor = .TextColor
-                cell.label_list_summary_credit.textColor = .TextColor
-                cell.label_list_summary.textColor = .TextColor
-                cell.label_list_date_month.textColor = .TextColor
-                cell.label_list_date.textColor = .TextColor
-                cell.label_list_number_left.textColor = .TextColor
-                cell.label_list_number_right.textColor = .TextColor
-                cell.label_list_debit.textColor = .TextColor
-                cell.label_list_credit.textColor = .TextColor
-            }
-            else {
-                cell.label_list_summary_debit.textColor = .red
-                cell.label_list_summary_credit.textColor = .red
-                cell.label_list_summary.textColor = .red
-                cell.label_list_date_month.textColor = .red
-                cell.label_list_date.textColor = .red
-                cell.label_list_number_left.textColor = .red
-                cell.label_list_number_right.textColor = .red
-                cell.label_list_debit.textColor = .red
-                cell.label_list_credit.textColor = .red
-            }
+            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
             // セルの選択を許可
             cell.selectionStyle = .default
         }
         else {
 // 空白行
             print("空白行", indexPath)
-            cell.label_list_date_month.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
-            cell.label_list_date.text = ""     // 末尾2文字の「日」         //日付
-            cell.label_list_summary_debit.text = ""     //借方勘定
-            cell.label_list_summary_credit.text = ""   //貸方勘定
-            cell.label_list_summary.text = ""      //小書き
-            cell.label_list_number_left.text = ""       // 丁数
-            cell.label_list_number_right.text = ""
-            cell.label_list_debit.text = ""        //借方金額 注意：空白を代入しないと、変な値が入る。
-            cell.label_list_credit.text = ""       //貸方金額
+            
+            cell.prepareForReuse()
             // セルの選択不可にする
             cell.selectionStyle = .none
         }
@@ -882,7 +728,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         button_edit.isHidden = !editing
         button_edit.isEnabled = false // まとめて編集ボタン
         button_edit.tintColor = editing ? .AccentBlue : UIColor.clear // 色
-        barButtonItem_print.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
+        pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         barButtonItem_add.isEnabled = !editing // 仕訳入力ボタン
         // 編集中の場合
         if editing {
@@ -978,9 +824,8 @@ extension JournalsViewController: JournalsPresenterOutput {
         createButtons() // ボタン作成
         setRefreshControl()
         setLongPressRecognizer()
-        initializeJournals()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
-//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(barButtonItem_print))
+//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(pdfBarButtonItem))
 //        //ナビゲーションに定義したボタンを置く
 //        self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "仕訳帳"
@@ -1023,12 +868,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -1094,6 +934,13 @@ extension JournalsViewController: JournalsPresenterOutput {
         // 下へスクロールする
         scrollToBottom()
     }
+    
+    // PDFのプレビューを表示させる
+    func showPreview() {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+    }
 }
 
 /*
@@ -1104,7 +951,7 @@ extension JournalsViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = pDFMaker.PDFpath {
+        if let PDFpath = presenter.PDFpath {
             return PDFpath.count
         }
         else {
@@ -1114,7 +961,7 @@ extension JournalsViewController: QLPreviewControllerDataSource {
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+        guard let pdfFilePath = presenter.PDFpath?[index] else {
             return "" as! QLPreviewItem
         }
         return pdfFilePath as QLPreviewItem

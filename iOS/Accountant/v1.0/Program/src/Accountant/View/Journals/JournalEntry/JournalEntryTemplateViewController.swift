@@ -62,8 +62,8 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         
         // 金額　電卓画面で入力した値を表示させる
         if let numbersOnDisplay = numbersOnDisplay {
-            TextField_amount_debit.text = addComma(string: numbersOnDisplay.description)
-            TextField_amount_credit.text = addComma(string: numbersOnDisplay.description)
+            TextField_amount_debit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
+            TextField_amount_credit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
         }
         
     }
@@ -73,6 +73,8 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     func createTextFieldForNickname() {
         nicknameTextField.delegate = self
         nicknameTextField.textAlignment = .center
+        // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
+        nicknameTextField.tintColor = UIColor.black
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -117,11 +119,11 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         if journalEntryType == "SettingsJournalEntries" {
             var textField_amount_debit = ""
             if let _ = TextField_amount_debit.text {
-                textField_amount_debit = removeComma(string: TextField_amount_debit.text!)
+                textField_amount_debit = StringUtility.shared.removeComma(string: TextField_amount_debit.text!)
             }
             var textField_amount_credit = ""
             if let _ = TextField_amount_credit.text {
-                textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
+                textField_amount_credit = StringUtility.shared.removeComma(string: TextField_amount_credit.text!)
             }
             // データベース　よく使う仕訳を追加
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
@@ -150,11 +152,11 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }else if journalEntryType == "SettingsJournalEntriesFixing" {
             var textField_amount_debit = ""
             if let _ = TextField_amount_debit.text {
-                textField_amount_debit = removeComma(string: TextField_amount_debit.text!)
+                textField_amount_debit = StringUtility.shared.removeComma(string: TextField_amount_debit.text!)
             }
             var textField_amount_credit = ""
             if let _ = TextField_amount_credit.text {
-                textField_amount_credit = removeComma(string: TextField_amount_credit.text!)
+                textField_amount_credit = StringUtility.shared.removeComma(string: TextField_amount_credit.text!)
             }
             // データベース　よく使う仕訳を更新
             let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
@@ -233,10 +235,10 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             deleteButton.setTitleColor(.ButtonTextColor, for: .normal)
             deleteButton.neumorphicLayer?.cornerRadius = 15
             deleteButton.setTitleColor(.ButtonTextColor, for: .selected)
-            deleteButton.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            deleteButton.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            deleteButton.neumorphicLayer?.edged = edged
-            deleteButton.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+            deleteButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            deleteButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            deleteButton.neumorphicLayer?.edged = Constant.edged
+            deleteButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
             // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
             deleteButton.neumorphicLayer?.elementColor = UIColor.Background.cgColor

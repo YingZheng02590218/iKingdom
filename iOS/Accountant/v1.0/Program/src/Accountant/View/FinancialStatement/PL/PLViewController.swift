@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuickLook
 import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 
@@ -15,16 +16,6 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
 
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     @IBOutlet var gADBannerView: GADBannerView!
     /// 損益計算書　上部
     @IBOutlet weak var label_company_name: UILabel!
@@ -37,14 +28,12 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
-    
-    let DARKSHADOWOPACITY: Float = 0.5
+//    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
-    let edged = false
+//    let edged = false
 
     fileprivate let refreshControl = UIRefreshControl()
     
-    var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     /// GUIアーキテクチャ　MVP
     private var presenter: PLPresenterInput!
     func inject(presenter: PLPresenterInput) {
@@ -52,8 +41,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Life cycle
-    // TODO: Model へ移動
-    let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy() // Use of undeclared type ''が発生した。2020/07/24
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,8 +82,8 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
@@ -107,27 +95,6 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
     }
     
-    private func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
-    
     // MARK: - Action
 
     @objc func refreshTable() {
@@ -135,167 +102,13 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         presenter.refreshTable()
     }
 
-    var printing: Bool = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     /**
      * 印刷ボタン押下時メソッド
      */
-    @IBAction func button_print(_ sender: UIButton) {
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        printing = true
-        // 常にライトモード（明るい外観）を指定することでダークモード適用を回避
-        tableView.overrideUserInterfaceStyle = .light
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
-            }
-        }
-//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        // 第三の方法
-        //余計なUIをキャプチャしないように隠す
-        tableView.showsVerticalScrollIndicator = false
-        while self.tableView.indexPathForSelectedRow?.count ?? 0 > 0 {
-            if let tappedIndexPath: IndexPath = self.tableView.indexPathForSelectedRow { // タップされたセルの位置を取得
-                tableView.deselectRow(at: tappedIndexPath, animated: true)// セルの選択を解除
-            }
-        }
-//            pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-        pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)//実際印刷用紙サイズ937x1452ピクセル
-        //viewと同じサイズのコンテキスト（オフスクリーンバッファ）を作成
-//        var rect = self.view.bounds
-        //p-41 「ビットマップグラフィックスコンテキストを使って新しい画像を生成」
-        //1. UIGraphicsBeginImageContextWithOptions関数でビットマップコンテキストを生成し、グラフィックススタックにプッシュします。
-        UIGraphicsBeginImageContextWithOptions(pageSize, true, 0.0)
-            //2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
-//        imageRect.draw(in: CGRect(origin: .zero, size: pageSize))
-            //3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        //p-43 リスト 3-1 縮小画像をビットマップコンテキストに描画し、その結果の画像を取得する
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        let newImage = self.tableView.captureImagee()
-        //4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
-        UIGraphicsEndImageContext()
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false)
-        //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
-        printing = false
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            gADBannerView.isHidden = false
-        }
-        /*
-        ビットマップグラフィックスコンテキストでの描画全体にCore Graphicsを使用する場合は、
-         CGBitmapContextCreate関数を使用して、コンテキストを作成し、
-         それに画像コンテンツを描画します。
-         描画が完了したら、CGBitmapContextCreateImage関数を使用し、そのビットマップコンテキストからCGImageRefを作成します。
-         Core Graphicsの画像を直接描画したり、この画像を使用して UIImageオブジェクトを初期化することができます。
-         完了したら、グラフィックスコンテキストに対 してCGContextRelease関数を呼び出します。
-        */
-        let myImageView = UIImageView(image: newImage)
-        myImageView.layer.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY)
-        
-//PDF
-        //p-49 リスト 4-2 ページ単位のコンテンツの描画
-            let framePath = NSMutableData()
-        //p-45 「PDFコンテキストの作成と設定」
-            // PDFグラフィックスコンテキストは、UIGraphicsBeginPDFContextToData関数、
-            //  または UIGraphicsBeginPDFContextToFile関数のいずれかを使用して作成します。
-            //  UIGraphicsBeginPDFContextToData関数の場合、
-            //  保存先はこの関数に渡される NSMutableDataオブジェクトです。
-            UIGraphicsBeginPDFContextToData(framePath, myImageView.bounds, nil)
-        print(" myImageView.bounds : \(myImageView.bounds)")
-        //p-46 「UIGraphicsBeginPDFPage関数は、デフォルトのサイズを使用してページを作成します。」
-//                UIGraphicsBeginPDFPage()
-//            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:0, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
+    @objc private func pdfBarButtonItemTapped() {
 
-         /* PDFページの描画
-           UIGraphicsBeginPDFPageは、デフォルトのサイズを使用して新しいページを作成します。一方、
-           UIGraphicsBeginPDFPageWithInfo関数を利用す ると、ページサイズや、PDFページのその他の属性をカスタマイズできます。
-        */
-        //p-49 「リスト 4-2 ページ単位のコンテンツの描画」
-            // グラフィックスコンテキストを取得する
-        // ビューイメージを全て印刷できるページ数を用意する
-        var pageCounts: CGFloat = 0
-        while myImageView.bounds.height > (myImageView.bounds.width*1.414516129) * pageCounts {
-            //            if myImageView.bounds.height > (myImageView.bounds.width*1.414516129)*2 {
-            UIGraphicsBeginPDFPageWithInfo(CGRect(x:0, y:-(myImageView.bounds.width*1.414516129)*pageCounts, width:myImageView.bounds.width, height:myImageView.bounds.width*1.414516129), nil) //高さはA4コピー用紙と同じ比率にするために、幅×1.414516129とする
-            // グラフィックスコンテキストを取得する
-            guard let currentContext = UIGraphicsGetCurrentContext() else { return }
-            myImageView.layer.render(in: currentContext)
-            // ページを増加
-            pageCounts += 1
-        }
-        //描画が終了したら、UIGraphicsEndPDFContextを呼び出して、PDFグラフィックスコンテキストを閉じます。
-            UIGraphicsEndPDFContext()
-            
-//ここからプリントです
-        //p-63 リスト 5-1 ページ範囲の選択が可能な単一のPDFドキュメント
-        let pic = UIPrintInteractionController.shared
-        if UIPrintInteractionController.canPrint(framePath as Data) {
-            //pic.delegate = self;
-            pic.delegate = self
-            
-            let printInfo = UIPrintInfo.printInfo()
-            printInfo.outputType = .general
-            printInfo.jobName = "Profit And Loss Statement"
-            printInfo.duplex = .none
-            pic.printInfo = printInfo
-            //'showsPageRange' was deprecated in iOS 10.0: Pages can be removed from the print preview, so page range is always shown.
-            pic.printingItem = framePath
-    
-            let completionHandler: (UIPrintInteractionController, Bool, NSError) -> Void = { (pic: UIPrintInteractionController, completed: Bool, error: Error?) in
-                
-                if !completed && (error != nil) {
-                    print("FAILED! due to error in domain %@ with error code %u \(String(describing: error))")
-                }
-            }
-            //p-79 印刷インタラクションコントローラを使って印刷オプションを提示
-            //UIPrintInteractionControllerには、ユーザに印刷オプションを表示するために次の3つのメソッ ドが宣言されており、それぞれアニメーションが付属しています。
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                //これらのうちの2つは、iPadデバイス上で呼び出されることを想定しています。
-                //・presentFromBarButtonItem:animated:completionHandler:は、ナビゲーションバーまたは ツールバーのボタン(通常は印刷ボタン)からアニメーションでPopover Viewを表示します。
-//                print("通過・printButton.frame -> \(button_print.frame)")
-//                print("通過・printButton.bounds -> \(button_print.bounds)")
-                //UIBarButtonItemの場合
-                //pic.present(from: printUIButton, animated: true, completionHandler: nil)
-                //・presentFromRect:inView:animated:completionHandler:は、アプリケーションのビューの任意の矩形からアニメーションでPopover Viewを表示します。
-                pic.present(from: CGRect(x: 0, y: 0, width: 0, height: 0), in: self.view, animated: true, completionHandler: nil)
-                print("iPadです")
-            } else {
-                //モーダル表示
-                //・presentAnimated:completionHandler:は、画面の下端からスライドアップするページをアニ メーション化します。これはiPhoneおよびiPod touchデバイス上で呼び出されることを想定しています。
-                pic.present(animated: true, completionHandler: completionHandler as? UIPrintInteractionController.CompletionHandler)
-                print("iPhoneです")
-            }
-        }
-        //余計なUIをキャプチャしないように隠したのを戻す
-        tableView.showsVerticalScrollIndicator = true
-        // ダークモード回避を解除
-        tableView.overrideUserInterfaceStyle = .unspecified
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.bottom, animated: false) //ビットマップコンテキストに描画後、画面上のTableViewを先頭にスクロールする
+        presenter.pdfBarButtonItemTapped()
     }
-    
-    // MARK: - UIImageWriteToSavedPhotosAlbum
-    
-    @objc func didFinishWriteImage(_ image: UIImage, error: NSError?, contextInfo: UnsafeMutableRawPointer) {
-        if let error = error {
-        print("Image write error: \(error)")
-        }
-    }
-
-    func printInteractionController ( _ printInteractionController: UIPrintInteractionController, choosePaper paperList: [UIPrintPaper]) -> UIPrintPaper {
-        print("printInteractionController")
-        for i in 0..<paperList.count {
-            let paper: UIPrintPaper = paperList[i]
-        print(" paperListのビクセル is \(paper.paperSize.width) \(paper.paperSize.height)")
-        }
-        //ピクセル
-        print(" pageSizeピクセル    -> \(pageSize)")
-        let bestPaper = UIPrintPaper.bestPaper(forPageSize: pageSize, withPapersFrom: paperList)
-        //mmで用紙サイズと印刷可能範囲を表示
-        print(" paperSizeミリ      -> \(bestPaper.paperSize.width / 72.0 * 25.4), \(bestPaper.paperSize.height / 72.0 * 25.4)")
-        print(" bestPaper         -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4), \(bestPaper.printableRect.origin.y / 72.0 * 25.4), \(bestPaper.printableRect.size.width / 72.0 * 25.4), \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
-        return bestPaper
-    }
-
 }
 
 extension PLViewController: UITableViewDelegate, UITableViewDataSource {
@@ -315,8 +128,8 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 7:5大利益　8:小分類のタイトル　5:小分類の合計
-        return 7 + 8 + 5 +
+        // 5:五大利益(+2 非支配株主に帰属する当期純利益,親会社株主に帰属する当期純利益)　8:小分類のタイトル　5:小分類の合計
+        return 5 + 8 + 5 +
         presenter.numberOfmid_category10 +
         presenter.numberOfobjects9 +
         presenter.numberOfmid_category6 +
@@ -346,8 +159,8 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
         let zei =           3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 12 //税金等調整前当期純利益
         let zeikin =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 13 //法人税等8
         let touki =         3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 14 //当期純利益
-        let htouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 15 //非支配株主に帰属する当期純利益
-        let otouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 16 //親会社株主に帰属する当期純利益
+//        let htouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 15 //非支配株主に帰属する当期純利益
+//        let otouki =        3 + presenter.numberOfobjects9 + presenter.numberOfmid_category10 + presenter.numberOfmid_category6 + presenter.numberOfmid_category11 + presenter.numberOfmid_category7 + 16 //親会社株主に帰属する当期純利益
 
         switch indexPath.row {
         case 0: //売上高10
@@ -774,32 +587,32 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
             cell.labelForPrevious.attributedText = attributeTextt
             cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
             return cell
-        case htouki: //非支配株主に帰属する当期純利益
-            cell.textLabel?.text = "非支配株主に帰属する当期純利益"
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
-            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            }else {
-                cell.labelForPrevious.text = "-"
-            }
-            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
-            return cell
-        case otouki: //親会社株主に帰属する当期純利益
-            cell.textLabel?.text = "親会社株主に帰属する当期純利益"
-            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-            //ラベルを置いて金額を表示する
-            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
-            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
-            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4) 
-            }else {
-                cell.labelForPrevious.text = "-"
-            }
-            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
-            return cell
+//        case htouki: //非支配株主に帰属する当期純利益
+//            cell.textLabel?.text = "非支配株主に帰属する当期純利益"
+//            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            //ラベルを置いて金額を表示する
+//            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+//            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+//                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            }else {
+//                cell.labelForPrevious.text = "-"
+//            }
+//            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
+//            return cell
+//        case otouki: //親会社株主に帰属する当期純利益
+//            cell.textLabel?.text = "親会社株主に帰属する当期純利益"
+//            cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+//            //ラベルを置いて金額を表示する
+//            cell.labelForThisYear.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            cell.labelForThisYear.font = UIFont.boldSystemFont(ofSize: 14)
+//            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+//                cell.labelForPrevious.text = "0"// TODO: presenter.getBenefitTotal(benefit: 4)
+//            }else {
+//                cell.labelForPrevious.text = "-"
+//            }
+//            cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
+//            return cell
         default:
             // 勘定科目
             if       indexPath.row > 3 &&                // 販売費及び一般管理費9
@@ -807,10 +620,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    "+presenter.objects9(forRow:indexPath.row - (3+1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow:indexPath.row - (3+1)).number, lastYear: false) // BSAndPL_category を number に変更する 2020/09/17
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow:indexPath.row - (3+1)).number, lastYear: false) // BSAndPL_category を number に変更する 2020/09/17
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow:indexPath.row - (3+1)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow:indexPath.row - (3+1)).number, lastYear: true)
                 }else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -821,10 +634,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    "+presenter.mid_category10(forRow:indexPath.row - (eigai + 1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category10(forRow:indexPath.row - (eigai + 1)).number, lastYear: false) //収益:4
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category10(forRow:indexPath.row - (eigai + 1)).number, lastYear: false) //収益:4
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category10(forRow:indexPath.row - (eigai + 1)).number, lastYear: true) //収益:4
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category10(forRow:indexPath.row - (eigai + 1)).number, lastYear: true) //収益:4
                 }else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -835,10 +648,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    "+presenter.mid_category6(forRow:indexPath.row - (eigaih + 1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category6(forRow:indexPath.row - (eigaih + 1)).number, lastYear: false)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category6(forRow:indexPath.row - (eigaih + 1)).number, lastYear: false)
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category6(forRow:indexPath.row - (eigaih + 1)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category6(forRow:indexPath.row - (eigaih + 1)).number, lastYear: true)
                 }else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -849,10 +662,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    "+presenter.mid_category11(forRow:indexPath.row - (toku + 1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category11(forRow:indexPath.row - (toku+1)).number, lastYear: false) //収益:4
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category11(forRow:indexPath.row - (toku+1)).number, lastYear: false) //収益:4
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category11(forRow:indexPath.row - (toku+1)).number, lastYear: true) //収益:4
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category11(forRow:indexPath.row - (toku+1)).number, lastYear: true) //収益:4
                 }else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -863,10 +676,10 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    "+presenter.mid_category7(forRow:indexPath.row - (tokus + 1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 //ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category7(forRow:indexPath.row - (tokus+1)).number, lastYear: false)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category7(forRow:indexPath.row - (tokus+1)).number, lastYear: false)
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = dataBaseManagerTaxonomy.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category7(forRow:indexPath.row - (tokus+1)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.mid_category7(forRow:indexPath.row - (tokus+1)).number, lastYear: true)
                 }else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -897,31 +710,27 @@ extension PLViewController: PLPresenterOutput {
         createButtons() // ボタン作成
         setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
-//        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
-//        //ナビゲーションに定義したボタンを置く
-//        self.navigationItem.rightBarButtonItem = printoutButton
+        let printoutButton = UIBarButtonItem(title: "PDF", style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
+        //ナビゲーションに定義したボタンを置く
+        self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "損益計算書"
     }
     
     func setupViewForViewWillAppear() {
-        if let company = presenter.company {
-            // 月末、年度末などの決算日をラベルに表示する
-            label_company_name.text = company // 社名
+        // 月末、年度末などの決算日をラベルに表示する
+        label_company_name.text = presenter.company() // 社名
+
+        let theDayOfReckoning = presenter.theDayOfReckoning()
+        let fiscalYear = presenter.fiscalYear()
+        if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
+            label_closingDate.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
+            label_closingDate_previous.text = "前年度\n(" + String(fiscalYear-1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
+            label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する
         }
-        
-        if let theDayOfReckoning = presenter.theDayOfReckoning {
-            if let fiscalYear = presenter.fiscalYear {
-                if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
-                    label_closingDate.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
-                    label_closingDate_previous.text = "前年度\n(" + String(fiscalYear-1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
-                    label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する
-                }
-                else {
-                    label_closingDate.text = String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
-                    label_closingDate_previous.text = "前年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
-                    label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する
-                }
-            }
+        else {
+            label_closingDate.text = String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
+            label_closingDate_previous.text = "前年度\n(" + String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 前年度　決算日を表示する
+            label_closingDate_thisYear.text = "今年度\n(" + String(fiscalYear+1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日)" // 今年度　決算日を表示する
         }
         label_title.text = "損益計算書"
         label_title.font = UIFont.boldSystemFont(ofSize: 21)
@@ -935,12 +744,8 @@ extension PLViewController: PLPresenterOutput {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
+            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -967,4 +772,35 @@ extension PLViewController: PLPresenterOutput {
             view.bringSubviewToFront(gADBannerView)
         }
     }
+    // PDFのプレビューを表示させる
+    func showPreview() {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+    }
 }
+
+/*
+  `QLPreviewController` にPDFデータを提供する
+  */
+
+ extension PLViewController: QLPreviewControllerDataSource {
+     
+     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+         
+         if let PDFpath = presenter.PDFpath {
+             return PDFpath.count
+         }
+         else {
+             return 0
+         }
+     }
+
+     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+         
+         guard let pdfFilePath = presenter.PDFpath?[index] else {
+             return "" as! QLPreviewItem
+         }
+         return pdfFilePath as QLPreviewItem
+     }
+ }

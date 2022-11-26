@@ -16,16 +16,6 @@ class GenearlLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
 
-    // マネタイズ対応
-    // 広告ユニットID
-    let AdMobID = "ca-app-pub-7616440336243237/8565070944"
-    // テスト用広告ユニットID
-    let TEST_ID = "ca-app-pub-3940256099942544/2934735716"
-    #if DEBUG
-    let AdMobTest:Bool = true    // true:テスト
-    #else
-    let AdMobTest:Bool = false
-    #endif
     @IBOutlet var gADBannerView: GADBannerView!
     /// 勘定　上部
     @IBOutlet weak var label_date_year: UILabel!
@@ -37,9 +27,9 @@ class GenearlLedgerAccountViewController: UIViewController {
     @IBOutlet var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
-    let DARKSHADOWOPACITY: Float = 0.5
+//    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
-    let edged = false
+//    let edged = false
     
     // 勘定名
     var account :String = ""
@@ -93,34 +83,14 @@ class GenearlLedgerAccountViewController: UIViewController {
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-            backgroundView.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-            backgroundView.neumorphicLayer?.edged = edged
+            backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
-    
-    func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: constant),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
+
     //カンマ区切りに変換（表示用）
     let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
     func addComma(string :String) -> String {
@@ -426,12 +396,7 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            if AdMobTest {
-                gADBannerView.adUnitID = TEST_ID
-            }
-            else{
-                gADBannerView.adUnitID = AdMobID
-            }
+            gADBannerView.adUnitID = Constant.ADMOB_ID
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())

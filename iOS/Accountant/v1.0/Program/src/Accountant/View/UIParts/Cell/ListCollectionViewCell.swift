@@ -42,11 +42,6 @@ class ListCollectionViewCell: UICollectionViewCell {
         backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 1 : 0
     }
     
-    let LIGHTSHADOWOPACITY: Float = 0.3
-    let DARKSHADOWOPACITY: Float = 0.5
-    let ELEMENTDEPTH: CGFloat = 6
-    let edged = false
-    
     // ビューのデザインを指定する
     private func createViewDesign() {
         backgroundViewForNeumorphism.neumorphicLayer?.borderColor = UIColor.gray.cgColor
@@ -54,10 +49,10 @@ class ListCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.cornerRadius = 10
         
         backgroundViewForNeumorphism.neumorphicLayer?.cornerRadius = 10
-        backgroundViewForNeumorphism.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
-        backgroundViewForNeumorphism.neumorphicLayer?.darkShadowOpacity = DARKSHADOWOPACITY
-        backgroundViewForNeumorphism.neumorphicLayer?.edged = edged
-        backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = ELEMENTDEPTH
+        backgroundViewForNeumorphism.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        backgroundViewForNeumorphism.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        backgroundViewForNeumorphism.neumorphicLayer?.edged = Constant.edged
+        backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
     }
     

@@ -834,7 +834,7 @@
                             <barButtonItem title="PDF" id="i4W-ZZ-FXk">
                                 <color key="tintColor" name="AccentBlue"/>
                                 <connections>
-                                    <action selector="button_print:" destination="Y6W-OH-hqX" id="WjU-Dg-tl6"/>
+                                    <action selector="pdfBarButtonItemTapped:" destination="Y6W-OH-hqX" id="t5g-6i-XbI"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -843,11 +843,11 @@
                         <outlet property="Label_list_date_year" destination="uc9-bY-flm" id="bfs-5c-RHb"/>
                         <outlet property="backgroundView" destination="iWJ-SB-FwY" id="V9x-28-Ync"/>
                         <outlet property="barButtonItem_add" destination="uJC-kS-QV3" id="ZB0-Rc-Gyf"/>
-                        <outlet property="barButtonItem_print" destination="i4W-ZZ-FXk" id="Lar-Wc-LrD"/>
                         <outlet property="button_edit" destination="Haf-gE-g6w" id="Rbb-dU-Oll"/>
                         <outlet property="label_closingDate" destination="O7L-5s-hJI" id="zKE-dF-zr8"/>
                         <outlet property="label_company_name" destination="eWE-1V-x9k" id="OVf-0F-YBd"/>
                         <outlet property="label_title" destination="aIP-xT-tcO" id="xpB-EK-qaq"/>
+                        <outlet property="pdfBarButtonItem" destination="i4W-ZZ-FXk" id="Lar-Wc-LrD"/>
                         <outlet property="tableView" destination="V3Q-kP-pLv" id="M8i-gW-k4T"/>
                     </connections>
                 </viewController>

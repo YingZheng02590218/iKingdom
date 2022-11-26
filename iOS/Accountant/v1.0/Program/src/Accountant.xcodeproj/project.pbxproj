@@ -132,8 +132,28 @@
 		F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6686C266247C7008E9137 /* UIColor+extension.swift */; };
 		F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */; };
 		F9A69B6F258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */; };
+		F9AC55192927ACDA003966E4 /* BSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC55182927ACDA003966E4 /* BSData.swift */; };
+		F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC55182927ACDA003966E4 /* BSData.swift */; };
+		F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC551B292B9E38003966E4 /* Accounting.swift */; };
+		F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC551B292B9E38003966E4 /* Accounting.swift */; };
+		F9AC551F292CA1D1003966E4 /* PLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC551E292CA1D1003966E4 /* PLData.swift */; };
+		F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC551E292CA1D1003966E4 /* PLData.swift */; };
+		F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */; };
+		F9AC5523292CC8B4003966E4 /* PDFMakerPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */; };
+		F9AC5525292CCC16003966E4 /* HTMLhelperPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */; };
+		F9AC5526292CCC16003966E4 /* HTMLhelperPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */; };
 		F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */; };
 		F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
+		F9AD64DA2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
+		F9AD64DB2912961900B9F50B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64D92912961900B9F50B /* Constant.swift */; };
+		F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */; };
+		F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */; };
+		F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */; };
+		F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */; };
+		F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
+		F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
+		F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
+		F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
 		F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
 		F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
 		F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */; };
@@ -532,8 +552,18 @@
 		F9A6686C266247C7008E9137 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9A69B6C258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewCell.swift; sourceTree = "<group>"; };
 		F9A69B6E258A65E1008E38B9 /* SettingsTheDayOfReckoningTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheDayOfReckoningTableViewController.swift; sourceTree = "<group>"; };
+		F9AC55182927ACDA003966E4 /* BSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSData.swift; sourceTree = "<group>"; };
+		F9AC551B292B9E38003966E4 /* Accounting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounting.swift; sourceTree = "<group>"; };
+		F9AC551E292CA1D1003966E4 /* PLData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLData.swift; sourceTree = "<group>"; };
+		F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerPL.swift; sourceTree = "<group>"; };
+		F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperPL.swift; sourceTree = "<group>"; };
 		F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselCollectionViewCell.xib; sourceTree = "<group>"; };
+		F9AD64D92912961900B9F50B /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerBS.swift; sourceTree = "<group>"; };
+		F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperBS.swift; sourceTree = "<group>"; };
+		F9AD64E22912B66B00B9F50B /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
+		F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
 		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
 		F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPresenter.swift; sourceTree = "<group>"; };
@@ -796,6 +826,7 @@
 			isa = PBXGroup;
 			children = (
 				F976798C24A8904B007A0D73 /* PLModel.swift */,
+				F9AC551E292CA1D1003966E4 /* PLData.swift */,
 				F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */,
 			);
 			path = PLDB;
@@ -851,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				F94EDD92237AEB3A0074D812 /* AppDelegate.swift */,
+				F9AD64D92912961900B9F50B /* Constant.swift */,
 				F9B209E6279D034500F7EA8D /* Model */,
 				F9B209EA279D0AF700F7EA8D /* View */,
 				F9B209EB279D38A900F7EA8D /* Presenter */,
@@ -936,8 +968,12 @@
 			children = (
 				F9CD5899266B963600F27E80 /* HTMLhelper.swift */,
 				F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */,
+				F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */,
+				F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
+				F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */,
+				F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */,
 			);
 			path = PDF;
 			sourceTree = "<group>";
@@ -1059,6 +1095,7 @@
 				F9860FBC285B388E008D0714 /* Upgrade */,
 				F9578BDF2859BFB7001C5D74 /* PDF */,
 				F919603524AC6FC40084A18B /* PrintOut */,
+				F9AC551B292B9E38003966E4 /* Accounting.swift */,
 			);
 			path = Functions;
 			sourceTree = "<group>";
@@ -1106,6 +1143,7 @@
 			isa = PBXGroup;
 			children = (
 				F99112E32495290000E28BB9 /* BSModel.swift */,
+				F9AC55182927ACDA003966E4 /* BSData.swift */,
 				F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */,
 			);
 			path = BSDB;
@@ -1187,6 +1225,7 @@
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
 				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
+				F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1335,6 +1374,7 @@
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
+				F9AD64E22912B66B00B9F50B /* StringUtility.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1890,6 +1930,8 @@
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
+				F9AC5525292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
 				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
@@ -1915,12 +1957,14 @@
 				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
+				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
 				F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9F934EC248554DA00BF7AA7 /* SettingsPeriodTableViewController.swift in Sources */,
+				F9AD64DA2912961900B9F50B /* Constant.swift in Sources */,
 				F9BDCBB427A80FA400BD8770 /* TBPresenter.swift in Sources */,
 				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9354DB224989895007DB098 /* TBModel.swift in Sources */,
@@ -1931,6 +1975,7 @@
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
 				F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */,
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
@@ -1955,6 +2000,7 @@
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
+				F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
 				F9354DB424989BAA007DB098 /* DataBaseTrialBalance.swift in Sources */,
@@ -1963,10 +2009,12 @@
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
 				F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
+				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -1976,6 +2024,7 @@
 				F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
+				F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */,
 				F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */,
 				F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */,
@@ -1984,6 +2033,7 @@
 				F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
+				F9AC551F292CA1D1003966E4 /* PLData.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
@@ -2032,6 +2082,8 @@
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,
+				F9AC5526292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9EC669327B90BC60003FBB6 /* SettingsTableViewCell.swift in Sources */,
 				F9EC669427B90BC60003FBB6 /* ClassicCalculatorViewController.swift in Sources */,
 				F9EC669527B90BC60003FBB6 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
@@ -2057,12 +2109,14 @@
 				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
+				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,
 				F9EC66AD27B90BC60003FBB6 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66AE27B90BC60003FBB6 /* SettingsPeriodTableViewController.swift in Sources */,
+				F9AD64DB2912961900B9F50B /* Constant.swift in Sources */,
 				F9EC66AF27B90BC60003FBB6 /* TBPresenter.swift in Sources */,
 				F9EC66B027B90BC60003FBB6 /* DocumentBrowserViewController.swift in Sources */,
 				F9EC66B127B90BC60003FBB6 /* TBModel.swift in Sources */,
@@ -2073,6 +2127,7 @@
 				F9EC66B627B90BC60003FBB6 /* AnnotationViewController.swift in Sources */,
 				F9EC66B727B90BC60003FBB6 /* PageContentViewController.swift in Sources */,
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
@@ -2097,6 +2152,7 @@
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
+				F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9EC66D127B90BC60003FBB6 /* SettingsHelpDetailViewController.swift in Sources */,
 				F9EC66D227B90BC60003FBB6 /* MasterData.swift in Sources */,
 				F9EC66D327B90BC60003FBB6 /* DataBaseTrialBalance.swift in Sources */,
@@ -2105,10 +2161,12 @@
 				F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */,
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
 				F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
+				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2118,6 +2176,7 @@
 				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */,
+				F9AC5523292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9EC66E527B90BC60003FBB6 /* DataBaseAccount.swift in Sources */,
 				F9EC66E627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.swift in Sources */,
 				F9EC66E727B90BC60003FBB6 /* FinancialStatementTableViewController.swift in Sources */,
@@ -2126,6 +2185,7 @@
 				F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
+				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
@@ -2327,7 +2387,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.2.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2343,7 +2403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2359,9 +2419,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.2.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2377,11 +2437,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvisioningProfileAccountant;
+				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Provisioning Profile Distribution";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2393,9 +2453,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.2.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2411,11 +2471,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Provisioning Profile Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2427,9 +2487,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.1.2;
+				CURRENT_PROJECT_VERSION = 2.2.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2445,11 +2505,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = ProvisioningProfileAccountant;
+				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Provisioning Profile Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

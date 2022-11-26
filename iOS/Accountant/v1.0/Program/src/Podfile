@@ -3,11 +3,11 @@
 
   def common_pods
     # Pods for All
-    pod 'Google-Mobile-Ads-SDK', '~> 8.13.0'
+    pod 'Google-Mobile-Ads-SDK', '8.13.0'
     pod 'GoogleAnalytics'
-    pod 'GoogleUtilities'
+    pod 'GoogleUtilities', '7.7.0'
 #    pod 'Firebase/AdMob'
-    pod 'Firebase/Core', ' ~> 8.10'
+    pod 'Firebase/Core'
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
     pod 'SwiftyStoreKit'

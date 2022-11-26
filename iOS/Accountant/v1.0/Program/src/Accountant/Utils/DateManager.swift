@@ -13,6 +13,20 @@ class DateManager {
     
     public static let shared = DateManager()
     private init() {
+        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy/MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatter.timeZone = .current
+
+        dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatteryyyyMMddHHmmss.timeZone = .current
+
+        dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatterHHmmss.timeZone = .current
+
+        dateFormatteryyyyMMdd.dateFormat = "yyyy-MM-dd"
+        dateFormatteryyyyMMdd.timeZone = .current
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
     }
     
     let now :Date = Date() // UTC時間なので　9時間ずれる
@@ -20,19 +34,10 @@ class DateManager {
     let dateFormatteryyyyMMddHHmmss = DateFormatter() // 年-月-日 時分秒
     let dateFormatterHHmmss = DateFormatter() // 時分秒
     let dateFormatteryyyyMMdd = DateFormatter() // 年-月-日
+    let formatter = DateFormatter() // 年/月/日 時:分
     
     // 年度変更機能 引数の日付が、会計期間の範囲内に入っているかどうかを判定する
     func isInPeriod(date: String) -> Bool {
-        
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy/MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        dateFormatter.timeZone = .current
-        dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        dateFormatteryyyyMMddHHmmss.timeZone = .current
-        dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        dateFormatterHHmmss.timeZone = .current
-        dateFormatteryyyyMMdd.dateFormat = "yyyy-MM-dd"
-        dateFormatteryyyyMMdd.timeZone = .current
-        
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false) // 年度
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()                  // 決算日
         var fiscalYearFixed = 0 // 補正値
@@ -64,5 +69,9 @@ class DateManager {
             return true // 範囲内
         }
     }
-    
+
+    func getDate() -> String {
+
+        return formatter.string(from: Date())
+    }
 }

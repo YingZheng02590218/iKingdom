@@ -17,9 +17,6 @@ protocol WSModelInput {
     func getTotalAmount(account: String, leftOrRight: Int) -> String
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> String
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> String
-    
-    func setComma(amount: Int64) -> String
-    func setCommaWith0(amount: Int64) -> String
 }
 // 精算表クラス
 class WSModel: WSModelInput {
@@ -33,17 +30,17 @@ class WSModel: WSModelInput {
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> String { // TODO: 戻り値をカンマ追加後のStringに変換してから返す
         let databaseManager = TBModel()
-        return setComma(amount:databaseManager.getTotalAmount(account: account, leftOrRight: leftOrRight))
+        return StringUtility.shared.setCommaForTB(amount:databaseManager.getTotalAmount(account: account, leftOrRight: leftOrRight))
     }
     // 取得　決算整理仕訳　勘定クラス　合計、残高　勘定別の決算整理仕訳の合計額
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> String {
         let databaseManager = TBModel()
-        return setComma(amount:databaseManager.getTotalAmountAdjusting(account: account, leftOrRight: leftOrRight))
+        return StringUtility.shared.setCommaForTB(amount:databaseManager.getTotalAmountAdjusting(account: account, leftOrRight: leftOrRight))
     }
     // 取得　決算整理後　勘定クラス　合計、残高　勘定別の決算整理後の合計額
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> String {
         let databaseManager = TBModel()
-        return setComma(amount:databaseManager.getTotalAmountAfterAdjusting(account: account, leftOrRight: leftOrRight))
+        return StringUtility.shared.setCommaForTB(amount:databaseManager.getTotalAmountAfterAdjusting(account: account, leftOrRight: leftOrRight))
     }
     
     // 精算表　計算　合計、残高の合計値　修正記入、損益計算書、貸借対照表
@@ -170,41 +167,5 @@ class WSModel: WSModelInput {
                 }
             }
         }
-    }
-    
-    private let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
-            return ""
-        }else {
-            return addComma(string: amount.description)
-        }
-    }
-    // コンマを追加
-    func setCommaWith0(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        return addComma(string: amount.description)
-    }
-    //カンマ区切りに変換（表示用）
-    private func addComma(string :String) -> String{
-        if(string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }else{
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    private func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
     }
 }

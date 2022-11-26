@@ -16,9 +16,8 @@ protocol TBModelInput {
     func setAllAccountTotal()
     
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64
-    
-    func setComma(amount: Int64) -> String
 }
+
 // 合計残高試算表クラス
 class TBModel: TBModelInput {
     
@@ -606,35 +605,4 @@ class TBModel: TBModelInput {
         }
         return result
     }
-    
-    private let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-    // コンマを追加
-    func setComma(amount: Int64) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        if addComma(string: amount.description) == "0" { //0の場合は、空白を表示する
-            return ""
-        }
-        else {
-            return addComma(string: amount.description)
-        }
-    }
-    //カンマ区切りに変換（表示用）
-    private func addComma(string :String) -> String{
-        if (string != "") { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        }
-        else {
-            return ""
-        }
-    }
-    //カンマ区切りを削除（計算用）
-    private func removeComma(string :String) -> String{
-        let string = string.replacingOccurrences(of: ",", with: "")
-        return string
-    }
-    
 }

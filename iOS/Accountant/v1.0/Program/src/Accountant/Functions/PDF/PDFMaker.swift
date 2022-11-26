@@ -16,10 +16,11 @@ class PDFMaker {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelper()
-    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // A4 210×297mm
+    let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm
     var fiscalYear = 0
     
-    func initialize() {
+    
+    func initialize(completion: ([URL]?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
@@ -54,10 +55,12 @@ class PDFMaker {
             print(error)
         }
         
-        readDB()
+        let url = readDB()
+        completion(url)
     }
     
-    func readDB() {
+    // PDFファイルを生成
+    func readDB() -> [URL]? {
         
         let dataBaseManager = JournalsModel()
         let dataBaseJournalEntries = dataBaseManager.getJournalEntriesInJournals()
@@ -176,12 +179,19 @@ class PDFMaker {
         // フッターを取得する
         let footerString = hTMLhelper.footerHTMLstring()
         htmlString.append(footerString)
+
+        print(htmlString)
         //HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
         //PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             //PDFファイルを表示する
             self.PDFpath?.append(fileName)
+            
+            return self.PDFpath
+        }
+        else {
+            return nil
         }
     }
     
@@ -196,6 +206,7 @@ class PDFMaker {
         renderer.setValue(paperFrame, forKey: "printableRect")
         
         let formatter = UIMarkupTextPrintFormatter(markupText: fromHTML)
+        formatter.perPageContentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         renderer.addPrintFormatter(formatter, startingAtPageAt: 0)
         
         let pdfData = NSMutableData()
