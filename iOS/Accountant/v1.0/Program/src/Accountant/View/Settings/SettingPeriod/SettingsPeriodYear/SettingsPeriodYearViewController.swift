@@ -27,11 +27,7 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     }
     
     override func viewWillAppear(_ animated: Bool){
-        if let _ = self.navigationController {
-            // ナビゲーションを透明にする処理
-            self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.navigationController!.navigationBar.shadowImage = UIImage()
-        }
+
     }
 
 //UIPickerView

@@ -65,10 +65,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         }
         // セットアップ AdMob
         setupAdMob()
-
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {

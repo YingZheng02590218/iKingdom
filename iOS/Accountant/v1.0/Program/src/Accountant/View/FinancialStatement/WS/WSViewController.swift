@@ -75,7 +75,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }

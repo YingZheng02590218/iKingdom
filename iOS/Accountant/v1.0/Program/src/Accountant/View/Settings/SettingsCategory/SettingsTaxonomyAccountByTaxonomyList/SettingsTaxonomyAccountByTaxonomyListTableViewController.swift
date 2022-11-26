@@ -52,11 +52,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

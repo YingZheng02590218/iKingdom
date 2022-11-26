@@ -57,7 +57,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <color key="backgroundColor" name="Background"/>
+            <color key="backgroundColor" name="BaseColor"/>
             <connections>
                 <outlet property="labelForPrevious" destination="Nci-4A-7sE" id="OTM-yl-JY3"/>
                 <outlet property="labelForThisYear" destination="x3e-zr-vW4" id="aLa-7f-wYY"/>
@@ -66,8 +66,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

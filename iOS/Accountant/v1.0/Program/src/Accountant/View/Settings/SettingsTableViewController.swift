@@ -157,6 +157,7 @@ class SettingsTableViewController: UITableViewController {
                 if cell.accessoryView == nil {
                     let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     // 生体認証パスコードロック　設定スイッチ
+                    switchView.onTintColor = .AccentLight
                     switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                     switchView.tag = indexPath.row
                     switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)

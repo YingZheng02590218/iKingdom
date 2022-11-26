@@ -232,16 +232,16 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     private func createButtons() {
         
         if let deleteButton = deleteButton {
-            deleteButton.setTitleColor(.ButtonTextColor, for: .normal)
+            deleteButton.setTitleColor(.TextColor, for: .normal)
             deleteButton.neumorphicLayer?.cornerRadius = 15
-            deleteButton.setTitleColor(.ButtonTextColor, for: .selected)
+            deleteButton.setTitleColor(.TextColor, for: .selected)
             deleteButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             deleteButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             deleteButton.neumorphicLayer?.edged = Constant.edged
             deleteButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
             // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
-            deleteButton.neumorphicLayer?.elementColor = UIColor.Background.cgColor
+            deleteButton.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
             let backImage = UIImage(named: "icons8-削除-25")?.withRenderingMode(.alwaysTemplate)
             deleteButton.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する

@@ -327,14 +327,14 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     
     // ボタンのデザインを指定する
     private func createButtons() {
-        Button_input.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_input.setTitleColor(.TextColor, for: .normal)
         Button_input.neumorphicLayer?.cornerRadius = 15
-        Button_input.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_input.setTitleColor(.TextColor, for: .selected)
         Button_input.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_input.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_input.neumorphicLayer?.edged = Constant.edged
         Button_input.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
     }
     
     // TextField作成

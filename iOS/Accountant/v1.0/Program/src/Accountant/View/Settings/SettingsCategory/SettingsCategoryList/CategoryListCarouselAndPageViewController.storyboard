@@ -22,7 +22,7 @@
                                 <subviews>
                                     <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oNy-pg-jSr">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                        <color key="backgroundColor" name="Background"/>
+                                        <color key="backgroundColor" name="BaseColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YYT-l1-rxd">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -52,7 +52,7 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gpG-pZ-w4x"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="gpG-pZ-w4x" firstAttribute="trailing" secondItem="aH1-ua-LeE" secondAttribute="trailing" id="72U-tL-DUH"/>
                             <constraint firstItem="aH1-ua-LeE" firstAttribute="width" secondItem="gpG-pZ-w4x" secondAttribute="width" id="9JB-ux-qXs"/>
@@ -118,8 +118,8 @@
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

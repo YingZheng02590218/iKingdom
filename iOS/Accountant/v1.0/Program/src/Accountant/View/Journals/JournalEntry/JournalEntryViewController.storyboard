@@ -109,7 +109,7 @@
                                                                 <locale key="locale" localeIdentifier="ja"/>
                                                             </datePicker>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Background"/>
+                                                        <color key="backgroundColor" name="BaseColor"/>
                                                         <constraints>
                                                             <constraint firstItem="Kpa-dQ-eBA" firstAttribute="top" secondItem="wcr-5P-JyB" secondAttribute="top" constant="5" id="AYG-WJ-zNm"/>
                                                             <constraint firstItem="Kpa-dQ-eBA" firstAttribute="height" secondItem="wcr-5P-JyB" secondAttribute="height" constant="-10" id="Kck-VG-QOm"/>
@@ -155,7 +155,7 @@
                                             </stackView>
                                             <button hidden="YES" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Lm-v1-UzE">
                                                 <rect key="frame" x="0.0" y="0.0" width="428" height="160"/>
-                                                <color key="backgroundColor" name="Background"/>
+                                                <color key="backgroundColor" name="BaseColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="maskDatePickerButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="pej-Kz-spZ"/>
@@ -225,7 +225,7 @@
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="203" height="52.666666666666664"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -235,7 +235,7 @@
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="205" y="0.0" width="203" height="52.666666666666664"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -264,7 +264,7 @@
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-8K-hRw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="203" height="52.333333333333336"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -273,7 +273,7 @@
                                                             </textField>
                                                             <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8YU-bl-bba">
                                                                 <rect key="frame" x="205" y="0.0" width="203" height="52.333333333333336"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -342,7 +342,7 @@
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
                                                         <rect key="frame" x="0.0" y="44" width="408" height="66"/>
-                                                        <color key="backgroundColor" name="TextFieldColor"/>
+                                                        <color key="backgroundColor" name="MainColor2"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
@@ -409,7 +409,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" tag="444" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="89" y="0.0" width="37" height="83.666666666666671"/>
+                                                                <rect key="frame" x="102" y="0.0" width="204" height="83.666666666666671"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="入力">
@@ -425,7 +425,7 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oY8-qm-N3q">
-                                                                <rect key="frame" x="131" y="0.0" width="277" height="83.666666666666671"/>
+                                                                <rect key="frame" x="324" y="0.0" width="84" height="83.666666666666671"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="oY8-qm-N3q" secondAttribute="height" multiplier="1:1" id="9vE-jO-61X"/>
@@ -526,7 +526,7 @@
                                         <size key="shadowOffset" width="0.0" height="3"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="Background"/>
+                                <color key="backgroundColor" name="BaseColor"/>
                                 <constraints>
                                     <constraint firstItem="ulo-NQ-K88" firstAttribute="leading" secondItem="msi-yI-bfw" secondAttribute="leading" id="8FK-JS-G9w"/>
                                     <constraint firstItem="ulo-NQ-K88" firstAttribute="centerX" secondItem="msi-yI-bfw" secondAttribute="centerX" id="FJa-Mu-S9B"/>
@@ -536,7 +536,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qiy-ix-sdg"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" id="44Z-PX-lTp"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="height" secondItem="qiy-ix-sdg" secondAttribute="height" id="4wc-Jw-atD"/>
@@ -683,17 +683,17 @@
         <image name="icons8-削除-25-2" width="25" height="25"/>
         <image name="icons8-戻る-25" width="25" height="25"/>
         <image name="icons8-進む-25" width="25" height="25"/>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="MainColor2">
+            <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TextFieldColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

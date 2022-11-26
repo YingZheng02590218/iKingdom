@@ -41,7 +41,7 @@
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EiD-9U-YW2"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="EPc-dy-tx4" firstAttribute="bottom" secondItem="EiD-9U-YW2" secondAttribute="bottom" id="2Vp-wY-qKt"/>
                             <constraint firstItem="EiD-9U-YW2" firstAttribute="trailing" secondItem="EPc-dy-tx4" secondAttribute="trailing" id="FC0-Ry-yfx"/>
@@ -78,8 +78,8 @@
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

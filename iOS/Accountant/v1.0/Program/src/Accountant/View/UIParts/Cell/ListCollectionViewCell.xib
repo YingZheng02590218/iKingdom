@@ -111,7 +111,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="BhF-dX-pXM" secondAttribute="bottom" id="13W-e3-s3X"/>
                             <constraint firstAttribute="trailing" secondItem="BhF-dX-pXM" secondAttribute="trailing" id="ZKk-nG-Aba"/>
@@ -122,7 +122,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="mu5-kb-Wdz"/>
-            <color key="backgroundColor" name="Background"/>
+            <color key="backgroundColor" name="BaseColor"/>
             <constraints>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-10" id="4Mj-Ka-wMh"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" constant="-10" id="HLt-cs-uZL"/>
@@ -149,8 +149,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

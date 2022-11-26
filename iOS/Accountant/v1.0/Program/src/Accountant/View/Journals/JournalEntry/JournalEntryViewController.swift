@@ -542,18 +542,18 @@ class JournalEntryViewController: UIViewController {
             datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             datePickerView.neumorphicLayer?.edged = Constant.edged
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         }
         
         if let Button_Left = Button_Left {
-            Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Left.setTitleColor(.TextColor, for: .normal)
             Button_Left.neumorphicLayer?.cornerRadius = 10
-            Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Left.setTitleColor(.TextColor, for: .selected)
             Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Left.neumorphicLayer?.edged = Constant.edged
             Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
@@ -561,14 +561,14 @@ class JournalEntryViewController: UIViewController {
         }
         
         if let Button_Right = Button_Right {
-            Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Right.setTitleColor(.TextColor, for: .normal)
             Button_Right.neumorphicLayer?.cornerRadius = 10
-            Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Right.setTitleColor(.TextColor, for: .selected)
             Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Right.neumorphicLayer?.edged = Constant.edged
             Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
@@ -581,7 +581,7 @@ class JournalEntryViewController: UIViewController {
             textFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             textFieldView.neumorphicLayer?.edged = Constant.edged
             textFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
         
@@ -591,30 +591,30 @@ class JournalEntryViewController: UIViewController {
             smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             smallWrittingTextFieldView.neumorphicLayer?.edged = Constant.edged
             smallWrittingTextFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
         
 //        inputButton.setTitle("入力", for: .normal)
-        inputButton.setTitleColor(.ButtonTextColor, for: .normal)
+        inputButton.setTitleColor(.TextColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
-        inputButton.setTitleColor(.ButtonTextColor, for: .selected)
+        inputButton.setTitleColor(.TextColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         
-        Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_cancel.setTitleColor(.TextColor, for: .normal)
         Button_cancel.neumorphicLayer?.cornerRadius = 15
-        Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_cancel.setTitleColor(.TextColor, for: .selected)
         Button_cancel.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_cancel.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_cancel.neumorphicLayer?.edged = Constant.edged
         Button_cancel.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
+        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
-        Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
+        Button_cancel.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
         let backImage = UIImage(named: "icons8-削除-25-2")?.withRenderingMode(.alwaysTemplate)
         Button_cancel.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
