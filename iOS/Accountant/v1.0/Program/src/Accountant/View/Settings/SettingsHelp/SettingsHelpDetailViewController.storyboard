@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -67,7 +67,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -110,7 +110,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -142,7 +142,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -168,7 +168,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -211,7 +211,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -277,7 +277,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -319,7 +319,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -351,7 +351,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -390,7 +390,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -421,7 +421,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -453,7 +453,7 @@ OKボタンをタップします。
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -488,54 +488,54 @@ OKボタンをタップします。
                         <viewLayoutGuide key="safeArea" id="yXR-Mj-B82"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="3oC-yC-dlZ"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="633-KG-GqZ"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="74S-Ot-tsh"/>
-                            <constraint firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="9sT-mm-R4P"/>
-                            <constraint firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
-                            <constraint firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="GPP-ep-hK8"/>
-                            <constraint firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="JNg-t2-0FL"/>
-                            <constraint firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="JhM-gz-6dr"/>
-                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="K2b-39-71s"/>
-                            <constraint firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="Q4H-SJ-CSd"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="QFs-CG-0NZ"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="Qd0-AD-rEj"/>
-                            <constraint firstAttribute="trailing" secondItem="flD-rt-n5l" secondAttribute="trailing" id="S5b-Qo-Rfa"/>
-                            <constraint firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
-                            <constraint firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="TCz-5z-1Sf"/>
-                            <constraint firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="Tim-sC-dW5"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="UQO-Ui-NaK"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="UVj-xf-gMN"/>
-                            <constraint firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="Y0E-mg-gh4"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="Z32-Gl-tkR"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="Z3c-VO-fXh"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="cwe-f4-shG"/>
-                            <constraint firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="d3B-lI-Fq9"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="dYm-yR-YUJ"/>
-                            <constraint firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="dZ6-1x-t0c"/>
-                            <constraint firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
-                            <constraint firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="eLj-0Z-7MD"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="euo-8m-YyO"/>
-                            <constraint firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="h9b-OY-E6O"/>
-                            <constraint firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="hG8-XR-9bP"/>
-                            <constraint firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
-                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="kKt-l1-IYQ"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="lXk-DL-fbD"/>
-                            <constraint firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
-                            <constraint firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="oU6-Lr-YQf"/>
-                            <constraint firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="p8P-f4-mAi"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="r2w-Lj-amg"/>
-                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="t2j-s7-Cnt"/>
-                            <constraint firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="tx5-f8-yYo"/>
-                            <constraint firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="x8H-A1-lTa"/>
-                            <constraint firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="xqE-bB-oEH"/>
-                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="xv3-O3-HNX"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="78T-2F-2CX" secondAttribute="leading" id="y5T-29-zst"/>
-                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="78T-2F-2CX" secondAttribute="top" id="yh2-39-EMk"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="3oC-yC-dlZ"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="633-KG-GqZ"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="74S-Ot-tsh"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="9sT-mm-R4P"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="GPP-ep-hK8"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="JNg-t2-0FL"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="JhM-gz-6dr"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="K2b-39-71s"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Q4H-SJ-CSd"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Qd0-AD-rEj"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="flD-rt-n5l" secondAttribute="trailing" id="S5b-Qo-Rfa"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="TCz-5z-1Sf"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="Tim-sC-dW5"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="UQO-Ui-NaK"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Y0E-mg-gh4"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Z32-Gl-tkR"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Z3c-VO-fXh"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="d3B-lI-Fq9"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="dZ6-1x-t0c"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="euo-8m-YyO"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="h9b-OY-E6O"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="hG8-XR-9bP"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="kKt-l1-IYQ"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="oU6-Lr-YQf"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="p8P-f4-mAi"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="r2w-Lj-amg"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="t2j-s7-Cnt"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="tx5-f8-yYo"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="x8H-A1-lTa"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="xqE-bB-oEH"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="xv3-O3-HNX"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="y5T-29-zst"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="yh2-39-EMk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
