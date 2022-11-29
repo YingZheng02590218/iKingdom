@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWJ-SB-FwY" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                <rect key="frame" x="7" y="51" width="0.0" height="804"/>
+                                <rect key="frame" x="7" y="51" width="400" height="804"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-VZ-ahH" userLabel="ViewBase">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="120.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
                                         <subviews>
-                                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="120.5"/>
+                                            <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
                                                 <subviews>
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
                                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="60.5"/>
@@ -70,8 +70,8 @@
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="wgo-5U-IVM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
-                                                        <rect key="frame" x="0.0" y="60.5" width="400" height="60"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
+                                                        <rect key="frame" x="0.0" y="60.5" width="0.0" height="60"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bR-9B-asA" userLabel="ViewDate">
                                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
@@ -138,6 +138,9 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <real key="value" value="0.5"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48496462264150941" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2z-of-O6b" userLabel="ViewMemo">
@@ -162,6 +165,9 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <real key="value" value="0.5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48496462264150941" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
@@ -199,6 +205,9 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <real key="value" value="0.5"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" name="MainColor"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-UW-4Jn" userLabel="ViewDebit">
@@ -223,6 +232,9 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <real key="value" value="0.5"/>
                                                                     </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" name="MainColor"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-QP-lR6" userLabel="ViewCredit">
@@ -246,6 +258,9 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                         <real key="value" value="0.5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" name="MainColor"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
@@ -311,25 +326,25 @@
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" tag="333" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V3Q-kP-pLv">
-                                        <rect key="frame" x="0.0" y="120.5" width="0.0" height="668.5"/>
+                                        <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_list_journalEntry" id="V1E-RO-R0Q" customClass="JournalsTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="0.0" height="55"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="400" height="55"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V1E-RO-R0Q" id="CDS-uX-WNE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4e-rD-eCp" userLabel="View1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="47.5" height="55"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1T-kT-1d6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="47.5" height="18.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="vJp-Pk-dX2" userLabel="list_date">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="19"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -338,10 +353,13 @@
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
                                                                                 </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
+                                                                                </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="RMB-BR-qah" userLabel="list_date">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="19"/>
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="19"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -349,6 +367,9 @@
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
@@ -369,10 +390,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Km-8O-N10">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="47.5" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="4yj-BE-gkw" userLabel="list_date2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="18"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -381,10 +402,13 @@
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
                                                                                 </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
+                                                                                </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="gAc-mf-toK" userLabel="list_date2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="18"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -392,6 +416,9 @@
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
@@ -413,10 +440,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4R9-6c-PCn">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="47.5" height="18.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="BS6-rj-eSX" userLabel="list_date3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="18.5"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -425,10 +452,13 @@
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
                                                                                 </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
+                                                                                </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="m2y-a0-Raj" userLabel="list_date3">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                            <rect key="frame" x="21" y="0.0" width="26.5" height="18.5"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                             <color key="textColor" name="TextColor"/>
@@ -436,6 +466,9 @@
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                                     <real key="value" value="0.29999999999999999"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="MainColor"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
@@ -483,10 +516,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-6A-ZcG" userLabel="View2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="47.5" y="0.0" width="197.5" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="lqL-eb-go1" userLabel="label_list_summary_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="197.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -494,11 +527,14 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="MzK-ht-71v" userLabel="label_list_summary_credit">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="197.5" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -507,10 +543,13 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="cYm-xa-3Nl" userLabel="list_summary">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="197.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -518,6 +557,9 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
@@ -544,10 +586,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztb-J0-tJf" userLabel="View3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="245" y="0.0" width="16" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="C07-dQ-fgX" userLabel="list_number">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -555,11 +597,14 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="mVa-QV-im9" userLabel="list_number2">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="16" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -568,10 +613,13 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="frX-9m-Dcl" userLabel="list_number3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="16" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -579,6 +627,9 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
@@ -606,10 +657,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJB-9h-cYP" userLabel="View4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="261" y="0.0" width="69" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="aPd-Oj-5kn" userLabel="list_debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="69" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -617,11 +668,14 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Hwh-81-pnL" userLabel="list_debit2">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="69" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -630,10 +684,13 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="G5I-PJ-D79" userLabel="list_debit3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="69" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -641,6 +698,9 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
@@ -666,10 +726,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vct-je-qo4" userLabel="View5">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="55"/>
+                                                            <rect key="frame" x="330.5" y="0.0" width="69.5" height="55"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="uMm-yx-HU4" userLabel="list_credit1">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="69.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -677,11 +737,14 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Mgu-8l-mZZ" userLabel="list_credit">
-                                                                    <rect key="frame" x="0.0" y="18.5" width="0.0" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="18.5" width="69.5" height="18"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -690,10 +753,13 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
                                                                         </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" translatesAutoresizingMaskIntoConstraints="NO" id="Noe-xz-h4G" userLabel="list_credit3">
-                                                                    <rect key="frame" x="0.0" y="36.5" width="0.0" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="36.5" width="69.5" height="18.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                                                                     <color key="textColor" name="TextColor"/>
@@ -701,6 +767,9 @@
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                                             <real key="value" value="0.29999999999999999"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" name="MainColor"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
@@ -788,11 +857,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IaW-QJ-s9A">
-                                <rect key="frame" x="3.5" y="802.5" width="7" height="50"/>
+                                <rect key="frame" x="103.5" y="802.5" width="207" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Haf-gE-g6w">
-                                        <rect key="frame" x="0.0" y="0.0" width="7" height="50"/>
-                                        <color key="tintColor" name="AccentBlue"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
+                                        <color key="tintColor" name="AccentColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="選択した項目を編集"/>
                                         <connections>
@@ -966,8 +1035,14 @@
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="AccentColor">
+            <color red="0.13333333333333333" green="0.27843137254901962" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48496460914611816" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

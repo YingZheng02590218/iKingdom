@@ -162,6 +162,8 @@
 		F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209EF27A4377000F7EA8D /* BSViewController.xib */; };
 		F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */; };
 		F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */; };
+		F9B78D33293628550051C027 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B78D32293628550051C027 /* UIView+extension.swift */; };
+		F9B78D34293628550051C027 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B78D32293628550051C027 /* UIView+extension.swift */; };
 		F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */; };
 		F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */; };
 		F9BDCBAF27A6CCC000BD8770 /* PLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */; };
@@ -572,6 +574,7 @@
 		F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSTableViewCell.xib; sourceTree = "<group>"; };
 		F9B778E625A09D0000300B7A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F9B78D32293628550051C027 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+extension.swift"; sourceTree = "<group>"; };
 		F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PLViewController.swift; sourceTree = "<group>"; };
 		F9BDCBAE27A6CCC000BD8770 /* PLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PLViewController.xib; sourceTree = "<group>"; };
@@ -1222,6 +1225,7 @@
 			isa = PBXGroup;
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
 				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
@@ -2000,6 +2004,7 @@
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
+				F9B78D33293628550051C027 /* UIView+extension.swift in Sources */,
 				F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */,
 				F929C00B247708CF0034FAAF /* MasterData.swift in Sources */,
@@ -2152,6 +2157,7 @@
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
+				F9B78D34293628550051C027 /* UIView+extension.swift in Sources */,
 				F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */,
 				F9EC66D127B90BC60003FBB6 /* SettingsHelpDetailViewController.swift in Sources */,
 				F9EC66D227B90BC60003FBB6 /* MasterData.swift in Sources */,
