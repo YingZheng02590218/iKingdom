@@ -1003,6 +1003,7 @@ extension BSViewController: BSPresenterOutput {
         setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
         let printoutButton = UIBarButtonItem(title: "PDF", style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
+        printoutButton.tintColor = .AccentColor
         //ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "貸借対照表"
@@ -1051,11 +1052,6 @@ extension BSViewController: BSPresenterOutput {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
-        }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
     

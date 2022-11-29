@@ -108,7 +108,15 @@ class SettingsUpgradeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
         switch indexPath.section {
         case 0:
 //            //① UI部品を指定　TableViewCell
@@ -157,7 +165,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
                 cell.accessoryType = .none
             }
             cell.leftImageView.image = UIImage(named: "icons8-復元-25")?.withRenderingMode(.alwaysTemplate)
-            return cell
         case 2:
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
@@ -167,7 +174,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
                 cell.centerLabel.text = "How to cancel"
             }
             cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")?.withRenderingMode(.alwaysTemplate)
-            return cell
         case 3:
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
@@ -177,10 +183,11 @@ class SettingsUpgradeTableViewController: UITableViewController {
                 cell.centerLabel.text = "Privacy Policy / Terms of Use"
             }
             cell.leftImageView.image = UIImage(named: "icons8-ポリシー文書-25")?.withRenderingMode(.alwaysTemplate)
-            return cell
         default:
-            return cell
+            break
         }
+
+        return cell
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

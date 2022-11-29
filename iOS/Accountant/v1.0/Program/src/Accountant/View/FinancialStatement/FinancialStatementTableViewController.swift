@@ -19,6 +19,9 @@ class FinancialStatementTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorColor = .AccentColor
+
         // リロード機能
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
@@ -28,6 +31,7 @@ class FinancialStatementTableViewController: UITableViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .AccentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {        
@@ -55,10 +59,7 @@ class FinancialStatementTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
+
     }
     
     // リロード機能
@@ -122,54 +123,58 @@ class FinancialStatementTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        var cell = UITableViewCell()
+
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
                 cell.textLabel?.text = "貸借対照表"
                 cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
                 cell.textLabel?.text = "損益計算書"
                 cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
 //            case 2:
 //                let cell = tableView.dequeueReusableCell(withIdentifier: "CF", for: indexPath)
 //                cell.textLabel?.text = "キャッシュフロー計算書"
 //                cell.textLabel?.textAlignment = NSTextAlignment.center
-//                return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
                 cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
-                return cell
             }
         }
         else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
             cell.textLabel?.text = "損益勘定"
             cell.textLabel?.textColor = .TextColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
         }
         else if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
             cell.textLabel?.text = "精算表"
             cell.textLabel?.textColor = .TextColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
             cell.textLabel?.text = "試算表"
             cell.textLabel?.textColor = .TextColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
-            return cell
         }
+
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

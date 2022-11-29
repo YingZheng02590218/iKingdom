@@ -1347,7 +1347,6 @@
                     <navigationItem key="navigationItem" title="精算表" id="ewJ-sp-MtQ">
                         <rightBarButtonItems>
                             <barButtonItem title="決算整理仕訳入力" id="Okf-WO-9Ds">
-                                <color key="tintColor" name="AccentBlue"/>
                                 <connections>
                                     <segue destination="mIG-7s-Qse" kind="presentation" id="dIK-LN-U8V"/>
                                 </connections>
@@ -1445,7 +1444,7 @@
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
-            <color red="1" green="0.27799999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

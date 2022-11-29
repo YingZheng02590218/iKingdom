@@ -23,6 +23,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // テーブルビューセル　作成
         createTableViewCell()
         tableView.allowsMultipleSelection = false
+        tableView.separatorColor = .AccentColor
+
         self.navigationItem.title = "会計期間"
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -261,6 +263,12 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 cell.detailTextLabel2.text = "\(date)"
                 print(date)
             }
+            // Accessory Color
+            let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+            let disclosureView = UIImageView(image: disclosureImage)
+            disclosureView.tintColor = UIColor.AccentColor
+            cell.accessoryView = disclosureView
+
             return cell
         case 1:
             // 会計年度

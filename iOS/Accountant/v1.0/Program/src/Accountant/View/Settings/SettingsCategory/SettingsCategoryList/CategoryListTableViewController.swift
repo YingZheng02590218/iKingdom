@@ -180,6 +180,12 @@ class CategoryListTableViewController: UITableViewController {
                 cell.ToggleButton.isEnabled = false
             }
         }
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
         return cell
     }
 

@@ -80,7 +80,8 @@ class JournalEntryViewController: UIViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+        navigationController?.navigationBar.tintColor = .AccentColor
+
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
         
@@ -202,12 +203,6 @@ class JournalEntryViewController: UIViewController {
         
         // セットアップ AdMob
         setupAdMob()
-        
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -557,7 +552,7 @@ class JournalEntryViewController: UIViewController {
             let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Left.tintColor = .TextColor
+            Button_Left.tintColor = .AccentColor
         }
         
         if let Button_Right = Button_Right {
@@ -572,7 +567,7 @@ class JournalEntryViewController: UIViewController {
             let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Right.tintColor = .TextColor
+            Button_Right.tintColor = .AccentColor
         }
         
         if let textFieldView = textFieldView {
@@ -596,9 +591,9 @@ class JournalEntryViewController: UIViewController {
         }
         
 //        inputButton.setTitle("入力", for: .normal)
-        inputButton.setTitleColor(.TextColor, for: .normal)
+        inputButton.setTitleColor(.AccentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
-        inputButton.setTitleColor(.TextColor, for: .selected)
+        inputButton.setTitleColor(.AccentColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         inputButton.neumorphicLayer?.edged = Constant.edged
@@ -618,7 +613,7 @@ class JournalEntryViewController: UIViewController {
         let backImage = UIImage(named: "icons8-削除-25-2")?.withRenderingMode(.alwaysTemplate)
         Button_cancel.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
-        Button_cancel.tintColor = .TextColor
+        Button_cancel.tintColor = .AccentColor
     }
 
     // MARK: PickerTextField
@@ -630,6 +625,9 @@ class JournalEntryViewController: UIViewController {
         TextField_category_credit.setup(identifier: "identifier_credit")
         TextField_category_debit.textAlignment = .left
         TextField_category_credit.textAlignment = .right
+
+        TextField_category_debit.layer.borderWidth = 0.5
+        TextField_category_credit.layer.borderWidth = 0.5
     }
     
     // MARK: UITextField
@@ -673,6 +671,9 @@ class JournalEntryViewController: UIViewController {
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+
+        TextField_amount_debit.layer.borderWidth = 0.5
+        TextField_amount_credit.layer.borderWidth = 0.5
     }
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
@@ -695,6 +696,8 @@ class JournalEntryViewController: UIViewController {
        cancelItem.tag = 77
        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
        TextField_SmallWritting.inputAccessoryView = toolbar
+
+        TextField_SmallWritting.layer.borderWidth = 0.5
     }
     // 初期値を再設定
     func setInitialData() {

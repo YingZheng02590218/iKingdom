@@ -27,6 +27,9 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorColor = .AccentColor
+
         // 登録ボタンの　表示　非表示
         if addAccount {
             Button_input.isHidden = false
@@ -182,6 +185,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.label.text = "表示科目を選択してください"
                     cell.label.textColor = .lightGray
                 }
+                // Accessory Color
+                let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+                let disclosureView = UIImageView(image: disclosureImage)
+                disclosureView.tintColor = UIColor.AccentColor
+                cell.accessoryView = disclosureView
+
                 return cell
             }
         }else { // 新規追加　以外

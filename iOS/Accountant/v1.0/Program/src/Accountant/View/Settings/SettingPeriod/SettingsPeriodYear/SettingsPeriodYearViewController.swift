@@ -15,6 +15,9 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.navigationBar.tintColor = .AccentColor
+
         //UIPickerView
         // Delegate設定
         pickerView.delegate = self

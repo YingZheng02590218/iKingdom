@@ -14,6 +14,8 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         // 生体認証パスコードロック アプリ起動完了時のパスコード画面表示の通知監視
         NotificationCenter.default.addObserver(self, selector: #selector(self.displayPasscodeLockScreenIfNeeded), name: UIApplication.didFinishLaunchingNotification, object: nil)
+
+        self.navigationController?.navigationBar.tintColor = .AccentColor
     }
 
     // MARK: - 生体認証パスコードロック

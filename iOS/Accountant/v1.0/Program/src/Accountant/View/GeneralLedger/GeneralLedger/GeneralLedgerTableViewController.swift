@@ -29,6 +29,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .AccentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,9 +59,6 @@ class GeneralLedgerTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {

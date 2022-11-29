@@ -80,6 +80,8 @@ class GenearlLedgerAccountViewController: UIViewController {
     // ボタンのデザインを指定する
     private func createButtons() {
         
+        button_print.tintColor = .AccentColor
+
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
@@ -408,14 +410,6 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
-        }
-        
-        if let navigationController = self.navigationController {
-            // ナビゲーションバーの半透明化（デフォルト）しない　storyboardでは設定が反映されなかった
-//            navigationController.navigationBar.isTranslucent = false
-            // ナビゲーションを透明にする処理
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
 

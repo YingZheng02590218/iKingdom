@@ -19,23 +19,19 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        
+        tableView.separatorColor = .AccentColor
+
         self.navigationItem.title = "設定"
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .AccentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
     
     // 生体認証パスコードロック　設定スイッチ 切り替え
@@ -112,95 +108,82 @@ class SettingsTableViewController: UITableViewController {
     }
     //セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                //① UI部品を指定　TableViewCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "アップグレード"
                 cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             default:
-                return WithIconTableViewCell()
+                break
             }
         }
         else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                //① UI部品を指定　TableViewCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
                 cell.leftImageView.image = UIImage(named: "icons8-会社-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "会計期間"
                 cell.leftImageView.image = UIImage(named: "icons8-カレンダー10-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "勘定科目"
                 cell.leftImageView.image = UIImage(named: "icons8-スタック組織図-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             default:
-                return WithIconTableViewCell()
+                break
             }
         }
         else if indexPath.section == 2 {
             switch indexPath.row {
                 case 0:
-                //① UI部品を指定　TableViewCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "パスコードロックを利用する"
                 cell.leftImageView.image = UIImage(systemName: "key.fill")?.withRenderingMode(.alwaysTemplate)
                 if cell.accessoryView == nil {
                     let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     // 生体認証パスコードロック　設定スイッチ
-                    switchView.onTintColor = .AccentLight
+                    switchView.onTintColor = .AccentColor
                     switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                     switchView.tag = indexPath.row
                     switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
                     cell.accessoryView = switchView
                 }
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "icons8-ペン-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "仕訳帳"
                 cell.leftImageView.image = UIImage(named: "icons8-開いた本-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             default:
-                return WithIconTableViewCell()
+                break
             }
         }
         else {
             switch indexPath.row {
             case 0:
-                //① UI部品を指定　TableViewCell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "icons8-情報-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "icons8-いいね-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             case 2:
                 // お問い合わせ機能
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")?.withRenderingMode(.alwaysTemplate)
-                return cell
             default:
-                return WithIconTableViewCell()
+                break
             }
         }
+
+        return cell
     }
     // セルがタップされたとき
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

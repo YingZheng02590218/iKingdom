@@ -238,6 +238,13 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
                 //UIButtonを無効化
                 cell.ToggleButton.isEnabled = false
             }
+
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
             return cell
     }
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す

@@ -161,6 +161,12 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
                 cell.selectionStyle = .default
             }
         }
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
         print(objects[indexPath.row].number, objects[indexPath.row].switching)
         return cell
     }

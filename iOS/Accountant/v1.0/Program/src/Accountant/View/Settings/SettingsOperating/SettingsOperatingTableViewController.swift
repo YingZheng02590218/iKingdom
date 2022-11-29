@@ -18,6 +18,8 @@ class SettingsOperatingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorColor = .AccentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
