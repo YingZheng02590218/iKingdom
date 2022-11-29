@@ -142,7 +142,14 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
 
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
-        
+        // 更新処理
+        if tappedIndexPathSection == 0 {
+            objects = model.getJournalEntriesInJournals() // 通常仕訳　全
+        }
+        else if tappedIndexPathSection == 1 {
+            objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+        }
+
         view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
     }
     // 削除　仕訳

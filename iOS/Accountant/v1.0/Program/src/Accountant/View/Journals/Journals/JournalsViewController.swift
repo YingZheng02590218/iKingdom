@@ -598,10 +598,12 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // 入力ボタン押下時の場合
         if scroll_adding {
-            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-            if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                cell.setHighlighted(true, animated: true)
-                indexPathForAutoScroll = indexPath
+            if TappedIndexPathSection == 0 {
+                // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+                if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                    cell.setHighlighted(true, animated: true)
+                    indexPathForAutoScroll = indexPath
+                }
             }
             // 最後のセルまで表示しされたかどうか
             if indexPath == indexPath_local {
