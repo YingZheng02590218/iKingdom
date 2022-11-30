@@ -100,7 +100,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true // 複数選択を可能にする
         button_edit.isHidden = true
-        button_edit.tintColor = tableView.isEditing ? .AccentColor : UIColor.clear// 色
+        button_edit.tintColor = tableView.isEditing ? .AccentBlue : UIColor.clear// 色
         
         // title設定
         navigationItem.title = "仕訳帳"
@@ -735,7 +735,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
 
         button_edit.isHidden = !editing
         button_edit.isEnabled = false // まとめて編集ボタン
-        button_edit.tintColor = editing ? .AccentColor : UIColor.clear // 色
+        button_edit.tintColor = editing ? .AccentBlue : UIColor.clear // 色
         pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         barButtonItem_add.isEnabled = !editing // 仕訳入力ボタン
         // 編集中の場合
