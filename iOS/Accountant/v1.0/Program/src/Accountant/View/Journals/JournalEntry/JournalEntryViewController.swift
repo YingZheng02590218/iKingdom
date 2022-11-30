@@ -680,7 +680,7 @@ class JournalEntryViewController: UIViewController {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
-        TextField_SmallWritting.tintColor = UIColor.black
+        TextField_SmallWritting.tintColor = UIColor.AccentColor
 
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()

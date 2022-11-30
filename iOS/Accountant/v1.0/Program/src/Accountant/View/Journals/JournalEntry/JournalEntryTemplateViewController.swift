@@ -74,7 +74,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         nicknameTextField.delegate = self
         nicknameTextField.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
-        nicknameTextField.tintColor = UIColor.black
+        nicknameTextField.tintColor = UIColor.AccentColor
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
