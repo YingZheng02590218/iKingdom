@@ -105,14 +105,16 @@
                                                             <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
                                                         <rect key="frame" x="116" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=" ">
+                                                            <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
                                                         <rect key="frame" x="232" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -316,7 +318,7 @@
                                                             <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc">
                                                         <rect key="frame" x="116" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -402,7 +404,7 @@
                         <outlet property="buttonMultiple" destination="xXE-2f-HKE" id="4Q9-N7-lJJ"/>
                         <outlet property="buttonPercent" destination="UzO-2h-Uqr" id="FzG-Mv-Ldw"/>
                         <outlet property="buttonPlus" destination="qVe-2f-Doy" id="NFH-UC-kOP"/>
-                        <outlet property="buttonPlusMinus" destination="VaX-Oy-oxU" id="8RR-6h-iNP"/>
+                        <outlet property="buttonPlusMinus" destination="VaX-Oy-oxU" id="R7x-Oq-aAm"/>
                         <outlet property="label" destination="JQr-4L-AiR" id="hIG-dM-450"/>
                         <outlet property="labelView" destination="2xY-0v-zIO" id="t5l-br-ufb"/>
                         <outletCollection property="arrayHugo" destination="t7R-DU-4BS" collectionClass="NSMutableArray" id="b2u-hu-pHU"/>
