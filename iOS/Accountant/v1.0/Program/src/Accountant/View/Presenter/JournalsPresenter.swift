@@ -142,15 +142,14 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
 
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
-        // 更新処理
-        if tappedIndexPathSection == 0 {
+        // 全勘定の合計と残高を計算する
+        model.initializeJournals(completion: { isFinished in
+            print("Result is \(isFinished)")
             objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-        }
-        else if tappedIndexPathSection == 1 {
             objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
-        }
-
-        view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
+            // オートスクロール
+            view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
+        })
     }
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
