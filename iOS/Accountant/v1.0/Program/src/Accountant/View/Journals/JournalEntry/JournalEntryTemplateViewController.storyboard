@@ -67,13 +67,13 @@
                                         <rect key="frame" x="0.0" y="328" width="394" height="164"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="xFW-Je-FVV">
-                                                <rect key="frame" x="10" y="0.0" width="374" height="82"/>
+                                                <rect key="frame" x="10" y="0.0" width="374" height="106.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OET-ln-1vY" userLabel="Stack View1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="b67-5e-WOV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="184.5" height="16"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="184.5" height="40.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -81,7 +81,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Whw-ft-npg">
-                                                                <rect key="frame" x="189.5" y="0.0" width="184.5" height="16"/>
+                                                                <rect key="frame" x="189.5" y="0.0" width="184.5" height="40.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -107,7 +107,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-TC-Ket" userLabel="Stack View2">
-                                                        <rect key="frame" x="0.0" y="17" width="374" height="32"/>
+                                                        <rect key="frame" x="0.0" y="41.5" width="374" height="32"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ue5-SW-9cy" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="186" height="32"/>
@@ -138,7 +138,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="22222" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Noz-lB-7r7" userLabel="Stack View3">
-                                                        <rect key="frame" x="0.0" y="50" width="374" height="32"/>
+                                                        <rect key="frame" x="0.0" y="74.5" width="374" height="32"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mw-ak-kF6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="186" height="32"/>
@@ -212,10 +212,10 @@
                                         <rect key="frame" x="0.0" y="492" width="394" height="123"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="krV-Tn-xWh">
-                                                <rect key="frame" x="10" y="0.0" width="374" height="48"/>
+                                                <rect key="frame" x="10" y="0.0" width="374" height="53.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Ku-UqX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="21.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -223,7 +223,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
-                                                        <rect key="frame" x="0.0" y="16" width="374" height="32"/>
+                                                        <rect key="frame" x="0.0" y="21.5" width="374" height="32"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <attributedString key="attributedText"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
@@ -261,7 +261,7 @@
                                         <rect key="frame" x="0.0" y="615" width="394" height="205"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="G7q-Qp-ZIP">
-                                                <rect key="frame" x="10" y="10" width="374" height="150"/>
+                                                <rect key="frame" x="10" y="10" width="374" height="149.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="F09-67-1oL" userLabel="Stack View1">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="75"/>
@@ -273,7 +273,7 @@
                                                                     <constraint firstAttribute="width" secondItem="XUS-hR-U9P" secondAttribute="height" multiplier="1:1" id="ZTX-Hw-Kum"/>
                                                                 </constraints>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="" image="icons8-削除-25-2">
+                                                                <state key="normal" title="" image="close-close_symbol">
                                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
@@ -287,7 +287,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-8B-VTU" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="168.5" y="0.0" width="37" height="75"/>
+                                                                <rect key="frame" x="93.5" y="0.0" width="187" height="75"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -311,7 +311,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <state key="normal" title="" image="icons8-削除-25">
+                                                                        <state key="normal" title="" image="delete-delete_symbol">
                                                                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
@@ -345,10 +345,10 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Wf-M6-ASE" userLabel="Stack View2">
-                                                        <rect key="frame" x="0.0" y="75" width="374" height="75"/>
+                                                        <rect key="frame" x="0.0" y="75" width="374" height="74.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaT-XT-YuL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="75"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="74.5"/>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
@@ -463,8 +463,8 @@
         <segue reference="l7h-iT-0oa"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="icons8-削除-25" width="25" height="25"/>
-        <image name="icons8-削除-25-2" width="25" height="25"/>
+        <image name="close-close_symbol" width="9" height="9"/>
+        <image name="delete-delete_symbol" width="11" height="12"/>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

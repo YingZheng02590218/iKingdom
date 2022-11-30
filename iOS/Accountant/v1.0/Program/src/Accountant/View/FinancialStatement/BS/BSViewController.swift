@@ -1001,8 +1001,8 @@ extension BSViewController: BSPresenterOutput {
         setTableView()
         createButtons() // ボタン作成
         setRefreshControl()
-        // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
-        let printoutButton = UIBarButtonItem(title: "PDF", style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
+        // 印刷機能
+        let printoutButton = UIBarButtonItem(image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol")!.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
         printoutButton.tintColor = .AccentColor
         //ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton

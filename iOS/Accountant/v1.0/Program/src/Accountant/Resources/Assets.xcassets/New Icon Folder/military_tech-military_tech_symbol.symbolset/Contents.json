@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "symbols" : [
+    {
+      "filename" : "military_tech-military_tech_symbol.svg",
+      "idiom" : "universal"
+    }
+  ]
+}

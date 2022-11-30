@@ -164,7 +164,8 @@ class SettingsUpgradeTableViewController: UITableViewController {
             else {
                 cell.accessoryType = .none
             }
-            cell.leftImageView.image = UIImage(named: "icons8-復元-25")?.withRenderingMode(.alwaysTemplate)
+            cell.accessoryView = nil
+            cell.leftImageView.image = UIImage(named: "settings_backup_restore_symbol")?.withRenderingMode(.alwaysTemplate)
         case 2:
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
@@ -173,7 +174,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }else {
                 cell.centerLabel.text = "How to cancel"
             }
-            cell.leftImageView.image = UIImage(named: "icons8-キャンセル-25")?.withRenderingMode(.alwaysTemplate)
+            cell.leftImageView.image = UIImage(named: "cancel-cancel_symbol")?.withRenderingMode(.alwaysTemplate)
         case 3:
             let language = Locale.preferredLanguages.first!
             print(language) // ja-JP
@@ -182,7 +183,7 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }else {
                 cell.centerLabel.text = "Privacy Policy / Terms of Use"
             }
-            cell.leftImageView.image = UIImage(named: "icons8-ポリシー文書-25")?.withRenderingMode(.alwaysTemplate)
+            cell.leftImageView.image = UIImage(named: "gavel-gavel_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
         default:
             break
         }

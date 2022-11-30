@@ -27,11 +27,11 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
@@ -45,7 +45,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>

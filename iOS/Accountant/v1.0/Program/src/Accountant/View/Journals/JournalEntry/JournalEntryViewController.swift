@@ -549,7 +549,7 @@ class JournalEntryViewController: UIViewController {
             Button_Left.neumorphicLayer?.edged = Constant.edged
             Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
-            let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
+            let backImage = UIImage(named: "arrow_back_ios-arrow_back_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
             Button_Left.tintColor = .AccentColor
@@ -564,7 +564,7 @@ class JournalEntryViewController: UIViewController {
             Button_Right.neumorphicLayer?.edged = Constant.edged
             Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
-            let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
+            let backImage = UIImage(named: "arrow_forward_ios-arrow_forward_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
             Button_Right.tintColor = .AccentColor
@@ -610,7 +610,7 @@ class JournalEntryViewController: UIViewController {
         Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
         Button_cancel.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
-        let backImage = UIImage(named: "icons8-削除-25-2")?.withRenderingMode(.alwaysTemplate)
+        let backImage = UIImage(named: "close-close_symbol")?.withRenderingMode(.alwaysTemplate)
         Button_cancel.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
         Button_cancel.tintColor = .AccentColor

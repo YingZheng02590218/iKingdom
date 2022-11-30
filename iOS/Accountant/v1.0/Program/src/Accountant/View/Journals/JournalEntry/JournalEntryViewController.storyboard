@@ -87,7 +87,7 @@
                                                         <rect key="frame" x="0.0" y="5" width="51.333333333333336" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-戻る-25">
+                                                        <state key="normal" title="" image="arrow_back_ios-arrow_back_ios_symbol">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -125,7 +125,7 @@
                                                         <rect key="frame" x="346.66666666666669" y="5" width="61.333333333333314" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-進む-25">
+                                                        <state key="normal" title="" image="arrow_forward_ios-arrow_forward_ios_symbol">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -396,7 +396,7 @@
                                                                     <constraint firstAttribute="width" secondItem="Ef0-Vy-bhy" secondAttribute="height" multiplier="1:1" id="DOV-L2-MHc"/>
                                                                 </constraints>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="" image="icons8-削除-25-2">
+                                                                <state key="normal" title="" image="close-close_symbol">
                                                                     <color key="titleColor" name="ButtonTextColor"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -680,9 +680,9 @@
         <segue reference="oNm-xH-Kw5"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="icons8-削除-25-2" width="25" height="25"/>
-        <image name="icons8-戻る-25" width="25" height="25"/>
-        <image name="icons8-進む-25" width="25" height="25"/>
+        <image name="arrow_back_ios-arrow_back_ios_symbol" width="8" height="13"/>
+        <image name="arrow_forward_ios-arrow_forward_ios_symbol" width="8" height="13"/>
+        <image name="close-close_symbol" width="9" height="9"/>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

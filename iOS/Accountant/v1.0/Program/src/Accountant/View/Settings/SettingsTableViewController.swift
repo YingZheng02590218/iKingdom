@@ -121,7 +121,7 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "アップグレード"
-                cell.leftImageView.image = UIImage(named: "icons8-シェブロン-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
@@ -130,13 +130,13 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
-                cell.leftImageView.image = UIImage(named: "icons8-会社-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "domain-domain_symbol")?.withRenderingMode(.alwaysTemplate)
             case 1:
                 cell.centerLabel.text = "会計期間"
-                cell.leftImageView.image = UIImage(named: "icons8-カレンダー10-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "edit_calendar-edit_calendar_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 cell.centerLabel.text = "勘定科目"
-                cell.leftImageView.image = UIImage(named: "icons8-スタック組織図-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
@@ -146,7 +146,7 @@ class SettingsTableViewController: UITableViewController {
                 case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
                 cell.centerLabel.text = "パスコードロックを利用する"
-                cell.leftImageView.image = UIImage(systemName: "key.fill")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
                 if cell.accessoryView == nil {
                     let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     // 生体認証パスコードロック　設定スイッチ
@@ -158,10 +158,10 @@ class SettingsTableViewController: UITableViewController {
                 }
             case 1:
                 cell.centerLabel.text = "仕訳"
-                cell.leftImageView.image = UIImage(named: "icons8-ペン-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 cell.centerLabel.text = "仕訳帳"
-                cell.leftImageView.image = UIImage(named: "icons8-開いた本-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
@@ -170,14 +170,14 @@ class SettingsTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "使い方ガイド"
-                cell.leftImageView.image = UIImage(named: "icons8-情報-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
             case 1:
                 cell.centerLabel.text = "評価・レビュー"
-                cell.leftImageView.image = UIImage(named: "icons8-いいね-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
-                cell.leftImageView.image = UIImage(named: "icons8-コミュニケーション-25")?.withRenderingMode(.alwaysTemplate)
+                cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }

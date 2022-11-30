@@ -720,8 +720,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="勘定" id="aJZ-Wx-0Xe">
-                        <barButtonItem key="rightBarButtonItem" title="PDF" id="thY-Gz-Lvy">
-                            <color key="tintColor" name="AccentBlue"/>
+                        <barButtonItem key="rightBarButtonItem" image="picture_as_pdf-picture_as_pdf_symbol" id="thY-Gz-Lvy">
                             <connections>
                                 <action selector="button_print:" destination="zo1-pw-cz2" id="1Se-zc-Al6"/>
                             </connections>
@@ -769,6 +768,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="picture_as_pdf-picture_as_pdf_symbol" width="13" height="13"/>
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
