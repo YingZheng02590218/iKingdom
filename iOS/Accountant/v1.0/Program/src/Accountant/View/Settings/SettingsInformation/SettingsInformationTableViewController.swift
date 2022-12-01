@@ -130,7 +130,7 @@ class SettingsInformationTableViewController: UITableViewController {
         case 0:
             //① UI部品を指定　TableViewCell
             cell = tableView.dequeueReusableCell(withIdentifier: "cell_companyName", for: indexPath) //as! TableViewCell
-                cell.textLabel?.text = "事業者名"
+                cell.textLabel?.text = ""
             // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
             return cell
         default:
