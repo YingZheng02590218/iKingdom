@@ -334,8 +334,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
                 // 損益計算書
                 cell.label_debit2.text = ""
                 cell.label_credit2.text = ""
-                cell.label_debit2.backgroundColor = .lightGray
-                cell.label_credit2.backgroundColor = .lightGray
+                cell.label_debit2.backgroundColor = .MainColor
+                cell.label_credit2.backgroundColor = .MainColor
                 // 貸借対照表 修正記入の分を差し引きして、表示する　WSModelを作成して処理を記述する
                 cell.label_debit3.text = presenter.getTotalAmountAfterAdjusting(account: "\(presenter.objects(forRow:indexPath.row).category as String)", leftOrRight: 2)
                 cell.label_debit3.textAlignment = NSTextAlignment.right
@@ -361,8 +361,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
                 // 貸借対照表
                 cell.label_debit3.text = ""
                 cell.label_credit3.text = ""
-                cell.label_debit3.backgroundColor = .lightGray
-                cell.label_credit3.backgroundColor = .lightGray
+                cell.label_debit3.backgroundColor = .MainColor
+                cell.label_credit3.backgroundColor = .MainColor
             default: //大分類　貸借対照表：0,1,2 損益計算書：3,4
                 print("a")
             }
@@ -385,8 +385,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             // 決算整理前残高試算表
             cell.label_debit.text = ""
             cell.label_credit.text = ""
-            cell.label_debit.backgroundColor = .lightGray
-            cell.label_credit.backgroundColor = .lightGray
+            cell.label_debit.backgroundColor = .MainColor
+            cell.label_credit.backgroundColor = .MainColor
             switch Int(presenter.objectss(forRow:indexPath.row-(presenter.numberOfobjects + 1)).Rank2) {
             case 0,1,2,3,4,5,12: //大分類　貸借対照表：0,1,2
                 // 修正記入
@@ -441,8 +441,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             // 決算整理前残高試算表
             cell.label_debit.text = ""
             cell.label_credit.text = ""
-            cell.label_debit.backgroundColor = .lightGray
-            cell.label_credit.backgroundColor = .lightGray
+            cell.label_debit.backgroundColor = .MainColor
+            cell.label_credit.backgroundColor = .MainColor
             // 修正記入
             cell.label_debit1.text = ""
             cell.label_credit1.text = ""
@@ -470,8 +470,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             // 決算整理前残高試算表
             cell.label_debit.text = ""
             cell.label_credit.text = ""
-            cell.label_debit.backgroundColor = .lightGray
-            cell.label_credit.backgroundColor = .lightGray
+            cell.label_debit.backgroundColor = .MainColor
+            cell.label_credit.backgroundColor = .MainColor
             // 修正記入
             cell.label_debit1.text = presenter.debit_adjustingEntries_total_total() // 残高ではなく合計
             cell.label_debit1.textAlignment = NSTextAlignment.right
