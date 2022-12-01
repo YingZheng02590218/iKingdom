@@ -185,6 +185,21 @@ class SettingsTableViewController: UITableViewController {
 
         return cell
     }
+
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.section {
+            // 選択不可にしたい場合は"nil"を返す
+        case 2:
+            switch indexPath.row {
+            case 0:
+                return nil
+            default:
+                return indexPath
+            }
+        default:
+            return indexPath
+        }
+    }
     // セルがタップされたとき
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セルの選択を解除
