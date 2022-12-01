@@ -314,7 +314,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "仕訳データを削除しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: {
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
 //            // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
