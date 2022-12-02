@@ -10,16 +10,29 @@ import UIKit
 import GoogleMobileAds // マネタイズ対応
 import SafariServices // アプリ内でブラウザ表示
 import MessageUI // お問い合わせ機能
+import MXParallaxHeader
 
 // 設定クラス
-class SettingsTableViewController: UITableViewController {
-    
-    
+class SettingsTableViewController: UIViewController {
+
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet var headerView: UIView!
+    var posX: CGFloat = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .AccentColor
+
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = 160
+        scrollView.parallaxHeader.mode = .topFill
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
 
         self.navigationItem.title = "設定"
         //largeTitle表示
@@ -62,13 +75,17 @@ class SettingsTableViewController: UITableViewController {
         }
     }
 
+}
+
+extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
+
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
@@ -83,7 +100,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     // セクションヘッダーのテキスト決める
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             return "アップグレード"
@@ -98,7 +115,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 3:
             return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
@@ -107,7 +124,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
 
@@ -186,7 +203,7 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
         case 2:
@@ -201,7 +218,7 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     // セルがタップされたとき
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
         // 別の画面に遷移
@@ -283,6 +300,16 @@ class SettingsTableViewController: UITableViewController {
                 break
             }
         }
+    }
+}
+
+extension SettingsTableViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        posX = scrollView.contentOffset.x
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.contentOffset.x = posX
     }
 }
 
