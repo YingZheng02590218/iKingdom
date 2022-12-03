@@ -16,6 +16,7 @@
 #    pod 'EMTNeumorphicView'
     pod 'Gecco'
     pod 'EAIntroView'
+    pod "MXParallaxHeader"
   end
 
   target 'Paciolist' do

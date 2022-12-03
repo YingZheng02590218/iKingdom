@@ -85,7 +85,7 @@ class BSViewController: UIViewController {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -1001,8 +1001,9 @@ extension BSViewController: BSPresenterOutput {
         setTableView()
         createButtons() // ボタン作成
         setRefreshControl()
-        // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
-        let printoutButton = UIBarButtonItem(title: "PDF", style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
+        // 印刷機能
+        let printoutButton = UIBarButtonItem(image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol")!.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
+        printoutButton.tintColor = .AccentColor
         //ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "貸借対照表"
@@ -1051,11 +1052,6 @@ extension BSViewController: BSPresenterOutput {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
-        }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
     

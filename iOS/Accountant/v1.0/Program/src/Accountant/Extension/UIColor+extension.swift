@@ -10,33 +10,37 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    /// AccentBlue RGB:#xxxx
+
     class var AccentBlue: UIColor {
         return UIColor(named: "AccentBlue")!
     }
-    
-    class var TextColor: UIColor {
-        return UIColor(named: "TextColor")!
+
+    class var AccentColor: UIColor {
+        return UIColor(named: "AccentColor") ?? .white
     }
-    
-    class var Background: UIColor {
-        return UIColor(named: "Background")!
+
+    class var AccentLight: UIColor {
+        return UIColor(named: "AccentLight")!
     }
-    
-    class var ButtonTextColor: UIColor {
-        return UIColor(named: "ButtonTextColor")!
-    }
-    
-    class var Background_light: UIColor {
-        return UIColor(named: "Background_light")!
-    }
-    
-    class var Background_dark: UIColor {
-        return UIColor(named: "Background_dark")!
+
+    class var BaseColor: UIColor {
+        return UIColor(named: "BaseColor") ?? .white
     }
 
     class var CalculatorDisplay: UIColor {
         return UIColor(named: "CalculatorDisplay")!
+    }
+
+    class var MainColor: UIColor {
+        return UIColor(named: "MainColor") ?? .white
+    }
+
+    class var MainColor2: UIColor {
+        return UIColor(named: "MainColor2") ?? .white
+    }
+    
+    class var TextColor: UIColor {
+        return UIColor(named: "TextColor")!
     }
 
     static let theme = UIColor(named: "C1D2EB")

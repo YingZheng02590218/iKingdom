@@ -79,7 +79,7 @@ class ClassicCalculatorViewController: UIViewController {
         backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         backgroundView.neumorphicLayer?.edged = Constant.edged
         backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         // Default is 1.
         labelView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
@@ -88,137 +88,137 @@ class ClassicCalculatorViewController: UIViewController {
         // Adding a thin border on the edge of the element.
         labelView.neumorphicLayer?.edged = true
         labelView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        labelView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        labelView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
 //        label.font = UIFont(name: "DSEG14 Classic-Regular", size: 34)
         label.text = numbersOnDisplay.description
         label.textAlignment = .right
         
         button1.setTitle("1", for: .normal)
-        button1.setTitleColor(.ButtonTextColor, for: .normal)
+        button1.setTitleColor(.TextColor, for: .normal)
         button1.neumorphicLayer?.cornerRadius = button1.frame.height / 2.2
         button1.contentVerticalAlignment = .fill
 //        button1.contentHorizontalAlignment = .fill
-        button1.setTitleColor(.ButtonTextColor, for: .selected)
+        button1.setTitleColor(.TextColor, for: .selected)
         button1.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button1.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button1.neumorphicLayer?.edged = Constant.edged
         button1.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button1.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button1.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         
         button2.setTitle("2", for: .normal)
-        button2.setTitleColor(.ButtonTextColor, for: .normal)
+        button2.setTitleColor(.TextColor, for: .normal)
         button2.neumorphicLayer?.cornerRadius = button2.frame.height / 2.2
         button2.contentVerticalAlignment = .fill
 //        button2.contentHorizontalAlignment = .fill
-        button2.setTitleColor(.ButtonTextColor, for: .selected)
+        button2.setTitleColor(.TextColor, for: .selected)
         button2.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button2.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button2.neumorphicLayer?.edged = Constant.edged
         button2.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button2.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button2.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         button3.setTitle("3", for: .normal)
-        button3.setTitleColor(.ButtonTextColor, for: .normal)
+        button3.setTitleColor(.TextColor, for: .normal)
         button3.neumorphicLayer?.cornerRadius = button3.frame.height / 2.2
         button3.contentVerticalAlignment = .fill
 //        button3.contentHorizontalAlignment = .fill
-        button3.setTitleColor(.ButtonTextColor, for: .selected)
+        button3.setTitleColor(.TextColor, for: .selected)
         button3.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button3.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button3.neumorphicLayer?.edged = Constant.edged
         button3.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button3.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button3.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         
         
         button4.setTitle("4", for: .normal)
-        button4.setTitleColor(.ButtonTextColor, for: .normal)
+        button4.setTitleColor(.TextColor, for: .normal)
         button4.neumorphicLayer?.cornerRadius = button4.frame.height / 2.2
         button4.contentVerticalAlignment = .fill
 //        button4.contentHorizontalAlignment = .fill
-        button4.setTitleColor(.ButtonTextColor, for: .selected)
+        button4.setTitleColor(.TextColor, for: .selected)
         button4.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button4.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button4.neumorphicLayer?.edged = Constant.edged
         button4.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button4.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button4.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         button5.setTitle("5", for: .normal)
-        button5.setTitleColor(.ButtonTextColor, for: .normal)
+        button5.setTitleColor(.TextColor, for: .normal)
         button5.neumorphicLayer?.cornerRadius = button5.frame.height / 2.2
         button5.contentVerticalAlignment = .fill
 //        button5.contentHorizontalAlignment = .fill
-        button5.setTitleColor(.ButtonTextColor, for: .selected)
+        button5.setTitleColor(.TextColor, for: .selected)
         button5.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button5.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button5.neumorphicLayer?.edged = Constant.edged
         button5.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button5.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button5.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         button6.setTitle("6", for: .normal)
-        button6.setTitleColor(.ButtonTextColor, for: .normal)
+        button6.setTitleColor(.TextColor, for: .normal)
         button6.neumorphicLayer?.cornerRadius = button6.frame.height / 2.2
         button6.contentVerticalAlignment = .fill
 //        button6.contentHorizontalAlignment = .fill
-        button6.setTitleColor(.ButtonTextColor, for: .selected)
+        button6.setTitleColor(.TextColor, for: .selected)
         button6.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button6.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button6.neumorphicLayer?.edged = Constant.edged
         button6.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button6.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button6.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         
         
         button7.setTitle("7", for: .normal)
-        button7.setTitleColor(.ButtonTextColor, for: .normal)
+        button7.setTitleColor(.TextColor, for: .normal)
         button7.neumorphicLayer?.cornerRadius = button7.frame.height / 2.2
         button7.contentVerticalAlignment = .fill
 //        button7.contentHorizontalAlignment = .fill
-        button7.setTitleColor(.ButtonTextColor, for: .selected)
+        button7.setTitleColor(.TextColor, for: .selected)
         button7.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button7.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button7.neumorphicLayer?.edged = Constant.edged
         button7.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button7.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button7.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         button8.setTitle("8", for: .normal)
-        button8.setTitleColor(.ButtonTextColor, for: .normal)
+        button8.setTitleColor(.TextColor, for: .normal)
         button8.neumorphicLayer?.cornerRadius = button8.frame.height / 2.2
         button8.contentVerticalAlignment = .fill
 //        button8.contentHorizontalAlignment = .fill
-        button8.setTitleColor(.ButtonTextColor, for: .selected)
+        button8.setTitleColor(.TextColor, for: .selected)
         button8.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button8.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button8.neumorphicLayer?.edged = Constant.edged
         button8.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button8.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button8.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         button9.setTitle("9", for: .normal)
-        button9.setTitleColor(.ButtonTextColor, for: .normal)
+        button9.setTitleColor(.TextColor, for: .normal)
         button9.neumorphicLayer?.cornerRadius = button9.frame.height / 2.2
         button9.contentVerticalAlignment = .fill
 //        button9.contentHorizontalAlignment = .fill
-        button9.setTitleColor(.ButtonTextColor, for: .selected)
+        button9.setTitleColor(.TextColor, for: .selected)
         button9.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button9.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button9.neumorphicLayer?.edged = Constant.edged
         button9.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button9.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button9.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         
         
         button0.setTitle("0", for: .normal)
-        button0.setTitleColor(.ButtonTextColor, for: .normal)
+        button0.setTitleColor(.TextColor, for: .normal)
         button0.neumorphicLayer?.cornerRadius = button0.frame.height / 2.2
         button0.contentVerticalAlignment = .fill
 //        button0.contentHorizontalAlignment = .fill
-        button0.setTitleColor(.ButtonTextColor, for: .selected)
+        button0.setTitleColor(.TextColor, for: .selected)
         button0.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         button0.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         button0.neumorphicLayer?.edged = Constant.edged
         button0.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        button0.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        button0.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
 //        buttonDivied.setTitle("÷", for: .normal)
 //        buttonDivied.backgroundColor = .orange
@@ -241,28 +241,28 @@ class ClassicCalculatorViewController: UIViewController {
 //        buttonDot.layer.cornerRadius = buttonDot.frame.height / 2.2
         
         buttonEqual.setTitle("=", for: .normal)
-        buttonEqual.setTitleColor(.ButtonTextColor, for: .normal)
+        buttonEqual.setTitleColor(.TextColor, for: .normal)
         buttonEqual.neumorphicLayer?.cornerRadius = buttonEqual.frame.height / 2.2
         buttonEqual.contentVerticalAlignment = .fill
 //        buttonEqual.contentHorizontalAlignment = .fill
-        buttonEqual.setTitleColor(.ButtonTextColor, for: .selected)
+        buttonEqual.setTitleColor(.TextColor, for: .selected)
         buttonEqual.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         buttonEqual.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         buttonEqual.neumorphicLayer?.edged = Constant.edged
         buttonEqual.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        buttonEqual.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        buttonEqual.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
         buttonAc.setTitle("AC", for: .normal)
-        buttonAc.setTitleColor(.ButtonTextColor, for: .normal)
+        buttonAc.setTitleColor(.TextColor, for: .normal)
         buttonAc.neumorphicLayer?.cornerRadius = buttonAc.frame.height / 2.2
         buttonAc.contentVerticalAlignment = .fill
 //        buttonAc.contentHorizontalAlignment = .fill
-        buttonAc.setTitleColor(.ButtonTextColor, for: .selected)
+        buttonAc.setTitleColor(.TextColor, for: .selected)
         buttonAc.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         buttonAc.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         buttonAc.neumorphicLayer?.edged = Constant.edged
         buttonAc.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        buttonAc.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        buttonAc.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
 
 //        buttonPlusMinus.setTitle("+/-", for: .normal)
 //        buttonPlusMinus.backgroundColor = .lightGray

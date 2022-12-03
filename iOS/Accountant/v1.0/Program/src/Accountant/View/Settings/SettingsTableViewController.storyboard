@@ -5,44 +5,17 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--設定-->
-        <scene sceneID="wso-Wa-TWQ">
-            <objects>
-                <tableViewController id="P6q-PR-AAS" customClass="SettingsTableViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="B9F-9v-Zyx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Background"/>
-                        <connections>
-                            <outlet property="dataSource" destination="P6q-PR-AAS" id="jt9-Wp-tCw"/>
-                            <outlet property="delegate" destination="P6q-PR-AAS" id="f0M-tD-kSG"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="設定" id="XAJ-4X-3ur"/>
-                    <connections>
-                        <segue destination="q12-zD-TI5" kind="showDetail" identifier="SettingsInformationTableViewController" id="W9T-Ud-Oix"/>
-                        <segue destination="U0x-50-Lq1" kind="showDetail" identifier="SettingsPeriodTableViewController" id="8Lh-ko-arn"/>
-                        <segue destination="aCf-mA-B66" kind="showDetail" identifier="SettingsCategoryTableViewController" id="Ilp-Wc-fGu"/>
-                        <segue destination="3kE-mn-yeq" kind="showDetail" identifier="SettingsOperatingTableViewController" id="Xb8-Xy-taS"/>
-                        <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="v6X-fB-3aL"/>
-                        <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="3dq-0w-3Ni"/>
-                        <segue destination="ez5-Hg-R91" kind="showDetail" identifier="SettingsOperatingJournalEntryViewController" id="h0J-BW-b9e"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jbi-Wz-XeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5743" y="2769"/>
-        </scene>
         <!--SettingsUpgradeTableViewController-->
         <scene sceneID="NCX-IR-4NC">
             <objects>
                 <viewControllerPlaceholder storyboardName="SettingsUpgradeTableViewController" id="dKv-K6-fHd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3a-g2-X2C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6490" y="2769"/>
+            <point key="canvasLocation" x="6488" y="2829"/>
         </scene>
         <!--SettingsHelpViewController-->
         <scene sceneID="wCy-eh-scK">
@@ -50,7 +23,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsHelpViewController" id="hjp-Wc-Ax9" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EU-fS-0VG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6449" y="2742"/>
+            <point key="canvasLocation" x="6449" y="2769"/>
         </scene>
         <!--SettingsInformationTableViewController-->
         <scene sceneID="xeG-aV-jzo">
@@ -58,7 +31,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsInformationTableViewController" id="q12-zD-TI5" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="unx-a4-Pgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6504" y="2594"/>
+            <point key="canvasLocation" x="6504" y="2478"/>
         </scene>
         <!--SettingsPeriodTableViewController-->
         <scene sceneID="OlB-zh-A7n">
@@ -66,7 +39,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsPeriodTableViewController" id="U0x-50-Lq1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISg-d1-ogD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6481" y="2626"/>
+            <point key="canvasLocation" x="6480" y="2534"/>
         </scene>
         <!--SettingsCategoryTableViewController-->
         <scene sceneID="IUs-zX-xCZ">
@@ -74,7 +47,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsCategoryTableViewController" id="aCf-mA-B66" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9b2-J5-9ot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6493" y="2655"/>
+            <point key="canvasLocation" x="6495" y="2591"/>
         </scene>
         <!--SettingsOperatingTableViewController-->
         <scene sceneID="D1Z-T7-XUW">
@@ -82,7 +55,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsOperatingTableViewController" id="3kE-mn-yeq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1fn-LE-Lm1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6496" y="2683"/>
+            <point key="canvasLocation" x="6496" y="2648"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OWE-tA-jpz">
@@ -91,13 +64,13 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="B5M-s0-wUS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="AccentOrange"/>
+                        <color key="tintColor" name="AccentColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" name="TextColor"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="P6q-PR-AAS" kind="relationship" relationship="rootViewController" id="gPU-qI-1Vh"/>
+                        <segue destination="qfj-L3-pGb" kind="relationship" relationship="rootViewController" id="znd-Ds-Pdt"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMz-qP-n3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -110,15 +83,115 @@
                 <viewControllerPlaceholder storyboardName="SettingsOperatingJournalEntryViewController" id="ez5-Hg-R91" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hpk-sM-J9M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6530" y="2713"/>
+            <point key="canvasLocation" x="6530" y="2707"/>
+        </scene>
+        <!--設定-->
+        <scene sceneID="ZWy-Tg-91a">
+            <objects>
+                <viewController id="qfj-L3-pGb" customClass="SettingsTableViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KrU-c3-tUV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hM-kh-JAI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeT-Uk-pjw" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="9Nn-g2-Pcz">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                                <color key="backgroundColor" name="BaseColor"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="qfj-L3-pGb" id="CYI-iO-RAA"/>
+                                                    <outlet property="delegate" destination="qfj-L3-pGb" id="dq2-xw-FTc"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="9Nn-g2-Pcz" firstAttribute="leading" secondItem="HeT-Uk-pjw" secondAttribute="leading" id="Hha-Zu-5yL"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Nn-g2-Pcz" secondAttribute="trailing" id="Mk6-VK-m2f"/>
+                                            <constraint firstAttribute="bottom" secondItem="9Nn-g2-Pcz" secondAttribute="bottom" id="RGn-aT-JYD"/>
+                                            <constraint firstItem="9Nn-g2-Pcz" firstAttribute="top" secondItem="HeT-Uk-pjw" secondAttribute="top" id="T6d-bZ-mei"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="width" secondItem="QmG-ce-wan" secondAttribute="width" id="2wm-zX-dVK"/>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="bottom" secondItem="znI-7U-821" secondAttribute="bottom" id="KXR-4K-dy2"/>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="leading" secondItem="znI-7U-821" secondAttribute="leading" id="duM-bJ-gEr"/>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="top" secondItem="znI-7U-821" secondAttribute="top" id="hqH-TO-ijw"/>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="height" secondItem="QmG-ce-wan" secondAttribute="height" id="tfe-F0-9mR"/>
+                                    <constraint firstItem="HeT-Uk-pjw" firstAttribute="trailing" secondItem="znI-7U-821" secondAttribute="trailing" id="zUN-GZ-ePj"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="znI-7U-821"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="QmG-ce-wan"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PhA-eR-RAu"/>
+                        <color key="backgroundColor" name="BaseColor"/>
+                        <constraints>
+                            <constraint firstItem="5hM-kh-JAI" firstAttribute="top" secondItem="KrU-c3-tUV" secondAttribute="top" id="1Nm-5C-pXa"/>
+                            <constraint firstItem="5hM-kh-JAI" firstAttribute="trailing" secondItem="PhA-eR-RAu" secondAttribute="trailing" id="Kgi-1X-jCp"/>
+                            <constraint firstItem="PhA-eR-RAu" firstAttribute="bottom" secondItem="5hM-kh-JAI" secondAttribute="bottom" id="k3w-e2-6Sn"/>
+                            <constraint firstItem="5hM-kh-JAI" firstAttribute="leading" secondItem="PhA-eR-RAu" secondAttribute="leading" id="ojm-fa-6GE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="設定" id="uKV-CJ-TAu"/>
+                    <connections>
+                        <outlet property="contentView" destination="HeT-Uk-pjw" id="fEC-RW-lZg"/>
+                        <outlet property="headerView" destination="m2e-xa-ehY" id="rOE-JS-e5t"/>
+                        <outlet property="scrollView" destination="5hM-kh-JAI" id="cjY-sz-tOR"/>
+                        <outlet property="tableView" destination="9Nn-g2-Pcz" id="e74-Ay-KgB"/>
+                        <segue destination="q12-zD-TI5" kind="showDetail" identifier="SettingsInformationTableViewController" id="E8k-Od-ZsD"/>
+                        <segue destination="U0x-50-Lq1" kind="showDetail" identifier="SettingsPeriodTableViewController" id="Sh1-mH-XE2"/>
+                        <segue destination="aCf-mA-B66" kind="showDetail" identifier="SettingsCategoryTableViewController" id="CUa-C9-DXP"/>
+                        <segue destination="3kE-mn-yeq" kind="showDetail" identifier="SettingsOperatingTableViewController" id="4QW-eL-48h"/>
+                        <segue destination="ez5-Hg-R91" kind="showDetail" identifier="SettingsOperatingJournalEntryViewController" id="xB3-Cd-Cb4"/>
+                        <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
+                        <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="m2e-xa-ehY">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Vrj-sR-CjP">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pacioli3" translatesAutoresizingMaskIntoConstraints="NO" id="fhN-Xm-Spc">
+                            <rect key="frame" x="0.0" y="20" width="240" height="128"/>
+                        </imageView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="cjR-mA-pCn"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Vrj-sR-CjP" firstAttribute="top" secondItem="m2e-xa-ehY" secondAttribute="top" id="70x-R2-FeQ"/>
+                        <constraint firstItem="Vrj-sR-CjP" firstAttribute="leading" secondItem="m2e-xa-ehY" secondAttribute="leading" id="7n2-b5-eW4"/>
+                        <constraint firstItem="fhN-Xm-Spc" firstAttribute="height" secondItem="m2e-xa-ehY" secondAttribute="height" id="BBh-Tu-9qS"/>
+                        <constraint firstItem="fhN-Xm-Spc" firstAttribute="leading" secondItem="Vrj-sR-CjP" secondAttribute="leading" id="Ofa-qu-aHN"/>
+                        <constraint firstItem="Vrj-sR-CjP" firstAttribute="height" secondItem="m2e-xa-ehY" secondAttribute="height" id="R5Q-7K-7au"/>
+                        <constraint firstAttribute="bottom" secondItem="Vrj-sR-CjP" secondAttribute="bottom" id="WsX-Ri-k2G"/>
+                        <constraint firstItem="fhN-Xm-Spc" firstAttribute="bottom" secondItem="Vrj-sR-CjP" secondAttribute="bottom" constant="20" id="j1K-iN-k2b"/>
+                        <constraint firstItem="fhN-Xm-Spc" firstAttribute="trailing" secondItem="Vrj-sR-CjP" secondAttribute="trailing" id="tDo-s6-if4"/>
+                        <constraint firstAttribute="trailing" secondItem="Vrj-sR-CjP" secondAttribute="trailing" id="veE-5t-IaQ"/>
+                        <constraint firstItem="fhN-Xm-Spc" firstAttribute="centerX" secondItem="m2e-xa-ehY" secondAttribute="centerX" id="xuh-r3-mcP"/>
+                    </constraints>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="4964" y="2769"/>
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentOrange">
-            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="Background" width="1500" height="1250"/>
+        <image name="Pacioli3" width="1500" height="1250"/>
+        <namedColor name="AccentColor">
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

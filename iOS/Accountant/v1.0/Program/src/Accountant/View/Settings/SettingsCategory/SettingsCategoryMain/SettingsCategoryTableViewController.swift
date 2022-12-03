@@ -18,6 +18,7 @@ class SettingsCategoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,11 +48,7 @@ class SettingsCategoryTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
+
     }
     
     // ビューが表示された後に呼ばれる
@@ -143,42 +140,46 @@ class SettingsCategoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        var cell = UITableViewCell()
+
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
                 //① UI部品を指定
-                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text = "勘定科目一覧"
                 cell.textLabel?.textColor = .TextColor
-                return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目別勘定科目一覧"
                 cell.textLabel?.textColor = .TextColor
-                return cell
 //        case 3:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
+//            cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
 //            cell.textLabel?.text =  "種類別勘定科目一覧"
-//            return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text =   ""
                 cell.textLabel?.textColor = .TextColor
-                return cell
             }
         }else {
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目一覧"
                 cell.textLabel?.textColor = .TextColor
-                return cell
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.textColor = .TextColor
                 cell.textLabel?.text =   ""
-                return cell
             }
         }
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
+        return cell
     }
 }

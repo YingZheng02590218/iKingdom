@@ -132,6 +132,7 @@ PODS:
     - GoogleUtilities/MethodSwizzler
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - MXParallaxHeader (1.1.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -149,6 +150,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK (= 8.13.0)
   - GoogleAnalytics
   - GoogleUtilities (= 7.7.0)
+  - MXParallaxHeader
   - SwiftyStoreKit
 
 SPEC REPOS:
@@ -171,6 +173,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - MXParallaxHeader
     - nanopb
     - PromisesObjC
     - SwiftyStoreKit
@@ -194,10 +197,11 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  MXParallaxHeader: de3c867e10ba46e8f6e20c8ee1f2a910372b3b94
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 13faf3a0e95fbee3c3b2467e7c72bea2e64edd7a
+PODFILE CHECKSUM: 18966bc4e4a3a31d72a25d97ca5357f7b6fd335c
 
 COCOAPODS: 1.11.2

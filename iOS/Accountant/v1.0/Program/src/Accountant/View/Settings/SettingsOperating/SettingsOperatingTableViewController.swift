@@ -18,6 +18,8 @@ class SettingsOperatingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorColor = .AccentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,9 +49,6 @@ class SettingsOperatingTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     // ビューが表示された後に呼ばれる

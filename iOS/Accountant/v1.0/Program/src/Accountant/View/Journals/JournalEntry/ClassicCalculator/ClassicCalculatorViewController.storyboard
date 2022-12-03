@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -16,7 +17,7 @@
         <!--Classic Calculator View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ClassicCalcuatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ClassicCalculatorViewController" customModule="AccountantTests" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClassicCalcuatorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ClassicCalculatorViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,14 +105,16 @@
                                                             <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VaX-Oy-oxU">
                                                         <rect key="frame" x="116" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                                        <buttonConfiguration key="configuration" style="plain" title=" ">
+                                                            <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-2h-Uqr">
                                                         <rect key="frame" x="232" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,7 +318,7 @@
                                                             <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
-                                                    <button contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc">
                                                         <rect key="frame" x="116" y="0.0" width="99" height="65"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -353,7 +356,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="Background"/>
+                                <color key="backgroundColor" name="BaseColor"/>
                                 <constraints>
                                     <constraint firstItem="qaE-hJ-5UJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrN-O8-LWP" secondAttribute="leading" id="0c5-AQ-N8G"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qaE-hJ-5UJ" secondAttribute="trailing" id="1vi-Ns-cdL"/>
@@ -401,7 +404,7 @@
                         <outlet property="buttonMultiple" destination="xXE-2f-HKE" id="4Q9-N7-lJJ"/>
                         <outlet property="buttonPercent" destination="UzO-2h-Uqr" id="FzG-Mv-Ldw"/>
                         <outlet property="buttonPlus" destination="qVe-2f-Doy" id="NFH-UC-kOP"/>
-                        <outlet property="buttonPlusMinus" destination="VaX-Oy-oxU" id="8RR-6h-iNP"/>
+                        <outlet property="buttonPlusMinus" destination="VaX-Oy-oxU" id="R7x-Oq-aAm"/>
                         <outlet property="label" destination="JQr-4L-AiR" id="hIG-dM-450"/>
                         <outlet property="labelView" destination="2xY-0v-zIO" id="t5l-br-ufb"/>
                         <outletCollection property="arrayHugo" destination="t7R-DU-4BS" collectionClass="NSMutableArray" id="b2u-hu-pHU"/>
@@ -424,8 +427,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

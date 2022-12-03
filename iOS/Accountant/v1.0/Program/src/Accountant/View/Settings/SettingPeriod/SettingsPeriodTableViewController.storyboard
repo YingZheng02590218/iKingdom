@@ -34,7 +34,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2Ih-If-H5z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <color key="tintColor" name="AccentOrange"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="identifier_theDayOfReckoning" id="xKP-jn-WXH" customClass="SettingsPeriodTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -69,7 +69,7 @@
                                         <constraint firstItem="Isq-wS-H05" firstAttribute="leading" secondItem="6b8-am-Xxn" secondAttribute="leading" constant="169" id="xVF-Vg-6Qs"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" name="CellBackground"/>
+                                <color key="backgroundColor" name="MainColor2"/>
                                 <color key="tintColor" name="AccentOrange"/>
                                 <connections>
                                     <outlet property="detailTextLabel2" destination="Isq-wS-H05" id="iF5-At-Nb7"/>
@@ -95,7 +95,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="会計期間" id="4tR-uQ-Nvd">
                         <barButtonItem key="rightBarButtonItem" title="会計年度を追加" id="08a-5E-Ugy">
-                            <color key="tintColor" name="AccentBlue"/>
                             <connections>
                                 <segue destination="ZIu-qn-l0p" kind="popoverPresentation" popoverAnchorBarButtonItem="08a-5E-Ugy" id="jum-xl-JWk">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -159,17 +158,17 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentBlue">
-            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="AccentOrange">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="CellBackground">
             <color red="0.97500002384185791" green="0.99099999666213989" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="MainColor2">
+            <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

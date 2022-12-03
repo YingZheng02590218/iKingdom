@@ -12,12 +12,10 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 背景の透過
-        UITabBar.appearance().backgroundImage = UIImage()
-        // 境界線の透過
-        UITabBar.appearance().shadowImage = UIImage()
         // 生体認証パスコードロック アプリ起動完了時のパスコード画面表示の通知監視
         NotificationCenter.default.addObserver(self, selector: #selector(self.displayPasscodeLockScreenIfNeeded), name: UIApplication.didFinishLaunchingNotification, object: nil)
+
+        self.navigationController?.navigationBar.tintColor = .AccentColor
     }
 
     // MARK: - 生体認証パスコードロック

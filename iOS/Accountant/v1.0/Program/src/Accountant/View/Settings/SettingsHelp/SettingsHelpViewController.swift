@@ -115,9 +115,6 @@ class SettingsHelpViewController: UIViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
 
     // 画面遷移の準備　勘定科目画面

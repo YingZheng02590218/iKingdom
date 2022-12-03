@@ -81,7 +81,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -437,11 +437,6 @@ extension TBViewController: TBPresenterOutput {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
-        }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
     

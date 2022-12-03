@@ -27,6 +27,9 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.separatorColor = .AccentColor
+
         // 登録ボタンの　表示　非表示
         if addAccount {
             Button_input.isHidden = false
@@ -182,6 +185,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.label.text = "表示科目を選択してください"
                     cell.label.textColor = .lightGray
                 }
+                // Accessory Color
+                let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+                let disclosureView = UIImageView(image: disclosureImage)
+                disclosureView.tintColor = UIColor.AccentColor
+                cell.accessoryView = disclosureView
+
                 return cell
             }
         }else { // 新規追加　以外
@@ -327,14 +336,14 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     
     // ボタンのデザインを指定する
     private func createButtons() {
-        Button_input.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_input.setTitleColor(.TextColor, for: .normal)
         Button_input.neumorphicLayer?.cornerRadius = 15
-        Button_input.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_input.setTitleColor(.TextColor, for: .selected)
         Button_input.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_input.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_input.neumorphicLayer?.edged = Constant.edged
         Button_input.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
     }
     
     // TextField作成
