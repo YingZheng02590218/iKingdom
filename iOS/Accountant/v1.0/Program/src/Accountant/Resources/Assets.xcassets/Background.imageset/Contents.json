@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "_111_background.png",
+      "filename" : "IMG_3246.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "_111_background-2.png",
+      "filename" : "IMG_3246-1.png",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "_111_background-1.png",
+      "filename" : "IMG_3246-2.png",
       "idiom" : "universal"
     }
   ],

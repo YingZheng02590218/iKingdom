@@ -17,6 +17,14 @@ class SettingsTableViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var scrollView: UIScrollView!
+    // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
+    // https://swallow-incubate.com/archives/blog/20200805
+    //    手順
+    //    UIScrollViewを設置する
+    //    UIScrollViewとViewに制約を設定する
+    //    UIScrollViewにUIView（ContentView）を配置する
+    //    UIScrollViewとContentViewに制約を設定する
+    //    ContentViewに高さを設定する
     @IBOutlet var contentView: UIView!
     @IBOutlet var headerView: UIView!
     var posX: CGFloat = 0
@@ -29,7 +37,7 @@ class SettingsTableViewController: UIViewController {
 
         scrollView.parallaxHeader.view = headerView
         scrollView.parallaxHeader.height = 160
-        scrollView.parallaxHeader.mode = .topFill
+        scrollView.parallaxHeader.mode = .fill
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
@@ -46,7 +54,7 @@ class SettingsTableViewController: UIViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
-    
+
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc func switchTriggered(sender: UISwitch){
         // 生体認証かパスコードのいずれかが使用可能かを確認する
