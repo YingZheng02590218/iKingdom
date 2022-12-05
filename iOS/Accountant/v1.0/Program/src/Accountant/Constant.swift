@@ -28,6 +28,6 @@ struct Constant {
     // ニューモフィズム
     static let LIGHTSHADOWOPACITY: Float = 0.3
     static let DARKSHADOWOPACITY: Float = 0.5
-    static let ELEMENTDEPTH: CGFloat = 6
+    static let ELEMENTDEPTH: CGFloat = 5
     static let edged = false
 }

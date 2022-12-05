@@ -37,9 +37,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
                 JournalEntryViewController.viewReload = true
             }
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
    
     override func viewWillLayoutSubviews() {

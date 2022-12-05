@@ -52,11 +52,6 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -243,6 +238,13 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
                 //UIButtonを無効化
                 cell.ToggleButton.isEnabled = false
             }
+
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
             return cell
     }
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す

@@ -80,7 +80,8 @@ class JournalEntryViewController: UIViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+        navigationController?.navigationBar.tintColor = .AccentColor
+
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
         
@@ -202,12 +203,6 @@ class JournalEntryViewController: UIViewController {
         
         // セットアップ AdMob
         setupAdMob()
-        
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -542,37 +537,37 @@ class JournalEntryViewController: UIViewController {
             datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             datePickerView.neumorphicLayer?.edged = Constant.edged
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         }
         
         if let Button_Left = Button_Left {
-            Button_Left.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Left.setTitleColor(.TextColor, for: .normal)
             Button_Left.neumorphicLayer?.cornerRadius = 10
-            Button_Left.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Left.setTitleColor(.TextColor, for: .selected)
             Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Left.neumorphicLayer?.edged = Constant.edged
             Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
-            let backImage = UIImage(named: "icons8-戻る-25")?.withRenderingMode(.alwaysTemplate)
+            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            let backImage = UIImage(named: "arrow_back_ios-arrow_back_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Left.tintColor = .TextColor
+            Button_Left.tintColor = .AccentColor
         }
         
         if let Button_Right = Button_Right {
-            Button_Right.setTitleColor(.ButtonTextColor, for: .normal)
+            Button_Right.setTitleColor(.TextColor, for: .normal)
             Button_Right.neumorphicLayer?.cornerRadius = 10
-            Button_Right.setTitleColor(.ButtonTextColor, for: .selected)
+            Button_Right.setTitleColor(.TextColor, for: .selected)
             Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Right.neumorphicLayer?.edged = Constant.edged
             Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
-            let backImage = UIImage(named: "icons8-進む-25")?.withRenderingMode(.alwaysTemplate)
+            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            let backImage = UIImage(named: "arrow_forward_ios-arrow_forward_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Right.tintColor = .TextColor
+            Button_Right.tintColor = .AccentColor
         }
         
         if let textFieldView = textFieldView {
@@ -581,7 +576,7 @@ class JournalEntryViewController: UIViewController {
             textFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             textFieldView.neumorphicLayer?.edged = Constant.edged
             textFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
         
@@ -591,34 +586,34 @@ class JournalEntryViewController: UIViewController {
             smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             smallWrittingTextFieldView.neumorphicLayer?.edged = Constant.edged
             smallWrittingTextFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
         
 //        inputButton.setTitle("入力", for: .normal)
-        inputButton.setTitleColor(.ButtonTextColor, for: .normal)
+        inputButton.setTitleColor(.AccentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
-        inputButton.setTitleColor(.ButtonTextColor, for: .selected)
+        inputButton.setTitleColor(.AccentColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         
-        Button_cancel.setTitleColor(.ButtonTextColor, for: .normal)
+        Button_cancel.setTitleColor(.TextColor, for: .normal)
         Button_cancel.neumorphicLayer?.cornerRadius = 15
-        Button_cancel.setTitleColor(.ButtonTextColor, for: .selected)
+        Button_cancel.setTitleColor(.TextColor, for: .selected)
         Button_cancel.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_cancel.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_cancel.neumorphicLayer?.edged = Constant.edged
         Button_cancel.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.systemPink.cgColor
+        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
-        Button_cancel.neumorphicLayer?.elementColor = UIColor.Background.cgColor
-        let backImage = UIImage(named: "icons8-削除-25-2")?.withRenderingMode(.alwaysTemplate)
+        Button_cancel.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
+        let backImage = UIImage(named: "close-close_symbol")?.withRenderingMode(.alwaysTemplate)
         Button_cancel.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
-        Button_cancel.tintColor = .TextColor
+        Button_cancel.tintColor = .AccentColor
     }
 
     // MARK: PickerTextField
@@ -630,6 +625,9 @@ class JournalEntryViewController: UIViewController {
         TextField_category_credit.setup(identifier: "identifier_credit")
         TextField_category_debit.textAlignment = .left
         TextField_category_credit.textAlignment = .right
+
+        TextField_category_debit.layer.borderWidth = 0.5
+        TextField_category_credit.layer.borderWidth = 0.5
     }
     
     // MARK: UITextField
@@ -673,13 +671,16 @@ class JournalEntryViewController: UIViewController {
         // TextFieldに入力された値に反応
         TextField_amount_debit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
         TextField_amount_credit.addTarget(self, action: #selector(textFieldDidChange),for: UIControl.Event.editingChanged)
+
+        TextField_amount_debit.layer.borderWidth = 0.5
+        TextField_amount_credit.layer.borderWidth = 0.5
     }
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
-        TextField_SmallWritting.tintColor = UIColor.black
+        TextField_SmallWritting.tintColor = UIColor.AccentColor
 
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
@@ -695,6 +696,8 @@ class JournalEntryViewController: UIViewController {
        cancelItem.tag = 77
        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
        TextField_SmallWritting.inputAccessoryView = toolbar
+
+        TextField_SmallWritting.layer.borderWidth = 0.5
     }
     // 初期値を再設定
     func setInitialData() {

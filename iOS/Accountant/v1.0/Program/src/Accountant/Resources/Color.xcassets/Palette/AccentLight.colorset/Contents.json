@@ -5,10 +5,23 @@
         "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.867",
-          "green" : "1.000",
-          "red" : "0.475"
+          "blue" : "0.537",
+          "green" : "0.278",
+          "red" : "0.133"
         }
+      },
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "color" : {
+        "platform" : "ios",
+        "reference" : "linkColor"
       },
       "idiom" : "universal"
     }

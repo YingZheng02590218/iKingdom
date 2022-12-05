@@ -44,7 +44,7 @@ class PeriodYearViewController: UIViewController {
             datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             datePickerView.neumorphicLayer?.edged = Constant.edged
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         }
         
         if let datePickerView = pickerViewViewView {
@@ -53,30 +53,30 @@ class PeriodYearViewController: UIViewController {
             datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             datePickerView.neumorphicLayer?.edged = Constant.edged
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         }
         
 //        doneButton.setTitle("Done", for: .normal)
-        doneButton.setTitleColor(.ButtonTextColor, for: .normal)
+        doneButton.setTitleColor(.TextColor, for: .normal)
         doneButton.neumorphicLayer?.cornerRadius = doneButton.frame.height / 2.2
         doneButton.contentVerticalAlignment = .fill
-        doneButton.setTitleColor(.ButtonTextColor, for: .selected)
+        doneButton.setTitleColor(.TextColor, for: .selected)
         doneButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         doneButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         doneButton.neumorphicLayer?.edged = Constant.edged
         doneButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        doneButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        doneButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
         
 //        cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.setTitleColor(.ButtonTextColor, for: .normal)
+        cancelButton.setTitleColor(.TextColor, for: .normal)
         cancelButton.neumorphicLayer?.cornerRadius = cancelButton.frame.height / 2.2
         cancelButton.contentVerticalAlignment = .fill
-        cancelButton.setTitleColor(.ButtonTextColor, for: .selected)
+        cancelButton.setTitleColor(.TextColor, for: .selected)
         cancelButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         cancelButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         cancelButton.neumorphicLayer?.edged = Constant.edged
         cancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+        cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
     }
     
     @IBAction func doneButtonTapped(_ sender: EMTNeumorphicButton) {

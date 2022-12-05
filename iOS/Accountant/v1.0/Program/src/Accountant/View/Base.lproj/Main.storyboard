@@ -20,7 +20,7 @@
         <scene sceneID="nKs-wx-s0s">
             <objects>
                 <splitViewController allowDoubleColumnStyle="YES" id="SZ1-CS-6Sk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="設定" image="icons8-ギア-25" id="iV4-KT-KPX"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="tools_wrench-tools_wrench_symbol" id="iV4-KT-KPX"/>
                     <navigationItem key="navigationItem" id="BGb-82-uru"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -46,7 +46,7 @@
         <scene sceneID="5eN-hT-QbF">
             <objects>
                 <navigationController id="dEp-Vg-nYV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="決算書" image="icons8-雑誌-25" id="kQn-iU-qSb"/>
+                    <tabBarItem key="tabBarItem" title="決算書" image="folder_open-folder_open_grad200_symbol" id="kQn-iU-qSb"/>
                     <navigationBar key="navigationBar" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGz-zt-TEe">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -67,7 +67,7 @@
         <scene sceneID="b3I-pg-ShW">
             <objects>
                 <navigationController id="PWY-gK-YFq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳帳" image="icons8-開いた本-25" id="SGD-Of-XCK" userLabel="仕訳帳"/>
+                    <tabBarItem key="tabBarItem" title="仕訳帳" image="import_contacts-import_contacts_grad200_symbol" id="SGD-Of-XCK" userLabel="仕訳帳"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3mA-3C-Vc6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -88,7 +88,7 @@
         <scene sceneID="8Yy-gm-rKf">
             <objects>
                 <navigationController id="Mfv-1p-Kx7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="仕訳" image="icons8-ペン-25" id="9b3-49-6Uh"/>
+                    <tabBarItem key="tabBarItem" title="仕訳" image="border_color-border_color_grad200_symbol" id="9b3-49-6Uh"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HBz-0c-msF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -134,7 +134,7 @@
         <scene sceneID="1yU-Pm-tWx">
             <objects>
                 <navigationController id="TNd-j8-cbF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="総勘定元帳" image="icons8-saddle-stitched-booklet-25" id="ek4-yK-Zyk"/>
+                    <tabBarItem key="tabBarItem" title="総勘定元帳" image="menu_book-menu_book_symbol" id="ek4-yK-Zyk"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZIn-vy-KXP">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -158,8 +158,8 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="632-gT-nm6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" name="AccentBlue"/>
+                        <color key="barTintColor" name="BaseColor"/>
+                        <color key="selectedImageTintColor" name="AccentColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="Mfv-1p-Kx7" kind="relationship" relationship="viewControllers" id="lfb-P1-Yq7"/>
@@ -185,13 +185,19 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-saddle-stitched-booklet-25" width="25" height="25"/>
-        <image name="icons8-ギア-25" width="25" height="25"/>
-        <image name="icons8-ペン-25" width="25" height="25"/>
-        <image name="icons8-開いた本-25" width="25" height="25"/>
-        <image name="icons8-雑誌-25" width="25" height="25"/>
+        <image name="border_color-border_color_grad200_symbol" width="14" height="17"/>
+        <image name="folder_open-folder_open_grad200_symbol" width="15" height="12"/>
+        <image name="import_contacts-import_contacts_grad200_symbol" width="15" height="11"/>
+        <image name="menu_book-menu_book_symbol" width="15" height="11"/>
+        <image name="tools_wrench-tools_wrench_symbol" width="13" height="13"/>
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AccentColor">
+            <color red="0.13333333333333333" green="0.27843137254901962" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

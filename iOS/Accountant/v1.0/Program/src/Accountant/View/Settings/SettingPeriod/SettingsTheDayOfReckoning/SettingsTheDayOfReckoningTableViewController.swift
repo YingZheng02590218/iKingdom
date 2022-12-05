@@ -47,9 +47,6 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: - Table view data source

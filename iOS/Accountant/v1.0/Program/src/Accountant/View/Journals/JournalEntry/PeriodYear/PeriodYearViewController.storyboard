@@ -71,7 +71,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="Background"/>
+                                        <color key="backgroundColor" name="BaseColor"/>
                                         <constraints>
                                             <constraint firstItem="9MJ-cA-Ggo" firstAttribute="top" secondItem="47O-qE-JUm" secondAttribute="top" constant="20" id="2Jc-pK-pwu"/>
                                             <constraint firstAttribute="trailing" secondItem="neW-BP-kVf" secondAttribute="trailing" constant="20" id="BSt-Uc-zqS"/>
@@ -118,8 +118,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

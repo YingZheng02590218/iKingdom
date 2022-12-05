@@ -50,11 +50,6 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
                 gADBannerView.isHidden = true
             }
         }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
-        }
     }
 
     // MARK: - Table view data source
@@ -166,6 +161,12 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
                 cell.selectionStyle = .default
             }
         }
+        // Accessory Color
+        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureView = UIImageView(image: disclosureImage)
+        disclosureView.tintColor = UIColor.AccentColor
+        cell.accessoryView = disclosureView
+
         print(objects[indexPath.row].number, objects[indexPath.row].switching)
         return cell
     }

@@ -15,6 +15,9 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.navigationBar.tintColor = .AccentColor
+
         //UIPickerView
         // Delegate設定
         pickerView.delegate = self
@@ -27,11 +30,7 @@ class SettingsPeriodYearViewController: UIViewController,UIPickerViewDataSource,
     }
     
     override func viewWillAppear(_ animated: Bool){
-        if let _ = self.navigationController {
-            // ナビゲーションを透明にする処理
-            self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            self.navigationController!.navigationBar.shadowImage = UIImage()
-        }
+
     }
 
 //UIPickerView

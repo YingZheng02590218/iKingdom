@@ -96,6 +96,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             tableView.sectionHeaderTopPadding = 0
         }
         // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
+        editButtonItem.tintColor = .AccentColor
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true // 複数選択を可能にする
         button_edit.isHidden = true
@@ -106,9 +107,14 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .AccentColor
     }
     
     private func setButtons() {
+
+        pdfBarButtonItem.tintColor = .AccentColor
+        barButtonItem_add.tintColor = .AccentColor
+
         // 空白行対応
         if presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 { // 仕訳が1件以上ある場合
             // ボタンを活性にする
@@ -132,7 +138,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.Background.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -308,7 +314,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "仕訳データを削除しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: {
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
 //            // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
@@ -592,10 +598,12 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // 入力ボタン押下時の場合
         if scroll_adding {
-            // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-            if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                cell.setHighlighted(true, animated: true)
-                indexPathForAutoScroll = indexPath
+            if TappedIndexPathSection == 0 {
+                // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+                if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                    cell.setHighlighted(true, animated: true)
+                    indexPathForAutoScroll = indexPath
+                }
             }
             // 最後のセルまで表示しされたかどうか
             if indexPath == indexPath_local {
@@ -880,11 +888,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
-        }
-        // ナビゲーションを透明にする処理
-        if let navigationController = self.navigationController {
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController.navigationBar.shadowImage = UIImage()
         }
     }
     

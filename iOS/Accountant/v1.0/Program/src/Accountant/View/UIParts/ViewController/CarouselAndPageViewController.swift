@@ -26,9 +26,6 @@ class CarouselAndPageViewController: UIViewController {
         // ビューを設定
         settingCollectionView()
         settingPageView()
-        // ナビゲーションを透明にする処理
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: - Setting

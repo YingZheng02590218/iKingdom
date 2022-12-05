@@ -19,23 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView tag="1" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Xe-Zw-HUf" userLabel="Stack View main">
-                                <rect key="frame" x="0.0" y="44" width="428" height="799"/>
+                                <rect key="frame" x="10" y="44" width="408" height="799"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCd-Tw-HKo" userLabel="mid0_View">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="199.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="408" height="199.66666666666666"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="voY-jm-Bql">
-                                                <rect key="frame" x="10" y="0.0" width="408" height="199.66666666666666"/>
+                                                <rect key="frame" x="10" y="0.0" width="388" height="199.66666666666666"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZD-WS-Sy8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="80"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="80"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="29"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7RC-03-hT4">
-                                                        <rect key="frame" x="0.0" y="80" width="408" height="119.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="80" width="388" height="119.66666666666669"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="32o-9m-xWf">
                                                             <size key="itemSize" width="128" height="128"/>
@@ -78,16 +78,16 @@
                                         </constraints>
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView">
-                                        <rect key="frame" x="0.0" y="199.66666666666663" width="428" height="160"/>
+                                        <rect key="frame" x="0.0" y="199.66666666666663" width="408" height="160"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="111" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
-                                                <rect key="frame" x="10" y="0.0" width="408" height="160"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="408" height="150"/>
                                                 <subviews>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="5" width="51.333333333333336" height="150"/>
+                                                        <rect key="frame" x="0.0" y="5" width="51.333333333333336" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-戻る-25">
+                                                        <state key="normal" title="" image="arrow_back_ios-arrow_back_ios_symbol">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -95,10 +95,10 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcr-5P-JyB" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="56.333333333333343" y="5" width="285.33333333333326" height="150"/>
+                                                        <rect key="frame" x="56.333333333333343" y="5" width="285.33333333333326" height="140"/>
                                                         <subviews>
                                                             <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                                <rect key="frame" x="5" y="5" width="275.33333333333331" height="140"/>
+                                                                <rect key="frame" x="5" y="5" width="275.33333333333331" height="130"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                                     <!--1970-01-01 11:00:00 +0000-->
@@ -109,7 +109,7 @@
                                                                 <locale key="locale" localeIdentifier="ja"/>
                                                             </datePicker>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="Background"/>
+                                                        <color key="backgroundColor" name="BaseColor"/>
                                                         <constraints>
                                                             <constraint firstItem="Kpa-dQ-eBA" firstAttribute="top" secondItem="wcr-5P-JyB" secondAttribute="top" constant="5" id="AYG-WJ-zNm"/>
                                                             <constraint firstItem="Kpa-dQ-eBA" firstAttribute="height" secondItem="wcr-5P-JyB" secondAttribute="height" constant="-10" id="Kck-VG-QOm"/>
@@ -122,10 +122,10 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="346.66666666666669" y="5" width="61.333333333333314" height="150"/>
+                                                        <rect key="frame" x="346.66666666666669" y="5" width="61.333333333333314" height="140"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="" image="icons8-進む-25">
+                                                        <state key="normal" title="" image="arrow_forward_ios-arrow_forward_ios_symbol">
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
@@ -154,8 +154,8 @@
                                                 </constraints>
                                             </stackView>
                                             <button hidden="YES" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Lm-v1-UzE">
-                                                <rect key="frame" x="0.0" y="0.0" width="428" height="160"/>
-                                                <color key="backgroundColor" name="Background"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="408" height="160"/>
+                                                <color key="backgroundColor" name="BaseColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="maskDatePickerButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="pej-Kz-spZ"/>
@@ -166,28 +166,28 @@
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="5Lm-v1-UzE" secondAttribute="trailing" id="7U4-K5-mIu"/>
-                                            <constraint firstAttribute="bottom" secondItem="jHf-qD-M1U" secondAttribute="bottom" id="9TS-TM-bpZ"/>
-                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="width" secondItem="xaT-PY-SRA" secondAttribute="width" constant="-20" id="Gsm-Nl-kKX"/>
-                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="height" secondItem="xaT-PY-SRA" secondAttribute="height" id="Sme-U3-VJb"/>
+                                            <constraint firstAttribute="bottom" secondItem="jHf-qD-M1U" secondAttribute="bottom" constant="10" id="9TS-TM-bpZ"/>
+                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="width" secondItem="xaT-PY-SRA" secondAttribute="width" id="Gsm-Nl-kKX"/>
+                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="height" secondItem="xaT-PY-SRA" secondAttribute="height" constant="-10" id="Sme-U3-VJb"/>
                                             <constraint firstAttribute="bottom" secondItem="5Lm-v1-UzE" secondAttribute="bottom" id="iWb-vP-aqx"/>
                                             <constraint firstItem="5Lm-v1-UzE" firstAttribute="top" secondItem="xaT-PY-SRA" secondAttribute="top" id="lOi-uU-Z8V"/>
-                                            <constraint firstAttribute="trailing" secondItem="jHf-qD-M1U" secondAttribute="trailing" constant="10" id="oCO-jH-dL5"/>
+                                            <constraint firstAttribute="trailing" secondItem="jHf-qD-M1U" secondAttribute="trailing" id="oCO-jH-dL5"/>
                                             <constraint firstItem="jHf-qD-M1U" firstAttribute="top" secondItem="xaT-PY-SRA" secondAttribute="top" id="uYE-tP-u8D"/>
-                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" constant="10" id="xEN-kT-qhY"/>
+                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" id="xEN-kT-qhY"/>
                                             <constraint firstItem="5Lm-v1-UzE" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" id="yqk-2d-qaY"/>
                                         </constraints>
                                     </view>
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14e-0l-xHx" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                        <rect key="frame" x="0.0" y="359.66666666666669" width="428" height="159.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="359.66666666666669" width="408" height="159.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
-                                                <rect key="frame" x="10" y="0.0" width="408" height="149.66666666666666"/>
+                                                <rect key="frame" x="10" y="0.0" width="388" height="149.66666666666666"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BZL-1o-tF1" userLabel="Stack View1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="42.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="42.666666666666664"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-HE-bM2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="201.66666666666666" height="42.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="191.66666666666666" height="42.666666666666664"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -195,7 +195,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-oH-5MC">
-                                                                <rect key="frame" x="206.66666666666663" y="0.0" width="201.33333333333337" height="42.666666666666664"/>
+                                                                <rect key="frame" x="196.66666666666663" y="0.0" width="191.33333333333337" height="42.666666666666664"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -221,11 +221,11 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="11111" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="8Ew-8G-jdU" userLabel="Stack View2">
-                                                        <rect key="frame" x="0.0" y="43.666666666666629" width="408" height="52.666666666666657"/>
+                                                        <rect key="frame" x="0.0" y="43.666666666666629" width="388" height="52.666666666666657"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtK-tc-ENG" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="52.666666666666664"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="193" height="52.666666666666664"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -234,8 +234,8 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
-                                                                <rect key="frame" x="205" y="0.0" width="203" height="52.666666666666664"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <rect key="frame" x="195" y="0.0" width="193" height="52.666666666666664"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -260,11 +260,11 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" tag="22222" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="2Ls-Lb-KwP" userLabel="Stack View3">
-                                                        <rect key="frame" x="0.0" y="97.333333333333314" width="408" height="52.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="97.333333333333314" width="388" height="52.333333333333343"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="333" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2F-8K-hRw">
-                                                                <rect key="frame" x="0.0" y="0.0" width="203" height="52.333333333333336"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="193" height="52.333333333333336"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -272,8 +272,8 @@
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="444" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="金額" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8YU-bl-bba">
-                                                                <rect key="frame" x="205" y="0.0" width="203" height="52.333333333333336"/>
-                                                                <color key="backgroundColor" name="TextFieldColor"/>
+                                                                <rect key="frame" x="195" y="0.0" width="193" height="52.333333333333336"/>
+                                                                <color key="backgroundColor" name="MainColor2"/>
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
@@ -327,13 +327,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8k-rh-mmp" userLabel="mid3_View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                        <rect key="frame" x="0.0" y="519.33333333333337" width="428" height="120"/>
+                                        <rect key="frame" x="0.0" y="519.33333333333337" width="408" height="120"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9k-QYm">
-                                                <rect key="frame" x="10" y="0.0" width="408" height="110"/>
+                                                <rect key="frame" x="10" y="0.0" width="388" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-b8-FIi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="44"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="44"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="16"/>
@@ -341,8 +341,8 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
-                                                        <rect key="frame" x="0.0" y="44" width="408" height="66"/>
-                                                        <color key="backgroundColor" name="TextFieldColor"/>
+                                                        <rect key="frame" x="0.0" y="44" width="388" height="66"/>
+                                                        <color key="backgroundColor" name="MainColor2"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
@@ -362,7 +362,7 @@
                                                     <constraint firstItem="nGT-71-Qqm" firstAttribute="width" secondItem="MZv-9k-QYm" secondAttribute="width" constant="-10" id="Tfp-t8-ZJw"/>
                                                     <constraint firstItem="d8g-b8-FIi" firstAttribute="height" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.4" id="YP7-JQ-ohW"/>
                                                     <constraint firstAttribute="bottom" secondItem="nGT-71-Qqm" secondAttribute="bottom" id="ZU6-rD-sNt"/>
-                                                    <constraint firstItem="d8g-b8-FIi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MZv-9k-QYm" secondAttribute="top" constant="3" id="Zco-Ll-L6r"/>
+                                                    <constraint firstItem="d8g-b8-FIi" firstAttribute="top" secondItem="MZv-9k-QYm" secondAttribute="top" constant="5" id="Zco-Ll-L6r"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nGT-71-Qqm" secondAttribute="trailing" constant="5" id="Zyq-l6-cQ2"/>
                                                     <constraint firstItem="d8g-b8-FIi" firstAttribute="leading" secondItem="MZv-9k-QYm" secondAttribute="leading" id="hTz-vn-5mM"/>
                                                     <constraint firstItem="d8g-b8-FIi" firstAttribute="width" secondItem="MZv-9k-QYm" secondAttribute="width" id="jDA-eW-vsW"/>
@@ -381,10 +381,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVf-Ir-WHR" userLabel="mid4_View">
-                                        <rect key="frame" x="0.0" y="639.33333333333337" width="428" height="159.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="639.33333333333337" width="408" height="159.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" tag="44" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZEn-2B-SNs" userLabel="mid4_Stack View">
-                                                <rect key="frame" x="10" y="10" width="408" height="139.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="10" width="408" height="139.66666666666666"/>
                                                 <subviews>
                                                     <stackView opaque="NO" tag="555" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-lr-FfW" userLabel="Stack View1">
                                                         <rect key="frame" x="0.0" y="0.0" width="408" height="83.666666666666671"/>
@@ -396,7 +396,7 @@
                                                                     <constraint firstAttribute="width" secondItem="Ef0-Vy-bhy" secondAttribute="height" multiplier="1:1" id="DOV-L2-MHc"/>
                                                                 </constraints>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="" image="icons8-削除-25-2">
+                                                                <state key="normal" title="" image="close-close_symbol">
                                                                     <color key="titleColor" name="ButtonTextColor"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -409,7 +409,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" tag="444" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="89" y="0.0" width="37" height="83.666666666666671"/>
+                                                                <rect key="frame" x="102" y="0.0" width="204" height="83.666666666666671"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="入力">
@@ -425,7 +425,7 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oY8-qm-N3q">
-                                                                <rect key="frame" x="131" y="0.0" width="277" height="83.666666666666671"/>
+                                                                <rect key="frame" x="324" y="0.0" width="84" height="83.666666666666671"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="oY8-qm-N3q" secondAttribute="height" multiplier="1:1" id="9vE-jO-61X"/>
@@ -478,11 +478,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="ZEn-2B-SNs" firstAttribute="width" secondItem="ZVf-Ir-WHR" secondAttribute="width" constant="-20" id="9aH-dp-G1F"/>
+                                            <constraint firstItem="ZEn-2B-SNs" firstAttribute="width" secondItem="ZVf-Ir-WHR" secondAttribute="width" id="9aH-dp-G1F"/>
                                             <constraint firstItem="ZEn-2B-SNs" firstAttribute="top" secondItem="ZVf-Ir-WHR" secondAttribute="top" constant="10" id="Kyt-RR-3I0"/>
                                             <constraint firstItem="ZEn-2B-SNs" firstAttribute="height" secondItem="ZVf-Ir-WHR" secondAttribute="height" constant="-20" id="O6g-LM-3tn"/>
-                                            <constraint firstItem="ZEn-2B-SNs" firstAttribute="leading" secondItem="ZVf-Ir-WHR" secondAttribute="leading" constant="10" id="PEH-Cv-UaQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZEn-2B-SNs" secondAttribute="trailing" constant="10" id="cII-SE-MgK"/>
+                                            <constraint firstItem="ZEn-2B-SNs" firstAttribute="leading" secondItem="ZVf-Ir-WHR" secondAttribute="leading" id="PEH-Cv-UaQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZEn-2B-SNs" secondAttribute="trailing" id="cII-SE-MgK"/>
                                             <constraint firstAttribute="bottom" secondItem="ZEn-2B-SNs" secondAttribute="bottom" constant="10" id="sFQ-p5-fbu"/>
                                         </constraints>
                                     </view>
@@ -526,7 +526,7 @@
                                         <size key="shadowOffset" width="0.0" height="3"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="Background"/>
+                                <color key="backgroundColor" name="BaseColor"/>
                                 <constraints>
                                     <constraint firstItem="ulo-NQ-K88" firstAttribute="leading" secondItem="msi-yI-bfw" secondAttribute="leading" id="8FK-JS-G9w"/>
                                     <constraint firstItem="ulo-NQ-K88" firstAttribute="centerX" secondItem="msi-yI-bfw" secondAttribute="centerX" id="FJa-Mu-S9B"/>
@@ -536,14 +536,14 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qiy-ix-sdg"/>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
-                            <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" id="44Z-PX-lTp"/>
+                            <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" constant="10" id="44Z-PX-lTp"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="height" secondItem="qiy-ix-sdg" secondAttribute="height" id="4wc-Jw-atD"/>
                             <constraint firstAttribute="bottom" secondItem="msi-yI-bfw" secondAttribute="bottom" id="Cel-zy-OdI"/>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="msi-yI-bfw" secondAttribute="trailing" id="Hfv-Hc-w0E"/>
-                            <constraint firstItem="7Xe-Zw-HUf" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" id="PHA-oa-TGH"/>
-                            <constraint firstItem="7Xe-Zw-HUf" firstAttribute="width" secondItem="qiy-ix-sdg" secondAttribute="width" id="R85-ta-jx5"/>
+                            <constraint firstItem="7Xe-Zw-HUf" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" constant="10" id="PHA-oa-TGH"/>
+                            <constraint firstItem="7Xe-Zw-HUf" firstAttribute="width" secondItem="qiy-ix-sdg" secondAttribute="width" constant="-20" id="R85-ta-jx5"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="top" secondItem="qiy-ix-sdg" secondAttribute="top" id="UvS-Lh-qpO"/>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="7Xe-Zw-HUf" secondAttribute="bottom" id="ZBU-FR-Frw"/>
                             <constraint firstItem="msi-yI-bfw" firstAttribute="top" secondItem="SFY-X8-JI8" secondAttribute="top" id="r7E-XE-2p4"/>
@@ -680,20 +680,20 @@
         <segue reference="oNm-xH-Kw5"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="icons8-削除-25-2" width="25" height="25"/>
-        <image name="icons8-戻る-25" width="25" height="25"/>
-        <image name="icons8-進む-25" width="25" height="25"/>
-        <namedColor name="Background">
-            <color red="0.92500001192092896" green="0.94099998474121094" blue="0.95300000905990601" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <image name="arrow_back_ios-arrow_back_ios_symbol" width="8" height="13"/>
+        <image name="arrow_forward_ios-arrow_forward_ios_symbol" width="8" height="13"/>
+        <image name="close-close_symbol" width="9" height="9"/>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="MainColor2">
+            <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TextFieldColor">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
