@@ -598,25 +598,28 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // 入力ボタン押下時の場合
         if scroll_adding {
-            if TappedIndexPathSection == 0 {
-                // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-                if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                    cell.setHighlighted(true, animated: true)
-                    indexPathForAutoScroll = indexPath
+            if indexPath.section == TappedIndexPathSection {
+                
+                if TappedIndexPathSection == 0 {
+                    // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
+                    if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
+                        cell.setHighlighted(true, animated: true)
+                        indexPathForAutoScroll = indexPath
+                    }
                 }
-            }
-            // 最後のセルまで表示しされたかどうか
-            if indexPath == indexPath_local {
-                // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
-                if let indexPathForAutoScroll = self.indexPathForAutoScroll {
-                    self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.top, animated: true) // 追加した仕訳データの行を画面の下方に表示する
-                    // 入力ボタン押下時の表示位置 OFF
-                    self.scroll_adding = false
-                    self.indexPathForAutoScroll = nil
-                }
-                else {
-                    // 上へスクロールする
-                    scrollToTop()
+                // 最後のセルまで表示しされたかどうか
+                if indexPath == indexPath_local {
+                    // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
+                    if let indexPathForAutoScroll = self.indexPathForAutoScroll {
+                        self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.top, animated: true) // 追加した仕訳データの行を画面の下方に表示する
+                        // 入力ボタン押下時の表示位置 OFF
+                        self.scroll_adding = false
+                        self.indexPathForAutoScroll = nil
+                    }
+                    else {
+                        // 上へスクロールする
+                        scrollToTop()
+                    }
                 }
             }
         }
