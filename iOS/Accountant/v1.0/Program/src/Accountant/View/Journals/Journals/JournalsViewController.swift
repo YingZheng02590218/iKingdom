@@ -10,6 +10,7 @@ import UIKit
 import EMTNeumorphicView
 import QuickLook
 import GoogleMobileAds // マネタイズ対応
+import Firebase // イベントログ対応
 
 // 仕訳帳クラス
 class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -330,6 +331,11 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 let result = self.presenter.deleteAdjustingJournalEntry(number: self.presenter.objectsss(forRow:indexPath.row).number)
                 if result == true {
                     self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                    // イベントログ
+                    Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                        AnalyticsParameterContentType: Constant.JOURNALS,
+                        AnalyticsParameterItemID: Constant.DELETE_ADJUSTING_JOURNAL_ENTRY
+                    ])
                 }
             }
             else if indexPath.section == 0 {
@@ -337,6 +343,11 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 let result = self.presenter.deleteJournalEntry(number: self.presenter.objects(forRow:indexPath.row).number)
                 if result == true {
                     self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                    // イベントログ
+                    Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                        AnalyticsParameterContentType: Constant.JOURNALS,
+                        AnalyticsParameterItemID: Constant.DELETE_JOURNAL_ENTRY
+                    ])
                 }
             }
             // ボタンを更新
@@ -599,7 +610,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         // 入力ボタン押下時の場合
         if scroll_adding {
             if indexPath.section == TappedIndexPathSection {
-                
+
                 if TappedIndexPathSection == 0 {
                     // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
                     if Number == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合

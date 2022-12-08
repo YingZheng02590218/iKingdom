@@ -30,4 +30,19 @@ struct Constant {
     static let DARKSHADOWOPACITY: Float = 0.5
     static let ELEMENTDEPTH: CGFloat = 5
     static let edged = false
+
+    // MARK: - Firebase Analytics ログイベント
+
+    // MARK: SELECT_CONTENT
+
+    // パラメータ FirebaseAnalytics.Param.CONTENT_TYPE (String)
+    static let JOURNAL_ENTRY = "journalentry" // 仕訳画面
+    static let JOURNALS = "journals"          // 仕訳帳画面
+    static let WORKSHEET = "worksheet"        // 精算表画面
+
+    // パラメータ FirebaseAnalytics.Param.ITEM_ID (String)
+    static let ADD_JOURNAL_ENTRY = "add_journalentry"                    // 通常仕訳
+    static let ADD_ADJUSTING_JOURNAL_ENTRY = "add_adjustingjournalentry" // 決算整理仕訳
+    static let DELETE_JOURNAL_ENTRY = "delete_journalentry"                    // 通常仕訳
+    static let DELETE_ADJUSTING_JOURNAL_ENTRY = "delete_adjustingjournalentry" // 決算整理仕訳
 }
