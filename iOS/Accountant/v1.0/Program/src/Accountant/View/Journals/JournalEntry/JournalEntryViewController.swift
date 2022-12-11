@@ -17,12 +17,6 @@ class JournalEntryViewController: UIViewController {
     // MARK: - var let
 
     private var interstitial: GADInterstitialAd?
- 
-    // 初期化画面　ロゴ
-    @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var logoImageView: UIView!
-    // 初期化画面　インジゲーター
-    var activityIndicatorView = UIActivityIndicatorView()
     // タイトルラベル
     @IBOutlet var label_title: UILabel!
     // 仕訳/決算整理仕訳　切り替え
@@ -72,11 +66,7 @@ class JournalEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 仕訳タイプ判定
-        if journalEntryType == "" {
-            // 初期化処理
-            initialize()
-        }
+
         self.navigationItem.title = "仕訳"
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -233,70 +223,6 @@ class JournalEntryViewController: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    // MARK: - ロゴとインジゲーターのアニメーション
-
-    func initialize() {
-        // インジゲーターを開始
-        showActivityIndicatorView()
-        // データベース初期化
-        let initial = Initial()
-        initial.initialize()
-        // インジケーターを終了
-        finishActivityIndicatorView()
-    }
-    // インジゲーターを開始
-    func showActivityIndicatorView() {
-        if let logoImageView = logoImageView {
-            logoImageView.isHidden = false
-            // 表示位置を設定（画面中央）
-            activityIndicatorView.center = CGPoint(x:view.center.x, y: view.center.y + 60)
-            // インジケーターのスタイルを指定（白色＆大きいサイズ）
-            activityIndicatorView.style = UIActivityIndicatorView.Style.large
-            // インジケーターを View に追加
-            view.addSubview(activityIndicatorView)
-            // インジケーターを表示＆アニメーション開始
-            activityIndicatorView.startAnimating()
-        }
-    }
-    // インジケーターを終了
-    func finishActivityIndicatorView() {
-        DispatchQueue.global(qos: .default).async {
-            // 非同期処理などが終了したらメインスレッドでアニメーション終了
-            DispatchQueue.main.async {
-                // ロゴをアニメーションさせる
-                self.showAnimation()
-                // 非同期処理などを実行（今回は2秒間待つだけ）
-                Thread.sleep(forTimeInterval: 0.5)
-                // アニメーション終了
-                self.activityIndicatorView.stopAnimating()
-            }
-        }
-    }
-    // ロゴをアニメーションさせる
-    func showAnimation() {
-        // 少し縮小するアニメーション
-        if let logoLabel = self.logoLabel {
-            UIView.animate(withDuration: 0.9,
-                           delay: 0.2,
-                           options: UIView.AnimationOptions.curveEaseOut,
-                           animations: { () in
-                logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            }, completion: { (Bool) in
-                
-            })
-            // 拡大させて、消えるアニメーション
-            UIView.animate(withDuration: 0.4,
-                           delay: 0.2,
-                           options: UIView.AnimationOptions.curveEaseOut,
-                           animations: { () in
-                self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self.logoLabel.alpha = 0
-            }, completion: { (Bool) in
-                self.logoImageView.removeFromSuperview()
-            })
-        }
     }
     
     // MARK: - チュートリアル対応 ウォークスルー型

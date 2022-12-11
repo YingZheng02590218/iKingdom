@@ -513,41 +513,16 @@
                                     <constraint firstItem="14e-0l-xHx" firstAttribute="height" secondItem="7Xe-Zw-HUf" secondAttribute="height" multiplier="0.2" id="zL3-rL-5Pq"/>
                                 </constraints>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msi-yI-bfw">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paciolist" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulo-NQ-K88">
-                                        <rect key="frame" x="0.0" y="430.33333333333331" width="428" height="65.666666666666686"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="48"/>
-                                        <color key="textColor" name="TextColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <size key="shadowOffset" width="0.0" height="3"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" name="BaseColor"/>
-                                <constraints>
-                                    <constraint firstItem="ulo-NQ-K88" firstAttribute="leading" secondItem="msi-yI-bfw" secondAttribute="leading" id="8FK-JS-G9w"/>
-                                    <constraint firstItem="ulo-NQ-K88" firstAttribute="centerX" secondItem="msi-yI-bfw" secondAttribute="centerX" id="FJa-Mu-S9B"/>
-                                    <constraint firstAttribute="trailing" secondItem="ulo-NQ-K88" secondAttribute="trailing" id="Q5B-bB-7rf"/>
-                                    <constraint firstItem="ulo-NQ-K88" firstAttribute="centerY" secondItem="msi-yI-bfw" secondAttribute="centerY" id="TOt-4o-gcy"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qiy-ix-sdg"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" constant="10" id="44Z-PX-lTp"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="height" secondItem="qiy-ix-sdg" secondAttribute="height" id="4wc-Jw-atD"/>
-                            <constraint firstAttribute="bottom" secondItem="msi-yI-bfw" secondAttribute="bottom" id="Cel-zy-OdI"/>
-                            <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="msi-yI-bfw" secondAttribute="trailing" id="Hfv-Hc-w0E"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" constant="10" id="PHA-oa-TGH"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="width" secondItem="qiy-ix-sdg" secondAttribute="width" constant="-20" id="R85-ta-jx5"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="top" secondItem="qiy-ix-sdg" secondAttribute="top" id="UvS-Lh-qpO"/>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="7Xe-Zw-HUf" secondAttribute="bottom" id="ZBU-FR-Frw"/>
-                            <constraint firstItem="msi-yI-bfw" firstAttribute="top" secondItem="SFY-X8-JI8" secondAttribute="top" id="r7E-XE-2p4"/>
-                            <constraint firstItem="msi-yI-bfw" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" id="rEy-le-I6h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="仕訳" id="8ln-1Z-2oy">
@@ -580,8 +555,6 @@
                         <outlet property="datePickerView" destination="wcr-5P-JyB" id="0q6-z7-Y5J"/>
                         <outlet property="inputButton" destination="kmr-j8-KMb" id="Cl5-WC-WJy"/>
                         <outlet property="label_title" destination="SZD-WS-Sy8" id="6rF-vt-NWa"/>
-                        <outlet property="logoImageView" destination="msi-yI-bfw" id="R71-zt-Zdj"/>
-                        <outlet property="logoLabel" destination="ulo-NQ-K88" id="qaR-0I-PYb"/>
                         <outlet property="maskDatePickerButton" destination="5Lm-v1-UzE" id="7Zd-Xb-Xca"/>
                         <outlet property="segmentedControl" destination="g2X-kG-cDb" id="DEl-FB-xZ0"/>
                         <outlet property="smallWrittingTextFieldView" destination="X8k-rh-mmp" id="q7O-tP-ypq"/>
