@@ -61,8 +61,8 @@ class CategoryListTableViewController: UITableViewController {
         }
         let cell = hoge as! CategoryListTableViewCell
 
-        // 大区分の内でonとなっているスイッチが残りひとつの場合は、offにさせない
-        if presenter.dataBaseSettingsTaxonomyAccount.count <= 1 {
+        // 繰越利益勘定はOFFにさせない
+        if cell.tag == 97 { // 連番97
             if !sender.isOn { // ON から　OFF に切り替えようとした時は効果音を鳴らす
                 // バイブレーション　ブーッブーという強いバイブレーションが2回続く
                 AudioServicesPlaySystemSound( 1011 )
