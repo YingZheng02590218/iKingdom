@@ -9,6 +9,7 @@
 import UIKit
 import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
+import Firebase // イベントログ対応
 
 // 仕訳クラス
 class JournalEntryViewController: UIViewController {
@@ -1095,6 +1096,7 @@ class JournalEntryViewController: UIViewController {
             credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
+
         // 精算表画面から入力の場合
         if let tabBarController = self.presentingViewController as? UITabBarController { // 一番基底となっているコントローラ
             let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
@@ -1104,6 +1106,11 @@ class JournalEntryViewController: UIViewController {
                 [presentingViewController] () -> Void in
                 presentingViewController.reloadData()
             })
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.WORKSHEET,
+                AnalyticsParameterItemID: Constant.ADD_ADJUSTING_JOURNAL_ENTRY
+            ])
         }
         // タブバーの仕訳タブから入力の場合
         else {
@@ -1116,6 +1123,11 @@ class JournalEntryViewController: UIViewController {
                     })
                 }
             }
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.JOURNAL_ENTRY,
+                AnalyticsParameterItemID: Constant.ADD_ADJUSTING_JOURNAL_ENTRY
+            ])
         }
     }
     
@@ -1179,6 +1191,12 @@ class JournalEntryViewController: UIViewController {
             credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
+        // イベントログ
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterContentType: Constant.JOURNALS,
+            AnalyticsParameterItemID: Constant.ADD_JOURNAL_ENTRY
+        ])
+        
         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
         let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
         //                        let nc = viewController.presentingViewController as! UINavigationController
@@ -1206,6 +1224,11 @@ class JournalEntryViewController: UIViewController {
             credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
+        // イベントログ
+        Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+            AnalyticsParameterContentType: Constant.JOURNAL_ENTRY,
+            AnalyticsParameterItemID: Constant.ADD_JOURNAL_ENTRY
+        ])
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

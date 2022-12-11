@@ -61,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // // マネタイズ対応　Use Firebase library to configure APIs
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-
+        // イベントログ
+        Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
         setupUserDefaults()
 
