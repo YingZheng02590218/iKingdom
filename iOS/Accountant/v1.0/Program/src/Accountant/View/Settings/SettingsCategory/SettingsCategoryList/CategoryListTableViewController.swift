@@ -152,7 +152,7 @@ class CategoryListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category", for: indexPath) as! CategoryListTableViewCell
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         cell.textLabel?.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).number). \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
-        cell.textLabel?.textColor = .TextColor
+        cell.textLabel?.textColor = .textColor
 //        cell.label_category.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
         // 勘定科目の連番
         cell.tag = presenter.objects(forRow: indexPath.row, section: indexPath.section).number
@@ -183,7 +183,7 @@ class CategoryListTableViewController: UITableViewController {
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         return cell

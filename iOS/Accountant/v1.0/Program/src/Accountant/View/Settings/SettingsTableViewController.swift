@@ -33,7 +33,7 @@ class SettingsTableViewController: UIViewController {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        tableView.separatorColor = .AccentColor
+        tableView.separatorColor = .accentColor
 
         scrollView.parallaxHeader.view = headerView
         scrollView.parallaxHeader.height = 160
@@ -46,7 +46,7 @@ class SettingsTableViewController: UIViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,7 +139,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         if indexPath.section == 0 {
@@ -175,7 +175,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 if cell.accessoryView == nil {
                     let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     // 生体認証パスコードロック　設定スイッチ
-                    switchView.onTintColor = .AccentColor
+                    switchView.onTintColor = .accentColor
                     switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                     switchView.tag = indexPath.row
                     switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
@@ -280,7 +280,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 let url = URL(string:"https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
                 if let url = url{
                     let vc = SFSafariViewController(url: url)
-                    vc.preferredControlTintColor = .AccentBlue
+                    vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
                 break

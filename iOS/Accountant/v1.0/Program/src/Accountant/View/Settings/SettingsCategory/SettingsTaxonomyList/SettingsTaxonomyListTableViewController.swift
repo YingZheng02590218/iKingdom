@@ -111,7 +111,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 //        let objectss = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objects[indexPath.row].number))
 //        let objectsss = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountSWInTaxonomy(numberOfTaxonomy: String(objects[indexPath.row].number), switching: true)
 //        let objectssss = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountSWInTaxonomy(numberOfTaxonomy: String(objects[indexPath.row].number), switching: false)
-        cell.textLabel?.textColor = .TextColor
+        cell.textLabel?.textColor = .textColor
         // 階層毎にスペースをつける
         if objects[indexPath.row].category1 as String == "" {
             cell.textLabel?.text = "\(objects[indexPath.row].number), \(objects[indexPath.row].category as String)"
@@ -164,7 +164,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         print(objects[indexPath.row].number, objects[indexPath.row].switching)

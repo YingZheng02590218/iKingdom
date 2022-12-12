@@ -85,7 +85,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -711,10 +711,10 @@ extension PLViewController: PLPresenterOutput {
         setRefreshControl()
         // 印刷機能
         let printoutButton = UIBarButtonItem(image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol")!.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
-        printoutButton.tintColor = .AccentColor
+        printoutButton.tintColor = .accentColor
         //ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
-        self.navigationController?.navigationBar.tintColor = .AccentColor
+        self.navigationController?.navigationBar.tintColor = .accentColor
         self.navigationItem.title = "損益計算書"
     }
     

@@ -216,7 +216,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
             // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
             cell.textLabel?.text = " \(objects[indexPath.row].number). \(objects[indexPath.row].category as String)"
-            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textColor = .textColor
 
     //        cell.label_category.text = " \(objects[indexPath.row].category as String)"
             cell.textLabel?.textAlignment = NSTextAlignment.center
@@ -242,7 +242,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
             return cell

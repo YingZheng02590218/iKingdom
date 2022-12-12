@@ -149,35 +149,35 @@ class SettingsCategoryTableViewController: UITableViewController {
                 //① UI部品を指定
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text = "勘定科目一覧"
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
             case 1:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目別勘定科目一覧"
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
 //        case 3:
 //            cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
 //            cell.textLabel?.text =  "種類別勘定科目一覧"
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text =   ""
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
             }
         }else {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目一覧"
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
                 cell.textLabel?.text =   ""
             }
         }
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         return cell

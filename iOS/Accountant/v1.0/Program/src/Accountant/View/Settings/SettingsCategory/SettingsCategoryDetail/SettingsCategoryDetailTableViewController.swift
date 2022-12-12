@@ -28,7 +28,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.separatorColor = .AccentColor
+        tableView.separatorColor = .accentColor
 
         // 登録ボタンの　表示　非表示
         if addAccount {
@@ -188,7 +188,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 // Accessory Color
                 let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
                 let disclosureView = UIImageView(image: disclosureImage)
-                disclosureView.tintColor = UIColor.AccentColor
+                disclosureView.tintColor = UIColor.accentColor
                 cell.accessoryView = disclosureView
 
                 return cell
@@ -336,14 +336,14 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     
     // ボタンのデザインを指定する
     private func createButtons() {
-        Button_input.setTitleColor(.TextColor, for: .normal)
+        Button_input.setTitleColor(.textColor, for: .normal)
         Button_input.neumorphicLayer?.cornerRadius = 15
-        Button_input.setTitleColor(.TextColor, for: .selected)
+        Button_input.setTitleColor(.textColor, for: .selected)
         Button_input.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_input.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_input.neumorphicLayer?.edged = Constant.edged
         Button_input.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+        Button_input.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     
     // TextField作成
@@ -512,7 +512,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! SettingAccountDetailTaxonomyTableViewCell
             let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
             cell_taxonomy.label.text! = "\(object!.number), \(object!.category)"
-            cell_taxonomy.label.textColor = .TextColor
+            cell_taxonomy.label.textColor = .textColor
             taxonomyname = cell_taxonomy.label.text!
         }
     }

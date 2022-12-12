@@ -71,7 +71,7 @@ class JournalEntryViewController: UIViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
 
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
@@ -464,37 +464,37 @@ class JournalEntryViewController: UIViewController {
             datePickerView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             datePickerView.neumorphicLayer?.edged = Constant.edged
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         }
         
         if let Button_Left = Button_Left {
-            Button_Left.setTitleColor(.TextColor, for: .normal)
+            Button_Left.setTitleColor(.textColor, for: .normal)
             Button_Left.neumorphicLayer?.cornerRadius = 10
-            Button_Left.setTitleColor(.TextColor, for: .selected)
+            Button_Left.setTitleColor(.textColor, for: .selected)
             Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Left.neumorphicLayer?.edged = Constant.edged
             Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             let backImage = UIImage(named: "arrow_back_ios-arrow_back_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Left.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Left.tintColor = .AccentColor
+            Button_Left.tintColor = .accentColor
         }
         
         if let Button_Right = Button_Right {
-            Button_Right.setTitleColor(.TextColor, for: .normal)
+            Button_Right.setTitleColor(.textColor, for: .normal)
             Button_Right.neumorphicLayer?.cornerRadius = 10
-            Button_Right.setTitleColor(.TextColor, for: .selected)
+            Button_Right.setTitleColor(.textColor, for: .selected)
             Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             Button_Right.neumorphicLayer?.edged = Constant.edged
             Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             let backImage = UIImage(named: "arrow_forward_ios-arrow_forward_ios_symbol")?.withRenderingMode(.alwaysTemplate)
             Button_Right.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Right.tintColor = .AccentColor
+            Button_Right.tintColor = .accentColor
         }
         
         if let textFieldView = textFieldView {
@@ -503,7 +503,7 @@ class JournalEntryViewController: UIViewController {
             textFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             textFieldView.neumorphicLayer?.edged = Constant.edged
             textFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
         
@@ -513,34 +513,34 @@ class JournalEntryViewController: UIViewController {
             smallWrittingTextFieldView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             smallWrittingTextFieldView.neumorphicLayer?.edged = Constant.edged
             smallWrittingTextFieldView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
         
 //        inputButton.setTitle("入力", for: .normal)
-        inputButton.setTitleColor(.AccentColor, for: .normal)
+        inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
-        inputButton.setTitleColor(.AccentColor, for: .selected)
+        inputButton.setTitleColor(.accentColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         inputButton.neumorphicLayer?.edged = Constant.edged
         inputButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+        inputButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         
-        Button_cancel.setTitleColor(.TextColor, for: .normal)
+        Button_cancel.setTitleColor(.textColor, for: .normal)
         Button_cancel.neumorphicLayer?.cornerRadius = 15
-        Button_cancel.setTitleColor(.TextColor, for: .selected)
+        Button_cancel.setTitleColor(.textColor, for: .selected)
         Button_cancel.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         Button_cancel.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         Button_cancel.neumorphicLayer?.edged = Constant.edged
         Button_cancel.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+        Button_cancel.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
-        Button_cancel.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
+        Button_cancel.neumorphicLayer?.elementColor = UIColor.baseColor.cgColor
         let backImage = UIImage(named: "close-close_symbol")?.withRenderingMode(.alwaysTemplate)
         Button_cancel.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
-        Button_cancel.tintColor = .AccentColor
+        Button_cancel.tintColor = .accentColor
     }
 
     // MARK: PickerTextField
@@ -607,7 +607,7 @@ class JournalEntryViewController: UIViewController {
         TextField_SmallWritting.delegate = self
         TextField_SmallWritting.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
-        TextField_SmallWritting.tintColor = UIColor.AccentColor
+        TextField_SmallWritting.tintColor = UIColor.accentColor
 
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
@@ -1391,7 +1391,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         // フォーカス　効果　ドロップシャドウをかける
         textField.layer.shadowOpacity = 1.4
         textField.layer.shadowRadius = 4
-        textField.layer.shadowColor = UIColor.CalculatorDisplay.cgColor
+        textField.layer.shadowColor = UIColor.calculatorDisplay.cgColor
         textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
 
         // 借方金額　貸方金額

@@ -26,7 +26,7 @@ class WalkThroughViewController: UIViewController {
         
         let page = EAIntroPage()
         page.title = "Paciolist"
-        page.titleColor = UIColor.TextColor
+        page.titleColor = UIColor.textColor
         page.titleFont = UIFont(name: "Futura-Bold", size: 48.0)
         page.titlePositionY = self.view.bounds.size.height/2
         page.desc = "複式簿記の会計帳簿\n\n紙の帳簿と同じデザインを表現した\n複式簿記で記帳ができるアプリ"
@@ -40,7 +40,7 @@ class WalkThroughViewController: UIViewController {
         // タイトルのテキスト
         page1.title = "仕訳"
         // タイトルの色変更
-        page1.titleColor = UIColor.TextColor
+        page1.titleColor = UIColor.textColor
         // タイトルのフォントの設定
         page1.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         
@@ -60,7 +60,7 @@ class WalkThroughViewController: UIViewController {
 
         let page2 = EAIntroPage()
         page2.title = "主要簿"
-        page2.titleColor = UIColor.TextColor
+        page2.titleColor = UIColor.textColor
         page2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         page2.titlePositionY = self.view.bounds.size.height * 0.8
         page2.desc = "仕訳帳と総勘定元帳を確認する\n\n仕訳帳で、仕訳の編集や削除ができる"
@@ -72,7 +72,7 @@ class WalkThroughViewController: UIViewController {
         
         let page1of2 = EAIntroPage()
         page1of2.title = " "
-        page1of2.titleColor = UIColor.TextColor
+        page1of2.titleColor = UIColor.textColor
         page1of2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         page1of2.titlePositionY = self.view.bounds.size.height * 0.8
         page1of2.desc = "プリンターで印刷や\nPDFファイルを出力することができる"
@@ -84,7 +84,7 @@ class WalkThroughViewController: UIViewController {
         
         let page3 = EAIntroPage()
         page3.title = "決算"
-        page3.titleColor = UIColor.TextColor
+        page3.titleColor = UIColor.textColor
         page3.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         page3.titlePositionY = self.view.bounds.size.height * 0.8
         page3.desc = "決算整理仕訳を済ませると\n貸借対照表と損益計算書が完成します"
@@ -96,7 +96,7 @@ class WalkThroughViewController: UIViewController {
 
         let page4 = EAIntroPage()
         page4.title = "まず勘定科目を設定しよう"
-        page4.titleColor = UIColor.TextColor
+        page4.titleColor = UIColor.textColor
         page4.titleFont = UIFont(name: "Helvetica-Bold", size: 29)
         page4.titlePositionY = self.view.bounds.size.height * 0.8
         page4.desc = "使用する勘定科目をONにする\n\nオリジナルの勘定科目も登録できる"
@@ -108,7 +108,7 @@ class WalkThroughViewController: UIViewController {
         
         let page5 = EAIntroPage()
         page5.title = "それでは良い\n複式簿記Lifeを"
-        page5.titleColor = UIColor.TextColor
+        page5.titleColor = UIColor.textColor
         page5.titleFont = UIFont(name: "Helvetica-Bold", size: 29)
         page5.titlePositionY = self.view.bounds.size.height/2
         page5.desc = ""
@@ -133,7 +133,7 @@ class WalkThroughViewController: UIViewController {
         else {
             introView?.pageControl.pageIndicatorTintColor = .lightGray
         }
-        introView?.pageControl.currentPageIndicatorTintColor = .AccentBlue
+        introView?.pageControl.currentPageIndicatorTintColor = .accentBlue
 
         introView?.pageControlY = self.view.bounds.size.height * 0.9
         

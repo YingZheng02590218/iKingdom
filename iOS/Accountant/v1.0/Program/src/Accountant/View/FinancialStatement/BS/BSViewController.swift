@@ -85,7 +85,7 @@ class BSViewController: UIViewController {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -140,7 +140,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションヘッダーの色とか調整する
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = .TextColor
+        header.textLabel?.textColor = .textColor
         header.textLabel?.textAlignment = .left
         // システムフォントのサイズを設定
         header.textLabel?.font = UIFont.systemFont(ofSize: 17)
@@ -1003,7 +1003,7 @@ extension BSViewController: BSPresenterOutput {
         setRefreshControl()
         // 印刷機能
         let printoutButton = UIBarButtonItem(image: UIImage(named: "picture_as_pdf-picture_as_pdf_symbol")!.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(pdfBarButtonItemTapped))
-        printoutButton.tintColor = .AccentColor
+        printoutButton.tintColor = .accentColor
         //ナビゲーションに定義したボタンを置く
         self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "貸借対照表"

@@ -20,7 +20,7 @@ class FinancialStatementTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.separatorColor = .AccentColor
+        tableView.separatorColor = .accentColor
 
         // リロード機能
         let refreshControl = UIRefreshControl()
@@ -31,7 +31,7 @@ class FinancialStatementTableViewController: UITableViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {        
@@ -131,12 +131,12 @@ class FinancialStatementTableViewController: UITableViewController {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
                 cell.textLabel?.text = "貸借対照表"
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
             case 1:
                 cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
                 cell.textLabel?.text = "損益計算書"
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
 //            case 2:
 //                let cell = tableView.dequeueReusableCell(withIdentifier: "CF", for: indexPath)
@@ -145,33 +145,33 @@ class FinancialStatementTableViewController: UITableViewController {
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
-                cell.textLabel?.textColor = .TextColor
+                cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
             }
         }
         else if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
             cell.textLabel?.text = "損益勘定"
-            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         }
         else if indexPath.section == 2 {
             cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
             cell.textLabel?.text = "精算表"
-            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         }
         else {
             cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
             cell.textLabel?.text = "試算表"
-            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         }
 
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         return cell

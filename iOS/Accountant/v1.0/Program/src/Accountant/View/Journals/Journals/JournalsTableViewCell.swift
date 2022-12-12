@@ -46,14 +46,14 @@ class JournalsTableViewCell: UITableViewCell {
     
     func setTextColor(isInPeriod: Bool) {
         // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-        label_list_date_month.textColor = isInPeriod ? .TextColor : .red
-        label_list_date.textColor = isInPeriod ? .TextColor : .red
-        label_list_summary_debit.textColor = isInPeriod ? .TextColor : .red
-        label_list_summary_credit.textColor = isInPeriod ? .TextColor : .red
-        label_list_summary.textColor = isInPeriod ? .TextColor : .red
-        label_list_number_left.textColor = isInPeriod ? .TextColor : .red
-        label_list_number_right.textColor = isInPeriod ? .TextColor : .red
-        label_list_debit.textColor = isInPeriod ? .TextColor : .red
-        label_list_credit.textColor = isInPeriod ? .TextColor : .red
+        label_list_date_month.textColor = isInPeriod ? .textColor : .red
+        label_list_date.textColor = isInPeriod ? .textColor : .red
+        label_list_summary_debit.textColor = isInPeriod ? .textColor : .red
+        label_list_summary_credit.textColor = isInPeriod ? .textColor : .red
+        label_list_summary.textColor = isInPeriod ? .textColor : .red
+        label_list_number_left.textColor = isInPeriod ? .textColor : .red
+        label_list_number_right.textColor = isInPeriod ? .textColor : .red
+        label_list_debit.textColor = isInPeriod ? .textColor : .red
+        label_list_credit.textColor = isInPeriod ? .textColor : .red
     }
 }

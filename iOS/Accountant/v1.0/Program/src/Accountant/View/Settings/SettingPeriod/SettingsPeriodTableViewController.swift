@@ -23,7 +23,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // テーブルビューセル　作成
         createTableViewCell()
         tableView.allowsMultipleSelection = false
-        tableView.separatorColor = .AccentColor
+        tableView.separatorColor = .accentColor
 
         self.navigationItem.title = "会計期間"
         //largeTitle表示
@@ -266,7 +266,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // Accessory Color
             let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
             let disclosureView = UIImageView(image: disclosureImage)
-            disclosureView.tintColor = UIColor.AccentColor
+            disclosureView.tintColor = UIColor.accentColor
             cell.accessoryView = disclosureView
 
             return cell

@@ -74,7 +74,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         nicknameTextField.delegate = self
         nicknameTextField.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
-        nicknameTextField.tintColor = UIColor.AccentColor
+        nicknameTextField.tintColor = UIColor.accentColor
 // toolbar 小書き Done:Tag Cancel:Tag
        let toolbar = UIToolbar()
        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
@@ -233,20 +233,20 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     private func createButtons() {
         
         if let deleteButton = deleteButton {
-            deleteButton.setTitleColor(.TextColor, for: .normal)
+            deleteButton.setTitleColor(.textColor, for: .normal)
             deleteButton.neumorphicLayer?.cornerRadius = 15
-            deleteButton.setTitleColor(.TextColor, for: .selected)
+            deleteButton.setTitleColor(.textColor, for: .selected)
             deleteButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
             deleteButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             deleteButton.neumorphicLayer?.edged = Constant.edged
             deleteButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            deleteButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             // Optional. if it is nil (default), elementBackgroundColor will be used as element color.
-            deleteButton.neumorphicLayer?.elementColor = UIColor.BaseColor.cgColor
+            deleteButton.neumorphicLayer?.elementColor = UIColor.baseColor.cgColor
             let backImage = UIImage(named: "delete-delete_symbol")?.withRenderingMode(.alwaysTemplate)
             deleteButton.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            deleteButton.tintColor = .AccentColor
+            deleteButton.tintColor = .accentColor
         }
     }
 }

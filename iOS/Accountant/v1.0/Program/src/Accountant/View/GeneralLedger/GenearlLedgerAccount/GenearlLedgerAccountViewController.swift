@@ -80,7 +80,7 @@ class GenearlLedgerAccountViewController: UIViewController {
     // ボタンのデザインを指定する
     private func createButtons() {
         
-        button_print.tintColor = .AccentColor
+        button_print.tintColor = .accentColor
 
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
@@ -88,7 +88,7 @@ class GenearlLedgerAccountViewController: UIViewController {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -191,14 +191,14 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 if DateManager.shared.isInPeriod(date: presenter.databaseJournalEntries(forRow: indexPath.row).date) {
-                    cell.label_list_date_month.textColor = .TextColor
-                    cell.label_list_date_day.textColor = .TextColor
-                    cell.label_list_summary.textColor = .TextColor
-                    cell.label_list_number.textColor = .TextColor
-                    cell.label_list_debit.textColor = .TextColor
-                    cell.label_list_credit.textColor = .TextColor
-                    cell.label_list_debitOrCredit.textColor = .TextColor
-                    cell.label_list_balance.textColor = .TextColor
+                    cell.label_list_date_month.textColor = .textColor
+                    cell.label_list_date_day.textColor = .textColor
+                    cell.label_list_summary.textColor = .textColor
+                    cell.label_list_number.textColor = .textColor
+                    cell.label_list_debit.textColor = .textColor
+                    cell.label_list_credit.textColor = .textColor
+                    cell.label_list_debitOrCredit.textColor = .textColor
+                    cell.label_list_balance.textColor = .textColor
                 }
                 else {
                     cell.label_list_date_month.textColor = .red
@@ -231,14 +231,14 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 if DateManager.shared.isInPeriod(date: presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date) {
-                    cell.label_list_date_month.textColor = .TextColor
-                    cell.label_list_date_day.textColor = .TextColor
-                    cell.label_list_summary.textColor = .TextColor
-                    cell.label_list_number.textColor = .TextColor
-                    cell.label_list_debit.textColor = .TextColor
-                    cell.label_list_credit.textColor = .TextColor
-                    cell.label_list_debitOrCredit.textColor = .TextColor
-                    cell.label_list_balance.textColor = .TextColor
+                    cell.label_list_date_month.textColor = .textColor
+                    cell.label_list_date_day.textColor = .textColor
+                    cell.label_list_summary.textColor = .textColor
+                    cell.label_list_number.textColor = .textColor
+                    cell.label_list_debit.textColor = .textColor
+                    cell.label_list_credit.textColor = .textColor
+                    cell.label_list_debitOrCredit.textColor = .textColor
+                    cell.label_list_balance.textColor = .textColor
                 }
                 else {
                     cell.label_list_date_month.textColor = .red

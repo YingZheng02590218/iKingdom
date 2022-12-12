@@ -67,7 +67,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "作成書類："))
             textView_aboutThisApp.attributedText = attributedString
-            textView_aboutThisApp.textColor = .TextColor
+            textView_aboutThisApp.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_aboutThisApp.setContentOffset(
                 CGPoint(x: 0, y: -textView_aboutThisApp.contentInset.top),
@@ -106,7 +106,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "□　経済活動の種類による分類"))
             textView_thought.attributedText = attributedString
-            textView_thought.textColor = .TextColor
+            textView_thought.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_thought.setContentOffset(
                 CGPoint(x: 0, y: -textView_thought.contentInset.top),
@@ -141,7 +141,7 @@ class SettingsHelpDetailViewController: UIViewController {
             ], range: NSString(string: baseString!).range(of: "1. 取引の発生から財務諸表までの流れ"))
             attributedString.replaceCharacters(in: NSMakeRange(150, 1), with: attrStringWithImage)
             textView_basicOfBookkeeping.attributedText = attributedString
-            textView_basicOfBookkeeping.textColor = .TextColor
+            textView_basicOfBookkeeping.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_basicOfBookkeeping.setContentOffset(
                 CGPoint(x: 0, y: -textView_basicOfBookkeeping.contentInset.top),
@@ -167,7 +167,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "    2. 勘定科目体系の登録 "))
             textView_setUp.attributedText = attributedString
-            textView_setUp.textColor = .TextColor
+            textView_setUp.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp.setContentOffset(
                 CGPoint(x: 0, y: -textView_setUp.contentInset.top),
@@ -262,7 +262,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 会計帳簿を作成しよう"))
             textView_setUp_basicInfo.attributedText = attributedString
-            textView_setUp_basicInfo.textColor = .TextColor
+            textView_setUp_basicInfo.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_basicInfo.setContentOffset(
                 CGPoint(x: 0, y: -textView_setUp_basicInfo.contentInset.top),
@@ -402,7 +402,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 新規に追加登録する"))
             textView_setUp_account.attributedText = attributedString
-            textView_setUp_account.textColor = .TextColor
+            textView_setUp_account.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_account.setContentOffset(
                 CGPoint(x: 0, y: -textView_setUp_account.contentInset.top),
@@ -546,7 +546,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 削除をする"))
             textView_setUp_accountEdit.attributedText = attributedString
-            textView_setUp_accountEdit.textColor = .TextColor
+            textView_setUp_accountEdit.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_setUp_accountEdit.setContentOffset(
                 CGPoint(x: 0, y: -textView_setUp_accountEdit.contentInset.top),
@@ -587,7 +587,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "* 仕訳帳画面"))
             textView_configuration.attributedText = attributedString
-            textView_configuration.textColor = .TextColor
+            textView_configuration.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_configuration.setContentOffset(
                 CGPoint(x: 0, y: -textView_configuration.contentInset.top),
@@ -619,7 +619,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "1. 仕訳を入力する"))
             textView_journalEntry.attributedText = attributedString
-            textView_journalEntry.textColor = .TextColor
+            textView_journalEntry.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry.setContentOffset(
                 CGPoint(x: 0, y: -textView_journalEntry.contentInset.top),
@@ -660,7 +660,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "2. 仕訳を修正する"))
             textView_journalEntry_edit.attributedText = attributedString
-            textView_journalEntry_edit.textColor = .TextColor
+            textView_journalEntry_edit.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry_edit.setContentOffset(
                 CGPoint(x: 0, y: -textView_journalEntry_edit.contentInset.top),
@@ -710,7 +710,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "3. 仕訳を削除する"))
             textView_journalEntry_delete.attributedText = attributedString
-            textView_journalEntry_delete.textColor = .TextColor
+            textView_journalEntry_delete.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_journalEntry_delete.setContentOffset(
                 CGPoint(x: 0, y: -textView_journalEntry_delete.contentInset.top),
@@ -760,7 +760,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 .font: UIFont.boldSystemFont(ofSize: 20)
             ], range: NSString(string: baseString!).range(of: "4. 入力した取引を確認しよう"))
             textView_journals.attributedText = attributedString
-            textView_journals.textColor = .TextColor
+            textView_journals.textColor = .textColor
             self.view.layoutIfNeeded()    // 追加
             textView_journals.setContentOffset(
                 CGPoint(x: 0, y: -textView_journals.contentInset.top),

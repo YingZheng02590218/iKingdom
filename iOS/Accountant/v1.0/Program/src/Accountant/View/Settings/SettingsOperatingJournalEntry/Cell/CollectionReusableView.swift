@@ -27,14 +27,14 @@ class CollectionReusableView: UICollectionReusableView {
     
     // ボタンのデザインを指定する
     private func createButtons() {
-        addButton.setTitleColor(.TextColor, for: .normal)
+        addButton.setTitleColor(.textColor, for: .normal)
         addButton.neumorphicLayer?.cornerRadius = 10
-        addButton.setTitleColor(.TextColor, for: .selected)
+        addButton.setTitleColor(.textColor, for: .selected)
         addButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         addButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         addButton.neumorphicLayer?.edged = Constant.edged
         addButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        addButton.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+        addButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     
 }

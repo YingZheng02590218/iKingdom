@@ -97,24 +97,24 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             tableView.sectionHeaderTopPadding = 0
         }
         // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
-        editButtonItem.tintColor = .AccentColor
+        editButtonItem.tintColor = .accentColor
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true // 複数選択を可能にする
         button_edit.isHidden = true
-        button_edit.tintColor = tableView.isEditing ? .AccentBlue : UIColor.clear// 色
+        button_edit.tintColor = tableView.isEditing ? .accentBlue : UIColor.clear// 色
         
         // title設定
         navigationItem.title = "仕訳帳"
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     private func setButtons() {
 
-        pdfBarButtonItem.tintColor = .AccentColor
-        barButtonItem_add.tintColor = .AccentColor
+        pdfBarButtonItem.tintColor = .accentColor
+        barButtonItem_add.tintColor = .accentColor
 
         // 空白行対応
         if presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 { // 仕訳が1件以上ある場合
@@ -139,7 +139,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -749,7 +749,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
 
         button_edit.isHidden = !editing
         button_edit.isEnabled = false // まとめて編集ボタン
-        button_edit.tintColor = editing ? .AccentBlue : UIColor.clear // 色
+        button_edit.tintColor = editing ? .accentBlue : UIColor.clear // 色
         pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         barButtonItem_add.isEnabled = !editing // 仕訳入力ボタン
         // 編集中の場合

@@ -29,7 +29,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         //largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -159,7 +159,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
         let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
         if objectss.count > 0 || objectsss.count > 0 || objectssss.count > 0 || objectsssss.count > 0 {
-            cell.textLabel?.textColor = .TextColor
+            cell.textLabel?.textColor = .textColor
         }else {
             cell.textLabel?.textColor = .lightGray
         }
