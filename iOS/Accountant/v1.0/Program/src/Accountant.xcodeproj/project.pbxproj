@@ -89,6 +89,8 @@
 		F9860FBA285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
 		F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
+		F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F986CC1D29474392005A2138 /* .swiftlint.yml */; };
+		F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F986CC1D29474392005A2138 /* .swiftlint.yml */; };
 		F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */; };
 		F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */; };
 		F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
@@ -509,6 +511,7 @@
 		F97C278E263AB39D00DFC3B0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsCategoryTableViewController.swift; path = Accountant/View/Settings/SettingsCategory/SettingsCategoryMain/SettingsCategoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLabelTableViewCell.swift; sourceTree = "<group>"; };
@@ -867,6 +870,7 @@
 		F94EDD86237AEB3A0074D812 = {
 			isa = PBXGroup;
 			children = (
+				F986CC1D29474392005A2138 /* .swiftlint.yml */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
@@ -1605,6 +1609,7 @@
 				F9EC674027B90BC60003FBB6 /* ShellScript */,
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
 				F9EC675927B95E240003FBB6 /* Run Script Carthage */,
+				F986CC1C2947419E005A2138 /* Run Script SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1655,6 +1660,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */,
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
@@ -1713,6 +1719,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */,
 				F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */,
 				F9EC670F27B90BC60003FBB6 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */,
@@ -1827,6 +1834,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		F986CC1C2947419E005A2138 /* Run Script SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		F9EC668D27B90BC60003FBB6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
