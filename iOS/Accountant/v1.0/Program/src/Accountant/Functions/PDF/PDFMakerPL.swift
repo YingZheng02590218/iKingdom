@@ -73,18 +73,18 @@ class PDFMakerPL {
         var tableTopString = hTMLhelper.tableTopString()
         htmlString.append(tableTopString)
         // 売上高
-        var rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.Sales.rawValue, amount: pLData.NetSales)
+        var rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.sales.rawValue, amount: pLData.NetSales)
         htmlString.append(rowString)
         // 売上原価
-        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.CostOfGoodsSold.rawValue, amount: pLData.CostOfGoodsSold)
+        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.costOfGoodsSold.rawValue, amount: pLData.CostOfGoodsSold)
         htmlString.append(rowString)
         // 売上総利益
-        var rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.GrossProfitOrLoss.rawValue, amount: pLData.GrossProfitOrLoss)
+        var rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue, amount: pLData.GrossProfitOrLoss)
         htmlString.append(rowStringForBenefits)
 
 
         // 販売費及び一般管理費
-        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.SellingGeneralAndAdministrativeExpenses.rawValue)
+        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in pLData.objects9 {
@@ -92,16 +92,16 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 販売費及び一般管理費
-        var middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.SellingGeneralAndAdministrativeExpenses.getTotalAmount(), amount: pLData.SellingGeneralAndAdministrativeExpenses)
+        var middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount(), amount: pLData.SellingGeneralAndAdministrativeExpenses)
         htmlString.append(middleRowEnd)
 
         // 営業利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.OtherCapitalSurpluses_total.rawValue, amount: pLData.OtherCapitalSurpluses_total)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.otherCapitalSurplusesTotal.rawValue, amount: pLData.OtherCapitalSurpluses_total)
         htmlString.append(rowStringForBenefits)
 
 
         // 営業外収益
-        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.NonOperatingIncome.rawValue)
+        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingIncome.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in pLData.mid_category10 {
@@ -109,11 +109,11 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 営業外収益
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.NonOperatingIncome.getTotalAmount(), amount: pLData.NonOperatingIncome)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount(), amount: pLData.NonOperatingIncome)
         htmlString.append(middleRowEnd)
 
         // 営業外費用
-        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.NonOperatingExpenses.rawValue)
+        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingExpenses.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in pLData.mid_category6 {
@@ -121,16 +121,16 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 営業外費用
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.NonOperatingExpenses.getTotalAmount(), amount: pLData.NonOperatingExpenses)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount(), amount: pLData.NonOperatingExpenses)
         htmlString.append(middleRowEnd)
 
         // 経常利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.OrdinaryIncomeOrLoss.rawValue, amount: pLData.OrdinaryIncomeOrLoss)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue, amount: pLData.OrdinaryIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
 
 
         // 特別利益
-        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.ExtraordinaryProfits.rawValue)
+        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryProfits.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in pLData.mid_category11 {
@@ -138,11 +138,11 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 特別利益
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.ExtraordinaryProfits.getTotalAmount(), amount: pLData.ExtraordinaryIncome)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount(), amount: pLData.ExtraordinaryIncome)
         htmlString.append(middleRowEnd)
 
         // 特別損失
-        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.ExtraordinaryLoss.rawValue)
+        tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryLoss.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in pLData.mid_category7 {
@@ -150,19 +150,19 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 特別損失
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.ExtraordinaryLoss.getTotalAmount(), amount: pLData.ExtraordinaryLosses)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount(), amount: pLData.ExtraordinaryLosses)
         htmlString.append(middleRowEnd)
 
         // 税引前当期純利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.IncomeOrLossBeforeIncomeTaxes.rawValue, amount: pLData.IncomeOrLossBeforeIncomeTaxes)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue, amount: pLData.IncomeOrLossBeforeIncomeTaxes)
         htmlString.append(rowStringForBenefits)
 
         // 法人税等
-        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.IncomeTaxes.rawValue, amount: pLData.IncomeTaxes)
+        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.incomeTaxes.rawValue, amount: pLData.IncomeTaxes)
         htmlString.append(rowString)
 
         // 当期純利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.NetIncomeOrLoss.rawValue, amount: pLData.NetIncomeOrLoss)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue, amount: pLData.NetIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
 
         // テーブル　エンド

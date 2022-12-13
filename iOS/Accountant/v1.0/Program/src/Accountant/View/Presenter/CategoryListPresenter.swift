@@ -71,42 +71,42 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         self.model = model
         self.index = index
         
-        objects0 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 0, Rank1: 0)
-        objects1 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 0, Rank1: 1)
-        objects2 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 0, Rank1: 2)
+        objects0 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 0)
+        objects1 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 1)
+        objects2 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 2)
         
-        objects3 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 1, Rank1: 3)
-        objects4 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 1, Rank1: 4)
-        objects5 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 1, Rank1: 5)
+        objects3 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 3)
+        objects4 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 4)
+        objects5 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 5)
         
-        objects6 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 2, Rank1: 6)
+        objects6 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 2, rank1: 6)
         
-        objects7 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 3, Rank1: 7)
-        objects8 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 3, Rank1: 8)
+        objects7 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 7)
+        objects8 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 8)
         
-        objects9 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 4, Rank1: 9)
+        objects9 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
         
-        objects10 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 5, Rank1: 10)
-        objects11 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 5, Rank1: 11)
-        objects12 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 5, Rank1: 12)
-        objects13 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 5, Rank1: 19)
+        objects10 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10)
+        objects11 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 11)
+        objects12 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 12)
+        objects13 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 19)
         
-        objects14 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 6, Rank1: nil)
+        objects14 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 6, rank1: nil)
         
-        objects15 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 7, Rank1: 13)
-        objects16 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 7, Rank1: 14)
+        objects15 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 7, rank1: 13)
+        objects16 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 7, rank1: 14)
         
-        objects17 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 8, Rank1: nil)
+        objects17 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 8, rank1: nil)
         
-        objects18 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 9, Rank1: 15)
-        objects19 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 9, Rank1: 16)
+        objects18 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 9, rank1: 15)
+        objects19 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 9, rank1: 16)
         
-        objects20 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 10, Rank1: 17)
-        objects21 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 10, Rank1: 18)
+        objects20 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 10, rank1: 17)
+        objects21 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 10, rank1: 18)
         
-        objects22 = model.getDataBaseSettingsTaxonomyAccountInRank(Rank0: 11, Rank1: nil)
+        objects22 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 11, rank1: nil)
         
-        dataBaseSettingsTaxonomyAccount = model.getSettingsSwitchingOn(Rank0: index)
+        dataBaseSettingsTaxonomyAccount = model.getSettingsSwitchingOn(rank0: index)
     }
     
     func numberOfsections() -> Int {

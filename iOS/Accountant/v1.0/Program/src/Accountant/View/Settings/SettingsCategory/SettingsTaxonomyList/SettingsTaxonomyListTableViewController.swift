@@ -36,7 +36,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
+            gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む

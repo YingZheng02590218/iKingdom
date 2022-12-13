@@ -20,8 +20,8 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     * @param fiscalYear 年度
     * @return モデルオブジェクトが存在するかどうか
     */
-    func checkInitialising(DataBase: DataBaseAccountingBooksShelf, fiscalYear: Int) -> Bool {
-        super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
+    func checkInitialising(dataBase: DataBaseAccountingBooksShelf, fiscalYear: Int) -> Bool {
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
     }
     // モデルオブフェクトの追加
     func addAccountingBooksShelf(company: String) -> Int {

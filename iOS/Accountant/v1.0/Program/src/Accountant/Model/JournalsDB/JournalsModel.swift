@@ -13,7 +13,7 @@ import RealmSwift
 protocol JournalsModelInput {
     
     func initializeJournals(completion: (Bool) -> Void)
-    func checkInitialising(DataBase: DataBaseJournals, fiscalYear: Int) -> Bool
+    func checkInitialising(dataBase: DataBaseJournals, fiscalYear: Int) -> Bool
     func addJournals(number: Int)
     func deleteJournals(number: Int) -> Bool
     
@@ -52,8 +52,8 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     * @param fiscalYear 年度
     * @return モデルオブジェクトが存在するかどうか
     */
-    func checkInitialising(DataBase: DataBaseJournals, fiscalYear: Int) -> Bool {
-        super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
+    func checkInitialising(dataBase: DataBaseJournals, fiscalYear: Int) -> Bool {
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
     }
     // 追加
     func addJournals(number: Int) {
@@ -257,10 +257,10 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         dataBaseManager.updateJournalEntry(
             primaryKey: primaryKey,
             date: date,
-            debit_category: debit_category,
-            debit_amount: debit_amount,
-            credit_category: credit_category,
-            credit_amount: credit_amount,
+            debitCategory: debit_category,
+            debitAmount: debit_amount,
+            creditCategory: credit_category,
+            creditAmount: credit_amount,
             smallWritting: smallWritting,
             completion: { primaryKey in
                 print("Result is \(primaryKey)")
@@ -273,10 +273,10 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         dataBaseManager.updateAdjustingJournalEntry(
             primaryKey: primaryKey,
             date: date,
-            debit_category: debit_category,
-            debit_amount: debit_amount,
-            credit_category: credit_category,
-            credit_amount: credit_amount,
+            debitCategory: debit_category,
+            debitAmount: debit_amount,
+            creditCategory: credit_category,
+            creditAmount: credit_amount,
             smallWritting: smallWritting,
             completion: { primaryKey in
                 print("Result is \(primaryKey)")

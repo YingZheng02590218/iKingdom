@@ -23,16 +23,15 @@ class WalkThroughViewController: UIViewController {
 
     // TODO: ライセンス表記
     func showIntroWithCrossDissolve() {
-        
         let page = EAIntroPage()
         page.title = "Paciolist"
         page.titleColor = UIColor.textColor
         page.titleFont = UIFont(name: "Futura-Bold", size: 48.0)
-        page.titlePositionY = self.view.bounds.size.height/2
+        page.titlePositionY = self.view.bounds.size.height / 2
         page.desc = "複式簿記の会計帳簿\n\n紙の帳簿と同じデザインを表現した\n複式簿記で記帳ができるアプリ"
         page.descColor = UIColor.lightGray
         page.descFont = UIFont(name: "HiraMaruProN-W4", size: 18)
-        page.descPositionY = self.view.bounds.size.height/2
+        page.descPositionY = self.view.bounds.size.height / 2
         page.bgColor = UIColor.clear
         
         // 各ページはEAIntroPageというクラスがあるので、それで作りましょう。
@@ -110,11 +109,11 @@ class WalkThroughViewController: UIViewController {
         page5.title = "それでは良い\n複式簿記Lifeを"
         page5.titleColor = UIColor.textColor
         page5.titleFont = UIFont(name: "Helvetica-Bold", size: 29)
-        page5.titlePositionY = self.view.bounds.size.height/2
+        page5.titlePositionY = self.view.bounds.size.height / 2
         page5.desc = ""
         page5.descColor = UIColor.lightGray
         page5.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
-        page5.descPositionY = self.view.bounds.size.height/2
+        page5.descPositionY = self.view.bounds.size.height / 2
         page5.bgColor = UIColor.clear
         
         // ここでページを追加
@@ -141,7 +140,6 @@ class WalkThroughViewController: UIViewController {
         // アニメーション設定
         introView?.show(in: self.view, animateDuration: 0.1)
     }
-    
 }
 
 // MARK: - EAIntroDelegate
@@ -149,7 +147,6 @@ class WalkThroughViewController: UIViewController {
 extension WalkThroughViewController: EAIntroDelegate {
 
     func intro(_ introView: EAIntroView!, pageAppeared page: EAIntroPage!, with pageIndex: UInt) {
-
         // 最終ページまで到達した場合
         if introView.limitPageIndex == pageIndex {
             // 非表示とする
@@ -158,7 +155,6 @@ extension WalkThroughViewController: EAIntroDelegate {
     }
     
     func intro(_ introView: EAIntroView!, pageStartScrolling page: EAIntroPage!, with pageIndex: UInt) {
-
         // 最終ページまで到達した場合
         if introView.limitPageIndex == pageIndex {
             // 非表示とする
@@ -167,7 +163,6 @@ extension WalkThroughViewController: EAIntroDelegate {
     }
     
     func intro(_ introView: EAIntroView!, pageEndScrolling page: EAIntroPage!, with pageIndex: UInt) {
-
         // 最終ページまで到達した場合
         if introView.limitPageIndex == pageIndex {
             // 2秒間待つだけ
@@ -187,16 +182,15 @@ extension WalkThroughViewController: EAIntroDelegate {
     }
     
     func introDidFinish(_ introView: EAIntroView!, wasSkipped: Bool) {
-        
         let tabBarController = self.presentingViewController as! UITabBarController
         let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
-        let presentingViewController = navigationController.viewControllers.first as! JournalEntryViewController
-        self.dismiss(animated: true, completion: {
-            [presentingViewController] () -> Void in
-            // ViewController(ウォークスルー画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-            // チュートリアル対応 コーチマーク型
-            presentingViewController.showAnnotation()
-        })
+        if let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
+            self.dismiss(animated: true, completion: {
+                [presentingViewController] () -> Void in
+                // ViewController(ウォークスルー画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                // チュートリアル対応 コーチマーク型
+                presentingViewController.showAnnotation()
+            })
+        }
     }
-    
 }

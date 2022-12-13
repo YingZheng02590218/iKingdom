@@ -17,7 +17,9 @@ extension UIView {
         UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
         print(" bounds.size: \(bounds.size)")
         // 設定されているCGContextを取り出す
-        guard let context: CGContext = UIGraphicsGetCurrentContext() else { return nil }
+        guard let context: CGContext = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
 
         self.layer.render(in: context)
         // オフスクリーンを画像として取り出す
@@ -30,19 +32,20 @@ extension UIView {
 }
 
 extension UITextView {
+
     var contentBottom: CGFloat {
-        return contentSize.height - bounds.height
+        contentSize.height - bounds.height
     }
     // オフスクリーン画像を作成
     func captureImageTextView() -> UIImage? {
             // オフスクリーン保持用のプロパティ
             let images = captureImages()
-            
+
             // Concatenate images
-            
+
             print(" contentSize: \(contentSize)\n")
-            UIGraphicsBeginImageContext(contentSize);
-            
+            UIGraphicsBeginImageContext(contentSize)
+
             // ①画像を描画
             // ②スケーリングさせないUIImageの描画
             var y: CGFloat = 0
@@ -53,23 +56,23 @@ extension UITextView {
                 y = min(y + bounds.height, contentBottom) // calculate layer diff
                 print(" y + bounds.height, contentBottom :  \(y) + \(bounds.height), \(contentBottom)")
             }
-            let concatImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            UIGraphicsEndImageContext();
-            
+            let concatImage = UIGraphicsGetImageFromCurrentImageContext()
+
+            UIGraphicsEndImageContext()
+
             return concatImage
     }
-    
+
     func captureImages() -> [UIImage] {
         print("captureImages")
         // オフスクリーン保持用のプロパティ
         var images: [UIImage?] = []
-        
+
         while true {
 
             images.append(superview?.captureImage()) // not work in self.view
 
-            if contentOffset.y < (contentBottom - bounds.height) { //スクロール高さ<コンテント高さー座標高さー座標高さ
+            if contentOffset.y < (contentBottom - bounds.height) { // スクロール高さ<コンテント高さー座標高さー座標高さ
                 // iPadを横向きで実行するとこのパスを通る
                 print("if contentOffset.y < (contentBottom - bounds.height)")
                 print(" images.count     : \(images.count)")
@@ -93,26 +96,26 @@ extension UITextView {
                 break
             }
         }
-        return images.flatMap{ $0 } // exclude nil
+        return images.compactMap { $0 } // exclude nil
     }
 }
 
 extension UITableView {
 
     var contentBottom: CGFloat {
-        return contentSize.height - bounds.height
+        contentSize.height - bounds.height
     }
-    
+
     func captureImagee() -> UIImage? {
         print("captureImagee")
         // オフスクリーン保持用のプロパティ
         let images = captureImages()
-        
+
         // Concatenate images
-        
+
         print(" contentSize: \(contentSize)\n")
-        UIGraphicsBeginImageContext(contentSize);
-        
+        UIGraphicsBeginImageContext(contentSize)
+
         // ①画像を描画
         // ②スケーリングさせないUIImageの描画
         var y: CGFloat = 0
@@ -123,23 +126,23 @@ extension UITableView {
             y = min(y + bounds.height, contentBottom) // calculate layer diff
             print(" y + bounds.height, contentBottom :  \(y) + \(bounds.height), \(contentBottom)")
         }
-        let concatImage = UIGraphicsGetImageFromCurrentImageContext();
-        
-        UIGraphicsEndImageContext();
-        
+        let concatImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
         return concatImage
     }
-    
+
     func captureImages() -> [UIImage] {
         print("captureImages")
         // オフスクリーン保持用のプロパティ
         var images: [UIImage?] = []
-        
+
         while true {
 
             images.append(superview?.captureImage()) // not work in self.view
 
-            if contentOffset.y < (contentBottom - bounds.height) { //スクロール高さ<コンテント高さー座標高さー座標高さ
+            if contentOffset.y < (contentBottom - bounds.height) { // スクロール高さ<コンテント高さー座標高さー座標高さ
                 // iPadを横向きで実行するとこのパスを通る
                 print("if contentOffset.y < (contentBottom - bounds.height)")
                 print(" images.count     : \(images.count)")
@@ -163,7 +166,7 @@ extension UITableView {
                 break
             }
         }
-        return images.flatMap{ $0 } // exclude nil
+        return images.compactMap { $0 } // exclude nil
     }
 }
 
@@ -171,7 +174,9 @@ extension UIScrollView {
 
     func getContentImage(captureSize: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(captureSize, false, 0.0)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
 
         // 元の frame.size を記憶
         let originalSize = self.frame.size
@@ -182,18 +187,17 @@ extension UIScrollView {
         self.frame.size = originalSize
 
         let capturedImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
 
         return capturedImage
     }
 }
 
-
 extension NSAttributedString {
-    
+
     static func parseHTML2Text(sourceText text: String) -> NSAttributedString? {
         let encodeData = text.data(using: String.Encoding.utf8, allowLossyConversion: true)
-        let attributedOptions : [NSAttributedString.DocumentReadingOptionKey : Any] = [
+        let attributedOptions: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
@@ -206,7 +210,7 @@ extension NSAttributedString {
                     documentAttributes: nil
                 )
             } catch _ {
-                
+                print("エラーが発生しました")
             }
         }
         return attributedString

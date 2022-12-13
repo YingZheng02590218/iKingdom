@@ -20,7 +20,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     * @return モデルオブジェクトが存在するかどうか
     */
     func checkInitialising(DataBase: DataBaseGeneralLedger, fiscalYear: Int) -> Bool {
-        super.checkInitialising(DataBase: DataBase, fiscalYear: fiscalYear)
+        super.checkInitialising(dataBase: DataBase, fiscalYear: fiscalYear)
     }
     // 設定画面の勘定科目一覧にある勘定を取得する
     func getObjects() -> Results<DataBaseSettingsTaxonomyAccount> {
@@ -48,7 +48,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
             let number = dataBaseGeneralLedger.save() //　自動採番
             print("addGeneralLedger", number)
             // オブジェクトを作成 勘定
-            for i in 0..<objects.count{
+            for i in 0..<objects.count {
                 let dataBaseAccount = DataBaseAccount() // 勘定
                 let number = dataBaseAccount.save() //　自動採番
                 print("dataBaseAccount", number)

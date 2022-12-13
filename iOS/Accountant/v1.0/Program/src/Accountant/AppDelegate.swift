@@ -6,7 +6,7 @@
 //  Copyright © 2019 Hisashi Ishihara. All rights reserved.
 //
 
-//import NeuKit
+// import NeuKit
 import RealmSwift
 import Firebase // マネタイズ対応
 import GoogleMobileAds
@@ -15,12 +15,10 @@ import StoreKit
 import AppTrackingTransparency // IDFA対応
 import AdSupport // IDFA対応
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -42,10 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 migration.enumerateObjects(ofType: DataBaseTaxonomy.className()) { oldObject, newObject in
                     // スキーマバージョンが0のときだけ、'numberOfTaxonomy'プロパティを追加します
                     if oldSchemaVersion < 1 {
-                        let fiscalYear = oldObject!["fiscalYear"] as! Int
-                        newObject!["numberOfTaxonomy"] = 0
-                        let accountName = oldObject!["accountName"] as! String
-                        let total = oldObject!["total"] as! Int64
+                        _ = oldObject?["fiscalYear"] as? Int
+                        newObject?["numberOfTaxonomy"] = 0
+                        _ = oldObject?["accountName"] as? String
+                        _ = oldObject?["total"] as? Int64
                     }
                 }
         })
@@ -55,9 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(config) // schemaVersion を確認できる
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        let realm = try! Realm()
+//        let realm = try! Realm()
         // Override point for customization after application launch.
-        
+
         // // マネタイズ対応　Use Firebase library to configure APIs
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
@@ -79,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
             UserDefaults.standard.synchronize()
         }
-        
+
         // アップグレード機能
         // アプリ起動時にトランザクションの監視を開始します
         initSwiftyStorekit()
@@ -93,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        
+
         // 生体認証パスコードロック 認証を要求する
         // applicationWillResignActive: フォアグラウンドからバックグラウンドへ移行しようとした時
         UserDefaults.standard.set(true, forKey: "biometrics")
@@ -102,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        
+
         // 生体認証パスコードロック
         // アプリをバックグラウンドに持っていった状態から再度フォアグラウンドへアプリを復帰させる場合
         showPassCodeLock()
@@ -129,8 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             @unknown default:
                 fatalError()
             }
-        }
-        else {// iOS14未満
+        } else {// iOS14未満
             if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
                 print("Allow Tracking")
                 print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
@@ -140,12 +137,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func application(_ app: UIApplication, open inputURL: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open inputURL: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         // Ensure the URL is a file URL
-        guard inputURL.isFileURL else { return false }
-                
+        guard inputURL.isFileURL else {
+            return false
+        }
+
         // Reveal / import the document at the URL
-        guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return false }
+        guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else {
+            return false
+        }
 
         documentBrowserViewController.revealDocument(at: inputURL, importIfNeeded: true) { (revealedDocumentURL, error) in
             if let error = error {
@@ -256,8 +257,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - IDFA対応
-    
-    ///Alert表示
+
+    /// Alert表示
     private func showRequestTrackingAuthorizationAlert() {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
@@ -290,34 +291,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.global(qos: .default).async {
                 DispatchQueue.main.async {
                     // 生体認証パスコードロック
-                    let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
-                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as! PassCodeLockViewController
-                    
-                    if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-                        
-                        // 現在のrootViewControllerにおいて一番上に表示されているViewControllerを取得する
-                        var topViewController: UIViewController = rootViewController
-                        while let presentedViewController = topViewController.presentedViewController {
-                            topViewController = presentedViewController
-                        }
-                        
-                        // すでにパスコードロック画面がかぶせてあるかを確認する
-                        let isDisplayedPasscodeLock: Bool = topViewController.children.map{
-                            return $0 is PassCodeLockViewController
-                        }.contains(true)
-                        
-                        // パスコードロック画面がかぶせてなければかぶせる
-                        if !isDisplayedPasscodeLock {
-                            let nav = UINavigationController(rootViewController: viewController)
-                            nav.modalPresentationStyle = .overFullScreen
-                            nav.modalTransitionStyle   = .crossDissolve
-                            topViewController.present(nav, animated: true, completion: nil)
+                    if let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as? PassCodeLockViewController {
+
+                        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+
+                            // 現在のrootViewControllerにおいて一番上に表示されているViewControllerを取得する
+                            var topViewController: UIViewController = rootViewController
+                            while let presentedViewController = topViewController.presentedViewController {
+                                topViewController = presentedViewController
+                            }
+
+                            // すでにパスコードロック画面がかぶせてあるかを確認する
+                            let isDisplayedPasscodeLock: Bool = topViewController.children.map {
+                                return $0 is PassCodeLockViewController
+                            }.contains(true)
+
+                            // パスコードロック画面がかぶせてなければかぶせる
+                            if !isDisplayedPasscodeLock {
+                                let nav = UINavigationController(rootViewController: viewController)
+                                nav.modalPresentationStyle = .overFullScreen
+                                nav.modalTransitionStyle   = .crossDissolve
+                                topViewController.present(nav, animated: true, completion: nil)
+                            }
                         }
                     }
                 }
             }
         }
     }
-    
 }
-

@@ -12,10 +12,10 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol GenearlLedgerAccountModelInput {
     func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) 
-    func getBalanceAmount(indexPath: IndexPath) ->Int64
-    func getBalanceAmountAdjusting(indexPath: IndexPath) ->Int64
-    func getBalanceDebitOrCredit(indexPath: IndexPath) ->String
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) ->String
+    func getBalanceAmount(indexPath: IndexPath) -> Int64
+    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
+    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
+    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
     func getNumberOfAccount(accountName: String) -> Int
 
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
@@ -34,28 +34,28 @@ class GenearlLedgerAccountModel: GenearlLedgerAccountModelInput {
         dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries) // 毎回、計算は行わない
     }
     // 取得　差引残高額　仕訳
-    func getBalanceAmount(indexPath: IndexPath) ->Int64 {
+    func getBalanceAmount(indexPath: IndexPath) -> Int64 {
         
-        return dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
     }
     // 取得　差引残高額　 決算整理仕訳　損益勘定以外
-    func getBalanceAmountAdjusting(indexPath: IndexPath) ->Int64 {
+    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
         
-        return dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: indexPath)
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: indexPath)
     }
     // 借又貸を取得
-    func getBalanceDebitOrCredit(indexPath: IndexPath) ->String {
+    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
         
-        return dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
     }
     // 借又貸を取得 決算整理仕訳
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) ->String {
+    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
         
-        return dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
     }
     
     // 追加　勘定
-    func addGeneralLedgerAccount(number: Int){
+    func addGeneralLedgerAccount(number: Int) {
         // (1)Realmのインスタンスを生成する
         let realm = try! Realm()
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)

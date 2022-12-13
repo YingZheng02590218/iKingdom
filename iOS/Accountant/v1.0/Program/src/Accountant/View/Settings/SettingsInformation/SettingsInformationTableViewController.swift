@@ -34,7 +34,7 @@ class SettingsInformationTableViewController: UITableViewController {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
+            gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む

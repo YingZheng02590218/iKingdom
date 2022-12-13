@@ -542,14 +542,14 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="Button_Left" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
-                        <outlet property="Button_Right" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
                         <outlet property="Button_cancel" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
                         <outlet property="TextField_SmallWritting" destination="nGT-71-Qqm" id="zsw-dM-nKu"/>
                         <outlet property="TextField_amount_credit" destination="8YU-bl-bba" id="9e8-Jc-Q7E"/>
                         <outlet property="TextField_amount_debit" destination="b2F-8K-hRw" id="CmH-Dz-fak"/>
                         <outlet property="TextField_category_credit" destination="arY-VQ-0Zi" id="u91-Mk-D5t"/>
                         <outlet property="TextField_category_debit" destination="RtK-tc-ENG" id="9X7-jH-Mal"/>
+                        <outlet property="buttonLeft" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
+                        <outlet property="buttonRight" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
                         <outlet property="carouselCollectionView" destination="7RC-03-hT4" id="Zw8-9E-bXQ"/>
                         <outlet property="datePicker" destination="Kpa-dQ-eBA" id="Oa7-eh-kgx"/>
                         <outlet property="datePickerView" destination="wcr-5P-JyB" id="0q6-z7-Y5J"/>

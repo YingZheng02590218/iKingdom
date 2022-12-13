@@ -41,7 +41,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,14 +50,14 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
         
         presenter.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        super.viewDidAppear(animated)
         presenter.viewDidAppear()
     }
     
@@ -746,7 +746,7 @@ extension PLViewController: PLPresenterOutput {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
+            gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む

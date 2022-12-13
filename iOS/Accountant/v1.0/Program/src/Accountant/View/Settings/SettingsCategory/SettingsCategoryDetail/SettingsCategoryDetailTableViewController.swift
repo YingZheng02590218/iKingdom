@@ -53,7 +53,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
+            gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む
@@ -527,7 +527,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             // TableViewControllerのviewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: {
                 [presentingViewController] () -> Void in
-                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(Rank0: self.big_num, Rank1: self.mid_num, Rank2: self.small_num, numberOfTaxonomy: String(self.numberOfTaxonomy), category: self.accountname, switching: true)
+                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(rank0: self.big_num, rank1: self.mid_num, rank2: self.small_num, numberOfTaxonomy: String(self.numberOfTaxonomy), category: self.accountname, switching: true)
                 // 新規追加　を終了するためにフラグを倒す
                 if newnumber != 0 {
                     self.addAccount = false

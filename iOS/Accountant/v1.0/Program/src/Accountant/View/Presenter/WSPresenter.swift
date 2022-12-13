@@ -77,8 +77,8 @@ final class WSPresenter: WSPresenterInput {
         model.initialize()
 
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true) //期中の仕訳の勘定科目を取得
-        objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: true, switching: true) //修正記入の勘定科目を取得
+        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) //期中の仕訳の勘定科目を取得
+        objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) //修正記入の勘定科目を取得
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         object = dataBaseManagerFinancialStatements.getFinancialStatements()

@@ -15,8 +15,8 @@ class DataBaseManagerGeneralLedgerAccountBalance {
     var dataBaseJournalEntries: Results<DataBaseJournalEntry>!            // 仕訳
     var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>!        // 決算整理仕訳　勘定別
 
-    var balanceAmount:Int64 = 0                             // 差引残高額
-    var balanceDebitOrCredit:String = ""                 // 借又貸
+    var balanceAmount: Int64 = 0                             // 差引残高額
+    var balanceDebitOrCredit: String = ""                 // 借又貸
 
 
     // 計算　差引残高

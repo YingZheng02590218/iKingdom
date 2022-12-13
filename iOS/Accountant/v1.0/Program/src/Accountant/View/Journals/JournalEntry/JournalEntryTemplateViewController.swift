@@ -51,9 +51,9 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
 //        }
         
 //        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
-//            Button_Left.isHidden = true
+//            buttonLeft.isHidden = true
 //            datePicker.isHidden = true
-//            Button_Right.isHidden = true
+//            buttonRight.isHidden = true
 //            dateLabel.isHidden = true
 //            nicknameTextField.isHidden = false
 //        }else {

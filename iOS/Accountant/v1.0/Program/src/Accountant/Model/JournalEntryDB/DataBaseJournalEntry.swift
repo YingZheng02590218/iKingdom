@@ -67,7 +67,7 @@ struct DBJournalEntry {
 }
 
 class RObject: Object {
-    @objc dynamic var number: Int = 0                   //非オプショナル型
+    @objc dynamic var number: Int = 0                   // 非オプショナル型
     // データを保存。
     func save() -> Int {
         let realm = try! Realm()
@@ -89,6 +89,6 @@ class RObject: Object {
     }
     // プライマリーキーの設定
     override static func primaryKey() -> String? {
-        return "number"
+        "number"
     }
 }

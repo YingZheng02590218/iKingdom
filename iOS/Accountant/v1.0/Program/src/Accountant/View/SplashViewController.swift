@@ -9,7 +9,6 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-    
     // 初期化画面　ロゴ
     @IBOutlet weak var logoLabel: UILabel!
     @IBOutlet weak var logoImageView: UIView!
@@ -38,7 +37,7 @@ class SplashViewController: UIViewController {
         if let logoImageView = logoImageView {
             logoImageView.isHidden = false
             // 表示位置を設定（画面中央）
-            activityIndicatorView.center = CGPoint(x:view.center.x, y: view.center.y + 60)
+            activityIndicatorView.center = CGPoint(x: view.center.x, y: view.center.y + 60)
             // インジケーターのスタイルを指定（白色＆大きいサイズ）
             activityIndicatorView.style = UIActivityIndicatorView.Style.large
             // インジケーターを View に追加
@@ -70,7 +69,7 @@ class SplashViewController: UIViewController {
                            options: UIView.AnimationOptions.curveEaseOut,
                            animations: { () in
                 logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            }, completion: { (Bool) in
+            }, completion: { _ in
 
             })
             // 拡大させて、消えるアニメーション
@@ -80,20 +79,22 @@ class SplashViewController: UIViewController {
                            animations: { () in
                 self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
                 self.logoLabel.alpha = 0
-            }, completion: { (Bool) in
+            }, completion: { _ in
                 self.logoImageView.removeFromSuperview()
             })
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // スプラッシュ画面から、仕訳画面へ遷移させる
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-            tabBarController.modalPresentationStyle = .fullScreen
-            tabBarController.modalTransitionStyle = .crossDissolve
-            self.present(tabBarController, animated: true, completion: nil)
+            if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController {
+                tabBarController.modalPresentationStyle = .fullScreen
+                tabBarController.modalTransitionStyle = .crossDissolve
+                self.present(tabBarController, animated: true, completion: nil)
+            }
         }
     }
 }

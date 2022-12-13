@@ -46,7 +46,7 @@ class GeneralLedgerTableViewController: UITableViewController {
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
+            gADBannerView.adUnitID = Constant.ADMOBID
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -141,13 +141,13 @@ class GeneralLedgerTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let databaseManagerSettings = CategoryListModel()
-        let objects = databaseManagerSettings.getSettingsSwitchingOn(Rank0: section) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: section) // どのセクションに表示するセルかを判別するため引数で渡す
         return objects.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let databaseManagerSettings = CategoryListModel()
-        let objects = databaseManagerSettings.getSettingsSwitchingOn(Rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger", for: indexPath)
         // 勘定科目の名称をセルに表示する
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
@@ -180,7 +180,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
         let databaseManagerSettings = CategoryListModel() //データベースマネジャー
-        let objects = databaseManagerSettings.getSettingsSwitchingOn(Rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
+        let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         // ③遷移先ViewCntrollerの取得
         let navigationController = segue.destination as! UINavigationController
         let viewControllerGenearlLedgerAccount = navigationController.topViewController as! GenearlLedgerAccountViewController

@@ -31,7 +31,6 @@ public enum BalanceSheet: Hashable {
     // 固定負債 Fixed liabilities
     case fixedLiabilities(FixedLiabilities)
 
-    
     // MARK: - 大区分
 
     public enum Block: String, CaseIterable, Hashable {
@@ -46,10 +45,14 @@ public enum BalanceSheet: Hashable {
         
         func getTotalAmount() -> String {
             switch self {
-            case .assets: return "資産合計"
-            case .liabilities: return "負債合計"
-            case .netAssets: return "純資産合計"
-            case .liabilityAndEquity: return "負債純資産合計"
+            case .assets:
+                return "資産合計"
+            case .liabilities:
+                return "負債合計"
+            case .netAssets:
+                return "純資産合計"
+            case .liabilityAndEquity:
+                return "負債純資産合計"
             }
         }
     }
@@ -66,9 +69,12 @@ public enum BalanceSheet: Hashable {
         
         func getTotalAmount() -> String {
             switch self {
-            case .currentAssets: return "流動資産合計"
-            case .nonCurrentAssets: return "固定資産合計"
-            case .deferredAssets: return "繰延資産合計"
+            case .currentAssets:
+                return "流動資産合計"
+            case .nonCurrentAssets:
+                return "固定資産合計"
+            case .deferredAssets:
+                return "繰延資産合計"
             }
         }
     }
@@ -81,8 +87,10 @@ public enum BalanceSheet: Hashable {
         
         func getTotalAmount() -> String {
             switch self {
-            case .currentLiabilities: return "流動負債合計"
-            case .fixedLiabilities: return "固定負債合計"
+            case .currentLiabilities:
+                return "流動負債合計"
+            case .fixedLiabilities:
+                return "固定負債合計"
             }
         }
     }
@@ -102,12 +110,16 @@ public enum BalanceSheet: Hashable {
         
         func getTotalAmount() -> String {
             switch self {
-            case .cashAndCashEquivalents: return "株主資本合計"
-            case .accumulatedOtherComprehensiveIncome: return "その他の包括利益累計額合計"
+            case .cashAndCashEquivalents:
+                return "株主資本合計"
+            case .accumulatedOtherComprehensiveIncome:
+                return "その他の包括利益累計額合計"
                 // 不使用
-            case .subscriptionRightsToShares: return ""
+            case .subscriptionRightsToShares:
+                return ""
                 // 不使用
-            case .nonControllingInterests: return ""
+            case .nonControllingInterests:
+                return ""
             }
         }
     }
@@ -155,7 +167,6 @@ public enum ProfitAndLossStatement: Hashable {
 
     case block(Block)
 
-
     // MARK: - 大区分
 
 //    public enum Block: String, CaseIterable, Hashable {
@@ -169,32 +180,40 @@ public enum ProfitAndLossStatement: Hashable {
 
     public enum Block: String, CaseIterable, Hashable {
         // 売上高    Sales
-        case Sales = "売上高"
+        case sales = "売上高"
         // 売上原価    Cost of goods sold
-        case CostOfGoodsSold = "売上原価"
+        case costOfGoodsSold = "売上原価"
         // 販売費及び一般管理費    Selling, general and administrative expenses
-        case SellingGeneralAndAdministrativeExpenses = "販売費及び一般管理費"
+        case sellingGeneralAndAdministrativeExpenses = "販売費及び一般管理費"
         // 営業外収益    Non-operating income
-        case NonOperatingIncome = "営業外収益"
+        case nonOperatingIncome = "営業外収益"
         // 営業外費用    Non-operating expenses
-        case NonOperatingExpenses = "営業外費用"
+        case nonOperatingExpenses = "営業外費用"
         // 特別利益    Extraordinary profits
-        case ExtraordinaryProfits = "特別利益"
+        case extraordinaryProfits = "特別利益"
         // 特別損失    Extraordinary loss
-        case ExtraordinaryLoss = "特別損失"
+        case extraordinaryLoss = "特別損失"
         // 法人税、住民税及び事業税    Corporation tax, residential tax and business tax
-        case IncomeTaxes = "法人税等"
+        case incomeTaxes = "法人税等"
 
         func getTotalAmount() -> String {
             switch self {
-            case .Sales: return ""
-            case .CostOfGoodsSold: return ""
-            case .SellingGeneralAndAdministrativeExpenses: return "販売費及び一般管理費合計"
-            case .NonOperatingIncome: return "営業外収益合計"
-            case .NonOperatingExpenses: return "営業外費用合計"
-            case .ExtraordinaryProfits: return "特別利益合計"
-            case .ExtraordinaryLoss: return "特別損失合計"
-            case .IncomeTaxes: return ""
+            case .sales:
+                return ""
+            case .costOfGoodsSold:
+                return ""
+            case .sellingGeneralAndAdministrativeExpenses:
+                return "販売費及び一般管理費合計"
+            case .nonOperatingIncome:
+                return "営業外収益合計"
+            case .nonOperatingExpenses:
+                return "営業外費用合計"
+            case .extraordinaryProfits:
+                return "特別利益合計"
+            case .extraordinaryLoss:
+                return "特別損失合計"
+            case .incomeTaxes:
+                return ""
             }
         }
     }
@@ -202,15 +221,15 @@ public enum ProfitAndLossStatement: Hashable {
     // MARK: - 利益
 
     public enum Benefits: String, CaseIterable, Hashable {
-        //売上総利益（損失）Gross profit (loss)
-        case GrossProfitOrLoss = "売上総利益"
-        //営業利益（損失）⇒ Operating income (loss)
-        case OtherCapitalSurpluses_total = "営業利益"
-        //経常利益（損失）⇒ Ordinary income (loss)
-        case OrdinaryIncomeOrLoss = "経常利益"
-        //税引前当期純利益（損失）⇒ Income (loss) before income taxes
-        case IncomeOrLossBeforeIncomeTaxes = "税引前当期純利益"
-        //当期純利益（損失）⇒ Net income (loss)
-        case NetIncomeOrLoss = "当期純利益"
+        // 売上総利益（損失）Gross profit (loss)
+        case grossProfitOrLoss = "売上総利益"
+        // 営業利益（損失）⇒ Operating income (loss)
+        case otherCapitalSurplusesTotal = "営業利益"
+        // 経常利益（損失）⇒ Ordinary income (loss)
+        case ordinaryIncomeOrLoss = "経常利益"
+        // 税引前当期純利益（損失）⇒ Income (loss) before income taxes
+        case incomeOrLossBeforeIncomeTaxes = "税引前当期純利益"
+        // 当期純利益（損失）⇒ Net income (loss)
+        case netIncomeOrLoss = "当期純利益"
     }
 }

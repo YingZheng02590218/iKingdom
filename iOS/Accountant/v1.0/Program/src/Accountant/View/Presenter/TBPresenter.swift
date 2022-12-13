@@ -60,7 +60,7 @@ final class TBPresenter: TBPresenterInput {
         self.model = model
         
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(AdjustingAndClosingEntries: false, switching: true)
+        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         object = dataBaseManagerFinancialStatements.getFinancialStatements()

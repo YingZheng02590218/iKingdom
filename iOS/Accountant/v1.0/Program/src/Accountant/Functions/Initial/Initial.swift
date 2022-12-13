@@ -34,10 +34,10 @@ class Initial {
             let dataBaseManager = DataBaseManagerJournalEntry()
             let _ = dataBaseManager.addJournalEntry(
                 date: "\(getTheTime())/04/01",
-                debit_category: "現金",
-                debit_amount: 1000000, //カンマを削除してからデータベースに書き込む
-                credit_category: "売上高",
-                credit_amount: 1000000,//カンマを削除してからデータベースに書き込む
+                debitCategory: "現金",
+                debitAmount: 1000000, //カンマを削除してからデータベースに書き込む
+                creditCategory: "売上高",
+                creditAmount: 1000000,//カンマを削除してからデータベースに書き込む
                 smallWritting: "ゾウ商店"
             )
             // よく使う仕訳のサンプルデータを作成する
@@ -81,7 +81,7 @@ class Initial {
     * 会計帳簿棚を初期化する。
     */
     func initializeAccountingBooksShelf() {
-        if !DataBaseManagerAccountingBooksShelf.shared.checkInitialising(DataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
+        if !DataBaseManagerAccountingBooksShelf.shared.checkInitialising(dataBase: DataBaseAccountingBooksShelf(), fiscalYear: 0) {
             let number = DataBaseManagerAccountingBooksShelf.shared.addAccountingBooksShelf(company: "事業者名")
             print(number)
         }
@@ -129,7 +129,7 @@ class Initial {
     */
     func initialiseJournals(number: Int,fiscalYear: Int){
          let dataBaseManager = JournalsModel()
-        if !dataBaseManager.checkInitialising(DataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
+        if !dataBaseManager.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
         }
     }
@@ -151,7 +151,7 @@ class Initial {
     func initializeFinancialStatements(number: Int,fiscalYear: Int) {
         let dataBaseManager = DataBaseManagerFinancialStatements()
         // データベースに財務諸表があるかをチェック
-        if !dataBaseManager.checkInitialising(DataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
+        if !dataBaseManager.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
             dataBaseManager.addFinancialStatements(number: number)
         }
     }

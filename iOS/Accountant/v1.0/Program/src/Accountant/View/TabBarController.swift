@@ -32,15 +32,16 @@ class TabBarController: UITabBarController {
             DispatchQueue.global(qos: .default).async {
                 DispatchQueue.main.async {
                     // 生体認証パスコードロック
-                    let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
-                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as! PassCodeLockViewController
-                    let nav = UINavigationController(rootViewController: viewController)
-                    nav.modalPresentationStyle = .overFullScreen
-                    nav.modalTransitionStyle   = .crossDissolve
-                    self.present(nav, animated: false, completion: nil)
+                    if let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as? PassCodeLockViewController {
+                        let nav = UINavigationController(rootViewController: viewController)
+                        nav.modalPresentationStyle = .overFullScreen
+                        nav.modalTransitionStyle   = .crossDissolve
+                        self.present(nav, animated: false, completion: nil)
+                    }
                 }
             }
         }
     }
-    
+
 }

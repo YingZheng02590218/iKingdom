@@ -22,6 +22,7 @@ class PassCodeLockViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 文言を指定
         let type = LocalAuthentication.getDeviceOwnerLocalAuthenticationType()
         label.text = type.getDescriptionTitle() + "を使って\n認証して下さい"
@@ -60,7 +61,7 @@ class PassCodeLockViewController: UIViewController {
                 DispatchQueue.main.async {
                     // アラート画面を表示する
                     // Paciolistの設定画面でパスコードロックをONにしている状態で、iPhoneの設定画面でパスコードをオフにした場合
-                    if errorReason != "" {
+                    if !errorReason.isEmpty {
                         let alert = UIAlertController(title: "エラー", message: errorReason, preferredStyle: .alert)
                         self.present(alert, animated: true) { () -> Void in
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

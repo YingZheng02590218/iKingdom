@@ -26,8 +26,8 @@ class JournalEntryViewController: UIViewController {
     static var viewReload = false // カルーセル　リロードするかどうか
     // ボタン　アウトレットコレクション
     @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
-    @IBOutlet weak var Button_Right: EMTNeumorphicButton!
-    @IBOutlet weak var Button_Left: EMTNeumorphicButton!
+    @IBOutlet weak var buttonRight: EMTNeumorphicButton!
+    @IBOutlet weak var buttonLeft: EMTNeumorphicButton!
     @IBOutlet var inputButton: EMTNeumorphicButton!
     @IBOutlet var Button_cancel: EMTNeumorphicButton!
     // デイトピッカー　日付
@@ -50,10 +50,10 @@ class JournalEntryViewController: UIViewController {
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳or決算整理仕訳or編集)
-    var journalEntryType :String = "" // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
+    var journalEntryType : String = "" // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
     
     // 仕訳編集　仕訳帳画面で選択されたセルの位置　仕訳か決算整理仕訳かの判定に使用する
-    var tappedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
+    var tappedIndexPath : IndexPath = IndexPath(row: 0, section: 0)
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int = 0
 
@@ -75,7 +75,6 @@ class JournalEntryViewController: UIViewController {
 
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
-        
         // セットアップ
         dateFormatter.locale = Locale.current
         dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
@@ -83,6 +82,7 @@ class JournalEntryViewController: UIViewController {
     }
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
         if isFromClassicCalcuatorViewController {
             // 金額　電卓画面で入力した値を表示させる
@@ -106,8 +106,7 @@ class JournalEntryViewController: UIViewController {
             }
             // フラグを倒す
             isFromClassicCalcuatorViewController = false
-        }
-        else {
+        } else {
             // UIパーツを作成
             createTextFieldForCategory()
             createTextFieldForAmount()
@@ -124,8 +123,7 @@ class JournalEntryViewController: UIViewController {
                     }
                 }
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            }
-            else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
+            } else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
 //                label_title.text = "決算整理仕訳"
                 createCarousel() // カルーセルを作成
                 if JournalEntryViewController.viewReload {
@@ -135,8 +133,7 @@ class JournalEntryViewController: UIViewController {
                     }
                 }
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            }
-            else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+            } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
                 label_title.text = "仕訳まとめて編集"
                 createCarousel() // カルーセルを作成
                 carouselCollectionView.isHidden = true
@@ -144,8 +141,7 @@ class JournalEntryViewController: UIViewController {
                 maskDatePickerButton.isHidden = false
                 isMaskedDatePicker = false
                 inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            }
-            else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
+            } else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
                 createCarousel() // カルーセルを作成
                 carouselCollectionView.isHidden = true
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
@@ -163,8 +159,7 @@ class JournalEntryViewController: UIViewController {
                         TextField_amount_credit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
                         TextField_SmallWritting.text = dataBaseJournalEntry.smallWritting
                     }
-                }
-                else {
+                } else {
 // 通常仕訳
                     label_title.text = "仕訳編集"
                     if let dataBaseJournalEntry = dataBaseManager.getJournalEntryWithNumber(number: primaryKey) {
@@ -177,8 +172,7 @@ class JournalEntryViewController: UIViewController {
                     }
                 }
                 inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            }
-            else if journalEntryType == "" {
+            } else if journalEntryType == "" {
                 label_title.text = ""
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
@@ -197,9 +191,10 @@ class JournalEntryViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        //ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+        super.viewDidAppear(animated)
+        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        //ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
+        // ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 //        // TODO: 動作確認用
 //        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
@@ -209,7 +204,6 @@ class JournalEntryViewController: UIViewController {
 //        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
 //
 //        self.present(fourthViewController, animated: true, completion: nil)
-        
         // チュートリアル対応 ウォークスルー型
         showWalkThrough()
     }
@@ -218,13 +212,13 @@ class JournalEntryViewController: UIViewController {
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     // MARK: - チュートリアル対応 ウォークスルー型
 
     // チュートリアル対応 ウォークスルー型
@@ -238,9 +232,10 @@ class JournalEntryViewController: UIViewController {
                 Thread.sleep(forTimeInterval: 1)
                 DispatchQueue.main.async {
                     // チュートリアル対応 ウォークスルー型
-                    let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as! WalkThroughViewController
+                    if let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as? WalkThroughViewController {
                     viewController.modalPresentationStyle = .fullScreen
                     self.present(viewController, animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -263,8 +258,7 @@ class JournalEntryViewController: UIViewController {
                     self.presentAnnotation()
                 }
             }
-        }
-        else {
+        } else {
             // コーチマークを終了
             self.finishAnnotation()
         }
@@ -279,13 +273,14 @@ class JournalEntryViewController: UIViewController {
                 }
             }
         }
-        let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as! AnnotationViewControllerJournalEntry
+        if let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as? AnnotationViewControllerJournalEntry {
         viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
+        }
     }
     // チュートリアル対応 コーチマーク型　コーチマークを終了
     func finishAnnotation() {
-        //タブの有効化
+        // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -313,7 +308,7 @@ class JournalEntryViewController: UIViewController {
         let nib = UINib(nibName: "CarouselCollectionViewCell", bundle: .main)
         carouselCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
-    
+
     // MARK: UIDatePicker
     // デートピッカー作成
     func createDatePicker() {
@@ -378,22 +373,18 @@ class JournalEntryViewController: UIViewController {
                 datePicker.minimumDate = dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(timezone.string(from: dateFormatterMMdd.date(from: theDayOfReckoning)!))")
                 datePicker.maximumDate = dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(timezone.string(from: dateFormatterMMdd.date(from: theDayOfReckoning)!))")
             }
-        }
-        else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
+        } else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
             // 決算日設定機能　何もしない
-        }
-        else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+        } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
             
-        }
-        else {
+        } else {
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 print("### 会計期間が年をまたがない場合")
                 datePicker.minimumDate = dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(timezone.string(from: modifiedDate))")
                 print(dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(timezone.string(from: modifiedDate))"))
                 datePicker.maximumDate = dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(timezone.string(from: dateFormatterMMdd.date(from: theDayOfReckoning)!))")
                 print(dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(timezone.string(from: dateFormatterMMdd.date(from: theDayOfReckoning)!))"))
-            }
-            else { // 会計期間が年をまたぐ場合
+            } else { // 会計期間が年をまたぐ場合
                 // 01/01 以降か
                 let Interval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: dateFormatterMMdd.date(from: nowStringMonthDay)! )).month
                 // 設定決算日 未満か
@@ -411,8 +402,7 @@ class JournalEntryViewController: UIViewController {
                         datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + dateFormatterHHmmss.string(from: now))!)
                         // 四月以降か
                         datePicker.maximumDate = dateFormatteryyyyMMdd.date(from: (nowStringNextYear + "-\(timezone.string(from: dateFormatterMMdd.date(from: theDayOfReckoning)!))"))
-                    }
-                    else if Interval2! >= 0 {
+                    } else if Interval2! >= 0 {
                         print("### 会計期間　年度開始日 以降")
                         if Interval3! <= 0 {
                             print("### 会計期間　12/31 以前")
@@ -428,19 +418,15 @@ class JournalEntryViewController: UIViewController {
         // ピッカーの初期値
         if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
             // 決算日設定機能　何もしない viewDidLoad()で値を設定している
-        }
-        else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
-            
-        }
-        else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
+        } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+            // nothing
+        } else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 datePicker.date = dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + dateFormatterHHmmss.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
-            }
-            else {
+            } else {
                 datePicker.date = dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + dateFormatterHHmmss.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
             }
-        }
-        else {
+        } else {
             datePicker.date = dateFormatteryyyyMMddHHmmss.date(from: dateFormatterMMdd.string(from: now) + "/" + dateFormatterYYYY.string(from: now) + ", " + dateFormatterHHmmss.string(from: now))!// 注意：カンマの後にスペースがないとnilになる
         }
 //        // 背景色
@@ -448,12 +434,11 @@ class JournalEntryViewController: UIViewController {
         //　iOS14対応　モード　ドラムロールはwheels
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
-        }
-        else {
+        } else {
             // Fallback on earlier versions
         }
-        
     }
+
     // MARK: EMTNeumorphicView
     // ニューモフィズム　ボタンとビューのデザインを指定する
     private func createEMTNeumorphicView() {
@@ -466,37 +451,34 @@ class JournalEntryViewController: UIViewController {
             datePickerView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         }
-        
-        if let Button_Left = Button_Left {
-            Button_Left.setTitleColor(.textColor, for: .normal)
-            Button_Left.neumorphicLayer?.cornerRadius = 10
-            Button_Left.setTitleColor(.textColor, for: .selected)
-            Button_Left.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
-            Button_Left.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
-            Button_Left.neumorphicLayer?.edged = Constant.edged
-            Button_Left.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Left.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        if let buttonLeft = buttonLeft {
+            buttonLeft.setTitleColor(.textColor, for: .normal)
+            buttonLeft.neumorphicLayer?.cornerRadius = 10
+            buttonLeft.setTitleColor(.textColor, for: .selected)
+            buttonLeft.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            buttonLeft.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            buttonLeft.neumorphicLayer?.edged = Constant.edged
+            buttonLeft.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            buttonLeft.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             let backImage = UIImage(named: "arrow_back_ios-arrow_back_ios_symbol")?.withRenderingMode(.alwaysTemplate)
-            Button_Left.setImage(backImage, for: UIControl.State.normal)
+            buttonLeft.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Left.tintColor = .accentColor
+            buttonLeft.tintColor = .accentColor
         }
-        
-        if let Button_Right = Button_Right {
-            Button_Right.setTitleColor(.textColor, for: .normal)
-            Button_Right.neumorphicLayer?.cornerRadius = 10
-            Button_Right.setTitleColor(.textColor, for: .selected)
-            Button_Right.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
-            Button_Right.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
-            Button_Right.neumorphicLayer?.edged = Constant.edged
-            Button_Right.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            Button_Right.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        if let buttonRight = buttonRight {
+            buttonRight.setTitleColor(.textColor, for: .normal)
+            buttonRight.neumorphicLayer?.cornerRadius = 10
+            buttonRight.setTitleColor(.textColor, for: .selected)
+            buttonRight.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            buttonRight.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            buttonRight.neumorphicLayer?.edged = Constant.edged
+            buttonRight.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            buttonRight.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             let backImage = UIImage(named: "arrow_forward_ios-arrow_forward_ios_symbol")?.withRenderingMode(.alwaysTemplate)
-            Button_Right.setImage(backImage, for: UIControl.State.normal)
+            buttonRight.setImage(backImage, for: UIControl.State.normal)
             // アイコン画像の色を指定する
-            Button_Right.tintColor = .accentColor
+            buttonRight.tintColor = .accentColor
         }
-        
         if let textFieldView = textFieldView {
             textFieldView.neumorphicLayer?.cornerRadius = 15
             textFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
@@ -506,7 +488,6 @@ class JournalEntryViewController: UIViewController {
             textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
-        
         if let smallWrittingTextFieldView = smallWrittingTextFieldView {
             smallWrittingTextFieldView.neumorphicLayer?.cornerRadius = 15
             smallWrittingTextFieldView.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
@@ -516,7 +497,6 @@ class JournalEntryViewController: UIViewController {
             smallWrittingTextFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             smallWrittingTextFieldView.neumorphicLayer?.depthType = .concave
         }
-        
 //        inputButton.setTitle("入力", for: .normal)
         inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
@@ -649,7 +629,7 @@ class JournalEntryViewController: UIViewController {
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: Constant.ADMOB_ID_INTERSTITIAL,
+            GADInterstitialAd.load(withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
                                    request: request,
                                    completionHandler: { [self] ad, error in
                 if let error = error {
@@ -1016,13 +996,13 @@ class JournalEntryViewController: UIViewController {
         var number = 0
         number = dataBaseManager.addAdjustingJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
-            debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-            credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            debitCategory: TextField_category_debit.text!,
+            debitAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            creditCategory: TextField_category_credit.text!,
+            creditAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
-
+        print(number)
         // 精算表画面から入力の場合
         if let tabBarController = self.presentingViewController as? UITabBarController { // 一番基底となっているコントローラ
             let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
@@ -1035,7 +1015,7 @@ class JournalEntryViewController: UIViewController {
             // イベントログ
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                 AnalyticsParameterContentType: Constant.WORKSHEET,
-                AnalyticsParameterItemID: Constant.ADD_ADJUSTING_JOURNAL_ENTRY
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
             ])
         }
         // タブバーの仕訳タブから入力の場合
@@ -1051,8 +1031,8 @@ class JournalEntryViewController: UIViewController {
             }
             // イベントログ
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.JOURNAL_ENTRY,
-                AnalyticsParameterItemID: Constant.ADD_ADJUSTING_JOURNAL_ENTRY
+                AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
             ])
         }
     }
@@ -1068,10 +1048,10 @@ class JournalEntryViewController: UIViewController {
             dataBaseManager.updateAdjustingJournalEntry(
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
-                debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-                credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                debitCategory: TextField_category_debit.text!,
+                debitAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                creditCategory: TextField_category_credit.text!,
+                creditAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1083,10 +1063,10 @@ class JournalEntryViewController: UIViewController {
             dataBaseManager.updateJournalEntry(
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
-                debit_category: TextField_category_debit.text!,
-                debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-                credit_category: TextField_category_credit.text!,
-                credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+                debitCategory: TextField_category_debit.text!,
+                debitAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+                creditCategory: TextField_category_credit.text!,
+                creditAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
                 smallWritting: TextField_SmallWritting.text!,
                 completion: { primaryKey in
                     print("Result is \(primaryKey)")
@@ -1111,16 +1091,16 @@ class JournalEntryViewController: UIViewController {
         var number = 0
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
-            debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-            credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            debitCategory: TextField_category_debit.text!,
+            debitAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            creditCategory: TextField_category_credit.text!,
+            creditAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         // イベントログ
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
             AnalyticsParameterContentType: Constant.JOURNALS,
-            AnalyticsParameterItemID: Constant.ADD_JOURNAL_ENTRY
+            AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
         ])
         
         let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
@@ -1144,16 +1124,16 @@ class JournalEntryViewController: UIViewController {
         var number = 0
         number = dataBaseManager.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
-            debit_category: TextField_category_debit.text!,
-            debit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
-            credit_category: TextField_category_credit.text!,
-            credit_amount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
+            debitCategory: TextField_category_debit.text!,
+            debitAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_debit.text!))!, //カンマを削除してからデータベースに書き込む
+            creditCategory: TextField_category_credit.text!,
+            creditAmount: Int64(StringUtility.shared.removeComma(string: TextField_amount_credit.text!))!,//カンマを削除してからデータベースに書き込む
             smallWritting: TextField_SmallWritting.text!
         )
         // イベントログ
         Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-            AnalyticsParameterContentType: Constant.JOURNAL_ENTRY,
-            AnalyticsParameterItemID: Constant.ADD_JOURNAL_ENTRY
+            AnalyticsParameterContentType: Constant.JOURNALENTRY,
+            AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
         ])
         let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
         self.present(alert, animated: true) { () -> Void in

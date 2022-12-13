@@ -81,7 +81,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         // データベース
         let databaseManager = CategoryListModel()
         for i in 0..<categories.count {
-            let objects = databaseManager.getSettingsSwitchingOn(Rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
+            let objects = databaseManager.getSettingsSwitchingOn(rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
 //            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
             var items: Array<String> = Array<String>()
             for y in 0..<objects.count {    // 勘定

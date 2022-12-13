@@ -17,7 +17,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
 
     private var interstitial: GADInterstitialAd?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // テーブルビューセル　作成
@@ -26,13 +25,14 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         tableView.separatorColor = .accentColor
 
         self.navigationItem.title = "会計期間"
-        //largeTitle表示
+        // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
+
         tableView.reloadData()
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
@@ -43,15 +43,15 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
     //        print(self.view.frame.size.height)
     //        print(gADBannerView.frame.height)
     //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
     //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
             // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOB_ID
-            
+            gADBannerView.adUnitID = Constant.ADMOBID
+
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
@@ -59,8 +59,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        }
-        else {
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -76,8 +75,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // マネタイズ対応
             if interstitial != nil {
                 interstitial?.present(fromRootViewController: self)
-            }
-            else {
+            } else {
                 print("Ad wasn't ready")
                 // セットアップ AdMob
                 setupAdMob()
@@ -88,7 +86,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     
     // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let ud = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingPeriod"
@@ -97,8 +96,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             ud.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
-        }
-        else {
+        } else {
             // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
@@ -113,13 +111,14 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 }
             }
         }
-        let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as! AnnotationViewControllerSettingPeriod
+        if let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as? AnnotationViewControllerSettingPeriod {
         viewController.alpha = 0.7
         present(viewController, animated: true, completion: nil)
+        }
     }
-    
+
     func finishAnnotation() {
-        //タブの有効化
+        // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -133,40 +132,44 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // セグエで場合分け
         if segue.identifier == "identifier_theDayOfReckoning"{ // 決算日設定
             // ③遷移先ViewCntrollerの取得
-            let navigationController = segue.destination as! UINavigationController
-            let viewController = navigationController.topViewController as! SettingsTheDayOfReckoningTableViewController
-            // 選択されたセルを取得
-            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-            // 遷移先のコントローラに値を渡す
-            if indexPath.row == 0 {
-                viewController.month = true // 決算日　月
-            }else if indexPath.row == 1 {
-                viewController.month = false // 決算日　日
+            if let navigationController = segue.destination as? UINavigationController,
+               let viewController = navigationController.topViewController as? SettingsTheDayOfReckoningTableViewController,
+                // 選択されたセルを取得
+                let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
+                // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+                // 遷移先のコントローラに値を渡す
+                if indexPath.row == 0 {
+                    viewController.month = true // 決算日　月
+                } else if indexPath.row == 1 {
+                    viewController.month = false // 決算日　日
+                }
             }
-        }else{
+        } else {
             // セグエのポップオーバー接続先を取得
             let popoverCtrl = segue.destination.popoverPresentationController
             // 呼び出し元がUIButtonの場合
             if sender is UIButton {
                 // タップされたボタンの領域を取得
-                popoverCtrl?.sourceRect = (sender as! UIButton).bounds
+                if let button = sender as? UIButton {
+                popoverCtrl?.sourceRect = button.bounds
+                }
             }
             // デリゲートを自分自身に設定
             popoverCtrl?.delegate = self
         }
     }
-    
+
     // MARK: - Setting
-    
+
     // セルを登録
     func createTableViewCell() {
-        //xib読み込み
+        // xib読み込み
         let nib = UINib(nibName: "WithLabelTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-        
     }
-    
+
     // MARK: GADInterstitialAd
+
     // セットアップ AdMob
     func setupAdMob() {
         // アップグレード機能　スタンダードプラン
@@ -175,7 +178,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: Constant.ADMOB_ID_INTERSTITIAL,
+            GADInterstitialAd.load(withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
                                    request: request,
                                    completionHandler: { [self] ad, error in
                 if let error = error {
@@ -188,9 +191,9 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             )
         }
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
@@ -206,7 +209,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return ""
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
@@ -228,7 +231,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return ""
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -247,7 +250,9 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         switch indexPath.section {
         case 0:
             // 決算日
-            let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath) as! SettingsPeriodTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath) as? SettingsPeriodTableViewCell else {
+                return UITableViewCell()
+            }
             let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             // 会計帳簿の年度をセルに表示する
             if indexPath.row == 0 {
@@ -256,7 +261,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 let date = d[d.index(d.startIndex, offsetBy: 0)..<d.index(d.startIndex, offsetBy: 2)] // 日付の9文字目にある日の十の位を抽出
                 cell.detailTextLabel2.text = "\(date)"
                 print(date)
-            }else {
+            } else {
                 cell.textLabel?.text = "日"
                 let d = object
                 let date = d[d.index(d.startIndex, offsetBy: 3)..<d.index(d.startIndex, offsetBy: 5)] // 日付の9文字目にある日の十の位を抽出
@@ -272,7 +277,9 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return cell
         case 1:
             // 会計年度
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithLabelTableViewCell else {
+                return UITableViewCell()
+            }
             // データベース
             let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
             let objectsJournalEntry = DataBaseManagerSettingsPeriod.shared.getJournalEntryCount(fiscalYear: objects[indexPath.row].fiscalYear)
@@ -290,13 +297,15 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             if objects[indexPath.row].openOrClose {
                 // チェックマークを入れる
                 cell.accessoryType = .checkmark
-            }else {
+            } else {
                 // チェックマークを外す
                 cell.accessoryType = .none
             }
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithLabelTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithLabelTableViewCell else {
+                return UITableViewCell()
+            }
             return cell
         }
     }
@@ -305,17 +314,17 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         switch indexPath.section {
         case 1:
             // 会計年度
-            let cell = tableView.cellForRow(at:indexPath)
-            // チェックマークを入れる
-            cell?.accessoryType = .checkmark
-            // ここからデータベースを更新する
-            pickAccountingBook(tag: cell!.tag) //会計帳簿の連番
-            // 年度を選択時に会計期間画面を更新する
-            tableView.reloadData()
+            if let cell = tableView.cellForRow(at: indexPath) {
+                // チェックマークを入れる
+                cell.accessoryType = .checkmark
+                // ここからデータベースを更新する
+                pickAccountingBook(tag: cell.tag) // 会計帳簿の連番
+                // 年度を選択時に会計期間画面を更新する
+                tableView.reloadData()
+            }
             break
         default:
             print("")
-            break
         }
     }
     // チェックマークの切り替え　データベースを更新
@@ -329,7 +338,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let cell = tableView.cellForRow(at:indexPath)
+            let cell = tableView.cellForRow(at: indexPath)
             // チェックマークを外す
             cell?.accessoryType = .none
         }
@@ -351,7 +360,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "会計帳簿を削除しますか？", preferredStyle: .alert)
-        
+
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
             (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
@@ -367,7 +376,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
+
         present(alert, animated: true, completion: nil)
     }
     // 表示スタイルの設定
@@ -380,7 +389,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
 // MARK: - GADFullScreenContentDelegate
 
 extension SettingsPeriodTableViewController: GADFullScreenContentDelegate {
-    
+
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
       print("Ad did fail to present full screen content.")
