@@ -28,15 +28,12 @@
                                             <rect key="frame" x="290" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <color key="onTintColor" name="AccentDark"/>
-                                            <connections>
-                                                <action selector="ToggleButton:" destination="vhk-G4-CWP" eventType="valueChanged" id="f3U-z5-Dxw"/>
-                                            </connections>
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
-                                    <outlet property="ToggleButton" destination="da6-2T-YsX" id="c1u-vS-TbH"/>
+                                    <outlet property="toggleButton" destination="da6-2T-YsX" id="c1u-vS-TbH"/>
                                     <segue destination="Wcu-Ps-cZd" kind="show" id="qEd-Ns-dUO"/>
                                 </connections>
                             </tableViewCell>

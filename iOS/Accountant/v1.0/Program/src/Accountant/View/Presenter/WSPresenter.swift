@@ -60,11 +60,11 @@ final class WSPresenter: WSPresenterInput {
     var theDayOfReckoning: String?
     
     // 期中の仕訳の勘定科目
-    private var objects:Results<DataBaseSettingsTaxonomyAccount>
+    private var objects: Results<DataBaseSettingsTaxonomyAccount>
     // 修正記入の勘定科目
-    private var objectss:Results<DataBaseSettingsTaxonomyAccount>
+    private var objectss: Results<DataBaseSettingsTaxonomyAccount>
     // 財務諸表
-    private var object:DataBaseFinancialStatements
+    private var object: DataBaseFinancialStatements
 
     private weak var view: WSPresenterOutput!
     private var model: WSModelInput

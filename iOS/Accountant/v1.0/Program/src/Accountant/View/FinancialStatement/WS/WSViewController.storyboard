@@ -165,7 +165,7 @@
                                                                 <rect key="frame" x="322" y="0.0" width="78" height="35.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸借対照表" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="TEn-s8-2mU" userLabel="bs">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="77" height="36"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="78" height="36"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -382,7 +382,7 @@
                                                                 <rect key="frame" x="322" y="0.0" width="39" height="35.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" id="r3N-Ef-8Mn" userLabel="list_debit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="35"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="38" height="35"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="13"/>
@@ -700,7 +700,7 @@
                                                                     <rect key="frame" x="322" y="0.0" width="39" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0099999997764825821" id="G8V-Z8-h1c" userLabel="list_debit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -811,15 +811,15 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="label_account" destination="Xpz-AY-jqc" id="Vir-ra-E2I"/>
-                                                    <outlet property="label_credit" destination="x4w-9d-hdK" id="Rek-jI-mLp"/>
-                                                    <outlet property="label_credit1" destination="geO-mj-3nm" id="MYd-AZ-w0d"/>
-                                                    <outlet property="label_credit2" destination="W0h-kg-Ywc" id="PSG-Tr-B9c"/>
-                                                    <outlet property="label_credit3" destination="53A-cH-5rf" id="zP3-L1-OfB"/>
-                                                    <outlet property="label_debit" destination="Ofb-Yj-kVG" id="MJG-NG-U8T"/>
-                                                    <outlet property="label_debit1" destination="MJe-6e-boc" id="CUr-Rv-bMz"/>
-                                                    <outlet property="label_debit2" destination="Bn5-ze-y6S" id="9Rs-pv-6c2"/>
-                                                    <outlet property="label_debit3" destination="G8V-Z8-h1c" id="IAI-wD-hhS"/>
+                                                    <outlet property="accountLabel" destination="Xpz-AY-jqc" id="Vir-ra-E2I"/>
+                                                    <outlet property="credit1Label" destination="geO-mj-3nm" id="MYd-AZ-w0d"/>
+                                                    <outlet property="credit2Label" destination="W0h-kg-Ywc" id="PSG-Tr-B9c"/>
+                                                    <outlet property="credit3Label" destination="53A-cH-5rf" id="zP3-L1-OfB"/>
+                                                    <outlet property="creditLabel" destination="x4w-9d-hdK" id="Rek-jI-mLp"/>
+                                                    <outlet property="debit1Label" destination="MJe-6e-boc" id="CUr-Rv-bMz"/>
+                                                    <outlet property="debit2Label" destination="Bn5-ze-y6S" id="9Rs-pv-6c2"/>
+                                                    <outlet property="debit3Label" destination="G8V-Z8-h1c" id="IAI-wD-hhS"/>
+                                                    <outlet property="debitLabel" destination="Ofb-Yj-kVG" id="MJG-NG-U8T"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total" rowHeight="20" id="zfU-xi-kkN" userLabel="cell_WS_total" customClass="WSTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -932,7 +932,7 @@
                                                                     <rect key="frame" x="204.5" y="0.0" width="39.5" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="vSe-WT-wS8" userLabel="list_credit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="20"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1004,7 +1004,7 @@
                                                                     <rect key="frame" x="322" y="0.0" width="39" height="20"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="FfS-ou-gka" userLabel="list_debit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1115,15 +1115,15 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="label_account" destination="GCf-fO-CQ5" id="ecg-yB-C8g"/>
-                                                    <outlet property="label_credit" destination="L4Q-Wb-dUX" id="O2b-Dw-3iO"/>
-                                                    <outlet property="label_credit1" destination="vSe-WT-wS8" id="1Hv-rQ-CwG"/>
-                                                    <outlet property="label_credit2" destination="Ni3-f0-Aop" id="QLh-ET-Dkb"/>
-                                                    <outlet property="label_credit3" destination="Peh-Tn-jHq" id="aIH-4X-H4z"/>
-                                                    <outlet property="label_debit" destination="N0h-sS-hxD" id="tLP-z0-gj2"/>
-                                                    <outlet property="label_debit1" destination="G37-BS-B3f" id="wYM-qW-vrm"/>
-                                                    <outlet property="label_debit2" destination="sn7-hC-TJI" id="KVi-tU-lJd"/>
-                                                    <outlet property="label_debit3" destination="FfS-ou-gka" id="fZd-oE-qHb"/>
+                                                    <outlet property="accountLabel" destination="GCf-fO-CQ5" id="ecg-yB-C8g"/>
+                                                    <outlet property="credit1Label" destination="vSe-WT-wS8" id="1Hv-rQ-CwG"/>
+                                                    <outlet property="credit2Label" destination="Ni3-f0-Aop" id="QLh-ET-Dkb"/>
+                                                    <outlet property="credit3Label" destination="Peh-Tn-jHq" id="aIH-4X-H4z"/>
+                                                    <outlet property="creditLabel" destination="L4Q-Wb-dUX" id="O2b-Dw-3iO"/>
+                                                    <outlet property="debit1Label" destination="G37-BS-B3f" id="wYM-qW-vrm"/>
+                                                    <outlet property="debit2Label" destination="sn7-hC-TJI" id="KVi-tU-lJd"/>
+                                                    <outlet property="debit3Label" destination="FfS-ou-gka" id="fZd-oE-qHb"/>
+                                                    <outlet property="debitLabel" destination="N0h-sS-hxD" id="tLP-z0-gj2"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_WS_total_2" rowHeight="20" id="BE1-L0-5Ot" customClass="WSTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -1236,7 +1236,7 @@
                                                                     <rect key="frame" x="204.5" y="0.0" width="39.5" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZUh-GW-f3d" userLabel="list_credit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="18"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1308,7 +1308,7 @@
                                                                     <rect key="frame" x="322" y="0.0" width="39" height="18"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="hh3-ri-9wl" userLabel="list_debit">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="37" height="18"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="18"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1421,15 +1421,15 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="label_account" destination="Gqp-WK-GlK" id="1Es-cb-dII"/>
-                                                    <outlet property="label_credit" destination="X2X-58-YDk" id="iC9-hc-IOn"/>
-                                                    <outlet property="label_credit1" destination="ZUh-GW-f3d" id="I2K-ab-wVa"/>
-                                                    <outlet property="label_credit2" destination="A0X-Q2-5cq" id="QSN-6L-d2a"/>
-                                                    <outlet property="label_credit3" destination="OoG-3g-1Fj" id="UR7-75-dhs"/>
-                                                    <outlet property="label_debit" destination="kUX-uI-xal" id="KJq-PK-bNb"/>
-                                                    <outlet property="label_debit1" destination="ETb-3B-6wU" id="foN-Px-NBs"/>
-                                                    <outlet property="label_debit2" destination="8PW-5Y-6Kb" id="9oe-3T-7ZD"/>
-                                                    <outlet property="label_debit3" destination="hh3-ri-9wl" id="7Go-my-QuI"/>
+                                                    <outlet property="accountLabel" destination="Gqp-WK-GlK" id="1Es-cb-dII"/>
+                                                    <outlet property="credit1Label" destination="ZUh-GW-f3d" id="I2K-ab-wVa"/>
+                                                    <outlet property="credit2Label" destination="A0X-Q2-5cq" id="QSN-6L-d2a"/>
+                                                    <outlet property="credit3Label" destination="OoG-3g-1Fj" id="UR7-75-dhs"/>
+                                                    <outlet property="creditLabel" destination="X2X-58-YDk" id="iC9-hc-IOn"/>
+                                                    <outlet property="debit1Label" destination="ETb-3B-6wU" id="foN-Px-NBs"/>
+                                                    <outlet property="debit2Label" destination="8PW-5Y-6Kb" id="9oe-3T-7ZD"/>
+                                                    <outlet property="debit3Label" destination="hh3-ri-9wl" id="7Go-my-QuI"/>
+                                                    <outlet property="debitLabel" destination="kUX-uI-xal" id="KJq-PK-bNb"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1482,19 +1482,19 @@
                                         <color key="titleColor" name="AccentBlue"/>
                                     </state>
                                     <connections>
-                                        <action selector="button_print:" destination="a9q-bv-lX8" eventType="touchUpInside" id="iQL-0F-3VB"/>
+                                        <action selector="printButtonTapped:" destination="a9q-bv-lX8" eventType="touchUpInside" id="fgG-Ti-iU8"/>
                                     </connections>
                                 </button>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBarButtonItem" destination="Okf-WO-9Ds" id="sjp-8q-FVZ"/>
                         <outlet property="backgroundView" destination="tnR-Gd-3dv" id="vq5-cF-YDg"/>
-                        <outlet property="barButtonItem_add" destination="Okf-WO-9Ds" id="sjp-8q-FVZ"/>
-                        <outlet property="button_print" destination="ZhV-n2-BVT" id="mWb-fs-Jnk"/>
-                        <outlet property="label_closingDate" destination="KfI-wU-39M" id="PnE-qD-xAt"/>
-                        <outlet property="label_company_name" destination="GyC-lX-wDV" id="mon-7D-9QS"/>
-                        <outlet property="label_title" destination="V6T-5r-BCa" id="ngl-FH-d3a"/>
+                        <outlet property="labelClosingDate" destination="KfI-wU-39M" id="PnE-qD-xAt"/>
+                        <outlet property="labelCompanyName" destination="GyC-lX-wDV" id="mon-7D-9QS"/>
+                        <outlet property="labelTitle" destination="V6T-5r-BCa" id="ngl-FH-d3a"/>
+                        <outlet property="printButton" destination="ZhV-n2-BVT" id="mWb-fs-Jnk"/>
                         <outlet property="tableView" destination="6rw-5E-QP2" id="RTb-V0-x6F"/>
                     </connections>
                 </viewController>
@@ -1570,7 +1570,7 @@
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48496460914611816" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

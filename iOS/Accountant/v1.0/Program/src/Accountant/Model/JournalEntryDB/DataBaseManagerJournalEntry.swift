@@ -23,7 +23,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = creditAmount      // 貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      // 小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
 
@@ -65,7 +65,7 @@ class DataBaseManagerJournalEntry {
         dataBaseJournalEntry.credit_amount = creditAmount      // 貸方金額 Int型(TextField.text アンラップ)
         dataBaseJournalEntry.smallWritting = smallWritting      // 小書き
         // オブジェクトを作成
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
         // 開いている会計帳簿の年度を取得

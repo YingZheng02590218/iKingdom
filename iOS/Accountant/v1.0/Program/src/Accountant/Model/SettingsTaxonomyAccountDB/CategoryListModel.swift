@@ -56,7 +56,7 @@ class CategoryListModel: CategoryListModelInput {
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
         // 勘定クラス　勘定を削除
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
         if isInvalidated {
             do {

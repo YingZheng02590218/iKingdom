@@ -12,27 +12,27 @@ import GoogleMobileAds // マネタイズ対応
 // 事業者名クラス
 class SettingsInformationTableViewController: UITableViewController {
 
-
-    @IBOutlet var gADBannerView: GADBannerView!
+    var gADBannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.title = "事業者名"
-        //largeTitle表示
+        // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             
@@ -41,8 +41,7 @@ class SettingsInformationTableViewController: UITableViewController {
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-        }
-        else {
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -50,7 +49,8 @@ class SettingsInformationTableViewController: UITableViewController {
     }
 
     // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
@@ -64,15 +64,14 @@ class SettingsInformationTableViewController: UITableViewController {
             ud.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
-        }
-        else {
+        } else {
             // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }
     // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
-        //タブの無効化
+        // タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -80,13 +79,19 @@ class SettingsInformationTableViewController: UITableViewController {
                 }
             }
         }
-        let viewController = UIStoryboard(name: "SettingsInformationTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsInformation") as! AnnotationViewControllerSettingsInformation
-        viewController.alpha = 0.7
-        present(viewController, animated: true, completion: nil)
+        if let viewController = UIStoryboard(
+            name: "SettingsInformationTableViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "Annotation_SettingsInformation"
+        ) as? AnnotationViewControllerSettingsInformation {
+            viewController.alpha = 0.7
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     func finishAnnotation() {
-        //タブの有効化
+        // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -99,11 +104,11 @@ class SettingsInformationTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        1
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -123,14 +128,14 @@ class SettingsInformationTableViewController: UITableViewController {
             return ""
         }
     }
-    //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{//TableViewCellSettings {
+    // セルを生成して返却するメソッド
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { //TableViewCellSettings {
         var cell = UITableViewCell()
         switch indexPath.section {
         case 0:
-            //① UI部品を指定　TableViewCell
-            cell = tableView.dequeueReusableCell(withIdentifier: "cell_companyName", for: indexPath) //as! TableViewCell
-                cell.textLabel?.text = ""
+            // ① UI部品を指定　TableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell_companyName", for: indexPath) // as! TableViewCell
+            cell.textLabel?.text = ""
             // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
             return cell
         default:

@@ -14,22 +14,22 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     // 選択された項目
     var selectedRank0 = ""
     var selectedRank1 = ""
-    var AccountDetail_big = ""
-    var AccountDetail = ""
+    var accountDetailBig = ""
+    var accountDetail = ""
     // ドラムロールに表示する勘定科目の文言
-    var Rank0 :[String] = Array<String>()
-    var big_0 :[String] = Array<String>()
-    var big_1 :[String] = Array<String>()
-    var big_2 :[String] = Array<String>()
-    var big_3 :[String] = Array<String>()
-    var big_4 :[String] = Array<String>()
-    var big_5 :[String] = Array<String>()
-    var big_6 :[String] = Array<String>()
-    var big_7 :[String] = Array<String>()
-    var big_8 :[String] = Array<String>()
-    var big_9 :[String] = Array<String>()
-    var big_10 :[String] = Array<String>()
-    var big_11 :[String] = Array<String>()
+    var rank0: [String] = Array<String>()
+    var big0: [String] = Array<String>()
+    var big1: [String] = Array<String>()
+    var big2: [String] = Array<String>()
+    var big3: [String] = Array<String>()
+    var big4: [String] = Array<String>()
+    var big5: [String] = Array<String>()
+    var big6: [String] = Array<String>()
+    var big7: [String] = Array<String>()
+    var big8: [String] = Array<String>()
+    var big9: [String] = Array<String>()
+    var big10: [String] = Array<String>()
+    var big11: [String] = Array<String>()
 
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -40,7 +40,7 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
      */
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width:0, height: 0))
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
     override init(frame: CGRect) {
@@ -53,13 +53,14 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     
     var identifier = ""
     var component0 = 0
+
     func setup(identifier: String) {
         // アイディを記憶
         self.identifier = identifier
-        //Segueを場合分け　初期値
+        // Segueを場合分け　初期値
         if identifier == "identifier_category_big" {
             self.tag = 0
-        }else if identifier == "identifier_category" {
+        } else if identifier == "identifier_category" {
             self.tag = 1
         }
         // ピッカー　ドラムロールの項目を初期化
@@ -73,8 +74,8 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
         picker.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 350)
 //        picker.transform = CGAffineTransform(scaleX: 0.5, y: 0.5);
         
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width:0, height: 44))
-        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する alpha 0透明　1不透明
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
@@ -87,318 +88,320 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
         self.inputView = picker
         self.inputAccessoryView = toolbar
         
-        //借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
+        // 借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
         picker.reloadAllComponents()
     }
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
-    func setSettingsCategory(){
+    func setSettingsCategory() {
         // 勘定科目区分　大区分
-        Rank0 = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
-        for i in 0..<Rank0.count {
-            transferItems(Rank1: i)    // 勘定科目区分ごとに文言を用意する
+        rank0 = [
+            "流動資産",
+            "固定資産",
+            "繰延資産",
+            "流動負債",
+            "固定負債",
+            "資本",
+            "売上",
+            "売上原価",
+            "販売費及び一般管理費",
+            "営業外損益",
+            "特別損益",
+            "税金"
+        ]
+        for i in 0..<rank0.count {
+            transferItems(rank1: i)    // 勘定科目区分ごとに文言を用意する
         }
     }
     // 設定データを変数に入れ替える 中区分
-    func transferItems(Rank1: Int) {
-        switch Rank1 {
+    func transferItems(rank1: Int) {
+        switch rank1 {
         case 0:
-            big_0 = ["当座資産","棚卸資産","その他の流動資産"]
-            break
+            big0 = ["当座資産", "棚卸資産", "その他の流動資産"]
         case 1:
-            big_1 = ["有形固定資産","無形固定資産","投資その他の資産"]
-            break
+            big1 = ["有形固定資産", "無形固定資産", "投資その他の資産"]
         case 2:
-            big_2 = ["繰延資産"]
-            break
+            big2 = ["繰延資産"]
         case 3:
-            big_3 = ["仕入債務","その他の流動負債"]
-            break
+            big3 = ["仕入債務", "その他の流動負債"]
         case 4:
-            big_4 = ["長期債務"]
-            break
+            big4 = ["長期債務"]
         case 5:
-            big_5 = ["株主資本","評価・換算差額等","新株予約権","非支配株主持分"]
-            break
+            big5 = ["株主資本", "評価・換算差額等", "新株予約権", "非支配株主持分"]
         case 6:
-            big_6 = ["-"]
-            break
+            big6 = ["-"]
         case 7:
-            big_7 = ["売上原価","製造原価"]
-            break
+            big7 = ["売上原価", "製造原価"]
         case 8:
-            big_8 = ["-"]
-            break
+            big8 = ["-"]
         case 9:
-            big_9 = ["営業外収益","営業外費用"]
-            break
+            big9 = ["営業外収益", "営業外費用"]
         case 10:
-            big_10 = ["特別利益","特別損失"]
-            break
+            big10 = ["特別利益", "特別損失"]
         case 11:
-            big_11 = ["-"]
-            break
+            big11 = ["-"]
         default:
-            //big_0 = array
+            // big0 = array
             break
         }
     }
-//UIPickerView
-    //UIPickerViewの列の数 コンポーネントの数
+// UIPickerView
+    // UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         print("AccountDetailPickerTextField numberOfComponents")
         return 2
     }
-    //UIPickerViewの行数、リストの数 コンポーネントの内のデータ
+    // UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         print("AccountDetailPickerTextField numberOfRowsInComponent", component)
         if component == 0 {
-            return Rank0.count
-        }else {
+            return rank0.count
+        } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
-                return big_0.count
+                return big0.count
             case 1:
-                return big_1.count
+                return big1.count
             case 2:
-                return big_2.count
+                return big2.count
             case 3:
-                return big_3.count
+                return big3.count
             case 4:
-                return big_4.count
+                return big4.count
             case 5:
-                return big_5.count
+                return big5.count
             case 6:
-                return big_6.count
+                return big6.count
             case 7:
-                return big_7.count
+                return big7.count
             case 8:
-                return big_8.count
+                return big8.count
             case 9:
-                return big_9.count
+                return big9.count
             case 10:
-                return big_10.count
+                return big10.count
             case 11:
-                return big_11.count
+                return big11.count
             default:
                 return 1
             }
         }
     }
-    //UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
+    // UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         print("AccountDetailPickerTextField titleForRow", component, row)
 // 1列目　初期値
         if component == 0 {
             if identifier == "identifier_category_big" {
-                self.text = Rank0[row] as String // TextFieldに表示
+                self.text = rank0[row] as String // TextFieldに表示
             }
-            self.AccountDetail_big = Rank0[row] as String
+            self.accountDetailBig = rank0[row] as String
             self.selectedRank0 = String(row)
-            return Rank0[row] as String
+            return rank0[row] as String
 // 2列目　初期値
-        }else {
-            switch pickerView.selectedRow(inComponent: 0){
+        } else {
+            switch pickerView.selectedRow(inComponent: 0) {
             case 0:
                 // ドラムロールを2列同時に回転させた場合の対策
-                if big_0.count <= row {
+                if big0.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_0[big_0.count-1] as String
+                        self.text = big0[big0.count - 1] as String
                     }
                     self.selectedRank1 = "2"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_0[row] as String // TextFieldに表示
+                        self.text = big0[row] as String // TextFieldに表示
                     }
                     self.selectedRank1 = String(row)
-                    self.AccountDetail = big_0[row] as String
-                    return big_0[row] as String      // PickerViewに表示
+                    self.accountDetail = big0[row] as String
+                    return big0[row] as String      // PickerViewに表示
                 }
             case 1:
-                if big_1.count <= row {
+                if big1.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_1[big_1.count-1] as String
+                        self.text = big1[big1.count - 1] as String
                     }
                     self.selectedRank1 = "5"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_1[row] as String
+                        self.text = big1[row] as String
                     }
                     self.selectedRank1 = String(row + 3)
-                    self.AccountDetail = big_1[row] as String
-                    return big_1[row] as String
+                    self.accountDetail = big1[row] as String
+                    return big1[row] as String
                 }
             case 2:
-                if big_2.count <= row {
+                if big2.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_2[big_2.count-1] as String
+                        self.text = big2[big2.count - 1] as String
                     }
                     self.selectedRank1 = "6"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_2[row] as String
+                        self.text = big2[row] as String
                     }
                     self.selectedRank1 = String(row + 6)
-                    self.AccountDetail = big_2[row] as String
-                    return big_2[row] as String
+                    self.accountDetail = big2[row] as String
+                    return big2[row] as String
                 }
             case 3:
-                if big_3.count <= row {
+                if big3.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_3[big_3.count-1] as String
+                        self.text = big3[big3.count - 1] as String
                     }
+
                     self.selectedRank1 = "8"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_3[row] as String
+                        self.text = big3[row] as String
                     }
-                    self.AccountDetail = big_3[row] as String
+                    self.accountDetail = big3[row] as String
                     self.selectedRank1 = String(row + 7)
-                    return big_3[row] as String  //ドラムロールを早く回すと、ここでエラーが発生する　2020/07/24
+                    return big3[row] as String  // ドラムロールを早く回すと、ここでエラーが発生する　2020/07/24
                 }
             case 4:
-                if big_4.count <= row {
+                if big4.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_4[big_4.count-1] as String
+                        self.text = big4[big4.count - 1] as String
                     }
                     self.selectedRank1 = "9"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_4[row] as String //エラー　2020/08/04
+                        self.text = big4[row] as String // エラー　2020/08/04
                     }
-                    self.AccountDetail = big_4[row] as String
+                    self.accountDetail = big4[row] as String
                     self.selectedRank1 = String(row + 9)
-                    return big_4[row] as String
+                    return big4[row] as String
                 }
             case 5:
-                if big_5.count <= row {
+                if big5.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_5[big_5.count-1] as String
+                        self.text = big5[big5.count - 1] as String
                     }
                     self.selectedRank1 = "13"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_5[row] as String
+                        self.text = big5[row] as String
                     }
-                    self.AccountDetail = big_5[row] as String
+                    self.accountDetail = big5[row] as String
                     self.selectedRank1 = String(row + 10)
-                    return big_5[row] as String
+                    return big5[row] as String
                 }
             case 6:
-                if big_6.count <= row {
+                if big6.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_6[big_6.count-1] as String
+                        self.text = big6[big6.count - 1] as String
                     }
                     self.selectedRank1 = ""
                     return ""
-                }else {
-                    if big_6[row] as String == "-" {
+                } else {
+                    if big6[row] as String == "-" {
                         if identifier == "identifier_category" {
                             self.text = "-"
                         }
-                        self.AccountDetail = "-"
-                    }else {
+                        self.accountDetail = "-"
+                    } else {
                         if identifier == "identifier_category" {
-                            self.text = big_6[row] as String
+                            self.text = big6[row] as String
                         }
-                        self.AccountDetail = big_6[row] as String
+                        self.accountDetail = big6[row] as String
                     }
                     self.selectedRank1 = ""
-                    return big_6[row] as String
+                    return big6[row] as String
                 }
             case 7:// 2列目　初期値
-                if big_7.count <= row {
+                if big7.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_7[big_7.count-1] as String
+                        self.text = big7[big7.count - 1] as String
                     }
                     self.selectedRank1 = "15"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_7[row] as String
+                        self.text = big7[row] as String
                     }
-                    self.AccountDetail = big_7[row] as String
+                    self.accountDetail = big7[row] as String
                     self.selectedRank1 = String(row + 14)
-                    return big_7[row] as String
+                    return big7[row] as String
                 }
             case 8:
-                if big_8.count <= row {
+                if big8.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_8[big_8.count-1] as String
+                        self.text = big8[big8.count - 1] as String
                     }
                     self.selectedRank1 = ""
                     return ""
-                }else {
-                    if big_8[row] as String == "-" {
+                } else {
+                    if big8[row] as String == "-" {
                         if identifier == "identifier_category" {
                             self.text = "-"
                         }
-                        self.AccountDetail = "-"
-                    }else {
+                        self.accountDetail = "-"
+                    } else {
                         if identifier == "identifier_category" {
-                            self.text = big_8[row] as String
+                            self.text = big8[row] as String
                         }
-                        self.AccountDetail = big_8[row] as String
+                        self.accountDetail = big8[row] as String
                     }
                     self.selectedRank1 = ""
-                    return big_8[row] as String
+                    return big8[row] as String
                 }
             case 9:
-                if big_9.count <= row {
+                if big9.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_9[big_9.count-1] as String
+                        self.text = big9[big9.count - 1] as String
                     }
                     self.selectedRank1 = "17"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_9[row] as String
+                        self.text = big9[row] as String
                     }
-                    self.AccountDetail = big_9[row] as String
+                    self.accountDetail = big9[row] as String
                     self.selectedRank1 = String(row + 16)
-                    return big_9[row] as String
+                    return big9[row] as String
                 }
             case 10:
-                if big_10.count <= row {
+                if big10.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_10[big_10.count-1] as String
+                        self.text = big10[big10.count - 1] as String
                     }
                     self.selectedRank1 = "19"
                     return ""
-                }else {
+                } else {
                     if identifier == "identifier_category" {
-                        self.text = big_10[row] as String
+                        self.text = big10[row] as String
                     }
-                    self.AccountDetail = big_10[row] as String
+                    self.accountDetail = big10[row] as String
                     self.selectedRank1 = String(row + 18)
-                    return big_10[row] as String
+                    return big10[row] as String
                 }
             case 11:
-                if big_11.count <= row {
+                if big11.count <= row {
                     if identifier == "identifier_category" {
-                        self.text = big_11[big_11.count-1] as String
+                        self.text = big11[big11.count - 1] as String
                     }
                     self.selectedRank1 = ""
                     return ""
-                }else {
-                    if big_11[row] as String == "-" {
+                } else {
+                    if big11[row] as String == "-" {
                         if identifier == "identifier_category" {
                             self.text = "-"
                         }
-                        self.AccountDetail = "-"
-                    }else {
+                        self.accountDetail = "-"
+                    } else {
                         if identifier == "identifier_category" {
-                            self.text = big_11[row] as String
+                            self.text = big11[row] as String
                         }
-                        self.AccountDetail = big_11[row] as String
+                        self.accountDetail = big11[row] as String
                     }
                     self.selectedRank1 = ""
-                    return big_11[row] as String // エラー　2020/10/15
+                    return big11[row] as String // エラー　2020/10/15
                 }
             default:
                 self.text = "" // 中区分
@@ -409,18 +412,18 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("AccountDetailPickerTextField didSelectRow", component, row)
-        //一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
+        // 一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
         pickerView.reloadAllComponents()
 //        pickerView.reloadComponent(1)
     }
-    //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
+    // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc func done() {
         self.endEditing(true)
     }
     
     @objc func cancel() {
-        AccountDetail_big = ""
-        AccountDetail = ""
+        accountDetailBig = ""
+        accountDetail = ""
         self.selectedRank0 = ""
         self.selectedRank1 = ""
         self.endEditing(true)

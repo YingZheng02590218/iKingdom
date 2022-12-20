@@ -105,8 +105,7 @@ private extension AnnotationViewControllerSettingsCategory {
             if controller.viewControllers[0] is SettingsCategoryTableViewController {
                 let tableViewControllerSettingsCategory = controller.viewControllers[0]
                 return controller.viewControllers[0]
-            }
-            else {
+            } else {
                 print(controller.viewControllers[0]) // SettingsTableViewController
                 print(controller.viewControllers[1]) // UINavigationController
                 return controller.viewControllers[1]

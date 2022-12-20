@@ -98,43 +98,44 @@ class BSModel: BSModelInput {
         // MARK: - "負債純資産合計"
         let liabilityAndEquityTotal = self.getTotalBig5(big5: 3, lastYear: false)
         let lastLiabilityAndEquityTotal = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
-
-        return BSData(company: company,
-                      fiscalYear: fiscalYear,
-                      theDayOfReckoning: theDayOfReckoning,
-                      objects0100: objects0100,
-                      currentAssetsTotal: currentAssetsTotal,
-                      lastCurrentAssetsTotal: lastCurrentAssetsTotal,
-                      objects010142: objects010142,
-                      objects010143: objects010143,
-                      objects010144: objects010144,
-                      fixedAssetsTotal: fixedAssetsTotal,
-                      lastFixedAssetsTotal: lastFixedAssetsTotal,
-                      objects0102: objects0102,
-                      deferredAssetsTotal: deferredAssetsTotal,
-                      lastDeferredAssetsTotal: lastDeferredAssetsTotal,
-                      assetTotal: assetTotal,
-                      lastAssetTotal: lastAssetTotal,
-                      objects0114: objects0114,
-                      currentLiabilitiesTotal: currentLiabilitiesTotal,
-                      lastCurrentLiabilitiesTotal: lastCurrentLiabilitiesTotal,
-                      objects0115: objects0115,
-                      fixedLiabilitiesTotal: fixedLiabilitiesTotal,
-                      lastFixedLiabilitiesTotal: lastFixedLiabilitiesTotal,
-                      liabilityTotal: liabilityTotal,
-                      lastLiabilityTotal: lastLiabilityTotal,
-                      objects0129: objects0129,
-                      capitalStockTotal: capitalStockTotal,
-                      lastCapitalStockTotal: lastCapitalStockTotal,
-                      objects01210: objects01210,
-                      otherCapitalSurplusesTotal: otherCapitalSurplusesTotal,
-                      lastOtherCapitalSurplusesTotal: lastOtherCapitalSurplusesTotal,
-                      objects01211: objects01211,
-                      objects01213: objects01213,
-                      equityTotal: equityTotal,
-                      lastEquityTotal: lastEquityTotal,
-                      liabilityAndEquityTotal: liabilityAndEquityTotal,
-                      lastLiabilityAndEquityTotal: lastLiabilityAndEquityTotal
+        
+        return BSData(
+            company: company,
+            fiscalYear: fiscalYear,
+            theDayOfReckoning: theDayOfReckoning,
+            objects0100: objects0100,
+            currentAssetsTotal: currentAssetsTotal,
+            lastCurrentAssetsTotal: lastCurrentAssetsTotal,
+            objects010142: objects010142,
+            objects010143: objects010143,
+            objects010144: objects010144,
+            fixedAssetsTotal: fixedAssetsTotal,
+            lastFixedAssetsTotal: lastFixedAssetsTotal,
+            objects0102: objects0102,
+            deferredAssetsTotal: deferredAssetsTotal,
+            lastDeferredAssetsTotal: lastDeferredAssetsTotal,
+            assetTotal: assetTotal,
+            lastAssetTotal: lastAssetTotal,
+            objects0114: objects0114,
+            currentLiabilitiesTotal: currentLiabilitiesTotal,
+            lastCurrentLiabilitiesTotal: lastCurrentLiabilitiesTotal,
+            objects0115: objects0115,
+            fixedLiabilitiesTotal: fixedLiabilitiesTotal,
+            lastFixedLiabilitiesTotal: lastFixedLiabilitiesTotal,
+            liabilityTotal: liabilityTotal,
+            lastLiabilityTotal: lastLiabilityTotal,
+            objects0129: objects0129,
+            capitalStockTotal: capitalStockTotal,
+            lastCapitalStockTotal: lastCapitalStockTotal,
+            objects01210: objects01210,
+            otherCapitalSurplusesTotal: otherCapitalSurplusesTotal,
+            lastOtherCapitalSurplusesTotal: lastOtherCapitalSurplusesTotal,
+            objects01211: objects01211,
+            objects01213: objects01213,
+            equityTotal: equityTotal,
+            lastEquityTotal: lastEquityTotal,
+            liabilityAndEquityTotal: liabilityAndEquityTotal,
+            lastLiabilityAndEquityTotal: lastLiabilityAndEquityTotal
         )
     }
     // 前年度の会計帳簿の存在有無を確認
@@ -153,8 +154,10 @@ class BSModel: BSModelInput {
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
             let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCreditForBig5(bigCategory: big5,
-                                                                  account: dataBaseSettingsTaxonomyAccounts[i].category) // 5大区分用の貸又借を使用する　2020/11/09
+            let totalDebitOrCredit = getTotalDebitOrCreditForBig5(
+                bigCategory: big5,
+                account: dataBaseSettingsTaxonomyAccounts[i].category
+            ) // 5大区分用の貸又借を使用する　2020/11/09
             if totalDebitOrCredit == "-" {
                 totalAmountOfBig5 -= totalAmount
             } else {
@@ -165,7 +168,6 @@ class BSModel: BSModelInput {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             do {
-                // (2)書き込みトランザクション内でデータを追加する
                 try DataBaseManager.realm.write {
                     switch big5 {
                     case 0: // 資産
@@ -192,9 +194,11 @@ class BSModel: BSModelInput {
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
             let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: rank0,
-                                                           midCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) ?? 999,
-                                                           account: dataBaseSettingsTaxonomyAccounts[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(
+                bigCategory: rank0,
+                midCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) ?? 999,
+                account: dataBaseSettingsTaxonomyAccounts[i].category
+            )
             if totalDebitOrCredit == "-" {
                 totalAmountOfRank0 -= totalAmount
             } else {
@@ -335,8 +339,7 @@ class BSModel: BSModelInput {
 
     // 取得　設定勘定科目　五大区分
     private func getAccountsInBig5(big5: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        let realm = try! Realm()
-        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         switch big5 {
         case 0: // 資産
@@ -352,16 +355,14 @@ class BSModel: BSModelInput {
     }
     // 取得　設定勘定科目　大区分
     private func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        let realm = try! Realm()
-        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("Rank0 LIKE '\(rank0)'")
         return objects
     }
     // 取得　設定勘定科目　中区分
     private func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        let realm = try! Realm()
-        var objects = realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("Rank1 LIKE '\(rank1)'")
         return objects

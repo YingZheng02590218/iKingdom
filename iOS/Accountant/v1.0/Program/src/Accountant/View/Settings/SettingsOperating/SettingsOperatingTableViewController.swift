@@ -30,7 +30,6 @@ class SettingsOperatingTableViewController: UITableViewController {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
@@ -75,7 +74,10 @@ class SettingsOperatingTableViewController: UITableViewController {
             }
         }
         // FIXME: 設定仕訳帳画面のためのAnnotationViewControllerクラスを作成する
-        if let viewController = UIStoryboard(name: "SettingsOperatingTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingJournals") as? AnnotationViewControllerSettingJournals {
+        if let viewController = UIStoryboard(
+            name: "SettingsOperatingTableViewController",
+            bundle: nil
+        ).instantiateViewController(withIdentifier: "Annotation_SettingJournals") as? AnnotationViewControllerSettingJournals {
             viewController.alpha = 0.7
             present(viewController, animated: true, completion: nil)
         }
@@ -95,7 +97,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+         1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,11 +140,11 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.textLabel?.text = "損益振替仕訳を表示"
             if let englishFromOfClosingTheLedger0 = object?.EnglishFromOfClosingTheLedger0 {
                 // 勘定科目の有効無効
-                cell.ToggleButton.isOn = englishFromOfClosingTheLedger0
+                cell.toggleButton.isOn = englishFromOfClosingTheLedger0
             }
             // 勘定科目の有効無効　変更時のアクションを指定
-            cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
-            cell.ToggleButton.tag = 0
+            cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
+            cell.toggleButton.tag = 0
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
@@ -151,11 +153,11 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.textLabel?.text = "資本振替仕訳を表示"
             if let englishFromOfClosingTheLedger1 = object?.EnglishFromOfClosingTheLedger1 {
                 // 勘定科目の有効無効
-                cell.ToggleButton.isOn = englishFromOfClosingTheLedger1
+                cell.toggleButton.isOn = englishFromOfClosingTheLedger1
             }
             // 勘定科目の有効無効　変更時のアクションを指定
-            cell.ToggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
-            cell.ToggleButton.tag = 1
+            cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
+            cell.toggleButton.tag = 1
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {

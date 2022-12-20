@@ -12,16 +12,15 @@ import GoogleMobileAds // マネタイズ対応
 // 勘定科目クラス
 class SettingsCategoryTableViewController: UITableViewController {
 
+    var gADBannerView: GADBannerView!
 
-    @IBOutlet var gADBannerView: GADBannerView!
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 年度を追加後に会計期間画面を更新する
         tableView.reloadData()
         // 要素数が少ないUITableViewで残りの部分や余白を消す
@@ -30,20 +29,18 @@ class SettingsCategoryTableViewController: UITableViewController {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeMediumRectangle)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
+            print(tableView.visibleCells[tableView.visibleCells.count - 1].frame.height)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count-1].frame.height * -1)
-        }
-        else {
+            addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count - 1].frame.height * -1)
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -52,24 +49,24 @@ class SettingsCategoryTableViewController: UITableViewController {
     }
     
     // ビューが表示された後に呼ばれる
-    override func viewDidAppear(_ animated: Bool){
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
-        let ud = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsCategory"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
+        if userDefaults.bool(forKey: firstLunchKey) {
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
-        }
-        else {
+        } else {
             // チュートリアル対応 コーチマーク型
             finishAnnotation()
         }
     }
     // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
-        //タブの無効化
+        // タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -77,13 +74,17 @@ class SettingsCategoryTableViewController: UITableViewController {
                 }
             }
         }
-        let viewController = UIStoryboard(name: "SettingsCategoryTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as! AnnotationViewControllerSettingsCategory
-        viewController.alpha = 0.7
-        present(viewController, animated: true, completion: nil)
+        if let viewController = UIStoryboard(
+            name: "SettingsCategoryTableViewController",
+            bundle: nil
+        ).instantiateViewController(withIdentifier: "Annotation_SettingsCategory") as? AnnotationViewControllerSettingsCategory {
+            viewController.alpha = 0.7
+            present(viewController, animated: true, completion: nil)
+        }
     }
     
     func finishAnnotation() {
-        //タブの有効化
+        // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -99,7 +100,7 @@ class SettingsCategoryTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,8 +120,8 @@ class SettingsCategoryTableViewController: UITableViewController {
             return "勘定科目"
         case 1:
             return "表示科目"
-//        case 2:
-//            return "情報"
+            //        case 2:
+            //            return "情報"
         default:
             return ""
         }
@@ -132,8 +133,8 @@ class SettingsCategoryTableViewController: UITableViewController {
             return "使用する勘定科目を設定することができます。"
         case 1:
             return "決算書上に表示される表示科目を参照することができます。"
-//        case 2:
-//            return "帳簿情報を設定することができます。"
+            //        case 2:
+            //            return "帳簿情報を設定することができます。"
         default:
             return ""
         }
@@ -146,7 +147,6 @@ class SettingsCategoryTableViewController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                //① UI部品を指定
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text = "勘定科目一覧"
                 cell.textLabel?.textColor = .textColor
@@ -154,15 +154,15 @@ class SettingsCategoryTableViewController: UITableViewController {
                 cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目別勘定科目一覧"
                 cell.textLabel?.textColor = .textColor
-//        case 3:
-//            cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
-//            cell.textLabel?.text =  "種類別勘定科目一覧"
+                //        case 3:
+                //            cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
+                //            cell.textLabel?.text =  "種類別勘定科目一覧"
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-                cell.textLabel?.text =   ""
+                cell.textLabel?.text = ""
                 cell.textLabel?.textColor = .textColor
             }
-        }else {
+        } else {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BSandPL", for: indexPath)
@@ -171,11 +171,11 @@ class SettingsCategoryTableViewController: UITableViewController {
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.textColor = .textColor
-                cell.textLabel?.text =   ""
+                cell.textLabel?.text = ""
             }
         }
         // Accessory Color
-        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView

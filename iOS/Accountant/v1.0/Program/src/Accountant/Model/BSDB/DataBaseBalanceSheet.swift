@@ -25,6 +25,6 @@ class DataBaseBalanceSheet: RObject {
     @objc dynamic var CapitalStock_total: Int64 = 0              // 株主資本　中分類　合計
     @objc dynamic var OtherCapitalSurpluses_total: Int64 = 0   // その他の包括利益累計額 評価・換算差額等　中分類　合計
     @objc dynamic var Equity_total: Int64 = 0                     // 大分類　合計
-    
+
     let dataBaseTaxonomy = List<DataBaseTaxonomy>()              // 表示科目　使用していない　2020/10/09 損益計算書には表示科目の属性がない 2020/11/12 使用する
 }

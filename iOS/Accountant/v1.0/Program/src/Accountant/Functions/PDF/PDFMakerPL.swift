@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class PDFMakerPL {
 
 
@@ -28,29 +27,26 @@ class PDFMakerPL {
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
             try FileManager.default.createDirectory(at: pDFsDirectory, withIntermediateDirectories: true, attributes: nil)
-        }
-        catch {
+        } catch {
             print("失敗した")
         }
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: pDFsDirectory, includingPropertiesForKeys: nil) // ファイル一覧を取得
             // if you want to filter the directory contents you can do like this:
-            let pdfFiles = directoryContents.filter{ $0.pathExtension == "pdf" }
-            print("pdf urls:",pdfFiles)
-            let pdfFileNames = pdfFiles.map{ $0.deletingPathExtension().lastPathComponent }
-            print("pdf list:", pdfFileNames)
+            let pdfFiles = directoryContents.filter { $0.pathExtension == "pdf" }
+            print("pdf urls: ", pdfFiles)
+            let pdfFileNames = pdfFiles.map { $0.deletingPathExtension().lastPathComponent }
+            print("pdf list: ", pdfFileNames)
             // ファイルのデータを取得
             for fileName in pdfFileNames {
                 let content = pDFsDirectory.appendingPathComponent(fileName + ".pdf")
                 do {
                     try FileManager.default.removeItem(at: content)
-                }
-                catch let error {
+                } catch let error {
                     print(error)
                 }
             }
-        }
-        catch {
+        } catch {
             print(error)
         }
 
@@ -73,13 +69,13 @@ class PDFMakerPL {
         var tableTopString = hTMLhelper.tableTopString()
         htmlString.append(tableTopString)
         // 売上高
-        var rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.sales.rawValue, amount: pLData.NetSales)
+        var rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.sales.rawValue, amount: pLData.netSales)
         htmlString.append(rowString)
         // 売上原価
-        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.costOfGoodsSold.rawValue, amount: pLData.CostOfGoodsSold)
+        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.costOfGoodsSold.rawValue, amount: pLData.costOfGoodsSold)
         htmlString.append(rowString)
         // 売上総利益
-        var rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue, amount: pLData.GrossProfitOrLoss)
+        var rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.grossProfitOrLoss.rawValue, amount: pLData.grossProfitOrLoss)
         htmlString.append(rowStringForBenefits)
 
 
@@ -92,11 +88,11 @@ class PDFMakerPL {
             htmlString.append(rowString)
         }
         // 販売費及び一般管理費
-        var middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount(), amount: pLData.SellingGeneralAndAdministrativeExpenses)
+        var middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.sellingGeneralAndAdministrativeExpenses.getTotalAmount(), amount: pLData.sellingGeneralAndAdministrativeExpenses)
         htmlString.append(middleRowEnd)
 
         // 営業利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.otherCapitalSurplusesTotal.rawValue, amount: pLData.OtherCapitalSurpluses_total)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.otherCapitalSurplusesTotal.rawValue, amount: pLData.otherCapitalSurplusesTotal)
         htmlString.append(rowStringForBenefits)
 
 
@@ -104,28 +100,28 @@ class PDFMakerPL {
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingIncome.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
-        for item in pLData.mid_category10 {
+        for item in pLData.midCategory10 {
             let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 営業外収益
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount(), amount: pLData.NonOperatingIncome)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingIncome.getTotalAmount(), amount: pLData.nonOperatingIncome)
         htmlString.append(middleRowEnd)
 
         // 営業外費用
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.nonOperatingExpenses.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
-        for item in pLData.mid_category6 {
+        for item in pLData.midCategory6 {
             let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 営業外費用
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount(), amount: pLData.NonOperatingExpenses)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.nonOperatingExpenses.getTotalAmount(), amount: pLData.nonOperatingExpenses)
         htmlString.append(middleRowEnd)
 
         // 経常利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue, amount: pLData.OrdinaryIncomeOrLoss)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.ordinaryIncomeOrLoss.rawValue, amount: pLData.ordinaryIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
 
 
@@ -133,36 +129,36 @@ class PDFMakerPL {
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryProfits.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
-        for item in pLData.mid_category11 {
+        for item in pLData.midCategory11 {
             let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 特別利益
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount(), amount: pLData.ExtraordinaryIncome)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryProfits.getTotalAmount(), amount: pLData.extraordinaryIncome)
         htmlString.append(middleRowEnd)
 
         // 特別損失
         tableTopString = hTMLhelper.middleRowTop(title: ProfitAndLossStatement.Block.extraordinaryLoss.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
-        for item in pLData.mid_category7 {
+        for item in pLData.midCategory7 {
             let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 特別損失
-        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount(), amount: pLData.ExtraordinaryLosses)
+        middleRowEnd = hTMLhelper.middleRowEnd(title: ProfitAndLossStatement.Block.extraordinaryLoss.getTotalAmount(), amount: pLData.extraordinaryLosses)
         htmlString.append(middleRowEnd)
 
         // 税引前当期純利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue, amount: pLData.IncomeOrLossBeforeIncomeTaxes)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.incomeOrLossBeforeIncomeTaxes.rawValue, amount: pLData.incomeOrLossBeforeIncomeTaxes)
         htmlString.append(rowStringForBenefits)
 
         // 法人税等
-        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.incomeTaxes.rawValue, amount: pLData.IncomeTaxes)
+        rowString = hTMLhelper.middleRowEndIndent0space(title: ProfitAndLossStatement.Block.incomeTaxes.rawValue, amount: pLData.incomeTaxes)
         htmlString.append(rowString)
 
         // 当期純利益
-        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue, amount: pLData.NetIncomeOrLoss)
+        rowStringForBenefits = hTMLhelper.getSingleRowForBenefits(title: ProfitAndLossStatement.Benefits.netIncomeOrLoss.rawValue, amount: pLData.netIncomeOrLoss)
         htmlString.append(rowStringForBenefits)
 
         // テーブル　エンド
@@ -178,16 +174,15 @@ class PDFMakerPL {
         htmlString.append(footerHTMLstring)
 
         print(htmlString)
-        //HTML -> PDF
+        // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
-        //PDFデータを一時ディレクトリに保存する
+        // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
-            //PDFファイルを表示する
+            // PDFファイルを表示する
             self.PDFpath?.append(fileName)
 
             return self.PDFpath
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -228,8 +223,7 @@ class PDFMakerPL {
         let pDFsDirectory = documentDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
             try FileManager.default.createDirectory(at: pDFsDirectory, withIntermediateDirectories: true, attributes: nil)
-        }
-        catch {
+        } catch {
             print("失敗した")
         }
 

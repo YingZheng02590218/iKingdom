@@ -87,9 +87,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="決算書" id="bDI-la-nOq"/>
-                    <connections>
-                        <outlet property="TableViewFS" destination="SS9-qa-GsB" id="JGc-VL-3dU"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxb-2b-MiA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

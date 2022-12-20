@@ -63,11 +63,12 @@ class CarouselAndPageViewController: UIViewController {
     // カルーセルのタブをタップされたときに中央のビューをスクロールさせる
     func selectTab(_ index: Int) {
         // 選択されたタブのViewControllerをセットする
-        let viewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as! PageContentViewController
-        viewController.index = index
-        pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
-        // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
-        self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        if let viewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as? PageContentViewController {
+            viewController.index = index
+            pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
+            // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
+            self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        }
     }
 }
 
@@ -82,7 +83,10 @@ extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as! CarouselTabCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CarouselTabCollectionViewCell",
+            for: indexPath
+        ) as? CarouselTabCollectionViewCell else { return UICollectionViewCell() }
         cell.label.text = "\(pageTabItems[indexPath.row])"
         return cell
     }
@@ -105,7 +109,7 @@ extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionV
 extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
     // セルのサイズ
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell: CarouselTabCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as? CarouselTabCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as? CarouselTabCollectionViewCell else {
             return CGSize(width: collectionView.frame.height * 2, height: collectionView.frame.height)
         }
         print(cell.label.frame.width, collectionView.frame.height)

@@ -10,8 +10,8 @@ import UIKit
 
 class SplashViewController: UIViewController {
     // 初期化画面　ロゴ
-    @IBOutlet weak var logoLabel: UILabel!
-    @IBOutlet weak var logoImageView: UIView!
+    @IBOutlet var logoLabel: UILabel!
+    @IBOutlet var logoImageView: UIView!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
 

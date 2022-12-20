@@ -91,7 +91,7 @@
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="Button_Left:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="6f1-XI-9Jc"/>
+                                                            <action selector="leftButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="8EX-uL-3Mj"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcr-5P-JyB" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
@@ -129,7 +129,7 @@
                                                             <color key="titleColor" name="ButtonTextColor"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="Button_Right:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="woh-yq-CrX"/>
+                                                            <action selector="rightButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="0BQ-Nw-cHY"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -229,8 +229,7 @@
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
-                                                                    <action selector="TextField_category_debit:" destination="RxZ-JM-Gew" eventType="editingDidBegin" id="3ND-g5-q5Y"/>
-                                                                    <action selector="TextField_category_debit:" destination="RxZ-JM-Gew" eventType="editingDidEndOnExit" id="dVX-hB-VZf"/>
+                                                                    <action selector="textFieldCategoryCredit:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="wwQ-0X-M9h"/>
                                                                 </connections>
                                                             </textField>
                                                             <textField opaque="NO" tag="222" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="bezel" placeholder="勘定科目" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arY-VQ-0Zi" customClass="PickerTextField" customModule="Paciolist" customModuleProvider="target">
@@ -239,8 +238,7 @@
                                                                 <attributedString key="attributedText"/>
                                                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                                 <connections>
-                                                                    <action selector="TextField_category_credit:" destination="RxZ-JM-Gew" eventType="editingDidBegin" id="WZY-Au-p0G"/>
-                                                                    <action selector="TextField_category_credit:" destination="RxZ-JM-Gew" eventType="editingDidEndOnExit" id="rbs-4d-W0w"/>
+                                                                    <action selector="textFieldCategoryDebit:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="RKE-dO-1yu"/>
                                                                 </connections>
                                                             </textField>
                                                         </subviews>
@@ -347,7 +345,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                         <connections>
-                                                            <action selector="TextField_SmallWritting:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="Hh7-G4-nhP"/>
+                                                            <action selector="textFieldSmallWritting:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="UWg-GJ-YdS"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -405,7 +403,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="Button_cancel:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="J5G-Cv-Xf7"/>
+                                                                    <action selector="cancelButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="d9h-T1-LIS"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" tag="444" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
@@ -421,7 +419,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="Button_Input:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="397-Hw-OfY"/>
+                                                                    <action selector="inputButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="Ow1-96-F5S"/>
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oY8-qm-N3q">
@@ -542,22 +540,22 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="Button_cancel" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
-                        <outlet property="TextField_SmallWritting" destination="nGT-71-Qqm" id="zsw-dM-nKu"/>
-                        <outlet property="TextField_amount_credit" destination="8YU-bl-bba" id="9e8-Jc-Q7E"/>
-                        <outlet property="TextField_amount_debit" destination="b2F-8K-hRw" id="CmH-Dz-fak"/>
-                        <outlet property="TextField_category_credit" destination="arY-VQ-0Zi" id="u91-Mk-D5t"/>
-                        <outlet property="TextField_category_debit" destination="RtK-tc-ENG" id="9X7-jH-Mal"/>
                         <outlet property="buttonLeft" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
                         <outlet property="buttonRight" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
+                        <outlet property="cancelButton" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
                         <outlet property="carouselCollectionView" destination="7RC-03-hT4" id="Zw8-9E-bXQ"/>
                         <outlet property="datePicker" destination="Kpa-dQ-eBA" id="Oa7-eh-kgx"/>
                         <outlet property="datePickerView" destination="wcr-5P-JyB" id="0q6-z7-Y5J"/>
                         <outlet property="inputButton" destination="kmr-j8-KMb" id="Cl5-WC-WJy"/>
-                        <outlet property="label_title" destination="SZD-WS-Sy8" id="6rF-vt-NWa"/>
+                        <outlet property="labelTitle" destination="SZD-WS-Sy8" id="6rF-vt-NWa"/>
                         <outlet property="maskDatePickerButton" destination="5Lm-v1-UzE" id="7Zd-Xb-Xca"/>
                         <outlet property="segmentedControl" destination="g2X-kG-cDb" id="DEl-FB-xZ0"/>
                         <outlet property="smallWrittingTextFieldView" destination="X8k-rh-mmp" id="q7O-tP-ypq"/>
+                        <outlet property="textFieldAmountCredit" destination="8YU-bl-bba" id="9e8-Jc-Q7E"/>
+                        <outlet property="textFieldAmountDebit" destination="b2F-8K-hRw" id="CmH-Dz-fak"/>
+                        <outlet property="textFieldCategoryCredit" destination="arY-VQ-0Zi" id="u91-Mk-D5t"/>
+                        <outlet property="textFieldCategoryDebit" destination="RtK-tc-ENG" id="9X7-jH-Mal"/>
+                        <outlet property="textFieldSmallWritting" destination="nGT-71-Qqm" id="zsw-dM-nKu"/>
                         <outlet property="textFieldView" destination="14e-0l-xHx" id="Jwi-dJ-LAb"/>
                         <outletCollection property="arrayHugo" destination="4fs-GK-JAo" collectionClass="NSMutableArray" id="Rv4-rx-g11"/>
                         <outletCollection property="arrayHugo" destination="4du-Lt-kP1" collectionClass="NSMutableArray" id="jbK-ND-EZt"/>

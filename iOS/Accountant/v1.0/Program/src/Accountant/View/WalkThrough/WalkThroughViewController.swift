@@ -128,8 +128,7 @@ class WalkThroughViewController: UIViewController {
         introView?.limitPageIndex = (introView?.pages.count ?? 1) - 1
         // ダークモード対応
         if UITraitCollection.isDarkMode {
-        }
-        else {
+        } else {
             introView?.pageControl.pageIndicatorTintColor = .lightGray
         }
         introView?.pageControl.currentPageIndicatorTintColor = .accentBlue
@@ -182,15 +181,17 @@ extension WalkThroughViewController: EAIntroDelegate {
     }
     
     func introDidFinish(_ introView: EAIntroView!, wasSkipped: Bool) {
-        let tabBarController = self.presentingViewController as! UITabBarController
-        let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
-        if let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
-            self.dismiss(animated: true, completion: {
-                [presentingViewController] () -> Void in
-                // ViewController(ウォークスルー画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                // チュートリアル対応 コーチマーク型
-                presentingViewController.showAnnotation()
-            })
+        if let tabBarController = self.presentingViewController as? UITabBarController,
+           let navigationController = tabBarController.viewControllers?[0] as? UINavigationController,
+           let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
+            self.dismiss(
+                animated: true,
+                completion: { [presentingViewController] () -> Void in
+                    // ViewController(ウォークスルー画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                    // チュートリアル対応 コーチマーク型
+                    presentingViewController.showAnnotation()
+                }
+            )
         }
     }
 }

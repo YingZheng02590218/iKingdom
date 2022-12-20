@@ -141,8 +141,7 @@ extension PDFMakerViewController: QLPreviewControllerDataSource {
         
         if let PDFpath = pDFMaker.PDFpath {
             return PDFpath.count
-        }
-        else {
+        } else {
             return 0
         }
     }

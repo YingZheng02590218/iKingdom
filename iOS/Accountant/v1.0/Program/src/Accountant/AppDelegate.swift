@@ -7,18 +7,18 @@
 //
 
 // import NeuKit
-import RealmSwift
+import AdSupport // IDFA対応
+import AppTrackingTransparency // IDFA対応
 import Firebase // マネタイズ対応
 import GoogleMobileAds
-import SwiftyStoreKit // アップグレード機能　スタンダードプラン
+import RealmSwift
 import StoreKit
-import AppTrackingTransparency // IDFA対応
-import AdSupport // IDFA対応
+import SwiftyStoreKit // アップグレード機能　スタンダードプラン
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    public var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -26,12 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
             schemaVersion: 1,
-            
+
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 0) {
+                if oldSchemaVersion < 0 {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
@@ -46,14 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         _ = oldObject?["total"] as? Int64
                     }
                 }
-        })
+            }
+        )
 
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
         print(config) // schemaVersion を確認できる
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-//        let realm = try! Realm()
+        let realm = try! Realm()
         // Override point for customization after application launch.
 
         // // マネタイズ対応　Use Firebase library to configure APIs
@@ -265,7 +266,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch status {
                 case .authorized:
                     print("🎉")
-                    //IDFA取得
+                    // IDFA取得
                     print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
                 case .denied, .restricted, .notDetermined:
                     print("😭")
@@ -275,7 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
     }
-    
+
     // MARK: - 生体認証パスコードロック
 
     // 生体認証パスコードロック画面へ遷移させる
@@ -304,8 +305,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                             // すでにパスコードロック画面がかぶせてあるかを確認する
                             let isDisplayedPasscodeLock: Bool = topViewController.children.map {
-                                return $0 is PassCodeLockViewController
-                            }.contains(true)
+                                $0 is PassCodeLockViewController
+                            }
+                                .contains(true)
 
                             // パスコードロック画面がかぶせてなければかぶせる
                             if !isDisplayedPasscodeLock {

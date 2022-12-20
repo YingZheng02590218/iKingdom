@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L06-3q-mbG">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsHelpDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0EX-ri-3LQ" customClass="SettingsHelpDetailViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="78T-2F-2CX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -67,7 +65,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -110,7 +108,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -142,7 +140,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -168,7 +166,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -211,7 +209,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -277,7 +275,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -319,7 +317,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -351,7 +349,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -390,7 +388,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -421,7 +419,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -453,7 +451,7 @@ OKボタンをタップします。
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -540,18 +538,18 @@ OKボタンをタップします。
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
-                        <outlet property="textView_aboutThisApp" destination="MiP-9d-jNF" id="alY-5L-XMd"/>
-                        <outlet property="textView_basicOfBookkeeping" destination="BUW-1U-SgM" id="Oxc-Ga-O4h"/>
-                        <outlet property="textView_configuration" destination="0pN-XE-IXu" id="34I-H0-jCd"/>
-                        <outlet property="textView_journalEntry" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
-                        <outlet property="textView_journalEntry_delete" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
-                        <outlet property="textView_journalEntry_edit" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
-                        <outlet property="textView_journals" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
-                        <outlet property="textView_setUp" destination="T3l-sa-OQv" id="m7X-PK-T0W"/>
-                        <outlet property="textView_setUp_account" destination="VOT-no-hpO" id="4sq-Cc-uTF"/>
-                        <outlet property="textView_setUp_accountEdit" destination="7dM-0h-33G" id="ydP-aF-ok0"/>
-                        <outlet property="textView_setUp_basicInfo" destination="Edc-8G-Bh4" id="PUT-oc-JBr"/>
-                        <outlet property="textView_thought" destination="flD-rt-n5l" id="V4c-Cw-xjD"/>
+                        <outlet property="aboutThisAppTextView" destination="MiP-9d-jNF" id="alY-5L-XMd"/>
+                        <outlet property="basicOfBookkeepingTextView" destination="BUW-1U-SgM" id="Oxc-Ga-O4h"/>
+                        <outlet property="configurationTextView" destination="0pN-XE-IXu" id="34I-H0-jCd"/>
+                        <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
+                        <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
+                        <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
+                        <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
+                        <outlet property="setUpAccountEditTextView" destination="7dM-0h-33G" id="ydP-aF-ok0"/>
+                        <outlet property="setUpAccountTextView" destination="VOT-no-hpO" id="4sq-Cc-uTF"/>
+                        <outlet property="setUpBasicInfoTextView" destination="Edc-8G-Bh4" id="PUT-oc-JBr"/>
+                        <outlet property="setUpTextView" destination="T3l-sa-OQv" id="m7X-PK-T0W"/>
+                        <outlet property="thoughtTextView" destination="flD-rt-n5l" id="V4c-Cw-xjD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

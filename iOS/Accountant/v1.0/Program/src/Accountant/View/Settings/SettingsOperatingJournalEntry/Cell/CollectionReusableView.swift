@@ -11,7 +11,7 @@ import EMTNeumorphicView
 
 class CollectionReusableView: UICollectionReusableView {
 
-    @IBOutlet weak var sectionLabel: UILabel!
+    @IBOutlet var sectionLabel: UILabel!
     @IBOutlet var addButton: EMTNeumorphicButton!
     
     override func awakeFromNib() {

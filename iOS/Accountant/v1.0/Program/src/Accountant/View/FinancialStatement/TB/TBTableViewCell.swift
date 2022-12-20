@@ -10,9 +10,9 @@ import UIKit
 
 class TBTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label_debit: UILabel!
-    @IBOutlet weak var label_account: UILabel! 
-    @IBOutlet weak var label_credit: UILabel!
+    @IBOutlet var debitLabel: UILabel!
+    @IBOutlet var accountLabel: UILabel!
+    @IBOutlet var creditLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

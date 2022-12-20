@@ -31,10 +31,10 @@ class PLModel: PLModelInput {
         setTotalRank1(big5: 3, rank1: 16) // 営業外費用6  営業外損益    営業外費用
         setTotalRank1(big5: 4, rank1: 17) // 特別利益11   特別損益    特別利益
         setTotalRank1(big5: 3, rank1: 18) // 特別損失7    特別損益    特別損失
-        
+
         // 利益を計算する関数を呼び出す todo
         setBenefitTotal()
-        
+
         let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
@@ -57,7 +57,7 @@ class PLModel: PLModelInput {
         // MARK: - 税等8 法人税等 税金
         let incomeTaxes = self.getTotalRank0(big5: 3, rank0: 11, lastYear: false)
         let lastIncomeTaxes = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 3, rank0: 11, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
-        
+
         // MARK: - 営業外収益10  営業外損益    営業外収益
         let nonOperatingIncome = self.getTotalRank1(big5: 4, rank1: 15, lastYear: false)
         let lastNonOperatingIncome = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 4, rank1: 15, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
@@ -70,13 +70,13 @@ class PLModel: PLModelInput {
         // MARK: - 特別損失7    特別損益    特別損失
         let extraordinaryLosses = self.getTotalRank1(big5: 3, rank1: 18, lastYear: false)
         let lastExtraordinaryLosses = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 3, rank1: 18, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
-        
+
         // MARK: - 売上総利益
         let grossProfitOrLoss = self.getBenefitTotal(benefit: 0, lastYear: false)
         let lastGrossProfitOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
         // MARK: - 営業利益
-        let otherCapitalSurpluses_total = self.getBenefitTotal(benefit: 1, lastYear: false)
-        let lastOtherCapitalSurpluses_total = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let otherCapitalSurplusesTotal = self.getBenefitTotal(benefit: 1, lastYear: false)
+        let lastOtherCapitalSurplusesTotal = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
         // MARK: - 経常利益
         let ordinaryIncomeOrLoss = self.getBenefitTotal(benefit: 2, lastYear: false)
         let lastOrdinaryIncomeOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
@@ -87,11 +87,46 @@ class PLModel: PLModelInput {
         let netIncomeOrLoss = self.getBenefitTotal(benefit: 4, lastYear: false)
         let lastNetIncomeOrLoss = self.checkSettingsPeriod() ? self.getBenefitTotal(benefit: 4, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
 
-        return PLData(company: company, fiscalYear: fiscalYear, theDayOfReckoning: theDayOfReckoning, CostOfGoodsSold: costOfGoodsSold, lastCostOfGoodsSold: lastCostOfGoodsSold, objects9: objects9, SellingGeneralAndAdministrativeExpenses: sellingGeneralAndAdministrativeExpenses, lastSellingGeneralAndAdministrativeExpenses: lastSellingGeneralAndAdministrativeExpenses, mid_category6: midCategory6, NonOperatingExpenses: nonOperatingExpenses, lastNonOperatingExpenses: lastNonOperatingExpenses, mid_category7: midCategory7, ExtraordinaryLosses: extraordinaryLosses, lastExtraordinaryLosses: lastExtraordinaryLosses, IncomeTaxes: incomeTaxes, lastIncomeTaxes: lastIncomeTaxes, NetSales: netSales, lastNetSales: lastNetSales, mid_category10: midCategory10, NonOperatingIncome: nonOperatingIncome, lastNonOperatingIncome: lastNonOperatingIncome, mid_category11: midCategory11, ExtraordinaryIncome: extraordinaryIncome, lastExtraordinaryIncome: lastExtraordinaryIncome, GrossProfitOrLoss: grossProfitOrLoss, lastGrossProfitOrLoss: lastGrossProfitOrLoss, OtherCapitalSurpluses_total: otherCapitalSurpluses_total, lastOtherCapitalSurpluses_total: lastOtherCapitalSurpluses_total, OrdinaryIncomeOrLoss: ordinaryIncomeOrLoss, lastOrdinaryIncomeOrLoss: lastOrdinaryIncomeOrLoss, IncomeOrLossBeforeIncomeTaxes: incomeOrLossBeforeIncomeTaxes, lastIncomeOrLossBeforeIncomeTaxes: lastIncomeOrLossBeforeIncomeTaxes, NetIncomeOrLoss: netIncomeOrLoss, lastNetIncomeOrLoss: lastNetIncomeOrLoss)
+        return PLData(
+            company: company,
+            fiscalYear: fiscalYear,
+            theDayOfReckoning: theDayOfReckoning,
+            costOfGoodsSold: costOfGoodsSold,
+            lastCostOfGoodsSold: lastCostOfGoodsSold,
+            objects9: objects9,
+            sellingGeneralAndAdministrativeExpenses: sellingGeneralAndAdministrativeExpenses,
+            lastSellingGeneralAndAdministrativeExpenses: lastSellingGeneralAndAdministrativeExpenses,
+            midCategory6: midCategory6,
+            nonOperatingExpenses: nonOperatingExpenses,
+            lastNonOperatingExpenses: lastNonOperatingExpenses,
+            midCategory7: midCategory7,
+            extraordinaryLosses: extraordinaryLosses,
+            lastExtraordinaryLosses: lastExtraordinaryLosses,
+            incomeTaxes: incomeTaxes,
+            lastIncomeTaxes: lastIncomeTaxes,
+            netSales: netSales,
+            lastNetSales: lastNetSales,
+            midCategory10: midCategory10,
+            nonOperatingIncome: nonOperatingIncome,
+            lastNonOperatingIncome: lastNonOperatingIncome,
+            midCategory11: midCategory11,
+            extraordinaryIncome: extraordinaryIncome,
+            lastExtraordinaryIncome: lastExtraordinaryIncome,
+            grossProfitOrLoss: grossProfitOrLoss,
+            lastGrossProfitOrLoss: lastGrossProfitOrLoss,
+            otherCapitalSurplusesTotal: otherCapitalSurplusesTotal,
+            lastOtherCapitalSurplusesTotal: lastOtherCapitalSurplusesTotal,
+            ordinaryIncomeOrLoss: ordinaryIncomeOrLoss,
+            lastOrdinaryIncomeOrLoss: lastOrdinaryIncomeOrLoss,
+            incomeOrLossBeforeIncomeTaxes: incomeOrLossBeforeIncomeTaxes,
+            lastIncomeOrLossBeforeIncomeTaxes: lastIncomeOrLossBeforeIncomeTaxes,
+            netIncomeOrLoss: netIncomeOrLoss,
+            lastNetIncomeOrLoss: lastNetIncomeOrLoss
+        )
     }
     // 前年度の会計帳簿の存在有無を確認
     func checkSettingsPeriod() -> Bool {
-        return DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
+        DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
     }
     // 計算　階層0 大区分
     private func setTotalRank0(big5: Int, rank0: Int) {

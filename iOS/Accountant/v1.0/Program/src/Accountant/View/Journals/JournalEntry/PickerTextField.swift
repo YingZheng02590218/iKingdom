@@ -12,19 +12,19 @@ import UIKit
 class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ドラムロールに表示する勘定科目の文言
-    var categories :[String] = Array<String>()
-    var big_0 :[String] = Array<String>()
-    var big_1 :[String] = Array<String>()
-    var big_2 :[String] = Array<String>()
-    var big_3 :[String] = Array<String>()
-    var big_4 :[String] = Array<String>()
-    var big_5 :[String] = Array<String>()
-    var big_6 :[String] = Array<String>()
-    var big_7 :[String] = Array<String>()
-    var big_8 :[String] = Array<String>()
-    var big_9 :[String] = Array<String>()
-    var big_10 :[String] = Array<String>()
-    var big_11 :[String] = Array<String>()
+    var categories: [String] = Array<String>()
+    var big0: [String] = Array<String>()
+    var big1: [String] = Array<String>()
+    var big2: [String] = Array<String>()
+    var big3: [String] = Array<String>()
+    var big4: [String] = Array<String>()
+    var big5: [String] = Array<String>()
+    var big6: [String] = Array<String>()
+    var big7: [String] = Array<String>()
+    var big8: [String] = Array<String>()
+    var big9: [String] = Array<String>()
+    var big10: [String] = Array<String>()
+    var big11: [String] = Array<String>()
 
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -35,7 +35,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
      */
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width:0, height: 0))
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
     
     override init(frame: CGRect) {
@@ -55,10 +55,22 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         picker.dataSource = self
         picker.showsSelectionIndicator = true
         // PickerView のサイズと位置 金額のTextfieldのキーボードの高さに合わせる
-        picker.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)!/3)
-//        picker.transform = CGAffineTransform(scaleX: 0.5, y: 0.5);
+        picker.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!,
+            height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)! / 3
+        )
+        //        picker.transform = CGAffineTransform(scaleX: 0.5, y: 0.5);
         
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44))
+        let toolbar = UIToolbar(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!,
+                height: 44
+            )
+        )
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
@@ -71,220 +83,208 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         self.inputView = picker
         self.inputAccessoryView = toolbar
         
-        //借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
+        // 借方勘定科目を選択した後に、貸方勘定科目を選択する際に初期値が前回のものが表示されるので、リロードする
         picker.reloadAllComponents()
     }
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
-    func getSettingsCategoryFromDB(){
+    func getSettingsCategoryFromDB() {
         // 勘定科目区分　大区分
-        categories = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
+        categories = ["流動資産", "固定資産", "繰延資産", "流動負債", "固定負債", "資本", "売上", "売上原価", "販売費及び一般管理費", "営業外損益", "特別損益", "税金"]
         // データベース
         let databaseManager = CategoryListModel()
         for i in 0..<categories.count {
             let objects = databaseManager.getSettingsSwitchingOn(rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
-//            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
-            var items: Array<String> = Array<String>()
+            //            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
+            var items: [String] = Array<String>()
             for y in 0..<objects.count {    // 勘定
                 items.append(objects[y].category as String) // 配列 Array<Element>型　に要素を追加していく
             }
-            transferItems(big_category: i, array: items)    // 勘定科目区分ごとに文言を用意する
+            transferItems(bigCategory: i, array: items)    // 勘定科目区分ごとに文言を用意する
         }
     }
     // データベースにある設定データを変数に入れ替える
-    func transferItems(big_category: Int, array: Array<String>) {
-        switch big_category {
+    func transferItems(bigCategory: Int, array: Array<String>) {
+        switch bigCategory {
         case 0:
-            big_0 = array
-            break
+            big0 = array
         case 1:
-            big_1 = array
-            break
+            big1 = array
         case 2:
-            big_2 = array
-            break
+            big2 = array
         case 3:
-            big_3 = array
-            break
+            big3 = array
         case 4:
-            big_4 = array
-            break
+            big4 = array
         case 5:
-            big_5 = array
-            break
+            big5 = array
         case 6:
-            big_6 = array
-            break
+            big6 = array
         case 7:
-            big_7 = array
-            break
+            big7 = array
         case 8:
-            big_8 = array
-            break
+            big8 = array
         case 9:
-            big_9 = array
-            break
+            big9 = array
         case 10:
-            big_10 = array
-            break
+            big10 = array
         case 11:
-            big_11 = array
-            break
+            big11 = array
         default:
-            //big_0 = array
+            // big0 = array
             break
         }
     }
-//UIPickerView
-    //UIPickerViewの列の数 コンポーネントの数
+    // UIPickerView
+    // UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        2
     }
-    //UIPickerViewの行数、リストの数 コンポーネントの内のデータ
+    // UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return categories.count
-        }else{
+        } else {
             switch pickerView.selectedRow(inComponent: 0) {
-            case 0://"資産":
-                return big_0.count
-            case 1://"負債":
-                return big_1.count
+            case 0: // "資産":
+                return big0.count
+            case 1: // "負債":
+                return big1.count
             case 2:
-                return big_2.count
+                return big2.count
             case 3:
-                return big_3.count
+                return big3.count
             case 4:
-                return big_4.count
+                return big4.count
             case 5:
-                return big_5.count
+                return big5.count
             case 6:
-                return big_6.count
+                return big6.count
             case 7:
-                return big_7.count
+                return big7.count
             case 8:
-                return big_8.count
+                return big8.count
             case 9:
-                return big_9.count
+                return big9.count
             case 10:
-                return big_10.count
+                return big10.count
             case 11:
-                return big_11.count
+                return big11.count
             default:
                 return 0
             }
         }
     }
-    //UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
+    // UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return categories[row] as String
-        }else{
+        } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
                 // ドラムロールを2列同時に回転させた場合の対策
-                if big_0.count <= row {
-                    self.text = big_0[0] as String
-                    return big_0[0] as String
-                }else {
-                    print(big_0.count)
-                    self.text = big_0[row] as String // TextFieldに表示
-                    return big_0[row] as String      // PickerViewに表示
+                if big0.count <= row {
+                    self.text = big0[0] as String
+                    return big0[0] as String
+                } else {
+                    print(big0.count)
+                    self.text = big0[row] as String // TextFieldに表示
+                    return big0[row] as String      // PickerViewに表示
                 }
             case 1:
-                if big_1.count <= row {
-                    self.text = big_1[0] as String
-                    return big_1[0] as String
-                }else {
-                    print(big_1.count)
-                    self.text = big_1[row] as String
-                    return big_1[row] as String
+                if big1.count <= row {
+                    self.text = big1[0] as String
+                    return big1[0] as String
+                } else {
+                    print(big1.count)
+                    self.text = big1[row] as String
+                    return big1[row] as String
                 }
             case 2:
-                if big_2.count <= row {
-                    self.text = big_2[0] as String
-                    return big_2[0] as String
-                }else {
-                    print(big_2.count)
-                    self.text = big_2[row] as String
-                    return big_2[row] as String
+                if big2.count <= row {
+                    self.text = big2[0] as String
+                    return big2[0] as String
+                } else {
+                    print(big2.count)
+                    self.text = big2[row] as String
+                    return big2[row] as String
                 }
             case 3:
-                if big_3.count <= row {
-                    self.text = big_3[0] as String
-                    return big_3[0] as String
-                }else {
-                    print(big_3.count)
-                    self.text = big_3[row] as String
-                    return big_3[row] as String  //ドラムロールを早く回すと、ここでエラーが発生する　2020/07/24
+                if big3.count <= row {
+                    self.text = big3[0] as String
+                    return big3[0] as String
+                } else {
+                    print(big3.count)
+                    self.text = big3[row] as String
+                    return big3[row] as String  // ドラムロールを早く回すと、ここでエラーが発生する　2020/07/24
                 }
             case 4:
-                if big_4.count <= row {
-                    self.text = big_4[0] as String
-                    return big_4[0] as String
-                }else {
-                    print(big_4.count)
-                    self.text = big_4[row] as String //エラー　2020/08/04
-                    return big_4[row] as String
+                if big4.count <= row {
+                    self.text = big4[0] as String
+                    return big4[0] as String
+                } else {
+                    print(big4.count)
+                    self.text = big4[row] as String // エラー　2020/08/04
+                    return big4[row] as String
                 }
             case 5:
-                if big_5.count <= row {
-                    self.text = big_5[0] as String
-                    return big_5[0] as String
-                }else {
-                    print(big_5.count)
-                    self.text = big_5[row] as String
-                    return big_5[row] as String
+                if big5.count <= row {
+                    self.text = big5[0] as String
+                    return big5[0] as String
+                } else {
+                    print(big5.count)
+                    self.text = big5[row] as String
+                    return big5[row] as String
                 }
             case 6:
-                if big_6.count <= row {
-                    self.text = big_6[0] as String
-                    return big_6[0] as String
-                }else {
-                    print(big_6.count)
-                    self.text = big_6[row] as String //エラー　2020/10/30 一度選択して、もう一度選択し直そうとした場合エラー
-                    return big_6[row] as String
+                if big6.count <= row {
+                    self.text = big6[0] as String
+                    return big6[0] as String
+                } else {
+                    print(big6.count)
+                    self.text = big6[row] as String // エラー　2020/10/30 一度選択して、もう一度選択し直そうとした場合エラー
+                    return big6[row] as String
                 }
             case 7:
-                if big_7.count <= row {
-                    self.text = big_7[0] as String
-                    return big_7[0] as String
-                }else {
-                    print(big_7.count)
-                    self.text = big_7[row] as String
-                    return big_7[row] as String
+                if big7.count <= row {
+                    self.text = big7[0] as String
+                    return big7[0] as String
+                } else {
+                    print(big7.count)
+                    self.text = big7[row] as String
+                    return big7[row] as String
                 }
             case 8:
-                if big_8.count <= row {
-                    self.text = big_8[0] as String
-                    return big_8[0] as String
-                }else {
-                    print(big_8.count)
-                    self.text = big_8[row] as String
-                    return big_8[row] as String
+                if big8.count <= row {
+                    self.text = big8[0] as String
+                    return big8[0] as String
+                } else {
+                    print(big8.count)
+                    self.text = big8[row] as String
+                    return big8[row] as String
                 }
             case 9:
-                if big_9.count <= row {
-                    self.text = big_9[0] as String
-                    return big_9[0] as String
-                }else {
-                    self.text = big_9[row] as String
-                    return big_9[row] as String
+                if big9.count <= row {
+                    self.text = big9[0] as String
+                    return big9[0] as String
+                } else {
+                    self.text = big9[row] as String
+                    return big9[row] as String
                 }
             case 10:
-                if big_10.count <= row {
-                    self.text = big_10[0] as String
-                    return big_10[0] as String
-                }else {
-                    self.text = big_10[row] as String
-                    return big_10[row] as String
+                if big10.count <= row {
+                    self.text = big10[0] as String
+                    return big10[0] as String
+                } else {
+                    self.text = big10[row] as String
+                    return big10[row] as String
                 }
             case 11:
-                if big_11.count <= row {
-                    self.text = big_11[0] as String
-                    return big_11[0] as String
-                }else {
-                    self.text = big_11[row] as String // エラー　2020/10/31
-                    return big_11[row] as String // エラー　2020/10/15
+                if big11.count <= row {
+                    self.text = big11[0] as String
+                    return big11[0] as String
+                } else {
+                    self.text = big11[row] as String // エラー　2020/10/31
+                    return big11[row] as String // エラー　2020/10/15
                 }
             default:
                 return ""
@@ -296,102 +296,89 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         // 文字色
         if component == 0 {
             self.text = categories[row] as String
-        }else if component == 1 { // ドラムロールの2列目か？
+        } else if component == 1 { // ドラムロールの2列目か？
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
                 // ドラムロールを2列同時に回転させた場合の対策
-                if big_0.count <= row {
-                    self.text = big_0[0] as String
+                if big0.count <= row {
+                    self.text = big0[0] as String
                     break
                 }
-                self.text = big_0[row] as String
-                break
+                self.text = big0[row] as String
             case 1:
-                if big_1.count <= row {
-                    self.text = big_1[0] as String
+                if big1.count <= row {
+                    self.text = big1[0] as String
                     break
                 }
-                self.text = big_1[row] as String
-                break
+                self.text = big1[row] as String
             case 2:
-                if big_2.count <= row {
-                    self.text = big_2[0] as String
+                if big2.count <= row {
+                    self.text = big2[0] as String
                     break
                 }
-                self.text = big_2[row] as String
-                break
+                self.text = big2[row] as String
             case 3:
-                if big_3.count <= row {
-                    self.text = big_3[0] as String
+                if big3.count <= row {
+                    self.text = big3[0] as String
                     break
                 }
-                self.text = big_3[row] as String
-                break
+                self.text = big3[row] as String
             case 4:
-                if big_4.count <= row {
-                    self.text = big_4[0] as String
+                if big4.count <= row {
+                    self.text = big4[0] as String
                     break
                 }
-                self.text = big_4[row] as String
-                break
+                self.text = big4[row] as String
             case 5:
-                if big_5.count <= row {
-                    self.text = big_5[0] as String
+                if big5.count <= row {
+                    self.text = big5[0] as String
                     break
                 }
-                self.text = big_5[row] as String
-                break
+                self.text = big5[row] as String
             case 6:
-                if big_6.count <= row {
-                    self.text = big_6[0] as String
+                if big6.count <= row {
+                    self.text = big6[0] as String
                     break
                 }
-                self.text = big_6[row] as String
-                break
+                self.text = big6[row] as String
             case 7:
-                if big_7.count <= row {
-                    self.text = big_7[0] as String
+                if big7.count <= row {
+                    self.text = big7[0] as String
                     break
                 }
-                self.text = big_7[row] as String
-                break
+                self.text = big7[row] as String
             case 8:
-                if big_8.count <= row {
-                    self.text = big_8[0] as String
+                if big8.count <= row {
+                    self.text = big8[0] as String
                     break
                 }
-                self.text = big_8[row] as String
-                break
+                self.text = big8[row] as String
             case 9:
-                if big_9.count <= row {
-                    self.text = big_9[0] as String
+                if big9.count <= row {
+                    self.text = big9[0] as String
                     break
                 }
-                self.text = big_9[row] as String
-                break
+                self.text = big9[row] as String
             case 10:
-                if big_10.count <= row {
-                    self.text = big_10[0] as String
+                if big10.count <= row {
+                    self.text = big10[0] as String
                     break
                 }
-                self.text = big_10[row] as String
-                break
+                self.text = big10[row] as String
             case 11:
-                if big_11.count <= row {
-                    self.text = big_11[0] as String
+                if big11.count <= row {
+                    self.text = big11[0] as String
                     break
                 }
-                self.text = big_11[row] as String
-                break
+                self.text = big11[row] as String
             default:
                 self.text = ""
-                break
             }
         }
-        //一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
+        // 一つ目のcompornentの選択内容に応じて、二つの目のcompornent表示を切り替える
         pickerView.reloadAllComponents()
     }
-    //Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
+    // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc func done() {
         self.endEditing(true)
     }

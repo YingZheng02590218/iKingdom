@@ -13,6 +13,7 @@ class PageContentViewController: UIViewController {
     // MARK: - Variable/Let
 
     @IBOutlet var collectionView: UICollectionView!
+
     var index: Int = 0 // カルーセルのタブの識別
     
     // MARK: - LifeCycle
@@ -44,19 +45,23 @@ class PageContentViewController: UIViewController {
     }
 
 }
+
 extension PageContentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        50
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as! CarouselTabCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CarouselTabCollectionViewCell",
+            for: indexPath
+        ) as? CarouselTabCollectionViewCell else { return UICollectionViewCell() }
         cell.label.text = "\(index)"
         return cell
     }
     // セルが選択された時
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
     }
     // セルが選択解除されたとき
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

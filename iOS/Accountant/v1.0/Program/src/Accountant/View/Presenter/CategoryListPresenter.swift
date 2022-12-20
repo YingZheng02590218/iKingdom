@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol CategoryListPresenterInput {
     
-    var dataBaseSettingsTaxonomyAccount:Results<DataBaseSettingsTaxonomyAccount> { get }
+    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
 
     func numberOfobjects(section: Int) -> Int
     func numberOfsections() -> Int
@@ -36,31 +36,31 @@ final class CategoryListPresenter: CategoryListPresenterInput {
     
     // MARK: - var let
     
-    private var objects0:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects1:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects2:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects3:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects4:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects5:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects6:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects7:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects8:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects9:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects10:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects11:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects12:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects13:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects14:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects15:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects16:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects17:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects18:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects19:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects20:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects21:Results<DataBaseSettingsTaxonomyAccount>
-    private var objects22:Results<DataBaseSettingsTaxonomyAccount>
+    private var objects0: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects1: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects2: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects3: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects4: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects5: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects6: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects7: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects8: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects9: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects10: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects11: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects12: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects13: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects14: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects15: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects16: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects17: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects18: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects19: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects20: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects21: Results<DataBaseSettingsTaxonomyAccount>
+    private var objects22: Results<DataBaseSettingsTaxonomyAccount>
     
-    internal var dataBaseSettingsTaxonomyAccount:Results<DataBaseSettingsTaxonomyAccount>
+    internal var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount>
     
     private weak var view: CategoryListPresenterOutput!
     private var model: CategoryListModelInput
@@ -393,8 +393,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         let result = model.deleteSettingsTaxonomyAccount(number: self.objects(forRow: indexPath.row, section: indexPath.section).number)
         if result == true {
             view.reloadData()
-        }
-        else {
+        } else {
             print("削除失敗　設定勘定科目")
         }
     }

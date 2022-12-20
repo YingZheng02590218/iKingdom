@@ -12,7 +12,7 @@ import GoogleMobileAds // マネタイズ対応
 class SettingsHelpViewController: UIViewController {
 
 
-    @IBOutlet var gADBannerView: GADBannerView!
+    var gADBannerView: GADBannerView!
     
     @IBOutlet var textView: UITextView!
     
@@ -48,45 +48,74 @@ class SettingsHelpViewController: UIViewController {
             .font: UIFont.boldSystemFont(ofSize: 30)
         ], range: NSString(string: baseString!).range(of: "6. 決算作業"))
         // リンクを設置
-        attributedString.addAttribute(.link,
-                                      value: "Link0",
-                                      range: NSString(string: baseString!).range(of: "このアプリについて"))
-        attributedString.addAttribute(.link,
-                                      value: "Link1",
-                                      range: NSString(string: baseString!).range(of: "当アプリで採用した会計概念"))
-        attributedString.addAttribute(.link,
-                                      value: "Link2",
-                                      range: NSString(string: baseString!).range(of: "簿記の基礎"))
-//        attributedString.addAttribute(.link,
-//                                      value: "Link3",
-//                                      range: NSString(string: baseString!).range(of: "初期設定の手順"))
-        attributedString.addAttribute(.link,
-                                      value: "Link4",
-                                      range: NSString(string: baseString!).range(of: "基本情報の登録をしよう"))
-        attributedString.addAttribute(.link,
-                                      value: "Link5",
-                                      range: NSString(string: baseString!).range(of: "勘定科目を設定しよう"))
-        attributedString.addAttribute(.link,
-                                      value: "Link6",
-                                      range: NSString(string: baseString!).range(of: "勘定科目の編集しよう"))
-        attributedString.addAttribute(.link,
-                                      value: "Link7",
-                                      range: NSString(string: baseString!).range(of: "環境設定を確認・変更しよう"))
-        attributedString.addAttribute(.link,
-                                      value: "Link8",
-                                      range: NSString(string: baseString!).range(of: "仕訳を入力する"))
-        attributedString.addAttribute(.link,
-                                      value: "Link9",
-                                      range: NSString(string: baseString!).range(of: "仕訳を修正する"))
-        attributedString.addAttribute(.link,
-                                      value: "Link10",
-                                      range: NSString(string: baseString!).range(of: "仕訳を削除する"))
-        attributedString.addAttribute(.link,
-                                      value: "Link11",
-                                      range: NSString(string: baseString!).range(of: "入力した取引を確認しよう"))
+        attributedString.addAttribute(
+            .link,
+            value: "Link0",
+            range: NSString(string: baseString!).range(of: "このアプリについて")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link1",
+            range: NSString(string: baseString!).range(of: "当アプリで採用した会計概念")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link2",
+            range: NSString(string: baseString!).range(of: "簿記の基礎")
+        )
+        //        attributedString.addAttribute(
+        //            .link,
+        //                                      value: "Link3",
+        //                                      range: NSString(string: baseString!).range(of: "初期設定の手順")
+        // )
+        attributedString.addAttribute(
+            .link,
+            value: "Link4",
+            range: NSString(string: baseString!).range(of: "基本情報の登録をしよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link5",
+            range: NSString(string: baseString!).range(of: "勘定科目を設定しよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link6",
+            range: NSString(string: baseString!).range(of: "勘定科目の編集しよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link7",
+            range: NSString(string: baseString!).range(of: "環境設定を確認・変更しよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link8",
+            range: NSString(string: baseString!).range(of: "仕訳を入力する")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link9",
+            range: NSString(string: baseString!).range(of: "仕訳を修正する")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link10",
+            range: NSString(string: baseString!).range(of: "仕訳を削除する")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link11",
+            range: NSString(string: baseString!).range(of: "入力した取引を確認しよう")
+        )
         textView.attributedText = attributedString
         textView.textColor = .textColor
-        textView.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)!)
+        textView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!,
+            height: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.height)!
+        )
         textView.center = view.center
         textView.isSelectable = true
         textView.isEditable = false
@@ -94,13 +123,13 @@ class SettingsHelpViewController: UIViewController {
         view.addSubview(textView)
     }
     // ビューが表示される直前に呼ばれる
-    override func viewWillAppear(_ animated: Bool){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             
@@ -109,8 +138,7 @@ class SettingsHelpViewController: UIViewController {
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: 30 * -1)
-        }
-        else {
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -120,95 +148,96 @@ class SettingsHelpViewController: UIViewController {
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // ③遷移先ViewCntrollerの取得
-        let navigationController = segue.destination as! UINavigationController
-        let viewController = navigationController.topViewController as! SettingsHelpDetailViewController
-        
-        if urlString == "Link0" {
-            print("このアプリについてのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "このアプリについて"
-            viewController.textView_switch = 0
-        }
+        if let navigationController = segue.destination as? UINavigationController,
+           let viewController = navigationController.topViewController as? SettingsHelpDetailViewController {
 
-        if urlString == "Link1" {
-            print("当アプリで採用した会計概念のリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "当アプリで採用した会計概念"
-            viewController.textView_switch = 1
-        }
+            if urlString == "Link0" {
+                print("このアプリについてのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "このアプリについて"
+                viewController.textViewSwitchNumber = 0
+            }
 
-        if urlString == "Link2" {
-            print("簿記の基礎のリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "簿記の基礎"
-            viewController.textView_switch = 2
-        }
-        
-        if urlString == "Link3" {
-            print("初期設定の手順のリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "初期設定の手順"
-            viewController.textView_switch = 3
-        }
-        if urlString == "Link4" {
-            print("基本情報の登録をしようのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "基本情報の登録をしよう"
-            viewController.textView_switch = 4
-        }
-        if urlString == "Link5" {
-            print("勘定科目を設定しようのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "勘定科目を設定しよう"
-            viewController.textView_switch = 5
-        }
-        if urlString == "Link6" {
-            print("勘定科目の編集しようのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "勘定科目の編集しよう"
-            viewController.textView_switch = 6
-        }
-        if urlString == "Link7" {
-            print("環境設定を確認・変更しようのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "環境設定を確認・変更しよう"
-            viewController.textView_switch = 7
-        }
-        if urlString == "Link8" {
-            print("仕訳を入力するのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "仕訳を入力する"
-            viewController.textView_switch = 8
-        }
-        if urlString == "Link9" {
-            print("仕訳を修正するのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "仕訳を修正する"
-            viewController.textView_switch = 9
-        }
-        if urlString == "Link10" {
-            print("仕訳を削除するのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "仕訳を削除する"
-            viewController.textView_switch = 10
-        }
-        if urlString == "Link11" {
-            print("入力した取引を確認しようのリンクがタップされました")
-            // ログ送信処理
-            // 詳細画面を開く処理
-            viewController.navigationItem.title = "入力した取引を確認しよう"
-            viewController.textView_switch = 11
+            if urlString == "Link1" {
+                print("当アプリで採用した会計概念のリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "当アプリで採用した会計概念"
+                viewController.textViewSwitchNumber = 1
+            }
+
+            if urlString == "Link2" {
+                print("簿記の基礎のリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "簿記の基礎"
+                viewController.textViewSwitchNumber = 2
+            }
+
+            if urlString == "Link3" {
+                print("初期設定の手順のリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "初期設定の手順"
+                viewController.textViewSwitchNumber = 3
+            }
+            if urlString == "Link4" {
+                print("基本情報の登録をしようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "基本情報の登録をしよう"
+                viewController.textViewSwitchNumber = 4
+            }
+            if urlString == "Link5" {
+                print("勘定科目を設定しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "勘定科目を設定しよう"
+                viewController.textViewSwitchNumber = 5
+            }
+            if urlString == "Link6" {
+                print("勘定科目の編集しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "勘定科目の編集しよう"
+                viewController.textViewSwitchNumber = 6
+            }
+            if urlString == "Link7" {
+                print("環境設定を確認・変更しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "環境設定を確認・変更しよう"
+                viewController.textViewSwitchNumber = 7
+            }
+            if urlString == "Link8" {
+                print("仕訳を入力するのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "仕訳を入力する"
+                viewController.textViewSwitchNumber = 8
+            }
+            if urlString == "Link9" {
+                print("仕訳を修正するのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "仕訳を修正する"
+                viewController.textViewSwitchNumber = 9
+            }
+            if urlString == "Link10" {
+                print("仕訳を削除するのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "仕訳を削除する"
+                viewController.textViewSwitchNumber = 10
+            }
+            if urlString == "Link11" {
+                print("入力した取引を確認しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "入力した取引を確認しよう"
+                viewController.textViewSwitchNumber = 11
+            }
         }
     }
 }
@@ -225,7 +254,7 @@ extension SettingsHelpViewController: UITextViewDelegate {
     }
 }
 
-//extension SettingsHelpViewController: UITextViewDelegate {
+// extension SettingsHelpViewController: UITextViewDelegate {
 //    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
 //        let urlString = URL.absoluteString
 //        if urlString == "TermOfUseLink" {
@@ -239,4 +268,4 @@ extension SettingsHelpViewController: UITextViewDelegate {
 //        }
 //        return true // 通常のURL遷移を行う
 //    }
-//}
+// }

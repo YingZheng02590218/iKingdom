@@ -12,8 +12,8 @@ import UIKit
 struct HTMLhelperBS {
     // PDFごとに1回コール
     func headerHTMLstring() -> String {
-        //htmlヘッダーを生成します。
-        //たとえば、ここに店の名前を入力できます
+        // htmlヘッダーを生成します。
+        // たとえば、ここに店の名前を入力できます
         return """
     <!DOCTYPE html>
         <html>
@@ -260,7 +260,7 @@ struct HTMLhelperBS {
     }
     // PDFごとに1回コール
     func footerHTMLstring() -> String {
-        return """
+         """
         </body>
     </html>
     """
@@ -268,7 +268,7 @@ struct HTMLhelperBS {
     
     // ページごとに1回コール
     func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
-        return """
+         """
                 <section class="page">
         <div class="richediter public-notice l-container">
 
@@ -284,7 +284,7 @@ struct HTMLhelperBS {
     }
     // ページごとに1回コール
     func footerstring() -> String {
-        return """
+         """
             </div>
         <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
         </div>
@@ -294,7 +294,7 @@ struct HTMLhelperBS {
     
     // テーブル　トップ 資産の部
     func tableTopString() -> String {
-        return """
+         """
         <table class="halfWidth marginBottomAuto">
                 <tbody>
                 <tr>
@@ -304,7 +304,7 @@ struct HTMLhelperBS {
     }
     // テーブル　トップ 負債の部、資本の部
     func tableTopString(block: String) -> String {
-        return """
+         """
                 <table style="width:100%">
                 <tbody>
                 <tr>
@@ -314,7 +314,7 @@ struct HTMLhelperBS {
     }
     // テーブル　エンド 資産の部 合計
     func tableEndString(title: String, amount: String) -> String {
-        return """
+         """
     <tr class="skyBlueBackgroundColor line_single_black_all">
     <th id="capital-4"><strong>\(title)</strong></th>
     <td headers="capital capital-4">\(amount)</td>
@@ -327,7 +327,7 @@ struct HTMLhelperBS {
     }
     // テーブル　エンド 負債の部 合計
     func tableEndString(amount: String) -> String {
-        return """
+         """
     <tr class="skyBlueBackgroundColor line_single_black_all">
     <th id="capital-4"><strong>\(BalanceSheet.Block.liabilities.getTotalAmount())</strong></th>
     <td headers="capital capital-4">\(amount)</td>
@@ -338,7 +338,7 @@ struct HTMLhelperBS {
     }
     // テーブル　エンド 負債・純資産の部 合計
     func tableEndString(capitalAmount: String, amount: String) -> String {
-        return """
+         """
     <tr class="skyBlueBackgroundColor line_single_black_all">
     <th id="capital-3">\(BalanceSheet.Block.netAssets.getTotalAmount())</th>
     <td headers="capital capital-3">\(capitalAmount)</td>
@@ -357,7 +357,7 @@ struct HTMLhelperBS {
 
     // 中区分 段落0　流動資産、固定資産、繰越資産、流動負債、固定負債、株主資本、その他の包括利益累計額、
     func middleRowTop(title: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1"></td>
@@ -366,7 +366,7 @@ struct HTMLhelperBS {
     }
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
@@ -376,7 +376,7 @@ struct HTMLhelperBS {
     
     // 中区分 合計 段落0　新株予約権、TODO、非支配株主持分、TODO
     func middleRowEndIndent0space(title: String, amount: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
@@ -386,7 +386,7 @@ struct HTMLhelperBS {
     
     // 小区分 有形固定資産、無形固定資産、投資その他資産
     func smallRowTop(title: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1"></td>
@@ -403,10 +403,9 @@ struct HTMLhelperBS {
 //    """
 //    }
     
-    
     // レコードごとに1回コール 段落1 現金
     func getSingleRow(title: String, amount: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
@@ -415,7 +414,7 @@ struct HTMLhelperBS {
     }
     // レコードごとに1回コール 段落2　有形固定資産、無形固定資産、投資その他の資産に属する表示科目
     func getSingleRowIndent2space(title: String, amount: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left textIndent2">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>

@@ -43,7 +43,10 @@ class DataBaseManagerSettingsOperating {
         do {
             // (2)書き込みトランザクション内でデータを更新する
             try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": 1, "\(englishFromOfClosingTheLedger)": isOn]
+                let value: [String: Any] = [
+                    "number": 1,
+                    "\(englishFromOfClosingTheLedger)": isOn
+                ]
                 DataBaseManager.realm.create(DataBaseSettingsOperating.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {

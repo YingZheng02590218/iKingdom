@@ -12,8 +12,7 @@ import GoogleMobileAds // マネタイズ対応
 // 会計期間クラス
 class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
-
-    @IBOutlet var gADBannerView: GADBannerView!
+    var gADBannerView: GADBannerView!
 
     private var interstitial: GADInterstitialAd?
 
@@ -41,14 +40,13 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-    //        print(self.view.frame.size.height)
-    //        print(gADBannerView.frame.height)
-    //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-    //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
+            //        print(self.view.frame.size.height)
+            //        print(gADBannerView.frame.height)
+            //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
+            //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
 
@@ -103,7 +101,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
-        //タブの無効化
+        // タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
                 if let tabBarItem = tabBarItem as? UITabBarItem {
@@ -111,9 +109,12 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 }
             }
         }
-        if let viewController = UIStoryboard(name: "SettingsPeriodTableViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as? AnnotationViewControllerSettingPeriod {
-        viewController.alpha = 0.7
-        present(viewController, animated: true, completion: nil)
+        if let viewController = UIStoryboard(
+            name: "SettingsPeriodTableViewController",
+            bundle: nil
+        ).instantiateViewController(withIdentifier: "Annotation_SettingPeriod") as? AnnotationViewControllerSettingPeriod {
+            viewController.alpha = 0.7
+            present(viewController, animated: true, completion: nil)
         }
     }
 
@@ -134,8 +135,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // ③遷移先ViewCntrollerの取得
             if let navigationController = segue.destination as? UINavigationController,
                let viewController = navigationController.topViewController as? SettingsTheDayOfReckoningTableViewController,
-                // 選択されたセルを取得
-                let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
+               // 選択されたセルを取得
+               let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
                 // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
                 // 遷移先のコントローラに値を渡す
                 if indexPath.row == 0 {
@@ -151,7 +152,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             if sender is UIButton {
                 // タップされたボタンの領域を取得
                 if let button = sender as? UIButton {
-                popoverCtrl?.sourceRect = button.bounds
+                    popoverCtrl?.sourceRect = button.bounds
                 }
             }
             // デリゲートを自分自身に設定
@@ -253,23 +254,23 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "identifier_theDayOfReckoning", for: indexPath) as? SettingsPeriodTableViewCell else {
                 return UITableViewCell()
             }
-            let object = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+            let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             // 会計帳簿の年度をセルに表示する
             if indexPath.row == 0 {
                 cell.textLabel?.text = "月"
-                let d = object
-                let date = d[d.index(d.startIndex, offsetBy: 0)..<d.index(d.startIndex, offsetBy: 2)] // 日付の9文字目にある日の十の位を抽出
+                let day = theDayOfReckoning
+                let date = day[day.index(day.startIndex, offsetBy: 0)..<day.index(day.startIndex, offsetBy: 2)] // 日付の9文字目にある日の十の位を抽出
                 cell.detailTextLabel2.text = "\(date)"
                 print(date)
             } else {
                 cell.textLabel?.text = "日"
-                let d = object
-                let date = d[d.index(d.startIndex, offsetBy: 3)..<d.index(d.startIndex, offsetBy: 5)] // 日付の9文字目にある日の十の位を抽出
+                let day = theDayOfReckoning
+                let date = day[day.index(day.startIndex, offsetBy: 3)..<day.index(day.startIndex, offsetBy: 5)] // 日付の9文字目にある日の十の位を抽出
                 cell.detailTextLabel2.text = "\(date)"
                 print(date)
             }
             // Accessory Color
-            let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+            let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
             let disclosureView = UIImageView(image: disclosureImage)
             disclosureView.tintColor = UIColor.accentColor
             cell.accessoryView = disclosureView
@@ -287,7 +288,11 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // 会計帳簿の年度をセルに表示する
             cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
 #if DEBUG
-            cell.rightdetailTextLabel.text = "データ数: \((objects[indexPath.row].dataBaseJournals?.dataBaseJournalEntries.count)! as Int):\(objectsJournalEntry.count),  \((objects[indexPath.row].dataBaseJournals?.dataBaseAdjustingEntries.count)! as Int):\(objectsAdjustingEntry.count)"
+            if let dataBaseJournals = objects[indexPath.row].dataBaseJournals {
+                print(dataBaseJournals.dataBaseJournalEntries.count)
+                print(dataBaseJournals.dataBaseAdjustingEntries.count)
+                cell.rightdetailTextLabel.text = "データ数: \((dataBaseJournals.dataBaseJournalEntries.count)):\(objectsJournalEntry.count),  \((dataBaseJournals.dataBaseAdjustingEntries.count)):\(objectsAdjustingEntry.count)"
+            }
 #else
             cell.rightdetailTextLabel.text = "データ数:　\(objectsJournalEntry.count), \(objectsAdjustingEntry.count)"
 #endif
@@ -322,7 +327,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                 // 年度を選択時に会計期間画面を更新する
                 tableView.reloadData()
             }
-            break
         default:
             print("")
         }
@@ -332,8 +336,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // データベース
         DataBaseManagerSettingsPeriod.shared.setMainBooksOpenOrClose(tag: tag)
         // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
-        dataBaseManagerAccount.addGeneralLedgerAccountLack() 
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
+        dataBaseManagerAccount.addGeneralLedgerAccountLack()
     }
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -345,7 +349,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
+        //        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
         // スタイルには、normal と　destructive がある
         let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
             // なんか処理
@@ -392,17 +396,17 @@ extension SettingsPeriodTableViewController: GADFullScreenContentDelegate {
 
     /// Tells the delegate that the ad failed to present full screen content.
     func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-      print("Ad did fail to present full screen content.")
+        print("Ad did fail to present full screen content.")
     }
 
     /// Tells the delegate that the ad will present full screen content.
     func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-      print("Ad will present full screen content.")
+        print("Ad will present full screen content.")
     }
 
     /// Tells the delegate that the ad dismissed full screen content.
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-      print("Ad did dismiss full screen content.")
+        print("Ad did dismiss full screen content.")
         // セットアップ AdMob
         setupAdMob()
     }

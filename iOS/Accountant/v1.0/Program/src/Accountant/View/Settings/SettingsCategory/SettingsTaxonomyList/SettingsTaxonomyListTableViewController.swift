@@ -13,10 +13,15 @@ import GoogleMobileAds // マネタイズ対応
 class SettingsTaxonomyListTableViewController: UITableViewController {
     
 
-    @IBOutlet var gADBannerView: GADBannerView!
+   var gADBannerView: GADBannerView!
 
     // セグメントスイッチ
-    @IBOutlet weak var segmentedControl_switch: UISegmentedControl!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+
+    var howToUse = false // 勘定科目　詳細　設定画面からの遷移の場合はtrue
+    var numberOfTaxonomyAccount: Int = 0 // 設定勘定科目番号
+    var addAccount = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
+
     @IBAction func segmentedControl(_ sender: Any) {
         self.tableView.reloadData()
     }
@@ -26,26 +31,25 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
+            print(tableView.visibleCells[tableView.visibleCells.count - 1].frame.height)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
-        }
-        else {
+            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count - 1].frame.height * -1)
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -56,11 +60,11 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return 1 //5
+        1 // 5
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch segmentedControl_switch.selectedSegmentIndex {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             return "貸借対照表"
         case 1:
@@ -79,31 +83,31 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // データベース　表示科目
         var sheet = 0
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
+        if segmentedControl.selectedSegmentIndex == 0 {
             sheet = 0 // BS
-        }else if segmentedControl_switch.selectedSegmentIndex == 1 {
+        } else if segmentedControl.selectedSegmentIndex == 1 {
             sheet = 1 // PL
-//        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
+//        } else if segmentedControl.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
         return objects.count
     }
-    //セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> CategoryListTableViewCell {
+    // セルを生成して返却するメソッド
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 決算書別に表示科目を取得
         var sheet = 0
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
+        if segmentedControl.selectedSegmentIndex == 0 {
             sheet = 0 // BS
-        }else if segmentedControl_switch.selectedSegmentIndex == 1 {
+        } else if segmentedControl.selectedSegmentIndex == 1 {
             sheet = 1 // PL
-//        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
+//        } else if segmentedControl.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
     
-        //① UI部品を指定　TableViewCellCategory
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as! CategoryListTableViewCell
+        // ① UI部品を指定　TableViewCellCategory
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as? CategoryListTableViewCell else { return UITableViewCell() }
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
         // 表示科目に紐づけられている勘定科目の数を表示する
         // 勘定科目モデルの階層と同じ勘定科目モデルを取得
@@ -113,47 +117,47 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
 //        let objectssss = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountSWInTaxonomy(numberOfTaxonomy: String(objects[indexPath.row].number), switching: false)
         cell.textLabel?.textColor = .textColor
         // 階層毎にスペースをつける
-        if objects[indexPath.row].category1 as String == "" {
+        if objects[indexPath.row].category1.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number), \(objects[indexPath.row].category as String)"
-        }else if objects[indexPath.row].category2 as String == "" {
+        } else if objects[indexPath.row].category2.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number),   \(objects[indexPath.row].category as String)"
-        }else if objects[indexPath.row].category3 as String == "" { // 資産の部　など
+        } else if objects[indexPath.row].category3.isEmpty { // 資産の部　など
             cell.textLabel?.text = "\(objects[indexPath.row].number),     \(objects[indexPath.row].category as String)"
-        }else if objects[indexPath.row].category4 as String == "" {
+        } else if objects[indexPath.row].category4.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number),       \(objects[indexPath.row].category as String)"
 //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
-        }else if objects[indexPath.row].category5 as String == "" {
+        } else if objects[indexPath.row].category5.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number),         \(objects[indexPath.row].category as String)"
 //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
-        }else if objects[indexPath.row].category6 as String == "" {
+        } else if objects[indexPath.row].category6.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number),           \(objects[indexPath.row].category as String)"
 //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
-        }else if objects[indexPath.row].category7 as String == "" {
+        } else if objects[indexPath.row].category7.isEmpty {
             cell.textLabel?.text = "\(objects[indexPath.row].number),             \(objects[indexPath.row].category as String)"
 //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
-        }else {
+        } else {
             cell.textLabel?.text = "\(objects[indexPath.row].number),               \(objects[indexPath.row].category as String)"
 //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
         }
         cell.label.text = ""
         cell.label.textAlignment = .right
         if objects[indexPath.row].abstract { // 抽象区分の場合
-            //UIButtonを非表示
-            cell.ToggleButton.isHidden = true
-            //UILabelを非表示
+            // UIButtonを非表示
+            cell.toggleButton.isHidden = true
+            // UILabelを非表示
             cell.label.isHidden = true
             // セルの選択不可にする
             cell.selectionStyle = .none
-        }else {
+        } else {
             // 表示科目の連番
             cell.tag = objects[indexPath.row].number
             // 表示科目の有効無効
-            cell.ToggleButton.isOn = objects[indexPath.row].switching
-            //UIButtonを無効化
-            cell.ToggleButton.isEnabled = false
-            //UIButtonを表示
-            cell.ToggleButton.isHidden = false
-            //UILabelを表示
+            cell.toggleButton.isOn = objects[indexPath.row].switching
+            // UIButtonを無効化
+            cell.toggleButton.isEnabled = false
+            // UIButtonを表示
+            cell.toggleButton.isHidden = false
+            // UILabelを表示
             cell.label.isHidden = false
             // 表示科目選択　の場合
             if howToUse {
@@ -162,7 +166,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             }
         }
         // Accessory Color
-        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
@@ -174,8 +178,8 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     @objc func hundleSwitch(sender: UISwitch) {
         // UISwitchが配置されたセルを探す
         var hoge = sender.superview // 親ビュー
-        while(hoge!.isKind(of: CategoryListTableViewCell.self) == false) {
-            hoge = hoge!.superview
+        while hoge?.isKind(of: CategoryListTableViewCell.self) == false {
+            hoge = hoge?.superview
         }
     }
     // トグルスイッチの切り替え　データベースを更新
@@ -191,24 +195,21 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     }
     // 追加・編集機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
         if IndexPath(row: 0, section: 1) != self.tableView.indexPathForSelectedRow! { // 表示科目名以外は遷移しない
-            return false //false:画面遷移させない
+            return false // false:画面遷移させない
         }
         return true
     }
-    var howToUse: Bool = false // 勘定科目　詳細　設定画面からの遷移の場合はtrue
-    var numberOfTaxonomyAccount :Int = 0 // 設定勘定科目番号
-    var addAccount: Bool = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
     // セルが選択された時に呼び出される
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 表示科目選択　の場合
         if howToUse {
             // 選択されたセルを取得
-            let cell = tableView.cellForRow(at:indexPath)
+            let cell = tableView.cellForRow(at: indexPath)
             if cell?.selectionStyle == UITableViewCell.SelectionStyle.none { // セルが選択不可
                 print("抽象区分　表示科目")
-            }else {
+            } else {
                 // チェックマークを入れる
                 cell?.accessoryType = .checkmark
                 // 確認のポップアップを表示したい
@@ -218,7 +219,7 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
     }
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at:indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
         // チェックマークを外す
         cell?.accessoryType = .none
     }
@@ -227,72 +228,69 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         // 選択されたセルに表示された表示科目のプライマリーキーを取得
         // 決算書別に表示科目を取得
         var sheet = 0
-        if segmentedControl_switch.selectedSegmentIndex == 0 {
+        if segmentedControl.selectedSegmentIndex == 0 {
             sheet = 0 // BS
-        }else if segmentedControl_switch.selectedSegmentIndex == 1 {
+        } else if segmentedControl.selectedSegmentIndex == 1 {
             sheet = 1 // PL
-//        }else if segmentedControl_switch.selectedSegmentIndex == 2 {
+//        } else if segmentedControl.selectedSegmentIndex == 2 {
 //            sheet = 4 // CF
         }
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
         // 呼び出し元のコントローラを取得
         if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
-            let presentingViewController = self.presentingViewController as! SettingsCategoryDetailTableViewController // 勘定科目詳細コントローラーを取得
-            let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-                (action: UIAlertAction!) in
-                print("OK アクションをタップした時の処理")
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: {
-                    [presentingViewController] () -> Void in
-                    presentingViewController.numberOfTaxonomy = objects[indexPath.row].number // 選択された表示科目の番号を渡す
-                    presentingViewController.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
-                    presentingViewController.showNumberOfTaxonomy() // 選択された表示科目名を表示
-//                    let num = presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
-//                    presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-//                    presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
-                    self.addAccount = false // 新規追加後にフラグを倒す
-                })
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                (action: UIAlertAction!) in
-                print("Cancel アクションをタップした時の処理")
-                self.dismiss(animated: true, completion: {
-                    [presentingViewController] () -> Void in
-                    self.addAccount = false // 新規追加後にフラグを倒す
-                })
-            }))
-            present(alert, animated: true, completion: nil)
-//            addAccount = false // 新規追加後にフラグを倒す
-        }else { // 既存の設定勘定科目を選択された場合
+            if let presentingViewController = self.presentingViewController as? SettingsCategoryDetailTableViewController { // 勘定科目詳細コントローラーを取得
+                let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
+
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+                    print("OK アクションをタップした時の処理")
+                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        presentingViewController.numberOfTaxonomy = objects[indexPath.row].number // 選択された表示科目の番号を渡す
+                        presentingViewController.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
+                        presentingViewController.showNumberOfTaxonomy() // 選択された表示科目名を表示
+                        //                    let num = presentingViewController.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
+                        //                    presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                        //                    presentingViewController.viewWillAppear(true) // TableViewをリロードする処理がある
+                        self.addAccount = false // 新規追加後にフラグを倒す
+                    })
+                }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                    print("Cancel アクションをタップした時の処理")
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        self.addAccount = false // 新規追加後にフラグを倒す
+                    })
+                }))
+                present(alert, animated: true, completion: nil)
+                //            addAccount = false // 新規追加後にフラグを倒す
+            }
+        } else { // 既存の設定勘定科目を選択された場合
             var presentingViewController: SettingsCategoryDetailTableViewController?
             
-            if let settingsCategoryDetailTableViewController: SettingsCategoryDetailTableViewController = self.presentingViewController as? SettingsCategoryDetailTableViewController {
+            if let settingsCategoryDetailTableViewController = self.presentingViewController as? SettingsCategoryDetailTableViewController {
                 presentingViewController = settingsCategoryDetailTableViewController
-            }else {
+            } else {
                 
-                let tabBarController = self.presentingViewController as! UITabBarController // 基底となっているコントローラ
-                let splitViewController = tabBarController.selectedViewController as! UISplitViewController // 基底のコントローラから、選択されているを取得する
-                let navigationController = splitViewController.viewControllers[0]  as! UINavigationController // スプリットコントローラから、現在選択されているコントローラを取得する
-                let navigationController2 = navigationController.viewControllers[1] as! UINavigationController
-                print(navigationController2.viewControllers.count)
-                print(navigationController2.viewControllers[0]) // SettingsCategoryTableViewController
-                print(navigationController2.viewControllers[1]) // CategoryListCarouselAndPageViewController
-                print(navigationController2.viewControllers[2]) // SettingsCategoryDetailTableViewController
-                presentingViewController = navigationController2.viewControllers[2] as! SettingsCategoryDetailTableViewController // 勘定科目詳細コントローラーを取得
+                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+                   let navigationController = splitViewController.viewControllers[0]  as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController {
+                    print(navigationController2.viewControllers.count)
+                    print(navigationController2.viewControllers[0]) // SettingsCategoryTableViewController
+                    print(navigationController2.viewControllers[1]) // CategoryListCarouselAndPageViewController
+                    print(navigationController2.viewControllers[2]) // SettingsCategoryDetailTableViewController
+
+                    presentingViewController = navigationController2.viewControllers[2] as? SettingsCategoryDetailTableViewController // 勘定科目詳細コントローラーを取得
+                }
             }
             let alert = UIAlertController(title: "変更", message: "勘定科目に紐付ける表示科目を変更しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-            self.dismiss(animated: true, completion: {
-                [presentingViewController] () -> Void in
-                presentingViewController!.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
-                presentingViewController!.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
-                presentingViewController!.viewWillAppear(true) // TableViewをリロードする処理がある
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController?.changeTaxonomyOfTaxonomyAccount(number: self.numberOfTaxonomyAccount, numberOfTaxonomy: objects[indexPath.row].number)
+                presentingViewController?.numberOfAccount = self.numberOfTaxonomyAccount // 勘定科目　詳細画面 の勘定科目番号に代入
+                presentingViewController?.viewWillAppear(true) // TableViewをリロードする処理がある
             })
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

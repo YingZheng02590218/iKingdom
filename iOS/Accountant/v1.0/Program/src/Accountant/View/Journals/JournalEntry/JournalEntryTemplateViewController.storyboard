@@ -283,7 +283,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="Button_cancel:" destination="hqY-Er-sb3" eventType="touchUpInside" id="OMK-K1-ywu"/>
+                                                                    <action selector="cancelButtonTapped:" destination="hqY-Er-sb3" eventType="touchUpInside" id="rTY-nc-r8E"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-8B-VTU" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
@@ -301,7 +301,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="Button_Input:" destination="hqY-Er-sb3" eventType="touchUpInside" id="Wtq-fb-j3g"/>
+                                                                    <action selector="inputButtonTapped:" destination="hqY-Er-sb3" eventType="touchUpInside" id="F7f-wx-zbb"/>
                                                                 </connections>
                                                             </button>
                                                             <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77c-Y9-S4K">
@@ -430,17 +430,17 @@
                     <navigationItem key="navigationItem" title="仕訳" id="356-I7-npU"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="Button_cancel" destination="XUS-hR-U9P" id="oNf-tl-mSe"/>
-                        <outlet property="TextField_SmallWritting" destination="QrX-gP-fQs" id="wbX-eG-Mxn"/>
-                        <outlet property="TextField_amount_credit" destination="Wld-cG-vmJ" id="n1z-Jn-bfb"/>
-                        <outlet property="TextField_amount_debit" destination="8mw-ak-kF6" id="XRD-FK-s8a"/>
-                        <outlet property="TextField_category_credit" destination="LOQ-8r-tSO" id="ij9-W5-jO1"/>
-                        <outlet property="TextField_category_debit" destination="ue5-SW-9cy" id="wnh-UR-hW7"/>
+                        <outlet property="cancelButton" destination="XUS-hR-U9P" id="rS1-u6-hZI"/>
                         <outlet property="deleteButton" destination="Fvo-vA-Ese" id="j6q-nu-m4J"/>
                         <outlet property="inputButton" destination="aOv-8B-VTU" id="7Cq-2D-5uK"/>
-                        <outlet property="label_title" destination="dHz-5Z-3Q8" id="n4u-Ur-ipZ"/>
+                        <outlet property="labelTitle" destination="dHz-5Z-3Q8" id="4LD-Ux-qJT"/>
                         <outlet property="nicknameTextField" destination="B0t-8m-lNH" id="SVS-RV-q4Y"/>
                         <outlet property="smallWrittingTextFieldView" destination="crE-AY-kdB" id="w8a-Hn-cbk"/>
+                        <outlet property="textFieldAmountCredit" destination="Wld-cG-vmJ" id="tyh-MW-KFZ"/>
+                        <outlet property="textFieldAmountDebit" destination="8mw-ak-kF6" id="TW5-Y2-pYJ"/>
+                        <outlet property="textFieldCategoryCredit" destination="ue5-SW-9cy" id="itx-mR-jBb"/>
+                        <outlet property="textFieldCategoryDebit" destination="LOQ-8r-tSO" id="MqZ-XQ-D3e"/>
+                        <outlet property="textFieldSmallWritting" destination="QrX-gP-fQs" id="na0-CD-Me2"/>
                         <outlet property="textFieldView" destination="vZK-fP-q1I" id="Hss-ho-Yek"/>
                         <outletCollection property="arrayHugo" destination="aOv-8B-VTU" collectionClass="NSMutableArray" id="pLK-xt-C3D"/>
                         <outletCollection property="arrayHugo" destination="XUS-hR-U9P" collectionClass="NSMutableArray" id="Tnc-MS-EKS"/>

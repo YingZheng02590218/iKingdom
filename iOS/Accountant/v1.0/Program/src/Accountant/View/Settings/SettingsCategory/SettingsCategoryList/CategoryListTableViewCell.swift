@@ -10,8 +10,7 @@ import UIKit
 
 class CategoryListTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ToggleButton: UISwitch!
-    @IBAction func ToggleButton(_ sender: UISwitch) {}
+    @IBOutlet var toggleButton: UISwitch!
     @IBOutlet var label: UILabel!
     
     override func awakeFromNib() {
@@ -24,4 +23,5 @@ class CategoryListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
 }

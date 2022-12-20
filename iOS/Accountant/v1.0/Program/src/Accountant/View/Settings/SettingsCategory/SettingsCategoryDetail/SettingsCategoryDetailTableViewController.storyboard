@@ -34,7 +34,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="Button_Input:" destination="cje-Si-hva" eventType="touchUpInside" id="Qdg-Z5-HwZ"/>
+                                        <action selector="inputButtonTapped:" destination="cje-Si-hva" eventType="touchUpInside" id="HFd-Aq-lEy"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -65,7 +65,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
-                                    <outlet property="textField_AccountDetail_big" destination="4Cm-FI-Chr" id="tAG-oH-RUH"/>
+                                    <outlet property="accountDetailBigTextField" destination="4Cm-FI-Chr" id="tAG-oH-RUH"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category" id="7R0-uJ-Cbn" customClass="SettingAccountDetailTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -119,7 +119,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
-                                    <outlet property="textField_AccountDetail_Account" destination="3XR-6k-myl" id="pAj-5O-p8o"/>
+                                    <outlet property="accountDetailAccountTextField" destination="3XR-6k-myl" id="pAj-5O-p8o"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="44" id="0KT-tB-STM" customClass="SettingAccountDetailTaxonomyTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -157,7 +157,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="勘定科目　詳細" id="ijy-fE-kMc"/>
                     <connections>
-                        <outlet property="Button_input" destination="htm-3x-yix" id="hLV-us-j1F"/>
+                        <outlet property="inputButton" destination="htm-3x-yix" id="hLV-us-j1F"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lln-eJ-dhH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

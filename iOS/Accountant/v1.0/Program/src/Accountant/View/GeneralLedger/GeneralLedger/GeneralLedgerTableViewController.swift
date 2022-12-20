@@ -14,7 +14,7 @@ class GeneralLedgerTableViewController: UITableViewController {
 
     // MARK: - var let
 
-    @IBOutlet var gADBannerView: GADBannerView!
+   var gADBannerView: GADBannerView!
     
     // MARK: - Life cycle
 
@@ -26,13 +26,14 @@ class GeneralLedgerTableViewController: UITableViewController {
         self.refreshControl = refreshControl
         
         self.navigationItem.title = "総勘定元帳"
-        //largeTitle表示
+        // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 総勘定元帳を開いた後で、設定画面の勘定科目のON/OFFを変えるとエラーとなるのでリロードする
         tableView.reloadData()
         
@@ -44,7 +45,7 @@ class GeneralLedgerTableViewController: UITableViewController {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
     //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize:kGADAdSizeLargeBanner)
+            gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             gADBannerView.rootViewController = self
@@ -53,8 +54,7 @@ class GeneralLedgerTableViewController: UITableViewController {
             print(tableView.rowHeight)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-        }
-        else {
+        } else {
             if let gADBannerView = gADBannerView {
                 gADBannerView.isHidden = true
             }
@@ -62,6 +62,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
@@ -75,7 +76,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         let databaseManager = TBModel()
         databaseManager.setAllAccountTotal()
         databaseManager.calculateAmountOfAllAccount() // 合計額を計算
-        //精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
+        // 精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
 //        let WSModel = WSModel()
 //        WSModel.calculateAmountOfAllAccount()
 //        WSModel.calculateAmountOfAllAccountForBS()
@@ -89,7 +90,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 12
+        12
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -153,14 +154,14 @@ class GeneralLedgerTableViewController: UITableViewController {
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
-        let dataBaseManagerAccount = GenearlLedgerAccountModel()
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
         let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
         let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
-        if objectss.count > 0 || objectsss.count > 0 || objectssss.count > 0 || objectsssss.count > 0 {
+        if !objectss.isEmpty || !objectsss.isEmpty || !objectssss.isEmpty || !objectsssss.isEmpty {
             cell.textLabel?.textColor = .textColor
-        }else {
+        } else {
             cell.textLabel?.textColor = .lightGray
         }
         return cell
@@ -179,13 +180,14 @@ class GeneralLedgerTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-        let databaseManagerSettings = CategoryListModel() //データベースマネジャー
+        let databaseManagerSettings = CategoryListModel() // データベースマネジャー
         let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         // ③遷移先ViewCntrollerの取得
-        let navigationController = segue.destination as! UINavigationController
-        let viewControllerGenearlLedgerAccount = navigationController.topViewController as! GenearlLedgerAccountViewController
-        // 遷移先のコントローラに値を渡す
-        viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+        if let navigationController = segue.destination as? UINavigationController,
+           let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
+            // 遷移先のコントローラに値を渡す
+            viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+        }
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
     }

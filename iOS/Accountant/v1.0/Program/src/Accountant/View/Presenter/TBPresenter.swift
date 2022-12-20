@@ -48,9 +48,9 @@ final class TBPresenter: TBPresenterInput {
     var fiscalYear: Int?
     var theDayOfReckoning: String?
     // 設定勘定科目
-    private var objects:Results<DataBaseSettingsTaxonomyAccount>
+    private var objects: Results<DataBaseSettingsTaxonomyAccount>
     // 財務諸表
-    private var object:DataBaseFinancialStatements
+    private var object: DataBaseFinancialStatements
     
     private weak var view: TBPresenterOutput!
     private var model: TBModelInput

@@ -56,9 +56,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     var fiscalYear: Int?
     var theDayOfReckoning: String?
     // 通常仕訳　全
-    private var objects:Results<DataBaseJournalEntry>
+    private var objects: Results<DataBaseJournalEntry>
     // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
-    private var objectsss:Results<DataBaseAdjustingEntry>
+    private var objectsss: Results<DataBaseAdjustingEntry>
     // PDFのパス
     var PDFpath: [URL]?
 
@@ -120,8 +120,7 @@ final class JournalsPresenter: JournalsPresenterInput {
                 // 更新処理
                 view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
             })
-        }
-        else {
+        } else {
             // 更新処理
             view.reloadData()
         }
@@ -173,15 +172,13 @@ final class JournalsPresenter: JournalsPresenterInput {
                     primaryKey: self.objects(forRow:indexPath.row).number,
                     fiscalYear: fiscalYear
                 )
-            }
-            else if indexPath.section == 1 {
+            } else if indexPath.section == 1 {
                 // 決算整理仕訳データを更新
                 let _ = model.updateAdjustingJournalEntry(
                     primaryKey: self.objectsss(forRow:indexPath.row).number,
                     fiscalYear: fiscalYear
                 )
-            }
-            else {
+            } else {
                 // 空白行
             }
         }
@@ -199,32 +196,30 @@ final class JournalsPresenter: JournalsPresenterInput {
                 model.updateJournalEntry(
                     primaryKey: self.objects(forRow:indexPath.row).number,
                     date: dBJournalEntry.date ?? self.objects(forRow:indexPath.row).date,
-                    debit_category: dBJournalEntry.debit_category ?? self.objects(forRow:indexPath.row).debit_category,
-                    debit_amount: dBJournalEntry.debit_amount ?? self.objects(forRow:indexPath.row).debit_amount,
-                    credit_category: dBJournalEntry.credit_category ?? self.objects(forRow:indexPath.row).credit_category,
-                    credit_amount: dBJournalEntry.credit_amount ?? self.objects(forRow:indexPath.row).credit_amount,
+                    debitCategory: dBJournalEntry.debit_category ?? self.objects(forRow:indexPath.row).debit_category,
+                    debitAmount: dBJournalEntry.debit_amount ?? self.objects(forRow:indexPath.row).debit_amount,
+                    creditCategory: dBJournalEntry.credit_category ?? self.objects(forRow:indexPath.row).credit_category,
+                    creditAmount: dBJournalEntry.credit_amount ?? self.objects(forRow:indexPath.row).credit_amount,
                     smallWritting: dBJournalEntry.smallWritting ?? self.objects(forRow:indexPath.row).smallWritting,
                     completion: { primaryKey in
                         print("Result is \(primaryKey)")
                         primaryKeys.append(primaryKey)
                     })
-            }
-            else if indexPath.section == 1 {
+            } else if indexPath.section == 1 {
                 // 決算整理仕訳データを更新
                 let _ = model.updateAdjustingJournalEntry(
                     primaryKey: self.objectsss(forRow:indexPath.row).number,
                     date: dBJournalEntry.date ?? self.objectsss(forRow:indexPath.row).date,
-                    debit_category: dBJournalEntry.debit_category ?? self.objectsss(forRow:indexPath.row).debit_category,
-                    debit_amount: dBJournalEntry.debit_amount ?? self.objectsss(forRow:indexPath.row).debit_amount,
-                    credit_category: dBJournalEntry.credit_category ?? self.objectsss(forRow:indexPath.row).credit_category,
-                    credit_amount: dBJournalEntry.credit_amount ?? self.objectsss(forRow:indexPath.row).credit_amount,
+                    debitCategory: dBJournalEntry.debit_category ?? self.objectsss(forRow:indexPath.row).debit_category,
+                    debitAmount: dBJournalEntry.debit_amount ?? self.objectsss(forRow:indexPath.row).debit_amount,
+                    creditCategory: dBJournalEntry.credit_category ?? self.objectsss(forRow:indexPath.row).credit_category,
+                    creditAmount: dBJournalEntry.credit_amount ?? self.objectsss(forRow:indexPath.row).credit_amount,
                     smallWritting: dBJournalEntry.smallWritting ?? self.objectsss(forRow:indexPath.row).smallWritting,
                     completion: { primaryKey in
                         print("Result is \(primaryKey)")
                         primaryKeysAdjusting.append(primaryKey)
                     })
-            }
-            else {
+            } else {
                 // 空白行
             }
         }

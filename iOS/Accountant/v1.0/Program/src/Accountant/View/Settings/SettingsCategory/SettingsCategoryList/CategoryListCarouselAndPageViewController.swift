@@ -12,13 +12,26 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
 
     // MARK: - Variable/Let
     
-    @IBOutlet var Button_add: UIBarButtonItem!
+    @IBOutlet var addBarButtonItem: UIBarButtonItem!
     
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
         // タブに表示する文言
-        pageTabItems = ["流動資産","固定資産","繰延資産","流動負債","固定負債","資本","売上","売上原価","販売費及び一般管理費","営業外損益","特別損益","税金"]
+        pageTabItems = [
+            "流動資産",
+            "固定資産",
+            "繰延資産",
+            "流動負債",
+            "固定負債",
+            "資本",
+            "売上",
+            "売上原価",
+            "販売費及び一般管理費",
+            "営業外損益",
+            "特別損益",
+            "税金"
+        ]
         super.viewDidLoad()
     }
     
@@ -27,20 +40,22 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
     // カルーセルのタブをタップされたときに中央のビューをスクロールさせる
     override func selectTab(_ index: Int) {
         // 選択されたタブのViewControllerをセットする
-        let viewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
-        viewController.index = index
-        pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
-        // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
-        self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        if let viewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as? CategoryListTableViewController {
+            viewController.index = index
+            pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
+            // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
+            self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        }
     }
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
         if segue.identifier == "segue_add_account"{ // 新規で設定勘定科目を追加する場合　addButtonを押下
             // segue.destinationの型はUIViewController
-            let tableViewControllerSettingsCategoryDetail = segue.destination as! SettingsCategoryDetailTableViewController
-            // 遷移先のコントローラに値を渡す
-            tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+            if let tableViewControllerSettingsCategoryDetail = segue.destination as? SettingsCategoryDetailTableViewController {
+                // 遷移先のコントローラに値を渡す
+                tableViewControllerSettingsCategoryDetail.addAccount = true // セルに表示した勘定科目の連番を取得
+            }
         }
     }
 
@@ -57,7 +72,7 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
     // 右にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
     override func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         // 遷移先のViewControllerを生成
-        let beforeViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
+        guard let beforeViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as? CategoryListTableViewController else { return nil }
         if let viewController = viewController as? CategoryListTableViewController {
             let beforeIndex: Int = viewController.index - 1
             if beforeIndex < 0 {
@@ -70,7 +85,7 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
     }
     // 左にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
     override func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let afterViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as! CategoryListTableViewController
+        guard let afterViewController = UIStoryboard(name: "CategoryListTableViewController", bundle: nil).instantiateInitialViewController() as? CategoryListTableViewController else { return nil }
         if let viewController = viewController as? CategoryListTableViewController {
             let afterIndex: Int = viewController.index + 1
             let maxCount = pageTabItems.count

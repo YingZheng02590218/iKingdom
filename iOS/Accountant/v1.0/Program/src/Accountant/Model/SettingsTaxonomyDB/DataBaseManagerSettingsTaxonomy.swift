@@ -28,17 +28,17 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     public static let shared = DataBaseManagerSettingsTaxonomy()
     // private let serialQueue = DispatchQueue(label: "serialQueue") 2022/03/15 修正　v2.0.2の変更でこのコードが書かれているので、v2.0.6までの間に初期化処理を行なったユーザーの初期化処理は失敗しているはず。
 
-//    let objects0100:Results<DataBaseSettingsTaxonomy>?
-//    let objects0102:Results<DataBaseSettingsTaxonomy>?
-//    let objects0114:Results<DataBaseSettingsTaxonomy>?
-//    let objects0115:Results<DataBaseSettingsTaxonomy>?
-//    let objects0129:Results<DataBaseSettingsTaxonomy>?
-//    let objects01210:Results<DataBaseSettingsTaxonomy>?
-//    let objects01211:Results<DataBaseSettingsTaxonomy>?
-//    let objects01213:Results<DataBaseSettingsTaxonomy>?
-//    let objects010142:Results<DataBaseSettingsTaxonomy>?
-//    let objects010143:Results<DataBaseSettingsTaxonomy>?
-//    let objects010144:Results<DataBaseSettingsTaxonomy>?
+//    let objects0100: Results<DataBaseSettingsTaxonomy>?
+//    let objects0102: Results<DataBaseSettingsTaxonomy>?
+//    let objects0114: Results<DataBaseSettingsTaxonomy>?
+//    let objects0115: Results<DataBaseSettingsTaxonomy>?
+//    let objects0129: Results<DataBaseSettingsTaxonomy>?
+//    let objects01210: Results<DataBaseSettingsTaxonomy>?
+//    let objects01211: Results<DataBaseSettingsTaxonomy>?
+//    let objects01213: Results<DataBaseSettingsTaxonomy>?
+//    let objects010142: Results<DataBaseSettingsTaxonomy>?
+//    let objects010143: Results<DataBaseSettingsTaxonomy>?
+//    let objects010144: Results<DataBaseSettingsTaxonomy>?
 //
 //    private init() {
 //        // 階層3　中区分ごとの数を取得
@@ -78,7 +78,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         print("DataBaseSettingsTaxonomy", objects.count)
-        return objects.count == 2068 // モデルオブフェクトが2068ある場合はtrueを返す
+        return objects.count == 2_068 // モデルオブフェクトが2068ある場合はtrueを返す
     }
     // 削除 表示科目
     func deleteAllOfSettingsTaxonomy() {
@@ -200,8 +200,8 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         // 勘定科目連番から表示科目連番を取得
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let numberOfTaxonomy = databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(number: number)
-        print("勘定科目:", number)
-        print("表示科目:", numberOfTaxonomy)
+        print("勘定科目: ", number)
+        print("表示科目: ", numberOfTaxonomy)
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
         do {
         if objects.isEmpty { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合

@@ -12,8 +12,8 @@ import UIKit
 struct HTMLhelperPL {
     // PDFごとに1回コール
     func headerHTMLstring() -> String {
-        //htmlヘッダーを生成します。
-        //たとえば、ここに店の名前を入力できます
+        // htmlヘッダーを生成します。
+        // たとえば、ここに店の名前を入力できます
         return """
     <!DOCTYPE html>
         <html>

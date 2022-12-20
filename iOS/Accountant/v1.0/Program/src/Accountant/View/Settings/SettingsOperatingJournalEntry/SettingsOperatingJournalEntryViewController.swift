@@ -9,25 +9,25 @@
 import UIKit
 
 class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     @IBOutlet var listCollectionView: UICollectionView!
     var tappedIndexPath: IndexPath?
     var viewReload = false // リロードするかどうか
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 更新機能　編集機能
         // UILongPressGestureRecognizer宣言
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent:") → うまくできなかった。2020/07/26
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26
         // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
         longPressRecognizer.delegate = self
         // CollectionViewにrecognizerを設定
         listCollectionView.addGestureRecognizer(longPressRecognizer)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.createList() // リストを作成
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
@@ -38,7 +38,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
             }
         }
     }
-   
+    
     override func viewWillLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // 画面の回転に合わせてCellのサイズを変更する
@@ -47,10 +47,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     }
     
     // MARK: - Create View
-
+    
     // リスト作成
     func createList() {
-        //xib読み込み
+        // xib読み込み
         let nib = UINib(nibName: "ListCollectionViewCell", bundle: .main)
         listCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
@@ -62,8 +62,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         
         if indexPath?.section == 1 {
             print("空白行を長押し")
-        }
-        else {
+        } else {
             guard let _ = indexPath else {
                 return
             }
@@ -79,32 +78,31 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     }
     // 追加機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        //画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
         if identifier == "longTapped" { // segueがタップ
             if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
-                if let _:IndexPath = self.tappedIndexPath { //代入に成功したら、ロングタップだと判断できる
-                    return true //true: 画面遷移させる
+                if let _ = self.tappedIndexPath { // 代入に成功したら、ロングタップだと判断できる
+                    return true // true: 画面遷移させる
                 }
             }
-        }
-        else if identifier == "buttonTapped" {
+        } else if identifier == "buttonTapped" {
             return true
         }
-        return false //false:画面遷移させない
+        return false // false:画面遷移させない
     }
     // 追加機能　画面遷移の準備　仕訳画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
-        let controller = segue.destination as! JournalEntryTemplateViewController
-        // 遷移先のコントローラに値を渡す
-        if segue.identifier == "buttonTapped" {
-            controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
-        }
-        else if segue.identifier == "longTapped" {
-            if tappedIndexPath != nil { // nil:ロングタップではない
-                controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
-                controller.tappedIndexPath = self.tappedIndexPath!//アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+        if let controller = segue.destination as? JournalEntryTemplateViewController {
+            // 遷移先のコントローラに値を渡す
+            if segue.identifier == "buttonTapped" {
+                controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
+            } else if segue.identifier == "longTapped" {
+                if tappedIndexPath != nil { // nil:ロングタップではない
+                    controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                    controller.tappedIndexPath = self.tappedIndexPath! // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+                }
             }
         }
     }
@@ -120,22 +118,22 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         }
         if kind == UICollectionView.elementKindSectionHeader {
             if indexPath.section == 0 {
-                header.sectionLabel.text = "よく使う仕訳"//"section \(indexPath.section)"
+                header.sectionLabel.text = "よく使う仕訳"// "section \(indexPath.section)"
             }
             return header
         }
         return UICollectionReusableView()
     }
-    //collectionViewの要素の数を返す
+    // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // データベース　よく使う仕訳を追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
         return objects.count
     }
-    //collectionViewのセルを返す（セルの内容を決める）
+    // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ListCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         // データベース　よく使う仕訳を追加
         let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
         let objects = dataBaseManager.getJournalEntry()
@@ -146,33 +144,32 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
         return cell
     }
-//    //セル間の間隔を指定
-//    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 20
-//    }
-    //セルのサイズ(CGSize)
+    //    //セル間の間隔を指定
+    //    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
+    //        return 20
+    //    }
+    // セルのサイズ(CGSize)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         print(collectionView.frame)
         print(view.frame)
         if UIDevice.current.userInterfaceIdiom == .pad {
             return CGSize(width: (collectionView.frame.width / 3) - 20, height: 100)
-        }
-        else {
+        } else {
             return CGSize(width: collectionView.frame.width - 20, height: 100)
         }
     }
-    //余白の調整（UIImageを拡大、縮小している）
+    // 余白の調整（UIImageを拡大、縮小している）
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        //top:ナビゲーションバーの高さ分上に移動
-        return UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+        // top:ナビゲーションバーの高さ分上に移動
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
-    ///セルの選択時に背景色を変化させる
-    ///今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
-    ///以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
+    /// セルの選択時に背景色を変化させる
+    /// 今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
+    /// 以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
     }
@@ -182,20 +179,20 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true  // 変更
+        true  // 変更
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath)")
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("Deselected: \(indexPath)")
     }
     
-//    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-//        return true  // 変更
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    //        return true  // 変更
+    //    }
     
 }

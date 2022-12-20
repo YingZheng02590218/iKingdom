@@ -10,15 +10,15 @@ import UIKit
 
 class WSTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label_account: UILabel!
-    @IBOutlet weak var label_debit: UILabel!
-    @IBOutlet weak var label_credit: UILabel!
-    @IBOutlet weak var label_debit1: UILabel!
-    @IBOutlet weak var label_credit1: UILabel!
-    @IBOutlet weak var label_debit2: UILabel!
-    @IBOutlet weak var label_credit2: UILabel!
-    @IBOutlet weak var label_debit3: UILabel!
-    @IBOutlet weak var label_credit3: UILabel!
+    @IBOutlet var accountLabel: UILabel!
+    @IBOutlet var debitLabel: UILabel!
+    @IBOutlet var creditLabel: UILabel!
+    @IBOutlet var debit1Label: UILabel!
+    @IBOutlet var credit1Label: UILabel!
+    @IBOutlet var debit2Label: UILabel!
+    @IBOutlet var credit2Label: UILabel!
+    @IBOutlet var debit3Label: UILabel!
+    @IBOutlet var credit3Label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

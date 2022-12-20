@@ -43,8 +43,7 @@ class DateManager {
         var fiscalYearFixed = 0 // 補正値
         if theDayOfReckoning == "12/31" {
             fiscalYearFixed = 0 // 年度と同じ年
-        }
-        else {
+        } else {
             fiscalYearFixed = 1 // 年度 + 1年
         }
         // 今年度の決算日　決算日 + 年度 + 時分秒
@@ -64,8 +63,7 @@ class DateManager {
         
         if journalEntryDate < dayOfStartInPeriod || fullTheDayOfReckoning < journalEntryDate {
             return false // 範囲外
-        }
-        else {
+        } else {
             return true // 範囲内
         }
     }

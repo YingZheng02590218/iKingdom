@@ -28,29 +28,26 @@ class PDFMakerBS {
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
             try FileManager.default.createDirectory(at: pDFsDirectory, withIntermediateDirectories: true, attributes: nil)
-        }
-        catch {
+        } catch {
             print("失敗した")
         }
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: pDFsDirectory, includingPropertiesForKeys: nil) // ファイル一覧を取得
             // if you want to filter the directory contents you can do like this:
-            let pdfFiles = directoryContents.filter{ $0.pathExtension == "pdf" }
-            print("pdf urls:",pdfFiles)
-            let pdfFileNames = pdfFiles.map{ $0.deletingPathExtension().lastPathComponent }
-            print("pdf list:", pdfFileNames)
+            let pdfFiles = directoryContents.filter { $0.pathExtension == "pdf" }
+            print("pdf urls: ",pdfFiles)
+            let pdfFileNames = pdfFiles.map { $0.deletingPathExtension().lastPathComponent }
+            print("pdf list: ", pdfFileNames)
             // ファイルのデータを取得
             for fileName in pdfFileNames {
                 let content = pDFsDirectory.appendingPathComponent(fileName + ".pdf")
                 do {
                     try FileManager.default.removeItem(at: content)
-                }
-                catch let error {
+                } catch let error {
                     print(error)
                 }
             }
-        }
-        catch {
+        } catch {
             print(error)
         }
         
@@ -207,16 +204,15 @@ class PDFMakerBS {
         htmlString.append(footerHTMLstring)
         
         print(htmlString)
-        //HTML -> PDF
+        // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
-        //PDFデータを一時ディレクトリに保存する
+        // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
-            //PDFファイルを表示する
+            // PDFファイルを表示する
             self.PDFpath?.append(fileName)
             
             return self.PDFpath
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -255,8 +251,7 @@ class PDFMakerBS {
         let pDFsDirectory = documentDirectory.appendingPathComponent("PDFs", isDirectory: true)
         do {
             try FileManager.default.createDirectory(at: pDFsDirectory, withIntermediateDirectories: true, attributes: nil)
-        }
-        catch {
+        } catch {
             print("失敗した")
         }
         

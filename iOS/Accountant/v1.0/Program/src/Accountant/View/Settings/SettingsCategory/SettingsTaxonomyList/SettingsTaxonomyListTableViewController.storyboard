@@ -44,8 +44,8 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
-                                    <outlet property="ToggleButton" destination="BBz-Uh-hYd" id="7ra-8Z-nio"/>
                                     <outlet property="label" destination="gdn-KW-hlU" id="iCw-sL-LyG"/>
+                                    <outlet property="toggleButton" destination="BBz-Uh-hYd" id="7ra-8Z-nio"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -72,7 +72,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="segmentedControl_switch" destination="Bf2-ff-Dpn" id="JvL-e2-4Pp"/>
+                        <outlet property="segmentedControl" destination="Bf2-ff-Dpn" id="JvL-e2-4Pp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKc-bT-1vD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

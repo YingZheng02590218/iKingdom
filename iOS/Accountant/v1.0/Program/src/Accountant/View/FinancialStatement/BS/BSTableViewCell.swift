@@ -10,8 +10,8 @@ import UIKit
 
 class BSTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelForPrevious: UILabel!
-    @IBOutlet weak var labelForThisYear: UILabel!
+    @IBOutlet var labelForPrevious: UILabel!
+    @IBOutlet var labelForThisYear: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

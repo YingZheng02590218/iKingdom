@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,12 +10,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PLViewController" customModule="Paciolist" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="Igp-Bm-Hf7" id="NNw-p8-69E"/>
-                <outlet property="label_closingDate" destination="W0q-A6-HnH" id="ct1-MR-SSC"/>
-                <outlet property="label_closingDate_previous" destination="97e-Ez-x7p" id="3dI-bG-WAF"/>
-                <outlet property="label_closingDate_thisYear" destination="Un1-g7-fki" id="6O1-Ye-twh"/>
-                <outlet property="label_company_name" destination="zAK-pG-Z0V" id="9y4-c9-9g4"/>
-                <outlet property="label_title" destination="xZc-PW-k5J" id="KDI-oN-4Mz"/>
+                <outlet property="closingDateLabel" destination="W0q-A6-HnH" id="ct1-MR-SSC"/>
+                <outlet property="closingDatePreviousLabel" destination="97e-Ez-x7p" id="3dI-bG-WAF"/>
+                <outlet property="closingDateThisYearLabel" destination="Un1-g7-fki" id="6O1-Ye-twh"/>
+                <outlet property="companyNameLabel" destination="zAK-pG-Z0V" id="9y4-c9-9g4"/>
                 <outlet property="tableView" destination="uaA-Ma-J7h" id="Qfc-vo-qZI"/>
+                <outlet property="titleLabel" destination="xZc-PW-k5J" id="KDI-oN-4Mz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,19 +25,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Igp-Bm-Hf7" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                    <rect key="frame" x="7" y="51" width="400" height="804"/>
+                    <rect key="frame" x="7" y="7" width="400" height="882"/>
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBy-WR-uCh" userLabel="ViewBase">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="132.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6K2-U0-CDQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="132.5"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5hR-S2-gj1" userLabel="ViewUpper">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="zAK-pG-Z0V" userLabel="company_name">
-                                                    <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
+                                                    <rect key="frame" x="0.0" y="33" width="400" height="33"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -47,7 +45,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZc-PW-k5J" userLabel="title">
-                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="21"/>
@@ -55,7 +53,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="W0q-A6-HnH" userLabel="closingDate">
-                                                    <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
+                                                    <rect key="frame" x="0.0" y="33" width="400" height="33"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
@@ -81,13 +79,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7W2-dc-OKv" userLabel="ViewLower">
-                                            <rect key="frame" x="0.0" y="60.5" width="400" height="60"/>
+                                            <rect key="frame" x="0.0" y="66" width="400" height="66.5"/>
                                             <subviews>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFK-eC-5Cd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="204.5" height="60"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="204.5" height="66.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="fAp-8e-k2j" userLabel="list_debit">
-                                                            <rect key="frame" x="-2" y="-4" width="204" height="64"/>
+                                                            <rect key="frame" x="-2" y="-4" width="204" height="70.5"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -108,10 +106,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YTo-bu-3QG">
-                                                    <rect key="frame" x="204.5" y="0.0" width="98" height="60"/>
+                                                    <rect key="frame" x="204.5" y="0.0" width="98" height="66.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="97e-Ez-x7p" userLabel="account_name">
-                                                            <rect key="frame" x="0.0" y="0.0" width="98" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="98" height="66.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
@@ -139,10 +137,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0BS-0i-4eW">
-                                                    <rect key="frame" x="302.5" y="0.0" width="97.5" height="60"/>
+                                                    <rect key="frame" x="302.5" y="0.0" width="97.5" height="66.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Un1-g7-fki" userLabel="list_credit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="66.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="11"/>
@@ -229,7 +227,7 @@
                             </constraints>
                         </view>
                         <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" style="plain" allowsMultipleSelection="YES" rowHeight="25" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uaA-Ma-J7h">
-                            <rect key="frame" x="0.0" y="120.5" width="400" height="668.5"/>
+                            <rect key="frame" x="0.0" y="132.5" width="400" height="734.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">

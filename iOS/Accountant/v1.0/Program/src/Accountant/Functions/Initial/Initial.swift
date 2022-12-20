@@ -27,27 +27,27 @@ class Initial {
         // 設定会計期間　決算日　初期化
         initializePeriod()
         // チュートリアル対応 コーチマーク型　初回起動時
-        let ud = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_JournalEntry"
-        if ud.bool(forKey: firstLunchKey) {
+        if userDefaults.bool(forKey: firstLunchKey) {
             // 仕訳のサンプルデータを作成する
             let dataBaseManager = DataBaseManagerJournalEntry()
             let _ = dataBaseManager.addJournalEntry(
                 date: "\(getTheTime())/04/01",
                 debitCategory: "現金",
-                debitAmount: 1000000, //カンマを削除してからデータベースに書き込む
+                debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
                 creditCategory: "売上高",
-                creditAmount: 1000000,//カンマを削除してからデータベースに書き込む
+                creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
                 smallWritting: "ゾウ商店"
             )
             // よく使う仕訳のサンプルデータを作成する
             let dataBaseManagerSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry()
             let _ = dataBaseManagerSettingsOperatingJournalEntry.addJournalEntry(
                 nickname: "よく使う仕訳1",
-                debit_category: "現金",
-                debit_amount: 1000000, //カンマを削除してからデータベースに書き込む
-                credit_category: "売上高",
-                credit_amount: 1000000,//カンマを削除してからデータベースに書き込む
+                debitCategory: "現金",
+                debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
+                creditCategory: "売上高",
+                creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
                 smallWritting: "ゾウ商店"
             )
         }
@@ -94,16 +94,16 @@ class Initial {
     */
     func getTheTime() -> Int {
         // 現在時刻を取得
-        let now :Date = Date() // UTC時間なので　9時間ずれる
+        let now = Date() // UTC時間なので　9時間ずれる
 
         switch Calendar.current.dateComponents([.month], from: now).month! {
-        case 4,5,6,7,8,9,10,11,12:
+        case 4, 5, 6, 7, 8, 9, 10, 11, 12:
             return Calendar.current.dateComponents([.year], from: now).year!
 //        case 1,2,3:
 //            return Calendar.current.date(byAdding: .year, value: -1, to: now)!
         default:
             let lastYear = Calendar.current.dateComponents([.year], from: now).year!
-            return lastYear-1 // 1月から3月であれば去年の年に補正する
+            return lastYear - 1 // 1月から3月であれば去年の年に補正する
         }
     }
     /**
@@ -116,18 +116,18 @@ class Initial {
         if !dataBaseManager.checkInitializing() {
             let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
-            initialiseJournals(number: number,fiscalYear: fiscalYear)
+            initialiseJournals(number: number, fiscalYear: fiscalYear)
             // 総勘定元帳画面　初期化
-            initialiseAccounts(number: number,fiscalYear: fiscalYear)
+            initialiseAccounts(number: number, fiscalYear: fiscalYear)
             // 決算書画面　初期化
-            initializeFinancialStatements(number: number,fiscalYear: fiscalYear)
+            initializeFinancialStatements(number: number, fiscalYear: fiscalYear)
         }
     }
     /**
     * 初期化　初期化メソッド
     * 仕訳帳を初期化する。
     */
-    func initialiseJournals(number: Int,fiscalYear: Int){
+    func initialiseJournals(number: Int, fiscalYear: Int) {
          let dataBaseManager = JournalsModel()
         if !dataBaseManager.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
             dataBaseManager.addJournals(number: number)
@@ -137,10 +137,10 @@ class Initial {
     * 初期化　初期化メソッド
     * 総勘定元帳を初期化する。
     */
-    func initialiseAccounts(number: Int,fiscalYear: Int) {
+    func initialiseAccounts(number: Int, fiscalYear: Int) {
         let dataBaseManager = DataBaseManagerGeneralLedger()
         // データベースに勘定画面の勘定があるかをチェック
-        if !dataBaseManager.checkInitialising(DataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
+        if !dataBaseManager.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
             dataBaseManager.addGeneralLedger(number: number)
         }
     }
@@ -148,7 +148,7 @@ class Initial {
     * 初期化　初期化メソッド
     * 財務諸表を初期化する。
     */
-    func initializeFinancialStatements(number: Int,fiscalYear: Int) {
+    func initializeFinancialStatements(number: Int, fiscalYear: Int) {
         let dataBaseManager = DataBaseManagerFinancialStatements()
         // データベースに財務諸表があるかをチェック
         if !dataBaseManager.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
@@ -165,7 +165,7 @@ class Initial {
         let isInvalidated = dataBaseManagerTaxonomy.deleteTaxonomyAll()
         if isInvalidated {
             dataBaseManagerTaxonomy.addTaxonomyAll()
-        }else {
+        } else {
             print("deleteTaxonomyAll 失敗")
         }
     }

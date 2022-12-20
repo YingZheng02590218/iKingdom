@@ -19,19 +19,19 @@ class DataBaseWorkSheet: RObject {
     @objc dynamic var netIncomeOrNetLossIncome: Int64 = 0                // 当期純利益(損失)
     @objc dynamic var netIncomeOrNetLossLoss: Int64 = 0                // 当期純利益(損失)
 
-    //修正記入
-    @objc dynamic var debit_adjustingEntries_total_total: Int64 = 0    //借方　合計　合計
-    @objc dynamic var credit_adjustingEntries_total_total: Int64 = 0   //貸方
-    @objc dynamic var debit_adjustingEntries_balance_total: Int64 = 0  //借方　残高　合計
-    @objc dynamic var credit_adjustingEntries_balance_total: Int64 = 0 //貸方
-    //損益計算書
-    @objc dynamic var debit_PL_total_total: Int64 = 0                     //借方　合計　合計
-    @objc dynamic var credit_PL_total_total: Int64 = 0                    //貸方
-    @objc dynamic var debit_PL_balance_total: Int64 = 0                   //借方　残高　合計
-    @objc dynamic var credit_PL_balance_total: Int64 = 0                  //貸方
-    //貸借対照表
-    @objc dynamic var debit_BS_total_total: Int64 = 0                      //借方　合計　合計
-    @objc dynamic var credit_BS_total_total: Int64 = 0                     //貸方
-    @objc dynamic var debit_BS_balance_total: Int64 = 0                    //借方　残高　合計
-    @objc dynamic var credit_BS_balance_total: Int64 = 0                   //貸方
+    // 修正記入
+    @objc dynamic var debit_adjustingEntries_total_total: Int64 = 0    // 借方　合計　合計
+    @objc dynamic var credit_adjustingEntries_total_total: Int64 = 0   // 貸方
+    @objc dynamic var debit_adjustingEntries_balance_total: Int64 = 0  // 借方　残高　合計
+    @objc dynamic var credit_adjustingEntries_balance_total: Int64 = 0 // 貸方
+    // 損益計算書
+    @objc dynamic var debit_PL_total_total: Int64 = 0                     // 借方　合計　合計
+    @objc dynamic var credit_PL_total_total: Int64 = 0                    // 貸方
+    @objc dynamic var debit_PL_balance_total: Int64 = 0                   // 借方　残高　合計
+    @objc dynamic var credit_PL_balance_total: Int64 = 0                  // 貸方
+    // 貸借対照表
+    @objc dynamic var debit_BS_total_total: Int64 = 0                      // 借方　合計　合計
+    @objc dynamic var credit_BS_total_total: Int64 = 0                     // 貸方
+    @objc dynamic var debit_BS_balance_total: Int64 = 0                    // 借方　残高　合計
+    @objc dynamic var credit_BS_balance_total: Int64 = 0                   // 貸方
 }

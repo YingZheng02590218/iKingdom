@@ -28,16 +28,13 @@
                                             <rect key="frame" x="291" y="7" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <color key="onTintColor" name="AccentDark"/>
-                                            <connections>
-                                                <action selector="ToggleButton:" destination="5uX-2P-xdT" eventType="valueChanged" id="WLB-RN-h6H"/>
-                                            </connections>
                                         </switch>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
-                                    <outlet property="ToggleButton" destination="GCM-Q5-D1g" id="GSp-5L-CuY"/>
+                                    <outlet property="toggleButton" destination="GCM-Q5-D1g" id="GSp-5L-CuY"/>
                                     <segue destination="NoQ-bl-6AE" kind="show" id="yRT-rJ-tkR"/>
                                 </connections>
                             </tableViewCell>
@@ -65,7 +62,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="segmentedControl_switch" destination="keB-og-WMK" id="HgI-lz-wMu"/>
+                        <outlet property="segmentedControl" destination="keB-og-WMK" id="HgI-lz-wMu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJq-jR-DWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

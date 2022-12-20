@@ -10,24 +10,24 @@ import UIKit
 import EMTNeumorphicView
 
 class PeriodYearViewController: UIViewController {
-
     
-    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet var pickerView: UIPickerView!
     @IBOutlet var pickerViewView: EMTNeumorphicView!
-    @IBOutlet weak var pickerViewViewView: EMTNeumorphicView!
-    @IBOutlet weak var doneButton: EMTNeumorphicButton!
-    @IBOutlet weak var cancelButton: EMTNeumorphicButton!
+    @IBOutlet var pickerViewViewView: EMTNeumorphicView!
+    @IBOutlet var doneButton: EMTNeumorphicButton!
+    @IBOutlet var cancelButton: EMTNeumorphicButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool){
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         createPicker()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // ドラムロールの初期位置
         pickerView.selectRow(DataBaseManagerSettingsPeriod.shared.getMainBooksAllCount() - 1, inComponent: 0, animated: true)
     }
@@ -36,7 +36,7 @@ class PeriodYearViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.isHidden = false
-//        pickerViewView.isHidden = false
+        //        pickerViewView.isHidden = false
         
         if let datePickerView = pickerViewView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
@@ -56,7 +56,7 @@ class PeriodYearViewController: UIViewController {
             datePickerView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         }
         
-//        doneButton.setTitle("Done", for: .normal)
+        //        doneButton.setTitle("Done", for: .normal)
         doneButton.setTitleColor(.textColor, for: .normal)
         doneButton.neumorphicLayer?.cornerRadius = doneButton.frame.height / 2.2
         doneButton.contentVerticalAlignment = .fill
@@ -67,7 +67,7 @@ class PeriodYearViewController: UIViewController {
         doneButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         doneButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
         
-//        cancelButton.setTitle("Cancel", for: .normal)
+        //        cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.setTitleColor(.textColor, for: .normal)
         cancelButton.neumorphicLayer?.cornerRadius = cancelButton.frame.height / 2.2
         cancelButton.contentVerticalAlignment = .fill
@@ -90,23 +90,21 @@ class PeriodYearViewController: UIViewController {
                 let fiscalYear = Int(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))
                 
                 let alert = UIAlertController(title: "最終確認", message: "年度を 「\(self.getPeriodFromDB(row: self.pickerView.selectedRow(inComponent: 0)))」 に変更しますか？", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: {
-                    (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action: UIAlertAction!) in
                     print("OK アクションをタップした時の処理")
                     
-                    let tabBarController = self.presentingViewController as! UITabBarController // 一番基底となっているコントローラ
-                    let navigationController = tabBarController.selectedViewController as! UINavigationController // 基底のコントローラから、現在選択されているコントローラを取得する
-                    let presentingViewController = navigationController.viewControllers.first as! JournalsViewController // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                    self.dismiss(animated: true, completion: {
-                        [presentingViewController] () -> Void in
-                        presentingViewController.updateFiscalYear(fiscalYear: fiscalYear!)
-                        // 編集を終了する
-                        presentingViewController.setEditing(false, animated: true)
-                    })
+                    if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+                       let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+                       let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                        // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            presentingViewController.updateFiscalYear(fiscalYear: fiscalYear!)
+                            // 編集を終了する
+                            presentingViewController.setEditing(false, animated: true)
+                        })
+                    }
                 }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                    (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                     print("Cancel アクションをタップした時の処理")
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -130,11 +128,11 @@ class PeriodYearViewController: UIViewController {
 }
 
 extension PeriodYearViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    //UIPickerViewの列の数 コンポーネントの数
+    // UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2 // ドラムロールは二列
+        2 // ドラムロールは二列
     }
-    //UIPickerViewの行数、リストの数 コンポーネントの内のデータ
+    // UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
@@ -143,7 +141,7 @@ extension PeriodYearViewController: UIPickerViewDataSource, UIPickerViewDelegate
             return 1
         }
     }
-    //UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
+    // UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:

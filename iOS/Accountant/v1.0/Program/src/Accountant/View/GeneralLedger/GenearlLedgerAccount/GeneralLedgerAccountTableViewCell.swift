@@ -10,14 +10,14 @@ import UIKit
 
 class GeneralLedgerAccountTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label_list_date_month: UILabel!
-    @IBOutlet weak var label_list_date_day: UILabel!
-    @IBOutlet weak var label_list_summary: UILabel!
-    @IBOutlet weak var label_list_number: UILabel!
-    @IBOutlet weak var label_list_debit: UILabel!
-    @IBOutlet weak var label_list_credit: UILabel!
-    @IBOutlet weak var label_list_debitOrCredit: UILabel!
-    @IBOutlet weak var label_list_balance: UILabel!
+    @IBOutlet var listDateMonthLabel: UILabel!
+    @IBOutlet var listDateDayLabel: UILabel!
+    @IBOutlet var listSummaryLabel: UILabel!
+    @IBOutlet var listNumberLabel: UILabel!
+    @IBOutlet var listDebitLabel: UILabel!
+    @IBOutlet var listCreditLabel: UILabel!
+    @IBOutlet var listDebitOrCreditLabel: UILabel!
+    @IBOutlet var listBalanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
