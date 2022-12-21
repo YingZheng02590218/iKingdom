@@ -1212,7 +1212,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // MARK: UIButton
-    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+    @IBAction func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true }
         for i in newArray {
@@ -1229,7 +1229,9 @@ class JournalEntryViewController: UIViewController {
         textFieldAmountCredit.text = ""
         textFieldSmallWritting.text = ""
         // 終了させる　仕訳帳画面へ戻る
-        self.dismiss(animated: true, completion: nil)
+        if self.journalEntryType == "JournalEntries" { // 仕訳
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
