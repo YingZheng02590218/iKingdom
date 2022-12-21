@@ -256,7 +256,7 @@ class DataBaseManagerTaxonomy {
                     }
                 }
             }
-            return object.dataBaseAccountingBooks[object.dataBaseAccountingBooks.count - 1].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.count ?? 0 > 0 // 成功したら true まだ失敗時の動きは確認していない
+            return object.dataBaseAccountingBooks[object.dataBaseAccountingBooks.count - 1].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.isEmpty // 成功したら true まだ失敗時の動きは確認していない
         }
 
         return false
