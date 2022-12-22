@@ -133,6 +133,11 @@ class CategoryListTableViewController: UITableViewController {
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    // 勘定科目を登録後、テーブルをリロードする
+    func reloadDataAferAdding() {
+        // データベースの削除処理が成功した場合、テーブルをリロードする
+        tableView.reloadData()
+    }
     
     // MARK: - Table view data source
     

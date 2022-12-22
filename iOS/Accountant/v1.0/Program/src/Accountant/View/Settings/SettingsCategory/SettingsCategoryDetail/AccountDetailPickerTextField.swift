@@ -282,14 +282,18 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
                     if identifier == "identifier_category" {
                         self.text = big5[big5.count - 1] as String
                     }
-                    self.selectedRank1 = "13"
+                    self.selectedRank1 = "19"
                     return ""
                 } else {
                     if identifier == "identifier_category" {
                         self.text = big5[row] as String
                     }
                     self.accountDetail = big5[row] as String
-                    self.selectedRank1 = String(row + 10)
+                    if row == 3 { // 被支配株主持分の場合 「19」なので対応が必要
+                        self.selectedRank1 = "19"
+                    } else {
+                        self.selectedRank1 = String(row + 10)
+                    }
                     return big5[row] as String
                 }
             case 6:
@@ -319,14 +323,14 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
                     if identifier == "identifier_category" {
                         self.text = big7[big7.count - 1] as String
                     }
-                    self.selectedRank1 = "15"
+                    self.selectedRank1 = "14"
                     return ""
                 } else {
                     if identifier == "identifier_category" {
                         self.text = big7[row] as String
                     }
                     self.accountDetail = big7[row] as String
-                    self.selectedRank1 = String(row + 14)
+                    self.selectedRank1 = String(row + 13)
                     return big7[row] as String
                 }
             case 8:
@@ -356,14 +360,14 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
                     if identifier == "identifier_category" {
                         self.text = big9[big9.count - 1] as String
                     }
-                    self.selectedRank1 = "17"
+                    self.selectedRank1 = "16"
                     return ""
                 } else {
                     if identifier == "identifier_category" {
                         self.text = big9[row] as String
                     }
                     self.accountDetail = big9[row] as String
-                    self.selectedRank1 = String(row + 16)
+                    self.selectedRank1 = String(row + 15)
                     return big9[row] as String
                 }
             case 10:
@@ -371,14 +375,14 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
                     if identifier == "identifier_category" {
                         self.text = big10[big10.count - 1] as String
                     }
-                    self.selectedRank1 = "19"
+                    self.selectedRank1 = "18"
                     return ""
                 } else {
                     if identifier == "identifier_category" {
                         self.text = big10[row] as String
                     }
                     self.accountDetail = big10[row] as String
-                    self.selectedRank1 = String(row + 18)
+                    self.selectedRank1 = String(row + 17)
                     return big10[row] as String
                 }
             case 11:

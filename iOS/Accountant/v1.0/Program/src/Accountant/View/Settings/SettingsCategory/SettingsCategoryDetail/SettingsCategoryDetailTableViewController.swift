@@ -6,17 +6,19 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 勘定科目詳細クラス
-class SettingsCategoryDetailTableViewController: UITableViewController, UITextFieldDelegate {
-
+class SettingsCategoryDetailTableViewController: UITableViewController {
+    
     // 入力ボタン
     @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
-
+    
     var gADBannerView: GADBannerView!
+    
+    // MARK: - var let
     
     var big = ""
     var mid = ""
@@ -26,19 +28,21 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     var bigNum = ""
     var midNum = ""
     var smallNum = ""
-
+    
     var numberOfAccount: Int = 0 // 勘定科目番号
     var numberOfTaxonomy: Int = 0 // 表示科目番号
-
+    
     var addAccount = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
     // 画面遷移の準備　表示科目一覧画面へ
     var tappedIndexPath: IndexPath?
-
+    
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.separatorColor = .accentColor
-
+        
         // 登録ボタンの　表示　非表示
         if addAccount {
             inputButton.isHidden = false
@@ -82,12 +86,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             // 大区分
@@ -120,7 +124,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             return ""
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingAccountDetailTaxonomyTableViewCell else { return UITableViewCell() }
         cell.accessoryType = .none
@@ -197,7 +201,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 let disclosureView = UIImageView(image: disclosureImage)
                 disclosureView.tintColor = UIColor.accentColor
                 cell.accessoryView = disclosureView
-
+                
                 return cell
             }
         } else { // 新規追加　以外
@@ -330,12 +334,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         
         // TextFieldに入力された値に反応
         // 入力開始
-        //        cell_big.textField_AccountDetail_big.addTarget(self, action: #selector(textFieldEditingDidBegin),for: UIControl.Event.editingDidBegin)
+        // cell_big.textField_AccountDetail_big.addTarget(self, action: #selector(textFieldEditingDidBegin),for: UIControl.Event.editingDidBegin)
         // 入力終了
-        bigCell.accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
-        cell.accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
-        //        cell_small.textField_AccountDetail.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
-        categoryCell.accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingDidEnd),for: UIControl.Event.editingDidEnd)
+        bigCell.accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
+        cell.accountDetailBigTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
+        // cell_small.textField_AccountDetail.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
+        categoryCell.accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
     }
     // テキストフィールへの入力が終了したとき
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
@@ -348,11 +352,11 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             // 中区分
             guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? SettingAccountDetailTableViewCell else { return }
             if textField.tag == 0 {
-                //            // String型の番号に変換してあげる
-                //            big = cell_big.accountDetailBigTextField.text!
-                //            cell_big.accountDetailBigTextField.textColor = UIColor.black // 文字色をブラックとする
-                //            // String型の番号に変換してあげる tagに大区分の番号を保持しておいたものを取得
-                //            bigNum = String(cell_big.accountDetailBigTextField.tag)
+                // // String型の番号に変換してあげる
+                // big = cell_big.accountDetailBigTextField.text!
+                // cell_big.accountDetailBigTextField.textColor = UIColor.black // 文字色をブラックとする
+                // // String型の番号に変換してあげる tagに大区分の番号を保持しておいたものを取得
+                // bigNum = String(cell_big.accountDetailBigTextField.tag)
                 big = bigCell.accountDetailBigTextField.accountDetailBig
                 bigNum = bigCell.accountDetailBigTextField.selectedRank0
                 mid = bigCell.accountDetailBigTextField.accountDetail
@@ -363,14 +367,14 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 mid = cell.accountDetailBigTextField.accountDetail
                 midNum = cell.accountDetailBigTextField.selectedRank1
             }
-            //            print(big)
+            print(big)
             bigCell.accountDetailBigTextField.text = big
-            //            print(mid)
+            print(mid)
             cell.accountDetailBigTextField.text = mid
         }
         // 勘定科目名
         guard let categoryCell = self.tableView.cellForRow(at: IndexPath(row: 2/*3*/, section: 0)) as? SettingAccountDetailAccountTableViewCell else { return }
-        if let str = categoryCell.accountDetailAccountTextField!.text {
+        if let str = categoryCell.accountDetailAccountTextField?.text {
             if str != "" {
                 // 文字列中の全ての空白や改行を削除する
                 let removeWhitesSpacesString = str.removeWhitespacesAndNewlines
@@ -396,7 +400,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     // テキストフィールドの枠線を非表示とする。
                     categoryCell.accountDetailAccountTextField.layer.borderColor = UIColor.lightGray.cgColor
                     categoryCell.accountDetailAccountTextField.layer.borderWidth = 0.0
-
+                    
                     accountname = categoryCell.accountDetailAccountTextField.text!
                 }
             }
@@ -408,17 +412,17 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
         }
         print(
             "AccountDetailPickerTextField",
-              big,
-              mid,
-              small,
-              accountname,
-              taxonomyname
+            big,
+            mid,
+            small,
+            accountname,
+            taxonomyname
         )
         print(
             "AccountDetailPickerTextField",
-              bigNum,
-              midNum,
-              smallNum
+            bigNum,
+            midNum,
+            smallNum
         )
     }
     // セルが選択された時に呼び出される　// すべての影響範囲に修正が必要
@@ -427,15 +431,21 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
     // 追加・編集機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
-        if IndexPath(row: 0, section: 1) != self.tableView.indexPathForSelectedRow! { // 表示科目名以外は遷移しない
-            return false // false:画面遷移させない
+        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
+            if IndexPath(row: 0, section: 1) != indexPath { // 表示科目名以外は遷移しない
+                return false // false:画面遷移させない
+            }
         }
         return true
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
-        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow { // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+            // セルの選択を解除
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
         switch segue.identifier {
             // 設定勘定科目
         case "segue_TaxonomyList": // “セグウェイにつけた名称”:
@@ -450,7 +460,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 case "6", "7", "8", "9", "10", "11":
                     viewControllerGenearlLedgerAccount.segmentedControl.selectedSegmentIndex = 1 // セグメントスイッチにPLを設定
                 default:
-                    //
                     break
                 }
                 viewControllerGenearlLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
@@ -459,11 +468,8 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 }
             }
         default:
-            //
             break
         }
-        // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     // 勘定科目に紐づけられた表示科目を変更する　設定勘定科目連番、表示科目連番
     func changeTaxonomyOfTaxonomyAccount(number: Int, numberOfTaxonomy: Int) -> Int {
@@ -485,25 +491,95 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             taxonomyname = taxonomyCell.label.text!
         }
     }
-
+    
     @IBAction func inputButtonTapped(_ sender: Any) {
         // 勘定科目　追加か編集か
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         var newnumber = 0
         // 入力チェック
         if textInputCheck() {
-            // TableViewControllerのviewWillAppearを呼び出す　更新のため
-            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(rank0: self.bigNum, rank1: self.midNum, rank2: self.smallNum, numberOfTaxonomy: String(self.numberOfTaxonomy), category: self.accountname, switching: true)
-                // 新規追加　を終了するためにフラグを倒す
-                if newnumber != 0 {
-                    self.addAccount = false
-                    //                                presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
-                    presentingViewController?.viewWillAppear(true) // TableViewをリロードする処理がある
+            
+            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+               let navigationController = splitViewController.viewControllers[0] as? UINavigationController { // スプリットコントローラから、現在選択されているコントローラを取得する
+                let navigationController2: UINavigationController
+                // iPadとiPhoneで動きが変わるので分岐する
+                if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+                    //        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
+                    print(splitViewController.viewControllers.count)
+                    if let navigationController0 = splitViewController.viewControllers[0] as? UINavigationController, // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                       let navigationController1 = navigationController0.viewControllers[1] as? UINavigationController {
+                        navigationController2 = navigationController1
+                        print(navigationController0.viewControllers.count)
+                        print(navigationController0.viewControllers[1])
+                        print(navigationController2.viewControllers.count)
+                        print(navigationController2.viewControllers[0])
+                        print("iPad ビューコントローラーの階層")
+                        //            print("splitViewController[0]      : ", splitViewController.viewControllers[0])     // UINavigationController
+                        //            print("splitViewController[1]      : ", splitViewController.viewControllers[1] )    // UINavigationController
+                        //            print("  navigationController[0]   : ", navigationController.viewControllers[0])    // SettingsTableViewController
+                        //            print("    navigationController2[0]: ", navigationController2.viewControllers[0])   // SettingsCategoryTableViewController
+                        print("    navigationController2[1]: ", navigationController2.viewControllers[1])   // CategoryListCarouselAndPageViewController
+                        if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
+                           let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {                           // viewWillAppearを呼び出す　更新のため
+                            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(
+                                    rank0: self.bigNum,
+                                    rank1: self.midNum,
+                                    rank2: self.smallNum,
+                                    numberOfTaxonomy: String(self.numberOfTaxonomy),
+                                    category: self.accountname,
+                                    switching: true
+                                )
+                                // 新規追加　を終了するためにフラグを倒す
+                                if newnumber != 0 {
+                                    self.addAccount = false
+                                    // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                                    // TableViewをリロードする処理がある
+                                    presentingViewController.reloadDataAferAdding()
+                                }
+                            })
+                        }
+                    }
+                } else { // iPhone
+                    print(splitViewController.viewControllers.count)
+                    if let navigationController1 = navigationController.viewControllers[1] as? UINavigationController {
+                        navigationController2 = navigationController1
+                        //             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                        print("iPhone ビューコントローラーの階層")
+                        print("splitViewController[0]      : ", splitViewController.viewControllers[0])     // UINavigationController
+                        print("  navigationController[0]   : ", navigationController.viewControllers[0])    // SettingsTableViewController
+                        print("  navigationController[1]   : ", navigationController.viewControllers[1])    // UINavigationController
+                        print("    navigationController2.count: ", navigationController2.viewControllers.count)   //
+                        print("    navigationController2[0]: ", navigationController2.viewControllers[0])   // SettingsCategoryTableViewController
+                        print("    navigationController2[1]: ", navigationController2.viewControllers[1])   // CategoryListCarouselAndPageViewController
+                        if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
+                           let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
+                            // viewWillAppearを呼び出す　更新のため
+                            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(
+                                    rank0: self.bigNum,
+                                    rank1: self.midNum,
+                                    rank2: self.smallNum,
+                                    numberOfTaxonomy: String(self.numberOfTaxonomy),
+                                    category: self.accountname,
+                                    switching: true
+                                )
+                                // 新規追加　を終了するためにフラグを倒す
+                                if newnumber != 0 {
+                                    self.addAccount = false
+                                    // presentingViewController.numberOfAccount = num // 勘定科目　詳細画面 の勘定科目番号に代入
+                                    // TableViewをリロードする処理がある
+                                    presentingViewController.reloadDataAferAdding()
+                                }
+                            })
+                        }
+                    }
                 }
-            })
+            }
         }
     }
+    
     // 入力チェック　バリデーション
     func textInputCheck() -> Bool {
         guard big != "選択してください" && big != "" else {
@@ -515,7 +591,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             }
             return false // NG
         }
-
+        
         guard mid != "選択してください" && mid != "" else {
             let alert = UIAlertController(title: "中区分", message: "入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
