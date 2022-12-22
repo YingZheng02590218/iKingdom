@@ -13,6 +13,9 @@ import GoogleMobileAds // マネタイズ対応
 // 勘定科目詳細クラス
 class SettingsCategoryDetailTableViewController: UITableViewController, UITextFieldDelegate {
 
+    // 入力ボタン
+    @IBOutlet private var inputButton: EMTNeumorphicButton! // 入力ボタン
+
     var gADBannerView: GADBannerView!
     
     var big = ""
@@ -117,6 +120,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             return ""
         }
     }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? SettingAccountDetailTaxonomyTableViewCell else { return UITableViewCell() }
         cell.accessoryType = .none
@@ -214,50 +218,48 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     cell.textLabel?.font = .systemFont(ofSize: 14)
                     switch object?.Rank0 {
-                    case "0": cell.label.text =   "流動資産"
-                    case "1": cell.label.text =   "固定資産"
-                    case "2": cell.label.text =   "繰延資産"
-                    case "3": cell.label.text =   "流動負債"
-                    case "4": cell.label.text =   "固定負債"
-                    case "5": cell.label.text =   "資本"
-                    case "6": cell.label.text =   "売上"
-                    case "7": cell.label.text =   "売上原価"
-                    case "8": cell.label.text =   "販売費及び一般管理費"
-                    case "9": cell.label.text =   "営業外損益"
-                    case "10": cell.label.text =   "特別損益"
-                    case "11": cell.label.text =   "税金"
+                    case "0": cell.label.text = "流動資産"
+                    case "1": cell.label.text = "固定資産"
+                    case "2": cell.label.text = "繰延資産"
+                    case "3": cell.label.text = "流動負債"
+                    case "4": cell.label.text = "固定負債"
+                    case "5": cell.label.text = "資本"
+                    case "6": cell.label.text = "売上"
+                    case "7": cell.label.text = "売上原価"
+                    case "8": cell.label.text = "販売費及び一般管理費"
+                    case "9": cell.label.text = "営業外損益"
+                    case "10": cell.label.text = "特別損益"
+                    case "11": cell.label.text = "税金"
                     default: cell.label.text = "-"
                     }
-                    break
                 case 1:
                     cell.textLabel?.text = "中区分"
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     cell.textLabel?.font = .systemFont(ofSize: 14)
                     switch object?.Rank1 {
-                    case "0": cell.label.text =   "当座資産"
-                    case "1": cell.label.text =   "棚卸資産"
-                    case "2": cell.label.text =   "その他の流動資産"
-                    case "3": cell.label.text =   "有形固定資産"
-                    case "4": cell.label.text =   "無形固定資産"
-                    case "5": cell.label.text =   "投資その他の資産"
-                    case "6": cell.label.text =   "繰延資産"
-                    case "7": cell.label.text =   "仕入債務"
-                    case "8": cell.label.text =   "その他の流動負債"
-                    case "9": cell.label.text =   "長期債務"
-                    case "10": cell.label.text =   "株主資本"
-                    case "11": cell.label.text =   "評価・換算差額等"
-                    case "12": cell.label.text =   "新株予約権"
-                    case "13": cell.label.text =   "売上原価"
-                    case "14": cell.label.text =   "製造原価"
-                    case "15": cell.label.text =   "営業外収益"
-                    case "16": cell.label.text =   "営業外費用"
-                    case "17": cell.label.text =   "特別利益"
-                    case "18": cell.label.text =   "特別損失"
+                    case "0": cell.label.text = "当座資産"
+                    case "1": cell.label.text = "棚卸資産"
+                    case "2": cell.label.text = "その他の流動資産"
+                    case "3": cell.label.text = "有形固定資産"
+                    case "4": cell.label.text = "無形固定資産"
+                    case "5": cell.label.text = "投資その他の資産"
+                    case "6": cell.label.text = "繰延資産"
+                    case "7": cell.label.text = "仕入債務"
+                    case "8": cell.label.text = "その他の流動負債"
+                    case "9": cell.label.text = "長期債務"
+                    case "10": cell.label.text = "株主資本"
+                    case "11": cell.label.text = "評価・換算差額等"
+                    case "12": cell.label.text = "新株予約権"
+                    case "13": cell.label.text = "売上原価"
+                    case "14": cell.label.text = "製造原価"
+                    case "15": cell.label.text = "営業外収益"
+                    case "16": cell.label.text = "営業外費用"
+                    case "17": cell.label.text = "特別利益"
+                    case "18": cell.label.text = "特別損失"
                     default: cell.label.text = "-"
                     }
                     cell.label.textAlignment = NSTextAlignment.center
-                    break
                 case 2:
                     //                    cell.textLabel?.text = "小区分"
                     //                    cell.textLabel?.textColor = .darkGray
@@ -269,16 +271,14 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
                     cell.textLabel?.font = .systemFont(ofSize: 14)
-                    //勘定科目
+                    // 勘定科目
                     if object!.category != "" {
                         cell.label.text = object!.category
                     } else {
                         cell.label.text = ""
                     }
                     cell.label.textAlignment = NSTextAlignment.center
-                    break
                 default:
-                    //
                     break
                 }
             } else { // タクソノミ　表示科目
@@ -290,7 +290,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
                 cell.textLabel?.textAlignment = NSTextAlignment.left
                 cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目の連番から表示科目を取得　勘定科目の詳細情報を得るため
-                if "" != object?.numberOfTaxonomy {
+                if object?.numberOfTaxonomy != "" {
                     let objectt = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: Int(object!.numberOfTaxonomy)!) // 表示科目
                     cell.label.text = "\(objectt!.number), \(objectt!.category)"
                 } else {
@@ -485,8 +485,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController, UITextFi
             taxonomyname = taxonomyCell.label.text!
         }
     }
-    // 入力ボタン
-    @IBOutlet var inputButton: EMTNeumorphicButton! // 入力ボタン
 
     @IBAction func inputButtonTapped(_ sender: Any) {
         // 勘定科目　追加か編集か

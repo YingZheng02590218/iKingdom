@@ -6,10 +6,10 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EMTNeumorphicView
 import Firebase // イベントログ対応
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 仕訳クラス
 class JournalEntryViewController: UIViewController {
@@ -27,16 +27,16 @@ class JournalEntryViewController: UIViewController {
     // ボタン　アウトレットコレクション
     @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
     @IBOutlet var buttonRight: EMTNeumorphicButton!
-    @IBOutlet var buttonLeft: EMTNeumorphicButton!
+    @IBOutlet private var buttonLeft: EMTNeumorphicButton!
     @IBOutlet var inputButton: EMTNeumorphicButton!
-    @IBOutlet var cancelButton: EMTNeumorphicButton!
+    @IBOutlet private var cancelButton: EMTNeumorphicButton!
     // デイトピッカー　日付
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet private var datePicker: UIDatePicker!
     let dateFormatter = DateFormatter()
     var isMaskedDatePicker = false // マスクフラグ
 
-    @IBOutlet var datePickerView: EMTNeumorphicView!
-    @IBOutlet var maskDatePickerButton: UIButton!
+    @IBOutlet private var datePickerView: EMTNeumorphicView!
+    @IBOutlet private var maskDatePickerButton: UIButton!
     // テキストフィールド　勘定科目、金額
     @IBOutlet var textFieldCategoryDebit: PickerTextField!
     @IBOutlet var textFieldCategoryCredit: PickerTextField!
@@ -146,7 +146,7 @@ class JournalEntryViewController: UIViewController {
                 carouselCollectionView.isHidden = true
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
                 // 仕訳データを取得
-                let dataBaseManager = DataBaseManagerJournalEntry() //データベースマネジャー
+                let dataBaseManager = DataBaseManagerJournalEntry() // データベースマネジャー
                 
                 if tappedIndexPath.section == 1 {
 // 決算整理仕訳
@@ -172,7 +172,7 @@ class JournalEntryViewController: UIViewController {
                     }
                 }
                 inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            } else if journalEntryType == "" {
+            } else if journalEntryType.isEmpty {
                 labelTitle.text = ""
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
@@ -232,7 +232,12 @@ class JournalEntryViewController: UIViewController {
                 Thread.sleep(forTimeInterval: 1)
                 DispatchQueue.main.async {
                     // チュートリアル対応 ウォークスルー型
-                    if let viewController = UIStoryboard(name: "WalkThroughViewController", bundle: nil).instantiateViewController(withIdentifier: "WalkThroughViewController") as? WalkThroughViewController {
+                    if let viewController = UIStoryboard(
+                        name: "WalkThroughViewController",
+                        bundle: nil
+                    ).instantiateViewController(
+                        withIdentifier: "WalkThroughViewController"
+                    ) as? WalkThroughViewController {
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true, completion: nil)
                     }
@@ -273,7 +278,12 @@ class JournalEntryViewController: UIViewController {
                 }
             }
         }
-        if let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_JournalEntry") as? AnnotationViewControllerJournalEntry {
+        if let viewController = UIStoryboard(
+            name: "JournalEntryViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "Annotation_JournalEntry"
+        ) as? AnnotationViewControllerJournalEntry {
             viewController.alpha = 0.7
             present(viewController, animated: true, completion: nil)
         }
@@ -859,7 +869,7 @@ class JournalEntryViewController: UIViewController {
                     } else if self.journalEntryType == "JournalEntries" { // 仕訳
                         
                         self.buttonTappedForJournalEntries()
-                    } else if self.journalEntryType == "" { // タブバーの仕訳タブからの遷移の場合
+                    } else if self.journalEntryType.isEmpty { // タブバーの仕訳タブからの遷移の場合
                         
                         self.buttonTappedForJournalEntriesOnTabBar()
                     }

@@ -21,14 +21,15 @@ protocol PLPresenterInput {
     func theDayOfReckoning() -> String
     
     var numberOfmidCategory10: Int { get }
-    func midCategory10(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfmidCategory6: Int { get }
-    func midCategory6(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfmidCategory11: Int { get }
-    func mid_category11(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfmidCategory7: Int { get }
-    func mid_category7(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects9: Int { get }
+
+    func midCategory10(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func midCategory6(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func mid_category11(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func mid_category7(forRow row: Int) -> DataBaseSettingsTaxonomy
     func objects9(forRow row: Int) -> DataBaseSettingsTaxonomy
     
     func viewDidLoad()
@@ -91,15 +92,15 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func company() -> String {
-        return pLData.company
+        pLData.company
     }
 
     func fiscalYear() -> Int {
-        return pLData.fiscalYear
+        pLData.fiscalYear
     }
 
     func theDayOfReckoning() -> String {
-        return pLData.theDayOfReckoning
+        pLData.theDayOfReckoning
     }
     
     var numberOfmidCategory10: Int {
@@ -107,7 +108,7 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func midCategory10(forRow row: Int) -> DataBaseSettingsTaxonomy {
-        return pLData.midCategory10[row]
+        pLData.midCategory10[row]
     }
     
     var numberOfmidCategory6: Int {
@@ -115,7 +116,7 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func midCategory6(forRow row: Int) -> DataBaseSettingsTaxonomy {
-        return pLData.midCategory6[row]
+        pLData.midCategory6[row]
     }
     
     var numberOfmidCategory11: Int {
@@ -123,7 +124,7 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func mid_category11(forRow row: Int) -> DataBaseSettingsTaxonomy {
-        return pLData.midCategory11[row]
+        pLData.midCategory11[row]
     }
     
     var numberOfmidCategory7: Int {
@@ -131,7 +132,7 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func mid_category7(forRow row: Int) -> DataBaseSettingsTaxonomy {
-        return pLData.midCategory7[row]
+        pLData.midCategory7[row]
     }
     
     var numberOfobjects9: Int {
@@ -139,10 +140,10 @@ final class PLPresenter: PLPresenterInput {
     }
 
     func objects9(forRow row: Int) -> DataBaseSettingsTaxonomy {
-        return pLData.objects9[row]
+        pLData.objects9[row]
     }
     // TODO: 移動
-    func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int, lastYear: Bool) -> String  {// 勘定別の合計　計算
+    func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int, lastYear: Bool) -> String { // 勘定別の合計　計算
         return DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: numberOfSettingsTaxonomy, lastYear: lastYear)
     }
     
@@ -248,7 +249,7 @@ final class PLPresenter: PLPresenterInput {
     }
     
     func checkSettingsPeriod() -> Bool {
-        return DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() // 前年度の会計帳簿の存在有無を確認
+        DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() // 前年度の会計帳簿の存在有無を確認
     }
     
     func refreshTable() {

@@ -11,7 +11,7 @@ import UIKit
 // 年度選択クラス
 class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    @IBOutlet var pickerView: UIPickerView!
+    @IBOutlet private var pickerView: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

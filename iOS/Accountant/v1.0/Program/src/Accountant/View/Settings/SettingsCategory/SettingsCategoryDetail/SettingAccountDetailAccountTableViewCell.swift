@@ -71,7 +71,7 @@ extension SettingAccountDetailAccountTableViewCell: UITextFieldDelegate {
             // 最大文字数以上ならfalseを返す
             resultForLength = textFieldNumber + stringNumber < maxLength
             // 文字列が0文字の場合、backspaceキーが押下されたということなので一文字削除する
-            if string == "" {
+            if string.isEmpty {
                 textField.deleteBackward()
             }
         }

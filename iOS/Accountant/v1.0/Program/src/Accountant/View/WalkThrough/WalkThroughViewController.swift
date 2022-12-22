@@ -21,7 +21,6 @@ class WalkThroughViewController: UIViewController {
 
     // MARK: - Setting
 
-    // TODO: ライセンス表記
     func showIntroWithCrossDissolve() {
         let page = EAIntroPage()
         page.title = "Paciolist"

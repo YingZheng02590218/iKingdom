@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift 
 
 // 設定表記名クラス
-//class DataBaseSettingsCategoryBSAndPL: RObject {
+// class DataBaseSettingsCategoryBSAndPL: RObject {
 //    // モデル定義
 //    @objc dynamic var big_category: Int = 0        //大分類
 //    @objc dynamic var mid_category: Int = 0        //中分類
@@ -18,7 +18,7 @@ import RealmSwift
 //    @objc dynamic var BSAndPL_category: Int = 0   //表記名の番号
 //    @objc dynamic var category: String = ""        //決算書上の表記名
 //    @objc dynamic var switching: Bool = false      //有効無効
-//}
+// }
 
 // 設定表示科目クラス
 class DataBaseSettingsTaxonomy: RObject {
@@ -32,8 +32,8 @@ class DataBaseSettingsTaxonomy: RObject {
     @objc dynamic var category5: String = "" // 階層5
     @objc dynamic var category6: String = "" // 階層6
     @objc dynamic var category7: String = "" // 階層7
-    @objc dynamic var category: String = ""  //表示科目名
-    @objc dynamic var abstract: Bool = false //抽象区分
-    @objc dynamic var switching: Bool = false //有効無効
+    @objc dynamic var category: String = ""  // 表示科目名
+    @objc dynamic var abstract: Bool = false // 抽象区分
+    @objc dynamic var switching: Bool = false // 有効無効
 
 }

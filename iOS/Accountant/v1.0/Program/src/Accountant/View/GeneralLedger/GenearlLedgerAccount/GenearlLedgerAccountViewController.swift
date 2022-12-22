@@ -18,13 +18,13 @@ class GenearlLedgerAccountViewController: UIViewController {
 
    var gADBannerView: GADBannerView!
     /// 勘定　上部
-    @IBOutlet var dateYearLabel: UILabel!
-    @IBOutlet var topView: UIView!
-    @IBOutlet var listHeadingLabel: UILabel!
-    @IBOutlet var printBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var dateYearLabel: UILabel!
+    @IBOutlet private var topView: UIView!
+    @IBOutlet private var listHeadingLabel: UILabel!
+    @IBOutlet private var printBarButtonItem: UIBarButtonItem!
     /// 勘定　下部
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
 //    let DARKSHADOWOPACITY: Float = 0.5

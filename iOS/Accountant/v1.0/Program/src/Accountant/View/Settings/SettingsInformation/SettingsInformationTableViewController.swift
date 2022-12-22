@@ -129,7 +129,7 @@ class SettingsInformationTableViewController: UITableViewController {
         }
     }
     // セルを生成して返却するメソッド
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { //TableViewCellSettings {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         switch indexPath.section {
         case 0:

@@ -17,12 +17,13 @@ protocol JournalsPresenterInput {
     var theDayOfReckoning: String? { get }
     
     var numberOfobjects: Int { get }
-    func objects(forRow row: Int) -> DataBaseJournalEntry
     var numberOfobjectsss: Int { get }
+    
+    func objects(forRow row: Int) -> DataBaseJournalEntry
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
     
     var PDFpath: [URL]? { get }
-
+    
     func viewDidLoad()
     func viewWillAppear()
     func viewDidAppear()
@@ -49,7 +50,7 @@ protocol JournalsPresenterOutput: AnyObject {
 }
 
 final class JournalsPresenter: JournalsPresenterInput {
-
+    
     // MARK: - var let
     
     var company: String?
@@ -61,22 +62,22 @@ final class JournalsPresenter: JournalsPresenterInput {
     private var objectsss: Results<DataBaseAdjustingEntry>
     // PDFのパス
     var PDFpath: [URL]?
-
+    
     private weak var view: JournalsPresenterOutput!
     private var model: JournalsModelInput
     
     init(view: JournalsPresenterOutput, model: JournalsModelInput) {
         self.view = view
         self.model = model
-                
+        
         objects = model.getJournalEntriesInJournals() // 通常仕訳　全
         objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
     }
     
     // MARK: - Life cycle
-
+    
     func viewDidLoad() {
-                
+        
         view.setupViewForViewDidLoad()
     }
     
@@ -98,16 +99,19 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     
     var numberOfobjects: Int {
-        return objects.count
+        objects.count
     }
+    
     func objects(forRow row: Int) -> DataBaseJournalEntry {
-        return objects[row]
+        objects[row]
     }
+    
     var numberOfobjectsss: Int {
-        return objectsss.count
+        objectsss.count
     }
+    
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry {
-        return objectsss[row]
+        objectsss[row]
     }
     
     func refreshTable(isEditing: Bool) {
@@ -139,7 +143,7 @@ final class JournalsPresenter: JournalsPresenterInput {
             self.view.showPreview()
         })
     }
-
+    
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
         // 全勘定の合計と残高を計算する
         model.initializeJournals(completion: { isFinished in
@@ -169,13 +173,13 @@ final class JournalsPresenter: JournalsPresenterInput {
             if indexPath.section == 0 {
                 // 仕訳データを更新
                 let _ = model.updateJournalEntry(
-                    primaryKey: self.objects(forRow:indexPath.row).number,
+                    primaryKey: self.objects(forRow: indexPath.row).number,
                     fiscalYear: fiscalYear
                 )
             } else if indexPath.section == 1 {
                 // 決算整理仕訳データを更新
                 let _ = model.updateAdjustingJournalEntry(
-                    primaryKey: self.objectsss(forRow:indexPath.row).number,
+                    primaryKey: self.objectsss(forRow: indexPath.row).number,
                     fiscalYear: fiscalYear
                 )
             } else {
@@ -187,38 +191,40 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     // 仕訳データを編集した通りに更新する
     func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: DBJournalEntry) {
-        var primaryKeys:[Int] = []
-        var primaryKeysAdjusting:[Int] = []
+        var primaryKeys: [Int] = []
+        var primaryKeysAdjusting: [Int] = []
         // 一括変更の処理
         for indexPath in indexPaths {
             if indexPath.section == 0 {
                 // 仕訳データを更新
                 model.updateJournalEntry(
-                    primaryKey: self.objects(forRow:indexPath.row).number,
-                    date: dBJournalEntry.date ?? self.objects(forRow:indexPath.row).date,
-                    debitCategory: dBJournalEntry.debit_category ?? self.objects(forRow:indexPath.row).debit_category,
-                    debitAmount: dBJournalEntry.debit_amount ?? self.objects(forRow:indexPath.row).debit_amount,
-                    creditCategory: dBJournalEntry.credit_category ?? self.objects(forRow:indexPath.row).credit_category,
-                    creditAmount: dBJournalEntry.credit_amount ?? self.objects(forRow:indexPath.row).credit_amount,
-                    smallWritting: dBJournalEntry.smallWritting ?? self.objects(forRow:indexPath.row).smallWritting,
+                    primaryKey: self.objects(forRow: indexPath.row).number,
+                    date: dBJournalEntry.date ?? self.objects(forRow: indexPath.row).date,
+                    debitCategory: dBJournalEntry.debit_category ?? self.objects(forRow: indexPath.row).debit_category,
+                    debitAmount: dBJournalEntry.debit_amount ?? self.objects(forRow: indexPath.row).debit_amount,
+                    creditCategory: dBJournalEntry.credit_category ?? self.objects(forRow: indexPath.row).credit_category,
+                    creditAmount: dBJournalEntry.credit_amount ?? self.objects(forRow: indexPath.row).credit_amount,
+                    smallWritting: dBJournalEntry.smallWritting ?? self.objects(forRow: indexPath.row).smallWritting,
                     completion: { primaryKey in
                         print("Result is \(primaryKey)")
                         primaryKeys.append(primaryKey)
-                    })
+                    }
+                )
             } else if indexPath.section == 1 {
                 // 決算整理仕訳データを更新
                 let _ = model.updateAdjustingJournalEntry(
-                    primaryKey: self.objectsss(forRow:indexPath.row).number,
-                    date: dBJournalEntry.date ?? self.objectsss(forRow:indexPath.row).date,
-                    debitCategory: dBJournalEntry.debit_category ?? self.objectsss(forRow:indexPath.row).debit_category,
-                    debitAmount: dBJournalEntry.debit_amount ?? self.objectsss(forRow:indexPath.row).debit_amount,
-                    creditCategory: dBJournalEntry.credit_category ?? self.objectsss(forRow:indexPath.row).credit_category,
-                    creditAmount: dBJournalEntry.credit_amount ?? self.objectsss(forRow:indexPath.row).credit_amount,
-                    smallWritting: dBJournalEntry.smallWritting ?? self.objectsss(forRow:indexPath.row).smallWritting,
+                    primaryKey: self.objectsss(forRow: indexPath.row).number,
+                    date: dBJournalEntry.date ?? self.objectsss(forRow: indexPath.row).date,
+                    debitCategory: dBJournalEntry.debit_category ?? self.objectsss(forRow: indexPath.row).debit_category,
+                    debitAmount: dBJournalEntry.debit_amount ?? self.objectsss(forRow: indexPath.row).debit_amount,
+                    creditCategory: dBJournalEntry.credit_category ?? self.objectsss(forRow: indexPath.row).credit_category,
+                    creditAmount: dBJournalEntry.credit_amount ?? self.objectsss(forRow: indexPath.row).credit_amount,
+                    smallWritting: dBJournalEntry.smallWritting ?? self.objectsss(forRow: indexPath.row).smallWritting,
                     completion: { primaryKey in
                         print("Result is \(primaryKey)")
                         primaryKeysAdjusting.append(primaryKey)
-                    })
+                    }
+                )
             } else {
                 // 空白行
             }

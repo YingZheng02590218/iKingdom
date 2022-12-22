@@ -19,9 +19,9 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     /// 精算表　上部
     @IBOutlet var labelCompanyName: UILabel!
     @IBOutlet var labelTitle: UILabel!
-    @IBOutlet var labelClosingDate: UILabel!
+    @IBOutlet private var labelClosingDate: UILabel!
     /// 精算表　下部
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
     @IBOutlet var backgroundView: EMTNeumorphicView!
 
     let LIGHTSHADOWOPACITY: Float = 0.5
@@ -30,6 +30,12 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     //    let edged = false
 
     fileprivate let refreshControl = UIRefreshControl()
+
+    var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
+    // 精算表画面で押下された場合は、決算整理仕訳とする
+    @IBOutlet private var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
+    @IBOutlet private var printButton: UIButton!
+
 
     /// GUIアーキテクチャ　MVP
     private var presenter: WSPresenterInput!
@@ -117,10 +123,6 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         presenter.refreshTable()
     }
     
-    var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
-    // 精算表画面で押下された場合は、決算整理仕訳とする
-    @IBOutlet var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
-    @IBOutlet var printButton: UIButton!
     /**
      * 印刷ボタン押下時メソッド
      */
@@ -400,7 +402,9 @@ extension WSViewController: WSPresenterOutput {
             // GADBannerView を作成する
             addBannerViewToView(
                 gADBannerView,
-                constant: (tableView.visibleCells[tableView.visibleCells.count - 3].frame.height + tableView.visibleCells[tableView.visibleCells.count - 2].frame.height + tableView.visibleCells[tableView.visibleCells.count - 1].frame.height) * -1
+                constant: (tableView.visibleCells[tableView.visibleCells.count - 3].frame.height +
+                           tableView.visibleCells[tableView.visibleCells.count - 2].frame.height +
+                           tableView.visibleCells[tableView.visibleCells.count - 1].frame.height) * -1
             ) // 一番したから3行分のスペースを空ける
         } else {
             if let gADBannerView = gADBannerView {

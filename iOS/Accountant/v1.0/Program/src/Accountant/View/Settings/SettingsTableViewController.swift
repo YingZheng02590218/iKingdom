@@ -15,8 +15,8 @@ import UIKit
 // 設定クラス
 class SettingsTableViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var scrollView: UIScrollView!
     // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
     // https://swallow-incubate.com/archives/blog/20200805
     //    手順
@@ -25,8 +25,8 @@ class SettingsTableViewController: UIViewController {
     //    UIScrollViewにUIView（ContentView）を配置する
     //    UIScrollViewとContentViewに制約を設定する
     //    ContentViewに高さを設定する
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var headerView: UIView!
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
 
     override func viewDidLoad() {

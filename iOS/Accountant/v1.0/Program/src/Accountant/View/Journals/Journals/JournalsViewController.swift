@@ -20,16 +20,16 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
    var gADBannerView: GADBannerView!
     // 仕訳帳　上部
     // まとめて編集機能
-    @IBOutlet var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
-    @IBOutlet var addBarButtonItem: UIBarButtonItem!
-    @IBOutlet var pdfBarButtonItem: UIBarButtonItem!
-    @IBOutlet var labelCompanyName: UILabel!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var closingDateLabel: UILabel!
-    @IBOutlet var listDateYearLabel: UILabel!
+    @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
+    @IBOutlet private var addBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var labelCompanyName: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var closingDateLabel: UILabel!
+    @IBOutlet private var listDateYearLabel: UILabel!
     /// 仕訳帳　下部
-    @IBOutlet var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
-    @IBOutlet var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5

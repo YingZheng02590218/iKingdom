@@ -19,13 +19,13 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     var gADBannerView: GADBannerView!
     /// 損益計算書　上部
     @IBOutlet var companyNameLabel: UILabel!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var closingDateLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var closingDateLabel: UILabel!
     @IBOutlet var closingDatePreviousLabel: UILabel!
     @IBOutlet var closingDateThisYearLabel: UILabel!
     /// 損益計算書　下部
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5

@@ -10,8 +10,8 @@ import UIKit
 
 class SplashViewController: UIViewController {
     // 初期化画面　ロゴ
-    @IBOutlet var logoLabel: UILabel!
-    @IBOutlet var logoImageView: UIView!
+    @IBOutlet private var logoLabel: UILabel!
+    @IBOutlet private var logoImageView: UIView!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
 
@@ -64,24 +64,28 @@ class SplashViewController: UIViewController {
     func showAnimation() {
         // 少し縮小するアニメーション
         if let logoLabel = self.logoLabel {
-            UIView.animate(withDuration: 0.9,
-                           delay: 0.2,
-                           options: UIView.AnimationOptions.curveEaseOut,
-                           animations: { () in
-                logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            }, completion: { _ in
+            UIView.animate(
+                withDuration: 0.9,
+                delay: 0.2,
+                options: UIView.AnimationOptions.curveEaseOut,
+                animations: { () in
+                    logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                }, completion: { _ in
 
-            })
+                }
+            )
             // 拡大させて、消えるアニメーション
-            UIView.animate(withDuration: 0.4,
-                           delay: 0.2,
-                           options: UIView.AnimationOptions.curveEaseOut,
-                           animations: { () in
-                self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self.logoLabel.alpha = 0
-            }, completion: { _ in
-                self.logoImageView.removeFromSuperview()
-            })
+            UIView.animate(
+                withDuration: 0.4,
+                delay: 0.2,
+                options: UIView.AnimationOptions.curveEaseOut,
+                animations: { () in
+                    self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    self.logoLabel.alpha = 0
+                }, completion: { _ in
+                    self.logoImageView.removeFromSuperview()
+                }
+            )
         }
     }
     

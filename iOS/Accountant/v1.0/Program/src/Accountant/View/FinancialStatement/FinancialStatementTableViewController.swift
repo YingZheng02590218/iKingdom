@@ -14,8 +14,6 @@ class FinancialStatementTableViewController: UITableViewController {
 
     var gADBannerView: GADBannerView!
     
-    //    @IBOutlet var tableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

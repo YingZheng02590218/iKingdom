@@ -13,26 +13,21 @@ class SettingsHelpDetailViewController: UIViewController {
 
    var gADBannerView: GADBannerView!
     
-    @IBOutlet var aboutThisAppTextView: UITextView!
-    @IBOutlet var thoughtTextView: UITextView!
-    @IBOutlet var basicOfBookkeepingTextView: UITextView!
-    @IBOutlet var setUpTextView: UITextView!
-    @IBOutlet var setUpBasicInfoTextView: UITextView!
-    @IBOutlet var setUpAccountTextView: UITextView!
-    @IBOutlet var setUpAccountEditTextView: UITextView!
-    @IBOutlet var configurationTextView: UITextView!
-    @IBOutlet var journalEntryTextView: UITextView!
-    @IBOutlet var journalEntryEditTextView: UITextView!
-    @IBOutlet var journalEntryDeleteTextView: UITextView!
-    @IBOutlet var journalsTextView: UITextView!
-    
-
-    @IBAction func closeButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    @IBOutlet private var aboutThisAppTextView: UITextView!
+    @IBOutlet private var thoughtTextView: UITextView!
+    @IBOutlet private var basicOfBookkeepingTextView: UITextView!
+    @IBOutlet private var setUpTextView: UITextView!
+    @IBOutlet private var setUpBasicInfoTextView: UITextView!
+    @IBOutlet private var setUpAccountTextView: UITextView!
+    @IBOutlet private var setUpAccountEditTextView: UITextView!
+    @IBOutlet private var configurationTextView: UITextView!
+    @IBOutlet private var journalEntryTextView: UITextView!
+    @IBOutlet private var journalEntryEditTextView: UITextView!
+    @IBOutlet private var journalEntryDeleteTextView: UITextView!
+    @IBOutlet private var journalsTextView: UITextView!
     
     var textViewSwitchNumber: Int = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,8 +65,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             aboutThisAppTextView.setContentOffset(
                 CGPoint(x: 0, y: -aboutThisAppTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 1:
             thoughtTextView.isHidden = false
 //            textView_thought.font = .systemFont(ofSize: 19)
@@ -109,8 +104,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             thoughtTextView.setContentOffset(
                 CGPoint(x: 0, y: -thoughtTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 2:
             basicOfBookkeepingTextView.isHidden = false
             let baseString = basicOfBookkeepingTextView.text
@@ -144,8 +139,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             basicOfBookkeepingTextView.setContentOffset(
                 CGPoint(x: 0, y: -basicOfBookkeepingTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 3: // 初期設定の手順
             setUpTextView.isHidden = false
             let baseString = setUpTextView.text
@@ -170,8 +165,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             setUpTextView.setContentOffset(
                 CGPoint(x: 0, y: -setUpTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 4: // 基本情報の登録をしよう
             setUpBasicInfoTextView.isHidden = false
             let baseString = setUpBasicInfoTextView.text
@@ -192,7 +187,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachmentt = NSTextAttachment()
             textAttachmentt.image = UIImage(named: "TableViewControllerSettingsInformation.png")!
             oldWidth = textAttachmentt.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachmentt.image = UIImage.init(cgImage: textAttachmentt.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachmentt)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -201,7 +196,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment1 = NSTextAttachment()
             textAttachment1.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_term.png")!
             oldWidth = textAttachment1.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment1.image = UIImage.init(cgImage: textAttachment1.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment1)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -210,7 +205,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment2 = NSTextAttachment()
             textAttachment2.image = UIImage(named: "Text View set Up basic Info2.png")!
             oldWidth = textAttachment2.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment2.image = UIImage.init(cgImage: textAttachment2.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment2)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -219,7 +214,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0 = NSTextAttachment()
             textAttachment0.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_term.png")!
             oldWidth = textAttachment0.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0.image = UIImage.init(cgImage: textAttachment0.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -228,7 +223,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment3 = NSTextAttachment()
             textAttachment3.image = UIImage(named: "Text View set Up basic Info3.png")!
             oldWidth = textAttachment3.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment3.image = UIImage.init(cgImage: textAttachment3.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment3)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -237,7 +232,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment4 = NSTextAttachment()
             textAttachment4.image = UIImage(named: "Text View set Up basic Info4.png")!
             oldWidth = textAttachment4.image!.size.width
-            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment4.image = UIImage.init(cgImage: textAttachment4.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment4)
             print(setUpBasicInfoTextView.text.unicodeScalars.count)
@@ -265,8 +260,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             setUpBasicInfoTextView.setContentOffset(
                 CGPoint(x: 0, y: -setUpBasicInfoTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 5: // 勘定科目を設定しよう
             setUpAccountTextView.isHidden = false
             let baseString = setUpAccountTextView.text
@@ -275,7 +270,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment00 = NSTextAttachment()
             textAttachment00.image = UIImage(named: "Text View set Up1.png")!
             var oldWidth = textAttachment00.image!.size.width
-            var scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment00.image = UIImage.init(cgImage: textAttachment00.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment00)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -284,7 +279,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment000 = NSTextAttachment()
             textAttachment000.image = UIImage(named: "Text View set Up2.png")!
             oldWidth = textAttachment000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment000.image = UIImage.init(cgImage: textAttachment000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment000)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -293,7 +288,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0000 = NSTextAttachment()
             textAttachment0000.image = UIImage(named: "TableViewControllerCategoryList.png")!
             oldWidth = textAttachment0000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0000.image = UIImage.init(cgImage: textAttachment0000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0000)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -302,7 +297,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0 = NSTextAttachment()
             textAttachment0.image = UIImage(named: "Text View set Up1.png")!
             oldWidth = textAttachment0.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0.image = UIImage.init(cgImage: textAttachment0.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -311,7 +306,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment1 = NSTextAttachment()
             textAttachment1.image = UIImage(named: "TableViewControllerSettingsCategory_categoriesBSandPL.png")!
             oldWidth = textAttachment1.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment1.image = UIImage.init(cgImage: textAttachment1.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment1)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -320,7 +315,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment11 = NSTextAttachment()
             textAttachment11.image = UIImage(named: "TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png")!
             oldWidth = textAttachment11.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment11.image = UIImage.init(cgImage: textAttachment11.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment11)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -329,7 +324,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachmentttt = NSTextAttachment()
             textAttachmentttt.image = UIImage(named: "Text View set Up1.png")!
             oldWidth = textAttachmentttt.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachmentttt.image = UIImage.init(cgImage: textAttachmentttt.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachmentttt)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -338,7 +333,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment2 = NSTextAttachment()
             textAttachment2.image = UIImage(named: "Text View set Up2.png")!
             oldWidth = textAttachment2.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment2.image = UIImage.init(cgImage: textAttachment2.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment2)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -347,7 +342,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment3 = NSTextAttachment()
             textAttachment3.image = UIImage(named: "Text View set Up3.png")!
             oldWidth = textAttachment3.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment3.image = UIImage.init(cgImage: textAttachment3.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment3)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -356,7 +351,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment4 = NSTextAttachment()
             textAttachment4.image = UIImage(named: "Text View set Up4.png")!
             oldWidth = textAttachment4.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment4.image = UIImage.init(cgImage: textAttachment4.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment4)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -365,7 +360,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment5 = NSTextAttachment()
             textAttachment5.image = UIImage(named: "Text View set Up5.png")!
             oldWidth = textAttachment5.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment5.image = UIImage.init(cgImage: textAttachment5.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment5)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -374,7 +369,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment6 = NSTextAttachment()
             textAttachment6.image = UIImage(named: "Text View set Up6.png")!
             oldWidth = textAttachment6.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment6.image = UIImage.init(cgImage: textAttachment6.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment6)
             print(setUpAccountTextView.text.unicodeScalars.count)
@@ -405,8 +400,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             setUpAccountTextView.setContentOffset(
                 CGPoint(x: 0, y: -setUpAccountTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 6: // 勘定科目の編集しよう
             setUpAccountEditTextView.isHidden = false
             let baseString = setUpAccountEditTextView.text
@@ -415,7 +410,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment00 = NSTextAttachment()
             textAttachment00.image = UIImage(named: "Text View set Up1.png")!
             var oldWidth = textAttachment00.image!.size.width
-            var scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment00.image = UIImage.init(cgImage: textAttachment00.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment00)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -424,7 +419,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment000 = NSTextAttachment()
             textAttachment000.image = UIImage(named: "Text View set Up2.png")!
             oldWidth = textAttachment000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment000.image = UIImage.init(cgImage: textAttachment000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -433,7 +428,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0000 = NSTextAttachment()
             textAttachment0000.image = UIImage(named: "TableViewControllerCategoryList1.png")!
             oldWidth = textAttachment0000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0000.image = UIImage.init(cgImage: textAttachment0000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -442,7 +437,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment00000 = NSTextAttachment()
             textAttachment00000.image = UIImage(named: "TableViewControllerCategoryList2.png")!
             oldWidth = textAttachment00000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment00000.image = UIImage.init(cgImage: textAttachment00000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment00000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -451,7 +446,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment000000 = NSTextAttachment()
             textAttachment000000.image = UIImage(named: "TableViewControllerCategoryList3.png")!
             oldWidth = textAttachment000000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment000000.image = UIImage.init(cgImage: textAttachment000000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment000000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -460,7 +455,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0000000 = NSTextAttachment()
             textAttachment0000000.image = UIImage(named: "TableViewControllerCategoryList4.png")!
             oldWidth = textAttachment0000000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0000000.image = UIImage.init(cgImage: textAttachment0000000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0000000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -470,7 +465,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment00000000 = NSTextAttachment()
             textAttachment00000000.image = UIImage(named: "Text View set Up1.png")!
             oldWidth = textAttachment00000000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment00000000.image = UIImage.init(cgImage: textAttachment00000000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment00000000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -479,7 +474,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment000000000 = NSTextAttachment()
             textAttachment000000000.image = UIImage(named: "Text View set Up2.png")!
             oldWidth = textAttachment000000000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment000000000.image = UIImage.init(cgImage: textAttachment000000000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment000000000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -488,7 +483,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment0000000000 = NSTextAttachment()
             textAttachment0000000000.image = UIImage(named: "Text View set Up3.png")!
             oldWidth = textAttachment0000000000.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment0000000000.image = UIImage.init(cgImage: textAttachment0000000000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment0000000000)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -497,7 +492,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment444 = NSTextAttachment()
             textAttachment444.image = UIImage(named: "TableViewControllerCategoryList_delete1.png")!
             oldWidth = textAttachment444.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment444.image = UIImage.init(cgImage: textAttachment444.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment444)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -506,7 +501,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment555 = NSTextAttachment()
             textAttachment555.image = UIImage(named: "TableViewControllerCategoryList_delete2.png")!
             oldWidth = textAttachment555.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment555.image = UIImage.init(cgImage: textAttachment555.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment555)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -515,7 +510,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "TableViewControllerCategoryList_delete3.png")!
             oldWidth = textAttachment666.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -524,7 +519,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment777 = NSTextAttachment()
             textAttachment777.image = UIImage(named: "TableViewControllerCategoryList_delete4.png")!
             oldWidth = textAttachment777.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment777)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -549,8 +544,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             setUpAccountEditTextView.setContentOffset(
                 CGPoint(x: 0, y: -setUpAccountEditTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 7: // 環境設定を確認・変更しよう
             configurationTextView.isHidden = false
             let baseString = configurationTextView.text
@@ -559,7 +554,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_Journals.png")!
             var oldWidth = textAttachment666.image!.size.width
-            var scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(configurationTextView.text.unicodeScalars.count)
@@ -568,7 +563,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment777 = NSTextAttachment()
             textAttachment777.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_Journals1.png")!
             oldWidth = textAttachment777.image!.size.width
-            scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment777)
             print(configurationTextView.text.unicodeScalars.count)
@@ -590,8 +585,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             configurationTextView.setContentOffset(
                 CGPoint(x: 0, y: -configurationTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 8: // 仕訳を入力する
             journalEntryTextView.isHidden = false
             let baseString = journalEntryTextView.text
@@ -600,7 +595,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "ViewControllerJournalEntry.png")!
             let oldWidth = textAttachment666.image!.size.width
-            let scaleFactor = oldWidth / (journalEntryTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            let scaleFactor = oldWidth / (journalEntryTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             let attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(journalEntryTextView.text.unicodeScalars.count)
@@ -622,8 +617,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             journalEntryTextView.setContentOffset(
                 CGPoint(x: 0, y: -journalEntryTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 9: // 仕訳を修正する
             journalEntryEditTextView.isHidden = false
             let baseString = journalEntryEditTextView.text
@@ -632,7 +627,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "TableViewControllerJournals.png")!
             var oldWidth = textAttachment666.image!.size.width
-            var scaleFactor = oldWidth / (journalEntryEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (journalEntryEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(journalEntryEditTextView.text.unicodeScalars.count)
@@ -641,7 +636,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment777 = NSTextAttachment()
             textAttachment777.image = UIImage(named: "TableViewControllerJournals1.png")!
             oldWidth = textAttachment777.image!.size.width
-            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment777)
             print(setUpAccountEditTextView.text.unicodeScalars.count)
@@ -663,8 +658,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             journalEntryEditTextView.setContentOffset(
                 CGPoint(x: 0, y: -journalEntryEditTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 10: // 仕訳を削除する
             journalEntryDeleteTextView.isHidden = false
             let baseString = journalEntryDeleteTextView.text
@@ -673,7 +668,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "TableViewControllerJournals.png")!
             var oldWidth = textAttachment666.image!.size.width
-            var scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(journalEntryDeleteTextView.text.unicodeScalars.count)
@@ -682,7 +677,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment777 = NSTextAttachment()
             textAttachment777.image = UIImage(named: "TableViewControllerJournals2.png")!
             oldWidth = textAttachment777.image!.size.width
-            scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment777)
             print(journalEntryDeleteTextView.text.unicodeScalars.count)
@@ -691,7 +686,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment888 = NSTextAttachment()
             textAttachment888.image = UIImage(named: "TableViewControllerJournals3.png")!
             oldWidth = textAttachment888.image!.size.width
-            scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment888.image = UIImage.init(cgImage: textAttachment888.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment888)
             print(journalEntryDeleteTextView.text.unicodeScalars.count)
@@ -713,8 +708,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             journalEntryDeleteTextView.setContentOffset(
                 CGPoint(x: 0, y: -journalEntryDeleteTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         case 11: // 入力した取引を確認しよう
             journalsTextView.isHidden = false
             let baseString = journalsTextView.text
@@ -723,7 +718,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment666 = NSTextAttachment()
             textAttachment666.image = UIImage(named: "TableViewControllerJournals4.png")!
             var oldWidth = textAttachment666.image!.size.width
-            var scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            var scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
             print(journalsTextView.text.unicodeScalars.count)
@@ -732,7 +727,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment777 = NSTextAttachment()
             textAttachment777.image = UIImage(named: "TableViewControllerGeneralLedger.png")!
             oldWidth = textAttachment777.image!.size.width
-            scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment777)
             print(journalsTextView.text.unicodeScalars.count)
@@ -741,7 +736,7 @@ class SettingsHelpDetailViewController: UIViewController {
             let textAttachment888 = NSTextAttachment()
             textAttachment888.image = UIImage(named: "TableViewControllerGeneralLedger1.png")!
             oldWidth = textAttachment888.image!.size.width
-            scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20)*3; //for the padding inside the textView
+            scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
             textAttachment888.image = UIImage.init(cgImage: textAttachment888.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
             attrStringWithImage = NSAttributedString(attachment: textAttachment888)
             print(journalsTextView.text.unicodeScalars.count)
@@ -763,8 +758,8 @@ class SettingsHelpDetailViewController: UIViewController {
             self.view.layoutIfNeeded()    // 追加
             journalsTextView.setContentOffset(
                 CGPoint(x: 0, y: -journalsTextView.contentInset.top),
-                animated: false)
-
+                animated: false
+            )
         default:
             break
         }
@@ -789,5 +784,9 @@ class SettingsHelpDetailViewController: UIViewController {
                 gADBannerView.isHidden = true
             }
         }
+    }
+
+    @IBAction func closeButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

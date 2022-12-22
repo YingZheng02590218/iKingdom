@@ -11,20 +11,19 @@ import EMTNeumorphicView
 
 // よく使う仕訳クラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
-
-//    @IBOutlet var titleLabel: UILabel!
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         // UIパーツを作成
         createTextFieldForNickname() // テキストフィールド　ニックネームを作成
-
+        
         if journalEntryType == "SettingsJournalEntries" {
             labelTitle.text = "よく使う仕訳"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
@@ -45,19 +44,19 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             textFieldSmallWritting.text = objects[tappedIndexPath.row].smallWritting
         }
         
-//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
-//            carouselCollectionView.isHidden = true
-//        }
+        //        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
+        //            carouselCollectionView.isHidden = true
+        //        }
         
-//        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
-//            buttonLeft.isHidden = true
-//            datePicker.isHidden = true
-//            buttonRight.isHidden = true
-//            dateLabel.isHidden = true
-//            nicknameTextField.isHidden = false
-//        } else {
-//            nicknameTextField.isHidden = true
-//        }
+        //        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
+        //            buttonLeft.isHidden = true
+        //            datePicker.isHidden = true
+        //            buttonRight.isHidden = true
+        //            dateLabel.isHidden = true
+        //            nicknameTextField.isHidden = false
+        //        } else {
+        //            nicknameTextField.isHidden = true
+        //        }
         
         // 金額　電卓画面で入力した値を表示させる
         if let numbersOnDisplay = numbersOnDisplay {
@@ -67,26 +66,26 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         
     }
     
-    @IBOutlet var nicknameTextField: UITextField!
+    @IBOutlet private var nicknameTextField: UITextField!
     // TextField作成 ニックネーム
     func createTextFieldForNickname() {
         nicknameTextField.delegate = self
         nicknameTextField.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
         nicknameTextField.tintColor = UIColor.accentColor
-// toolbar 小書き Done:Tag Cancel:Tag
-       let toolbar = UIToolbar()
-       toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
-//       toolbar.backgroundColor = UIColor.clear// 名前で指定する
-//       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
-       toolbar.isTranslucent = true
-//       toolbar.barStyle = .default
-       let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
-       doneButtonItem.tag = 8
-       let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-       let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
-       cancelItem.tag = 88
-       toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
+        // toolbar 小書き Done:Tag Cancel:Tag
+        let toolbar = UIToolbar()
+        toolbar.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!, height: 44)
+        //       toolbar.backgroundColor = UIColor.clear// 名前で指定する
+        //       toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)// RGBで指定する    alpha 0透明　1不透明
+        toolbar.isTranslucent = true
+        //       toolbar.barStyle = .default
+        let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
+        doneButtonItem.tag = 8
+        let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
+        cancelItem.tag = 88
+        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
         nicknameTextField.inputAccessoryView = toolbar
         
         nicknameTextField.layer.borderWidth = 0.5
@@ -183,8 +182,8 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }
     }
     // 削除ボタン
-    @IBOutlet var deleteButton: EMTNeumorphicButton!
-
+    @IBOutlet private var deleteButton: EMTNeumorphicButton!
+    
     @IBAction func deleteButton(_ sender: Any) {
         // 確認のポップアップを表示したい
         self.showPopover()

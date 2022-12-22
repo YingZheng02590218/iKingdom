@@ -184,7 +184,6 @@ private extension AnnotationViewControllerJournals {
             print(controller.viewControllers[0])
             return controller.viewControllers[0]
         }
-        print(presentingViewController)
         return presentingViewController
     }
     // テーブルビューのセルを取得
@@ -196,7 +195,6 @@ private extension AnnotationViewControllerJournals {
             print(controller.viewControllers[0])
             return controller.viewControllers[0]
         }
-        print(presentingViewController)
         return presentingViewController
     }
 

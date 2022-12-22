@@ -27,39 +27,39 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     
     public static let shared = DataBaseManagerSettingsTaxonomy()
     // private let serialQueue = DispatchQueue(label: "serialQueue") 2022/03/15 修正　v2.0.2の変更でこのコードが書かれているので、v2.0.6までの間に初期化処理を行なったユーザーの初期化処理は失敗しているはず。
-
-//    let objects0100: Results<DataBaseSettingsTaxonomy>?
-//    let objects0102: Results<DataBaseSettingsTaxonomy>?
-//    let objects0114: Results<DataBaseSettingsTaxonomy>?
-//    let objects0115: Results<DataBaseSettingsTaxonomy>?
-//    let objects0129: Results<DataBaseSettingsTaxonomy>?
-//    let objects01210: Results<DataBaseSettingsTaxonomy>?
-//    let objects01211: Results<DataBaseSettingsTaxonomy>?
-//    let objects01213: Results<DataBaseSettingsTaxonomy>?
-//    let objects010142: Results<DataBaseSettingsTaxonomy>?
-//    let objects010143: Results<DataBaseSettingsTaxonomy>?
-//    let objects010144: Results<DataBaseSettingsTaxonomy>?
-//
-//    private init() {
-//        // 階層3　中区分ごとの数を取得
-//        objects0100 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "0") // 流動資産
-//        objects0102 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "2") // 繰延資産
-//        objects0114 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "4") // 流動負債
-//        objects0115 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "5") // 固定負債
-//        objects0129 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "9") //株主資本14
-//        objects01210 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "10") //評価・換算差額等15
-//        //            0    1    2    11                    新株予約権
-//        //            0    1    2    12                    自己新株予約権
-//        //            0    1    2    13                    非支配株主持分
-//        //            0    1    2    14                    少数株主持分
-//        objects01211 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "11")//新株予約権16
-//        objects01213 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "13")//非支配株主持分22
-//        // 階層4 小区分
-//        objects010142 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "42") // 有形固定資産3
-//        objects010143 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
-//        objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
-//    }
-//
+    
+    //    let objects0100: Results<DataBaseSettingsTaxonomy>?
+    //    let objects0102: Results<DataBaseSettingsTaxonomy>?
+    //    let objects0114: Results<DataBaseSettingsTaxonomy>?
+    //    let objects0115: Results<DataBaseSettingsTaxonomy>?
+    //    let objects0129: Results<DataBaseSettingsTaxonomy>?
+    //    let objects01210: Results<DataBaseSettingsTaxonomy>?
+    //    let objects01211: Results<DataBaseSettingsTaxonomy>?
+    //    let objects01213: Results<DataBaseSettingsTaxonomy>?
+    //    let objects010142: Results<DataBaseSettingsTaxonomy>?
+    //    let objects010143: Results<DataBaseSettingsTaxonomy>?
+    //    let objects010144: Results<DataBaseSettingsTaxonomy>?
+    //
+    //    private init() {
+    //        // 階層3　中区分ごとの数を取得
+    //        objects0100 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "0") // 流動資産
+    //        objects0102 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "0",category3: "2") // 繰延資産
+    //        objects0114 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "4") // 流動負債
+    //        objects0115 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "1",category3: "5") // 固定負債
+    //        objects0129 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "9") //株主資本14
+    //        objects01210 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "10") //評価・換算差額等15
+    //        //            0    1    2    11                    新株予約権
+    //        //            0    1    2    12                    自己新株予約権
+    //        //            0    1    2    13                    非支配株主持分
+    //        //            0    1    2    14                    少数株主持分
+    //        objects01211 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "11")//新株予約権16
+    //        objects01213 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0",category1: "1",category2: "2",category3: "13")//非支配株主持分22
+    //        // 階層4 小区分
+    //        objects010142 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "42") // 有形固定資産3
+    //        objects010143 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "43") // 無形固定資産4
+    //        objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
+    //    }
+    //
     // 初期化
     func initializeSettingsTaxonomy() {
         // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
@@ -99,9 +99,9 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
-                            .filter("abstract == \(false)")
-//        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-//                            .filter("switching == \(true)") // 不要　2020/08/02
+            .filter("abstract == \(false)")
+        //        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+        //                            .filter("switching == \(true)") // 不要　2020/08/02
         if objects.isEmpty {
             print("ゼロ　getAllSettingsTaxonomy")
         }
@@ -112,8 +112,8 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
-                            .filter("abstract == \(false)")
-                            .filter("switching == \(true)")
+            .filter("abstract == \(false)")
+            .filter("switching == \(true)")
         if objects.isEmpty {
             print("ゼロ　getAllSettingsTaxonomy")
         }
@@ -125,8 +125,8 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-//        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-//                            .filter("switching == \(true)") // 不要　2020/08/02
+        //        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+        //                            .filter("switching == \(true)") // 不要　2020/08/02
         if objects.isEmpty {
             print("ゼロ　getAllSettingsCategoryBSAndPLSwitichON")
         }
@@ -137,54 +137,54 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category0 LIKE '\(section)'") // 決算書の種類　貸借対照表とか損益計算書に絞る
-//                        .filter("category1 LIKE '\(1)'") // 2020/10/13 階層1で絞る
-//                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+        //                        .filter("category1 LIKE '\(1)'") // 2020/10/13 階層1で絞る
+        //                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
         if objects.isEmpty {
             print("ゼロ　getBigCategoryAll")
         }
         return objects
     }
     // 取得 設定表示科目　大区分別　階層2
-    func getBigCategory(category0: String,category1: String,category2: String) -> Results<DataBaseSettingsTaxonomy> {
+    func getBigCategory(category0: String, category1: String, category2: String) -> Results<DataBaseSettingsTaxonomy> {
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category0 LIKE '\(category0)'")
-                        .filter("category1 LIKE '\(category1)'")
-                        .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-                        .filter("switching == \(true)") // 2020/10/01
-                        .filter("abstract == \(false)") // 2020/10/01
+            .filter("category1 LIKE '\(category1)'")
+            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
+            .filter("switching == \(true)") // 2020/10/01
+            .filter("abstract == \(false)") // 2020/10/01
         if objects.isEmpty {
             print("ゼロ　getBigCategory")
         }
         return objects
     }
     // 取得　設定表示科目 中区分別　階層3 抽象区分以外
-    func getMiddleCategory(category0: String,category1: String,category2: String,category3: String) -> Results<DataBaseSettingsTaxonomy> {
+    func getMiddleCategory(category0: String, category1: String, category2: String, category3: String) -> Results<DataBaseSettingsTaxonomy> {
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self) // モデル
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         objects = objects.filter("category0 LIKE '\(category0)'")
-                        .filter("category1 LIKE '\(category1)'")
-                        .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-                        .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
-//                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-                        .filter("switching == \(true)") // いる？　2020/09/23 要る　2020/09/29
-                        .filter("abstract == \(false)")
+            .filter("category1 LIKE '\(category1)'")
+            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
+            .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
+        //                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+            .filter("switching == \(true)") // いる？　2020/09/23 要る　2020/09/29
+            .filter("abstract == \(false)")
         if objects.isEmpty {
             print("ゼロ　getMiddleCategory", category0, category1, category2, category3)
         }
         return objects
     }
     // 取得　設定表示科目　小区分別　階層4 抽象区分以外
-    func getSmallCategory(category0: String,category1: String,category2: String,category3: String,category4: String) -> Results<DataBaseSettingsTaxonomy> {
+    func getSmallCategory(category0: String, category1: String, category2: String, category3: String, category4: String) -> Results<DataBaseSettingsTaxonomy> {
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         objects = objects.filter("category0 LIKE '\(category0)'")
-                        .filter("category1 LIKE '\(category1)'")
-                        .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-                        .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
-                        .filter("category4 LIKE '\(category4)'")
-                        .filter("switching == \(true)") // 2020/09/29
-                        .filter("abstract == \(false)")
+            .filter("category1 LIKE '\(category1)'")
+            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
+            .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
+            .filter("category4 LIKE '\(category4)'")
+            .filter("switching == \(true)") // 2020/09/29
+            .filter("abstract == \(false)")
         if objects.isEmpty {
             print("ゼロ　getSmallCategory", category0, category1, category2, category3, category4)
         }
@@ -204,18 +204,18 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         print("表示科目: ", numberOfTaxonomy)
         let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
         do {
-        if objects.isEmpty { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
-            // (2)書き込みトランザクション内でデータを更新する
-            try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": numberOfTaxonomy, "switching": false]
-                DataBaseManager.realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
+            if objects.isEmpty { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
+                // (2)書き込みトランザクション内でデータを更新する
+                try DataBaseManager.realm.write {
+                    let value: [String: Any] = ["number": numberOfTaxonomy, "switching": false]
+                    DataBaseManager.realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
+                }
+            } else {
+                try DataBaseManager.realm.write {
+                    let value: [String: Any] = ["number": numberOfTaxonomy, "switching": true]
+                    DataBaseManager.realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
+                }
             }
-        } else {
-            try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": numberOfTaxonomy, "switching": true]
-                DataBaseManager.realm.create(DataBaseSettingsTaxonomy.self, value: value, update: .modified) // 一部上書き更新
-            }
-        }
         } catch {
             print("エラーが発生しました")
         }

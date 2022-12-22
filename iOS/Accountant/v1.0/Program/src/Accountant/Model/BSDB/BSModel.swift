@@ -43,7 +43,7 @@ class BSModel: BSModelInput {
         let objects0102 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "0", category3: "2") // 繰延資産
         let objects0114 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "1", category3: "4") // 流動負債
         let objects0115 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "1", category3: "5") // 固定負債
-        let objects0129 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "2", category3: "9") //株主資本14
+        let objects0129 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "2", category3: "9") // 株主資本14
         let objects01210 = DataBaseManagerSettingsTaxonomy.shared.getMiddleCategory(category0: "0", category1: "1", category2: "2", category3: "10") // 評価・換算差額等15
         //            0    1    2    11                    新株予約権
         //            0    1    2    12                    自己新株予約権

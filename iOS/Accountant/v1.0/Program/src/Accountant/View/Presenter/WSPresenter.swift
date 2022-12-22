@@ -17,8 +17,9 @@ protocol WSPresenterInput {
     var theDayOfReckoning: String? { get }
     
     var numberOfobjects: Int { get }
-    func objects(forRow row: Int) -> DataBaseSettingsTaxonomyAccount
     var numberOfobjectss: Int { get }
+
+    func objects(forRow row: Int) -> DataBaseSettingsTaxonomyAccount
     func objectss(forRow row: Int) -> DataBaseSettingsTaxonomyAccount
     
     func viewDidLoad()
@@ -77,8 +78,8 @@ final class WSPresenter: WSPresenterInput {
         model.initialize()
 
         let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) //期中の仕訳の勘定科目を取得
-        objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) //修正記入の勘定科目を取得
+        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) // 期中の仕訳の勘定科目を取得
+        objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) // 修正記入の勘定科目を取得
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         object = dataBaseManagerFinancialStatements.getFinancialStatements()
@@ -106,17 +107,19 @@ final class WSPresenter: WSPresenterInput {
     }
     
     var numberOfobjects: Int {
-        return objects.count
+        objects.count
     }
+
     func objects(forRow row: Int) -> DataBaseSettingsTaxonomyAccount {
-        return objects[row]
+        objects[row]
     }
     
     var numberOfobjectss: Int {
-        return objectss.count
+        objectss.count
     }
+
     func objectss(forRow row: Int) -> DataBaseSettingsTaxonomyAccount {
-        return objectss[row]
+        objectss[row]
     }
     
     func refreshTable() {
@@ -126,79 +129,79 @@ final class WSPresenter: WSPresenterInput {
         view.reloadData()
     }
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
-    func getTotalAmount(account: String, leftOrRight: Int) -> String { // TODO: 戻り値をカンマ追加後のStringに変換してから返す
-
-        return model.getTotalAmount(account: account, leftOrRight: leftOrRight)
+    func getTotalAmount(account: String, leftOrRight: Int) -> String {
+        // TODO: 戻り値をカンマ追加後のStringに変換してから返す
+        model.getTotalAmount(account: account, leftOrRight: leftOrRight)
     }
     // 取得　決算整理仕訳　勘定クラス　合計、残高　勘定別の決算整理仕訳の合計額
     func getTotalAmountAdjusting(account: String, leftOrRight: Int) -> String {
 
-        return model.getTotalAmountAdjusting(account: account, leftOrRight: leftOrRight)
+        model.getTotalAmountAdjusting(account: account, leftOrRight: leftOrRight)
     }
     // 取得　決算整理後　勘定クラス　合計、残高　勘定別の決算整理後の合計額
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> String {
         
-        return model.getTotalAmountAfterAdjusting(account: account, leftOrRight: leftOrRight)
+        model.getTotalAmountAfterAdjusting(account: account, leftOrRight: leftOrRight)
     }
-    //借方　合計　集計
+    // 借方　合計　集計
     func debit_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.compoundTrialBalance!.debit_total_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_total_total)
     }
-    //貸方　合計　集計
+    // 貸方　合計　集計
     func credit_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.compoundTrialBalance!.credit_total_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_total_total)
     }
-    //借方　残高　集計
+    // 借方　残高　集計
     func debit_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.compoundTrialBalance!.debit_balance_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_balance_total)
     }
-    //貸方　残高　集計
+    // 貸方　残高　集計
     func credit_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.compoundTrialBalance!.credit_balance_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_balance_total)
     }
     
     func netIncomeOrNetLossLoss() -> String {
         
-        return StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない
+        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない
     }
     
     func netIncomeOrNetLossIncome() -> String {
         
-        return StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない
+        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない
     }
     // 修正記入 借方
     func debit_adjustingEntries_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.debit_adjustingEntries_total_total) // 残高ではなく合計
+        StringUtility.shared.setComma(amount: object.workSheet!.debit_adjustingEntries_total_total) // 残高ではなく合計
     }
     // 修正記入　貸方
     func credit_adjustingEntries_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.credit_adjustingEntries_total_total) // 残高ではなく合計
+        StringUtility.shared.setComma(amount: object.workSheet!.credit_adjustingEntries_total_total) // 残高ではなく合計
     }
     // 貸借対照表 借方
     func debit_BS_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する
+        StringUtility.shared.setComma(amount: object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する
     }
     // 貸借対照表　貸方
     func credit_BS_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する
+        StringUtility.shared.setComma(amount: object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する
     }
     // 損益計算書 借方
     func debit_PL_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss)// 当期純利益と合計借方とを足す
+        StringUtility.shared.setComma(amount: object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss)// 当期純利益と合計借方とを足す
     }
     // 損益計算書　貸方
     func credit_PL_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount:object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome)// 当期純損失と合計貸方とを足す
+        StringUtility.shared.setComma(amount: object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome)// 当期純損失と合計貸方とを足す
     }
     
 }

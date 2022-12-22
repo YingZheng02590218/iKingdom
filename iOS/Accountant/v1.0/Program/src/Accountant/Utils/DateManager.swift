@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class DateManager {
     
     public static let shared = DateManager()
@@ -29,7 +28,7 @@ class DateManager {
         formatter.locale = Locale(identifier: "en_US_POSIX")
     }
     
-    let now :Date = Date() // UTC時間なので　9時間ずれる
+    let now = Date() // UTC時間なので　9時間ずれる
     let dateFormatter = DateFormatter() // 年/月/日
     let dateFormatteryyyyMMddHHmmss = DateFormatter() // 年-月-日 時分秒
     let dateFormatterHHmmss = DateFormatter() // 時分秒
@@ -70,6 +69,6 @@ class DateManager {
 
     func getDate() -> String {
 
-        return formatter.string(from: Date())
+        formatter.string(from: Date())
     }
 }

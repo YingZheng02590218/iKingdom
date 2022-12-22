@@ -172,7 +172,6 @@ private extension AnnotationViewControllerJournalEntry {
             print(controller)
             return controller
         }
-        print(presentingViewController)
         return presentingViewController
     }
     

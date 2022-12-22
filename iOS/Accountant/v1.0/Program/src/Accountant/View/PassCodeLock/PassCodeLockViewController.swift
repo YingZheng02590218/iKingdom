@@ -12,7 +12,7 @@ class PassCodeLockViewController: UIViewController {
 
     // MARK: - var let
 
-    @IBOutlet var label: UILabel!
+    @IBOutlet private var label: UILabel!
     
     // MARK: - Life cycle
 

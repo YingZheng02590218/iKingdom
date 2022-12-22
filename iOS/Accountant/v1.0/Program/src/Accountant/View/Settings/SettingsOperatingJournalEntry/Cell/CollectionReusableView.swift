@@ -6,13 +6,13 @@
 //  Copyright © 2021 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EMTNeumorphicView
+import UIKit
 
 class CollectionReusableView: UICollectionReusableView {
 
     @IBOutlet var sectionLabel: UILabel!
-    @IBOutlet var addButton: EMTNeumorphicButton!
+    @IBOutlet private var addButton: EMTNeumorphicButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

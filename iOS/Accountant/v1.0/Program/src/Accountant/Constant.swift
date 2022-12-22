@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Constant {
+enum Constant {
 
     // MARK: - マネタイズ対応
 

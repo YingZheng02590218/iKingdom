@@ -12,7 +12,7 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
 
     // MARK: - Variable/Let
     
-    @IBOutlet var addBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var addBarButtonItem: UIBarButtonItem!
     
     // MARK: - LifeCycle
 

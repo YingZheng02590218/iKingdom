@@ -13,8 +13,7 @@ class CarouselTabCollectionViewCell: UICollectionViewCell {
     @IBOutlet var label: UILabel!
     @IBOutlet var view: UIView! // 洗濯中のマーク
     @IBOutlet var coverEfect: UIView! // 選択中以外にエフェクトをかける
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // セルの背景色を変える
@@ -25,7 +24,6 @@ class CarouselTabCollectionViewCell: UICollectionViewCell {
         // セルを角丸にする
         self.contentView.layer.cornerRadius = 10
     }
-    
     
     override var isSelected: Bool {
         didSet {

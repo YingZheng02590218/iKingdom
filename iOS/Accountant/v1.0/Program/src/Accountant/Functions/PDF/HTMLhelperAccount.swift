@@ -330,16 +330,18 @@ struct HTMLhelperAccount {
     """
     }
     
-    func getSingleRow(month: String,
-                      day: String,
-                      debitCategory: String,
-                      debitAmount: Int64,
-                      creditCategory: String,
-                      creditAmount: Int64,
-                      correspondingAccounts: String,
-                      numberOfAccount: Int,
-                      balanceAmount: Int64,
-                      balanceDebitOrCredit: String) -> String {
+    func getSingleRow(
+        month: String,
+        day: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        correspondingAccounts: String,
+        numberOfAccount: Int,
+        balanceAmount: Int64,
+        balanceDebitOrCredit: String
+    ) -> String {
         // 摘要は勘定科目を右寄せか左よせを分岐する
         if correspondingAccounts == debitCategory {
             return """

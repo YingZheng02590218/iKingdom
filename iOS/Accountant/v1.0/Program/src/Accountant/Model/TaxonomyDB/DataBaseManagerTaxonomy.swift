@@ -13,7 +13,7 @@ import RealmSwift
 class DataBaseManagerTaxonomy {
     
     public static let shared = DataBaseManagerTaxonomy()
-
+    
     // 初期化
     func initializeTaxonomy() {
         // 設定表示科目
@@ -29,7 +29,7 @@ class DataBaseManagerTaxonomy {
         var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
         objects = objects.filter("numberOfTaxonomy LIKE '\(numberOfTaxonomy)'")
         if objects.isEmpty {
-//            print("ゼロ　getAccountsInTaxonomy", numberOfTaxonomy)
+            //            print("ゼロ　getAccountsInTaxonomy", numberOfTaxonomy)
         } else {
             print("getAccountsInTaxonomy", numberOfTaxonomy)
         }
@@ -38,16 +38,17 @@ class DataBaseManagerTaxonomy {
     // 取得　設定表示科目　設定表示科目の名称
     func getNameOfSettingsTaxonomy(number: Int) -> String {
         if let object = DataBaseManager.realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: number) {
-        return object.category
+            return object.category
         }
         return ""
     }
+    
     /**
-    * 表示科目　読込みメソッド
-    * 表示名別の合計をデータベースから読み込む。
-    * @param number 設定表示科目の連番
-    * @return result 合計額
-    */
+     * 表示科目　読込みメソッド
+     * 表示名別の合計をデータベースから読み込む。
+     * @param number 設定表示科目の連番
+     * @return result 合計額
+     */
     // 取得 表示科目　表示名別の合計
     func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
@@ -67,11 +68,11 @@ class DataBaseManagerTaxonomy {
         return StringUtility.shared.setComma(amount: result)
     }
     /**
-    * 表示科目　書込みメソッド
-    * 表示科目別の合計額をデータベースに書き込む。
-    * @param number 設定表示科目の連番
-    * @return なし
-    */
+     * 表示科目　書込みメソッド
+     * 表示科目別の合計額をデータベースに書き込む。
+     * @param number 設定表示科目の連番
+     * @return なし
+     */
     func setTotalOfTaxonomy(numberOfSettingsTaxonomy: Int) {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
@@ -81,50 +82,54 @@ class DataBaseManagerTaxonomy {
         // 計算
         let bSAndPLCategoryTotalAmount = culculatAmountOfTaxonomy(numberOfTaxonomy: numberOfSettingsTaxonomy) // 五大区分は表示科目の階層2ではなく、勘定科目の大区分を使用する
         if let objectss = object.dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy {
-        // 貸借対照表のなかの表示科目で、計算したい表示科目と同じ場合
-        for i in 0..<objectss.count where objectss[i].numberOfTaxonomy == numberOfSettingsTaxonomy && i == (objectss[i].number % objectss.count) - 1 {
-            do {
-            // (2)書き込みトランザクション内でデータを追加する
-            try DataBaseManager.realm.write {
-                print(bSAndPLCategoryTotalAmount)
-                objectss[i].total = bSAndPLCategoryTotalAmount
+            // 貸借対照表のなかの表示科目で、計算したい表示科目と同じ場合
+            for i in 0..<objectss.count where objectss[i].numberOfTaxonomy == numberOfSettingsTaxonomy && i == (objectss[i].number % objectss.count) - 1 {
+                do {
+                    // (2)書き込みトランザクション内でデータを追加する
+                    try DataBaseManager.realm.write {
+                        print(bSAndPLCategoryTotalAmount)
+                        objectss[i].total = bSAndPLCategoryTotalAmount
+                    }
+                } catch {
+                    print("エラーが発生しました")
+                }
             }
-            } catch {
-                print("エラーが発生しました")
-            }
-        }
         }
     }
     /**
-    * 表示科目　計算メソッド
-    * 表示名に該当する勘定の合計を計算して合計額を返す。
-    * @param number 設定表示科目の連番
-    * @return BSAndPLCategoryTotalAmount 合計額
-    */
+     * 表示科目　計算メソッド
+     * 表示名に該当する勘定の合計を計算して合計額を返す。
+     * @param number 設定表示科目の連番
+     * @return BSAndPLCategoryTotalAmount 合計額
+     */
     func culculatAmountOfTaxonomy(numberOfTaxonomy: Int) -> Int64 {
         // 設定表示科目に紐づけられた設定勘定科目を取得する
         let objects = getAccountsInTaxonomy(numberOfTaxonomy: numberOfTaxonomy)
         var BSAndPLCategoryTotalAmount: Int64 = 0            // 累計額
         // オブジェクトを作成 勘定
-        for i in 0..<objects.count where //表示科目に該当する勘定の金額を合計する
+        for i in 0..<objects.count where // 表示科目に該当する勘定の金額を合計する
         !objects[i].category.isEmpty { // ここで空白が入っている　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
-                let totalAmount = getTotalAmount(account: objects[i].category)
-                let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: Int(objects[i].Rank0)!, midCategory: Int(objects[i].Rank1) ?? 999, account: objects[i].category) // big_categoryは、表示科目の階層2ではなく勘定科目の大区分を使う　2020/11/09
-                if totalDebitOrCredit == "-"{
-                    BSAndPLCategoryTotalAmount -= totalAmount
-                } else {
-                    BSAndPLCategoryTotalAmount += totalAmount
-                }
+            let totalAmount = getTotalAmount(account: objects[i].category)
+            let totalDebitOrCredit = getTotalDebitOrCredit(
+                bigCategory: Int(objects[i].Rank0)!,
+                midCategory: Int(objects[i].Rank1) ?? 999,
+                account: objects[i].category
+            ) // big_categoryは、表示科目の階層2ではなく勘定科目の大区分を使う　2020/11/09
+            if totalDebitOrCredit == "-"{
+                BSAndPLCategoryTotalAmount -= totalAmount
+            } else {
+                BSAndPLCategoryTotalAmount += totalAmount
+            }
         }
         return BSAndPLCategoryTotalAmount
     }
     /**
-    * 合計　取得メソッド
-    * 勘定の借方の合計と貸方の合計でより大きい方の合計を返す。
-    * @param account 勘定名
-    * @return debit_total 借方合計　決算整理後
-    * @return  credit_total 貸方合計　決算整理後
-    */
+     * 合計　取得メソッド
+     * 勘定の借方の合計と貸方の合計でより大きい方の合計を返す。
+     * @param account 勘定名
+     * @return debit_total 借方合計　決算整理後
+     * @return  credit_total 貸方合計　決算整理後
+     */
     func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
         // 引数に空白が入るのでインデックスエラーとなる　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
@@ -147,29 +152,29 @@ class DataBaseManagerTaxonomy {
         return result
     }
     /**
-    * 借又貸　取得メソッド
-    * @param big_category 大分類名
-    * @param account 勘定名
-    * @return "-" マイナス
-    * @return  "" プラス
-    */
+     * 借又貸　取得メソッド
+     * @param big_category 大分類名
+     * @param account 勘定名
+     * @return "-" マイナス
+     * @return  "" プラス
+     */
     func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
+        
         if let objectss = object.dataBaseGeneralLedger {
             // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
             for i in 0..<objectss.dataBaseAccounts.count where objectss.dataBaseAccounts[i].accountName == account {
-                    // 借方と貸方で金額が大きい方はどちらか
-                    if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                        debitOrCredit = "借"
-                    } else if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                        debitOrCredit = "貸"
-                    } else {
-                        debitOrCredit = "-"
-                    }
+                // 借方と貸方で金額が大きい方はどちらか
+                if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    debitOrCredit = "借"
+                } else if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    debitOrCredit = "貸"
+                } else {
+                    debitOrCredit = "-"
+                }
             }
             switch bigCategory {
             case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
@@ -258,7 +263,7 @@ class DataBaseManagerTaxonomy {
             }
             return object.dataBaseAccountingBooks[object.dataBaseAccountingBooks.count - 1].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.isEmpty // 成功したら true まだ失敗時の動きは確認していない
         }
-
+        
         return false
     }
 }

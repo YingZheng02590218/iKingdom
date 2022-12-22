@@ -6,41 +6,40 @@
 //  Copyright © 2021 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EMTNeumorphicView
+import UIKit
 
 class ClassicCalculatorViewController: UIViewController {
 
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var labelView: EMTNeumorphicView!
+    @IBOutlet private var label: UILabel!
     
-    @IBOutlet var backgroundView: EMTNeumorphicView!
-    @IBOutlet var labelView: EMTNeumorphicView!
-    @IBOutlet var label: UILabel!
+    @IBOutlet private var button1: EMTNeumorphicButton!
+    @IBOutlet private var button2: EMTNeumorphicButton!
+    @IBOutlet private var button3: EMTNeumorphicButton!
+    @IBOutlet private var button4: EMTNeumorphicButton!
+    @IBOutlet private var button5: EMTNeumorphicButton!
+    @IBOutlet private var button6: EMTNeumorphicButton!
+    @IBOutlet private var button7: EMTNeumorphicButton!
+    @IBOutlet private var button8: EMTNeumorphicButton!
+    @IBOutlet private var button9: EMTNeumorphicButton!
+    @IBOutlet private var button0: EMTNeumorphicButton!
     
-    @IBOutlet var button1: EMTNeumorphicButton!
-    @IBOutlet var button2: EMTNeumorphicButton!
-    @IBOutlet var button3: EMTNeumorphicButton!
-    @IBOutlet var button4: EMTNeumorphicButton!
-    @IBOutlet var button5: EMTNeumorphicButton!
-    @IBOutlet var button6: EMTNeumorphicButton!
-    @IBOutlet var button7: EMTNeumorphicButton!
-    @IBOutlet var button8: EMTNeumorphicButton!
-    @IBOutlet var button9: EMTNeumorphicButton!
-    @IBOutlet var button0: EMTNeumorphicButton!
+    @IBOutlet private var buttonAc: EMTNeumorphicButton!
+    @IBOutlet private var buttonPlusMinus: UIButton!
+    @IBOutlet private var buttonPercent: UIButton!
     
-    @IBOutlet var buttonAc: EMTNeumorphicButton!
-    @IBOutlet var buttonPlusMinus: UIButton!
-    @IBOutlet var buttonPercent: UIButton!
+    @IBOutlet private var buttonDivied: EMTNeumorphicButton!
+    @IBOutlet private var buttonMultiple: EMTNeumorphicButton!
+    @IBOutlet private var buttonMinus: EMTNeumorphicButton!
+    @IBOutlet private var buttonPlus: EMTNeumorphicButton!
     
-    @IBOutlet var buttonDivied: EMTNeumorphicButton!
-    @IBOutlet var buttonMultiple: EMTNeumorphicButton!
-    @IBOutlet var buttonMinus: EMTNeumorphicButton!
-    @IBOutlet var buttonPlus: EMTNeumorphicButton!
-    
-    @IBOutlet var buttonDot: UIButton!
-    @IBOutlet var buttonEqual: EMTNeumorphicButton!
+    @IBOutlet private var buttonDot: UIButton!
+    @IBOutlet private var buttonEqual: EMTNeumorphicButton!
     
     /// 演算の種類
-    var hugoBox: FourArithmeticOperations = .undefined //String?
+    var hugoBox: FourArithmeticOperations = .undefined // String?
     /// 1つ目の値
     var box1: Int = DecimalNumbers.zero.rawValue
     /// 2つ目の値
@@ -130,8 +129,7 @@ class ClassicCalculatorViewController: UIViewController {
         button3.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button3.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
 
-        
-        
+
         button4.setTitle("4", for: .normal)
         button4.setTitleColor(.textColor, for: .normal)
         button4.neumorphicLayer?.cornerRadius = button4.frame.height / 2.2
@@ -168,8 +166,7 @@ class ClassicCalculatorViewController: UIViewController {
         button6.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button6.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
 
-        
-        
+
         button7.setTitle("7", for: .normal)
         button7.setTitleColor(.textColor, for: .normal)
         button7.neumorphicLayer?.cornerRadius = button7.frame.height / 2.2
@@ -206,8 +203,7 @@ class ClassicCalculatorViewController: UIViewController {
         button9.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         button9.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
 
-        
-        
+
         button0.setTitle("0", for: .normal)
         button0.setTitleColor(.textColor, for: .normal)
         button0.neumorphicLayer?.cornerRadius = button0.frame.height / 2.2
@@ -276,7 +272,7 @@ class ClassicCalculatorViewController: UIViewController {
         
     }
     
-    @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
+    @IBOutlet private var arrayHugo: [EMTNeumorphicButton]!
     
     // 数字ボタンを押下
     @objc func numClick(_ sender: EMTNeumorphicButton) {
@@ -471,8 +467,7 @@ class ClassicCalculatorViewController: UIViewController {
         // 仕訳帳、決算整理仕訳、仕訳編集画面からの遷移の場合
         if let presentingViewController2 = presentingViewController as? JournalEntryViewController {
             // viewWillAppearを呼び出す　更新のため
-            self.dismiss(animated: true, completion: {
-                [presentingViewController2] () -> Void in
+            self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
                 presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
                 // フラグを立てる
@@ -496,8 +491,7 @@ class ClassicCalculatorViewController: UIViewController {
         // ナビゲーションコントローラの最前面を取得
         if let presentingViewController2 = navigationController.topViewController as? JournalEntryViewController {
             // viewWillAppearを呼び出す　更新のため
-            self.dismiss(animated: true, completion: {
-                [presentingViewController2] () -> Void in
+            self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
                 presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
                 // フラグを立てる

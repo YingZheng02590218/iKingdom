@@ -6,16 +6,13 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 class SettingsHelpViewController: UIViewController {
-
-
-    var gADBannerView: GADBannerView!
     
     @IBOutlet var textView: UITextView!
-    
+    var gADBannerView: GADBannerView!
     var urlString: String = ""
     
     override func viewDidLoad() {
@@ -144,13 +141,13 @@ class SettingsHelpViewController: UIViewController {
             }
         }
     }
-
+    
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // ③遷移先ViewCntrollerの取得
         if let navigationController = segue.destination as? UINavigationController,
            let viewController = navigationController.topViewController as? SettingsHelpDetailViewController {
-
+            
             if urlString == "Link0" {
                 print("このアプリについてのリンクがタップされました")
                 // ログ送信処理
@@ -158,7 +155,7 @@ class SettingsHelpViewController: UIViewController {
                 viewController.navigationItem.title = "このアプリについて"
                 viewController.textViewSwitchNumber = 0
             }
-
+            
             if urlString == "Link1" {
                 print("当アプリで採用した会計概念のリンクがタップされました")
                 // ログ送信処理
@@ -166,7 +163,7 @@ class SettingsHelpViewController: UIViewController {
                 viewController.navigationItem.title = "当アプリで採用した会計概念"
                 viewController.textViewSwitchNumber = 1
             }
-
+            
             if urlString == "Link2" {
                 print("簿記の基礎のリンクがタップされました")
                 // ログ送信処理
@@ -174,7 +171,7 @@ class SettingsHelpViewController: UIViewController {
                 viewController.navigationItem.title = "簿記の基礎"
                 viewController.textViewSwitchNumber = 2
             }
-
+            
             if urlString == "Link3" {
                 print("初期設定の手順のリンクがタップされました")
                 // ログ送信処理
@@ -249,7 +246,7 @@ extension SettingsHelpViewController: UITextViewDelegate {
         self.urlString = URL.absoluteString
         // 別の画面に遷移
         performSegue(withIdentifier: "toDetailScreen", sender: nil)
-
+        
         return false // 通常のURL遷移を行わない
     }
 }

@@ -43,7 +43,6 @@ class GeneralLedgerTableViewController: UITableViewController {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-    //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する

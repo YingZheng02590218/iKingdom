@@ -17,6 +17,7 @@ protocol TBPresenterInput {
     var theDayOfReckoning: String? { get }
     
     var numberOfobjects: Int { get }
+
     func objects(forRow row: Int) -> DataBaseSettingsTaxonomyAccount
 
     func viewDidLoad()
@@ -90,31 +91,32 @@ final class TBPresenter: TBPresenterInput {
     }
     
     var numberOfobjects: Int {
-        return objects.count
+        objects.count
     }
+
     func objects(forRow row: Int) -> DataBaseSettingsTaxonomyAccount {
-        return objects[row]
+        objects[row]
     }
     
-    //借方　合計　集計
+    // 借方　合計　集計
     func debit_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_total_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_total_total)
     }
-    //貸方　合計　集計
+    // 貸方　合計　集計
     func credit_total_total() -> String {
         
-        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_total_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_total_total)
     }
-    //借方　残高　集計
+    // 借方　残高　集計
     func debit_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_balance_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.debit_balance_total)
     }
-    //貸方　残高　集計
+    // 貸方　残高　集計
     func credit_balance_total() -> String {
         
-        return StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_balance_total)
+        StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_balance_total)
     }
     
     func refreshTable() {
@@ -129,6 +131,6 @@ final class TBPresenter: TBPresenterInput {
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> String {
 
-        return StringUtility.shared.setCommaForTB(amount: model.getTotalAmount(account: account, leftOrRight: leftOrRight))
+        StringUtility.shared.setCommaForTB(amount: model.getTotalAmount(account: account, leftOrRight: leftOrRight))
     }
 }

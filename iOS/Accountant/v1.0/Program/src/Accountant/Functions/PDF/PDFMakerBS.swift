@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-
 class PDFMakerBS {
-    
     
     var PDFpath: [URL]?
     
@@ -35,7 +33,7 @@ class PDFMakerBS {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: pDFsDirectory, includingPropertiesForKeys: nil) // ファイル一覧を取得
             // if you want to filter the directory contents you can do like this:
             let pdfFiles = directoryContents.filter { $0.pathExtension == "pdf" }
-            print("pdf urls: ",pdfFiles)
+            print("pdf urls: ", pdfFiles)
             let pdfFileNames = pdfFiles.map { $0.deletingPathExtension().lastPathComponent }
             print("pdf list: ", pdfFileNames)
             // ファイルのデータを取得
@@ -74,7 +72,13 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects0100 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 流動資産
@@ -87,21 +91,39 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects010142 {
-            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRowIndent2space(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.intangibleAssets.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects010143 {
-            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRowIndent2space(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         tableTopString = hTMLhelper.smallRowTop(title: BalanceSheet.NonCurrentAssets.investments.rawValue)
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects010144 {
-            let rowString = hTMLhelper.getSingleRowIndent2space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRowIndent2space(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 固定資産
@@ -112,7 +134,13 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects0102 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         // 繰延資産
@@ -132,7 +160,13 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects0114 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.currentLiabilities.getTotalAmount(), amount: bSData.currentLiabilitiesTotal)
@@ -142,7 +176,13 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects0115 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: item.number,
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.Liabilities.fixedLiabilities.getTotalAmount(), amount: bSData.fixedLiabilitiesTotal)
@@ -159,7 +199,10 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects0129 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.NetAssets.cashAndCashEquivalents.getTotalAmount(), amount: bSData.capitalStockTotal)
@@ -169,7 +212,10 @@ class PDFMakerBS {
         htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
         for item in bSData.objects01210 {
-            let rowString = hTMLhelper.getSingleRow(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)
+            ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
         middleRowEnd = hTMLhelper.middleRowEnd(title: BalanceSheet.NetAssets.accumulatedOtherComprehensiveIncome.getTotalAmount(), amount: bSData.otherCapitalSurplusesTotal)
@@ -178,7 +224,10 @@ class PDFMakerBS {
         if bSData.objects01211.isEmpty { // 新株予約権16 が0件の場合
             // tableMiddle 行数分繰り返す
             for item in bSData.objects01211 {
-                let rowString = hTMLhelper.middleRowEndIndent0space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+                let rowString = hTMLhelper.middleRowEndIndent0space(
+                    title: item.category,
+                    amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)
+                ) // TODO: 金額　取得先
                 htmlString.append(rowString)
             }
         }
@@ -186,7 +235,10 @@ class PDFMakerBS {
         if bSData.objects01213.isEmpty { // 非支配株主持分22 が0件の場合
             // tableMiddle 行数分繰り返す
             for item in bSData.objects01213 {
-                let rowString = hTMLhelper.middleRowEndIndent0space(title: item.category, amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)) // TODO: 金額　取得先
+                let rowString = hTMLhelper.middleRowEndIndent0space(
+                    title: item.category,
+                    amount: DataBaseManagerTaxonomy.shared.getTotalOfTaxonomy(numberOfSettingsTaxonomy: item.number, lastYear: false)
+                ) // TODO: 金額　取得先
                 htmlString.append(rowString)
             }
         }

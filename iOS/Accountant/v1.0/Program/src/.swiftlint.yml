@@ -230,7 +230,7 @@ opt_in_rules:
 - collection_alignment
 - conditional_returns_on_newline
 - contains_over_first_not_nil
-- convenience_type
+- convenience_type # 静的メンバーのみをホストするために使われる型は、インスタンス化を回避するために、case のない列挙型として実装すべきです。
 - discouraged_object_literal
 - discouraged_optional_boolean
 - discouraged_optional_collection
@@ -280,7 +280,7 @@ opt_in_rules:
 - pattern_matching_keywords # キーワードをタプルの外に出し、複数のパターンマッチングバインディングを組み合わせるべきです。
 - prefixed_toplevel_constant
 - private_action
-- private_outlet
+- private_outlet # @IBOutlet は private にすべきです。∵上位レイヤーへ UIKit が漏洩するのを防ぐため
 - prohibited_interface_builder
 - prohibited_super_call
 - quick_discouraged_call
@@ -300,7 +300,7 @@ opt_in_rules:
 - trailing_closure
 - unavailable_function
 - unneeded_parentheses_in_closure_argument
-- untyped_error_in_catch
+- untyped_error_in_catch # catch 文は型キャストなしでエラー変数を定義すべきではありません。
 - unused_import
 - unused_private_declaration
 - vertical_parameter_alignment_on_call

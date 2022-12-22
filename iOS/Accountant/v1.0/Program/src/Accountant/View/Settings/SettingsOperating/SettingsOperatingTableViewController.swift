@@ -11,12 +11,12 @@ import GoogleMobileAds // マネタイズ対応
 
 // 操作設定クラス
 class SettingsOperatingTableViewController: UITableViewController {
-
+    
     @IBOutlet private var gADBannerView: GADBannerView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.separatorColor = .accentColor
     }
     
@@ -57,7 +57,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             userDefaults.set(false, forKey: firstLunchKey)
             userDefaults.synchronize()
             // FIXME: チュートリアル対応 コーチマーク型
-//            presentAnnotation()
+            //            presentAnnotation()
         } else {
             // チュートリアル対応 コーチマーク型
             finishAnnotation()
@@ -95,11 +95,11 @@ class SettingsOperatingTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-         1
+        1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -120,13 +120,13 @@ class SettingsOperatingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-//        case 0:
-//            return "使用する勘定科目を設定することができます。"
+            //        case 0:
+            //            return "使用する勘定科目を設定することができます。"
         default:
             return ""
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 設定操作
         let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
@@ -171,7 +171,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     @objc func hundleSwitch(sender: UISwitch) {
         // 設定操作
         let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
-
+        
         if sender.tag == 0 { // 損益振替仕訳
             dataBaseManagerSettingsOperating.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger0", isOn: sender.isOn)
         } else if sender.tag == 1 { // 資本振替仕訳

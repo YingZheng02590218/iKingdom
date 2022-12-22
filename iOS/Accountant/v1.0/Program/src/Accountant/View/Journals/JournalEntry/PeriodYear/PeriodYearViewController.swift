@@ -13,9 +13,9 @@ class PeriodYearViewController: UIViewController {
     
     @IBOutlet var pickerView: UIPickerView!
     @IBOutlet var pickerViewView: EMTNeumorphicView!
-    @IBOutlet var pickerViewViewView: EMTNeumorphicView!
-    @IBOutlet var doneButton: EMTNeumorphicButton!
-    @IBOutlet var cancelButton: EMTNeumorphicButton!
+    @IBOutlet private var pickerViewViewView: EMTNeumorphicView!
+    @IBOutlet private var doneButton: EMTNeumorphicButton!
+    @IBOutlet private var cancelButton: EMTNeumorphicButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

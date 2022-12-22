@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class PDFMakerAccount {
-
+    
     var PDFpath: [URL]?
-
+    
     let hTMLhelper = HTMLhelperAccount()
     let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm
     // 勘定名
     var account: String = ""
     var fiscalYear = 0
-
+    
     func initialize(account: String) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
@@ -69,26 +69,42 @@ class PDFMakerAccount {
         
         // ページ数
         var pageNumber = 1
-
+        
         // 行を取得する
         var totalDebitAmount: Int64 = 0
         var totalCreditAmount: Int64 = 0
         var counter = 0
-
+        
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
         // 行数分繰り返す 仕訳
         for i in 0..<dataBaseJournalEntries.count {
-
+            
             let fiscalYear = dataBaseJournalEntries[i].fiscalYear
             if counter == 0 {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
             // データ
-            let month = dataBaseJournalEntries[i].date[dataBaseJournalEntries[i].date.index(dataBaseJournalEntries[i].date.startIndex, offsetBy: 5)..<dataBaseJournalEntries[i].date.index(dataBaseJournalEntries[i].date.startIndex, offsetBy: 7)]
-            let date = dataBaseJournalEntries[i].date[dataBaseJournalEntries[i].date.index(dataBaseJournalEntries[i].date.startIndex, offsetBy: 8)..<dataBaseJournalEntries[i].date.index(dataBaseJournalEntries[i].date.startIndex, offsetBy: 10)]
+            let month = dataBaseJournalEntries[i].date[
+                dataBaseJournalEntries[i].date.index(
+                    dataBaseJournalEntries[i].date.startIndex,
+                    offsetBy: 5
+                )..<dataBaseJournalEntries[i].date.index(
+                    dataBaseJournalEntries[i].date.startIndex,
+                    offsetBy: 7
+                )
+            ]
+            let date = dataBaseJournalEntries[i].date[
+                dataBaseJournalEntries[i].date.index(
+                    dataBaseJournalEntries[i].date.startIndex,
+                    offsetBy: 8
+                )..<dataBaseJournalEntries[i].date.index(
+                    dataBaseJournalEntries[i].date.startIndex,
+                    offsetBy: 10
+                )
+            ]
             let debitCategory = dataBaseJournalEntries[i].debit_category
             let debitAmount = dataBaseJournalEntries[i].debit_amount
             let creditCategory = dataBaseJournalEntries[i].credit_category
@@ -103,10 +119,10 @@ class PDFMakerAccount {
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
             let balanceLeft = dataBaseJournalEntries[i].balance_left
             let balanceRight = dataBaseJournalEntries[i].balance_right
-
+            
             let balanceAmount = generalLedgerAccountModel.getBalanceAmount(indexPath: IndexPath(row: i, section: 0))
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
-
+            
             let rowString = hTMLhelper.getSingleRow(
                 month: String(month),
                 day: String(date),
@@ -136,15 +152,31 @@ class PDFMakerAccount {
         }
         // 行数分繰り返す 決算整理仕訳
         for i in 0..<dataBaseAdjustingEntries.count {
-
+            
             let fiscalYear = dataBaseAdjustingEntries[i].fiscalYear
             if counter == 0 {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
             // データ
-            let month = dataBaseAdjustingEntries[i].date[dataBaseAdjustingEntries[i].date.index(dataBaseAdjustingEntries[i].date.startIndex, offsetBy: 5)..<dataBaseAdjustingEntries[i].date.index(dataBaseAdjustingEntries[i].date.startIndex, offsetBy: 7)]
-            let date = dataBaseAdjustingEntries[i].date[dataBaseAdjustingEntries[i].date.index(dataBaseAdjustingEntries[i].date.startIndex, offsetBy: 8)..<dataBaseAdjustingEntries[i].date.index(dataBaseAdjustingEntries[i].date.startIndex, offsetBy: 10)]
+            let month = dataBaseAdjustingEntries[i].date[
+                dataBaseAdjustingEntries[i].date.index(
+                    dataBaseAdjustingEntries[i].date.startIndex,
+                    offsetBy: 5
+                )..<dataBaseAdjustingEntries[i].date.index(
+                    dataBaseAdjustingEntries[i].date.startIndex,
+                    offsetBy: 7
+                )
+            ]
+            let date = dataBaseAdjustingEntries[i].date[
+                dataBaseAdjustingEntries[i].date.index(
+                    dataBaseAdjustingEntries[i].date.startIndex,
+                    offsetBy: 8
+                )..<dataBaseAdjustingEntries[i].date.index(
+                    dataBaseAdjustingEntries[i].date.startIndex,
+                    offsetBy: 10
+                )
+            ]
             let debitCategory = dataBaseAdjustingEntries[i].debit_category
             let debitAmount = dataBaseAdjustingEntries[i].debit_amount
             let creditCategory = dataBaseAdjustingEntries[i].credit_category
@@ -159,10 +191,10 @@ class PDFMakerAccount {
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
             let balanceLeft = dataBaseAdjustingEntries[i].balance_left
             let balanceRight = dataBaseAdjustingEntries[i].balance_right
-
+            
             let balanceAmount = generalLedgerAccountModel.getBalanceAmountAdjusting(indexPath: IndexPath(row: i, section: 0))
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditAdjusting(indexPath: IndexPath(row: i, section: 0))
-
+            
             let rowString = hTMLhelper.getSingleRow(
                 month: String(month),
                 day: String(date),
@@ -190,7 +222,7 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
-
+        
         if counter > 0 && counter <= 30 {
             for _ in counter ..< 30 {
                 let rowString = hTMLhelper.getSingleRowEmpty()
@@ -209,7 +241,7 @@ class PDFMakerAccount {
         htmlString.append(footerString)
         // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
-
+        
         print(htmlString)
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
@@ -257,8 +289,8 @@ class PDFMakerAccount {
         }
         
         // "receipt-" + UUID().uuidString
-       // "\(fiscalYear)-Account-\(account)"
-
+        // "\(fiscalYear)-Account-\(account)"
+        
         let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GenearlLedger-\(account)" + ".pdf")
         do {
             try data.write(to: filePath)

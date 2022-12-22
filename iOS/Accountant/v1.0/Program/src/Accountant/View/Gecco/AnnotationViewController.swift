@@ -10,7 +10,7 @@ import UIKit
 import Gecco
 
 class AnnotationViewController: SpotlightViewController {
-
+    
     @IBOutlet var annotationViews: [UIView]!
     
     var stepIndex: Int = 0
@@ -35,28 +35,30 @@ class AnnotationViewController: SpotlightViewController {
         switch stepIndex {
         case 0:
             spotlightView.appear(
-                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
-                                       size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
-                                       cornerRadius: 6)
+                Spotlight.RoundedRect(
+                    center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                    size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                    cornerRadius: 6
+                )
             )
-            break
         case 1:
             spotlightView.move(
-                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
-                                      size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
-                                      cornerRadius: 6),
-                moveType: .disappear)
-            break
+                Spotlight.RoundedRect(
+                    center: CGPoint(x: rightBarButtonFrames.first.midX, y: rightBarButtonFrames.first.midY),
+                    size: CGSize(width: rightBarButtonFrames.first.width, height: rightBarButtonFrames.first.height),
+                    cornerRadius: 6
+                ),
+                moveType: .disappear
+            )
         case 2:
             // FIXME: 印刷ボタン
-//            spotlightView.move(
-//                Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50),
-//                moveType: .direct)
+            //            spotlightView.move(
+            //                Spotlight.Oval(center: CGPoint(x: rightBarButtonFrames.second.midX, y: rightBarButtonFrames.second.midY), diameter: 50),
+            //                moveType: .direct)
             dismiss(animated: true, completion: nil)
-            break
-//        case 3:
-//            dismiss(animated: true, completion: nil)
-//            break
+            //        case 3:
+            //            dismiss(animated: true, completion: nil)
+            //            break
         default:
             break
         }
@@ -107,19 +109,16 @@ private extension AnnotationViewController {
             case 0:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
-                break
             case 1:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.first.origin.y + 60
-                break
             case 2:
                 // FIXME: 印刷ボタン
-//                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
-//                annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
+                //                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width - 20
+                //                annotationView.frame.origin.y = rightBarButtonFrames.second.origin.y + 60
                 break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
-                break
             }
         }
     }
@@ -137,7 +136,6 @@ private extension AnnotationViewController {
             print(controller.viewControllers[0])
             return controller.viewControllers[0]
         }
-        print(presentingViewController)
         return presentingViewController
     }
     
@@ -145,8 +143,8 @@ private extension AnnotationViewController {
         guard
             let firstRightBarButtonItem = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[0].value(forKey: "view") as? UIView,
             let secondRightBarButtonItem = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[1].value(forKey: "view") as? UIView
-            else {
-                fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
+        else {
+            fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
         return (
             first: firstRightBarButtonItem.convert(firstRightBarButtonItem.bounds, to: view),

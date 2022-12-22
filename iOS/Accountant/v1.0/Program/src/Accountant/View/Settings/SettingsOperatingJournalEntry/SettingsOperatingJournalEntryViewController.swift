@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    @IBOutlet var listCollectionView: UICollectionView!
+    @IBOutlet private var listCollectionView: UICollectionView!
     var tappedIndexPath: IndexPath?
     var viewReload = false // リロードするかどうか
     
@@ -113,7 +113,11 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     
     // ヘッダーセル
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionReusableView", for: indexPath) as? CollectionReusableView else {
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "CollectionReusableView",
+            for: indexPath
+        ) as? CollectionReusableView else {
             fatalError("Could not find proper header")
         }
         if kind == UICollectionView.elementKindSectionHeader {

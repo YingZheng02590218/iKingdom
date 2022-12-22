@@ -20,28 +20,29 @@ protocol BSPresenterInput {
     func theDayOfReckoning() -> String
 
     var numberOfobjects0100: Int { get }
-    func objects0100(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects0102: Int { get }
-    func objects0102(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects0114: Int { get }
-    func objects0114(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects0115: Int { get }
-    func objects0115(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects0129: Int { get }
-    func objects0129(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects01210: Int { get }
-    func objects01210(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects01211: Int { get }
-    func objects01211(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects01213: Int { get }
-    func objects01213(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects010142: Int { get }
-    func objects010142(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects010143: Int { get }
-    func objects010143(forRow row: Int) -> DataBaseSettingsTaxonomy
     var numberOfobjects010144: Int { get }
+
+    func objects0100(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects0102(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects0114(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects0115(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects0129(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects01210(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects01211(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects01213(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects010142(forRow row: Int) -> DataBaseSettingsTaxonomy
+    func objects010143(forRow row: Int) -> DataBaseSettingsTaxonomy
     func objects010144(forRow row: Int) -> DataBaseSettingsTaxonomy
-    
+
     func viewDidLoad()
     func viewWillAppear()
     func viewDidAppear()
@@ -115,6 +116,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects0100: Int {
         bSData.objects0100.count
     }
+
     func objects0100(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects0100[row]
     }
@@ -122,6 +124,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects0102: Int {
         bSData.objects0102.count
     }
+
     func objects0102(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects0102[row]
     }
@@ -129,6 +132,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects0114: Int {
         bSData.objects0114.count
     }
+
     func objects0114(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects0114[row]
     }
@@ -136,6 +140,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects0115: Int {
         bSData.objects0115.count
     }
+
     func objects0115(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects0115[row]
     }
@@ -143,6 +148,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects0129: Int {
         bSData.objects0129.count
     }
+
     func objects0129(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects0129[row]
     }
@@ -150,6 +156,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects01210: Int {
         bSData.objects01210.count
     }
+
     func objects01210(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects01210[row]
     }
@@ -157,6 +164,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects01211: Int {
         bSData.objects01211.count
     }
+
     func objects01211(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects01211[row]
     }
@@ -164,6 +172,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects01213: Int {
         bSData.objects01213.count
     }
+
     func objects01213(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects01213[row]
     }
@@ -171,6 +180,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects010142: Int {
         bSData.objects010142.count
     }
+
     func objects010142(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects010142[row]
     }
@@ -178,6 +188,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects010143: Int {
         bSData.objects010143.count
     }
+
     func objects010143(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects010143[row]
     }
@@ -185,6 +196,7 @@ final class BSPresenter: BSPresenterInput {
     var numberOfobjects010144: Int {
         bSData.objects010144.count
     }
+
     func objects010144(forRow row: Int) -> DataBaseSettingsTaxonomy {
         bSData.objects010144[row]
     }

@@ -25,7 +25,7 @@ class BSViewController: UIViewController {
     @IBOutlet var closingDateThisYearLabel: UILabel!
     /// 貸借対照表　下部
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
@@ -496,9 +496,9 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                             numberOfSettingsTaxonomy:
                                 presenter.objects010144(
                                     forRow: indexPath.row - (presenter.numberOfobjects0100 + 1 + 1 + 1 +
-                                                                                 presenter.numberOfobjects010142 + 1 +
-                                                                                 presenter.numberOfobjects010143 + 1 + 1)
-                                                       ).number,
+                                                             presenter.numberOfobjects010142 + 1 +
+                                                             presenter.numberOfobjects010143 + 1 + 1)
+                                ).number,
                             lastYear: true
                         )
                     } else {
@@ -858,7 +858,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/10/19
-                guard 0 < presenter.numberOfobjects01213 else {
+                guard presenter.numberOfobjects01213 > 0 else {
                     // MARK: - "純資産合計"
                     cell.textLabel?.text = "純資産合計"
                     print("BS", indexPath.row, "純資産合計" + "★")
@@ -992,19 +992,29 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                     cell.labelForThisYear.textAlignment = .right
                 } else if indexPath.row >= presenter.numberOfobjects0129 + 2 + 1 &&                     // その他の包括利益累計額
-                            indexPath.row <   presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 {    // その他の包括利益累計額合計
+                            indexPath.row < presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 {    // その他の包括利益累計額合計
                     cell.textLabel?.text = "        " + presenter.objects01210(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)).category
                     print("BS", indexPath.row, "        " + presenter.objects01210(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)).category)
-                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01210(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)).number, lastYear: false)
+                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                        numberOfSettingsTaxonomy: presenter.objects01210(
+                            forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)
+                        ).number,
+                        lastYear: false
+                    )
                     if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01210(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)).number, lastYear: true)
+                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
+                            numberOfSettingsTaxonomy: presenter.objects01210(
+                                forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + 1)
+                            ).number,
+                            lastYear: true
+                        )
                     } else {
                         cell.labelForPrevious.text = "-"
                     }
                     cell.labelForThisYear.textAlignment = .right
                 } else {
                     print("??")
-                    let soundIdRing: SystemSoundID = 1000 // 鐘
+                    let soundIdRing: SystemSoundID = 1_000 // 鐘
                     AudioServicesPlaySystemSound(soundIdRing)
                 }
                 return cell

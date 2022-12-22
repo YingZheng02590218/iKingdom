@@ -65,7 +65,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         do {
             try DataBaseManager.realm.write {
                 let number = dataBaseJournals.save() // ページ番号(一年で1ページ)　自動採番
-                print("addJournals",number)
+                print("addJournals", number)
                 // 年度　の数だけ増える
                 object.dataBaseJournals = dataBaseJournals
             }

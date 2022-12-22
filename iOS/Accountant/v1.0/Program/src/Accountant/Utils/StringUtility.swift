@@ -9,15 +9,15 @@
 import Foundation
 
 class StringUtility {
-
+    
     public static let shared = StringUtility()
-
+    
     private init() {
     }
-
+    
     // MARK: NumberFormatter
     let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
-
+    
     // コンマを追加
     func setComma(amount: Int64) -> String {
         // 三角形はマイナスの意味
@@ -38,13 +38,13 @@ class StringUtility {
     }
     // コンマを追加
     func setCommaWith0(amount: Int64) -> String {
-
-        return StringUtility.shared.addComma(string: amount.description)
+        
+        StringUtility.shared.addComma(string: amount.description)
     }
-
+    
     // カンマ区切りに変換（表示用）
-    func addComma(string :String) -> String {
-        //3桁ごとにカンマ区切りするフォーマット
+    func addComma(string: String) -> String {
+        // 3桁ごとにカンマ区切りするフォーマット
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
@@ -60,16 +60,16 @@ class StringUtility {
         let string = string.replacingOccurrences(of: ",", with: "")
         return string
     }
-
+    
     // MARK: 日付
-
+    
     // 先頭行は月を表示 日付の6文字目にある月を抽出
     func pickupMonth(date: String) -> String {
         // 月
         let month = date[
             date.index(
-            date.startIndex,
-            offsetBy: 5
+                date.startIndex,
+                offsetBy: 5
             )..<date.index(
                 date.startIndex,
                 offsetBy: 7
@@ -77,10 +77,10 @@ class StringUtility {
         ]
         // 月の十の位を抽出
         let tensPlace = month.prefix(1)
-
+        
         if tensPlace == "0" { // 月の十の位が0の場合は表示しない
             return "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-
+            
         } else {
             return "\(month)" // 「月」
         }
@@ -90,8 +90,8 @@ class StringUtility {
         // 月
         let month = date[
             date.index(
-            date.startIndex,
-            offsetBy: 5
+                date.startIndex,
+                offsetBy: 5
             )..<date.index(
                 date.startIndex,
                 offsetBy: 7
@@ -109,11 +109,11 @@ class StringUtility {
         ]
         // 月の十の位を抽出
         let tensPlace = month.prefix(1)
-
+        
         if month != upperMonth {
             if tensPlace == "0" { // 月の十の位が0の場合は表示しない
                 return "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-
+                
             } else {
                 return "\(month)" // 「月」
             }

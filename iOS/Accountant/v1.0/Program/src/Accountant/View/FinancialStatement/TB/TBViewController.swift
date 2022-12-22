@@ -17,14 +17,14 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     
     var gADBannerView: GADBannerView!
     /// 合計残高試算表　上部
-    @IBOutlet var companyNameLabel: UILabel!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var closingDateLabel: UILabel!
-    @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBOutlet var printButton: UIButton!
+    @IBOutlet private var companyNameLabel: UILabel!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var closingDateLabel: UILabel!
+    @IBOutlet private var segmentedControl: UISegmentedControl!
+    @IBOutlet private var printButton: UIButton!
     /// 合計残高試算表　下部
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var backgroundView: EMTNeumorphicView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
@@ -161,7 +161,7 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
             // 勘定科目をセルに表示する
             //        cell.textLabel?.text = "\(presenter.objects(forRow:indexPath.row].category as String)"
-            cell.accountLabel.text = "\(presenter.objects(forRow:indexPath.row).category as String)"
+            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
             cell.accountLabel.textAlignment = NSTextAlignment.center
             switch segmentedControl.selectedSegmentIndex {
             case 0: // 合計　借方
