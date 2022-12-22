@@ -57,11 +57,11 @@ class SettingsInformationTableViewController: UITableViewController {
             view.bringSubviewToFront(gADBannerView)
         }
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
-        let ud = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsInformation"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
+        if userDefaults.bool(forKey: firstLunchKey) {
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
         } else {

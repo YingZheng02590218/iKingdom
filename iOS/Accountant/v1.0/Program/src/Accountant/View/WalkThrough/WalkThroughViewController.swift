@@ -169,10 +169,10 @@ extension WalkThroughViewController: EAIntroDelegate {
             // 画面を閉じる
             introView.hide(withFadeOutDuration: 0.8)
             // チュートリアル対応 ウォークスルー型　初回起動時
-            let ud = UserDefaults.standard
+            let userDefaults = UserDefaults.standard
             let firstLunchKey = "firstLunch_WalkThrough"
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
         }
     }
     

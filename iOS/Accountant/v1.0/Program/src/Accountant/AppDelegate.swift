@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         )
-
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
         print(config) // schemaVersion を確認できる
@@ -64,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
         setupUserDefaults()
-
+        
         // レビュー催促機能
         let key = "startUpCount"
         let count = UserDefaults.standard.integer(forKey: key)
@@ -85,10 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // アプリ起動時にネットに繋いでAppStoreで購入済みか確認する（1件のみ有料アイテムを登録）
         UpgradeManager.shared.isPurchasedWhenAppStart()
         Network.shared.setUp() // 初期化対応
-
+        
         return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -98,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(true, forKey: "biometrics")
         UserDefaults.standard.synchronize()
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 
@@ -106,11 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // アプリをバックグラウンドに持っていった状態から再度フォアグラウンドへアプリを復帰させる場合
         showPassCodeLock()
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         // IDFA対応
@@ -159,79 +158,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Present the Document View Controller for the revealed URL
             documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
         }
-
+        
         return true
     }
     // UserDefaultsをセットアップ
     func setupUserDefaults() {
         // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
-        let ud = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         // 仕訳帳
         var firstLunchKey = "firstLunch_Journals"
         var firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 仕訳
         firstLunchKey = "firstLunch_JournalEntry"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 精算表
         firstLunchKey = "firstLunch_WorkSheet"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 試算表
         firstLunchKey = "firstLunch_TrialBalance"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 会計期間
         firstLunchKey = "firstLunch_SettingPeriod"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 勘定科目
         firstLunchKey = "firstLunch_SettingsCategory"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 帳簿情報
         firstLunchKey = "firstLunch_SettingsInformation"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 設定　仕訳帳
         firstLunchKey = "firstLunch_SettingsJournals"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // チュートリアル対応 ウォークスルー型
         firstLunchKey = "firstLunch_WalkThrough"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 生体認証パスコードロック設定スイッチ
         firstLunchKey = "biometrics_switch"
         firstLunch = [firstLunchKey: false] // 初期値はOFFとする
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // 動作確認用
-    //        ud.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 生体認証パスコードロック
         firstLunchKey = "biometrics"
         firstLunch = [firstLunchKey: true]
-        ud.register(defaults: firstLunch)
+        userDefaults.register(defaults: firstLunch)
         // ロック中
-        ud.set(true, forKey: firstLunchKey)
+        userDefaults.set(true, forKey: firstLunchKey)
     }
     
     // MARK: - アップグレード機能
@@ -256,7 +255,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
     // MARK: - IDFA対応
 
     /// Alert表示
@@ -278,7 +277,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - 生体認証パスコードロック
-
+    
     // 生体認証パスコードロック画面へ遷移させる
     func showPassCodeLock() {
         // パスコードロックを設定していない場合は何もしない

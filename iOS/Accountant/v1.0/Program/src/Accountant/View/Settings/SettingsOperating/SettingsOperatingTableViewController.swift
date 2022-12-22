@@ -51,11 +51,11 @@ class SettingsOperatingTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
-        let ud = UserDefaults.standard
+        let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsJournals"
-        if ud.bool(forKey: firstLunchKey) {
-            ud.set(false, forKey: firstLunchKey)
-            ud.synchronize()
+        if userDefaults.bool(forKey: firstLunchKey) {
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
             // FIXME: チュートリアル対応 コーチマーク型
 //            presentAnnotation()
         } else {

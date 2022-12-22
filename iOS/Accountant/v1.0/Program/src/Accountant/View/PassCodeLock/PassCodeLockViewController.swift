@@ -47,10 +47,10 @@ class PassCodeLockViewController: UIViewController {
             successHandler: {
                 // 認証成功時の処理
                 // 生体認証パスコードロック
-                let ud = UserDefaults.standard
+                let userDefaults = UserDefaults.standard
                 let firstLunchKey = "biometrics"
-                ud.set(false, forKey: firstLunchKey)
-                ud.synchronize()
+                userDefaults.set(false, forKey: firstLunchKey)
+                userDefaults.synchronize()
                 // 生体認証パスコードロック画面を閉じる ロック解除
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: nil)
