@@ -90,13 +90,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingPeriod"
         if userDefaults.bool(forKey: firstLunchKey) {
-            userDefaults.set(false, forKey: firstLunchKey)
-            userDefaults.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
-        } else {
-            // チュートリアル対応 コーチマーク型
-            finishAnnotation()
         }
     }
     // チュートリアル対応 コーチマーク型
@@ -117,8 +112,14 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             present(viewController, animated: true, completion: nil)
         }
     }
-
+    // コーチマーク画面からコール
     func finishAnnotation() {
+        // フラグを倒す
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunch_SettingPeriod"
+        userDefaults.set(false, forKey: firstLunchKey)
+        userDefaults.synchronize()
+
         // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {

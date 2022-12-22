@@ -95,7 +95,7 @@ class AnnotationViewControllerJournalEntry: SpotlightViewController {
                 self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
                     // ViewController(コーチマーク画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
                     // チュートリアル対応 コーチマーク型
-                    presentingViewController.showAnnotation()
+                    presentingViewController.finishAnnotation()
                 })
             }
         default:

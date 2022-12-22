@@ -255,17 +255,10 @@ class JournalEntryViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_JournalEntry"
         if userDefaults.bool(forKey: firstLunchKey) {
-            DispatchQueue.global(qos: .default).async {
-            userDefaults.set(false, forKey: firstLunchKey)
-            userDefaults.synchronize()
-                DispatchQueue.main.async {
-                    // コーチマークを開始
-                    self.presentAnnotation()
-                }
+            DispatchQueue.main.async {
+                // コーチマークを開始
+                self.presentAnnotation()
             }
-        } else {
-            // コーチマークを終了
-            self.finishAnnotation()
         }
     }
     // チュートリアル対応 コーチマーク型　コーチマークを開始
@@ -288,8 +281,14 @@ class JournalEntryViewController: UIViewController {
             present(viewController, animated: true, completion: nil)
         }
     }
-    // チュートリアル対応 コーチマーク型　コーチマークを終了
+    // チュートリアル対応 コーチマーク型　コーチマークを終了 コーチマーク画面からコール
     func finishAnnotation() {
+        // フラグを倒す
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunch_JournalEntry"
+        userDefaults.set(false, forKey: firstLunchKey)
+        userDefaults.synchronize()
+
         // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
@@ -299,9 +298,8 @@ class JournalEntryViewController: UIViewController {
             }
         }
         // チュートリアル対応 赤ポチ型　初回起動時　7行を追加
-        let userDefaults = UserDefaults.standard
-        let firstLunchKey = "firstLunch_SettingsCategory"
-        if userDefaults.bool(forKey: firstLunchKey) { // 設定勘定科目のコーチマークが表示されていない場合
+        let firstLunchKeySettingsCategory = "firstLunch_SettingsCategory"
+        if userDefaults.bool(forKey: firstLunchKeySettingsCategory) { // 設定勘定科目のコーチマークが表示されていない場合
             DispatchQueue.main.async {
                 // 赤ポチを開始
                 self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = ""

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 勘定科目クラス
 class SettingsCategoryTableViewController: UITableViewController {
@@ -55,13 +55,8 @@ class SettingsCategoryTableViewController: UITableViewController {
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsCategory"
         if userDefaults.bool(forKey: firstLunchKey) {
-            userDefaults.set(false, forKey: firstLunchKey)
-            userDefaults.synchronize()
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
-        } else {
-            // チュートリアル対応 コーチマーク型
-            finishAnnotation()
         }
     }
     // チュートリアル対応 コーチマーク型
@@ -82,8 +77,14 @@ class SettingsCategoryTableViewController: UITableViewController {
             present(viewController, animated: true, completion: nil)
         }
     }
-    
+    // コーチマーク画面からコール
     func finishAnnotation() {
+        // フラグを倒す
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunch_SettingsCategory"
+        userDefaults.set(false, forKey: firstLunchKey)
+        userDefaults.synchronize()
+
         // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {

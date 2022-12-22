@@ -6,13 +6,13 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import Gecco
+import UIKit
 
 class AnnotationViewControllerSettingsCategory: SpotlightViewController {
-    
+
     @IBOutlet var annotationViews: [UIView]!
-    
+
     var stepIndex: Int = 0
     lazy var geccoSpotlight = Spotlight.Oval(center: CGPoint(x: UIScreen.main.bounds.size.width / 2, y: 200 + view.safeAreaInsets.top), diameter: 220)
     
@@ -42,7 +42,14 @@ class AnnotationViewControllerSettingsCategory: SpotlightViewController {
                 )
             )
         default:
-            dismiss(animated: true, completion: nil)
+            if let navigationController = presentingViewController as? UINavigationController,
+            let navigationController2 = navigationController.viewControllers.last as? UINavigationController,
+            let presentingViewController = navigationController2.viewControllers.first as? SettingsCategoryTableViewController {
+                dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    // チュートリアル対応 コーチマーク型
+                    presentingViewController.finishAnnotation()
+                })
+            }
         }
         
         stepIndex += 1
@@ -110,7 +117,7 @@ private extension AnnotationViewControllerSettingsCategory {
         }
         return presentingViewController
     }
-    
+
     func extractRightBarButtonConvertedFrames() -> (CGRect) {
         guard
             let first  = viewControllerHasNavigationItem?.view.viewWithTag(0)?.viewWithTag(1)

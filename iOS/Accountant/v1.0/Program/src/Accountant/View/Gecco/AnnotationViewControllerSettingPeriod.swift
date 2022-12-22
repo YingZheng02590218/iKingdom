@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import Gecco
+import UIKit
 
 class AnnotationViewControllerSettingPeriod: SpotlightViewController {
     
@@ -42,7 +42,14 @@ class AnnotationViewControllerSettingPeriod: SpotlightViewController {
                 )
             )
         case 1:
-            dismiss(animated: true, completion: nil)
+            if let navigationController = presentingViewController as? UINavigationController,
+            let navigationController2 = navigationController.viewControllers.last as? UINavigationController,
+            let presentingViewController = navigationController2.viewControllers.first as? SettingsPeriodTableViewController {
+                dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    // チュートリアル対応 コーチマーク型
+                    presentingViewController.finishAnnotation()
+                })
+            }
         default:
             break
         }
