@@ -22,6 +22,7 @@ protocol TBPresenterInput {
 
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
 
     func debit_total_total() -> String
@@ -38,6 +39,7 @@ protocol TBPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
 }
 
@@ -84,7 +86,12 @@ final class TBPresenter: TBPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-    
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
+    }
+
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()

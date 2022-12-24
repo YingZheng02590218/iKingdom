@@ -24,6 +24,7 @@ protocol WSPresenterInput {
     
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
     
     func refreshTable()
@@ -49,6 +50,7 @@ protocol WSPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
 }
 
@@ -100,7 +102,12 @@ final class WSPresenter: WSPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-    
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
+    }
+
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()

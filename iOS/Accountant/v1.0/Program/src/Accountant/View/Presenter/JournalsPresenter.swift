@@ -26,6 +26,7 @@ protocol JournalsPresenterInput {
     
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
     
     func refreshTable(isEditing: Bool)
@@ -43,6 +44,7 @@ protocol JournalsPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
     func setupCellLongPressed(indexPath: IndexPath)
     func autoScroll(number: Int, tappedIndexPathSection: Int)
@@ -92,7 +94,12 @@ final class JournalsPresenter: JournalsPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-    
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
+    }
+
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()

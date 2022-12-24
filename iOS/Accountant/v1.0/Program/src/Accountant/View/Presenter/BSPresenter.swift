@@ -45,6 +45,7 @@ protocol BSPresenterInput {
 
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
 
     func refreshTable()
@@ -61,6 +62,7 @@ protocol BSPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
     func showPreview()
 }
@@ -97,6 +99,11 @@ final class BSPresenter: BSPresenterInput {
     
     func viewWillAppear() {
         view.setupViewForViewWillAppear()
+    }
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
     }
 
     func viewDidAppear() {

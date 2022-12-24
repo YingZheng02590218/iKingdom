@@ -22,6 +22,7 @@ protocol GenearlLedgerAccountPresenterInput {
     
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
     
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
@@ -34,6 +35,7 @@ protocol GenearlLedgerAccountPresenterInput {
 protocol GenearlLedgerAccountPresenterOutput: AnyObject {
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
 }
 
@@ -78,7 +80,12 @@ final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-    
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
+    }
+
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()

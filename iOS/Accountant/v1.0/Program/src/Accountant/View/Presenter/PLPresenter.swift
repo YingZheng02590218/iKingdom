@@ -34,6 +34,7 @@ protocol PLPresenterInput {
     
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func viewDidAppear()
     
     func refreshTable()
@@ -50,6 +51,7 @@ protocol PLPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
     func showPreview()
 }
@@ -84,6 +86,11 @@ final class PLPresenter: PLPresenterInput {
     func viewWillAppear() {
         
         view.setupViewForViewWillAppear()
+    }
+
+    func viewWillDisappear() {
+
+        view.setupViewForViewWillDisappear()
     }
     
     func viewDidAppear() {

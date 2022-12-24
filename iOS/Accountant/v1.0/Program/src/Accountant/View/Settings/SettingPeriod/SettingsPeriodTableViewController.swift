@@ -59,12 +59,23 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
         }
         // セットアップ AdMob
         setupAdMob()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
+        }
+    }
+
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {
         

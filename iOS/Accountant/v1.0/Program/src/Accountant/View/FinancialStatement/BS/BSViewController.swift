@@ -55,7 +55,13 @@ class BSViewController: UIViewController {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        presenter.viewWillDisappear()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
@@ -1122,8 +1128,17 @@ extension BSViewController: BSPresenterOutput {
             }
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
+        }
+    }
+
+    func setupViewForViewWillDisappear() {
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
         }
     }
 

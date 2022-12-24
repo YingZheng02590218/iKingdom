@@ -58,7 +58,13 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        presenter.viewWillDisappear()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
@@ -408,11 +414,20 @@ extension WSViewController: WSPresenterOutput {
             ) // 一番したから3行分のスペースを空ける
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
         }
     }
 
+    func setupViewForViewWillDisappear() {
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
+        }
+    }
+    
     func setupViewForViewDidAppear() {
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let userDefaults = UserDefaults.standard

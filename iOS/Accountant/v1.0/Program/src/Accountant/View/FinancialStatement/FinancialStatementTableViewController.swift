@@ -52,12 +52,21 @@ class FinancialStatementTableViewController: UITableViewController {
             addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count - 1].frame.height * -1)
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
         }
 
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
+        }
+    }
     // リロード機能
     @objc func refreshTable() {
         // 全勘定の合計と残高を計算する

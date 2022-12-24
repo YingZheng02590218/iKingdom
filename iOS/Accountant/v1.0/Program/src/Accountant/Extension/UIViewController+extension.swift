@@ -12,6 +12,9 @@ import UIKit
 
 extension UIViewController {
 
+    // MARK: - アップグレード機能　スタンダードプラン
+
+    // 広告を表示
     func addBannerViewToView(_ bannerView: GADBannerView, constant: CGFloat) {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
@@ -37,5 +40,10 @@ extension UIViewController {
                 )
             ]
         )
+    }
+    // 広告を非表示
+    func removeBannerViewToView(_ bannerView: GADBannerView) {
+
+        bannerView.removeFromSuperview()
     }
 }

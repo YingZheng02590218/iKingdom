@@ -43,11 +43,20 @@ class SettingsInformationTableViewController: UITableViewController {
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
         }
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
+        }
+    }
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

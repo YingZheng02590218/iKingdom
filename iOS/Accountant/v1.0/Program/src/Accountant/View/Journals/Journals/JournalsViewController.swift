@@ -77,6 +77,12 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         presenter.viewWillAppear()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        presenter.viewWillDisappear()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -851,7 +857,6 @@ extension JournalsViewController: JournalsPresenterOutput {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            //        print("Google Mobile Ads SDK version: \(GADRequest.sdkVersion())")
             // GADBannerView を作成する
             gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
@@ -864,11 +869,20 @@ extension JournalsViewController: JournalsPresenterOutput {
             addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
         } else {
             if let gADBannerView = gADBannerView {
-                gADBannerView.isHidden = true
+                // GADBannerView を外す
+                removeBannerViewToView(gADBannerView)
             }
         }
     }
-    
+
+    func setupViewForViewWillDisappear() {
+        // アップグレード機能　スタンダードプラン
+        if let gADBannerView = gADBannerView {
+            // GADBannerView を外す
+            removeBannerViewToView(gADBannerView)
+        }
+    }
+
     func setupViewForViewDidAppear() {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
