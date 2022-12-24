@@ -95,7 +95,7 @@ private extension AnnotationViewControllerSettingPeriod {
     
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
-        annotationViews.enumerated().forEach { (offset, annotationView) in
+        annotationViews.enumerated().forEach { offset, annotationView in
             switch offset {
             case 0:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width

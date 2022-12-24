@@ -48,11 +48,13 @@ class StringUtility {
         formatter.numberStyle = NumberFormatter.Style.decimal
         formatter.groupingSeparator = ","
         formatter.groupingSize = 3
-        if string != "" { // ありえないでしょう
-            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        } else {
+        if string.isEmpty {
             return ""
+        } else {
+            let string = removeComma(string: string) // カンマを削除してから、カンマを追加する処理を実行する
+            guard let value = Double(string) else { return "" }
+            guard let formattedValue = formatter.string(from: NSNumber(value: value)) else { return "" }
+            return formattedValue
         }
     }
     // カンマ区切りを削除（計算用）

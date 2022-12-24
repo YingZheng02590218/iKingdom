@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(config) // schemaVersion を確認できる
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        let realm = try! Realm()
+        _ = try! Realm()
         // Override point for customization after application launch.
 
         // // マネタイズ対応　Use Firebase library to configure APIs

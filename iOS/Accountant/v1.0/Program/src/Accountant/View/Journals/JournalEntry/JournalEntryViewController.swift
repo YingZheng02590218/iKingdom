@@ -883,12 +883,14 @@ class JournalEntryViewController: UIViewController {
                         UIAlertAction(
                             title: "OK",
                             style: .default,
-                            handler: {
-                                (action: UIAlertAction!) -> Void in
+                            handler: { (action: UIAlertAction!) -> Void in
                                 // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
                                 if Network.shared.isOnline() {
                                     // アップグレード画面を表示
-                                    if let viewController = UIStoryboard(name: "SettingsUpgradeTableViewController", bundle: nil).instantiateViewController(withIdentifier: "SettingsUpgradeTableViewController") as? SettingsUpgradeTableViewController {
+                                    if let viewController = UIStoryboard(
+                                        name: "SettingsUpgradeTableViewController",
+                                        bundle: nil
+                                    ).instantiateViewController(withIdentifier: "SettingsUpgradeTableViewController") as? SettingsUpgradeTableViewController {
                                         self.present(viewController, animated: true, completion: nil)
                                     }
                                 } else {
@@ -1464,11 +1466,11 @@ extension JournalEntryViewController: UITextFieldDelegate {
     }
     // TextFieldに入力され値が変化した時の処理の関数
     @objc func textFieldDidChange(_ sender: UITextField) {
-//    func textFieldEditingChanged(_ sender: UITextField) {
-        if sender.text != "" {
+        // func textFieldEditingChanged(_ sender: UITextField) {
+        if let text = sender.text {
             // カンマを追加する
             if sender == textFieldAmountDebit || sender == textFieldAmountCredit { // 借方金額仮　貸方金額
-                sender.text = "\(StringUtility.shared.addComma(string: String(sender.text!)))"
+                sender.text = "\(StringUtility.shared.addComma(string: text))"
             }
             print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }

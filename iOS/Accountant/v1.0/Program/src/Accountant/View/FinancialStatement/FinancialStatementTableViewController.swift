@@ -21,7 +21,7 @@ class FinancialStatementTableViewController: UITableViewController {
 
         // リロード機能
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
         
         self.navigationItem.title = "決算書"

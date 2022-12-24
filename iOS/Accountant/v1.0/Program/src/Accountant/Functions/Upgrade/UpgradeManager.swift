@@ -50,7 +50,7 @@ class UpgradeManager {
                 }
                 print("priceLocale          : \(product.priceLocale)")
                 print("Product              : \(product.localizedDescription)")
-                print("subscriptionPeriod   : \(product.subscriptionPeriod?.unit)")
+                print("subscriptionPeriod   : \(String(describing: product.subscriptionPeriod?.unit))")
                 print("productIdentifier    : \(product.productIdentifier)")
             } else if let invalidProductId = result.invalidProductIDs.first {
                 

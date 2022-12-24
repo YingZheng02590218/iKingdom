@@ -152,7 +152,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                     cell.selectionStyle = .none
                     cell.textLabel?.textColor = .lightGray
                     cell.textLabel?.textAlignment = NSTextAlignment.left
-                    print(cell.textLabel?.font.pointSize) // = .systemFont(ofSize: 15))
                     cell.textLabel?.font = .systemFont(ofSize: 14)
                     // 勘定科目の名称をセルに表示する
                     cell.textLabel?.text = "大区分"

@@ -22,7 +22,7 @@ class GeneralLedgerTableViewController: UITableViewController {
         super.viewDidLoad()
         // リロード機能
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: Selector(("refreshTable")), for: UIControl.Event.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
         self.refreshControl = refreshControl
         
         self.navigationItem.title = "総勘定元帳"

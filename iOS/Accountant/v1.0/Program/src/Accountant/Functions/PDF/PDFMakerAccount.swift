@@ -109,7 +109,7 @@ class PDFMakerAccount {
             let debitAmount = dataBaseJournalEntries[i].debit_amount
             let creditCategory = dataBaseJournalEntries[i].credit_category
             let creditAmount = dataBaseJournalEntries[i].credit_amount
-            let smallWritting = dataBaseJournalEntries[i].smallWritting
+            _ = dataBaseJournalEntries[i].smallWritting
             var correspondingAccounts: String = "" // 当勘定の相手勘定
             if debitCategory == account {
                 correspondingAccounts = creditCategory
@@ -117,8 +117,8 @@ class PDFMakerAccount {
                 correspondingAccounts = debitCategory
             }
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            let balanceLeft = dataBaseJournalEntries[i].balance_left
-            let balanceRight = dataBaseJournalEntries[i].balance_right
+            _ = dataBaseJournalEntries[i].balance_left
+            _ = dataBaseJournalEntries[i].balance_right
             
             let balanceAmount = generalLedgerAccountModel.getBalanceAmount(indexPath: IndexPath(row: i, section: 0))
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
@@ -181,7 +181,7 @@ class PDFMakerAccount {
             let debitAmount = dataBaseAdjustingEntries[i].debit_amount
             let creditCategory = dataBaseAdjustingEntries[i].credit_category
             let creditAmount = dataBaseAdjustingEntries[i].credit_amount
-            let smallWritting = dataBaseAdjustingEntries[i].smallWritting
+            _ = dataBaseAdjustingEntries[i].smallWritting
             var correspondingAccounts: String = "" // 当勘定の相手勘定
             if debitCategory == account {
                 correspondingAccounts = creditCategory
@@ -189,8 +189,8 @@ class PDFMakerAccount {
                 correspondingAccounts = debitCategory
             }
             let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
-            let balanceLeft = dataBaseAdjustingEntries[i].balance_left
-            let balanceRight = dataBaseAdjustingEntries[i].balance_right
+            _ = dataBaseAdjustingEntries[i].balance_left
+            _ = dataBaseAdjustingEntries[i].balance_right
             
             let balanceAmount = generalLedgerAccountModel.getBalanceAmountAdjusting(indexPath: IndexPath(row: i, section: 0))
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditAdjusting(indexPath: IndexPath(row: i, section: 0))
