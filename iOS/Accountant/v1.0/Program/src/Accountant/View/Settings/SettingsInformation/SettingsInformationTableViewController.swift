@@ -32,7 +32,7 @@ class SettingsInformationTableViewController: UITableViewController {
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: kGADAdSizeMediumRectangle)
+            gADBannerView = GADBannerView(adSize: GADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             

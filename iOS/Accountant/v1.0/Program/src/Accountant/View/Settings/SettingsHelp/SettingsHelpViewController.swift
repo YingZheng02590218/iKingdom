@@ -126,7 +126,7 @@ class SettingsHelpViewController: UIViewController {
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
             

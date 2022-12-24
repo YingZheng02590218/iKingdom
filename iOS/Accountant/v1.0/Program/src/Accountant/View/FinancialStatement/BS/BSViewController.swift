@@ -1116,7 +1116,7 @@ extension BSViewController: BSPresenterOutput {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView を作成する
             if gADBannerView == nil {
-                gADBannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+                gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
                 // GADBannerView プロパティを設定する
                 gADBannerView.adUnitID = Constant.ADMOBID
                 gADBannerView.rootViewController = self

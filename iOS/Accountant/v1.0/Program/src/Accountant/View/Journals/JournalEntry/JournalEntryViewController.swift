@@ -636,16 +636,17 @@ class JournalEntryViewController: UIViewController {
             // GADBannerView プロパティを設定する
             // GADInterstitial を作成する
             let request = GADRequest()
-            GADInterstitialAd.load(withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
-                                   request: request,
-                                   completionHandler: { [self] ad, error in
-                if let error = error {
-                    print("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                    return
+            GADInterstitialAd.load(
+                withAdUnitID: Constant.ADMOBIDINTERSTITIAL,
+                request: request,
+                completionHandler: { [self] ad, error in
+                    if let error = error {
+                        print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                        return
+                    }
+                    interstitial = ad
+                    interstitial?.fullScreenContentDelegate = self
                 }
-                interstitial = ad
-                interstitial?.fullScreenContentDelegate = self
-            }
             )
         }
     }
