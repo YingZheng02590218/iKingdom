@@ -224,12 +224,14 @@ class DataBaseManagerTaxonomy {
                     do {
                         // (2)書き込みトランザクション内でデータを追加する
                         try DataBaseManager.realm.write {
-                            let dataBaseTaxonomy = DataBaseTaxonomy() // 表示科目
+                            let dataBaseTaxonomy = DataBaseTaxonomy(
+                                fiscalYear: object.dataBaseAccountingBooks[y].fiscalYear, // 帳簿ごとの年度
+                                accountName: objects[i].category, // 設定表示科目の表示科目名
+                                total: 0,
+                                numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
+                            )
                             let number = dataBaseTaxonomy.save() //　自動採番
                             print(number)
-                            dataBaseTaxonomy.fiscalYear = object.dataBaseAccountingBooks[y].fiscalYear // 帳簿ごとの年度
-                            dataBaseTaxonomy.accountName = objects[i].category // 設定表示科目の表示科目名
-                            dataBaseTaxonomy.numberOfTaxonomy = objects[i].number // 設定表示科目の連番を保持する　マイグレーション
                             // 表示科目を追加
                             object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 既にある貸借対照表に新たに表示科目を追加する
                         }
