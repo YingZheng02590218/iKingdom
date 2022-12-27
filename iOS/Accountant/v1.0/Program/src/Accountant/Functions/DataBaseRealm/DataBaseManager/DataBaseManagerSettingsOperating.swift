@@ -21,9 +21,11 @@ class DataBaseManagerSettingsOperating {
     // モデルオブフェクトの追加　仕訳帳
     func addSettingsOperating() {
         do {
-            // (2)書き込みトランザクション内でデータを追加する
-            // オブジェクトを作成
-            let dataBaseSettingsOperating = DataBaseSettingsOperating() // 仕訳帳
+            // オブジェクトを作成  設定仕訳帳
+            let dataBaseSettingsOperating = DataBaseSettingsOperating(
+                EnglishFromOfClosingTheLedger0: true,
+                EnglishFromOfClosingTheLedger1: true
+            )
             try DataBaseManager.realm.write {
                 let number = dataBaseSettingsOperating.save() // 自動採番
                 print(number)
