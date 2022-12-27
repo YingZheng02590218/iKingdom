@@ -24,13 +24,32 @@ import RealmSwift
 
 // 設定勘定科目
 class DataBaseSettingsTaxonomyAccount: RObject {
-    // 連番　プライマリーキー
-    @objc dynamic var Rank0: String = "" // 大区分
-    @objc dynamic var Rank1: String = "" // 中区分
-    @objc dynamic var Rank2: String = ""  // 小区分
-    @objc dynamic var numberOfTaxonomy: String = "" // タクソノミ表示科目クラス　の連番を保持する
-    @objc dynamic var category: String = ""       // 勘定科目名
-    @objc dynamic var AdjustingAndClosingEntries: Bool = false     // 決算整理仕訳　使用していない2020/10/07
-    @objc dynamic var switching: Bool = false     // 有効無効
-//    @objc dynamic var explaining: String = ""     // 説明
+    convenience init(
+        Rank0: String,
+        Rank1: String,
+        Rank2: String,
+        numberOfTaxonomy: String,
+        category: String,
+        AdjustingAndClosingEntries: Bool,
+        switching: Bool
+    ) {
+        self.init()
+
+        self.Rank0 = Rank0
+        self.Rank1 = Rank1
+        self.Rank2 = Rank2
+        self.numberOfTaxonomy = numberOfTaxonomy
+        self.category = category
+        self.AdjustingAndClosingEntries = AdjustingAndClosingEntries
+        self.switching = switching
+    }
+
+    @objc dynamic var Rank0: String = ""                         // 大区分
+    @objc dynamic var Rank1: String = ""                         // 中区分
+    @objc dynamic var Rank2: String = ""                         // 小区分
+    @objc dynamic var numberOfTaxonomy: String = ""             // タクソノミ表示科目クラス　の連番を保持する
+    @objc dynamic var category: String = ""                      // 勘定科目名
+    @objc dynamic var AdjustingAndClosingEntries: Bool = false // 決算整理仕訳　使用していない2020/10/07
+    @objc dynamic var switching: Bool = false                    // 有効無効
+    // @objc dynamic var explaining: String = ""              // 説明
 }

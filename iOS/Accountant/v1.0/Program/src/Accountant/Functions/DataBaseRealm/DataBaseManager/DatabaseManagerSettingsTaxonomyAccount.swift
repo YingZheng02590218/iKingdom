@@ -263,15 +263,17 @@ class DatabaseManagerSettingsTaxonomyAccount {
     // 追加　設定勘定科目　新規作成
     func addSettingsTaxonomyAccount(rank0: String, rank1: String, rank2: String, numberOfTaxonomy: String, category: String, switching: Bool) -> Int {
         // オブジェクトを作成
-        let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount()
-        var number = 0                                          // プライマリーキー 自動採番にした
-        dataBaseSettingsTaxonomyAccount.Rank0 = rank0
-        dataBaseSettingsTaxonomyAccount.Rank1 = rank1
-        dataBaseSettingsTaxonomyAccount.Rank2 = rank2
-        dataBaseSettingsTaxonomyAccount.numberOfTaxonomy = numberOfTaxonomy
-        dataBaseSettingsTaxonomyAccount.category = category
-        //        dataBaseSettingsTaxonomyAccount.dataBaseSettingsTaxonomyAccount.category =  = AdjustingAndClosingEntries
-        dataBaseSettingsTaxonomyAccount.switching = switching        // オブジェクトを作成
+        let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount(
+            Rank0: rank0,
+            Rank1: rank1,
+            Rank2: rank2,
+            numberOfTaxonomy: numberOfTaxonomy,
+            category: category,
+            AdjustingAndClosingEntries: false, // 決算整理仕訳　使用していない2020/10/07
+            switching: switching
+        )
+        var number = 0
+
         do {
             try DataBaseManager.realm.write {
                 number = dataBaseSettingsTaxonomyAccount.save() //　自動採番
