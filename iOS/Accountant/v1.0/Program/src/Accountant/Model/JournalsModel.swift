@@ -59,9 +59,10 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     func addJournals(number: Int) {
         // 会計帳簿　のオブジェクトを取得
         let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
-        // オブジェクトを作成
-        let dataBaseJournals = DataBaseJournals() // 仕訳帳
-        dataBaseJournals.fiscalYear = object.fiscalYear
+        // オブジェクトを作成 仕訳帳
+        let dataBaseJournals = DataBaseJournals(
+            fiscalYear: object.fiscalYear
+        )
         do {
             try DataBaseManager.realm.write {
                 let number = dataBaseJournals.save() // ページ番号(一年で1ページ)　自動採番
