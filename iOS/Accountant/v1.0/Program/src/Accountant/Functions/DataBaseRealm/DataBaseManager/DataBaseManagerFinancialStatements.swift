@@ -66,8 +66,23 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             CashAndCashEquivalentsAtBeginningOfPeriod: 0,
             CashAndCashEquivalentsAtEndOfPeriod: 0
         )
-        let workSheet = DataBaseWorkSheet()
-        workSheet.fiscalYear = object.fiscalYear
+        let workSheet = DataBaseWorkSheet(
+            fiscalYear: object.fiscalYear,
+            netIncomeOrNetLossIncome: 0,
+            netIncomeOrNetLossLoss: 0,
+            debit_adjustingEntries_total_total: 0,
+            credit_adjustingEntries_total_total: 0,
+            debit_adjustingEntries_balance_total: 0,
+            credit_adjustingEntries_balance_total: 0,
+            debit_PL_total_total: 0,
+            credit_PL_total_total: 0,
+            debit_PL_balance_total: 0,
+            credit_PL_balance_total: 0,
+            debit_BS_total_total: 0,
+            credit_BS_total_total: 0,
+            debit_BS_balance_total: 0,
+            credit_BS_balance_total: 0
+        )
         let compoundTrialBalance = DataBaseCompoundTrialBalance()
         compoundTrialBalance.fiscalYear = object.fiscalYear
         let dataBaseFinancialStatements = DataBaseFinancialStatements(
