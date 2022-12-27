@@ -25,9 +25,10 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     }
     // モデルオブフェクトの追加
     func addAccountingBooksShelf(company: String) -> Int {
-        // オブジェクトを作成
-        let dataBaseAccountingBooksShelf = DataBaseAccountingBooksShelf() // 会計帳簿棚
-        dataBaseAccountingBooksShelf.companyName = company 
+        // オブジェクトを作成 会計帳簿棚
+        let dataBaseAccountingBooksShelf = DataBaseAccountingBooksShelf(
+            companyName: company
+        )
         // (2)書き込みトランザクション内でデータを追加する
         var number = 0
         do {
