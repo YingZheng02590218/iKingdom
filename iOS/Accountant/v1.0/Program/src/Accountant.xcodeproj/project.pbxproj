@@ -46,6 +46,8 @@
 		F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */; };
 		F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
 		F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
+		F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A263329573714002B7EB9 /* JournalEntryData.swift */; };
+		F93A263529573714002B7EB9 /* JournalEntryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A263329573714002B7EB9 /* JournalEntryData.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
 		F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
@@ -463,6 +465,7 @@
 		F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCashFlowStatement.swift; sourceTree = "<group>"; };
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
 		F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryTableViewController.swift; sourceTree = "<group>"; };
+		F93A263329573714002B7EB9 /* JournalEntryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryData.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* UIString+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+extension.swift"; sourceTree = "<group>"; };
@@ -1332,6 +1335,7 @@
 				F93A2632295722BF002B7EB9 /* DataBaseModel */,
 				F9AC55182927ACDA003966E4 /* BSData.swift */,
 				F9AC551E292CA1D1003966E4 /* PLData.swift */,
+				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
 			);
 			path = DataBaseRealm;
 			sourceTree = "<group>";
@@ -1778,6 +1782,7 @@
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5525292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */,
 				F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
 				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
@@ -1929,6 +1934,7 @@
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5526292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F93A263529573714002B7EB9 /* JournalEntryData.swift in Sources */,
 				F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9EC669327B90BC60003FBB6 /* SettingsTableViewCell.swift in Sources */,
 				F9EC669427B90BC60003FBB6 /* ClassicCalculatorViewController.swift in Sources */,

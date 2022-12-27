@@ -35,7 +35,7 @@ protocol JournalsPresenterInput {
     func deleteJournalEntry(number: Int) -> Bool
     func deleteAdjustingJournalEntry(number: Int) -> Bool
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int)
-    func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: DBJournalEntry)
+    func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: JournalEntryData)
     func autoScroll(number: Int, tappedIndexPathSection: Int)
 }
 
@@ -197,7 +197,7 @@ final class JournalsPresenter: JournalsPresenterInput {
         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
     }
     // 仕訳データを編集した通りに更新する
-    func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: DBJournalEntry) {
+    func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: JournalEntryData) {
         var primaryKeys: [Int] = []
         var primaryKeysAdjusting: [Int] = []
         // 一括変更の処理

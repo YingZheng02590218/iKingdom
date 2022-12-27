@@ -39,7 +39,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate let refreshControl = UIRefreshControl()
     // まとめて編集機能
     var indexPaths: [IndexPath] = []
-    var dBJournalEntry: DBJournalEntry?
+    var dBJournalEntry: JournalEntryData?
     var primaryKeys: [Int]? // 通常仕訳の連番
     var primaryKeysAdjusting: [Int]? // 決算整理仕訳の連番
     // 編集機能

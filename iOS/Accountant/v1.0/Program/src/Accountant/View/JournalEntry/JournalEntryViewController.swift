@@ -939,7 +939,7 @@ class JournalEntryViewController: UIViewController {
             }
         }
         
-        let dBJournalEntry = DBJournalEntry(
+        let dBJournalEntry = JournalEntryData(
             date: datePicker,
             debit_category: textFieldCategoryDebit,
             debit_amount: textFieldAmountDebit,
