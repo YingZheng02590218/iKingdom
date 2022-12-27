@@ -40,8 +40,22 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             OtherCapitalSurpluses_total: 0,
             Equity_total: 0
         )
-        let profitAndLossStatement = DataBaseProfitAndLossStatement()
-        profitAndLossStatement.fiscalYear = object.fiscalYear
+        let profitAndLossStatement = DataBaseProfitAndLossStatement(
+            fiscalYear: object.fiscalYear,
+            NetSales: 0,
+            CostOfGoodsSold: 0,
+            GrossProfitOrLoss: 0,
+            SellingGeneralAndAdministrativeExpenses: 0,
+            OtherCapitalSurpluses_total: 0,
+            NonOperatingIncome: 0,
+            NonOperatingExpenses: 0,
+            OrdinaryIncomeOrLoss: 0,
+            ExtraordinaryIncome: 0,
+            ExtraordinaryLosses: 0,
+            IncomeOrLossBeforeIncomeTaxes: 0,
+            IncomeTaxes: 0,
+            NetIncomeOrLoss: 0
+        )
         let cashFlowStatement = DataBaseCashFlowStatement()
         cashFlowStatement.fiscalYear = object.fiscalYear
         let workSheet = DataBaseWorkSheet()
