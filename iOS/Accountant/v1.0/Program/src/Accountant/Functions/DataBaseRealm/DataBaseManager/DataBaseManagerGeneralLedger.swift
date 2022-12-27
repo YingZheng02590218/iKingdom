@@ -34,9 +34,11 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     func addGeneralLedger(number: Int) {
         // 主要簿　のオブジェクトを取得
         let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
-        // オブジェクトを作成
-        let dataBaseGeneralLedger = DataBaseGeneralLedger() // 総勘定元帳
-        dataBaseGeneralLedger.fiscalYear = object.fiscalYear
+        // オブジェクトを作成 総勘定元帳
+        let dataBaseGeneralLedger = DataBaseGeneralLedger(
+            fiscalYear: object.fiscalYear,
+            dataBasePLAccount: nil
+        )
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = getObjects()
         do {
