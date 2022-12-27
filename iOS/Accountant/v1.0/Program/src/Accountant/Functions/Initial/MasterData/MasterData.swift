@@ -70,19 +70,20 @@ class MasterData {
                 // 保存先のパスを出力しておく
                 print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
                 // モデルオブフェクトを生成
-                let dataBaseSettingsCategoryTaxonomy = DataBaseSettingsTaxonomy()
+                let dataBaseSettingsCategoryTaxonomy = DataBaseSettingsTaxonomy(
+                    category0: line.components(separatedBy: ",")[0],
+                    category1: line.components(separatedBy: ",")[1],
+                    category2: line.components(separatedBy: ",")[2],
+                    category3: line.components(separatedBy: ",")[3],
+                    category4: line.components(separatedBy: ",")[4],
+                    category5: line.components(separatedBy: ",")[5],
+                    category6: line.components(separatedBy: ",")[6],
+                    category7: line.components(separatedBy: ",")[7],
+                    category: line.components(separatedBy: ",")[8], // 表示科目
+                    abstract: self.toBoolean(string: line.components(separatedBy: ",")[9]),
+                    switching: self.toBoolean(string: line.components(separatedBy: ",")[10])
+                )
                 var number = 0 // 自動採番にした
-                dataBaseSettingsCategoryTaxonomy.category0 = line.components(separatedBy: ",")[0]
-                dataBaseSettingsCategoryTaxonomy.category1 = line.components(separatedBy: ",")[1]
-                dataBaseSettingsCategoryTaxonomy.category2 = line.components(separatedBy: ",")[2]
-                dataBaseSettingsCategoryTaxonomy.category3 = line.components(separatedBy: ",")[3]
-                dataBaseSettingsCategoryTaxonomy.category4 = line.components(separatedBy: ",")[4]
-                dataBaseSettingsCategoryTaxonomy.category5 = line.components(separatedBy: ",")[5]
-                dataBaseSettingsCategoryTaxonomy.category6 = line.components(separatedBy: ",")[6]
-                dataBaseSettingsCategoryTaxonomy.category7 = line.components(separatedBy: ",")[7]
-                dataBaseSettingsCategoryTaxonomy.category = line.components(separatedBy: ",")[8] // 表示科目
-                dataBaseSettingsCategoryTaxonomy.abstract = self.toBoolean(string: line.components(separatedBy: ",")[9])
-                dataBaseSettingsCategoryTaxonomy.switching = self.toBoolean(string: line.components(separatedBy: ",")[10])
                 // 書き込み
                 do {
                     try DataBaseManager.realm.write {

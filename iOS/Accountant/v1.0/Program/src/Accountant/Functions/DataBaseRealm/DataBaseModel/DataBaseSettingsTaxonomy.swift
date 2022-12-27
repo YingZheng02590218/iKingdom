@@ -22,8 +22,34 @@ import RealmSwift
 
 // 設定表示科目クラス
 class DataBaseSettingsTaxonomy: RObject {
-    // モデル定義
-    // 連番　プライマリーキー
+    convenience init(
+        category0: String,
+        category1: String,
+        category2: String,
+        category3: String,
+        category4: String,
+        category5: String,
+        category6: String,
+        category7: String,
+        category: String,
+        abstract: Bool,
+        switching: Bool
+    ) {
+        self.init()
+
+        self.category0 = category0
+        self.category1 = category1
+        self.category2 = category2
+        self.category3 = category3
+        self.category4 = category4
+        self.category5 = category5
+        self.category6 = category6
+        self.category7 = category7
+        self.category = category
+        self.abstract = abstract
+        self.switching = switching
+    }
+
     @objc dynamic var category0: String = "" // 階層0
     @objc dynamic var category1: String = "" // 階層1
     @objc dynamic var category2: String = "" // 階層2  大分類　資産の部　など
@@ -35,5 +61,4 @@ class DataBaseSettingsTaxonomy: RObject {
     @objc dynamic var category: String = ""  // 表示科目名
     @objc dynamic var abstract: Bool = false // 抽象区分
     @objc dynamic var switching: Bool = false // 有効無効
-
 }
