@@ -27,7 +27,7 @@ class DataBaseManagerSettingsPeriod {
     func addSettingsPeriod() {
         // (2)書き込みトランザクション内でデータを追加する
         // オブジェクトを作成
-        let dataBaseSettingsPeriod = DataBaseSettingsPeriod() // 仕訳帳
+        let dataBaseSettingsPeriod = DataBaseSettingsPeriod(theDayOfReckoning: "03/31") // 仕訳帳
         do {
             try DataBaseManager.realm.write {
                 let number = dataBaseSettingsPeriod.save() // 自動採番
