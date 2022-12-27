@@ -37,8 +37,14 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         workSheet.fiscalYear = object.fiscalYear
         let compoundTrialBalance = DataBaseCompoundTrialBalance()
         compoundTrialBalance.fiscalYear = object.fiscalYear
-        let dataBaseFinancialStatements = DataBaseFinancialStatements() //
-        dataBaseFinancialStatements.fiscalYear = object.fiscalYear
+        let dataBaseFinancialStatements = DataBaseFinancialStatements(
+            fiscalYear: object.fiscalYear,
+            balanceSheet: balanceSheet,
+            profitAndLossStatement: profitAndLossStatement,
+            cashFlowStatement: cashFlowStatement,
+            workSheet: workSheet,
+            compoundTrialBalance: compoundTrialBalance
+        )
         do {
         // (2)書き込みトランザクション内でデータを追加する
         try DataBaseManager.realm.write {
@@ -62,11 +68,6 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
                 dataBaseTaxonomy.accountName = objects[i].category
                 balanceSheet.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 表示科目を作成して貸借対照表に追加する
             }
-            dataBaseFinancialStatements.balanceSheet = balanceSheet
-            dataBaseFinancialStatements.profitAndLossStatement = profitAndLossStatement
-            dataBaseFinancialStatements.cashFlowStatement = cashFlowStatement
-            dataBaseFinancialStatements.workSheet = workSheet
-            dataBaseFinancialStatements.compoundTrialBalance = compoundTrialBalance
             // 年度　の数だけ増える
             object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
         }
