@@ -36,16 +36,18 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
     }
     // モデルオブフェクトの追加
     func addAccountingBooks(fiscalYear: Int) -> Int {
-            // 会計帳簿棚　のオブジェクトを取得
-            let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1) // 会社に会計帳簿棚はひとつ
-            // オブジェクトを作成
-            let dataBaseAccountingBooks = DataBaseAccountingBooks() // 会計帳簿
-            dataBaseAccountingBooks.fiscalYear = fiscalYear
-            if !checkOpeningAccountingBook() { // 会計帳簿がひとつだけならこの帳簿を開く
-                dataBaseAccountingBooks.openOrClose = true
-            }
-            // (2)書き込みトランザクション内でデータを追加する
-            var number = 0
+        // 会計帳簿棚　のオブジェクトを取得
+        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1) // 会社に会計帳簿棚はひとつ
+        // オブジェクトを作成 会計帳簿
+        let dataBaseAccountingBooks = DataBaseAccountingBooks(
+            fiscalYear: fiscalYear,
+            dataBaseJournals: nil,
+            dataBaseGeneralLedger: nil,
+            dataBaseFinancialStatements: nil,
+            openOrClose: !checkOpeningAccountingBook() ? true : false // 会計帳簿がひとつだけならこの帳簿を開く
+        )
+        // (2)書き込みトランザクション内でデータを追加する
+        var number = 0
 
         do {
             try DataBaseManager.realm.write {
