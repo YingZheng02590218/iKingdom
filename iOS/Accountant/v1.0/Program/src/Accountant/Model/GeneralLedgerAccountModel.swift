@@ -60,14 +60,29 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         // 設定画面の勘定科目一覧にある勘定を取得する
         let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         let objectt = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number)
+        // オブジェクトを作成 勘定
+        let dataBaseAccount = DataBaseAccount(
+            fiscalYear: object.fiscalYear,
+            accountName: objectt!.category,
+            debit_total: 0,
+            credit_total: 0,
+            debit_balance: 0,
+            credit_balance: 0,
+            debit_total_Adjusting: 0,
+            credit_total_Adjusting: 0,
+            debit_balance_Adjusting: 0,
+            credit_balance_Adjusting: 0,
+            debit_total_AfterAdjusting: 0,
+            credit_total_AfterAdjusting: 0,
+            debit_balance_AfterAdjusting: 0,
+            credit_balance_AfterAdjusting: 0
+        )
         do {
             try DataBaseManager.realm.write {
-                let dataBaseAccount = DataBaseAccount() // 勘定
-                let num = dataBaseAccount.save() // dataBaseAccount.number = number //　自動採番ではなく、設定勘定科目のプライマリーキーを使用する　2020/11/08 年度を追加すると勘定クラスの連番が既に使用されている
+                let num = dataBaseAccount.save() // dataBaseAccount.number = number
+                //　自動採番ではなく、設定勘定科目のプライマリーキーを使用する　2020/11/08 年度を追加すると勘定クラスの連番が既に使用されている
                 print("dataBaseAccount", number)
                 print("dataBaseAccount", num)
-                dataBaseAccount.fiscalYear = object.fiscalYear
-                dataBaseAccount.accountName = objectt!.category
                 object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
             }
         } catch {
@@ -82,27 +97,41 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = dataBaseManagerGeneralLedger.getObjects()
-        do {
-            try DataBaseManager.realm.write {
-                // 設定勘定科目と総勘定元帳ないの勘定を比較
-                for i in 0..<objects.count {
-                    let dataBaseAccount = getAccountByAccountName(accountName: objects[i].category)
-                    print("addGeneralLedgerAccountLack", objects[i].category)
-                    if dataBaseAccount != nil {
-                        // print("勘定は存在する")
-                    } else {
-                        // print("勘定が存在しない")
-                        let dataBaseAccount = DataBaseAccount() // 勘定
+        // 設定勘定科目と総勘定元帳ないの勘定を比較
+        for i in 0..<objects.count {
+            let dataBaseAccount = getAccountByAccountName(accountName: objects[i].category)
+            print("addGeneralLedgerAccountLack", objects[i].category)
+            if dataBaseAccount != nil {
+                // print("勘定は存在する")
+            } else {
+                // print("勘定が存在しない")
+                // オブジェクトを作成 勘定
+                let dataBaseAccount = DataBaseAccount(
+                    fiscalYear: object.fiscalYear,
+                    accountName: objects[i].category,
+                    debit_total: 0,
+                    credit_total: 0,
+                    debit_balance: 0,
+                    credit_balance: 0,
+                    debit_total_Adjusting: 0,
+                    credit_total_Adjusting: 0,
+                    debit_balance_Adjusting: 0,
+                    credit_balance_Adjusting: 0,
+                    debit_total_AfterAdjusting: 0,
+                    credit_total_AfterAdjusting: 0,
+                    debit_balance_AfterAdjusting: 0,
+                    credit_balance_AfterAdjusting: 0
+                )
+                do {
+                    try DataBaseManager.realm.write {
                         let number = dataBaseAccount.save() //　自動採番
                         print("dataBaseAccount", number)
-                        dataBaseAccount.fiscalYear = object.fiscalYear
-                        dataBaseAccount.accountName = objects[i].category
                         object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
                     }
+                } catch {
+                    print("エラーが発生しました")
                 }
             }
-        } catch {
-            print("エラーが発生しました")
         }
     }
     // 取得 仕訳　すべて　今期

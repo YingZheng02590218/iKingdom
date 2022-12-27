@@ -47,18 +47,46 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 print("addGeneralLedger", number)
                 // オブジェクトを作成 勘定
                 for i in 0..<objects.count {
-                    let dataBaseAccount = DataBaseAccount() // 勘定
+                    // オブジェクトを作成 勘定
+                    let dataBaseAccount = DataBaseAccount(
+                        fiscalYear: object.fiscalYear,
+                        accountName: objects[i].category,
+                        debit_total: 0,
+                        credit_total: 0,
+                        debit_balance: 0,
+                        credit_balance: 0,
+                        debit_total_Adjusting: 0,
+                        credit_total_Adjusting: 0,
+                        debit_balance_Adjusting: 0,
+                        credit_balance_Adjusting: 0,
+                        debit_total_AfterAdjusting: 0,
+                        credit_total_AfterAdjusting: 0,
+                        debit_balance_AfterAdjusting: 0,
+                        credit_balance_AfterAdjusting: 0
+                    )
                     let number = dataBaseAccount.save() //　自動採番
                     print("dataBaseAccount", number)
-                    dataBaseAccount.fiscalYear = object.fiscalYear
-                    dataBaseAccount.accountName = objects[i].category
                     dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
                 }
-                let dataBasePLAccount = DataBasePLAccount() // 損益勘定
+                // オブジェクトを作成 損益勘定
+                let dataBasePLAccount = DataBasePLAccount(
+                    fiscalYear: object.fiscalYear,
+                    accountName: "損益勘定",
+                    debit_total: 0,
+                    credit_total: 0,
+                    debit_balance: 0,
+                    credit_balance: 0,
+                    debit_total_Adjusting: 0,
+                    credit_total_Adjusting: 0,
+                    debit_balance_Adjusting: 0,
+                    credit_balance_Adjusting: 0,
+                    debit_total_AfterAdjusting: 0,
+                    credit_total_AfterAdjusting: 0,
+                    debit_balance_AfterAdjusting: 0,
+                    credit_balance_AfterAdjusting: 0
+                )
                 let numberr = dataBasePLAccount.save() //　自動採番
                 print("dataBasePLAccount", numberr)
-                dataBasePLAccount.fiscalYear = object.fiscalYear
-                dataBasePLAccount.accountName = "損益勘定"
                 dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する
                 // 年度　の数だけ増える
                 object.dataBaseGeneralLedger = dataBaseGeneralLedger

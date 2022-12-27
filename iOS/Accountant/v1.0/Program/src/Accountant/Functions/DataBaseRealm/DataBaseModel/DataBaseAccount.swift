@@ -12,6 +12,46 @@ import RealmSwift
 // 勘定クラス
 // 勘定 は 仕訳データ を 1 つ以上持っています。
 class DataBaseAccount: RObject {
+    convenience init(
+        fiscalYear: Int,
+        accountName: String,
+
+        debit_total: Int64,
+        credit_total: Int64,
+        debit_balance: Int64,
+        credit_balance: Int64,
+
+        debit_total_Adjusting: Int64,
+        credit_total_Adjusting: Int64,
+        debit_balance_Adjusting: Int64,
+        credit_balance_Adjusting: Int64,
+
+        debit_total_AfterAdjusting: Int64,
+        credit_total_AfterAdjusting: Int64,
+        debit_balance_AfterAdjusting: Int64,
+        credit_balance_AfterAdjusting: Int64
+    ) {
+        self.init()
+
+        self.fiscalYear = fiscalYear
+        self.accountName = accountName
+
+        self.debit_total = debit_total
+        self.credit_total = credit_total
+        self.debit_balance = debit_balance
+        self.credit_balance = credit_balance
+
+        self.debit_total_Adjusting = debit_total_Adjusting
+        self.credit_total_Adjusting = credit_total_Adjusting
+        self.debit_balance_Adjusting = debit_balance_Adjusting
+        self.credit_balance_Adjusting = credit_balance_Adjusting
+
+        self.debit_total_AfterAdjusting = debit_total_AfterAdjusting
+        self.credit_total_AfterAdjusting = credit_total_AfterAdjusting
+        self.debit_balance_AfterAdjusting = debit_balance_AfterAdjusting
+        self.credit_balance_AfterAdjusting = credit_balance_AfterAdjusting
+    }
+
     @objc dynamic var fiscalYear: Int = 0                      // 年度
     @objc dynamic var accountName: String = ""                // 勘定名
     // 決算整理前
@@ -35,4 +75,5 @@ class DataBaseAccount: RObject {
 
 // 損益勘定クラス
 class DataBasePLAccount: DataBaseAccount {
+    
 }
