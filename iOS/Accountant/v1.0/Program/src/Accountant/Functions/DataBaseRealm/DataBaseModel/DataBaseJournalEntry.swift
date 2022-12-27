@@ -11,15 +11,32 @@ import RealmSwift
 
 // 仕訳クラス
 class DataBaseJournalEntry: RObject {
-//    // initを使用することでイニシャライザ定義
-//    init(date: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, balance_left: Int64, balance_right: Int64) {
-//        self.date = date
-//        self.debit_category = debit_category
-//        self.debit_amount = debit_amount
-//        self.credit_category = credit_category
-//        self.credit_amount = credit_amount
-//        self.smallWritting = smallWritting
-//    }
+    // Overriding init() isn't quite supported just yet. I'll rename the issue accordingly.
+    // Meanwhile, you can create and use convenience initializers like this:
+    // https://github.com/realm/realm-swift/issues/1849
+    convenience init(
+        fiscalYear: Int,
+        date: String,
+        debit_category: String,
+        debit_amount: Int64,
+        credit_category: String,
+        credit_amount: Int64,
+        smallWritting: String,
+        balance_left: Int64,
+        balance_right: Int64
+    ) {
+        self.init()
+        
+        self.fiscalYear = fiscalYear
+        self.date = date
+        self.debit_category = debit_category
+        self.debit_amount = debit_amount
+        self.credit_category = credit_category
+        self.credit_amount = credit_amount
+        self.smallWritting = smallWritting
+        self.balance_left = balance_left
+        self.balance_right = balance_right
+    }
     // モデル定義
     // @objc dynamic var number: Int = 0                 // 仕訳番号
     @objc dynamic var fiscalYear: Int = 0               // 年度

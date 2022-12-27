@@ -13,15 +13,8 @@ import RealmSwift
 class DataBaseManagerJournalEntry {
     // 追加　仕訳
     func addJournalEntry(date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
-        // オブジェクトを作成
-        let dataBaseJournalEntry = DataBaseJournalEntry()       // 仕訳
-        var number = 0                                          // 仕訳番号 自動採番にした
-        dataBaseJournalEntry.date = date                        // 日付
-        dataBaseJournalEntry.debit_category = debitCategory    // 借方勘定
-        dataBaseJournalEntry.debit_amount = debitAmount        // 借方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.credit_category = creditCategory  // 貸方勘定
-        dataBaseJournalEntry.credit_amount = creditAmount      // 貸方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.smallWritting = smallWritting      // 小書き
+
+        var number = 0
         // オブジェクトを作成
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
@@ -30,11 +23,22 @@ class DataBaseManagerJournalEntry {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let fiscalYear = object.dataBaseJournals?.fiscalYear {
+            // オブジェクトを作成
+            let dataBaseJournalEntry = DataBaseJournalEntry(
+                fiscalYear: fiscalYear,
+                date: date,
+                debit_category: debitCategory,
+                debit_amount: debitAmount,
+                credit_category: creditCategory,
+                credit_amount: creditAmount,
+                smallWritting: smallWritting,
+                balance_left: 0,
+                balance_right: 0
+            )
             do {
                 // (2)書き込みトランザクション内でデータを追加する
                 try DataBaseManager.realm.write {
                     number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                    dataBaseJournalEntry.fiscalYear = fiscalYear                        // 年度
                     // 仕訳帳に仕訳データを追加
                     object.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
                     // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
@@ -55,27 +59,32 @@ class DataBaseManagerJournalEntry {
     }
     // 追加　決算整理仕訳
     func addAdjustingJournalEntry(date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
-        // オブジェクトを作成
-        let dataBaseJournalEntry = DataBaseAdjustingEntry()
-        var number = 0                                          // 仕訳番号 自動採番にした
-        dataBaseJournalEntry.date = date                        // 日付
-        dataBaseJournalEntry.debit_category = debitCategory    // 借方勘定
-        dataBaseJournalEntry.debit_amount = debitAmount        // 借方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.credit_category = creditCategory  // 貸方勘定
-        dataBaseJournalEntry.credit_amount = creditAmount      // 貸方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.smallWritting = smallWritting      // 小書き
+
+        var number = 0
         // オブジェクトを作成
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
+
         // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let fiscalYear = dataBaseAccountingBook.dataBaseJournals?.fiscalYear {
+            // オブジェクトを作成
+            let dataBaseJournalEntry = DataBaseAdjustingEntry(
+                fiscalYear: fiscalYear,
+                date: date,
+                debit_category: debitCategory,
+                debit_amount: debitAmount,
+                credit_category: creditCategory,
+                credit_amount: creditAmount,
+                smallWritting: smallWritting,
+                balance_left: 0,
+                balance_right: 0
+            )
             do {
                 // (2)書き込みトランザクション内でデータを追加する
                 try DataBaseManager.realm.write {
                     number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                    dataBaseJournalEntry.fiscalYear = fiscalYear                        // 年度
                     // 仕訳帳に仕訳データを追加
                     dataBaseAccountingBook.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                     // 勘定へ転記
