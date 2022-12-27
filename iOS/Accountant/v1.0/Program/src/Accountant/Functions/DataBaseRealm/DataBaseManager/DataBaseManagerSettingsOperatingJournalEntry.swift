@@ -14,15 +14,16 @@ class DataBaseManagerSettingsOperatingJournalEntry {
     
     // 追加　よく使う仕訳
     func addJournalEntry(nickname: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
-        // オブジェクトを作成
-        let dataBaseJournalEntry = DataBaseSettingsOperatingJournalEntry()       // よく使う仕訳
-        dataBaseJournalEntry.nickname = nickname                        // ニックネーム
+        // オブジェクトを作成 よく使う仕訳
+        let dataBaseJournalEntry = DataBaseSettingsOperatingJournalEntry(
+            nickname: nickname,                        // ニックネーム
+            debit_category: debitCategory,    // 借方勘定
+            debit_amount: debitAmount,        // 借方金額 Int型(TextField.text アンラップ)
+            credit_category: creditCategory,  // 貸方勘定
+            credit_amount: creditAmount,      // 貸方金額
+            smallWritting: smallWritting      // 小書き
+        )
         var number = 0                                          // 仕訳番号 自動採番にした
-        dataBaseJournalEntry.debit_category = debitCategory    // 借方勘定
-        dataBaseJournalEntry.debit_amount = debitAmount        // 借方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.credit_category = creditCategory  // 貸方勘定
-        dataBaseJournalEntry.credit_amount = creditAmount      // 貸方金額 Int型(TextField.text アンラップ)
-        dataBaseJournalEntry.smallWritting = smallWritting      // 小書き
         
         do {
             try DataBaseManager.realm.write {
