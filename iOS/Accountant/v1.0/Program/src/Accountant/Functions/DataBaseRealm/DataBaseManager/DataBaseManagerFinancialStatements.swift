@@ -56,8 +56,16 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             IncomeTaxes: 0,
             NetIncomeOrLoss: 0
         )
-        let cashFlowStatement = DataBaseCashFlowStatement()
-        cashFlowStatement.fiscalYear = object.fiscalYear
+        let cashFlowStatement = DataBaseCashFlowStatement(
+            fiscalYear: object.fiscalYear,
+            CashFlowsFromOperatingActivities: 0,
+            CashFlowsFromInvestingActivities: 0,
+            CashFlowsFromfInancingActivities: 0,
+            EffectOfExchangeRateChangesOnCashAndCashEquivalents: 0,
+            NetIncreaseInCashAndCashEquivalents: 0,
+            CashAndCashEquivalentsAtBeginningOfPeriod: 0,
+            CashAndCashEquivalentsAtEndOfPeriod: 0
+        )
         let workSheet = DataBaseWorkSheet()
         workSheet.fiscalYear = object.fiscalYear
         let compoundTrialBalance = DataBaseCompoundTrialBalance()
