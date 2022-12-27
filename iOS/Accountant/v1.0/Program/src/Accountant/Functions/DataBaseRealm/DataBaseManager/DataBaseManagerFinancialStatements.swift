@@ -27,8 +27,19 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         // 会計帳簿棚　のオブジェクトを取得
         let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
         // オブジェクトに格納するオブジェクトを作成
-        let balanceSheet = DataBaseBalanceSheet()
-        balanceSheet.fiscalYear = object.fiscalYear
+        let balanceSheet = DataBaseBalanceSheet(
+            fiscalYear: object.fiscalYear,
+            CurrentAssets_total: 0,
+            FixedAssets_total: 0,
+            DeferredAssets_total: 0,
+            Asset_total: 0,
+            CurrentLiabilities_total: 0,
+            FixedLiabilities_total: 0,
+            Liability_total: 0,
+            CapitalStock_total: 0,
+            OtherCapitalSurpluses_total: 0,
+            Equity_total: 0
+        )
         let profitAndLossStatement = DataBaseProfitAndLossStatement()
         profitAndLossStatement.fiscalYear = object.fiscalYear
         let cashFlowStatement = DataBaseCashFlowStatement()
