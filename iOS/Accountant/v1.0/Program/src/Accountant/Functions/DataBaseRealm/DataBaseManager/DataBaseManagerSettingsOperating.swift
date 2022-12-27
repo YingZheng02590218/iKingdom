@@ -37,7 +37,7 @@ class DataBaseManagerSettingsOperating {
     }
     // 取得
     func getSettingsOperating() -> DataBaseSettingsOperating? {
-        let object = DataBaseManager.realm.object(ofType: DataBaseSettingsOperating.self, forPrimaryKey: 1)
+        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1) else { return nil }
         return object
     }
     // 更新　スイッチの切り替え

@@ -37,10 +37,8 @@ class DataBaseManagerTaxonomy {
     }
     // 取得　設定表示科目　設定表示科目の名称
     func getNameOfSettingsTaxonomy(number: Int) -> String {
-        if let object = DataBaseManager.realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: number) {
-            return object.category
-        }
-        return ""
+        guard let object = RealmUtilManager.shared.findFirst(type: DataBaseSettingsTaxonomy.self, key: number) else { return "" }
+        return object.category
     }
     
     /**
@@ -214,30 +212,29 @@ class DataBaseManagerTaxonomy {
     // 追加 表示科目　マイグレーション
     func addTaxonomyAll() {
         // 会計帳簿棚　を取得
-        if let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1) {
-            // 設定表示科目　を取得
-            let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
-            // 会計帳簿　の数の分だけ表示科目を作成
-            for y in 0..<object.dataBaseAccountingBooks.count where object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.count ?? 0 > 0 {
-                // 表示科目　オブジェクトを作成
-                for i in 0..<objects.count {
-                    do {
-                        // (2)書き込みトランザクション内でデータを追加する
-                        try DataBaseManager.realm.write {
-                            let dataBaseTaxonomy = DataBaseTaxonomy(
-                                fiscalYear: object.dataBaseAccountingBooks[y].fiscalYear, // 帳簿ごとの年度
-                                accountName: objects[i].category, // 設定表示科目の表示科目名
-                                total: 0,
-                                numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
-                            )
-                            let number = dataBaseTaxonomy.save() //　自動採番
-                            print(number)
-                            // 表示科目を追加
-                            object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 既にある貸借対照表に新たに表示科目を追加する
-                        }
-                    } catch {
-                        print("エラーが発生しました")
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return }
+        // 設定表示科目　を取得
+        let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
+        // 会計帳簿　の数の分だけ表示科目を作成
+        for y in 0..<object.dataBaseAccountingBooks.count where object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.count ?? 0 > 0 {
+            // 表示科目　オブジェクトを作成
+            for i in 0..<objects.count {
+                do {
+                    // (2)書き込みトランザクション内でデータを追加する
+                    try DataBaseManager.realm.write {
+                        let dataBaseTaxonomy = DataBaseTaxonomy(
+                            fiscalYear: object.dataBaseAccountingBooks[y].fiscalYear, // 帳簿ごとの年度
+                            accountName: objects[i].category, // 設定表示科目の表示科目名
+                            total: 0,
+                            numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
+                        )
+                        let number = dataBaseTaxonomy.save() //　自動採番
+                        print(number)
+                        // 表示科目を追加
+                        object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 既にある貸借対照表に新たに表示科目を追加する
                     }
+                } catch {
+                    print("エラーが発生しました")
                 }
             }
         }
@@ -245,27 +242,24 @@ class DataBaseManagerTaxonomy {
     // 削除 表示科目　マイグレーション
     func deleteTaxonomyAll() -> Bool {
         // 会計帳簿棚　を取得
-        if let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1) {
-            // 会計帳簿　の数の分だけ表示科目を削除
-            for y in 0..<object.dataBaseAccountingBooks.count where object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy[0].numberOfTaxonomy == 0 {
-                // 表示科目　オブジェクトを削除
-                if let dataBaseTaxonomy = object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy {
-                    for _ in 0..<dataBaseTaxonomy.count {
-                        do {
-                            // (2)書き込みトランザクション内でデータを追加する
-                            try DataBaseManager.realm.write {
-                                // 表示科目を削除
-                                DataBaseManager.realm.delete(dataBaseTaxonomy[0])   // 既にある表示科目を削除する
-                            }
-                        } catch {
-                            print("エラーが発生しました")
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return false }
+        // 会計帳簿　の数の分だけ表示科目を削除
+        for y in 0..<object.dataBaseAccountingBooks.count where object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy[0].numberOfTaxonomy == 0 {
+            // 表示科目　オブジェクトを削除
+            if let dataBaseTaxonomy = object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy {
+                for _ in 0..<dataBaseTaxonomy.count {
+                    do {
+                        // (2)書き込みトランザクション内でデータを追加する
+                        try DataBaseManager.realm.write {
+                            // 表示科目を削除
+                            DataBaseManager.realm.delete(dataBaseTaxonomy[0])   // 既にある表示科目を削除する
                         }
+                    } catch {
+                        print("エラーが発生しました")
                     }
                 }
             }
-            return object.dataBaseAccountingBooks[object.dataBaseAccountingBooks.count - 1].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.isEmpty // 成功したら true まだ失敗時の動きは確認していない
         }
-        
-        return false
+        return object.dataBaseAccountingBooks[object.dataBaseAccountingBooks.count - 1].dataBaseFinancialStatements!.balanceSheet!.dataBaseTaxonomy.isEmpty // 成功したら true まだ失敗時の動きは確認していない
     }
 }

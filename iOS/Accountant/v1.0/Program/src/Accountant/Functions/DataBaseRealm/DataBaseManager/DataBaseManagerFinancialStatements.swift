@@ -25,7 +25,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     // モデルオブフェクトの追加
     func addFinancialStatements(number: Int) {
         // 会計帳簿棚　のオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトに格納するオブジェクトを作成
         let balanceSheet = DataBaseBalanceSheet(
             fiscalYear: object.fiscalYear,
@@ -132,27 +132,24 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     }
     // モデルオブフェクトの削除
     func deleteFinancialStatements(number: Int) -> Bool {
-        if let object = DataBaseManager.realm.object(ofType: DataBaseFinancialStatements.self, forPrimaryKey: number) {
-            do {
-        try DataBaseManager.realm.write {
-            // 表示科目を削除
-            DataBaseManager.realm.delete(object.balanceSheet!.dataBaseTaxonomy)
-            // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
-            DataBaseManager.realm.delete(object.balanceSheet!)
-            DataBaseManager.realm.delete(object.profitAndLossStatement!)
-            DataBaseManager.realm.delete(object.cashFlowStatement!)
-            DataBaseManager.realm.delete(object.workSheet!)
-            DataBaseManager.realm.delete(object.compoundTrialBalance!)
-            // 会計帳簿を削除
-            DataBaseManager.realm.delete(object)
-        }
-            } catch {
-                print("エラーが発生しました")
+        guard let object = RealmManager.shared.findFirst(type: DataBaseFinancialStatements.self, key: number) else { return false }
+        do {
+            try DataBaseManager.realm.write {
+                // 表示科目を削除
+                DataBaseManager.realm.delete(object.balanceSheet!.dataBaseTaxonomy)
+                // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
+                DataBaseManager.realm.delete(object.balanceSheet!)
+                DataBaseManager.realm.delete(object.profitAndLossStatement!)
+                DataBaseManager.realm.delete(object.cashFlowStatement!)
+                DataBaseManager.realm.delete(object.workSheet!)
+                DataBaseManager.realm.delete(object.compoundTrialBalance!)
+                // 会計帳簿を削除
+                DataBaseManager.realm.delete(object)
             }
-            return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+        } catch {
+            print("エラーが発生しました")
         }
-
-        return false
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
     }
     // 取得　財務諸表　現在開いている年度
     func getFinancialStatements() -> DataBaseFinancialStatements {

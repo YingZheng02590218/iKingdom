@@ -192,7 +192,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得　設定表示科目　表示科目の連番から設定表示科目を取得
     func getSettingsTaxonomy(numberOfTaxonomy: Int) -> DataBaseSettingsTaxonomy? {
-        let object = DataBaseManager.realm.object(ofType: DataBaseSettingsTaxonomy.self, forPrimaryKey: numberOfTaxonomy)
+        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomy.self, key: numberOfTaxonomy) else { return nil }
         return object
     }
     // モデルオブフェクトの更新　スイッチの切り替え

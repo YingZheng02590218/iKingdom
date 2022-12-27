@@ -106,18 +106,11 @@ class DataBaseManagerJournalEntry {
     // 取得　仕訳 編集する仕訳をプライマリーキーで取得
     func getJournalEntryWithNumber(number: Int) -> DataBaseJournalEntry? {
 
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: number) else {
-            return nil
-        }
-        return dataBaseJournalEntry
+        RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number)
     }
     // 取得　決算整理仕訳 編集する仕訳をプライマリーキーで取得
     func getAdjustingEntryWithNumber(number: Int) -> DataBaseAdjustingEntry? {
-
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number) else {
-            return nil
-        }
-        return dataBaseJournalEntry
+        RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: number)
     }
     // 仕訳　総数
     func getJournalEntryCount() -> Results<DataBaseJournalEntry> {
@@ -178,9 +171,7 @@ class DataBaseManagerJournalEntry {
     // 更新 仕訳
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: primaryKey) else {
-            return
-        }
+        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
         let accountLeft = dataBaseJournalEntry.debit_category
         let accountRight = dataBaseJournalEntry.credit_category
@@ -267,9 +258,7 @@ class DataBaseManagerJournalEntry {
     // 更新 決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey) else {
-            return
-        }
+        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
         let accountLeft = dataBaseJournalEntry.debit_category
         let accountRight = dataBaseJournalEntry.credit_category
@@ -355,7 +344,7 @@ class DataBaseManagerJournalEntry {
     }
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
-        let object = DataBaseManager.realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number) else { return false }
         // 再計算用に、勘定をメモしておく
         let accountLeft = object.debit_category
         let accountRight = object.credit_category
@@ -374,7 +363,7 @@ class DataBaseManagerJournalEntry {
     }
     // 削除　決算整理仕訳
     func deleteAdjustingJournalEntry(number: Int) -> Bool {
-        let object = DataBaseManager.realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: number) else { return false }
         // 再計算用に、勘定をメモしておく
         let accountLeft = object.debit_category
         let accountRight = object.credit_category

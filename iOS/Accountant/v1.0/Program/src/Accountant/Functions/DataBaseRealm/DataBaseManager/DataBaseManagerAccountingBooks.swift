@@ -36,8 +36,10 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
     }
     // モデルオブフェクトの追加
     func addAccountingBooks(fiscalYear: Int) -> Int {
+
+        var number = 0
         // 会計帳簿棚　のオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1) // 会社に会計帳簿棚はひとつ
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return number } // 会社に会計帳簿棚はひとつ
         // オブジェクトを作成 会計帳簿
         let dataBaseAccountingBooks = DataBaseAccountingBooks(
             fiscalYear: fiscalYear,
@@ -47,26 +49,23 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             openOrClose: !checkOpeningAccountingBook() ? true : false // 会計帳簿がひとつだけならこの帳簿を開く
         )
         // (2)書き込みトランザクション内でデータを追加する
-        var number = 0
 
         do {
             try DataBaseManager.realm.write {
                 number = dataBaseAccountingBooks.save() //　自動採番
                 // 年度　の数だけ増える
-                object?.dataBaseAccountingBooks.append(dataBaseAccountingBooks) // 会計帳簿棚に会計帳簿を追加する
+                object.dataBaseAccountingBooks.append(dataBaseAccountingBooks) // 会計帳簿棚に会計帳簿を追加する
             }
             return number
         } catch let error as NSError {
             print(error)
-            return 0
+            return number
         }
     }
     // モデルオブフェクトの削除　会計帳簿
     func deleteAccountingBooks(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
-        guard let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number) else {
-            return false
-        }
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return false } // 会社に会計帳簿棚はひとつ
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
         // 会計帳簿が一つしかない場合は、削除しない

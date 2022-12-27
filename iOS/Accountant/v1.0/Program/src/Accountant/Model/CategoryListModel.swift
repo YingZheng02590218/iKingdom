@@ -61,7 +61,7 @@ class CategoryListModel: CategoryListModelInput {
         if isInvalidated {
             do {
                 // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-                if let object = DataBaseManager.realm.object(ofType: DataBaseSettingsTaxonomyAccount.self, forPrimaryKey: number) {
+                if let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) {
                     try DataBaseManager.realm.write {
                         // 仕訳が残ってないか
                         // 勘定を削除

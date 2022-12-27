@@ -33,7 +33,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     // 追加　総勘定元帳
     func addGeneralLedger(number: Int) {
         // 主要簿　のオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトを作成 総勘定元帳
         let dataBaseGeneralLedger = DataBaseGeneralLedger(
             fiscalYear: object.fiscalYear,
@@ -98,7 +98,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     // モデルオブフェクトの削除
     func deleteGeneralLedger(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseGeneralLedger.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseGeneralLedger.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 // 勘定を削除

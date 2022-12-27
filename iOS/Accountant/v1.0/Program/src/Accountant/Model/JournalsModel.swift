@@ -58,7 +58,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     // 追加
     func addJournals(number: Int) {
         // 会計帳簿　のオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトを作成 仕訳帳
         let dataBaseJournals = DataBaseJournals(
             fiscalYear: object.fiscalYear
@@ -77,7 +77,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     // 削除
     func deleteJournals(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-        let object = DataBaseManager.realm.object(ofType: DataBaseJournals.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseJournals.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 DataBaseManager.realm.delete(object.dataBaseJournalEntries) // 仕訳
@@ -116,8 +116,8 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-        let dataBaseSettingsOperating = DataBaseManager.realm.object(ofType: DataBaseSettingsOperating.self, forPrimaryKey: 1)
-        
+        let dataBaseSettingsOperating = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1)
+
         if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
            let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
             if !englishFromOfClosingTheLedger0 { // 損益振替仕訳
@@ -132,7 +132,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     // 更新　仕訳　年度
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseJournalEntry.self, forPrimaryKey: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
         guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
@@ -214,7 +214,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     // 更新　決算整理仕訳　年度 損益振替仕訳、資本振替仕訳以外の決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = DataBaseManager.realm.object(ofType: DataBaseAdjustingEntry.self, forPrimaryKey: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
         guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }

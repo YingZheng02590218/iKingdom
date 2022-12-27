@@ -63,7 +63,7 @@ class DataBaseManagerSettingsOperatingJournalEntry {
     }
     // 削除　よく使う仕訳
     func deleteJournalEntry(number: Int) -> Bool {
-        let object = DataBaseManager.realm.object(ofType: DataBaseSettingsOperatingJournalEntry.self, forPrimaryKey: number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsOperatingJournalEntry.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 DataBaseManager.realm.delete(object)

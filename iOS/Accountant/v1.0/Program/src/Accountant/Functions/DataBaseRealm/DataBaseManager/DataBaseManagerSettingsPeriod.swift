@@ -40,8 +40,8 @@ class DataBaseManagerSettingsPeriod {
     // 取得　決算日
     func getTheDayOfReckoning() -> String {
         // (2)データベース内に保存されているモデルを全て取得する
-        let object = DataBaseManager.realm.object(ofType: DataBaseSettingsPeriod.self, forPrimaryKey: 1)
-        return object!.theDayOfReckoning
+        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsPeriod.self, key: 1) else { return "" }
+        return object.theDayOfReckoning
     }
     // 更新　決算日
     func setTheDayOfReckoning(month: Bool, date: String) {
@@ -155,13 +155,13 @@ class DataBaseManagerSettingsPeriod {
         // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
         objects = objects.filter("openOrClose == \(true)")
         // (2)データベース内に保存されているモデルをひとつ取得する
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooks.self, forPrimaryKey: objects[0].number)!
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: objects[0].number) else { return 0 }
         return object.fiscalYear // 年度を返す
     }
     // モデルオブフェクトの更新
     func setMainBooksOpenOrClose(tag: Int) {
         // (2)データベース内に保存されているDataBaseAccountingBooksShelfモデルをひとつ取得する
-        let object = DataBaseManager.realm.object(ofType: DataBaseAccountingBooksShelf.self, forPrimaryKey: 1)! // 会計帳簿棚は会社に一つ
+        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return } // 会計帳簿棚は会社に一つ
         do {
             try DataBaseManager.realm.write {
                 // 一括更新　一旦、すべてのチェックマークを外す
