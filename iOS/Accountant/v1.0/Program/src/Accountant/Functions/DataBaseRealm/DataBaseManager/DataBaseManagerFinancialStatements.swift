@@ -83,8 +83,13 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             debit_BS_balance_total: 0,
             credit_BS_balance_total: 0
         )
-        let compoundTrialBalance = DataBaseCompoundTrialBalance()
-        compoundTrialBalance.fiscalYear = object.fiscalYear
+        let compoundTrialBalance = DataBaseCompoundTrialBalance(
+            fiscalYear: object.fiscalYear,
+            debit_total_total: 0,
+            credit_total_total: 0,
+            debit_balance_total: 0,
+            credit_balance_total: 0
+        )
         let dataBaseFinancialStatements = DataBaseFinancialStatements(
             fiscalYear: object.fiscalYear,
             balanceSheet: balanceSheet,
