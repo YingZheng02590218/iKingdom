@@ -56,59 +56,15 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     
     // 追加　勘定
     func addGeneralLedgerAccount(number: Int) {
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        // 設定画面の勘定科目一覧にある勘定を取得する
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let objectt = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number)
-        // オブジェクトを作成 勘定
-        let dataBaseAccount = DataBaseAccount(
-            fiscalYear: object.fiscalYear,
-            accountName: objectt!.category,
-            debit_total: 0,
-            credit_total: 0,
-            debit_balance: 0,
-            credit_balance: 0,
-            debit_total_Adjusting: 0,
-            credit_total_Adjusting: 0,
-            debit_balance_Adjusting: 0,
-            credit_balance_Adjusting: 0,
-            debit_total_AfterAdjusting: 0,
-            credit_total_AfterAdjusting: 0,
-            debit_balance_AfterAdjusting: 0,
-            credit_balance_AfterAdjusting: 0
-        )
-        do {
-            try DataBaseManager.realm.write {
-                let num = dataBaseAccount.save() // dataBaseAccount.number = number
-                //　自動採番ではなく、設定勘定科目のプライマリーキーを使用する　2020/11/08 年度を追加すると勘定クラスの連番が既に使用されている
-                print("dataBaseAccount", number)
-                print("dataBaseAccount", num)
-                object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
-    }
-    // 追加　勘定　不足している勘定を追加する
-    func addGeneralLedgerAccountLack() {
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        // 総勘定元帳　取得
-        let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
-        // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = dataBaseManagerGeneralLedger.getObjects()
-        // 設定勘定科目と総勘定元帳ないの勘定を比較
-        for i in 0..<objects.count {
-            let dataBaseAccount = getAccountByAccountName(accountName: objects[i].category)
-            print("addGeneralLedgerAccountLack", objects[i].category)
-            if dataBaseAccount != nil {
-                // print("勘定は存在する")
-            } else {
-                // print("勘定が存在しない")
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
+            // 設定画面の勘定科目一覧にある勘定を取得する
+            let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+            if let dataBaseSettingsTaxonomyAccount = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number) {
                 // オブジェクトを作成 勘定
                 let dataBaseAccount = DataBaseAccount(
-                    fiscalYear: object.fiscalYear,
-                    accountName: objects[i].category,
+                    fiscalYear: dataBaseAccountingBook.fiscalYear,
+                    accountName: dataBaseSettingsTaxonomyAccount.category,
                     debit_total: 0,
                     credit_total: 0,
                     debit_balance: 0,
@@ -124,12 +80,61 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
                 )
                 do {
                     try DataBaseManager.realm.write {
-                        let number = dataBaseAccount.save() //　自動採番
+                        let num = dataBaseAccount.save() // dataBaseAccount.number = number
+                        // 自動採番ではなく、設定勘定科目のプライマリーキーを使用する　2020/11/08 年度を追加すると勘定クラスの連番が既に使用されている
                         print("dataBaseAccount", number)
-                        object.dataBaseGeneralLedger!.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
+                        print("dataBaseAccount", num)
+                        dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
                     }
                 } catch {
                     print("エラーが発生しました")
+                }
+            }
+        }
+    }
+    // 追加　勘定　不足している勘定を追加する
+    func addGeneralLedgerAccountLack() {
+        // 開いている会計帳簿の年度を取得
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
+            // 総勘定元帳　取得
+            let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
+            // 設定画面の勘定科目一覧にある勘定を取得する
+            let objects = dataBaseManagerGeneralLedger.getObjects()
+            // 設定勘定科目と総勘定元帳ないの勘定を比較
+            for i in 0..<objects.count {
+                let dataBaseAccount = getAccountByAccountName(accountName: objects[i].category)
+                print("addGeneralLedgerAccountLack", objects[i].category)
+                if dataBaseAccount != nil {
+                    // print("勘定は存在する")
+                } else {
+                    // print("勘定が存在しない")
+                    // オブジェクトを作成 勘定
+                    let dataBaseAccount = DataBaseAccount(
+                        fiscalYear: dataBaseAccountingBook.fiscalYear,
+                        accountName: objects[i].category,
+                        debit_total: 0,
+                        credit_total: 0,
+                        debit_balance: 0,
+                        credit_balance: 0,
+                        debit_total_Adjusting: 0,
+                        credit_total_Adjusting: 0,
+                        debit_balance_Adjusting: 0,
+                        credit_balance_Adjusting: 0,
+                        debit_total_AfterAdjusting: 0,
+                        credit_total_AfterAdjusting: 0,
+                        debit_balance_AfterAdjusting: 0,
+                        credit_balance_AfterAdjusting: 0
+                    )
+                    do {
+                        try DataBaseManager.realm.write {
+                            let number = dataBaseAccount.save() //　自動採番
+                            print("dataBaseAccount", number)
+                            dataBaseGeneralLedger.dataBaseAccounts.append(dataBaseAccount)   // 勘定を作成して総勘定元帳に追加する
+                        }
+                    } catch {
+                        print("エラーが発生しました")
+                    }
                 }
             }
         }

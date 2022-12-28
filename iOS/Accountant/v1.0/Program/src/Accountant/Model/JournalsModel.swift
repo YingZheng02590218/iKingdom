@@ -135,8 +135,14 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.debit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else { return }
+        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.credit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else { return }
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let journals = getJournalsWithFiscalYear(fiscalYear: fiscalYear) else { return }
         guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
@@ -217,8 +223,14 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
+        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.debit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else { return }
+        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.credit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else { return }
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let journals = getJournalsWithFiscalYear(fiscalYear: fiscalYear) else { return }
         guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
@@ -309,7 +321,16 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         )
     }
     // 更新 決算整理仕訳　日付、借方勘定、借方金額、貸方勘定、貸方金額、小書き
-    func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
+    func updateAdjustingJournalEntry(
+        primaryKey: Int,
+        date: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        smallWritting: String,
+        completion: (Int) -> Void
+    ) {
         let dataBaseManager = DataBaseManagerJournalEntry()
         dataBaseManager.updateAdjustingJournalEntry(
             primaryKey: primaryKey,
