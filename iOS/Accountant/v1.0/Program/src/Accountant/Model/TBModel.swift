@@ -13,7 +13,7 @@ import RealmSwift
 protocol TBModelInput {
     func calculateAmountOfAllAccount()
     func setAllAccountTotal()
-    
+
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64
 }
 
@@ -27,7 +27,7 @@ class TBModel: TBModelInput {
             // 財務諸表　取得
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             let object = dataBaseManagerFinancialStatements.getFinancialStatements()
-            
+
             do {
                 try DataBaseManager.realm.write {
                     for r in 0..<4 { // 注意：3になっていた。誤り
@@ -142,7 +142,7 @@ class TBModel: TBModelInput {
             dataBaseManagerTaxonomy.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountLeft)) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
         }
         if accountRight != "損益勘定" {
-            
+
             dataBaseManagerTaxonomy.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountRight))
         }
         dataBaseManagerTaxonomy.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: "繰越利益"))
@@ -162,12 +162,12 @@ class TBModel: TBModelInput {
                             dataBaseGeneralLedger.dataBaseAccounts[i].credit_total = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance = 0
-                            
+
                             dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
                             dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_Adjusting = 0
-                            
+
                             dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting = 0
                             dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0
@@ -178,12 +178,12 @@ class TBModel: TBModelInput {
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_total = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.debit_balance = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_balance = 0
-                        
+
                         dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0
-                        
+
                         dataBaseGeneralLedger.dataBasePLAccount?.debit_total_AfterAdjusting = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_total_AfterAdjusting = 0
                         dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_AfterAdjusting = 0
@@ -199,7 +199,7 @@ class TBModel: TBModelInput {
     private func calculateAccountTotal(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-        
+
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: account) // 勘定別に取得
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
@@ -272,7 +272,7 @@ class TBModel: TBModelInput {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         var objects: Results<DataBaseAdjustingEntry>
-        
+
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         if account != "損益勘定" && account != "繰越利益" {
             objects = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account)
@@ -359,8 +359,10 @@ class TBModel: TBModelInput {
                     do {
                         try DataBaseManager.realm.write {
                             // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
-                            dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total + dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting
-                            dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total + dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting
+                            dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting =
+                            dataBaseGeneralLedger.dataBaseAccounts[i].debit_total + dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting
+                            dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting =
+                            dataBaseGeneralLedger.dataBaseAccounts[i].credit_total + dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting
                         }
                     } catch {
                         print("エラーが発生しました")

@@ -150,7 +150,10 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         // 編集する仕訳
         do {
             try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": primaryKey, "fiscalYear": fiscalYear]
+                let value: [String: Any] = [
+                    "number": primaryKey,
+                    "fiscalYear": fiscalYear
+                ]
                 DataBaseManager.realm.create(DataBaseJournalEntry.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {
@@ -238,7 +241,10 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         // 編集する仕訳
         do {
             try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": primaryKey, "fiscalYear": fiscalYear]
+                let value: [String: Any] = [
+                    "number": primaryKey,
+                    "fiscalYear": fiscalYear
+                ]
                 DataBaseManager.realm.create(DataBaseAdjustingEntry.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {

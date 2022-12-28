@@ -220,8 +220,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益は除外
     func getAllAdjustingEntryInPLAccount(account: String) -> Results<DataBaseAdjustingEntry> {
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
@@ -246,8 +245,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益のみ
     func getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: String) -> Results<DataBaseAdjustingEntry> {
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
@@ -276,9 +274,9 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 取得　勘定名から勘定を取得
     func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let dataBaseAccount = RealmManager.shared.read(type: DataBaseAccount.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: object.dataBaseJournals!.fiscalYear)),
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "accountName LIKE %@", NSString(string: accountName))
         ])
         return dataBaseAccount

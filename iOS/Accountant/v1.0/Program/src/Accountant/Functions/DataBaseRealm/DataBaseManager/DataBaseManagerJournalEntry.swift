@@ -21,35 +21,33 @@ class DataBaseManagerJournalEntry {
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
 
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let fiscalYear = object.dataBaseJournals?.fiscalYear {
-            // オブジェクトを作成
-            let dataBaseJournalEntry = DataBaseJournalEntry(
-                fiscalYear: fiscalYear,
-                date: date,
-                debit_category: debitCategory,
-                debit_amount: debitAmount,
-                credit_category: creditCategory,
-                credit_amount: creditAmount,
-                smallWritting: smallWritting,
-                balance_left: 0,
-                balance_right: 0
-            )
-            do {
-                // (2)書き込みトランザクション内でデータを追加する
-                try DataBaseManager.realm.write {
-                    number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                    // 仕訳帳に仕訳データを追加
-                    object.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
-                    // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
-                    // 勘定に借方の仕訳データを追加
-                    leftObject?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
-                    // 勘定に貸方の仕訳データを追加
-                    rightObject?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
-                }
-            } catch {
-                print("エラーが発生しました")
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        // オブジェクトを作成
+        let dataBaseJournalEntry = DataBaseJournalEntry(
+            fiscalYear: dataBaseAccountingBook.fiscalYear,
+            date: date,
+            debit_category: debitCategory,
+            debit_amount: debitAmount,
+            credit_category: creditCategory,
+            credit_amount: creditAmount,
+            smallWritting: smallWritting,
+            balance_left: 0,
+            balance_right: 0
+        )
+        do {
+            // (2)書き込みトランザクション内でデータを追加する
+            try DataBaseManager.realm.write {
+                number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+                // 仕訳帳に仕訳データを追加
+                dataBaseAccountingBook.dataBaseJournals?.dataBaseJournalEntries.append(dataBaseJournalEntry)
+                // 勘定へ転記 開いている会計帳簿の総勘定元帳の勘定に仕訳データを追加したい
+                // 勘定に借方の仕訳データを追加
+                leftObject?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                // 勘定に貸方の仕訳データを追加
+                rightObject?.dataBaseJournalEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
             }
+        } catch {
+            print("エラーが発生しました")
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
@@ -68,34 +66,32 @@ class DataBaseManagerJournalEntry {
 
         // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let fiscalYear = dataBaseAccountingBook.dataBaseJournals?.fiscalYear {
-            // オブジェクトを作成
-            let dataBaseJournalEntry = DataBaseAdjustingEntry(
-                fiscalYear: fiscalYear,
-                date: date,
-                debit_category: debitCategory,
-                debit_amount: debitAmount,
-                credit_category: creditCategory,
-                credit_amount: creditAmount,
-                smallWritting: smallWritting,
-                balance_left: 0,
-                balance_right: 0
-            )
-            do {
-                // (2)書き込みトランザクション内でデータを追加する
-                try DataBaseManager.realm.write {
-                    number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                    // 仕訳帳に仕訳データを追加
-                    dataBaseAccountingBook.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
-                    // 勘定へ転記
-                    // 勘定に借方の仕訳データを追加
-                    leftObject?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
-                    // 勘定に貸方の仕訳データを追加
-                    rightObject?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
-                }
-            } catch {
-                print("エラーが発生しました")
+        // オブジェクトを作成
+        let dataBaseJournalEntry = DataBaseAdjustingEntry(
+            fiscalYear: dataBaseAccountingBook.fiscalYear,
+            date: date,
+            debit_category: debitCategory,
+            debit_amount: debitAmount,
+            credit_category: creditCategory,
+            credit_amount: creditAmount,
+            smallWritting: smallWritting,
+            balance_left: 0,
+            balance_right: 0
+        )
+        do {
+            // (2)書き込みトランザクション内でデータを追加する
+            try DataBaseManager.realm.write {
+                number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+                // 仕訳帳に仕訳データを追加
+                dataBaseAccountingBook.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                // 勘定へ転記
+                // 勘定に借方の仕訳データを追加
+                leftObject?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
+                // 勘定に貸方の仕訳データを追加
+                rightObject?.dataBaseAdjustingEntries.append(dataBaseJournalEntry) // 会計帳簿.総勘定元帳.勘定.決算整理仕訳リスト
             }
+        } catch {
+            print("エラーが発生しました")
         }
         // 仕訳データを追加したら、試算表を再計算する
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29

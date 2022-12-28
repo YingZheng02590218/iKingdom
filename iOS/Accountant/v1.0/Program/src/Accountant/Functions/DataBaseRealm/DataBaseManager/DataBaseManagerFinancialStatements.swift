@@ -136,13 +136,23 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         do {
             try DataBaseManager.realm.write {
                 // 表示科目を削除
-                DataBaseManager.realm.delete(object.balanceSheet!.dataBaseTaxonomy)
-                // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
-                DataBaseManager.realm.delete(object.balanceSheet!)
-                DataBaseManager.realm.delete(object.profitAndLossStatement!)
-                DataBaseManager.realm.delete(object.cashFlowStatement!)
-                DataBaseManager.realm.delete(object.workSheet!)
-                DataBaseManager.realm.delete(object.compoundTrialBalance!)
+                if let balanceSheet = object.balanceSheet {
+                    DataBaseManager.realm.delete(balanceSheet.dataBaseTaxonomy)
+                    // 貸借対照表、損益計算書、CF計算書、精算表、試算表を削除
+                    DataBaseManager.realm.delete(balanceSheet)
+                }
+                if let profitAndLossStatement = object.profitAndLossStatement {
+                    DataBaseManager.realm.delete(profitAndLossStatement)
+                }
+                if let cashFlowStatement = object.cashFlowStatement {
+                    DataBaseManager.realm.delete(cashFlowStatement)
+                }
+                if let workSheet = object.workSheet {
+                    DataBaseManager.realm.delete(workSheet)
+                }
+                if let compoundTrialBalance = object.compoundTrialBalance {
+                    DataBaseManager.realm.delete(compoundTrialBalance)
+                }
                 // 会計帳簿を削除
                 DataBaseManager.realm.delete(object)
             }
@@ -154,9 +164,8 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     // 取得　財務諸表　現在開いている年度
     func getFinancialStatements() -> DataBaseFinancialStatements {
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseFinancialStatements.self, predicates: [
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseFinancialStatements.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
         return objects[0]

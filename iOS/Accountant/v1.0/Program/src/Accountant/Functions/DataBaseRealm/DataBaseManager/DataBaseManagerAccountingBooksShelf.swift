@@ -52,7 +52,10 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     func updateCompanyName(companyName: String) {
         do {
             try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": 1, "companyName": companyName]
+                let value: [String: Any] = [
+                    "number": 1,
+                    "companyName": companyName
+                ]
                 DataBaseManager.realm.create(DataBaseAccountingBooksShelf.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {

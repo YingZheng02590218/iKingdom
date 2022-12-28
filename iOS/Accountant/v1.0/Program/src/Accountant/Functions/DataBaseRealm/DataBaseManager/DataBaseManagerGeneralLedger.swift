@@ -33,10 +33,10 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     // 追加　総勘定元帳
     func addGeneralLedger(number: Int) {
         // 主要簿　のオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
+        guard let dataBaseAccountingBooks = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトを作成 総勘定元帳
         let dataBaseGeneralLedger = DataBaseGeneralLedger(
-            fiscalYear: object.fiscalYear,
+            fiscalYear: dataBaseAccountingBooks.fiscalYear,
             dataBasePLAccount: nil
         )
         // 設定画面の勘定科目一覧にある勘定を取得する
@@ -49,7 +49,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 for i in 0..<objects.count {
                     // オブジェクトを作成 勘定
                     let dataBaseAccount = DataBaseAccount(
-                        fiscalYear: object.fiscalYear,
+                        fiscalYear: dataBaseAccountingBooks.fiscalYear,
                         accountName: objects[i].category,
                         debit_total: 0,
                         credit_total: 0,
@@ -70,7 +70,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 }
                 // オブジェクトを作成 損益勘定
                 let dataBasePLAccount = DataBasePLAccount(
-                    fiscalYear: object.fiscalYear,
+                    fiscalYear: dataBaseAccountingBooks.fiscalYear,
                     accountName: "損益勘定",
                     debit_total: 0,
                     credit_total: 0,
@@ -89,7 +89,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 print("dataBasePLAccount", numberr)
                 dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する
                 // 年度　の数だけ増える
-                object.dataBaseGeneralLedger = dataBaseGeneralLedger
+                dataBaseAccountingBooks.dataBaseGeneralLedger = dataBaseGeneralLedger
             }
         } catch {
             print("エラーが発生しました")
@@ -114,8 +114,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     // 取得　総勘定元帳　開いている会計帳簿内の元帳
     func getGeneralLedger() -> DataBaseGeneralLedger? {
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])

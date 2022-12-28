@@ -351,10 +351,9 @@ class JournalEntryViewController: UIViewController {
         timezone.locale = Locale(identifier: "en_US_POSIX")
 
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear = object.dataBaseJournals?.fiscalYear
-        let nowStringYear = fiscalYear!.description                            //　本年度
-        let nowStringNextYear = (fiscalYear! + 1).description                  //　次年度
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let nowStringYear = fiscalYear.description                            //　本年度
+        let nowStringNextYear = (fiscalYear + 1).description                  //　次年度
         let nowStringMonthDay = dateFormatterMMdd.string(from: now)                           // 現在時刻の月日
         
         // 設定決算日

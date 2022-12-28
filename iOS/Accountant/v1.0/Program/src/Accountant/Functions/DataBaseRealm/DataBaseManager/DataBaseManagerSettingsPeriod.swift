@@ -170,7 +170,10 @@ class DataBaseManagerSettingsPeriod {
                 // 一括更新　一旦、すべてのチェックマークを外す
                 object.setValue(false, forKeyPath: "dataBaseAccountingBooks.openOrClose")
                 // そして、選択された年度の会計帳簿にチェックマークをつける
-                let value: [String: Any] = ["number": tag, "openOrClose": true]
+                let value: [String: Any] = [
+                    "number": tag,
+                    "openOrClose": true
+                ]
                 DataBaseManager.realm.create(DataBaseAccountingBooks.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {

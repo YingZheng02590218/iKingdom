@@ -37,7 +37,7 @@ class DateManager {
     
     // 年度変更機能 引数の日付が、会計期間の範囲内に入っているかどうかを判定する
     func isInPeriod(date: String) -> Bool {
-        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false) // 年度
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear() // 年度
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()                  // 決算日
         var fiscalYearFixed = 0 // 補正値
         if theDayOfReckoning == "12/31" {
@@ -46,7 +46,7 @@ class DateManager {
             fiscalYearFixed = 1 // 年度 + 1年
         }
         // 今年度の決算日　決算日 + 年度 + 時分秒
-        let fullTheDayOfReckoning = dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + String(dataBaseAccountingBook.fiscalYear + fiscalYearFixed) + ", " + dateFormatterHHmmss.string(from: now))!
+        let fullTheDayOfReckoning = dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + String(fiscalYear + fiscalYearFixed) + ", " + dateFormatterHHmmss.string(from: now))!
         // 年度開始日　決算日の翌日に設定する
         var dayOfStartInPeriod = Calendar.current.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning)! // 今年度の決算日 -１年
         dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod)!          // 今年度の決算日 +１日

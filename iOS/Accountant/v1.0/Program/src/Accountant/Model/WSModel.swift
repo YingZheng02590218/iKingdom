@@ -49,33 +49,36 @@ class WSModel: WSModelInput {
         if let objectG = dataBaseManager.getGeneralLedger() {
             
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-            let object = dataBaseManagerFinancialStatements.getFinancialStatements()
-            
-            let dataBaseManagerTB = TBModel()
-            
-            do {
-                try DataBaseManager.realm.write {
-                    for r in 0..<4 { // 注意：3になっていた。誤り
-                        var l: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
-                        for i in 0..<objectG.dataBaseAccounts.count {
-                            l += dataBaseManagerTB.getTotalAmountAdjusting(account: objectG.dataBaseAccounts[i].accountName, leftOrRight: r) // 累計額に追加
+            let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()
+            if let workSheet = dataBaseFinancialStatement.workSheet {
+                
+                let dataBaseManagerTB = TBModel()
+                
+                for r in 0..<4 { // 注意：3になっていた。誤り
+                    var l: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
+                    for i in 0..<objectG.dataBaseAccounts.count {
+                        l += dataBaseManagerTB.getTotalAmountAdjusting(account: objectG.dataBaseAccounts[i].accountName, leftOrRight: r) // 累計額に追加
+                    }
+                    
+                    do {
+                        try DataBaseManager.realm.write {
+                            switch r {
+                            case 0: // 合計　借方
+                                workSheet.debit_adjustingEntries_total_total = l
+                            case 1: // 合計　貸方
+                                workSheet.credit_adjustingEntries_total_total = l
+                            case 2: // 残高　借方
+                                workSheet.debit_adjustingEntries_balance_total = l
+                            case 3: // 残高　貸方
+                                workSheet.credit_adjustingEntries_balance_total = l
+                            default:
+                                print(l)
+                            }
                         }
-                        switch r {
-                        case 0: // 合計　借方
-                            object.workSheet?.debit_adjustingEntries_total_total = l
-                        case 1: // 合計　貸方
-                            object.workSheet?.credit_adjustingEntries_total_total = l
-                        case 2: // 残高　借方
-                            object.workSheet?.debit_adjustingEntries_balance_total = l
-                        case 3: // 残高　貸方
-                            object.workSheet?.credit_adjustingEntries_balance_total = l
-                        default:
-                            print(l)
-                        }
+                    } catch {
+                        print("エラーが発生しました")
                     }
                 }
-            } catch {
-                print("エラーが発生しました")
             }
         }
     }
@@ -109,14 +112,14 @@ class WSModel: WSModelInput {
                         default:
                             print(l)
                         }
-                    }
-                    // 当期純利益を計算する
-                    if workSheet.debit_PL_balance_total > workSheet.credit_PL_balance_total {
-                        workSheet.netIncomeOrNetLossIncome = workSheet.debit_PL_balance_total - workSheet.credit_PL_balance_total
-                        workSheet.netIncomeOrNetLossLoss = 0
-                    } else {
-                        workSheet.netIncomeOrNetLossIncome = 0
-                        workSheet.netIncomeOrNetLossLoss = workSheet.credit_PL_balance_total - workSheet.debit_PL_balance_total
+                        // 当期純利益を計算する
+                        if workSheet.debit_PL_balance_total > workSheet.credit_PL_balance_total {
+                            workSheet.netIncomeOrNetLossIncome = workSheet.debit_PL_balance_total - workSheet.credit_PL_balance_total
+                            workSheet.netIncomeOrNetLossLoss = 0
+                        } else {
+                            workSheet.netIncomeOrNetLossIncome = 0
+                            workSheet.netIncomeOrNetLossLoss = workSheet.credit_PL_balance_total - workSheet.debit_PL_balance_total
+                        }
                     }
                 } catch {
                     print("エラーが発生しました")

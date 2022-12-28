@@ -14,9 +14,9 @@ class DataBaseManagerPLAccount: DataBaseManager {
     
     // チェック 決算整理仕訳　存在するかを確認
     func checkAdjustingEntry(account: String) -> Results<DataBaseAdjustingEntry> {
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: object.fiscalYear)),
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
         ])
@@ -24,10 +24,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
     }
     // チェック 決算整理仕訳　損益勘定内の勘定が存在するかを確認
     func checkAdjustingEntryInPLAccount(account: String) -> Results<DataBaseAdjustingEntry> {
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let objects = object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let objects = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries
             .sorted(byKeyPath: "date", ascending: true)
-            .filter("fiscalYear == \(object.fiscalYear)")
+            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
             .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
             .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
         return objects!
@@ -48,20 +48,17 @@ class DataBaseManagerPLAccount: DataBaseManager {
             let dataBaseJournalEntry = DataBaseAdjustingEntry()
             var number = 0                                          // 仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
-            let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-            guard let fiscalYear = object.dataBaseJournals?.fiscalYear else {
-                return
-            }
-            dataBaseJournalEntry.fiscalYear = fiscalYear                        // 年度
+            let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            dataBaseJournalEntry.fiscalYear = dataBaseAccountingBook.fiscalYear                        // 年度
             // 決算日
             let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             var fiscalYearFixed = ""
             if theDayOfReckoning == "12/31" {
-                fiscalYearFixed = String(fiscalYear)
+                fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear)
             } else {
-                fiscalYearFixed = String(fiscalYear + 1)
+                fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear + 1)
             }
-
+            
             dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
             dataBaseJournalEntry.debit_category = creditCategory    // 借方勘定　＊引数の貸方勘定を振替える
             dataBaseJournalEntry.debit_amount = amount        // 借方金額
@@ -111,25 +108,25 @@ class DataBaseManagerPLAccount: DataBaseManager {
                         print(number)
                         try DataBaseManager.realm.write {
                             // 仕訳帳に仕訳データを追加
-                            object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            dataBaseAccountingBook.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                         }
                         // 勘定へ転記 // オブジェクトを作成
-                        if let objectss = object.dataBaseGeneralLedger {
-                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                        for i in 0..<objectss.dataBaseAccounts.count {
-                            print(objectss.dataBaseAccounts[i].accountName, account)
-                            if objectss.dataBaseAccounts[i].accountName == account {
-                                try DataBaseManager.realm.write {
-                                    // 勘定に借方の仕訳データを追加
-                                    object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                        if let objectss = dataBaseAccountingBook.dataBaseGeneralLedger {
+                            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                            for i in 0..<objectss.dataBaseAccounts.count {
+                                print(objectss.dataBaseAccounts[i].accountName, account)
+                                if objectss.dataBaseAccounts[i].accountName == account {
+                                    try DataBaseManager.realm.write {
+                                        // 勘定に借方の仕訳データを追加
+                                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                                    }
+                                    break
                                 }
-                                break
                             }
-                        }
                         }
                         try DataBaseManager.realm.write {
                             // 勘定に貸方の仕訳データを追加
-                            object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                            dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                         }
                     } catch {
                         print("エラーが発生しました")
@@ -153,84 +150,82 @@ class DataBaseManagerPLAccount: DataBaseManager {
             let dataBaseJournalEntry = DataBaseAdjustingEntry()
             var number = 0                                          // 仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
-            let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-            if let fiscalYear = object.dataBaseJournals?.fiscalYear {
-                dataBaseJournalEntry.fiscalYear = fiscalYear                       // 年度
-                // 決算日
-                let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
-                var fiscalYearFixed = ""
-                if theDayOfReckoning == "12/31" {
-                    fiscalYearFixed = String(fiscalYear)
+            let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+            dataBaseJournalEntry.fiscalYear = dataBaseAccountingBook.fiscalYear                       // 年度
+            // 決算日
+            let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+            var fiscalYearFixed = ""
+            if theDayOfReckoning == "12/31" {
+                fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear)
             } else {
-                    fiscalYearFixed = String(fiscalYear + 1)
-                }
-                dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
-                dataBaseJournalEntry.debit_category = creditCategory    // 借方勘定　＊引数の貸方勘定を振替える
-                dataBaseJournalEntry.debit_amount = amount        // 借方金額
-                dataBaseJournalEntry.credit_category = debitCategory  // 貸方勘定　＊引数の借方勘定を振替える
-                dataBaseJournalEntry.credit_amount = amount      // 貸方金額
-                dataBaseJournalEntry.smallWritting = "資本振替仕訳"
-                // 損益振替仕訳　が1件超が存在する場合は　削除
-                let objects = checkAdjustingEntry(account: account) // 損益勘定内に勘定が存在するか
-            outerLoop: while objects.count > 1 {
-                for i in 0..<objects.count {
-                    let isInvalidated = deleteAdjustingJournalEntry(primaryKey: objects[i].number)
-                    print("削除", isInvalidated, objects.count)
-                    continue outerLoop
-                }
-                break
+                fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear + 1)
             }
-                let objectss = checkAdjustingEntryInPLAccount(account: account) // 損益勘定内に勘定が存在するか
-            outerLoop: while objectss.count > 1 {
-                for i in 0..<objectss.count {
-                    let isInvalidated = removeAdjustingJournalEntry(primaryKey: objectss[i].number)
-                    print("関連削除", isInvalidated, objectss.count)
-                    continue outerLoop
-                }
-                break
+            dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
+            dataBaseJournalEntry.debit_category = creditCategory    // 借方勘定　＊引数の貸方勘定を振替える
+            dataBaseJournalEntry.debit_amount = amount        // 借方金額
+            dataBaseJournalEntry.credit_category = debitCategory  // 貸方勘定　＊引数の借方勘定を振替える
+            dataBaseJournalEntry.credit_amount = amount      // 貸方金額
+            dataBaseJournalEntry.smallWritting = "資本振替仕訳"
+            // 損益振替仕訳　が1件超が存在する場合は　削除
+            let objects = checkAdjustingEntry(account: account) // 損益勘定内に勘定が存在するか
+        outerLoop: while objects.count > 1 {
+            for i in 0..<objects.count {
+                let isInvalidated = deleteAdjustingJournalEntry(primaryKey: objects[i].number)
+                print("削除", isInvalidated, objects.count)
+                continue outerLoop
             }
-                if objects.count == 1 {
-                    // 資本振替仕訳　が存在する場合は　更新
-                    number = updateAdjustingJournalEntry(
-                        primaryKey: objects[0].number,
-                        date: dataBaseJournalEntry.date,
-                        debitCategory: dataBaseJournalEntry.debit_category,
-                        debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
-                        creditCategory: dataBaseJournalEntry.credit_category,
-                        creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
-                        smallWritting: dataBaseJournalEntry.smallWritting
-                    )
-                } else {
-                    // 資本振替仕訳　が存在しない場合は　作成
-                    if amount != 0 {
-                        number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                        print(number)
-                        do {
-                            try DataBaseManager.realm.write {
-                                // 仕訳帳に仕訳データを追加
-                                object.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
-                            }
-                            // 勘定へ転記 // オブジェクトを作成
-                            // 勘定に借方の仕訳データを追加
-                            if let objectss = object.dataBaseGeneralLedger {
-                                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                                for i in 0..<objectss.dataBaseAccounts.count where
-                                objectss.dataBaseAccounts[i].accountName == account {
-                                    print(objectss.dataBaseAccounts[i].accountName, account)
-
-                                    try DataBaseManager.realm.write {
-                                        object.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
-                                    }
-                                    break
-                                }
-                            }
-                            try DataBaseManager.realm.write {
-                                // 勘定に貸方の仕訳データを追加
-                                object.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
-                            }
-                        } catch {
-                            print("エラーが発生しました")
+            break
+        }
+            let objectss = checkAdjustingEntryInPLAccount(account: account) // 損益勘定内に勘定が存在するか
+        outerLoop: while objectss.count > 1 {
+            for i in 0..<objectss.count {
+                let isInvalidated = removeAdjustingJournalEntry(primaryKey: objectss[i].number)
+                print("関連削除", isInvalidated, objectss.count)
+                continue outerLoop
+            }
+            break
+        }
+            if objects.count == 1 {
+                // 資本振替仕訳　が存在する場合は　更新
+                number = updateAdjustingJournalEntry(
+                    primaryKey: objects[0].number,
+                    date: dataBaseJournalEntry.date,
+                    debitCategory: dataBaseJournalEntry.debit_category,
+                    debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
+                    creditCategory: dataBaseJournalEntry.credit_category,
+                    creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
+                    smallWritting: dataBaseJournalEntry.smallWritting
+                )
+            } else {
+                // 資本振替仕訳　が存在しない場合は　作成
+                if amount != 0 {
+                    number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+                    print(number)
+                    do {
+                        try DataBaseManager.realm.write {
+                            // 仕訳帳に仕訳データを追加
+                            dataBaseAccountingBook.dataBaseJournals?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
                         }
+                        // 勘定へ転記 // オブジェクトを作成
+                        // 勘定に借方の仕訳データを追加
+                        if let objectss = dataBaseAccountingBook.dataBaseGeneralLedger {
+                            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                            for i in 0..<objectss.dataBaseAccounts.count where
+                            objectss.dataBaseAccounts[i].accountName == account {
+                                print(objectss.dataBaseAccounts[i].accountName, account)
+                                
+                                try DataBaseManager.realm.write {
+                                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                                }
+                                break
+                            }
+                        }
+                        try DataBaseManager.realm.write {
+                            // 勘定に貸方の仕訳データを追加
+                            dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries.append(dataBaseJournalEntry)
+                        }
+                    } catch {
+                        print("エラーが発生しました")
                     }
                 }
             }
@@ -283,9 +278,9 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<oldJournals.dataBaseAdjustingEntries.count where oldJournals.dataBaseAdjustingEntries[i].number == primaryKey ||
         oldJournals.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                oldJournals.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.仕訳帳.仕訳リスト
-            }
+                try DataBaseManager.realm.write {
+                    oldJournals.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.仕訳帳.仕訳リスト
+                }
             } catch {
                 print("エラーが発生しました")
             }
@@ -298,12 +293,12 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<oldLeftObject.dataBaseAdjustingEntries.count where oldLeftObject.dataBaseAdjustingEntries[i].number == primaryKey ||
         oldLeftObject.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                oldLeftObject.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                try DataBaseManager.realm.write {
+                    oldLeftObject.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                }
+            } catch {
+                print("エラーが発生しました")
             }
-        } catch {
-            print("エラーが発生しました")
-        }
             continue outerLoop
         }
         break
@@ -313,25 +308,25 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<dataBasePLAccount.dataBaseAdjustingEntries.count where dataBasePLAccount.dataBaseAdjustingEntries[i].number == primaryKey ||
         dataBasePLAccount.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                dataBasePLAccount.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                try DataBaseManager.realm.write {
+                    dataBasePLAccount.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                }
+            } catch {
+                print("エラーが発生しました")
             }
-        } catch {
-            print("エラーが発生しました")
-        }
             continue outerLoop
         }
         break
     }
         if !dataBaseJournalEntry.isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                // 仕訳データを削除
-                DataBaseManager.realm.delete(dataBaseJournalEntry)
+                try DataBaseManager.realm.write {
+                    // 仕訳データを削除
+                    DataBaseManager.realm.delete(dataBaseJournalEntry)
+                }
+            } catch {
+                print("エラーが発生しました")
             }
-        } catch {
-            print("エラーが発生しました")
-        }
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
@@ -362,10 +357,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<oldJournals.dataBaseAdjustingEntries.count where oldJournals.dataBaseAdjustingEntries[i].number == primaryKey ||
         oldJournals.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                oldJournals.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.仕訳帳.仕訳リスト
-                print(oldJournals.dataBaseAdjustingEntries.count)
-            }
+                try DataBaseManager.realm.write {
+                    oldJournals.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.仕訳帳.仕訳リスト
+                    print(oldJournals.dataBaseAdjustingEntries.count)
+                }
             } catch {
                 print("エラーが発生しました")
             }
@@ -380,10 +375,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<oldLeftObject.dataBaseAdjustingEntries.count where oldLeftObject.dataBaseAdjustingEntries[i].number == primaryKey ||
         oldLeftObject.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                oldLeftObject.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
-                print(oldLeftObject.dataBaseAdjustingEntries.count)
-            }
+                try DataBaseManager.realm.write {
+                    oldLeftObject.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                    print(oldLeftObject.dataBaseAdjustingEntries.count)
+                }
             } catch {
                 print("エラーが発生しました")
             }
@@ -398,10 +393,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
         for i in 0..<dataBasePLAccount.dataBaseAdjustingEntries.count where dataBasePLAccount.dataBaseAdjustingEntries[i].number == primaryKey ||
         dataBasePLAccount.dataBaseAdjustingEntries[i].isInvalidated {
             do {
-            try DataBaseManager.realm.write {
-                dataBasePLAccount.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
-                print(dataBasePLAccount.dataBaseAdjustingEntries.count)
-            }
+                try DataBaseManager.realm.write {
+                    dataBasePLAccount.dataBaseAdjustingEntries.remove(at: i) // 会計帳簿.総勘定元帳.勘定.仕訳リスト
+                    print(dataBasePLAccount.dataBaseAdjustingEntries.count)
+                }
             } catch {
                 print("エラーが発生しました")
             }
@@ -410,7 +405,7 @@ class DataBaseManagerPLAccount: DataBaseManager {
         break
     }
         if !dataBaseJournalEntry.isInvalidated {
-
+            
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
