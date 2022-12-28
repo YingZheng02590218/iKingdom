@@ -137,7 +137,9 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
 
     // 取得　通常仕訳 勘定別に取得
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
-        let dataBaseAccountingBook = DataBaseManager.realm.objects(DataBaseAccountingBooks.self).filter("openOrClose == \(true)").first
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
         if account == "損益勘定" {
             // 損益勘定の場合
             let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
@@ -153,7 +155,9 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     }
     // 取得 決算整理仕訳 勘定別に取得
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry> {
-        let dataBaseAccountingBook = DataBaseManager.realm.objects(DataBaseAccountingBooks.self).filter("openOrClose == \(true)").first
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
         if account == "損益勘定" {
             // 損益勘定の場合
             let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount

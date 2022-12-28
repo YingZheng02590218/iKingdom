@@ -144,13 +144,11 @@ class DataBaseManagerJournalEntry {
      * @return  勘定
      */
     private func getAccountByAccountNameWithFiscalYear(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
-        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
-        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
-            return nil
-        }
-        let dataBaseAccounts = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts
+
+        let dataBaseAccounts = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
             .filter("accountName LIKE '\(accountName)'")
         guard let dataBaseAccount = dataBaseAccounts?.first else {
             return nil

@@ -23,34 +23,35 @@ class TBModel: TBModelInput {
     func calculateAmountOfAllAccount() {
         // 総勘定元帳　取得
         let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
-        let objectsOfGL = dataBaseManagerGeneralLedger.getGeneralLedger()
-        // 財務諸表　取得
-        let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-        let object = dataBaseManagerFinancialStatements.getFinancialStatements()
+        if let objectsOfGL = dataBaseManagerGeneralLedger.getGeneralLedger() {
+            // 財務諸表　取得
+            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
+            let object = dataBaseManagerFinancialStatements.getFinancialStatements()
 
-        do {
-            try DataBaseManager.realm.write {
-                for r in 0..<4 { // 注意：3になっていた。誤り
-                    var l: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
-                    for i in 0..<objectsOfGL.dataBaseAccounts.count {
-                        l += getTotalAmount(account: objectsOfGL.dataBaseAccounts[i].accountName, leftOrRight: r) // 累計額に追加
-                    }
-                    switch r {
-                    case 0: // 合計　借方
-                        object.compoundTrialBalance?.debit_total_total = l // + k
-                    case 1: // 合計　貸方
-                        object.compoundTrialBalance?.credit_total_total = l // + k
-                    case 2: // 残高　借方
-                        object.compoundTrialBalance?.debit_balance_total = l // + k
-                    case 3: // 残高　貸方
-                        object.compoundTrialBalance?.credit_balance_total = l // + k
-                    default:
-                        print("default calculateAmountOfAllAccount")
+            do {
+                try DataBaseManager.realm.write {
+                    for r in 0..<4 { // 注意：3になっていた。誤り
+                        var l: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
+                        for i in 0..<objectsOfGL.dataBaseAccounts.count {
+                            l += getTotalAmount(account: objectsOfGL.dataBaseAccounts[i].accountName, leftOrRight: r) // 累計額に追加
+                        }
+                        switch r {
+                        case 0: // 合計　借方
+                            object.compoundTrialBalance?.debit_total_total = l // + k
+                        case 1: // 合計　貸方
+                            object.compoundTrialBalance?.credit_total_total = l // + k
+                        case 2: // 残高　借方
+                            object.compoundTrialBalance?.debit_balance_total = l // + k
+                        case 3: // 残高　貸方
+                            object.compoundTrialBalance?.credit_balance_total = l // + k
+                        default:
+                            print("default calculateAmountOfAllAccount")
+                        }
                     }
                 }
+            } catch {
+                print("エラーが発生しました")
             }
-        } catch {
-            print("エラーが発生しました")
         }
     }
     // 設定　仕訳と決算整理後　勘定クラス　全ての勘定

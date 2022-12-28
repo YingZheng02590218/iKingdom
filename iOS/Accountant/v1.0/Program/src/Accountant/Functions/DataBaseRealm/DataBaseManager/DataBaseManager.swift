@@ -63,12 +63,9 @@ class DataBaseManager {
     // 転記をやり直し　再度開いている帳簿の年度のすべての仕訳、決算整理仕訳を勘定へ転記する
     func reconnectJournalEntryToAccounts() {
         // 会計帳簿 年度を使用するため
-        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+        guard let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
-            return
-        }
+        ]) else { return }
         // 仕訳帳　開いている帳簿のすべての仕訳帳
         guard let dataBaseJournals = dataBaseAccountingBook.dataBaseJournals else {
             return
@@ -218,14 +215,11 @@ class DataBaseManager {
      * @return 仕訳帳
      */
     func getJournalsWithFiscalYear(fiscalYear: Int) -> DataBaseJournals? {
-        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
-        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
-            return nil
-        }
 
-        guard let dataBaseJournals = dataBaseAccountingBook.dataBaseJournals else {
+        guard let dataBaseJournals = dataBaseAccountingBook?.dataBaseJournals else {
             return nil
         }
 
@@ -240,21 +234,19 @@ class DataBaseManager {
      * 特殊化方法: 戻り値からの型推論による特殊化　戻り値の代入先の型が決まっている必要がある
      */
     func getAccountByAccountNameWithFiscalYear<T>(accountName: String, fiscalYear: Int) -> T? {
-        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
-        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
-            return nil
-        }
+
         if accountName == "損益勘定" {
             // 損益勘定の場合
-            guard let dataBasePLAccount = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount else {
+            guard let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount else {
                 return nil
             }
             return dataBasePLAccount as? T
         } else {
             // 損益勘定以外の勘定の場合
-            guard let dataBaseAccount = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts
+            guard let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
                     .filter("accountName LIKE '\(accountName)'").first else { return nil }
             return dataBaseAccount as? T
         }

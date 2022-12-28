@@ -112,13 +112,13 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
     }
     // 取得　総勘定元帳　開いている会計帳簿内の元帳
-    func getGeneralLedger() -> DataBaseGeneralLedger {
+    func getGeneralLedger() -> DataBaseGeneralLedger? {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
-        return objects[0].dataBaseGeneralLedger!
+        return dataBaseAccountingBook?.dataBaseGeneralLedger
     }
 }
