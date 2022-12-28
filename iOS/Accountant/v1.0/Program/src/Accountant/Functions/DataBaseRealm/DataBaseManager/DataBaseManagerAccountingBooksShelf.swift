@@ -13,16 +13,10 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
     public static let shared = DataBaseManagerAccountingBooksShelf()
     
-    /**
-     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
-     * モデルオブジェクトをデータベースから読み込む。
-     * @param DataBase モデルオブジェクト
-     * @param fiscalYear 年度
-     * @return モデルオブジェクトが存在するかどうか
-     */
-    func checkInitialising(dataBase: DataBaseAccountingBooksShelf, fiscalYear: Int) -> Bool {
-        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
-    }
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // モデルオブフェクトの追加
     func addAccountingBooksShelf(company: String) -> Int {
         // オブジェクトを作成 会計帳簿棚
@@ -42,12 +36,29 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         }
         return number
     }
+    
+    // MARK: Read
+    
+    /**
+     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+     * モデルオブジェクトをデータベースから読み込む。
+     * @param DataBase モデルオブジェクト
+     * @param fiscalYear 年度
+     * @return モデルオブジェクトが存在するかどうか
+     */
+    func checkInitialising(dataBase: DataBaseAccountingBooksShelf, fiscalYear: Int) -> Bool {
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
+    }
+    
     // 事業者名の取得
     func getCompanyName() -> String {
         // (2)データベース内に保存されているモデルをひとつ取得する
         guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return "" }
         return object.companyName // 事業者名を返す
     }
+    
+    // MARK: Update
+    
     // モデルオブフェクトの更新
     func updateCompanyName(companyName: String) {
         do {
@@ -62,4 +73,6 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Delete
 }

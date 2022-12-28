@@ -32,29 +32,18 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     
     // 印刷機能
     let pDFMaker = PDFMaker()
-    
-    // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
-    func initializeJournals(completion: (Bool) -> Void) {
-        // 転記　仕訳から勘定への関連を付け直す
-        reconnectJournalEntryToAccounts()
-        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
-        let databaseManager = TBModel()
-        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
-        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+    // 初期化 PDFメーカー
+    func initializePDFMaker(completion: ([URL]?) -> Void) {
         
-        completion(true)
+        pDFMaker.initialize(completion: { PDFpath in
+            completion(PDFpath)
+        })
     }
-
-    /**
-     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
-     * モデルオブジェクトをデータベースから読み込む。
-     * @param DataBase モデルオブジェクト
-     * @param fiscalYear 年度
-     * @return モデルオブジェクトが存在するかどうか
-     */
-    func checkInitialising(dataBase: DataBaseJournals, fiscalYear: Int) -> Bool {
-        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
-    }
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // 追加
     func addJournals(number: Int) {
         // 会計帳簿　のオブジェクトを取得
@@ -74,20 +63,18 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
             print("エラーが発生しました")
         }
     }
-    // 削除
-    func deleteJournals(number: Int) -> Bool {
-        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseJournals.self, key: number) else { return false }
-        do {
-            try DataBaseManager.realm.write {
-                DataBaseManager.realm.delete(object.dataBaseJournalEntries) // 仕訳
-                DataBaseManager.realm.delete(object.dataBaseAdjustingEntries) // 決算整理仕訳
-                DataBaseManager.realm.delete(object) // 仕訳帳
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
-        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+    
+    // MARK: Read
+    
+    /**
+     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+     * モデルオブジェクトをデータベースから読み込む。
+     * @param DataBase モデルオブジェクト
+     * @param fiscalYear 年度
+     * @return モデルオブジェクトが存在するかどうか
+     */
+    func checkInitialising(dataBase: DataBaseJournals, fiscalYear: Int) -> Bool {
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
     }
     
     /**
@@ -117,7 +104,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
         let dataBaseSettingsOperating = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1)
-
+        
         if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
            let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
             if !englishFromOfClosingTheLedger0 { // 損益振替仕訳
@@ -129,6 +116,21 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         }
         return dataBaseAdjustingEntries
     }
+    
+    // MARK: Update
+    
+    // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
+    func initializeJournals(completion: (Bool) -> Void) {
+        // 転記　仕訳から勘定への関連を付け直す
+        reconnectJournalEntryToAccounts()
+        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+        let databaseManager = TBModel()
+        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+        
+        completion(true)
+    }
+    
     // 更新　仕訳　年度
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int) {
         // 編集する仕訳
@@ -218,7 +220,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         } catch {
             print("エラーが発生しました")
         }
-
+        
     }
     // 更新　決算整理仕訳　年度 損益振替仕訳、資本振替仕訳以外の決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int) {
@@ -352,11 +354,22 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
             }
         )
     }
-    // 初期化 PDFメーカー
-    func initializePDFMaker(completion: ([URL]?) -> Void) {
-
-        pDFMaker.initialize(completion: { PDFpath in
-            completion(PDFpath)
-        })
+    
+    // MARK: Delete
+    
+    // 削除
+    func deleteJournals(number: Int) -> Bool {
+        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+        guard let object = RealmManager.shared.findFirst(type: DataBaseJournals.self, key: number) else { return false }
+        do {
+            try DataBaseManager.realm.write {
+                DataBaseManager.realm.delete(object.dataBaseJournalEntries) // 仕訳
+                DataBaseManager.realm.delete(object.dataBaseAdjustingEntries) // 決算整理仕訳
+                DataBaseManager.realm.delete(object) // 仕訳帳
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
     }
 }

@@ -17,7 +17,7 @@ protocol GenearlLedgerAccountModelInput {
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
     func getNumberOfAccount(accountName: String) -> Int
-
+    
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
@@ -25,34 +25,13 @@ protocol GenearlLedgerAccountModelInput {
 }
 // 勘定クラス
 class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
-
+    
     let dataBaseManagerGeneralLedgerAccountBalance = DataBaseManagerGeneralLedgerAccountBalance()
-
-    // 差引残高　計算
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) {
-        
-        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries) // 毎回、計算は行わない
-    }
-    // 取得　差引残高額　仕訳
-    func getBalanceAmount(indexPath: IndexPath) -> Int64 {
-        
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
-    }
-    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
-        
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: indexPath)
-    }
-    // 借又貸を取得
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
-        
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
-    }
-    // 借又貸を取得 決算整理仕訳
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
-        
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-    }
+    
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
     
     // 追加　勘定
     func addGeneralLedgerAccount(number: Int) {
@@ -139,7 +118,30 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             }
         }
     }
-
+    
+    // MARK: Read
+    
+    // 取得　差引残高額　仕訳
+    func getBalanceAmount(indexPath: IndexPath) -> Int64 {
+        
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+    }
+    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
+    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
+        
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: indexPath)
+    }
+    // 借又貸を取得
+    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
+        
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+    }
+    // 借又貸を取得 決算整理仕訳
+    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
+        
+        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
+    }
+    
     // 取得　通常仕訳 勘定別に取得
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
@@ -176,7 +178,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             return dataBaseJournalEntries
         }
     }
-
+    
     // 取得 仕訳　勘定別 全年度
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
@@ -255,7 +257,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
-
+    
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         if accountName == "損益勘定" {
@@ -263,14 +265,14 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         } else {
             let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [ // DataBaseAccount.self) 2020/11/08
                 NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // "accountName LIKE '\(accountName)'")// 2020/11/08
-            ])
+                                                                                                                        ])
             print(objects)
             // 勘定のプライマリーキーを取得する
             let numberOfAccount = objects[0].number
             return numberOfAccount
         }
     }
-
+    
     // 取得　勘定名から勘定を取得
     func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
         // 開いている会計帳簿の年度を取得
@@ -281,6 +283,17 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         ])
         return dataBaseAccount
     }
+    
+    // MARK: Update
+    
+    // 差引残高　計算
+    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) {
+        
+        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries) // 毎回、計算は行わない
+    }
+    
+    // MARK: Delete
+    
     // 削除　勘定　設定勘定科目を削除するときに呼ばれる
     func deleteAccount(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得

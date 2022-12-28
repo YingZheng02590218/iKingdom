@@ -11,18 +11,16 @@ import RealmSwift
 
 // 会計期間クラス
 class DataBaseManagerSettingsPeriod {
-
+    
     public static let shared = DataBaseManagerSettingsPeriod()
-
+    
     private init() {
     }
     
-    // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising() -> Bool {
-        // (2)データベース内に保存されているモデルを全て取得する
-        let objects = RealmManager.shared.read(type: DataBaseSettingsPeriod.self)
-        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
-    }
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // 追加　会計期間
     func addSettingsPeriod() {
         // (2)書き込みトランザクション内でデータを追加する
@@ -37,62 +35,23 @@ class DataBaseManagerSettingsPeriod {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Read
+    
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkInitialising() -> Bool {
+        // (2)データベース内に保存されているモデルを全て取得する
+        let objects = RealmManager.shared.read(type: DataBaseSettingsPeriod.self)
+        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
+    
     // 取得　決算日
     func getTheDayOfReckoning() -> String {
         // (2)データベース内に保存されているモデルを全て取得する
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsPeriod.self, key: 1) else { return "" }
         return object.theDayOfReckoning
     }
-    // 更新　決算日
-    func setTheDayOfReckoning(month: Bool, date: String) {
-        var dateChanged = ""
-        if date.count < 2 {
-            dateChanged = "0" + date
-        } else {
-            dateChanged = date
-        }
-        var theDayOfReckoning = ""
-        let currentTheDayOfReckoning = getTheDayOfReckoning()
-        if !month {
-            theDayOfReckoning = String(currentTheDayOfReckoning.prefix(2) + "/\(dateChanged)") // 先頭2文字
-        } else { // 月
-            // 月別に日数を調整する
-            var dayChanged = ""
-            switch dateChanged {
-            case "02":
-                if currentTheDayOfReckoning.suffix(2) == "29" ||
-                    currentTheDayOfReckoning.suffix(2) == "30" ||
-                    currentTheDayOfReckoning.suffix(2) == "31" {
-                    dayChanged = "28"
-                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
-                } else {
-                    theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
-                }
-            case "04", "06", "09", "11":
-                if currentTheDayOfReckoning.suffix(2) == "31" {
-                    dayChanged = "30"
-                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
-                } else {
-                    theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
-                }
-            default:
-                theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
-            }
-        }
-        do {
-            // (2)書き込みトランザクション内でデータを更新する
-            try DataBaseManager.realm.write {
-                // 選択された月または日に更新する
-                let value: [String: Any] = [
-                    "number": 1,
-                    "theDayOfReckoning": theDayOfReckoning
-                ]
-                DataBaseManager.realm.create(DataBaseSettingsPeriod.self, value: value, update: .modified) // 一部上書き更新
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
-    }
+    
     // すべてのモデルオブフェクトの取得
     func getMainBooksAllCount() -> Int {
         // (2)データベース内に保存されているモデルを全て取得する
@@ -161,6 +120,60 @@ class DataBaseManagerSettingsPeriod {
         guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: objects[0].number) else { return 0 }
         return object.fiscalYear // 年度を返す
     }
+    
+    // MARK: Update
+    
+    // 更新　決算日
+    func setTheDayOfReckoning(month: Bool, date: String) {
+        var dateChanged = ""
+        if date.count < 2 {
+            dateChanged = "0" + date
+        } else {
+            dateChanged = date
+        }
+        var theDayOfReckoning = ""
+        let currentTheDayOfReckoning = getTheDayOfReckoning()
+        if !month {
+            theDayOfReckoning = String(currentTheDayOfReckoning.prefix(2) + "/\(dateChanged)") // 先頭2文字
+        } else { // 月
+            // 月別に日数を調整する
+            var dayChanged = ""
+            switch dateChanged {
+            case "02":
+                if currentTheDayOfReckoning.suffix(2) == "29" ||
+                    currentTheDayOfReckoning.suffix(2) == "30" ||
+                    currentTheDayOfReckoning.suffix(2) == "31" {
+                    dayChanged = "28"
+                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
+                } else {
+                    theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
+                }
+            case "04", "06", "09", "11":
+                if currentTheDayOfReckoning.suffix(2) == "31" {
+                    dayChanged = "30"
+                    theDayOfReckoning = String("\(dateChanged)/" + dayChanged) // 末尾2文字
+                } else {
+                    theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
+                }
+            default:
+                theDayOfReckoning = String("\(dateChanged)/" + currentTheDayOfReckoning.suffix(2)) // 末尾2文字
+            }
+        }
+        do {
+            // (2)書き込みトランザクション内でデータを更新する
+            try DataBaseManager.realm.write {
+                // 選択された月または日に更新する
+                let value: [String: Any] = [
+                    "number": 1,
+                    "theDayOfReckoning": theDayOfReckoning
+                ]
+                DataBaseManager.realm.create(DataBaseSettingsPeriod.self, value: value, update: .modified) // 一部上書き更新
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
+    
     // モデルオブフェクトの更新
     func setMainBooksOpenOrClose(tag: Int) {
         // (2)データベース内に保存されているDataBaseAccountingBooksShelfモデルをひとつ取得する
@@ -180,4 +193,7 @@ class DataBaseManagerSettingsPeriod {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Delete
+    
 }

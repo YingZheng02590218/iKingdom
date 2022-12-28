@@ -12,16 +12,10 @@ import RealmSwift
 // 決算書クラス
 class DataBaseManagerFinancialStatements: DataBaseManager {
     
-    /**
-    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
-    * モデルオブジェクトをデータベースから読み込む。
-    * @param DataBase モデルオブジェクト
-    * @param fiscalYear 年度
-    * @return モデルオブジェクトが存在するかどうか
-    */
-    func checkInitialising(dataBase: DataBaseFinancialStatements, fiscalYear: Int) -> Bool {
-        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
-    }
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // モデルオブフェクトの追加
     func addFinancialStatements(number: Int) {
         // 会計帳簿棚　のオブジェクトを取得
@@ -99,37 +93,65 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             compoundTrialBalance: compoundTrialBalance
         )
         do {
-        // (2)書き込みトランザクション内でデータを追加する
-        try DataBaseManager.realm.write {
-            var number = balanceSheet.save()
-            print(number)
-             number = profitAndLossStatement.save()
-             number = cashFlowStatement.save()
-             number = workSheet.save()
-             number = compoundTrialBalance.save()
-             number = dataBaseFinancialStatements.save() //　自動採番
-            // オブジェクトを作成して追加
-            // 設定画面の勘定科目一覧にある勘定を取得する
-            let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
-            // オブジェクトを作成 表示科目
-            for i in 0..<objects.count {
-                let dataBaseTaxonomy = DataBaseTaxonomy(
-                    fiscalYear: object.fiscalYear,
-                    accountName: objects[i].category,
-                    total: 0,
-                    numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
-                )
-                let number = dataBaseTaxonomy.save() //　自動採番
+            // (2)書き込みトランザクション内でデータを追加する
+            try DataBaseManager.realm.write {
+                var number = balanceSheet.save()
                 print(number)
-                balanceSheet.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 表示科目を作成して貸借対照表に追加する
+                number = profitAndLossStatement.save()
+                number = cashFlowStatement.save()
+                number = workSheet.save()
+                number = compoundTrialBalance.save()
+                number = dataBaseFinancialStatements.save() //　自動採番
+                // オブジェクトを作成して追加
+                // 設定画面の勘定科目一覧にある勘定を取得する
+                let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
+                // オブジェクトを作成 表示科目
+                for i in 0..<objects.count {
+                    let dataBaseTaxonomy = DataBaseTaxonomy(
+                        fiscalYear: object.fiscalYear,
+                        accountName: objects[i].category,
+                        total: 0,
+                        numberOfTaxonomy: objects[i].number // 設定表示科目の連番を保持する　マイグレーション
+                    )
+                    let number = dataBaseTaxonomy.save() //　自動採番
+                    print(number)
+                    balanceSheet.dataBaseTaxonomy.append(dataBaseTaxonomy)   // 表示科目を作成して貸借対照表に追加する
+                }
+                // 年度　の数だけ増える
+                object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
             }
-            // 年度　の数だけ増える
-            object.dataBaseFinancialStatements = dataBaseFinancialStatements // 会計帳簿に財務諸表を追加する
-        }
         } catch {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Read
+    
+    /**
+     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+     * モデルオブジェクトをデータベースから読み込む。
+     * @param DataBase モデルオブジェクト
+     * @param fiscalYear 年度
+     * @return モデルオブジェクトが存在するかどうか
+     */
+    func checkInitialising(dataBase: DataBaseFinancialStatements, fiscalYear: Int) -> Bool {
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
+    }
+    
+    // 取得　財務諸表　現在開いている年度
+    func getFinancialStatements() -> DataBaseFinancialStatements {
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseFinancialStatements.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
+        return objects[0]
+    }
+    
+    // MARK: Update
+    
+    // MARK: Delete
+    
     // モデルオブフェクトの削除
     func deleteFinancialStatements(number: Int) -> Bool {
         guard let object = RealmManager.shared.findFirst(type: DataBaseFinancialStatements.self, key: number) else { return false }
@@ -160,14 +182,5 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             print("エラーが発生しました")
         }
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
-    }
-    // 取得　財務諸表　現在開いている年度
-    func getFinancialStatements() -> DataBaseFinancialStatements {
-        // 開いている会計帳簿の年度を取得
-        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseFinancialStatements.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
-        ])
-        return objects[0]
     }
 }

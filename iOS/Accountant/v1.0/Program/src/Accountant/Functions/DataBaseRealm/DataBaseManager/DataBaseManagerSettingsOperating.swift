@@ -11,13 +11,11 @@ import RealmSwift
 
 // 設定操作クラス
 class DataBaseManagerSettingsOperating {
-
-    // データベースにモデルが存在するかどうかをチェックする
-    func checkInitialising() -> Bool {
-        // (2)データベース内に保存されているモデルを全て取得する
-        let objects = RealmManager.shared.read(type: DataBaseSettingsOperating.self)
-        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
-    }
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // モデルオブフェクトの追加　仕訳帳
     func addSettingsOperating() {
         do {
@@ -35,11 +33,23 @@ class DataBaseManagerSettingsOperating {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Read
+    
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkInitialising() -> Bool {
+        // (2)データベース内に保存されているモデルを全て取得する
+        let objects = RealmManager.shared.read(type: DataBaseSettingsOperating.self)
+        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
     // 取得
     func getSettingsOperating() -> DataBaseSettingsOperating? {
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1) else { return nil }
         return object
     }
+    
+    // MARK: Update
+    
     // 更新　スイッチの切り替え
     func updateSettingsOperating(englishFromOfClosingTheLedger: String, isOn: Bool) {
         do {
@@ -55,4 +65,7 @@ class DataBaseManagerSettingsOperating {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Delete
+    
 }

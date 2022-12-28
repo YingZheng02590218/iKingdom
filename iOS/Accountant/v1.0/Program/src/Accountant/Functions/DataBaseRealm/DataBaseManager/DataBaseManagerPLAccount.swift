@@ -12,26 +12,10 @@ import RealmSwift
 // 損益勘定クラス
 class DataBaseManagerPLAccount: DataBaseManager {
     
-    // チェック 決算整理仕訳　存在するかを確認
-    func checkAdjustingEntry(account: String) -> Results<DataBaseAdjustingEntry> {
-        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
-        ])
-        return objects
-    }
-    // チェック 決算整理仕訳　損益勘定内の勘定が存在するかを確認
-    func checkAdjustingEntryInPLAccount(account: String) -> Results<DataBaseAdjustingEntry> {
-        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let objects = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries
-            .sorted(byKeyPath: "date", ascending: true)
-            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
-        return objects!
-    }
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // 追加　決算振替仕訳　損益振替仕訳をする
     // 引数：日付、借方勘定、勘定残高額借方、貸方勘定、勘定残高貸方、小書き
     func addTransferEntry(debitCategory: String, amount: Int64, creditCategory: String) {
@@ -135,6 +119,7 @@ class DataBaseManagerPLAccount: DataBaseManager {
             }
         }
     }
+    
     // 追加　決算振替仕訳　資本振替
     // 引数：日付、借方勘定、金額、貸方勘定
     func addTransferEntryToNetWorth(debitCategory: String, amount: Int64, creditCategory: String) {
@@ -231,6 +216,32 @@ class DataBaseManagerPLAccount: DataBaseManager {
             }
         }
     }
+    
+    // MARK: Read
+    
+    // チェック 決算整理仕訳　存在するかを確認
+    func checkAdjustingEntry(account: String) -> Results<DataBaseAdjustingEntry> {
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
+        return objects
+    }
+    // チェック 決算整理仕訳　損益勘定内の勘定が存在するかを確認
+    func checkAdjustingEntryInPLAccount(account: String) -> Results<DataBaseAdjustingEntry> {
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let objects = dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseAdjustingEntries
+            .sorted(byKeyPath: "date", ascending: true)
+            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
+        return objects!
+    }
+    
+    // MARK: Update
+    
     // 更新 決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
         // 編集前の借方勘定と貸方勘定をメモする
@@ -253,6 +264,9 @@ class DataBaseManagerPLAccount: DataBaseManager {
         }
         return primaryKey
     }
+    
+    // MARK: Delete
+    
     // 削除　決算整理仕訳 損益振替仕訳
     func deleteAdjustingJournalEntry(primaryKey: Int) -> Bool {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return false }
@@ -330,6 +344,7 @@ class DataBaseManagerPLAccount: DataBaseManager {
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
+    
     // 関連削除　決算整理仕訳 損益振替仕訳
     func removeAdjustingJournalEntry(primaryKey: Int) -> Bool {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return false }

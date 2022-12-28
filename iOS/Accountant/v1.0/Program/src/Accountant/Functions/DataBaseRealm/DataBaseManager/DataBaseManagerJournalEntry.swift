@@ -11,15 +11,20 @@ import RealmSwift
 
 // 仕訳クラス
 class DataBaseManagerJournalEntry {
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // 追加　仕訳
     func addJournalEntry(date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
-
+        
         var number = 0
         // オブジェクトを作成
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
-
+        
         // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // オブジェクトを作成
@@ -55,15 +60,16 @@ class DataBaseManagerJournalEntry {
         dataBaseManager.setAccountTotal(accountLeft: debitCategory, accountRight: creditCategory)
         return number
     }
+    
     // 追加　決算整理仕訳
     func addAdjustingJournalEntry(date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
-
+        
         var number = 0
         // オブジェクトを作成
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let leftObject = dataBaseManagerAccount.getAccountByAccountName(accountName: debitCategory)
         let rightObject = dataBaseManagerAccount.getAccountByAccountName(accountName: creditCategory)
-
+        
         // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // オブジェクトを作成
@@ -99,27 +105,53 @@ class DataBaseManagerJournalEntry {
         dataBaseManager.setAccountTotalAdjusting(accountLeft: debitCategory, accountRight: creditCategory)
         return number
     }
+    
+    // MARK: Read
+    
     // 取得　仕訳 編集する仕訳をプライマリーキーで取得
     func getJournalEntryWithNumber(number: Int) -> DataBaseJournalEntry? {
-
+        
         RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number)
     }
+    
     // 取得　決算整理仕訳 編集する仕訳をプライマリーキーで取得
     func getAdjustingEntryWithNumber(number: Int) -> DataBaseAdjustingEntry? {
+        
         RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: number)
     }
+    
+    /**
+     * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
+     * 年度を指定して勘定を取得する
+     * @param  勘定名
+     * @return  勘定
+     */
+    private func getAccountByAccountNameWithFiscalYear(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
+        
+        let dataBaseAccounts = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(accountName)'")
+        guard let dataBaseAccount = dataBaseAccounts?.first else {
+            return nil
+        }
+        return dataBaseAccount
+    }
+    
     // 仕訳　総数
     func getJournalEntryCount() -> Results<DataBaseJournalEntry> {
-
+        
         let objects = RealmManager.shared.read(type: DataBaseJournalEntry.self)
         return objects
     }
     // 決算整理仕訳　総数
     func getAdjustingEntryCount() -> Results<DataBaseAdjustingEntry> {
-
+        
         let objects = RealmManager.shared.read(type: DataBaseAdjustingEntry.self)
         return objects
     }
+    
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
@@ -132,25 +164,9 @@ class DataBaseManagerJournalEntry {
             return 0 // クラッシュ対応
         }
     }
-
-    /**
-     * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
-     * 年度を指定して勘定を取得する
-     * @param  勘定名
-     * @return  勘定
-     */
-    private func getAccountByAccountNameWithFiscalYear(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
-        ])
-
-        let dataBaseAccounts = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(accountName)'")
-        guard let dataBaseAccount = dataBaseAccounts?.first else {
-            return nil
-        }
-        return dataBaseAccount
-    }
+    
+    // MARK: Update
+    
     // 更新 仕訳
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
         // 編集する仕訳
@@ -238,6 +254,7 @@ class DataBaseManagerJournalEntry {
         
         completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
     }
+    
     // 更新 決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
         // 編集する仕訳
@@ -325,6 +342,9 @@ class DataBaseManagerJournalEntry {
         
         completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
     }
+    
+    // MARK: Delete
+    
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
         guard let object = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number) else { return false }

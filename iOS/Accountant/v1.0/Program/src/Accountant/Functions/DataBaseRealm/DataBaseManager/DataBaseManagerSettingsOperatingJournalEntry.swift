@@ -12,19 +12,22 @@ import RealmSwift
 // よく使う仕訳クラス
 class DataBaseManagerSettingsOperatingJournalEntry {
     
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // 追加　よく使う仕訳
     func addJournalEntry(nickname: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
         // オブジェクトを作成 よく使う仕訳
         let dataBaseJournalEntry = DataBaseSettingsOperatingJournalEntry(
-            nickname: nickname,                        // ニックネーム
+            nickname: nickname,                // ニックネーム
             debit_category: debitCategory,    // 借方勘定
             debit_amount: debitAmount,        // 借方金額 Int型(TextField.text アンラップ)
             credit_category: creditCategory,  // 貸方勘定
             credit_amount: creditAmount,      // 貸方金額
-            smallWritting: smallWritting      // 小書き
+            smallWritting: smallWritting       // 小書き
         )
         var number = 0                                          // 仕訳番号 自動採番にした
-        
         do {
             try DataBaseManager.realm.write {
                 number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
@@ -36,11 +39,17 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         }
         return number
     }
+    
+    // MARK: Read
+    
     // 取得　よく使う仕訳
     func getJournalEntry() -> Results<DataBaseSettingsOperatingJournalEntry> {
         let objects = RealmManager.shared.read(type: DataBaseSettingsOperatingJournalEntry.self)
         return objects
     }
+    
+    // MARK: Update
+    
     // 更新 よく使う仕訳
     func updateJournalEntry(primaryKey: Int, nickname: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
         let value: [String: Any] = [
@@ -61,6 +70,9 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         }
         return primaryKey
     }
+    
+    // MARK: Delete
+    
     // 削除　よく使う仕訳
     func deleteJournalEntry(number: Int) -> Bool {
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsOperatingJournalEntry.self, key: number) else { return false }

@@ -60,39 +60,19 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     //        objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0",category1: "1",category2: "0",category3: "1",category4: "44") // 投資その他の資産5
     //    }
     //
-    // 初期化
-    func initializeSettingsTaxonomy() {
-        // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
-        for i in 0..<objects.count {
-            if objects[i].switching == true { // 設定勘定科目 スイッチ
-                if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
-                    updateSettingsCategoryBSAndPLSwitching(number: objects[i].number)
-                }
-            }
-        }
-    }
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
+    // MARK: Read
+    
     // データベースにモデルが存在するかどうかをチェックする　設定表示科目クラス
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
         print("DataBaseSettingsTaxonomy", objects.count)
         return objects.count == 2_068 // モデルオブフェクトが2068ある場合はtrueを返す
-    }
-    // 削除 表示科目
-    func deleteAllOfSettingsTaxonomy() {
-        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
-        // 表示科目　オブジェクトを削除
-        for object in objects {
-            do {
-                try DataBaseManager.realm.write {
-                    DataBaseManager.realm.delete(object)
-                }
-            } catch {
-                print("エラーが発生しました")
-            }
-        }
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
@@ -189,6 +169,22 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomy.self, key: numberOfTaxonomy) else { return nil }
         return object
     }
+    
+    // MARK: Update
+    
+    // 初期化
+    func initializeSettingsTaxonomy() {
+        // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
+        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
+        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
+        for i in 0..<objects.count {
+            if objects[i].switching == true { // 設定勘定科目 スイッチ
+                if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
+                    updateSettingsCategoryBSAndPLSwitching(number: objects[i].number)
+                }
+            }
+        }
+    }
     // モデルオブフェクトの更新　スイッチの切り替え
     func updateSettingsCategoryBSAndPLSwitching(number: Int) { // 勘定科目　連番
         // 勘定科目連番から表示科目連番を取得
@@ -212,6 +208,23 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
             }
         } catch {
             print("エラーが発生しました")
+        }
+    }
+    
+    // MARK: Delete
+    
+    // 削除 表示科目
+    func deleteAllOfSettingsTaxonomy() {
+        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
+        // 表示科目　オブジェクトを削除
+        for object in objects {
+            do {
+                try DataBaseManager.realm.write {
+                    DataBaseManager.realm.delete(object)
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
         }
     }
 }

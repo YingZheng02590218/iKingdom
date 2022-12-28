@@ -11,17 +11,22 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol CategoryListModelInput {
-
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount>
-
+    
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool)
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool
 }
 
 // クラス
 class CategoryListModel: CategoryListModelInput {
-
+    
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
+    // MARK: Read
+    
     // 取得 大区分、中区分、小区分
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
         var predicates = [
@@ -44,6 +49,9 @@ class CategoryListModel: CategoryListModelInput {
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }
+    
+    // MARK: Update
+    
     // 更新　スイッチの切り替え
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool) {
         do {
@@ -56,6 +64,9 @@ class CategoryListModel: CategoryListModelInput {
             print("エラーが発生しました")
         }
     }
+    
+    // MARK: Delete
+    
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
         // 勘定クラス　勘定を削除

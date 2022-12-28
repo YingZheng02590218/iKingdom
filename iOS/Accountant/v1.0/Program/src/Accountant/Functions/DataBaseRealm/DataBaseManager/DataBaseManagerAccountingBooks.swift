@@ -11,33 +11,13 @@ import RealmSwift
 
 class DataBaseManagerAccountingBooks: DataBaseManager {
     
-    /**
-    * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
-    * モデルオブジェクトをデータベースから読み込む。
-    * @param DataBase モデルオブジェクト
-    * @param fiscalYear 年度
-    * @return モデルオブジェクトが存在するかどうか
-    */
-    func checkInitialising(dataBase: DataBaseAccountingBooks, fiscalYear: Int) -> Bool { // 年度を追加する場合
-        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
-    }
-    // データベースにモデルが存在するかどうかをチェックする
-    func checkOpeningAccountingBook() -> Bool { // 帳簿が一冊の場合
-        // (2)データベース内に保存されているモデルを全て取得する
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true)) // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
-        ])
-        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
-    }
-    // データベースにモデルが存在するかどうかをチェックする
-    func checkInitializing() -> Bool { // 帳簿が一冊もない場合
-        // (2)データベース内に保存されているモデルを全て取得する
-        let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
-        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
-    }
+    // MARK: - CRUD
+    
+    // MARK: Create
+    
     // モデルオブフェクトの追加
     func addAccountingBooks(fiscalYear: Int) -> Int {
-
+        
         var number = 0
         // 会計帳簿棚　のオブジェクトを取得
         guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return number } // 会社に会計帳簿棚はひとつ
@@ -50,7 +30,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             openOrClose: !checkOpeningAccountingBook() ? true : false // 会計帳簿がひとつだけならこの帳簿を開く
         )
         // (2)書き込みトランザクション内でデータを追加する
-
+        
         do {
             try DataBaseManager.realm.write {
                 number = dataBaseAccountingBooks.save() //　自動採番
@@ -63,6 +43,40 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             return number
         }
     }
+    
+    // MARK: Read
+    
+    /**
+     * データベース　データベースにモデルが存在するかどうかをチェックするメソッド
+     * モデルオブジェクトをデータベースから読み込む。
+     * @param DataBase モデルオブジェクト
+     * @param fiscalYear 年度
+     * @return モデルオブジェクトが存在するかどうか
+     */
+    func checkInitialising(dataBase: DataBaseAccountingBooks, fiscalYear: Int) -> Bool { // 年度を追加する場合
+        super.checkInitialising(dataBase: dataBase, fiscalYear: fiscalYear)
+    }
+    
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkOpeningAccountingBook() -> Bool { // 帳簿が一冊の場合
+        // (2)データベース内に保存されているモデルを全て取得する
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true)) // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
+        ])
+        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
+    
+    // データベースにモデルが存在するかどうかをチェックする
+    func checkInitializing() -> Bool { // 帳簿が一冊もない場合
+        // (2)データベース内に保存されているモデルを全て取得する
+        let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
+        return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
+    }
+    
+    // MARK: Update
+    
+    // MARK: Delete
+    
     // モデルオブフェクトの削除　会計帳簿
     func deleteAccountingBooks(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
@@ -95,7 +109,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             }
         }
         do {
-
+            
             try DataBaseManager.realm.write {
                 DataBaseManager.realm.delete(object)
             }
