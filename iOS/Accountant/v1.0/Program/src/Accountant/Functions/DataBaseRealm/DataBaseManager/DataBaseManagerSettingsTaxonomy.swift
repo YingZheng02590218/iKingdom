@@ -121,19 +121,6 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         }
         return objects
     }
-    // 設定表示科目　取得 ONのみ
-    func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy> {
-        // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
-        // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        //　objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-        //                　  .filter("switching == \(true)") // 不要　2020/08/02
-        if objects.isEmpty {
-            print("ゼロ　getAllSettingsCategoryBSAndPLSwitichON")
-        }
-        return objects
-    }
     // 取得 設定表示科目　大区分別　全て
     func getBigCategoryAll(section: Int) -> Results<DataBaseSettingsTaxonomy> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
