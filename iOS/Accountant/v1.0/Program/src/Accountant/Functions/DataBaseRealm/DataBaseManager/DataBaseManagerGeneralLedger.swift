@@ -111,14 +111,6 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         }
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
     }
-    // モデルオブフェクトの取得　年度を指定　総勘定元帳
-    func getGeneralLedger(fiscalYear: Int) -> DataBaseGeneralLedger {
-        // (2)データベース内に保存されているモデルをひとつ取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-        // 希望する勘定だけを抽出する
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        return objects[0].dataBaseGeneralLedger!
-    }
     // 取得　総勘定元帳　開いている会計帳簿内の元帳
     func getGeneralLedger() -> DataBaseGeneralLedger {
         // 開いている会計帳簿の年度を取得

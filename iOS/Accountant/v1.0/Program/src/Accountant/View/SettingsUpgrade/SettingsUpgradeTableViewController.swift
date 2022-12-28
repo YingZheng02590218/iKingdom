@@ -83,7 +83,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 
         guard let language = Locale.preferredLanguages.first else { return nil }
-        print(language) // ja-JP
 
         switch section {
         case 0:
@@ -116,7 +115,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let language = Locale.preferredLanguages.first else { return UITableViewCell() }
-        print(language) // ja-JP
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
 
@@ -158,7 +156,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }
             return cell
         case 1:
-            print(language) // ja-JP
             if language == "ja-JP" {
                 cell.centerLabel.text = "購入の復元をする"
             } else {
@@ -172,7 +169,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
             cell.accessoryView = nil
             cell.leftImageView.image = UIImage(named: "settings_backup_restore_symbol")?.withRenderingMode(.alwaysTemplate)
         case 2:
-            print(language) // ja-JP
             if language == "ja-JP" {
                 cell.centerLabel.text = "解約方法"
             } else {
@@ -180,7 +176,6 @@ class SettingsUpgradeTableViewController: UITableViewController {
             }
             cell.leftImageView.image = UIImage(named: "cancel-cancel_symbol")?.withRenderingMode(.alwaysTemplate)
         case 3:
-            print(language) // ja-JP
             if language == "ja-JP" {
                 cell.centerLabel.text = "プライバシーポリシー / 利用規約"
             } else {

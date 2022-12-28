@@ -134,26 +134,6 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             }
         }
     }
-    // 取得 仕訳　すべて　今期
-    func getJournalEntryAll() -> Results<DataBaseJournalEntry> {
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        var objects = DataBaseManager.realm.objects(DataBaseJournalEntry.self)
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
-    // 取得 決算整理仕訳　すべて　今期
-    func getAdjustingEntryAll() -> Results<DataBaseAdjustingEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
 
     // 取得　通常仕訳 勘定別に取得
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
@@ -186,18 +166,6 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             let dataBaseJournalEntries = (dataBaseAccount?.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true))!
             return dataBaseJournalEntries
         }
-    }
-
-    // 取得 決算整理仕訳 決算振替仕訳　損益振替　勘定別に月別に取得
-    func getPLAccount(section: Int) -> DataBasePLAccount? {
-        var objects = DataBaseManager.realm.objects(DataBasePLAccount.self)
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-
-        return object.dataBaseGeneralLedger?.dataBasePLAccount
     }
 
     // 取得 仕訳　勘定別 全年度
@@ -295,19 +263,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             return numberOfAccount
         }
     }
-    // 勘定のプライマリーキーを取得　※丁数ではない
-    func getPrimaryNumberOfAccount(accountName: String) -> Int {
-        var objects = DataBaseManager.realm.objects(DataBaseAccount.self)
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects
-            .filter("fiscalYear == \(fiscalYear)")
-            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-        let number: Int = objects[0].number
-        
-        return number
-    }
+
     // 取得　勘定名から勘定を取得
     func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
         // 開いている会計帳簿の年度を取得

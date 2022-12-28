@@ -36,11 +36,6 @@ class DataBaseManagerTaxonomy {
         }
         return objects
     }
-    // 取得　設定表示科目　設定表示科目の名称
-    func getNameOfSettingsTaxonomy(number: Int) -> String {
-        guard let object = RealmUtilManager.shared.findFirst(type: DataBaseSettingsTaxonomy.self, key: number) else { return "" }
-        return object.category
-    }
     
     /**
      * 表示科目　読込みメソッド

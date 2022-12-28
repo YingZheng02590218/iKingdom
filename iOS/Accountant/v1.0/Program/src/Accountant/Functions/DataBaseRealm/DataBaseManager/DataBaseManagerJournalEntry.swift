@@ -136,19 +136,6 @@ class DataBaseManagerJournalEntry {
             return 0 // クラッシュ対応
         }
     }
-    // 勘定のプライマリーキーを取得　※丁数ではない
-    func getPrimaryNumberOfAccount(accountName: String) -> Int {
-        var number: Int = 0
-        // 開いている会計帳簿の年度を取得
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let fiscalYear = dataBaseAccountingBooks.dataBaseJournals?.fiscalYear {
-            let objects = DataBaseManager.realm.objects(DataBaseAccount.self)
-                .filter("fiscalYear == \(fiscalYear)")
-                .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-            number = objects[0].number
-        }
-        return number
-    }
 
     /**
      * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
