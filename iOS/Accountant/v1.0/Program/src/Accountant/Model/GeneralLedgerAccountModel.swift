@@ -202,29 +202,29 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
 
     // 取得 仕訳　勘定別 全年度
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseJournalEntry.self)
-        objects = objects
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")// 条件を間違えないように注意する
-            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
     // 取得 決算整理仕訳　勘定別　損益勘定以外 全年度
     func getAllAdjustingEntryInAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-        objects = objects
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
     // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益は除外 全年度
     func getAllAdjustingEntryInPLAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-        objects = objects
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
-            .filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')") // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "繰越利益"), NSString(string: "繰越利益")) // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
+        ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
@@ -242,15 +242,15 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     }
     // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益は除外
     func getAllAdjustingEntryInPLAccount(account: String) -> Results<DataBaseAdjustingEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects
-            .filter("fiscalYear == \(fiscalYear)")
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
-            .filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')") // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "繰越利益"), NSString(string: "繰越利益")) // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
+        ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
@@ -268,15 +268,15 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     }
     // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益のみ
     func getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: String) -> Results<DataBaseAdjustingEntry> {
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects
-            .filter("fiscalYear == \(fiscalYear)")
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
-            .filter("debit_category LIKE '\("繰越利益")' || credit_category LIKE '\("繰越利益")'")
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "繰越利益"), NSString(string: "繰越利益"))
+        ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
@@ -286,8 +286,9 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         if accountName == "損益勘定" {
             return 0
         } else {
-            var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self) // DataBaseAccount.self) 2020/11/08
-            objects = objects.filter("category LIKE '\(accountName)'") // "accountName LIKE '\(accountName)'")// 2020/11/08
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [ // DataBaseAccount.self) 2020/11/08
+                NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // "accountName LIKE '\(accountName)'")// 2020/11/08
+            ])
             print(objects)
             // 勘定のプライマリーキーを取得する
             let numberOfAccount = objects[0].number
@@ -309,24 +310,22 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     }
     // 取得　勘定名から勘定を取得
     func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
-        var objects = DataBaseManager.realm.objects(DataBaseAccount.self)
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        objects = objects
-            .filter("fiscalYear == \(fiscalYear)")
-            .filter("accountName LIKE '\(accountName)'")// 条件を間違えないように注意する
-        print(objects)
-        return objects.isEmpty ? nil : objects[0]
+        let dataBaseAccount = RealmManager.shared.read(type: DataBaseAccount.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: object.dataBaseJournals!.fiscalYear)),
+            NSPredicate(format: "accountName LIKE %@", NSString(string: accountName))
+        ])
+        return dataBaseAccount
     }
     // 削除　勘定　設定勘定科目を削除するときに呼ばれる
     func deleteAccount(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
         // 勘定　全年度　取得
-        var objectsssss = DataBaseManager.realm.objects(DataBaseAccount.self)
-        objectsssss = objectsssss.filter("accountName LIKE '\(object.category)'")
-
+        let objectsssss = RealmManager.shared.readWithPredicate(type: DataBaseAccount.self, predicates: [
+            NSPredicate(format: "accountName LIKE %@", NSString(string: object.category))
+        ])
         // 勘定クラス　勘定ないの仕訳を取得
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: object.category) // 全年度の仕訳データを確認する

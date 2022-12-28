@@ -33,25 +33,29 @@ class DataBaseManager {
             let objects = DataBaseManager.realm.objects(DataBaseAccountingBooksShelf.self) // モデル
             return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
         } else if dataBase is DataBaseAccountingBooks {
-            var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-            objects = objects.filter("fiscalYear == \(fiscalYear)")
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+            ])
             return !objects.isEmpty
         } else if dataBase is DataBaseJournals {
-            var objects = DataBaseManager.realm.objects(DataBaseJournals.self)
-            objects = objects.filter("fiscalYear == \(fiscalYear)")
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseJournals.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+            ])
             return !objects.isEmpty
-            
         } else if dataBase is DataBaseGeneralLedger {
-            var objects = DataBaseManager.realm.objects(DataBaseGeneralLedger.self)
-            objects = objects.filter("fiscalYear == \(fiscalYear)")
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseGeneralLedger.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+            ])
             return !objects.isEmpty
         } else if dataBase is DataBaseFinancialStatements {
-            var objects = DataBaseManager.realm.objects(DataBaseFinancialStatements.self)
-            objects = objects.filter("fiscalYear == \(fiscalYear)")
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseFinancialStatements.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+            ])
             return !objects.isEmpty
         } else {
-            var objects = DataBaseManager.realm.objects(DataBaseJournals.self)
-            objects = objects.filter("fiscalYear == \(fiscalYear)")
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseJournals.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+            ])
             return !objects.isEmpty
         }
     }
@@ -59,7 +63,10 @@ class DataBaseManager {
     // 転記をやり直し　再度開いている帳簿の年度のすべての仕訳、決算整理仕訳を勘定へ転記する
     func reconnectJournalEntryToAccounts() {
         // 会計帳簿 年度を使用するため
-        guard let dataBaseAccountingBook = DataBaseManager.realm.objects(DataBaseAccountingBooks.self).filter("openOrClose == \(true)").first else {
+        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
             return
         }
         // 仕訳帳　開いている帳簿のすべての仕訳帳
@@ -75,23 +82,27 @@ class DataBaseManager {
             return
         }
         // 通常仕訳 開いている帳簿の年度と同じ仕訳に絞り込む
-        let dataBaseJournalEntries = DataBaseManager.realm.objects(DataBaseJournalEntry.self)
-            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
+        let dataBaseJournalEntries = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear))
+        ])
             .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 開いている帳簿の年度と同じ仕訳に絞り込む
-        let dataBaseJournalAdjustingEntries = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
-            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
+        let dataBaseJournalAdjustingEntries = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
             .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 借方勘定が損益勘定の場合
-        let dataBasePLAccountJournalAdjustingEntriesDebit = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
-            .filter("debit_category LIKE '\("損益勘定")' && !(credit_category LIKE '\("損益勘定")')")
+        let dataBasePLAccountJournalAdjustingEntriesDebit = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
             .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 貸方勘定が損益勘定の場合
-        let dataBasePLAccountJournalAdjustingEntriesCredit = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-            .filter("fiscalYear == \(dataBaseAccountingBook.fiscalYear)")
-            .filter("!(debit_category LIKE '\("損益勘定")') && credit_category LIKE '\("損益勘定")'")
+        let dataBasePLAccountJournalAdjustingEntriesCredit = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
+            NSPredicate(format: "!(debit_category LIKE %@) AND credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
             .sorted(byKeyPath: "date", ascending: true)
         do {
             // 転記やり直し前の仕訳データを仕訳帳と勘定、損益勘定から削除
@@ -207,7 +218,9 @@ class DataBaseManager {
      * @return 仕訳帳
      */
     func getJournalsWithFiscalYear(fiscalYear: Int) -> DataBaseJournals? {
-        let dataBaseAccountingBooks = DataBaseManager.realm.objects(DataBaseAccountingBooks.self).filter("fiscalYear == \(fiscalYear)")
+        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
         guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
             return nil
         }
@@ -227,7 +240,10 @@ class DataBaseManager {
      * 特殊化方法: 戻り値からの型推論による特殊化　戻り値の代入先の型が決まっている必要がある
      */
     func getAccountByAccountNameWithFiscalYear<T>(accountName: String, fiscalYear: Int) -> T? {
-        guard let dataBaseAccountingBook = DataBaseManager.realm.objects(DataBaseAccountingBooks.self).filter("fiscalYear == \(fiscalYear)").first else {
+        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
+        guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
             return nil
         }
         if accountName == "損益勘定" {

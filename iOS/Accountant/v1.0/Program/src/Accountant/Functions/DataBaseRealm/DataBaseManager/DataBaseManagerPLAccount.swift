@@ -15,11 +15,11 @@ class DataBaseManagerPLAccount: DataBaseManager {
     // チェック 決算整理仕訳　存在するかを確認
     func checkAdjustingEntry(account: String) -> Results<DataBaseAdjustingEntry> {
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        var objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
-        objects = objects
-            .filter("fiscalYear == \(object.fiscalYear)")
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: object.fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+        ])
         return objects
     }
     // チェック 決算整理仕訳　損益勘定内の勘定が存在するかを確認

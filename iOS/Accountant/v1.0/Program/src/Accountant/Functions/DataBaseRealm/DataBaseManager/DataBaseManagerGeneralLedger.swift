@@ -124,8 +124,9 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let fiscalYear: Int = object.dataBaseJournals!.fiscalYear
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-        objects = objects.filter("fiscalYear == \(fiscalYear)")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
         return objects[0].dataBaseGeneralLedger!
     }
 }

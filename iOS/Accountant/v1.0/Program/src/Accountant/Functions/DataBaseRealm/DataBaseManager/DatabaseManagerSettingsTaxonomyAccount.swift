@@ -57,9 +57,10 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // チェック　勘定科目名から大区分が損益計算書の区分かを参照する
     func checkSettingsTaxonomyAccountRank0(account: String) -> Bool {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "category LIKE %@", NSString(string: account)) // 勘定科目を絞る
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category LIKE '\(account)'") // 勘定科目を絞る
         switch objects[0].Rank0 {
         case "6", "7", "8", "9", "10", "11":
             return true // 損益計算書の科目である
@@ -69,17 +70,20 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得　決算整理仕訳　スイッチ
     func getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: Bool, switching: Bool) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "AdjustingAndClosingEntries == %@", NSNumber(value: adjustingAndClosingEntries)),
+            NSPredicate(format: "switching == %@", NSNumber(value: switching)) // 勘定科目がONだけに絞る
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("AdjustingAndClosingEntries == \(adjustingAndClosingEntries)")
-            .filter("switching == \(switching)") // 勘定科目がONだけに絞る
         return objects
     }
     // 取得　設定勘定科目　大区分別
     func getSettingsTaxonomyAccount(section: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            // セクション　資産の部、負債の部、純資産の部
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(section)))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        objects = objects.filter("Rank0 LIKE '\(section)'")
         return objects
     }
     // 取得 全ての勘定科目
@@ -90,9 +94,10 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得 設定勘定科目 BSとPLで切り分ける　スイッチON
     func getSettingsSwitchingOnBSorPL(BSorPL: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("switching == \(true)") // 勘定科目がONだけに絞る
         switch BSorPL {
         case 0: // 貸借対照表　資産 負債 純資産
             objects = objects.filter("Rank0 LIKE '\(0)' OR Rank0 LIKE '\(1)' OR Rank0 LIKE '\(2)' OR Rank0 LIKE '\(3)' OR Rank0 LIKE '\(4)' OR Rank0 LIKE '\(5)' OR Rank0 LIKE '\(12)'")
@@ -105,14 +110,16 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得
     func getMiddleCategory(category0: String, category1: String, category2: String, category3: String) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            // セクション　資産の部、負債の部、純資産の部
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: category0)),
+            NSPredicate(format: "Rank1 LIKE %@", NSString(string: category1)),
+            NSPredicate(format: "Rank2 LIKE %@", NSString(string: category2)), // 大区分　資産の部
+            NSPredicate(format: "category3 LIKE %@", NSString(string: category3)), // 中区分　流動資産
+            // .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+            NSPredicate(format: "switching == %@", NSNumber(value: true))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        objects = objects.filter("Rank0 LIKE '\(category0)'")
-            .filter("Rank1 LIKE '\(category1)'")
-            .filter("Rank2 LIKE '\(category2)'") // 大区分　資産の部
-            .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
-        //                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-            .filter("switching == \(true)")
         // セクション　資産の部、負債の部、純資産の部
         //        switch mid_category {
         //        case 0: // 流動資産
@@ -140,13 +147,14 @@ class DatabaseManagerSettingsTaxonomyAccount {
         category6: String,
         category7: String
     ) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            // セクション　資産の部、負債の部、純資産の部
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: category0)),
+            NSPredicate(format: "Rank1 LIKE %@", NSString(string: category1)),
+            NSPredicate(format: "Rank2 LIKE %@", NSString(string: category2)),
+            NSPredicate(format: "category3 LIKE %@", NSString(string: category3)) // 小区分
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        // セクション　資産の部、負債の部、純資産の部
-        objects = objects.filter("Rank0 LIKE '\(category0)'")
-            .filter("Rank1 LIKE '\(category1)'")
-            .filter("Rank2 LIKE '\(category2)'")
-            .filter("category3 LIKE '\(category3)'") // 小区分
         // 以下省略
         //        switch small_category {
         //        case 0: // 当座資産0
@@ -182,8 +190,9 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得 勘定科目の勘定科目名から表示科目連番を取得
     func getNumberOfTaxonomy(category: String) -> Int {
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
-            .filter("category LIKE '\(category)'") // 勘定科目を絞る
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "category LIKE %@", NSString(string: category)) // 勘定科目を絞る
+        ])
         return Int(objects[0].numberOfTaxonomy) ?? 0
     }
     // 取得 勘定科目連番から表示科目連番を取得
@@ -199,17 +208,19 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得 設定表示科目連番から表示科目別に設定勘定科目を取得
     func getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "numberOfTaxonomy LIKE %@", NSString(string: numberOfTaxonomy)) // 表示科目別に絞る
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("numberOfTaxonomy LIKE '\(numberOfTaxonomy)'")// 表示科目別に絞る
         return objects
     }
     // 取得 設定表示科目別に勘定科目を取得　スイッチON
     func getSettingsTaxonomyAccountSWInTaxonomy(numberOfTaxonomy: String, switching: Bool) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "numberOfTaxonomy LIKE %@", NSString(string: numberOfTaxonomy)),
+            NSPredicate(format: "switching == %@", NSNumber(value: switching)) // 勘定科目がONだけに絞る)
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("numberOfTaxonomy LIKE '\(numberOfTaxonomy)'")
-            .filter("switching == \(switching)") // 勘定科目がONだけに絞る)
         return objects
     }
     // 更新　スイッチの切り替え
@@ -250,8 +261,9 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
     func isExistSettingsTaxonomyAccount(category: String) -> Bool {
-        let dataBaseSettingsTaxonomyAccounts = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
-            .filter("category LIKE '\(category)'") // 勘定科目を絞る
+        let dataBaseSettingsTaxonomyAccounts = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "category LIKE %@", NSString(string: category))
+        ])
         if !dataBaseSettingsTaxonomyAccounts.isEmpty {
             return true // ある
         } else {

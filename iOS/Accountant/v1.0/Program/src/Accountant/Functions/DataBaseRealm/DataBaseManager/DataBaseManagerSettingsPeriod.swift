@@ -111,49 +111,52 @@ class DataBaseManagerSettingsPeriod {
     }
     // 仕訳　年度別
     func getJournalEntryCount(fiscalYear: Int) -> Results<DataBaseJournalEntry> {
-        let objects = DataBaseManager.realm.objects(DataBaseJournalEntry.self).filter("fiscalYear == \(fiscalYear)")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
         return objects
     }
     // 決算整理仕訳　年度別
     func getAdjustingEntryCount(fiscalYear: Int) -> Results<DataBaseAdjustingEntry> {
-        let objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self).filter("fiscalYear == \(fiscalYear)")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
         return objects
     }
     // 特定のモデルオブフェクトの取得　会計帳簿
     func getSettingsPeriod(lastYear: Bool) -> DataBaseAccountingBooks { // メソッド名を変更する
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self) // モデル
-        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
-        objects = objects.filter("openOrClose == \(true)")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
         // 前年度の会計帳簿をし取得する場合
         if lastYear {
-            let objectss = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-            for i in 0..<objectss.count {
-                if objects[0].fiscalYear - 1 == objectss[i].fiscalYear { // 前年度と同じ年の会計帳簿を判断
-                    return objectss[i] // 前年度の会計帳簿を返す
-                }
-            }
+            let objectss = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: objects[0].fiscalYear - 1)) // 前年度と同じ年の会計帳簿を判断
+            ])
+            return objectss[0] // 前年度の会計帳簿を返す
         }
         return objects[0] // 今年度の会計帳簿を返す
     }
     // チェック　会計帳簿　前年度の会計帳簿
     func checkSettingsPeriod() -> Bool { // メソッド名を変更する
         // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self) // モデル
-        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
-        objects = objects.filter("openOrClose == \(true)")
-        let objectss = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-        for i in 0..<objectss.count where objects[0].fiscalYear - 1 == objectss[i].fiscalYear { // 前年度と同じ年の会計帳簿を判断
-                return true // 前年度の会計帳簿はある
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true)) // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+        ])
+        let objectss = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: objects[0].fiscalYear - 1)) // 前年度と同じ年の会計帳簿を判断
+        ])
+        if !objectss.isEmpty {
+            return true // 前年度の会計帳簿はある
+        } else {
+            return false // 前年度の会計帳簿はない
         }
-        return false // 前年度の会計帳簿はない
     }
     // 年度の取得　会計帳簿
     func getSettingsPeriodYear() -> Int {
-        // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self) // モデル
-        // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
-        objects = objects.filter("openOrClose == \(true)")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true)) // 希望の年度の会計帳簿を絞り込む 開いている会計帳簿
+        ])
         // (2)データベース内に保存されているモデルをひとつ取得する
         guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: objects[0].number) else { return 0 }
         return object.fiscalYear // 年度を返す

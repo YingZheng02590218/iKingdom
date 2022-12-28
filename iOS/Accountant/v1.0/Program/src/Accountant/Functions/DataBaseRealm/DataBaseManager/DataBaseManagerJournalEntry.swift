@@ -126,8 +126,9 @@ class DataBaseManagerJournalEntry {
     }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self) // 2020/11/08
-        objects = objects.filter("category LIKE '\(accountName)'")// 2020/11/08
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // 2020/11/08
+        ])
         // 設定勘定科目のプライマリーキーを取得する
         if let numberOfAccount = objects.first {
             return numberOfAccount.number
@@ -156,8 +157,9 @@ class DataBaseManagerJournalEntry {
      * @return  勘定
      */
     private func getAccountByAccountNameWithFiscalYear(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
-        let dataBaseAccountingBooks = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-            .filter("fiscalYear == \(fiscalYear)")
+        let dataBaseAccountingBooks = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
         guard let dataBaseAccountingBook = dataBaseAccountingBooks.first else {
             return nil
         }

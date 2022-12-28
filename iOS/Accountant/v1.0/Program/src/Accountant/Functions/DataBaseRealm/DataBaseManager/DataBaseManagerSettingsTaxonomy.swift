@@ -96,12 +96,13 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            NSPredicate(format: "category2 LIKE %@", NSString(string: "?*")), // nilチェック　大区分以降に値があるもののみに絞る
+            NSPredicate(format: "abstract == %@", NSNumber(value: false)),
+            // .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+            // .filter("switching == \(true)") // 不要　2020/08/02
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
-            .filter("abstract == \(false)")
-        //        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-        //                            .filter("switching == \(true)") // 不要　2020/08/02
         if objects.isEmpty {
             print("ゼロ　getAllSettingsTaxonomy")
         }
@@ -109,11 +110,12 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomySwitichON() -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            NSPredicate(format: "category2 LIKE %@", NSString(string: "?*")), // nilチェック　大区分以降に値があるもののみに絞る
+            NSPredicate(format: "abstract == %@", NSNumber(value: false)),
+            NSPredicate(format: "switching == %@", NSNumber(value: true))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category2 LIKE '?*'") // nilチェック　大区分以降に値があるもののみに絞る
-            .filter("abstract == \(false)")
-            .filter("switching == \(true)")
         if objects.isEmpty {
             print("ゼロ　getAllSettingsTaxonomy")
         }
@@ -134,11 +136,12 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得 設定表示科目　大区分別　全て
     func getBigCategoryAll(section: Int) -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            NSPredicate(format: "category0 LIKE %@", NSString(string: String(section))) // 決算書の種類　貸借対照表とか損益計算書に絞る
+            // .filter("category1 LIKE '\(1)'") // 2020/10/13 階層1で絞る
+            // .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category0 LIKE '\(section)'") // 決算書の種類　貸借対照表とか損益計算書に絞る
-        //                        .filter("category1 LIKE '\(1)'") // 2020/10/13 階層1で絞る
-        //                            .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
         if objects.isEmpty {
             print("ゼロ　getBigCategoryAll")
         }
@@ -146,13 +149,14 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得 設定表示科目　大区分別　階層2
     func getBigCategory(category0: String, category1: String, category2: String) -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            NSPredicate(format: "category0 LIKE %@", NSString(string: category0)),
+            NSPredicate(format: "category1 LIKE %@", NSString(string: category1)),
+            NSPredicate(format: "category2 LIKE %@", NSString(string: category2)), // 大区分　資産の部
+            NSPredicate(format: "switching == %@", NSNumber(value: true)), // 2020/10/01
+            NSPredicate(format: "abstract == %@", NSNumber(value: false)) // 2020/10/01
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category0 LIKE '\(category0)'")
-            .filter("category1 LIKE '\(category1)'")
-            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-            .filter("switching == \(true)") // 2020/10/01
-            .filter("abstract == \(false)") // 2020/10/01
         if objects.isEmpty {
             print("ゼロ　getBigCategory")
         }
@@ -160,15 +164,16 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得　設定表示科目 中区分別　階層3 抽象区分以外
     func getMiddleCategory(category0: String, category1: String, category2: String, category3: String) -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self) // モデル
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            NSPredicate(format: "category0 LIKE %@", NSString(string: category0)),
+            NSPredicate(format: "category1 LIKE %@", NSString(string: category1)),
+            NSPredicate(format: "category2 LIKE %@", NSString(string: category2)), // 大区分　資産の部
+            NSPredicate(format: "category3 LIKE %@", NSString(string: category3)), // 中区分　流動資産
+            // .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+            NSPredicate(format: "switching == %@", NSNumber(value: true)), // いる？　2020/09/23 要る　2020/09/29
+            NSPredicate(format: "abstract == %@", NSNumber(value: false))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        objects = objects.filter("category0 LIKE '\(category0)'")
-            .filter("category1 LIKE '\(category1)'")
-            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-            .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
-        //                        .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-            .filter("switching == \(true)") // いる？　2020/09/23 要る　2020/09/29
-            .filter("abstract == \(false)")
         if objects.isEmpty {
             print("ゼロ　getMiddleCategory", category0, category1, category2, category3)
         }
@@ -176,15 +181,17 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得　設定表示科目　小区分別　階層4 抽象区分以外
     func getSmallCategory(category0: String, category1: String, category2: String, category3: String, category4: String) -> Results<DataBaseSettingsTaxonomy> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
+            // セクション　資産の部、負債の部、純資産の部
+            NSPredicate(format: "category0 LIKE %@", NSString(string: category0)),
+            NSPredicate(format: "category1 LIKE %@", NSString(string: category1)),
+            NSPredicate(format: "category2 LIKE %@", NSString(string: category2)), // 大区分　資産の部
+            NSPredicate(format: "category3 LIKE %@", NSString(string: category3)), // 中区分　流動資産
+            NSPredicate(format: "category4 LIKE %@", NSString(string: category4)),
+            NSPredicate(format: "switching == %@", NSNumber(value: true)), // 2020/09/29
+            NSPredicate(format: "abstract == %@", NSNumber(value: false))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("category0 LIKE '\(category0)'")
-            .filter("category1 LIKE '\(category1)'")
-            .filter("category2 LIKE '\(category2)'") // 大区分　資産の部
-            .filter("category3 LIKE '\(category3)'") // 中区分　流動資産
-            .filter("category4 LIKE '\(category4)'")
-            .filter("switching == \(true)") // 2020/09/29
-            .filter("abstract == \(false)")
         if objects.isEmpty {
             print("ゼロ　getSmallCategory", category0, category1, category2, category3, category4)
         }

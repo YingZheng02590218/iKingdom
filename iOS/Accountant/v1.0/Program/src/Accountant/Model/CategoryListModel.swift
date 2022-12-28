@@ -24,21 +24,24 @@ class CategoryListModel: CategoryListModelInput {
 
     // 取得 大区分、中区分、小区分
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
-            .sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-            .filter("Rank0 LIKE '\(rank0)'") // 大区分　流動資産
+        var predicates = [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))) // 大区分　流動資産
             // .filter("Rank2 LIKE '\(Rank2)'") // 小区分　未使用
+        ]
         if let rank1 = rank1 {
-            objects = objects.filter("Rank1 LIKE '\(rank1)'") // 中区分　当座資産
+            predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
         }
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
+        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
     }
     // 取得 大区分別に、スイッチONの勘定科目
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))),
+            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("Rank0 LIKE '\(rank0)'")
-            .filter("switching == \(true)") // 勘定科目がONだけに絞る
         return objects
     }
     // 更新　スイッチの切り替え

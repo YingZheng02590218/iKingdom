@@ -24,8 +24,9 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
     // データベースにモデルが存在するかどうかをチェックする
     func checkOpeningAccountingBook() -> Bool { // 帳簿が一冊の場合
         // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
-        objects = objects.filter("openOrClose == \(true)") // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true)) // ※  Int型の比較に文字列の比較演算子を使用してはいけない　LIKEは文字列の比較演算子
+        ])
         return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // データベースにモデルが存在するかどうかをチェックする

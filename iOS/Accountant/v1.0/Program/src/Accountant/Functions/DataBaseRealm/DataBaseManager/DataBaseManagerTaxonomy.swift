@@ -26,10 +26,11 @@ class DataBaseManagerTaxonomy {
     // 取得　設定勘定科目　設定表示科目の連番から設定表示科目別の設定勘定科目
     func getAccountsInTaxonomy(numberOfTaxonomy: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         // 設定勘定科目クラス
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
-        objects = objects.filter("numberOfTaxonomy LIKE '\(numberOfTaxonomy)'")
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "numberOfTaxonomy LIKE %@", NSString(string: String(numberOfTaxonomy)))
+        ])
         if objects.isEmpty {
-            //            print("ゼロ　getAccountsInTaxonomy", numberOfTaxonomy)
+            // print("ゼロ　getAccountsInTaxonomy", numberOfTaxonomy)
         } else {
             print("getAccountsInTaxonomy", numberOfTaxonomy)
         }

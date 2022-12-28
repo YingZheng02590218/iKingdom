@@ -230,9 +230,10 @@ class PLModel: PLModelInput {
     }
     // 取得　設定勘定科目　中区分
     private func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("Rank1 LIKE '\(rank1)'")
         return objects
     }
     // 取得　階層1 中区分　前年度表示対応
@@ -331,9 +332,10 @@ class PLModel: PLModelInput {
     }
     // 取得　設定勘定科目　大区分
     private func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0)))
+        ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
-        objects = objects.filter("Rank0 LIKE '\(rank0)'")
         return objects
     }
     // 借又貸を取得
