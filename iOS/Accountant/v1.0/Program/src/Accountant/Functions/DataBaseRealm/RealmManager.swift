@@ -35,6 +35,15 @@ class RealmManager {
     }
 
     /**
+     * データベース
+     * 指定されたモデルオブジェクトのテーブルからレコードを全件取得する
+     * @param type モデルオブジェクトタイプ
+     */
+    func read<T: Object>(type: T.Type) -> Results<T> {
+        DataBaseManager.realm.objects(T.self)
+    }
+
+    /**
      * 指定キーのレコードを取得
      */
     func findFirst<T: Object>(type: T.Type, key: Int) -> T? {

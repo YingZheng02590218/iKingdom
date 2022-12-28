@@ -32,7 +32,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
     // データベースにモデルが存在するかどうかをチェックする
     func checkInitializing() -> Bool { // 帳簿が一冊もない場合
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
+        let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self) // TODO: DataBaseManager に統合する
         return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // モデルオブフェクトの追加
@@ -68,7 +68,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
         guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return false } // 会社に会計帳簿棚はひとつ
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self)
+        let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
         // 会計帳簿が一つしかない場合は、削除しない
         if objects.count >= 1 {
             // 会計帳簿だけではなく、仕訳帳、総勘定元帳なども削除する

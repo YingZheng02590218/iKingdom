@@ -20,7 +20,7 @@ class DataBaseManagerSettingsPeriod {
     // データベースにモデルが存在するかどうかをチェックする
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsPeriod.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsPeriod.self)
         return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // 追加　会計期間
@@ -96,15 +96,15 @@ class DataBaseManagerSettingsPeriod {
     // すべてのモデルオブフェクトの取得
     func getMainBooksAllCount() -> Int {
         // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self) // モデル
-        // ソートする        注意：ascending: true とするとモデルオブフェクトのnumberの自動採番がおかしくなる？
+        var objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
+        // ソートする　注意：ascending: true とするとモデルオブフェクトのnumberの自動採番がおかしくなる？
         objects = objects.sorted(byKeyPath: "fiscalYear", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects.count
     }
     // すべてのモデルオブフェクトの取得
     func getMainBooksAll() -> Results<DataBaseAccountingBooks> {
         // (2)データベース内に保存されているモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseAccountingBooks.self) // モデル
+        var objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
         // ソートする        注意：ascending: true とするとモデルオブフェクトのnumberの自動採番がおかしくなる？
         objects = objects.sorted(byKeyPath: "fiscalYear", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects

@@ -30,7 +30,7 @@ class DataBaseManager {
     func checkInitialising<T>(dataBase: T, fiscalYear: Int) -> Bool {
         // (2)データベース内に保存されているモデルを全て取得する
         if dataBase is DataBaseAccountingBooksShelf {
-            let objects = DataBaseManager.realm.objects(DataBaseAccountingBooksShelf.self) // モデル
+            let objects = RealmManager.shared.read(type: DataBaseAccountingBooksShelf.self) // モデル
             return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
         } else if dataBase is DataBaseAccountingBooks {
             let objects = RealmManager.shared.readWithPredicate(type: DataBaseAccountingBooks.self, predicates: [

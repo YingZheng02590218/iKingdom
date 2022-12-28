@@ -15,7 +15,7 @@ class DataBaseManagerSettingsOperating {
     // データベースにモデルが存在するかどうかをチェックする
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsOperating.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsOperating.self)
         return !objects.isEmpty // モデルオブフェクトが1以上ある場合はtrueを返す
     }
     // モデルオブフェクトの追加　仕訳帳

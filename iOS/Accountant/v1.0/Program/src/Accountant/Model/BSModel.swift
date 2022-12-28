@@ -339,7 +339,7 @@ class BSModel: BSModelInput {
 
     // 取得　設定勘定科目　五大区分
     private func getAccountsInBig5(big5: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         switch big5 {
         case 0: // 資産

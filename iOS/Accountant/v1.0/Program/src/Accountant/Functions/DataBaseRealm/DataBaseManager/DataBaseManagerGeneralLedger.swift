@@ -25,7 +25,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
     // 設定画面の勘定科目一覧にある勘定を取得する
     func getObjects() -> Results<DataBaseSettingsTaxonomyAccount> {
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects

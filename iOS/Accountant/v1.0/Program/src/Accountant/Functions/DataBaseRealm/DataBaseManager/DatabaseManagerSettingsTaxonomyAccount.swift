@@ -37,13 +37,13 @@ class DatabaseManagerSettingsTaxonomyAccount {
     // チェック
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         print("DataBaseSettingsTaxonomyAccount", objects.count)
         return objects.count >= 229 // モデルオブフェクトが229以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
     }
     // 削除 勘定科目
     func deleteAllOfSettingsTaxonomyAccount() {
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         // 表示科目　オブジェクトを削除
         for object in objects {
             do {
@@ -88,7 +88,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得 全ての勘定科目
     func getSettingsTaxonomyAccountAll() -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomyAccount.self)
+        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }

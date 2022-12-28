@@ -76,13 +76,13 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     // データベースにモデルが存在するかどうかをチェックする　設定表示科目クラス
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
         print("DataBaseSettingsTaxonomy", objects.count)
         return objects.count == 2_068 // モデルオブフェクトが2068ある場合はtrueを返す
     }
     // 削除 表示科目
     func deleteAllOfSettingsTaxonomy() {
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
         // 表示科目　オブジェクトを削除
         for object in objects {
             do {
@@ -124,11 +124,11 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     // 設定表示科目　取得 ONのみ
     func getAllSettingsCategoryBSAndPLSwitichON() -> Results<DataBaseSettingsTaxonomy> {
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
-        var objects = DataBaseManager.realm.objects(DataBaseSettingsTaxonomy.self)
+        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
         // ソートする 注意：ascending: true とするとDataBaseSettingsCategoryのnumberの自動採番がおかしくなる
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        //        objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
-        //                            .filter("switching == \(true)") // 不要　2020/08/02
+        //　objects = objects.filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
+        //                　  .filter("switching == \(true)") // 不要　2020/08/02
         if objects.isEmpty {
             print("ゼロ　getAllSettingsCategoryBSAndPLSwitichON")
         }

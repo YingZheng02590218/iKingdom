@@ -115,13 +115,13 @@ class DataBaseManagerJournalEntry {
     // 仕訳　総数
     func getJournalEntryCount() -> Results<DataBaseJournalEntry> {
 
-        let objects = DataBaseManager.realm.objects(DataBaseJournalEntry.self)
+        let objects = RealmManager.shared.read(type: DataBaseJournalEntry.self)
         return objects
     }
     // 決算整理仕訳　総数
     func getAdjustingEntryCount() -> Results<DataBaseAdjustingEntry> {
 
-        let objects = DataBaseManager.realm.objects(DataBaseAdjustingEntry.self)
+        let objects = RealmManager.shared.read(type: DataBaseAdjustingEntry.self)
         return objects
     }
     // 丁数を取得

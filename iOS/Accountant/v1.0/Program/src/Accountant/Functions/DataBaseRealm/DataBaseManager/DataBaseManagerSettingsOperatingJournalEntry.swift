@@ -38,7 +38,7 @@ class DataBaseManagerSettingsOperatingJournalEntry {
     }
     // 取得　よく使う仕訳
     func getJournalEntry() -> Results<DataBaseSettingsOperatingJournalEntry> {
-        let objects = DataBaseManager.realm.objects(DataBaseSettingsOperatingJournalEntry.self)
+        let objects = RealmManager.shared.read(type: DataBaseSettingsOperatingJournalEntry.self)
         return objects
     }
     // 更新 よく使う仕訳
