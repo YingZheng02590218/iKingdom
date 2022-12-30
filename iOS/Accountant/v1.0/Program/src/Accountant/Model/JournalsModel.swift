@@ -11,7 +11,6 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol JournalsModelInput {
-    
     func initializeJournals(completion: (Bool) -> Void)
     func checkInitialising(dataBase: DataBaseJournals, fiscalYear: Int) -> Bool
     func addJournals(number: Int)
@@ -137,18 +136,18 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+        guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
             accountName: dataBaseJournalEntry.debit_category,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else { return }
-        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+        guard let oldRightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
             accountName: dataBaseJournalEntry.credit_category,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else { return }
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let journals = getJournalsWithFiscalYear(fiscalYear: fiscalYear) else { return }
-        guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
-        guard let rightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: fiscalYear) else { return }
+        guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
+        guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: fiscalYear) else { return }
         // 編集する仕訳
         do {
             try DataBaseManager.realm.write {
@@ -228,18 +227,18 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+        guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
             accountName: dataBaseJournalEntry.debit_category,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else { return }
-        guard let oldRightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(
+        guard let oldRightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
             accountName: dataBaseJournalEntry.credit_category,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else { return }
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let journals = getJournalsWithFiscalYear(fiscalYear: fiscalYear) else { return }
-        guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
-        guard let rightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: fiscalYear) else { return }
+        guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: fiscalYear) else { return }
+        guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: fiscalYear) else { return }
         // 編集する仕訳
         do {
             try DataBaseManager.realm.write {
@@ -313,8 +312,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
     }
     // 更新 仕訳　日付、借方勘定、借方金額、貸方勘定、貸方金額、小書き
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        dataBaseManager.updateJournalEntry(
+        DataBaseManagerJournalEntry.shared.updateJournalEntry(
             primaryKey: primaryKey,
             date: date,
             debitCategory: debitCategory,
@@ -339,8 +337,7 @@ class JournalsModel: DataBaseManager, JournalsModelInput {
         smallWritting: String,
         completion: (Int) -> Void
     ) {
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        dataBaseManager.updateAdjustingJournalEntry(
+        DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
             primaryKey: primaryKey,
             date: date,
             debitCategory: debitCategory,

@@ -139,12 +139,10 @@ class JournalEntryViewController: UIViewController {
                 carouselCollectionView.isHidden = true
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
                 // 仕訳データを取得
-                let dataBaseManager = DataBaseManagerJournalEntry() // データベースマネジャー
-                
                 if tappedIndexPath.section == 1 {
 // 決算整理仕訳
                     labelTitle.text = "決算整理仕訳編集"
-                    if let dataBaseJournalEntry = dataBaseManager.getAdjustingEntryWithNumber(number: primaryKey) {
+                    if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey) {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                         textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
@@ -155,7 +153,7 @@ class JournalEntryViewController: UIViewController {
                 } else {
 // 通常仕訳
                     labelTitle.text = "仕訳編集"
-                    if let dataBaseJournalEntry = dataBaseManager.getJournalEntryWithNumber(number: primaryKey) {
+                    if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey) {
                         datePicker.date = dateFormatter.date(from: dataBaseJournalEntry.date)! // 注意：カンマの後にスペースがないとnilになる
                         textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                         textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
@@ -986,10 +984,9 @@ class JournalEntryViewController: UIViewController {
     // 決算整理仕訳　の処理
     func buttonTappedForAdjustingAndClosingEntries() {
         // データベース　仕訳データを追加
-        let dataBaseManager = DataBaseManagerJournalEntry()
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
-        number = dataBaseManager.addAdjustingJournalEntry(
+        number = DataBaseManagerAdjustingEntry.shared.addAdjustingJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debitCategory: textFieldCategoryDebit.text!,
             debitAmount: Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit.text!))!, // カンマを削除してからデータベースに書き込む
@@ -1033,12 +1030,11 @@ class JournalEntryViewController: UIViewController {
     // 仕訳編集　の処理
     func buttonTappedForJournalEntriesFixing() {
         // データベース　仕訳データを追加
-        let dataBaseManager = DataBaseManagerJournalEntry()
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
         if tappedIndexPath.section == 1 { // 決算整理仕訳
             // データベースに書き込む
-            dataBaseManager.updateAdjustingJournalEntry(
+            DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debitCategory: textFieldCategoryDebit.text!,
@@ -1053,7 +1049,7 @@ class JournalEntryViewController: UIViewController {
             )
         } else { // 仕訳
             // データベースに書き込む
-            dataBaseManager.updateJournalEntry(
+            DataBaseManagerJournalEntry.shared.updateJournalEntry(
                 primaryKey: primaryKey,
                 date: dateFormatter.string(from: datePicker.date),
                 debitCategory: textFieldCategoryDebit.text!,
@@ -1080,10 +1076,9 @@ class JournalEntryViewController: UIViewController {
     // 仕訳　の処理
     func buttonTappedForJournalEntries() {
         // データベース　仕訳データを追加
-        let dataBaseManager = DataBaseManagerJournalEntry()
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
-        number = dataBaseManager.addJournalEntry(
+        number = DataBaseManagerJournalEntry.shared.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debitCategory: textFieldCategoryDebit.text!,
             debitAmount: Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit.text!))!, // カンマを削除してからデータベースに書き込む
@@ -1113,10 +1108,9 @@ class JournalEntryViewController: UIViewController {
     // タブバーの仕訳タブからの遷移の場合
     func buttonTappedForJournalEntriesOnTabBar() {
         // データベース　仕訳データを追加
-        let dataBaseManager = DataBaseManagerJournalEntry()
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
-        number = dataBaseManager.addJournalEntry(
+        number = DataBaseManagerJournalEntry.shared.addJournalEntry(
             date: dateFormatter.string(from: datePicker.date),
             debitCategory: textFieldCategoryDebit.text!,
             debitAmount: Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit.text!))!, // カンマを削除してからデータベースに書き込む
@@ -1201,8 +1195,7 @@ class JournalEntryViewController: UIViewController {
             
             var iValue = 0
             // 仕訳が50件以上入力済みの場合は毎回広告を表示する　マネタイズ対応
-            let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
-            let results = dataBaseManagerJournalEntry.getJournalEntryCount()
+            let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
             if results.count <= 10 {
                 // 仕訳10件以下　広告を表示しない
                 iValue = 1

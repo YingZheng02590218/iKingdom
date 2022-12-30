@@ -237,9 +237,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         case 0:
             return "決算日は、財務諸表や仕訳帳、精算表、試算表に表示されます。"
         case 1:
-            let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
-            let results = dataBaseManagerJournalEntry.getJournalEntryCount()
-            let resultss = dataBaseManagerJournalEntry.getAdjustingEntryCount()
+            let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
+            let resultss = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryCount()
             return "データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
         default:
             return ""

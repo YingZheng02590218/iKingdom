@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 // 損益勘定クラス
-class DataBaseManagerPLAccount: DataBaseManager {
+class DataBaseManagerPLAccount {
     
     // MARK: - CRUD
     
@@ -281,10 +281,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
         } else if dataBaseJournalEntry.credit_category == "損益勘定" {
             account = dataBaseJournalEntry.debit_category
         }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: account, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: account, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
-        guard let dataBasePLAccount: DataBasePLAccount = getAccountByAccountNameWithFiscalYear(accountName: "損益勘定", fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let dataBasePLAccount: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: "損益勘定", fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
         // 仕訳帳から削除前仕訳データの関連を削除
@@ -359,10 +359,10 @@ class DataBaseManagerPLAccount: DataBaseManager {
         } else if dataBaseJournalEntry.credit_category == "損益勘定" {
             account = dataBaseJournalEntry.debit_category
         }
-        guard let oldLeftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: account, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: account, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
-        guard let dataBasePLAccount: DataBasePLAccount = getAccountByAccountNameWithFiscalYear(accountName: "損益勘定", fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let dataBasePLAccount: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: "損益勘定", fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
         // 仕訳帳から削除前仕訳データの関連を削除

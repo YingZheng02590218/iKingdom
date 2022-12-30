@@ -31,8 +31,7 @@ class Initial {
         let firstLunchKey = "firstLunch_JournalEntry"
         if userDefaults.bool(forKey: firstLunchKey) {
             // 仕訳のサンプルデータを作成する
-            let dataBaseManager = DataBaseManagerJournalEntry()
-            let _ = dataBaseManager.addJournalEntry(
+            let _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
                 date: "\(getTheTime())/04/01",
                 debitCategory: "現金",
                 debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む

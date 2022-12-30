@@ -27,8 +27,7 @@ protocol GenearlLedgerAccountModelInput {
 class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     
     let dataBaseManagerGeneralLedgerAccountBalance = DataBaseManagerGeneralLedgerAccountBalance()
-    
-    
+
     // MARK: - CRUD
     
     // MARK: Create
@@ -82,7 +81,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             let objects = dataBaseManagerGeneralLedger.getObjects()
             // 設定勘定科目と総勘定元帳ないの勘定を比較
             for i in 0..<objects.count {
-                let dataBaseAccount = getAccountByAccountName(accountName: objects[i].category)
+                let dataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountName(accountName: objects[i].category)
                 print("addGeneralLedgerAccountLack", objects[i].category)
                 if dataBaseAccount != nil {
                     // print("勘定は存在する")
@@ -274,17 +273,6 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         }
     }
     
-    // 取得　勘定名から勘定を取得
-    func getAccountByAccountName(accountName: String) -> DataBaseAccount? {
-        // 開いている会計帳簿の年度を取得
-        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        let dataBaseAccount = RealmManager.shared.read(type: DataBaseAccount.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
-            NSPredicate(format: "accountName LIKE %@", NSString(string: accountName))
-        ])
-        return dataBaseAccount
-    }
-    
     // MARK: Update
     
     // 差引残高　計算
@@ -311,22 +299,21 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category) // よく使う仕訳
 
         // 仕訳クラス　仕訳を削除
-        let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
         var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
         var isInvalidatedd = true
         var isInvalidateddd = true
         var isInvalidatedddd = true
 
         for _ in 0..<objectss.count {
-            isInvalidated = dataBaseManagerJournalEntry.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+            isInvalidated = DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
         // 仕訳クラス　決算整理仕訳仕訳を削除
         for _ in 0..<objectsss.count {
-            isInvalidatedd = dataBaseManagerJournalEntry.deleteAdjustingJournalEntry(number: objectsss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+            isInvalidatedd = DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: objectsss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
         // 損益振替仕訳を削除
         for _ in 0..<objectssss.count {
-            isInvalidateddd = dataBaseManagerJournalEntry.deleteAdjustingJournalEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+            isInvalidateddd = DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
         // よく使う仕訳を削除
         for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {

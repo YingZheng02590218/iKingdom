@@ -164,14 +164,12 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
         
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        return dataBaseManager.deleteJournalEntry(number: number)
+        return DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: number)
     }
     // 削除　決算整理仕訳
     func deleteAdjustingJournalEntry(number: Int) -> Bool {
         
-        let dataBaseManager = DataBaseManagerJournalEntry()
-        return dataBaseManager.deleteAdjustingJournalEntry(number: number)
+        return DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: number)
     }
     // 年度を変更する
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int) {

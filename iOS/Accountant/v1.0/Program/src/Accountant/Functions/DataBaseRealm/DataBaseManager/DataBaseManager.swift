@@ -85,35 +85,6 @@ class DataBaseManager {
         return dataBaseJournals
     }
     
-    /**
-     * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
-     * 勘定名と年度を指定して勘定を取得する
-     * @param accountName 勘定名、fiscalYear 年度
-     * @return  DataBaseAccount? 勘定、DataBasePLAccount? 損益勘定
-     * 特殊化方法: 戻り値からの型推論による特殊化　戻り値の代入先の型が決まっている必要がある
-     */
-    func getAccountByAccountNameWithFiscalYear<T>(accountName: String, fiscalYear: Int) -> T? {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
-        ])
-        
-        if accountName == "損益勘定" {
-            // 損益勘定の場合
-            guard let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount else {
-                return nil
-            }
-            return dataBasePLAccount as? T
-        } else {
-            // 損益勘定以外の勘定の場合
-            guard let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-                    .filter("accountName LIKE '\(accountName)'")
-                    .first else {
-                        return nil
-                    }
-            return dataBaseAccount as? T
-        }
-    }
-    
     // MARK: Update
     
     // 転記をやり直し　再度開いている帳簿の年度のすべての仕訳、決算整理仕訳を勘定へ転記する
@@ -182,10 +153,10 @@ class DataBaseManager {
             guard let journals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let rightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
             do {
@@ -204,10 +175,10 @@ class DataBaseManager {
             guard let journals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let rightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
             do {
@@ -225,10 +196,10 @@ class DataBaseManager {
             guard let journals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBasePLAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let leftObject: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let rightObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
             do {
@@ -246,10 +217,10 @@ class DataBaseManager {
             guard let journals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let rightObject: DataBasePLAccount = getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let rightObject: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
             do {
