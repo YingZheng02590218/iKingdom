@@ -17,7 +17,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - var let
 
-   var gADBannerView: GADBannerView!
+    var gADBannerView: GADBannerView!
     // 仕訳帳　上部
     // まとめて編集機能
     @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
@@ -324,42 +324,48 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "仕訳データを削除しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-            print("OK アクションをタップした時の処理")
-            // // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-            // let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
-            // print(objects)
-            if indexPath.section == 1 {
-                // 設定操作
-                // let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
-                // let object = dataBaseManagerSettingsOperating.getSettingsOperating()
-                // let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section,
-                // EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
-                // 決算整理仕訳データを削除
-                let result = self.presenter.deleteAdjustingJournalEntry(number: self.presenter.objectsss(forRow: indexPath.row).number)
-                if result == true {
-                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
-                    // イベントログ
-                    Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                        AnalyticsParameterContentType: Constant.JOURNALS,
-                        AnalyticsParameterItemID: Constant.DELETEADJUSTINGJOURNALENTRY
-                    ])
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    // // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
+                    // let objects = dataBaseManager.getJournalEntry(section: indexPath.section) // 何月のセクションに表示するセルかを判別するため引数で渡す
+                    // print(objects)
+                    if indexPath.section == 1 {
+                        // 設定操作
+                        // let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
+                        // let object = dataBaseManagerSettingsOperating.getSettingsOperating()
+                        // let objectss = dataBaseManager.getJournalAdjustingEntry(section: indexPath.section,
+                        // EnglishFromOfClosingTheLedger0: object!.EnglishFromOfClosingTheLedger0, EnglishFromOfClosingTheLedger1: object!.EnglishFromOfClosingTheLedger1) // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+                        // 決算整理仕訳データを削除
+                        let result = self.presenter.deleteAdjustingJournalEntry(number: self.presenter.objectsss(forRow: indexPath.row).number)
+                        if result == true {
+                            self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                            // イベントログ
+                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                AnalyticsParameterContentType: Constant.JOURNALS,
+                                AnalyticsParameterItemID: Constant.DELETEADJUSTINGJOURNALENTRY
+                            ])
+                        }
+                    } else if indexPath.section == 0 {
+                        // 仕訳データを削除
+                        let result = self.presenter.deleteJournalEntry(number: self.presenter.objects(forRow: indexPath.row).number)
+                        if result == true {
+                            self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                            // イベントログ
+                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                AnalyticsParameterContentType: Constant.JOURNALS,
+                                AnalyticsParameterItemID: Constant.DELETEJOURNALENTRY
+                            ])
+                        }
+                    }
+                    // ボタンを更新
+                    self.setButtons()
                 }
-            } else if indexPath.section == 0 {
-                // 仕訳データを削除
-                let result = self.presenter.deleteJournalEntry(number: self.presenter.objects(forRow: indexPath.row).number)
-                if result == true {
-                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
-                    // イベントログ
-                    Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                        AnalyticsParameterContentType: Constant.JOURNALS,
-                        AnalyticsParameterItemID: Constant.DELETEJOURNALENTRY
-                    ])
-                }
-            }
-            // ボタンを更新
-            self.setButtons()
-        }))
+            )
+        )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         present(alert, animated: true, completion: nil)

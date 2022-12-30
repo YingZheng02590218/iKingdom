@@ -379,20 +379,25 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "会計帳簿を削除しますか？", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            (action: UIAlertAction!) in
-            print("OK アクションをタップした時の処理")
-            // データベース
-            let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
-            if objects.count > 1 {
-                // 会計帳簿を削除
-                let dataBaseManager = DataBaseManagerAccountingBooks()
-                let result = dataBaseManager.deleteAccountingBooks(number: objects[indexPath.row].number)
-                if result == true {
-                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { (action: UIAlertAction!) in
+                    print("OK アクションをタップした時の処理")
+                    // データベース
+                    let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+                    if objects.count > 1 {
+                        // 会計帳簿を削除
+                        let dataBaseManager = DataBaseManagerAccountingBooks()
+                        let result = dataBaseManager.deleteAccountingBooks(number: objects[indexPath.row].number)
+                        if result == true {
+                            self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                        }
+                    }
                 }
-            }
-        }))
+            )
+        )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
