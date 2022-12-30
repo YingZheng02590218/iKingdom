@@ -106,7 +106,10 @@ class DataBaseManager {
         } else {
             // 損益勘定以外の勘定の場合
             guard let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-                    .filter("accountName LIKE '\(accountName)'").first else { return nil }
+                    .filter("accountName LIKE '\(accountName)'")
+                    .first else {
+                        return nil
+                    }
             return dataBaseAccount as? T
         }
     }

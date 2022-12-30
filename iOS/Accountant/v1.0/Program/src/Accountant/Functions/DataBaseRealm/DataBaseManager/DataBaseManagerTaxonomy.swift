@@ -74,16 +74,17 @@ class DataBaseManagerTaxonomy {
         // 開いている会計帳簿を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // (2)データベース内に保存されているモデルを全て取得する
-        if let objectss = object.dataBaseGeneralLedger {
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
             // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<objectss.dataBaseAccounts.count where objectss.dataBaseAccounts[i].accountName == account {
+            if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first  {
+                print(dataBaseAccount)
                 // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
-                if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                } else if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                if dataBaseAccount.debit_balance_AfterAdjusting > dataBaseAccount.credit_balance_AfterAdjusting {
+                    result = dataBaseAccount.debit_balance_AfterAdjusting
+                } else if dataBaseAccount.debit_balance_AfterAdjusting < dataBaseAccount.credit_balance_AfterAdjusting {
+                    result = dataBaseAccount.credit_balance_AfterAdjusting
                 } else {
-                    result = objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                    result = dataBaseAccount.debit_balance_AfterAdjusting
                 }
             }
         }

@@ -33,8 +33,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
             // データベース　よく使う仕訳を追加
-            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-            let objects = dataBaseManager.getJournalEntry()
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
             primaryKey = objects[tappedIndexPath.row].number
             nicknameTextField.text = objects[tappedIndexPath.row].nickname
             textFieldCategoryDebit.text = objects[tappedIndexPath.row].debit_category
@@ -122,8 +121,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 amountCreditTextField = StringUtility.shared.removeComma(string: text)
             }
             // データベース　よく使う仕訳を追加
-            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-            number = dataBaseManager.addJournalEntry(
+            number = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
                 nickname: nicknameTextField.text!,
                 debitCategory: textFieldCategoryDebit.text!,
                 debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
@@ -155,8 +153,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 amountCreditTextField = StringUtility.shared.removeComma(string: text)
             }
             // データベース　よく使う仕訳を更新
-            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-            number = dataBaseManager.updateJournalEntry(
+            number = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
                 primaryKey: primaryKey,
                 nickname: nicknameTextField.text!,
                 debitCategory: textFieldCategoryDebit.text!,
@@ -195,8 +192,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース　よく使う仕訳を削除
-            let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-            if dataBaseManager.deleteJournalEntry(number: primaryKey) {
+            if DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: primaryKey) {
                 if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
                    let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
                    let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する

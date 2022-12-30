@@ -23,7 +23,8 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     // コレクションビュー　カルーセル　よく使う仕訳
     @IBOutlet var carouselCollectionView: UICollectionView!
-    static var viewReload = false // カルーセル　リロードするかどうか
+    // カルーセル　true: リロードする
+    static var viewReload = false
     // ボタン　アウトレットコレクション
     @IBOutlet var arrayHugo: [EMTNeumorphicButton]!
     @IBOutlet var buttonRight: EMTNeumorphicButton!
@@ -116,22 +117,14 @@ class JournalEntryViewController: UIViewController {
                 labelTitle.text = "仕　訳"
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
-                if JournalEntryViewController.viewReload {
-                    DispatchQueue.main.async {
-                        self.carouselCollectionView.reloadData()
-                        JournalEntryViewController.viewReload = false
-                    }
-                }
+                // カルーセルをリロードする
+                reloadCarousel()
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             } else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
-//                labelTitle.text = "決算整理仕訳"
+                //　labelTitle.text = "決算整理仕訳"
                 createCarousel() // カルーセルを作成
-                if JournalEntryViewController.viewReload {
-                    DispatchQueue.main.async {
-                        self.carouselCollectionView.reloadData()
-                        JournalEntryViewController.viewReload = false
-                    }
-                }
+                // カルーセルをリロードする
+                reloadCarousel()
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
                 labelTitle.text = "仕訳まとめて編集"
@@ -176,12 +169,8 @@ class JournalEntryViewController: UIViewController {
                 labelTitle.text = ""
                 // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
                 createCarousel() // カルーセルを作成
-                if JournalEntryViewController.viewReload {
-                    DispatchQueue.main.async {
-                        self.carouselCollectionView.reloadData()
-                        JournalEntryViewController.viewReload = false
-                    }
-                }
+                // カルーセルをリロードする
+                reloadCarousel()
                 createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             }
         }
@@ -189,7 +178,19 @@ class JournalEntryViewController: UIViewController {
         // セットアップ AdMob
         setupAdMob()
     }
+    // カルーセルをリロードする
+    func reloadCarousel() {
+        if JournalEntryViewController.viewReload {
+            DispatchQueue.main.async { [self] in
+                // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
+                self.textFieldCategoryDebit.text = nil
+                textFieldCategoryCredit.text = nil
 
+                self.carouselCollectionView.reloadData()
+                JournalEntryViewController.viewReload = false
+            }
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
@@ -1273,16 +1274,14 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
     // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // データベース　よく使う仕訳を追加
-        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-        let objects = dataBaseManager.getJournalEntry()
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         return objects.count
     }
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CarouselCollectionViewCell else { return UICollectionViewCell() }
         // データベース　よく使う仕訳を追加
-        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-        let objects = dataBaseManager.getJournalEntry()
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         cell.nicknameLabel.text = objects[indexPath.row].nickname
         return cell
     }
@@ -1308,9 +1307,8 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
-        // データベース　よく使う仕訳を追加
-        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-        let objects = dataBaseManager.getJournalEntry()
+        // データベース　よく使う仕訳を追加 TODO: よく使う仕訳を削除後に、仕訳画面でセルをタップするとクラッシュする
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         textFieldCategoryDebit.text = objects[indexPath.row].debit_category
         textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))
         textFieldCategoryCredit.text = objects[indexPath.row].credit_category

@@ -97,9 +97,17 @@ class CategoryListTableViewController: UITableViewController {
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category) // 全年度の仕訳データを確認する
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category) // 全年度の仕訳データを確認する
+        // データベース　よく使う仕訳を追加
+        let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            account: presenter.objects(
+                forRow: indexPath.row,
+                section: indexPath.section
+            ).category
+        )
+
         let alert = UIAlertController(
             title: "削除",
-            message: "「\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category)」を削除しますか？\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件あります",
+            message: "勘定科目「\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category)」を削除しますか？\n\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件\nよく使う仕訳が \(dataBaseSettingsOperatingJournalEntry.count)件 \nあります。",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action: UIAlertAction!) in

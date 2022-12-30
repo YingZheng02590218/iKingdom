@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 設定仕訳画面
 class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet private var listCollectionView: UICollectionView!
@@ -131,16 +132,14 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
     // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // データベース　よく使う仕訳を追加
-        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-        let objects = dataBaseManager.getJournalEntry()
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         return objects.count
     }
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         // データベース　よく使う仕訳を追加
-        let dataBaseManager = DataBaseManagerSettingsOperatingJournalEntry()
-        let objects = dataBaseManager.getJournalEntry()
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         cell.nicknameLabel.text = objects[indexPath.row].nickname
         cell.debitLabel.text = objects[indexPath.row].debit_category
         cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)

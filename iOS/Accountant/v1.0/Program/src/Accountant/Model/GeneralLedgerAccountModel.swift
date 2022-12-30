@@ -263,9 +263,10 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         if accountName == "損益勘定" {
             return 0
         } else {
-            let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [ // DataBaseAccount.self) 2020/11/08
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+                // DataBaseAccount.self) 2020/11/08
                 NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // "accountName LIKE '\(accountName)'")// 2020/11/08
-                                                                                                                        ])
+            ])
             print(objects)
             // 勘定のプライマリーキーを取得する
             let numberOfAccount = objects[0].number
@@ -294,7 +295,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     
     // MARK: Delete
     
-    // 削除　勘定　設定勘定科目を削除するときに呼ばれる
+    // 削除　勘定、よく使う仕訳　設定勘定科目を削除するときに呼ばれる
     func deleteAccount(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
         guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
@@ -307,11 +308,15 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: object.category) // 全年度の仕訳データを確認する
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: object.category) // 全年度の仕訳データを確認する
         let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountAll(account: object.category) // 全年度の仕訳データを確認する
+        let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category) // よく使う仕訳
+
         // 仕訳クラス　仕訳を削除
         let dataBaseManagerJournalEntry = DataBaseManagerJournalEntry()
         var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
         var isInvalidatedd = true
         var isInvalidateddd = true
+        var isInvalidatedddd = true
+
         for _ in 0..<objectss.count {
             isInvalidated = dataBaseManagerJournalEntry.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
@@ -323,20 +328,27 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         for _ in 0..<objectssss.count {
             isInvalidateddd = dataBaseManagerJournalEntry.deleteAdjustingJournalEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
-        if isInvalidateddd {
-            if isInvalidatedd {
-                if isInvalidated {
-                    do {
-                        try DataBaseManager.realm.write {
-                            for _ in 0..<objectsssss.count {
-                                // 仕訳が残ってないか
-                                DataBaseManager.realm.delete(objectsssss[0])
+        // よく使う仕訳を削除
+        for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {
+            isInvalidatedddd = DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: dataBaseSettingsOperatingJournalEntry[0].number)
+        }
+
+        if isInvalidatedddd {
+            if isInvalidateddd {
+                if isInvalidatedd {
+                    if isInvalidated {
+                        for _ in 0..<objectsssss.count {
+                            do {
+                                try DataBaseManager.realm.write {
+                                    // 仕訳が残ってないか
+                                    DataBaseManager.realm.delete(objectsssss[0])
+                                }
+                            } catch {
+                                print("エラーが発生しました")
                             }
                         }
-                    } catch {
-                        print("エラーが発生しました")
+                        return true // objectsssss.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
                     }
-                    return true // objectsssss.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
                 }
             }
         }

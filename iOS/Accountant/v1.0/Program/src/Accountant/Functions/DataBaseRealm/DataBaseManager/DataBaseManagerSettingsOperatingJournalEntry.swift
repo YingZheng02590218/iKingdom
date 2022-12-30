@@ -11,7 +11,9 @@ import RealmSwift
 
 // よく使う仕訳クラス
 class DataBaseManagerSettingsOperatingJournalEntry {
-    
+
+    static let shared = DataBaseManagerSettingsOperatingJournalEntry()
+
     // MARK: - CRUD
     
     // MARK: Create
@@ -48,6 +50,14 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         return objects
     }
     
+    // 取得　よく使う仕訳
+    func getJournalEntry(account: String) -> Results<DataBaseSettingsOperatingJournalEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account))
+        ])
+        return objects
+    }
+
     // MARK: Update
     
     // 更新 よく使う仕訳

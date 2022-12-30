@@ -302,10 +302,12 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             cell.leftTextLabel.text = " \(objects[indexPath.row].fiscalYear as Int)"
 #if DEBUG
             if let dataBaseJournals = objects[indexPath.row].dataBaseJournals {
-                print(dataBaseJournals.dataBaseJournalEntries.count)
-                print(dataBaseJournals.dataBaseAdjustingEntries.count)
+                print("dataBaseJournals.dataBaseJournalEntries.count", dataBaseJournals.dataBaseJournalEntries.count)
+                print("dataBaseJournals.dataBaseAdjustingEntries.count", dataBaseJournals.dataBaseAdjustingEntries.count)
                 cell.rightdetailTextLabel.text = "データ数: \((dataBaseJournals.dataBaseJournalEntries.count)):\(objectsJournalEntry.count),  \((dataBaseJournals.dataBaseAdjustingEntries.count)):\(objectsAdjustingEntry.count)"
             }
+            print("objectsJournalEntry", objectsJournalEntry.count)
+            print("objectsAdjustingEntry", objectsAdjustingEntry.count)
 #else
             cell.rightdetailTextLabel.text = "データ数:　\(objectsJournalEntry.count), \(objectsAdjustingEntry.count)"
 #endif

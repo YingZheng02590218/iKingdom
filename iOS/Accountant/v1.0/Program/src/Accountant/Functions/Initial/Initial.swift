@@ -41,8 +41,7 @@ class Initial {
                 smallWritting: "ゾウ商店"
             )
             // よく使う仕訳のサンプルデータを作成する
-            let dataBaseManagerSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry()
-            let _ = dataBaseManagerSettingsOperatingJournalEntry.addJournalEntry(
+            let _ = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
                 nickname: "よく使う仕訳1",
                 debitCategory: "現金",
                 debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
