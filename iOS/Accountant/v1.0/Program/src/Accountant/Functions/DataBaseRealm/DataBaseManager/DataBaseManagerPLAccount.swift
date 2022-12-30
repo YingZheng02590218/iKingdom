@@ -11,6 +11,11 @@ import RealmSwift
 
 // 損益勘定クラス
 class DataBaseManagerPLAccount {
+
+    public static let shared = DataBaseManagerPLAccount()
+
+    private init() {
+    }
     
     // MARK: - CRUD
     

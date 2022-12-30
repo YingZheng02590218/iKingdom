@@ -213,10 +213,16 @@ class DataBaseManagerJournals: DataBaseManager {
             guard let journals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+                accountName: dataBaseJournalEntry.debit_category,
+                fiscalYear: dataBaseJournalEntry.fiscalYear
+            ) else {
                 return
             }
-            guard let rightObject: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            guard let rightObject: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+                accountName: dataBaseJournalEntry.credit_category,
+                fiscalYear: dataBaseJournalEntry.fiscalYear
+            ) else {
                 return
             }
             do {
