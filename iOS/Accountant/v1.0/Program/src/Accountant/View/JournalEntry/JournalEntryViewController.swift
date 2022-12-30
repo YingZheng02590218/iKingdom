@@ -228,7 +228,7 @@ class JournalEntryViewController: UIViewController {
         if userDefaults.bool(forKey: firstLunchKey) {
             DispatchQueue.global(qos: .default).async {
                 // 非同期処理などを実行（今回は3秒間待つだけ）
-                Thread.sleep(forTimeInterval: 1)
+                Thread.sleep(forTimeInterval: 0)
                 DispatchQueue.main.async {
                     // チュートリアル対応 ウォークスルー型
                     if let viewController = UIStoryboard(
