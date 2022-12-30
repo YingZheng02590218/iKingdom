@@ -11,7 +11,12 @@ import RealmSwift
 
 // 差引残高クラス
 class DataBaseManagerGeneralLedgerAccountBalance {
-    
+
+    public static let shared = DataBaseManagerGeneralLedgerAccountBalance()
+
+    private init() {
+    }
+
     var dataBaseJournalEntries: Results<DataBaseJournalEntry>!            // 仕訳
     var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>!        // 決算整理仕訳　勘定別
     

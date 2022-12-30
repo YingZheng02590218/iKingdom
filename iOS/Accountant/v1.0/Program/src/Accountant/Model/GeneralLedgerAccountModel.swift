@@ -25,8 +25,6 @@ protocol GenearlLedgerAccountModelInput {
 }
 // 勘定クラス
 class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
-    
-    let dataBaseManagerGeneralLedgerAccountBalance = DataBaseManagerGeneralLedgerAccountBalance()
 
     // MARK: - CRUD
     
@@ -123,22 +121,22 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 取得　差引残高額　仕訳
     func getBalanceAmount(indexPath: IndexPath) -> Int64 {
         
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmount(indexPath: indexPath)
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmount(indexPath: indexPath)
     }
     // 取得　差引残高額　 決算整理仕訳　損益勘定以外
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
         
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceAmountAdjusting(indexPath: indexPath)
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountAdjusting(indexPath: indexPath)
     }
     // 借又貸を取得
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
         
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCredit(indexPath: indexPath)
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCredit(indexPath: indexPath)
     }
     // 借又貸を取得 決算整理仕訳
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
         
-        dataBaseManagerGeneralLedgerAccountBalance.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
     }
     
     // 取得　通常仕訳 勘定別に取得
@@ -278,7 +276,10 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 差引残高　計算
     func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) {
         
-        dataBaseManagerGeneralLedgerAccountBalance.calculateBalance(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries) // 毎回、計算は行わない
+        DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
+            account: account, databaseJournalEntries: databaseJournalEntries,
+            dataBaseAdjustingEntries: dataBaseAdjustingEntries
+        ) // 毎回、計算は行わない
     }
     
     // MARK: Delete
