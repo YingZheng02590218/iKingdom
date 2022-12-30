@@ -1300,7 +1300,7 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
-        // データベース　よく使う仕訳を追加 TODO: よく使う仕訳を削除後に、仕訳画面でセルをタップするとクラッシュする
+        // データベース　よく使う仕訳
         let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
         textFieldCategoryDebit.text = objects[indexPath.row].debit_category
         textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))

@@ -69,6 +69,8 @@
 		F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
 		F951725E295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */; };
 		F951725F295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */; };
+		F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */; };
+		F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */; };
 		F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */; };
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
@@ -488,6 +490,7 @@
 		F94EDDA0237AEB3B0074D812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F94EDDA2237AEB3B0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccount.swift; sourceTree = "<group>"; };
+		F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournals.swift; sourceTree = "<group>"; };
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
@@ -792,6 +795,7 @@
 				F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */,
 				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
 				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
+				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
 				F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */,
@@ -1912,6 +1916,7 @@
 				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
+				F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
 				F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */,
@@ -2067,6 +2072,7 @@
 				F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */,
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
+				F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
 				F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9EC66F727B90BC60003FBB6 /* CompanyNameTableViewCell.swift in Sources */,

@@ -94,12 +94,12 @@ final class JournalsPresenter: JournalsPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-
+    
     func viewWillDisappear() {
-
+        
         view.setupViewForViewWillDisappear()
     }
-
+    
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()
@@ -164,12 +164,12 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
         
-        return DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: number)
+        DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: number)
     }
     // 削除　決算整理仕訳
     func deleteAdjustingJournalEntry(number: Int) -> Bool {
         
-        return DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: number)
+        DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: number)
     }
     // 年度を変更する
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int) {

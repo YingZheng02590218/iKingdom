@@ -271,7 +271,7 @@ class DataBaseManagerPLAccount {
     func deleteAdjustingJournalEntry(primaryKey: Int) -> Bool {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return false }
         // 削除前の仕訳帳と借方勘定と貸方勘定
-        guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let oldJournals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
         // 損益計算書に関する勘定科目のみに絞る
@@ -349,7 +349,7 @@ class DataBaseManagerPLAccount {
     func removeAdjustingJournalEntry(primaryKey: Int) -> Bool {
         guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return false }
         // 削除前の仕訳帳と借方勘定と貸方勘定
-        guard let oldJournals = getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+        guard let oldJournals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
         // 損益計算書に関する勘定科目のみに絞る

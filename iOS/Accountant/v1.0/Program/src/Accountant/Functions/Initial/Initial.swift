@@ -126,9 +126,8 @@ class Initial {
     * 仕訳帳を初期化する。
     */
     func initialiseJournals(number: Int, fiscalYear: Int) {
-         let dataBaseManager = JournalsModel()
-        if !dataBaseManager.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
-            dataBaseManager.addJournals(number: number)
+        if !DataBaseManagerJournals.shared.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: fiscalYear) {
+            DataBaseManagerJournals.shared.addJournals(number: number)
         }
     }
     /**
