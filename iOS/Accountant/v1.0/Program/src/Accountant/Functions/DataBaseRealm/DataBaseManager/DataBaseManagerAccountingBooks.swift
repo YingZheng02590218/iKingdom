@@ -9,8 +9,14 @@
 import Foundation
 import RealmSwift
 
+// 会計帳簿クラス
 class DataBaseManagerAccountingBooks: DataBaseManager {
-    
+
+    public static let shared = DataBaseManagerAccountingBooks()
+
+    override private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create

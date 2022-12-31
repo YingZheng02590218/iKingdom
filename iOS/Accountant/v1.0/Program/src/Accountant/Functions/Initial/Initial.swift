@@ -108,10 +108,9 @@ class Initial {
     * 会計帳簿を初期化する。
     */
     func initializeAccountingBooks() {
-        let dataBaseManager = DataBaseManagerAccountingBooks()
         let fiscalYear = getTheTime()     // デフォルトで現在の年月から今年度の会計帳簿を作成する
-        if !dataBaseManager.checkInitializing() {
-            let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
+        if !DataBaseManagerAccountingBooks.shared.checkInitializing() {
+            let number = DataBaseManagerAccountingBooks.shared.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
             initialiseJournals(number: number, fiscalYear: fiscalYear)
             // 総勘定元帳画面　初期化

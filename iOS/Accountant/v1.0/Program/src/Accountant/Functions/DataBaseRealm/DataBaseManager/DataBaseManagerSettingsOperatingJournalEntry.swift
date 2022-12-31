@@ -14,6 +14,9 @@ class DataBaseManagerSettingsOperatingJournalEntry {
 
     static let shared = DataBaseManagerSettingsOperatingJournalEntry()
 
+    private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create

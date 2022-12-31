@@ -168,11 +168,9 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
     }
 
     func createNewPeriod(fiscalYear: Int) {
-        // オブジェクト作成
-        let dataBaseManager = DataBaseManagerAccountingBooks()
         // データベースに会計帳簿があるかをチェック
-        if !dataBaseManager.checkInitialising(dataBase: DataBaseAccountingBooks(), fiscalYear: fiscalYear) { // データベースに同じ年度のモデルオブフェクトが存在しない場合
-            let number = dataBaseManager.addAccountingBooks(fiscalYear: fiscalYear)
+        if !DataBaseManagerAccountingBooks.shared.checkInitialising(dataBase: DataBaseAccountingBooks(), fiscalYear: fiscalYear) { // データベースに同じ年度のモデルオブフェクトが存在しない場合
+            let number = DataBaseManagerAccountingBooks.shared.addAccountingBooks(fiscalYear: fiscalYear)
             // 仕訳帳画面　　初期化
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
             if !DataBaseManagerJournals.shared.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合

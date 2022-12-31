@@ -389,8 +389,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
                     let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
                     if objects.count > 1 {
                         // 会計帳簿を削除
-                        let dataBaseManager = DataBaseManagerAccountingBooks()
-                        let result = dataBaseManager.deleteAccountingBooks(number: objects[indexPath.row].number)
+                        let result = DataBaseManagerAccountingBooks.shared.deleteAccountingBooks(number: objects[indexPath.row].number)
                         if result == true {
                             self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
                         }
