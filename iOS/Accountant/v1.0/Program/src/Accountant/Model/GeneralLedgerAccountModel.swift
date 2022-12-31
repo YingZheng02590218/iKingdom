@@ -263,7 +263,8 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
-            account: account, databaseJournalEntries: databaseJournalEntries,
+            account: account,
+            databaseJournalEntries: databaseJournalEntries,
             dataBaseAdjustingEntries: dataBaseAdjustingEntries
         ) // 毎回、計算は行わない
     }
@@ -311,15 +312,15 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             if isInvalidateddd {
                 if isInvalidatedd {
                     if isInvalidated {
-                        for _ in 0..<objectsssss.count {
-                            do {
-                                try DataBaseManager.realm.write {
+                        do {
+                            try DataBaseManager.realm.write {
+                                for _ in 0..<objectsssss.count {
                                     // 仕訳が残ってないか
                                     DataBaseManager.realm.delete(objectsssss[0])
                                 }
-                            } catch {
-                                print("エラーが発生しました")
                             }
+                        } catch {
+                            print("エラーが発生しました")
                         }
                         return true // objectsssss.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
                     }
