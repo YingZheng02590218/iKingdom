@@ -13,7 +13,10 @@ import RealmSwift
 class DataBaseManagerTaxonomy {
     
     public static let shared = DataBaseManagerTaxonomy()
-    
+
+    private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create

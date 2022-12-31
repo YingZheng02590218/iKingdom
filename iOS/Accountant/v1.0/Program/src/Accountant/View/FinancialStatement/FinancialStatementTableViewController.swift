@@ -77,8 +77,7 @@ class FinancialStatementTableViewController: UITableViewController {
         let WSModel = WSModel()
         WSModel.initialize()
         // 設定表示科目　初期化
-        let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
-        dataBaseManagerTaxonomy.initializeTaxonomy()
+        DataBaseManagerTaxonomy.shared.initializeTaxonomy()
         // 更新処理
         self.tableView.reloadData()
         // クルクルを止める

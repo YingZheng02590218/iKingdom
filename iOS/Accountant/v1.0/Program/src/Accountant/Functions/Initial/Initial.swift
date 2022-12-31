@@ -158,10 +158,9 @@ class Initial {
     */
     func initializeTaxonomy() {
         // 表示科目
-        let dataBaseManagerTaxonomy = DataBaseManagerTaxonomy()
-        let isInvalidated = dataBaseManagerTaxonomy.deleteTaxonomyAll()
+        let isInvalidated = DataBaseManagerTaxonomy.shared.deleteTaxonomyAll()
         if isInvalidated {
-            dataBaseManagerTaxonomy.addTaxonomyAll()
+            DataBaseManagerTaxonomy.shared.addTaxonomyAll()
         } else {
             print("deleteTaxonomyAll 失敗")
         }
