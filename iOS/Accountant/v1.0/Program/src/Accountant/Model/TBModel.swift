@@ -165,8 +165,7 @@ class TBModel: TBModelInput {
         // 総勘定元帳　取得
         if let objectsOfGL = DataBaseManagerGeneralLedger.shared.getGeneralLedger() {
             // 財務諸表　取得
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-            let object = dataBaseManagerFinancialStatements.getFinancialStatements()
+            let object = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
             
             do {
                 try DataBaseManager.realm.write {

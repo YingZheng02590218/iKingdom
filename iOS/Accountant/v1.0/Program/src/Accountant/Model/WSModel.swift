@@ -55,8 +55,7 @@ class WSModel: WSModelInput {
     private func calculateAmountOfAllAccount() {
         if let objectG = DataBaseManagerGeneralLedger.shared.getGeneralLedger() {
 
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-            let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()
+            let dataBaseFinancialStatement = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
             if let workSheet = dataBaseFinancialStatement.workSheet {
 
                 let dataBaseManagerTB = TBModel()
@@ -93,8 +92,7 @@ class WSModel: WSModelInput {
     private func calculateAmountOfAllAccountForPL() { // calculateAmountOfAllAccountForBS と共通化したい
         let objectG = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 1)
 
-        let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-        let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()
+        let dataBaseFinancialStatement = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
         if let workSheet = dataBaseFinancialStatement.workSheet {
 
             let dataBaseManagerTB = TBModel()
@@ -137,8 +135,7 @@ class WSModel: WSModelInput {
     private func calculateAmountOfAllAccountForBS() {
         let objectG = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 0)
 
-        let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-        let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()
+        let dataBaseFinancialStatement = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
         if let workSheet = dataBaseFinancialStatement.workSheet {
 
             let dataBaseManagerTB = TBModel()

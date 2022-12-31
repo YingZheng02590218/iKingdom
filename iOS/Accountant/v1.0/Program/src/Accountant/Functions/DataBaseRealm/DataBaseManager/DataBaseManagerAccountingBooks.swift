@@ -95,21 +95,17 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
             // 仕訳帳画面
             // データベースに仕訳帳画面の仕訳帳があるかをチェック
             if DataBaseManagerJournals.shared.checkInitialising(dataBase: DataBaseJournals(), fiscalYear: object.fiscalYear) {
-                let isInvalidated = DataBaseManagerJournals.shared.deleteJournals(number: object.number)
-                print(isInvalidated)
+                _ = DataBaseManagerJournals.shared.deleteJournals(number: object.number)
             }
             // 総勘定元帳画面
             // データベースに勘定画面の勘定があるかをチェック
             if DataBaseManagerGeneralLedger.shared.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: object.fiscalYear) {
-                let isInvalidated = DataBaseManagerGeneralLedger.shared.deleteGeneralLedger(number: object.number)
-                print(isInvalidated)
+                _ = DataBaseManagerGeneralLedger.shared.deleteGeneralLedger(number: object.number)
             }
             // 決算書画面
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             // データベースに勘定画面の勘定があるかをチェック
-            if dataBaseManagerFinancialStatements.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: object.fiscalYear) {
-                let isInvalidated = dataBaseManagerFinancialStatements.deleteFinancialStatements(number: object.number)
-                print(isInvalidated)
+            if DataBaseManagerFinancialStatements.shared.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: object.fiscalYear) {
+                _ = DataBaseManagerFinancialStatements.shared.deleteFinancialStatements(number: object.number)
             }
         }
         do {

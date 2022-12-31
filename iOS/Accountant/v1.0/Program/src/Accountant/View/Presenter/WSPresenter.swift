@@ -82,8 +82,7 @@ final class WSPresenter: WSPresenterInput {
         objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) // 期中の仕訳の勘定科目を取得
         objectss = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) // 修正記入の勘定科目を取得
         
-        let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-        object = dataBaseManagerFinancialStatements.getFinancialStatements()
+        object = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
     }
     
     // MARK: - Life cycle

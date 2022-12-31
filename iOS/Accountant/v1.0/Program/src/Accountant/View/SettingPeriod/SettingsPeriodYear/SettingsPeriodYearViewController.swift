@@ -182,10 +182,9 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
                 DataBaseManagerGeneralLedger.shared.addGeneralLedger(number: number)
             }
             // 決算書画面　初期化
-            let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             // データベースに勘定画面の勘定があるかをチェック
-            if !dataBaseManagerFinancialStatements.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
-                dataBaseManagerFinancialStatements.addFinancialStatements(number: number)
+            if !DataBaseManagerFinancialStatements.shared.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) { // データベースにモデルオブフェクトが存在しない場合
+                DataBaseManagerFinancialStatements.shared.addFinancialStatements(number: number)
             }
         }
     }

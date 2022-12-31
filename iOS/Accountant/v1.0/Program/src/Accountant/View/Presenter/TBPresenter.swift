@@ -64,8 +64,7 @@ final class TBPresenter: TBPresenterInput {
         
         objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
         
-        let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
-        object = dataBaseManagerFinancialStatements.getFinancialStatements()
+        object = DataBaseManagerFinancialStatements.shared.getFinancialStatements()
     }
     
     // MARK: - Life cycle

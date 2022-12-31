@@ -143,10 +143,9 @@ class Initial {
     * 財務諸表を初期化する。
     */
     func initializeFinancialStatements(number: Int, fiscalYear: Int) {
-        let dataBaseManager = DataBaseManagerFinancialStatements()
         // データベースに財務諸表があるかをチェック
-        if !dataBaseManager.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
-            dataBaseManager.addFinancialStatements(number: number)
+        if !DataBaseManagerFinancialStatements.shared.checkInitialising(dataBase: DataBaseFinancialStatements(), fiscalYear: fiscalYear) {
+            DataBaseManagerFinancialStatements.shared.addFinancialStatements(number: number)
         }
     }
     /**

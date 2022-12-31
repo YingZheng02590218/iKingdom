@@ -11,7 +11,12 @@ import RealmSwift
 
 // 決算書クラス
 class DataBaseManagerFinancialStatements: DataBaseManager {
-    
+
+    public static let shared = DataBaseManagerFinancialStatements()
+
+    override private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create
