@@ -6,13 +6,14 @@
 //  Copyright © 2021 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EMTNeumorphicView
+import UIKit
 
 // よく使う仕訳クラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
-    
-    
+
+    @IBOutlet private var nicknameTextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +66,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         
     }
     
-    @IBOutlet private var nicknameTextField: UITextField!
     // TextField作成 ニックネーム
     func createTextFieldForNickname() {
         nicknameTextField.delegate = self

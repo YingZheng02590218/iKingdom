@@ -17,7 +17,6 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     var accountDetailBig = ""
     var accountDetail = ""
     // ドラムロールに表示する勘定科目の文言
-    var rank0: [String] = Array<String>()
     var big0: [String] = Array<String>()
     var big1: [String] = Array<String>()
     var big2: [String] = Array<String>()
@@ -94,21 +93,7 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
     func setSettingsCategory() {
         // 勘定科目区分　大区分
-        rank0 = [
-            "流動資産",
-            "固定資産",
-            "繰延資産",
-            "流動負債",
-            "固定負債",
-            "資本",
-            "売上",
-            "売上原価",
-            "販売費及び一般管理費",
-            "営業外損益",
-            "特別損益",
-            "税金"
-        ]
-        for i in 0..<rank0.count {
+        for i in 0..<Rank0.allCases.count {
             transferItems(rank1: i)    // 勘定科目区分ごとに文言を用意する
         }
     }
@@ -154,7 +139,7 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         print("AccountDetailPickerTextField numberOfRowsInComponent", component)
         if component == 0 {
-            return rank0.count
+            return Rank0.allCases.count
         } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
@@ -192,11 +177,11 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
 // 1列目　初期値
         if component == 0 {
             if identifier == "identifier_category_big" {
-                self.text = rank0[row] as String // TextFieldに表示
+                self.text = Rank0.allCases[row].rawValue as String // TextFieldに表示
             }
-            self.accountDetailBig = rank0[row] as String
+            self.accountDetailBig = Rank0.allCases[row].rawValue as String
             self.selectedRank0 = String(row)
-            return rank0[row] as String
+            return Rank0.allCases[row].rawValue as String
 // 2列目　初期値
         } else {
             switch pickerView.selectedRow(inComponent: 0) {

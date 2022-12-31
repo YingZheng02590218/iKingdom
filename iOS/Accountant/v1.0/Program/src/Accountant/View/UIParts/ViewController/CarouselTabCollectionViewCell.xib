@@ -25,10 +25,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubm-rX-3lc" userLabel="View1">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="47.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="haM-6t-Rle">
-                                                <rect key="frame" x="15" y="15.5" width="20" height="17"/>
+                                                <rect key="frame" x="20" y="14" width="10" height="17"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" name="TextColor"/>
@@ -37,24 +37,24 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="15" id="Ehl-C1-PZ4"/>
+                                            <constraint firstItem="haM-6t-Rle" firstAttribute="leading" secondItem="Ubm-rX-3lc" secondAttribute="leading" constant="20" id="Ehl-C1-PZ4"/>
                                             <constraint firstItem="haM-6t-Rle" firstAttribute="centerY" secondItem="Ubm-rX-3lc" secondAttribute="centerY" id="Swr-jg-ZK2"/>
-                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="15" id="gXz-tr-lNO"/>
+                                            <constraint firstAttribute="trailing" secondItem="haM-6t-Rle" secondAttribute="trailing" constant="20" id="gXz-tr-lNO"/>
                                             <constraint firstItem="haM-6t-Rle" firstAttribute="centerX" secondItem="Ubm-rX-3lc" secondAttribute="centerX" id="zQL-B3-wKb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="otb-hx-fnL" userLabel="View2">
-                                        <rect key="frame" x="0.0" y="47.5" width="50" height="2.5"/>
+                                        <rect key="frame" x="0.0" y="45" width="50" height="5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="otb-hx-fnL" firstAttribute="top" secondItem="Ubm-rX-3lc" secondAttribute="bottom" id="56A-qE-1rt"/>
                                     <constraint firstAttribute="trailing" secondItem="Ubm-rX-3lc" secondAttribute="trailing" id="7V0-5d-FTS"/>
-                                    <constraint firstItem="otb-hx-fnL" firstAttribute="height" secondItem="kpP-10-K0p" secondAttribute="height" multiplier="0.05" id="Jip-8v-Uyc"/>
+                                    <constraint firstItem="otb-hx-fnL" firstAttribute="height" secondItem="kpP-10-K0p" secondAttribute="height" multiplier="0.1" id="Jip-8v-Uyc"/>
                                     <constraint firstItem="otb-hx-fnL" firstAttribute="top" secondItem="Ubm-rX-3lc" secondAttribute="bottom" id="MN3-32-GqC"/>
                                     <constraint firstItem="otb-hx-fnL" firstAttribute="leading" secondItem="kpP-10-K0p" secondAttribute="leading" id="Wxa-Z5-LHZ"/>
-                                    <constraint firstItem="Ubm-rX-3lc" firstAttribute="height" secondItem="kpP-10-K0p" secondAttribute="height" multiplier="0.95" id="Z3b-wS-tlh"/>
+                                    <constraint firstItem="Ubm-rX-3lc" firstAttribute="height" secondItem="kpP-10-K0p" secondAttribute="height" multiplier="0.9" id="Z3b-wS-tlh"/>
                                     <constraint firstItem="Ubm-rX-3lc" firstAttribute="leading" secondItem="kpP-10-K0p" secondAttribute="leading" id="gg1-XX-Fqi"/>
                                     <constraint firstItem="Ubm-rX-3lc" firstAttribute="top" secondItem="kpP-10-K0p" secondAttribute="top" id="giy-8W-lCT"/>
                                     <constraint firstAttribute="bottom" secondItem="otb-hx-fnL" secondAttribute="bottom" id="rmT-kd-5Mg"/>

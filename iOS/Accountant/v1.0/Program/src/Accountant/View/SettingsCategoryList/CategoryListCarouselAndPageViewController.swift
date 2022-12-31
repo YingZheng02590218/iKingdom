@@ -18,20 +18,7 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
 
     override func viewDidLoad() {
         // タブに表示する文言
-        pageTabItems = [
-            "流動資産",
-            "固定資産",
-            "繰延資産",
-            "流動負債",
-            "固定負債",
-            "資本",
-            "売上",
-            "売上原価",
-            "販売費及び一般管理費",
-            "営業外損益",
-            "特別損益",
-            "税金"
-        ]
+        pageTabItems = Rank0.allCases.map({ $0.rawValue })
         super.viewDidLoad()
     }
     

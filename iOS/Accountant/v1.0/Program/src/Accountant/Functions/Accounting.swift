@@ -233,3 +233,31 @@ public enum ProfitAndLossStatement: Hashable {
         case netIncomeOrLoss = "当期純利益"
     }
 }
+
+// 勘定科目区分 大区分
+public enum Rank0: String, CaseIterable, Hashable {
+    // 流動資産
+    case currentAssets = "流動資産"
+    // 固定資産
+    case nonCurrentAssets = "固定資産"
+    // 繰延資産
+    case deferredAssets = "繰延資産"
+    // 流動負債
+    case currentLiabilities = "流動負債"
+    // 固定負債
+    case fixedLiabilities = "固定負債"
+    // 資本
+    case capital = "資本"
+    // 売上
+    case sales = "売上"
+    // 売上原価
+    case costOfGoodsSold = "売上原価"
+    // 販売費及び一般管理費
+    case sellingGeneralAndAdministrativeExpenses = "販売費及び一般管理費"
+    // 営業外損益
+    case nonOperatingProfitOrLoss = "営業外損益"
+    // 特別損益
+    case extraordinaryIncomeOrLoss = "特別損益"
+    // 税金
+    case taxes = "税金"
+}

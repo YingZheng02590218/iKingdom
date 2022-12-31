@@ -12,7 +12,6 @@ import UIKit
 class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // ドラムロールに表示する勘定科目の文言
-    var categories: [String] = Array<String>()
     var big0: [String] = Array<String>()
     var big1: [String] = Array<String>()
     var big2: [String] = Array<String>()
@@ -88,26 +87,11 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     }
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
     func getSettingsCategoryFromDB() {
-        // 勘定科目区分　大区分
-        categories = [
-            "流動資産",
-            "固定資産",
-            "繰延資産",
-            "流動負債",
-            "固定負債",
-            "資本",
-            "売上",
-            "売上原価",
-            "販売費及び一般管理費",
-            "営業外損益",
-            "特別損益",
-            "税金"
-        ]
         // データベース
         let databaseManager = CategoryListModel()
-        for i in 0..<categories.count {
+        for i in 0..<Rank0.allCases.count {
             let objects = databaseManager.getSettingsSwitchingOn(rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
-            //            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
+            //　let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
             var items: [String] = []
             for y in 0..<objects.count {    // 勘定
                 items.append(objects[y].category as String) // 配列 Array<Element>型　に要素を追加していく
@@ -155,7 +139,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
-            return categories.count
+            return Rank0.allCases.count
         } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0: // "資産":
@@ -190,7 +174,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
-            return categories[row] as String
+            return Rank0.allCases[row].rawValue as String
         } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:

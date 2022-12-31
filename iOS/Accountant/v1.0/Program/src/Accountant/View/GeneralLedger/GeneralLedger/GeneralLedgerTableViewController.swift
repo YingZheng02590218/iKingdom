@@ -99,46 +99,11 @@ class GeneralLedgerTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        12
+        Rank0.allCases.count
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return    "流動資産"
-        case 1: return    "固定資産"
-        case 2: return    "繰延資産"
-        case 3: return    "流動負債"
-        case 4: return    "固定負債"
-        case 5: return    "資本"
-        case 6: return    "売上"
-        case 7: return    "売上原価"
-        case 8: return    "販売費及び一般管理費"
-        case 9: return    "営業外損益"
-        case 10: return    "特別損益"
-        case 11: return    "税金"
-
-//        case 0: return    "当座資産"
-//        case 1: return    "棚卸資産"
-//        case 2: return    "その他の流動資産"
-//        case 3: return    "有形固定資産"
-//        case 4: return    "無形固定資産"
-//        case 5: return    "投資その他の資産"
-//        case 6: return    "繰延資産"
-//        case 7: return    "仕入債務"
-//        case 8: return    "その他の流動負債"
-//        case 9: return    "長期債務"
-//        case 10: return    "株主資本"
-//        case 11: return    "評価・換算差額等"
-//        case 12: return    "新株予約権"
-//        case 13: return    "売上原価"
-//        case 14: return    "製造原価"
-//        case 15: return    "営業外収益"
-//        case 16: return    "営業外費用"
-//        case 17: return    "特別利益"
-//        case 18: return    "特別損失"
-        default:
-            return ""
-        }
+        Rank0.allCases[section].rawValue
     }
     
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
