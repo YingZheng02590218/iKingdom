@@ -26,6 +26,10 @@ import RealmSwift
 class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyModelInput {
     
     public static let shared = DataBaseManagerSettingsTaxonomy()
+
+    private init() {
+    }
+    
     // private let serialQueue = DispatchQueue(label: "serialQueue") 2022/03/15 修正　v2.0.2の変更でこのコードが書かれているので、v2.0.6までの間に初期化処理を行なったユーザーの初期化処理は失敗しているはず。
     
     //    let objects0100: Results<DataBaseSettingsTaxonomy>?
@@ -175,8 +179,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     // 初期化
     func initializeSettingsTaxonomy() {
         // 表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAll() // 設定勘定科目を全て取得
         for i in 0..<objects.count {
             if objects[i].switching == true { // 設定勘定科目 スイッチ
                 if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
@@ -188,11 +191,10 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     // モデルオブフェクトの更新　スイッチの切り替え
     func updateSettingsCategoryBSAndPLSwitching(number: Int) { // 勘定科目　連番
         // 勘定科目連番から表示科目連番を取得
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let numberOfTaxonomy = databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(number: number)
+        let numberOfTaxonomy = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(number: number)
         print("勘定科目: ", number)
         print("表示科目: ", numberOfTaxonomy)
-        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountInTaxonomy(number: number)// スイッチオンの勘定科目を取得
         do {
             if objects.isEmpty { // 表示科目に該当する勘定科目がすべてスイッチOFFだった場合
                 // (2)書き込みトランザクション内でデータを更新する

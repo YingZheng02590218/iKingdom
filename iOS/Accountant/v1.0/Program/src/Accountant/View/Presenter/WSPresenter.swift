@@ -79,9 +79,8 @@ final class WSPresenter: WSPresenterInput {
         // 精算表　貸借対照表 損益計算書　初期化　再計算
         model.initialize()
 
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        objects = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) // 期中の仕訳の勘定科目を取得
-        objectss = databaseManagerSettings.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) // 修正記入の勘定科目を取得
+        objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true) // 期中の仕訳の勘定科目を取得
+        objectss = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: true, switching: true) // 修正記入の勘定科目を取得
         
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         object = dataBaseManagerFinancialStatements.getFinancialStatements()

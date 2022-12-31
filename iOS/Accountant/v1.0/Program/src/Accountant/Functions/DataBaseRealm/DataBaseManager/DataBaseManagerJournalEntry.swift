@@ -79,19 +79,6 @@ class DataBaseManagerJournalEntry {
         let objects = RealmManager.shared.read(type: DataBaseJournalEntry.self)
         return objects
     }
-
-    // 丁数を取得
-    func getNumberOfAccount(accountName: String) -> Int {
-        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // 2020/11/08
-        ])
-        // 設定勘定科目のプライマリーキーを取得する
-        if let numberOfAccount = objects.first {
-            return numberOfAccount.number
-        } else {
-            return 0 // クラッシュ対応
-        }
-    }
     
     // MARK: Update
     

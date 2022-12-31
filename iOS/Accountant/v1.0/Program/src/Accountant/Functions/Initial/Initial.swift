@@ -55,10 +55,9 @@ class Initial {
     * 設定勘定科目を初期化する。
     */
     func initialiseMasterData() {
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        if !databaseManagerSettingsTaxonomyAccount.checkInitialising() {
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.checkInitialising() {
             // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
-            databaseManagerSettingsTaxonomyAccount.deleteAllOfSettingsTaxonomyAccount()
+            DatabaseManagerSettingsTaxonomyAccount.shared.deleteAllOfSettingsTaxonomyAccount()
             let masterData = MasterData()
             // マスターデータを作成する
             masterData.readMasterDataFromCSVOfTaxonomyAccount()
@@ -70,7 +69,7 @@ class Initial {
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
         // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
-        databaseManagerSettingsTaxonomyAccount.initializeSettingsTaxonomyAccount()
+        DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
         // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
         DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
     }

@@ -197,8 +197,7 @@ class TBModel: TBModelInput {
     }
     // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
     func setAllAccountTotal() {
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
         for i in 0..<objects.count {
             // クリア
             clearAccountTotal(account: objects[i].category)
@@ -243,14 +242,13 @@ class TBModel: TBModelInput {
         calculateAccountTotalAdjusting(account: "繰越利益")
         calculateAccountTotalAfterAdjusting(account: "繰越利益")
         // 設定表示科目　初期化 毎回行うと時間がかかる
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         if accountLeft != "損益勘定" {
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountLeft)) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
+            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
         }
         if accountRight != "損益勘定" {
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountRight))
+            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight))
         }
-        DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: "繰越利益"))
+        DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: "繰越利益"))
         // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
     }
     // 設定　決算整理仕訳と決算整理後　勘定クラス　個別の勘定別　決算整理仕訳データを追加後に、呼び出される
@@ -276,19 +274,18 @@ class TBModel: TBModelInput {
         calculateAccountTotalAdjusting(account: "繰越利益")
         calculateAccountTotalAfterAdjusting(account: "繰越利益")
         // 設定表示科目　初期化 毎回行うと時間がかかる
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         if accountLeft != "損益勘定" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountLeft)
+                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)
             ) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
         }
         if accountRight != "損益勘定" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: accountRight)
+                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight)
             )
         }
         DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-            numberOfSettingsTaxonomy: databaseManagerSettingsTaxonomyAccount.getNumberOfTaxonomy(category: "繰越利益")
+            numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: "繰越利益")
         )
         // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
     }

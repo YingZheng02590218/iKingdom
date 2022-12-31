@@ -219,8 +219,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             // セルの選択
             cell.selectionStyle = .none
             // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
-            let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-            let object = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: numberOfAccount) // 勘定科目
+            let object = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount) // 勘定科目
             cell.label.text = "-"
             if indexPath.section == 0 { // 勘定科目
                 switch indexPath.row {
@@ -391,8 +390,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                 categoryCell.accountDetailAccountTextField!.text = removeWhitesSpacesString
                 
                 // 存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
-                let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-                if databaseManagerSettingsTaxonomyAccount.isExistSettingsTaxonomyAccount(category: removeWhitesSpacesString) {
+                if DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: removeWhitesSpacesString) {
                     // テキストフィールドの枠線を赤色とする。
                     categoryCell.accountDetailAccountTextField.layer.borderColor = UIColor.red.cgColor
                     categoryCell.accountDetailAccountTextField.layer.borderWidth = 1.0
@@ -484,8 +482,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     func changeTaxonomyOfTaxonomyAccount(number: Int, numberOfTaxonomy: Int) -> Int {
         var newnumber = 0
         // 変更
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        databaseManagerSettingsTaxonomyAccount.updateTaxonomyOfSettingsTaxonomyAccount(number: number, numberOfTaxonomy: String(numberOfTaxonomy))
+        DatabaseManagerSettingsTaxonomyAccount.shared.updateTaxonomyOfSettingsTaxonomyAccount(number: number, numberOfTaxonomy: String(numberOfTaxonomy))
         newnumber = number
         return newnumber
     }
@@ -503,7 +500,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     
     @IBAction func inputButtonTapped(_ sender: Any) {
         // 勘定科目　追加か編集か
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
         var newnumber = 0
         // 入力チェック
         if textInputCheck() {
@@ -532,7 +528,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                         if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
                            let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {                           // viewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(
+                                newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                     rank0: self.bigNum,
                                     rank1: self.midNum,
                                     rank2: self.smallNum,
@@ -566,7 +562,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                            let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
                             // viewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                                newnumber = databaseManagerSettingsTaxonomyAccount.addSettingsTaxonomyAccount(
+                                newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                     rank0: self.bigNum,
                                     rank1: self.midNum,
                                     rank2: self.smallNum,

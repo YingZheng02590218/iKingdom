@@ -31,8 +31,7 @@ class DataBaseManagerPLAccount {
         } else if creditCategory == "損益勘定" {
             account = debitCategory
         }
-        let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-        if databaseManagerSettingsTaxonomyAccount.checkSettingsTaxonomyAccountRank0(account: account) {
+        if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             // オブジェクトを作成
             let dataBaseJournalEntry = DataBaseAdjustingEntry()
             var number = 0                                          // 仕訳番号 自動採番にした

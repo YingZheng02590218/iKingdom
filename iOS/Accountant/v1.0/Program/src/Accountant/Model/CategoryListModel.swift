@@ -29,65 +29,24 @@ class CategoryListModel: CategoryListModelInput {
     
     // 取得 大区分、中区分、小区分
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var predicates = [
-            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))) // 大区分　流動資産
-            // .filter("Rank2 LIKE '\(Rank2)'") // 小区分　未使用
-        ]
-        if let rank1 = rank1 {
-            predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
-        }
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
-        return objects
+        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRank(rank0: rank0, rank1: rank1)
     }
     // 取得 大区分別に、スイッチONの勘定科目
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))),
-            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
+        DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOn(rank0: rank0)
     }
     
     // MARK: Update
     
     // 更新　スイッチの切り替え
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool) {
-        do {
-            // (2)書き込みトランザクション内でデータを更新する
-            try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": tag, "switching": isOn]
-                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
+        DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
     }
     
     // MARK: Delete
     
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
-        // 勘定クラス　勘定を削除
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        // 削除　勘定、よく使う仕訳
-        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
-        if isInvalidated {
-            do {
-                // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-                if let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) {
-                    try DataBaseManager.realm.write {
-                        // 仕訳が残ってないか
-                        // 勘定を削除
-                        DataBaseManager.realm.delete(object)
-                    }
-                    return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
-                }
-            } catch {
-                print("エラーが発生しました")
-            }
-        }
-        return false // 勘定を削除できたら、設定勘定科目を削除する
+        DatabaseManagerSettingsTaxonomyAccount.shared.deleteSettingsTaxonomyAccount(number: number)
     }
 }

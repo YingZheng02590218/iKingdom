@@ -105,39 +105,7 @@ class BSModel: BSModelInput {
     }
     
     // MARK: Local method　読み出し
-    
-    // 取得　設定勘定科目　五大区分
-    private func getAccountsInBig5(big5: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        switch big5 {
-        case 0: // 資産
-            objects = objects.filter("Rank0 LIKE '\(0)' OR Rank0 LIKE '\(1)' OR Rank0 LIKE '\(2)'") // 流動資産, 固定資産, 繰延資産
-        case 1: // 負債
-            objects = objects.filter("Rank0 LIKE '\(3)' OR Rank0 LIKE '\(4)'") // 流動負債, 固定負債
-        case 2: // 純資産
-            objects = objects.filter("Rank0 LIKE '\(5)'") // 資本, 2020/11/09 不使用　評価・換算差額等　 OR Rank0 LIKE '\(12)'
-        default:
-            print("")
-        }
-        return objects
-    }
-    // 取得　設定勘定科目　大区分
-    private func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0)))
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
-    }
-    // 取得　設定勘定科目　中区分
-    private func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
-    }
+
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     private func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
@@ -378,7 +346,7 @@ class BSModel: BSModelInput {
         // 累計額
         var totalAmountOfBig5: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let dataBaseSettingsTaxonomyAccounts = getAccountsInBig5(big5: big5)
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInBig5(big5: big5)
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
             let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
@@ -418,7 +386,7 @@ class BSModel: BSModelInput {
         // 累計額
         var totalAmountOfRank0: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let dataBaseSettingsTaxonomyAccounts = getAccountsInRank0(rank0: rank0)
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
         // オブジェクトを作成 勘定
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
             let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
@@ -463,7 +431,7 @@ class BSModel: BSModelInput {
     private func setTotalRank1(big5: Int, rank1: Int) {
         var totalAmountOfRank1: Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = getAccountsInRank1(rank1: rank1)
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
         // オブジェクトを作成 勘定
         for i in 0..<objects.count {
             let totalAmount = getTotalAmount(account: objects[i].category)

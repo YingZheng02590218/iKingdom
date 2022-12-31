@@ -36,14 +36,6 @@ class PLModel: PLModelInput {
     func checkSettingsPeriod() -> Bool {
         DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
     }
-    // 取得　設定勘定科目　中区分
-    private func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
-    }
     // 取得　階層1 中区分　前年度表示対応
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
@@ -128,14 +120,6 @@ class PLModel: PLModelInput {
             }
         }
         return result
-    }
-    // 取得　設定勘定科目　大区分
-    private func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0)))
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
-        return objects
     }
     // 借又貸を取得
     private func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
@@ -305,7 +289,7 @@ class PLModel: PLModelInput {
     private func setTotalRank0(big5: Int, rank0: Int) {
         var totalAmountOfRank0: Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = getAccountsInRank0(rank0: rank0)
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
         // オブジェクトを作成 勘定
         for i in 0..<objects.count {
             let totalAmount = getTotalAmount(account: objects[i].category)
@@ -343,7 +327,7 @@ class PLModel: PLModelInput {
     private func setTotalRank1(big5: Int, rank1: Int) {
         var totalAmountOfRank1: Int64 = 0            // 累計額
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = getAccountsInRank1(rank1: rank1)
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
         // オブジェクトを作成 勘定
         for i in 0..<objects.count {
             let totalAmount = getTotalAmount(account: objects[i].category)

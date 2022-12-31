@@ -11,6 +11,11 @@ import RealmSwift
 
 // 設定勘定科目クラス
 class DatabaseManagerSettingsTaxonomyAccount {
+
+    public static let shared = DatabaseManagerSettingsTaxonomyAccount()
+
+    private init() {
+    }
     
     // MARK: - CRUD
     
@@ -145,7 +150,78 @@ class DatabaseManagerSettingsTaxonomyAccount {
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }
-    
+    // 取得　設定勘定科目　五大区分
+    func getAccountsInBig5(big5: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        switch big5 {
+        case 0: // 資産
+            objects = objects.filter("Rank0 LIKE '\(0)' OR Rank0 LIKE '\(1)' OR Rank0 LIKE '\(2)'") // 流動資産, 固定資産, 繰延資産
+        case 1: // 負債
+            objects = objects.filter("Rank0 LIKE '\(3)' OR Rank0 LIKE '\(4)'") // 流動負債, 固定負債
+        case 2: // 純資産
+            objects = objects.filter("Rank0 LIKE '\(5)'") // 資本, 2020/11/09 不使用　評価・換算差額等　 OR Rank0 LIKE '\(12)'
+        default:
+            print("")
+        }
+        return objects
+    }
+    // 取得　設定勘定科目　大区分
+    func getAccountsInRank0(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0)))
+        ])
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        return objects
+    }
+    // 取得　設定勘定科目　中区分
+    func getAccountsInRank1(rank1: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))
+        ])
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        return objects
+    }
+    // 取得 大区分、中区分、小区分
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var predicates = [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))) // 大区分　流動資産
+            // .filter("Rank2 LIKE '\(Rank2)'") // 小区分　未使用
+        ]
+        if let rank1 = rank1 {
+            predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
+        }
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
+        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        return objects
+    }
+    // 取得 大区分別に、スイッチONの勘定科目
+    func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))),
+            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
+        ])
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        return objects
+    }
+    // 丁数を取得
+    func getNumberOfAccount(accountName: String) -> Int {
+        if accountName == "損益勘定" {
+            return 0
+        } else {
+            let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+                // DataBaseAccount.self) 2020/11/08
+                NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // "accountName LIKE '\(accountName)'")// 2020/11/08
+            ])
+            // 設定勘定科目のプライマリーキーを取得する
+            if let numberOfAccount = objects.first {
+                return numberOfAccount.number
+            } else {
+                return 0 // クラッシュ対応
+            }
+        }
+    }
+
     // MARK: Update
     
     // 初期化
@@ -222,5 +298,28 @@ class DatabaseManagerSettingsTaxonomyAccount {
                 print("エラーが発生しました")
             }
         }
+    }
+    // 削除　設定勘定科目
+    func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
+        // 勘定クラス　勘定を削除
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
+        // 削除　勘定、よく使う仕訳
+        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
+        if isInvalidated {
+            do {
+                // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+                if let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) {
+                    try DataBaseManager.realm.write {
+                        // 仕訳が残ってないか
+                        // 勘定を削除
+                        DataBaseManager.realm.delete(object)
+                    }
+                    return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+        return false // 勘定を削除できたら、設定勘定科目を削除する
     }
 }

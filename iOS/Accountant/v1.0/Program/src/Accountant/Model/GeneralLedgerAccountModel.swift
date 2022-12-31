@@ -35,8 +35,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
             // 設定画面の勘定科目一覧にある勘定を取得する
-            let databaseManagerSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount()
-            if let dataBaseSettingsTaxonomyAccount = databaseManagerSettingsTaxonomyAccount.getSettingsTaxonomyAccount(number: number) {
+            if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: number) {
                 // オブジェクトを作成 勘定
                 let dataBaseAccount = DataBaseAccount(
                     fiscalYear: dataBaseAccountingBook.fiscalYear,
@@ -194,7 +193,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
-    // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益は除外 全年度
+    // 取得 決算整理仕訳　勘定別 損益勘定のみ　繰越利益は除外 全年度 (※損益科目の勘定科目)
     func getAllAdjustingEntryInPLAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
@@ -257,18 +256,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
-        if accountName == "損益勘定" {
-            return 0
-        } else {
-            let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-                // DataBaseAccount.self) 2020/11/08
-                NSPredicate(format: "category LIKE %@", NSString(string: accountName)) // "accountName LIKE '\(accountName)'")// 2020/11/08
-            ])
-            print(objects)
-            // 勘定のプライマリーキーを取得する
-            let numberOfAccount = objects[0].number
-            return numberOfAccount
-        }
+        return DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: accountName)
     }
     
     // MARK: Update

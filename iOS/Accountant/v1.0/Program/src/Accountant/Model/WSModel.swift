@@ -92,8 +92,7 @@ class WSModel: WSModelInput {
     }
     // 損益計算書　計算　合計、残高の合計値
     private func calculateAmountOfAllAccountForPL() { // calculateAmountOfAllAccountForBS と共通化したい
-        let dataBaseManager = DatabaseManagerSettingsTaxonomyAccount()
-        let objectG = dataBaseManager.getSettingsSwitchingOnBSorPL(BSorPL: 1)
+        let objectG = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 1)
 
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()
@@ -137,8 +136,7 @@ class WSModel: WSModelInput {
     }
     // 貸借対照表　計算　合計、残高の合計値
     private func calculateAmountOfAllAccountForBS() {
-        let dataBaseManager = DatabaseManagerSettingsTaxonomyAccount()
-        let objectG = dataBaseManager.getSettingsSwitchingOnBSorPL(BSorPL: 0)
+        let objectG = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 0)
 
         let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
         let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()

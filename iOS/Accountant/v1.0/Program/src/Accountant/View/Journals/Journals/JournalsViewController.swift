@@ -500,7 +500,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberLeftLabel.text = ""
             } else {
                 print(presenter.objects(forRow: indexPath.row).debit_category)
-                let numberOfAccountLeft = DataBaseManagerJournalEntry.shared.getNumberOfAccount(accountName: "\(presenter.objects(forRow: indexPath.row).debit_category)")  // 丁数を取得
+                let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objects(forRow: indexPath.row).debit_category)")  // 丁数を取得
                 cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
             }
             /// 丁数　貸方
@@ -508,7 +508,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberRightLabel.text = ""
             } else {
                 print(presenter.objects(forRow: indexPath.row).credit_category)
-                let numberOfAccountRight = DataBaseManagerJournalEntry.shared.getNumberOfAccount(accountName: "\(presenter.objects(forRow: indexPath.row).credit_category)")    // 丁数を取得
+                let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objects(forRow: indexPath.row).credit_category)")    // 丁数を取得
                 cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
             }
             cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow: indexPath.row).debit_amount))) "        // 借方金額
@@ -550,7 +550,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberLeftLabel.text = ""
             } else {
                 print(presenter.objectsss(forRow: indexPath.row).debit_category)
-                let numberOfAccountLeft = DataBaseManagerJournalEntry.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).debit_category)")  // 丁数を取得
+                let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).debit_category)")  // 丁数を取得
                 cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
             }
             /// 丁数　貸方
@@ -558,7 +558,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberRightLabel.text = ""
             } else {
                 print(presenter.objectsss(forRow: indexPath.row).credit_category)
-                let numberOfAccountRight = DataBaseManagerJournalEntry.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).credit_category)")    // 丁数を取得
+                let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).credit_category)")    // 丁数を取得
                 cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
             }
             cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).debit_amount))) "        // 借方金額

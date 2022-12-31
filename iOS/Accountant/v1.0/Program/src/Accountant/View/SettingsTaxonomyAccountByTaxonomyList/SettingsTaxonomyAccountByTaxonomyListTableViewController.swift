@@ -200,9 +200,8 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         let objects = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
         // データベース　勘定科目
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount() // データベースマネジャー
         // セクション毎に分けて表示する。indexPath が row と section を持っているので、sectionで切り分ける。ここがポイント
-        let objectss = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objects[section].number))
+        let objectss = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objects[section].number))
         return objectss.count
     }
     // セルを生成して返却するメソッド
@@ -219,8 +218,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         let objectssss = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet) // どのセクションに表示するセルかを判別するため引数で渡す
 
         // データベース 勘定科目
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
         // ① UI部品を指定　TableViewCellCategory
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_category_BSandPL", for: indexPath) as? CategoryListTableViewCell else { return UITableViewCell() }
         // 勘定科目の名称をセルに表示する 丁数(元丁) 勘定名
@@ -274,8 +272,7 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
     // トグルスイッチの切り替え　データベースを更新
     func changeSwitch(tag: Int, isOn: Bool) {
         // 勘定科目のスイッチを設定する 末端科目が一つも存在しない表示科目はスイッチOFFとなり、表示科目をOFFにできない。2020/09/12
-        let databaseManagerSettingsCategory = DatabaseManagerSettingsTaxonomyAccount() // データベースマネジャー
-        databaseManagerSettingsCategory.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
+        DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
         // 表示科目のスイッチを設定する　勘定科目がひとつもなければOFFにする
         DataBaseManagerSettingsTaxonomy.shared.updateSettingsCategoryBSAndPLSwitching(number: tag)
     }
@@ -295,9 +292,8 @@ class SettingsTaxonomyAccountByTaxonomyListTableViewController: UITableViewContr
         }
         let objectssss = DataBaseManagerSettingsTaxonomy.shared.getBigCategoryAll(section: sheet)
         // 勘定科目
-        let databaseManagerSettings = DatabaseManagerSettingsTaxonomyAccount()
-        //        let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.row].number))
-        let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
+        // let objects = databaseManagerSettings.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.row].number))
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountInTaxonomy(numberOfTaxonomy: String(objectssss[indexPath.section].number))
         // segue.destinationの型はUIViewController
         if let tableViewController = segue.destination as? SettingsCategoryDetailTableViewController {
             // 遷移先のコントローラに値を渡す
