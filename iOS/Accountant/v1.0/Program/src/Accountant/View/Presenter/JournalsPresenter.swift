@@ -174,22 +174,33 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 年度を変更する
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int) {
         // 一括変更の処理
+        var numbers: [Int] = []
+        var numbersAdjusting: [Int] = []
+
         for indexPath in indexPaths {
             if indexPath.section == 0 {
-                // 仕訳データを更新
-                let _ = model.updateJournalEntry(
-                    primaryKey: self.objects(forRow: indexPath.row).number,
-                    fiscalYear: fiscalYear
-                )
+                // 仕訳の連番を保持
+                numbers.append(self.objects(forRow: indexPath.row).number)
             } else if indexPath.section == 1 {
-                // 決算整理仕訳データを更新
-                let _ = model.updateAdjustingJournalEntry(
-                    primaryKey: self.objectsss(forRow: indexPath.row).number,
-                    fiscalYear: fiscalYear
-                )
+                // 決算整理仕訳の連番を保持
+                numbersAdjusting.append(self.objectsss(forRow: indexPath.row).number)
             } else {
                 // 空白行
             }
+        }
+        for number in numbers {
+            // 仕訳データを更新
+            _ = model.updateJournalEntry(
+                primaryKey: number,
+                fiscalYear: fiscalYear
+            )
+        }
+        for number in numbersAdjusting {
+            // 決算整理仕訳データを更新
+            _ = model.updateAdjustingJournalEntry(
+                primaryKey: number,
+                fiscalYear: fiscalYear
+            )
         }
         // view にリロードさせる
         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
