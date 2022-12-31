@@ -80,7 +80,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             }
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -458,6 +458,15 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         case "segue_TaxonomyList": // “セグウェイにつけた名称”:
             // segue.destinationの型はUIViewController
             if let viewControllerGenearlLedgerAccount = segue.destination as? SettingsTaxonomyListTableViewController {
+                viewControllerGenearlLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
+                if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
+                    viewControllerGenearlLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
+                } else {
+                    // 勘定科目を編集する場合　勘定科目の連番から勘定科目を取得　大区分を知るため
+                    if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount) {
+                        bigNum = dataBaseSettingsTaxonomyAccount.Rank0 // 大区分
+                    }
+                }
                 // 遷移先のコントローラに値を渡す
                 viewControllerGenearlLedgerAccount.numberOfTaxonomyAccount = numberOfAccount // 設定勘定科目連番　を渡す
                 switch bigNum { // object?.rank0 {
@@ -468,10 +477,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                     viewControllerGenearlLedgerAccount.segmentedControl.selectedSegmentIndex = 1 // セグメントスイッチにPLを設定
                 default:
                     break
-                }
-                viewControllerGenearlLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
-                if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
-                    viewControllerGenearlLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
                 }
             }
         default:
@@ -526,7 +531,8 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                         //            print("    navigationController2[0]: ", navigationController2.viewControllers[0])   // SettingsCategoryTableViewController
                         print("    navigationController2[1]: ", navigationController2.viewControllers[1])   // CategoryListCarouselAndPageViewController
                         if let categoryListCarouselAndPageViewController = navigationController2.viewControllers[1] as? CategoryListCarouselAndPageViewController,
-                           let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {                           // viewWillAppearを呼び出す　更新のため
+                           let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
+                            // viewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
                                 newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                     rank0: self.bigNum,
