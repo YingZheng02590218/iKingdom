@@ -11,30 +11,48 @@ import Foundation
 class DateManager {
     
     public static let shared = DateManager()
+
     private init() {
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy/MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         dateFormatter.timeZone = .current
+
+        dateFormatterMMdd.dateFormat = DateFormatter.dateFormat(fromTemplate: "MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatterMMdd.timeZone = .current
 
         dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         dateFormatteryyyyMMddHHmmss.timeZone = .current
 
-        dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        dateFormatterHHmmss.timeZone = .current
-
         dateFormatteryyyyMMdd.dateFormat = "yyyy-MM-dd"
         dateFormatteryyyyMMdd.timeZone = .current
 
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        timezone.dateFormat = "MM-dd"
+        timezone.timeZone = .current
+        timezone.locale = Locale(identifier: "en_US_POSIX")
+
+        dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatterHHmmss.timeZone = .current
+
+        dateFormatterYYYY.dateFormat = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatterYYYY.timeZone = .current
     }
     
     let now = Date() // UTC時間なので　9時間ずれる
-    let dateFormatter = DateFormatter() // 年/月/日
-    let dateFormatteryyyyMMddHHmmss = DateFormatter() // 年-月-日 時分秒
-    let dateFormatterHHmmss = DateFormatter() // 時分秒
-    let dateFormatteryyyyMMdd = DateFormatter() // 年-月-日
+
     let formatter = DateFormatter() // 年/月/日 時:分
-    
+    let dateFormatter = DateFormatter() // 年/月/日
+    let dateFormatterMMdd = DateFormatter() // 月/日
+
+    let dateFormatteryyyyMMddHHmmss = DateFormatter() // 年-月-日 時分秒
+    let dateFormatteryyyyMMdd = DateFormatter() // 年-月-日
+    let timezone = DateFormatter() // 月-日
+
+    let dateFormatterHHmmss = DateFormatter() // 時分秒
+
+    let dateFormatterYYYY = DateFormatter() // 年
+
     // 年度変更機能 引数の日付が、会計期間の範囲内に入っているかどうかを判定する
     func isInPeriod(date: String) -> Bool {
         let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear() // 年度
