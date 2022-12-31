@@ -99,10 +99,9 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
                 print(isInvalidated)
             }
             // 総勘定元帳画面
-            let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
             // データベースに勘定画面の勘定があるかをチェック
-            if dataBaseManagerGeneralLedger.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: object.fiscalYear) {
-                let isInvalidated = dataBaseManagerGeneralLedger.deleteGeneralLedger(number: object.number)
+            if DataBaseManagerGeneralLedger.shared.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: object.fiscalYear) {
+                let isInvalidated = DataBaseManagerGeneralLedger.shared.deleteGeneralLedger(number: object.number)
                 print(isInvalidated)
             }
             // 決算書画面

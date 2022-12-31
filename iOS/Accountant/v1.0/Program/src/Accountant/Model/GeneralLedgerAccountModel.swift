@@ -72,10 +72,8 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
-            // 総勘定元帳　取得
-            let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
             // 設定画面の勘定科目一覧にある勘定を取得する
-            let objects = dataBaseManagerGeneralLedger.getObjects()
+            let objects = DataBaseManagerGeneralLedger.shared.getObjects()
             // 設定勘定科目と総勘定元帳ないの勘定を比較
             for i in 0..<objects.count {
                 let dataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountName(accountName: objects[i].category)

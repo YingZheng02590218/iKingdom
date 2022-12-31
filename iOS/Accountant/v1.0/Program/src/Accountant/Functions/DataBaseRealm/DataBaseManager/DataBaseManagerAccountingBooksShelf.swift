@@ -9,10 +9,14 @@
 import Foundation
 import RealmSwift
 
+// 会計帳簿棚クラス
 class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
     public static let shared = DataBaseManagerAccountingBooksShelf()
-    
+
+    override private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create

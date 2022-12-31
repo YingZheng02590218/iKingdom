@@ -133,10 +133,9 @@ class Initial {
     * 総勘定元帳を初期化する。
     */
     func initialiseAccounts(number: Int, fiscalYear: Int) {
-        let dataBaseManager = DataBaseManagerGeneralLedger()
         // データベースに勘定画面の勘定があるかをチェック
-        if !dataBaseManager.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
-            dataBaseManager.addGeneralLedger(number: number)
+        if !DataBaseManagerGeneralLedger.shared.checkInitialising(dataBase: DataBaseGeneralLedger(), fiscalYear: fiscalYear) {
+            DataBaseManagerGeneralLedger.shared.addGeneralLedger(number: number)
         }
     }
     /**

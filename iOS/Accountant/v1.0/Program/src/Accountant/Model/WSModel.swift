@@ -53,8 +53,7 @@ class WSModel: WSModelInput {
     }
     // 精算表　計算　合計、残高の合計値　修正記入、損益計算書、貸借対照表
     private func calculateAmountOfAllAccount() {
-        let dataBaseManager = DataBaseManagerGeneralLedger()
-        if let objectG = dataBaseManager.getGeneralLedger() {
+        if let objectG = DataBaseManagerGeneralLedger.shared.getGeneralLedger() {
 
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             let dataBaseFinancialStatement = dataBaseManagerFinancialStatements.getFinancialStatements()

@@ -163,8 +163,7 @@ class TBModel: TBModelInput {
     // 計算　合計残高試算表クラス　合計（借方、貸方）、残高（借方、貸方）の集計
     func calculateAmountOfAllAccount() {
         // 総勘定元帳　取得
-        let dataBaseManagerGeneralLedger = DataBaseManagerGeneralLedger()
-        if let objectsOfGL = dataBaseManagerGeneralLedger.getGeneralLedger() {
+        if let objectsOfGL = DataBaseManagerGeneralLedger.shared.getGeneralLedger() {
             // 財務諸表　取得
             let dataBaseManagerFinancialStatements = DataBaseManagerFinancialStatements()
             let object = dataBaseManagerFinancialStatements.getFinancialStatements()

@@ -11,7 +11,12 @@ import RealmSwift
 
 // 総勘定元帳クラス
 class DataBaseManagerGeneralLedger: DataBaseManager {
-    
+
+    public static let shared = DataBaseManagerGeneralLedger()
+
+    override private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create

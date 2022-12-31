@@ -13,6 +13,9 @@ import RealmSwift
 class DataBaseManagerJournals: DataBaseManager {
     
     public static let shared = DataBaseManagerJournals()
+
+    override private init() {
+    }
     
     // MARK: - CRUD
     

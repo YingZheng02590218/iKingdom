@@ -13,6 +13,9 @@ class RealmManager {
 
     static let shared = RealmManager()
 
+    private init() {
+    }
+
     // MARK: - CRUD
 
     // MARK: Create
