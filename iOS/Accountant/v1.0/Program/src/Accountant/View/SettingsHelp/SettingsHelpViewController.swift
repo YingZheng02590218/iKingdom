@@ -12,6 +12,7 @@ import UIKit
 class SettingsHelpViewController: UIViewController {
     
     @IBOutlet var textView: UITextView!
+    
     var gADBannerView: GADBannerView!
     var urlString: String = ""
     

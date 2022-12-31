@@ -171,12 +171,12 @@ final class WSPresenter: WSPresenterInput {
     
     func netIncomeOrNetLossLoss() -> String {
         
-        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss)//0でも空白にしない
+        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossLoss) // 0でも空白にしない
     }
     
     func netIncomeOrNetLossIncome() -> String {
         
-        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome)//0でも空白にしない
+        StringUtility.shared.setCommaWith0(amount: object.workSheet!.netIncomeOrNetLossIncome) // 0でも空白にしない
     }
     // 修正記入 借方
     func debit_adjustingEntries_total_total() -> String {
@@ -191,22 +191,22 @@ final class WSPresenter: WSPresenterInput {
     // 貸借対照表 借方
     func debit_BS_balance_total() -> String {
         
-        StringUtility.shared.setComma(amount: object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) //損益計算書とは反対の方に記入する
+        StringUtility.shared.setComma(amount: object.workSheet!.debit_BS_balance_total+object.workSheet!.netIncomeOrNetLossIncome) // 損益計算書とは反対の方に記入する
     }
     // 貸借対照表　貸方
     func credit_BS_balance_total() -> String {
         
-        StringUtility.shared.setComma(amount: object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) //損益計算書とは反対の方に記入する
+        StringUtility.shared.setComma(amount: object.workSheet!.credit_BS_balance_total+object.workSheet!.netIncomeOrNetLossLoss) // 損益計算書とは反対の方に記入する
     }
     // 損益計算書 借方
     func debit_PL_balance_total() -> String {
         
-        StringUtility.shared.setComma(amount: object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss)// 当期純利益と合計借方とを足す
+        StringUtility.shared.setComma(amount: object.workSheet!.debit_PL_balance_total+object.workSheet!.netIncomeOrNetLossLoss) // 当期純利益と合計借方とを足す
     }
     // 損益計算書　貸方
     func credit_PL_balance_total() -> String {
         
-        StringUtility.shared.setComma(amount: object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome)// 当期純損失と合計貸方とを足す
+        StringUtility.shared.setComma(amount: object.workSheet!.credit_PL_balance_total+object.workSheet!.netIncomeOrNetLossIncome) // 当期純損失と合計貸方とを足す
     }
     
 }

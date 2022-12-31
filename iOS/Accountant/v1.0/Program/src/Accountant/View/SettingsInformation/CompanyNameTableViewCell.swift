@@ -29,7 +29,6 @@ class CompanyNameTableViewCell: UITableViewCell, UITextViewDelegate { // プロ�
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        print(textView.text)
     }
     
 //    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {

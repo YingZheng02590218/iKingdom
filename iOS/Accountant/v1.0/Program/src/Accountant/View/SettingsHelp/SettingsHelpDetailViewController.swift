@@ -114,7 +114,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 let attributedString = NSMutableAttributedString(string: basicOfBookkeepingTextView.text)
                 let textAttachment = NSTextAttachment()
                 textAttachment.image = UIImage(named: "簿記一巡.png")!
-                let oldWidth = textAttachment.image!.size.width;
+                let oldWidth = textAttachment.image!.size.width
                 print(textAttachment.image!.size.width)
                 print(basicOfBookkeepingTextView.frame.size.width)
                 print((UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!)

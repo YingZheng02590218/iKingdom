@@ -616,7 +616,12 @@ extension PLViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.text = "    " + presenter.objects9(forRow: indexPath.row - (3 + 1)).category
                 cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                 // ラベルを置いて金額を表示する
-                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow: indexPath.row - (3 + 1)).number, lastYear: false) // BSAndPL_category を number に変更する 2020/09/17
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: presenter.objects9(
+                        forRow: indexPath.row - (3 + 1)
+                    ).number,
+                    lastYear: false
+                ) // BSAndPL_category を number に変更する 2020/09/17
                 cell.labelForThisYear.font = UIFont.systemFont(ofSize: 13)
                 if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                     cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects9(forRow: indexPath.row - (3 + 1)).number, lastYear: true)

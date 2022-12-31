@@ -13,9 +13,9 @@ import QuickLook
 import UIKit
 
 class BSViewController: UIViewController {
-
+    
     // MARK: - var let
-
+    
     var gADBannerView: GADBannerView!
     /// 貸借対照表　上部
     @IBOutlet var companyNameLabel: UILabel!
@@ -31,7 +31,7 @@ class BSViewController: UIViewController {
     //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
-
+    
     fileprivate let refreshControl = UIRefreshControl()
     
     /// GUIアーキテクチャ　MVP
@@ -39,7 +39,7 @@ class BSViewController: UIViewController {
     func inject(presenter: BSPresenterInput) {
         self.presenter = presenter
     }
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -50,18 +50,18 @@ class BSViewController: UIViewController {
         
         presenter.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         presenter.viewWillDisappear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
@@ -72,9 +72,9 @@ class BSViewController: UIViewController {
         // ボタン作成
         createButtons()
     }
-
+    
     // MARK: - Setting
-
+    
     private func setTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -96,18 +96,18 @@ class BSViewController: UIViewController {
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
-
+    
     private func setRefreshControl() {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
     }
-
+    
     // MARK: - Action
     
     @objc private func refreshTable() {
         presenter.refreshTable()
     }
-
+    
     var printing = false { // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
         didSet(oldValue) {
             if !(oldValue) {
@@ -127,13 +127,13 @@ class BSViewController: UIViewController {
     @objc private func pdfBarButtonItemTapped() {
         presenter.pdfBarButtonItemTapped()
     }
-
+    
 }
 
 extension BSViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Table view data source
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         // 資産の部、負債の部、純資産の部
         return 3
@@ -164,7 +164,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
             return ""
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
@@ -172,7 +172,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.bringSubviewToFront(gADBannerView)
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             // 大分類のタイトルはセクションヘッダーに表示する
@@ -212,22 +212,22 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         22
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BSTableViewCell", for: indexPath) as? BSTableViewCell else { return UITableViewCell() }
         cell.labelForThisYear.font = UIFont.systemFont(ofSize: 14)
         cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
         cell.labelForThisYear.attributedText = nil
         cell.labelForPrevious.attributedText = nil
-
+        
         switch indexPath.section { // 大区分
         case 0: // MARK: - 資産の部
-
+            
             switch indexPath.row { // 中区分
             case 0:
                 // MARK: - "  流動資産"
@@ -694,9 +694,17 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 } else if indexPath.row >= presenter.numberOfobjects0114 + 1 + 1 + 1 && // 固定負債タイトルの1行下
                             indexPath.row < presenter.numberOfobjects0114 + 1 + 1 + presenter.numberOfobjects0115 + 1 { // 固定負債合計
                     cell.textLabel?.text = "        " + presenter.objects0115(forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).category
-                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects0115(forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number, lastYear: false)
+                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                        numberOfSettingsTaxonomy: presenter.objects0115(
+                            forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number,
+                        lastYear: false
+                    )
                     if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects0115(forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number, lastYear: true)
+                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
+                            numberOfSettingsTaxonomy: presenter.objects0115(
+                                forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number,
+                            lastYear: true
+                        )
                     } else {
                         cell.labelForPrevious.text = "-"
                     }
@@ -796,13 +804,13 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.textLabel?.minimumScaleFactor = 0.05
                 cell.textLabel?.adjustsFontSizeToFitWidth = true
                 // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/10/19
-                guard 0 < presenter.numberOfobjects01211 else { // 新株予約権16 が0件の場合
+                guard presenter.numberOfobjects01211 > 0 else { // 新株予約権16 が0件の場合
                     cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
                     cell.textLabel?.minimumScaleFactor = 0.05
                     cell.textLabel?.adjustsFontSizeToFitWidth = true
-
+                    
                     // セルに表示する内容がデータベースに0件しかない場合、エラー回避する　2020/08/03
-                    guard 0 < presenter.numberOfobjects01213 else { // 非支配株主持分22 が0件の場合
+                    guard presenter.numberOfobjects01213 > 0 else { // 非支配株主持分22 が0件の場合
                         // MARK: - "純資産合計"
                         cell.textLabel?.text = "純資産合計"
                         print("BS", indexPath.row, "純資産合計" + "★")
@@ -836,13 +844,26 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                         cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
                         return cell
                     } // 1. array.count（要素数）を利用する
-
-                    cell.textLabel?.text = "  " + presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category
-                    print("BS", indexPath.row, "  " + presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category)
-
-                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
+                    
+                    cell.textLabel?.text = "  " + presenter.objects01213(
+                        forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                    ).category
+                    print("BS", indexPath.row, "  " + presenter.objects01213(
+                        forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                    ).category)
+                    
+                    cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                        numberOfSettingsTaxonomy: presenter.objects01213(
+                            forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                        ).number, lastYear: false
+                    )
                     if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
+                        cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
+                            numberOfSettingsTaxonomy: presenter.objects01213(
+                                forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                            ).number,
+                            lastYear: true
+                        )
                     } else {
                         cell.labelForPrevious.text = "-"
                     }
@@ -851,10 +872,20 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 cell.textLabel?.text = "  " + presenter.objects01211(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).category
                 print("BS", indexPath.row, "  " + presenter.objects01211(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).category)
-
-                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: false)
+                
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: presenter.objects01211(
+                        forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)
+                    ).number,
+                    lastYear: false
+                )
                 if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01211(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
+                        numberOfSettingsTaxonomy: presenter.objects01211(
+                            forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1)
+                        ).number,
+                        lastYear: true
+                    )
                 } else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -899,12 +930,26 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
                     return cell
                 } // 1. array.count（要素数）を利用する
-                cell.textLabel?.text = "  " + presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category
-                print("BS", indexPath.row, "  " + presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).category)
-
-                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: false)
+                cell.textLabel?.text = "  " + presenter.objects01213(
+                    forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                ).category
+                print("BS", indexPath.row, "  " + presenter.objects01213(
+                    forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                ).category)
+                
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: presenter.objects01213(
+                        forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                    ).number,
+                    lastYear: false
+                )
                 if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
-                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(numberOfSettingsTaxonomy: presenter.objects01213(forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)).number, lastYear: true)
+                    cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
+                        numberOfSettingsTaxonomy: presenter.objects01213(
+                            forRow: indexPath.row - (presenter.numberOfobjects0129 + 2 + presenter.numberOfobjects01210 + 1 + 1 + presenter.numberOfobjects01211)
+                        ).number,
+                        lastYear: true
+                    )
                 } else {
                     cell.labelForPrevious.text = "-"
                 }
@@ -1030,7 +1075,7 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-
+    
     private func translateSmallCategory(smallCategory: Int) -> String {
         var smallCategoryName: String
         switch smallCategory {
@@ -1040,19 +1085,19 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
             smallCategoryName = " 棚卸資産"
         case 2:
             smallCategoryName = " その他流動資産"
-
+            
         case 3:
             smallCategoryName = " 有形固定資産"
         case 4:
             smallCategoryName = " 無形固定資産"
         case 5:
             smallCategoryName = " 投資その他資産"
-
+            
         case 6:
             smallCategoryName = " 仕入負債" // 仕入債務
         case 7:
             smallCategoryName = " その他流動負債" // 短期借入金
-
+            
         case 8:
             smallCategoryName = " 売上原価"
         case 9:
@@ -1067,13 +1112,13 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension BSViewController: BSPresenterOutput {
-
+    
     func reloadData() {
         tableView.reloadData()
         // クルクルを止める
         refreshControl.endRefreshing()
     }
-
+    
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
@@ -1091,11 +1136,11 @@ extension BSViewController: BSPresenterOutput {
         self.navigationItem.rightBarButtonItem = printoutButton
         self.navigationItem.title = "貸借対照表"
     }
-
+    
     func setupViewForViewWillAppear() {
         // 月末、年度末などの決算日をラベルに表示する
         companyNameLabel.text = presenter.company() // 社名
-
+        
         let theDayOfReckoning = presenter.theDayOfReckoning()
         let fiscalYear = presenter.fiscalYear()
         if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
@@ -1134,7 +1179,7 @@ extension BSViewController: BSPresenterOutput {
             }
         }
     }
-
+    
     func setupViewForViewWillDisappear() {
         // アップグレード機能　スタンダードプラン
         if let gADBannerView = gADBannerView {
@@ -1142,7 +1187,7 @@ extension BSViewController: BSPresenterOutput {
             removeBannerViewToView(gADBannerView)
         }
     }
-
+    
     func setupViewForViewDidAppear() {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
@@ -1163,7 +1208,7 @@ extension BSViewController: BSPresenterOutput {
  */
 
 extension BSViewController: QLPreviewControllerDataSource {
-
+    
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         if let PDFpath = presenter.PDFpath {
             return PDFpath.count
@@ -1171,9 +1216,9 @@ extension BSViewController: QLPreviewControllerDataSource {
             return 0
         }
     }
-
+    
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-
+        
         guard let pdfFilePath = presenter.PDFpath?[index] else {
             return "" as! QLPreviewItem
         }

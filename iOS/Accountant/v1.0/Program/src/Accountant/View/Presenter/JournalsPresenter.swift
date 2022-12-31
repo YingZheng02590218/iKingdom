@@ -228,7 +228,7 @@ final class JournalsPresenter: JournalsPresenterInput {
                 )
             } else if indexPath.section == 1 {
                 // 決算整理仕訳データを更新
-                let _ = model.updateAdjustingJournalEntry(
+                _ = model.updateAdjustingJournalEntry(
                     primaryKey: self.objectsss(forRow: indexPath.row).number,
                     date: dBJournalEntry.date ?? self.objectsss(forRow: indexPath.row).date,
                     debitCategory: dBJournalEntry.debit_category ?? self.objectsss(forRow: indexPath.row).debit_category,

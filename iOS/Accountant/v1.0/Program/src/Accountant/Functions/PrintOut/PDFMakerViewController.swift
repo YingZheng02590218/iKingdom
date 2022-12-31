@@ -7,16 +7,14 @@
 //
 
 import Foundation
+import PDFKit
 import QuickLook
 import UIKit
-import PDFKit
-
 
 class PDFMakerViewController: UIViewController {
-        
-    
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var pdfView: PDFView!
+
+    @IBOutlet var textView: UITextView!
+    @IBOutlet var pdfView: PDFView!
     
     // 印刷機能
     let pDFMaker = PDFMaker() // 仕訳帳
@@ -25,16 +23,13 @@ class PDFMakerViewController: UIViewController {
 //    let paperSize = CGSize(width: 187 / 25.4 * 72, height: 257 / 25.4 * 72) // B5 187×257mm コクヨ仕訳帳　実寸
 //    let paperSize = CGSize(width: 176 / 25.4 * 72, height: 250 / 25.4 * 72) // B5 176mm x 250mm　標準の ISO の寸法
 //    let paperSize = CGSize(width: 128 / 25.4 * 72, height: 182 / 25.4 * 72) // B6 128x182
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // 初期化
 //        pDFMaker.initialize()
     }
-    
-    
-    
+
     @IBAction func tap(_ sender: Any) {
         
     }
@@ -66,7 +61,7 @@ class PDFMakerViewController: UIViewController {
         let fiscalYear = "2022"
 //        if let fiscalYear = presenter.fiscalYear {
             let printController = UIPrintInteractionController.shared
-            let printInfo = UIPrintInfo(dictionary:nil)
+            let printInfo = UIPrintInfo(dictionary: nil)
             printInfo.outputType = .general
             printInfo.jobName = "\(fiscalYear)-Journals"
             printInfo.duplex = .none

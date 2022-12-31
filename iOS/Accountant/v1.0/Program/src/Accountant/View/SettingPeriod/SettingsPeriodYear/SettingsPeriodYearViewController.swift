@@ -86,7 +86,8 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
             // 選択した年度の会計帳簿を作成する
             let row = pickerView.selectedRow(inComponent: 0)
             let fiscalYear = getPeriodFromDB(row: row)
-            createNewPeriod(fiscalYear: Int(fiscalYear)!)
+            guard let fiscalYear = Int(fiscalYear) else { return }
+            createNewPeriod(fiscalYear: fiscalYear)
 
             if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
                let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する

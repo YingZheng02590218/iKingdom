@@ -145,8 +145,8 @@ class PDFMaker {
             let creditCategory = item.credit_category
             let creditAmount = item.credit_amount
             let smallWritting = item.smallWritting
-            let balanceLeft = item.balance_left
-            let balanceRight = item.balance_right
+            _ = item.balance_left
+            _ = item.balance_right
             let genearlLedgerAccountModel = GeneralLedgerAccountModel()
             let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
             let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる

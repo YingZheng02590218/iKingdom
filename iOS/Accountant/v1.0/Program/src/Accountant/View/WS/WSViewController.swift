@@ -36,7 +36,6 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet private var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
     @IBOutlet private var printButton: UIButton!
 
-
     /// GUIアーキテクチャ　MVP
     private var presenter: WSPresenterInput!
     func inject(presenter: WSPresenterInput) {

@@ -13,8 +13,10 @@ import SwiftyStoreKit // アップグレード機能
 // アップグレード
 class UpgradeManager {
     
-    private init() {}
     static let shared = UpgradeManager()
+
+    private init() {
+    }
 
     // 定期購読のためのフラグ
     public var inAppPurchaseFlag = false
