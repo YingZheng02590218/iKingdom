@@ -31,7 +31,7 @@ class Initial {
         let firstLunchKey = "firstLunch_JournalEntry"
         if userDefaults.bool(forKey: firstLunchKey) {
             // 仕訳のサンプルデータを作成する
-            let _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
+            _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
                 date: "\(getTheTime())/04/01",
                 debitCategory: "現金",
                 debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
@@ -40,7 +40,7 @@ class Initial {
                 smallWritting: "ゾウ商店"
             )
             // よく使う仕訳のサンプルデータを作成する
-            let _ = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
+            _ = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
                 nickname: "よく使う仕訳1",
                 debitCategory: "現金",
                 debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
@@ -169,9 +169,8 @@ class Initial {
     * 設定操作を初期化する。
     */
     func initializeSettingsOperating() {
-        let dataBaseManager = DataBaseManagerSettingsOperating()
-        if !dataBaseManager.checkInitialising() {
-            dataBaseManager.addSettingsOperating()
+        if !DataBaseManagerSettingsOperating.shared.checkInitialising() {
+            DataBaseManagerSettingsOperating.shared.addSettingsOperating()
         }
     }
     /**

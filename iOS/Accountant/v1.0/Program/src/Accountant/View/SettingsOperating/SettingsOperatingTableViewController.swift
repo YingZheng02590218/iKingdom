@@ -140,8 +140,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 設定操作
-        let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
-        let object = dataBaseManagerSettingsOperating.getSettingsOperating() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+        let object = DataBaseManagerSettingsOperating.shared.getSettingsOperating() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         switch indexPath.row {
         case 0:
             // ① UI部品を指定
@@ -180,13 +179,11 @@ class SettingsOperatingTableViewController: UITableViewController {
     }
     // 有効無効　変更時のアクション
     @objc func hundleSwitch(sender: UISwitch) {
-        // 設定操作
-        let dataBaseManagerSettingsOperating = DataBaseManagerSettingsOperating()
-        
+        // 設定操作        
         if sender.tag == 0 { // 損益振替仕訳
-            dataBaseManagerSettingsOperating.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger0", isOn: sender.isOn)
+            DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger0", isOn: sender.isOn)
         } else if sender.tag == 1 { // 資本振替仕訳
-            dataBaseManagerSettingsOperating.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger1", isOn: sender.isOn)
+            DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger1", isOn: sender.isOn)
         }
     }
 }

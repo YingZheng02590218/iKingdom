@@ -11,7 +11,12 @@ import RealmSwift
 
 // 設定操作クラス
 class DataBaseManagerSettingsOperating {
-    
+
+    public static let shared = DataBaseManagerSettingsOperating()
+
+    private init() {
+    }
+
     // MARK: - CRUD
     
     // MARK: Create
