@@ -667,6 +667,29 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     break
                 }
             }
+            if let _ = self.indexPathForAutoScroll {
+                break
+            }
+        }
+        if let indexPathForAutoScroll = self.indexPathForAutoScroll {
+            for s in (0..<tableView.numberOfSections).reversed() {
+                for r in (0..<tableView.numberOfRows(inSection: s)).reversed() {
+                    indexPathLocal = IndexPath(row: r, section: s)
+                    self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.bottom, animated: true)
+                    // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
+                    if indexPathLocal == indexPathForAutoScroll {
+                        self.indexPathForAutoScroll = nil
+                        break
+                    }
+                }
+                if indexPathLocal == indexPathForAutoScroll {
+                    self.indexPathForAutoScroll = nil
+                    break
+                }
+            }
+        } else {
+            // 上へスクロールする
+            scrollToTop()
         }
     }
     // 上へスクロールする
@@ -678,6 +701,26 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.bottom, animated: true)
                 // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 if let _ = self.indexPathForAutoScroll {
+                    break
+                }
+            }
+            if let _ = self.indexPathForAutoScroll {
+                break
+            }
+        }
+        if let indexPathForAutoScroll = self.indexPathForAutoScroll {
+            for s in 0..<tableView.numberOfSections {
+                for r in 0..<tableView.numberOfRows(inSection: s) {
+                    indexPathLocal = IndexPath(row: r, section: s)
+                    self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
+                    // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
+                    if indexPathLocal == indexPathForAutoScroll {
+                        self.indexPathForAutoScroll = nil
+                        break
+                    }
+                }
+                if indexPathLocal == indexPathForAutoScroll {
+                    self.indexPathForAutoScroll = nil
                     break
                 }
             }
