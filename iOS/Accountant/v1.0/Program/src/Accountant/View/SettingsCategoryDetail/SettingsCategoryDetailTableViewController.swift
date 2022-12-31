@@ -80,7 +80,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             }
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -91,6 +91,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // ボタン作成
         createButtons()
     }

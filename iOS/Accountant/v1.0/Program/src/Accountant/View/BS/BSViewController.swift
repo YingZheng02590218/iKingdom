@@ -68,6 +68,7 @@ class BSViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // ボタン作成
         createButtons()
     }

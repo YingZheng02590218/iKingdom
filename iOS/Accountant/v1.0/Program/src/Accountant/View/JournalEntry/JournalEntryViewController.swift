@@ -208,6 +208,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
     }

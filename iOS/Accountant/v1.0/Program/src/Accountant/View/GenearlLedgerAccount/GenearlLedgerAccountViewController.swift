@@ -70,6 +70,7 @@ class GenearlLedgerAccountViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // ボタン作成
         createButtons()
     }
@@ -97,23 +98,6 @@ class GenearlLedgerAccountViewController: UIViewController {
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
-    }
-
-    // カンマ区切りに変換（表示用）
-    let formatter = NumberFormatter() // プロパティの設定はviewDidLoadで行う
-    func addComma(string: String) -> String {
-        if string != "" { // ありえないでしょう
-            return formatter.string(from: NSNumber(value: Double(string)!))!
-        } else {
-            return ""
-        }
-    }
-    
-    private func initializeGenearlLedgerAccount() {
-        // 3桁ごとにカンマ区切りするフォーマット
-        formatter.numberStyle = NumberFormatter.Style.decimal
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
     }
     
     // MARK: - Action
@@ -314,7 +298,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listNumberLabel.text = numberOfAccountCredit.description                    // 丁数　相手方勘定なので貸方
                 }
                 //　借方金額
-                cell.listDebitLabel.text = "\(addComma(string: String(debitAmount))) "        // 借方金額
+                cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(debitAmount))) "        // 借方金額
                 //　貸方金額
                 cell.listCreditLabel.text = ""                                                 // 貸方金額 注意：空白を代入しないと、変な値が入る。
             } else if account == "\(creditCategory)" {  // 貸方勘定の場合
@@ -328,10 +312,10 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listNumberLabel.text = numberOfAccountDebit.description                               // 丁数　相手方勘定なので貸方
                 }
                 cell.listDebitLabel.text = ""                                                                         // 借方金額 注意：空白を代入しないと、変な値が入る。
-                cell.listCreditLabel.text = "\(addComma(string: String(creditAmount))) "      // 貸方金額
+                cell.listCreditLabel.text = "\(StringUtility.shared.addComma(string: String(creditAmount))) "      // 貸方金額
             }
             
-            cell.listBalanceLabel.text = "\(addComma(string: balanceAmount.description))"    // 差引残高
+            cell.listBalanceLabel.text = "\(StringUtility.shared.addComma(string: balanceAmount.description))"    // 差引残高
             cell.listDebitOrCreditLabel.text = balanceDebitOrCredit                          // 借又貸
             // セルの選択を許可
             cell.selectionStyle = .default
@@ -369,7 +353,6 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
         // UI
         setTableView()
         createButtons() // ボタン作成
-        initializeGenearlLedgerAccount()
 
         self.navigationItem.title = "勘定"
         // largeTitle表示

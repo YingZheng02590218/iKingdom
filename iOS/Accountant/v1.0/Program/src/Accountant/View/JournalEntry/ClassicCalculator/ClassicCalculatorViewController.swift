@@ -65,7 +65,7 @@ class ClassicCalculatorViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-
+        super.viewDidLayoutSubviews()
     }
     
     func layout() {

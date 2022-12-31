@@ -68,6 +68,7 @@ class PLViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         // ボタン作成
         createButtons()
     }
