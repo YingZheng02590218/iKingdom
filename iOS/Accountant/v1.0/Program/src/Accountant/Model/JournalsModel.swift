@@ -68,7 +68,7 @@ class JournalsModel: JournalsModelInput {
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-        let dataBaseSettingsOperating = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1)
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         
         if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
            let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
@@ -99,7 +99,7 @@ class JournalsModel: JournalsModelInput {
     // 更新　仕訳　年度
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
         guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
@@ -196,7 +196,7 @@ class JournalsModel: JournalsModelInput {
     // 更新　決算整理仕訳　年度 損益振替仕訳、資本振替仕訳以外の決算整理仕訳
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 編集前の仕訳帳と借方勘定と貸方勘定
         guard let oldJournals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else { return }
         guard let oldLeftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(

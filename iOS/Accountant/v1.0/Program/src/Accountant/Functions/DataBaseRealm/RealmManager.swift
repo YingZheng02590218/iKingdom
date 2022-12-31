@@ -64,12 +64,11 @@ class RealmManager {
     /**
      * 指定キーのレコードを取得
      */
-    func findFirst<T: Object>(type: T.Type, key: Int) -> T? {
+    func readWithPrimaryKey<T: Object>(type: T.Type, key: Int) -> T? {
         DataBaseManager.realm.object(ofType: T.self, forPrimaryKey: key)
     }
 
     // MARK: Update
-
 
     // MARK: Delete
 

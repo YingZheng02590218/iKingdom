@@ -24,7 +24,7 @@ class DataBaseManagerJournals: DataBaseManager {
     // 追加
     func addJournals(number: Int) {
         // 会計帳簿　のオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトを作成 仕訳帳
         let dataBaseJournals = DataBaseJournals(
             fiscalYear: object.fiscalYear
@@ -245,7 +245,7 @@ class DataBaseManagerJournals: DataBaseManager {
     // 削除
     func deleteJournals(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseJournals.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseJournals.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 DataBaseManager.realm.delete(object.dataBaseJournalEntries) // 仕訳

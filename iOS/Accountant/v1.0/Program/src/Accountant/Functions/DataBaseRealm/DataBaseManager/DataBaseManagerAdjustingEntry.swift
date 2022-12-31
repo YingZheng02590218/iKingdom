@@ -70,7 +70,7 @@ class DataBaseManagerAdjustingEntry {
     // 取得　決算整理仕訳 編集する仕訳をプライマリーキーで取得
     func getAdjustingEntryWithNumber(number: Int) -> DataBaseAdjustingEntry? {
         
-        RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: number)
+        RealmManager.shared.readWithPrimaryKey(type: DataBaseAdjustingEntry.self, key: number)
     }
     
     // 決算整理仕訳　総数
@@ -94,7 +94,7 @@ class DataBaseManagerAdjustingEntry {
         completion: (Int) -> Void
     ) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseAdjustingEntry.self, key: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
         let accountLeft = dataBaseJournalEntry.debit_category
         let accountRight = dataBaseJournalEntry.credit_category
@@ -195,7 +195,7 @@ class DataBaseManagerAdjustingEntry {
     
     // 削除　決算整理仕訳
     func deleteAdjustingJournalEntry(number: Int) -> Bool {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAdjustingEntry.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAdjustingEntry.self, key: number) else { return false }
         // 再計算用に、勘定をメモしておく
         let accountLeft = object.debit_category
         let accountRight = object.credit_category

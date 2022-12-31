@@ -274,7 +274,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     // 削除　勘定、よく使う仕訳　設定勘定科目を削除するときに呼ばれる
     func deleteAccount(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
         // 勘定　全年度　取得
         let objectsssss = RealmManager.shared.readWithPredicate(type: DataBaseAccount.self, predicates: [
             NSPredicate(format: "accountName LIKE %@", NSString(string: object.category))

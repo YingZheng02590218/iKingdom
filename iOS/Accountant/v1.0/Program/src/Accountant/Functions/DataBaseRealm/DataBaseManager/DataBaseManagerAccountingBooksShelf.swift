@@ -57,7 +57,7 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     // 事業者名の取得
     func getCompanyName() -> String {
         // (2)データベース内に保存されているモデルをひとつ取得する
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return "" }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooksShelf.self, key: 1) else { return "" }
         return object.companyName // 事業者名を返す
     }
     

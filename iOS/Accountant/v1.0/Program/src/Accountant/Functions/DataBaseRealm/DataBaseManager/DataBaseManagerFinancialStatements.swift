@@ -24,7 +24,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     // モデルオブフェクトの追加
     func addFinancialStatements(number: Int) {
         // 会計帳簿棚　のオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooks.self, key: number) else { return }
         // オブジェクトに格納するオブジェクトを作成
         let balanceSheet = DataBaseBalanceSheet(
             fiscalYear: object.fiscalYear,
@@ -159,7 +159,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
     
     // モデルオブフェクトの削除
     func deleteFinancialStatements(number: Int) -> Bool {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseFinancialStatements.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseFinancialStatements.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 // 表示科目を削除

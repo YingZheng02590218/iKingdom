@@ -170,7 +170,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     }
     // 取得　設定表示科目　表示科目の連番から設定表示科目を取得
     func getSettingsTaxonomy(numberOfTaxonomy: Int) -> DataBaseSettingsTaxonomy? {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomy.self, key: numberOfTaxonomy) else { return nil }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomy.self, key: numberOfTaxonomy) else { return nil }
         return object
     }
     

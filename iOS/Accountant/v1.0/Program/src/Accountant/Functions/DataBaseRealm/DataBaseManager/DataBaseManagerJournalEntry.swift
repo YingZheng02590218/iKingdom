@@ -70,7 +70,7 @@ class DataBaseManagerJournalEntry {
     // 取得　仕訳 編集する仕訳をプライマリーキーで取得
     func getJournalEntryWithNumber(number: Int) -> DataBaseJournalEntry? {
         
-        RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number)
+        RealmManager.shared.readWithPrimaryKey(type: DataBaseJournalEntry.self, key: number)
     }
     
     // 仕訳　総数
@@ -94,7 +94,7 @@ class DataBaseManagerJournalEntry {
         completion: (Int) -> Void
     ) {
         // 編集する仕訳
-        guard let dataBaseJournalEntry = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
+        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseJournalEntry.self, key: primaryKey) else { return }
         // 再計算用に、勘定をメモしておく
         let accountLeft = dataBaseJournalEntry.debit_category
         let accountRight = dataBaseJournalEntry.credit_category
@@ -195,7 +195,7 @@ class DataBaseManagerJournalEntry {
     
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseJournalEntry.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseJournalEntry.self, key: number) else { return false }
         // 再計算用に、勘定をメモしておく
         let accountLeft = object.debit_category
         let accountRight = object.credit_category

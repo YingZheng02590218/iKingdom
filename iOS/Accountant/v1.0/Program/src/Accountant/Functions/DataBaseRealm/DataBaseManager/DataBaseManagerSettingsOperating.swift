@@ -49,7 +49,7 @@ class DataBaseManagerSettingsOperating {
     }
     // 取得
     func getSettingsOperating() -> DataBaseSettingsOperating? {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsOperating.self, key: 1) else { return nil }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1) else { return nil }
         return object
     }
     

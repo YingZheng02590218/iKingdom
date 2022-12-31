@@ -34,7 +34,7 @@ class DataBaseManagerTaxonomy {
     // 追加 表示科目　マイグレーション
     func addTaxonomyAll() {
         // 会計帳簿棚　を取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooksShelf.self, key: 1) else { return }
         // 設定表示科目　を取得
         let objects = DataBaseManagerSettingsTaxonomy.shared.getAllSettingsTaxonomy()
         // 会計帳簿　の数の分だけ表示科目を作成
@@ -258,7 +258,7 @@ class DataBaseManagerTaxonomy {
     // 削除 表示科目　マイグレーション
     func deleteTaxonomyAll() -> Bool {
         // 会計帳簿棚　を取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooksShelf.self, key: 1) else { return false }
         // 会計帳簿　の数の分だけ表示科目を削除
         for y in 0..<object.dataBaseAccountingBooks.count where object.dataBaseAccountingBooks[y].dataBaseFinancialStatements?.balanceSheet?.dataBaseTaxonomy[0].numberOfTaxonomy == 0 {
             // 表示科目　オブジェクトを削除

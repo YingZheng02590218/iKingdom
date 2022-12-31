@@ -26,7 +26,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
         
         var number = 0
         // 会計帳簿棚　のオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooksShelf.self, key: 1) else { return number } // 会社に会計帳簿棚はひとつ
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooksShelf.self, key: 1) else { return number } // 会社に会計帳簿棚はひとつ
         // オブジェクトを作成 会計帳簿
         let dataBaseAccountingBooks = DataBaseAccountingBooks(
             fiscalYear: fiscalYear,
@@ -86,7 +86,7 @@ class DataBaseManagerAccountingBooks: DataBaseManager {
     // モデルオブフェクトの削除　会計帳簿
     func deleteAccountingBooks(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する プライマリーキーを指定してオブジェクトを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseAccountingBooks.self, key: number) else { return false } // 会社に会計帳簿棚はひとつ
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooks.self, key: number) else { return false } // 会社に会計帳簿棚はひとつ
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
         // 会計帳簿が一つしかない場合は、削除しない

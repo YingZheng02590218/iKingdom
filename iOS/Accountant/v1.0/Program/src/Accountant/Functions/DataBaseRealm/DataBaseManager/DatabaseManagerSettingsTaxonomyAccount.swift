@@ -134,12 +134,12 @@ class DatabaseManagerSettingsTaxonomyAccount {
     // 取得 勘定科目連番から表示科目連番を取得
     func getNumberOfTaxonomy(number: Int) -> Int {
         // 勘定科目モデルを取得
-        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return 0 }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return 0 }
         return Int(object.numberOfTaxonomy) ?? 0
     }
     // 取得 勘定科目の連番から勘定科目を取得
     func getSettingsTaxonomyAccount(number: Int) -> DataBaseSettingsTaxonomyAccount? {
-        guard let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return nil }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return nil }
         return object
     }
     // 取得 設定表示科目連番から表示科目別に設定勘定科目を取得
@@ -308,7 +308,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         if isInvalidated {
             do {
                 // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-                if let object = RealmManager.shared.findFirst(type: DataBaseSettingsTaxonomyAccount.self, key: number) {
+                if let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) {
                     try DataBaseManager.realm.write {
                         // 仕訳が残ってないか
                         // 勘定を削除
