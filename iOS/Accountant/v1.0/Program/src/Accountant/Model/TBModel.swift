@@ -582,7 +582,7 @@ class TBModel: TBModelInput {
                             print("エラーが発生しました")
                         }
                         // 決算振替仕訳　損益勘定の締切り
-                        DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(debitCategory: "損益勘定", amount: dataBasePLAccount.debit_balance_AfterAdjusting, creditCategory: "繰越利益")
+                        DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(debitCategory: "損益勘定", amount: dataBasePLAccount.debit_balance_AfterAdjusting, creditCategory: "繰越利益") // 仕訳画面で繰越利益を選択して仕訳入力した場合、実行される
                     } else if dataBasePLAccount.debit_total_AfterAdjusting < dataBasePLAccount.credit_total_AfterAdjusting {
                         do {
                             try DataBaseManager.realm.write {

@@ -89,13 +89,26 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // 設定画面の勘定科目設定で有効を選択した勘定を、勘定科目画面のドラムロールに表示するために、DBから文言を読み込む
     func getSettingsCategoryFromDB() {
         // 勘定科目区分　大区分
-        categories = ["流動資産", "固定資産", "繰延資産", "流動負債", "固定負債", "資本", "売上", "売上原価", "販売費及び一般管理費", "営業外損益", "特別損益", "税金"]
+        categories = [
+            "流動資産",
+            "固定資産",
+            "繰延資産",
+            "流動負債",
+            "固定負債",
+            "資本",
+            "売上",
+            "売上原価",
+            "販売費及び一般管理費",
+            "営業外損益",
+            "特別損益",
+            "税金"
+        ]
         // データベース
         let databaseManager = CategoryListModel()
         for i in 0..<categories.count {
             let objects = databaseManager.getSettingsSwitchingOn(rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
             //            let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
-            var items: [String] = Array<String>()
+            var items: [String] = []
             for y in 0..<objects.count {    // 勘定
                 items.append(objects[y].category as String) // 配列 Array<Element>型　に要素を追加していく
             }
@@ -103,7 +116,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     // データベースにある設定データを変数に入れ替える
-    func transferItems(bigCategory: Int, array: Array<String>) {
+    func transferItems(bigCategory: Int, array: [String]) {
         switch bigCategory {
         case 0:
             big0 = array
@@ -181,6 +194,11 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         } else {
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
+                // 大区分に勘定科目がない場合
+                if big0.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 // ドラムロールを2列同時に回転させた場合の対策
                 if big0.count <= row {
                     self.text = big0[0] as String
@@ -191,6 +209,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big0[row] as String      // PickerViewに表示
                 }
             case 1:
+                if big1.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big1.count <= row {
                     self.text = big1[0] as String
                     return big1[0] as String
@@ -200,6 +222,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big1[row] as String
                 }
             case 2:
+                if big2.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big2.count <= row {
                     self.text = big2[0] as String
                     return big2[0] as String
@@ -209,6 +235,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big2[row] as String
                 }
             case 3:
+                if big3.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big3.count <= row {
                     self.text = big3[0] as String
                     return big3[0] as String
@@ -218,6 +248,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big3[row] as String  // ドラムロールを早く回すと、ここでエラーが発生する　2020/07/24
                 }
             case 4:
+                if big4.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big4.count <= row {
                     self.text = big4[0] as String
                     return big4[0] as String
@@ -227,6 +261,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big4[row] as String
                 }
             case 5:
+                if big5.isEmpty { // 繰越利益をOFFにできない仕様なので、Emptyとならない
+                    self.text = ""
+                    return nil
+                }
                 if big5.count <= row {
                     self.text = big5[0] as String
                     return big5[0] as String
@@ -236,6 +274,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big5[row] as String
                 }
             case 6:
+                if big6.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big6.count <= row {
                     self.text = big6[0] as String
                     return big6[0] as String
@@ -245,6 +287,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big6[row] as String
                 }
             case 7:
+                if big7.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big7.count <= row {
                     self.text = big7[0] as String
                     return big7[0] as String
@@ -254,6 +300,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big7[row] as String
                 }
             case 8:
+                if big8.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big8.count <= row {
                     self.text = big8[0] as String
                     return big8[0] as String
@@ -263,6 +313,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big8[row] as String
                 }
             case 9:
+                if big9.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big9.count <= row {
                     self.text = big9[0] as String
                     return big9[0] as String
@@ -271,6 +325,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big9[row] as String
                 }
             case 10:
+                if big10.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big10.count <= row {
                     self.text = big10[0] as String
                     return big10[0] as String
@@ -279,6 +337,10 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                     return big10[row] as String
                 }
             case 11:
+                if big11.isEmpty {
+                    self.text = ""
+                    return nil
+                }
                 if big11.count <= row {
                     self.text = big11[0] as String
                     return big11[0] as String
@@ -294,11 +356,14 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // UIPickerViewのRowが選択された時の挙動
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // 文字色
-        if component == 0 {
-            self.text = categories[row] as String
-        } else if component == 1 { // ドラムロールの2列目か？
+        if component == 1 { // ドラムロールの2列目か？
             switch pickerView.selectedRow(inComponent: 0) {
             case 0:
+                // 大区分に勘定科目がない場合
+                if big0.isEmpty {
+                    self.text = ""
+                    break
+                }
                 // ドラムロールを2列同時に回転させた場合の対策
                 if big0.count <= row {
                     self.text = big0[0] as String
@@ -306,66 +371,110 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
                 }
                 self.text = big0[row] as String
             case 1:
+                if big1.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big1.count <= row {
                     self.text = big1[0] as String
                     break
                 }
                 self.text = big1[row] as String
             case 2:
+                if big2.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big2.count <= row {
                     self.text = big2[0] as String
                     break
                 }
                 self.text = big2[row] as String
             case 3:
+                if big3.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big3.count <= row {
                     self.text = big3[0] as String
                     break
                 }
                 self.text = big3[row] as String
             case 4:
+                if big4.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big4.count <= row {
                     self.text = big4[0] as String
                     break
                 }
                 self.text = big4[row] as String
             case 5:
+                if big5.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big5.count <= row {
                     self.text = big5[0] as String
                     break
                 }
                 self.text = big5[row] as String
             case 6:
+                if big6.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big6.count <= row {
                     self.text = big6[0] as String
                     break
                 }
                 self.text = big6[row] as String
             case 7:
+                if big7.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big7.count <= row {
                     self.text = big7[0] as String
                     break
                 }
                 self.text = big7[row] as String
             case 8:
+                if big8.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big8.count <= row {
                     self.text = big8[0] as String
                     break
                 }
                 self.text = big8[row] as String
             case 9:
+                if big9.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big9.count <= row {
                     self.text = big9[0] as String
                     break
                 }
                 self.text = big9[row] as String
             case 10:
+                if big10.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big10.count <= row {
                     self.text = big10[0] as String
                     break
                 }
                 self.text = big10[row] as String
             case 11:
+                if big11.isEmpty {
+                    self.text = ""
+                    break
+                }
                 if big11.count <= row {
                     self.text = big11[0] as String
                     break
