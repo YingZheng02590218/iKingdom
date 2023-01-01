@@ -30,7 +30,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     var smallNum = ""
     
     var numberOfAccount: Int = 0 // 勘定科目番号
-    var numberOfTaxonomy: Int = 0 // 表示科目番号
+    var numberOfTaxonomy: Int? // 表示科目番号
     
     var addAccount = false // 勘定科目　詳細　設定画面からの遷移で勘定科目追加の場合はtrue
     // 画面遷移の準備　表示科目一覧画面へ
@@ -104,15 +104,19 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             // 大区分
             // 中区分
             // 小区分 コメントアウト
             // 勘定科目名
             return 3 // 4
-        } else {
+        case 1:
             // 表示科目
-            return 1
+            // 法人/個人フラグ
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? 1 : 0
+        default:
+            return 0
         }
     }
     // セクションヘッダーのテキスト決める
@@ -121,18 +125,20 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         case 0:
             return "勘定科目"
         case 1:
-            return "表示科目"
+            // 法人/個人フラグ
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "表示科目" : nil
         default:
-            return ""
+            return nil
         }
     }
     // セクションフッターのテキスト決める
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 1:
-            return "勘定科目を、決算書上に表記される表示科目に紐付けてください。"
+            // 法人/個人フラグ
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "勘定科目を、決算書上に表記される表示科目に紐付けてください。" : nil
         default:
-            return ""
+            return nil
         }
     }
     
@@ -196,18 +202,19 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                 cell.textLabel?.textColor = .lightGray
                 cell.textLabel?.font = .systemFont(ofSize: 14)
                 // 表示科目名
-                //                let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? SettingAccountDetailTaxonomyTableViewCell else { return UITableViewCell() }
-                if self.numberOfTaxonomy != 0 {
-                    //                    taxonomyname = cell_taxonomy.label.text!
-                    //                    cell.label.text = taxonomyname
-                    let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
+                // let cell_taxonomy = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? SettingAccountDetailTaxonomyTableViewCell else { return UITableViewCell() }
+                if let numberOfTaxonomy = self.numberOfTaxonomy,
+                   numberOfTaxonomy != 0 {
+                    // taxonomyname = cell_taxonomy.label.text!
+                    // cell.label.text = taxonomyname
+                    let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: numberOfTaxonomy)
                     cell.label.text! = "\(object!.number), \(object!.category)"
                 } else {
                     cell.label.text = "表示科目を選択してください"
                     cell.label.textColor = .lightGray
                 }
                 // Accessory Color
-                let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
                 let disclosureView = UIImageView(image: disclosureImage)
                 disclosureView.tintColor = UIColor.accentColor
                 cell.accessoryView = disclosureView
@@ -495,12 +502,18 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     
     func showNumberOfTaxonomy() {
         // 表示科目名
-        if self.numberOfTaxonomy != 0 { // 表示科目が選択されて、表示科目番号が詳細画面に戻ってきた場合
-            guard let taxonomyCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? SettingAccountDetailTaxonomyTableViewCell else { return }
-            let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: self.numberOfTaxonomy)
-            taxonomyCell.label.text! = "\(object!.number), \(object!.category)"
-            taxonomyCell.label.textColor = .textColor
-            taxonomyname = taxonomyCell.label.text!
+        if let numberOfTaxonomy = self.numberOfTaxonomy,
+           self.numberOfTaxonomy != 0 { // 表示科目が選択されて、表示科目番号が詳細画面に戻ってきた場合
+            guard let taxonomyCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as? SettingAccountDetailTaxonomyTableViewCell else {
+                return
+            }
+            if let dataBaseSettingsTaxonomy = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(
+                numberOfTaxonomy: numberOfTaxonomy
+            ) {
+                taxonomyname = "\(dataBaseSettingsTaxonomy.number), \(dataBaseSettingsTaxonomy.category)"
+                taxonomyCell.label.text = "\(dataBaseSettingsTaxonomy.number), \(dataBaseSettingsTaxonomy.category)"
+                taxonomyCell.label.textColor = .textColor
+            }
         }
     }
     
@@ -535,11 +548,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                            let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
                             // viewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                // 表示科目が紐付けされていない場合
+                                var numberOfTaxonomyString = ""
+                                if let numberOfTaxonomy = self.numberOfTaxonomy {
+                                    numberOfTaxonomyString = String(numberOfTaxonomy)
+                                }
                                 newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                     rank0: self.bigNum,
                                     rank1: self.midNum,
                                     rank2: self.smallNum,
-                                    numberOfTaxonomy: String(self.numberOfTaxonomy),
+                                    numberOfTaxonomy: numberOfTaxonomyString,
                                     category: self.accountname,
                                     switching: true
                                 )
@@ -569,11 +587,16 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                            let presentingViewController = categoryListCarouselAndPageViewController.pageViewController.viewControllers?.first as? CategoryListTableViewController {
                             // viewWillAppearを呼び出す　更新のため
                             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                // 表示科目が紐付けされていない場合
+                                var numberOfTaxonomyString = ""
+                                if let numberOfTaxonomy = self.numberOfTaxonomy {
+                                    numberOfTaxonomyString = String(numberOfTaxonomy)
+                                }
                                 newnumber = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
                                     rank0: self.bigNum,
                                     rank1: self.midNum,
                                     rank2: self.smallNum,
-                                    numberOfTaxonomy: String(self.numberOfTaxonomy),
+                                    numberOfTaxonomy: numberOfTaxonomyString,
                                     category: self.accountname,
                                     switching: true
                                 )
@@ -623,15 +646,19 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             }
             return false // NG
         }
-        guard taxonomyname != "表示科目を選択してください" && taxonomyname != "" else {
-            let alert = UIAlertController(title: "表示科目名", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
+        // 法人/個人フラグ 法人の場合　チェックする
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            guard taxonomyname != "表示科目を選択してください" && taxonomyname != "" else {
+                let alert = UIAlertController(title: "表示科目名", message: "入力してください", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
+                return false // NG
             }
-            return false // NG
         }
+
         return true // OK
     }
 }

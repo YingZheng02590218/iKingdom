@@ -163,8 +163,10 @@ class SettingsCategoryTableViewController: UITableViewController {
         case 0:
             return 1
         case 1:
+            // 法人/個人フラグ
             return UserDefaults.standard.bool(forKey: "corporation_switch") ? 2 : 1
         case 2:
+            // 法人/個人フラグ
             return UserDefaults.standard.bool(forKey: "corporation_switch") ? 1 : 0
         default:
             return 0
@@ -178,6 +180,7 @@ class SettingsCategoryTableViewController: UITableViewController {
         case 1:
             return "勘定科目"
         case 2:
+            // 法人/個人フラグ
             return UserDefaults.standard.bool(forKey: "corporation_switch") ? "表示科目" : nil
         default:
             return nil
@@ -191,6 +194,7 @@ class SettingsCategoryTableViewController: UITableViewController {
         case 1:
             return "使用する勘定科目を設定することができます。"
         case 2:
+            // 法人/個人フラグ
             return UserDefaults.standard.bool(forKey: "corporation_switch") ? "決算書上に表示される表示科目を参照することができます。" : nil
         default:
             return nil

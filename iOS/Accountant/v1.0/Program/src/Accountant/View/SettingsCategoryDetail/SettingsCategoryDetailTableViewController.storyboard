@@ -17,13 +17,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="atH-Tk-ti9">
-                            <rect key="frame" x="0.0" y="243.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="243.5" width="414" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="htm-3x-yix" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                    <rect key="frame" x="119" y="0.0" width="179" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htm-3x-yix" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                    <rect key="frame" x="118" y="30" width="179" height="60"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="Lu3-M3-15R"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="24"/>
                                     <state key="normal" title="登録">
                                         <color key="titleColor" name="ButtonTextColor"/>
@@ -39,6 +41,11 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="htm-3x-yix" firstAttribute="width" secondItem="atH-Tk-ti9" secondAttribute="width" multiplier="0.432367" id="9gS-sg-tao"/>
+                                <constraint firstItem="htm-3x-yix" firstAttribute="centerY" secondItem="atH-Tk-ti9" secondAttribute="centerY" id="Ip4-kB-ut9"/>
+                                <constraint firstItem="htm-3x-yix" firstAttribute="centerX" secondItem="atH-Tk-ti9" secondAttribute="centerX" id="Z1H-Bh-m84"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category_big" id="LBG-EM-5r1" customClass="SettingAccountDetailTableViewCell" customModule="Paciolist" customModuleProvider="target">
@@ -129,7 +136,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="345.5" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aaaaaaa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbZ-zd-LJt" userLabel="label">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbZ-zd-LJt" userLabel="label">
                                             <rect key="frame" x="103.5" y="5" width="207.5" height="34"/>
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                             <color key="textColor" name="TextColor"/>

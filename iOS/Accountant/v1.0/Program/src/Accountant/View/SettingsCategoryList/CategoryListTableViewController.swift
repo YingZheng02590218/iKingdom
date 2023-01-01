@@ -179,7 +179,12 @@ class CategoryListTableViewController: UITableViewController {
         cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
         // モデルオブフェクトの取得 勘定別に取得
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String) // 通常仕訳　勘定別 全年度にしてはいけない
+        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(
+            account: presenter.objects(
+                forRow: indexPath.row,
+                section: indexPath.section
+            ).category as String
+        ) // 通常仕訳　勘定別 全年度にしてはいけない
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(
             account: presenter.objects(
                 forRow: indexPath.row,
@@ -188,8 +193,11 @@ class CategoryListTableViewController: UITableViewController {
         ) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
         // タクソノミに紐付けされていない勘定科目はスイッチをONにできないように無効化する
         if presenter.objects(forRow: indexPath.row, section: indexPath.section).numberOfTaxonomy.isEmpty {
-            // UIButtonを無効化
-            cell.toggleButton.isEnabled = false
+            // 法人/個人フラグ
+            if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                // UIButtonを無効化
+                cell.toggleButton.isEnabled = false
+            }
         } else {
             // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
             if objectss.isEmpty && objectsss.isEmpty {
