@@ -12,7 +12,7 @@ class PassCodeLockViewController: UIViewController {
 
     // MARK: - var let
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet private var label: UILabel!
     
     // MARK: - Life cycle
 
@@ -22,6 +22,7 @@ class PassCodeLockViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 文言を指定
         let type = LocalAuthentication.getDeviceOwnerLocalAuthenticationType()
         label.text = type.getDescriptionTitle() + "を使って\n認証して下さい"
@@ -46,10 +47,10 @@ class PassCodeLockViewController: UIViewController {
             successHandler: {
                 // 認証成功時の処理
                 // 生体認証パスコードロック
-                let ud = UserDefaults.standard
+                let userDefaults = UserDefaults.standard
                 let firstLunchKey = "biometrics"
-                ud.set(false, forKey: firstLunchKey)
-                ud.synchronize()
+                userDefaults.set(false, forKey: firstLunchKey)
+                userDefaults.synchronize()
                 // 生体認証パスコードロック画面を閉じる ロック解除
                 DispatchQueue.main.async {
                     self.dismiss(animated: false, completion: nil)
@@ -60,7 +61,7 @@ class PassCodeLockViewController: UIViewController {
                 DispatchQueue.main.async {
                     // アラート画面を表示する
                     // Paciolistの設定画面でパスコードロックをONにしている状態で、iPhoneの設定画面でパスコードをオフにした場合
-                    if errorReason != "" {
+                    if !errorReason.isEmpty {
                         let alert = UIAlertController(title: "エラー", message: errorReason, preferredStyle: .alert)
                         self.present(alert, animated: true) { () -> Void in
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

@@ -6,13 +6,13 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import Gecco
+import UIKit
 
 class AnnotationViewControllerSettingsCategory: SpotlightViewController {
 
     @IBOutlet var annotationViews: [UIView]!
-        
+
     var stepIndex: Int = 0
     lazy var geccoSpotlight = Spotlight.Oval(center: CGPoint(x: UIScreen.main.bounds.size.width / 2, y: 200 + view.safeAreaInsets.top), diameter: 220)
     
@@ -35,14 +35,21 @@ class AnnotationViewControllerSettingsCategory: SpotlightViewController {
         switch stepIndex {
         case 0:
             spotlightView.appear(
-                Spotlight.RoundedRect(center: CGPoint(x: rightBarButtonFrames.midX, y: rightBarButtonFrames.midY),
-                                      size: CGSize(width: rightBarButtonFrames.width, height: rightBarButtonFrames.height),
-                                      cornerRadius: 6)
+                Spotlight.RoundedRect(
+                    center: CGPoint(x: rightBarButtonFrames.midX, y: rightBarButtonFrames.midY),
+                    size: CGSize(width: rightBarButtonFrames.width, height: rightBarButtonFrames.height),
+                    cornerRadius: 6
+                )
             )
-            break
         default:
-            dismiss(animated: true, completion: nil)
-            break
+            if let navigationController = presentingViewController as? UINavigationController,
+            let navigationController2 = navigationController.viewControllers.last as? UINavigationController,
+            let presentingViewController = navigationController2.viewControllers.first as? SettingsCategoryTableViewController {
+                dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    // チュートリアル対応 コーチマーク型
+                    presentingViewController.finishAnnotation()
+                })
+            }
         }
         
         stepIndex += 1
@@ -91,10 +98,8 @@ private extension AnnotationViewControllerSettingsCategory {
             case 0:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.origin.y + 60
-                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
-                break
             }
         }
     }
@@ -103,24 +108,21 @@ private extension AnnotationViewControllerSettingsCategory {
     var viewControllerHasNavigationItem: UIViewController? {
         if let controller = presentingViewController as? UINavigationController {
             if controller.viewControllers[0] is SettingsCategoryTableViewController {
-                let tableViewControllerSettingsCategory = controller.viewControllers[0]
                 return controller.viewControllers[0]
-            }
-            else {
+            } else {
                 print(controller.viewControllers[0]) // SettingsTableViewController
                 print(controller.viewControllers[1]) // UINavigationController
                 return controller.viewControllers[1]
             }
         }
-        print(presentingViewController)
         return presentingViewController
     }
 
     func extractRightBarButtonConvertedFrames() -> (CGRect) {
         guard
             let first  = viewControllerHasNavigationItem?.view.viewWithTag(0)?.viewWithTag(1)
-            else {
-                fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
+        else {
+            fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
         return first.convert(first.bounds, to: view)
     }

@@ -826,15 +826,15 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" name="AccentBlue"/>
                                                 <connections>
-                                                    <outlet property="label_list_credit" destination="Mgu-8l-mZZ" id="r3u-NU-glb"/>
-                                                    <outlet property="label_list_date" destination="RMB-BR-qah" id="tdQ-BK-ZkH"/>
-                                                    <outlet property="label_list_date_month" destination="vJp-Pk-dX2" id="TxU-U7-1eR"/>
-                                                    <outlet property="label_list_debit" destination="aPd-Oj-5kn" id="zFR-8M-3SF"/>
-                                                    <outlet property="label_list_number_left" destination="C07-dQ-fgX" id="BL0-Vb-6u1"/>
-                                                    <outlet property="label_list_number_right" destination="mVa-QV-im9" id="DaC-p4-9qs"/>
-                                                    <outlet property="label_list_summary" destination="cYm-xa-3Nl" id="6Dc-Dj-IVJ"/>
-                                                    <outlet property="label_list_summary_credit" destination="MzK-ht-71v" id="Kjp-ph-AX9"/>
-                                                    <outlet property="label_list_summary_debit" destination="lqL-eb-go1" id="Arb-37-QgE"/>
+                                                    <outlet property="listCreditLabel" destination="Mgu-8l-mZZ" id="r3u-NU-glb"/>
+                                                    <outlet property="listDateLabel" destination="RMB-BR-qah" id="tdQ-BK-ZkH"/>
+                                                    <outlet property="listDateMonthLabel" destination="vJp-Pk-dX2" id="TxU-U7-1eR"/>
+                                                    <outlet property="listDebitLabel" destination="aPd-Oj-5kn" id="zFR-8M-3SF"/>
+                                                    <outlet property="listNumberLeftLabel" destination="C07-dQ-fgX" id="BL0-Vb-6u1"/>
+                                                    <outlet property="listNumberRightLabel" destination="mVa-QV-im9" id="DaC-p4-9qs"/>
+                                                    <outlet property="listSummaryCreditLabel" destination="MzK-ht-71v" id="Kjp-ph-AX9"/>
+                                                    <outlet property="listSummaryDebitLabel" destination="lqL-eb-go1" id="Arb-37-QgE"/>
+                                                    <outlet property="listSummaryLabel" destination="cYm-xa-3Nl" id="6Dc-Dj-IVJ"/>
                                                     <segue destination="TR8-pc-zuU" kind="presentation" identifier="longTapped" id="W6Q-N5-Dbe"/>
                                                 </connections>
                                             </tableViewCell>
@@ -865,7 +865,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="選択した項目を編集"/>
                                         <connections>
-                                            <action selector="barButtonItem_move:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V7e-Ga-oou"/>
+                                            <action selector="editBarButtonItemTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oZ7-Ga-Dz2"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -908,15 +908,15 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="Label_list_date_year" destination="uc9-bY-flm" id="bfs-5c-RHb"/>
+                        <outlet property="addBarButtonItem" destination="uJC-kS-QV3" id="ZB0-Rc-Gyf"/>
                         <outlet property="backgroundView" destination="iWJ-SB-FwY" id="V9x-28-Ync"/>
-                        <outlet property="barButtonItem_add" destination="uJC-kS-QV3" id="ZB0-Rc-Gyf"/>
-                        <outlet property="button_edit" destination="Haf-gE-g6w" id="Rbb-dU-Oll"/>
-                        <outlet property="label_closingDate" destination="O7L-5s-hJI" id="zKE-dF-zr8"/>
-                        <outlet property="label_company_name" destination="eWE-1V-x9k" id="OVf-0F-YBd"/>
-                        <outlet property="label_title" destination="aIP-xT-tcO" id="xpB-EK-qaq"/>
+                        <outlet property="closingDateLabel" destination="O7L-5s-hJI" id="zKE-dF-zr8"/>
+                        <outlet property="editWithSlectionButton" destination="Haf-gE-g6w" id="Rbb-dU-Oll"/>
+                        <outlet property="labelCompanyName" destination="eWE-1V-x9k" id="OVf-0F-YBd"/>
+                        <outlet property="listDateYearLabel" destination="uc9-bY-flm" id="bfs-5c-RHb"/>
                         <outlet property="pdfBarButtonItem" destination="i4W-ZZ-FXk" id="Lar-Wc-LrD"/>
                         <outlet property="tableView" destination="V3Q-kP-pLv" id="M8i-gW-k4T"/>
+                        <outlet property="titleLabel" destination="aIP-xT-tcO" id="xpB-EK-qaq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1036,13 +1036,13 @@
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.13333333333333333" green="0.27843137254901962" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48496460914611816" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

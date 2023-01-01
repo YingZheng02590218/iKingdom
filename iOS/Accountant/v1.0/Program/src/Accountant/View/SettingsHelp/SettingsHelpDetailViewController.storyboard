@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L06-3q-mbG">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings Help Detail View Controller-->
+        <scene sceneID="lAS-3p-qfQ">
+            <objects>
+                <viewController storyboardIdentifier="SettingsHelpDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0EX-ri-3LQ" customClass="SettingsHelpDetailViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="78T-2F-2CX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+このアプリについて
+
+
+概要：
+このアプリは、正統派な複式簿記スタイルにデザインされた会計アプリです。
+日々の取引を仕訳入力することで、主要簿である仕訳帳、総勘定元帳と集計表(試算表、精算表)、最終成果物である財務諸表を作成することができます。
+登録手続き不要。
+入力件数制限なし。
+確定申告、家計簿をつけたい方などがご利用いただけます。
+
+
+想定ユーザー：　
+複式簿記の基礎的な知識があり複式簿記で帳簿付けをしたい方、
+もしくは、実際に帳簿付けを行いながら複式簿記を身につけてファイナンシャルリテラシーを養いたい方を対象としています。
+法人、個人事業主に対応
+
+コンセプト：　
+アナログな簿記を独自の呼称や形式を使わずにそのまま、デジタルで表現したデザインです。
+複式簿記で記帳する紙ベースの帳簿を、素早く便利なスマホで使いたいという気持ちから生まれたアプリです。
+
+
+作成書類：　
+主要簿　： 仕訳帳、総勘定元帳
+財務諸表： 貸借対照表、損益計算書
+集計表　： 試算表(合計試算表、残高試算表)、精算表(8桁精算表)
+　　　　　　作成書類は印刷が可能です。
+
+
+アプリ名：　
+Paciolist パチョーリ主義 
+ルカ・パチョーリ　Fra Luca Bartolomeo de Pacioli
+イタリアの数学者、修道僧。簿記の教科書となる本を書いた「近代会計学の父」と呼ばれる。彼の思想を受け継ぐアプリという意味が由来です。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+当アプリで採用した会計概念
+
+□　簿記の分類
+　　* 複式簿記
+
+□　帳簿会計の分類
+　　* 帳簿会計
+　　    * 単一仕訳帳制
+
+□　会計帳簿の分類
+　　* 主要簿
+    　　* 仕訳帳
+   　　 * 総勘定元帳　書式：残高式
+
+□　仕訳の分類
+　　* 単純仕訳（単一仕訳）
+　　* 決算仕訳
+　　    * 決算整理仕訳…決算本手続きの前半で行われる決算整理前の各勘定残高の修正仕訳
+　　    * 決算振替仕訳…決算本手続きの後半で行われる振替仕訳
+　　        * 損益振替仕訳　→損益勘定に集計
+　　        * 資本振替仕訳　→損益勘定の締切り
+
+□　帳簿決算（帳簿の締め切り）方法
+　　* 英米式決算法
+
+□　経済活動の種類による分類
+　　* 商業簿記
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+
+
+1. 簿記の基礎
+
+    1. 取引の発生から財務諸表までの流れ
+        1. 取引の発生
+        2. 仕訳
+        3. 総勘定元帳へ転記
+        4. 残高試算表の作成
+        5. 財務諸表の作成
+
+
+このアプリでは、3〜5を自動で処理します。 
+
+
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+1. 初期設定の手順
+    1. 基本情報の登録 
+    2. 勘定科目体系の登録 
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+2. 基本情報の登録をしよう
+
+    * 事業者名を設定しよう
+帳簿情報 &gt; 事業者名 &gt; 任意の名称
+
+
+
+こちらで設定した事業者名は、財務諸表や仕訳帳、精算表、試算表に表示されます。
+
+    * 決算日を設定しよう
+会計期間 &gt; 月 &gt; 任意の月
+会計期間 &gt; 日 &gt; 任意の日
+
+
+
+こちらで設定した決算日は、財務諸表や仕訳帳、精算表、試算表に表示されます。
+仕訳入力をする際に、決算日を基準とした会計期間外の日付を選択されなくなります。
+
+    * 会計帳簿を作成しよう
+会計期間 &gt; ＋ &gt; 任意の年度 &gt; Save
+
+
+
+
+会計帳簿を作成後に、任意の年度の帳簿を開くことができます。
+
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+3. 勘定科目を設定しよう
+
+* 準備資料
+    * 以前使用していた会計帳簿や前年度の決算書
+どのような勘定科目が必要なのかを確認することができます。
+
+    * 前年の勘定科目内訳明細書
+    * 前年の青色申告決算書や収支内訳書
+どのような表示科目が必要なのかを確認することができます。
+※ 表示科目とは、財務諸表に表示される勘定科目を集計した科目です。
+
+
+* 勘定科目の確認
+勘定科目毎にスイッチがあります。使用したい勘定科目をONに、不使用の勘定科目をOFFに設定してください。
+表示方法は2通りあります
+
+
+    * 勘定科目を一覧で表示
+勘定科目 &gt; 勘定科目一覧 &gt; 勘定科目一覧画面
+
+
+
+
+表示順：流動資産 → 固定資産 → 繰延資産 → 流動負債 → 固定負債 → 資本 → 売上 → 販売費及び一般管理費 → 営業外損益 → 特別損益 → 税金
+
+
+    * 表示科目別に勘定科目を表示
+勘定科目 &gt; 表示科目別勘定科目一覧 &gt; BS/PL切替えボタン
+
+
+
+
+BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替えることができます。
+
+
+* 勘定科目体系の図
+
+
+* 新規に追加登録する
+勘定科目 &gt; 勘定科目一覧 &gt; Edit &gt; 勘定科目追加 &gt; 大区分 &gt; 中区分 &gt; 勘定科目名 &gt; 表示科目名 &gt; 登録 &gt; Done
+
+
+
+
+
+
+
+勘定科目を追加登録後は、表示科目のみ変更が可能です。
+
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+4. 勘定科目の編集しよう
+
+    * 修正をする
+勘定科目 &gt; 勘定科目一覧 &gt; 任意の勘定科目 &gt; 表示科目名 &gt; 任意の表示科目 &gt; OK
+
+
+
+
+
+
+
+表示科目名のみ変更が可能です。
+
+
+    * 削除をする
+勘定科目 &gt; 勘定科目一覧 &gt; Edit &gt; 任意の勘定科目の赤い丸ボタン &gt; ゴミ箱ボタン &gt; OK &gt; Done
+
+
+
+
+
+
+
+
+新規で追加した勘定科目のみ削除が可能です。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+5. 環境設定を確認・変更しよう
+
+    * 仕訳帳画面
+勘定科目 &gt; 仕訳帳
+
+        * 決算振替仕訳
+
+
+
+損益振替仕訳と資本振替仕訳の表示と非表示を切り替えることができます。
+
+
+
+
+
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+4. 帳簿に記帳する
+    1. 仕訳を入力する
+仕訳 &gt; 日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 入力ボタン
+
+
+① 日付の入力
+ドラムロールとボタンを操作して日付を選択できます。
+
+②④ 勘定科目の入力
+入力欄をタップすると、ドラムロールが表示されます。
+ドラムロールの左列が勘定科目の大区分、右列が勘定科目です。
+
+③ 金額の入力
+入力欄をタップすると、キーボードが表示されます。
+7桁までの金額を入力できます。
+
+⑤ 小書きの入力
+入力欄をタップすると、キーボードが表示されます。
+20桁までの金額を入力できます。
+
+⑥ 入力ボタン
+ボタンをタップすると仕訳が記帳されます。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+
+
+4. 帳簿に記帳する
+    2. 仕訳を修正する
+仕訳帳 &gt; 任意の仕訳を長押し &gt; 仕訳
+
+
+
+① 任意の仕訳を長押し
+任意の仕訳を長押しすると仕訳画面が表示されます。
+
+② 仕訳画面
+日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 更新ボタン
+仕訳をすると同様の手順です。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+4. 帳簿に記帳する
+    3. 仕訳を削除する
+仕訳帳 &gt; 任意の仕訳を右から左へスワイプ &gt; ゴミ箱ボタン &gt; OK
+
+
+
+
+① 任意の仕訳を右から左へスワイプ
+任意の仕訳を右から左へスワイプすると確認画面が表示されます。
+
+② ゴミ箱ボタン
+ゴミ箱ボタンをタップします。
+
+③ OK
+OKボタンをタップします。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">
+
+4. 帳簿に記帳する
+    4. 入力した取引を確認しよう
+
+* 仕訳帳
+仕訳帳 &gt; 仕訳帳画面
+
+
+
+* 総勘定元帳
+総勘定元帳 &gt; 総勘定元帳画面 &gt; 任意の勘定 &gt; 勘定画面
+
+
+
+② 任意の勘定
+仕訳データが一件も存在しない勘定は、勘定名がグレーとなっています。
+
+
+
+
+
+
+</string>
+                                <color key="textColor" name="TextColor"/>
+                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yXR-Mj-B82"/>
+                        <color key="backgroundColor" name="BaseColor"/>
+                        <constraints>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="3oC-yC-dlZ"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="633-KG-GqZ"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="74S-Ot-tsh"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="9sT-mm-R4P"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="GPP-ep-hK8"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="JNg-t2-0FL"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="flD-rt-n5l" secondAttribute="bottom" id="JhM-gz-6dr"/>
+                            <constraint firstItem="Edc-8G-Bh4" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="K2b-39-71s"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Q4H-SJ-CSd"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Qd0-AD-rEj"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="flD-rt-n5l" secondAttribute="trailing" id="S5b-Qo-Rfa"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="TCz-5z-1Sf"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="MiP-9d-jNF" secondAttribute="trailing" id="Tim-sC-dW5"/>
+                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="UQO-Ui-NaK"/>
+                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Y0E-mg-gh4"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Z32-Gl-tkR"/>
+                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Z3c-VO-fXh"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Edc-8G-Bh4" secondAttribute="trailing" id="d3B-lI-Fq9"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="dZ6-1x-t0c"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
+                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
+                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="euo-8m-YyO"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="T3l-sa-OQv" secondAttribute="bottom" id="h9b-OY-E6O"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="hG8-XR-9bP"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
+                            <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="kKt-l1-IYQ"/>
+                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="oU6-Lr-YQf"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="p8P-f4-mAi"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="r2w-Lj-amg"/>
+                            <constraint firstItem="T3l-sa-OQv" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="t2j-s7-Cnt"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="MiP-9d-jNF" secondAttribute="bottom" id="tx5-f8-yYo"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="x8H-A1-lTa"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="xqE-bB-oEH"/>
+                            <constraint firstItem="MiP-9d-jNF" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="xv3-O3-HNX"/>
+                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="y5T-29-zst"/>
+                            <constraint firstItem="flD-rt-n5l" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="yh2-39-EMk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
+                    <connections>
+                        <outlet property="aboutThisAppTextView" destination="MiP-9d-jNF" id="alY-5L-XMd"/>
+                        <outlet property="basicOfBookkeepingTextView" destination="BUW-1U-SgM" id="Oxc-Ga-O4h"/>
+                        <outlet property="configurationTextView" destination="0pN-XE-IXu" id="34I-H0-jCd"/>
+                        <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
+                        <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
+                        <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
+                        <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
+                        <outlet property="setUpAccountEditTextView" destination="7dM-0h-33G" id="ydP-aF-ok0"/>
+                        <outlet property="setUpAccountTextView" destination="VOT-no-hpO" id="4sq-Cc-uTF"/>
+                        <outlet property="setUpBasicInfoTextView" destination="Edc-8G-Bh4" id="PUT-oc-JBr"/>
+                        <outlet property="setUpTextView" destination="T3l-sa-OQv" id="m7X-PK-T0W"/>
+                        <outlet property="thoughtTextView" destination="flD-rt-n5l" id="V4c-Cw-xjD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8957.971014492754" y="4974.7767857142853"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cdv-ki-GVD">
+            <objects>
+                <navigationController id="L06-3q-mbG" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vbR-Oq-jAM">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0EX-ri-3LQ" kind="relationship" relationship="rootViewController" id="MYV-TY-xgu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UwC-fa-Cy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8958" y="4244"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="TextColor">
+            <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

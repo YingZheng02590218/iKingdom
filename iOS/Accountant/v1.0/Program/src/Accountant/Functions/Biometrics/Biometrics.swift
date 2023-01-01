@@ -12,72 +12,72 @@ import LocalAuthentication
 enum LocalAuthentication {
     
     // 生体認証を行う
-    static func auth(successHandler: (() -> ())? = nil,
-                     errorHandler: ((String) -> Void)? = nil) {
+    static func auth(
+        successHandler: (() -> ())? = nil,
+        errorHandler: ((String) -> Void)? = nil) {
 
-        let context = LAContext()
-        // Mac のシミュレータでTouchIDの入力画面のポップアップの文言が、「"" is trying to」となるのでローカライズする
-        let localizedReason = Locale.preferredLanguages.first == "ja-JP" ? "ロックを解除するために利用します。" : "Log in to your account"
-        var errorReason = ""
+            let context = LAContext()
+            // Mac のシミュレータでTouchIDの入力画面のポップアップの文言が、「"" is trying to」となるのでローカライズする
+            let localizedReason = Locale.preferredLanguages.first == "ja-JP" ? "ロックを解除するために利用します。" : "Log in to your account"
+            var errorReason = ""
 
-        context.evaluatePolicy(.deviceOwnerAuthentication,
-                               localizedReason: localizedReason,
-                               reply: { success, error in
-            
-            if let error = error {
-                switch LAError(_nsError: error as NSError).code {
-                case .appCancel:
-                    // システムによるキャンセル① アプリのコード
-                    break
-                case .systemCancel:
-                    // システムによるキャンセル② システム　アプリを閉じるなどをした場合
-                    break
-                case .userCancel:
-                    // ユーザーによってキャンセルされた場合
-                    break
-                case .biometryLockout:
-                    // 生体認証エラー① 失敗制限に達した際のロック
-                    break
-                case .biometryNotAvailable:
-                    // 生体認証エラー② 許可していない　呼ばれないようだ
-                    break
-                case .biometryNotEnrolled:
-                    // 生体認証エラー③ 生体認証IDが１つもない　呼ばれないようだ
-                    break
-                case .authenticationFailed:
-                    // 認証に失敗してエラー　呼ばれないようだ
-                    break
-                case .invalidContext:
-                    // システムによるエラー① すでに無効化済み
-                    break
-                case .notInteractive:
-                    // システムによるエラー② 非表示になっている
-                    break
-                case .passcodeNotSet:
-                    // パスコード認証エラー① パスコードを設定していない
-                    errorReason = "パスコードを設定してください"
-                    break
-                case .userFallback:
-                    // パスコード認証エラー② LAPolicyによって無効化
-                    break
-                default:
-                    // そのほかの未対応エラー
-                    break
+            context.evaluatePolicy(
+                .deviceOwnerAuthentication,
+                localizedReason: localizedReason,
+                reply: { success, error in
+
+                    if let error = error {
+                        switch LAError(_nsError: error as NSError).code {
+                        case .appCancel:
+                            // システムによるキャンセル① アプリのコード
+                            break
+                        case .systemCancel:
+                            // システムによるキャンセル② システム　アプリを閉じるなどをした場合
+                            break
+                        case .userCancel:
+                            // ユーザーによってキャンセルされた場合
+                            break
+                        case .biometryLockout:
+                            // 生体認証エラー① 失敗制限に達した際のロック
+                            break
+                        case .biometryNotAvailable:
+                            // 生体認証エラー② 許可していない　呼ばれないようだ
+                            break
+                        case .biometryNotEnrolled:
+                            // 生体認証エラー③ 生体認証IDが１つもない　呼ばれないようだ
+                            break
+                        case .authenticationFailed:
+                            // 認証に失敗してエラー　呼ばれないようだ
+                            break
+                        case .invalidContext:
+                            // システムによるエラー① すでに無効化済み
+                            break
+                        case .notInteractive:
+                            // システムによるエラー② 非表示になっている
+                            break
+                        case .passcodeNotSet:
+                            // パスコード認証エラー① パスコードを設定していない
+                            errorReason = "パスコードを設定してください"
+                        case .userFallback:
+                            // パスコード認証エラー② LAPolicyによって無効化
+                            break
+                        default:
+                            // そのほかの未対応エラー
+                            break
+                        }
+                        errorHandler?(errorReason)
+                        print("認証失敗: ", errorReason)
+                    } else if success {
+                        // 認証成功時の処理
+                        successHandler?()
+                        print("認証成功: ")
+                    } else {
+                        // 予期せぬエラーの場合
+                        print("Authenticate Cancel: " + (error?.localizedDescription ?? "Unknown Error"))
+                    }
                 }
-                errorHandler?(errorReason)
-                print("認証失敗:", errorReason)
-            }
-            else if success {
-                // 認証成功時の処理
-                successHandler?()
-                print("認証成功:")
-            }
-            else {
-                // 予期せぬエラーの場合
-                print("Authenticate Cancel: " + (error?.localizedDescription ?? "Unknown Error"))
-            }
-        })
-    }
+            )
+        }
     
     // MARK: - Static Function
     
@@ -100,8 +100,7 @@ enum LocalAuthentication {
             // 生体認証が利用できるか
             if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                 return .authWithTouchID
-            }
-            else {
+            } else {
                 return .authWithManual
             }
         }

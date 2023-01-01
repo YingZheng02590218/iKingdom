@@ -12,7 +12,7 @@ import RealmSwift
 // マスターデータクラス
 class MasterData {
 
-    func toBoolean(string:String) -> Bool {
+    func toBoolean(string: String) -> Bool {
         switch string {
         case "TRUE", "True", "true", "YES", "Yes", "yes", "1":
             return true
@@ -27,7 +27,7 @@ class MasterData {
     func readMasterDataFromCSVOfTaxonomyAccount() {
         if let csvPath = Bundle.main.path(forResource: "TaxonomyAccount", ofType: "csv") {
             var csvString = ""
-            do{
+            do {
                 csvString = try NSString(contentsOfFile: csvPath, encoding: String.Encoding.utf8.rawValue) as String
             } catch let error as NSError {
                 print(error.localizedDescription)
@@ -36,19 +36,24 @@ class MasterData {
                 // 保存先のパスを出力しておく
                 print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
                 // モデルオブフェクトを生成
-                let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount()
+                let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount(
+                    Rank0: line.components(separatedBy: ",")[0], // 大区分
+                    Rank1: line.components(separatedBy: ",")[1], // 中区分
+                    Rank2: line.components(separatedBy: ",")[2], // 小区分
+                    numberOfTaxonomy: line.components(separatedBy: ",")[3], // 紐づけた表示科目
+                    category: line.components(separatedBy: ",")[4], // 勘定科目名
+                    AdjustingAndClosingEntries: false, // 決算整理仕訳　使用していない2020/10/07
+                    switching: self.toBoolean(string: line.components(separatedBy: ",")[5]) // スイッチ
+                )
                 var number = 0 // 自動採番にした
-                dataBaseSettingsTaxonomyAccount.Rank0 = line.components(separatedBy:",")[0] // 大区分
-                dataBaseSettingsTaxonomyAccount.Rank1 = line.components(separatedBy:",")[1] // 中区分
-                dataBaseSettingsTaxonomyAccount.Rank2 = line.components(separatedBy:",")[2] // 小区分
-                dataBaseSettingsTaxonomyAccount.numberOfTaxonomy = line.components(separatedBy:",")[3] // 紐づけた表示科目
-                dataBaseSettingsTaxonomyAccount.category = line.components(separatedBy:",")[4] // 勘定科目名
-                dataBaseSettingsTaxonomyAccount.switching = self.toBoolean(string: line.components(separatedBy:",")[5]) // スイッチ
                 // 書き込み
-                let realm = try! Realm()
-                try! realm.write {
-                    number = dataBaseSettingsTaxonomyAccount.save() // 連番　自動採番
-                    realm.add(dataBaseSettingsTaxonomyAccount)
+                do {
+                    try DataBaseManager.realm.write {
+                        number = dataBaseSettingsTaxonomyAccount.save() // 連番　自動採番
+                        DataBaseManager.realm.add(dataBaseSettingsTaxonomyAccount)
+                    }
+                } catch {
+                    print("エラーが発生しました")
                 }
                 print("連番: \(number), \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
             }
@@ -58,7 +63,7 @@ class MasterData {
     func readMasterDataFromCSVOfTaxonomy() {
         if let csvPath = Bundle.main.path(forResource: "taxonomy", ofType: "csv") {
             var csvString = ""
-            do{
+            do {
                 csvString = try NSString(contentsOfFile: csvPath, encoding: String.Encoding.utf8.rawValue) as String
             } catch let error as NSError {
                 print(error.localizedDescription)
@@ -67,24 +72,28 @@ class MasterData {
                 // 保存先のパスを出力しておく
                 print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
                 // モデルオブフェクトを生成
-                let dataBaseSettingsCategoryTaxonomy = DataBaseSettingsTaxonomy()
+                let dataBaseSettingsCategoryTaxonomy = DataBaseSettingsTaxonomy(
+                    category0: line.components(separatedBy: ",")[0],
+                    category1: line.components(separatedBy: ",")[1],
+                    category2: line.components(separatedBy: ",")[2],
+                    category3: line.components(separatedBy: ",")[3],
+                    category4: line.components(separatedBy: ",")[4],
+                    category5: line.components(separatedBy: ",")[5],
+                    category6: line.components(separatedBy: ",")[6],
+                    category7: line.components(separatedBy: ",")[7],
+                    category: line.components(separatedBy: ",")[8], // 表示科目
+                    abstract: self.toBoolean(string: line.components(separatedBy: ",")[9]),
+                    switching: self.toBoolean(string: line.components(separatedBy: ",")[10])
+                )
                 var number = 0 // 自動採番にした
-                dataBaseSettingsCategoryTaxonomy.category0 = line.components(separatedBy:",")[0]
-                dataBaseSettingsCategoryTaxonomy.category1 = line.components(separatedBy:",")[1]
-                dataBaseSettingsCategoryTaxonomy.category2 = line.components(separatedBy:",")[2]
-                dataBaseSettingsCategoryTaxonomy.category3 = line.components(separatedBy:",")[3]
-                dataBaseSettingsCategoryTaxonomy.category4 = line.components(separatedBy:",")[4]
-                dataBaseSettingsCategoryTaxonomy.category5 = line.components(separatedBy:",")[5]
-                dataBaseSettingsCategoryTaxonomy.category6 = line.components(separatedBy:",")[6]
-                dataBaseSettingsCategoryTaxonomy.category7 = line.components(separatedBy:",")[7]
-                dataBaseSettingsCategoryTaxonomy.category = line.components(separatedBy:",")[8]//表示科目
-                dataBaseSettingsCategoryTaxonomy.abstract = self.toBoolean(string: line.components(separatedBy:",")[9])
-                dataBaseSettingsCategoryTaxonomy.switching = self.toBoolean(string: line.components(separatedBy:",")[10])
                 // 書き込み
-                let realm = try! Realm()
-                try! realm.write {
-                    number = dataBaseSettingsCategoryTaxonomy.save() // 連番　自動採番
-                    realm.add(dataBaseSettingsCategoryTaxonomy)
+                do {
+                    try DataBaseManager.realm.write {
+                        number = dataBaseSettingsCategoryTaxonomy.save() // 連番　自動採番
+                        DataBaseManager.realm.add(dataBaseSettingsCategoryTaxonomy)
+                    }
+                } catch {
+                    print("エラーが発生しました")
                 }
                 print("連番: \(number)")
             }

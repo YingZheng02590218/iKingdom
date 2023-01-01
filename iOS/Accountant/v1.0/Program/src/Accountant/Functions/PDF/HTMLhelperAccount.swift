@@ -12,8 +12,8 @@ import UIKit
 struct HTMLhelperAccount {
     
     func headerHTMLstring() -> String {
-        //htmlヘッダーを生成します。
-        //たとえば、ここに店の名前を入力できます
+        // htmlヘッダーを生成します。
+        // たとえば、ここに店の名前を入力できます
         return """
         <!DOCTYPE html>
         <html>
@@ -253,8 +253,7 @@ struct HTMLhelperAccount {
     }
     
     func headerstring(title: String, fiscalYear: Int, pageNumber: Int) -> String {
-
-        return """
+        """
             <section class="page">
                 <div class="richediter l-container">
 
@@ -331,30 +330,40 @@ struct HTMLhelperAccount {
     """
     }
     
-    func getSingleRow(month: String, day: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, correspondingAccounts: String, numberOfAccount: Int, balanceAmount: Int64, balanceDebitOrCredit: String) -> String {
+    func getSingleRow(
+        month: String,
+        day: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        correspondingAccounts: String,
+        numberOfAccount: Int,
+        balanceAmount: Int64,
+        balanceDebitOrCredit: String
+    ) -> String {
         // 摘要は勘定科目を右寄せか左よせを分岐する
-        if correspondingAccounts == debit_category {
+        if correspondingAccounts == debitCategory {
             return """
             　<tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debit_category)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debitCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(credit_amount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(creditAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
                   <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
                 </tr>
     """
-        }
-        else {
+        } else {
             return """
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95">\(credit_category)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debit_amount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debitAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
                   <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
@@ -364,7 +373,7 @@ struct HTMLhelperAccount {
     }
 
     func getSingleRowEmpty() -> String {
-        return """
+        """
                                    <tr class="rowHeight">
                                      <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
                                      <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
@@ -378,8 +387,8 @@ struct HTMLhelperAccount {
     """
     }
 
-    func footerstring(debit_amount: Int64, credit_amount: Int64) -> String {
-        return """
+    func footerstring(debitAmount: Int64, creditAmount: Int64) -> String {
+        """
                                    <tr class="rowHeight">
                                       <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
                                       <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
@@ -398,7 +407,7 @@ struct HTMLhelperAccount {
     }
 
     func footerHTMLstring() -> String {
-        return """
+        """
         </body>
     </html>
     """

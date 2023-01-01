@@ -53,7 +53,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         backgroundViewForNeumorphism.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         backgroundViewForNeumorphism.neumorphicLayer?.edged = Constant.edged
         backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = UIColor.BaseColor.cgColor
+        backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     
 }

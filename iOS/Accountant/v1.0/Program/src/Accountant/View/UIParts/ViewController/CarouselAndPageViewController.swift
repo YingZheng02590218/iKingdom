@@ -15,10 +15,12 @@ class CarouselAndPageViewController: UIViewController {
     @IBOutlet var carouselCollectionView: UICollectionView!
     var pageTabItems: [String] = [] // タブに表示する文言
     var selectedIndex: Int = 0 // 選択されたカルーセルのタブのRow private
-    var pageViewController: UIPageViewController { return self.children.compactMap { $0 as? UIPageViewController }.first! } // 中央のView private
-    
+    var pageViewController: UIPageViewController {
+        self.children.compactMap { $0 as? UIPageViewController }.first!
+    } // 中央のView private
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // タブに表示する文言
@@ -27,7 +29,7 @@ class CarouselAndPageViewController: UIViewController {
         settingCollectionView()
         settingPageView()
     }
-    
+
     // MARK: - Setting
 
     func settingCollectionView() {
@@ -45,7 +47,7 @@ class CarouselAndPageViewController: UIViewController {
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize // Labelの文言に合わせてセルの幅を変化させる
         carouselCollectionView.collectionViewLayout = layout
     }
-    
+
     func settingPageView() {
         // デリゲート、データソース
         pageViewController.delegate = self
@@ -55,19 +57,19 @@ class CarouselAndPageViewController: UIViewController {
         // Storyboardから遷移先のViewControllerを生成
         selectTab(selectedIndex)
     }
-    
+
     // MARK: - Action
 
     // カルーセルのタブをタップされたときに中央のビューをスクロールさせる
     func selectTab(_ index: Int) {
         // 選択されたタブのViewControllerをセットする
-        let viewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as! PageContentViewController
-        viewController.index = index
-        pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
-        // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
-        self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        if let viewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as? PageContentViewController {
+            viewController.index = index
+            pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
+            // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
+            self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+        }
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -75,13 +77,16 @@ class CarouselAndPageViewController: UIViewController {
 
 // カルーセル
 extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pageTabItems.count
+        pageTabItems.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as! CarouselTabCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "CarouselTabCollectionViewCell",
+            for: indexPath
+        ) as? CarouselTabCollectionViewCell else { return UICollectionViewCell() }
         cell.label.text = "\(pageTabItems[indexPath.row])"
         return cell
     }
@@ -94,7 +99,7 @@ extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionV
     }
     // セルが選択解除されたとき
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
+
     }
 }
 
@@ -102,10 +107,11 @@ extension CarouselAndPageViewController: UICollectionViewDelegate, UICollectionV
 
 // カルーセル　セルのサイズ、位置
 extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
-    
     // セルのサイズ
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cell:CarouselTabCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as! CarouselTabCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CarouselTabCollectionViewCell", for: indexPath) as? CarouselTabCollectionViewCell else {
+            return CGSize(width: collectionView.frame.height * 2, height: collectionView.frame.height)
+        }
         print(cell.label.frame.width, collectionView.frame.height)
 //        return CGSize(width: cell.label.frame.width, height: collectionView.frame.height)
         return CGSize(width: collectionView.frame.height * 2, height: collectionView.frame.height)
@@ -137,10 +143,9 @@ extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
 
 //        let inset = (collectionView.bounds.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
 //        return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-        
+
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
 }
 
 // MARK: - UIPageViewControllerDelegate
@@ -148,11 +153,12 @@ extension CarouselAndPageViewController: UICollectionViewDelegateFlowLayout {
 
 // 中央のビュー
 extension CarouselAndPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    
     // 右にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         // 遷移先のViewControllerを生成
-        let beforeViewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as! PageContentViewController
+        guard let beforeViewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as? PageContentViewController else {
+            return nil
+        }
         if let viewController = viewController as? PageContentViewController {
             let beforeIndex: Int = viewController.index - 1
             if beforeIndex < 0 {
@@ -165,7 +171,9 @@ extension CarouselAndPageViewController: UIPageViewControllerDelegate, UIPageVie
     }
     // 左にスワイプ　戻り値のViewControllerが表示され、nilならそれ以上進まない
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let afterViewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as! PageContentViewController
+        guard let afterViewController = UIStoryboard(name: "PageContentViewController", bundle: nil).instantiateInitialViewController() as? PageContentViewController else {
+            return nil
+        }
         if let viewController = viewController as? PageContentViewController {
             let afterIndex: Int = viewController.index + 1
             let maxCount = pageTabItems.count
@@ -177,7 +185,7 @@ extension CarouselAndPageViewController: UIPageViewControllerDelegate, UIPageVie
         }
         return afterViewController
     }
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         // viewControllerBefore と viewControllerAfter　は2回処理が走ってインデックスがずれるので、アニメーション完了後にインデックスを取得
         if let currentVC = pageViewController.viewControllers?.first as? PageContentViewController {

@@ -10,7 +10,6 @@ import UIKit
 
 class WithLabelTableViewCell: UITableViewCell {
 
-    
     @IBOutlet var leftTextLabel: UILabel!
     @IBOutlet var rightdetailTextLabel: UILabel!
 
