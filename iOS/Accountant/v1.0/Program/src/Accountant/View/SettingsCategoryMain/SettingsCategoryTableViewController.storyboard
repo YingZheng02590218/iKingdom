@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--勘定科目-->
+        <!--勘定科目体系-->
         <scene sceneID="xVF-Xk-E5N">
             <objects>
                 <tableViewController id="50f-JZ-N5i" customClass="SettingsCategoryTableViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
@@ -70,7 +70,7 @@
                             <outlet property="delegate" destination="50f-JZ-N5i" id="WUu-uN-oqd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="勘定科目" id="4BT-h1-e9g"/>
+                    <navigationItem key="navigationItem" title="勘定科目体系" id="4BT-h1-e9g"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NuZ-on-EjJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

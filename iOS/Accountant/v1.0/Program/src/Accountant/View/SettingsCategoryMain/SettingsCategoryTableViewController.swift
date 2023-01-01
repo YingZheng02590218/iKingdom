@@ -9,14 +9,19 @@
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
-// 勘定科目クラス
+// 勘定科目体系クラス
 class SettingsCategoryTableViewController: UITableViewController {
 
     var gADBannerView: GADBannerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // title設定
+        navigationItem.title = "勘定科目体系"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,19 +111,61 @@ class SettingsCategoryTableViewController: UITableViewController {
         // 赤ポチを終了
         self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = nil
     }
-    
+
+    // 勘定科目体系　設定スイッチ 切り替え
+    @objc func onSegment(sender: UISegmentedControl) {
+        // セグメントコントロール　0: 法人, 1:個人
+        let segStatus = sender.selectedSegmentIndex == 0 ? true : false
+        print("Segment \(segStatus)")
+
+        let alert = UIAlertController(
+            title: "変更",
+            message: "勘定科目体系を変更しますか？",
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    // 法人/個人フラグ　設定スイッチ
+                    UserDefaults.standard.set(segStatus, forKey: "corporation_switch")
+                    UserDefaults.standard.synchronize()
+
+                    // リロード
+                    self.tableView.reloadData()
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { _ in
+                    DispatchQueue.main.async {
+                        // 法人/個人フラグ　スイッチを元に戻す
+                        sender.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "corporation_switch") ? 0 : 1
+                    }
+                }
+            )
+        )
+        present(alert, animated: true, completion: nil)
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
-        case 1:
             return 1
+        case 1:
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? 2 : 1
+        case 2:
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? 1 : 0
         default:
             return 0
         }
@@ -127,26 +174,26 @@ class SettingsCategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "勘定科目"
+            return nil
         case 1:
-            return "表示科目"
-            //        case 2:
-            //            return "情報"
+            return "勘定科目"
+        case 2:
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "表示科目" : nil
         default:
-            return ""
+            return nil
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "使用する勘定科目を設定することができます。"
+            return nil
         case 1:
-            return "決算書上に表示される表示科目を参照することができます。"
-            //        case 2:
-            //            return "帳簿情報を設定することができます。"
+            return "使用する勘定科目を設定することができます。"
+        case 2:
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "決算書上に表示される表示科目を参照することができます。" : nil
         default:
-            return ""
+            return nil
         }
     }
     
@@ -155,6 +202,18 @@ class SettingsCategoryTableViewController: UITableViewController {
         var cell = UITableViewCell()
 
         if indexPath.section == 0 {
+            if cell.accessoryView == nil {
+                // 法人/個人フラグ　設定スイッチ
+                let segment = UISegmentedControl(items: ["法人", "個人"])
+                segment.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "corporation_switch") ? 0 : 1
+                segment.addTarget(self, action: #selector(onSegment), for: .valueChanged)
+                cell.accessoryView = UIView(frame: segment.frame)
+                cell.accessoryView?.addSubview(segment)
+            }
+            cell.textLabel?.text = "勘定科目体系"
+            cell.textLabel?.textColor = .textColor
+            cell.backgroundColor = .mainColor2
+        } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
@@ -164,9 +223,6 @@ class SettingsCategoryTableViewController: UITableViewController {
                 cell = tableView.dequeueReusableCell(withIdentifier: "categoriesBSandPL", for: indexPath)
                 cell.textLabel?.text = "表示科目別勘定科目一覧"
                 cell.textLabel?.textColor = .textColor
-                //        case 3:
-                //            cell = tableView.dequeueReusableCell(withIdentifier: "groups", for: indexPath)
-                //            cell.textLabel?.text =  "種類別勘定科目一覧"
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
                 cell.textLabel?.text = ""
@@ -184,11 +240,13 @@ class SettingsCategoryTableViewController: UITableViewController {
                 cell.textLabel?.text = ""
             }
         }
-        // Accessory Color
-        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
-        let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.accentColor
-        cell.accessoryView = disclosureView
+        if indexPath.section != 0 {
+            // Accessory Color
+            let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+            let disclosureView = UIImageView(image: disclosureImage)
+            disclosureView.tintColor = UIColor.accentColor
+            cell.accessoryView = disclosureView
+        }
 
         return cell
     }
