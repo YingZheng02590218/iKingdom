@@ -194,7 +194,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstLunch = [firstLunchKey: true]
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
-        // userDefaults.set(true, forKey: firstLunchKey)
+        //　userDefaults.set(true, forKey: firstLunchKey)
+        // 法人/個人フラグ　法人:true, 個人:false
+        firstLunchKey = "corporation_switch"
+        firstLunch = [firstLunchKey: false] // 初期値は個人とする
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        //　userDefaults.set(true, forKey: firstLunchKey)
         // 生体認証パスコードロック設定スイッチ
         firstLunchKey = "biometrics_switch"
         firstLunch = [firstLunchKey: false] // 初期値はOFFとする

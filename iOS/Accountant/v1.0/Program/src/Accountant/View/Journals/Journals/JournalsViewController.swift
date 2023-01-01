@@ -219,8 +219,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 UIAlertAction(
                     title: "年度を変更する",
                     style: .default,
-                    handler: { (action: UIAlertAction!) -> Void in
-                        print("年度を変更する")
+                    handler: { (action: UIAlertAction) -> Void in
+                        print(action)
                         // 年度変更画面を表示
                         if let viewController = UIStoryboard(name: "PeriodYearViewController", bundle: nil).instantiateInitialViewController() as? PeriodYearViewController {
                             self.present(viewController, animated: true, completion: nil)
@@ -234,8 +234,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 UIAlertAction(
                     title: "仕訳内容を編集する",
                     style: .default,
-                    handler: { (action: UIAlertAction!) -> Void in
-                        print("仕訳内容を編集する")
+                    handler: { (action: UIAlertAction) -> Void in
+                        print(action)
                         print("選択されたセル", self.indexPaths)
                         // 仕訳編集画面を表示して、一括変更したい内容に修正させる
                         if let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateInitialViewController() as? JournalEntryViewController {
@@ -252,8 +252,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 UIAlertAction(
                     title: "Cancel",
                     style: .cancel,
-                    handler: { (action: UIAlertAction!) -> Void in
-                        print("Cancel")
+                    handler: { (action: UIAlertAction) -> Void in
+                        print(action)
                     }
                 )
             )
@@ -268,6 +268,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                     width: 0,
                     height: 0
                 )
+                // iPadの場合、アクションシートの背後の画面をタップできる
             } else {
                 // ③表示するViewと表示位置を指定する
                 actionSheet.popoverPresentationController?.sourceView = view
