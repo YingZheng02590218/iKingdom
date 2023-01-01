@@ -97,10 +97,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         if let controller = segue.destination as? JournalEntryTemplateViewController {
             // 遷移先のコントローラに値を渡す
             if segue.identifier == "buttonTapped" {
-                controller.journalEntryType = "SettingsJournalEntries" // セルに表示した仕訳タイプを取得
+                controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if tappedIndexPath != nil { // nil:ロングタップではない
-                    controller.journalEntryType = "SettingsJournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                    controller.journalEntryType = .SettingsJournalEntriesFixing // セルに表示した仕訳タイプを取得
                     controller.tappedIndexPath = self.tappedIndexPath! // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
                     self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
                 }

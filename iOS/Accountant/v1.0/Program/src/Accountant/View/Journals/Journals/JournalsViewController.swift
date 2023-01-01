@@ -239,7 +239,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                         print("選択されたセル", self.indexPaths)
                         // 仕訳編集画面を表示して、一括変更したい内容に修正させる
                         if let viewController = UIStoryboard(name: "JournalEntryViewController", bundle: nil).instantiateInitialViewController() as? JournalEntryViewController {
-                            viewController.journalEntryType = "JournalEntriesPackageFixing" // セルに表示した仕訳タイプを取得
+                            viewController.journalEntryType = .JournalEntriesPackageFixing // セルに表示した仕訳タイプを取得
 
                             self.present(viewController, animated: true, completion: nil)
                         }
@@ -415,12 +415,12 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         if let controller = segue.destination as? JournalEntryViewController {
             // 遷移先のコントローラに値を渡す
             if segue.identifier == "buttonTapped" {
-                controller.journalEntryType = "JournalEntries" // セルに表示した仕訳タイプを取得
+                controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 // 編集中ではない場合
                 if !tableView.isEditing {
                     if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
-                        controller.journalEntryType = "JournalEntriesFixing" // セルに表示した仕訳タイプを取得
+                        controller.journalEntryType = .JournalEntriesFixing // セルに表示した仕訳タイプを取得
                         controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
                         if tappedIndexPath.section == 0 {
                             controller.primaryKey = presenter.objects(forRow: tappedIndexPath.row).number

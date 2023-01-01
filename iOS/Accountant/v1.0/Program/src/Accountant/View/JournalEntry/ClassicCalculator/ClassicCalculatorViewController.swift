@@ -469,10 +469,7 @@ class ClassicCalculatorViewController: UIViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
-                // フラグを立てる
-                presentingViewController2.isFromClassicCalcuatorViewController = true
-                presentingViewController2.viewWillAppear(true)
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
             })
             return
         }
@@ -493,10 +490,7 @@ class ClassicCalculatorViewController: UIViewController {
             // viewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
                 // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                presentingViewController2.numbersOnDisplay = self.numbersOnDisplay
-                // フラグを立てる
-                presentingViewController2.isFromClassicCalcuatorViewController = true
-                presentingViewController2.viewWillAppear(true)
+                presentingViewController2.setAmountValue(numbersOnDisplay: self.numbersOnDisplay)
             })
               return
         }

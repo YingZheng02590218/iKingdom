@@ -696,13 +696,15 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.textLabel?.text = "        " + presenter.objects0115(forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).category
                     cell.labelForThisYear.text = presenter.getTotalOfTaxonomy(
                         numberOfSettingsTaxonomy: presenter.objects0115(
-                            forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number,
+                            forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)
+                        ).number,
                         lastYear: false
                     )
                     if presenter.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                         cell.labelForPrevious.text = presenter.getTotalOfTaxonomy(
                             numberOfSettingsTaxonomy: presenter.objects0115(
-                                forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)).number,
+                                forRow: indexPath.row - (presenter.numberOfobjects0114 + 1 + 1 + 1)
+                            ).number,
                             lastYear: true
                         )
                     } else {

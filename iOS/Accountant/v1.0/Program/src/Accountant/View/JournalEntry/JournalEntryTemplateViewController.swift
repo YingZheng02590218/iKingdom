@@ -11,9 +11,9 @@ import UIKit
 
 // よく使う仕訳クラス
 class JournalEntryTemplateViewController: JournalEntryViewController {
-
+    
     @IBOutlet private var nicknameTextField: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,11 +25,11 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         // UIパーツを作成
         createTextFieldForNickname() // テキストフィールド　ニックネームを作成
         
-        if journalEntryType == "SettingsJournalEntries" {
+        if journalEntryType == .SettingsJournalEntries {
             labelTitle.text = "よく使う仕訳"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = true
-        } else if journalEntryType == "SettingsJournalEntriesFixing" {
+        } else if journalEntryType == .SettingsJournalEntriesFixing {
             labelTitle.text = "よく使う仕訳"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
@@ -43,27 +43,6 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             textFieldAmountCredit.text = String(objects[tappedIndexPath.row].credit_amount)
             textFieldSmallWritting.text = objects[tappedIndexPath.row].smallWritting
         }
-        
-        //        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
-        //            carouselCollectionView.isHidden = true
-        //        }
-        
-        //        if journalEntryType == "SettingsJournalEntries" || journalEntryType == "SettingsJournalEntriesFixing" { // よく使う仕訳の場合
-        //            buttonLeft.isHidden = true
-        //            datePicker.isHidden = true
-        //            buttonRight.isHidden = true
-        //            dateLabel.isHidden = true
-        //            nicknameTextField.isHidden = false
-        //        } else {
-        //            nicknameTextField.isHidden = true
-        //        }
-        
-        // 金額　電卓画面で入力した値を表示させる
-        if let numbersOnDisplay = numbersOnDisplay {
-            textFieldAmountDebit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-            textFieldAmountCredit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-        }
-        
     }
     
     // TextField作成 ニックネーム
@@ -111,7 +90,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
-        if journalEntryType == "SettingsJournalEntries" {
+        if journalEntryType == .SettingsJournalEntries {
             var amountDebitTextField = ""
             if let text = textFieldAmountDebit.text {
                 amountDebitTextField = StringUtility.shared.removeComma(string: text)
@@ -120,30 +99,35 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             if let text = textFieldAmountCredit.text {
                 amountCreditTextField = StringUtility.shared.removeComma(string: text)
             }
-            // データベース　よく使う仕訳を追加
-            number = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
-                nickname: nicknameTextField.text!,
-                debitCategory: textFieldCategoryDebit.text!,
-                debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit.text!,
-                creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                smallWritting: textFieldSmallWritting.text!
-            )
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
-               let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
-               let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
-               let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                print(navigationController.viewControllers[0])
-                print(navigationController.viewControllers[1])
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
-                    presentingViewController.viewWillAppear(true)
-                })
+            if let nicknameTextField = nicknameTextField.text,
+               let textFieldCategoryDebit = textFieldCategoryDebit.text,
+               let textFieldCategoryCredit = textFieldCategoryCredit.text,
+               let textFieldSmallWritting = textFieldSmallWritting.text {
+                // データベース　よく使う仕訳を追加
+                number = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
+                    nickname: nicknameTextField,
+                    debitCategory: textFieldCategoryDebit,
+                    debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                    creditCategory: textFieldCategoryCredit,
+                    creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                    smallWritting: textFieldSmallWritting
+                )
+                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+                   let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
+                   let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                    print(navigationController.viewControllers[0])
+                    print(navigationController.viewControllers[1])
+                    // 画面を閉じる
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        presentingViewController.viewReload = true
+                        presentingViewController.viewWillAppear(true)
+                    })
+                }
             }
-        } else if journalEntryType == "SettingsJournalEntriesFixing" {
+        } else if journalEntryType == .SettingsJournalEntriesFixing {
             var amountDebitTextField = ""
             if let text = textFieldAmountDebit.text {
                 amountDebitTextField = StringUtility.shared.removeComma(string: text)
@@ -152,29 +136,34 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             if let text = textFieldAmountCredit.text {
                 amountCreditTextField = StringUtility.shared.removeComma(string: text)
             }
-            // データベース　よく使う仕訳を更新
-            number = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
-                primaryKey: primaryKey,
-                nickname: nicknameTextField.text!,
-                debitCategory: textFieldCategoryDebit.text!,
-                debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit.text!,
-                creditAmount: Int64(amountCreditTextField) ?? 0,// カンマを削除してからデータベースに書き込む
-                smallWritting: textFieldSmallWritting.text!
-            )
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
-               let navigationController = splitViewController.viewControllers[0]  as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
-               let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
-               let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                print(navigationController.viewControllers[0])
-                print(navigationController.viewControllers[1])
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                // 画面を閉じる
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.viewReload = true
-                    presentingViewController.viewWillAppear(true)
-                })
+            if let nicknameTextField = nicknameTextField.text,
+               let textFieldCategoryDebit = textFieldCategoryDebit.text,
+               let textFieldCategoryCredit = textFieldCategoryCredit.text,
+               let textFieldSmallWritting = textFieldSmallWritting.text {
+                // データベース　よく使う仕訳を更新
+                number = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
+                    primaryKey: primaryKey,
+                    nickname: nicknameTextField,
+                    debitCategory: textFieldCategoryDebit,
+                    debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                    creditCategory: textFieldCategoryCredit,
+                    creditAmount: Int64(amountCreditTextField) ?? 0,// カンマを削除してからデータベースに書き込む
+                    smallWritting: textFieldSmallWritting
+                )
+                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+                   let navigationController = splitViewController.viewControllers[0]  as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
+                   let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                    print(navigationController.viewControllers[0])
+                    print(navigationController.viewControllers[1])
+                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                    // 画面を閉じる
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        presentingViewController.viewReload = true
+                        presentingViewController.viewWillAppear(true)
+                    })
+                }
             }
         }
     }

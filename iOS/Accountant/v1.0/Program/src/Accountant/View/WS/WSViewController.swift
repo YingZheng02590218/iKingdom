@@ -12,9 +12,9 @@ import UIKit
 
 // 精算表クラス
 class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
-
+    
     // MARK: - var let
-
+    
     var gADBannerView: GADBannerView!
     /// 精算表　上部
     @IBOutlet var labelCompanyName: UILabel!
@@ -23,19 +23,19 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     /// 精算表　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var backgroundView: EMTNeumorphicView!
-
+    
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
-
+    
     fileprivate let refreshControl = UIRefreshControl()
-
+    
     var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // 精算表画面で押下された場合は、決算整理仕訳とする
     @IBOutlet private var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
     @IBOutlet private var printButton: UIButton!
-
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: WSPresenterInput!
     func inject(presenter: WSPresenterInput) {
@@ -43,7 +43,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,13 +57,13 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         presenter.viewWillDisappear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
@@ -76,7 +76,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Setting
-
+    
     // ボタンのデザインを指定する
     private func createButtons() {
         if let backgroundView = backgroundView {
@@ -89,7 +89,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
-
+    
     private func setRefreshControl() {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
@@ -110,7 +110,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             present(viewController, animated: true, completion: nil)
         }
     }
-
+    
     func finishAnnotation() {
         // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
@@ -121,11 +121,11 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
             }
         }
     }
-
+    
     // MARK: - Action
-
+    
     @objc private func refreshTable() {
-
+        
         presenter.refreshTable()
     }
     
@@ -134,28 +134,28 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
      */
     @IBAction func printButtonTapped(_ sender: UIButton) {
     }
-
+    
     // MARK: - Navigation
-
+    
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryViewController {
             // 遷移先のコントローラに値を渡す
-            controller.journalEntryType = "AdjustingAndClosingEntries" // セルに表示した仕訳タイプを取得
+            controller.journalEntryType = .AdjustingAndClosingEntries // セルに表示した仕訳タイプを取得
         }
     }
 }
 
 extension WSViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Table view data source
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         presenter.numberOfobjects + 1 + presenter.numberOfobjectss + 1 + 1  // + 試算表合計の行の分+修正記入の行の分+当期純利益+修正記入、損益計算書、貸借対照表の合計の分
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セル　決算整理前残高試算表の行
         if indexPath.row < presenter.numberOfobjects {
@@ -354,14 +354,14 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension WSViewController: WSPresenterOutput {
-
+    
     func reloadData() {
         // 更新処理
         tableView.reloadData()
         // クルクルを止める
         refreshControl.endRefreshing()
     }
-
+    
     func setupViewForViewDidLoad() {
         // UI
         //        setTableView()
@@ -374,9 +374,9 @@ extension WSViewController: WSPresenterOutput {
         printButton.isHidden = true
         self.navigationItem.title = "精算表"
     }
-
+    
     func setupViewForViewWillAppear() {
-
+        
         if let company = presenter.company {
             // 月末、年度末などの決算日をラベルに表示する
             labelCompanyName.text = company // 社名
@@ -419,7 +419,7 @@ extension WSViewController: WSPresenterOutput {
             }
         }
     }
-
+    
     func setupViewForViewWillDisappear() {
         // アップグレード機能　スタンダードプラン
         if let gADBannerView = gADBannerView {
@@ -427,7 +427,7 @@ extension WSViewController: WSPresenterOutput {
             removeBannerViewToView(gADBannerView)
         }
     }
-
+    
     func setupViewForViewDidAppear() {
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let userDefaults = UserDefaults.standard

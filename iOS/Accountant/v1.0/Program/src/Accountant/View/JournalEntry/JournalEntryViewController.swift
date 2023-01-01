@@ -50,18 +50,13 @@ class JournalEntryViewController: UIViewController {
     
     private var timer: Timer? // Timerを保持する変数
     
-    // 仕訳タイプ(仕訳or決算整理仕訳or編集)
-    var journalEntryType: String = "" // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
+    // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
+    var journalEntryType: JournalEntryType = .JournalEntry // Journal Entries、Adjusting and Closing Entries, JournalEntriesPackageFixing
     
     // 仕訳編集　仕訳帳画面で選択されたセルの位置　仕訳か決算整理仕訳かの判定に使用する
     var tappedIndexPath = IndexPath(row: 0, section: 0)
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int = 0
-    
-    /// 電卓画面から仕訳画面へ遷移したか
-    var isFromClassicCalcuatorViewController = false
-    /// 電卓画面で入力された金額の値
-    var numbersOnDisplay: Int?
     
     // MARK: - Life cycle
     
@@ -84,99 +79,93 @@ class JournalEntryViewController: UIViewController {
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
-        if isFromClassicCalcuatorViewController {
-            // 金額　電卓画面で入力した値を表示させる
-            if let numbersOnDisplay = numbersOnDisplay {
-                textFieldAmountDebit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-                textFieldAmountCredit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
-                // TextField 貸方金額　入力後
-                if textFieldAmountDebit.text == "0"{
-                    textFieldAmountDebit.text = ""
-                    textFieldAmountCredit.text = ""
+        // UIパーツを作成
+        createTextFieldForCategory()
+        createTextFieldForAmount()
+        createTextFieldForSmallwritting()
+        // 仕訳タイプ判定
+        if journalEntryType == .JournalEntries { // 仕訳
+            labelTitle.text = "仕　訳"
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
+            //　labelTitle.text = "決算整理仕訳"
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+            labelTitle.text = "仕訳まとめて編集"
+            createCarousel() // カルーセルを作成
+            carouselCollectionView.isHidden = true
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            maskDatePickerButton.isHidden = false
+            isMaskedDatePicker = false
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+            createCarousel() // カルーセルを作成
+            carouselCollectionView.isHidden = true
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            // 仕訳データを取得
+            if tappedIndexPath.section == 1 {
+                // 決算整理仕訳
+                labelTitle.text = "決算整理仕訳編集"
+                if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
+                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
+                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
                 }
-                if textFieldAmountCredit.text == "0"{
-                    textFieldAmountCredit.text = ""
-                    textFieldAmountDebit.text = ""
-                }
-                if journalEntryType != "JournalEntriesPackageFixing" { // 仕訳一括編集ではない場合
-                    if textFieldSmallWritting.text == "" {
-                        textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
-                    }
+            } else {
+                // 通常仕訳
+                labelTitle.text = "仕訳編集"
+                if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
+                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
+                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
                 }
             }
-            // フラグを倒す
-            isFromClassicCalcuatorViewController = false
-        } else {
-            // UIパーツを作成
-            createTextFieldForCategory()
-            createTextFieldForAmount()
-            createTextFieldForSmallwritting()
-            // 仕訳タイプ判定
-            if journalEntryType == "JournalEntries" { // 仕訳
-                labelTitle.text = "仕　訳"
-                // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-                createCarousel() // カルーセルを作成
-                // カルーセルをリロードする
-                reloadCarousel()
-                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            } else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
-                //　labelTitle.text = "決算整理仕訳"
-                createCarousel() // カルーセルを作成
-                // カルーセルをリロードする
-                reloadCarousel()
-                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
-                labelTitle.text = "仕訳まとめて編集"
-                createCarousel() // カルーセルを作成
-                carouselCollectionView.isHidden = true
-                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-                maskDatePickerButton.isHidden = false
-                isMaskedDatePicker = false
-                inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            } else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
-                createCarousel() // カルーセルを作成
-                carouselCollectionView.isHidden = true
-                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-                // 仕訳データを取得
-                if tappedIndexPath.section == 1 {
-                    // 決算整理仕訳
-                    labelTitle.text = "決算整理仕訳編集"
-                    if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
-                       let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                        datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
-                        textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                        textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                        textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
-                        textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                    }
-                } else {
-                    // 通常仕訳
-                    labelTitle.text = "仕訳編集"
-                    if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
-                       let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                        datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
-                        textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                        textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                        textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                        textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
-                        textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                    }
-                }
-                inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-            } else if journalEntryType.isEmpty {
-                labelTitle.text = ""
-                // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-                createCarousel() // カルーセルを作成
-                // カルーセルをリロードする
-                reloadCarousel()
-                createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            }
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        } else if journalEntryType == .JournalEntry {
+            labelTitle.text = ""
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         }
-        
         // セットアップ AdMob
         setupAdMob()
+    }
+    // 金額　電卓画面で入力した値を表示させる
+    func setAmountValue(numbersOnDisplay: Int) {
+        // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
+        textFieldAmountDebit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
+        textFieldAmountCredit.text = StringUtility.shared.addComma(string: numbersOnDisplay.description)
+        // TextField 貸方金額　入力後
+        if textFieldAmountDebit.text == "0"{
+            textFieldAmountDebit.text = ""
+            textFieldAmountCredit.text = ""
+        }
+        if textFieldAmountCredit.text == "0"{
+            textFieldAmountCredit.text = ""
+            textFieldAmountDebit.text = ""
+        }
+        if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+            if textFieldSmallWritting.text == "" {
+                textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
+            }
+        }
     }
     // カルーセルをリロードする
     func reloadCarousel() {
@@ -344,7 +333,7 @@ class JournalEntryViewController: UIViewController {
         guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNow: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
         // デイトピッカーの最大値と最小値を設定
-        if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
+        if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             // 決算整理仕訳の場合は日付を決算日に固定
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 print("### 会計期間が年をまたがない場合")
@@ -356,9 +345,9 @@ class JournalEntryViewController: UIViewController {
                 datePicker.minimumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
                 datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
             }
-        } else if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
             // 決算日設定機能　何もしない
-        } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             
         } else {
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
@@ -399,11 +388,11 @@ class JournalEntryViewController: UIViewController {
             }
         }
         // ピッカーの初期値
-        if journalEntryType == "JournalEntriesFixing" { // 仕訳編集
+        if journalEntryType == .JournalEntriesFixing { // 仕訳編集
             // 決算日設定機能　何もしない viewDidLoad()で値を設定している
-        } else if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             // nothing
-        } else if journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
+        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 datePicker.date = yyyyMMddHHmmss // 注意：カンマの後にスペースがないとnilになる
             } else {
@@ -525,49 +514,9 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForAmount() {
         textFieldAmountDebit.delegate = self
         textFieldAmountCredit.delegate = self
+        
         textFieldAmountDebit.textAlignment = .left
         textFieldAmountCredit.textAlignment = .right
-        // toolbar 借方 Done:Tag5 Cancel:Tag55
-        let toolbar = UIToolbar()
-        toolbar.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!,
-            height: 44
-        )
-        toolbar.isTranslucent = true
-        toolbar.barStyle = .default
-        let doneButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
-        doneButtonItem.tag = 5
-        let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
-        cancelItem.tag = 55
-        toolbar.setItems([cancelItem, flexSpaceItem, doneButtonItem], animated: true)
-        //        doneButtonItem.isEnabled = false
-        // previous, next, paste ボタンを消す
-        self.textFieldAmountDebit.inputAssistantItem.leadingBarButtonGroups.removeAll()
-        textFieldAmountDebit.inputAccessoryView = toolbar
-        // toolbar2 貸方 Done:Tag6 Cancel:Tag66
-        let toolbar2 = UIToolbar()
-        toolbar2.frame = CGRect(
-            x: 0,
-            y: 0,
-            width: (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!,
-            height: 44
-        )
-        toolbar2.isTranslucent = true
-        toolbar2.barStyle = .default
-        let doneButtonItem2 = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(barButtonTapped(_:)))
-        doneButtonItem2.tag = 6
-        let flexSpaceItem2 = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelItem2 = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(barButtonTapped(_:)))
-        cancelItem2.tag = 66
-        toolbar2.setItems([cancelItem2, flexSpaceItem2, doneButtonItem2], animated: true)
-        //        doneButtonItem2.isEnabled = false
-        // previous, next, paste ボタンを消す
-        self.textFieldAmountCredit.inputAssistantItem.leadingBarButtonGroups.removeAll()
-        //        self.TextField_amount_credit.inputAssistantItem.trailingBarButtonGroups.removeAll()
-        textFieldAmountCredit.inputAccessoryView = toolbar2
         // TextFieldに入力された値に反応
         textFieldAmountDebit.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         textFieldAmountCredit.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
@@ -648,11 +597,11 @@ class JournalEntryViewController: UIViewController {
     @IBAction func segmentedControl(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             // 仕訳タイプ判定
-            journalEntryType = "" // 仕訳
+            journalEntryType = .JournalEntry // 仕訳
             labelTitle.text = ""
             self.navigationItem.title = "仕訳"
         } else {
-            journalEntryType = "AdjustingAndClosingEntries" // 決算整理仕訳
+            journalEntryType = .AdjustingAndClosingEntries // 決算整理仕訳
             labelTitle.text = ""
             self.navigationItem.title = "決算整理仕訳"
         }
@@ -712,10 +661,6 @@ class JournalEntryViewController: UIViewController {
     @IBAction private func textFieldSmallWritting(_ sender: UITextField) {}
     
     // MARK: キーボード
-    //    // TextFieldをタップしても呼ばれない
-    //    @IBAction func TapGestureRecognizer(_ sender: Any) {// この前に　touchesBegan が呼ばれている
-    //        self.view.endEditing(true)
-    //    }
     // UIKeyboardWillShow通知を受けて、実行される関数
     @objc func keyboardWillShow(notification: NSNotification) {
         // 小書きを入力中は、画面を上げる
@@ -770,40 +715,6 @@ class JournalEntryViewController: UIViewController {
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
         
         switch sender.tag {
-        case 5: // 借方金額の場合 Done
-            if textFieldAmountDebit.text == "0" {
-                textFieldAmountDebit.text = ""
-            } else if textFieldAmountDebit.text == "" {
-            } else {
-                self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if textFieldCategoryCredit.text == "" {
-                    if journalEntryType != "JournalEntriesPackageFixing" { // 仕訳一括編集ではない場合
-                        // TextFieldのキーボードを自動的に表示する　借方金額　→ 貸方勘定科目
-                        textFieldCategoryCredit.becomeFirstResponder()
-                    }
-                }
-            }
-        case 55: // 借方金額の場合 Cancel
-            textFieldAmountDebit.text = ""
-            textFieldAmountCredit.text = ""
-            self.view.endEditing(true) // textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
-        case 6: // 貸方金額の場合 Done
-            if textFieldAmountCredit.text == "0" {
-                textFieldAmountCredit.text = ""
-            } else if textFieldAmountCredit.text == "" {
-            } else {
-                self.view.endEditing(true) // 注意：キーボードを閉じた後にbecomeFirstResponderをしないと二重に表示される
-                if textFieldSmallWritting.text == "" {
-                    if journalEntryType != "JournalEntriesPackageFixing" { // 仕訳一括編集ではない場合
-                        // カーソルを小書きへ移す
-                        self.textFieldSmallWritting.becomeFirstResponder()
-                    }
-                }
-            }
-        case 66: // 貸方金額の場合 Cancel
-            textFieldAmountDebit.text = ""
-            textFieldAmountCredit.text = ""
-            self.view.endEditing(true) // textFieldDidEndEditingで借方金額へコピーするのでtextを設定した後に実行
         case 7: // 小書きの場合 Done
             self.view.endEditing(true)
         case 77: // 小書きの場合 Cancel
@@ -836,7 +747,7 @@ class JournalEntryViewController: UIViewController {
             sender.isSelected = !sender.isSelected
         }
         
-        if journalEntryType == "JournalEntriesPackageFixing" { // 仕訳一括編集
+        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             
             buttonTappedForJournalEntriesPackageFixing()
         } else { // 一括編集以外
@@ -850,16 +761,16 @@ class JournalEntryViewController: UIViewController {
                     UpgradeManager.shared.inAppPurchaseFlag {
                     // ネットワークあり
                     // 仕訳タイプ判定　仕訳、決算整理仕訳、編集、一括編集
-                    if self.journalEntryType == "AdjustingAndClosingEntries" { // 決算整理仕訳
+                    if self.journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
                         
                         self.buttonTappedForAdjustingAndClosingEntries()
-                    } else if self.journalEntryType == "JournalEntriesFixing" { // 仕訳編集
+                    } else if self.journalEntryType == .JournalEntriesFixing { // 仕訳編集
                         
                         self.buttonTappedForJournalEntriesFixing()
-                    } else if self.journalEntryType == "JournalEntries" { // 仕訳
+                    } else if self.journalEntryType == .JournalEntries { // 仕訳
                         
                         self.buttonTappedForJournalEntries()
-                    } else if self.journalEntryType.isEmpty { // タブバーの仕訳タブからの遷移の場合
+                    } else if self.journalEntryType == .JournalEntry { // タブバーの仕訳タブからの遷移の場合
                         
                         self.buttonTappedForJournalEntriesOnTabBar()
                     }
@@ -1107,7 +1018,7 @@ class JournalEntryViewController: UIViewController {
                 AnalyticsParameterContentType: Constant.JOURNALS,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-
+            
             if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
                let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
                //                        let nc = viewController.presentingViewController as! UINavigationController
@@ -1259,7 +1170,7 @@ class JournalEntryViewController: UIViewController {
         textFieldAmountCredit.text = ""
         textFieldSmallWritting.text = ""
         // 終了させる　仕訳帳画面へ戻る
-        if self.journalEntryType == "JournalEntries" { // 仕訳
+        if self.journalEntryType == .JournalEntries { // 仕訳
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -1459,7 +1370,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 貸方と同じ勘定科目の場合
                 textFieldCategoryDebit.text = ""
             } else {
-                if journalEntryType != "JournalEntriesPackageFixing" { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
                     if textFieldCategoryCredit.text == "" {
                         textFieldCategoryCredit.becomeFirstResponder()
                     }
@@ -1471,7 +1382,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
                 textFieldCategoryCredit.text = ""
             } else {
                 // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if journalEntryType != "JournalEntriesPackageFixing" { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
                     if textFieldAmountDebit.text == "" {
                         textFieldAmountDebit.becomeFirstResponder() // カーソルを金額へ移す
                     }
@@ -1481,7 +1392,6 @@ extension JournalEntryViewController: UITextFieldDelegate {
     }
     // TextFieldに入力され値が変化した時の処理の関数
     @objc func textFieldDidChange(_ sender: UITextField) {
-        // func textFieldEditingChanged(_ sender: UITextField) {
         if let text = sender.text {
             // カンマを追加する
             if sender == textFieldAmountDebit || sender == textFieldAmountCredit { // 借方金額仮　貸方金額
@@ -1490,4 +1400,22 @@ extension JournalEntryViewController: UITextFieldDelegate {
             print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }
     }
+}
+
+// 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
+enum JournalEntryType {
+    // 仕訳
+    case JournalEntries
+    // 決算整理仕訳
+    case AdjustingAndClosingEntries
+    // タブバーの仕訳タブからの遷移の場合
+    case JournalEntry
+    // 仕訳編集
+    case JournalEntriesFixing
+    // 仕訳一括編集
+    case JournalEntriesPackageFixing
+    // よく使う仕訳 追加
+    case SettingsJournalEntries
+    // よく使う仕訳 更新
+    case SettingsJournalEntriesFixing
 }
