@@ -76,7 +76,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
         // (2)データベース内に保存されているDataBaseSettingsCategoryモデルを全て取得する
         let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomy.self)
         print("DataBaseSettingsTaxonomy", objects.count)
-        return objects.count == 2_068 // モデルオブフェクトが2068ある場合はtrueを返す
+        return objects.count >= 2_068 // モデルオブフェクトが2068ある場合はtrueを返す
     }
     // 取得 設定表示科目　階層2より下の階層で抽象項目以外の設定表示科目を取得
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
