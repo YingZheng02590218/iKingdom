@@ -245,7 +245,15 @@ class DatabaseManagerSettingsTaxonomyAccount {
         for i in 0..<objects.count {
             if objects[i].switching == true { // 設定勘定科目 スイッチ
                 if objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしていない場合
-                    updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
+                    // 勘定クラス　勘定ないの仕訳を取得
+                    let dataBaseManagerAccount = GeneralLedgerAccountModel()
+                    let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    if !objectss.isEmpty || !objectsss.isEmpty {
+                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
+                    } else {
+                        updateSettingsCategorySwitching(tag: objects[i].number, isOn: false)
+                    }
                 }
             } else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
                 if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
