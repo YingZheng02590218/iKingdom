@@ -25,16 +25,14 @@ class MasterData {
     
     // 勘定科目　CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
     func readMasterDataFromCSVOfTaxonomyAccount() {
-        if let csvPath = Bundle.main.path(forResource: "TaxonomyAccount", ofType: "csv") {
+        if let csvPath = Bundle.main.path(forResource: "taxonomyAccount", ofType: "csv") {
             var csvString = ""
             do {
                 csvString = try NSString(contentsOfFile: csvPath, encoding: String.Encoding.utf8.rawValue) as String
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            csvString.enumerateLines { (line, stop) -> () in
-                // 保存先のパスを出力しておく
-                print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
+            csvString.enumerateLines { (line, stop) -> Void in
                 // モデルオブフェクトを生成
                 let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount(
                     Rank0: line.components(separatedBy: ",")[0], // 大区分
@@ -55,8 +53,13 @@ class MasterData {
                 } catch {
                     print("エラーが発生しました")
                 }
-                print("連番: \(number), \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
+                print("連番: \(number), 勘定科目　CSVファイルを読み込み \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
+                if number == 232 {
+                    stop = true
+                }
             }
+            // 保存先のパスを出力しておく
+            print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL))")
         }
     }
     // 表示科目　CSVファイルを読み込み、Realmデータベースにモデルオブフェクトを登録して、マスターデータを作成
@@ -68,9 +71,7 @@ class MasterData {
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            csvString.enumerateLines { (line, stop) -> () in
-                // 保存先のパスを出力しておく
-                print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL!))")
+            csvString.enumerateLines { (line, stop) -> Void in
                 // モデルオブフェクトを生成
                 let dataBaseSettingsCategoryTaxonomy = DataBaseSettingsTaxonomy(
                     category0: line.components(separatedBy: ",")[0],
@@ -86,17 +87,22 @@ class MasterData {
                     switching: self.toBoolean(string: line.components(separatedBy: ",")[10])
                 )
                 var number = 0 // 自動採番にした
+                number = dataBaseSettingsCategoryTaxonomy.save() // 連番　自動採番
                 // 書き込み
                 do {
                     try DataBaseManager.realm.write {
-                        number = dataBaseSettingsCategoryTaxonomy.save() // 連番　自動採番
                         DataBaseManager.realm.add(dataBaseSettingsCategoryTaxonomy)
                     }
                 } catch {
                     print("エラーが発生しました")
                 }
                 print("連番: \(number) 表示科目　CSVファイルを読み込み")
+                if number == 2_068 {
+                    stop = true
+                }
             }
+            // 保存先のパスを出力しておく
+            print("保存先のパス: \(Realm.Configuration.defaultConfiguration.fileURL))")
         }
     }
 }

@@ -259,25 +259,21 @@ class PDFMakerBalanceSheet {
         tableTopString = hTMLhelper.tableTopString(block: BalanceSheet.Block.netAssets.rawValue)
         htmlString.append(tableTopString)
 
-        // 元入金
-        tableTopString = hTMLhelper.middleRowTop(title: BalanceSheet.Capital.capital.rawValue)
-        htmlString.append(tableTopString)
         // tableMiddle 行数分繰り返す
-        for item in balanceSheetData.objects23 {
+        for item in balanceSheetData.objects10 {
             let rowString = hTMLhelper.getSingleRow(
                 title: item.category,
                 amount: DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
                     rank0: 5,
-                    rank1: 20,
+                    rank1: 10,
                     accountNameOfSettingsTaxonomyAccount: item.category, // 勘定科目名
                     lastYear: false
                 )
             ) // TODO: 金額　取得先
             htmlString.append(rowString)
         }
-        // 合計
 
-        // テーブル　エンド 負債・純資産の部 合計
+        // テーブル　エンド 負債・資本の部 合計
         tableEndString = hTMLhelper.tableEndString(capitalAmount: balanceSheetData.equityTotal, amount: balanceSheetData.liabilityAndEquityTotal)
         htmlString.append(tableEndString)
 

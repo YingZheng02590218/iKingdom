@@ -254,7 +254,7 @@ class CategoryListTableViewController: UITableViewController {
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath
     ) {
-        // ユーザーが新規追加した勘定科目のみを削除可能とする。
+        // TODO: ユーザーが新規追加した勘定科目のみを削除可能とする。
         if editingStyle == .delete {
             // 確認のポップアップを表示したい
             self.showPopover(indexPath: indexPath)
@@ -270,7 +270,7 @@ class CategoryListTableViewController: UITableViewController {
     // 編集機能
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         // デフォルトの勘定科目数（230）以上ある場合は、削除可能とし、それ以下の場合は削除不可とする。
-        if presenter.objects(forRow: indexPath.row, section: indexPath.section).number < 230 {
+        if presenter.objects(forRow: indexPath.row, section: indexPath.section).number <= 232 {
             return .none // 削除不可
         }
         return .delete

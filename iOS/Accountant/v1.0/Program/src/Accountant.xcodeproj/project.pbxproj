@@ -369,7 +369,7 @@
 		F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
 		F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
-		F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
+		F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 		F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
 		F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */; };
@@ -438,7 +438,7 @@
 		F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934EE2485578900BF7AA7 /* Initial.swift */; };
 		F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */; };
 		F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */; };
-		F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
+		F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -687,7 +687,7 @@
 		F9F934EE2485578900BF7AA7 /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooks.swift; sourceTree = "<group>"; };
 		F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooks.swift; sourceTree = "<group>"; };
-		F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaxonomyAccount.csv; sourceTree = "<group>"; };
+		F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomyAccount.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1193,7 +1193,7 @@
 			isa = PBXGroup;
 			children = (
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
-				F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */,
+				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F9C7371F265E7D7E00A9F287 /* Color.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
@@ -1538,7 +1538,7 @@
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
-				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
+				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
@@ -1599,7 +1599,7 @@
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
-				F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */,
+				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,

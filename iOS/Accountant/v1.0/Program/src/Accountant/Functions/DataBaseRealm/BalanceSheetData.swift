@@ -59,7 +59,7 @@ struct BalanceSheetData {
 
     // MARK: - 純資産の部
 
-    var objects23: Results<DataBaseSettingsTaxonomyAccount> // 元入金
+    var objects10: Results<DataBaseSettingsTaxonomyAccount> // 元入金
     // MARK: 元入金合計
 
     // MARK: - 純資産合計

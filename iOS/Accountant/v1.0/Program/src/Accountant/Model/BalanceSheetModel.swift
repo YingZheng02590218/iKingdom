@@ -240,7 +240,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
         let objects9 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
 
         // TODO: 株主資本、評価・換算差額等　なども表示させる
-        let objects23 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 20) // 資本　元入金
+        let objects10 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10) // 資本　元入金
         // MARK: - "    元入金合計"
 
         // MARK: - "    流動資産合計"
@@ -307,7 +307,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
             lastFixedLiabilitiesTotal: lastFixedLiabilitiesTotal,
             liabilityTotal: liabilityTotal,
             lastLiabilityTotal: lastLiabilityTotal,
-            objects23: objects23,
+            objects10: objects10,
             equityTotal: equityTotal,
             lastEquityTotal: lastEquityTotal,
             liabilityAndEquityTotal: liabilityAndEquityTotal,

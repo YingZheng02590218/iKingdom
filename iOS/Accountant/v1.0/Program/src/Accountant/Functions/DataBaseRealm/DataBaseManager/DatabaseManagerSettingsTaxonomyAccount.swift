@@ -68,7 +68,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         print("DataBaseSettingsTaxonomyAccount", objects.count)
-        return objects.count >= 229 // モデルオブフェクトが229以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
+        return objects.count >= 232 // モデルオブフェクトが232以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
     }
     // チェック　勘定科目名から大区分が損益計算書の区分かを参照する
     func checkSettingsTaxonomyAccountRank0(account: String) -> Bool {
@@ -280,18 +280,18 @@ class DatabaseManagerSettingsTaxonomyAccount {
             print("エラーが発生しました")
         }
     }
-    // 更新　勘定科目名を変更
-    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // すべての影響範囲に修正が必要
-        do {
-            // (2)書き込みトランザクション内でデータを更新する
-            try DataBaseManager.realm.write {
-                let value: [String: Any] = ["number": number, "category": accountName]
-                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
-            }
-        } catch {
-            print("エラーが発生しました")
-        }
-    }
+//    // 更新　勘定科目名を変更
+//    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // すべての影響範囲に修正が必要
+//        do {
+//            // (2)書き込みトランザクション内でデータを更新する
+//            try DataBaseManager.realm.write {
+//                let value: [String: Any] = ["number": number, "category": accountName]
+//                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
+//            }
+//        } catch {
+//            print("エラーが発生しました")
+//        }
+//    }
     // 更新　設定勘定科目　設定勘定科目連番から、紐づける表示科目を変更
     func updateTaxonomyOfSettingsTaxonomyAccount(number: Int, numberOfTaxonomy: String) {
         do {

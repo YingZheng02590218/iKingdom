@@ -132,8 +132,7 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             }
         case 5: //     "元入金"
             switch rank1 {
-                // TODO: 株主資本、評価・換算差額等　なども表示させる
-            case 4: return balanceSheetData.objects23.count
+            case 0: return balanceSheetData.objects10.count
             default: return 0
             }
         default: //    ""
@@ -176,27 +175,35 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             }
         case 5: //     "元入金"
             switch rank1 {
-                // TODO: 株主資本、評価・換算差額等　なども表示させる
-            case 4: return balanceSheetData.objects23[row]
-            default: return balanceSheetData.objects23[row]
+            case 0: return balanceSheetData.objects10[row]
+            default: return balanceSheetData.objects10[row]
             }
         default: //    ""
-            return balanceSheetData.objects23[row]
+            return balanceSheetData.objects10[row]
         }
     }
 
     // 勘定別の合計を取得　マイナス表示もつける
     func getTotalOfTaxonomyAccount(rank0: Int, rank1: Int, forRow row: Int, lastYear: Bool) -> String {
         let settingsTaxonomyAccount = objects(rank0: rank0, rank1: rank1, forRow: row)
-        if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+        if lastYear {
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+                return DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
+                    rank0: rank0,
+                    rank1: rank1,
+                    accountNameOfSettingsTaxonomyAccount: settingsTaxonomyAccount.category, // 勘定科目名
+                    lastYear: lastYear
+                )
+            } else {
+                return "-"
+            }
+        } else {
             return DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
                 rank0: rank0,
                 rank1: rank1,
                 accountNameOfSettingsTaxonomyAccount: settingsTaxonomyAccount.category, // 勘定科目名
                 lastYear: lastYear
             )
-        } else {
-            return "-"
         }
     }
     // 取得　階層0 大区分 前年度表示対応

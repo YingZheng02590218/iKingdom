@@ -162,10 +162,8 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             return 0 // 負債合計
         case 9: return 35 // 資本の部
         case 10:
-            return 0 // 元入金
-        case 11:
             return 0 // 純資産合計
-        case 12:
+        case 11:
             return 0 // 負債純資産合計
         default:
             return 35
@@ -193,10 +191,8 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             return 35 // 負債合計
         case 9: return 0 // 資本の部
         case 10:
-            return 0 // 元入金合計
-        case 11:
             return 35 // 純資産合計
-        case 12:
+        case 11:
             return 35 // 負債純資産合計
         default:
             return 0
@@ -237,11 +233,9 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         case 9:
             return BalanceSheet.Block.netAssets.rawValue // 資本の部
         case 10:
-            return nil // 元入金
-        case 11: // 純資産合計
-            return nil
-        case 12: // 負債純資産合計
-            return nil
+            return nil // 純資産合計
+        case 11:
+            return nil // 負債純資産合計
         default:
             return nil
         }
@@ -288,14 +282,11 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
                 textForPrevious = presenter.getTotalBig5(big5: 1, lastYear: true)
                 textForThisYear = presenter.getTotalBig5(big5: 1, lastYear: false)
                 //　case 9: // 資本の部
-            case 10: // MARK: - "    元入金合計"
-                // TODO: 株主資本、評価・換算差額等　なども表示させる
-                break
-            case 11: // MARK: - "純資産合計"
+            case 10: // MARK: - "純資産合計"
                 footerLabelText = BalanceSheet.Block.netAssets.getTotalAmount() // 資本の部
                 textForPrevious = presenter.getTotalBig5(big5: 2, lastYear: true)
                 textForThisYear = presenter.getTotalBig5(big5: 2, lastYear: false)
-            case 12: // MARK: - "負債純資産合計"
+            case 11: // MARK: - "負債純資産合計"
                 footerLabelText = BalanceSheet.Block.liabilityAndEquity.getTotalAmount() // 負債純資産の部
                 textForPrevious = presenter.getTotalBig5(big5: 3, lastYear: true)
                 textForThisYear = presenter.getTotalBig5(big5: 3, lastYear: false)
@@ -398,16 +389,14 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             return 0
         case 9: // 資本の部
             print("資本の部")
-            return 0
-        case 10: // 資本
             print(
                 "資本",
-                presenter.numberOfobjects(rank0: 5, rank1: 4)
+                presenter.numberOfobjects(rank0: 5, rank1: 0)
             )
-            return presenter.numberOfobjects(rank0: 5, rank1: 4)
-        case 11: // 純資産合計
+            return presenter.numberOfobjects(rank0: 5, rank1: 0)
+        case 10: // 純資産合計
             return 0
-        case 12: // 負債純資産合計
+        case 11: // 負債純資産合計
             return 0
             
         default:
@@ -559,29 +548,25 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             return cell
             
         case 9: // MARK: - 資本の部
-            return cell
-            
-        case 10: // MARK: - "  元入金"
             switch indexPath.row {
-                // TODO: 株主資本、評価・換算差額等　なども表示させる
                 // MARK: - "  元入金"
-            case 0 ..< presenter.numberOfobjects(rank0: 5, rank1: 4):
+            case 0 ..< presenter.numberOfobjects(rank0: 5, rank1: 0):
                 // 勘定科目
-                cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 4, forRow: indexPath.row).category
-                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 4, forRow: indexPath.row).category)
-                cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 4, forRow: indexPath.row, lastYear: false) // 勘定別の合計
-                cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 4, forRow: indexPath.row, lastYear: true) // 勘定別の合計
+                cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 0, forRow: indexPath.row, lastYear: false) // 勘定別の合計
+                cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 0, forRow: indexPath.row, lastYear: true) // 勘定別の合計
                 return cell
             default:
                 return cell
             }
-            
-        case 11: // 純資産合計
+
+        case 10: // 純資産合計
             return cell
-            
-        case 12: // 負債純資産合計
+
+        case 11: // 負債純資産合計
             return cell
-            
+
         default:
             return cell
         }
