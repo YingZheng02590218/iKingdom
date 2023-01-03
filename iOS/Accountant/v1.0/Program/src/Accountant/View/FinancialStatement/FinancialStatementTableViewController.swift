@@ -185,12 +185,27 @@ class FinancialStatementTableViewController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(viewController, animated: true)
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
                 } else {
-                    let navigation = UINavigationController(rootViewController: viewController)
-                    self.present(navigation, animated: true, completion: nil)
+                    if let viewController = UIStoryboard(
+                        name: "BalanceSheetViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? BalanceSheetViewController {
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
                 }
             case 1:
                 let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)

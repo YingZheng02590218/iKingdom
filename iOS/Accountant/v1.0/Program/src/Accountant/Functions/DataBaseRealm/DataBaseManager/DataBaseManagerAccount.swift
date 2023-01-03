@@ -80,7 +80,82 @@ class DataBaseManagerAccount {
         ])
         return dataBaseAccount
     }
-    
+
+    /**
+     * 勘定科目　読込みメソッド
+     * 勘定名別の残高をデータベースから読み込む。
+     * @param rank0 設定勘定科目の大区分
+     * @param rank1 設定勘定科目の中区分
+     * @param accountNameOfSettingsTaxonomyAccount 設定勘定科目の勘定科目名
+     * @param number 設定勘定科目の連番
+     * @return result 勘定名別の残高額
+     */
+    func getTotalOfTaxonomyAccount(rank0: Int, rank1: Int, accountNameOfSettingsTaxonomyAccount: String, lastYear: Bool) -> String {
+        var result: Int64 = 0
+        var debitOrCredit: String = "" // 借又貸
+        var positiveOrNegative: String = "" // 借又貸
+
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
+        // 勘定クラス
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
+                print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
+                print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
+                // 借方と貸方で金額が大きい方はどちらか
+                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                    debitOrCredit = "借"
+                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                    debitOrCredit = "貸"
+                } else {
+                    debitOrCredit = "-"
+                }
+            }
+            switch rank0 {
+            case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
+                switch debitOrCredit {
+                case "貸":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
+                }
+            case 9, 10: // 営業外損益 特別損益
+                if rank1 == 15 || rank1 == 17 { // 営業外損益
+                    switch debitOrCredit {
+                    case "借":
+                        positiveOrNegative = "-"
+                    default:
+                        positiveOrNegative = ""
+                    }
+                } else if rank1 == 16 || rank1 == 18 { // 特別損益
+                    switch debitOrCredit {
+                    case "貸":
+                        positiveOrNegative = "-"
+                    default:
+                        positiveOrNegative = ""
+                    }
+                }
+            default: // 3,4,5,6（流動負債 固定負債 資本）, 売上
+                switch debitOrCredit {
+                case "借":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
+                }
+            }
+        }
+        if positiveOrNegative == "-" {
+            // 残高がマイナスの場合、三角のマークをつける
+            result = (result * -1)
+        }
+
+        // カンマを追加して文字列に変換した値を返す
+        return StringUtility.shared.setComma(amount: result)
+    }
+
     // MARK: Update
 
     // MARK: Delete

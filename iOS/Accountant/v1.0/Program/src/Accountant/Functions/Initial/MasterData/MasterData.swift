@@ -95,7 +95,7 @@ class MasterData {
                 } catch {
                     print("エラーが発生しました")
                 }
-                print("連番: \(number)")
+                print("連番: \(number) 表示科目　CSVファイルを読み込み")
             }
         }
     }

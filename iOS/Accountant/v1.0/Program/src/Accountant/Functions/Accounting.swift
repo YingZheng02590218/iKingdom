@@ -123,7 +123,19 @@ public enum BalanceSheet: Hashable {
             }
         }
     }
-    
+
+    public enum Capital: String, CaseIterable, Hashable {
+        // 元入金
+        case capital = "元入金"
+        
+        func getTotalAmount() -> String {
+            switch self {
+            case .capital:
+                return "元入金合計"
+            }
+        }
+    }
+
     // MARK: - 小区分
     
     public enum CurrentAssets: String, CaseIterable, Hashable {

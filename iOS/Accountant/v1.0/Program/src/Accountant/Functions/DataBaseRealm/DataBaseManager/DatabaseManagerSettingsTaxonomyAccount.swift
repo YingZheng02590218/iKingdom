@@ -195,6 +195,20 @@ class DatabaseManagerSettingsTaxonomyAccount {
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
     }
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主
+    func getDataBaseSettingsTaxonomyAccountInRankValid(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
+        var predicates = [
+            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))), // 大区分　流動資産
+            // .filter("Rank2 LIKE '\(Rank2)'") // 小区分　未使用
+            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
+        ]
+        if let rank1 = rank1 {
+            predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
+        }
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
+        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        return objects
+    }
     // 取得 大区分別に、スイッチONの勘定科目
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [

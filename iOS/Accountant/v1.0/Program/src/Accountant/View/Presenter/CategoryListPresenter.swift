@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol CategoryListPresenterInput {
     
-    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
+//    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
 
     func numberOfobjects(section: Int) -> Int
     func numberOfsections() -> Int
@@ -60,7 +60,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
     private var objects21: Results<DataBaseSettingsTaxonomyAccount>
     private var objects22: Results<DataBaseSettingsTaxonomyAccount>
     
-    internal var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount>
+//    internal var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount>
     
     private weak var view: CategoryListPresenterOutput!
     private var model: CategoryListModelInput
@@ -106,7 +106,7 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         
         objects22 = model.getDataBaseSettingsTaxonomyAccountInRank(rank0: 11, rank1: nil)
         
-        dataBaseSettingsTaxonomyAccount = model.getSettingsSwitchingOn(rank0: index)
+//        dataBaseSettingsTaxonomyAccount = model.getSettingsSwitchingOn(rank0: index)
     }
     
     func numberOfsections() -> Int {

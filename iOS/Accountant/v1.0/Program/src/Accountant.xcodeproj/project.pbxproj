@@ -81,6 +81,22 @@
 		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
 		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
+		F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
+		F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
+		F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
+		F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
+		F963E2A12962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */; };
+		F963E2A22962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */; };
+		F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A32962B728002DF49E /* BalanceSheetModel.swift */; };
+		F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A32962B728002DF49E /* BalanceSheetModel.swift */; };
+		F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A62962BA40002DF49E /* BalanceSheetData.swift */; };
+		F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A62962BA40002DF49E /* BalanceSheetData.swift */; };
+		F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */; };
+		F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */; };
+		F963E2AD296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */; };
+		F963E2AE296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */; };
+		F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */; };
+		F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */; };
 		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
@@ -503,6 +519,14 @@
 		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
 		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
+		F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetViewController.swift; sourceTree = "<group>"; };
+		F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BalanceSheetViewController.storyboard; sourceTree = "<group>"; };
+		F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalacneSheetPresenter.swift; sourceTree = "<group>"; };
+		F963E2A32962B728002DF49E /* BalanceSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetModel.swift; sourceTree = "<group>"; };
+		F963E2A62962BA40002DF49E /* BalanceSheetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetData.swift; sourceTree = "<group>"; };
+		F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerBalanceSheet.swift; sourceTree = "<group>"; };
+		F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
@@ -899,10 +923,14 @@
 		F955B60E2490FCD6005E2C6D /* BS */ = {
 			isa = PBXGroup;
 			children = (
+				F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */,
+				F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */,
 				F9B209EE27A4377000F7EA8D /* BSViewController.swift */,
 				F9B209EF27A4377000F7EA8D /* BSViewController.xib */,
 				F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */,
 				F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */,
+				F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */,
+				F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */,
 			);
 			path = BS;
 			sourceTree = "<group>";
@@ -946,6 +974,7 @@
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
 				F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */,
+				F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */,
 				F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */,
 			);
 			path = PDF;
@@ -1151,6 +1180,7 @@
 				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
 				F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */,
 				F99112E32495290000E28BB9 /* BSModel.swift */,
+				F963E2A32962B728002DF49E /* BalanceSheetModel.swift */,
 				F976798C24A8904B007A0D73 /* PLModel.swift */,
 				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
 				F9354DB124989895007DB098 /* TBModel.swift */,
@@ -1221,6 +1251,7 @@
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
 				F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */,
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
+				F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */,
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 				F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */,
@@ -1350,6 +1381,7 @@
 				F93A2631295721D7002B7EB9 /* DataBaseManager */,
 				F93A2632295722BF002B7EB9 /* DataBaseModel */,
 				F9AC55182927ACDA003966E4 /* BSData.swift */,
+				F963E2A62962BA40002DF49E /* BalanceSheetData.swift */,
 				F9AC551E292CA1D1003966E4 /* PLData.swift */,
 				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
 			);
@@ -1529,6 +1561,7 @@
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
+				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
@@ -1542,6 +1575,7 @@
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
+				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
@@ -1588,6 +1622,7 @@
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
+				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F9EC672F27B90BC60003FBB6 /* Main.storyboard in Resources */,
 				F9EC673027B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9EC673127B90BC60003FBB6 /* PLViewController.xib in Resources */,
@@ -1601,6 +1636,7 @@
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
+				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
@@ -1847,6 +1883,7 @@
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
+				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
 				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
@@ -1891,8 +1928,10 @@
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
+				F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */,
 				F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */,
@@ -1903,6 +1942,7 @@
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC551F292CA1D1003966E4 /* PLData.swift in Sources */,
+				F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
@@ -1915,6 +1955,7 @@
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
 				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
+				F963E2AD296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
 				F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
@@ -1923,6 +1964,7 @@
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
 				F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F963E2A12962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F99112E42495290000E28BB9 /* BSModel.swift in Sources */,
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
@@ -2003,6 +2045,7 @@
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
+				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
 				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
@@ -2047,8 +2090,10 @@
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */,
+				F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5523292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9EC66E527B90BC60003FBB6 /* DataBaseAccount.swift in Sources */,
 				F9EC66E627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.swift in Sources */,
@@ -2059,6 +2104,7 @@
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
+				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
@@ -2071,6 +2117,7 @@
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
 				F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */,
+				F963E2AE296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */,
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
 				F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
@@ -2079,6 +2126,7 @@
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
 				F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F963E2A22962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F9EC66FA27B90BC60003FBB6 /* BSModel.swift in Sources */,
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,

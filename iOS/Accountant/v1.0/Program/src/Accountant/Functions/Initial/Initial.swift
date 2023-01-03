@@ -68,10 +68,13 @@ class Initial {
             let masterData = MasterData()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
-        // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
-        DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
-        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
+            DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
+            // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
+            DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
+        }
     }
     /**
     * 初期化　初期化メソッド
