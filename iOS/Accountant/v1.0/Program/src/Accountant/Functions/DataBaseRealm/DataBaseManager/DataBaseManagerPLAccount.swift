@@ -32,12 +32,10 @@ class DataBaseManagerPLAccount {
             account = debitCategory
         }
         if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
-            // オブジェクトを作成
-            let dataBaseJournalEntry = DataBaseAdjustingEntry()
+
             var number = 0                                          // 仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
             let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-            dataBaseJournalEntry.fiscalYear = dataBaseAccountingBook.fiscalYear                        // 年度
             // 決算日
             let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             var fiscalYearFixed = ""
@@ -46,13 +44,18 @@ class DataBaseManagerPLAccount {
             } else {
                 fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear + 1)
             }
-            
-            dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
-            dataBaseJournalEntry.debit_category = creditCategory    // 借方勘定　＊引数の貸方勘定を振替える
-            dataBaseJournalEntry.debit_amount = amount        // 借方金額
-            dataBaseJournalEntry.credit_category = debitCategory  // 貸方勘定　＊引数の借方勘定を振替える
-            dataBaseJournalEntry.credit_amount = amount      // 貸方金額
-            dataBaseJournalEntry.smallWritting = "損益振替仕訳"      // 小書き
+            // オブジェクトを作成
+            let dataBaseJournalEntry = DataBaseAdjustingEntry(
+                fiscalYear: dataBaseAccountingBook.fiscalYear, // 年度
+                date: fiscalYearFixed + "/" + theDayOfReckoning,
+                debit_category: creditCategory, // 借方勘定　＊引数の貸方勘定を振替える
+                debit_amount: amount, // 借方金額
+                credit_category: debitCategory, // 貸方勘定　＊引数の借方勘定を振替える
+                credit_amount: amount, // 貸方金額
+                smallWritting: "損益振替仕訳", // 小書き
+                balance_left: 0,
+                balance_right: 0
+            )
             // 損益振替仕訳　が1件超が存在する場合は　削除
             let objects = checkAdjustingEntry(account: account) // 損益勘定内に勘定が存在するか
         outerLoop: while objects.count > 1 {
@@ -123,7 +126,7 @@ class DataBaseManagerPLAccount {
             }
         }
     }
-    
+
     // 追加　決算振替仕訳　資本振替
     // 引数：日付、借方勘定、金額、貸方勘定
     func addTransferEntryToNetWorth(debitCategory: String, amount: Int64, creditCategory: String) {
@@ -135,12 +138,9 @@ class DataBaseManagerPLAccount {
             account = debitCategory
         }
         if account == "繰越利益" {
-            // オブジェクトを作成
-            let dataBaseJournalEntry = DataBaseAdjustingEntry()
             var number = 0                                          // 仕訳番号 自動採番にした
             // 開いている会計帳簿の年度を取得
             let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-            dataBaseJournalEntry.fiscalYear = dataBaseAccountingBook.fiscalYear                       // 年度
             // 決算日
             let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             var fiscalYearFixed = ""
@@ -149,12 +149,19 @@ class DataBaseManagerPLAccount {
             } else {
                 fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear + 1)
             }
-            dataBaseJournalEntry.date = fiscalYearFixed + "/" + theDayOfReckoning
-            dataBaseJournalEntry.debit_category = creditCategory    // 借方勘定　＊引数の貸方勘定を振替える
-            dataBaseJournalEntry.debit_amount = amount        // 借方金額
-            dataBaseJournalEntry.credit_category = debitCategory  // 貸方勘定　＊引数の借方勘定を振替える
-            dataBaseJournalEntry.credit_amount = amount      // 貸方金額
-            dataBaseJournalEntry.smallWritting = "資本振替仕訳"
+            // オブジェクトを作成
+            let dataBaseJournalEntry = DataBaseAdjustingEntry(
+                fiscalYear: dataBaseAccountingBook.fiscalYear, // 年度
+                date: fiscalYearFixed + "/" + theDayOfReckoning,
+                debit_category: creditCategory, // 借方勘定　＊引数の貸方勘定を振替える
+                debit_amount: amount, // 借方金額
+                credit_category: debitCategory, // 貸方勘定　＊引数の借方勘定を振替える
+                credit_amount: amount, // 貸方金額
+                smallWritting: "資本振替仕訳", // 小書き
+                balance_left: 0,
+                balance_right: 0
+            )
+
             // 損益振替仕訳　が1件超が存在する場合は　削除
             let objects = checkAdjustingEntry(account: account) // 損益勘定内に勘定が存在するか
         outerLoop: while objects.count > 1 {

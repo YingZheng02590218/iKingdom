@@ -72,8 +72,3 @@ class DataBaseAccount: RObject {
     @objc dynamic var debit_balance_AfterAdjusting: Int64 = 0         // 借方残高
     @objc dynamic var credit_balance_AfterAdjusting: Int64 = 0        // 貸方
 }
-
-// 損益勘定クラス
-class DataBasePLAccount: DataBaseAccount {
-    
-}
