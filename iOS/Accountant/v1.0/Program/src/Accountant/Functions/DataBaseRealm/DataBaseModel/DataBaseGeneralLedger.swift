@@ -24,6 +24,5 @@ class DataBaseGeneralLedger: RObject {
 
     @objc dynamic var fiscalYear: Int = 0           // 年度
     let dataBaseAccounts = List<DataBaseAccount>() // 勘定
-    // 損益勘定
-    @objc dynamic var dataBasePLAccount: DataBasePLAccount?
+    @objc dynamic var dataBasePLAccount: DataBasePLAccount? // 損益勘定
 }

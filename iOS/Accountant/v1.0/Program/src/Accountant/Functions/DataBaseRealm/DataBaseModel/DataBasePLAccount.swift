@@ -11,7 +11,8 @@ import RealmSwift
 
 // 損益勘定クラス
 class DataBasePLAccount: DataBaseAccount {
-
     // 損益振替仕訳
-//    let dataBaseTransferEntry = List<DataBaseTransferEntry>() // 損益振替仕訳
+    let dataBaseTransferEntries = List<DataBaseTransferEntry>()
+    // 資本振替仕訳
+    @objc dynamic var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
 }

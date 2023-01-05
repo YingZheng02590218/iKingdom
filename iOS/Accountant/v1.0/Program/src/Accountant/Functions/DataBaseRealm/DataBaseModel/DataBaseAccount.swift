@@ -71,4 +71,6 @@ class DataBaseAccount: RObject {
     @objc dynamic var credit_total_AfterAdjusting: Int64 = 0          // 貸方
     @objc dynamic var debit_balance_AfterAdjusting: Int64 = 0         // 借方残高
     @objc dynamic var credit_balance_AfterAdjusting: Int64 = 0        // 貸方
+    // 損益振替仕訳
+    @objc dynamic var dataBaseTransferEntry: DataBaseTransferEntry?  // 損益振替仕訳
 }
