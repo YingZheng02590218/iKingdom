@@ -54,7 +54,7 @@ class MasterData {
                     print("エラーが発生しました")
                 }
                 print("連番: \(number), 勘定科目　CSVファイルを読み込み \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
-                if number == 232 {
+                if number == 229 {
                     stop = true
                 }
             }

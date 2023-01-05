@@ -270,7 +270,7 @@ class CategoryListTableViewController: UITableViewController {
     // 編集機能
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         // デフォルトの勘定科目数（230）以上ある場合は、削除可能とし、それ以下の場合は削除不可とする。
-        if presenter.objects(forRow: indexPath.row, section: indexPath.section).number <= 232 {
+        if presenter.objects(forRow: indexPath.row, section: indexPath.section).number <= 229 {
             return .none // 削除不可
         }
         return .delete

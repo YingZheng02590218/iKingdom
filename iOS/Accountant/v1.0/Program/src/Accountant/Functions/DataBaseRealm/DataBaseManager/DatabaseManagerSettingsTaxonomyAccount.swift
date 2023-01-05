@@ -68,7 +68,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         // (2)データベース内に保存されているモデルを全て取得する
         let objects = RealmManager.shared.read(type: DataBaseSettingsTaxonomyAccount.self)
         print("DataBaseSettingsTaxonomyAccount", objects.count)
-        return objects.count >= 232 // モデルオブフェクトが232以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
+        return objects.count >= 229 // モデルオブフェクトが229以上ある場合はtrueを返す　ユーザーが作成した勘定科目があるため
     }
     // チェック　勘定科目名から大区分が損益計算書の区分かを参照する
     func checkSettingsTaxonomyAccountRank0(account: String) -> Bool {

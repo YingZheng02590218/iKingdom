@@ -55,40 +55,6 @@ class Initial {
     * 設定勘定科目を初期化する。
     */
     func initialiseMasterData() {
-        // 個人事業主対応　存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
-        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "元入金") {
-            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
-                rank0: "5",
-                rank1: "10",
-                rank2: "",
-                numberOfTaxonomy: "",
-                category: "元入金",
-                switching: true
-            )
-            print(number)
-        }
-        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主貸") {
-            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
-                rank0: "5",
-                rank1: "10",
-                rank2: "",
-                numberOfTaxonomy: "",
-                category: "事業主貸",
-                switching: true
-            )
-            print(number)
-        }
-        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主借") {
-            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
-                rank0: "5",
-                rank1: "10",
-                rank2: "",
-                numberOfTaxonomy: "",
-                category: "事業主借",
-                switching: true
-            )
-            print(number)
-        }
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkInitialising() {
             // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
             DatabaseManagerSettingsTaxonomyAccount.shared.deleteAllOfSettingsTaxonomyAccount()
@@ -154,6 +120,40 @@ class Initial {
             initialiseAccounts(number: number, fiscalYear: fiscalYear)
             // 決算書画面　初期化
             initializeFinancialStatements(number: number, fiscalYear: fiscalYear)
+        }
+        // 個人事業主対応　存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "元入金") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "元入金",
+                switching: true
+            )
+            print(number)
+        }
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主貸") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "事業主貸",
+                switching: true
+            )
+            print(number)
+        }
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主借") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "事業主借",
+                switching: true
+            )
+            print(number)
         }
     }
     /**
