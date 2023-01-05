@@ -86,6 +86,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
     // 取得　決算整理仕訳　スイッチ
     func getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: Bool, switching: Bool) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            // FIXME: 使用していないプロパティを使っている
             NSPredicate(format: "AdjustingAndClosingEntries == %@", NSNumber(value: adjustingAndClosingEntries)),
             NSPredicate(format: "switching == %@", NSNumber(value: switching)) // 勘定科目がONだけに絞る
         ])

@@ -49,6 +49,31 @@ class Initial {
                 smallWritting: "ゾウ商店"
             )
         }
+
+        // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
+        // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            // 損益振替仕訳　が0件超が存在する場合は　削除
+            let objects = DataBaseManagerPLAccount.shared.checkAdjustingEntry(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objects.isEmpty {
+            for i in 0..<objects.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.deleteAdjustingJournalEntry(primaryKey: objects[i].number)
+                print("削除", isInvalidated, objects.count)
+                continue outerLoop
+            }
+            break
+        }
+            let objectss = DataBaseManagerPLAccount.shared.checkAdjustingEntryInPLAccount(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objectss.isEmpty {
+            for i in 0..<objectss.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.removeAdjustingJournalEntry(primaryKey: objectss[i].number)
+                print("関連削除", isInvalidated, objectss.count)
+                continue outerLoop
+            }
+            break
+        }
+        }
     }
     /**
     * 初期化　初期化メソッド
