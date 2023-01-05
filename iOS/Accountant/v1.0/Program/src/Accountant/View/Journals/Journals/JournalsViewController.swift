@@ -296,8 +296,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 if let indexPath = indexPath {
                     if indexPath.section == 1 {
                         // 損益振替仕訳の場合
-                        if presenter.objectsss(forRow: indexPath.row).debit_category == "損益勘定" ||
-                            presenter.objectsss(forRow: indexPath.row).credit_category == "損益勘定" {
+                        if presenter.objectsss(forRow: indexPath.row).debit_category == "損益" ||
+                            presenter.objectsss(forRow: indexPath.row).credit_category == "損益" {
                             
                         } else {
                             // 長押しされた場合の処理
@@ -497,7 +497,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.listSummaryLabel.text = "\(presenter.objects(forRow: indexPath.row).smallWritting) "
             cell.listSummaryLabel.textAlignment = NSTextAlignment.left
             /// 丁数　借方
-            if presenter.objects(forRow: indexPath.row).debit_category == "損益勘定" { // 損益勘定の場合
+            if presenter.objects(forRow: indexPath.row).debit_category == "損益" { // 損益勘定の場合
                 cell.listNumberLeftLabel.text = ""
             } else {
                 print(presenter.objects(forRow: indexPath.row).debit_category)
@@ -505,7 +505,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
             }
             /// 丁数　貸方
-            if presenter.objects(forRow: indexPath.row).credit_category == "損益勘定" { // 損益勘定の場合
+            if presenter.objects(forRow: indexPath.row).credit_category == "損益" { // 損益勘定の場合
                 cell.listNumberRightLabel.text = ""
             } else {
                 print(presenter.objects(forRow: indexPath.row).credit_category)
@@ -547,7 +547,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.listSummaryLabel.text = "\(presenter.objectsss(forRow: indexPath.row).smallWritting) "
             cell.listSummaryLabel.textAlignment = NSTextAlignment.left
             /// 丁数　借方
-            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益勘定" { // 損益勘定の場合
+            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益" { // 損益勘定の場合
                 cell.listNumberLeftLabel.text = ""
             } else {
                 print(presenter.objectsss(forRow: indexPath.row).debit_category)
@@ -555,7 +555,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
             }
             /// 丁数　貸方
-            if presenter.objectsss(forRow: indexPath.row).credit_category == "損益勘定" { // 損益勘定の場合
+            if presenter.objectsss(forRow: indexPath.row).credit_category == "損益" { // 損益勘定の場合
                 cell.listNumberRightLabel.text = ""
             } else {
                 print(presenter.objectsss(forRow: indexPath.row).credit_category)
@@ -733,8 +733,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             // 選択不可にしたい場合は"nil"を返す
         case 1:
             // 損益振替仕訳の場合
-            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益勘定" ||
-                presenter.objectsss(forRow: indexPath.row).credit_category == "損益勘定" {
+            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益" ||
+                presenter.objectsss(forRow: indexPath.row).credit_category == "損益" {
                 return nil
             } else {
                 return indexPath
@@ -785,8 +785,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if indexPath.section == 1 {
             // 損益振替仕訳の場合
-            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益勘定" ||
-                presenter.objectsss(forRow: indexPath.row).credit_category == "損益勘定" {
+            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益" ||
+                presenter.objectsss(forRow: indexPath.row).credit_category == "損益" {
                 return false
             } else {
                 return true

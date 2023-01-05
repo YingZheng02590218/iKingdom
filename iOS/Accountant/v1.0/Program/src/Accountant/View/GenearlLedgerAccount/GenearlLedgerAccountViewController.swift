@@ -290,7 +290,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 cell.listSummaryLabel.text = "\(creditCategory) "             // 摘要　相手方勘定なので貸方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.right
                 // 丁数
-                if creditCategory == "損益勘定" { // 損益勘定の場合
+                if creditCategory == "損益" { // 損益勘定の場合
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = ""                                            // 丁数　相手方勘定なので貸方
                 } else {
@@ -304,7 +304,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             } else if account == "\(creditCategory)" {  // 貸方勘定の場合
                 cell.listSummaryLabel.text = "\(debitCategory) "              // 摘要　相手方勘定なので借方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.left
-                if debitCategory == "損益勘定" { // 損益勘定の場合
+                if debitCategory == "損益" { // 損益勘定の場合
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = ""                               // 丁数　相手方勘定なので貸方
                 } else {

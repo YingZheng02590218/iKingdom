@@ -53,7 +53,7 @@ class DataBaseManagerAccount {
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
 
-        if accountName == "損益勘定" {
+        if accountName == "損益" {
             // 損益勘定の場合
             guard let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount else {
                 return nil

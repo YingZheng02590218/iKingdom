@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     // DataBasePLAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBasePLAccount.className()) { oldObject, newObject in
+                        newObject?["accountName"] = "損益"
                         // 損益振替仕訳
                         newObject?["dataBaseTransferEntries"] = List<DataBaseTransferEntry>()
                         // 資本振替仕訳

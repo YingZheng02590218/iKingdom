@@ -154,7 +154,7 @@ class FinancialStatementTableViewController: UITableViewController {
             }
         } else if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
-            cell.textLabel?.text = "損益勘定"
+            cell.textLabel?.text = "損益"
             cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         } else if indexPath.section == 2 {
@@ -244,7 +244,7 @@ class FinancialStatementTableViewController: UITableViewController {
             if let navigationController = segue.destination as? UINavigationController,
                let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
                 // 遷移先のコントローラに値を渡す
-                viewControllerGenearlLedgerAccount.account = "損益勘定" // セルに表示した勘定名を設定
+                viewControllerGenearlLedgerAccount.account = "損益" // セルに表示した勘定名を設定
                 // 遷移先のコントローラー.条件用の属性 = “条件”
             }
         default:

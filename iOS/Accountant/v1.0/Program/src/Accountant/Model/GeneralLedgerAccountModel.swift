@@ -141,7 +141,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        if account == "損益勘定" {
+        if account == "損益" {
             // 損益勘定の場合
             let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
             let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
@@ -159,7 +159,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        if account == "損益勘定" {
+        if account == "損益" {
             // 損益勘定の場合
             let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
             let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true))!
@@ -177,7 +177,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
-            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益"), NSString(string: "損益"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
@@ -186,7 +186,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     func getAllAdjustingEntryInAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
-            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益"), NSString(string: "損益"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
@@ -195,7 +195,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
     func getAllAdjustingEntryInPLAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
             NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "繰越利益"), NSString(string: "繰越利益")) // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
@@ -207,7 +207,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
             NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "繰越利益"), NSString(string: "繰越利益")) // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
@@ -220,7 +220,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             .filter("accountName LIKE '\(account)'")
         var objects = dataBaseAccount[0].dataBaseAdjustingEntries
             .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")')")
+            .filter("!(debit_category LIKE '\("損益")') && !(credit_category LIKE '\("損益")')")
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
@@ -232,7 +232,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
             .filter("accountName LIKE '\(account)'")
         var objects = dataBaseAccount[0].dataBaseAdjustingEntries
             .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            .filter("debit_category LIKE '\("損益勘定")' || credit_category LIKE '\("損益勘定")'")
+            .filter("debit_category LIKE '\("損益")' || credit_category LIKE '\("損益")'")
         // .filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')") // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
@@ -244,7 +244,7 @@ class GeneralLedgerAccountModel: GenearlLedgerAccountModelInput {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "繰越利益"), NSString(string: "繰越利益"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)

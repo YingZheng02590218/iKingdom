@@ -73,7 +73,7 @@ class JournalsModel: JournalsModelInput {
         if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
            let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
             if !englishFromOfClosingTheLedger0 { // 損益振替仕訳
-                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")') || (debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
+                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("(debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
             }
             if !englishFromOfClosingTheLedger1 { // 資本振替仕訳
                 dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")

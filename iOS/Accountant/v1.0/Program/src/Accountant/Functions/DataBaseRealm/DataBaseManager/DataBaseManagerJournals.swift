@@ -100,19 +100,19 @@ class DataBaseManagerJournals: DataBaseManager {
         // 決算整理仕訳 開いている帳簿の年度と同じ仕訳に絞り込む
         let dataBaseJournalAdjustingEntries = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
-            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+            NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "損益"), NSString(string: "損益"))
         ])
             .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 借方勘定が損益勘定の場合
         let dataBasePLAccountJournalAdjustingEntriesDebit = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
-            NSPredicate(format: "debit_category LIKE %@ AND !(credit_category LIKE %@)", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+            NSPredicate(format: "debit_category LIKE %@ AND !(credit_category LIKE %@)", NSString(string: "損益"), NSString(string: "損益"))
         ])
             .sorted(byKeyPath: "date", ascending: true)
         // 決算整理仕訳 貸方勘定が損益勘定の場合
         let dataBasePLAccountJournalAdjustingEntriesCredit = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
-            NSPredicate(format: "!(debit_category LIKE %@) AND credit_category LIKE %@", NSString(string: "損益勘定"), NSString(string: "損益勘定"))
+            NSPredicate(format: "!(debit_category LIKE %@) AND credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益"))
         ])
             .sorted(byKeyPath: "date", ascending: true)
         do {

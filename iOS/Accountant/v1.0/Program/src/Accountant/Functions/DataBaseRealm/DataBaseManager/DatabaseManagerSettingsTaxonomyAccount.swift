@@ -138,7 +138,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return 0 }
         return Int(object.numberOfTaxonomy) ?? 0
     }
-    // 取得 勘定科目の連番から勘定科目を取得
+    // 取得 勘定科目の連番から設定勘定科目を取得
     func getSettingsTaxonomyAccount(number: Int) -> DataBaseSettingsTaxonomyAccount? {
         guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return nil }
         return object
@@ -221,7 +221,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
-        if accountName == "損益勘定" {
+        if accountName == "損益" {
             return 0
         } else {
             let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [

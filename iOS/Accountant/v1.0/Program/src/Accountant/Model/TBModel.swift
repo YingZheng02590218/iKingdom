@@ -32,7 +32,7 @@ class TBModel: TBModelInput {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            if account != "損益勘定" {
+            if account != "損益" {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                     switch leftOrRight {
@@ -76,7 +76,7 @@ class TBModel: TBModelInput {
             if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
                 result = 0
             } else {
-                if account != "損益勘定" {
+                if account != "損益" {
                     // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                     for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                         switch leftOrRight {
@@ -121,7 +121,7 @@ class TBModel: TBModelInput {
             if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
                 result = 0
             } else {
-                if account != "損益勘定" {
+                if account != "損益" {
                     // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                     for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                         switch leftOrRight {
@@ -212,13 +212,13 @@ class TBModel: TBModelInput {
     // 設定　仕訳と決算整理後　勘定クラス　個別の勘定別　仕訳データを追加、更新、削除後に、呼び出される
     func setAccountTotal(accountLeft: String, accountRight: String) {
         // 注意：損益振替仕訳を削除すると、エラーが発生するので、account_leftもしくは、account_rightが損益勘定の場合は下記を実行しない。
-        if accountLeft != "損益勘定" {
+        if accountLeft != "損益" {
             // 勘定別に仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
             calculateAccountTotal(account: accountLeft ) // 借方
             // 勘定別の決算整理後の集計
             calculateAccountTotalAfterAdjusting(account: accountLeft )
         }
-        if accountRight != "損益勘定" {
+        if accountRight != "損益" {
             calculateAccountTotal(account: accountRight) // 貸方
             calculateAccountTotalAfterAdjusting(account: accountRight)
         }
@@ -226,12 +226,12 @@ class TBModel: TBModelInput {
         transferJournals()
 
         // 設定表示科目　初期化 毎回行うと時間がかかる
-        if accountLeft != "損益勘定" {
+        if accountLeft != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)
             ) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
         }
-        if accountRight != "損益勘定" {
+        if accountRight != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight)
             )
@@ -244,13 +244,13 @@ class TBModel: TBModelInput {
     // 設定　決算整理仕訳と決算整理後　勘定クラス　個別の勘定別　決算整理仕訳データを追加後に、呼び出される
     func setAccountTotalAdjusting(accountLeft: String, accountRight: String) {
         // 注意：損益振替仕訳を削除すると、エラーが発生するので、account_leftもしくは、account_rightが損益勘定の場合は下記を実行しない。
-        if accountLeft != "損益勘定" {
+        if accountLeft != "損益" {
             // 勘定別に決算整理仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
             calculateAccountTotalAdjusting(account: accountLeft) // 借方
             // 勘定別の決算整理後の集計
             calculateAccountTotalAfterAdjusting(account: accountLeft)
         }
-        if accountRight != "損益勘定" {
+        if accountRight != "損益" {
             calculateAccountTotalAdjusting(account: accountRight) // 貸方
             calculateAccountTotalAfterAdjusting(account: accountRight)
         }
@@ -258,12 +258,12 @@ class TBModel: TBModelInput {
         transferJournals()
 
         // 設定表示科目　初期化 毎回行うと時間がかかる
-        if accountLeft != "損益勘定" {
+        if accountLeft != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountLeft)
             ) // 勘定科目の名称から、紐づけられた設定表示科目の連番を取得する
         }
-        if accountRight != "損益勘定" {
+        if accountRight != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: accountRight)
             )
@@ -405,12 +405,12 @@ class TBModel: TBModelInput {
         var right: Int64 = 0
 
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: "損益勘定") // 勘定別に取得
+        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: "損益") // 勘定別に取得
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
-            if "損益勘定" == "\(objects[i].debit_category)" { // 借方
+            if "損益" == "\(objects[i].debit_category)" { // 借方
                 left += objects[i].debit_amount // 累計額に追加
-            } else if "損益勘定" == "\(objects[i].credit_category)" { // 貸方
+            } else if "損益" == "\(objects[i].credit_category)" { // 貸方
                 right += objects[i].credit_amount // 累計額に追加
             }
         }
@@ -503,13 +503,13 @@ class TBModel: TBModelInput {
         var objects: Results<DataBaseAdjustingEntry>
 
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        objects = dataBaseManagerAccount.getAllAdjustingEntryInPLAccount(account: "損益勘定")
+        objects = dataBaseManagerAccount.getAllAdjustingEntryInPLAccount(account: "損益")
 
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
-            if "損益勘定" == "\(objects[i].debit_category)" { // 借方
+            if "損益" == "\(objects[i].debit_category)" { // 借方
                 left += objects[i].debit_amount // 累計額に追加
-            } else if "損益勘定" == "\(objects[i].credit_category)" { // 貸方
+            } else if "損益" == "\(objects[i].credit_category)" { // 貸方
                 right += objects[i].credit_amount // 累計額に追加
             }
         }
@@ -575,12 +575,12 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益勘定振替
+                    // 決算振替仕訳　損益振替
                     if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
                         DataBaseManagerPLAccount.shared.addTransferEntry(
                             debitCategory: account,
                             amount: dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting,
-                            creditCategory: "損益勘定"
+                            creditCategory: "損益"
                         )
                     }
                 } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting {
@@ -594,10 +594,10 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益勘定振替
+                    // 決算振替仕訳　損益振替
                     if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
                         DataBaseManagerPLAccount.shared.addTransferEntry(
-                            debitCategory: "損益勘定",
+                            debitCategory: "損益",
                             amount: dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting,
                             creditCategory: account
                         )
@@ -611,8 +611,12 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益勘定振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
-                    DataBaseManagerPLAccount.shared.addTransferEntry(debitCategory: "損益勘定", amount: 0, creditCategory: account)
+                    // 決算振替仕訳　損益振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
+                    DataBaseManagerPLAccount.shared.addTransferEntry(
+                        debitCategory: "損益",
+                        amount: 0,
+                        creditCategory: account
+                    )
                 }
             }
         }
@@ -646,7 +650,11 @@ class TBModel: TBModelInput {
                         print("エラーが発生しました")
                     }
                     // 決算振替仕訳　損益勘定の締切り
-                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(debitCategory: "損益勘定", amount: dataBasePLAccount.debit_balance_AfterAdjusting, creditCategory: "繰越利益") // 仕訳画面で繰越利益を選択して仕訳入力した場合、実行される
+                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
+                        debitCategory: "損益",
+                        amount: dataBasePLAccount.debit_balance_AfterAdjusting,
+                        creditCategory: "繰越利益"
+                    ) // 仕訳画面で繰越利益を選択して仕訳入力した場合、実行される
                 } else if dataBasePLAccount.debit_total_AfterAdjusting < dataBasePLAccount.credit_total_AfterAdjusting {
                     do {
                         try DataBaseManager.realm.write {
@@ -659,7 +667,11 @@ class TBModel: TBModelInput {
                         print("エラーが発生しました")
                     }
                     // 決算振替仕訳　損益勘定の締切り
-                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(debitCategory: "繰越利益", amount: dataBasePLAccount.credit_balance_AfterAdjusting, creditCategory: "損益勘定")
+                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
+                        debitCategory: "繰越利益",
+                        amount: dataBasePLAccount.credit_balance_AfterAdjusting,
+                        creditCategory: "損益"
+                    )
                 } else {
                     do {
                         try DataBaseManager.realm.write {
@@ -670,7 +682,11 @@ class TBModel: TBModelInput {
                         print("エラーが発生しました")
                     }
                     // 決算振替仕訳　損益勘定の締切り 記述漏れ　2020/11/05
-                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(debitCategory: "繰越利益", amount: 0, creditCategory: "損益勘定")
+                    DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
+                        debitCategory: "繰越利益",
+                        amount: 0,
+                        creditCategory: "損益"
+                    )
                 }
             }
         }

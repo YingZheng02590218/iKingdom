@@ -62,7 +62,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 // オブジェクトを作成 損益勘定
                 let dataBasePLAccount = DataBasePLAccount(
                     fiscalYear: dataBaseAccountingBooks.fiscalYear,
-                    accountName: "損益勘定",
+                    accountName: "損益",
                     debit_total: 0,
                     credit_total: 0,
                     debit_balance: 0,
