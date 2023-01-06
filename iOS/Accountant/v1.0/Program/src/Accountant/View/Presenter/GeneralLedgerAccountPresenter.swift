@@ -16,10 +16,12 @@ protocol GeneralLedgerAccountPresenterInput {
     
     var numberOfDatabaseJournalEntries: Int { get }
     var numberOfDataBaseAdjustingEntries: Int { get }
-    
+    var numberOfDataBaseTransferEntry: Int { get }
+
     func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry
     func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry
-    
+    func dataBaseTransferEntries() -> DataBaseTransferEntry?
+
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -50,7 +52,9 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var databaseJournalEntries: Results<DataBaseJournalEntry>
     // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
-    
+    // 損益振替仕訳
+    private var dataBaseTransferEntry: DataBaseTransferEntry?
+
     private weak var view: GeneralLedgerAccountPresenterOutput!
     private var model: GeneralLedgerAccountModelInput
     
@@ -63,6 +67,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         databaseJournalEntries = model.getJournalEntryInAccount(account: account)
         // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
         dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
+        // 損益振替仕訳
+        dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
     }
     
     // MARK: - Life cycle
@@ -106,7 +112,15 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry {
         dataBaseAdjustingEntries[row]
     }
-    
+
+    var numberOfDataBaseTransferEntry: Int {
+        dataBaseTransferEntry == nil ? 0 : 1
+    }
+
+    func dataBaseTransferEntries() -> DataBaseTransferEntry? {
+        dataBaseTransferEntry
+    }
+
     // 取得　差引残高額　 決算整理仕訳　損益勘定以外
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
         
@@ -127,6 +141,17 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         
         model.getBalanceDebitOrCredit(indexPath: indexPath)
     }
+    // FIXME: 省略
+//    // 取得　差引残高額 損益振替仕訳
+//    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
+//
+//        model.getBalanceAmountCapitalTransferJournalEntry()
+//    }
+//    // 借又貸を取得 損益振替仕訳
+//    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
+//
+//        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
+//    }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         

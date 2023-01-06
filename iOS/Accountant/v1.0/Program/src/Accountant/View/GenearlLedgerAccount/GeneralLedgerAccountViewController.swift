@@ -118,18 +118,22 @@ class GeneralLedgerAccountViewController: UIViewController {
 extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳　決算整理仕訳　空白行
-        return 3
+        // 通常仕訳　決算整理仕訳 損益振替仕訳　空白行
+        return 4
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             // 通常仕訳
             return presenter.numberOfDatabaseJournalEntries
-        } else if section == 1 {
+        case 1:
             // 決算整理仕訳
             return presenter.numberOfDataBaseAdjustingEntries
-        } else {
+        case 2:
+            // 損益振替仕訳
+            return presenter.numberOfDataBaseTransferEntry
+        default:
             // 空白行
             return 21 // 空白行を表示するため+21行を追加
         }
@@ -154,7 +158,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         var balanceAmount: Int64 = 0
         var balanceDebitOrCredit: String = ""
 
-        if indexPath.section == 0 || indexPath.section == 1 {
+        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 {
             
             if indexPath.section == 0 {
                 // 通常仕訳　通常仕訳 勘定別
@@ -232,6 +236,43 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listCreditLabel.textColor = .red
                     cell.listDebitOrCreditLabel.textColor = .red
                     cell.listBalanceLabel.textColor = .red
+                }
+            } else if indexPath.section == 2 {
+                // 損益振替仕訳
+                if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
+                    date = "\(dataBaseTransferEntry.date)"
+                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
+                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
+                    debitCategory = dataBaseTransferEntry.debit_category
+                    creditCategory = dataBaseTransferEntry.credit_category
+                    debitAmount = dataBaseTransferEntry.debit_amount
+                    creditAmount = dataBaseTransferEntry.credit_amount
+                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
+
+                    balanceAmount = 0
+                    balanceDebitOrCredit = "-"
+
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
+                        cell.listDateMonthLabel.textColor = .textColor
+                        cell.listDateDayLabel.textColor = .textColor
+                        cell.listSummaryLabel.textColor = .textColor
+                        cell.listNumberLabel.textColor = .textColor
+                        cell.listDebitLabel.textColor = .textColor
+                        cell.listCreditLabel.textColor = .textColor
+                        cell.listDebitOrCreditLabel.textColor = .textColor
+                        cell.listBalanceLabel.textColor = .textColor
+                    } else {
+                        cell.listDateMonthLabel.textColor = .red
+                        cell.listDateDayLabel.textColor = .red
+                        cell.listSummaryLabel.textColor = .red
+                        cell.listNumberLabel.textColor = .red
+                        cell.listDebitLabel.textColor = .red
+                        cell.listCreditLabel.textColor = .red
+                        cell.listDebitOrCreditLabel.textColor = .red
+                        cell.listBalanceLabel.textColor = .red
+                    }
                 }
             }
 // 月
@@ -319,7 +360,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             cell.listDebitOrCreditLabel.text = balanceDebitOrCredit                          // 借又貸
             // セルの選択を許可
             cell.selectionStyle = .default
-        } else if indexPath.section == 2 {
+        } else {
             // 空白行
             cell.listDateMonthLabel.text = ""    // 「月」注意：空白を代入しないと、変な値が入る。
             cell.listDateDayLabel.text = ""      // 末尾2文字の「日」         //日付
@@ -338,11 +379,11 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
-        // 選択不可にしたい場合は"nil"を返す
-        case 2:
-            return nil
-        default:
+            // 選択不可にしたい場合は"nil"を返す
+        case 0, 1:
             return indexPath
+        default:
+            return nil
         }
     }
 }

@@ -107,7 +107,7 @@ class GeneralLedgerPLAccountViewController: UIViewController {
      */
     @IBAction func printButtonTapped(_ sender: Any) {
         // 初期化
-        pDFMaker.initialize() // TODO: 損益勘定用を作る
+        pDFMaker.initialize()
 
         let previewController = QLPreviewController()
         previewController.dataSource = self
@@ -157,7 +157,7 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
         if indexPath.section == 0 || indexPath.section == 1 {
             
             if indexPath.section == 0 {
-                // 通常仕訳　通常仕訳 勘定別
+                // 損益振替仕訳
                 date = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date)"                              // 日付
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                     upperCellMonth = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row - 1).date)"             // 日付
@@ -168,8 +168,8 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 creditCategory = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category      // 摘要　相手方勘定なので貸方
                 debitAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount            // 借方金額
                 creditAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount             // 貸方金額
-                numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
-                numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
+                numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
 
                 // 差引残高　差引残高クラスで計算した計算結果を取得
                 balanceAmount = presenter.getBalanceAmount(indexPath: indexPath)
@@ -205,8 +205,8 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
                     debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
                     creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
-                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
+                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
 
                     balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
                     balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
