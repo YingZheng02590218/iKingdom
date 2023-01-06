@@ -65,7 +65,7 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
     }
 
     // 取得　差引残高額　 資本振替仕訳　損益勘定以外
-    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
+    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
         if let dataBaseAdjustingEntries = dataBaseCapitalTransferJournalEntry {
             if dataBaseAdjustingEntries.balance_left > dataBaseAdjustingEntries.balance_right { // 借方と貸方を比較
                 balanceAmount = dataBaseAdjustingEntries.balance_left// - objects.balance_right
@@ -80,7 +80,7 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
         return balanceAmount
     }
     // 借又貸を取得 資本振替仕訳
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
         if let dataBaseAdjustingEntries = dataBaseCapitalTransferJournalEntry {
             if dataBaseAdjustingEntries.balance_left > dataBaseAdjustingEntries.balance_right {
                 balanceDebitOrCredit = "借"

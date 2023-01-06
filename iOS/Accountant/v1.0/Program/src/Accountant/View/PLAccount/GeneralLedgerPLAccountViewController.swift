@@ -34,7 +34,7 @@ class GeneralLedgerPLAccountViewController: UIViewController {
     // 勘定名
     let account: String = "損益"
     // 印刷機能
-    let pDFMaker = PDFMakerAccount()
+    let pDFMaker = PDFMakerPLAccount()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerPLAccountPresenterInput!
@@ -107,7 +107,7 @@ class GeneralLedgerPLAccountViewController: UIViewController {
      */
     @IBAction func printButtonTapped(_ sender: Any) {
         // 初期化
-        pDFMaker.initialize(account: account) // TODO: 損益勘定用を作る
+        pDFMaker.initialize() // TODO: 損益勘定用を作る
 
         let previewController = QLPreviewController()
         previewController.dataSource = self
@@ -196,7 +196,7 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     cell.listBalanceLabel.textColor = .red
                 }
             } else if indexPath.section == 1 {
-                // 決算整理仕訳　勘定別　損益勘定以外
+                // 資本振替仕訳
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
                     date = "\(dataBaseCapitalTransferJournalEntry.date)"
                     oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
@@ -208,8 +208,8 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
 
-                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath) // TODO: メソッドをまとめる
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
+                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {

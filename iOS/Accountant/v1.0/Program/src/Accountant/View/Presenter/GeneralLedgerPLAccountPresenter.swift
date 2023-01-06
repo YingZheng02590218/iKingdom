@@ -27,8 +27,8 @@ protocol GeneralLedgerPLAccountPresenterInput {
 
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
-    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String
+    func getBalanceAmountCapitalTransferJournalEntry() -> Int64
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
     func getNumberOfAccount(accountName: String) -> Int
 }
 
@@ -117,14 +117,14 @@ final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInpu
         model.getBalanceDebitOrCredit(indexPath: indexPath)
     }
     // 取得　差引残高額 資本振替仕訳
-    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
+    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
 
-        model.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath)
+        model.getBalanceAmountCapitalTransferJournalEntry()
     }
     // 借又貸を取得 資本振替仕訳
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
 
-        model.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
     }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {

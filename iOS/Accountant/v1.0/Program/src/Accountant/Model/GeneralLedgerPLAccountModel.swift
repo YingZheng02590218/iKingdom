@@ -14,9 +14,9 @@ protocol GeneralLedgerPLAccountModelInput {
     func initialize(dataBaseTransferEntries: Results<DataBaseTransferEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?)
 
     func getBalanceAmount(indexPath: IndexPath) -> Int64
-    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String
+    func getBalanceAmountCapitalTransferJournalEntry() -> Int64
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
     func getNumberOfAccount(accountName: String) -> Int
     
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
@@ -36,20 +36,20 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
         // 損益勘定用
         DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceAmount(indexPath: indexPath)
     }
-    // 取得　差引残高額 資本振替仕訳
-    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
-
-        DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath)
-    }
     // 借又貸を取得 損益振替仕訳
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
         
         DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceDebitOrCredit(indexPath: indexPath)
     }
-    // 借又貸を取得 資本振替仕訳
-    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+    // 取得　差引残高額 資本振替仕訳
+    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
 
-        DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+        DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceAmountCapitalTransferJournalEntry()
+    }
+    // 借又貸を取得 資本振替仕訳
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
+
+        DataBaseManagerGeneralLedgerPLAccountBalance.shared.getBalanceDebitOrCreditCapitalTransferJournalEntry()
     }
 
     // 取得　損益振替仕訳
