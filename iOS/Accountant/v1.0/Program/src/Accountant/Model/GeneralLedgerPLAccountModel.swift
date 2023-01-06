@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 /// GUIアーキテクチャ　MVP
-protocol GeneralLedgerAccountModelInput {
+protocol GeneralLedgerPLAccountModelInput {
     func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>)
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
@@ -24,7 +24,7 @@ protocol GeneralLedgerAccountModelInput {
     func getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: String) -> Results<DataBaseAdjustingEntry>
 }
 // 勘定クラス
-class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
+class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
 
     // MARK: - CRUD
     

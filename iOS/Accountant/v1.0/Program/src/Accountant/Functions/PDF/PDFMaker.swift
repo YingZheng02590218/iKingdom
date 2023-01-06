@@ -100,9 +100,9 @@ class PDFMaker {
             let smallWritting = item.smallWritting
             _ = item.balance_left
             _ = item.balance_right
-            let genearlLedgerAccountModel = GeneralLedgerAccountModel()
-            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)") // 損益勘定の場合はエラーになる
-            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)") // 損益勘定の場合はエラーになる
+            let generalLedgerAccountModel = GeneralLedgerAccountModel()
+            let numberOfAccountCredit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)") // 損益勘定の場合はエラーになる
+            let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)") // 損益勘定の場合はエラーになる
 
             let rowString = hTMLhelper.getSingleRow(
                 month: String(month),
@@ -147,9 +147,9 @@ class PDFMaker {
             let smallWritting = item.smallWritting
             _ = item.balance_left
             _ = item.balance_right
-            let genearlLedgerAccountModel = GeneralLedgerAccountModel()
-            let numberOfAccountCredit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
-            let numberOfAccountDebit: Int = genearlLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
+            let generalLedgerAccountModel = GeneralLedgerAccountModel()
+            let numberOfAccountCredit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
+            let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
             
             let rowString = hTMLhelper.getSingleRow(
                 month: String(month),

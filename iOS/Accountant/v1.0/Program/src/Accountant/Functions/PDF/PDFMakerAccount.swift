@@ -291,7 +291,7 @@ class PDFMakerAccount {
         // "receipt-" + UUID().uuidString
         // "\(fiscalYear)-Account-\(account)"
         
-        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GenearlLedger-\(account)" + ".pdf")
+        let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GeneralLedger-\(account)" + ".pdf")
         do {
             try data.write(to: filePath)
             print(filePath)

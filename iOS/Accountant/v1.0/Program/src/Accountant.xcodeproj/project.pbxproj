@@ -103,6 +103,14 @@
 		F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */; };
 		F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */; };
 		F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */; };
+		F963E2BD2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */; };
+		F963E2BE2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */; };
+		F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */; };
+		F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */; };
+		F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */; };
+		F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */; };
+		F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */; };
+		F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */; };
 		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
@@ -144,7 +152,7 @@
 		F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */; };
 		F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */; };
 		F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */; };
-		F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
+		F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */; };
 		F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */; };
 		F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE798261DD042004611E4 /* WSViewController.storyboard */; };
@@ -188,8 +196,8 @@
 		F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
 		F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
 		F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
-		F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
-		F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
+		F9B1548C27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */; };
+		F9B1548D27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */; };
 		F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */; };
 		F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */; };
 		F9B209F027A4377000F7EA8D /* BSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EE27A4377000F7EA8D /* BSViewController.swift */; };
@@ -234,7 +242,7 @@
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
 		F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */; };
 		F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */; };
-		F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
+		F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */; };
 		F9D5D54D247E48D600EA35C7 /* GeneralLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */; };
 		F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */; };
 		F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
@@ -314,7 +322,7 @@
 		F9EC66D527B90BC60003FBB6 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F4EF3249CCD5B00D50767 /* TBViewController.swift */; };
 		F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
-		F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
+		F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */; };
 		F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
@@ -377,7 +385,7 @@
 		F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
 		F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 		F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
-		F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
+		F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */; };
 		F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */; };
 		F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CEE26208DF50099D51C /* SettingsPeriodYearViewController.storyboard */; };
 		F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */; };
@@ -536,6 +544,10 @@
 		F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCapitalTransferJournalEntry.swift; sourceTree = "<group>"; };
 		F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTransferEntry.swift; sourceTree = "<group>"; };
 		F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBasePLAccount.swift; sourceTree = "<group>"; };
+		F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountViewController.swift; sourceTree = "<group>"; };
+		F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralLedgerPLAccountViewController.storyboard; sourceTree = "<group>"; };
+		F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountPresenter.swift; sourceTree = "<group>"; };
+		F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountModel.swift; sourceTree = "<group>"; };
 		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
@@ -572,7 +584,7 @@
 		F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSTableViewCell.swift; sourceTree = "<group>"; };
 		F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerTableViewController.storyboard; sourceTree = "<group>"; };
-		F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenearlLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
+		F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
 		F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FinancialStatementTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CFTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE798261DD042004611E4 /* WSViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WSViewController.storyboard; sourceTree = "<group>"; };
@@ -611,7 +623,7 @@
 		F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperBS.swift; sourceTree = "<group>"; };
 		F9AD64E22912B66B00B9F50B /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
 		F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
-		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
+		F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountPresenter.swift; sourceTree = "<group>"; };
 		F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPresenter.swift; sourceTree = "<group>"; };
 		F9B209EE27A4377000F7EA8D /* BSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSViewController.swift; sourceTree = "<group>"; };
@@ -653,7 +665,7 @@
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
 		F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodYearViewController.swift; sourceTree = "<group>"; };
 		F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpDetailViewController.swift; sourceTree = "<group>"; };
-		F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountViewController.swift; sourceTree = "<group>"; };
+		F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountViewController.swift; sourceTree = "<group>"; };
 		F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
 		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -1028,6 +1040,8 @@
 		F9706847252AC631003307F8 /* PLAccount */ = {
 			isa = PBXGroup;
 			children = (
+				F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */,
+				F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */,
 			);
 			path = PLAccount;
 			sourceTree = "<group>";
@@ -1191,6 +1205,7 @@
 			children = (
 				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
 				F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */,
+				F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */,
 				F99112E32495290000E28BB9 /* BSModel.swift */,
 				F963E2A32962B728002DF49E /* BalanceSheetModel.swift */,
 				F976798C24A8904B007A0D73 /* PLModel.swift */,
@@ -1261,7 +1276,8 @@
 			isa = PBXGroup;
 			children = (
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
-				F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */,
+				F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */,
+				F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */,
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
 				F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */,
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
@@ -1310,8 +1326,8 @@
 		F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */ = {
 			isa = PBXGroup;
 			children = (
-				F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */,
-				F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */,
+				F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */,
+				F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */,
 				F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */,
 			);
 			path = GenearlLedgerAccount;
@@ -1552,7 +1568,7 @@
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
-				F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */,
+				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
@@ -1570,6 +1586,7 @@
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
+				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
@@ -1613,7 +1630,7 @@
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
-				F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */,
+				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
@@ -1631,6 +1648,7 @@
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
+				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
@@ -1878,6 +1896,7 @@
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
+				F963E2BD2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
 				F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9F934EC248554DA00BF7AA7 /* SettingsPeriodTableViewController.swift in Sources */,
 				F9AD64DA2912961900B9F50B /* Constant.swift in Sources */,
@@ -1890,10 +1909,12 @@
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
 				F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */,
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
+				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
@@ -1928,7 +1949,7 @@
 				F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
-				F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
@@ -1978,7 +1999,7 @@
 				F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
-				F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F9B1548C27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */,
 				F963E2A12962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F99112E42495290000E28BB9 /* BSModel.swift in Sources */,
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
@@ -2043,6 +2064,7 @@
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,
+				F963E2BE2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
 				F9EC66AD27B90BC60003FBB6 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66AE27B90BC60003FBB6 /* SettingsPeriodTableViewController.swift in Sources */,
 				F9AD64DB2912961900B9F50B /* Constant.swift in Sources */,
@@ -2055,10 +2077,12 @@
 				F9EC66B627B90BC60003FBB6 /* AnnotationViewController.swift in Sources */,
 				F9EC66B727B90BC60003FBB6 /* PageContentViewController.swift in Sources */,
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
+				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
@@ -2093,7 +2117,7 @@
 				F9EC66D527B90BC60003FBB6 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */,
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
-				F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
@@ -2143,7 +2167,7 @@
 				F9EC66F727B90BC60003FBB6 /* CompanyNameTableViewCell.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
-				F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F9B1548D27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */,
 				F963E2A22962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F9EC66FA27B90BC60003FBB6 /* BSModel.swift in Sources */,
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  GenearlLedgerAccountViewController.swift
+//  GeneralLedgerAccountViewController.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2020/05/27.
@@ -12,7 +12,7 @@ import QuickLook
 import UIKit
 
 // 勘定クラス
-class GenearlLedgerAccountViewController: UIViewController {
+class GeneralLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
 
@@ -37,8 +37,8 @@ class GenearlLedgerAccountViewController: UIViewController {
     let pDFMaker = PDFMakerAccount()
 
     /// GUIアーキテクチャ　MVP
-    private var presenter: GenearlLedgerAccountPresenterInput!
-    func inject(presenter: GenearlLedgerAccountPresenterInput) {
+    private var presenter: GeneralLedgerAccountPresenterInput!
+    func inject(presenter: GeneralLedgerAccountPresenterInput) {
         self.presenter = presenter
     }
     
@@ -47,7 +47,7 @@ class GenearlLedgerAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = GenearlLedgerAccountPresenter.init(view: self, model: GeneralLedgerAccountModel(), account: account)
+        presenter = GeneralLedgerAccountPresenter.init(view: self, model: GeneralLedgerAccountModel(), account: account)
         inject(presenter: presenter)
         
         presenter.viewDidLoad()
@@ -115,7 +115,7 @@ class GenearlLedgerAccountViewController: UIViewController {
     }
 }
 
-extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDataSource {
+extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
         // 通常仕訳　決算整理仕訳　空白行
@@ -347,7 +347,7 @@ extension GenearlLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     }
 }
 
-extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutput {
+extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutput {
 
     func setupViewForViewDidLoad() {
         // UI
@@ -415,7 +415,7 @@ extension GenearlLedgerAccountViewController: GenearlLedgerAccountPresenterOutpu
  `QLPreviewController` にPDFデータを提供する
  */
 
-extension GenearlLedgerAccountViewController: QLPreviewControllerDataSource {
+extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         

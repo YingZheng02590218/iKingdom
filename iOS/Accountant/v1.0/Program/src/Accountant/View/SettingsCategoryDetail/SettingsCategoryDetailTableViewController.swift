@@ -465,10 +465,10 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             // 設定勘定科目
         case "segue_TaxonomyList": // “セグウェイにつけた名称”:
             // segue.destinationの型はUIViewController
-            if let viewControllerGenearlLedgerAccount = segue.destination as? SettingsTaxonomyListTableViewController {
-                viewControllerGenearlLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
+            if let viewControllerGeneralLedgerAccount = segue.destination as? SettingsTaxonomyListTableViewController {
+                viewControllerGeneralLedgerAccount.howToUse = true // 勘定科目　詳細　設定画面からの遷移の場合はtrue
                 if addAccount { // 新規で設定勘定科目を追加する場合　addButtonを押下
-                    viewControllerGenearlLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
+                    viewControllerGeneralLedgerAccount.addAccount = true // 新規で設定勘定科目を追加する場合　addButtonを押下
                 } else {
                     // 勘定科目を編集する場合　勘定科目の連番から勘定科目を取得　大区分を知るため
                     if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount) {
@@ -476,13 +476,13 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                     }
                 }
                 // 遷移先のコントローラに値を渡す
-                viewControllerGenearlLedgerAccount.numberOfTaxonomyAccount = numberOfAccount // 設定勘定科目連番　を渡す
+                viewControllerGeneralLedgerAccount.numberOfTaxonomyAccount = numberOfAccount // 設定勘定科目連番　を渡す
                 switch bigNum { // object?.rank0 {
                 case "0", "1", "2", "3", "4", "5":
-                    viewControllerGenearlLedgerAccount.segmentedControl.selectedSegmentIndex = 0 // セグメントスイッチにBSを設定
+                    viewControllerGeneralLedgerAccount.segmentedControl.selectedSegmentIndex = 0 // セグメントスイッチにBSを設定
                     // 遷移先のコントローラー.条件用の属性 = “条件”
                 case "6", "7", "8", "9", "10", "11":
-                    viewControllerGenearlLedgerAccount.segmentedControl.selectedSegmentIndex = 1 // セグメントスイッチにPLを設定
+                    viewControllerGeneralLedgerAccount.segmentedControl.selectedSegmentIndex = 1 // セグメントスイッチにPLを設定
                 default:
                     break
                 }

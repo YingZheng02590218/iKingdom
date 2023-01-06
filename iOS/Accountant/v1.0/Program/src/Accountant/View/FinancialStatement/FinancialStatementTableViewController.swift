@@ -242,9 +242,9 @@ class FinancialStatementTableViewController: UITableViewController {
         case "segue_PLAccount": // “セグウェイにつけた名称”:
             // ③遷移先ViewCntrollerの取得
             if let navigationController = segue.destination as? UINavigationController,
-               let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
+               let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerPLAccountViewController {
                 // 遷移先のコントローラに値を渡す
-                viewControllerGenearlLedgerAccount.account = "損益" // セルに表示した勘定名を設定
+                viewControllerGeneralLedgerAccount.account = "損益" // セルに表示した勘定名を設定
                 // 遷移先のコントローラー.条件用の属性 = “条件”
             }
         default:

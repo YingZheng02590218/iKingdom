@@ -158,9 +158,9 @@ class GeneralLedgerTableViewController: UITableViewController {
         let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         // ③遷移先ViewCntrollerの取得
         if let navigationController = segue.destination as? UINavigationController,
-           let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
+           let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerAccountViewController {
             // 遷移先のコントローラに値を渡す
-            viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+            viewControllerGeneralLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
         }
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)

@@ -1,5 +1,5 @@
 //
-//  GenearlLedgerAccountPresenter.swift
+//  GeneralLedgerPLAccountPresenter.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2022/02/23.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 /// GUIアーキテクチャ　MVP
-protocol GenearlLedgerAccountPresenterInput {
+protocol GeneralLedgerPLAccountPresenterInput {
     
     var fiscalYear: Int? { get }
     
@@ -32,14 +32,14 @@ protocol GenearlLedgerAccountPresenterInput {
     func getNumberOfAccount(accountName: String) -> Int
 }
 
-protocol GenearlLedgerAccountPresenterOutput: AnyObject {
+protocol GeneralLedgerPLAccountPresenterOutput: AnyObject {
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
 }
 
-final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
+final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInput {
     
     // MARK: - var let
     
@@ -51,10 +51,10 @@ final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
     // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
     
-    private weak var view: GenearlLedgerAccountPresenterOutput!
-    private var model: GenearlLedgerAccountModelInput
+    private weak var view: GeneralLedgerPLAccountPresenterOutput!
+    private var model: GeneralLedgerPLAccountModelInput
     
-    init(view: GenearlLedgerAccountPresenterOutput, model: GenearlLedgerAccountModelInput, account: String) {
+    init(view: GeneralLedgerPLAccountPresenterOutput, model: GeneralLedgerPLAccountModelInput, account: String) {
         self.view = view
         self.model = model
         self.account = account
