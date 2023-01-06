@@ -280,7 +280,7 @@ class TBModel: TBModelInput {
     func transferJournals() {
         // 損益振替仕訳
         clearAccountTotalPLAccount() // クリア
-        calculateAccountTotalPLAccount() // 集計　決算整理前
+        calculateAccountTotalPLAccount() // 集計　損益振替
         calculateAccountTotalAdjustingPLAccount() // 集計　決算整理仕訳
         calculateAccountTotalAfterAdjustingPLAccount() // 集計　決算整理後
         // 資本振替仕訳
@@ -405,7 +405,7 @@ class TBModel: TBModelInput {
         var right: Int64 = 0
 
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: "損益") // 勘定別に取得
+        let objects = dataBaseManagerAccount.getTransferEntryInAccount() // FIXME: 損益 勘定別に取得
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if "損益" == "\(objects[i].debit_category)" { // 借方
@@ -496,45 +496,18 @@ class TBModel: TBModelInput {
             }
         }
     }
-    //　損益勘定クラス　勘定別に決算整理仕訳データを集計
+    //　損益勘定クラス　勘定別に損益振替仕訳データを集計
     private func calculateAccountTotalAdjustingPLAccount() {
-        var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
-        var right: Int64 = 0
-        var objects: Results<DataBaseAdjustingEntry>
-
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        objects = dataBaseManagerAccount.getAllAdjustingEntryInPLAccount(account: "損益")
-
-        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
-            // 勘定が借方と貸方のどちらか
-            if "損益" == "\(objects[i].debit_category)" { // 借方
-                left += objects[i].debit_amount // 累計額に追加
-            } else if "損益" == "\(objects[i].credit_category)" { // 貸方
-                right += objects[i].credit_amount // 累計額に追加
-            }
-        }
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
             do {
                 try DataBaseManager.realm.write {
                     // 借方と貸方で金額が大きい方はどちらか
-                    if left > right {
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = left
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = right
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = left - right // 差額を格納
+                        dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = 0
+                        dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = 0
+                        dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0 // 差額を格納
                         dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
-                    } else if left < right {
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = left
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = right
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = right - left
-                    } else {
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = left
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = right
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0
-                    }
                 }
             } catch {
                 print("エラーが発生しました")
@@ -622,7 +595,7 @@ class TBModel: TBModelInput {
         }
     }
     // 損益勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後
-    private func calculateAccountTotalAfterAdjustingPLAccount() { // 損益勘定 用も作る
+    private func calculateAccountTotalAfterAdjustingPLAccount() {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 決算振替仕訳　損益勘定振替

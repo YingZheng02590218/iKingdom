@@ -141,38 +141,33 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        if account == "損益" {
-            // 損益勘定の場合
-            let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-            let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
-            return dataBaseJournalEntries
-        } else {
             // 損益勘定以外の勘定の場合
             let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
                 .filter("accountName LIKE '\(account)'").first
             let dataBaseJournalEntries = (dataBaseAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
             return dataBaseJournalEntries
-        }
     }
     // 取得 決算整理仕訳 勘定別に取得
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        if account == "損益" {
-            // 損益勘定の場合
-            let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-            let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true))!
-            return dataBaseJournalEntries
-        } else {
             // 損益勘定以外の勘定の場合
             let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
                 .filter("accountName LIKE '\(account)'").first
             let dataBaseJournalEntries = (dataBaseAccount?.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true))!
             return dataBaseJournalEntries
-        }
     }
-    
+    // 取得　損益振替仕訳 勘定別に取得
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
+        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
+        return dataBaseJournalEntries
+    }
+
     // 取得 仕訳　勘定別 全年度
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
@@ -207,7 +202,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")), // FIXME: 不要
             NSPredicate(format: "!(debit_category LIKE %@) AND !(credit_category LIKE %@)", NSString(string: "繰越利益"), NSString(string: "繰越利益")) // 消すと、損益勘定の差引残高の計算が狂う　2020/10/11
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)

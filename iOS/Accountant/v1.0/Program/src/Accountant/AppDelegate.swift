@@ -62,6 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // 資本振替仕訳
                         newObject?["dataBaseCapitalTransferJournalEntry"] = nil
                     }
+                    // DataBaseJournalsオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseJournals.className()) { oldObject, newObject in
+                        // 資本振替仕訳
+                        newObject?["dataBaseCapitalTransferJournalEntry"] = nil
+                    }
+
                 }
             }
         )

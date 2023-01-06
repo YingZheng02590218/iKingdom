@@ -32,7 +32,7 @@ class GeneralLedgerPLAccountViewController: UIViewController {
 //    let edged = false
     
     // 勘定名
-    var account: String = ""
+    let account: String = "損益"
     // 印刷機能
     let pDFMaker = PDFMakerAccount()
 
@@ -47,7 +47,7 @@ class GeneralLedgerPLAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter = GeneralLedgerPLAccountPresenter.init(view: self, model: GeneralLedgerPLAccountModel(), account: account)
+        presenter = GeneralLedgerPLAccountPresenter.init(view: self, model: GeneralLedgerPLAccountModel())
         inject(presenter: presenter)
         
         presenter.viewDidLoad()
@@ -107,8 +107,8 @@ class GeneralLedgerPLAccountViewController: UIViewController {
      */
     @IBAction func printButtonTapped(_ sender: Any) {
         // 初期化
-        pDFMaker.initialize(account: account)
-        
+        pDFMaker.initialize(account: account) // TODO: 損益勘定用を作る
+
         let previewController = QLPreviewController()
         previewController.dataSource = self
         present(previewController, animated: true, completion: nil)
@@ -125,10 +125,10 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             // 通常仕訳
-            return presenter.numberOfDatabaseJournalEntries
+            return presenter.numberOfDataBaseTransferEntries
         } else if section == 1 {
             // 決算整理仕訳
-            return presenter.numberOfDataBaseAdjustingEntries
+            return presenter.numberOfDataBaseCapitalTransferJournalEntry
         } else {
             // 空白行
             return 21 // 空白行を表示するため+21行を追加
@@ -158,16 +158,16 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
             
             if indexPath.section == 0 {
                 // 通常仕訳　通常仕訳 勘定別
-                date = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date)"                              // 日付
+                date = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date)"                              // 日付
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                    upperCellMonth = "\(presenter.databaseJournalEntries(forRow: indexPath.row - 1).date)"             // 日付
+                    upperCellMonth = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row - 1).date)"             // 日付
                 }
-                oneOfCaractorAtLast = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date.suffix(1))"     // 末尾1文字の「日」         //日付
-                twoOfCaractorAtLast = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date.suffix(2))"     // 末尾2文字の「日」         //日付
-                debitCategory = presenter.databaseJournalEntries(forRow: indexPath.row).debit_category          // 借方勘定の場合                      //この勘定が借方の場合
-                creditCategory = presenter.databaseJournalEntries(forRow: indexPath.row).credit_category      // 摘要　相手方勘定なので貸方
-                debitAmount = presenter.databaseJournalEntries(forRow: indexPath.row).debit_amount            // 借方金額
-                creditAmount = presenter.databaseJournalEntries(forRow: indexPath.row).credit_amount             // 貸方金額
+                oneOfCaractorAtLast = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date.suffix(1))"     // 末尾1文字の「日」         //日付
+                twoOfCaractorAtLast = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date.suffix(2))"     // 末尾2文字の「日」         //日付
+                debitCategory = presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category          // 借方勘定の場合                      //この勘定が借方の場合
+                creditCategory = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category      // 摘要　相手方勘定なので貸方
+                debitAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount            // 借方金額
+                creditAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount             // 貸方金額
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
 
@@ -176,7 +176,7 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                if DateManager.shared.isInPeriod(date: presenter.databaseJournalEntries(forRow: indexPath.row).date) {
+                if DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date) {
                     cell.listDateMonthLabel.textColor = .textColor
                     cell.listDateDayLabel.textColor = .textColor
                     cell.listSummaryLabel.textColor = .textColor
@@ -197,41 +197,40 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 }
             } else if indexPath.section == 1 {
                 // 決算整理仕訳　勘定別　損益勘定以外
-                date = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date)"
-                if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                    upperCellMonth = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row - 1).date)"
-                }
-                oneOfCaractorAtLast = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date.suffix(1))"
-                twoOfCaractorAtLast = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date.suffix(2))"
-                debitCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_category
-                creditCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_category
-                debitAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_amount
-                creditAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_amount
-                numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
-                numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
+                if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
+                    date = "\(dataBaseCapitalTransferJournalEntry.date)"
+                    oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
+                    twoOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(2))"
+                    debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+                    creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                    debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
+                    creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
+                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
+                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
 
-                balanceAmount = presenter.getBalanceAmountAdjusting(indexPath: indexPath) // TODO: メソッドをまとめる
-                balanceDebitOrCredit = presenter.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-                
-                // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                if DateManager.shared.isInPeriod(date: presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date) {
-                    cell.listDateMonthLabel.textColor = .textColor
-                    cell.listDateDayLabel.textColor = .textColor
-                    cell.listSummaryLabel.textColor = .textColor
-                    cell.listNumberLabel.textColor = .textColor
-                    cell.listDebitLabel.textColor = .textColor
-                    cell.listCreditLabel.textColor = .textColor
-                    cell.listDebitOrCreditLabel.textColor = .textColor
-                    cell.listBalanceLabel.textColor = .textColor
-                } else {
-                    cell.listDateMonthLabel.textColor = .red
-                    cell.listDateDayLabel.textColor = .red
-                    cell.listSummaryLabel.textColor = .red
-                    cell.listNumberLabel.textColor = .red
-                    cell.listDebitLabel.textColor = .red
-                    cell.listCreditLabel.textColor = .red
-                    cell.listDebitOrCreditLabel.textColor = .red
-                    cell.listBalanceLabel.textColor = .red
+                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath) // TODO: メソッドをまとめる
+                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
+                        cell.listDateMonthLabel.textColor = .textColor
+                        cell.listDateDayLabel.textColor = .textColor
+                        cell.listSummaryLabel.textColor = .textColor
+                        cell.listNumberLabel.textColor = .textColor
+                        cell.listDebitLabel.textColor = .textColor
+                        cell.listCreditLabel.textColor = .textColor
+                        cell.listDebitOrCreditLabel.textColor = .textColor
+                        cell.listBalanceLabel.textColor = .textColor
+                    } else {
+                        cell.listDateMonthLabel.textColor = .red
+                        cell.listDateDayLabel.textColor = .red
+                        cell.listSummaryLabel.textColor = .red
+                        cell.listNumberLabel.textColor = .red
+                        cell.listDebitLabel.textColor = .red
+                        cell.listCreditLabel.textColor = .red
+                        cell.listDebitOrCreditLabel.textColor = .red
+                        cell.listBalanceLabel.textColor = .red
+                    }
                 }
             }
 // 月
@@ -369,7 +368,7 @@ extension GeneralLedgerPLAccountViewController: GeneralLedgerPLAccountPresenterO
             dateYearLabel.text = fiscalYear.description + "年"
         }
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if presenter.numberOfDatabaseJournalEntries + presenter.numberOfDataBaseAdjustingEntries >= 1 {
+        if presenter.numberOfDataBaseTransferEntries + presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
             printBarButtonItem.isEnabled = true
         } else {
             printBarButtonItem.isEnabled = false

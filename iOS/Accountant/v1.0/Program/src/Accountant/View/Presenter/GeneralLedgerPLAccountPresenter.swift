@@ -14,21 +14,21 @@ protocol GeneralLedgerPLAccountPresenterInput {
     
     var fiscalYear: Int? { get }
     
-    var numberOfDatabaseJournalEntries: Int { get }
-    var numberOfDataBaseAdjustingEntries: Int { get }
+    var numberOfDataBaseTransferEntries: Int { get }
+    var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
     
-    func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry
-    func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry
+    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
     
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
     func viewDidAppear()
-    
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
+
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String
     func getNumberOfAccount(accountName: String) -> Int
 }
 
@@ -42,34 +42,34 @@ protocol GeneralLedgerPLAccountPresenterOutput: AnyObject {
 final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInput {
     
     // MARK: - var let
-    
-    // 勘定名
-    var account: String = ""
+
     var fiscalYear: Int?
-    // 通常仕訳　勘定別
-    private var databaseJournalEntries: Results<DataBaseJournalEntry>
-    // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
-    private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
+    // 損益振替仕訳
+    private var dataBaseTransferEntries: Results<DataBaseTransferEntry>
+    // 資本振替仕訳
+    private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     
     private weak var view: GeneralLedgerPLAccountPresenterOutput!
     private var model: GeneralLedgerPLAccountModelInput
     
-    init(view: GeneralLedgerPLAccountPresenterOutput, model: GeneralLedgerPLAccountModelInput, account: String) {
+    init(view: GeneralLedgerPLAccountPresenterOutput, model: GeneralLedgerPLAccountModelInput) {
         self.view = view
         self.model = model
-        self.account = account
-        
-        // 通常仕訳　勘定別
-        databaseJournalEntries = model.getJournalEntryInAccount(account: account)
-        // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
-        dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
+
+        // 損益振替仕訳
+        dataBaseTransferEntries = model.getTransferEntryInAccount()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
     }
     
     // MARK: - Life cycle
     
     func viewDidLoad() {
         
-        model.initialize(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries)
+        model.initialize(
+            dataBaseTransferEntries: dataBaseTransferEntries,
+            dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
+        )
         
         view.setupViewForViewDidLoad()
     }
@@ -91,41 +91,40 @@ final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInpu
         view.setupViewForViewDidAppear()
     }
     
-    var numberOfDatabaseJournalEntries: Int {
-        databaseJournalEntries.count
+    var numberOfDataBaseTransferEntries: Int {
+        dataBaseTransferEntries.count
     }
     
-    func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry {
-        databaseJournalEntries[row]
+    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry {
+        dataBaseTransferEntries[row]
     }
     
-    var numberOfDataBaseAdjustingEntries: Int {
-        dataBaseAdjustingEntries.count
+    var numberOfDataBaseCapitalTransferJournalEntry: Int {
+        dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
     }
-    
-    func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry {
-        dataBaseAdjustingEntries[row]
+
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
+        dataBaseCapitalTransferJournalEntry
     }
-    
-    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
-        
-        model.getBalanceAmountAdjusting(indexPath: indexPath)
-    }
-    // 借又貸を取得 決算整理仕訳
-    func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
-        
-        model.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
-    }
-    // 取得　差引残高額　仕訳
+    // 取得　差引残高額　損益振替仕訳
     func getBalanceAmount(indexPath: IndexPath) -> Int64 {
-        
+
         model.getBalanceAmount(indexPath: indexPath)
     }
-    // 借又貸を取得
+    // 借又貸を取得　損益振替仕訳
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
-        
+
         model.getBalanceDebitOrCredit(indexPath: indexPath)
+    }
+    // 取得　差引残高額 資本振替仕訳
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
+
+        model.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath)
+    }
+    // 借又貸を取得 資本振替仕訳
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+
+        model.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
     }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {

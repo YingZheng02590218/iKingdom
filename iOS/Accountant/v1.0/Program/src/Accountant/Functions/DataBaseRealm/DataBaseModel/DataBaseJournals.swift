@@ -23,4 +23,6 @@ class DataBaseJournals: RObject {
     @objc dynamic var fiscalYear: Int = 0                     // 年度
     let dataBaseJournalEntries = List<DataBaseJournalEntry>() // 一対多の関連
     let dataBaseAdjustingEntries = List<DataBaseAdjustingEntry>() // 決算整理仕訳
+    // 資本振替仕訳
+    @objc dynamic var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
 }

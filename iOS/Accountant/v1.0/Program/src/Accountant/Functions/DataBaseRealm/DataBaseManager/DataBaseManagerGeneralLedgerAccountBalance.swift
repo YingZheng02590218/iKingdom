@@ -11,17 +11,19 @@ import RealmSwift
 
 // 差引残高クラス
 class DataBaseManagerGeneralLedgerAccountBalance {
-
+    
     public static let shared = DataBaseManagerGeneralLedgerAccountBalance()
-
+    
     private init() {
     }
-
-    var dataBaseJournalEntries: Results<DataBaseJournalEntry>!            // 仕訳
-    var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>!        // 決算整理仕訳　勘定別
-    
-    var balanceAmount: Int64 = 0                             // 差引残高額
-    var balanceDebitOrCredit: String = ""                 // 借又貸
+    // 仕訳
+    var dataBaseJournalEntries: Results<DataBaseJournalEntry>!
+    // 決算整理仕訳　勘定別
+    var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>!
+    // 差引残高額
+    var balanceAmount: Int64 = 0
+    // 借又貸
+    var balanceDebitOrCredit: String = ""
     
     // MARK: - CRUD
     
@@ -45,23 +47,6 @@ class DataBaseManagerGeneralLedgerAccountBalance {
         }
         return balanceAmount
     }
-    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
-        if !dataBaseAdjustingEntries.isEmpty {
-            let r = indexPath.row
-            if dataBaseAdjustingEntries[r].balance_left > dataBaseAdjustingEntries[r].balance_right { // 借方と貸方を比較
-                balanceAmount = dataBaseAdjustingEntries[r].balance_left// - objects[r].balance_right
-            } else if dataBaseAdjustingEntries[r].balance_right > dataBaseAdjustingEntries[r].balance_left {
-                balanceAmount = dataBaseAdjustingEntries[r].balance_right// - objects[r].balance_left
-            } else {
-                balanceAmount = 0
-            }
-        } else {
-            balanceAmount = 0
-        }
-        return balanceAmount
-    }
-    
     // 借又貸を取得
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
         if !dataBaseJournalEntries.isEmpty {
@@ -77,6 +62,23 @@ class DataBaseManagerGeneralLedgerAccountBalance {
             balanceDebitOrCredit = "-"
         }
         return balanceDebitOrCredit
+    }
+    
+    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
+    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
+        if !dataBaseAdjustingEntries.isEmpty {
+            let r = indexPath.row
+            if dataBaseAdjustingEntries[r].balance_left > dataBaseAdjustingEntries[r].balance_right { // 借方と貸方を比較
+                balanceAmount = dataBaseAdjustingEntries[r].balance_left// - objects[r].balance_right
+            } else if dataBaseAdjustingEntries[r].balance_right > dataBaseAdjustingEntries[r].balance_left {
+                balanceAmount = dataBaseAdjustingEntries[r].balance_right// - objects[r].balance_left
+            } else {
+                balanceAmount = 0
+            }
+        } else {
+            balanceAmount = 0
+        }
+        return balanceAmount
     }
     // 借又貸を取得 決算整理仕訳
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
@@ -105,7 +107,7 @@ class DataBaseManagerGeneralLedgerAccountBalance {
         var left: Int64 = 0 // 差引残高 累積　勘定内の仕訳データを全て表示するまで、覚えておく
         var right: Int64 = 0
         // 仕訳
-        print("仕訳", dataBaseJournalEntries.count, dataBaseJournalEntries!)
+        print("仕訳", dataBaseJournalEntries.count, dataBaseJournalEntries)
         for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if account == "\(dataBaseJournalEntries[i].debit_category)" { // 借方
