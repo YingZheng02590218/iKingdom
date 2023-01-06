@@ -18,10 +18,12 @@ protocol JournalsPresenterInput {
     
     var numberOfobjects: Int { get }
     var numberOfobjectsss: Int { get }
-    
+    var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
+
     func objects(forRow row: Int) -> DataBaseJournalEntry
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
-    
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
+
     var PDFpath: [URL]? { get }
     
     func viewDidLoad()
@@ -62,6 +64,9 @@ final class JournalsPresenter: JournalsPresenterInput {
     private var objects: Results<DataBaseJournalEntry>
     // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
     private var objectsss: Results<DataBaseAdjustingEntry>
+    // 資本振替仕訳
+    private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+
     // PDFのパス
     var PDFpath: [URL]?
     
@@ -71,9 +76,13 @@ final class JournalsPresenter: JournalsPresenterInput {
     init(view: JournalsPresenterOutput, model: JournalsModelInput) {
         self.view = view
         self.model = model
-        
-        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-        objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+
+        // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals()
+        // 決算整理仕訳
+        objectsss = model.getJournalAdjustingEntry()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
     }
     
     // MARK: - Life cycle
@@ -119,6 +128,14 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry {
         objectsss[row]
+    }
+
+    var numberOfDataBaseCapitalTransferJournalEntry: Int {
+        dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+    }
+
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
+        dataBaseCapitalTransferJournalEntry
     }
     
     func refreshTable(isEditing: Bool) {

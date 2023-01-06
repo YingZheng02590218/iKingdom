@@ -500,7 +500,7 @@ class DataBaseManagerPLAccount {
 
             // 損益振替仕訳　が1件超が存在する場合は　削除
             let objects = checkCapitalTransferJournalEntry() // 損益勘定内に勘定が存在するか
-        outerLoop: while objects.count >= 1 {
+        outerLoop: while objects.count > 1 {
             for i in 0..<objects.count {
                 let isInvalidated = deleteCapitalTransferJournalEntry(primaryKey: objects[i].number)
                 print("削除", isInvalidated, objects.count)
@@ -508,11 +508,6 @@ class DataBaseManagerPLAccount {
             }
             break
         }
-            // FIXME: 毎回、資本振替仕訳を削除している
-            if  let objectss = checkCapitalTransferJournalEntryInPLAccount() { // 損益勘定内に勘定が存在するか
-                let isInvalidated = removeCapitalTransferJournalEntry(primaryKey: objectss.number)
-                print("関連削除", isInvalidated)
-            }
 
             if objects.count == 1 {
                 // 資本振替仕訳　が存在する場合は　更新
@@ -551,7 +546,7 @@ class DataBaseManagerPLAccount {
                         //        　　　　　　　　　　　　　　　　　　　　　　１２０｜　　　　　　　｜
                         //        　　　　　　　　　　　　　　　　　　　　　　　　　｜―――――――・
                         //        　―――――――――――――――――――――――――――――――――
-                        // FIXME: 資本振替仕訳は、仕訳帳には追加する。
+                        // MARK: 資本振替仕訳は、仕訳帳には追加する。
                         try DataBaseManager.realm.write {
                             // 仕訳帳に仕訳データを追加
                             dataBaseAccountingBook.dataBaseJournals?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry

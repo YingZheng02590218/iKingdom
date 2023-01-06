@@ -15,6 +15,8 @@ protocol JournalsModelInput {
     
     func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
+
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
@@ -80,6 +82,14 @@ class JournalsModel: JournalsModelInput {
             }
         }
         return dataBaseAdjustingEntries
+    }
+    // 取得 資本振替仕訳
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseCapitalTransferJournalEntry = dataBaseAccountingBook?.dataBaseJournals!.dataBaseCapitalTransferJournalEntry
+        return dataBaseCapitalTransferJournalEntry
     }
     
     // MARK: Update
