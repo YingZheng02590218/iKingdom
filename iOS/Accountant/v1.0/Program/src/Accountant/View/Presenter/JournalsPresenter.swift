@@ -62,7 +62,7 @@ final class JournalsPresenter: JournalsPresenterInput {
     var theDayOfReckoning: String?
     // 通常仕訳　全
     private var objects: Results<DataBaseJournalEntry>
-    // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
+    // 決算整理仕訳
     private var objectsss: Results<DataBaseAdjustingEntry>
     // 資本振替仕訳
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
@@ -147,8 +147,13 @@ final class JournalsPresenter: JournalsPresenterInput {
             // 全勘定の合計と残高を計算する
             model.initializeJournals(completion: { isFinished in
                 print("Result is \(isFinished)")
-                objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-                objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+                // 通常仕訳　全
+                objects = model.getJournalEntriesInJournals()
+                // 決算整理仕訳
+                objectsss = model.getJournalAdjustingEntry()
+                // 資本振替仕訳
+                dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+                
                 // 更新処理
                 view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
             })
