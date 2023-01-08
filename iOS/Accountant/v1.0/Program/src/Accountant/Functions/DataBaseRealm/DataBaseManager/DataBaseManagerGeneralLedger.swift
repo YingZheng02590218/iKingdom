@@ -28,7 +28,8 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
         // オブジェクトを作成 総勘定元帳
         let dataBaseGeneralLedger = DataBaseGeneralLedger(
             fiscalYear: dataBaseAccountingBooks.fiscalYear,
-            dataBasePLAccount: nil
+            dataBasePLAccount: nil,
+            dataBaseCapitalAccount: nil
         )
         // 設定画面の勘定科目一覧にある勘定を取得する
         let objects = getObjects()

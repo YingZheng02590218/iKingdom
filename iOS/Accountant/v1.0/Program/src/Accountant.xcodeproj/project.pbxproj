@@ -115,6 +115,8 @@
 		F963E2C92967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */; };
 		F963E2CB296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */; };
 		F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */; };
+		F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
+		F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
 		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
@@ -554,6 +556,7 @@
 		F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountModel.swift; sourceTree = "<group>"; };
 		F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerPLAccountBalance.swift; sourceTree = "<group>"; };
 		F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerPLAccount.swift; sourceTree = "<group>"; };
+		F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCapitalAccount.swift; sourceTree = "<group>"; };
 		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
@@ -876,6 +879,7 @@
 				F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */,
 				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
 				F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */,
+				F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */,
 				F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */,
 				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
 				F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */,
@@ -1942,6 +1946,7 @@
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */,
+				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
@@ -2112,6 +2117,7 @@
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
+				F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
