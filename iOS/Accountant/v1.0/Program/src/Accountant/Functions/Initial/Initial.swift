@@ -180,6 +180,11 @@ class Initial {
             )
             print(number)
         }
+        // 総勘定元帳に、資本金勘定が作成されていなければ、作成する
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+        for dataBaseAccountingBook in dataBaseAccountingBooks where dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount == nil {
+            DataBaseManagerGeneralLedger.shared.addCapitalAccountToGeneralLedger(number: dataBaseAccountingBook.number)
+        }
     }
     /**
     * 初期化　初期化メソッド

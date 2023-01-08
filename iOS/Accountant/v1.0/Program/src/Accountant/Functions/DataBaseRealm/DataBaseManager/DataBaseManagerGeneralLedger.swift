@@ -80,8 +80,61 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                 let numberr = dataBasePLAccount.save() //　自動採番
                 print("dataBasePLAccount", numberr)
                 dataBaseGeneralLedger.dataBasePLAccount = dataBasePLAccount   // 損益勘定を作成して総勘定元帳に追加する
+
+                // オブジェクトを作成 資本金勘定
+                let dataBaseCapitalAccount = DataBaseCapitalAccount(
+                    fiscalYear: dataBaseAccountingBooks.fiscalYear,
+                    accountName: "資本金勘定",
+                    debit_total: 0,
+                    credit_total: 0,
+                    debit_balance: 0,
+                    credit_balance: 0,
+                    debit_total_Adjusting: 0,
+                    credit_total_Adjusting: 0,
+                    debit_balance_Adjusting: 0,
+                    credit_balance_Adjusting: 0,
+                    debit_total_AfterAdjusting: 0,
+                    credit_total_AfterAdjusting: 0,
+                    debit_balance_AfterAdjusting: 0,
+                    credit_balance_AfterAdjusting: 0
+                )
+                let numberrr = dataBaseCapitalAccount.save() //　自動採番
+                print("dataBaseCapitalAccount", numberrr)
+                dataBaseGeneralLedger.dataBaseCapitalAccount = dataBaseCapitalAccount   // 資本金勘定を作成して総勘定元帳に追加する
+
                 // 年度　の数だけ増える
                 dataBaseAccountingBooks.dataBaseGeneralLedger = dataBaseGeneralLedger
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
+    // 追加　資本金勘定
+    func addCapitalAccountToGeneralLedger(number: Int) {
+        // 主要簿　のオブジェクトを取得
+        guard let dataBaseAccountingBooks = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooks.self, key: number) else { return }
+        do {
+            try DataBaseManager.realm.write {
+                // オブジェクトを作成 資本金勘定
+                let dataBaseCapitalAccount = DataBaseCapitalAccount(
+                    fiscalYear: dataBaseAccountingBooks.fiscalYear,
+                    accountName: "資本金勘定",
+                    debit_total: 0,
+                    credit_total: 0,
+                    debit_balance: 0,
+                    credit_balance: 0,
+                    debit_total_Adjusting: 0,
+                    credit_total_Adjusting: 0,
+                    debit_balance_Adjusting: 0,
+                    credit_balance_Adjusting: 0,
+                    debit_total_AfterAdjusting: 0,
+                    credit_total_AfterAdjusting: 0,
+                    debit_balance_AfterAdjusting: 0,
+                    credit_balance_AfterAdjusting: 0
+                )
+                let numberrr = dataBaseCapitalAccount.save() //　自動採番
+                print("dataBaseCapitalAccount", numberrr)
+                dataBaseAccountingBooks.dataBaseGeneralLedger?.dataBaseCapitalAccount = dataBaseCapitalAccount   // 資本金勘定を作成して総勘定元帳に追加する
             }
         } catch {
             print("エラーが発生しました")
