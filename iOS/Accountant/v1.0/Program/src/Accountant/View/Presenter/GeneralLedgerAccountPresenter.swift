@@ -65,7 +65,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         
         // 通常仕訳　勘定別
         databaseJournalEntries = model.getJournalEntryInAccount(account: account)
-        // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
+        // 決算整理仕訳　勘定別
         dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
         // 損益振替仕訳
         dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
@@ -114,7 +114,14 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     }
 
     var numberOfDataBaseTransferEntry: Int {
-        dataBaseTransferEntry == nil ? 0 : 1
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
+            // 損益振替仕訳
+            if englishFromOfClosingTheLedger0 {
+                return dataBaseTransferEntry == nil ? 0 : 1
+            }
+        }
+        return 0
     }
 
     func dataBaseTransferEntries() -> DataBaseTransferEntry? {

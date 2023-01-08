@@ -57,7 +57,6 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        // 損益勘定の場合
         let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
         let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
         print(dataBaseJournalEntries)
@@ -68,7 +67,6 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        // 損益勘定の場合
         let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
         let dataBaseJournalEntries = dataBasePLAccount?.dataBaseCapitalTransferJournalEntry
         return dataBaseJournalEntries

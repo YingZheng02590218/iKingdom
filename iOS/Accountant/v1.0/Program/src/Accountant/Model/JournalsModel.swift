@@ -70,17 +70,6 @@ class JournalsModel: JournalsModelInput {
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        
-        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
-           let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
-            if !englishFromOfClosingTheLedger0 { // 損益振替仕訳
-                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("(debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
-            }
-            if !englishFromOfClosingTheLedger1 { // 資本振替仕訳
-                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")
-            }
-        }
         return dataBaseAdjustingEntries
     }
     // 取得 資本振替仕訳

@@ -117,6 +117,8 @@
 		F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */; };
 		F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
 		F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
+		F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */; };
+		F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */; };
 		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
@@ -557,6 +559,7 @@
 		F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerPLAccountBalance.swift; sourceTree = "<group>"; };
 		F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerPLAccount.swift; sourceTree = "<group>"; };
 		F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCapitalAccount.swift; sourceTree = "<group>"; };
+		F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerTransferEntry.swift; sourceTree = "<group>"; };
 		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
@@ -849,6 +852,7 @@
 				F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */,
 				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
 				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
+				F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */,
 				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
@@ -1906,6 +1910,7 @@
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
 				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
+				F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
@@ -2077,6 +2082,7 @@
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
 				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
+				F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,

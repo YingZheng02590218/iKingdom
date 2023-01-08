@@ -131,9 +131,8 @@ class GeneralLedgerTableViewController: UITableViewController {
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         let objectss = dataBaseManagerAccount.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
         let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
-        let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
-        let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
-        if !objectss.isEmpty || !objectsss.isEmpty || !objectssss.isEmpty || !objectsssss.isEmpty {
+
+        if !objectss.isEmpty || !objectsss.isEmpty {
             cell.textLabel?.textColor = .textColor
         } else {
             cell.textLabel?.textColor = .lightGray

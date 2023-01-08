@@ -73,40 +73,19 @@ class TBModel: TBModelInput {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
-                result = 0
-            } else {
-                if account != "損益" {
-                    // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                    for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                        switch leftOrRight {
-                        case 0: // 合計　借方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting
-                        case 1: // 合計　貸方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting
-                        case 2: // 残高　借方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_Adjusting
-                        case 3: // 残高　貸方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_Adjusting
-                        default:
-                            print("getTotalAmountAdjusting")
-                        }
-                    }
-                } else {
-                    if let dataBasePLAccount = dataBaseGeneralLedger.dataBasePLAccount {
-                        switch leftOrRight {
-                        case 0: // 合計　借方
-                            result = dataBasePLAccount.debit_total_Adjusting
-                        case 1: // 合計　貸方
-                            result = dataBasePLAccount.credit_total_Adjusting
-                        case 2: // 残高　借方
-                            result = dataBasePLAccount.debit_balance_Adjusting
-                        case 3: // 残高　貸方
-                            result = dataBasePLAccount.credit_balance_Adjusting
-                        default:
-                            print("getTotalAmountAdjusting 損益勘定")
-                        }
-                    }
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                switch leftOrRight {
+                case 0: // 合計　借方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting
+                case 1: // 合計　貸方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting
+                case 2: // 残高　借方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_Adjusting
+                case 3: // 残高　貸方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_Adjusting
+                default:
+                    print("getTotalAmountAdjusting")
                 }
             }
         }
@@ -118,40 +97,19 @@ class TBModel: TBModelInput {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            if account == "繰越利益" { // 精算表作成後に、資本振替仕訳を行うので、繰越利益の決算整理仕訳は計算に含まない。
-                result = 0
-            } else {
-                if account != "損益" {
-                    // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                    for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                        switch leftOrRight {
-                        case 0: // 合計　借方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting
-                        case 1: // 合計　貸方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting
-                        case 2: // 残高　借方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                        case 3: // 残高　貸方
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
-                        default:
-                            print("getTotalAmountAfterAdjusting")
-                        }
-                    }
-                } else {
-                    if let dataBasePLAccount = dataBaseGeneralLedger.dataBasePLAccount {
-                        switch leftOrRight {
-                        case 0: // 合計　借方
-                            result = dataBasePLAccount.debit_total_AfterAdjusting
-                        case 1: // 合計　貸方
-                            result = dataBasePLAccount.credit_total_AfterAdjusting
-                        case 2: // 残高　借方
-                            result = dataBasePLAccount.debit_balance_AfterAdjusting
-                        case 3: // 残高　貸方
-                            result = dataBasePLAccount.credit_balance_AfterAdjusting
-                        default:
-                            print("getTotalAmountAfterAdjusting 損益勘定")
-                        }
-                    }
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                switch leftOrRight {
+                case 0: // 合計　借方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting
+                case 1: // 合計　貸方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting
+                case 2: // 残高　借方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                case 3: // 残高　貸方
+                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                default:
+                    print("getTotalAmountAfterAdjusting")
                 }
             }
         }
@@ -224,7 +182,7 @@ class TBModel: TBModelInput {
         }
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
-
+        
         // 設定表示科目　初期化 毎回行うと時間がかかる
         if accountLeft != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
@@ -237,7 +195,9 @@ class TBModel: TBModelInput {
             )
         }
         DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-            numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: "繰越利益")
+            numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
+                category: "繰越利益"
+            ) // FIXME: 資本金勘定
         )
         // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
     }
@@ -256,7 +216,7 @@ class TBModel: TBModelInput {
         }
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
-
+        
         // 設定表示科目　初期化 毎回行うと時間がかかる
         if accountLeft != "損益" {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
@@ -269,7 +229,9 @@ class TBModel: TBModelInput {
             )
         }
         DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-            numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: "繰越利益")
+            numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
+                category: "繰越利益"
+            ) // FIXME: 資本金勘定
         )
         // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
     }
@@ -285,14 +247,14 @@ class TBModel: TBModelInput {
         calculateAccountTotalAfterAdjustingPLAccount() // 集計　決算整理後
         // 資本振替仕訳
         // 資本振替仕訳後に、繰越利益勘定の決算整理前と決算整理仕訳、決算整理後の合計額と残高額の集計は必要ないのか？
-        clearAccountTotal(account: "繰越利益")
-        calculateAccountTotal(account: "繰越利益")
-        calculateAccountTotalAdjusting(account: "繰越利益")
-        calculateAccountTotalAfterAdjusting(account: "繰越利益")
+        clearAccountTotalCapitalAccount() // 集計 資本金勘定
+        calculateAccountTotalCapitalAccount() // 集計 資本金勘定
+        calculateAccountTotalAdjustingCapitalAccount() // 集計 資本金勘定
+        calculateAccountTotalAfterAdjustingCapitalAccount() // 集計 資本金勘定
     }
-
+    
     // MARK: クリア
-
+    
     //　クリア　勘定クラス　決算整理前、決算整理仕訳、決算整理後（合計、残高）
     private func clearAccountTotal(account: String) {
         // 開いている会計帳簿の年度を取得
@@ -306,12 +268,12 @@ class TBModel: TBModelInput {
                         dataBaseGeneralLedger.dataBaseAccounts[i].credit_total = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance = 0
-
+                        
                         dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_Adjusting = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_Adjusting = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
                         dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_Adjusting = 0
-
+                        
                         dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting = 0
                         dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting = 0
@@ -334,12 +296,12 @@ class TBModel: TBModelInput {
                     dataBaseGeneralLedger.dataBasePLAccount?.credit_total = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.debit_balance = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.credit_balance = 0
-
+                    
                     dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0
-
+                    
                     dataBaseGeneralLedger.dataBasePLAccount?.debit_total_AfterAdjusting = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.credit_total_AfterAdjusting = 0
                     dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_AfterAdjusting = 0
@@ -350,9 +312,36 @@ class TBModel: TBModelInput {
             }
         }
     }
-
+    //　クリア　資本金勘定クラス　決算整理前、決算整理仕訳、決算整理後（合計、残高）
+    private func clearAccountTotalCapitalAccount() {
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            do {
+                try DataBaseManager.realm.write {
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance = 0
+                    
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total_Adjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total_Adjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance_Adjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance_Adjusting = 0
+                    
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total_AfterAdjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total_AfterAdjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance_AfterAdjusting = 0
+                    dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance_AfterAdjusting = 0
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+    }
+    
     // MARK: 計算 決算整理前
-
+    
     //　勘定クラス　勘定別に仕訳データを集計
     private func calculateAccountTotal(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
@@ -403,9 +392,9 @@ class TBModel: TBModelInput {
     private func calculateAccountTotalPLAccount() {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-
+        
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getTransferEntryInAccount() // FIXME: 損益 勘定別に取得
+        let objects = dataBaseManagerAccount.getTransferEntryInAccount() // 損益勘定から取得
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if "損益" == "\(objects[i].debit_category)" { // 借方
@@ -442,9 +431,53 @@ class TBModel: TBModelInput {
             }
         }
     }
-
+    //　資本金勘定クラス　勘定別に仕訳データを集計
+    private func calculateAccountTotalCapitalAccount() {
+        var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
+        var right: Int64 = 0
+        
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
+        let objects = dataBaseManagerAccount.getJournalEntryInCapitalAccount() // 資本金勘定から取得
+        
+        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
+            // 勘定が借方と貸方のどちらか
+            if "資本金勘定" == "\(objects[i].debit_category)" { // 借方
+                left += objects[i].debit_amount // 累計額に追加
+            } else if "資本金勘定" == "\(objects[i].credit_category)" { // 貸方
+                right += objects[i].credit_amount // 累計額に追加
+            }
+        }
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            do {
+                try DataBaseManager.realm.write {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if left > right {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance = left - right // 差額を格納
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    } else if left < right {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance = 0
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance = right - left
+                    } else {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance = 0 // ゼロを入れないと前回値が残る
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance = 0
+                    }
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+    }
+    
     // MARK: 計算 決算整理仕訳
-
+    
     //　勘定クラス　勘定別に決算整理仕訳データを集計
     private func calculateAccountTotalAdjusting(account: String) {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
@@ -452,11 +485,8 @@ class TBModel: TBModelInput {
         var objects: Results<DataBaseAdjustingEntry>
         
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        if account != "繰越利益" {
-            objects = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account)
-        } else { // 繰越利益
-            objects = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: account)
-        }
+        objects = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: account)
+        
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if account == "\(objects[i].debit_category)" { // 借方
@@ -496,7 +526,7 @@ class TBModel: TBModelInput {
             }
         }
     }
-    //　損益勘定クラス　勘定別に損益振替仕訳データを集計
+    //　損益勘定クラス　勘定別に決算整理仕訳データを集計
     private func calculateAccountTotalAdjustingPLAccount() {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
@@ -504,19 +534,64 @@ class TBModel: TBModelInput {
             do {
                 try DataBaseManager.realm.write {
                     // 借方と貸方で金額が大きい方はどちらか
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = 0
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = 0
-                        dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0 // 差額を格納
-                        dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    dataBaseGeneralLedger.dataBasePLAccount?.debit_total_Adjusting = 0
+                    dataBaseGeneralLedger.dataBasePLAccount?.credit_total_Adjusting = 0
+                    dataBaseGeneralLedger.dataBasePLAccount?.debit_balance_Adjusting = 0 // 差額を格納
+                    dataBaseGeneralLedger.dataBasePLAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                 }
             } catch {
                 print("エラーが発生しました")
             }
         }
     }
-
+    //　資本金勘定クラス　勘定別に決算整理仕訳データを集計
+    private func calculateAccountTotalAdjustingCapitalAccount() {
+        var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
+        var right: Int64 = 0
+        var objects: Results<DataBaseCapitalTransferJournalEntry>
+        
+        let dataBaseManagerAccount = GeneralLedgerAccountModel()
+        objects = dataBaseManagerAccount.getAllCapitalTransferJournalEntry() // FIXME: 資本振替仕訳　資本金勘定
+        
+        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
+            // 勘定が借方と貸方のどちらか
+            if "資本金勘定" == "\(objects[i].debit_category)" { // 借方
+                left += objects[i].debit_amount // 累計額に追加
+            } else if "資本金勘定" == "\(objects[i].credit_category)" { // 貸方
+                right += objects[i].credit_amount // 累計額に追加
+            }
+        }
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            do {
+                try DataBaseManager.realm.write {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if left > right {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total_Adjusting = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total_Adjusting = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance_Adjusting = left - right // 差額を格納
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance_Adjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    } else if left < right {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total_Adjusting = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total_Adjusting = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance_Adjusting = 0
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance_Adjusting = right - left
+                    } else {
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_total_Adjusting = left
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_total_Adjusting = right
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.debit_balance_Adjusting = 0 // ゼロを入れないと前回値が残る
+                        dataBaseGeneralLedger.dataBaseCapitalAccount?.credit_balance_Adjusting = 0
+                    }
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+    }
+    
     // MARK: 計算 決算整理後
-
+    
     // 勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後
     private func calculateAccountTotalAfterAdjusting(account: String) {
         // 開いている会計帳簿の年度を取得
@@ -549,7 +624,7 @@ class TBModel: TBModelInput {
                         print("エラーが発生しました")
                     }
                     // 決算振替仕訳　損益振替
-                    if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
+                    if account != "資本金勘定" { // 繰越利益の日付が手動で変更される可能性がある // FIXME: 資本金勘定
                         DataBaseManagerPLAccount.shared.addTransferEntry(
                             debitCategory: account,
                             amount: dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting,
@@ -568,7 +643,7 @@ class TBModel: TBModelInput {
                         print("エラーが発生しました")
                     }
                     // 決算振替仕訳　損益振替
-                    if account != "繰越利益" { // 繰越利益の日付が手動で変更される可能性がある
+                    if account != "資本金勘定" { // 繰越利益の日付が手動で変更される可能性がある // FIXME: 資本金勘定
                         DataBaseManagerPLAccount.shared.addTransferEntry(
                             debitCategory: "損益",
                             amount: dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting,
@@ -626,7 +701,7 @@ class TBModel: TBModelInput {
                     DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
                         debitCategory: "損益",
                         amount: dataBasePLAccount.debit_balance_AfterAdjusting,
-                        creditCategory: "繰越利益"
+                        creditCategory: "資本金勘定" // FIXME: 資本金勘定
                     ) // 仕訳画面で繰越利益を選択して仕訳入力した場合、実行される
                 } else if dataBasePLAccount.debit_total_AfterAdjusting < dataBasePLAccount.credit_total_AfterAdjusting {
                     do {
@@ -641,7 +716,7 @@ class TBModel: TBModelInput {
                     }
                     // 決算振替仕訳　損益勘定の締切り
                     DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
-                        debitCategory: "繰越利益",
+                        debitCategory: "資本金勘定", // FIXME: 資本金勘定
                         amount: dataBasePLAccount.credit_balance_AfterAdjusting,
                         creditCategory: "損益"
                     )
@@ -656,7 +731,7 @@ class TBModel: TBModelInput {
                     }
                     // 決算振替仕訳　損益勘定の締切り 記述漏れ　2020/11/05
                     DataBaseManagerPLAccount.shared.addTransferEntryToNetWorth(
-                        debitCategory: "繰越利益",
+                        debitCategory: "資本金勘定", // FIXME: 資本金勘定
                         amount: 0,
                         creditCategory: "損益"
                     )
@@ -664,7 +739,59 @@ class TBModel: TBModelInput {
             }
         }
     }
-
+    // 資本金勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後
+    private func calculateAccountTotalAfterAdjustingCapitalAccount() {
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        // 決算振替仕訳　損益勘定振替
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                do {
+                    try DataBaseManager.realm.write {
+                        // 合計額 通常仕訳＋決算整理仕訳＝決算整理後
+                        dataBaseCapitalAccount.debit_total_AfterAdjusting = dataBaseCapitalAccount.debit_total + dataBaseCapitalAccount.debit_total_Adjusting
+                        dataBaseCapitalAccount.credit_total_AfterAdjusting = dataBaseCapitalAccount.credit_total + dataBaseCapitalAccount.credit_total_Adjusting
+                    }
+                } catch {
+                    print("エラーが発生しました")
+                }
+                // 残高額　借方と貸方で金額が大きい方はどちらか
+                if dataBaseCapitalAccount.debit_total_AfterAdjusting > dataBaseCapitalAccount.credit_total_AfterAdjusting {
+                    do {
+                        try DataBaseManager.realm.write {
+                            dataBaseCapitalAccount.debit_balance_AfterAdjusting =
+                            dataBaseCapitalAccount.debit_total_AfterAdjusting -
+                            dataBaseCapitalAccount.credit_total_AfterAdjusting // 差額を格納
+                            dataBaseCapitalAccount.credit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                        }
+                    } catch {
+                        print("エラーが発生しました")
+                    }
+                } else if dataBaseCapitalAccount.debit_total_AfterAdjusting < dataBaseCapitalAccount.credit_total_AfterAdjusting {
+                    do {
+                        try DataBaseManager.realm.write {
+                            dataBaseCapitalAccount.credit_balance_AfterAdjusting =
+                            dataBaseCapitalAccount.credit_total_AfterAdjusting -
+                            dataBaseCapitalAccount.debit_total_AfterAdjusting // 差額を格納
+                            dataBaseCapitalAccount.debit_balance_AfterAdjusting = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                        }
+                    } catch {
+                        print("エラーが発生しました")
+                    }
+                } else {
+                    do {
+                        try DataBaseManager.realm.write {
+                            dataBaseCapitalAccount.debit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                            dataBaseCapitalAccount.credit_balance_AfterAdjusting = 0 // ゼロを入れないと前回値が残る
+                        }
+                    } catch {
+                        print("エラーが発生しました")
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: Delete
     
 }

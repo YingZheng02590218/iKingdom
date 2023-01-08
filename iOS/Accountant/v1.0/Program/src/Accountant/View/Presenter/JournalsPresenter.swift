@@ -135,7 +135,14 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
 
     var numberOfDataBaseCapitalTransferJournalEntry: Int {
-        dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
+            // 資本振替仕訳
+            if englishFromOfClosingTheLedger1 {
+                return dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+            }
+        }
+        return 0
     }
 
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {

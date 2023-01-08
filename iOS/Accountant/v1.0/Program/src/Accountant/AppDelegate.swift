@@ -64,7 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     // DataBaseGeneralLedgerオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseGeneralLedger.className()) { oldObject, newObject in
-                            newObject?["dataBaseCapitalAccount"] = nil
+                        // 資本金勘定
+                        newObject?["dataBaseCapitalAccount"] = nil
                     }
                     // DataBaseJournalsオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseJournals.className()) { oldObject, newObject in

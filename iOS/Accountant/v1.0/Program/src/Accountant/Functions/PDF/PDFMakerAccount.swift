@@ -61,7 +61,7 @@ class PDFMakerAccount {
         let generalLedgerAccountModel = GeneralLedgerAccountModel()
         // 通常仕訳　勘定別
         let dataBaseJournalEntries = generalLedgerAccountModel.getJournalEntryInAccount(account: account)
-        // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
+        // 決算整理仕訳　勘定別
         let dataBaseAdjustingEntries = generalLedgerAccountModel.getAdjustingJournalEntryInAccount(account: account)
         generalLedgerAccountModel.initialize(
             account: account,
