@@ -135,7 +135,12 @@ class DataBaseManagerGeneralLedgerAccountBalance {
     // MARK: Update
     
     // 計算　差引残高
-    func calculateBalance(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?) {
+    func calculateBalance(
+        account: String,
+        databaseJournalEntries: Results<DataBaseJournalEntry>,
+        dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
+        dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    ) {
         // 参照先を渡す
         self.dataBaseJournalEntries = databaseJournalEntries
         self.dataBaseAdjustingEntries = dataBaseAdjustingEntries

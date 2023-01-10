@@ -83,8 +83,12 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     
     func viewDidLoad() {
         
-        model.initialize(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries,
-                         dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry)
+        model.initialize(
+            account: account,
+            databaseJournalEntries: databaseJournalEntries,
+            dataBaseAdjustingEntries: dataBaseAdjustingEntries,
+            dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
+        )
         
         view.setupViewForViewDidLoad()
     }

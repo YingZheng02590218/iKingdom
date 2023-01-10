@@ -451,7 +451,7 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             dateYearLabel.text = fiscalYear.description + "年"
         }
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if presenter.numberOfDatabaseJournalEntries + presenter.numberOfDataBaseAdjustingEntries >= 1 {
+        if presenter.numberOfDatabaseJournalEntries + presenter.numberOfDataBaseAdjustingEntries + presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
             printBarButtonItem.isEnabled = true
         } else {
             printBarButtonItem.isEnabled = false

@@ -535,7 +535,7 @@ class TBModel: TBModelInput {
         var objects: Results<DataBaseCapitalTransferJournalEntry>
         
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        objects = dataBaseManagerAccount.getAllCapitalTransferJournalEntry() // FIXME: 資本振替仕訳　資本金勘定
+        objects = dataBaseManagerAccount.getAllCapitalTransferJournalEntry()
         
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか

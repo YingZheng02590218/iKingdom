@@ -224,7 +224,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseCapitalTransferJournalEntry.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "資本金勘定"), NSString(string: "資本金勘定")) // FIXME: 資本金勘定
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "資本金勘定"), NSString(string: "資本金勘定"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
@@ -276,7 +276,12 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // MARK: Update
     
     // 差引残高　計算
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?) {
+    func initialize(
+        account: String,
+        databaseJournalEntries: Results<DataBaseJournalEntry>,
+        dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
+        dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    ) {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
             account: account,

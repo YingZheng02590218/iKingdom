@@ -128,15 +128,43 @@ class GeneralLedgerTableViewController: UITableViewController {
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
+        let model = GeneralLedgerAccountModel()
+        let objectss = model.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
+        let objectsss = model.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
 
         if !objectss.isEmpty || !objectsss.isEmpty {
             cell.textLabel?.textColor = .textColor
         } else {
             cell.textLabel?.textColor = .lightGray
         }
+        // 資本振替仕訳
+        let dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
+            // 資本振替仕訳
+            if englishFromOfClosingTheLedger1 {
+                // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    if objects[indexPath.row].category == CapitalAccountType.retainedEarnings.rawValue {
+                        if dataBaseCapitalTransferJournalEntry != nil {
+                            cell.textLabel?.textColor = .textColor
+                        } else {
+                            cell.textLabel?.textColor = .lightGray
+                        }
+                    }
+                } else {
+                    if objects[indexPath.row].category == CapitalAccountType.capital.rawValue {
+                        if dataBaseCapitalTransferJournalEntry != nil {
+                            cell.textLabel?.textColor = .textColor
+                        } else {
+                            cell.textLabel?.textColor = .lightGray
+                        }
+                    }
+                }
+            }
+        }
+
         return cell
     }
 //    var account :String = "" // 勘定名
