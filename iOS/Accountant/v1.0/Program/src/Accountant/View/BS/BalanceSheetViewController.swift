@@ -245,6 +245,8 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: BSTableViewHeaderFooterView.self))
         if let headerView = view as? BSTableViewHeaderFooterView {
+            headerView.labelForThisYear.textColor = .textColor
+            headerView.labelForPrevious.textColor = .textColor
 
             var footerLabelText = "" // タイトル
             var textForPrevious = "" // 前年度 前年度の会計帳簿の存在有無を確認
@@ -268,6 +270,12 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
                 footerLabelText = BalanceSheet.Block.assets.getTotalAmount() // 資産の部
                 textForPrevious = presenter.getTotalBig5(big5: 0, lastYear: true)
                 textForThisYear = presenter.getTotalBig5(big5: 0, lastYear: false)
+                // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
+                if presenter.getTotalBig5(big5: 0, lastYear: false) != presenter.getTotalBig5(big5: 3, lastYear: false) {
+                    headerView.labelForThisYear.textColor = .red
+                } else if presenter.getTotalBig5(big5: 0, lastYear: true) != presenter.getTotalBig5(big5: 3, lastYear: true) {
+                    headerView.labelForPrevious.textColor = .red
+                }
                 //　case 5: // 負債の部
             case 6: // MARK: - "    流動負債合計"
                 footerLabelText = BalanceSheet.Liabilities.currentLiabilities.getTotalAmount() // 流動負債
@@ -290,6 +298,12 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
                 footerLabelText = BalanceSheet.Block.liabilityAndEquity.getTotalAmount() // 負債純資産の部
                 textForPrevious = presenter.getTotalBig5(big5: 3, lastYear: true)
                 textForThisYear = presenter.getTotalBig5(big5: 3, lastYear: false)
+                // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
+                if presenter.getTotalBig5(big5: 0, lastYear: false) != presenter.getTotalBig5(big5: 3, lastYear: false) {
+                    headerView.labelForThisYear.textColor = .red
+                } else if presenter.getTotalBig5(big5: 0, lastYear: true) != presenter.getTotalBig5(big5: 3, lastYear: true) {
+                    headerView.labelForPrevious.textColor = .red
+                }
             default:
                 break
             }

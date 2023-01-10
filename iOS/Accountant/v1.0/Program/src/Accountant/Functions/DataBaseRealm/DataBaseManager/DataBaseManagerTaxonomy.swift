@@ -79,7 +79,7 @@ class DataBaseManagerTaxonomy {
         // (2)データベース内に保存されているモデルを全て取得する
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
             // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first  {
+            if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first {
                 print(dataBaseAccount)
                 // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
                 if dataBaseAccount.debit_balance_AfterAdjusting > dataBaseAccount.credit_balance_AfterAdjusting {

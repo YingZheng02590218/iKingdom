@@ -119,7 +119,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
         // 通常仕訳　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
-        return 4
+        return 5
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

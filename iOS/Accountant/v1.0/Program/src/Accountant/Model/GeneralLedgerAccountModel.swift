@@ -23,7 +23,6 @@ protocol GeneralLedgerAccountModelInput {
     func getNumberOfAccount(accountName: String) -> Int
     
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
-    func getJournalEntryInCapitalAccount() -> Results<DataBaseJournalEntry>
 
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry?
@@ -154,7 +153,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditCapitalTransferJournalEntry()
     }
 
-
     // MARK: - 勘定
     // 取得　通常仕訳 勘定別に取得
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
@@ -198,15 +196,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
 
     // MARK: - 資本金勘定
-    // 取得　通常仕訳 資本金勘定から取得
-    func getJournalEntryInCapitalAccount() -> Results<DataBaseJournalEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
-        let dataBaseJournalEntries = (dataBaseAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
-        return dataBaseJournalEntries
-    }
     // 取得 資本振替仕訳 資本金勘定から取得
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [

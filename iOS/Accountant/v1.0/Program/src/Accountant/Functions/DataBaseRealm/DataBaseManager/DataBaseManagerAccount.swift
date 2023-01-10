@@ -95,23 +95,49 @@ class DataBaseManagerAccount {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
 
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
+
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         // 勘定クラス
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
-                print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
-                print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
-                // 借方と貸方で金額が大きい方はどちらか
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                    debitOrCredit = "借"
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
-                    debitOrCredit = "貸"
+            if capitalAccount == accountNameOfSettingsTaxonomyAccount {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    print("借方残高", dataBaseCapitalAccount.debit_balance_AfterAdjusting)
+                    print("貸方残高", dataBaseCapitalAccount.credit_balance_AfterAdjusting)
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                        debitOrCredit = "借"
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.credit_balance_AfterAdjusting
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
                 } else {
-                    debitOrCredit = "-"
+                    // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                    for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
+                        print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
+                        print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
+                        // 借方と貸方で金額が大きい方はどちらか
+                        if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                            debitOrCredit = "借"
+                        } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                            debitOrCredit = "貸"
+                        } else {
+                            debitOrCredit = "-"
+                        }
+                    }
                 }
             }
             switch rank0 {
