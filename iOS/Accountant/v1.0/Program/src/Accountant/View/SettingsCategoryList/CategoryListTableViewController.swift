@@ -13,7 +13,7 @@ import AudioToolbox // 効果音
 class CategoryListTableViewController: UITableViewController {
     
     // MARK: - Variable/Let
-    
+
     var index: Int = 0 // カルーセルのタブの識別
     
     /// GUIアーキテクチャ　MVP
@@ -21,18 +21,18 @@ class CategoryListTableViewController: UITableViewController {
     func inject(presenter: CategoryListPresenterInput) {
         self.presenter = presenter
     }
-    
+
     // MARK: - Life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         presenter = CategoryListPresenter.init(view: self, model: CategoryListModel(), index: index)
         inject(presenter: presenter)
         
         presenter.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
@@ -50,7 +50,7 @@ class CategoryListTableViewController: UITableViewController {
         // 編集ボタンの設定
         navigationItem.rightBarButtonItem = editButtonItem
     }
-    
+
     // MARK: - Action
     
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す
@@ -96,16 +96,6 @@ class CategoryListTableViewController: UITableViewController {
                     return false
                 }
             }
-            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
-                if settingsTaxonomyAccount.number == tag {
-                    return false
-                }
-            }
-            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
-                if settingsTaxonomyAccount.number == tag {
-                    return false
-                }
-            }
         }
         // 勘定科目のスイッチを設定する
         presenter.changeSwitch(tag: tag, isOn: isOn)
@@ -124,7 +114,7 @@ class CategoryListTableViewController: UITableViewController {
                 section: indexPath.section
             ).category
         )
-        
+
         let alert = UIAlertController(
             title: "削除",
             message: "勘定科目「\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category)」を削除しますか？\n\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件\nよく使う仕訳が \(dataBaseSettingsOperatingJournalEntry.count)件 \nあります。",
@@ -142,12 +132,12 @@ class CategoryListTableViewController: UITableViewController {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
+
         tableView.setEditing(editing, animated: animated)
     }
     
     // MARK: - Navigation
-    
+
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
@@ -170,17 +160,17 @@ class CategoryListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
+
         presenter.numberOfsections()
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
+
         presenter.titleForHeaderInSection(section: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         presenter.numberOfobjects(section: section)
     }
     // セルを生成して返却するメソッド
@@ -193,6 +183,32 @@ class CategoryListTableViewController: UITableViewController {
         //        cell.label_category.text = " \(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
         // 勘定科目の連番
         cell.tag = presenter.objects(forRow: indexPath.row, section: indexPath.section).number
+        // 必須　ラベル
+        cell.label.isHidden = true
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            // 繰越利益勘定
+            if cell.tag == 97 { // 連番97
+                cell.label.isHidden = false
+            }
+        } else {
+            // 個人事業主対応
+            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "元入金") {
+                if settingsTaxonomyAccount.number == cell.tag {
+                    cell.label.isHidden = false
+                }
+            }
+//            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
+//                if settingsTaxonomyAccount.number == cell.tag {
+//                    cell.label.isHidden = false
+//                }
+//            }
+//            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
+//                if settingsTaxonomyAccount.number == cell.tag {
+//                    cell.label.isHidden = false
+//                }
+//            }
+        }
         // 勘定科目の有効無効
         cell.toggleButton.isOn = presenter.objects(forRow: indexPath.row, section: indexPath.section).switching
         // 勘定科目の有効無効　変更時のアクションを指定
@@ -233,10 +249,10 @@ class CategoryListTableViewController: UITableViewController {
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
-        
+
         return cell
     }
-    
+
     //    // セル選択不可
     //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     //        // 編集モードの場合　は押下できないのでこの処理は通らない
@@ -292,6 +308,22 @@ class CategoryListTableViewController: UITableViewController {
         // デフォルトの勘定科目数（230）以上ある場合は、削除可能とし、それ以下の場合は削除不可とする。
         if presenter.objects(forRow: indexPath.row, section: indexPath.section).number <= 229 {
             return .none // 削除不可
+        }
+        // 個人事業主対応
+        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "元入金") {
+            if settingsTaxonomyAccount.number == presenter.objects(forRow: indexPath.row, section: indexPath.section).number {
+                return .none // 削除不可
+            }
+        }
+        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
+            if settingsTaxonomyAccount.number == presenter.objects(forRow: indexPath.row, section: indexPath.section).number {
+                return .none // 削除不可
+            }
+        }
+        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
+            if settingsTaxonomyAccount.number == presenter.objects(forRow: indexPath.row, section: indexPath.section).number {
+                return .none // 削除不可
+            }
         }
         return .delete
     }

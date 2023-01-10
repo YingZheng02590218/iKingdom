@@ -11,7 +11,7 @@ import UIKit
 class CategoryListTableViewCell: UITableViewCell {
 
     @IBOutlet var toggleButton: UISwitch!
-    @IBOutlet var label: UILabel!
+    @IBOutlet var label: UILabel! // 必須ラベル
     
     override func awakeFromNib() {
         super.awakeFromNib()

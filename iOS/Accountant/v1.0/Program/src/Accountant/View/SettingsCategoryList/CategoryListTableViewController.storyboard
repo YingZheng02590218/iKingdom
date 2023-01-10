@@ -24,15 +24,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="345.5" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="da6-2T-YsX">
-                                            <rect key="frame" x="290" y="7" width="49" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必須" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XWB-JH-aJL">
+                                            <rect key="frame" x="246.5" y="11.5" width="35" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" name="MainColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="da6-2T-YsX">
+                                            <rect key="frame" x="287" y="7" width="51" height="31"/>
                                             <color key="onTintColor" name="AccentDark"/>
                                         </switch>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="da6-2T-YsX" firstAttribute="leading" secondItem="XWB-JH-aJL" secondAttribute="trailing" constant="5" id="2Jo-8z-wdS"/>
+                                        <constraint firstItem="da6-2T-YsX" firstAttribute="centerY" secondItem="cZ8-iU-a1N" secondAttribute="centerY" id="3pG-JR-HRX"/>
+                                        <constraint firstAttribute="trailing" secondItem="da6-2T-YsX" secondAttribute="trailing" constant="10" id="94p-bN-5R9"/>
+                                        <constraint firstItem="XWB-JH-aJL" firstAttribute="centerY" secondItem="cZ8-iU-a1N" secondAttribute="centerY" id="MDS-QR-TPz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
+                                    <outlet property="label" destination="XWB-JH-aJL" id="8iT-1a-dqX"/>
                                     <outlet property="toggleButton" destination="da6-2T-YsX" id="c1u-vS-TbH"/>
                                     <segue destination="Wcu-Ps-cZd" kind="show" id="qEd-Ns-dUO"/>
                                 </connections>
@@ -67,6 +79,9 @@
         </namedColor>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor2">
             <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
