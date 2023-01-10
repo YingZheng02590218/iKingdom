@@ -73,21 +73,43 @@ class DataBaseManagerTaxonomy {
      */
     func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
+
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
         // 引数に空白が入るのでインデックスエラーとなる　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
         // 開いている会計帳簿を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // (2)データベース内に保存されているモデルを全て取得する
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first {
-                print(dataBaseAccount)
-                // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
-                if dataBaseAccount.debit_balance_AfterAdjusting > dataBaseAccount.credit_balance_AfterAdjusting {
-                    result = dataBaseAccount.debit_balance_AfterAdjusting
-                } else if dataBaseAccount.debit_balance_AfterAdjusting < dataBaseAccount.credit_balance_AfterAdjusting {
-                    result = dataBaseAccount.credit_balance_AfterAdjusting
-                } else {
-                    result = dataBaseAccount.debit_balance_AfterAdjusting
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.credit_balance_AfterAdjusting
+                    } else {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                if let dataBaseAccount = dataBaseGeneralLedger.dataBaseAccounts.where({ $0.accountName == account }).first {
+                    print(dataBaseAccount)
+                    // 借方と貸方で金額が大きい方はどちらか　2020/10/12 決算整理後の合計　→ 決算整理後の残高
+                    if dataBaseAccount.debit_balance_AfterAdjusting > dataBaseAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseAccount.debit_balance_AfterAdjusting
+                    } else if dataBaseAccount.debit_balance_AfterAdjusting < dataBaseAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseAccount.credit_balance_AfterAdjusting
+                    } else {
+                        result = dataBaseAccount.debit_balance_AfterAdjusting
+                    }
                 }
             }
         }
@@ -102,21 +124,43 @@ class DataBaseManagerTaxonomy {
      * @return  "" プラス
      */
     func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
+
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
         
-        if let objectss = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<objectss.dataBaseAccounts.count where objectss.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting > objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "借"
-                } else if objectss.dataBaseAccounts[i].debit_balance_AfterAdjusting < objectss.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "貸"
-                } else {
-                    debitOrCredit = "-"
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
                 }
             }
             switch bigCategory {

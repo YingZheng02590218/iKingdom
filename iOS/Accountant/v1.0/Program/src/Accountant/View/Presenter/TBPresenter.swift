@@ -125,11 +125,11 @@ final class TBPresenter: TBPresenterInput {
     }
     
     func refreshTable() {
-        // 合計残高試算表　再計算 合計額を計算
-        model.calculateAmountOfAllAccount()
         // 全勘定の合計と残高を計算する
         // 合計残高試算表　再計算 合計額を計算
         model.setAllAccountTotal()
+        // 合計残高試算表　再計算 合計額を計算
+        model.calculateAmountOfAllAccount()
         // 更新処理
         view.reloadData()
     }

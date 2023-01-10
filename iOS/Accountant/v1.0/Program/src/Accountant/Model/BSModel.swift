@@ -32,18 +32,18 @@ class BSModel: BSModelInput {
     
     // MARK: Read
     
-    // 前年度の会計帳簿の存在有無を確認
-    func checkSettingsPeriod() -> Bool {
-        DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
-    }
-    
     // MARK: 読み出し
     
     // 取得　五大区分　前年度表示対応
     func getTotalBig5(big5: Int, lastYear: Bool) -> String {
         // 合計額
         var result: Int64 = 0
-        // 開いている会計帳簿の年度を取得
+        if lastYear {
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            } else {
+                return "-"
+            }
+        }
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             switch big5 {
@@ -64,7 +64,12 @@ class BSModel: BSModelInput {
     // 取得　階層0 大区分 前年度表示対応
     func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String {
         var result: Int64 = 0            // 累計額
-        // 開いている会計帳簿の年度を取得
+        if lastYear {
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            } else {
+                return "-"
+            }
+        }
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             switch rank0 {
@@ -86,8 +91,14 @@ class BSModel: BSModelInput {
     }
     // 取得　階層1 中区分　前年度表示対応
     func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
-        var result: Int64 = 0            // 累計額
-        // 開いている会計帳簿の年度を取得
+        // 合計額
+        var result: Int64 = 0
+        if lastYear {
+            if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
+            } else {
+                return "-"
+            }
+        }
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             switch rank1 {
@@ -109,18 +120,40 @@ class BSModel: BSModelInput {
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     private func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
+
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
-                } else {
-                    result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        result = dataBaseCapitalAccount.credit_balance_AfterAdjusting
+                    } else {
+                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                    } else {
+                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                    }
                 }
             }
         }
@@ -130,18 +163,41 @@ class BSModel: BSModelInput {
     private func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
+
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
+
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "借"
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "貸"
-                } else {
-                    debitOrCredit = "-"
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
                 }
             }
             switch bigCategory {
@@ -183,18 +239,41 @@ class BSModel: BSModelInput {
     private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
+
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
+
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "借"
-                } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                    debitOrCredit = "貸"
-                } else {
-                    debitOrCredit = "-"
+            if capitalAccount == account {
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "借"
+                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
                 }
             }
             switch bigCategory {
@@ -257,47 +336,47 @@ class BSModel: BSModelInput {
         let objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0", category1: "1", category2: "0", category3: "1", category4: "44") // 投資その他の資産5
         // MARK: - "    株主資本合計"
         let capitalStockTotal = self.getTotalRank1(big5: 2, rank1: 10, lastYear: false) // 中区分の合計を取得
-        let lastCapitalStockTotal = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 2, rank1: 10, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastCapitalStockTotal = self.getTotalRank1(big5: 2, rank1: 10, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    その他の包括利益累計額合計"
         let otherCapitalSurplusesTotal = self.getTotalRank1(big5: 2, rank1: 11, lastYear: false) // 中区分の合計を取得
-        let lastOtherCapitalSurplusesTotal = self.checkSettingsPeriod() ? self.getTotalRank1(big5: 2, rank1: 11, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastOtherCapitalSurplusesTotal = self.getTotalRank1(big5: 2, rank1: 11, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    流動資産合計"
         let currentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: false)
-        let lastCurrentAssetsTotal = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastCurrentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    固定資産合計"
         let fixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: false)
-        let lastFixedAssetsTotal = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastFixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    繰越資産合計"
         let deferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: false)
-        let lastDeferredAssetsTotal = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 0, rank0: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastDeferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    流動負債合計"
         let currentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: false)
-        let lastCurrentLiabilitiesTotal = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 1, rank0: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastCurrentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    固定負債合計"
         let fixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: false)
-        let lastFixedLiabilitiesTotal = self.checkSettingsPeriod() ? self.getTotalRank0(big5: 1, rank0: 4, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastFixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "資産合計"
         let assetTotal = self.getTotalBig5(big5: 0, lastYear: false)
-        let lastAssetTotal = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 0, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastAssetTotal = self.getTotalBig5(big5: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "負債合計"
         let liabilityTotal = self.getTotalBig5(big5: 1, lastYear: false)
-        let lastLiabilityTotal = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 1, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastLiabilityTotal = self.getTotalBig5(big5: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "純資産合計"
         let equityTotal = self.getTotalBig5(big5: 2, lastYear: false)
-        let lastEquityTotal = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 2, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastEquityTotal = self.getTotalBig5(big5: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "負債純資産合計"
         let liabilityAndEquityTotal = self.getTotalBig5(big5: 3, lastYear: false)
-        let lastLiabilityAndEquityTotal = self.checkSettingsPeriod() ? self.getTotalBig5(big5: 3, lastYear: true) : "-" // 前年度の会計帳簿の存在有無を確認
+        let lastLiabilityAndEquityTotal = self.getTotalBig5(big5: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         return BSData(
             company: company,

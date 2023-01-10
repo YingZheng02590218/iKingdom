@@ -224,6 +224,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
         cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
         cell.labelForThisYear.attributedText = nil
         cell.labelForPrevious.attributedText = nil
+        cell.labelForThisYear.textColor = .textColor
+        cell.labelForPrevious.textColor = .textColor
         
         switch indexPath.section { // 大区分
         case 0: // MARK: - 資産の部
@@ -400,8 +402,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
                 if presenter.getTotalBig5(big5: 0, lastYear: false) != presenter.getTotalBig5(big5: 3, lastYear: false) {
                     cell.labelForThisYear.textColor = .red
-                } else {
-                    
+                } else if presenter.getTotalBig5(big5: 0, lastYear: true) != presenter.getTotalBig5(big5: 3, lastYear: true) {
+                    cell.labelForPrevious.textColor = .red
                 }
                 return cell
             default:
@@ -1025,8 +1027,8 @@ extension BSViewController: UITableViewDelegate, UITableViewDataSource {
                 // 資産合計と純資産負債合計の金額が不一致の場合、文字色を赤
                 if presenter.getTotalBig5(big5: 0, lastYear: false) != presenter.getTotalBig5(big5: 3, lastYear: false) {
                     cell.labelForThisYear.textColor = .red
-                } else {
-                    // nothing
+                } else if presenter.getTotalBig5(big5: 0, lastYear: true) != presenter.getTotalBig5(big5: 3, lastYear: true) {
+                    cell.labelForPrevious.textColor = .red
                 }
                 return cell
             default:

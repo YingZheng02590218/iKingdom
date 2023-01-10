@@ -39,11 +39,6 @@ class BalanceSheetModel: BalanceSheetModelInput {
         DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
     }
 
-    // 前年度の会計帳簿の存在有無を確認
-    func checkSettingsPeriod() -> Bool {
-        DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod()
-    }
-
     // MARK: 読み出し
 
     // 取得　五大区分　前年度表示対応
