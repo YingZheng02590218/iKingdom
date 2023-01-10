@@ -301,6 +301,79 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
+        // 行数分繰り返す 資本振替仕訳
+        if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
+
+            let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
+            if counter == 0 {
+                let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
+                htmlString.append(tableHeader)
+            }
+            // データ
+            let month = dataBaseCapitalTransferJournalEntry.date[
+                dataBaseCapitalTransferJournalEntry.date.index(
+                    dataBaseCapitalTransferJournalEntry.date.startIndex,
+                    offsetBy: 5
+                )..<dataBaseCapitalTransferJournalEntry.date.index(
+                    dataBaseCapitalTransferJournalEntry.date.startIndex,
+                    offsetBy: 7
+                )
+            ]
+            let date = dataBaseCapitalTransferJournalEntry.date[
+                dataBaseCapitalTransferJournalEntry.date.index(
+                    dataBaseCapitalTransferJournalEntry.date.startIndex,
+                    offsetBy: 8
+                )..<dataBaseCapitalTransferJournalEntry.date.index(
+                    dataBaseCapitalTransferJournalEntry.date.startIndex,
+                    offsetBy: 10
+                )
+            ]
+            let debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+            let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
+            let creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+            let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
+            _ = dataBaseCapitalTransferJournalEntry.smallWritting
+            var correspondingAccounts: String = "" // 当勘定の相手勘定
+            if debitCategory == account {
+                correspondingAccounts = creditCategory
+            } else if creditCategory == account {
+                correspondingAccounts = debitCategory
+            }
+            let numberOfAccount: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(correspondingAccounts)")
+            _ = dataBaseCapitalTransferJournalEntry.balance_left
+            _ = dataBaseCapitalTransferJournalEntry.balance_right
+
+            let balanceAmount = generalLedgerAccountModel.getBalanceAmountCapitalTransferJournalEntry()
+            let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditCapitalTransferJournalEntry()
+
+            let rowString = hTMLhelper.getSingleRow(
+                month: String(month),
+                day: String(date),
+                debitCategory: debitCategory,
+                debitAmount: debitAmount,
+                creditCategory: creditCategory,
+                creditAmount: creditAmount,
+                correspondingAccounts: correspondingAccounts,
+                numberOfAccount: numberOfAccount,
+                balanceAmount: balanceAmount,
+                balanceDebitOrCredit: balanceDebitOrCredit
+            )
+            htmlString.append(rowString)
+
+            totalDebitAmount += dataBaseCapitalTransferJournalEntry.debit_amount
+            totalCreditAmount += dataBaseCapitalTransferJournalEntry.credit_amount
+
+            if counter >= 29 {
+                let tableFooter = hTMLhelper.footerstring(debitAmount: totalDebitAmount, creditAmount: totalCreditAmount)
+                htmlString.append(tableFooter)
+            }
+            counter += 1
+            if counter >= 30 {
+                counter = 0
+                pageNumber += 1
+            }
+        }
+
         if counter > 0 && counter <= 30 {
             for _ in counter ..< 30 {
                 let rowString = hTMLhelper.getSingleRowEmpty()

@@ -291,8 +291,8 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
 
-                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath)
-                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+                    balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
+                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
