@@ -72,6 +72,11 @@ class SettingsCategoryTableViewController: UITableViewController {
             // チュートリアル対応 コーチマーク型
             presentAnnotation()
         }
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
     }
     // チュートリアル対応 コーチマーク型
     func presentAnnotation() {
@@ -214,7 +219,8 @@ class SettingsCategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
-            return nil
+            // 法人/個人フラグ
+            return UserDefaults.standard.bool(forKey: "corporation_switch") ? "法人：資本振替仕訳は「繰越利益」勘定を使用し、財務諸表に「表示科目」を表示します。" : "個人事業主：資本振替仕訳は「元入金」勘定を使用し、財務諸表に「勘定科目」を表示します。"
         case 1:
             return "使用する勘定科目を設定することができます。"
         case 2:
@@ -241,6 +247,8 @@ class SettingsCategoryTableViewController: UITableViewController {
             cell.textLabel?.text = "勘定科目体系"
             cell.textLabel?.textColor = .textColor
             cell.backgroundColor = .mainColor2
+            // セルの選択不可にする
+            cell.selectionStyle = .none
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
