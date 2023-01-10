@@ -63,6 +63,13 @@ class DatabaseManagerSettingsTaxonomyAccount {
             return false // ない
         }
     }
+    // 取得　引数と同じ勘定科目名がの設定勘定科目
+    func getSettingsTaxonomyAccount(category: String) -> DataBaseSettingsTaxonomyAccount? {
+        let dataBaseSettingsTaxonomyAccounts = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+            NSPredicate(format: "category LIKE %@", NSString(string: category))
+        ])
+        return dataBaseSettingsTaxonomyAccounts.first
+    }
     // チェック
     func checkInitialising() -> Bool {
         // (2)データベース内に保存されているモデルを全て取得する

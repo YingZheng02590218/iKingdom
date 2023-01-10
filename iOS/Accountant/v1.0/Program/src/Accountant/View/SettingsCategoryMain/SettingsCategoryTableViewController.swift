@@ -131,6 +131,30 @@ class SettingsCategoryTableViewController: UITableViewController {
                     // 法人/個人フラグ　設定スイッチ
                     UserDefaults.standard.set(segStatus, forKey: "corporation_switch")
                     UserDefaults.standard.synchronize()
+                    // 法人/個人フラグ
+                    if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                        // 更新　スイッチの切り替え
+                        // 法人対応 ONに切り替える
+                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "繰越利益") {
+                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                        }
+                    } else {
+                        // 更新　スイッチの切り替え
+                        // 個人事業主対応 ONに切り替える
+                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "元入金") {
+                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                        }
+                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
+                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                        }
+                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
+                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                        }
+                    }
+                    // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+                    let databaseManager = TBModel()
+                    databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+                    databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
 
                     // リロード
                     self.tableView.reloadData()
