@@ -273,3 +273,10 @@ public enum Rank0: String, CaseIterable, Hashable {
     // 税金
     case taxes = "税金"
 }
+// 資本金勘定　資本振替仕訳の対象となる勘定
+public enum CapitalAccountType: String, CaseIterable, Hashable {
+    // 法人：繰越利益勘定
+    case retainedEarnings = "繰越利益"
+    // 個人事業主：元入金勘定
+    case capital = "元入金"
+}

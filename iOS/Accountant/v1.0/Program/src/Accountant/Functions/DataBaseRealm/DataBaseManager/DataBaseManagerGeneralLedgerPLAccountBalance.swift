@@ -66,11 +66,11 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
 
     // 取得　差引残高額　 資本振替仕訳　損益勘定以外
     func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-        if let dataBaseAdjustingEntries = dataBaseCapitalTransferJournalEntry {
-            if dataBaseAdjustingEntries.balance_left > dataBaseAdjustingEntries.balance_right { // 借方と貸方を比較
-                balanceAmount = dataBaseAdjustingEntries.balance_left// - objects.balance_right
-            } else if dataBaseAdjustingEntries.balance_right > dataBaseAdjustingEntries.balance_left {
-                balanceAmount = dataBaseAdjustingEntries.balance_right// - objects.balance_left
+        if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
+            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
+                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_left// - objects.balance_right
+            } else if dataBaseCapitalTransferJournalEntry.balance_right > dataBaseCapitalTransferJournalEntry.balance_left {
+                balanceAmount = dataBaseCapitalTransferJournalEntry.balance_right// - objects.balance_left
             } else {
                 balanceAmount = 0
             }
@@ -81,10 +81,10 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
     }
     // 借又貸を取得 資本振替仕訳
     func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-        if let dataBaseAdjustingEntries = dataBaseCapitalTransferJournalEntry {
-            if dataBaseAdjustingEntries.balance_left > dataBaseAdjustingEntries.balance_right {
+        if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
+            if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right {
                 balanceDebitOrCredit = "借"
-            } else if dataBaseAdjustingEntries.balance_left < dataBaseAdjustingEntries.balance_right {
+            } else if dataBaseCapitalTransferJournalEntry.balance_left < dataBaseCapitalTransferJournalEntry.balance_right {
                 balanceDebitOrCredit = "貸"
             } else {
                 balanceDebitOrCredit = "-"
@@ -98,12 +98,12 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
     // MARK: Update
 
     // 計算　差引残高
-    func calculateBalance(dataBaseTransferEntries: Results<DataBaseTransferEntry>, dataBaseAdjustingEntries: DataBaseCapitalTransferJournalEntry?) {
+    func calculateBalance(dataBaseTransferEntries: Results<DataBaseTransferEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?) {
         // 勘定名
         let account: String = "損益"
         // 参照先を渡す
         self.dataBaseTransferEntries = dataBaseTransferEntries
-        self.dataBaseCapitalTransferJournalEntry = dataBaseAdjustingEntries
+        self.dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry
         var left: Int64 = 0 // 差引残高 累積　勘定内の仕訳データを全て表示するまで、覚えておく
         var right: Int64 = 0
         // 損益振替仕訳
@@ -134,26 +134,26 @@ class DataBaseManagerGeneralLedgerPLAccountBalance {
             }
         }
         // 資本振替仕訳
-        print("資本振替仕訳", dataBaseAdjustingEntries)
-        if let dataBaseAdjustingEntries = dataBaseAdjustingEntries {
+        print("資本振替仕訳", dataBaseCapitalTransferJournalEntry)
+        if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
             // 勘定が借方と貸方のどちらか
-            if account == "\(dataBaseAdjustingEntries.debit_category)" { // 借方
-                left += dataBaseAdjustingEntries.debit_amount // 累計額に追加
-            } else if account == "\(dataBaseAdjustingEntries.credit_category)" { // 貸方
-                right += dataBaseAdjustingEntries.credit_amount // 累計額に追加
+            if account == "\(dataBaseCapitalTransferJournalEntry.debit_category)" { // 借方
+                left += dataBaseCapitalTransferJournalEntry.debit_amount // 累計額に追加
+            } else if account == "\(dataBaseCapitalTransferJournalEntry.credit_category)" { // 貸方
+                right += dataBaseCapitalTransferJournalEntry.credit_amount // 累計額に追加
             }
             do {
                 try DataBaseManager.realm.write {
                     // 借方と貸方で金額が大きい方はどちらか
                     if left > right {
-                        dataBaseAdjustingEntries.balance_left = left - right // 差額を格納
-                        dataBaseAdjustingEntries.balance_right = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                        dataBaseCapitalTransferJournalEntry.balance_left = left - right // 差額を格納
+                        dataBaseCapitalTransferJournalEntry.balance_right = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
                     } else if left < right {
-                        dataBaseAdjustingEntries.balance_left = 0
-                        dataBaseAdjustingEntries.balance_right = right - left
+                        dataBaseCapitalTransferJournalEntry.balance_left = 0
+                        dataBaseCapitalTransferJournalEntry.balance_right = right - left
                     } else {
-                        dataBaseAdjustingEntries.balance_left = 0 // ゼロを入れないと前回値が残る
-                        dataBaseAdjustingEntries.balance_right = 0
+                        dataBaseCapitalTransferJournalEntry.balance_left = 0 // ゼロを入れないと前回値が残る
+                        dataBaseCapitalTransferJournalEntry.balance_right = 0
                     }
                 }
             } catch {

@@ -11,12 +11,15 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol GeneralLedgerAccountModelInput {
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>)
+    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?)
 
     func getBalanceAmount(indexPath: IndexPath) -> Int64
-    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
+    func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String
+
     func getNumberOfAccount(accountName: String) -> Int
     
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
@@ -24,6 +27,7 @@ protocol GeneralLedgerAccountModelInput {
 
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry?
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
 
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
 }
@@ -124,22 +128,34 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmount(indexPath: indexPath)
     }
-    // 取得　差引残高額　 決算整理仕訳　損益勘定以外
+    // 借又貸を取得
+    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCredit(indexPath: indexPath)
+    }
+    // 取得　差引残高額　 決算整理仕訳
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountAdjusting(indexPath: indexPath)
     }
-    // 借又貸を取得
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
-        
-        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCredit(indexPath: indexPath)
-    }
     // 借又貸を取得 決算整理仕訳
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String {
-        
+
         DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
     }
-    
+    // 取得　差引残高額　 資本振替仕訳
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountCapitalTransferJournalEntry()
+    }
+    // 借又貸を取得 資本振替仕訳
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditCapitalTransferJournalEntry()
+    }
+
+
+    // MARK: - 勘定
     // 取得　通常仕訳 勘定別に取得
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry> {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
@@ -147,15 +163,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         ])
         let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
             .filter("accountName LIKE '\(account)'").first
-        let dataBaseJournalEntries = (dataBaseAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
-        return dataBaseJournalEntries
-    }
-    // 取得　通常仕訳 資本金勘定から取得
-    func getJournalEntryInCapitalAccount() -> Results<DataBaseJournalEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
         let dataBaseJournalEntries = (dataBaseAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
         return dataBaseJournalEntries
     }
@@ -169,14 +176,15 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         let dataBaseJournalEntries = (dataBaseAccount?.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true))!
         return dataBaseJournalEntries
     }
-    // 取得　損益振替仕訳 損益勘定から取得
-    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
-        return dataBaseJournalEntries
+    // 取得 決算整理仕訳　勘定別に取得
+    func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry> {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let dataBaseAccount = dataBaseAccountingBooks.dataBaseGeneralLedger!.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'")
+        var objects = dataBaseAccount[0].dataBaseAdjustingEntries
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+        objects = objects.sorted(byKeyPath: "date", ascending: true)
+        return objects
     }
     // 取得　損益振替仕訳 勘定別に取得
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
@@ -188,6 +196,52 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         let dataBaseTransferEntry = dataBaseAccount?.dataBaseTransferEntry
         return dataBaseTransferEntry
     }
+
+    // MARK: - 資本金勘定
+    // 取得　通常仕訳 資本金勘定から取得
+    func getJournalEntryInCapitalAccount() -> Results<DataBaseJournalEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+        let dataBaseJournalEntries = (dataBaseAccount?.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true))!
+        return dataBaseJournalEntries
+    }
+    // 取得 資本振替仕訳 資本金勘定から取得
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+        let dataBaseCapitalTransferJournalEntry = dataBaseAccount?.dataBaseCapitalTransferJournalEntry
+        print(dataBaseCapitalTransferJournalEntry)
+        return dataBaseCapitalTransferJournalEntry
+    }
+    // 取得 資本振替仕訳　勘定別 損益勘定のみ　資本金勘定のみ
+    func getAllCapitalTransferJournalEntry() -> Results<DataBaseCapitalTransferJournalEntry> {
+        // 開いている会計帳簿の年度を取得
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseCapitalTransferJournalEntry.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "資本金勘定"), NSString(string: "資本金勘定")) // FIXME: 資本金勘定
+        ])
+        objects = objects.sorted(byKeyPath: "date", ascending: true)
+        return objects
+    }
+
+    // MARK: - 損益勘定
+    // 取得　損益振替仕訳 損益勘定から取得
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
+        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
+        return dataBaseJournalEntries
+    }
+
+    // MARK: - 仕訳
     // 取得 仕訳　勘定別 全年度
     func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
@@ -213,29 +267,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
-    // 取得 決算整理仕訳　勘定別　損益勘定以外
-    func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry> {
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseAccount = dataBaseAccountingBooks.dataBaseGeneralLedger!.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'")
-        var objects = dataBaseAccount[0].dataBaseAdjustingEntries
-            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
-
-    // 取得 資本振替仕訳　勘定別 損益勘定のみ　資本金勘定のみ
-    func getAllCapitalTransferJournalEntry() -> Results<DataBaseCapitalTransferJournalEntry> {
-        // 開いている会計帳簿の年度を取得
-        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseCapitalTransferJournalEntry.self, predicates: [
-            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "資本金勘定"), NSString(string: "資本金勘定")) // FIXME: 資本金勘定
-        ])
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
 
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
@@ -245,12 +276,13 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // MARK: Update
     
     // 差引残高　計算
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>) {
+    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?) {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
             account: account,
             databaseJournalEntries: databaseJournalEntries,
-            dataBaseAdjustingEntries: dataBaseAdjustingEntries
+            dataBaseAdjustingEntries: dataBaseAdjustingEntries,
+            dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
         ) // 毎回、計算は行わない
     }
     

@@ -63,10 +63,13 @@ class PDFMakerAccount {
         let dataBaseJournalEntries = generalLedgerAccountModel.getJournalEntryInAccount(account: account)
         // 決算整理仕訳　勘定別
         let dataBaseAdjustingEntries = generalLedgerAccountModel.getAdjustingJournalEntryInAccount(account: account)
+        // 資本振替仕訳
+        let dataBaseCapitalTransferJournalEntry = generalLedgerAccountModel.getCapitalTransferJournalEntryInAccount()
         generalLedgerAccountModel.initialize(
             account: account,
             databaseJournalEntries: dataBaseJournalEntries,
-            dataBaseAdjustingEntries: dataBaseAdjustingEntries
+            dataBaseAdjustingEntries: dataBaseAdjustingEntries,
+            dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
         )
         
         var htmlString = ""

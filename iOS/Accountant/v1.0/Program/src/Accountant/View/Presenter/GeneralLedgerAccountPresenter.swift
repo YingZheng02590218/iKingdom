@@ -17,10 +17,12 @@ protocol GeneralLedgerAccountPresenterInput {
     var numberOfDatabaseJournalEntries: Int { get }
     var numberOfDataBaseAdjustingEntries: Int { get }
     var numberOfDataBaseTransferEntry: Int { get }
+    var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
 
     func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry
     func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry
     func dataBaseTransferEntries() -> DataBaseTransferEntry?
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
 
     func viewDidLoad()
     func viewWillAppear()
@@ -31,6 +33,8 @@ protocol GeneralLedgerAccountPresenterInput {
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String
     func getNumberOfAccount(accountName: String) -> Int
 }
 
@@ -54,6 +58,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
     // 損益振替仕訳
     private var dataBaseTransferEntry: DataBaseTransferEntry?
+    // 資本振替仕訳
+    private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
 
     private weak var view: GeneralLedgerAccountPresenterOutput!
     private var model: GeneralLedgerAccountModelInput
@@ -69,13 +75,16 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
         // 損益振替仕訳
         dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
     }
     
     // MARK: - Life cycle
     
     func viewDidLoad() {
         
-        model.initialize(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries)
+        model.initialize(account: account, databaseJournalEntries: databaseJournalEntries, dataBaseAdjustingEntries: dataBaseAdjustingEntries,
+                         dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry)
         
         view.setupViewForViewDidLoad()
     }
@@ -128,6 +137,30 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         dataBaseTransferEntry
     }
 
+    var numberOfDataBaseCapitalTransferJournalEntry: Int {
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
+            // 資本振替仕訳
+            if englishFromOfClosingTheLedger1 {
+                // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    if account == CapitalAccountType.retainedEarnings.rawValue {
+                        return dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+                    }
+                } else {
+                    if account == CapitalAccountType.capital.rawValue {
+                        return dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+                    }
+                }
+            }
+        }
+        return 0
+    }
+
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
+        dataBaseCapitalTransferJournalEntry
+    }
     // 取得　差引残高額　 決算整理仕訳　損益勘定以外
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
         
@@ -159,6 +192,16 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
 //
 //        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 //    }
+    // 取得　差引残高額　 資本振替仕訳
+    func getBalanceAmountCapitalTransferJournalEntry(indexPath: IndexPath) -> Int64 {
+
+        model.getBalanceAmountCapitalTransferJournalEntry(indexPath: indexPath)
+    }
+    // 借又貸を取得 資本振替仕訳
+    func getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: IndexPath) -> String {
+
+        model.getBalanceDebitOrCreditCapitalTransferJournalEntry(indexPath: indexPath)
+    }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         

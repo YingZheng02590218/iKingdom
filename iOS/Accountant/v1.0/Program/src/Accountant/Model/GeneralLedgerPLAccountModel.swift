@@ -84,7 +84,7 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
         
         DataBaseManagerGeneralLedgerPLAccountBalance.shared.calculateBalance(
             dataBaseTransferEntries: dataBaseTransferEntries,
-            dataBaseAdjustingEntries: dataBaseCapitalTransferJournalEntry
+            dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
         ) // 毎回、計算は行わない
     }
     
