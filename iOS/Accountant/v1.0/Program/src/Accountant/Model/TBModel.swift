@@ -705,7 +705,7 @@ class TBModel: TBModelInput {
 
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         objects = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(account: account)
-        dataBaseCapitalTransferJournalEntry = dataBaseManagerAccount.getCapitalTransferJournalEntryInAccount()
+        dataBaseCapitalTransferJournalEntry = dataBaseManagerAccount.getCapitalTransferJournalEntryInAccount(account: account)
 
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか

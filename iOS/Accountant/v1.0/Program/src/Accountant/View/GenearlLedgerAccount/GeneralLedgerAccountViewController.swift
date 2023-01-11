@@ -284,13 +284,28 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     date = "\(dataBaseCapitalTransferJournalEntry.date)"
                     oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
                     twoOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(2))"
-                    debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
-                    creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                    if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                        debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+                    } else {
+                        debitCategory = Constant.capitalAccountName
+                    }
+                    if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                        creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                    } else {
+                        creditCategory = Constant.capitalAccountName
+                    }
                     debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
                     creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
-                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
+                    if creditCategory == "損益" { // 損益勘定の場合
+                        numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    } else {
+                        numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
+                    }
+                    if debitCategory == "損益" { // 損益勘定の場合
+                        numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
+                    } else {
+                        numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
+                    }
                     balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
                     balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 

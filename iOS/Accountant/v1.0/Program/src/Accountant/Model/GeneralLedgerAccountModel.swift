@@ -26,7 +26,7 @@ protocol GeneralLedgerAccountModelInput {
 
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry?
-    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
+    func getCapitalTransferJournalEntryInAccount(account: String) -> DataBaseCapitalTransferJournalEntry?
 
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
 }
@@ -197,14 +197,18 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
 
     // MARK: - 資本金勘定
     // 取得 資本振替仕訳 資本金勘定から取得
-    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
-        let dataBaseCapitalTransferJournalEntry = dataBaseAccount?.dataBaseCapitalTransferJournalEntry
-        print(dataBaseCapitalTransferJournalEntry)
-        return dataBaseCapitalTransferJournalEntry
+    func getCapitalTransferJournalEntryInAccount(account: String) -> DataBaseCapitalTransferJournalEntry? {
+        if account == Constant.capitalAccountName {
+            let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+                NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+            ])
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+            let dataBaseCapitalTransferJournalEntry = dataBaseAccount?.dataBaseCapitalTransferJournalEntry
+            print(dataBaseCapitalTransferJournalEntry)
+            return dataBaseCapitalTransferJournalEntry
+        } else {
+            return nil
+        }
     }
     // 取得 資本振替仕訳　勘定別 損益勘定のみ　資本金勘定のみ
     func getAllCapitalTransferJournalEntry() -> Results<DataBaseCapitalTransferJournalEntry> {

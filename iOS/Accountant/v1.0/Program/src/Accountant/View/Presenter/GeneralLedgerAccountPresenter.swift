@@ -76,7 +76,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         // 損益振替仕訳
         dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
         // 資本振替仕訳
-        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount(account: account)
     }
     
     // MARK: - Life cycle

@@ -138,7 +138,7 @@ class GeneralLedgerTableViewController: UITableViewController {
             cell.textLabel?.textColor = .lightGray
         }
         // 資本振替仕訳
-        let dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+        let dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount(account: objects[indexPath.row].category)
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
             // 資本振替仕訳

@@ -64,7 +64,7 @@ class PDFMakerAccount {
         // 決算整理仕訳　勘定別
         let dataBaseAdjustingEntries = generalLedgerAccountModel.getAdjustingJournalEntryInAccount(account: account)
         // 資本振替仕訳
-        let dataBaseCapitalTransferJournalEntry = generalLedgerAccountModel.getCapitalTransferJournalEntryInAccount()
+        let dataBaseCapitalTransferJournalEntry = generalLedgerAccountModel.getCapitalTransferJournalEntryInAccount(account: account)
         generalLedgerAccountModel.initialize(
             account: account,
             databaseJournalEntries: dataBaseJournalEntries,
@@ -328,9 +328,20 @@ class PDFMakerAccount {
                     offsetBy: 10
                 )
             ]
-            let debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+            var debitCategory = ""
+            if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+            } else {
+                debitCategory = Constant.capitalAccountName
+            }
+            var creditCategory = ""
+            if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+            } else {
+                creditCategory = Constant.capitalAccountName
+            }
+
             let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
-            let creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
             let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
             _ = dataBaseCapitalTransferJournalEntry.smallWritting
             var correspondingAccounts: String = "" // 当勘定の相手勘定
