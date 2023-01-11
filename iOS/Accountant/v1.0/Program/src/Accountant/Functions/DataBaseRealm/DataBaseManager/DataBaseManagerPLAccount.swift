@@ -290,17 +290,15 @@ class DataBaseManagerPLAccount {
         }
             if objects.count >= 1 {
                 // 損益振替仕訳　が存在する場合は　更新
-                if amount != 0 {
-                    number = updateTransferEntry(
-                        primaryKey: objects[0].number,
-                        date: dataBaseJournalEntry.date,
-                        debitCategory: dataBaseJournalEntry.debit_category,
-                        debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
-                        creditCategory: dataBaseJournalEntry.credit_category,
-                        creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
-                        smallWritting: dataBaseJournalEntry.smallWritting
-                    )
-                }
+                number = updateTransferEntry(
+                    primaryKey: objects[0].number,
+                    date: dataBaseJournalEntry.date,
+                    debitCategory: dataBaseJournalEntry.debit_category,
+                    debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
+                    creditCategory: dataBaseJournalEntry.credit_category,
+                    creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
+                    smallWritting: dataBaseJournalEntry.smallWritting
+                )
             } else {
                 // 損益振替仕訳　が存在しない場合は　作成
                 if amount != 0 {
