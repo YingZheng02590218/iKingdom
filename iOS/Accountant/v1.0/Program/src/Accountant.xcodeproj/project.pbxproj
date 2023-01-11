@@ -245,6 +245,10 @@
 		F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */; };
 		F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */; };
 		F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */; };
+		F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
+		F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
+		F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
+		F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
 		F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */; };
 		F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */; };
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
@@ -672,6 +676,8 @@
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryDetailTableViewController.swift; sourceTree = "<group>"; };
 		F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTableViewCell.swift; sourceTree = "<group>"; };
+		F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementViewController.swift; sourceTree = "<group>"; };
+		F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfitAndLossStatementViewController.storyboard; sourceTree = "<group>"; };
 		F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
@@ -953,6 +959,8 @@
 		F955B6082490E305005E2C6D /* PL */ = {
 			isa = PBXGroup;
 			children = (
+				F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */,
+				F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */,
 				F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */,
 				F9BDCBAE27A6CCC000BD8770 /* PLViewController.xib */,
 			);
@@ -1588,6 +1596,7 @@
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
+				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
@@ -1650,6 +1659,7 @@
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
+				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
@@ -1982,6 +1992,7 @@
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
 				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
@@ -2154,6 +2165,7 @@
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
 				F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */,

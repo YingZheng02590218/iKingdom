@@ -208,12 +208,27 @@ class FinancialStatementTableViewController: UITableViewController {
                     }
                 }
             case 1:
-                let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(viewController, animated: true)
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
                 } else {
-                    let navigation = UINavigationController(rootViewController: viewController)
-                    self.present(navigation, animated: true, completion: nil)
+                    if let viewController = UIStoryboard(
+                        name: "ProfitAndLossStatementViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
                 }
             default:
                 break
