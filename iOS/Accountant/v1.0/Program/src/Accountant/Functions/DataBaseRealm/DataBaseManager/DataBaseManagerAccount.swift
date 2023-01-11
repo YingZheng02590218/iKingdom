@@ -122,21 +122,21 @@ class DataBaseManagerAccount {
                     } else {
                         debitOrCredit = "-"
                     }
-                } else {
-                    // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                    for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
-                        print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
-                        print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
-                        // 借方と貸方で金額が大きい方はどちらか
-                        if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
-                            debitOrCredit = "借"
-                        } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-                            result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
-                            debitOrCredit = "貸"
-                        } else {
-                            debitOrCredit = "-"
-                        }
+                }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == accountNameOfSettingsTaxonomyAccount {
+                    print("借方残高", dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting)
+                    print("貸方残高", dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting)
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        result = dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting
+                        debitOrCredit = "借"
+                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
+                        result = dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
                     }
                 }
             }
