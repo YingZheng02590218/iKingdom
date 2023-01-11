@@ -13,7 +13,7 @@ import AudioToolbox // 効果音
 class CategoryListTableViewController: UITableViewController {
     
     // MARK: - Variable/Let
-
+    
     var index: Int = 0 // カルーセルのタブの識別
     
     /// GUIアーキテクチャ　MVP
@@ -21,18 +21,18 @@ class CategoryListTableViewController: UITableViewController {
     func inject(presenter: CategoryListPresenterInput) {
         self.presenter = presenter
     }
-
+    
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         presenter = CategoryListPresenter.init(view: self, model: CategoryListModel(), index: index)
         inject(presenter: presenter)
         
         presenter.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
@@ -50,7 +50,7 @@ class CategoryListTableViewController: UITableViewController {
         // 編集ボタンの設定
         navigationItem.rightBarButtonItem = editButtonItem
     }
-
+    
     // MARK: - Action
     
     // 勘定科目の有効無効　変更時のアクション TableViewの中のどのTableViewCellに配置されたトグルスイッチかを探す
@@ -76,8 +76,6 @@ class CategoryListTableViewController: UITableViewController {
                 // UIButtonを無効化　はしないで、強制的にONに戻す
                 // sender.isEnabled = false
             }
-            // UIButtonを有効化
-            sender.isEnabled = true
             // tableView.reloadData() // 不要　注意：ここでリロードすると、トグルスイッチが深緑色となり元の緑色に戻らなくなる
         }
     }
@@ -114,7 +112,7 @@ class CategoryListTableViewController: UITableViewController {
                 section: indexPath.section
             ).category
         )
-
+        
         let alert = UIAlertController(
             title: "削除",
             message: "勘定科目「\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category)」を削除しますか？\n\n仕訳データが \(objectss.count) 件\n決算整理仕訳データが \(objectsss.count) 件\nよく使う仕訳が \(dataBaseSettingsOperatingJournalEntry.count)件 \nあります。",
@@ -132,12 +130,12 @@ class CategoryListTableViewController: UITableViewController {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
+        
         tableView.setEditing(editing, animated: animated)
     }
     
     // MARK: - Navigation
-
+    
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // セグエで場合分け
@@ -160,17 +158,17 @@ class CategoryListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-
+        
         presenter.numberOfsections()
     }
     // セクションヘッダーのテキスト決める
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
+        
         presenter.titleForHeaderInSection(section: section)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         presenter.numberOfobjects(section: section)
     }
     // セルを生成して返却するメソッド
@@ -198,16 +196,16 @@ class CategoryListTableViewController: UITableViewController {
                     cell.label.isHidden = false
                 }
             }
-//            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
-//                if settingsTaxonomyAccount.number == cell.tag {
-//                    cell.label.isHidden = false
-//                }
-//            }
-//            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
-//                if settingsTaxonomyAccount.number == cell.tag {
-//                    cell.label.isHidden = false
-//                }
-//            }
+            //            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
+            //                if settingsTaxonomyAccount.number == cell.tag {
+            //                    cell.label.isHidden = false
+            //                }
+            //            }
+            //            if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
+            //                if settingsTaxonomyAccount.number == cell.tag {
+            //                    cell.label.isHidden = false
+            //                }
+            //            }
         }
         // 勘定科目の有効無効
         cell.toggleButton.isOn = presenter.objects(forRow: indexPath.row, section: indexPath.section).switching
@@ -227,32 +225,24 @@ class CategoryListTableViewController: UITableViewController {
                 section: indexPath.section
             ).category as String
         ) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
-        // タクソノミに紐付けされていない勘定科目はスイッチをONにできないように無効化する
-        if presenter.objects(forRow: indexPath.row, section: indexPath.section).numberOfTaxonomy.isEmpty {
-            // 法人/個人フラグ
-            if UserDefaults.standard.bool(forKey: "corporation_switch") {
-                // UIButtonを無効化
-                cell.toggleButton.isEnabled = false
-            }
+        
+        // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
+        if objectss.isEmpty && objectsss.isEmpty {
+            // UIButtonを有効化
+            cell.toggleButton.isEnabled = true
         } else {
-            // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
-            if objectss.isEmpty && objectsss.isEmpty {
-                // UIButtonを有効化
-                cell.toggleButton.isEnabled = true
-            } else {
-                // UIButtonを無効化
-                cell.toggleButton.isEnabled = false
-            }
+            // UIButtonを無効化
+            cell.toggleButton.isEnabled = false
         }
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
-
+        
         return cell
     }
-
+    
     //    // セル選択不可
     //    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     //        // 編集モードの場合　は押下できないのでこの処理は通らない
