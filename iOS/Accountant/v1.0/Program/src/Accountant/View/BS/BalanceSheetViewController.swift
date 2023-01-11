@@ -166,7 +166,7 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         case 11:
             return 0 // 負債純資産合計
         default:
-            return 35
+            return 0
         }
         // セクションヘッダーの高さを設定　セルの高さより高くしてメリハリをつける
     }
