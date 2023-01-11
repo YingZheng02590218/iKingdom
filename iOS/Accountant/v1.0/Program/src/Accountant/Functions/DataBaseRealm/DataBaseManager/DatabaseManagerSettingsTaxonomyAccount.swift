@@ -134,7 +134,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 取得 勘定科目の勘定科目名から表示科目連番を取得
     func getNumberOfTaxonomy(category: String) -> Int {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
             NSPredicate(format: "category LIKE %@", NSString(string: category)) // 勘定科目を絞る
         ])
         return Int(objects[0].numberOfTaxonomy) ?? 0

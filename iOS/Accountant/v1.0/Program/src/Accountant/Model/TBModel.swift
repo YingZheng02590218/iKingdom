@@ -153,19 +153,36 @@ class TBModel: TBModelInput {
     }
     // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
     func setAllAccountTotal() {
-        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: false)
-        for i in 0..<objects.count {
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAll()
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
             // クリア
-            clearAccountTotal(account: objects[i].category)
+            clearAccountTotal(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別に仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
-            calculateAccountTotal(account: objects[i].category)
+            calculateAccountTotal(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別に決算整理仕訳データを集計
-            calculateAccountTotalAdjusting(account: objects[i].category)
+            calculateAccountTotalAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別の決算整理後の集計
-            calculateAccountTotalAfterAdjusting(account: objects[i].category)
+            calculateAccountTotalAfterAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
+            // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+            // 法人/個人フラグ
+            if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                // 設定表示科目　初期化 毎回行うと時間がかかる
+                DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
+                    numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: dataBaseSettingsTaxonomyAccounts[i].category)
+                )
+            }
         }
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
+                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
+                    category: "繰越利益"
+                )
+            )
+        }
     }
     // 設定　仕訳と決算整理後　勘定クラス　個別の勘定別　仕訳データを追加、更新、削除後に、呼び出される
     func setAccountTotal(accountLeft: String, accountRight: String) {
@@ -191,7 +208,7 @@ class TBModel: TBModelInput {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
                     category: "繰越利益"
-                ) // FIXME: 資本金勘定
+                )
             )
             // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
         }
@@ -201,9 +218,9 @@ class TBModel: TBModelInput {
         // 注意：損益振替仕訳を削除すると、エラーが発生するので、account_leftもしくは、account_rightが損益勘定の場合は下記を実行しない。
         // 勘定別に決算整理仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
         calculateAccountTotalAdjusting(account: accountLeft) // 借方
+        calculateAccountTotalAdjusting(account: accountRight) // 貸方
         // 勘定別の決算整理後の集計
         calculateAccountTotalAfterAdjusting(account: accountLeft)
-        calculateAccountTotalAdjusting(account: accountRight) // 貸方
         calculateAccountTotalAfterAdjusting(account: accountRight)
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
@@ -220,7 +237,7 @@ class TBModel: TBModelInput {
             DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
                 numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
                     category: "繰越利益"
-                ) // FIXME: 資本金勘定
+                )
             )
             // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
         }
