@@ -198,9 +198,20 @@ class PDFMaker {
                     dataBaseCapitalTransferJournalEntry.date.startIndex, offsetBy: 10
                 )
             ]
-            let debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+            var debitCategory = ""
+            if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+            } else {
+                debitCategory = Constant.capitalAccountName
+            }
+            var creditCategory = ""
+            if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+            } else {
+                creditCategory = Constant.capitalAccountName
+            }
+
             let debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
-            let creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
             let creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
             let smallWritting = dataBaseCapitalTransferJournalEntry.smallWritting
             _ = dataBaseCapitalTransferJournalEntry.balance_left

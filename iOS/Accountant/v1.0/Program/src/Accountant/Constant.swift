@@ -45,4 +45,17 @@ enum Constant {
     static let ADDADJUSTINGJOURNALENTRY = "add_adjustingjournalentry" // 決算整理仕訳
     static let DELETEJOURNALENTRY = "delete_journalentry"                    // 通常仕訳
     static let DELETEADJUSTINGJOURNALENTRY = "delete_adjustingjournalentry" // 決算整理仕訳
+
+    // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+
+    static var capitalAccountName: String {
+        get {
+            // 法人/個人フラグ
+            if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                return CapitalAccountType.retainedEarnings.rawValue
+            } else {
+                return CapitalAccountType.capital.rawValue
+            }
+        }
+    }
 }

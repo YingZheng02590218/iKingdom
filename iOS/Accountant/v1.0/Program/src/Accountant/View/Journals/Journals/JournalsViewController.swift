@@ -589,10 +589,18 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.listDateLabel.text = StringUtility.shared.pickupDay(date: date)
                 cell.listDateLabel.textAlignment = NSTextAlignment.right
                 /// 借方勘定
-                cell.listSummaryDebitLabel.text = " (\(dataBaseCapitalTransferJournalEntry.debit_category))"
+                if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                    cell.listSummaryDebitLabel.text = " (\(dataBaseCapitalTransferJournalEntry.debit_category))"
+                } else {
+                    cell.listSummaryDebitLabel.text = " (\(Constant.capitalAccountName))"
+                }
                 cell.listSummaryDebitLabel.textAlignment = NSTextAlignment.left
                 /// 貸方勘定
-                cell.listSummaryCreditLabel.text = "(\(dataBaseCapitalTransferJournalEntry.credit_category)) "
+                if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                    cell.listSummaryCreditLabel.text = "(\(dataBaseCapitalTransferJournalEntry.credit_category)) "
+                } else {
+                    cell.listSummaryCreditLabel.text = " (\(Constant.capitalAccountName))"
+                }
                 cell.listSummaryCreditLabel.textAlignment = NSTextAlignment.right
                 /// 小書き
                 cell.listSummaryLabel.text = "\(dataBaseCapitalTransferJournalEntry.smallWritting) "
@@ -602,7 +610,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.listNumberLeftLabel.text = ""
                 } else {
                     print(dataBaseCapitalTransferJournalEntry.debit_category)
-                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(dataBaseCapitalTransferJournalEntry.debit_category)")  // 丁数を取得
+                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")  // 丁数を取得
                     cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
                 }
                 /// 丁数　貸方
@@ -610,7 +618,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.listNumberRightLabel.text = ""
                 } else {
                     print(dataBaseCapitalTransferJournalEntry.credit_category)
-                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(dataBaseCapitalTransferJournalEntry.credit_category)")    // 丁数を取得
+                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")    // 丁数を取得
                     cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
                 }
                 cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.debit_amount))) "        // 借方金額

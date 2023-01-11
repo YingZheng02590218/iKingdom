@@ -201,13 +201,28 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     date = "\(dataBaseCapitalTransferJournalEntry.date)"
                     oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
                     twoOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(2))"
-                    debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
-                    creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                    if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
+                        debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
+                    } else {
+                        debitCategory = Constant.capitalAccountName
+                    }
+                    if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
+                        creditCategory = dataBaseCapitalTransferJournalEntry.credit_category
+                    } else {
+                        creditCategory = Constant.capitalAccountName
+                    }
                     debitAmount = dataBaseCapitalTransferJournalEntry.debit_amount
                     creditAmount = dataBaseCapitalTransferJournalEntry.credit_amount
-                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
-                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
+                    if creditCategory == "損益" { // 損益勘定の場合
+                        numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    } else {
+                        numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
+                    }
+                    if debitCategory == "損益" { // 損益勘定の場合
+                        numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
+                    } else {
+                        numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")
+                    }
                     balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
                     balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 
@@ -284,7 +299,7 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 cell.listDateDayLabel.text = "\(twoOfCaractorAtLast)" // 末尾2文字の「日」         //日付
             }
             cell.listDateDayLabel.textAlignment = NSTextAlignment.right
-            // 摘要
+// 摘要
             if account == "\(debitCategory)" { // 借方勘定の場合                      //この勘定が借方の場合
                 cell.listSummaryLabel.text = "\(creditCategory) "             // 摘要　相手方勘定なので貸方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.right
