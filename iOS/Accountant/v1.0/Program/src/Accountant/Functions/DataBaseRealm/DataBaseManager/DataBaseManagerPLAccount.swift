@@ -288,6 +288,35 @@ class DataBaseManagerPLAccount {
             }
             break
         }
+            if objects.count == 1 {
+                // リレーションが正しくない場合、一旦、資本振替仕訳を削除する
+                do {
+                    // 金額
+                    if amount != 0 {
+                        // 更新する
+                    } else {
+                        // 損益振替仕訳　が1件以上が存在する場合は　削除
+                        let objects = checkTransferEntry(account: account) // 損益勘定内に勘定が存在するか
+                    outerLoop: while objects.count >= 1 {
+                        for i in 0..<objects.count {
+                            let isInvalidated = deleteTransferEntry(primaryKey: objects[i].number)
+                            print("削除", isInvalidated, objects.count)
+                            continue outerLoop
+                        }
+                        break
+                    }
+                        let objectss = checkTransferEntryInPLAccount(account: account) // 損益勘定内に勘定が存在するか
+                    outerLoop: while objectss.count >= 1 {
+                        for i in 0..<objectss.count {
+                            let isInvalidated = removeTransferEntry(primaryKey: objectss[i].number)
+                            print("関連削除", isInvalidated, objectss.count)
+                            continue outerLoop
+                        }
+                        break
+                    }
+                    }
+                }
+            }
             if objects.count >= 1 {
                 // 損益振替仕訳　が存在する場合は　更新
                 number = updateTransferEntry(
@@ -431,8 +460,6 @@ class DataBaseManagerPLAccount {
     // 関連削除 損益振替仕訳
     func removeTransferEntry(primaryKey: Int) -> Bool {
         guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseTransferEntry.self, key: primaryKey) else { return false }
-        
-        // 損益計算書に関する勘定科目のみに絞る
         var account: String = "" // 損益振替の相手勘定
         if dataBaseJournalEntry.debit_category == "損益" {
             account = dataBaseJournalEntry.credit_category
@@ -445,7 +472,6 @@ class DataBaseManagerPLAccount {
         guard let dataBasePLAccount: DataBasePLAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: "損益", fiscalYear: dataBaseJournalEntry.fiscalYear) else {
             return false
         }
-        
         // 勘定から削除前損益振替仕訳データの関連を削除
         do {
             try DataBaseManager.realm.write {
@@ -511,8 +537,8 @@ class DataBaseManagerPLAccount {
             balance_right: 0
         )
         
-        // 損益振替仕訳　が1件超が存在する場合は　削除
-        let objects = checkCapitalTransferJournalEntry() // 損益勘定内に勘定が存在するか
+        // 資本振替仕訳　が1件超が存在する場合は　削除
+        var objects = checkCapitalTransferJournalEntry()
     outerLoop: while objects.count > 1 {
         for i in 0..<objects.count {
             let isInvalidated = deleteCapitalTransferJournalEntry(primaryKey: objects[i].number)
@@ -529,11 +555,19 @@ class DataBaseManagerPLAccount {
                    // 相手方の勘定
                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount?.dataBaseCapitalTransferJournalEntry != nil,
                    // 損益勘定
-                   dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount?.dataBaseCapitalTransferJournalEntry != nil {
-                    
+                   dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseCapitalTransferJournalEntry != nil {
+                    // 更新する
                 } else {
-                    let isInvalidated = deleteCapitalTransferJournalEntry(primaryKey: objects[0].number)
-                    print("関連削除", isInvalidated)
+                    // 資本振替仕訳　が1件以上が存在する場合は　削除
+                    objects = checkCapitalTransferJournalEntry()
+                outerLoop: while objects.count >= 1 {
+                    for i in 0..<objects.count {
+                        let isInvalidated = deleteCapitalTransferJournalEntry(primaryKey: objects[i].number)
+                        print("削除", isInvalidated, objects.count)
+                        continue outerLoop
+                    }
+                    break
+                }
                 }
             }
         }
@@ -551,52 +585,50 @@ class DataBaseManagerPLAccount {
             )
         } else {
             // 資本振替仕訳　が存在しない場合は　作成
-            if amount != 0 {
-                number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
-                print(number)
-                //        ＜仕訳帳＞
-                //        　　　――――――――――――――――――――――――――――――
-                //        　　　（借）損　　　　　益　１２０　（貸）資　　本　　金　１２０
-                //        　　　――――――――――――――――――――――――――――――
-                //        ＜総勘定元帳の一部＞
-                //        　　――――――――――――――――――――――――――――――――
-                //        　　　　　　　　　　　　　　　　　　 　　　　資　本　金　　　　＋
-                //        　　　　　　　　　　　　　　　　　　―――――――――――――――・
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　　××｜
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　　　　｜
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜―――――――・
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　１２０
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜
-                //        　　　　　　　　　　　　　　　　　　 　　　　損　　　益　　　　＋
-                //        　　　　　　　　　　　　　　　　　・―――――――――――――――・
-                //        　　　　　　　　　　　　　　　　　｜合計　　６００｜合計　　７２０｜
-                //        　　　　　　　　　　　　　　　　　・―――――――｜　　　　　　　｜
-                //        　　　　　　　　　　　　　　　　　　　　　　１２０｜　　　　　　　｜
-                //        　　　　　　　　　　　　　　　　　　　　　　　　　｜―――――――・
-                //        　―――――――――――――――――――――――――――――――――
-                do {
-                    // MARK: 仕訳帳 資本振替仕訳は、仕訳帳には追加する。
-                    try DataBaseManager.realm.write {
-                        // 資本振替仕訳データを代入
-                        dataBaseAccountingBook.dataBaseJournals?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
-                    }
-                    // 資本金勘定
-                    try DataBaseManager.realm.write {
-                        // 資本振替仕訳データを代入
-                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
-                    }
-                    // 損益勘定
-                    try DataBaseManager.realm.write {
-                        // 資本振替仕訳データを代入
-                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
-                    }
-                } catch {
-                    print("エラーが発生しました")
+            number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+            print(number)
+            //        ＜仕訳帳＞
+            //        　　　――――――――――――――――――――――――――――――
+            //        　　　（借）損　　　　　益　１２０　（貸）資　　本　　金　１２０
+            //        　　　――――――――――――――――――――――――――――――
+            //        ＜総勘定元帳の一部＞
+            //        　　――――――――――――――――――――――――――――――――
+            //        　　　　　　　　　　　　　　　　　　 　　　　資　本　金　　　　＋
+            //        　　　　　　　　　　　　　　　　　　―――――――――――――――・
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　　××｜
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　　　　｜
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜―――――――・
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜　　　　１２０
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜
+            //        　　　　　　　　　　　　　　　　　　 　　　　損　　　益　　　　＋
+            //        　　　　　　　　　　　　　　　　　・―――――――――――――――・
+            //        　　　　　　　　　　　　　　　　　｜合計　　６００｜合計　　７２０｜
+            //        　　　　　　　　　　　　　　　　　・―――――――｜　　　　　　　｜
+            //        　　　　　　　　　　　　　　　　　　　　　　１２０｜　　　　　　　｜
+            //        　　　　　　　　　　　　　　　　　　　　　　　　　｜―――――――・
+            //        　―――――――――――――――――――――――――――――――――
+            do {
+                // MARK: 仕訳帳 資本振替仕訳は、仕訳帳には追加する。
+                try DataBaseManager.realm.write {
+                    // 資本振替仕訳データを代入
+                    dataBaseAccountingBook.dataBaseJournals?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
                 }
+                // 資本金勘定
+                try DataBaseManager.realm.write {
+                    // 資本振替仕訳データを代入
+                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
+                }
+                // 損益勘定
+                try DataBaseManager.realm.write {
+                    // 資本振替仕訳データを代入
+                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBasePLAccount?.dataBaseCapitalTransferJournalEntry = dataBaseJournalEntry
+                }
+            } catch {
+                print("エラーが発生しました")
             }
         }
     }
-    
+
     // MARK: Read
     // チェック 資本振替仕訳　存在するかを確認
     func checkCapitalTransferJournalEntry() -> Results<DataBaseCapitalTransferJournalEntry> {
@@ -608,7 +640,7 @@ class DataBaseManagerPLAccount {
         print(objects)
         return objects
     }
-    
+
     // MARK: Update
     // 更新 資本振替仕訳
     func updateCapitalTransferJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
@@ -632,7 +664,7 @@ class DataBaseManagerPLAccount {
         }
         return primaryKey
     }
-    
+
     // MARK: Delete
     // 削除 資本振替仕訳
     func deleteCapitalTransferJournalEntry(primaryKey: Int) -> Bool {
@@ -652,7 +684,7 @@ class DataBaseManagerPLAccount {
         } catch {
             print("エラーが発生しました")
         }
-        
+
         // 損益勘定から削除前資本振替仕訳データの関連を削除
         do {
             try DataBaseManager.realm.write {
@@ -661,7 +693,7 @@ class DataBaseManagerPLAccount {
         } catch {
             print("エラーが発生しました")
         }
-        
+
         if !dataBaseJournalEntry.isInvalidated {
             do {
                 try DataBaseManager.realm.write {
@@ -674,5 +706,5 @@ class DataBaseManagerPLAccount {
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
-    
+
 }

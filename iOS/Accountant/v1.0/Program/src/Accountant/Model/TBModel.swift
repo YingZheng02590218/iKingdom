@@ -153,7 +153,7 @@ class TBModel: TBModelInput {
     }
     // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
     func setAllAccountTotal() {
-        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
+        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: false)
         for i in 0..<objects.count {
             // クリア
             clearAccountTotal(account: objects[i].category)
