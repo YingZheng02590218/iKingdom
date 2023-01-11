@@ -11,25 +11,25 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol BalacneSheetPresenterInput {
-
+    
     var PDFpath: [URL]? { get }
-
+    
     func company() -> String
     func fiscalYear() -> Int
     func theDayOfReckoning() -> String
     // 大区分:流動資産 中区分:当座資産
     func numberOfobjects(rank0: Int, rank1: Int) -> Int
-
+    
     func objects(rank0: Int, rank1: Int, forRow row: Int) -> DataBaseSettingsTaxonomyAccount
-
+    
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
     func viewDidAppear()
-
+    
     func refreshTable()
     func pdfBarButtonItemTapped()
-
+    
     func getTotalOfTaxonomyAccount(rank0: Int, rank1: Int, forRow row: Int, lastYear: Bool) -> String  // 勘定別の合計　計算
     func getTotalRank0(rank0: Int, lastYear: Bool) -> String
     func getTotalBig5(big5: Int, lastYear: Bool) -> String
@@ -45,21 +45,21 @@ protocol BalacneSheetPresenterOutput: AnyObject {
 }
 // 貸借対照表　個人事業主
 final class BalacneSheetPresenter: BalacneSheetPresenterInput {
-
+    
     // MARK: - var let
-
+    
     // 貸借対照表のデータ
     var balanceSheetData: BalanceSheetData
     // PDFのパス
     var PDFpath: [URL]?
-
+    
     private weak var view: BalacneSheetPresenterOutput!
     private var model: BalanceSheetModelInput
-
+    
     init(view: BalacneSheetPresenterOutput, model: BalanceSheetModelInput) {
         self.view = view
         self.model = model
-
+        
         // 貸借対照表　計算
         balanceSheetData = model.initializeBS()
         //        貸借対照表に表示する項目ごとの合計値を計算する
@@ -67,26 +67,25 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
         //        データベースから読み出す
         //        ビューへ表示する
     }
-
+    
     // MARK: - Life cycle
-
+    
     func viewDidLoad() {
         view.setupViewForViewDidLoad()
     }
-
+    
     func viewWillAppear() {
         view.setupViewForViewWillAppear()
     }
-
+    
     func viewWillDisappear() {
-
         view.setupViewForViewWillDisappear()
     }
-
+    
     func viewDidAppear() {
         view.setupViewForViewDidAppear()
     }
-
+    
     func company() -> String {
         balanceSheetData.company
     }
@@ -96,9 +95,9 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
     func theDayOfReckoning() -> String {
         balanceSheetData.theDayOfReckoning
     }
-
+    
     func numberOfobjects(rank0: Int, rank1: Int) -> Int {
-
+        
         switch rank0 {
         case 0: //     "流動資産"
             switch rank1 {
@@ -139,9 +138,9 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             return 0
         }
     }
-
+    
     func objects(rank0: Int, rank1: Int, forRow row: Int) -> DataBaseSettingsTaxonomyAccount {
-
+        
         switch rank0 {
         case 0: //     "流動資産"
             switch rank1 {
@@ -182,7 +181,7 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             return balanceSheetData.objects10[row]
         }
     }
-
+    
     // 勘定別の合計を取得　マイナス表示もつける
     func getTotalOfTaxonomyAccount(rank0: Int, rank1: Int, forRow row: Int, lastYear: Bool) -> String {
         let settingsTaxonomyAccount = objects(rank0: rank0, rank1: rank1, forRow: row)
@@ -276,7 +275,7 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             }
         }
     }
-
+    
     func refreshTable() {
         // 貸借対照表　初期化　再計算
         balanceSheetData = model.initializeBS()

@@ -249,6 +249,14 @@
 		F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
 		F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
 		F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
+		F9D15FB9296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */; };
+		F9D15FBA296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */; };
+		F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */; };
+		F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */; };
+		F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */; };
+		F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */; };
+		F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */; };
+		F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */; };
 		F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */; };
 		F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */; };
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
@@ -678,6 +686,10 @@
 		F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTableViewCell.swift; sourceTree = "<group>"; };
 		F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementViewController.swift; sourceTree = "<group>"; };
 		F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfitAndLossStatementViewController.storyboard; sourceTree = "<group>"; };
+		F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementPresenter.swift; sourceTree = "<group>"; };
+		F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementData.swift; sourceTree = "<group>"; };
+		F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementModel.swift; sourceTree = "<group>"; };
+		F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
@@ -1021,6 +1033,7 @@
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
 				F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */,
+				F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */,
 				F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */,
 				F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */,
 				F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */,
@@ -1233,6 +1246,7 @@
 				F99112E32495290000E28BB9 /* BSModel.swift */,
 				F963E2A32962B728002DF49E /* BalanceSheetModel.swift */,
 				F976798C24A8904B007A0D73 /* PLModel.swift */,
+				F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */,
 				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
 				F9354DB124989895007DB098 /* TBModel.swift */,
 				F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */,
@@ -1305,6 +1319,7 @@
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
 				F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */,
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
+				F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 				F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */,
 				F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */,
@@ -1435,6 +1450,7 @@
 				F9AC55182927ACDA003966E4 /* BSData.swift */,
 				F963E2A62962BA40002DF49E /* BalanceSheetData.swift */,
 				F9AC551E292CA1D1003966E4 /* PLData.swift */,
+				F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */,
 				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
 			);
 			path = DataBaseRealm;
@@ -1921,6 +1937,7 @@
 				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
 				F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
+				F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
@@ -1953,6 +1970,7 @@
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
+				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9F4605424BDD616008FE62B /* Migration.swift in Sources */,
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
@@ -1985,6 +2003,7 @@
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2018,6 +2037,7 @@
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
+				F9D15FB9296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
 				F963E2C82967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
 				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F963E2B329647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */,
@@ -2094,6 +2114,7 @@
 				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
 				F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
+				F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,
@@ -2126,6 +2147,7 @@
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
+				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
@@ -2158,6 +2180,7 @@
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2191,6 +2214,7 @@
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
+				F9D15FBA296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
 				F963E2C92967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
 				F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */,
 				F963E2B429647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */,

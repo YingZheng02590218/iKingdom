@@ -247,7 +247,7 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         if let headerView = view as? BSTableViewHeaderFooterView {
             headerView.labelForThisYear.textColor = .textColor
             headerView.labelForPrevious.textColor = .textColor
-
+            
             var footerLabelText = "" // タイトル
             var textForPrevious = "" // 前年度 前年度の会計帳簿の存在有無を確認
             var textForThisYear = "" // 今年度
@@ -331,7 +331,7 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             )
             headerView.labelForPrevious.attributedText = attributeTextForPrevious
             headerView.labelForPrevious.font = UIFont.boldSystemFont(ofSize: 14)
-
+            
             return headerView
         }
         return nil
@@ -426,12 +426,12 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         cell.textLabel?.minimumScaleFactor = 0.05
         cell.textLabel?.adjustsFontSizeToFitWidth = true
-        // 前年度
+        // 今年度
         cell.labelForThisYear.font = UIFont.systemFont(ofSize: 14)
         cell.labelForThisYear.attributedText = nil
         cell.labelForThisYear.text = nil
         cell.labelForThisYear.textAlignment = .right
-        
+        // 前年度
         cell.labelForPrevious.font = UIFont.systemFont(ofSize: 14)
         cell.labelForPrevious.attributedText = nil
         cell.labelForPrevious.text = nil
@@ -574,13 +574,13 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             default:
                 return cell
             }
-
+            
         case 10: // 純資産合計
             return cell
-
+            
         case 11: // 負債純資産合計
             return cell
-
+            
         default:
             return cell
         }

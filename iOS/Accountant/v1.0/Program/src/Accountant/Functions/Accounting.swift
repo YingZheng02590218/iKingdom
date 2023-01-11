@@ -12,7 +12,7 @@ import Foundation
 public enum BalanceSheet: Hashable {
     
     case block(Block)
-
+    
     // 資産の部
     case assets(Assets)
     // 負債の部
@@ -30,9 +30,9 @@ public enum BalanceSheet: Hashable {
     case currentLiabilities(CurrentLiabilities)
     // 固定負債 Fixed liabilities
     case fixedLiabilities(FixedLiabilities)
-
+    
     // MARK: - 大区分
-
+    
     public enum Block: String, CaseIterable, Hashable {
         // 資産の部 Assets
         case assets = "資産の部"
@@ -56,7 +56,7 @@ public enum BalanceSheet: Hashable {
             }
         }
     }
-
+    
     // MARK: - 中区分
     
     public enum Assets: String, CaseIterable, Hashable {
@@ -94,13 +94,13 @@ public enum BalanceSheet: Hashable {
             }
         }
     }
-
+    
     public enum NetAssets: String, CaseIterable, Hashable {
         // 株主資本　Shareholders' equity
         case cashAndCashEquivalents = "株主資本"
         // TODO: 勘定科目一覧の小区分で使用
-//        // 評価・換算差額等　Valuation and translation adjustments
-//        case valuationAndTranslationAdjustments = "評価・換算差額等"
+        //        // 評価・換算差額等　Valuation and translation adjustments
+        //        case valuationAndTranslationAdjustments = "評価・換算差額等"
         // その他の包括利益累計額 Accumulated other comprehensive income
         case accumulatedOtherComprehensiveIncome = "その他の包括利益累計額"
         // 新株予約権 Subscription rights to shares
@@ -123,7 +123,7 @@ public enum BalanceSheet: Hashable {
             }
         }
     }
-
+    
     public enum Capital: String, CaseIterable, Hashable {
         // 元入金
         case capital = "元入金"
@@ -135,7 +135,7 @@ public enum BalanceSheet: Hashable {
             }
         }
     }
-
+    
     // MARK: - 小区分
     
     public enum CurrentAssets: String, CaseIterable, Hashable {
@@ -172,24 +172,24 @@ public enum BalanceSheet: Hashable {
         // 長期債務　long-term debt
         case longTermDebt = "長期債務"
     }
-        
+    
 }
 // 損益計算書
 public enum ProfitAndLossStatement: Hashable {
-
+    
     case block(Block)
-
+    
     // MARK: - 大区分
-
-//    public enum Block: String, CaseIterable, Hashable {
-//        // 費用　Expense
-//        case expense = "費用"
-//        // 収益　Income
-//        case income = "収益"
-//    }
-
+    
+    //    public enum Block: String, CaseIterable, Hashable {
+    //        // 費用　Expense
+    //        case expense = "費用"
+    //        // 収益　Income
+    //        case income = "収益"
+    //    }
+    
     // MARK: - 中区分
-
+    
     public enum Block: String, CaseIterable, Hashable {
         // 売上高    Sales
         case sales = "売上高"
@@ -206,14 +206,14 @@ public enum ProfitAndLossStatement: Hashable {
         // 特別損失    Extraordinary loss
         case extraordinaryLoss = "特別損失"
         // 法人税、住民税及び事業税    Corporation tax, residential tax and business tax
-        case incomeTaxes = "法人税等"
-
+        case incomeTaxes = "税等"
+        
         func getTotalAmount() -> String {
             switch self {
             case .sales:
-                return ""
+                return "売上高合計"
             case .costOfGoodsSold:
-                return ""
+                return "売上原価合計"
             case .sellingGeneralAndAdministrativeExpenses:
                 return "販売費及び一般管理費合計"
             case .nonOperatingIncome:
@@ -225,13 +225,13 @@ public enum ProfitAndLossStatement: Hashable {
             case .extraordinaryLoss:
                 return "特別損失合計"
             case .incomeTaxes:
-                return ""
+                return "税等合計"
             }
         }
     }
-
+    
     // MARK: - 利益
-
+    
     public enum Benefits: String, CaseIterable, Hashable {
         // 売上総利益（損失）Gross profit (loss)
         case grossProfitOrLoss = "売上総利益"

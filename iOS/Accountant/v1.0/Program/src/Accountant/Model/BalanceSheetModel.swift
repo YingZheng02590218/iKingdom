@@ -13,34 +13,33 @@ import RealmSwift
 protocol BalanceSheetModelInput {
     func initializeBS() -> BalanceSheetData
     func initializePDFMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void)
-
+    
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
 }
 // 貸借対照表クラス　個人事業主
 class BalanceSheetModel: BalanceSheetModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerBalanceSheet()
-
     // 初期化 PDFメーカー
     func initializePDFMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
         pDFMaker.initialize(balanceSheetData: balanceSheetData, completion: { PDFpath in
             completion(PDFpath)
         })
     }
-
+    
     // MARK: - CRUD
-
+    
     // MARK: Create
-
+    
     // MARK: Read
-
+    
     // 取得 大区分、中区分、小区分 スイッチONの勘定科目
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
         DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
     }
-
+    
     // MARK: 読み出し
-
+    
     // 取得　五大区分　前年度表示対応
     func getTotalBig5(big5: Int, lastYear: Bool) -> String {
         // 合計額
@@ -96,13 +95,13 @@ class BalanceSheetModel: BalanceSheetModelInput {
         }
         return StringUtility.shared.setComma(amount: result)
     }
-
+    
     // MARK: Local method　読み出し
-
+    
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     private func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
-
+        
         var capitalAccount = ""
         // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
@@ -111,9 +110,8 @@ class BalanceSheetModel: BalanceSheetModelInput {
         } else {
             capitalAccount = CapitalAccountType.capital.rawValue
         }
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
             if capitalAccount == account {
                 if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
                     // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
@@ -145,7 +143,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
     private func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
+        
         var capitalAccount = ""
         // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
@@ -154,10 +152,9 @@ class BalanceSheetModel: BalanceSheetModelInput {
         } else {
             capitalAccount = CapitalAccountType.capital.rawValue
         }
-
-        // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+        
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
             if capitalAccount == account {
                 if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
                     // 借方と貸方で金額が大きい方はどちらか
@@ -221,7 +218,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
     private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
+        
         var capitalAccount = ""
         // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
@@ -230,7 +227,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
         } else {
             capitalAccount = CapitalAccountType.capital.rawValue
         }
-
+        
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
@@ -277,22 +274,22 @@ class BalanceSheetModel: BalanceSheetModelInput {
         }
         return positiveOrNegative
     }
-
+    
     // MARK: Update
-
+    
     // 初期化　中分類、大分類　ごとに計算
     func initializeBS() -> BalanceSheetData {
         // 0:資産 1:負債 2:純資産
         setTotalBig5(big5: 0)// 資産
         setTotalBig5(big5: 1)// 負債
         setTotalBig5(big5: 2)// 純資産
-
+        
         setTotalRank0(big5: 0, rank0: 0)// 流動資産
         setTotalRank0(big5: 0, rank0: 1)// 固定資産
         setTotalRank0(big5: 0, rank0: 2)// 繰延資産
         setTotalRank0(big5: 1, rank0: 3)// 流動負債
         setTotalRank0(big5: 1, rank0: 4)// 固定負債
-
+        
         let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
@@ -300,58 +297,58 @@ class BalanceSheetModel: BalanceSheetModelInput {
         let objects0 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 0)
         let objects1 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 1)
         let objects2 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 2)
-
+        
         let objects3 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 3)
         let objects4 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 4)
         let objects5 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 5)
-
+        
         let objects6 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 2, rank1: 6)
-
+        
         let objects7 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 7)
         let objects8 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 8)
-
+        
         let objects9 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
-
+        
         // TODO: 株主資本、評価・換算差額等　なども表示させる
         let objects10 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10) // 資本　元入金
         // MARK: - "    元入金合計"
-
+        
         // MARK: - "    流動資産合計"
         let currentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: false)
         let lastCurrentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "    固定資産合計"
         let fixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: false)
         let lastFixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "    繰越資産合計"
         let deferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: false)
         let lastDeferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "    流動負債合計"
         let currentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: false)
         let lastCurrentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "    固定負債合計"
         let fixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: false)
         let lastFixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "資産合計"
         let assetTotal = self.getTotalBig5(big5: 0, lastYear: false)
         let lastAssetTotal = self.getTotalBig5(big5: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "負債合計"
         let liabilityTotal = self.getTotalBig5(big5: 1, lastYear: false)
         let lastLiabilityTotal = self.getTotalBig5(big5: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "純資産合計"
         let equityTotal = self.getTotalBig5(big5: 2, lastYear: false)
         let lastEquityTotal = self.getTotalBig5(big5: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         // MARK: - "負債純資産合計"
         let liabilityAndEquityTotal = self.getTotalBig5(big5: 3, lastYear: false)
         let lastLiabilityAndEquityTotal = self.getTotalBig5(big5: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-
+        
         return BalanceSheetData(
             company: company,
             fiscalYear: fiscalYear,
@@ -387,12 +384,11 @@ class BalanceSheetModel: BalanceSheetModelInput {
             lastLiabilityAndEquityTotal: lastLiabilityAndEquityTotal
         )
     }
-
+    
     // MARK: 計算　書き込み
-
+    
     // 計算　五大区分
     private func setTotalBig5(big5: Int) {
-        // 累計額
         var totalAmountOfBig5: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInBig5(big5: big5)
@@ -409,7 +405,6 @@ class BalanceSheetModel: BalanceSheetModelInput {
                 totalAmountOfBig5 += totalAmount
             }
         }
-        // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             do {
@@ -432,7 +427,6 @@ class BalanceSheetModel: BalanceSheetModelInput {
     }
     // 計算　階層0 大区分
     private func setTotalRank0(big5: Int, rank0: Int) {
-        // 累計額
         var totalAmountOfRank0: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)
@@ -450,7 +444,6 @@ class BalanceSheetModel: BalanceSheetModelInput {
                 totalAmountOfRank0 += totalAmount
             }
         }
-        // 開いている会計帳簿の年度を取得
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
             do {
@@ -476,7 +469,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
             }
         }
     }
-
+    
     // MARK: Delete
-
+    
 }
