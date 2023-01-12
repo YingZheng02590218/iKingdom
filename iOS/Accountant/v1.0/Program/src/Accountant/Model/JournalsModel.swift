@@ -15,6 +15,8 @@ protocol JournalsModelInput {
     
     func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
+
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
@@ -68,18 +70,15 @@ class JournalsModel: JournalsModelInput {
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
-        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        
-        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0,
-           let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
-            if !englishFromOfClosingTheLedger0 { // 損益振替仕訳
-                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("!(debit_category LIKE '\("損益勘定")') && !(credit_category LIKE '\("損益勘定")') || (debit_category LIKE '\("繰越利益")') || (credit_category LIKE '\("繰越利益")')")
-            }
-            if !englishFromOfClosingTheLedger1 { // 資本振替仕訳
-                dataBaseAdjustingEntries = dataBaseAdjustingEntries.filter("!(debit_category LIKE '\("繰越利益")') && !(credit_category LIKE '\("繰越利益")')")
-            }
-        }
         return dataBaseAdjustingEntries
+    }
+    // 取得 資本振替仕訳
+    func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseCapitalTransferJournalEntry = dataBaseAccountingBook?.dataBaseJournals!.dataBaseCapitalTransferJournalEntry
+        return dataBaseCapitalTransferJournalEntry
     }
     
     // MARK: Update

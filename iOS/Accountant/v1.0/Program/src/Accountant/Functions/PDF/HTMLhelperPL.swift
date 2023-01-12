@@ -275,7 +275,7 @@ struct HTMLhelperPL {
     <h2>損益計算書</h2>
         <div class="flex margin20">
         <span class="halfWidth">\(company)</span>
-        <span class="halfWidth"><p class="right"> (\(fiscalYear)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+        <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
         </div>
     
     <div>

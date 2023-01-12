@@ -154,7 +154,7 @@ class FinancialStatementTableViewController: UITableViewController {
             }
         } else if indexPath.section == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
-            cell.textLabel?.text = "損益勘定"
+            cell.textLabel?.text = "損益"
             cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         } else if indexPath.section == 2 {
@@ -185,20 +185,50 @@ class FinancialStatementTableViewController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(viewController, animated: true)
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    let viewController = BSViewController.init(nibName: "BSViewController", bundle: nil)
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
                 } else {
-                    let navigation = UINavigationController(rootViewController: viewController)
-                    self.present(navigation, animated: true, completion: nil)
+                    if let viewController = UIStoryboard(
+                        name: "BalanceSheetViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? BalanceSheetViewController {
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
                 }
             case 1:
-                let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(viewController, animated: true)
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    let viewController = PLViewController.init(nibName: "PLViewController", bundle: nil)
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
                 } else {
-                    let navigation = UINavigationController(rootViewController: viewController)
-                    self.present(navigation, animated: true, completion: nil)
+                    if let viewController = UIStoryboard(
+                        name: "ProfitAndLossStatementViewController",
+                        bundle: nil
+                    ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(viewController, animated: true)
+                        } else {
+                            let navigation = UINavigationController(rootViewController: viewController)
+                            self.present(navigation, animated: true, completion: nil)
+                        }
+                    }
                 }
             default:
                 break
@@ -227,9 +257,8 @@ class FinancialStatementTableViewController: UITableViewController {
         case "segue_PLAccount": // “セグウェイにつけた名称”:
             // ③遷移先ViewCntrollerの取得
             if let navigationController = segue.destination as? UINavigationController,
-               let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
+               let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerPLAccountViewController {
                 // 遷移先のコントローラに値を渡す
-                viewControllerGenearlLedgerAccount.account = "損益勘定" // セルに表示した勘定名を設定
                 // 遷移先のコントローラー.条件用の属性 = “条件”
             }
         default:

@@ -112,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="3288" y="1953"/>
         </scene>
-        <!--GenearlLedgerAccountViewController-->
+        <!--GeneralLedgerPLAccountViewController-->
         <scene sceneID="lAD-af-xv9">
             <objects>
-                <viewControllerPlaceholder storyboardName="GenearlLedgerAccountViewController" id="e1L-cz-Ix4" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="GeneralLedgerPLAccountViewController" id="e1L-cz-Ix4" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ivw-lE-gWd"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWR-Wj-3Nk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

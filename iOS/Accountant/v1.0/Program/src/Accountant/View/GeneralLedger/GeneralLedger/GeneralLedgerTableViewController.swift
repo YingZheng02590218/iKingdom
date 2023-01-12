@@ -128,16 +128,43 @@ class GeneralLedgerTableViewController: UITableViewController {
         cell.textLabel?.text = "\(objects[indexPath.row].category as String)"
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
-        let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 損益勘定
-        let objectsssss = dataBaseManagerAccount.getAllAdjustingEntryWithRetainedEarningsCarriedForward(account: "\(objects[indexPath.row].category as String)") // 繰越利益
-        if !objectss.isEmpty || !objectsss.isEmpty || !objectssss.isEmpty || !objectsssss.isEmpty {
+        let model = GeneralLedgerAccountModel()
+        let objectss = model.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
+        let objectsss = model.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
+
+        if !objectss.isEmpty || !objectsss.isEmpty {
             cell.textLabel?.textColor = .textColor
         } else {
             cell.textLabel?.textColor = .lightGray
         }
+        // 資本振替仕訳
+        let dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount(account: objects[indexPath.row].category)
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
+            // 資本振替仕訳
+            if englishFromOfClosingTheLedger1 {
+                // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+                // 法人/個人フラグ
+                if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                    if objects[indexPath.row].category == CapitalAccountType.retainedEarnings.rawValue {
+                        if dataBaseCapitalTransferJournalEntry != nil {
+                            cell.textLabel?.textColor = .textColor
+                        } else {
+                            cell.textLabel?.textColor = .lightGray
+                        }
+                    }
+                } else {
+                    if objects[indexPath.row].category == CapitalAccountType.capital.rawValue {
+                        if dataBaseCapitalTransferJournalEntry != nil {
+                            cell.textLabel?.textColor = .textColor
+                        } else {
+                            cell.textLabel?.textColor = .lightGray
+                        }
+                    }
+                }
+            }
+        }
+
         return cell
     }
 //    var account :String = "" // 勘定名
@@ -158,9 +185,9 @@ class GeneralLedgerTableViewController: UITableViewController {
         let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
         // ③遷移先ViewCntrollerの取得
         if let navigationController = segue.destination as? UINavigationController,
-           let viewControllerGenearlLedgerAccount = navigationController.topViewController as? GenearlLedgerAccountViewController {
+           let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerAccountViewController {
             // 遷移先のコントローラに値を渡す
-            viewControllerGenearlLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+            viewControllerGeneralLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
         }
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)

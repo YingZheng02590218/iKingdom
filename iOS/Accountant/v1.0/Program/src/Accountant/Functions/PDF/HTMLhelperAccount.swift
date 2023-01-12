@@ -361,7 +361,7 @@ struct HTMLhelperAccount {
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95">\(creditCategory)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debitAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>

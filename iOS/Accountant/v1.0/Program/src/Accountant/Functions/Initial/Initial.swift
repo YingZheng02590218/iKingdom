@@ -49,6 +49,31 @@ class Initial {
                 smallWritting: "ゾウ商店"
             )
         }
+
+        // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
+        // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: false, switching: true)
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            // 損益振替仕訳　が0件超が存在する場合は　削除
+            let objects = DataBaseManagerPLAccount.shared.checkAdjustingEntry(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objects.isEmpty {
+            for i in 0..<objects.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.deleteAdjustingJournalEntry(primaryKey: objects[i].number)
+                print("削除", isInvalidated, objects.count)
+                continue outerLoop
+            }
+            break
+        }
+            let objectss = DataBaseManagerPLAccount.shared.checkAdjustingEntryInPLAccount(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objectss.isEmpty {
+            for i in 0..<objectss.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.removeAdjustingJournalEntry(primaryKey: objectss[i].number)
+                print("関連削除", isInvalidated, objectss.count)
+                continue outerLoop
+            }
+            break
+        }
+        }
     }
     /**
     * 初期化　初期化メソッド
@@ -68,10 +93,13 @@ class Initial {
             let masterData = MasterData()
             masterData.readMasterDataFromCSVOfTaxonomy()
         }
-        // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
-        DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
-        // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
-        DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
+            DatabaseManagerSettingsTaxonomyAccount.shared.initializeSettingsTaxonomyAccount()
+            // 設定表示科目　初期化　表示科目のスイッチを設定する　勘定科目のスイッチONが、ひとつもなければOFFにする
+            DataBaseManagerSettingsTaxonomy.shared.initializeSettingsTaxonomy()
+        }
     }
     /**
     * 初期化　初期化メソッド
@@ -117,6 +145,45 @@ class Initial {
             initialiseAccounts(number: number, fiscalYear: fiscalYear)
             // 決算書画面　初期化
             initializeFinancialStatements(number: number, fiscalYear: fiscalYear)
+        }
+        // 個人事業主対応　存在確認　引数と同じ勘定科目名が存在するかどうかを確認する
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "元入金") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "元入金",
+                switching: true
+            )
+            print(number)
+        }
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主貸") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "事業主貸",
+                switching: true
+            )
+            print(number)
+        }
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.isExistSettingsTaxonomyAccount(category: "事業主借") {
+            let number = DatabaseManagerSettingsTaxonomyAccount.shared.addSettingsTaxonomyAccount(
+                rank0: "5",
+                rank1: "10",
+                rank2: "",
+                numberOfTaxonomy: "",
+                category: "事業主借",
+                switching: true
+            )
+            print(number)
+        }
+        // 総勘定元帳に、資本金勘定が作成されていなければ、作成する
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+        for dataBaseAccountingBook in dataBaseAccountingBooks where dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount == nil {
+            DataBaseManagerGeneralLedger.shared.addCapitalAccountToGeneralLedger(number: dataBaseAccountingBook.number)
         }
     }
     /**

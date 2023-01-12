@@ -161,6 +161,65 @@ extension WalkThroughViewController: EAIntroDelegate {
     }
     
     func intro(_ introView: EAIntroView!, pageEndScrolling page: EAIntroPage!, with pageIndex: UInt) {
+        // 5ページ目の場合
+        if pageIndex == 5 {
+            // ①UIAlertControllerクラスのインスタンスを生成する
+            // titleにタイトル, messegeにメッセージ, prefereedStyleにスタイルを指定する
+            // preferredStyleにUIAlertControllerStyle.actionSheetを指定してアクションシートを表示する
+            let actionSheet = UIAlertController(
+                title: "勘定科目体系の選択",
+                message: nil,
+                preferredStyle: UIAlertController.Style.actionSheet
+            )
+            // ②選択肢の作成と追加
+            actionSheet.addAction(
+                UIAlertAction(
+                    title: "法人",
+                    style: .default,
+                    handler: { (action: UIAlertAction) -> Void in
+                        print(action)
+                        // 法人/個人フラグ　法人:true, 個人:false
+                        let userDefaults = UserDefaults.standard
+                        let firstLunchKey = "corporation_switch"
+                        userDefaults.set(true, forKey: firstLunchKey)
+                        userDefaults.synchronize()
+                    }
+                )
+            )
+            // ②選択肢の作成と追加
+            actionSheet.addAction(
+                UIAlertAction(
+                    title: "個人事業主",
+                    style: .default,
+                    handler: { (action: UIAlertAction) -> Void in
+                        print(action)
+                        // 法人/個人フラグ　法人:true, 個人:false
+                        let userDefaults = UserDefaults.standard
+                        let firstLunchKey = "corporation_switch"
+                        userDefaults.set(false, forKey: firstLunchKey)
+                        userDefaults.synchronize()
+                    }
+                )
+            )
+            // iPad の場合のみ、ActionSheetを表示するための必要な設定
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                actionSheet.popoverPresentationController?.sourceView = self.view
+                let screenSize = UIScreen.main.bounds
+                actionSheet.popoverPresentationController?.sourceRect = CGRect(
+                    x: screenSize.size.width / 2,
+                    y: screenSize.size.height,
+                    width: 0,
+                    height: 0
+                )
+                // iPadの場合、アクションシートの背後の画面をタップできる
+            } else {
+                // ③表示するViewと表示位置を指定する
+                actionSheet.popoverPresentationController?.sourceView = view
+                actionSheet.popoverPresentationController?.sourceRect = (page as AnyObject).frame
+            }
+            // ④アクションシートを表示
+            present(actionSheet, animated: true, completion: nil)
+        }
         // 最終ページまで到達した場合
         if introView.limitPageIndex == pageIndex {
             // 2秒間待つだけ

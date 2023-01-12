@@ -18,10 +18,12 @@ protocol JournalsPresenterInput {
     
     var numberOfobjects: Int { get }
     var numberOfobjectsss: Int { get }
-    
+    var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
+
     func objects(forRow row: Int) -> DataBaseJournalEntry
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
-    
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
+
     var PDFpath: [URL]? { get }
     
     func viewDidLoad()
@@ -60,8 +62,11 @@ final class JournalsPresenter: JournalsPresenterInput {
     var theDayOfReckoning: String?
     // 通常仕訳　全
     private var objects: Results<DataBaseJournalEntry>
-    // 決算整理仕訳 (損益振替仕訳 資本振替仕訳)
+    // 決算整理仕訳
     private var objectsss: Results<DataBaseAdjustingEntry>
+    // 資本振替仕訳
+    private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+
     // PDFのパス
     var PDFpath: [URL]?
     
@@ -71,9 +76,13 @@ final class JournalsPresenter: JournalsPresenterInput {
     init(view: JournalsPresenterOutput, model: JournalsModelInput) {
         self.view = view
         self.model = model
-        
-        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-        objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+
+        // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals()
+        // 決算整理仕訳
+        objectsss = model.getJournalAdjustingEntry()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
     }
     
     // MARK: - Life cycle
@@ -89,9 +98,13 @@ final class JournalsPresenter: JournalsPresenterInput {
         fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
-        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-        objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
-        
+        // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals()
+        // 決算整理仕訳
+        objectsss = model.getJournalAdjustingEntry()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+
         view.setupViewForViewWillAppear()
     }
     
@@ -120,14 +133,34 @@ final class JournalsPresenter: JournalsPresenterInput {
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry {
         objectsss[row]
     }
+
+    var numberOfDataBaseCapitalTransferJournalEntry: Int {
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
+            // 資本振替仕訳
+            if englishFromOfClosingTheLedger1 {
+                return dataBaseCapitalTransferJournalEntry == nil ? 0 : 1
+            }
+        }
+        return 0
+    }
+
+    func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
+        dataBaseCapitalTransferJournalEntry
+    }
     
     func refreshTable(isEditing: Bool) {
         if !isEditing {
             // 全勘定の合計と残高を計算する
             model.initializeJournals(completion: { isFinished in
                 print("Result is \(isFinished)")
-                objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-                objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+                // 通常仕訳　全
+                objects = model.getJournalEntriesInJournals()
+                // 決算整理仕訳
+                objectsss = model.getJournalAdjustingEntry()
+                // 資本振替仕訳
+                dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+                
                 // 更新処理
                 view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
             })
@@ -155,8 +188,13 @@ final class JournalsPresenter: JournalsPresenterInput {
         // 全勘定の合計と残高を計算する
         model.initializeJournals(completion: { isFinished in
             print("Result is \(isFinished)")
-            objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-            objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+            // 通常仕訳　全
+            objects = model.getJournalEntriesInJournals()
+            // 決算整理仕訳
+            objectsss = model.getJournalAdjustingEntry()
+            // 資本振替仕訳
+            dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+
             // オートスクロール
             view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
         })
@@ -245,8 +283,13 @@ final class JournalsPresenter: JournalsPresenterInput {
                 // 空白行
             }
         }
-        objects = model.getJournalEntriesInJournals() // 通常仕訳　全
-        objectsss = model.getJournalAdjustingEntry() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
+        // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals()
+        // 決算整理仕訳
+        objectsss = model.getJournalAdjustingEntry()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+
         // view にリロードさせる
         self.view.reloadData(primaryKeys: primaryKeys, primaryKeysAdjusting: primaryKeysAdjusting)
     }

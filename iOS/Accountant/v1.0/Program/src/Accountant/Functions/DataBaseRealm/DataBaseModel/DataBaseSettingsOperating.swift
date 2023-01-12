@@ -21,6 +21,6 @@ class DataBaseSettingsOperating: RObject {
         self.EnglishFromOfClosingTheLedger1 = EnglishFromOfClosingTheLedger1
     }
 
-    @objc dynamic var EnglishFromOfClosingTheLedger0: Bool = false // 損益振替仕訳
-    @objc dynamic var EnglishFromOfClosingTheLedger1: Bool = false // 資本振替仕訳
+    @objc dynamic var EnglishFromOfClosingTheLedger0: Bool = true // 損益振替仕訳 初期値はON
+    @objc dynamic var EnglishFromOfClosingTheLedger1: Bool = true // 資本振替仕訳 初期値はON
 }

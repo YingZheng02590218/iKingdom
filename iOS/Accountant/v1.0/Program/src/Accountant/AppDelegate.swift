@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 1,
+            schemaVersion: 2,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -36,15 +36,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
                 }
-                // DataBaseTaxonomyオブジェクトを列挙します
-                migration.enumerateObjects(ofType: DataBaseTaxonomy.className()) { oldObject, newObject in
-                    // スキーマバージョンが0のときだけ、'numberOfTaxonomy'プロパティを追加します
-                    if oldSchemaVersion < 1 {
+                // スキーマバージョン
+                if oldSchemaVersion < 1 {
+                    // DataBaseTaxonomyオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseTaxonomy.className()) { oldObject, newObject in
                         _ = oldObject?["fiscalYear"] as? Int
+                        // プロパティを追加します
                         newObject?["numberOfTaxonomy"] = 0
                         _ = oldObject?["accountName"] as? String
                         _ = oldObject?["total"] as? Int64
                     }
+                }
+                // スキーマバージョン
+                if oldSchemaVersion < 2 {
+                    // DataBaseAccountオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
+                        // 損益振替仕訳
+                        newObject?["dataBaseTransferEntry"] = nil
+                    }
+                    // DataBasePLAccountオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBasePLAccount.className()) { oldObject, newObject in
+                        newObject?["accountName"] = "損益"
+                        // 損益振替仕訳
+                        newObject?["dataBaseTransferEntries"] = List<DataBaseTransferEntry>()
+                        // 資本振替仕訳
+                        newObject?["dataBaseCapitalTransferJournalEntry"] = nil
+                    }
+                    // DataBaseGeneralLedgerオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseGeneralLedger.className()) { oldObject, newObject in
+                        // 資本金勘定
+                        newObject?["dataBaseCapitalAccount"] = nil
+                    }
+                    // DataBaseJournalsオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseJournals.className()) { oldObject, newObject in
+                        // 資本振替仕訳
+                        newObject?["dataBaseCapitalTransferJournalEntry"] = nil
+                    }
+
                 }
             }
         )
@@ -194,7 +222,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstLunch = [firstLunchKey: true]
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
-        // userDefaults.set(true, forKey: firstLunchKey)
+        //　userDefaults.set(true, forKey: firstLunchKey)
+        // 法人/個人フラグ　法人:true, 個人:false
+        firstLunchKey = "corporation_switch"
+        firstLunch = [firstLunchKey: false] // 初期値は個人とする
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        //　userDefaults.set(true, forKey: firstLunchKey)
         // 生体認証パスコードロック設定スイッチ
         firstLunchKey = "biometrics_switch"
         firstLunch = [firstLunchKey: false] // 初期値はOFFとする

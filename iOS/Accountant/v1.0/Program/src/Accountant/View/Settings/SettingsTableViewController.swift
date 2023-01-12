@@ -159,7 +159,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "会計期間"
                 cell.leftImageView.image = UIImage(named: "edit_calendar-edit_calendar_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
-                cell.centerLabel.text = "勘定科目"
+                cell.centerLabel.text = "勘定科目体系"
                 cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
