@@ -308,9 +308,12 @@ class BalanceSheetModel: BalanceSheetModelInput {
         let objects8 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 8)
         
         let objects9 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
-        
-        // TODO: 株主資本、評価・換算差額等　なども表示させる
-        let objects10 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10) // 資本　元入金
+
+        let objects10 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10) // 株主資本
+        let objects11 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 11) // 評価・換算差額等
+        let objects12 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 12) // 新株予約権
+        let objects13 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 19) // 非支配株主持分
+
         // MARK: - "    元入金合計"
         
         // MARK: - "    流動資産合計"
@@ -378,6 +381,9 @@ class BalanceSheetModel: BalanceSheetModelInput {
             liabilityTotal: liabilityTotal,
             lastLiabilityTotal: lastLiabilityTotal,
             objects10: objects10,
+            objects11: objects11,
+            objects12: objects12,
+            objects13: objects13,
             equityTotal: equityTotal,
             lastEquityTotal: lastEquityTotal,
             liabilityAndEquityTotal: liabilityAndEquityTotal,

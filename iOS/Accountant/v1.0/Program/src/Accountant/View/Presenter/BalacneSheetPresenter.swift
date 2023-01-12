@@ -129,9 +129,12 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             case 0: return balanceSheetData.objects9.count
             default: return 0
             }
-        case 5: //     "元入金"
+        case 5: //     "資本"
             switch rank1 {
             case 0: return balanceSheetData.objects10.count
+            case 1: return balanceSheetData.objects11.count
+            case 2: return balanceSheetData.objects12.count
+            case 3: return balanceSheetData.objects13.count
             default: return 0
             }
         default: //    ""
@@ -172,10 +175,13 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
             case 0: return balanceSheetData.objects9[row]
             default: return balanceSheetData.objects9[row]
             }
-        case 5: //     "元入金"
+        case 5: //     "資本"
             switch rank1 {
             case 0: return balanceSheetData.objects10[row]
-            default: return balanceSheetData.objects10[row]
+            case 1: return balanceSheetData.objects11[row]
+            case 2: return balanceSheetData.objects12[row]
+            case 3: return balanceSheetData.objects13[row]
+            default: return balanceSheetData.objects13[row]
             }
         default: //    ""
             return balanceSheetData.objects10[row]

@@ -405,9 +405,15 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             print("資本の部")
             print(
                 "資本",
-                presenter.numberOfobjects(rank0: 5, rank1: 0)
+                presenter.numberOfobjects(rank0: 5, rank1: 0) +
+                presenter.numberOfobjects(rank0: 5, rank1: 1) +
+                presenter.numberOfobjects(rank0: 5, rank1: 2) +
+                presenter.numberOfobjects(rank0: 5, rank1: 3)
             )
-            return presenter.numberOfobjects(rank0: 5, rank1: 0)
+            return presenter.numberOfobjects(rank0: 5, rank1: 0) +
+            presenter.numberOfobjects(rank0: 5, rank1: 1) +
+            presenter.numberOfobjects(rank0: 5, rank1: 2) +
+            presenter.numberOfobjects(rank0: 5, rank1: 3)
         case 10: // 純資産合計
             return 0
         case 11: // 負債純資産合計
@@ -563,13 +569,37 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
             
         case 9: // MARK: - 資本の部
             switch indexPath.row {
-                // MARK: - "  元入金"
+                // MARK: - 株主資本
             case 0 ..< presenter.numberOfobjects(rank0: 5, rank1: 0):
                 // 勘定科目
                 cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category
                 print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 0, forRow: indexPath.row).category)
                 cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 0, forRow: indexPath.row, lastYear: false) // 勘定別の合計
                 cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 0, forRow: indexPath.row, lastYear: true) // 勘定別の合計
+                return cell
+                // MARK: - 評価・換算差額等
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1):
+                // 勘定科目
+                cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0)).category)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0), lastYear: false) // 勘定別の合計
+                cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 1, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0), lastYear: true) // 勘定別の合計
+                return cell
+                // MARK: - 新株予約権
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2):
+                // 勘定科目
+                cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1)).category)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1), lastYear: false) // 勘定別の合計
+                cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 2, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1), lastYear: true) // 勘定別の合計
+                return cell
+                // MARK: - 非支配株主持分
+            case presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2) ..< presenter.numberOfobjects(rank0: 5, rank1: 0) + presenter.numberOfobjects(rank0: 5, rank1: 1) + presenter.numberOfobjects(rank0: 5, rank1: 2) + presenter.numberOfobjects(rank0: 5, rank1: 3):
+                // 勘定科目
+                cell.textLabel?.text = "    " + presenter.objects(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2)).category
+                print("BS", indexPath.row, "    " + presenter.objects(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2)).category)
+                cell.labelForThisYear.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2), lastYear: false) // 勘定別の合計
+                cell.labelForPrevious.text = presenter.getTotalOfTaxonomyAccount(rank0: 5, rank1: 3, forRow: indexPath.row - presenter.numberOfobjects(rank0: 5, rank1: 0) - presenter.numberOfobjects(rank0: 5, rank1: 1) - presenter.numberOfobjects(rank0: 5, rank1: 2), lastYear: true) // 勘定別の合計
                 return cell
             default:
                 return cell

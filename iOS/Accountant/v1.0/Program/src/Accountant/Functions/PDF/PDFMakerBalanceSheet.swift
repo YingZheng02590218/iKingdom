@@ -273,6 +273,47 @@ class PDFMakerBalanceSheet {
             htmlString.append(rowString)
         }
 
+        // tableMiddle 行数分繰り返す
+        for item in balanceSheetData.objects11 {
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
+                    rank0: 5,
+                    rank1: 11,
+                    accountNameOfSettingsTaxonomyAccount: item.category, // 勘定科目名
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+
+        // tableMiddle 行数分繰り返す
+        for item in balanceSheetData.objects12 {
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
+                    rank0: 5,
+                    rank1: 12,
+                    accountNameOfSettingsTaxonomyAccount: item.category, // 勘定科目名
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
+
+        // tableMiddle 行数分繰り返す
+        for item in balanceSheetData.objects13 {
+            let rowString = hTMLhelper.getSingleRow(
+                title: item.category,
+                amount: DataBaseManagerAccount.shared.getTotalOfTaxonomyAccount(
+                    rank0: 5,
+                    rank1: 19,
+                    accountNameOfSettingsTaxonomyAccount: item.category, // 勘定科目名
+                    lastYear: false
+                )
+            ) // TODO: 金額　取得先
+            htmlString.append(rowString)
+        }
         // テーブル　エンド 負債・資本の部 合計
         tableEndString = hTMLhelper.tableEndString(capitalAmount: balanceSheetData.equityTotal, amount: balanceSheetData.liabilityAndEquityTotal)
         htmlString.append(tableEndString)

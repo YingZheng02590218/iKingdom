@@ -59,8 +59,11 @@ struct BalanceSheetData {
 
     // MARK: - 純資産の部
 
-    var objects10: Results<DataBaseSettingsTaxonomyAccount> // 元入金
-    // MARK: 元入金合計
+    var objects10: Results<DataBaseSettingsTaxonomyAccount> // 資本
+    var objects11: Results<DataBaseSettingsTaxonomyAccount>
+    var objects12: Results<DataBaseSettingsTaxonomyAccount>
+    var objects13: Results<DataBaseSettingsTaxonomyAccount>
+    // MARK: 資本合計
 
     // MARK: - 純資産合計
     var equityTotal: String
