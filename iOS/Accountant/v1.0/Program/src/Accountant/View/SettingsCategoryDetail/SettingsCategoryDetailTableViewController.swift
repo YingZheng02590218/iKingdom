@@ -271,6 +271,7 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                     case "10": cell.label.text = "株主資本"
                     case "11": cell.label.text = "評価・換算差額等"
                     case "12": cell.label.text = "新株予約権"
+                    case "19": cell.label.text = "非支配株主持分"
                     case "13": cell.label.text = "売上原価"
                     case "14": cell.label.text = "製造原価"
                     case "15": cell.label.text = "営業外収益"
