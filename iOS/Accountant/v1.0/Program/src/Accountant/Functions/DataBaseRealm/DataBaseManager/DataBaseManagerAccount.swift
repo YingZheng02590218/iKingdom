@@ -182,6 +182,26 @@ class DataBaseManagerAccount {
         return StringUtility.shared.setComma(amount: result)
     }
 
+    // 取得　損益振替仕訳、残高振替仕訳 勘定別に取得
+    func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
+        if account == Constant.capitalAccountName || account == "資本金勘定" {
+            let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+                NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+            ])
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+            let dataBaseTransferEntry = dataBaseAccount?.dataBaseTransferEntry
+            return dataBaseTransferEntry
+        } else {
+            let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+                NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+            ])
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+                .filter("accountName LIKE '\(account)'").first
+            let dataBaseTransferEntry = dataBaseAccount?.dataBaseTransferEntry
+            return dataBaseTransferEntry
+        }
+    }
+
     // MARK: Update
 
     // MARK: Delete

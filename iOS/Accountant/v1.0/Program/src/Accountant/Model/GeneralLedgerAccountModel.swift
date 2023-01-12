@@ -186,13 +186,8 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     // 取得　損益振替仕訳 勘定別に取得
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseTransferEntry = dataBaseAccount?.dataBaseTransferEntry
-        return dataBaseTransferEntry
+
+        DataBaseManagerAccount.shared.getTransferEntryInAccount(account: account)
     }
 
     // MARK: - 資本金勘定

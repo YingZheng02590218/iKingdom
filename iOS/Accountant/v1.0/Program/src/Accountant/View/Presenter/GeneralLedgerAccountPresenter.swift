@@ -56,10 +56,10 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var databaseJournalEntries: Results<DataBaseJournalEntry>
     // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
-    // 損益振替仕訳
-    private var dataBaseTransferEntry: DataBaseTransferEntry?
     // 資本振替仕訳
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    // 損益振替仕訳
+    private var dataBaseTransferEntry: DataBaseTransferEntry?
 
     private weak var view: GeneralLedgerAccountPresenterOutput!
     private var model: GeneralLedgerAccountModelInput
@@ -73,10 +73,10 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         databaseJournalEntries = model.getJournalEntryInAccount(account: account)
         // 決算整理仕訳　勘定別
         dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
-        // 損益振替仕訳
-        dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
         // 資本振替仕訳
         dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount(account: account)
+        // 損益振替仕訳、残高振替仕訳
+        dataBaseTransferEntry = model.getTransferEntryInAccount(account: account)
     }
     
     // MARK: - Life cycle

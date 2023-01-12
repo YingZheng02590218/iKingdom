@@ -16,7 +16,7 @@ class GeneralLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
 
-   var gADBannerView: GADBannerView!
+    var gADBannerView: GADBannerView!
     /// 勘定　上部
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
@@ -27,9 +27,9 @@ class GeneralLedgerAccountViewController: UIViewController {
     @IBOutlet private var backgroundView: EMTNeumorphicView!
     
     let LIGHTSHADOWOPACITY: Float = 0.5
-//    let DARKSHADOWOPACITY: Float = 0.5
+    //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
-//    let edged = false
+    //    let edged = false
     
     // 勘定名
     var account: String = ""
@@ -131,11 +131,11 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             // 決算整理仕訳
             return presenter.numberOfDataBaseAdjustingEntries
         case 2:
-            // 損益振替仕訳
-            return presenter.numberOfDataBaseTransferEntry
-        case 3:
             // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
+        case 3:
+            // 損益振替仕訳
+            return presenter.numberOfDataBaseTransferEntry
         default:
             // 空白行
             return 21 // 空白行を表示するため+21行を追加
@@ -241,43 +241,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listBalanceLabel.textColor = .red
                 }
             } else if indexPath.section == 2 {
-                // 損益振替仕訳
-                if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
-                    date = "\(dataBaseTransferEntry.date)"
-                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
-                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
-                    debitCategory = dataBaseTransferEntry.debit_category
-                    creditCategory = dataBaseTransferEntry.credit_category
-                    debitAmount = dataBaseTransferEntry.debit_amount
-                    creditAmount = dataBaseTransferEntry.credit_amount
-                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
-                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
-                    balanceAmount = 0
-                    balanceDebitOrCredit = "-"
-
-                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
-                    if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
-                        cell.listDateMonthLabel.textColor = .textColor
-                        cell.listDateDayLabel.textColor = .textColor
-                        cell.listSummaryLabel.textColor = .textColor
-                        cell.listNumberLabel.textColor = .textColor
-                        cell.listDebitLabel.textColor = .textColor
-                        cell.listCreditLabel.textColor = .textColor
-                        cell.listDebitOrCreditLabel.textColor = .textColor
-                        cell.listBalanceLabel.textColor = .textColor
-                    } else {
-                        cell.listDateMonthLabel.textColor = .red
-                        cell.listDateDayLabel.textColor = .red
-                        cell.listSummaryLabel.textColor = .red
-                        cell.listNumberLabel.textColor = .red
-                        cell.listDebitLabel.textColor = .red
-                        cell.listCreditLabel.textColor = .red
-                        cell.listDebitOrCreditLabel.textColor = .red
-                        cell.listBalanceLabel.textColor = .red
-                    }
-                }
-            } else if indexPath.section == 3 {
                 // 資本振替仕訳
                 print("資本振替仕訳", indexPath)
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
@@ -330,8 +293,45 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         cell.listBalanceLabel.textColor = .red
                     }
                 }
+            } else if indexPath.section == 3 {
+                // 損益振替仕訳、残高振替仕訳
+                if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
+                    date = "\(dataBaseTransferEntry.date)"
+                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
+                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
+                    creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
+                    debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+                    creditAmount = dataBaseTransferEntry.credit_amount
+                    debitAmount = dataBaseTransferEntry.debit_amount
+                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
+
+                    balanceAmount = 0
+                    balanceDebitOrCredit = "-"
+
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
+                        cell.listDateMonthLabel.textColor = .textColor
+                        cell.listDateDayLabel.textColor = .textColor
+                        cell.listSummaryLabel.textColor = .textColor
+                        cell.listNumberLabel.textColor = .textColor
+                        cell.listDebitLabel.textColor = .textColor
+                        cell.listCreditLabel.textColor = .textColor
+                        cell.listDebitOrCreditLabel.textColor = .textColor
+                        cell.listBalanceLabel.textColor = .textColor
+                    } else {
+                        cell.listDateMonthLabel.textColor = .red
+                        cell.listDateDayLabel.textColor = .red
+                        cell.listSummaryLabel.textColor = .red
+                        cell.listNumberLabel.textColor = .red
+                        cell.listDebitLabel.textColor = .red
+                        cell.listCreditLabel.textColor = .red
+                        cell.listDebitOrCreditLabel.textColor = .red
+                        cell.listBalanceLabel.textColor = .red
+                    }
+                }
             }
-// 月
+            // 月
             // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
             if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                 // 一行上のセルに表示した月とこの行の月を比較する
@@ -374,7 +374,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
                 }
             }
-// 日
+            // 日
             let date = date[date.index(date.startIndex, offsetBy: 8)..<date.index(date.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
             if date == "0" { // 日の十の位が0の場合は表示しない
                 cell.listDateDayLabel.text = "\(oneOfCaractorAtLast)" // 末尾1文字の「日」         //日付
@@ -387,7 +387,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 cell.listSummaryLabel.text = "\(creditCategory) " // 摘要　相手方勘定なので貸方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.right
                 // 丁数
-                if creditCategory == "損益" { // 損益勘定の場合
+                if creditCategory == "損益" || creditCategory == "次期繰越" {
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = "" // 丁数　相手方勘定なので貸方
                 } else {
@@ -401,7 +401,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             } else if account == "\(creditCategory)" || "資本金勘定" == "\(creditCategory)" {  // 貸方勘定の場合
                 cell.listSummaryLabel.text = "\(debitCategory) " // 摘要　相手方勘定なので借方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.left
-                if debitCategory == "損益" { // 損益勘定の場合
+                if debitCategory == "損益" || debitCategory == "次期繰越" {
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = "" // 丁数　相手方勘定なので貸方
                 } else {
@@ -504,7 +504,7 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
     }
     
     func setupViewForViewDidAppear() {
-    
+
     }
 }
 

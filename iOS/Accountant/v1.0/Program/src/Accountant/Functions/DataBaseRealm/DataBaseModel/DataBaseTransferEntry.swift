@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-// 損益振替仕訳クラス 決算振替仕訳
+// 損益振替仕訳クラス、残高振替仕訳クラス 決算振替仕訳
 // 仕訳クラス　と　クラス名が違うだけでその他は同じ
 class DataBaseTransferEntry: DataBaseJournalEntry {
 

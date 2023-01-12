@@ -357,7 +357,78 @@ class DataBaseManagerPLAccount {
             }
         }
     }
-    
+    // 追加　決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+    func addTransferEntryForClosingBalanceAccount(debitCategory: String, amount: Int64, creditCategory: String) {
+        var account: String = "" // 残高振替の相手勘定
+        if debitCategory == "残高" {
+            account = creditCategory
+        } else if creditCategory == "残高" {
+            account = debitCategory
+        }
+        var number = 0 // 仕訳番号 自動採番にした
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        // 決算日
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+        var fiscalYearFixed = ""
+        if theDayOfReckoning == "12/31" {
+            fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear)
+        } else {
+            fiscalYearFixed = String(dataBaseAccountingBook.fiscalYear + 1)
+        }
+        // オブジェクトを作成
+        let dataBaseJournalEntry = DataBaseTransferEntry(
+            fiscalYear: dataBaseAccountingBook.fiscalYear, // 年度
+            date: fiscalYearFixed + "/" + theDayOfReckoning,
+            debit_category: creditCategory, // 借方勘定　＊引数の貸方勘定を振替える
+            debit_amount: amount, // 借方金額
+            credit_category: debitCategory, // 貸方勘定　＊引数の借方勘定を振替える
+            credit_amount: amount, // 貸方金額
+            smallWritting: "残高振替仕訳", // 小書き
+            balance_left: 0,
+            balance_right: 0
+        )
+        // 取得　残高振替仕訳 勘定別に取得
+        if let dataBaseTransferEntry = DataBaseManagerAccount.shared.getTransferEntryInAccount(account: account) {
+            // 残高振替仕訳　が存在する場合は　更新
+            number = updateTransferEntry(
+                primaryKey: dataBaseTransferEntry.number,
+                date: dataBaseJournalEntry.date,
+                debitCategory: dataBaseJournalEntry.debit_category,
+                debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
+                creditCategory: dataBaseJournalEntry.credit_category,
+                creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
+                smallWritting: dataBaseJournalEntry.smallWritting
+            )
+        } else {
+            // 残高振替仕訳　が存在しない場合は　作成
+            if amount != 0 {
+                number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+                print(number)
+                do {
+                    // MARK: 残高振替仕訳は、仕訳帳には追加しない。
+                    // 相手方の勘定
+                    if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
+                        if account == "資本金勘定" {
+                            try DataBaseManager.realm.write {
+                                dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseTransferEntry = dataBaseJournalEntry
+                            }
+                        } else {
+                            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                                try DataBaseManager.realm.write {
+                                    // 損益振替仕訳データを代入
+                                    dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseTransferEntry = dataBaseJournalEntry
+                                }
+                                break
+                            }
+                        }
+                    }
+                } catch {
+                    print("エラーが発生しました")
+                }
+            }
+        }
+    }
+
     // MARK: Read
     // チェック 損益振替仕訳　存在するかを確認
     func checkTransferEntry(account: String) -> Results<DataBaseTransferEntry> {
@@ -628,7 +699,7 @@ class DataBaseManagerPLAccount {
             }
         }
     }
-
+    
     // MARK: Read
     // チェック 資本振替仕訳　存在するかを確認
     func checkCapitalTransferJournalEntry() -> Results<DataBaseCapitalTransferJournalEntry> {
@@ -640,7 +711,7 @@ class DataBaseManagerPLAccount {
         print(objects)
         return objects
     }
-
+    
     // MARK: Update
     // 更新 資本振替仕訳
     func updateCapitalTransferJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String) -> Int {
@@ -664,7 +735,7 @@ class DataBaseManagerPLAccount {
         }
         return primaryKey
     }
-
+    
     // MARK: Delete
     // 削除 資本振替仕訳
     func deleteCapitalTransferJournalEntry(primaryKey: Int) -> Bool {
@@ -684,7 +755,7 @@ class DataBaseManagerPLAccount {
         } catch {
             print("エラーが発生しました")
         }
-
+        
         // 損益勘定から削除前資本振替仕訳データの関連を削除
         do {
             try DataBaseManager.realm.write {
@@ -693,7 +764,7 @@ class DataBaseManagerPLAccount {
         } catch {
             print("エラーが発生しました")
         }
-
+        
         if !dataBaseJournalEntry.isInvalidated {
             do {
                 try DataBaseManager.realm.write {
@@ -706,5 +777,5 @@ class DataBaseManagerPLAccount {
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
-
+    
 }

@@ -189,9 +189,9 @@ class TBModel: TBModelInput {
         // 注意：損益振替仕訳を削除すると、エラーが発生するので、account_leftもしくは、account_rightが損益勘定の場合は下記を実行しない。
         // 勘定別に仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
         calculateAccountTotal(account: accountLeft ) // 借方
+        calculateAccountTotal(account: accountRight) // 貸方
         // 勘定別の決算整理後の集計
         calculateAccountTotalAfterAdjusting(account: accountLeft )
-        calculateAccountTotal(account: accountRight) // 貸方
         calculateAccountTotalAfterAdjusting(account: accountRight)
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
@@ -389,7 +389,7 @@ class TBModel: TBModelInput {
             }
         }
     }
-    // 勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後
+    // 勘定クラス　勘定別の決算整理後の集計 決算整理前+決算整理事項=決算整理後 ※繰越利益、元入金勘定も含まれるが、計算結果は使用しない
     private func calculateAccountTotalAfterAdjusting(account: String) {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
@@ -420,12 +420,22 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益振替
-                    DataBaseManagerPLAccount.shared.addTransferEntry(
-                        debitCategory: account,
-                        amount: dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting,
-                        creditCategory: "損益"
-                    )
+                    // 損益計算書に関する勘定科目のみに絞る
+                    if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                        // 決算振替仕訳　損益振替
+                        DataBaseManagerPLAccount.shared.addTransferEntry(
+                            debitCategory: account,
+                            amount: dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting,
+                            creditCategory: "損益"
+                        )
+                    } else {
+                        // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                        DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                            debitCategory: account,
+                            amount: dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting,
+                            creditCategory: "残高"
+                        )
+                    }
                 } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_total_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_total_AfterAdjusting {
                     do {
                         try DataBaseManager.realm.write {
@@ -437,12 +447,22 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益振替
-                    DataBaseManagerPLAccount.shared.addTransferEntry(
-                        debitCategory: "損益",
-                        amount: dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting,
-                        creditCategory: account
-                    )
+                    // 損益計算書に関する勘定科目のみに絞る
+                    if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                        // 決算振替仕訳　損益振替
+                        DataBaseManagerPLAccount.shared.addTransferEntry(
+                            debitCategory: "損益",
+                            amount: dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting,
+                            creditCategory: account
+                        )
+                    } else {
+                        // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                        DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                            debitCategory: "残高",
+                            amount: dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting,
+                            creditCategory: account
+                        )
+                    }
                 } else {
                     do {
                         try DataBaseManager.realm.write {
@@ -452,12 +472,22 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
-                    // 決算振替仕訳　損益振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
-                    DataBaseManagerPLAccount.shared.addTransferEntry(
-                        debitCategory: "損益",
-                        amount: 0,
-                        creditCategory: account
-                    )
+                    // 損益計算書に関する勘定科目のみに絞る
+                    if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                        // 決算振替仕訳　損益振替 差額がない勘定は損益振替しなくてもよいのか？　2020/10/05
+                        DataBaseManagerPLAccount.shared.addTransferEntry(
+                            debitCategory: "損益",
+                            amount: 0,
+                            creditCategory: account
+                        )
+                    } else {
+                        // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                        DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                            debitCategory: "残高",
+                            amount: 0,
+                            creditCategory: account
+                        )
+                    }
                 }
             }
         }
@@ -798,6 +828,12 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
+                    // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                    DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                        debitCategory: "資本金勘定",
+                        amount: dataBaseCapitalAccount.debit_balance_AfterAdjusting,
+                        creditCategory: "残高"
+                    )
                 } else if dataBaseCapitalAccount.debit_total_AfterAdjusting < dataBaseCapitalAccount.credit_total_AfterAdjusting {
                     do {
                         try DataBaseManager.realm.write {
@@ -809,6 +845,12 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
+                    // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                    DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                        debitCategory: "残高",
+                        amount: dataBaseCapitalAccount.credit_balance_AfterAdjusting,
+                        creditCategory: "資本金勘定"
+                    )
                 } else {
                     do {
                         try DataBaseManager.realm.write {
@@ -818,6 +860,12 @@ class TBModel: TBModelInput {
                     } catch {
                         print("エラーが発生しました")
                     }
+                    // 決算振替仕訳　残高振替仕訳をする closingBalanceAccount
+                    DataBaseManagerPLAccount.shared.addTransferEntryForClosingBalanceAccount(
+                        debitCategory: "残高",
+                        amount: 0,
+                        creditCategory: "資本金勘定"
+                    )
                 }
             }
         }
