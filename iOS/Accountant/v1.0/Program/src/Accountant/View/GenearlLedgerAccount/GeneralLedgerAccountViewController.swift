@@ -119,21 +119,24 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
         // 通常仕訳　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
-        return 5
+        return 6
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            // 開始仕訳
+            return presenter.numberOfDataBaseOpeningJournalEntry
+        case 1:
             // 通常仕訳
             return presenter.numberOfDatabaseJournalEntries
-        case 1:
+        case 2:
             // 決算整理仕訳
             return presenter.numberOfDataBaseAdjustingEntries
-        case 2:
+        case 3:
             // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
-        case 3:
+        case 4:
             // 損益振替仕訳
             return presenter.numberOfDataBaseTransferEntry
         default:
@@ -161,9 +164,47 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         var balanceAmount: Int64 = 0
         var balanceDebitOrCredit: String = ""
 
-        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3 {
-            
+        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 {
+
             if indexPath.section == 0 {
+                // 開始仕訳
+                if let dataBaseTransferEntry = presenter.dataBaseOpeningJournalEntries() {
+                    date = "\(dataBaseTransferEntry.date)"
+                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
+                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
+                    creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.credit_category
+                    debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.debit_category
+                    creditAmount = dataBaseTransferEntry.credit_amount
+                    debitAmount = dataBaseTransferEntry.debit_amount
+                    numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
+                    numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
+
+                    // 差引残高　差引残高クラスで計算した計算結果を取得
+                    balanceAmount = presenter.getBalanceAmountOpeningJournalEntry()
+                    balanceDebitOrCredit = presenter.getBalanceDebitOrCreditOpeningJournalEntry()
+
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
+                        cell.listDateMonthLabel.textColor = .textColor
+                        cell.listDateDayLabel.textColor = .textColor
+                        cell.listSummaryLabel.textColor = .textColor
+                        cell.listNumberLabel.textColor = .textColor
+                        cell.listDebitLabel.textColor = .textColor
+                        cell.listCreditLabel.textColor = .textColor
+                        cell.listDebitOrCreditLabel.textColor = .textColor
+                        cell.listBalanceLabel.textColor = .textColor
+                    } else {
+                        cell.listDateMonthLabel.textColor = .red
+                        cell.listDateDayLabel.textColor = .red
+                        cell.listSummaryLabel.textColor = .red
+                        cell.listNumberLabel.textColor = .red
+                        cell.listDebitLabel.textColor = .red
+                        cell.listCreditLabel.textColor = .red
+                        cell.listDebitOrCreditLabel.textColor = .red
+                        cell.listBalanceLabel.textColor = .red
+                    }
+                }
+            } else if indexPath.section == 1 {
                 // 通常仕訳　通常仕訳 勘定別
                 date = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date)"                              // 日付
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
@@ -202,7 +243,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listDebitOrCreditLabel.textColor = .red
                     cell.listBalanceLabel.textColor = .red
                 }
-            } else if indexPath.section == 1 {
+            } else if indexPath.section == 2 {
                 // 決算整理仕訳　勘定別　損益勘定以外
                 date = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date)"
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
@@ -240,7 +281,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listDebitOrCreditLabel.textColor = .red
                     cell.listBalanceLabel.textColor = .red
                 }
-            } else if indexPath.section == 2 {
+            } else if indexPath.section == 3 {
                 // 資本振替仕訳
                 print("資本振替仕訳", indexPath)
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
@@ -293,7 +334,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         cell.listBalanceLabel.textColor = .red
                     }
                 }
-            } else if indexPath.section == 3 {
+            } else if indexPath.section == 4 {
                 // 損益振替仕訳、残高振替仕訳
                 if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
                     date = "\(dataBaseTransferEntry.date)"
@@ -387,7 +428,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 cell.listSummaryLabel.text = "\(creditCategory) " // 摘要　相手方勘定なので貸方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.right
                 // 丁数
-                if creditCategory == "損益" || creditCategory == "次期繰越" {
+                if creditCategory == "損益" || creditCategory == "次期繰越" || creditCategory == "前期繰越" {
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = "" // 丁数　相手方勘定なので貸方
                 } else {
@@ -401,7 +442,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             } else if account == "\(creditCategory)" || "資本金勘定" == "\(creditCategory)" {  // 貸方勘定の場合
                 cell.listSummaryLabel.text = "\(debitCategory) " // 摘要　相手方勘定なので借方
                 cell.listSummaryLabel.textAlignment = NSTextAlignment.left
-                if debitCategory == "損益" || debitCategory == "次期繰越" {
+                if debitCategory == "損益" || debitCategory == "次期繰越" || debitCategory == "前期繰越"{
                     // 勘定の仕丁は、相手方勘定の丁数ではない。仕訳帳の丁数である。 2020/07/27
                     cell.listNumberLabel.text = "" // 丁数　相手方勘定なので貸方
                 } else {
@@ -436,7 +477,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
-        case 0, 1:
+        case 1, 2:
             return indexPath
         default:
             return nil
@@ -466,7 +507,10 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             dateYearLabel.text = fiscalYear.description + "年"
         }
         // 仕訳データが0件の場合、印刷ボタンを不活性にする
-        if presenter.numberOfDatabaseJournalEntries + presenter.numberOfDataBaseAdjustingEntries + presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
+        if presenter.numberOfDataBaseOpeningJournalEntry +
+            presenter.numberOfDatabaseJournalEntries +
+            presenter.numberOfDataBaseAdjustingEntries +
+            presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
             printBarButtonItem.isEnabled = true
         } else {
             printBarButtonItem.isEnabled = false

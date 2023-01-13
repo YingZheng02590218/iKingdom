@@ -129,10 +129,13 @@ class GeneralLedgerTableViewController: UITableViewController {
         cell.textLabel?.textAlignment = NSTextAlignment.center
         // 仕訳データがない勘定の表示名をグレーアウトする
         let model = GeneralLedgerAccountModel()
+        // 開始仕訳
+        let dataBaseOpeningJournalEntry = model.getOpeningJournalEntryInAccount(account: objects[indexPath.row].category)
+
         let objectss = model.getJournalEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 勘定別に取得
         let objectsss = model.getAllAdjustingEntryInAccount(account: "\(objects[indexPath.row].category as String)") // 決算整理仕訳
 
-        if !objectss.isEmpty || !objectsss.isEmpty {
+        if !objectss.isEmpty || !objectsss.isEmpty || dataBaseOpeningJournalEntry != nil {
             cell.textLabel?.textColor = .textColor
         } else {
             cell.textLabel?.textColor = .lightGray

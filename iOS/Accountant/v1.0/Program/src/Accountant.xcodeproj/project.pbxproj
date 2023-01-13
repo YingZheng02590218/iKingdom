@@ -267,6 +267,8 @@
 		F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */; };
 		F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
 		F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
+		F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
+		F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -699,6 +701,7 @@
 		F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
 		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningJournalEntry.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -897,6 +900,7 @@
 				F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */,
 				F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */,
 				F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */,
+				F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */,
 				F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */,
 				F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */,
 				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
@@ -1902,6 +1906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */,
+				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
@@ -2079,6 +2084,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
+				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,

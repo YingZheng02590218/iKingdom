@@ -155,6 +155,10 @@ class TBModel: TBModelInput {
     func setAllAccountTotal() {
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAll()
         for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            // 開始仕訳　残高振替仕訳の逆仕訳をする
+            DataBaseManagerAccount.shared.addOpeningJournalEntryFromClosingBalanceAccount(
+                account: dataBaseSettingsTaxonomyAccounts[i].category
+            )
             // クリア
             clearAccountTotal(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別に仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
@@ -175,6 +179,14 @@ class TBModel: TBModelInput {
     }
     // 設定　仕訳と決算整理後　勘定クラス　個別の勘定別　仕訳データを追加、更新、削除後に、呼び出される
     func setAccountTotal(accountLeft: String, accountRight: String) {
+        // 開始仕訳　残高振替仕訳の逆仕訳をする
+        DataBaseManagerAccount.shared.addOpeningJournalEntryFromClosingBalanceAccount(
+            account: accountLeft
+        )
+        // 開始仕訳　残高振替仕訳の逆仕訳をする
+        DataBaseManagerAccount.shared.addOpeningJournalEntryFromClosingBalanceAccount(
+            account: accountRight
+        )
         // 注意：損益振替仕訳を削除すると、エラーが発生するので、account_leftもしくは、account_rightが損益勘定の場合は下記を実行しない。
         // 勘定別に仕訳データを集計　勘定ごとに保持している合計と残高を再計算する処理
         calculateAccountTotal(account: accountLeft ) // 借方
@@ -290,16 +302,26 @@ class TBModel: TBModelInput {
         var right: Int64 = 0
 
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: account) // 勘定別に取得
-        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
+        // 開始仕訳 勘定別に取得
+        let dataBaseOpeningJournalEntry = dataBaseManagerAccount.getOpeningJournalEntryInAccount(account: account)
+        if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
             // 勘定が借方と貸方のどちらか
-            if account == "\(objects[i].debit_category)" { // 借方
-                left += objects[i].debit_amount // 累計額に追加
-            } else if account == "\(objects[i].credit_category)" { // 貸方
-                right += objects[i].credit_amount // 累計額に追加
+            if account == dataBaseOpeningJournalEntry.debit_category { // 借方
+                left += dataBaseOpeningJournalEntry.debit_amount // 累計額に追加
+            } else if account == dataBaseOpeningJournalEntry.credit_category { // 貸方
+                right += dataBaseOpeningJournalEntry.credit_amount // 累計額に追加
             }
         }
-        // 開いている会計帳簿の年度を取得
+        // 通常仕訳 勘定別に取得
+        let dataBaseJournalEntries = dataBaseManagerAccount.getJournalEntryInAccount(account: account)
+        for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ
+            // 勘定が借方と貸方のどちらか
+            if account == "\(dataBaseJournalEntries[i].debit_category)" { // 借方
+                left += dataBaseJournalEntries[i].debit_amount // 累計額に追加
+            } else if account == "\(dataBaseJournalEntries[i].credit_category)" { // 貸方
+                right += dataBaseJournalEntries[i].credit_amount // 累計額に追加
+            }
+        }
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
             // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
@@ -684,17 +706,26 @@ class TBModel: TBModelInput {
             account = CapitalAccountType.capital.rawValue
         }
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getJournalEntryInAccount(account: account) // 資本金勘定から取得
-
-        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
+        // 開始仕訳 勘定別に取得
+        let dataBaseOpeningJournalEntry = dataBaseManagerAccount.getOpeningJournalEntryInAccount(account: account)
+        if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
             // 勘定が借方と貸方のどちらか
-            if account == "\(objects[i].debit_category)" { // 借方
-                left += objects[i].debit_amount // 累計額に追加
-            } else if account == "\(objects[i].credit_category)" { // 貸方
-                right += objects[i].credit_amount // 累計額に追加
+            if account == dataBaseOpeningJournalEntry.debit_category || dataBaseOpeningJournalEntry.debit_category == "資本金勘定" { // 借方
+                left += dataBaseOpeningJournalEntry.debit_amount // 累計額に追加
+            } else if account == dataBaseOpeningJournalEntry.credit_category || dataBaseOpeningJournalEntry.credit_category == "資本金勘定" { // 貸方
+                right += dataBaseOpeningJournalEntry.credit_amount // 累計額に追加
             }
         }
-        // 開いている会計帳簿の年度を取得
+        // 取得　通常仕訳 資本金勘定から取得
+        let dataBaseJournalEntries = dataBaseManagerAccount.getJournalEntryInAccount(account: account)
+        for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ
+            // 勘定が借方と貸方のどちらか
+            if account == "\(dataBaseJournalEntries[i].debit_category)" { // 借方
+                left += dataBaseJournalEntries[i].debit_amount // 累計額に追加
+            } else if account == "\(dataBaseJournalEntries[i].credit_category)" { // 貸方
+                right += dataBaseJournalEntries[i].credit_amount // 累計額に追加
+            }
+        }
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
             do {

@@ -11,8 +11,16 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol GeneralLedgerAccountModelInput {
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?)
+    func initialize(
+        account: String,
+        dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?,
+        databaseJournalEntries: Results<DataBaseJournalEntry>,
+        dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
+        dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    )
 
+    func getBalanceAmountOpeningJournalEntry() -> Int64
+    func getBalanceDebitOrCreditOpeningJournalEntry() -> String
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
@@ -21,9 +29,8 @@ protocol GeneralLedgerAccountModelInput {
     func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
 
     func getNumberOfAccount(accountName: String) -> Int
-    
+    func getOpeningJournalEntryInAccount(account: String) -> DataBaseOpeningJournalEntry?
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
-
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry?
     func getCapitalTransferJournalEntryInAccount(account: String) -> DataBaseCapitalTransferJournalEntry?
@@ -121,7 +128,17 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     
     // MARK: Read
-    
+
+    // 取得　差引残高額　 開始仕訳
+    func getBalanceAmountOpeningJournalEntry() -> Int64 {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountOpeningJournalEntry()
+    }
+    // 借又貸を取得 開始仕訳
+    func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditOpeningJournalEntry()
+    }
     // 取得　差引残高額　仕訳
     func getBalanceAmount(indexPath: IndexPath) -> Int64 {
         
@@ -188,6 +205,12 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
 
         DataBaseManagerAccount.shared.getTransferEntryInAccount(account: account)
+    }
+
+    // 取得　開始仕訳 勘定別に取得
+    func getOpeningJournalEntryInAccount(account: String) -> DataBaseOpeningJournalEntry? {
+
+        DataBaseManagerAccount.shared.getOpeningJournalEntryInAccount(account: account)
     }
 
     // MARK: - 資本金勘定
@@ -266,6 +289,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // 差引残高　計算
     func initialize(
         account: String,
+        dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?,
         databaseJournalEntries: Results<DataBaseJournalEntry>,
         dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
         dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
@@ -273,6 +297,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
             account: account,
+            dataBaseOpeningJournalEntry: dataBaseOpeningJournalEntry,
             databaseJournalEntries: databaseJournalEntries,
             dataBaseAdjustingEntries: dataBaseAdjustingEntries,
             dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry

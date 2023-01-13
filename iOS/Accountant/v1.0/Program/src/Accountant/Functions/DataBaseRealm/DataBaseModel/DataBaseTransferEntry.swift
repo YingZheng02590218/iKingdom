@@ -6,7 +6,6 @@
 //  Copyright © 2023 Hisashi Ishihara. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
 // 損益振替仕訳クラス、残高振替仕訳クラス 決算振替仕訳
