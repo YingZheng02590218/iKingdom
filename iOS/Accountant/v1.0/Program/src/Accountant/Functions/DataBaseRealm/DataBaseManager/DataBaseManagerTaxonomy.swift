@@ -245,24 +245,25 @@ class DataBaseManagerTaxonomy {
      */
     func culculatAmountOfTaxonomy(numberOfTaxonomy: Int) -> Int64 {
         // 設定表示科目に紐づけられた設定勘定科目を取得する
-        let objects = getAccountsInTaxonomy(numberOfTaxonomy: numberOfTaxonomy)
-        var BSAndPLCategoryTotalAmount: Int64 = 0            // 累計額
+        let dataBaseSettingsTaxonomyAccounts = getAccountsInTaxonomy(numberOfTaxonomy: numberOfTaxonomy)
+        var bSAndPLCategoryTotalAmount: Int64 = 0            // 累計額
         // オブジェクトを作成 勘定
-        for i in 0..<objects.count where // 表示科目に該当する勘定の金額を合計する
-        !objects[i].category.isEmpty { // ここで空白が入っている　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
-            let totalAmount = getTotalAmount(account: objects[i].category)
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count // 表示科目に該当する勘定の金額を合計する
+        where !dataBaseSettingsTaxonomyAccounts[i].category.isEmpty { // ここで空白が入っている　TaxonomyAccount.csvの最下行に余計な行が生成されている　2020/10/24
+
+            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
             let totalDebitOrCredit = getTotalDebitOrCredit(
-                bigCategory: Int(objects[i].Rank0)!,
-                midCategory: Int(objects[i].Rank1) ?? 999,
-                account: objects[i].category
+                bigCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank0) ?? 999,
+                midCategory: Int(dataBaseSettingsTaxonomyAccounts[i].Rank1) ?? 999,
+                account: dataBaseSettingsTaxonomyAccounts[i].category
             ) // big_categoryは、表示科目の階層2ではなく勘定科目の大区分を使う　2020/11/09
             if totalDebitOrCredit == "-"{
-                BSAndPLCategoryTotalAmount -= totalAmount
+                bSAndPLCategoryTotalAmount -= totalAmount
             } else {
-                BSAndPLCategoryTotalAmount += totalAmount
+                bSAndPLCategoryTotalAmount += totalAmount
             }
         }
-        return BSAndPLCategoryTotalAmount
+        return bSAndPLCategoryTotalAmount
     }
     
     // MARK: Update

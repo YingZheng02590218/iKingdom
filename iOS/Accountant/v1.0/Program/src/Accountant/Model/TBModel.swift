@@ -163,25 +163,14 @@ class TBModel: TBModelInput {
             calculateAccountTotalAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別の決算整理後の集計
             calculateAccountTotalAfterAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
-            // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
-            // 法人/個人フラグ
-            if UserDefaults.standard.bool(forKey: "corporation_switch") {
-                // 設定表示科目　初期化 毎回行うと時間がかかる
-                DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                    numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(category: dataBaseSettingsTaxonomyAccounts[i].category)
-                )
-            }
         }
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
         // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
         if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            DataBaseManagerTaxonomy.shared.setTotalOfTaxonomy(
-                numberOfSettingsTaxonomy: DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfTaxonomy(
-                    category: "繰越利益"
-                )
-            )
+            // 設定表示科目　初期化 毎回行うと時間がかかる
+            DataBaseManagerTaxonomy.shared.initializeTaxonomy()
         }
     }
     // 設定　仕訳と決算整理後　勘定クラス　個別の勘定別　仕訳データを追加、更新、削除後に、呼び出される
