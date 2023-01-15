@@ -68,8 +68,20 @@
                                     <segue destination="MQX-qc-poq" kind="show" identifier="" id="e3y-vQ-JFd"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PLAccount" id="pga-yU-pyz" userLabel="PLAccount">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AfterClosingTrialBalance" id="QLd-SF-XXV">
                                 <rect key="frame" x="20" y="267" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QLd-SF-XXV" id="EUu-Oy-lQN">
+                                    <rect key="frame" x="0.0" y="0.0" width="345.5" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" name="MainColor2"/>
+                                <connections>
+                                    <segue destination="WzW-Ea-0F9" kind="show" id="AhB-kw-Bmd"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PLAccount" id="pga-yU-pyz" userLabel="PLAccount">
+                                <rect key="frame" x="20" y="310.5" width="374" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pga-yU-pyz" id="fHO-Yh-0Hd">
                                     <rect key="frame" x="0.0" y="0.0" width="345.5" height="43.5"/>
@@ -110,7 +122,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVv-Ps-jZQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3288" y="1953"/>
+            <point key="canvasLocation" x="3293" y="2022"/>
         </scene>
         <!--GeneralLedgerPLAccountViewController-->
         <scene sceneID="lAD-af-xv9">
@@ -121,6 +133,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWR-Wj-3Nk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3376" y="1977"/>
+        </scene>
+        <!--AfterClosingTrialBalanceViewController-->
+        <scene sceneID="2Wc-MC-NDo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AfterClosingTrialBalanceViewController" id="WzW-Ea-0F9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7Y7-by-UWz"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o27-ZH-ivX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3391" y="2058"/>
         </scene>
     </scenes>
     <resources>

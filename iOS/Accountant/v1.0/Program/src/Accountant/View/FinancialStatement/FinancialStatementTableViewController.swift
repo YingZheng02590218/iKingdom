@@ -119,8 +119,8 @@ class FinancialStatementTableViewController: UITableViewController {
             // 精算書
             return 1
         case 3:
-            // 試算表
-            return 1
+            // 試算表　繰越試算表
+            return 2
         default:
             return 0
         }
@@ -163,10 +163,17 @@ class FinancialStatementTableViewController: UITableViewController {
             cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
         } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
-            cell.textLabel?.text = "試算表"
-            cell.textLabel?.textColor = .textColor
-            cell.textLabel?.textAlignment = NSTextAlignment.center
+            if indexPath.row == 0 {
+                cell = tableView.dequeueReusableCell(withIdentifier: "TB", for: indexPath)
+                cell.textLabel?.text = "試算表"
+                cell.textLabel?.textColor = .textColor
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+            } else {
+                cell = tableView.dequeueReusableCell(withIdentifier: "AfterClosingTrialBalance", for: indexPath)
+                cell.textLabel?.text = "繰越試算表"
+                cell.textLabel?.textColor = .textColor
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+            }
         }
 
         // Accessory Color

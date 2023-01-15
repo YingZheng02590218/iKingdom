@@ -89,13 +89,21 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
             debit_balance_total: 0,
             credit_balance_total: 0
         )
+        let afterClosingTrialBalance = DataBaseAfterClosingTrialBalance(
+            fiscalYear: object.fiscalYear,
+            debit_total_total: 0,
+            credit_total_total: 0,
+            debit_balance_total: 0,
+            credit_balance_total: 0
+        )
         let dataBaseFinancialStatements = DataBaseFinancialStatements(
             fiscalYear: object.fiscalYear,
             balanceSheet: balanceSheet,
             profitAndLossStatement: profitAndLossStatement,
             cashFlowStatement: cashFlowStatement,
             workSheet: workSheet,
-            compoundTrialBalance: compoundTrialBalance
+            compoundTrialBalance: compoundTrialBalance,
+            afterClosingTrialBalance: afterClosingTrialBalance
         )
         do {
             // (2)書き込みトランザクション内でデータを追加する
@@ -106,6 +114,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
                 number = cashFlowStatement.save()
                 number = workSheet.save()
                 number = compoundTrialBalance.save()
+                number = afterClosingTrialBalance.save()
                 number = dataBaseFinancialStatements.save() //　自動採番
                 // オブジェクトを作成して追加
                 // 設定画面の勘定科目一覧にある勘定を取得する

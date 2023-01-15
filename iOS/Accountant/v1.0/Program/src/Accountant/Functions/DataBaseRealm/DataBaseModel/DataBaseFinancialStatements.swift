@@ -18,7 +18,8 @@ class DataBaseFinancialStatements: RObject {
         profitAndLossStatement: DataBaseProfitAndLossStatement?,
         cashFlowStatement: DataBaseCashFlowStatement?,
         workSheet: DataBaseWorkSheet?,
-        compoundTrialBalance: DataBaseCompoundTrialBalance?
+        compoundTrialBalance: DataBaseCompoundTrialBalance?,
+        afterClosingTrialBalance: DataBaseAfterClosingTrialBalance?
     ) {
         self.init()
 
@@ -28,6 +29,7 @@ class DataBaseFinancialStatements: RObject {
         self.cashFlowStatement = cashFlowStatement
         self.workSheet = workSheet
         self.compoundTrialBalance = compoundTrialBalance
+        self.afterClosingTrialBalance = afterClosingTrialBalance
     }
 
     @objc dynamic var fiscalYear: Int = 0                                         // 年度
@@ -36,4 +38,5 @@ class DataBaseFinancialStatements: RObject {
     @objc dynamic var cashFlowStatement: DataBaseCashFlowStatement?            // キャッシュフロー計算書
     @objc dynamic var workSheet: DataBaseWorkSheet?                              // 精算表　// 使用しない　2020/07/25 → 使用する　2020/08/02
     @objc dynamic var compoundTrialBalance: DataBaseCompoundTrialBalance?      // 合計残高試算表
+    @objc dynamic var afterClosingTrialBalance: DataBaseAfterClosingTrialBalance?      // 繰越試算表
 }
