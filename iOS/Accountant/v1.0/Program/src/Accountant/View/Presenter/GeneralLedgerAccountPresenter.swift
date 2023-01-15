@@ -120,9 +120,9 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
 
     var numberOfDataBaseOpeningJournalEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
-            // 損益振替仕訳
-            if englishFromOfClosingTheLedger0 {
+        if let englishFromOfClosingTheLedger2 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger2 {
+            // 残高振替仕訳
+            if englishFromOfClosingTheLedger2 {
                 // 開始仕訳
                 return dataBaseOpeningJournalEntry == nil ? 0 : 1
             }
@@ -152,10 +152,20 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
 
     var numberOfDataBaseTransferEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
-        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
-            // 損益振替仕訳
-            if englishFromOfClosingTheLedger0 {
-                return dataBaseTransferEntry == nil ? 0 : 1
+        // 損益計算書に関する勘定科目のみに絞る
+        if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+            if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
+                // 損益振替仕訳
+                if englishFromOfClosingTheLedger0 {
+                    return dataBaseTransferEntry == nil ? 0 : 1
+                }
+            }
+        } else {
+            if let englishFromOfClosingTheLedger2 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger2 {
+                // 残高振替仕訳
+                if englishFromOfClosingTheLedger2 {
+                    return dataBaseTransferEntry == nil ? 0 : 1
+                }
             }
         }
         return 0

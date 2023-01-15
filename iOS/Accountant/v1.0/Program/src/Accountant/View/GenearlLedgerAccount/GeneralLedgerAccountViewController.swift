@@ -137,7 +137,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
         case 4:
-            // 損益振替仕訳
+            // 損益振替仕訳、残高振替仕訳
             return presenter.numberOfDataBaseTransferEntry
         default:
             // 空白行

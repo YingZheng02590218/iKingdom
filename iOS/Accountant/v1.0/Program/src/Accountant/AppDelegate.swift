@@ -75,7 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // 資本振替仕訳
                         newObject?["dataBaseCapitalTransferJournalEntry"] = nil
                     }
-
+                    // DataBaseSettingsOperatingオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseSettingsOperating.className()) { oldObject, newObject in
+                        // 残高振替仕訳
+                        newObject?["EnglishFromOfClosingTheLedger2"] = true
+                    }
                 }
             }
         )

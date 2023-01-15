@@ -184,7 +184,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
-                cell.centerLabel.text = "仕訳帳"
+                cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
