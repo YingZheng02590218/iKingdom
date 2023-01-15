@@ -15,12 +15,22 @@ protocol JournalsModelInput {
     
     func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
 
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
-    func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
+    func updateAdjustingJournalEntry(
+        primaryKey: Int,
+        date: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        smallWritting: String,
+        completion: (Int) -> Void
+    )
     
     func initializePDFMaker(completion: ([URL]?) -> Void)
 }
@@ -68,6 +78,16 @@ class JournalsModel: JournalsModelInput {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         let dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
         return dataBaseAdjustingEntries
+    }
+    // 取得　損益振替仕訳　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
+        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
+        print(dataBaseJournalEntries)
+        return dataBaseJournalEntries
     }
     // 取得 資本振替仕訳
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {

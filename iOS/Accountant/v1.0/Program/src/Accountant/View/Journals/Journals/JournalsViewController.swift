@@ -441,8 +441,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳　決算整理仕訳 資本振替仕訳　空白行
-        return 4
+        // 通常仕訳　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
+        return 5
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -454,6 +454,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             // 決算整理仕訳
             return presenter.numberOfobjectsss
         case 2:
+            // 損益振替仕訳
+            return presenter.numberOfDataBaseTransferEntries
+        case 3:
             // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
         default:
@@ -546,23 +549,17 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.listSummaryLabel.text = "\(presenter.objectsss(forRow: indexPath.row).smallWritting) "
             cell.listSummaryLabel.textAlignment = NSTextAlignment.left
             /// 丁数　借方
-            if presenter.objectsss(forRow: indexPath.row).debit_category == "損益" { // 損益勘定の場合
-                cell.listNumberLeftLabel.text = ""
-            } else {
-                print(presenter.objectsss(forRow: indexPath.row).debit_category)
-                let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).debit_category)")  // 丁数を取得
-                cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
-            }
+            let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
+                accountName: presenter.objectsss(forRow: indexPath.row).debit_category
+            )
+            cell.listNumberLeftLabel.text = numberOfAccountLeft.description
             /// 丁数　貸方
-            if presenter.objectsss(forRow: indexPath.row).credit_category == "損益" { // 損益勘定の場合
-                cell.listNumberRightLabel.text = ""
-            } else {
-                print(presenter.objectsss(forRow: indexPath.row).credit_category)
-                let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objectsss(forRow: indexPath.row).credit_category)")    // 丁数を取得
-                cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
-            }
-            cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).debit_amount))) "        // 借方金額
-            cell.listCreditLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).credit_amount))) "      // 貸方金額
+            let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
+                accountName: presenter.objectsss(forRow: indexPath.row).credit_category
+            )
+            cell.listNumberRightLabel.text = numberOfAccountRight.description
+            cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).debit_amount)) // 借方金額
+            cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).credit_amount)) // 貸方金額
 
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
@@ -570,21 +567,66 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .default
 
         } else if indexPath.section == 2 {
+            // 損益振替仕訳
+            print("損益振替仕訳", indexPath)
+            /// 日付
+            let date = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date)"
+            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+            if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
+                // 一行上のセルに表示した月とこの行の月を比較する
+                let upperCellMonth = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row - 1).date)" // 日付
+                // 日付の6文字目にある月の十の位を抽出
+                cell.listDateMonthLabel.text = StringUtility.shared.pickupMonth(date: date, upperCellMonth: upperCellMonth)
+            } else { // 先頭行は月を表示
+                cell.listDateMonthLabel.text = StringUtility.shared.pickupMonth(date: date)
+            }
+            // 日付の9文字目にある日の十の位を抽出
+            cell.listDateLabel.text = StringUtility.shared.pickupDay(date: date)
+            cell.listDateLabel.textAlignment = NSTextAlignment.right
+            /// 借方勘定
+            cell.listSummaryDebitLabel.text = " (\(presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category))"
+            cell.listSummaryDebitLabel.textAlignment = NSTextAlignment.left
+            /// 貸方勘定
+            cell.listSummaryCreditLabel.text = "(\(presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category)) "
+            cell.listSummaryCreditLabel.textAlignment = NSTextAlignment.right
+            /// 小書き
+            cell.listSummaryLabel.text = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).smallWritting) "
+            cell.listSummaryLabel.textAlignment = NSTextAlignment.left
+            /// 丁数　借方
+            if presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category == "損益" { // 損益勘定の場合
+                cell.listNumberLeftLabel.text = ""
+            } else {
+                let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
+                    accountName: presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category
+                )
+                cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
+            }
+            /// 丁数　貸方
+            if presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category == "損益" { // 損益勘定の場合
+                cell.listNumberRightLabel.text = ""
+            } else {
+                let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(
+                    accountName: presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category
+                )
+                cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
+            }
+            cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount)) // 借方金額
+            cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount)) // 貸方金額
+
+            // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+            cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date))
+            // セルの選択を許可
+            cell.selectionStyle = .default
+
+        } else if indexPath.section == 3 {
             // 資本振替仕訳
             print("資本振替仕訳", indexPath)
             if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
-                // ② todo 借方の場合は左寄せ、貸方の場合は右寄せ。小書きは左寄せ。
                 /// 日付
                 let date = "\(dataBaseCapitalTransferJournalEntry.date)"
                 // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-                if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                    // 一行上のセルに表示した月とこの行の月を比較する
-                    let upperCellMonth = "\(presenter.objectsss(forRow: indexPath.row - 1).date)" // 日付
-                    // 日付の6文字目にある月の十の位を抽出
-                    cell.listDateMonthLabel.text = StringUtility.shared.pickupMonth(date: date, upperCellMonth: upperCellMonth)
-                } else { // 先頭行は月を表示
-                    cell.listDateMonthLabel.text = StringUtility.shared.pickupMonth(date: date)
-                }
+                // 先頭行は月を表示
+                cell.listDateMonthLabel.text = StringUtility.shared.pickupMonth(date: date)
                 // 日付の9文字目にある日の十の位を抽出
                 cell.listDateLabel.text = StringUtility.shared.pickupDay(date: date)
                 cell.listDateLabel.textAlignment = NSTextAlignment.right
@@ -609,20 +651,18 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                     cell.listNumberLeftLabel.text = ""
                 } else {
-                    print(dataBaseCapitalTransferJournalEntry.debit_category)
-                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")  // 丁数を取得
-                    cell.listNumberLeftLabel.text = numberOfAccountLeft.description                                // 丁数　借方
+                    let numberOfAccountLeft = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: Constant.capitalAccountName) // 丁数を取得
+                    cell.listNumberLeftLabel.text = numberOfAccountLeft.description
                 }
                 /// 丁数　貸方
                 if dataBaseCapitalTransferJournalEntry.credit_category == "損益" { // 損益勘定の場合
                     cell.listNumberRightLabel.text = ""
                 } else {
-                    print(dataBaseCapitalTransferJournalEntry.credit_category)
-                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(Constant.capitalAccountName)")    // 丁数を取得
-                    cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
+                    let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: Constant.capitalAccountName) // 丁数を取得
+                    cell.listNumberRightLabel.text = numberOfAccountRight.description
                 }
-                cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.debit_amount))) "        // 借方金額
-                cell.listCreditLabel.text = "\(StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.credit_amount))) "      // 貸方金額
+                cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.debit_amount)) // 借方金額
+                cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.credit_amount)) // 貸方金額
 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date))

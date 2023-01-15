@@ -18,10 +18,12 @@ protocol JournalsPresenterInput {
     
     var numberOfobjects: Int { get }
     var numberOfobjectsss: Int { get }
+    var numberOfDataBaseTransferEntries: Int { get }
     var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
 
     func objects(forRow row: Int) -> DataBaseJournalEntry
     func objectsss(forRow row: Int) -> DataBaseAdjustingEntry
+    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
 
     var PDFpath: [URL]? { get }
@@ -64,6 +66,8 @@ final class JournalsPresenter: JournalsPresenterInput {
     private var objects: Results<DataBaseJournalEntry>
     // 決算整理仕訳
     private var objectsss: Results<DataBaseAdjustingEntry>
+    // 損益振替仕訳
+    private var dataBaseTransferEntries: Results<DataBaseTransferEntry>
     // 資本振替仕訳
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
 
@@ -81,6 +85,8 @@ final class JournalsPresenter: JournalsPresenterInput {
         objects = model.getJournalEntriesInJournals()
         // 決算整理仕訳
         objectsss = model.getJournalAdjustingEntry()
+        // 損益振替仕訳
+        dataBaseTransferEntries = model.getTransferEntryInAccount()
         // 資本振替仕訳
         dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
     }
@@ -102,6 +108,8 @@ final class JournalsPresenter: JournalsPresenterInput {
         objects = model.getJournalEntriesInJournals()
         // 決算整理仕訳
         objectsss = model.getJournalAdjustingEntry()
+        // 損益振替仕訳
+        dataBaseTransferEntries = model.getTransferEntryInAccount()
         // 資本振替仕訳
         dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
 
@@ -134,6 +142,23 @@ final class JournalsPresenter: JournalsPresenterInput {
         objectsss[row]
     }
 
+    var numberOfDataBaseTransferEntries: Int {
+        let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
+        if let englishFromOfClosingTheLedger0 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger0 {
+            // 損益振替仕訳
+            if englishFromOfClosingTheLedger0 {
+                return dataBaseTransferEntries.count
+            } else {
+                return 0
+            }
+        }
+        return 0
+    }
+
+    func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry {
+        dataBaseTransferEntries[row]
+    }
+
     var numberOfDataBaseCapitalTransferJournalEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
@@ -158,6 +183,8 @@ final class JournalsPresenter: JournalsPresenterInput {
                 objects = model.getJournalEntriesInJournals()
                 // 決算整理仕訳
                 objectsss = model.getJournalAdjustingEntry()
+                // 損益振替仕訳
+                dataBaseTransferEntries = model.getTransferEntryInAccount()
                 // 資本振替仕訳
                 dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
                 
@@ -192,6 +219,8 @@ final class JournalsPresenter: JournalsPresenterInput {
             objects = model.getJournalEntriesInJournals()
             // 決算整理仕訳
             objectsss = model.getJournalAdjustingEntry()
+            // 損益振替仕訳
+            dataBaseTransferEntries = model.getTransferEntryInAccount()
             // 資本振替仕訳
             dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
 
@@ -287,6 +316,8 @@ final class JournalsPresenter: JournalsPresenterInput {
         objects = model.getJournalEntriesInJournals()
         // 決算整理仕訳
         objectsss = model.getJournalAdjustingEntry()
+        // 損益振替仕訳
+        dataBaseTransferEntries = model.getTransferEntryInAccount()
         // 資本振替仕訳
         dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
 
