@@ -1,5 +1,5 @@
 //
-//  AfterClosingTrialBalanceViewController.swift
+//  OpeningBalanceViewController.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2023/01/15.
@@ -10,19 +10,19 @@ import EMTNeumorphicView
 import GoogleMobileAds // マネタイズ対応
 import UIKit
 
-// 繰越試算表 afterClosingTrialBalance
-class AfterClosingTrialBalanceViewController: UIViewController {
+// 開始残高 openingBalance
+class OpeningBalanceViewController: UIViewController {
 
     // MARK: - var let
 
     var gADBannerView: GADBannerView!
-    /// 繰越試算表　上部
+    /// 開始残高　上部
     @IBOutlet private var companyNameLabel: UILabel!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var closingDateLabel: UILabel!
 
     @IBOutlet private var printButton: UIButton!
-    /// 繰越試算表　下部
+    /// 開始残高　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
 
@@ -31,9 +31,16 @@ class AfterClosingTrialBalanceViewController: UIViewController {
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
 
+    // 設定残高振替仕訳　連番
+var primaryKey: Int = 0
+    // 勘定科目名
+    var category: String = ""
+    // 電卓画面で入力中の金額は、借方か貸方か
+    var debitOrCredit: DebitOrCredit = .credit
+
     /// GUIアーキテクチャ　MVP
-    private var presenter: AfterClosingTrialBalancePresenterInput!
-    func inject(presenter: AfterClosingTrialBalancePresenterInput) {
+    private var presenter: OpeningBalancePresenterInput!
+    func inject(presenter: OpeningBalancePresenterInput) {
         self.presenter = presenter
     }
 
@@ -42,7 +49,7 @@ class AfterClosingTrialBalanceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter = AfterClosingTrialBalancePresenter.init(view: self, model: AfterClosingTrialBalanceModel())
+        presenter = OpeningBalancePresenter.init(view: self, model: OpeningBalanceModel())
         inject(presenter: presenter)
 
         presenter.viewDidLoad()
@@ -101,7 +108,7 @@ class AfterClosingTrialBalanceViewController: UIViewController {
     }
 }
 
-extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableViewDataSource {
+extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Table view data source
 
@@ -113,14 +120,31 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row < presenter.numberOfobjects {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
-            // 勘定科目をセルに表示する
-            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
-            cell.accountLabel.textAlignment = NSTextAlignment.center
-            // 残高　借方
-            cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
-            // 残高　貸方
-            cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? OpeningBalanceTableViewCell else { return UITableViewCell() }
+            // delegate設定
+            cell.delegate = self
+
+            var account = ""
+            var valueDebitText: Int64 = 0
+            var valueCreditText: Int64 = 0
+
+            if presenter.objects(forRow: indexPath.row).debit_category == "残高" { // 借方
+                account = presenter.objects(forRow: indexPath.row).credit_category
+                valueCreditText = presenter.objects(forRow: indexPath.row).credit_amount
+            } else if presenter.objects(forRow: indexPath.row).credit_category == "残高" { // 貸方
+                account = presenter.objects(forRow: indexPath.row).debit_category
+                valueDebitText = presenter.objects(forRow: indexPath.row).debit_amount
+            }
+
+            cell.setup(
+                primaryKey: presenter.objects(forRow: indexPath.row).number,
+                category: account,
+                valueDebitText: "\(valueDebitText)",
+                valueCreditText: "\(valueCreditText)"
+            ) { (textFieldAmountDebit, textFieldAmountCredit) in
+                cell.debitLabel.text = textFieldAmountDebit.text
+                cell.creditLabel.text = textFieldAmountCredit.text
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
@@ -132,13 +156,54 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
             if cell.debitLabel.text != cell.creditLabel.text {
                 cell.debitLabel.textColor = .red
                 cell.creditLabel.textColor = .red
+            } else {
+                cell.debitLabel.textColor = .textColor
+                cell.creditLabel.textColor = .textColor
             }
             return cell
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue.destinationの型はUIViewController
+        if let controller = segue.destination as? ClassicCalculatorViewController {
+
+            controller.primaryKey = primaryKey
+            controller.debitOrCredit = debitOrCredit
+            controller.category = category
+        }
+    }
+
+    // 金額　電卓画面で入力した値を表示させる
+    func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit) {
+        // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
+        print(numbersOnDisplay, category, debitOrCredit)
+
+        presenter.setAmountValue(primaryKey: primaryKey, numbersOnDisplay: numbersOnDisplay, category: category, debitOrCredit: debitOrCredit)
+    }
 }
 
-extension AfterClosingTrialBalanceViewController: AfterClosingTrialBalancePresenterOutput {
+extension OpeningBalanceViewController: InputTextTableCellDelegate {
+    // MARK: - InputTextTableCellDelegate
+    // テキストフィールがタップされ、入力可能になったあと
+    func textFieldDidBeginEditing(primaryKey: Int, category: String, debitOrCredit: DebitOrCredit) {
+        // 設定残高振替仕訳　連番
+        self.primaryKey = primaryKey
+        // 勘定科目名
+        self.category = category
+        // 借方金額　貸方金額
+        self.debitOrCredit = debitOrCredit
+
+        self.view.endEditing(true)
+    }
+}
+
+extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
+
+    func reloadData() {
+
+        tableView.reloadData()
+    }
 
     func setupViewForViewDidLoad() {
         // UI
@@ -166,8 +231,8 @@ extension AfterClosingTrialBalanceViewController: AfterClosingTrialBalancePresen
                 }
             }
         }
-        titleLabel.text = " 繰越試算表"
-        self.navigationItem.title = " 繰越試算表"
+        titleLabel.text = " 開始残高"
+        self.navigationItem.title = " 開始残高"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
         // 要素数が少ないUITableViewで残りの部分や余白を消す
@@ -201,6 +266,11 @@ extension AfterClosingTrialBalanceViewController: AfterClosingTrialBalancePresen
             // GADBannerView を外す
             removeBannerViewToView(gADBannerView)
         }
+        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+        let databaseManager = TBModel()
+        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+
     }
 
     func setupViewForViewDidAppear() {

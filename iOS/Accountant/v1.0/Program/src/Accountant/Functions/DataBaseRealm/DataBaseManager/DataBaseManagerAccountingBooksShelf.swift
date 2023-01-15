@@ -25,7 +25,8 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     func addAccountingBooksShelf(company: String) -> Int {
         // オブジェクトを作成 会計帳簿棚
         let dataBaseAccountingBooksShelf = DataBaseAccountingBooksShelf(
-            companyName: company
+            companyName: company,
+            dataBaseOpeningBalanceAccount: nil
         )
         // (2)書き込みトランザクション内でデータを追加する
         var number = 0
@@ -60,7 +61,31 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseAccountingBooksShelf.self, key: 1) else { return "" }
         return object.companyName // 事業者名を返す
     }
-    
+
+    /**
+     * 会計帳簿.開始残高 オブジェクトを取得するメソッド
+     * 開始残高を取得する
+     */
+    func getOpeningBalanceAccount() -> DataBaseOpeningBalanceAccount? {
+        guard let dataBaseAccountingBooksShelf = RealmManager.shared.readWithPrimaryKey(
+            type: DataBaseAccountingBooksShelf.self,
+            key: 1
+        ) else { return nil }
+        let dataBaseAccount = dataBaseAccountingBooksShelf.dataBaseOpeningBalanceAccount
+        return dataBaseAccount
+    }
+
+    /**
+     * 設定残高振替仕訳 オブジェクトを取得するメソッド
+     * 設定残高振替仕訳を取得する
+     */
+    func getTransferEntriesInOpeningBalanceAccount() -> Results<SettingDataBaseTransferEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: SettingDataBaseTransferEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高"))
+        ])
+        return objects
+    }
+
     // MARK: Update
     
     // モデルオブフェクトの更新
@@ -77,6 +102,34 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
             print("エラーが発生しました")
         }
     }
+    // 更新 設定残高振替仕訳
+    func updateJournalEntry(
+        primaryKey: Int,
+        debitCategory: String,
+        debitAmount: Int, // 電卓で入力する場合は、Int64でなくてよい
+        creditCategory: String,
+        creditAmount: Int, // 電卓で入力する場合は、Int64でなくてよい
+        completion: (Int) -> Void
+    ) {
+        do {
+            // 編集する仕訳
+            try DataBaseManager.realm.write {
+                let value: [String: Any] = [
+                    "number": primaryKey,
+                    "date": "",
+                    "debit_category": debitCategory,
+                    "debit_amount": debitAmount,
+                    "credit_category": creditCategory,
+                    "credit_amount": creditAmount,
+                    "smallWritting": ""
+                ]
+                DataBaseManager.realm.create(SettingDataBaseTransferEntry.self, value: value, update: .modified) // 一部上書き更新
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
     
     // MARK: Delete
+
 }

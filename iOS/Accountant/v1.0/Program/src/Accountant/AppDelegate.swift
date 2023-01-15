@@ -49,6 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 // スキーマバージョン
                 if oldSchemaVersion < 2 {
+                    // DataBaseAccountingBooksShelfオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseAccountingBooksShelf.className()) { oldObject, newObject in
+                        // 開始残高
+                        newObject?["dataBaseOpeningBalanceAccount"] = nil
+                    }
                     // DataBaseAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
                         // 損益振替仕訳

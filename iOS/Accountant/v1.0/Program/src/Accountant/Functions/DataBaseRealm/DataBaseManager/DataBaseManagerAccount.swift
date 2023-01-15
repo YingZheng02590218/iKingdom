@@ -246,9 +246,16 @@ class DataBaseManagerAccount {
             }
         } else {
             // 前年度の会計帳簿　が存在しない
-            // TODO: 初期設定開始残高勘定を参照する
             return nil
         }
+    }
+    // 取得　開始仕訳（設定開始残高勘定の残高振替仕訳） 勘定別に取得
+    func getSettingDataBaseTransferEntryInAccountLastYear(account: String) -> SettingDataBaseTransferEntry? {
+            // TODO: 初期設定開始残高勘定を参照する
+            var settingDataBaseTransferEntries = DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
+            settingDataBaseTransferEntries = settingDataBaseTransferEntries
+                .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+            return settingDataBaseTransferEntries.first
     }
 
     // MARK: Update
@@ -370,6 +377,97 @@ class DataBaseManagerAccount {
                     }
                 }
                 //        }
+            } else {
+                // 前年度の残高振替仕訳を取得
+                if let dataBaseTransferEntry = DataBaseManagerAccount.shared.getSettingDataBaseTransferEntryInAccountLastYear(
+                    account: account
+                ) {
+                var account: String = "" // 開始仕訳の相手勘定
+                if dataBaseTransferEntry.debit_category == "残高" {
+                    account = dataBaseTransferEntry.credit_category
+                } else if dataBaseTransferEntry.credit_category == "残高" {
+                    account = dataBaseTransferEntry.debit_category
+                }
+                var number = 0 // 仕訳番号 自動採番にした
+                let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+                // 期首
+                let beginningOfYearDate = DateManager.shared.getBeginningOfYearDate()
+                // オブジェクトを作成
+                let dataBaseJournalEntry = DataBaseOpeningJournalEntry(
+                    fiscalYear: dataBaseAccountingBook.fiscalYear, // 年度
+                    date: beginningOfYearDate,
+                    debit_category: dataBaseTransferEntry.credit_category, // 借方勘定　＊引数の貸方勘定を振替える
+                    debit_amount: dataBaseTransferEntry.credit_amount, // 借方金額
+                    credit_category: dataBaseTransferEntry.debit_category, // 貸方勘定　＊引数の借方勘定を振替える
+                    credit_amount: dataBaseTransferEntry.debit_amount, // 貸方金額
+                    smallWritting: "開始仕訳", // 小書き
+                    balance_left: 0,
+                    balance_right: 0
+                )
+                // 開始仕訳　が1件超が存在する場合は　削除
+                let objects = checkOpeningJournalEntry(account: account)
+            outerLoop: while objects.count > 1 {
+                for i in 0..<objects.count {
+                    let isInvalidated = deleteOpeningJournalEntry(primaryKey: objects[i].number)
+                    print("削除", isInvalidated, objects.count, "開始仕訳　連番", objects.first?.number)
+                    continue outerLoop
+                }
+                break
+            }
+                if let dataBaseOpeningJournalEntry = getOpeningJournalEntryInAccount(account: account) { // 勘定内に仕訳が存在するか
+                    // 諸勘定の開始仕訳にリレーションがある場合
+                    print(dataBaseOpeningJournalEntry)
+                } else {
+                    // 諸勘定の開始仕訳にリレーションがない場合　開始仕訳を全削除
+                outerLoop: while objects.count >= 1 {
+                    for i in 0..<objects.count {
+                        let isInvalidated = deleteOpeningJournalEntry(primaryKey: objects[i].number)
+                        print("関連削除", isInvalidated, objects.count)
+                        continue outerLoop
+                    }
+                    break
+                }
+                }
+                // 取得　開始仕訳 勘定別に取得
+                if let dataBaseOpeningJournalEntry = DataBaseManagerAccount.shared.getOpeningJournalEntryInAccount(account: account) {
+                    // 開始仕訳　が存在する場合は　更新
+                    number = updateOpeningJournalEntry(
+                        primaryKey: dataBaseOpeningJournalEntry.number,
+                        date: dataBaseJournalEntry.date,
+                        debitCategory: dataBaseJournalEntry.debit_category,
+                        debitAmount: Int64(dataBaseJournalEntry.debit_amount), // カンマを削除してからデータベースに書き込む
+                        creditCategory: dataBaseJournalEntry.credit_category,
+                        creditAmount: Int64(dataBaseJournalEntry.credit_amount),// カンマを削除してからデータベースに書き込む
+                        smallWritting: dataBaseJournalEntry.smallWritting
+                    )
+                } else {
+                    // 開始仕訳　が存在しない場合は　作成
+                    //            if amount != 0 {
+                    number = dataBaseJournalEntry.save() // 仕訳番号　自動採番
+                    print(number)
+                    do {
+                        // 相手方の勘定
+                        if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
+                            if account == Constant.capitalAccountName || account == "資本金勘定" {
+                                try DataBaseManager.realm.write {
+                                    dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseOpeningJournalEntry = dataBaseJournalEntry
+                                }
+                            } else {
+                                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                                    try DataBaseManager.realm.write {
+                                        // 開始仕訳データを代入
+                                        dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseOpeningJournalEntry = dataBaseJournalEntry
+                                    }
+                                    break
+                                }
+                            }
+                        }
+                    } catch {
+                        print("エラーが発生しました")
+                    }
+                }
+                //        }
+                }
             }
         }
     }

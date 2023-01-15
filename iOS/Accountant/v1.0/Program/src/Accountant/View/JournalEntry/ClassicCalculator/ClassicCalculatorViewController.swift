@@ -37,7 +37,14 @@ class ClassicCalculatorViewController: UIViewController {
     
     @IBOutlet private var buttonDot: UIButton!
     @IBOutlet private var buttonEqual: EMTNeumorphicButton!
-    
+
+    // 設定残高振替仕訳　連番
+    var primaryKey: Int = 0
+    // 勘定科目名
+    var category: String = ""
+    // 電卓画面で入力中の金額は、借方か貸方か
+    var debitOrCredit: DebitOrCredit = .credit
+
     /// 演算の種類
     var hugoBox: FourArithmeticOperations = .undefined // String?
     /// 1つ目の値
@@ -463,7 +470,72 @@ class ClassicCalculatorViewController: UIViewController {
     @objc func clickEqual(_ sender: UIButton) {
  
 //        calculate()
-        
+
+        // 開始残高画面からの遷移の場合
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+           let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+           let navigationController = splitViewController.viewControllers[0] as? UINavigationController { // スプリットコントローラから、現在選択されているコントローラを取得する
+            let navigationController2: UINavigationController
+            // iPadとiPhoneで動きが変わるので分岐する
+            if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+                //        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
+                print(splitViewController.viewControllers.count)
+                if let navigationController0 = splitViewController.viewControllers[0] as? UINavigationController, // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                   let navigationController1 = navigationController0.viewControllers[1] as? UINavigationController {
+                    navigationController2 = navigationController1
+                    print(navigationController0.viewControllers.count)
+                    print(navigationController0.viewControllers[1])
+                    print(navigationController2.viewControllers.count)
+                    print(navigationController2.viewControllers[0])
+                    print("iPad ビューコントローラーの階層")
+                    //            print("splitViewController[0]      : ", splitViewController.viewControllers[0])     // UINavigationController
+                    //            print("splitViewController[1]      : ", splitViewController.viewControllers[1] )    // UINavigationController
+                    //            print("  navigationController[0]   : ", navigationController.viewControllers[0])    // SettingsTableViewController
+                    //            print("    navigationController2[0]: ", navigationController2.viewControllers[0])   // OpeningBalanceViewController
+                    if let presentingViewController = navigationController2.viewControllers[0] as? OpeningBalanceViewController { // 呼び出し元のビューコントローラーを取得
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                            presentingViewController.setAmountValue(
+                                primaryKey: self.primaryKey,
+                                numbersOnDisplay: self.numbersOnDisplay,
+                                category: self.category,
+                                debitOrCredit: self.debitOrCredit
+                            )
+                        })
+                    }
+                }
+            } else { // iPhone
+                print(splitViewController.viewControllers.count)
+                if let navigationController1 = navigationController.viewControllers[1] as? UINavigationController {
+                    navigationController2 = navigationController1
+                    //             navigationController2 = navigationController.viewControllers[0] as! UINavigationController // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                    print("iPhone ビューコントローラーの階層")
+                    print("splitViewController[0]      : ", splitViewController.viewControllers[0])     // UINavigationController
+                    print("  navigationController[0]   : ", navigationController.viewControllers[0])    // SettingsTableViewController
+                    print("  navigationController[1]   : ", navigationController.viewControllers[1])    // UINavigationController
+                    print("    navigationController2[0]: ", navigationController2.viewControllers[0])   // OpeningBalanceViewController
+                    if let presentingViewController = navigationController2.viewControllers[0] as? OpeningBalanceViewController { // 呼び出し元のビューコントローラーを取得
+                        self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                            // ViewController(電卓画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                            presentingViewController.setAmountValue(
+                                primaryKey: self.primaryKey,
+                                numbersOnDisplay: self.numbersOnDisplay,
+                                category: self.category,
+                                debitOrCredit: self.debitOrCredit
+                            )
+                        })
+                    }
+                }
+            }
+        }
+
+        if let presentingViewController2 = presentingViewController as? OpeningBalanceViewController {
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController2] () -> Void in
+
+            })
+            return
+        }
         // 仕訳帳、決算整理仕訳、仕訳編集画面からの遷移の場合
         if let presentingViewController2 = presentingViewController as? JournalEntryViewController {
             // viewWillAppearを呼び出す　更新のため
