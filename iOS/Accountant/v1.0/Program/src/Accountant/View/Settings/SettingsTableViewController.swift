@@ -35,13 +35,6 @@ class SettingsTableViewController: UIViewController {
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
 
-        scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = 160
-        scrollView.parallaxHeader.mode = .fill
-        scrollView.parallaxHeader.minimumHeight = 0
-        scrollView.contentSize = contentView.frame.size
-        scrollView.flashScrollIndicators()
-
         self.navigationItem.title = "設定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -55,6 +48,18 @@ class SettingsTableViewController: UIViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
+        scrollView.parallaxHeader.mode = .center
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
+    }
+
 
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc func switchTriggered(sender: UISwitch) {
