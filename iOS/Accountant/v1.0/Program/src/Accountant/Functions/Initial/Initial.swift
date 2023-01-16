@@ -110,6 +110,11 @@ class Initial {
             let number = DataBaseManagerAccountingBooksShelf.shared.addAccountingBooksShelf(company: "事業者名")
             print(number)
         }
+        // 財務諸表に、繰越試算表が作成されていなければ、作成する
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+        for dataBaseAccountingBook in dataBaseAccountingBooks where dataBaseAccountingBook.dataBaseFinancialStatements?.afterClosingTrialBalance == nil {
+            DataBaseManagerFinancialStatements.shared.addAfterClosingTrialBalanceToFinancialStatements(number: dataBaseAccountingBook.number)
+        }
         // 会計帳簿
         initializeAccountingBooks()
     }
