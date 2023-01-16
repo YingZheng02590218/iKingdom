@@ -87,7 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     // DataBaseSettingsOperatingオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseSettingsOperating.className()) { oldObject, newObject in
-                        // 残高振替仕訳
+                        // 損益振替仕訳 初期値はON
+                        newObject?["EnglishFromOfClosingTheLedger0"] = true
+                        // 資本振替仕訳 初期値はON
+                        newObject?["EnglishFromOfClosingTheLedger1"] = true
+                        // 残高振替仕訳 初期値はON
                         newObject?["EnglishFromOfClosingTheLedger2"] = true
                     }
                 }
