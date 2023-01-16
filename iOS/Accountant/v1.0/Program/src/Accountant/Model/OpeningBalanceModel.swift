@@ -36,6 +36,40 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
 
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 0) // 貸借対照表　資産 負債 純資産
         if let dataBaseOpeningBalanceAccount = DataBaseManagerAccountingBooksShelf.shared.getOpeningBalanceAccount() {
+            // 開始残高勘定がある場合
+        } else {
+            // 開始残高勘定がない場合
+            // オブジェクトを作成 開始残高勘定
+            let dataBaseAccount = DataBaseOpeningBalanceAccount(
+                fiscalYear: 0,
+                accountName: "開始残高",
+                debit_total: 0,
+                credit_total: 0,
+                debit_balance: 0,
+                credit_balance: 0,
+                debit_total_Adjusting: 0,
+                credit_total_Adjusting: 0,
+                debit_balance_Adjusting: 0,
+                credit_balance_Adjusting: 0,
+                debit_total_AfterAdjusting: 0,
+                credit_total_AfterAdjusting: 0,
+                debit_balance_AfterAdjusting: 0,
+                credit_balance_AfterAdjusting: 0
+            )
+            let numberr = dataBaseAccount.save() //　自動採番
+            print("dataBaseOpeningBalanceAccount", numberr)
+
+            do {
+                try DataBaseManager.realm.write {
+
+                    dataBaseAccountingBooksShelf.dataBaseOpeningBalanceAccount = dataBaseAccount
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+        // 開始残高勘定がある場合
+        if let dataBaseOpeningBalanceAccount = DataBaseManagerAccountingBooksShelf.shared.getOpeningBalanceAccount() {
             // 設定勘定科目　貸借科目
             for dataBaseSettingsTaxonomyAccount in dataBaseSettingsTaxonomyAccounts {
                 // 設定残高振替仕訳 が存在するか
@@ -46,7 +80,6 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                     // 正常
                     print(dataBaseTransferEntries)
                 } else if dataBaseTransferEntries.count > 1 {
-
                     // 設定開始仕訳　が1件超が存在する場合は　削除
                 outerLoop: while dataBaseTransferEntries.count > 1 {
                     for i in 0..<dataBaseTransferEntries.count {
@@ -82,35 +115,6 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                     }
                 }
             }
-        } else {
-            // オブジェクトを作成 開始残高勘定
-            let dataBaseAccount = DataBaseOpeningBalanceAccount(
-                fiscalYear: 0,
-                accountName: "開始残高",
-                debit_total: 0,
-                credit_total: 0,
-                debit_balance: 0,
-                credit_balance: 0,
-                debit_total_Adjusting: 0,
-                credit_total_Adjusting: 0,
-                debit_balance_Adjusting: 0,
-                credit_balance_Adjusting: 0,
-                debit_total_AfterAdjusting: 0,
-                credit_total_AfterAdjusting: 0,
-                debit_balance_AfterAdjusting: 0,
-                credit_balance_AfterAdjusting: 0
-            )
-            let numberr = dataBaseAccount.save() //　自動採番
-            print("dataBaseOpeningBalanceAccount", numberr)
-
-            do {
-                try DataBaseManager.realm.write {
-
-                    dataBaseAccountingBooksShelf.dataBaseOpeningBalanceAccount = dataBaseAccount
-                }
-            } catch {
-                print("エラーが発生しました")
-            }
         }
     }
 
@@ -145,9 +149,9 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit) {
         DataBaseManagerAccountingBooksShelf.shared.updateJournalEntry(
             primaryKey: primaryKey,
-            debitCategory: debitOrCredit == .debit ? category : "残高",
+            debitCategory: debitOrCredit == .debit ? "残高" : category,
             debitAmount: numbersOnDisplay,
-            creditCategory: debitOrCredit == .credit ? category : "残高",
+            creditCategory: debitOrCredit == .credit ? "残高" : category,
             creditAmount: numbersOnDisplay,
             completion: { primaryKey in
                 print("Result is \(primaryKey)")
@@ -161,15 +165,12 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
         var right: Int64 = 0
 
         let objects = DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
-        for i in 0..<objects.count { // 勘定内のすべての仕訳データ
+        for i in 0..<objects.count {
             // 勘定が借方と貸方のどちらか
-            var account: String = "" // 開始仕訳の相手勘定
-            if objects[i].credit_category == "残高" {
-                account = objects[i].credit_category
-                left += objects[i].credit_amount // 累計額に追加
-            } else if objects[i].debit_category == "残高" {
-                account = objects[i].debit_category
-                right += objects[i].debit_amount // 累計額に追加
+            if objects[i].debit_category == "残高" {
+                left += objects[i].debit_amount // 累計額に追加
+            } else if objects[i].credit_category == "残高" {
+                right += objects[i].credit_amount // 累計額に追加
             }
         }
         if let dataBaseOpeningBalanceAccount = DataBaseManagerAccountingBooksShelf.shared.getOpeningBalanceAccount() {

@@ -32,7 +32,7 @@ class OpeningBalanceViewController: UIViewController {
     //    let edged = false
 
     // 設定残高振替仕訳　連番
-var primaryKey: Int = 0
+    var primaryKey: Int = 0
     // 勘定科目名
     var category: String = ""
     // 電卓画面で入力中の金額は、借方か貸方か
@@ -129,11 +129,11 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
             var valueCreditText: Int64 = 0
 
             if presenter.objects(forRow: indexPath.row).debit_category == "残高" { // 借方
-                account = presenter.objects(forRow: indexPath.row).credit_category
-                valueCreditText = presenter.objects(forRow: indexPath.row).credit_amount
-            } else if presenter.objects(forRow: indexPath.row).credit_category == "残高" { // 貸方
-                account = presenter.objects(forRow: indexPath.row).debit_category
+                account = presenter.objects(forRow: indexPath.row).credit_category // 相手勘定科目名
                 valueDebitText = presenter.objects(forRow: indexPath.row).debit_amount
+            } else if presenter.objects(forRow: indexPath.row).credit_category == "残高" { // 貸方
+                account = presenter.objects(forRow: indexPath.row).debit_category // 相手勘定科目名
+                valueCreditText = presenter.objects(forRow: indexPath.row).credit_amount
             }
 
             cell.setup(
@@ -266,11 +266,6 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
             // GADBannerView を外す
             removeBannerViewToView(gADBannerView)
         }
-        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
-        let databaseManager = TBModel()
-        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
-        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
-
     }
 
     func setupViewForViewDidAppear() {

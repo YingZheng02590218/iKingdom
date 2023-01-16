@@ -83,7 +83,7 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         let objects = RealmManager.shared.readWithPredicate(type: SettingDataBaseTransferEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高"))
         ])
-        return objects
+        return objects.sorted(byKeyPath: "number", ascending: true)
     }
 
     // MARK: Update

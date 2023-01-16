@@ -251,11 +251,11 @@ class DataBaseManagerAccount {
     }
     // 取得　開始仕訳（設定開始残高勘定の残高振替仕訳） 勘定別に取得
     func getSettingDataBaseTransferEntryInAccountLastYear(account: String) -> SettingDataBaseTransferEntry? {
-            // TODO: 初期設定開始残高勘定を参照する
-            var settingDataBaseTransferEntries = DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
-            settingDataBaseTransferEntries = settingDataBaseTransferEntries
-                .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
-            return settingDataBaseTransferEntries.first
+        // 初期設定開始残高勘定を参照する
+        var settingDataBaseTransferEntries = DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
+        settingDataBaseTransferEntries = settingDataBaseTransferEntries
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+        return settingDataBaseTransferEntries.first
     }
 
     // MARK: Update
@@ -378,7 +378,7 @@ class DataBaseManagerAccount {
                 }
                 //        }
             } else {
-                // 前年度の残高振替仕訳を取得
+                // 前年度の残高振替仕訳を取得（設定開始残高勘定の残高振替仕訳）
                 if let dataBaseTransferEntry = DataBaseManagerAccount.shared.getSettingDataBaseTransferEntryInAccountLastYear(
                     account: account
                 ) {
