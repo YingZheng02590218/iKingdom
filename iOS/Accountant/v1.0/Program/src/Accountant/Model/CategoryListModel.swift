@@ -47,11 +47,11 @@ class CategoryListModel: CategoryListModelInput {
             if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: tag) {
                 // 設定開始残高勘定の設定残高振替仕訳があれば、削除する
                 // 設定開始残高勘定
-                let settingDataBaseTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: dataBaseSettingsTaxonomyAccount.category) // 設定残高振替仕訳データを確認する
-                print(settingDataBaseTransferEntry)
+                let dataBaseSettingTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: dataBaseSettingsTaxonomyAccount.category) // 設定残高振替仕訳データを確認する
+                print(dataBaseSettingTransferEntry)
                 // 設定残高振替仕訳を削除
-                for _ in 0..<settingDataBaseTransferEntry.count {
-                    let isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: settingDataBaseTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+                for _ in 0..<dataBaseSettingTransferEntry.count {
+                    let isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: dataBaseSettingTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
                     print(isInvalidated6)
                 }
             }

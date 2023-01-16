@@ -17,7 +17,7 @@ protocol OpeningBalanceModelInput {
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit)
 
     func getTotalAmount(leftOrRight: Int) -> Int64
-    func getDataBaseTransferEntries() -> Results<SettingDataBaseTransferEntry>
+    func getDataBaseTransferEntries() -> Results<DataBaseSettingTransferEntry>
 }
 
 // 繰越試算表クラス
@@ -83,7 +83,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                     // 設定開始仕訳　が1件超が存在する場合は　削除
                 outerLoop: while dataBaseTransferEntries.count > 1 {
                     for i in 0..<dataBaseTransferEntries.count {
-                        let isInvalidated = deleteSettingDataBaseTransferEntry(primaryKey: dataBaseTransferEntries[i].number)
+                        let isInvalidated = deleteSettingTransferEntry(primaryKey: dataBaseTransferEntries[i].number)
                         print("関連削除", isInvalidated, dataBaseTransferEntries.count)
                         continue outerLoop
                     }
@@ -91,7 +91,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                 }
                 } else {
                     // 設定残高振替仕訳
-                    let dataBaseJournalEntry = SettingDataBaseTransferEntry(
+                    let dataBaseJournalEntry = DataBaseSettingTransferEntry(
                         fiscalYear: 0,
                         date: "",
                         debit_category: dataBaseSettingsTaxonomyAccount.category,
@@ -103,7 +103,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                         balance_right: 0
                     )
                     let numberr = dataBaseJournalEntry.save() //　自動採番
-                    print("SettingDataBaseTransferEntry", numberr)
+                    print("DataBaseSettingTransferEntry", numberr)
 
                     do {
                         try DataBaseManager.realm.write {
@@ -120,7 +120,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
 
     // MARK: Read
 
-    func getDataBaseTransferEntries() -> Results<SettingDataBaseTransferEntry> {
+    func getDataBaseTransferEntries() -> Results<DataBaseSettingTransferEntry> {
         DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
     }
 
@@ -202,8 +202,8 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
 
     // MARK: Delete
     // 削除 設定残高振替仕訳
-    func deleteSettingDataBaseTransferEntry(primaryKey: Int) -> Bool {
-        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: SettingDataBaseTransferEntry.self, key: primaryKey) else { return false }
+    func deleteSettingTransferEntry(primaryKey: Int) -> Bool {
+        guard let dataBaseJournalEntry = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingTransferEntry.self, key: primaryKey) else { return false }
         var account: String = "" // 相手勘定
         if dataBaseJournalEntry.debit_category == "残高" {
             account = dataBaseJournalEntry.credit_category

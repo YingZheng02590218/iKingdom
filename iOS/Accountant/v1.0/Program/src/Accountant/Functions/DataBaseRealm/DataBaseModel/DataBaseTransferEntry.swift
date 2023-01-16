@@ -14,6 +14,6 @@ class DataBaseTransferEntry: DataBaseJournalEntry {
 
 }
 // 設定残高振替仕訳クラス 開始残高で使用する
-class SettingDataBaseTransferEntry: DataBaseJournalEntry {
+class DataBaseSettingTransferEntry: DataBaseJournalEntry {
 
 }

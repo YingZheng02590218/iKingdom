@@ -373,8 +373,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
         let dataBaseOpeningJournalEntry = DataBaseManagerAccount.shared.getAllOpeningJournalEntryInAccountAll(account: object.category) // 全年度の開始仕訳データを確認する
         print(dataBaseOpeningJournalEntry)
         // 設定開始残高勘定
-        let settingDataBaseTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: object.category) // 設定残高振替仕訳データを確認する
-        print(settingDataBaseTransferEntry)
+        let dataBaseSettingTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: object.category) // 設定残高振替仕訳データを確認する
+        print(dataBaseSettingTransferEntry)
         // よく使う仕訳
         let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category)
         print(dataBaseSettingsOperatingJournalEntry)
@@ -408,8 +408,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
             isInvalidated5 = DataBaseManagerAccount.shared.deleteOpeningJournalEntry(primaryKey: dataBaseOpeningJournalEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
         // 設定残高振替仕訳を削除
-        for _ in 0..<settingDataBaseTransferEntry.count {
-            isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: settingDataBaseTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        for _ in 0..<dataBaseSettingTransferEntry.count {
+            isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: dataBaseSettingTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
         }
         // よく使う仕訳を削除
         for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {

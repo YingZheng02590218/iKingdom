@@ -18,7 +18,7 @@ protocol OpeningBalancePresenterInput {
 
     var numberOfobjects: Int { get }
 
-    func objects(forRow row: Int) -> SettingDataBaseTransferEntry
+    func objects(forRow row: Int) -> DataBaseSettingTransferEntry
 
     func viewDidLoad()
     func viewWillAppear()
@@ -47,7 +47,7 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
     var fiscalYear: Int?
     var theDayOfBeginningOfYear: String?
     // 設定残高振替仕訳 開始残高
-    private var dataBaseTransferEntries: Results<SettingDataBaseTransferEntry>
+    private var dataBaseTransferEntries: Results<DataBaseSettingTransferEntry>
 
     private weak var view: OpeningBalancePresenterOutput!
     private var model: OpeningBalanceModelInput
@@ -94,7 +94,7 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
         dataBaseTransferEntries.count
     }
 
-    func objects(forRow row: Int) -> SettingDataBaseTransferEntry {
+    func objects(forRow row: Int) -> DataBaseSettingTransferEntry {
         dataBaseTransferEntries[row]
     }
 

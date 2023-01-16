@@ -79,15 +79,15 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
      * 設定残高振替仕訳 オブジェクトを取得するメソッド
      * 設定残高振替仕訳を取得する
      */
-    func getTransferEntriesInOpeningBalanceAccount() -> Results<SettingDataBaseTransferEntry> {
-        let objects = RealmManager.shared.readWithPredicate(type: SettingDataBaseTransferEntry.self, predicates: [
+    func getTransferEntriesInOpeningBalanceAccount() -> Results<DataBaseSettingTransferEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingTransferEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高"))
         ])
         return objects.sorted(byKeyPath: "number", ascending: true)
     }
     // 取得 設定残高振替仕訳　勘定別  全年度 (※貸借科目の勘定科目)
-    func getAllTransferEntry(account: String) -> Results<SettingDataBaseTransferEntry> {
-        var objects = RealmManager.shared.readWithPredicate(type: SettingDataBaseTransferEntry.self, predicates: [
+    func getAllTransferEntry(account: String) -> Results<DataBaseSettingTransferEntry> {
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingTransferEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高")),
         ])
@@ -132,7 +132,7 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
                     "credit_amount": creditAmount,
                     "smallWritting": ""
                 ]
-                DataBaseManager.realm.create(SettingDataBaseTransferEntry.self, value: value, update: .modified) // 一部上書き更新
+                DataBaseManager.realm.create(DataBaseSettingTransferEntry.self, value: value, update: .modified) // 一部上書き更新
             }
         } catch {
             print("エラーが発生しました")
@@ -143,7 +143,7 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
 
     // 削除　設定残高振替仕訳
     func deleteTransferEntry(number: Int) -> Bool {
-        guard let object = RealmManager.shared.readWithPrimaryKey(type: SettingDataBaseTransferEntry.self, key: number) else { return false }
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingTransferEntry.self, key: number) else { return false }
         do {
             try DataBaseManager.realm.write {
                 DataBaseManager.realm.delete(object)

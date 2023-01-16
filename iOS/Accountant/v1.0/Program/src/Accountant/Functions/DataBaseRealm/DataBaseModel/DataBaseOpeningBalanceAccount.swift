@@ -12,5 +12,5 @@ import RealmSwift
 // 開始残高勘定クラス
 class DataBaseOpeningBalanceAccount: DataBaseAccount {
     // 設定残高振替仕訳
-    let dataBaseTransferEntries = List<SettingDataBaseTransferEntry>()
+    let dataBaseTransferEntries = List<DataBaseSettingTransferEntry>()
 }
