@@ -148,11 +148,13 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             cell.textLabel?.text = "\(objects[indexPath.row].number),               \(objects[indexPath.row].category as String)"
             //            cell.label.text = "ON: \(objectsss.count),  OFF: \(objectssss.count), DB: \(objects[indexPath.row].switching)"
         }
-        cell.label.text = ""
+
         cell.label.textAlignment = .right
+        // UIButtonを非表示
+        cell.toggleButton.isHidden = true
+        // UIButtonを無効化
+        cell.toggleButton.isEnabled = false
         if objects[indexPath.row].abstract { // 抽象区分の場合
-            // UIButtonを非表示
-            cell.toggleButton.isHidden = true
             // UILabelを非表示
             cell.label.isHidden = true
             // セルの選択不可にする
@@ -160,26 +162,14 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         } else {
             // 表示科目の連番
             cell.tag = objects[indexPath.row].number
-            // 表示科目の有効無効
-            cell.toggleButton.isOn = objects[indexPath.row].switching
-            // UIButtonを無効化
-            cell.toggleButton.isEnabled = false
-            // UIButtonを表示
-            cell.toggleButton.isHidden = false
             // UILabelを表示
-            cell.label.isHidden = false
+            cell.label.isHidden = objects[indexPath.row].switching ? false : true // 表示科目の有効無効
             // 表示科目選択　の場合
             if howToUse {
                 // セルの選択を許可
                 cell.selectionStyle = .default
             }
         }
-        // Accessory Color
-        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
-        let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.accentColor
-        cell.accessoryView = disclosureView
-
         print(objects[indexPath.row].number, objects[indexPath.row].switching)
         return cell
     }
