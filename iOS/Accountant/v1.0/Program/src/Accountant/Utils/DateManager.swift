@@ -103,7 +103,24 @@ class DateManager {
         dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod)! // 前年度の決算日 ＋１日
         return dateFormatterYYYY.string(from: dayOfStartInPeriod) + "/" + dateFormatterMMdd.string(from: dayOfStartInPeriod)
     }
-    
+    // 期首　月日
+    func getTheDayOfBeginningOfYear() -> String {
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear() // 年度
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning() // 決算日
+        var fiscalYearFixed = 0 // 補正値
+        if theDayOfReckoning == "12/31" {
+            fiscalYearFixed = 0 // 年度と同じ年
+        } else {
+            fiscalYearFixed = 1 // 年度 + 1年
+        }
+        // 今年度の決算日　決算日 + 年度 + 時分秒
+        let fullTheDayOfReckoning = dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + String(fiscalYear + fiscalYearFixed) + ", " + dateFormatterHHmmss.string(from: now))!
+        // 年度開始日　決算日の翌日に設定する
+        var dayOfStartInPeriod = Calendar.current.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning)! // 今年度の決算日 -１年
+        dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod)! // 前年度の決算日 ＋１日
+        return dateFormatterMMdd.string(from: dayOfStartInPeriod)
+    }
+
     func getDate() -> String {
         
         formatter.string(from: Date())

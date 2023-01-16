@@ -483,6 +483,14 @@ class DataBaseManagerAccount {
         ])
         return objects
     }
+    // 取得 開始仕訳
+    func getAllOpeningJournalEntryInAccountAll(account: String) -> Results<DataBaseOpeningJournalEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseOpeningJournalEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高"))
+        ])
+        return objects
+    }
 
     // MARK: Update
     // 更新 開始仕訳

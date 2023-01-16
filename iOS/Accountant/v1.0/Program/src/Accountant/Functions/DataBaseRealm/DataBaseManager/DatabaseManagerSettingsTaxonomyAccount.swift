@@ -254,9 +254,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
             if objects[i].switching == true { // 設定勘定科目 スイッチ
                 if objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしていない場合
                     // 勘定クラス　勘定ないの仕訳を取得
-                    let dataBaseManagerAccount = GeneralLedgerAccountModel()
-                    let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
                     if !objectss.isEmpty || !objectsss.isEmpty {
                         updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
                     } else {
@@ -266,9 +265,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
             } else if objects[i].switching == false { // 表示科目科目が選択されていて仕訳データがあればONにする
                 if !objects[i].numberOfTaxonomy.isEmpty { // 表示科目に紐付けしている場合
                     // 勘定クラス　勘定ないの仕訳を取得
-                    let dataBaseManagerAccount = GeneralLedgerAccountModel()
-                    let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
-                    let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
+                    let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(account: objects[i].category) // 全年度の仕訳データを確認する
                     if !objectss.isEmpty || !objectsss.isEmpty {
                         updateSettingsCategorySwitching(tag: objects[i].number, isOn: true)
                     }
@@ -288,18 +286,18 @@ class DatabaseManagerSettingsTaxonomyAccount {
             print("エラーが発生しました")
         }
     }
-//    // 更新　勘定科目名を変更
-//    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // すべての影響範囲に修正が必要
-//        do {
-//            // (2)書き込みトランザクション内でデータを更新する
-//            try DataBaseManager.realm.write {
-//                let value: [String: Any] = ["number": number, "category": accountName]
-//                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
-//            }
-//        } catch {
-//            print("エラーが発生しました")
-//        }
-//    }
+    //    // 更新　勘定科目名を変更
+    //    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // すべての影響範囲に修正が必要
+    //        do {
+    //            // (2)書き込みトランザクション内でデータを更新する
+    //            try DataBaseManager.realm.write {
+    //                let value: [String: Any] = ["number": number, "category": accountName]
+    //                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
+    //            }
+    //        } catch {
+    //            print("エラーが発生しました")
+    //        }
+    //    }
     // 更新　設定勘定科目　設定勘定科目連番から、紐づける表示科目を変更
     func updateTaxonomyOfSettingsTaxonomyAccount(number: Int, numberOfTaxonomy: String) {
         do {
@@ -331,10 +329,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
     }
     // 削除　設定勘定科目
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool {
-        // 勘定クラス　勘定を削除
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
         // 削除　勘定、よく使う仕訳
-        let isInvalidated = dataBaseManagerAccount.deleteAccount(number: number)
+        let isInvalidated = deleteAccount(number: number)
         if isInvalidated {
             do {
                 // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
@@ -352,4 +348,100 @@ class DatabaseManagerSettingsTaxonomyAccount {
         }
         return false // 勘定を削除できたら、設定勘定科目を削除する
     }
+
+    // 削除　勘定、よく使う仕訳　設定勘定科目を削除するときに呼ばれる
+    func deleteAccount(number: Int) -> Bool {
+        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
+        // 勘定　全年度　取得
+        let dataBaseAccounts = RealmManager.shared.readWithPredicate(type: DataBaseAccount.self, predicates: [
+            NSPredicate(format: "accountName LIKE %@", NSString(string: object.category))
+        ])
+        // 仕訳
+        let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(account: object.category) // 全年度の通常仕訳データを確認する
+        print(objectss)
+        // 決算整理仕訳
+        let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(account: object.category) // 全年度の決算整理仕訳データを確認する
+        print(objectsss)
+        // 損益振替仕訳
+        let objectssss = DataBaseManagerTransferEntry.shared.getAllTransferEntryInPLAccountAll(account: object.category) // 全年度の損益振替仕訳データを確認する
+        print(objectssss)
+        // 残高振替仕訳
+        let dataBaseTransferEntry = DataBaseManagerTransferEntry.shared.getAllTransferEntry(account: object.category) // 全年度の残高振替仕訳データを確認する
+        print(dataBaseTransferEntry)
+        // 開始仕訳
+        let dataBaseOpeningJournalEntry = DataBaseManagerAccount.shared.getAllOpeningJournalEntryInAccountAll(account: object.category) // 全年度の開始仕訳データを確認する
+        print(dataBaseOpeningJournalEntry)
+        // 設定開始残高勘定
+        let settingDataBaseTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: object.category) // 設定残高振替仕訳データを確認する
+        print(settingDataBaseTransferEntry)
+        // よく使う仕訳
+        let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category)
+        print(dataBaseSettingsOperatingJournalEntry)
+
+        // 仕訳クラス　仕訳を削除
+        var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
+        var isInvalidated2 = true
+        var isInvalidated3 = true
+        var isInvalidated4 = true
+        var isInvalidated5 = true
+        var isInvalidated6 = true
+        var isInvalidated7 = true
+        // 仕訳を削除
+        for _ in 0..<objectss.count {
+            isInvalidated = DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 決算整理仕訳を削除
+        for _ in 0..<objectsss.count {
+            isInvalidated2 = DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: objectsss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 損益振替仕訳を削除
+        for _ in 0..<objectssss.count {
+            isInvalidated3 = DataBaseManagerTransferEntry.shared.deleteTransferEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 残高振替仕訳を削除
+        for _ in 0..<dataBaseTransferEntry.count {
+            isInvalidated4 = DataBaseManagerTransferEntry.shared.deleteTransferEntry(number: dataBaseTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 開始仕訳を削除
+        for _ in 0..<dataBaseOpeningJournalEntry.count {
+            isInvalidated5 = DataBaseManagerAccount.shared.deleteOpeningJournalEntry(primaryKey: dataBaseOpeningJournalEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // 設定残高振替仕訳を削除
+        for _ in 0..<settingDataBaseTransferEntry.count {
+            isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: settingDataBaseTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+        }
+        // よく使う仕訳を削除
+        for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {
+            isInvalidated7 = DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: dataBaseSettingsOperatingJournalEntry[0].number)
+        }
+
+        if isInvalidated7 {
+            if isInvalidated6 {
+                if isInvalidated5 {
+                    if isInvalidated4 {
+                        if isInvalidated3 {
+                            if isInvalidated2 {
+                                if isInvalidated {
+                                    do {
+                                        try DataBaseManager.realm.write {
+                                            for _ in 0..<dataBaseAccounts.count {
+                                                // 仕訳が残ってないか
+                                                DataBaseManager.realm.delete(dataBaseAccounts[0])
+                                            }
+                                        }
+                                    } catch {
+                                        print("エラーが発生しました")
+                                    }
+                                    return true // objectsssss.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false
+    }
+
 }

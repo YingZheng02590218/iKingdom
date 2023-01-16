@@ -14,7 +14,7 @@ protocol OpeningBalancePresenterInput {
 
     var company: String? { get }
     var fiscalYear: Int? { get }
-    var theDayOfReckoning: String? { get }
+    var theDayOfBeginningOfYear: String? { get }
 
     var numberOfobjects: Int { get }
 
@@ -45,7 +45,7 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
 
     var company: String?
     var fiscalYear: Int?
-    var theDayOfReckoning: String?
+    var theDayOfBeginningOfYear: String?
     // 設定残高振替仕訳 開始残高
     private var dataBaseTransferEntries: Results<SettingDataBaseTransferEntry>
 
@@ -71,8 +71,9 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
     func viewWillAppear() {
 
         company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
-        fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+        // 一番古い会計帳簿の年度の期首　とする
+        fiscalYear = DataBaseManagerSettingsPeriod.shared.getOldestPeriodYear()
+        theDayOfBeginningOfYear = DateManager.shared.getTheDayOfBeginningOfYear()
         // 再計算 合計額を計算
         model.calculateAccountTotalAccount()
 

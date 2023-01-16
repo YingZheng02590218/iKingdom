@@ -81,13 +81,7 @@ class JournalsModel: JournalsModelInput {
     }
     // 取得　損益振替仕訳　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
-        print(dataBaseJournalEntries)
-        return dataBaseJournalEntries
+        DataBaseManagerPLAccount.shared.getTransferEntryInAccount()
     }
     // 取得 資本振替仕訳
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {

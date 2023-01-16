@@ -380,7 +380,17 @@ class DataBaseManagerPLAccount {
         print(objects)
         return objects!
     }
-    
+    // MARK: - 損益勘定
+    // 取得　損益振替仕訳 損益勘定から取得　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
+        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
+        return dataBaseJournalEntries
+    }
+
     // MARK: Update
     
     // 更新 損益振替仕訳

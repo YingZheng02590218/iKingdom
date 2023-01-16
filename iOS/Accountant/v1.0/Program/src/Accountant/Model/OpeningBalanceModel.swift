@@ -159,7 +159,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
             }
         )
     }
-    //　開始残高勘定クラス　勘定別に仕訳データを集計
+    // 開始残高勘定クラス　勘定別に仕訳データを集計
     internal func calculateAccountTotalAccount() {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0

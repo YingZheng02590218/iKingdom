@@ -239,7 +239,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         case 1:
             let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
             let resultss = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryCount()
-            return "データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
+            return "開始残高は、最も古い年度の帳簿に適用されます。\n入力データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
         default:
             return ""
         }

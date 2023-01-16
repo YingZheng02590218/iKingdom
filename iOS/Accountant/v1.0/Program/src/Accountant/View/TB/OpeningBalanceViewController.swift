@@ -222,17 +222,13 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
             companyNameLabel.text = company // 社名
         }
 
-        if let theDayOfReckoning = presenter.theDayOfReckoning {
+        if let theDayOfBeginningOfYear = presenter.theDayOfBeginningOfYear {
             if let fiscalYear = presenter.fiscalYear {
-                if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
-                    closingDateLabel.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
-                } else {
-                    closingDateLabel.text = String(fiscalYear + 1) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
-                }
+                closingDateLabel.text = String(fiscalYear) + "年\(theDayOfBeginningOfYear.prefix(2))月\(theDayOfBeginningOfYear.suffix(2))日" // 決算日を表示する
             }
         }
-        titleLabel.text = " 開始残高"
-        self.navigationItem.title = " 開始残高"
+        titleLabel.text = "開始残高"
+        self.navigationItem.title = "開始残高"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
         // 要素数が少ないUITableViewで残りの部分や余白を消す

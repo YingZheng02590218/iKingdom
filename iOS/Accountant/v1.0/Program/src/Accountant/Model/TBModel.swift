@@ -554,8 +554,7 @@ class TBModel: TBModelInput {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
         
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objects = dataBaseManagerAccount.getTransferEntryInAccount() // 損益勘定から取得
+        let objects = DataBaseManagerPLAccount.shared.getTransferEntryInAccount() // 損益勘定から取得
         for i in 0..<objects.count { // 勘定内のすべての仕訳データ
             // 勘定が借方と貸方のどちらか
             if "損益" == "\(objects[i].debit_category)" { // 借方

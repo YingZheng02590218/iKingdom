@@ -41,6 +41,21 @@ class CategoryListModel: CategoryListModelInput {
     // 更新　スイッチの切り替え
     func updateSettingsCategorySwitching(tag: Int, isOn: Bool) {
         DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
+        // スイッチをOFFにする場合
+        if isOn == false {
+            // 取得 勘定科目の連番から設定勘定科目を取得
+            if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: tag) {
+                // 設定開始残高勘定の設定残高振替仕訳があれば、削除する
+                // 設定開始残高勘定
+                let settingDataBaseTransferEntry = DataBaseManagerAccountingBooksShelf.shared.getAllTransferEntry(account: dataBaseSettingsTaxonomyAccount.category) // 設定残高振替仕訳データを確認する
+                print(settingDataBaseTransferEntry)
+                // 設定残高振替仕訳を削除
+                for _ in 0..<settingDataBaseTransferEntry.count {
+                    let isInvalidated6 = DataBaseManagerAccountingBooksShelf.shared.deleteTransferEntry(number: settingDataBaseTransferEntry[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
+                    print(isInvalidated6)
+                }
+            }
+        }
     }
     
     // MARK: Delete

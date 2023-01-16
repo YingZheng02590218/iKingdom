@@ -85,6 +85,15 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
         ])
         return objects.sorted(byKeyPath: "number", ascending: true)
     }
+    // 取得 設定残高振替仕訳　勘定別  全年度 (※貸借科目の勘定科目)
+    func getAllTransferEntry(account: String) -> Results<SettingDataBaseTransferEntry> {
+        var objects = RealmManager.shared.readWithPredicate(type: SettingDataBaseTransferEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高")),
+        ])
+        objects = objects.sorted(byKeyPath: "number", ascending: true)
+        return objects
+    }
 
     // MARK: Update
     
@@ -132,4 +141,16 @@ class DataBaseManagerAccountingBooksShelf: DataBaseManager {
     
     // MARK: Delete
 
+    // 削除　設定残高振替仕訳
+    func deleteTransferEntry(number: Int) -> Bool {
+        guard let object = RealmManager.shared.readWithPrimaryKey(type: SettingDataBaseTransferEntry.self, key: number) else { return false }
+        do {
+            try DataBaseManager.realm.write {
+                DataBaseManager.realm.delete(object)
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+        return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
+    }
 }
