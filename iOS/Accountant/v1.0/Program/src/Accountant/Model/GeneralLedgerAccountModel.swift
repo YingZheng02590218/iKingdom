@@ -11,8 +11,16 @@ import RealmSwift
 
 /// GUIアーキテクチャ　MVP
 protocol GeneralLedgerAccountModelInput {
-    func initialize(account: String, databaseJournalEntries: Results<DataBaseJournalEntry>, dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>, dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?)
+    func initialize(
+        account: String,
+        dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?,
+        databaseJournalEntries: Results<DataBaseJournalEntry>,
+        dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
+        dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    )
 
+    func getBalanceAmountOpeningJournalEntry() -> Int64
+    func getBalanceDebitOrCreditOpeningJournalEntry() -> String
     func getBalanceAmount(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
@@ -21,9 +29,8 @@ protocol GeneralLedgerAccountModelInput {
     func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
 
     func getNumberOfAccount(accountName: String) -> Int
-    
+    func getOpeningJournalEntryInAccount(account: String) -> DataBaseOpeningJournalEntry?
     func getJournalEntryInAccount(account: String) -> Results<DataBaseJournalEntry>
-
     func getAdjustingJournalEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry?
     func getCapitalTransferJournalEntryInAccount(account: String) -> DataBaseCapitalTransferJournalEntry?
@@ -121,7 +128,17 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     
     // MARK: Read
-    
+
+    // 取得　差引残高額　 開始仕訳
+    func getBalanceAmountOpeningJournalEntry() -> Int64 {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceAmountOpeningJournalEntry()
+    }
+    // 借又貸を取得 開始仕訳
+    func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
+
+        DataBaseManagerGeneralLedgerAccountBalance.shared.getBalanceDebitOrCreditOpeningJournalEntry()
+    }
     // 取得　差引残高額　仕訳
     func getBalanceAmount(indexPath: IndexPath) -> Int64 {
         
@@ -186,13 +203,14 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     // 取得　損益振替仕訳 勘定別に取得
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseTransferEntry = dataBaseAccount?.dataBaseTransferEntry
-        return dataBaseTransferEntry
+
+        DataBaseManagerAccount.shared.getTransferEntryInAccount(account: account)
+    }
+
+    // 取得　開始仕訳 勘定別に取得
+    func getOpeningJournalEntryInAccount(account: String) -> DataBaseOpeningJournalEntry? {
+
+        DataBaseManagerAccount.shared.getOpeningJournalEntryInAccount(account: account)
     }
 
     // MARK: - 資本金勘定
@@ -204,7 +222,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
             ])
             let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
             let dataBaseCapitalTransferJournalEntry = dataBaseAccount?.dataBaseCapitalTransferJournalEntry
-            print(dataBaseCapitalTransferJournalEntry)
             return dataBaseCapitalTransferJournalEntry
         } else {
             return nil
@@ -222,45 +239,6 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
-
-    // MARK: - 損益勘定
-    // 取得　損益振替仕訳 損益勘定から取得
-    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
-        return dataBaseJournalEntries
-    }
-
-    // MARK: - 仕訳
-    // 取得 仕訳　勘定別 全年度
-    func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
-        ])
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
-    // 取得 決算整理仕訳　勘定別　損益勘定以外 全年度
-    func getAllAdjustingEntryInAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
-        ])
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
-    // 取得 損益振替仕訳　勘定別  全年度 (※損益科目の勘定科目)
-    func getAllAdjustingEntryInPLAccountAll(account: String) -> Results<DataBaseTransferEntry> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseTransferEntry.self, predicates: [
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
-        ])
-        objects = objects.sorted(byKeyPath: "date", ascending: true)
-        return objects
-    }
-
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: accountName)
@@ -271,6 +249,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // 差引残高　計算
     func initialize(
         account: String,
+        dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?,
         databaseJournalEntries: Results<DataBaseJournalEntry>,
         dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
         dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
@@ -278,6 +257,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         
         DataBaseManagerGeneralLedgerAccountBalance.shared.calculateBalance(
             account: account,
+            dataBaseOpeningJournalEntry: dataBaseOpeningJournalEntry,
             databaseJournalEntries: databaseJournalEntries,
             dataBaseAdjustingEntries: dataBaseAdjustingEntries,
             dataBaseCapitalTransferJournalEntry: dataBaseCapitalTransferJournalEntry
@@ -285,63 +265,5 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     
     // MARK: Delete
-    
-    // 削除　勘定、よく使う仕訳　設定勘定科目を削除するときに呼ばれる
-    func deleteAccount(number: Int) -> Bool {
-        // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
-        guard let object = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsTaxonomyAccount.self, key: number) else { return false }
-        // 勘定　全年度　取得
-        let objectsssss = RealmManager.shared.readWithPredicate(type: DataBaseAccount.self, predicates: [
-            NSPredicate(format: "accountName LIKE %@", NSString(string: object.category))
-        ])
-        // 勘定クラス　勘定ないの仕訳を取得
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: object.category) // 全年度の通常仕訳データを確認する
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: object.category) // 全年度の決算整理仕訳データを確認する
-        let objectssss = dataBaseManagerAccount.getAllAdjustingEntryInPLAccountAll(account: object.category) // 全年度の損益振替仕訳データを確認する
-        let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category) // よく使う仕訳
 
-        // 仕訳クラス　仕訳を削除
-        var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
-        var isInvalidatedd = true
-        var isInvalidateddd = true
-        var isInvalidatedddd = true
-        // 仕訳を削除
-        for _ in 0..<objectss.count {
-            isInvalidated = DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: objectss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
-        }
-        // 決算整理仕訳を削除
-        for _ in 0..<objectsss.count {
-            isInvalidatedd = DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: objectsss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
-        }
-        // 損益振替仕訳を削除
-        for _ in 0..<objectssss.count {
-            isInvalidateddd = DataBaseManagerTransferEntry.shared.deleteTransferEntry(number: objectssss[0].number) // 削除するたびにobjectss.countが減っていくので、iを利用せずに常に要素0を消す
-        }
-        // よく使う仕訳を削除
-        for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {
-            isInvalidatedddd = DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: dataBaseSettingsOperatingJournalEntry[0].number)
-        }
-
-        if isInvalidatedddd {
-            if isInvalidateddd {
-                if isInvalidatedd {
-                    if isInvalidated {
-                        do {
-                            try DataBaseManager.realm.write {
-                                for _ in 0..<objectsssss.count {
-                                    // 仕訳が残ってないか
-                                    DataBaseManager.realm.delete(objectsssss[0])
-                                }
-                            }
-                        } catch {
-                            print("エラーが発生しました")
-                        }
-                        return true // objectsssss.isInvalidated // 成功したら true まだ失敗時の動きは確認していない
-                    }
-                }
-            }
-        }
-        return false
-    }
 }

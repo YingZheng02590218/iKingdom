@@ -185,6 +185,10 @@ class Initial {
         for dataBaseAccountingBook in dataBaseAccountingBooks where dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseCapitalAccount == nil {
             DataBaseManagerGeneralLedger.shared.addCapitalAccountToGeneralLedger(number: dataBaseAccountingBook.number)
         }
+        // 財務諸表に、繰越試算表が作成されていなければ、作成する
+        for dataBaseAccountingBook in dataBaseAccountingBooks where dataBaseAccountingBook.dataBaseFinancialStatements?.afterClosingTrialBalance == nil {
+            DataBaseManagerFinancialStatements.shared.addAfterClosingTrialBalanceToFinancialStatements(number: dataBaseAccountingBook.number)
+        }
     }
     /**
     * 初期化　初期化メソッド

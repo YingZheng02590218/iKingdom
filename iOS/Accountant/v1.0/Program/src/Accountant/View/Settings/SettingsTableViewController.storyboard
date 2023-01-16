@@ -151,6 +151,7 @@
                         <segue destination="ez5-Hg-R91" kind="showDetail" identifier="SettingsOperatingJournalEntryViewController" id="xB3-Cd-Cb4"/>
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
+                        <segue destination="fTk-JG-5fj" kind="showDetail" identifier="OpeningBalanceViewController" id="P4a-ge-WFi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -182,6 +183,14 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="4964" y="2769"/>
+        </scene>
+        <!--OpeningBalanceViewController-->
+        <scene sceneID="74V-L4-xkU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OpeningBalanceViewController" id="fTk-JG-5fj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i0Y-WG-fff" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6465" y="2619"/>
         </scene>
     </scenes>
     <resources>

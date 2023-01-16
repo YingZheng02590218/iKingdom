@@ -45,3 +45,7 @@ class DataBaseCompoundTrialBalanceMonth: DataBaseCompoundTrialBalance {
 class DataBaseCompoundTrialBalanceDay: DataBaseCompoundTrialBalance {
 
 }
+// 繰越試算表
+class DataBaseAfterClosingTrialBalance: DataBaseCompoundTrialBalance {
+
+}

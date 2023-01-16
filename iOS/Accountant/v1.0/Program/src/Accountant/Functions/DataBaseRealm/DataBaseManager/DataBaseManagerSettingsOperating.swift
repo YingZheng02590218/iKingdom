@@ -27,7 +27,8 @@ class DataBaseManagerSettingsOperating {
             // オブジェクトを作成  設定仕訳帳
             let dataBaseSettingsOperating = DataBaseSettingsOperating(
                 EnglishFromOfClosingTheLedger0: true,
-                EnglishFromOfClosingTheLedger1: true
+                EnglishFromOfClosingTheLedger1: true,
+                EnglishFromOfClosingTheLedger2: true
             )
             try DataBaseManager.realm.write {
                 let number = dataBaseSettingsOperating.save() // 自動採番

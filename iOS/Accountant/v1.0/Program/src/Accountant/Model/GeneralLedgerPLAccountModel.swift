@@ -54,13 +54,7 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
 
     // 取得　損益振替仕訳
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
-        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
-            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
-        ])
-        let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
-        let dataBaseJournalEntries = (dataBasePLAccount?.dataBaseTransferEntries.sorted(byKeyPath: "date", ascending: true))!
-        print(dataBaseJournalEntries)
-        return dataBaseJournalEntries
+        DataBaseManagerPLAccount.shared.getTransferEntryInAccount()
     }
     // 取得 資本振替仕訳
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {

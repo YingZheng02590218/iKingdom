@@ -118,16 +118,16 @@ class GeneralLedgerPLAccountViewController: UIViewController {
 extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳　決算整理仕訳　空白行
+        // 損益振替仕訳　資本振替仕訳　空白行
         return 3
     }
     // セルの数を、モデル(仕訳)の数に指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            // 通常仕訳
+            // 損益振替仕訳
             return presenter.numberOfDataBaseTransferEntries
         } else if section == 1 {
-            // 決算整理仕訳
+            // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
         } else {
             // 空白行

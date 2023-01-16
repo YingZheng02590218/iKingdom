@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--試算表-->
+        <!--繰越試算表-->
         <scene sceneID="waC-Ug-l0h">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="TBViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mqU-Yd-p1X" customClass="AfterClosingTrialBalanceViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y7z-Dz-h6M">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,11 +27,11 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k">
                                                 <rect key="frame" x="0.0" y="0.0" width="400" height="120.5"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="60.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
@@ -45,7 +45,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30.5"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
@@ -70,14 +70,14 @@
                                                             <constraint firstItem="Fc2-HD-pSV" firstAttribute="leading" secondItem="wqe-TZ-AuG" secondAttribute="leading" id="xzc-SF-r6b"/>
                                                         </constraints>
                                                     </view>
-                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
-                                                        <rect key="frame" x="0.0" y="60.5" width="400" height="60"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLx-ow-noB" userLabel="ViewLower">
+                                                        <rect key="frame" x="0.0" y="60.5" width="0.0" height="60"/>
                                                         <subviews>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFW-fO-F9C">
-                                                                <rect key="frame" x="0.0" y="0.0" width="97.5" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="3vn-4g-NqC" userLabel="list_debit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="2" height="60"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -96,10 +96,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifW-Bi-RUu">
-                                                                <rect key="frame" x="97.5" y="0.0" width="205" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="勘定科目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="hkT-8r-06u" userLabel="account_name">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="206" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="1" height="60"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
@@ -118,10 +118,10 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJg-go-Uex">
-                                                                <rect key="frame" x="302.5" y="0.0" width="97.5" height="60"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="XXs-8w-VdH" userLabel="list_credit">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="99" height="60"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="2" height="60"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -492,42 +492,23 @@
                             <constraint firstItem="14z-DW-9U7" firstAttribute="top" secondItem="sS2-gl-8gr" secondAttribute="top" constant="7" id="qnT-52-Vun"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="試算表" id="ao6-7n-s8L">
-                        <rightBarButtonItems>
-                            <barButtonItem id="QZN-tR-7ez">
-                                <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="YkC-dw-b0J">
-                                    <rect key="frame" x="287" y="6" width="107" height="32"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <segments>
-                                        <segment title="合計"/>
-                                        <segment title="残高"/>
-                                    </segments>
-                                    <connections>
-                                        <action selector="segmentedControl:" destination="mqU-Yd-p1X" eventType="valueChanged" id="6jV-Ge-zEk"/>
-                                    </connections>
-                                </segmentedControl>
-                            </barButtonItem>
-                            <barButtonItem title="＊" id="VnI-pU-PdX">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3W1-VF-l83">
-                                    <rect key="frame" x="204" y="7" width="75" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="印刷">
-                                        <color key="titleColor" name="AccentBlue"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="printButtonTapped:" destination="mqU-Yd-p1X" eventType="touchUpInside" id="jUW-U7-UXq"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                    <navigationItem key="navigationItem" title="繰越試算表" id="ao6-7n-s8L">
+                        <barButtonItem key="rightBarButtonItem" title="＊" id="VnI-pU-PdX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3W1-VF-l83">
+                                <rect key="frame" x="204" y="7" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="印刷">
+                                    <color key="titleColor" name="AccentBlue"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundView" destination="14z-DW-9U7" id="vlb-cW-G83"/>
                         <outlet property="closingDateLabel" destination="5dR-qc-gzB" id="Ce8-00-THE"/>
                         <outlet property="companyNameLabel" destination="Fc2-HD-pSV" id="Z5i-aB-eAZ"/>
                         <outlet property="printButton" destination="3W1-VF-l83" id="BkK-t7-VQE"/>
-                        <outlet property="segmentedControl" destination="YkC-dw-b0J" id="pD6-f4-4ph"/>
                         <outlet property="tableView" destination="fNc-Jo-BVR" id="hTz-7M-neB"/>
                         <outlet property="titleLabel" destination="aHQ-AM-Ixh" id="cN4-RT-euv"/>
                     </connections>

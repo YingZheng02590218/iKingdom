@@ -102,9 +102,12 @@ class CategoryListTableViewController: UITableViewController {
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
         // 勘定クラス
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category) // 全年度の仕訳データを確認する
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category) // 全年度の仕訳データを確認する
+        let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(
+            account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category
+        ) // 全年度の仕訳データを確認する
+        let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(
+            account: presenter.objects(forRow: indexPath.row, section: indexPath.section).category
+        ) // 全年度の仕訳データを確認する
         // データベース　よく使う仕訳を追加
         let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
             account: presenter.objects(
@@ -212,14 +215,13 @@ class CategoryListTableViewController: UITableViewController {
         // 勘定科目の有効無効　変更時のアクションを指定
         cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
         // モデルオブフェクトの取得 勘定別に取得
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        let objectss = dataBaseManagerAccount.getAllJournalEntryInAccountAll(
+        let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(
             account: presenter.objects(
                 forRow: indexPath.row,
                 section: indexPath.section
             ).category as String
         ) // 通常仕訳　勘定別 全年度にしてはいけない
-        let objectsss = dataBaseManagerAccount.getAllAdjustingEntryInAccountAll(
+        let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(
             account: presenter.objects(
                 forRow: indexPath.row,
                 section: indexPath.section

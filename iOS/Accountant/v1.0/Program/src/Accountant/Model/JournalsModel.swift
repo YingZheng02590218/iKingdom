@@ -15,12 +15,22 @@ protocol JournalsModelInput {
     
     func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry>
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry>
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
 
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
-    func updateAdjustingJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
+    func updateAdjustingJournalEntry(
+        primaryKey: Int,
+        date: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        smallWritting: String,
+        completion: (Int) -> Void
+    )
     
     func initializePDFMaker(completion: ([URL]?) -> Void)
 }
@@ -54,8 +64,7 @@ class JournalsModel: JournalsModelInput {
     func getJournalEntriesInJournals() -> Results<DataBaseJournalEntry> {
         
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries
-            .sorted(byKeyPath: "date", ascending: true)
+        let dataBaseJournalEntries = dataBaseAccountingBooks.dataBaseJournals!.dataBaseJournalEntries.sorted(byKeyPath: "date", ascending: true)
         return dataBaseJournalEntries
     }
     
@@ -63,14 +72,16 @@ class JournalsModel: JournalsModelInput {
      * 会計帳簿.仕訳帳.決算整理仕訳[ ] オブジェクトを取得するメソッド\
      * 決算整理仕訳
      * 日付を降順にソートする
-     * @param EnglishFromOfClosingTheLedger0 損益振替仕訳を含めるかフラグ
-     * @param EnglishFromOfClosingTheLedger1 資本振替仕訳を含めるかフラグ
      * @return 決算整理仕訳[ ]
      */
     func getJournalAdjustingEntry() -> Results<DataBaseAdjustingEntry> {
         let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        var dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
+        let dataBaseAdjustingEntries = dataBaseAccountingBook.dataBaseJournals!.dataBaseAdjustingEntries.sorted(byKeyPath: "date", ascending: true)
         return dataBaseAdjustingEntries
+    }
+    // 取得　損益振替仕訳　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
+    func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
+        DataBaseManagerPLAccount.shared.getTransferEntryInAccount()
     }
     // 取得 資本振替仕訳
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry? {

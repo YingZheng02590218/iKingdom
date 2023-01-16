@@ -51,6 +51,8 @@ class DataBaseAccount: RObject {
         self.debit_balance_AfterAdjusting = debit_balance_AfterAdjusting
         self.credit_balance_AfterAdjusting = credit_balance_AfterAdjusting
     }
+    // 開始仕訳（前年度の残高振替仕訳の逆仕訳）
+    @objc dynamic var dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?  // 開始仕訳
 
     @objc dynamic var fiscalYear: Int = 0                      // 年度
     @objc dynamic var accountName: String = ""                // 勘定名
@@ -71,6 +73,6 @@ class DataBaseAccount: RObject {
     @objc dynamic var credit_total_AfterAdjusting: Int64 = 0          // 貸方
     @objc dynamic var debit_balance_AfterAdjusting: Int64 = 0         // 借方残高
     @objc dynamic var credit_balance_AfterAdjusting: Int64 = 0        // 貸方
-    // 損益振替仕訳
-    @objc dynamic var dataBaseTransferEntry: DataBaseTransferEntry?  // 損益振替仕訳
+    // 損益振替仕訳、残高振替仕訳
+    @objc dynamic var dataBaseTransferEntry: DataBaseTransferEntry?  // 損益振替仕訳、残高振替仕訳
 }

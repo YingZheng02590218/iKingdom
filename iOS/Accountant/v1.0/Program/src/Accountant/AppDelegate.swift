@@ -49,6 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 // スキーマバージョン
                 if oldSchemaVersion < 2 {
+                    // DataBaseAccountingBooksShelfオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseAccountingBooksShelf.className()) { oldObject, newObject in
+                        // 開始残高
+                        newObject?["dataBaseOpeningBalanceAccount"] = nil
+                    }
                     // DataBaseAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
                         // 損益振替仕訳
@@ -56,6 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     // DataBasePLAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBasePLAccount.className()) { oldObject, newObject in
+                        // 開始仕訳（前年度の残高振替仕訳の逆仕訳）
+                        newObject?["dataBaseOpeningJournalEntry"] = nil
+                        // 勘定名
                         newObject?["accountName"] = "損益"
                         // 損益振替仕訳
                         newObject?["dataBaseTransferEntries"] = List<DataBaseTransferEntry>()
@@ -72,7 +80,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // 資本振替仕訳
                         newObject?["dataBaseCapitalTransferJournalEntry"] = nil
                     }
-
+                    // DataBaseFinancialStatementsオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseFinancialStatements.className()) { oldObject, newObject in
+                        // 繰越試算表
+                        newObject?["afterClosingTrialBalance"] = nil
+                    }
+                    // DataBaseSettingsOperatingオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseSettingsOperating.className()) { oldObject, newObject in
+                        // 損益振替仕訳 初期値はON
+                        newObject?["EnglishFromOfClosingTheLedger0"] = true
+                        // 資本振替仕訳 初期値はON
+                        newObject?["EnglishFromOfClosingTheLedger1"] = true
+                        // 残高振替仕訳 初期値はON
+                        newObject?["EnglishFromOfClosingTheLedger2"] = true
+                    }
                 }
             }
         )

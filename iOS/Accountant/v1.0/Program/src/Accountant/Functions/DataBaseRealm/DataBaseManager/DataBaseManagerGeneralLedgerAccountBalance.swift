@@ -16,6 +16,8 @@ class DataBaseManagerGeneralLedgerAccountBalance {
     
     private init() {
     }
+    // 開始仕訳　OpeningJournalEntry
+    var dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?
     // 仕訳
     var dataBaseJournalEntries: Results<DataBaseJournalEntry>!
     // 決算整理仕訳　勘定別
@@ -33,7 +35,37 @@ class DataBaseManagerGeneralLedgerAccountBalance {
     // MARK: Create
     
     // MARK: Read
-    
+
+    // 取得　差引残高額　 開始仕訳
+    func getBalanceAmountOpeningJournalEntry() -> Int64 {
+        if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
+            if dataBaseOpeningJournalEntry.balance_left > dataBaseOpeningJournalEntry.balance_right { // 借方と貸方を比較
+                balanceAmount = dataBaseOpeningJournalEntry.balance_left
+            } else if dataBaseOpeningJournalEntry.balance_right > dataBaseOpeningJournalEntry.balance_left {
+                balanceAmount = dataBaseOpeningJournalEntry.balance_right
+            } else {
+                balanceAmount = 0
+            }
+        } else {
+            balanceAmount = 0
+        }
+        return balanceAmount
+    }
+    // 借又貸を取得 開始仕訳
+    func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
+        if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
+            if dataBaseOpeningJournalEntry.balance_left > dataBaseOpeningJournalEntry.balance_right {
+                balanceDebitOrCredit = "借"
+            } else if dataBaseOpeningJournalEntry.balance_left < dataBaseOpeningJournalEntry.balance_right {
+                balanceDebitOrCredit = "貸"
+            } else {
+                balanceDebitOrCredit = "-"
+            }
+        } else {
+            balanceDebitOrCredit = "-"
+        }
+        return balanceDebitOrCredit
+    }
     // 取得　差引残高額　仕訳
     func getBalanceAmount(indexPath: IndexPath) -> Int64 {
         if !dataBaseJournalEntries.isEmpty {
@@ -100,7 +132,7 @@ class DataBaseManagerGeneralLedgerAccountBalance {
         return balanceDebitOrCredit
     }
 
-    // 取得　差引残高額　 資本振替仕訳　損益勘定以外
+    // 取得　差引残高額　 資本振替仕訳
     func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
             if dataBaseCapitalTransferJournalEntry.balance_left > dataBaseCapitalTransferJournalEntry.balance_right { // 借方と貸方を比較
@@ -131,22 +163,51 @@ class DataBaseManagerGeneralLedgerAccountBalance {
         return balanceDebitOrCredit
     }
 
-
     // MARK: Update
     
     // 計算　差引残高
     func calculateBalance(
         account: String,
+        dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?,
         databaseJournalEntries: Results<DataBaseJournalEntry>,
         dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>,
         dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     ) {
         // 参照先を渡す
+        self.dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry
         self.dataBaseJournalEntries = databaseJournalEntries
         self.dataBaseAdjustingEntries = dataBaseAdjustingEntries
         self.dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry
         var left: Int64 = 0 // 差引残高 累積　勘定内の仕訳データを全て表示するまで、覚えておく
         var right: Int64 = 0
+
+        // 開始仕訳
+        print("開始仕訳", dataBaseOpeningJournalEntry)
+        if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
+            // 勘定が借方と貸方のどちらか
+            if account == dataBaseOpeningJournalEntry.debit_category || dataBaseOpeningJournalEntry.debit_category == "資本金勘定" { // 借方
+                left += dataBaseOpeningJournalEntry.debit_amount // 累計額に追加
+            } else if account == dataBaseOpeningJournalEntry.credit_category || dataBaseOpeningJournalEntry.credit_category == "資本金勘定" { // 貸方
+                right += dataBaseOpeningJournalEntry.credit_amount // 累計額に追加
+            }
+            do {
+                try DataBaseManager.realm.write {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if left > right {
+                        dataBaseOpeningJournalEntry.balance_left = left - right // 差額を格納
+                        dataBaseOpeningJournalEntry.balance_right = 0 // 相手方勘定を0にしないと、getBalanceAmountの計算がおかしくなる
+                    } else if left < right {
+                        dataBaseOpeningJournalEntry.balance_left = 0
+                        dataBaseOpeningJournalEntry.balance_right = right - left
+                    } else {
+                        dataBaseOpeningJournalEntry.balance_left = 0 // ゼロを入れないと前回値が残る
+                        dataBaseOpeningJournalEntry.balance_right = 0
+                    }
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
         // 仕訳
         print("仕訳", dataBaseJournalEntries.count, dataBaseJournalEntries)
         for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ

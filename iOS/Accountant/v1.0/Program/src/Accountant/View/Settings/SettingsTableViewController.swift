@@ -35,13 +35,6 @@ class SettingsTableViewController: UIViewController {
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
 
-        scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = 160
-        scrollView.parallaxHeader.mode = .fill
-        scrollView.parallaxHeader.minimumHeight = 0
-        scrollView.contentSize = contentView.frame.size
-        scrollView.flashScrollIndicators()
-
         self.navigationItem.title = "設定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -55,6 +48,18 @@ class SettingsTableViewController: UIViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
+        scrollView.parallaxHeader.mode = .center
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
+    }
+
 
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc func switchTriggered(sender: UISwitch) {
@@ -98,7 +103,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            return 3
+            return 4
         case 2:
             return 3
         case 3:
@@ -125,6 +130,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
+        case 1:
+            return "開始残高　前期の決算書、もしくは試算表の貸借対照表をご参照いただきながら設定してください。"
         case 3:
             return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
         default:
@@ -161,6 +168,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 2:
                 cell.centerLabel.text = "勘定科目体系"
                 cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
+            case 3:
+                cell.centerLabel.text = "開始残高"
+                cell.leftImageView.image = UIImage(named: "edit_document-edit_document_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
@@ -184,7 +194,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
-                cell.centerLabel.text = "仕訳帳"
+                cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
@@ -243,6 +253,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 performSegue(withIdentifier: "SettingsPeriodTableViewController", sender: tableView.cellForRow(at: indexPath))
             case 2:
                 performSegue(withIdentifier: "SettingsCategoryTableViewController", sender: tableView.cellForRow(at: indexPath))
+            case 3:
+                performSegue(withIdentifier: "OpeningBalanceViewController", sender: tableView.cellForRow(at: indexPath))
             default:
                 break
             }

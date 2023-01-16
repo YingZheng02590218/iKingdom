@@ -79,6 +79,15 @@ class DataBaseManagerJournalEntry {
         let objects = RealmManager.shared.read(type: DataBaseJournalEntry.self)
         return objects
     }
+
+    // 取得 仕訳　勘定別 全年度
+    func getAllJournalEntryInAccountAll(account: String) -> Results<DataBaseJournalEntry> {
+        var objects = RealmManager.shared.readWithPredicate(type: DataBaseJournalEntry.self, predicates: [
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
+        ])
+        objects = objects.sorted(byKeyPath: "date", ascending: true)
+        return objects
+    }
     
     // MARK: Update
     

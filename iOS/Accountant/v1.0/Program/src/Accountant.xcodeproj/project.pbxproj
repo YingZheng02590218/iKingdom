@@ -132,6 +132,26 @@
 		F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
 		F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
 		F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */; };
+		F98289782973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
+		F98289792973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
+		F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */; };
+		F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */; };
+		F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */; };
+		F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */; };
+		F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */; };
+		F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */; };
+		F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */; };
+		F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */; };
+		F98289872973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */; };
+		F98289882973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */; };
+		F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */; };
+		F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */; };
+		F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */; };
+		F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */; };
+		F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */; };
+		F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */; };
+		F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
+		F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
 		F9860FB9285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F9860FBA285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
@@ -267,6 +287,8 @@
 		F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */; };
 		F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
 		F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
+		F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
+		F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -585,6 +607,16 @@
 		F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F97AC19C25A976000077B667 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		F97C278E263AB39D00DFC3B0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalanceViewController.swift; sourceTree = "<group>"; };
+		F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AfterClosingTrialBalanceViewController.storyboard; sourceTree = "<group>"; };
+		F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalancePresenter.swift; sourceTree = "<group>"; };
+		F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalanceModel.swift; sourceTree = "<group>"; };
+		F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceViewController.swift; sourceTree = "<group>"; };
+		F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalancePresenter.swift; sourceTree = "<group>"; };
+		F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceModel.swift; sourceTree = "<group>"; };
+		F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OpeningBalanceViewController.storyboard; sourceTree = "<group>"; };
+		F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceTableViewCell.swift; sourceTree = "<group>"; };
+		F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningBalanceAccount.swift; sourceTree = "<group>"; };
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -699,6 +731,7 @@
 		F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
 		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningJournalEntry.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -897,10 +930,12 @@
 				F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */,
 				F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */,
 				F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */,
+				F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */,
 				F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */,
 				F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */,
 				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
 				F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */,
+				F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */,
 				F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */,
 				F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */,
 				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
@@ -1006,9 +1041,14 @@
 		F955B6122490FF9A005E2C6D /* TB */ = {
 			isa = PBXGroup;
 			children = (
+				F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */,
+				F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */,
+				F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */,
+				F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */,
 				F92F4EF3249CCD5B00D50767 /* TBViewController.swift */,
 				F99BE7A3261DD0EA004611E4 /* TBViewController.storyboard */,
 				F9711328249D12A1006258F7 /* TBTableViewCell.swift */,
+				F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */,
 			);
 			path = TB;
 			sourceTree = "<group>";
@@ -1249,6 +1289,8 @@
 				F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */,
 				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
 				F9354DB124989895007DB098 /* TBModel.swift */,
+				F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */,
+				F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */,
 				F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */,
 			);
 			path = Model;
@@ -1322,6 +1364,8 @@
 				F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 				F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */,
+				F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */,
+				F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */,
 				F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */,
 			);
 			name = Presenter;
@@ -1629,6 +1673,7 @@
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
+				F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
 				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
@@ -1644,6 +1689,7 @@
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
+				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
@@ -1692,6 +1738,7 @@
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
 				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
+				F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
 				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
@@ -1707,6 +1754,7 @@
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
+				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
@@ -1902,6 +1950,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */,
+				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
+				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
@@ -1921,6 +1971,7 @@
 				F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */,
 				F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */,
 				F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */,
+				F98289782973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */,
 				F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */,
 				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */,
@@ -1969,6 +2020,7 @@
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
+				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9F4605424BDD616008FE62B /* Migration.swift in Sources */,
@@ -2002,6 +2054,7 @@
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
+				F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
@@ -2036,6 +2089,8 @@
 				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
+				F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
 				F9D15FB9296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
 				F963E2C82967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
@@ -2046,6 +2101,7 @@
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
 				F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F98289872973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */,
 				F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
@@ -2069,6 +2125,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
+				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,
 			);
@@ -2079,6 +2136,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
+				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
+				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,
@@ -2098,6 +2157,7 @@
 				F9EC669A27B90BC60003FBB6 /* DataBaseSettingsTaxonomy.swift in Sources */,
 				F9EC669B27B90BC60003FBB6 /* WithLabelTableViewCell.swift in Sources */,
 				F9EC669C27B90BC60003FBB6 /* BSTableViewCell.swift in Sources */,
+				F98289792973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */,
 				F9EC669F27B90BC60003FBB6 /* CategoryListTableViewController.swift in Sources */,
 				F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */,
 				F9EC66A127B90BC60003FBB6 /* CategoryListTableViewCell.swift in Sources */,
@@ -2146,6 +2206,7 @@
 				F9EC66C027B90BC60003FBB6 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
+				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
@@ -2179,6 +2240,7 @@
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
+				F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
@@ -2213,6 +2275,8 @@
 				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
+				F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
 				F9D15FBA296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
 				F963E2C92967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
@@ -2223,6 +2287,7 @@
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
 				F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F98289882973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */,
 				F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9EC66F727B90BC60003FBB6 /* CompanyNameTableViewCell.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
@@ -2246,6 +2311,7 @@
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,
+				F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9EC670927B90BC60003FBB6 /* UIColor+extension.swift in Sources */,
 			);

@@ -239,7 +239,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         case 1:
             let results = DataBaseManagerJournalEntry.shared.getJournalEntryCount()
             let resultss = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryCount()
-            return "データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
+            return "開始残高は、最も古い年度の帳簿に適用されます。\n入力データ総数:　仕訳: \(results.count),　決算整理仕訳: \(resultss.count)"
         default:
             return ""
         }
@@ -352,6 +352,10 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         dataBaseManagerAccount.addGeneralLedgerAccountLack()
+        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+        let databaseManager = TBModel()
+        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
     }
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

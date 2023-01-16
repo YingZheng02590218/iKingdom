@@ -48,7 +48,7 @@ class SettingsOperatingTableViewController: UITableViewController {
             }
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -114,7 +114,7 @@ class SettingsOperatingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
+            return 3
         default:
             return 0
         }
@@ -131,8 +131,8 @@ class SettingsOperatingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-            //        case 0:
-            //            return "使用する勘定科目を設定することができます。"
+        case 0:
+            return "仕訳帳と諸勘定に決算振替仕訳を表示するかどうかを設定することができます。"
         default:
             return ""
         }
@@ -169,6 +169,19 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
             cell.toggleButton.tag = 1
             return cell
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.textLabel?.text = "残高振替仕訳を表示(前期繰越、次期繰越)"
+            if let englishFromOfClosingTheLedger2 = object?.EnglishFromOfClosingTheLedger2 {
+                // 勘定科目の有効無効
+                cell.toggleButton.isOn = englishFromOfClosingTheLedger2
+            }
+            // 勘定科目の有効無効　変更時のアクションを指定
+            cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
+            cell.toggleButton.tag = 2
+            return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
                 return UITableViewCell()
@@ -184,6 +197,8 @@ class SettingsOperatingTableViewController: UITableViewController {
             DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger0", isOn: sender.isOn)
         } else if sender.tag == 1 { // 資本振替仕訳
             DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger1", isOn: sender.isOn)
+        } else if sender.tag == 2 { // 残高振替仕訳
+            DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger2", isOn: sender.isOn)
         }
     }
 }
