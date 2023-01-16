@@ -24,16 +24,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdn-KW-hlU" userLabel="label">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用中" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdn-KW-hlU" userLabel="label">
+                                            <rect key="frame" x="309" y="14" width="50" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="JDg-Zc-2hM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBz-Uh-hYd">
-                                            <rect key="frame" x="319" y="7" width="49" height="31"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                        <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBz-Uh-hYd">
+                                            <rect key="frame" x="364" y="6.5" width="2" height="31"/>
                                             <color key="tintColor" name="AccentOrange"/>
                                             <color key="onTintColor" name="AccentGreen"/>
                                             <connections>
@@ -41,6 +42,14 @@
                                             </connections>
                                         </switch>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="BBz-Uh-hYd" firstAttribute="centerY" secondItem="yaZ-VA-r9L" secondAttribute="centerY" id="23i-gK-jGR"/>
+                                        <constraint firstItem="BBz-Uh-hYd" firstAttribute="leading" secondItem="gdn-KW-hlU" secondAttribute="trailing" constant="5" id="CaA-Cw-mwB"/>
+                                        <constraint firstItem="gdn-KW-hlU" firstAttribute="centerY" secondItem="yaZ-VA-r9L" secondAttribute="centerY" id="Cbd-t7-w33"/>
+                                        <constraint firstItem="gdn-KW-hlU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yaZ-VA-r9L" secondAttribute="leading" id="Ced-86-2F1"/>
+                                        <constraint firstAttribute="trailing" secondItem="gdn-KW-hlU" secondAttribute="trailing" priority="900" constant="10" id="T7B-Pk-fJF"/>
+                                        <constraint firstAttribute="trailing" secondItem="BBz-Uh-hYd" secondAttribute="trailing" constant="10" id="oVq-pK-uVn"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
