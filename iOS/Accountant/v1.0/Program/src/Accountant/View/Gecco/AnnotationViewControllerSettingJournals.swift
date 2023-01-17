@@ -41,10 +41,8 @@ class AnnotationViewControllerSettingJournals: SpotlightViewController {
                     cornerRadius: 6
                 )
             )
-            break
         case 1:
             dismiss(animated: true, completion: nil)
-            break
         default:
             break
         }
@@ -95,10 +93,8 @@ private extension AnnotationViewControllerSettingJournals {
             case 0:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.origin.y + 60
-                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
-                break
             }
         }
     }
@@ -114,15 +110,14 @@ private extension AnnotationViewControllerSettingJournals {
                 }
             }
         }
-        print(presentingViewController)
         return presentingViewController
     }
 
     func extractRightBarButtonConvertedFrames() -> CGRect {
         guard
-            let first = tableViewControllerHasCell?.view.viewWithTag(0)!.viewWithTag(33)
-            else {
-                fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
+            let first = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(33)
+        else {
+            fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
         return first.convert(first.bounds, to: view)
     }

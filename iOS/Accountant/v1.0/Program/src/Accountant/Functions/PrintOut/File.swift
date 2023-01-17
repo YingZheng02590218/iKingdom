@@ -9,18 +9,18 @@
 //  Created by 福田敏一 on 2018/11/30.
 //  Copyright © 2018 Toshikazu Fukuda. All rights reserved.
 //
-//国税庁サイト http://www.nta.go.jp/law/tsutatsu/kobetsu/hojin/010705/pdf/180401_02.pdf
+// 国税庁サイト http://www.nta.go.jp/law/tsutatsu/kobetsu/hojin/010705/pdf/180401_02.pdf
 //
 
 import UIKit
 
 class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelegate {
     
-    @IBOutlet weak var UIView: UIView!//CGRect(x: 0, y: 0, width: 480, height: 680)
-    //画像は国税庁サイトの法人事業概況説明書FB1006の1枚目、つまり表面、ちなみに裏面が2枚目です
-    //この法人事業概況説明書の毎年税務署から郵送される現物は1枚で両面印刷になっています
-    //ダウンロードしてPDFからPNGへ変更すると幅2480pixelx3507pixel解像度300dpiです
-    @IBOutlet weak var 画像: UIImageView!//CGRect(x: 6, y: 7, width: 469, height: 666)
+    @IBOutlet var UIView: UIView! // CGRect(x: 0, y: 0, width: 480, height: 680)
+    // 画像は国税庁サイトの法人事業概況説明書FB1006の1枚目、つまり表面、ちなみに裏面が2枚目です
+    // この法人事業概況説明書の毎年税務署から郵送される現物は1枚で両面印刷になっています
+    // ダウンロードしてPDFからPNGへ変更すると幅2480pixelx3507pixel解像度300dpiです
+    @IBOutlet var 画像: UIImageView! // CGRect(x: 6, y: 7, width: 469, height: 666)
     
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     
@@ -28,36 +28,36 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
         super.viewDidLoad()
     }
     
-    //リスト 5-1 ページ範囲の選択が可能な単一のPDFドキュメント
-    //- (IBAction)printContent:(id)sender {
+    // リスト 5-1 ページ範囲の選択が可能な単一のPDFドキュメント
+    // - (IBAction)printContent:(id)sender {
     @IBAction func printContent(_ sender: UIButton) {
         // キャプチャする元UIViewに新たに追加したUIView範囲を取得する
-        let rect = UIView.bounds//実行結果 : rect = (0.0, 0.0, 480.0, 680.0)
+        let rect = UIView.bounds// 実行結果 : rect = (0.0, 0.0, 480.0, 680.0)
         print("通過・rect -> \(rect)")
-        //参考サイト https://developer.apple.com/documentation/uikit/1623912-uigraphicsbeginimagecontextwitho
-    //p-41・ビットマップグラフィックスコンテキストを使って新しい画像を生成
-        //UIKitの場合、その手順は次のようになります。
+        // 参考サイト https://developer.apple.com/documentation/uikit/1623912-uigraphicsbeginimagecontextwitho
+    // p-41・ビットマップグラフィックスコンテキストを使って新しい画像を生成
+        // UIKitの場合、その手順は次のようになります。
         // 1. UIGraphicsBeginImageContextWithOptions関数でビットマップコンテキストを生成し、グラフィックススタックにプッシュします。
-        //UIGraphicsBeginImageContextWithOptions(CGSizeMake(100.0,100.0), NO, 2.0);
+        // UIGraphicsBeginImageContextWithOptions(CGSizeMake(100.0,100.0), NO, 2.0);
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         // 2. UIKitまたはCore Graphicsのルーチンを使って、新たに生成したグラフィックスコンテキストに画像を描画します。
-        //CGContextRef context = UIGraphicsGetCurrentContext();
-        let CGContextRef : CGContext = UIGraphicsGetCurrentContext()!
+        // CGContextRef context = UIGraphicsGetCurrentContext();
+        let CGContextRef: CGContext = UIGraphicsGetCurrentContext()!
         // view内の描画をcontextに複写するbitMap
         UIView.layer.render(in: CGContextRef)
         // 3. UIGraphicsGetImageFromCurrentImageContext関数を呼び出すと、描画した画像に基づく UIImageオブジェクトが生成され、返されます。必要ならば、さらに描画した上で再びこのメソッ ドを呼び出し、別の画像を生成することも可能です。
-        //UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
-        let backgroundImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        // UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();
+        let backgroundImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         // 4. UIGraphicsEndImageContextを呼び出してグラフィックススタックからコンテキストをポップします。
         UIGraphicsEndImageContext()
         
-//印刷はここからです
-    //p-58
-        //印刷サポートの概要
+// 印刷はここからです
+    // p-58
+        // 印刷サポートの概要
         /*         大まかに言うと、印刷機能をアプリケーションに組み込む方法は2通りあます、UIActivityViewControllerを使っていて、ページ範囲を選んだり、用紙選択の処理をオーバーライドしたりする必要がなければ、印刷アクティビティを追加する、という方法があります。
          今回は私はこの方法で印刷します
          */
-    //p-80 最後に、標準ビューコントローラのpresent*メソッドを使って、アクティビティビューを表示しま す。ここでユーザが印刷を選択すると、iOS側が印刷ジョブを生成するようになっています。詳しく は、『UIActivityViewController Class Reference 』および『UIActivity Class Reference 』を参照してください。
+    // p-80 最後に、標準ビューコントローラのpresent*メソッドを使って、アクティビティビューを表示しま す。ここでユーザが印刷を選択すると、iOS側が印刷ジョブを生成するようになっています。詳しく は、『UIActivityViewController Class Reference 』および『UIActivity Class Reference 』を参照してください。
         
         let shareText = "Apple - Apple iPhone X"
         let shareWebsite = NSURL(string: "https://www.apple.com/jp/iphone-x/")!
@@ -66,9 +66,9 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
         var activityItems = [] as [Any]
         activityItems = [shareText, shareWebsite] as [Any]
         activityItems.append(shareImage)
-        //参考サイト https://developer.apple.com/documentation/uikit/uiactivityviewcontroller/1622019-init
-        //Declaration
-        //init(activityItems: [Any], applicationActivities: [UIActivity]?)
+        // 参考サイト https://developer.apple.com/documentation/uikit/uiactivityviewcontroller/1622019-init
+        // Declaration
+        // init(activityItems: [Any], applicationActivities: [UIActivity]?)
         let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -86,7 +86,7 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
          //以下の実装は未使用で省略されています
          UIPrintInteractionController *pic = [UIPrintInteractionController] sharedPrintController];
          */
-        //訂正します、今回は2つのコードは印刷には使用していませんが関数func printInteractionControllerを利用してbestPaper -> (0.0, 0.0, 210.00000000000003, 297.0)などを利用する為には必要でした、これで利用できます
+        // 訂正します、今回は2つのコードは印刷には使用していませんが関数func printInteractionControllerを利用してbestPaper -> (0.0, 0.0, 210.00000000000003, 297.0)などを利用する為には必要でした、これで利用できます
         let pic = UIPrintInteractionController.shared
         /*
          if  (pic && UIPrintInteractionController canPrintData: self.myPDFData] ) { }
@@ -99,7 +99,7 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
          //以下省略
          */
     }
-    //p-78の「リスト 5-8 printInteractionController:choosePaper:メソッドの実装」
+    // p-78の「リスト 5-8 printInteractionController:choosePaper:メソッドの実装」
     /*
      - (UIPrintPaper *)printInteractionController:(UIPrintInteractionController *)pic choosePaper:(NSArray *)paperList {
      // カスタムメソッドとプロパティ...
@@ -114,10 +114,10 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
             let paper: UIPrintPaper = paperList[i]
             print("paperListのビクセル is \(paper.paperSize.width) \(paper.paperSize.height)")
         }
-        //ピクセル
+        // ピクセル
         print("\npageSizeピクセル -> \(pageSize)")
         let bestPaper = UIPrintPaper.bestPaper(forPageSize: pageSize, withPapersFrom: paperList)
-        //mmで用紙サイズと印刷可能範囲を表示
+        // mmで用紙サイズと印刷可能範囲を表示
         print("paperSizeミリ -> \(bestPaper.paperSize.width / 72.0 * 25.4) \(bestPaper.paperSize.height / 72.0 * 25.4)")
         print("bestPaper -> \(bestPaper.printableRect.origin.x / 72.0 * 25.4) \(bestPaper.printableRect.origin.y / 72.0 * 25.4) \(bestPaper.printableRect.size.width / 72.0 * 25.4) \(bestPaper.printableRect.size.height / 72.0 * 25.4)\n")
         return bestPaper
@@ -208,4 +208,3 @@ class FB1006ViewController: UIViewController, UIPrintInteractionControllerDelega
 
      */
 }
-

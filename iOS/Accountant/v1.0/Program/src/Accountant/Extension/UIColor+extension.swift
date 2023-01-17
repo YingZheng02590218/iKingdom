@@ -11,36 +11,36 @@ import UIKit
 
 extension UIColor {
 
-    class var AccentBlue: UIColor {
-        return UIColor(named: "AccentBlue")!
+    class var accentBlue: UIColor {
+        UIColor(named: "AccentBlue") ?? .white
     }
 
-    class var AccentColor: UIColor {
-        return UIColor(named: "AccentColor") ?? .white
+    class var accentColor: UIColor {
+        UIColor(named: "AccentColor") ?? .white
     }
 
-    class var AccentLight: UIColor {
-        return UIColor(named: "AccentLight")!
+    class var accentLight: UIColor {
+        UIColor(named: "AccentLight") ?? .white
     }
 
-    class var BaseColor: UIColor {
-        return UIColor(named: "BaseColor") ?? .white
+    class var baseColor: UIColor {
+        UIColor(named: "BaseColor") ?? .white
     }
 
-    class var CalculatorDisplay: UIColor {
-        return UIColor(named: "CalculatorDisplay")!
+    class var calculatorDisplay: UIColor {
+        UIColor(named: "CalculatorDisplay") ?? .white
     }
 
-    class var MainColor: UIColor {
-        return UIColor(named: "MainColor") ?? .white
+    class var mainColor: UIColor {
+        UIColor(named: "MainColor") ?? .white
     }
 
-    class var MainColor2: UIColor {
-        return UIColor(named: "MainColor2") ?? .white
+    class var mainColor2: UIColor {
+        UIColor(named: "MainColor2") ?? .white
     }
-    
-    class var TextColor: UIColor {
-        return UIColor(named: "TextColor")!
+
+    class var textColor: UIColor {
+        UIColor(named: "TextColor") ?? .white
     }
 
     static let theme = UIColor(named: "C1D2EB")

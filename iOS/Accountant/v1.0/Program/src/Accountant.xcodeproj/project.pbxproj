@@ -44,6 +44,12 @@
 		F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */; };
 		F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */; };
 		F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */; };
+		F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
+		F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
+		F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A263329573714002B7EB9 /* JournalEntryData.swift */; };
+		F93A263529573714002B7EB9 /* JournalEntryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A263329573714002B7EB9 /* JournalEntryData.swift */; };
+		F93A2637295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
+		F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
 		F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
@@ -58,12 +64,13 @@
 		F94DE33827DC9C0A0022F739 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F94DE33627DC9C020022F739 /* MessageUI.framework */; };
 		F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F94E79EA259DF8C7004726F7 /* Settings.bundle */; };
 		F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD92237AEB3A0074D812 /* AppDelegate.swift */; };
-		F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */; };
-		F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD96237AEB3A0074D812 /* DocumentView.swift */; };
-		F94EDD99237AEB3A0074D812 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD98237AEB3A0074D812 /* Document.swift */; };
 		F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9A237AEB3A0074D812 /* Main.storyboard */; };
 		F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9D237AEB3B0074D812 /* Assets.xcassets */; };
 		F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */; };
+		F951725E295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */; };
+		F951725F295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */; };
+		F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */; };
+		F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */; };
 		F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */; };
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
@@ -74,26 +81,89 @@
 		F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */; };
 		F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59AC26503E0600EFE522 /* PageContentViewController.swift */; };
 		F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */; };
+		F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
+		F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */; };
+		F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
+		F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */; };
+		F963E2A12962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */; };
+		F963E2A22962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */; };
+		F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A32962B728002DF49E /* BalanceSheetModel.swift */; };
+		F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A32962B728002DF49E /* BalanceSheetModel.swift */; };
+		F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A62962BA40002DF49E /* BalanceSheetData.swift */; };
+		F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A62962BA40002DF49E /* BalanceSheetData.swift */; };
+		F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */; };
+		F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */; };
+		F963E2AD296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */; };
+		F963E2AE296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */; };
+		F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */; };
+		F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */; };
+		F963E2B329647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */; };
+		F963E2B429647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */; };
+		F963E2B629647A01002DF49E /* DataBaseTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */; };
+		F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */; };
+		F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */; };
+		F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */; };
+		F963E2BD2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */; };
+		F963E2BE2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */; };
+		F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */; };
+		F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */; };
+		F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */; };
+		F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */; };
+		F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */; };
+		F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */; };
+		F963E2C82967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */; };
+		F963E2C92967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */; };
+		F963E2CB296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */; };
+		F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */; };
+		F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
+		F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */; };
+		F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */; };
+		F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */; };
 		F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F966371227B2930A00475CC7 /* PDFKit.framework */; };
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */; };
 		F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */; };
 		F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9711328249D12A1006258F7 /* TBTableViewCell.swift */; };
+		F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
+		F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
 		F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */; };
 		F976798D24A8904B007A0D73 /* PLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F976798C24A8904B007A0D73 /* PLModel.swift */; };
 		F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
 		F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
 		F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */; };
+		F98289782973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
+		F98289792973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
+		F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */; };
+		F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */; };
+		F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */; };
+		F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */; };
+		F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */; };
+		F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */; };
+		F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */; };
+		F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */; };
+		F98289872973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */; };
+		F98289882973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */; };
+		F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */; };
+		F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */; };
+		F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */; };
+		F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */; };
+		F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */; };
+		F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */; };
+		F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
+		F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
 		F9860FB9285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F9860FBA285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
+		F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
+		F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
+		F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F986CC1D29474392005A2138 /* .swiftlint.yml */; };
+		F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = F986CC1D29474392005A2138 /* .swiftlint.yml */; };
 		F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */; };
 		F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */; };
 		F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
-		F98CD97724DCB49D001CBF94 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */; };
 		F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */; };
-		F98D8A5127A534BD009560AA /* Printout+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+extension.swift */; };
+		F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+Utility.swift */; };
 		F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5227A55F27009560AA /* WSPresenter.swift */; };
 		F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */; };
 		F99112E42495290000E28BB9 /* BSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E32495290000E28BB9 /* BSModel.swift */; };
@@ -110,7 +180,7 @@
 		F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */; };
 		F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */; };
 		F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */; };
-		F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
+		F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */; };
 		F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */; };
 		F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE798261DD042004611E4 /* WSViewController.storyboard */; };
@@ -154,8 +224,8 @@
 		F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E22912B66B00B9F50B /* StringUtility.swift */; };
 		F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
 		F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */; };
-		F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
-		F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */; };
+		F9B1548C27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */; };
+		F9B1548D27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */; };
 		F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */; };
 		F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */; };
 		F9B209F027A4377000F7EA8D /* BSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EE27A4377000F7EA8D /* BSViewController.swift */; };
@@ -195,16 +265,30 @@
 		F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */; };
 		F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */; };
 		F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */; };
+		F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
+		F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
+		F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
+		F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
+		F9D15FB9296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */; };
+		F9D15FBA296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */; };
+		F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */; };
+		F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */; };
+		F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */; };
+		F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */; };
+		F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */; };
+		F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */; };
 		F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */; };
 		F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */; };
 		F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */; };
 		F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */; };
 		F9D38E96259618DE00364B45 /* SettingsHelpDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */; };
-		F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
-		F9D5D54D247E48D600EA35C7 /* GenearlLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */; };
+		F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */; };
+		F9D5D54D247E48D600EA35C7 /* GeneralLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */; };
 		F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */; };
 		F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
 		F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
+		F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
+		F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -226,7 +310,6 @@
 		F9EC669A27B90BC60003FBB6 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F9EC669B27B90BC60003FBB6 /* WithLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */; };
 		F9EC669C27B90BC60003FBB6 /* BSTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */; };
-		F9EC669D27B90BC60003FBB6 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */; };
 		F9EC669F27B90BC60003FBB6 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */; };
 		F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
 		F9EC66A127B90BC60003FBB6 /* CategoryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */; };
@@ -235,7 +318,6 @@
 		F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919603324AC679E0084A18B /* File2.swift */; };
 		F9EC66A527B90BC60003FBB6 /* JournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */; };
 		F9EC66A627B90BC60003FBB6 /* DataBaseSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */; };
-		F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD98237AEB3A0074D812 /* Document.swift */; };
 		F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
 		F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */; };
 		F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */; };
@@ -244,9 +326,8 @@
 		F9EC66AD27B90BC60003FBB6 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */; };
 		F9EC66AE27B90BC60003FBB6 /* SettingsPeriodTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934EB248554DA00BF7AA7 /* SettingsPeriodTableViewController.swift */; };
 		F9EC66AF27B90BC60003FBB6 /* TBPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */; };
-		F9EC66B027B90BC60003FBB6 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */; };
 		F9EC66B127B90BC60003FBB6 /* TBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DB124989895007DB098 /* TBModel.swift */; };
-		F9EC66B227B90BC60003FBB6 /* GenearlLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */; };
+		F9EC66B227B90BC60003FBB6 /* GeneralLedgerAccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */; };
 		F9EC66B327B90BC60003FBB6 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9EC66B427B90BC60003FBB6 /* GeneralLedgerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF067C24289DC700C59031 /* GeneralLedgerTableViewController.swift */; };
 		F9EC66B527B90BC60003FBB6 /* SettingUpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */; };
@@ -283,7 +364,7 @@
 		F9EC66D527B90BC60003FBB6 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F4EF3249CCD5B00D50767 /* TBViewController.swift */; };
 		F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
-		F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */; };
+		F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */; };
 		F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
@@ -308,11 +389,10 @@
 		F9EC66EE27B90BC60003FBB6 /* BSPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */; };
 		F9EC66EF27B90BC60003FBB6 /* DataBaseJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */; };
 		F9EC66F027B90BC60003FBB6 /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */; };
-		F9EC66F127B90BC60003FBB6 /* Printout+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+extension.swift */; };
+		F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D8A5027A534BD009560AA /* Printout+Utility.swift */; };
 		F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F976798C24A8904B007A0D73 /* PLModel.swift */; };
 		F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */; };
 		F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */; };
-		F9EC66F527B90BC60003FBB6 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD96237AEB3A0074D812 /* DocumentView.swift */; };
 		F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */; };
 		F9EC66F727B90BC60003FBB6 /* CompanyNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */; };
 		F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EDD92237AEB3A0074D812 /* AppDelegate.swift */; };
@@ -345,9 +425,9 @@
 		F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */; };
 		F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227716261F2D8F0080B746 /* CategoryListTableViewController.storyboard */; };
 		F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9968AAF264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard */; };
-		F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
+		F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 		F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
-		F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */; };
+		F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */; };
 		F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */; };
 		F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CEE26208DF50099D51C /* SettingsPeriodYearViewController.storyboard */; };
 		F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */; };
@@ -414,7 +494,7 @@
 		F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934EE2485578900BF7AA7 /* Initial.swift */; };
 		F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */; };
 		F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */; };
-		F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */; };
+		F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -464,6 +544,9 @@
 		F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCashFlowStatement.swift; sourceTree = "<group>"; };
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
+		F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryTableViewController.swift; sourceTree = "<group>"; };
+		F93A263329573714002B7EB9 /* JournalEntryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryData.swift; sourceTree = "<group>"; };
+		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* UIString+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+extension.swift"; sourceTree = "<group>"; };
@@ -474,13 +557,12 @@
 		F94E79EA259DF8C7004726F7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F94EDD8F237AEB3A0074D812 /* Paciolist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paciolist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94EDD92237AEB3A0074D812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
-		F94EDD96237AEB3A0074D812 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
-		F94EDD98237AEB3A0074D812 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		F94EDD9B237AEB3A0074D812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F94EDD9D237AEB3B0074D812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F94EDDA0237AEB3B0074D812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F94EDDA2237AEB3B0074D812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccount.swift; sourceTree = "<group>"; };
+		F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournals.swift; sourceTree = "<group>"; };
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
@@ -493,10 +575,30 @@
 		F95F59A626502DC200EFE522 /* CarouselTabCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTabCollectionViewCell.xib; sourceTree = "<group>"; };
 		F95F59AC26503E0600EFE522 /* PageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		F95F59B126503E1D00EFE522 /* PageContentViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PageContentViewController.storyboard; sourceTree = "<group>"; };
+		F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetViewController.swift; sourceTree = "<group>"; };
+		F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BalanceSheetViewController.storyboard; sourceTree = "<group>"; };
+		F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalacneSheetPresenter.swift; sourceTree = "<group>"; };
+		F963E2A32962B728002DF49E /* BalanceSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetModel.swift; sourceTree = "<group>"; };
+		F963E2A62962BA40002DF49E /* BalanceSheetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceSheetData.swift; sourceTree = "<group>"; };
+		F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerBalanceSheet.swift; sourceTree = "<group>"; };
+		F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BSTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCapitalTransferJournalEntry.swift; sourceTree = "<group>"; };
+		F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseTransferEntry.swift; sourceTree = "<group>"; };
+		F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBasePLAccount.swift; sourceTree = "<group>"; };
+		F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountViewController.swift; sourceTree = "<group>"; };
+		F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GeneralLedgerPLAccountViewController.storyboard; sourceTree = "<group>"; };
+		F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountPresenter.swift; sourceTree = "<group>"; };
+		F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerPLAccountModel.swift; sourceTree = "<group>"; };
+		F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerPLAccountBalance.swift; sourceTree = "<group>"; };
+		F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerPLAccount.swift; sourceTree = "<group>"; };
+		F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCapitalAccount.swift; sourceTree = "<group>"; };
+		F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerTransferEntry.swift; sourceTree = "<group>"; };
 		F966371227B2930A00475CC7 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpViewController.swift; sourceTree = "<group>"; };
 		F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerPLAccount.swift; sourceTree = "<group>"; };
 		F9711328249D12A1006258F7 /* TBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBTableViewCell.swift; sourceTree = "<group>"; };
+		F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAdjustingEntry.swift; sourceTree = "<group>"; };
 		F97422D8253F091500FBA052 /* SettingAccountDetailTaxonomyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTaxonomyTableViewCell.swift; sourceTree = "<group>"; };
 		F97422D9253F091500FBA052 /* SettingAccountDetailAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F97422DA253F091500FBA052 /* AccountDetailPickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPickerTextField.swift; sourceTree = "<group>"; };
@@ -505,12 +607,23 @@
 		F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F97AC19C25A976000077B667 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		F97C278E263AB39D00DFC3B0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalanceViewController.swift; sourceTree = "<group>"; };
+		F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AfterClosingTrialBalanceViewController.storyboard; sourceTree = "<group>"; };
+		F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalancePresenter.swift; sourceTree = "<group>"; };
+		F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalanceModel.swift; sourceTree = "<group>"; };
+		F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceViewController.swift; sourceTree = "<group>"; };
+		F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalancePresenter.swift; sourceTree = "<group>"; };
+		F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceModel.swift; sourceTree = "<group>"; };
+		F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OpeningBalanceViewController.storyboard; sourceTree = "<group>"; };
+		F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceTableViewCell.swift; sourceTree = "<group>"; };
+		F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningBalanceAccount.swift; sourceTree = "<group>"; };
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
-		F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsCategoryTableViewController.swift; path = Accountant/View/Settings/SettingsCategory/SettingsCategoryMain/SettingsCategoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLabelTableViewCell.swift; sourceTree = "<group>"; };
 		F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithLabelTableViewCell.xib; sourceTree = "<group>"; };
-		F98D8A5027A534BD009560AA /* Printout+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Printout+extension.swift"; sourceTree = "<group>"; };
+		F98D8A5027A534BD009560AA /* Printout+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Printout+Utility.swift"; sourceTree = "<group>"; };
 		F98D8A5227A55F27009560AA /* WSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSPresenter.swift; sourceTree = "<group>"; };
 		F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingTableViewController.swift; sourceTree = "<group>"; };
 		F99112E32495290000E28BB9 /* BSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSModel.swift; sourceTree = "<group>"; };
@@ -527,7 +640,7 @@
 		F99B65BE24B7A38F006BD3DD /* WSTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSTableViewCell.swift; sourceTree = "<group>"; };
 		F99BAEB1261C98410038FBB2 /* JournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerTableViewController.storyboard; sourceTree = "<group>"; };
-		F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenearlLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
+		F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GeneralLedgerAccountViewController.storyboard; sourceTree = "<group>"; };
 		F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FinancialStatementTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CFTableViewController.storyboard; sourceTree = "<group>"; };
 		F99BE798261DD042004611E4 /* WSViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WSViewController.storyboard; sourceTree = "<group>"; };
@@ -566,7 +679,7 @@
 		F9AD64DF2912AA1300B9F50B /* HTMLhelperBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperBS.swift; sourceTree = "<group>"; };
 		F9AD64E22912B66B00B9F50B /* StringUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtility.swift; sourceTree = "<group>"; };
 		F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
-		F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountPresenter.swift; sourceTree = "<group>"; };
+		F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountPresenter.swift; sourceTree = "<group>"; };
 		F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPresenter.swift; sourceTree = "<group>"; };
 		F9B209EE27A4377000F7EA8D /* BSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSViewController.swift; sourceTree = "<group>"; };
@@ -603,15 +716,22 @@
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryDetailTableViewController.swift; sourceTree = "<group>"; };
 		F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTableViewCell.swift; sourceTree = "<group>"; };
+		F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementViewController.swift; sourceTree = "<group>"; };
+		F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfitAndLossStatementViewController.storyboard; sourceTree = "<group>"; };
+		F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementPresenter.swift; sourceTree = "<group>"; };
+		F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementData.swift; sourceTree = "<group>"; };
+		F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementModel.swift; sourceTree = "<group>"; };
+		F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooksShelf.swift; sourceTree = "<group>"; };
 		F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSubsidiaryLedger.swift; sourceTree = "<group>"; };
 		F9D34FB6248A324A00F8B403 /* SettingsPeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodYearViewController.swift; sourceTree = "<group>"; };
 		F9D38E95259618DE00364B45 /* SettingsHelpDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelpDetailViewController.swift; sourceTree = "<group>"; };
-		F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountViewController.swift; sourceTree = "<group>"; };
-		F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenearlLedgerAccountModel.swift; sourceTree = "<group>"; };
+		F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountViewController.swift; sourceTree = "<group>"; };
+		F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerAccountModel.swift; sourceTree = "<group>"; };
 		F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
 		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningJournalEntry.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -645,13 +765,13 @@
 		F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccount.swift; sourceTree = "<group>"; };
 		F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournals.swift; sourceTree = "<group>"; };
 		F9F934E42484D59900BF7AA7 /* JournalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalsModel.swift; sourceTree = "<group>"; };
-		F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataBaseManagerGeneralLedger.swift; path = ../GeneralLedgerDB/DataBaseManagerGeneralLedger.swift; sourceTree = "<group>"; };
-		F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataBaseGeneralLedger.swift; path = ../GeneralLedgerDB/DataBaseGeneralLedger.swift; sourceTree = "<group>"; };
+		F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedger.swift; sourceTree = "<group>"; };
+		F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseGeneralLedger.swift; sourceTree = "<group>"; };
 		F9F934EB248554DA00BF7AA7 /* SettingsPeriodTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPeriodTableViewController.swift; sourceTree = "<group>"; };
 		F9F934EE2485578900BF7AA7 /* Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initial.swift; sourceTree = "<group>"; };
 		F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccountingBooks.swift; sourceTree = "<group>"; };
 		F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerAccountingBooks.swift; sourceTree = "<group>"; };
-		F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TaxonomyAccount.csv; sourceTree = "<group>"; };
+		F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomyAccount.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -746,27 +866,6 @@
 			path = SettingsOperatingJournalEntry;
 			sourceTree = "<group>";
 		};
-		F9134C222476BBC1002A0F77 /* SettingsCategory */ = {
-			isa = PBXGroup;
-			children = (
-				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
-				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
-				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
-				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
-				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
-			);
-			path = SettingsCategory;
-			sourceTree = "<group>";
-		};
-		F91878C32581415300D2E793 /* SettingsOperatingDB */ = {
-			isa = PBXGroup;
-			children = (
-				F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */,
-				F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */,
-			);
-			path = SettingsOperatingDB;
-			sourceTree = "<group>";
-		};
 		F919603524AC6FC40084A18B /* PrintOut */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,77 +892,73 @@
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
 			);
-			name = Settings;
+			path = Settings;
 			sourceTree = "<group>";
 		};
-		F9318AE224A60C5200CE45BE /* FinancialStatementDB */ = {
+		F93A2631295721D7002B7EB9 /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
+				F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */,
+				F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */,
+				F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */,
+				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
+				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
+				F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */,
+				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
+				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
+				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
+				F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */,
+				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
+				F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */,
 				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
-				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
+				F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */,
+				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
+				F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */,
+				F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */,
+				F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */,
+				F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */,
 			);
-			path = FinancialStatementDB;
+			path = DataBaseManager;
 			sourceTree = "<group>";
 		};
-		F9354DB02498986F007DB098 /* TBDB */ = {
+		F93A2632295722BF002B7EB9 /* DataBaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				F9354DB124989895007DB098 /* TBModel.swift */,
+				F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */,
+				F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */,
+				F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */,
+				F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */,
+				F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */,
+				F963E2B529647A01002DF49E /* DataBaseTransferEntry.swift */,
+				F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */,
+				F963E2B229647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift */,
+				F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */,
+				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
+				F963E2B829647AA0002DF49E /* DataBasePLAccount.swift */,
+				F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */,
+				F963E2CD296A8D55002DF49E /* DataBaseCapitalAccount.swift */,
+				F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */,
+				F9354DB52498A361007DB098 /* DataBaseFinancialStatements.swift */,
+				F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */,
+				F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */,
+				F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */,
+				F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */,
+				F9354DBA2498DDF4007DB098 /* DataBaseWorkSheet.swift */,
 				F9354DB72498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift */,
 				F9354DB324989BAA007DB098 /* DataBaseTrialBalance.swift */,
+				F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */,
+				F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */,
+				F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */,
+				F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */,
+				F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */,
 			);
-			path = TBDB;
-			sourceTree = "<group>";
-		};
-		F9354DB92498DD81007DB098 /* WSDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
-				F9354DBA2498DDF4007DB098 /* DataBaseWorkSheet.swift */,
-				F9354DBC2498E5D3007DB098 /* DataBaseAdjustingEntry.swift */,
-			);
-			path = WSDB;
-			sourceTree = "<group>";
-		};
-		F9354DBE2498F721007DB098 /* PLDB */ = {
-			isa = PBXGroup;
-			children = (
-				F976798C24A8904B007A0D73 /* PLModel.swift */,
-				F9AC551E292CA1D1003966E4 /* PLData.swift */,
-				F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */,
-			);
-			path = PLDB;
-			sourceTree = "<group>";
-		};
-		F9354DC12498FE63007DB098 /* CFDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */,
-			);
-			path = CFDB;
-			sourceTree = "<group>";
-		};
-		F93A630424FAD5FB00C1C2C1 /* AccountingBooksShelfDB */ = {
-			isa = PBXGroup;
-			children = (
-				F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */,
-				F9D224C824893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift */,
-			);
-			path = AccountingBooksShelfDB;
-			sourceTree = "<group>";
-		};
-		F93A630524FAD63E00C1C2C1 /* AccountingBooksDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */,
-				F9F934F72485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift */,
-			);
-			path = AccountingBooksDB;
+			path = DataBaseModel;
 			sourceTree = "<group>";
 		};
 		F94EDD86237AEB3A0074D812 = {
 			isa = PBXGroup;
 			children = (
+				F986CC1D29474392005A2138 /* .swiftlint.yml */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
@@ -895,9 +990,6 @@
 				F9B209E9279D08C100F7EA8D /* Resources */,
 				F9C2BC22277DEF08006334D0 /* AccountantTests-Bridging-Header.h */,
 				F9C2BC23277DEF08006334D0 /* AccountantUITests-Bridging-Header.h */,
-				F94EDD94237AEB3A0074D812 /* DocumentBrowserViewController.swift */,
-				F94EDD96237AEB3A0074D812 /* DocumentView.swift */,
-				F94EDD98237AEB3A0074D812 /* Document.swift */,
 			);
 			path = Accountant;
 			sourceTree = "<group>";
@@ -907,12 +999,6 @@
 			children = (
 				F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */,
 				F99BE775261DCB22004611E4 /* FinancialStatementTableViewController.storyboard */,
-				F955B60E2490FCD6005E2C6D /* BS */,
-				F955B6082490E305005E2C6D /* PL */,
-				F955B60F2490FD1D005E2C6D /* CF */,
-				F955B61324910003005E2C6D /* WS */,
-				F955B6122490FF9A005E2C6D /* TB */,
-				F9706847252AC631003307F8 /* PLAccount */,
 			);
 			path = FinancialStatement;
 			sourceTree = "<group>";
@@ -920,6 +1006,8 @@
 		F955B6082490E305005E2C6D /* PL */ = {
 			isa = PBXGroup;
 			children = (
+				F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */,
+				F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */,
 				F9BDCBAD27A6CCC000BD8770 /* PLViewController.swift */,
 				F9BDCBAE27A6CCC000BD8770 /* PLViewController.xib */,
 			);
@@ -929,10 +1017,14 @@
 		F955B60E2490FCD6005E2C6D /* BS */ = {
 			isa = PBXGroup;
 			children = (
+				F963E29A2961D686002DF49E /* BalanceSheetViewController.swift */,
+				F963E29D2961D6A7002DF49E /* BalanceSheetViewController.storyboard */,
 				F9B209EE27A4377000F7EA8D /* BSViewController.swift */,
 				F9B209EF27A4377000F7EA8D /* BSViewController.xib */,
 				F9B209F227A4EF7C00F7EA8D /* BSTableViewCell.swift */,
 				F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */,
+				F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */,
+				F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */,
 			);
 			path = BS;
 			sourceTree = "<group>";
@@ -949,9 +1041,14 @@
 		F955B6122490FF9A005E2C6D /* TB */ = {
 			isa = PBXGroup;
 			children = (
+				F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */,
+				F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */,
+				F98289832973E83100F8F1B8 /* OpeningBalanceViewController.swift */,
+				F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */,
 				F92F4EF3249CCD5B00D50767 /* TBViewController.swift */,
 				F99BE7A3261DD0EA004611E4 /* TBViewController.storyboard */,
 				F9711328249D12A1006258F7 /* TBTableViewCell.swift */,
+				F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */,
 			);
 			path = TB;
 			sourceTree = "<group>";
@@ -975,7 +1072,10 @@
 				F9AC5524292CCC16003966E4 /* HTMLhelperPL.swift */,
 				F9CD589B266B980A00F27E80 /* PDFMaker.swift */,
 				F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */,
+				F963E2CA296829A6002DF49E /* PDFMakerPLAccount.swift */,
+				F9D15FC1296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift */,
 				F9AD64DC2912A9D200B9F50B /* PDFMakerBS.swift */,
+				F963E2A92962BB47002DF49E /* PDFMakerBalanceSheet.swift */,
 				F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */,
 			);
 			path = PDF;
@@ -1017,42 +1117,10 @@
 		F9706847252AC631003307F8 /* PLAccount */ = {
 			isa = PBXGroup;
 			children = (
+				F963E2BB2966E745002DF49E /* GeneralLedgerPLAccountViewController.swift */,
+				F963E2BC2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard */,
 			);
 			path = PLAccount;
-			sourceTree = "<group>";
-		};
-		F9789A322475C41700B62CAF /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				F929C0252478365E0034FAAF /* Settings */,
-				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
-				F9F4607524CF64BA008FE62B /* SettingsInformation */,
-				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
-				F9134C222476BBC1002A0F77 /* SettingsCategory */,
-				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
-				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
-				F96B62232595ED75000FC05F /* SettingsHelp */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		F9812F9223F2DC2E0076AD48 /* Journals */ = {
-			isa = PBXGroup;
-			children = (
-				F99EDE0E246C00F500334FF4 /* Journals */,
-				F99EDE0F246C012E00334FF4 /* JournalEntry */,
-			);
-			path = Journals;
-			sourceTree = "<group>";
-		};
-		F9812F9323F2DEBF0076AD48 /* GeneralLedger */ = {
-			isa = PBXGroup;
-			children = (
-				F9F934F02485CDB900BF7AA7 /* GeneralLedger */,
-				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
-				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
-			);
-			path = GeneralLedger;
 			sourceTree = "<group>";
 		};
 		F9860FBB285B3826008D0714 /* PassCodeLock */ = {
@@ -1093,6 +1161,7 @@
 		F9860FBF285B3DC0008D0714 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
+				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F901E8752848BA7A00290DFD /* Biometrics */,
 				F9860FBC285B388E008D0714 /* Upgrade */,
@@ -1101,15 +1170,6 @@
 				F9AC551B292B9E38003966E4 /* Accounting.swift */,
 			);
 			path = Functions;
-			sourceTree = "<group>";
-		};
-		F9876D2726428EE30095F130 /* SettingsOperatingJournalEntryDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */,
-				F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */,
-			);
-			path = SettingsOperatingJournalEntryDB;
 			sourceTree = "<group>";
 		};
 		F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */ = {
@@ -1127,7 +1187,7 @@
 		F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */ = {
 			isa = PBXGroup;
 			children = (
-				F98CD95F24DCA2C0001CBF94 /* SettingsCategoryTableViewController.swift */,
+				F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */,
 				F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */,
 			);
 			path = SettingsCategoryMain;
@@ -1140,16 +1200,6 @@
 				F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */,
 			);
 			path = SettingsOperating;
-			sourceTree = "<group>";
-		};
-		F99112E2249528D000E28BB9 /* BSDB */ = {
-			isa = PBXGroup;
-			children = (
-				F99112E32495290000E28BB9 /* BSModel.swift */,
-				F9AC55182927ACDA003966E4 /* BSData.swift */,
-				F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */,
-			);
-			path = BSDB;
 			sourceTree = "<group>";
 		};
 		F99C6B9C280DAFBA00E99080 /* PeriodYear */ = {
@@ -1168,7 +1218,8 @@
 				F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */,
 				F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */,
 			);
-			path = Journals;
+			name = Journals;
+			path = Journals/Journals;
 			sourceTree = "<group>";
 		};
 		F99EDE0F246C012E00334FF4 /* JournalEntry */ = {
@@ -1183,14 +1234,6 @@
 				F99C6B9C280DAFBA00E99080 /* PeriodYear */,
 			);
 			path = JournalEntry;
-			sourceTree = "<group>";
-		};
-		F9A20F46255DC1B600F7D6A5 /* PLAccountDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */,
-			);
-			path = PLAccountDB;
 			sourceTree = "<group>";
 		};
 		F9A3A6462631AB2C006E0FA0 /* Cell */ = {
@@ -1227,7 +1270,7 @@
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
-				F98D8A5027A534BD009560AA /* Printout+extension.swift */,
+				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
 				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
 				F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */,
 			);
@@ -1237,27 +1280,18 @@
 		F9B209E6279D034500F7EA8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
-				F93A630424FAD5FB00C1C2C1 /* AccountingBooksShelfDB */,
-				F93A630524FAD63E00C1C2C1 /* AccountingBooksDB */,
-				F9F934F32485EC2300BF7AA7 /* JournalsDB */,
-				F9F934F42485EC3600BF7AA7 /* JournalEntryDB */,
-				F9F934F22485EBBA00BF7AA7 /* GeneralLedgerDB */,
-				F9F934F12485EB5B00BF7AA7 /* GeneralLedgerAccountDB */,
-				F9D224CA2489445B006C6CD9 /* SubsidiaryLedgerDB */,
-				F9318AE224A60C5200CE45BE /* FinancialStatementDB */,
-				F99112E2249528D000E28BB9 /* BSDB */,
-				F9F4607224C9D97C008FE62B /* TaxonomyDB */,
-				F9354DBE2498F721007DB098 /* PLDB */,
-				F9354DC12498FE63007DB098 /* CFDB */,
-				F9354DB92498DD81007DB098 /* WSDB */,
-				F9354DB02498986F007DB098 /* TBDB */,
-				F9A20F46255DC1B600F7D6A5 /* PLAccountDB */,
-				F9D224C424891ED3006C6CD9 /* SettingPeriodDB */,
-				F9F4607A24D1A298008FE62B /* SettingsTaxonomyDB */,
-				F9F934F52485EC6D00BF7AA7 /* SettingsTaxonomyAccountDB */,
-				F91878C32581415300D2E793 /* SettingsOperatingDB */,
-				F9876D2726428EE30095F130 /* SettingsOperatingJournalEntryDB */,
+				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
+				F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */,
+				F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */,
+				F99112E32495290000E28BB9 /* BSModel.swift */,
+				F963E2A32962B728002DF49E /* BalanceSheetModel.swift */,
+				F976798C24A8904B007A0D73 /* PLModel.swift */,
+				F9D15FBE296EA7F9005E197D /* ProfitAndLossStatementModel.swift */,
+				F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */,
+				F9354DB124989895007DB098 /* TBModel.swift */,
+				F98289802973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift */,
+				F98289892973E8B900F8F1B8 /* OpeningBalanceModel.swift */,
+				F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1266,7 +1300,7 @@
 			isa = PBXGroup;
 			children = (
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
-				F9FF9AB725317A0D00FB06BB /* TaxonomyAccount.csv */,
+				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F9C7371F265E7D7E00A9F287 /* Color.xcassets */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
@@ -1283,15 +1317,36 @@
 			isa = PBXGroup;
 			children = (
 				F94EDD9F237AEB3B0074D812 /* LaunchScreen.storyboard */,
+				F986CC162945BA9A005A2138 /* SplashViewController.swift */,
 				F94EDD9A237AEB3A0074D812 /* Main.storyboard */,
 				F9941D6926458259008B3970 /* TabBarController.swift */,
 				F9F324522833A5A400DA813E /* WalkThrough */,
 				F9E620FA256527E000C2C3B3 /* Gecco */,
 				F9860FBB285B3826008D0714 /* PassCodeLock */,
-				F9812F9223F2DC2E0076AD48 /* Journals */,
-				F9812F9323F2DEBF0076AD48 /* GeneralLedger */,
+				F99EDE0F246C012E00334FF4 /* JournalEntry */,
+				F99EDE0E246C00F500334FF4 /* Journals */,
+				F9F934F02485CDB900BF7AA7 /* GeneralLedger */,
+				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
+				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
-				F9789A322475C41700B62CAF /* Settings */,
+				F955B60E2490FCD6005E2C6D /* BS */,
+				F955B6082490E305005E2C6D /* PL */,
+				F955B60F2490FD1D005E2C6D /* CF */,
+				F955B61324910003005E2C6D /* WS */,
+				F955B6122490FF9A005E2C6D /* TB */,
+				F9706847252AC631003307F8 /* PLAccount */,
+				F929C0252478365E0034FAAF /* Settings */,
+				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9F4607524CF64BA008FE62B /* SettingsInformation */,
+				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
+				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
+				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
+				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
+				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
+				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
+				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
+				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
+				F96B62232595ED75000FC05F /* SettingsHelp */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
 			path = View;
@@ -1301,11 +1356,16 @@
 			isa = PBXGroup;
 			children = (
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
-				F9B1548B27C6457900452537 /* GenearlLedgerAccountPresenter.swift */,
+				F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */,
+				F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */,
 				F9B209EC279D38EA00F7EA8D /* BSPresenter.swift */,
+				F963E2A02962B6C3002DF49E /* BalacneSheetPresenter.swift */,
 				F9BDCBB127A6D1C600BD8770 /* PLPresenter.swift */,
+				F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */,
 				F98D8A5227A55F27009560AA /* WSPresenter.swift */,
 				F9BDCBB327A80FA400BD8770 /* TBPresenter.swift */,
+				F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */,
+				F98289862973E88400F8F1B8 /* OpeningBalancePresenter.swift */,
 				F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */,
 			);
 			name = Presenter;
@@ -1339,15 +1399,6 @@
 			path = SettingsTaxonomyList;
 			sourceTree = "<group>";
 		};
-		F9D224C424891ED3006C6CD9 /* SettingPeriodDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
-				F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */,
-			);
-			path = SettingPeriodDB;
-			sourceTree = "<group>";
-		};
 		F9D224C724893F41006C6CD9 /* SubsidiaryLedger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1355,19 +1406,11 @@
 			path = SubsidiaryLedger;
 			sourceTree = "<group>";
 		};
-		F9D224CA2489445B006C6CD9 /* SubsidiaryLedgerDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9D224CB24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift */,
-			);
-			path = SubsidiaryLedgerDB;
-			sourceTree = "<group>";
-		};
 		F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */ = {
 			isa = PBXGroup;
 			children = (
-				F9D5D549247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift */,
-				F99BAEC1261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard */,
+				F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */,
+				F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */,
 				F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */,
 			);
 			path = GenearlLedgerAccount;
@@ -1444,19 +1487,17 @@
 			isa = PBXGroup;
 			children = (
 				F9F4605324BDD616008FE62B /* Migration.swift */,
-				F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */,
 				F93A630124FA8AFC00C1C2C1 /* DataBase.swift */,
+				F93A2636295B4FC1002B7EB9 /* RealmManager.swift */,
+				F93A2631295721D7002B7EB9 /* DataBaseManager */,
+				F93A2632295722BF002B7EB9 /* DataBaseModel */,
+				F9AC55182927ACDA003966E4 /* BSData.swift */,
+				F963E2A62962BA40002DF49E /* BalanceSheetData.swift */,
+				F9AC551E292CA1D1003966E4 /* PLData.swift */,
+				F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */,
+				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
 			);
 			path = DataBaseRealm;
-			sourceTree = "<group>";
-		};
-		F9F4607224C9D97C008FE62B /* TaxonomyDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */,
-				F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */,
-			);
-			path = TaxonomyDB;
 			sourceTree = "<group>";
 		};
 		F9F4607524CF64BA008FE62B /* SettingsInformation */ = {
@@ -1467,15 +1508,6 @@
 				F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */,
 			);
 			path = SettingsInformation;
-			sourceTree = "<group>";
-		};
-		F9F4607A24D1A298008FE62B /* SettingsTaxonomyDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */,
-				F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */,
-			);
-			path = SettingsTaxonomyDB;
 			sourceTree = "<group>";
 		};
 		F9F7992E25A864300037EC50 /* SettingsUpgrade */ = {
@@ -1516,54 +1548,8 @@
 				F99BAEB9261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard */,
 				F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */,
 			);
-			path = GeneralLedger;
-			sourceTree = "<group>";
-		};
-		F9F934F12485EB5B00BF7AA7 /* GeneralLedgerAccountDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9D5D54C247E48D600EA35C7 /* GenearlLedgerAccountModel.swift */,
-				F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */,
-				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
-			);
-			path = GeneralLedgerAccountDB;
-			sourceTree = "<group>";
-		};
-		F9F934F22485EBBA00BF7AA7 /* GeneralLedgerDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
-				F9F934E82484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift */,
-			);
-			path = GeneralLedgerDB;
-			sourceTree = "<group>";
-		};
-		F9F934F32485EC2300BF7AA7 /* JournalsDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
-				F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */,
-			);
-			path = JournalsDB;
-			sourceTree = "<group>";
-		};
-		F9F934F42485EC3600BF7AA7 /* JournalEntryDB */ = {
-			isa = PBXGroup;
-			children = (
-				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
-				F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */,
-			);
-			path = JournalEntryDB;
-			sourceTree = "<group>";
-		};
-		F9F934F52485EC6D00BF7AA7 /* SettingsTaxonomyAccountDB */ = {
-			isa = PBXGroup;
-			children = (
-				F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */,
-				F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */,
-				F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */,
-			);
-			path = SettingsTaxonomyAccountDB;
+			name = GeneralLedger;
+			path = GeneralLedger/GeneralLedger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1601,6 +1587,7 @@
 				F9EC674027B90BC60003FBB6 /* ShellScript */,
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
 				F9EC675927B95E240003FBB6 /* Run Script Carthage */,
+				F986CC1C2947419E005A2138 /* Run Script SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -1651,6 +1638,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */,
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
@@ -1662,12 +1650,13 @@
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
-				F9FF9AB825317A0D00FB06BB /* TaxonomyAccount.csv in Resources */,
+				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
-				F99BAEC2261C9D460038FBB2 /* GenearlLedgerAccountViewController.storyboard in Resources */,
+				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
+				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
@@ -1682,9 +1671,12 @@
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
+				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
+				F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
+				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
@@ -1697,7 +1689,9 @@
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
+				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
+				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
@@ -1709,6 +1703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */,
 				F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */,
 				F9EC670F27B90BC60003FBB6 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */,
@@ -1720,12 +1715,13 @@
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
-				F9EC671A27B90BC60003FBB6 /* TaxonomyAccount.csv in Resources */,
+				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
-				F9EC671C27B90BC60003FBB6 /* GenearlLedgerAccountViewController.storyboard in Resources */,
+				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
+				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
@@ -1740,9 +1736,12 @@
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
+				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
+				F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
+				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F9EC672F27B90BC60003FBB6 /* Main.storyboard in Resources */,
 				F9EC673027B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9EC673127B90BC60003FBB6 /* PLViewController.xib in Resources */,
@@ -1755,7 +1754,9 @@
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
+				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
+				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
@@ -1823,6 +1824,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		F986CC1C2947419E005A2138 /* Run Script SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect --format # 自動修正の有効化\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		F9EC668D27B90BC60003FBB6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1931,12 +1950,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */,
+				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
+				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5525292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */,
 				F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
+				F951725E295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
 				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9D08D8E25444CF700CE3CB2 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,
@@ -1944,10 +1967,11 @@
 				F9BDCBAF27A6CCC000BD8770 /* PLViewController.swift in Sources */,
 				F9860FB9285AB805008D0714 /* Network.swift in Sources */,
 				F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */,
+				F963E2CB296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */,
 				F98D536A264FB49A00996653 /* WithLabelTableViewCell.swift in Sources */,
 				F9B209F427A4EF7C00F7EA8D /* BSTableViewCell.swift in Sources */,
-				F98CD97724DCB49D001CBF94 /* SettingsCategoryTableViewController.swift in Sources */,
+				F98289782973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */,
 				F98CD96D24DCB077001CBF94 /* CategoryListTableViewController.swift in Sources */,
 				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */,
@@ -1955,42 +1979,50 @@
 				F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */,
 				F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9F4607424C9E0BD008FE62B /* File2.swift in Sources */,
+				F93A2637295B4FC1002B7EB9 /* RealmManager.swift in Sources */,
 				F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */,
 				F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
-				F94EDD99237AEB3A0074D812 /* Document.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
 				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
+				F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
+				F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
+				F963E2BD2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
 				F9876D2926428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9F934EC248554DA00BF7AA7 /* SettingsPeriodTableViewController.swift in Sources */,
 				F9AD64DA2912961900B9F50B /* Constant.swift in Sources */,
 				F9BDCBB427A80FA400BD8770 /* TBPresenter.swift in Sources */,
-				F94EDD95237AEB3A0074D812 /* DocumentBrowserViewController.swift in Sources */,
 				F9354DB224989895007DB098 /* TBModel.swift in Sources */,
-				F9D5D54D247E48D600EA35C7 /* GenearlLedgerAccountModel.swift in Sources */,
+				F9D5D54D247E48D600EA35C7 /* GeneralLedgerAccountModel.swift in Sources */,
 				F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */,
 				F9BF067D24289DC700C59031 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */,
 				F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */,
 				F95F59AD26503E0600EFE522 /* PageContentViewController.swift in Sources */,
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
+				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
+				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
+				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
 				F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */,
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
+				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
+				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9F4605424BDD616008FE62B /* Migration.swift in Sources */,
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
@@ -1999,10 +2031,13 @@
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */,
+				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
+				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
+				F963E2B629647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
 				F9F934F82485EE3C00BF7AA7 /* DataBaseAccountingBooks.swift in Sources */,
 				F9B78D33293628550051C027 /* UIView+extension.swift in Sources */,
 				F9AD64E62912C56400B9F50B /* UIViewController+extension.swift in Sources */,
@@ -2013,13 +2048,15 @@
 				F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F92F4EF4249CCD5B00D50767 /* TBViewController.swift in Sources */,
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
-				F9D5D54A247E408C00EA35C7 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
+				F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2027,8 +2064,11 @@
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
+				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
+				F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */,
 				F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */,
@@ -2039,28 +2079,39 @@
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC551F292CA1D1003966E4 /* PLData.swift in Sources */,
+				F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */,
 				F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */,
 				F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
-				F98D8A5127A534BD009560AA /* Printout+extension.swift in Sources */,
+				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
+				F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
+				F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
+				F9D15FB9296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
+				F963E2C82967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
 				F9D224C62489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift in Sources */,
+				F963E2B329647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */,
 				F9354DBD2498E5D3007DB098 /* DataBaseAdjustingEntry.swift in Sources */,
-				F94EDD97237AEB3A0074D812 /* DocumentView.swift in Sources */,
+				F963E2AD296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */,
 				F9F4607724D04F8F008FE62B /* SettingsInformationTableViewController.swift in Sources */,
+				F9517261295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB2282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F98289872973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */,
 				F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */,
 				F94EDD93237AEB3A0074D812 /* AppDelegate.swift in Sources */,
 				F9F934E52484D59900BF7AA7 /* JournalsModel.swift in Sources */,
-				F9B1548C27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F9B1548C27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */,
+				F963E2A12962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F99112E42495290000E28BB9 /* BSModel.swift in Sources */,
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
+				F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
 				F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */,
@@ -2074,6 +2125,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
+				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,
 			);
@@ -2084,12 +2136,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
+				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
+				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5526292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
+				F93A263529573714002B7EB9 /* JournalEntryData.swift in Sources */,
 				F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9EC669327B90BC60003FBB6 /* SettingsTableViewCell.swift in Sources */,
+				F951725F295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
 				F9EC669427B90BC60003FBB6 /* ClassicCalculatorViewController.swift in Sources */,
 				F9EC669527B90BC60003FBB6 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9EC669627B90BC60003FBB6 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,
@@ -2097,10 +2153,11 @@
 				F9EC669827B90BC60003FBB6 /* PLViewController.swift in Sources */,
 				F9860FBA285AB805008D0714 /* Network.swift in Sources */,
 				F9EC669927B90BC60003FBB6 /* AccountDetailPickerTextField.swift in Sources */,
+				F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F9EC669A27B90BC60003FBB6 /* DataBaseSettingsTaxonomy.swift in Sources */,
 				F9EC669B27B90BC60003FBB6 /* WithLabelTableViewCell.swift in Sources */,
 				F9EC669C27B90BC60003FBB6 /* BSTableViewCell.swift in Sources */,
-				F9EC669D27B90BC60003FBB6 /* SettingsCategoryTableViewController.swift in Sources */,
+				F98289792973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */,
 				F9EC669F27B90BC60003FBB6 /* CategoryListTableViewController.swift in Sources */,
 				F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */,
 				F9EC66A127B90BC60003FBB6 /* CategoryListTableViewCell.swift in Sources */,
@@ -2108,42 +2165,50 @@
 				F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */,
 				F9EC66A327B90BC60003FBB6 /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */,
+				F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */,
 				F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */,
 				F9EC66A527B90BC60003FBB6 /* JournalEntryViewController.swift in Sources */,
 				F9EC66A627B90BC60003FBB6 /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
-				F9EC66A727B90BC60003FBB6 /* Document.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
 				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
+				F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
+				F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,
+				F963E2BE2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
 				F9EC66AD27B90BC60003FBB6 /* DataBaseSettingsOperatingJournalEntry.swift in Sources */,
 				F9EC66AE27B90BC60003FBB6 /* SettingsPeriodTableViewController.swift in Sources */,
 				F9AD64DB2912961900B9F50B /* Constant.swift in Sources */,
 				F9EC66AF27B90BC60003FBB6 /* TBPresenter.swift in Sources */,
-				F9EC66B027B90BC60003FBB6 /* DocumentBrowserViewController.swift in Sources */,
 				F9EC66B127B90BC60003FBB6 /* TBModel.swift in Sources */,
-				F9EC66B227B90BC60003FBB6 /* GenearlLedgerAccountModel.swift in Sources */,
+				F9EC66B227B90BC60003FBB6 /* GeneralLedgerAccountModel.swift in Sources */,
 				F9EC66B327B90BC60003FBB6 /* HTMLhelper.swift in Sources */,
 				F9EC66B427B90BC60003FBB6 /* GeneralLedgerTableViewController.swift in Sources */,
 				F9EC66B527B90BC60003FBB6 /* SettingUpgradeTableViewCell.swift in Sources */,
 				F9EC66B627B90BC60003FBB6 /* AnnotationViewController.swift in Sources */,
 				F9EC66B727B90BC60003FBB6 /* PageContentViewController.swift in Sources */,
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
+				F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
+				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
+				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
+				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
 				F9EC66BF27B90BC60003FBB6 /* ListCollectionViewCell.swift in Sources */,
 				F9EC66C027B90BC60003FBB6 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
+				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
+				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
@@ -2152,10 +2217,13 @@
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
+				F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
+				F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
+				F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
 				F9B78D34293628550051C027 /* UIView+extension.swift in Sources */,
 				F9AD64E72912C56400B9F50B /* UIViewController+extension.swift in Sources */,
@@ -2166,13 +2234,15 @@
 				F9EC66D527B90BC60003FBB6 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */,
 				F9EC66D627B90BC60003FBB6 /* TBViewController.swift in Sources */,
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
-				F9EC66D827B90BC60003FBB6 /* GenearlLedgerAccountViewController.swift in Sources */,
+				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
+				F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
+				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2180,8 +2250,11 @@
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
+				F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
+				F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */,
+				F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5523292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9EC66E527B90BC60003FBB6 /* DataBaseAccount.swift in Sources */,
 				F9EC66E627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.swift in Sources */,
@@ -2192,28 +2265,39 @@
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
+				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9EC66EE27B90BC60003FBB6 /* BSPresenter.swift in Sources */,
 				F9EC66EF27B90BC60003FBB6 /* DataBaseJournals.swift in Sources */,
 				F9EC66F027B90BC60003FBB6 /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */,
-				F9EC66F127B90BC60003FBB6 /* Printout+extension.swift in Sources */,
+				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
+				F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
+				F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
+				F9D15FBA296EA260005E197D /* ProfitAndLossStatementPresenter.swift in Sources */,
+				F963E2C92967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift in Sources */,
 				F9EC66F327B90BC60003FBB6 /* DataBaseManagerSettingsPeriod.swift in Sources */,
+				F963E2B429647917002DF49E /* DataBaseCapitalTransferJournalEntry.swift in Sources */,
 				F9EC66F427B90BC60003FBB6 /* DataBaseAdjustingEntry.swift in Sources */,
-				F9EC66F527B90BC60003FBB6 /* DocumentView.swift in Sources */,
+				F963E2AE296326F0002DF49E /* BSTableViewHeaderFooterView.swift in Sources */,
 				F9EC66F627B90BC60003FBB6 /* SettingsInformationTableViewController.swift in Sources */,
+				F9517262295F1209007DD20C /* DataBaseManagerJournals.swift in Sources */,
 				F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */,
+				F98289882973E88400F8F1B8 /* OpeningBalancePresenter.swift in Sources */,
 				F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */,
 				F9EC66F727B90BC60003FBB6 /* CompanyNameTableViewCell.swift in Sources */,
 				F9EC66F827B90BC60003FBB6 /* AppDelegate.swift in Sources */,
 				F9EC66F927B90BC60003FBB6 /* JournalsModel.swift in Sources */,
-				F9B1548D27C6457900452537 /* GenearlLedgerAccountPresenter.swift in Sources */,
+				F9B1548D27C6457900452537 /* GeneralLedgerAccountPresenter.swift in Sources */,
+				F963E2A22962B6C3002DF49E /* BalacneSheetPresenter.swift in Sources */,
 				F9EC66FA27B90BC60003FBB6 /* BSModel.swift in Sources */,
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,
+				F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
 				F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F9EC66FD27B90BC60003FBB6 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9EC66FE27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.swift in Sources */,
@@ -2227,6 +2311,7 @@
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,
+				F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9EC670927B90BC60003FBB6 /* UIColor+extension.swift in Sources */,
 			);
@@ -2393,7 +2478,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.2.1;
+				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2409,7 +2494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 3.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2427,7 +2512,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.2.1;
+				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2443,7 +2528,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 3.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2461,7 +2546,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.2.1;
+				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2477,7 +2562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 3.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2495,7 +2580,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2.2.1;
+				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2511,7 +2596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 3.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";

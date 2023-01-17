@@ -12,14 +12,14 @@ import UIKit
 struct HTMLhelperPL {
     // PDFごとに1回コール
     func headerHTMLstring() -> String {
-        //htmlヘッダーを生成します。
-        //たとえば、ここに店の名前を入力できます
+        // htmlヘッダーを生成します。
+        // たとえば、ここに店の名前を入力できます
         return """
     <!DOCTYPE html>
         <html>
-
+    
         <style type="text/css" media="all">
-
+    
     <!--     /*　位置　*/ -->
             .center {
                 text-align: center;
@@ -38,7 +38,7 @@ struct HTMLhelperPL {
                   text-indent: 80px; }
             .textIndent5 {
                   text-indent: 100px; }
-
+    
             .right {
                 margin-right: 5px;
                 margin-left: auto;
@@ -99,7 +99,7 @@ struct HTMLhelperPL {
             .fontsize95 {
                 font-size: 95%;
             }
-
+    
             .flex-colum {
                 display: flex;
                 flex-direction: column;
@@ -122,7 +122,7 @@ struct HTMLhelperPL {
             .rowHeight {
                 height: auto;/*  2.7237354086% 7mm　*/
             }
-
+    
         html {
         }
         body {
@@ -153,9 +153,9 @@ struct HTMLhelperPL {
         }
     <!--     /* ■ テーブル全体、セルの横幅、高さを%で指定
         width="%"で指定した場合、テーブルの横幅は画面全体100%に対する割合 の長さになります。 テーブルの横幅が50%だと画面全体の2分の1、つまり半分の大きさということ になります。
-
+    
         テーブルの横幅と高さを指定してある時でセルの横幅、高さを%で指定した場合、 それらの大きさはテーブル全体に対する割合の大きさになります。 */ -->
-
+    
         .richediter {
       line-height: 1.0; }
        .richediter ul, .richediter ol {
@@ -186,7 +186,7 @@ struct HTMLhelperPL {
         font-weight: normal; }
       .richediter dd {
         margin: 12px 0 24px 1em; }
-
+    
         .richediter h2 {
       display: table;
       font-family: "FOT-ロダン Pro DB", sans-serif;
@@ -196,38 +196,38 @@ struct HTMLhelperPL {
       margin: 0 auto;
       padding: 0 0.6em 10px;
       border-bottom: 1px solid; }
-
+    
     .borderTop {
         border-top: 1px solid; }
     .borderBottom {
         border-bottom: 1px solid; }
-
+    
        .richediter th, td {
     <!--   border: 1px solid #05203a; -->
       padding: 5px; }
-
+    
       .l-container {
       margin: auto; }
-
+    
       table {
             border: 1px solid #05203a;
       border-collapse: collapse;
       border-spacing: 0; }
-
+    
         table{
         margin: 0px 0; }
-
+    
       th, td {
               font-size: 15px;
       border: 0px solid #05203a;
       padding: 5px; }
-
+    
       th {
       width: 70%;
       <!--   テーブルレコードの色 -->
       background-color: #e5f0fa;
       }
-
+    
     <!--   body {
         font-size: 13px;
     } -->
@@ -248,67 +248,67 @@ struct HTMLhelperPL {
             margin-top: 20px;}
      .marginBottomAuto {
             margin-bottom: auto;}
-
+    
     .halfWidth {
         width: 50%;
     }
         </style>
         <body>
-
+    
     """
     }
     // PDFごとに1回コール
     func footerHTMLstring() -> String {
-        return """
+         """
         </body>
     </html>
     """
     }
-
+    
     // ページごとに1回コール
     func headerstring(company: String, fiscalYear: Int, theDayOfReckoning: String) -> String {
-        return """
+         """
                 <section class="page">
         <div class="richediter public-notice l-container">
-
+    
         <p class="text-right">\(DateManager.shared.getDate())</p>
     <h2>損益計算書</h2>
         <div class="flex margin20">
         <span class="halfWidth">\(company)</span>
-        <span class="halfWidth"><p class="right"> (\(fiscalYear)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
+        <span class="halfWidth"><p class="right"> (\(theDayOfReckoning == "12/31" ? fiscalYear : fiscalYear + 1)/\(theDayOfReckoning) 現在)<br> (単位:円)</p></span>
         </div>
-
+    
     <div>
     """
     }
     // ページごとに1回コール
     func footerstring() -> String {
-        return """
+         """
                 </div>
         <p class="fontsize95 right margin5">©複式簿記の会計帳簿 Paciolist</p>
         </div>
         </section>
         """
     }
-
+    
     // テーブル　トップ
     func tableTopString() -> String {
-        return """
+         """
     <table>
                 <tbody>
     """
     }
     // テーブル　エンド
     func tableEndString() -> String {
-        return """
+         """
     </tbody>
     </table>
     """
     }
-
+    
     // 中区分 合計 売上高、売上原価
     func middleRowEndIndent0space(title: String, amount: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
@@ -317,7 +317,7 @@ struct HTMLhelperPL {
     }
     // 中区分 段落0　販売費及び一般管理費
     func middleRowTop(title: String) -> String {
-        return """
+         """
                 <tr>
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1"></td>
@@ -326,27 +326,27 @@ struct HTMLhelperPL {
     }
     // 中区分 合計 段落1
     func middleRowEnd(title: String, amount: String) -> String {
-        return """
+         """
     <tr  class="skyBlueBackgroundColor">
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1" class="borderBottom">\(amount)</td>
                 </tr>
     """
     }
-
+    
     // レコードごとに1回コール 段落1
     func getSingleRow(title: String, amount: String) -> String {
-        return """
+         """
     <tr>
                 <th id="asset-1" class="left textIndent1">\(title)</th>
                 <td headers="assets asset-1">\(amount)</td>
                 </tr>
     """
     }
-
+    
     // レコードごとに1回コール 段落0 五つの利益
     func getSingleRowForBenefits(title: String, amount: String) -> String {
-        return """
+         """
     <tr  class="skyBlueBackgroundColor">
                 <th id="asset-1" class="left">\(title)</th>
                 <td headers="assets asset-1" class="borderTop borderBottom">\(amount)</td>

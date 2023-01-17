@@ -12,11 +12,12 @@ class WithIconTableViewCell: UITableViewCell {
 
     @IBOutlet var leftImageView: UIImageView!
     @IBOutlet var centerLabel: UILabel!
-    
+    @IBOutlet var subLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // アイコン画像の色を指定する
-        leftImageView.tintColor = .TextColor
+        leftImageView.tintColor = .textColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

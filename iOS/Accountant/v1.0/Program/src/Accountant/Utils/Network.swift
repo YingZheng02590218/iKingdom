@@ -9,7 +9,6 @@
 import Foundation
 import Network
 
-
 class Network {
     
     static let shared = Network()
@@ -21,14 +20,11 @@ class Network {
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 print("Network satisfied")
-            }
-            else if path.status == .unsatisfied {
+            } else if path.status == .unsatisfied {
                 print("Network unsatisfied")
-            }
-            else if path.status == .requiresConnection {
+            } else if path.status == .requiresConnection {
                 print("Network requiresConnection")
-            }
-            else {
+            } else {
                 print("Network else")
             }
         }

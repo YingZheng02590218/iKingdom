@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XAj-k2-vBb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2O8-Vh-YQi">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -183,6 +184,54 @@
             </objects>
             <point key="canvasLocation" x="748" y="1766"/>
         </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="pZ2-u7-qpW">
+            <objects>
+                <viewController id="2O8-Vh-YQi" customClass="SplashViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NKE-Dr-5B3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgO-eI-SCT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paciolist" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3b-eN-h2Y">
+                                        <rect key="frame" x="0.0" y="415" width="414" height="66"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="48"/>
+                                        <color key="textColor" name="TextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="shadowOffset" width="0.0" height="3"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="BaseColor"/>
+                                <constraints>
+                                    <constraint firstItem="h3b-eN-h2Y" firstAttribute="leading" secondItem="zgO-eI-SCT" secondAttribute="leading" id="6ei-P0-p5e"/>
+                                    <constraint firstAttribute="trailing" secondItem="h3b-eN-h2Y" secondAttribute="trailing" id="QEv-Qc-vw6"/>
+                                    <constraint firstItem="h3b-eN-h2Y" firstAttribute="centerX" secondItem="zgO-eI-SCT" secondAttribute="centerX" id="Tw6-Dr-Wwc"/>
+                                    <constraint firstItem="h3b-eN-h2Y" firstAttribute="centerY" secondItem="zgO-eI-SCT" secondAttribute="centerY" id="WUV-is-wRe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="leV-Js-XNo"/>
+                        <color key="backgroundColor" name="BaseColor"/>
+                        <constraints>
+                            <constraint firstItem="leV-Js-XNo" firstAttribute="trailing" secondItem="zgO-eI-SCT" secondAttribute="trailing" id="Hf4-Fc-tba"/>
+                            <constraint firstAttribute="bottom" secondItem="zgO-eI-SCT" secondAttribute="bottom" id="Hmn-53-r6z"/>
+                            <constraint firstItem="zgO-eI-SCT" firstAttribute="top" secondItem="NKE-Dr-5B3" secondAttribute="top" id="Za3-q5-eRW"/>
+                            <constraint firstItem="zgO-eI-SCT" firstAttribute="leading" secondItem="leV-Js-XNo" secondAttribute="leading" id="sHD-eI-K3f"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoImageView" destination="zgO-eI-SCT" id="MQa-Mr-mYE"/>
+                        <outlet property="logoLabel" destination="h3b-eN-h2Y" id="haU-gF-MIJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNi-18-qGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="558"/>
+        </scene>
     </scenes>
     <resources>
         <image name="border_color-border_color_grad200_symbol" width="14" height="17"/>
@@ -194,7 +243,7 @@
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="AccentColor">
-            <color red="0.13333333333333333" green="0.27843137254901962" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

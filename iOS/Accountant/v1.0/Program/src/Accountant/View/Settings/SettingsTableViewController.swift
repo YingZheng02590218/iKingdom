@@ -6,17 +6,17 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
-import SafariServices // アプリ内でブラウザ表示
 import MessageUI // お問い合わせ機能
 import MXParallaxHeader
+import SafariServices // アプリ内でブラウザ表示
+import UIKit
 
 // 設定クラス
 class SettingsTableViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var scrollView: UIScrollView!
     // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
     // https://swallow-incubate.com/archives/blog/20200805
     //    手順
@@ -25,38 +25,44 @@ class SettingsTableViewController: UIViewController {
     //    UIScrollViewにUIView（ContentView）を配置する
     //    UIScrollViewとContentViewに制約を設定する
     //    ContentViewに高さを設定する
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var headerView: UIView!
+    @IBOutlet private var contentView: UIView!
+    @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        tableView.separatorColor = .AccentColor
-
-        scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = 160
-        scrollView.parallaxHeader.mode = .fill
-        scrollView.parallaxHeader.minimumHeight = 0
-        scrollView.contentSize = contentView.frame.size
-        scrollView.flashScrollIndicators()
+        tableView.separatorColor = .accentColor
 
         self.navigationItem.title = "設定"
-        //largeTitle表示
+        // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .AccentColor
+        navigationController?.navigationBar.tintColor = .accentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
+        scrollView.parallaxHeader.mode = .center
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
+    }
+
+
     // 生体認証パスコードロック　設定スイッチ 切り替え
-    @objc func switchTriggered(sender: UISwitch){
+    @objc func switchTriggered(sender: UISwitch) {
         // 生体認証かパスコードのいずれかが使用可能かを確認する
         if LocalAuthentication.canEvaluatePolicy() {
             // 認証使用可能時の処理
@@ -65,8 +71,7 @@ class SettingsTableViewController: UIViewController {
                 UserDefaults.standard.set(sender.isOn, forKey: "biometrics_switch")
                 UserDefaults.standard.synchronize()
             }
-        }
-        else {
+        } else {
             // 認証使用可能時の処理
             DispatchQueue.main.async {
                 // スイッチを元に戻す
@@ -90,7 +95,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+         4
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,7 +103,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            return 3
+            return 4
         case 2:
             return 3
         case 3:
@@ -125,21 +130,23 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
+        case 1:
+            return "開始残高　前期の決算書、もしくは試算表の貸借対照表をご参照いただきながら設定してください。"
         case 3:
             return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
         default:
             return ""
         }
     }
-    //セルを生成して返却するメソッド
+    //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
 
         // Accessory Color
-        let disclosureImage = UIImage(named: "navigate_next")!.withRenderingMode(.alwaysTemplate)
+        let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
-        disclosureView.tintColor = UIColor.AccentColor
+        disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
         if indexPath.section == 0 {
@@ -150,8 +157,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             default:
                 break
             }
-        }
-        else if indexPath.section == 1 {
+        } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
@@ -160,38 +166,40 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "会計期間"
                 cell.leftImageView.image = UIImage(named: "edit_calendar-edit_calendar_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
-                cell.centerLabel.text = "勘定科目"
+                cell.centerLabel.text = "勘定科目体系"
                 cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
+            case 3:
+                cell.centerLabel.text = "開始残高"
+                cell.leftImageView.image = UIImage(named: "edit_document-edit_document_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
-        }
-        else if indexPath.section == 2 {
+        } else if indexPath.section == 2 {
             switch indexPath.row {
-                case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WithIconTableViewCell
+            case 0:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
                 cell.centerLabel.text = "パスコードロックを利用する"
                 cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
                 if cell.accessoryView == nil {
                     let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                     // 生体認証パスコードロック　設定スイッチ
-                    switchView.onTintColor = .AccentColor
+                    switchView.onTintColor = .accentColor
                     switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
                     switchView.tag = indexPath.row
                     switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
                     cell.accessoryView = switchView
                 }
+                return cell
             case 1:
                 cell.centerLabel.text = "仕訳"
                 cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
-                cell.centerLabel.text = "仕訳帳"
+                cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
             }
-        }
-        else {
+        } else {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "使い方ガイド"
@@ -234,56 +242,46 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             default:
                 break
             }
-        }
-        else if indexPath.section == 1 {
+        } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsInformationTableViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             case 1:
                 performSegue(withIdentifier: "SettingsPeriodTableViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             case 2:
                 performSegue(withIdentifier: "SettingsCategoryTableViewController", sender: tableView.cellForRow(at: indexPath))
-                break
+            case 3:
+                performSegue(withIdentifier: "OpeningBalanceViewController", sender: tableView.cellForRow(at: indexPath))
             default:
                 break
             }
-        }
-        else if indexPath.section == 2 {
+        } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
-                
                 break
             case 1:
                 performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             case 2:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             default:
                 break
             }
-        }
-        else {
+        } else {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
-                break
             case 1:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
-                let url = URL(string:"https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
-                if let url = url{
+                let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
+                if let url = url {
                     let vc = SFSafariViewController(url: url)
-                    vc.preferredControlTintColor = .AccentBlue
+                    vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
-                break
             case 2:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
@@ -299,11 +297,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                         mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(version) Buld: \(build)", isHTML: false)
                     }
                     present(mail, animated: true, completion: nil)
-                }
-                else {
+                } else {
                     print("送信できません")
                 }
-                break
             default:
                 break
             }

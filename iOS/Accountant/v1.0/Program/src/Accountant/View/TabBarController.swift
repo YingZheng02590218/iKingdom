@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
         // 生体認証パスコードロック アプリ起動完了時のパスコード画面表示の通知監視
         NotificationCenter.default.addObserver(self, selector: #selector(self.displayPasscodeLockScreenIfNeeded), name: UIApplication.didFinishLaunchingNotification, object: nil)
 
-        self.navigationController?.navigationBar.tintColor = .AccentColor
+        self.navigationController?.navigationBar.tintColor = .accentColor
     }
 
     // MARK: - 生体認証パスコードロック
@@ -32,15 +32,16 @@ class TabBarController: UITabBarController {
             DispatchQueue.global(qos: .default).async {
                 DispatchQueue.main.async {
                     // 生体認証パスコードロック
-                    let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
-                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as! PassCodeLockViewController
-                    let nav = UINavigationController(rootViewController: viewController)
-                    nav.modalPresentationStyle = .overFullScreen
-                    nav.modalTransitionStyle   = .crossDissolve
-                    self.present(nav, animated: false, completion: nil)
+                    if let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as? PassCodeLockViewController {
+                        let nav = UINavigationController(rootViewController: viewController)
+                        nav.modalPresentationStyle = .overFullScreen
+                        nav.modalTransitionStyle   = .crossDissolve
+                        self.present(nav, animated: false, completion: nil)
+                    }
                 }
             }
         }
     }
-    
+
 }

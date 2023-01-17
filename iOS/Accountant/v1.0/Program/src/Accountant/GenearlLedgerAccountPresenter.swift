@@ -17,12 +17,13 @@ protocol GenearlLedgerAccountPresenterInput {
 //    var theDayOfReckoning: String? { get }
 //
     var numberOfobjects: Int { get }
-    func objects(forRow row: Int) -> DataBaseJournalEntry
     var numberOfobjectss: Int { get }
-    func objectss(forRow row: Int) -> DataBaseAdjustingEntry
     var numberOfobjectsss: Int { get }
-    func objectsss(forRow row: Int) -> DataBaseJournalEntry
     var numberOfobjectssss: Int { get }
+
+    func objects(forRow row: Int) -> DataBaseJournalEntry
+    func objectss(forRow row: Int) -> DataBaseAdjustingEntry
+    func objectsss(forRow row: Int) -> DataBaseJournalEntry
     func objectssss(forRow row: Int) -> DataBaseAdjustingEntry
     
     func viewDidLoad()
@@ -46,15 +47,15 @@ final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
 //    var fiscalYear: Int?
 //    var theDayOfReckoning: String?
     // 通常仕訳　勘定別
-    private var objects:Results<DataBaseJournalEntry>
+    private var objects: Results<DataBaseJournalEntry>
     // 決算整理仕訳　勘定別　損益勘定以外
-    private var objectss:Results<DataBaseAdjustingEntry>
+    private var objectss: Results<DataBaseAdjustingEntry>
     // 通常仕訳　勘定別に月別に取得
-    private var objectsss:Results<DataBaseJournalEntry>
+    private var objectsss: Results<DataBaseJournalEntry>
     // 決算整理仕訳　勘定別に取得
-    private var objectssss:Results<DataBaseAdjustingEntry>
+    private var objectssss: Results<DataBaseAdjustingEntry>
     // 勘定別に損益の仕訳のみを取得
-    private var objectsssss:Results<DataBaseAdjustingEntry>
+    private var objectsssss: Results<DataBaseAdjustingEntry>
     
     private weak var view: GenearlLedgerAccountPresenterOutput!
     private var model: GenearlLedgerAccountModelInput
@@ -67,7 +68,7 @@ final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
         objectss = model.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳　勘定別　損益勘定以外
         objectsss = model.getJournalEntryInAccount(account: account) // 通常仕訳　勘定別に月別に取得
         objectssss = model.getAdjustingJournalEntryInAccount(account: account) // 決算整理仕訳　勘定別に取得
-        objectsssss =  model.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: account) // 勘定別に損益の仕訳のみを取得
+        objectsssss = model.getAllAdjustingEntryInPLAccountWithRetainedEarningsCarriedForward(account: account) // 勘定別に損益の仕訳のみを取得
 
 //        object = model.getFinancialStatements()
     }
@@ -96,30 +97,34 @@ final class GenearlLedgerAccountPresenter: GenearlLedgerAccountPresenterInput {
     }
     
     var numberOfobjects: Int {
-        return objects.count
+        objects.count
     }
+
     func objects(forRow row: Int) -> DataBaseJournalEntry {
-        return objects[row]
+        objects[row]
     }
     
     var numberOfobjectss: Int {
-        return objectss.count
+        objectss.count
     }
+
     func objectss(forRow row: Int) -> DataBaseAdjustingEntry {
-        return objectss[row]
+        objectss[row]
     }
     
     var numberOfobjectsss: Int {
-        return objectsss.count
+        objectsss.count
     }
+
     func objectsss(forRow row: Int) -> DataBaseJournalEntry {
-        return objectsss[row]
+        objectsss[row]
     }
     
     var numberOfobjectssss: Int {
-        return objectssss.count
+        objectssss.count
     }
+
     func objectssss(forRow row: Int) -> DataBaseAdjustingEntry {
-        return objectssss[row]
+        objectssss[row]
     }
 }

@@ -12,8 +12,8 @@ import UIKit
 struct HTMLhelper {
     
     func headerHTMLstring() -> String {
-        //htmlヘッダーを生成します。
-        //たとえば、ここに店の名前を入力できます
+        // htmlヘッダーを生成します。
+        // たとえば、ここに店の名前を入力できます
         return """
     <!DOCTYPE html>
     <html>
@@ -306,23 +306,33 @@ struct HTMLhelper {
     """
     }
     
-    func getSingleRow(month: String, day: String, debit_category: String, debit_amount: Int64, credit_category: String, credit_amount: Int64, smallWritting: String, numberOfAccountCredit: Int, numberOfAccountDebit: Int) -> String {
-        return """
+    func getSingleRow(
+        month: String,
+        day: String,
+        debitCategory: String,
+        debitAmount: Int64,
+        creditCategory: String,
+        creditAmount: Int64,
+        smallWritting: String,
+        numberOfAccountCredit: Int,
+        numberOfAccountDebit: Int
+    ) -> String {
+         """
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom fontsize95 center">\(month)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debit_category)</td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debitCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountDebit == 0 ? "" : String(numberOfAccountDebit))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debit_amount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debitAmount))</p></td>
                   <td class="line_single_blue_bottom"></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95"><p class="right">\(credit_category)</p></td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95"><p class="right">\(creditCategory)</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountCredit == 0 ? "" : String(numberOfAccountCredit))</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(credit_amount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(creditAmount))</p></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom"></td>
@@ -336,7 +346,7 @@ struct HTMLhelper {
     }
 
     func getSingleRowEmpty() -> String {
-        return """
+         """
                  <tr class="rowHeight">
                    <td class="line_single_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
                    <td class="line_double_red_right line_single_blue_bottom fontsize95 center clearColor"> あ</td>
@@ -364,8 +374,8 @@ struct HTMLhelper {
     """
     }
 
-    func footerstring(debit_amount: Int64, credit_amount: Int64) -> String {
-        return """
+    func footerstring(debitAmount: Int64, creditAmount: Int64) -> String {
+         """
                  <tr class="rowHeight">
                     <td class="line_single_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
                     <td class="line_double_red_right line_single_blue_bottom fontsize95 clearColor"> あ</td>
@@ -382,7 +392,7 @@ struct HTMLhelper {
     }
 
     func footerHTMLstring() -> String {
-        return """
+         """
         </body>
     </html>
     """

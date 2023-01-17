@@ -6,11 +6,11 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import Gecco
+import UIKit
 
 class AnnotationViewControllerSettingPeriod: SpotlightViewController {
-
+    
     @IBOutlet var annotationViews: [UIView]!
     
     var stepIndex: Int = 0
@@ -41,10 +41,15 @@ class AnnotationViewControllerSettingPeriod: SpotlightViewController {
                     cornerRadius: 6
                 )
             )
-            break
         case 1:
-            dismiss(animated: true, completion: nil)
-            break
+            if let navigationController = presentingViewController as? UINavigationController,
+            let navigationController2 = navigationController.viewControllers.last as? UINavigationController,
+            let presentingViewController = navigationController2.viewControllers.first as? SettingsPeriodTableViewController {
+                dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    // チュートリアル対応 コーチマーク型
+                    presentingViewController.finishAnnotation()
+                })
+            }
         default:
             break
         }
@@ -90,15 +95,13 @@ private extension AnnotationViewControllerSettingPeriod {
     
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
-        annotationViews.enumerated().forEach { (offset, annotationView) in
+        annotationViews.enumerated().forEach { offset, annotationView in
             switch offset {
             case 0:
                 annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
                 annotationView.frame.origin.y = rightBarButtonFrames.origin.y + 60
-                break
             default:
                 fatalError("unexpected index \(offset) for \(annotationView)")
-                break
             }
         }
     }
@@ -114,15 +117,14 @@ private extension AnnotationViewControllerSettingPeriod {
             print(controller.viewControllers[0]) // SettingsTableViewController
             return controller.viewControllers[0]
         }
-        print(presentingViewController)
         return presentingViewController
     }
     
     func extractRightBarButtonConvertedFrames() -> CGRect {
         guard
             let first = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[0].value(forKey: "view") as? UIView
-            else {
-                fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
+        else {
+            fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
         return first.convert(first.bounds, to: view)
     }
