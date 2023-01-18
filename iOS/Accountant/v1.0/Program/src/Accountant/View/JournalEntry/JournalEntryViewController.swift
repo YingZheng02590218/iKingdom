@@ -1289,7 +1289,13 @@ extension JournalEntryViewController: UITextFieldDelegate {
         textField.layer.shadowRadius = 4
         textField.layer.shadowColor = UIColor.calculatorDisplay.cgColor
         textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        
+
+        // 2列目のComponentをリロードする
+        if textField == textFieldCategoryDebit {
+            textFieldCategoryDebit.reloadComponent()
+        } else if textField == textFieldCategoryCredit {
+            textFieldCategoryCredit.reloadComponent()
+        }
         // 借方金額　貸方金額
         if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
             self.view.endEditing(true)

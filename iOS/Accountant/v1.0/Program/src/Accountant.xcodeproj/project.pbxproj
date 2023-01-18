@@ -52,8 +52,8 @@
 		F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
-		F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
-		F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* UIString+extension.swift */; };
+		F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
+		F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
 		F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
 		F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */; };
@@ -551,7 +551,7 @@
 		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
-		F9482EAC282F9E20008B82E1 /* UIString+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIString+extension.swift"; sourceTree = "<group>"; };
+		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
 		F94DE33327DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerSettingJournals.swift; sourceTree = "<group>"; };
@@ -1274,7 +1274,7 @@
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
-				F9482EAC282F9E20008B82E1 /* UIString+extension.swift */,
+				F9482EAC282F9E20008B82E1 /* String+extension.swift */,
 				F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */,
 			);
 			path = Extension;
@@ -1980,7 +1980,7 @@
 				F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */,
 				F98CD96C24DCB071001CBF94 /* CategoryListTableViewCell.swift in Sources */,
 				F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */,
-				F9482EAD282F9E20008B82E1 /* UIString+extension.swift in Sources */,
+				F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */,
 				F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9F4607424C9E0BD008FE62B /* File2.swift in Sources */,
 				F93A2637295B4FC1002B7EB9 /* RealmManager.swift in Sources */,
@@ -2167,7 +2167,7 @@
 				F9EC66A027B90BC60003FBB6 /* PDFMakerViewController.swift in Sources */,
 				F9EC66A127B90BC60003FBB6 /* CategoryListTableViewCell.swift in Sources */,
 				F9EC66A227B90BC60003FBB6 /* PDFMaker.swift in Sources */,
-				F9482EAE282F9E20008B82E1 /* UIString+extension.swift in Sources */,
+				F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */,
 				F9EC66A327B90BC60003FBB6 /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */,
 				F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */,
