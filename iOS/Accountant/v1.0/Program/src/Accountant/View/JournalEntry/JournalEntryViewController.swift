@@ -500,8 +500,8 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForCategory() {
         textFieldCategoryDebit.delegate = self
         textFieldCategoryCredit.delegate = self
-        textFieldCategoryDebit.setup(identifier: "identifier_debit")
-        textFieldCategoryCredit.setup(identifier: "identifier_credit")
+        textFieldCategoryDebit.setup()
+        textFieldCategoryCredit.setup()
         textFieldCategoryDebit.textAlignment = .left
         textFieldCategoryCredit.textAlignment = .right
         
@@ -530,7 +530,10 @@ class JournalEntryViewController: UIViewController {
         textFieldSmallWritting.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
         textFieldSmallWritting.tintColor = UIColor.accentColor
-        
+        // 文字サイズを指定
+        textFieldSmallWritting.adjustsFontSizeToFitWidth = true // TextField 文字のサイズを合わせる
+        textFieldSmallWritting.minimumFontSize = 12
+
         // toolbar 小書き Done:Tag Cancel:Tag
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(

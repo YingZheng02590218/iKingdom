@@ -10,7 +10,7 @@ import UIKit
 
 // ドラムロール　仕訳画面　勘定科目選択
 class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     // ドラムロールに表示する勘定科目の文言
     var big0: [String] = []
     var big1: [String] = []
@@ -24,11 +24,11 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     var big9: [String] = []
     var big10: [String] = []
     var big11: [String] = []
-    
+
     var selectedValue: String?
-    
+
     let pickerView = UIPickerView()
-    
+
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }
@@ -41,7 +41,11 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         super.init(coder: aDecoder)
     }
     
-    func setup(identifier: String) {
+    func setup() {
+        // 文字サイズを指定
+        self.adjustsFontSizeToFitWidth = true // TextField 文字のサイズを合わせる
+        self.minimumFontSize = 12
+
         // ピッカー　ドラムロールの項目を初期化
         getSettingsCategoryFromDB()
         
@@ -73,7 +77,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         toolbar.setItems([cancelItem, flexSpaceItem, doneItem], animated: true)
         // previous, next, paste ボタンを消す
         self.inputAssistantItem.leadingBarButtonGroups.removeAll()
-        
+
         self.inputView = pickerView
         self.inputAccessoryView = toolbar
         
@@ -126,14 +130,14 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             break
         }
     }
-    
+
     func reloadComponent() {
         // 借方勘定科目TextFieldと貸方勘定科目TextFieldを行き来すると、
         // 　row の行数が変わるため。二つの目のcompornent表示を切り替える
         pickerView.reloadComponent(0)
         pickerView.reloadComponent(2)
     }
-    
+
     // UIPickerView
     // UIPickerViewの列の数 コンポーネントの数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -315,13 +319,13 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             pickerView.reloadComponent(2)
         }
     }
-    
+
     var isSettingHeight = false
     var currentRowHeight: CGFloat = 0
-    let fontSize: UIFont = .systemFont(ofSize: 25)
-    
+    let fontSize: UIFont = .systemFont(ofSize: 22)
+
     private var selectedRow: Int?
-    
+
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         if !isSettingHeight {
             calculateRowHeight(pickerView: pickerView)
@@ -329,18 +333,18 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         // print(currentRowHeight)
         return currentRowHeight
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         switch component {
         case 0:
-            return pickerView.bounds.width * 0.5 - 10
+            return pickerView.bounds.width * 0.5 - 40
         case 1:
-            return 20
+            return 50
         default:
             return pickerView.bounds.width * 0.45
         }
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //        let label = (view as? UILabel) ?? UILabel(
         //            frame: .init(
@@ -348,12 +352,12 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         //                size: .init(width: pickerView.bounds.width * 0.5 - 10, height: 0)
         //            )
         //        )
-        
+
         if component == 0 {
             let label = UILabel(
                 frame: .init(
                     origin: .zero,
-                    size: .init(width: pickerView.bounds.width * 0.5 - 10, height: 0)
+                    size: .init(width: pickerView.bounds.width * 0.5 - 40, height: 0)
                 )
             )
             label.font = fontSize
@@ -535,7 +539,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             return label
         }
     }
-    
+
     func calculateRowHeight(pickerView: UIPickerView) {
         var rowHeight: CGFloat = currentRowHeight
         for value in Rank0.allCases {
@@ -551,7 +555,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         currentRowHeight = rowHeight
         isSettingHeight = true
     }
-    
+
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc func done() {
         print("done", self.text, selectedValue)
