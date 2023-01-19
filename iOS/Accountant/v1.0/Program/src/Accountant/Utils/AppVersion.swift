@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AppVersion {
+public struct AppVersion {
     
     static var currentVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
@@ -17,7 +17,16 @@ struct AppVersion {
     static var currentBuildVersion: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1.0.0"
     }
-    
+
+    static var identifier: String {
+#if DEBUG
+        // STG環境で動作確認するため
+        "com.ikingdom.Accountant"
+#else
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String ?? "com.ikingdom.Accountant"
+#endif
+    }
+
     //    static func convertVersionValue(string: String) -> Int {
     //        let versionList = string.components(separatedBy: ".")
     //        guard versionList.count == 3 else { return 10_000 }

@@ -72,10 +72,9 @@ class SplashViewController: UIViewController {
     // https://cpoint-lab.co.jp/article/202206/22919/
     // 端末にインストールされているアプリのバージョンを取得後、App Store から公開済みアプリのバージョンを取得し、それらを比較すると言う処理を行なっています。
     func appVersionCheck(completionHandler: @escaping (Bool) -> Void) {
-        guard let info = Bundle.main.infoDictionary,
-              let appVersion = info["CFBundleShortVersionString"] as? String,
-              let identifier = info["CFBundleIdentifier"] as? String,
-              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else { return }
+        let appVersion = AppVersion.currentVersion
+        let identifier = AppVersion.identifier
+        guard let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else { return }
         //        // アプリバージョン　< 強制アップデートバージョン（）の場合、強制アップデートダイアログを表示する
         //        let appVersionValue = AppVersion.convertVersionValue(string: AppVersion.currentVersion)
         //        let forcedUpdateVersionValue = AppVersion.convertVersionValue(string: "TODO") // APIから取得する
