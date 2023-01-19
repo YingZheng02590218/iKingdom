@@ -47,7 +47,9 @@ class JournalEntryViewController: UIViewController {
     // テキストフィールド　小書き
     @IBOutlet var textFieldSmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
-    
+    // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
+    var isShown = false
+
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
@@ -184,8 +186,11 @@ class JournalEntryViewController: UIViewController {
         super.viewDidAppear(animated)
         // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        // ここでUIKeyboardWillHideという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        // テキストフィールド　勘定科目、小書きのキーボードが表示中 viewDidLoadなどで監視を設定
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidDisappear), name: UIResponder.keyboardDidHideNotification, object: nil)
         // TODO: 動作確認用
         //        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
         //        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
@@ -206,8 +211,13 @@ class JournalEntryViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー解除をしている
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        // テキストフィールド　勘定科目、小書きのキーボードが表示中 監視を解除
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     // MARK: - チュートリアル対応 ウォークスルー型
@@ -734,6 +744,14 @@ class JournalEntryViewController: UIViewController {
         // touchesBeganメソッドをオーバーライドします。
         self.view.endEditing(true)
     }
+    // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグを切り替える
+    @objc func keyboardDidAppear() {
+        isShown = true
+    }
+    @objc func keyboardDidDisappear() {
+        isShown = false
+    }
+
     
     // MARK: EMTNeumorphicButton
     // 入力ボタン
@@ -1284,6 +1302,21 @@ extension JournalEntryViewController: UITextFieldDelegate {
     //    textFieldShouldEndEditing
     //    textFieldDidEndEditing
     //    textFieldShouldReturn
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        // 借方金額　貸方金額、小書き
+        if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
+            // 借方勘定科目、貸方勘定科目、小書きのキーボードが表示中に、電卓を表示させないようにする
+            if isShown {
+                // キーボードが表示されている時
+               return false
+            } else {
+                // 隠れている時
+                return true
+            }
+        }
+        return true
+    }
     
     // テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
