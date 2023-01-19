@@ -44,7 +44,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     func setup() {
         // 文字サイズを指定
         self.adjustsFontSizeToFitWidth = true // TextField 文字のサイズを合わせる
-        self.minimumFontSize = 12
+        self.minimumFontSize = 11
 
         // ピッカー　ドラムロールの項目を初期化
         getSettingsCategoryFromDB()
@@ -322,7 +322,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
 
     var isSettingHeight = false
     var currentRowHeight: CGFloat = 0
-    let fontSize: UIFont = .systemFont(ofSize: 22)
+    let fontSize: UIFont = .systemFont(ofSize: 25)
 
     private var selectedRow: Int?
 
@@ -337,9 +337,9 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         switch component {
         case 0:
-            return pickerView.bounds.width * 0.5 - 40
+            return pickerView.bounds.width * 0.45 - 40
         case 1:
-            return 50
+            return 60 // iPad Landscapeの場合　上下のrowの文言が重なってしまう対策（60以上）
         default:
             return pickerView.bounds.width * 0.45
         }
@@ -357,7 +357,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             let label = UILabel(
                 frame: .init(
                     origin: .zero,
-                    size: .init(width: pickerView.bounds.width * 0.5 - 40, height: 0)
+                    size: .init(width: pickerView.bounds.width * 0.45 - 40, height: 0)
                 )
             )
             label.font = fontSize
@@ -367,7 +367,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             label.text = Rank0.allCases[row].rawValue
             // label.sizeToFit() // 文言が入り切らない場合に、2行にするために使用。alignmentが効かなくなるため削除。
             label.adjustsFontSizeToFitWidth = true // UIPickerView 文字のサイズを合わせる
-            label.minimumScaleFactor = 0.5 // デフォルトは0となる。0だと、文字サイズが縮小されない
+            label.minimumScaleFactor = 0.4 // デフォルトは0となる。0だと、文字サイズが縮小されない
             // print("1列目", label.frame.origin, label.frame.width)
             // print("1列目", label.text, selectedValue)
             return label
@@ -533,7 +533,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             }
             // label.sizeToFit() // 文言が入り切らない場合に、2行にするために使用。alignmentが効かなくなるため削除。
             label.adjustsFontSizeToFitWidth = true // UIPickerView 文字のサイズを合わせる
-            label.minimumScaleFactor = 0.5 // デフォルトは0となる。0だと、文字サイズが縮小されない
+            label.minimumScaleFactor = 0.3 // デフォルトは0となる。0だと、文字サイズが縮小されない
             // print("2列目", label.frame.origin, label.frame.width)
             // print("2列目", label.text, selectedValue)
             return label
