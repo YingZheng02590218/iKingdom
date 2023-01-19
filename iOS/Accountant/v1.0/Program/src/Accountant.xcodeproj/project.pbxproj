@@ -152,6 +152,8 @@
 		F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */; };
 		F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
 		F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */; };
+		F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289B72978E0E800F8F1B8 /* AppVersion.swift */; };
+		F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289B72978E0E800F8F1B8 /* AppVersion.swift */; };
 		F9860FB9285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F9860FBA285AB805008D0714 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9860FB8285AB805008D0714 /* Network.swift */; };
 		F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F986CC162945BA9A005A2138 /* SplashViewController.swift */; };
@@ -617,6 +619,7 @@
 		F982898C2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OpeningBalanceViewController.storyboard; sourceTree = "<group>"; };
 		F982898F2973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBalanceTableViewCell.swift; sourceTree = "<group>"; };
 		F98289922974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningBalanceAccount.swift; sourceTree = "<group>"; };
+		F98289B72978E0E800F8F1B8 /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
 		F9860FB8285AB805008D0714 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		F986CC162945BA9A005A2138 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F986CC1D29474392005A2138 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -1420,6 +1423,7 @@
 			isa = PBXGroup;
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
+				F98289B72978E0E800F8F1B8 /* AppVersion.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
 				F9AD64E22912B66B00B9F50B /* StringUtility.swift */,
 			);
@@ -2051,6 +2055,7 @@
 				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
+				F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
@@ -2237,6 +2242,7 @@
 				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
+				F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,

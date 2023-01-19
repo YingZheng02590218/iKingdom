@@ -11,6 +11,13 @@ import UIKit
 
 enum Constant {
 
+    // MARK: - App Store
+
+    // Short Link
+    static let APPSTOREAPPPAGESHORT = "https://apple.co/3Xnkc0m"
+    // Content Link
+    static let APPSTOREAPPPAGE = "https://apps.apple.com/us/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-paciolist-%E3%83%91%E3%83%81%E3%83%A7%E3%83%BC%E3%83%AA%E4%B8%BB%E7%BE%A9/id1535793378?itsct=apps_box_link&itscg=30200"
+
     // MARK: - マネタイズ対応
 
 #if DEBUG
