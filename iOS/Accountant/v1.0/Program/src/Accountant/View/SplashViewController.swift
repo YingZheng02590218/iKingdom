@@ -29,8 +29,86 @@ class SplashViewController: UIViewController {
         // データベース初期化
         let initial = Initial()
         initial.initialize()
-        // インジケーターを終了
-        finishActivityIndicatorView()
+        // 半強制アップデートダイアログ表示
+        appVersionCheck(completionHandler: { moveForward in
+            if moveForward {
+                // インジケーターを終了
+                self.finishActivityIndicatorView()
+            } else {
+                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                    exit(0)
+                }
+            }
+        })
+    }
+    // 半強制アップデートダイアログを表示する アラートを表示し、App Store に誘導する
+    func showForcedUpdateDialog(completionHandler: @escaping (Bool) -> Void) {
+
+        DispatchQueue.main.async {
+            let alert = UIAlertController(
+                title: "アップデートのお知らせ",
+                message: "最新のアプリをご利用いただけます。",
+                preferredStyle: .alert
+            )
+            let storeAction = UIAlertAction(title: "ストアページへ", style: .default) { [weak self] _ in
+                // guard let self = self else { return }
+                // AppStore へのリンクは、Short Linkを指定すると、外部ブラウザを経由して、AppStoreアプリを起動される。
+                guard let url = URL(string: Constant.APPSTOREAPPPAGE) else { return }
+                UIApplication.shared.open(url, options: [:])
+                // self.showForcedUpdateDialog()
+                completionHandler(false)
+
+            }
+            let laterAction = UIAlertAction(title: "あとで", style: .destructive) { [weak self] _ in
+                // guard let self = self else { return }
+                completionHandler(true)
+            }
+            alert.addAction(storeAction)
+            alert.addAction(laterAction)
+            self.present(alert, animated: true)
+        }
+    }
+    // https://cpoint-lab.co.jp/article/202206/22919/
+    // 端末にインストールされているアプリのバージョンを取得後、App Store から公開済みアプリのバージョンを取得し、それらを比較すると言う処理を行なっています。
+    func appVersionCheck(completionHandler: @escaping (Bool) -> Void) {
+        let appVersion = AppVersion.currentVersion
+        let identifier = AppVersion.identifier
+        guard let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else { return }
+        //        // アプリバージョン　< 強制アップデートバージョン（）の場合、強制アップデートダイアログを表示する
+        //        let appVersionValue = AppVersion.convertVersionValue(string: AppVersion.currentVersion)
+        //        let forcedUpdateVersionValue = AppVersion.convertVersionValue(string: "TODO") // APIから取得する
+        //        guard forcedUpdateVersionValue <= appVersionValue else {
+        //            // 強制アップデートダイアログを表示する
+        //            showForcedUpdateDialog()
+        //        }
+
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
+                guard let result = (json?["results"] as? [Any])?.first as? [String: Any],
+                      let storeVersion = result["version"] as? String else { return }
+
+                // 端末のアプリバージョンと App Store のアプリバージョンを比較
+                if appVersion != storeVersion {
+                    // appVersion と storeVersion が異なっている時に実行したい処理
+                    // 半強制アップデートダイアログを表示する
+                    self.showForcedUpdateDialog(completionHandler: { moveForward in
+                        if moveForward {
+                            completionHandler(true)
+                        } else {
+                            completionHandler(false)
+                        }
+                    })
+                } else {
+                    completionHandler(true)
+                }
+            } catch let error {
+                print(error)
+            }
+        }
+        task.resume()
     }
     // インジゲーターを開始
     func showActivityIndicatorView() {
@@ -57,6 +135,15 @@ class SplashViewController: UIViewController {
                 Thread.sleep(forTimeInterval: 0.5)
                 // アニメーション終了
                 self.activityIndicatorView.stopAnimating()
+                // スプラッシュ画面から、仕訳画面へ遷移させる
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController {
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        tabBarController.modalTransitionStyle = .crossDissolve
+                        self.present(tabBarController, animated: true, completion: nil)
+                    }
+                }
             }
         }
     }
@@ -91,14 +178,5 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // スプラッシュ画面から、仕訳画面へ遷移させる
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController {
-                tabBarController.modalPresentationStyle = .fullScreen
-                tabBarController.modalTransitionStyle = .crossDissolve
-                self.present(tabBarController, animated: true, completion: nil)
-            }
-        }
     }
 }

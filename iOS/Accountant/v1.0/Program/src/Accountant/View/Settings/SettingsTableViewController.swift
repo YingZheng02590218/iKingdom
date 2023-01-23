@@ -15,6 +15,7 @@ import UIKit
 // 設定クラス
 class SettingsTableViewController: UIViewController {
 
+    @IBOutlet var versionLabel: UILabel!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var scrollView: UIScrollView!
     // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
@@ -58,6 +59,8 @@ class SettingsTableViewController: UIViewController {
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
+
+        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
 
 
@@ -292,10 +295,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     // 件名
                     mail.setSubject("お問い合わせ")
                     // 本文　末尾に、iPhoneのモデルとOSとバージョンを表示
-                    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
-                       let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
-                        mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(version) Buld: \(build)", isHTML: false)
-                    }
+                    mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(AppVersion.currentVersion) Buld: \(AppVersion.currentBuildVersion)", isHTML: false)
                     present(mail, animated: true, completion: nil)
                 } else {
                     print("送信できません")
