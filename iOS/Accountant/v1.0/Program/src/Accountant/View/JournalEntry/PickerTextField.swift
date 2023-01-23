@@ -337,11 +337,11 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         switch component {
         case 0:
-            return pickerView.bounds.width * 0.45 - 40
+            return pickerView.bounds.width * 0.45 - 20
         case 1:
             return 60 // iPad Landscapeの場合　上下のrowの文言が重なってしまう対策（60以上）
         default:
-            return pickerView.bounds.width * 0.45
+            return pickerView.bounds.width * 0.45 - 20
         }
     }
 
@@ -357,7 +357,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             let label = UILabel(
                 frame: .init(
                     origin: .zero,
-                    size: .init(width: pickerView.bounds.width * 0.45 - 40, height: 0)
+                    size: .init(width: pickerView.bounds.width * 0.45 - 20, height: 0)
                 )
             )
             label.font = fontSize
@@ -385,7 +385,7 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
             let label = UILabel(
                 frame: .init(
                     origin: .zero,
-                    size: .init(width: pickerView.bounds.width * 0.45, height: 0)
+                    size: .init(width: pickerView.bounds.width * 0.45 - 20, height: 0)
                 )
             )
             label.font = fontSize
