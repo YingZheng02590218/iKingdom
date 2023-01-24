@@ -280,7 +280,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
             case 1:
-                performSegue(withIdentifier: "YouTubeListViewController", sender: tableView.cellForRow(at: indexPath))
+                performSegue(withIdentifier: "YouTubeViewController", sender: tableView.cellForRow(at: indexPath))
             case 2:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く

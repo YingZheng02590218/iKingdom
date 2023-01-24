@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css.css">
+            <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+        <div id="player">
+        </div>
+        <script>
+            // YouTubeの埋め込み動画をYouTube Player APIでコントロールしよう！
+            // https://blog.8bit.co.jp/?p=15803
+            // 設置サンプル　YouTube IFrame API：イベント
+            // https://phpjavascriptroom.com/example3.php?f=module/include/strm/youtubeiframeplayerapi/event.inc&ttl=%E8%A8%AD%E7%BD%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB
+
+            // API読み込み
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '315',
+                    width: '560',
+                    videoId: 't4SzgYZsrDs',
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    },
+                    playerVars :{ /* プレーヤーに渡すパラメータ */
+                        rel: 0, //最初の動画の再生が終了（または停止）したときに、プレーヤーに関連動画を表示するかどうか　0:表示しない 1:表示する　デフォルトは1
+                        // playlist: 't4SzgYZsrDs', //次に流すyoutubeにアップした動画のID指定
+                        loop: 0, //ループをするかどうか　0:ループしない 1:ループをする　デフォルトは0
+                        controls: 0, //コントローラーを表示させるか　0:コントローラー無し 1:コントローラー有り　デフォルトは1
+                        autoplay: 0, //オートで再生させるか　0:オートで再生させない　1：オートで再生する　デフォルトは0
+                        showinfo: 0, //上部の動画タイトルを表示について　0：タイトルを表示させない　1：タイトルを表示させる　デフォルトは1
+                        disablekb: 0, // キーボードの操作をさせるかどうか
+                        playsinline: 0 // このパラメータは iOS 上の HTML5 プレーヤーで動画をインラインまたは全画面表示のどちらで再生するかを制御します。有効な値は次のとおりです。
+                        // 0: この値を指定すると全画面表示で再生されます。現時点ではこれがデフォルト値ですが、デフォルトは変更される場合があります。
+                        // 1: この値を指定すると、UIWebViews（allowsInlineMediaPlayback プロパティを TRUE に設定して作成したもの）がインライン再生されます。
+                    }
+                });
+            }
+            // 動画呼び出し
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                event.target.mute(); // ミュートにする
+                // event.target.playVideo(); // 動画再生
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                    // setTimeout(stopVideo, 5000); // 5秒間、再生して停止させる
+                    done = true;
+                }
+
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+
+            // SwiftからJavaScriptをコール
+            //ネイティブから処理を呼出
+             function callFromNative(videoId) {
+                 // 取得したvieoを再生
+                 player.loadVideoById(videoId, 0, "large")
+             }
+        </script>
+    </body>
+</html>

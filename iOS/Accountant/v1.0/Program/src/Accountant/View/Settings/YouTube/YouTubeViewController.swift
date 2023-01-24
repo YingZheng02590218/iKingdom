@@ -1,5 +1,5 @@
 //
-//  YouTubeListViewController.swift
+//  YouTubeViewController.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2023/01/24.
@@ -10,7 +10,7 @@ import Alamofire
 import UIKit
 import WebKit
 
-class YouTubeListViewController: UIViewController {
+class YouTubeViewController: UIViewController {
 
     // TODO: 特定のチャンネルにアップロードされている動画の一覧を取得して各動画の詳細（タイトル、説明、再生数など）を取得する
 
@@ -33,11 +33,11 @@ class YouTubeListViewController: UIViewController {
     // https://hiromiick.com/swift-youtube-like-mini-player-view/#YouTube
 
     //    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet var webViewBase: UIView!
+        @IBOutlet var webViewBase: UIView!
 
-     var webView = WKWebView()
+    lazy var webView = WKWebView()
 
-    @IBOutlet var tableView: UITableView!
+        @IBOutlet var tableView: UITableView!
 
     var canRotateInt = 1 // 1は回転不可、−１は回転可能
 
@@ -174,9 +174,9 @@ class YouTubeListViewController: UIViewController {
 
         // ① Channels:list でチャンネルの情報を取得する
         //   アップロード済み動画 のリストが含まれているプレイリストの ID（playlistId）が取得できる
-                callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
+        callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
 
-//        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
+        //        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
         // ② PlaylistItems:list で playlistId に含まれている動画の一覧を取得する
         //   各動画の概要と videoId が取得できる
 
@@ -293,22 +293,22 @@ class YouTubeListViewController: UIViewController {
     }
 }
 
-extension UIImage {
-
-    public convenience init(url: String) {
-        let url = URL(string: url)
-        do {
-            let data = try Data(contentsOf: url!)
-            self.init(data: data)!
-            return
-        } catch let err {
-            print("Error : \(err.localizedDescription)")
-        }
-        self.init()
-    }
-}
+//extension UIImage {
+//
+//    public convenience init(url: String) {
+//        let url = URL(string: url)
+//        do {
+//            let data = try Data(contentsOf: url!)
+//            self.init(data: data)!
+//            return
+//        } catch let err {
+//            print("Error : \(err.localizedDescription)")
+//        }
+//        self.init()
+//    }
+//}
 // Respond when a user selects a place.
-extension YouTubeListViewController: UITableViewDelegate {
+extension YouTubeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -334,7 +334,7 @@ extension YouTubeListViewController: UITableViewDelegate {
 }
 
 // Populate the table with the list of most likely places.
-extension YouTubeListViewController: UITableViewDataSource {
+extension YouTubeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -372,18 +372,18 @@ extension YouTubeListViewController: UITableViewDataSource {
         return cell
     }
 }
-// 無限スクロール(ページネート)現在の状況を管理
-enum LoadStatus {
-    // loadStatusを導入して現在の状況を管理できるようにしました。
-    // 初期状態
-    case initial
-    // apiを叩いて結果が返ってきて表示されるまでの状態
-    case fetching
-    // 次のページがまだある状態
-    case loadMore
-    // 次のページにはもう記事がない状態
-    case full
-    // エラー
-    case error
-    // これでfetching,fullの状態ではController側からAPIが呼ばれたとしてもapiを叩かないようにしています。
-}
+//// 無限スクロール(ページネート)現在の状況を管理
+//enum LoadStatus {
+//    // loadStatusを導入して現在の状況を管理できるようにしました。
+//    // 初期状態
+//    case initial
+//    // apiを叩いて結果が返ってきて表示されるまでの状態
+//    case fetching
+//    // 次のページがまだある状態
+//    case loadMore
+//    // 次のページにはもう記事がない状態
+//    case full
+//    // エラー
+//    case error
+//    // これでfetching,fullの状態ではController側からAPIが呼ばれたとしてもapiを叩かないようにしています。
+//}
