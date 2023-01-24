@@ -17,6 +17,7 @@
     pod 'Gecco'
     pod 'EAIntroView'
     pod "MXParallaxHeader"
+    pod 'Alamofire', '5.6.1'
   end
 
   target 'Paciolist' do

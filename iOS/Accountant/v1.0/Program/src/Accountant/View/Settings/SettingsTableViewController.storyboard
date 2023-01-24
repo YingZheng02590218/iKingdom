@@ -23,7 +23,15 @@
                 <viewControllerPlaceholder storyboardName="SettingsHelpViewController" id="hjp-Wc-Ax9" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EU-fS-0VG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6449" y="2769"/>
+            <point key="canvasLocation" x="6450" y="2769"/>
+        </scene>
+        <!--YouTubeViewController-->
+        <scene sceneID="0Ae-zm-bVJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="YouTubeViewController" id="fSQ-IT-JTV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wbb-d6-yIf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6425" y="2800"/>
         </scene>
         <!--SettingsInformationTableViewController-->
         <scene sceneID="xeG-aV-jzo">
@@ -153,6 +161,7 @@
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
                         <segue destination="fTk-JG-5fj" kind="showDetail" identifier="OpeningBalanceViewController" id="P4a-ge-WFi"/>
+                        <segue destination="fSQ-IT-JTV" kind="showDetail" identifier="YouTubeViewController" id="o3f-CT-T64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -167,7 +176,7 @@
                             <rect key="frame" x="0.0" y="40" width="240" height="128"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDp-Nv-C18">
-                            <rect key="frame" x="183.5" y="44" width="51.5" height="18"/>
+                            <rect key="frame" x="183.5" y="0.0" width="51.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" name="TextColor"/>
                             <nil key="highlightedColor"/>
@@ -183,7 +192,7 @@
                         <constraint firstItem="fhN-Xm-Spc" firstAttribute="leading" secondItem="Vrj-sR-CjP" secondAttribute="leading" id="Ofa-qu-aHN"/>
                         <constraint firstItem="Vrj-sR-CjP" firstAttribute="height" secondItem="m2e-xa-ehY" secondAttribute="height" id="R5Q-7K-7au"/>
                         <constraint firstAttribute="bottom" secondItem="Vrj-sR-CjP" secondAttribute="bottom" id="WsX-Ri-k2G"/>
-                        <constraint firstItem="NDp-Nv-C18" firstAttribute="top" secondItem="cjR-mA-pCn" secondAttribute="top" id="eoi-FE-RY9"/>
+                        <constraint firstItem="NDp-Nv-C18" firstAttribute="top" secondItem="Vrj-sR-CjP" secondAttribute="top" id="eoi-FE-RY9"/>
                         <constraint firstItem="fhN-Xm-Spc" firstAttribute="top" secondItem="Vrj-sR-CjP" secondAttribute="top" constant="40" id="j1K-iN-k2b"/>
                         <constraint firstItem="fhN-Xm-Spc" firstAttribute="trailing" secondItem="Vrj-sR-CjP" secondAttribute="trailing" id="tDo-s6-if4"/>
                         <constraint firstAttribute="trailing" secondItem="Vrj-sR-CjP" secondAttribute="trailing" id="veE-5t-IaQ"/>
