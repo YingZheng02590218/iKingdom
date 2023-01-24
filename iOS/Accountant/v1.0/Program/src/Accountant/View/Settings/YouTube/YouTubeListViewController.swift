@@ -1,5 +1,5 @@
 //
-//  YouTubeViewController.swift
+//  YouTubeListViewController.swift
 //  Accountant
 //
 //  Created by Hisashi Ishihara on 2023/01/24.
@@ -10,7 +10,7 @@ import Alamofire
 import UIKit
 import WebKit
 
-class YouTubeViewController: UIViewController {
+class YouTubeListViewController: UIViewController {
 
     // TODO: 特定のチャンネルにアップロードされている動画の一覧を取得して各動画の詳細（タイトル、説明、再生数など）を取得する
 
@@ -123,7 +123,7 @@ class YouTubeViewController: UIViewController {
     func setupTableView() {
 
         // Register the table view cell class and its reuse id.
-        tableView.register(UINib(nibName: "MapTableViewCell", bundle: nil), forCellReuseIdentifier: "MapTableViewCell")
+        tableView.register(UINib(nibName: String(describing: VideoTableViewCell.self), bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
         // 2. 可変にしたいとき
         tableView.estimatedRowHeight = 40
         tableView.rowHeight = UITableView.automaticDimension
@@ -308,7 +308,7 @@ extension UIImage {
     }
 }
 // Respond when a user selects a place.
-extension YouTubeViewController: UITableViewDelegate {
+extension YouTubeListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -334,7 +334,7 @@ extension YouTubeViewController: UITableViewDelegate {
 }
 
 // Populate the table with the list of most likely places.
-extension YouTubeViewController: UITableViewDataSource {
+extension YouTubeListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -343,7 +343,7 @@ extension YouTubeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MapTableViewCell", for: indexPath ) as? MapTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: VideoTableViewCell.self), for: indexPath ) as? VideoTableViewCell else { return UITableViewCell() }
         let collectionItem = items[indexPath.row]
 
         if let thumbnails = collectionItem.snippet?.thumbnails {

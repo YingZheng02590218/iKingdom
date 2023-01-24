@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--YouTubeViewController-->
+        <!--YouTubeListViewController-->
         <scene sceneID="qsr-Fe-stz">
             <objects>
-                <viewControllerPlaceholder storyboardName="YouTubeViewController" id="0Im-Mm-bpP" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="YouTubeListViewController" id="0Im-Mm-bpP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1f-16-z2N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6431" y="2798"/>
@@ -161,7 +161,7 @@
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
                         <segue destination="fTk-JG-5fj" kind="showDetail" identifier="OpeningBalanceViewController" id="P4a-ge-WFi"/>
-                        <segue destination="0Im-Mm-bpP" kind="showDetail" identifier="YouTubeViewController" id="g5d-g6-STC"/>
+                        <segue destination="0Im-Mm-bpP" kind="showDetail" identifier="YouTubeListViewController" id="g5d-g6-STC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

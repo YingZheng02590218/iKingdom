@@ -1,5 +1,5 @@
 //
-//  MapTableViewCell.swift
+//  VideoTableViewCell.swift
 //  APIClientApp
 //
 //  Created by Hisashi Ishihara on 2022/08/08.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MapTableViewCell: UITableViewCell {
+class VideoTableViewCell: UITableViewCell {
 
 
     @IBOutlet var thumbnailsImageView: UIImageView!
