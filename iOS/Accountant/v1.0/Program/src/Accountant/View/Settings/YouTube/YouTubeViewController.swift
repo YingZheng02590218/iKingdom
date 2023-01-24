@@ -32,23 +32,21 @@ class YouTubeViewController: UIViewController {
     // TODO: 【Swift】YouTube風の動画ミニビューの実装方法
     // https://hiromiick.com/swift-youtube-like-mini-player-view/#YouTube
 
-    //    @IBOutlet weak var webView: WKWebView!
-        @IBOutlet var webViewBase: UIView!
-
+    @IBOutlet var webViewBase: UIView!
+    @IBOutlet var tableView: UITableView!
     lazy var webView = WKWebView()
-
-        @IBOutlet var tableView: UITableView!
-
+    // 回転禁止
     var canRotateInt = 1 // 1は回転不可、−１は回転可能
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "使い方ガイド on YouTube"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.prefersLargeTitles = false
 
-        // FIXME: 全画面の時のみ、横画面にすることを許可する
+        // 全画面の時のみ、横画面にすることを許可する
         // https://teratail.com/questions/9741?sort=1
         // 全画面表示になったことを検知
         // wideViewメソッドはあとで書きます
@@ -57,11 +55,7 @@ class YouTubeViewController: UIViewController {
         // wideViewメソッドはあとで書きます
         NotificationCenter.default.addObserver(self, selector: #selector(self.wideView), name: UIWindow.didBecomeKeyNotification, object: nil)
 
-        rotateSet(rotateInt: 1)
-
         // https://web-y.dev/2020/10/24/ios-wkwebview-play-youtube-inline/
-        print(view.frame.width)
-        view.backgroundColor = .systemPink
         //        WKWebView を用意
         //        まずWKWebView を準備します。
         //        storyboard や xib ではなく、直接コードにより作っていきます。
@@ -71,17 +65,14 @@ class YouTubeViewController: UIViewController {
         //        これを指定しないと、YouTube動画がインライン再生されず、
         //        再生ボタンをタップした瞬間に全画面再生になってしまいます。
         config.allowsInlineMediaPlayback = true
-
         // 自動再生させる
         config.mediaTypesRequiringUserActionForPlayback = []
 
-        print(view.frame.width)
         webView = WKWebView(
             frame: webViewBase.frame,
             configuration: config
         )
         webView.contentMode = UIView.ContentMode.scaleAspectFit // 効いてる？
-        webView.backgroundColor = .green
         webViewBase.addSubview(webView)
         // https://qiita.com/aryzae/items/9b3d6f77cb5082665220
         // webViewの制約設定時、AutoresizingMaskによって自動生成される制約と競合するため、自動生成をやめる
@@ -106,7 +97,7 @@ class YouTubeViewController: UIViewController {
         webView.widthAnchor.constraint(equalTo: webViewBase.widthAnchor, multiplier: 1).isActive = true
         webView.heightAnchor.constraint(equalTo: webViewBase.heightAnchor, multiplier: 1).isActive = true
 
-        guard let path: String = Bundle.main.path(forResource: "html", ofType: "html") else {
+        guard let path: String = Bundle.main.path(forResource: "index", ofType: "html") else {
             return
         }
 
@@ -135,10 +126,8 @@ class YouTubeViewController: UIViewController {
 
     var items: [PlaylistItemsRequest.Body.Item] = [] {
         didSet {
-            //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.tableView.reloadData()
             // Toast.show("検索結果 \(self.placeList.count)件", self.view)
-            //            }
         }
     }
     var item: PlaylistItemsRequest.Body.Item? {
@@ -174,9 +163,8 @@ class YouTubeViewController: UIViewController {
 
         // ① Channels:list でチャンネルの情報を取得する
         //   アップロード済み動画 のリストが含まれているプレイリストの ID（playlistId）が取得できる
-        callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
-
-        //        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
+        //        callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
+        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
         // ② PlaylistItems:list で playlistId に含まれている動画の一覧を取得する
         //   各動画の概要と videoId が取得できる
 
@@ -262,26 +250,32 @@ class YouTubeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 回転禁止
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        appdelegate.shouldSupportAllOrientation = false
+        // 強制的に縦表示に戻す
+        rotateSet(rotateInt: 1)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 回転を許可する
+        rotateSet(rotateInt: -1)
+    }
+
     // 画面の回転可能性の設定
     func rotateSet(rotateInt: Int) {
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        if rotateInt == 1 {
-            // 強制的に縦表示に戻す
-            appdelegate.shouldSupportAllOrientation = false
-            let value = UIInterfaceOrientation.portrait.rawValue
-            UIDevice.current.setValue(value, forKey: "orientation")
-        } else {
-            // 回転を許可する
-            appdelegate.shouldSupportAllOrientation = true
+        if let appdelegate = UIApplication.shared.delegate as? AppDelegate {
+            if rotateInt == 1 {
+                // 強制的に縦表示に戻す
+                appdelegate.shouldSupportAllOrientation = false
+                let value = UIInterfaceOrientation.portrait.rawValue
+                UIDevice.current.setValue(value, forKey: "orientation")
+            } else {
+                // 回転を許可する
+                appdelegate.shouldSupportAllOrientation = true
+            }
         }
     }
 
@@ -293,35 +287,18 @@ class YouTubeViewController: UIViewController {
     }
 }
 
-//extension UIImage {
-//
-//    public convenience init(url: String) {
-//        let url = URL(string: url)
-//        do {
-//            let data = try Data(contentsOf: url!)
-//            self.init(data: data)!
-//            return
-//        } catch let err {
-//            print("Error : \(err.localizedDescription)")
-//        }
-//        self.init()
-//    }
-//}
 // Respond when a user selects a place.
 extension YouTubeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         item = items[indexPath.row]
-        // TODO: 詳細画面表示
-        // performSegue(withIdentifier: "unwindToMain", sender: self)
     }
 
     // Adjust cell height to only show the first five items in the table
     // (scrolling is disabled in IB).
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100 //self.tableView.frame.size.height
-
+        100
     }
 
     // Make table rows display at proper height if there are less than 5 items.
@@ -347,24 +324,17 @@ extension YouTubeViewController: UITableViewDataSource {
         let collectionItem = items[indexPath.row]
 
         if let thumbnails = collectionItem.snippet?.thumbnails {
-            cell.iconImageView.image = UIImage(url: thumbnails.thumbnailsDefault.url)
+            cell.thumbnailsImageView.image = UIImage(url: thumbnails.thumbnailsDefault.url)
         }
 
-        cell.nameLabel.text = collectionItem.snippet?.title
+        cell.titleLabel.text = collectionItem.snippet?.title
 
         if let description = collectionItem.snippet?.snippetDescription {
-            cell.openingHoursLabel.text = "(\(description))"
+            cell.descriptionLabel.text = "\(description)"
         } else {
-            cell.openingHoursLabel.text = "(-)"
+            cell.descriptionLabel.text = ""
         }
-        //        if let openingHours = collectionItem.openingHours {
-        //            cell.openingHoursLabel.text = openingHours.openNow ? "Open" : "Close"
-        //            cell.openingHoursLabel.textColor = openingHours.openNow ? UIColor.green : UIColor.red
-        //        }
-        //        else {
-        //            cell.openingHoursLabel.text = "-"
-        //            cell.openingHoursLabel.textColor = UIColor.gray
-        //        }
+
         if let publishedAt = collectionItem.snippet?.publishedAt {
             cell.publishedAtLabel.text = publishedAt
         }
@@ -372,18 +342,18 @@ extension YouTubeViewController: UITableViewDataSource {
         return cell
     }
 }
-//// 無限スクロール(ページネート)現在の状況を管理
-//enum LoadStatus {
-//    // loadStatusを導入して現在の状況を管理できるようにしました。
-//    // 初期状態
-//    case initial
-//    // apiを叩いて結果が返ってきて表示されるまでの状態
-//    case fetching
-//    // 次のページがまだある状態
-//    case loadMore
-//    // 次のページにはもう記事がない状態
-//    case full
-//    // エラー
-//    case error
-//    // これでfetching,fullの状態ではController側からAPIが呼ばれたとしてもapiを叩かないようにしています。
-//}
+// 無限スクロール(ページネート)現在の状況を管理
+enum LoadStatus {
+    // loadStatusを導入して現在の状況を管理できるようにしました。
+    // 初期状態
+    case initial
+    // apiを叩いて結果が返ってきて表示されるまでの状態
+    case fetching
+    // 次のページがまだある状態
+    case loadMore
+    // 次のページにはもう記事がない状態
+    case full
+    // エラー
+    case error
+    // これでfetching,fullの状態ではController側からAPIが呼ばれたとしてもapiを叩かないようにしています。
+}

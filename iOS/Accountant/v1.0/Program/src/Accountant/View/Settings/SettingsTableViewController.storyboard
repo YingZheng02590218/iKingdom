@@ -9,14 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--YouTubeViewController-->
-        <scene sceneID="qsr-Fe-stz">
-            <objects>
-                <viewControllerPlaceholder storyboardName="YouTubeViewController" id="0Im-Mm-bpP" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b1f-16-z2N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6431" y="2798"/>
-        </scene>
         <!--SettingsUpgradeTableViewController-->
         <scene sceneID="NCX-IR-4NC">
             <objects>
@@ -32,6 +24,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EU-fS-0VG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6450" y="2769"/>
+        </scene>
+        <!--YouTubeViewController-->
+        <scene sceneID="0Ae-zm-bVJ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="YouTubeViewController" id="fSQ-IT-JTV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wbb-d6-yIf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6425" y="2800"/>
         </scene>
         <!--SettingsInformationTableViewController-->
         <scene sceneID="xeG-aV-jzo">
@@ -161,7 +161,7 @@
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
                         <segue destination="fTk-JG-5fj" kind="showDetail" identifier="OpeningBalanceViewController" id="P4a-ge-WFi"/>
-                        <segue destination="0Im-Mm-bpP" kind="showDetail" identifier="YouTubeViewController" id="g5d-g6-STC"/>
+                        <segue destination="fSQ-IT-JTV" kind="showDetail" identifier="YouTubeViewController" id="o3f-CT-T64"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

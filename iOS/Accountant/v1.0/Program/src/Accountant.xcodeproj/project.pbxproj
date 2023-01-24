@@ -52,30 +52,24 @@
 		F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
-		F940347D297FB79300FD93F5 /* YouTubeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940347B297FB79300FD93F5 /* YouTubeListViewController.swift */; };
 		F940347E297FB8B100FD93F5 /* PlaylistItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D7297F810A00F8F1B8 /* PlaylistItemsRequest.swift */; };
 		F940347F297FB8B300FD93F5 /* PlaylistItemsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D7297F810A00F8F1B8 /* PlaylistItemsRequest.swift */; };
 		F9403480297FB8B600FD93F5 /* ChannelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D8297F810A00F8F1B8 /* ChannelsRequest.swift */; };
 		F9403481297FB8B700FD93F5 /* ChannelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D8297F810A00F8F1B8 /* ChannelsRequest.swift */; };
 		F9403482297FB8BC00FD93F5 /* WebAPIClientYouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D6297F810A00F8F1B8 /* WebAPIClientYouTube.swift */; };
 		F9403483297FB8BD00FD93F5 /* WebAPIClientYouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D6297F810A00F8F1B8 /* WebAPIClientYouTube.swift */; };
-		F9403488297FB8C900FD93F5 /* YouTubeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940347B297FB79300FD93F5 /* YouTubeListViewController.swift */; };
 		F9403489297FB8C900FD93F5 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98289D5297F810A00F8F1B8 /* VideoTableViewCell.xib */; };
 		F940348A297FB8C900FD93F5 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D9297F810A00F8F1B8 /* VideoTableViewCell.swift */; };
 		F940348D297FB8CB00FD93F5 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F98289D5297F810A00F8F1B8 /* VideoTableViewCell.xib */; };
 		F940348E297FB8CB00FD93F5 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289D9297F810A00F8F1B8 /* VideoTableViewCell.swift */; };
 		F9403490297FC5E700FD93F5 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = F98289DD297F823300F8F1B8 /* index.html */; };
 		F9403491297FC5ED00FD93F5 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = F98289DE297F823300F8F1B8 /* style.css */; };
-		F94034AF297FEDF200FD93F5 /* YouTubeListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94034AE297FEDF200FD93F5 /* YouTubeListViewController.storyboard */; };
-		F94034B0297FEDF200FD93F5 /* YouTubeListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94034AE297FEDF200FD93F5 /* YouTubeListViewController.storyboard */; };
-		F94034B2297FF30800FD93F5 /* html.html in Resources */ = {isa = PBXBuildFile; fileRef = F94034B1297FF30800FD93F5 /* html.html */; };
-		F94034B3297FF30800FD93F5 /* html.html in Resources */ = {isa = PBXBuildFile; fileRef = F94034B1297FF30800FD93F5 /* html.html */; };
-		F94034B5297FF37600FD93F5 /* css.css in Resources */ = {isa = PBXBuildFile; fileRef = F94034B4297FF37600FD93F5 /* css.css */; };
-		F94034B6297FF37600FD93F5 /* css.css in Resources */ = {isa = PBXBuildFile; fileRef = F94034B4297FF37600FD93F5 /* css.css */; };
 		F94034B8297FF3F500FD93F5 /* YouTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94034B7297FF3F500FD93F5 /* YouTubeViewController.swift */; };
 		F94034B9297FF3F500FD93F5 /* YouTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94034B7297FF3F500FD93F5 /* YouTubeViewController.swift */; };
 		F94034BB297FF40400FD93F5 /* YouTubeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94034BA297FF40400FD93F5 /* YouTubeViewController.storyboard */; };
 		F94034BC297FF40400FD93F5 /* YouTubeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94034BA297FF40400FD93F5 /* YouTubeViewController.storyboard */; };
+		F94034BE29800D0B00FD93F5 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94034BD29800D0B00FD93F5 /* UIImage+extension.swift */; };
+		F94034BF29800D0B00FD93F5 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94034BD29800D0B00FD93F5 /* UIImage+extension.swift */; };
 		F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
@@ -577,12 +571,9 @@
 		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
-		F940347B297FB79300FD93F5 /* YouTubeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeListViewController.swift; sourceTree = "<group>"; };
-		F94034AE297FEDF200FD93F5 /* YouTubeListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YouTubeListViewController.storyboard; sourceTree = "<group>"; };
-		F94034B1297FF30800FD93F5 /* html.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = html.html; sourceTree = "<group>"; };
-		F94034B4297FF37600FD93F5 /* css.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = css.css; sourceTree = "<group>"; };
 		F94034B7297FF3F500FD93F5 /* YouTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewController.swift; sourceTree = "<group>"; };
 		F94034BA297FF40400FD93F5 /* YouTubeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YouTubeViewController.storyboard; sourceTree = "<group>"; };
+		F94034BD29800D0B00FD93F5 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
@@ -1013,10 +1004,6 @@
 			isa = PBXGroup;
 			children = (
 				F986CC1D29474392005A2138 /* .swiftlint.yml */,
-				F98289DD297F823300F8F1B8 /* index.html */,
-				F94034B1297FF30800FD93F5 /* html.html */,
-				F94034B4297FF37600FD93F5 /* css.css */,
-				F98289DE297F823300F8F1B8 /* style.css */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
@@ -1192,8 +1179,6 @@
 			children = (
 				F94034B7297FF3F500FD93F5 /* YouTubeViewController.swift */,
 				F94034BA297FF40400FD93F5 /* YouTubeViewController.storyboard */,
-				F940347B297FB79300FD93F5 /* YouTubeListViewController.swift */,
-				F94034AE297FEDF200FD93F5 /* YouTubeListViewController.storyboard */,
 				F98289D9297F810A00F8F1B8 /* VideoTableViewCell.swift */,
 				F98289D5297F810A00F8F1B8 /* VideoTableViewCell.xib */,
 			);
@@ -1356,6 +1341,7 @@
 			isa = PBXGroup;
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+				F94034BD29800D0B00FD93F5 /* UIImage+extension.swift */,
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
@@ -1395,6 +1381,8 @@
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F9EC674727B911FD0003FBB6 /* GoogleService-Info */,
 				F9C2BC1D277DEE2D006334D0 /* DSEG14Classic-Regular.ttf */,
+				F98289DD297F823300F8F1B8 /* index.html */,
+				F98289DE297F823300F8F1B8 /* style.css */,
 				F95D44FF25ADE5F00044493A /* Configuration.storekit */,
 				F94E79EA259DF8C7004726F7 /* Settings.bundle */,
 			);
@@ -1717,7 +1705,6 @@
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
-				F94034B5297FF37600FD93F5 /* css.css in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
@@ -1757,7 +1744,6 @@
 				F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
 				F99BE7B4261DD84E004611E4 /* SettingsInformationTableViewController.storyboard in Resources */,
-				F94034AF297FEDF200FD93F5 /* YouTubeListViewController.storyboard in Resources */,
 				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
 				F94034BB297FF40400FD93F5 /* YouTubeViewController.storyboard in Resources */,
@@ -1767,7 +1753,6 @@
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
-				F94034B2297FF30800FD93F5 /* html.html in Resources */,
 				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
@@ -1789,7 +1774,6 @@
 				F9EC671127B90BC60003FBB6 /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
-				F94034B6297FF37600FD93F5 /* css.css in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
@@ -1829,7 +1813,6 @@
 				F9EC673227B90BC60003FBB6 /* WSViewController.storyboard in Resources */,
 				F9EC673327B90BC60003FBB6 /* SettingsInformationTableViewController.storyboard in Resources */,
 				F9EC673427B90BC60003FBB6 /* PageContentViewController.storyboard in Resources */,
-				F94034B0297FEDF200FD93F5 /* YouTubeListViewController.storyboard in Resources */,
 				F9EC673527B90BC60003FBB6 /* InfoPlist.strings in Resources */,
 				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F94034BC297FF40400FD93F5 /* YouTubeViewController.storyboard in Resources */,
@@ -1839,7 +1822,6 @@
 				F9403490297FC5E700FD93F5 /* index.html in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
 				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
-				F94034B3297FF30800FD93F5 /* html.html in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9403491297FC5ED00FD93F5 /* style.css in Resources */,
@@ -2140,6 +2122,7 @@
 				F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */,
 				F9D5D54A247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC55192927ACDA003966E4 /* BSData.swift in Sources */,
+				F94034BE29800D0B00FD93F5 /* UIImage+extension.swift in Sources */,
 				F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */,
 				F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
@@ -2159,7 +2142,6 @@
 				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
-				F9403488297FB8C900FD93F5 /* YouTubeListViewController.swift in Sources */,
 				F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */,
@@ -2257,7 +2239,6 @@
 				F9EC66A127B90BC60003FBB6 /* CategoryListTableViewCell.swift in Sources */,
 				F9EC66A227B90BC60003FBB6 /* PDFMaker.swift in Sources */,
 				F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */,
-				F940347D297FB79300FD93F5 /* YouTubeListViewController.swift in Sources */,
 				F9EC66A327B90BC60003FBB6 /* DataBaseManagerSettingsTaxonomy.swift in Sources */,
 				F9EC66A427B90BC60003FBB6 /* File2.swift in Sources */,
 				F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */,
@@ -2334,6 +2315,7 @@
 				F9EC66D727B90BC60003FBB6 /* SettingsTableViewController.swift in Sources */,
 				F9EC66D827B90BC60003FBB6 /* GeneralLedgerAccountViewController.swift in Sources */,
 				F9AC551A2927ACDA003966E4 /* BSData.swift in Sources */,
+				F94034BF29800D0B00FD93F5 /* UIImage+extension.swift in Sources */,
 				F9EC66D927B90BC60003FBB6 /* DataBaseManager.swift in Sources */,
 				F98289B92978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,

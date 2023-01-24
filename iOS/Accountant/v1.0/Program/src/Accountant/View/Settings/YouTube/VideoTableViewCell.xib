@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,41 +30,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="D8d-QC-Ijl">
-                                        <rect key="frame" x="0.0" y="34" width="180" height="13.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYa-gt-rCY">
-                                                <rect key="frame" x="0.0" y="0.0" width="18" height="13.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" systemColor="systemGrayColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5c2-04-HBj">
-                                                <rect key="frame" x="18" y="0.0" width="67.5" height="13.5"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhH-eG-CxL">
-                                                <rect key="frame" x="85.5" y="0.0" width="94.5" height="13.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" systemColor="systemGrayColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="eYa-gt-rCY" firstAttribute="width" relation="lessThanOrEqual" secondItem="D8d-QC-Ijl" secondAttribute="width" multiplier="0.1" id="3U5-OX-eYq"/>
-                                            <constraint firstItem="MhH-eG-CxL" firstAttribute="width" relation="greaterThanOrEqual" secondItem="D8d-QC-Ijl" secondAttribute="width" multiplier="0.1" id="7zo-1i-gnu"/>
-                                            <constraint firstItem="5c2-04-HBj" firstAttribute="width" secondItem="D8d-QC-Ijl" secondAttribute="height" multiplier="5:1" id="CzF-LI-s9z"/>
-                                            <constraint firstItem="eYa-gt-rCY" firstAttribute="centerY" secondItem="D8d-QC-Ijl" secondAttribute="centerY" id="OHK-Bq-gEX"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MhH-eG-CxL" secondAttribute="trailing" id="Vlk-TB-bvy"/>
-                                            <constraint firstItem="MhH-eG-CxL" firstAttribute="centerY" secondItem="D8d-QC-Ijl" secondAttribute="centerY" id="crs-SZ-62s"/>
-                                            <constraint firstItem="5c2-04-HBj" firstAttribute="centerY" secondItem="D8d-QC-Ijl" secondAttribute="centerY" id="m7R-Vy-GwR"/>
-                                            <constraint firstItem="5c2-04-HBj" firstAttribute="height" secondItem="D8d-QC-Ijl" secondAttribute="height" id="xda-mU-9Rg"/>
-                                        </constraints>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1H-OT-269">
                                         <rect key="frame" x="0.0" y="34" width="180" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <color key="textColor" systemColor="opaqueSeparatorColor"/>
+                                        <color key="textColor" name="AccentColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="af5-yK-zkq">
@@ -88,9 +57,6 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="D8d-QC-Ijl" firstAttribute="height" secondItem="jOC-RU-HDb" secondAttribute="height" multiplier="0.15" id="npN-7u-wzX"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -119,22 +85,20 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="GZO-bi-Lvz"/>
-            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="iconImageView" destination="atY-YP-Cdu" id="Zmc-i8-sUx"/>
-                <outlet property="nameLabel" destination="cdH-oL-7GX" id="ucg-Im-1Ek"/>
-                <outlet property="openingHoursLabel" destination="G1H-OT-269" id="lVw-tf-HDv"/>
-                <outlet property="publishedAtLabel" destination="JbH-gs-o8O" id="n5Y-du-NeG"/>
+                <outlet property="descriptionLabel" destination="G1H-OT-269" id="rL9-xo-F8W"/>
+                <outlet property="publishedAtLabel" destination="JbH-gs-o8O" id="Ymv-ys-QVu"/>
+                <outlet property="thumbnailsImageView" destination="atY-YP-Cdu" id="G9C-tl-wu3"/>
+                <outlet property="titleLabel" destination="cdH-oL-7GX" id="NKU-Rb-zCs"/>
+                <outlet property="type" destination="m9H-zV-n7i" id="UXq-BF-dhb"/>
             </connections>
             <point key="canvasLocation" x="109" y="161"/>
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="AccentColor">
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

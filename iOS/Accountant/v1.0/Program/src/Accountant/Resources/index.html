@@ -1,16 +1,13 @@
 
-
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css.css">
-            <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css">
     </head>
-
+    
     <body>
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-        <div id="player">
-        </div>
+        <div id="player"></div>
         <script>
             // YouTubeの埋め込み動画をYouTube Player APIでコントロールしよう！
             // https://blog.8bit.co.jp/?p=15803
@@ -20,11 +17,10 @@
             // API読み込み
             // 2. This code loads the IFrame Player API code asynchronously.
             var tag = document.createElement('script');
-
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+            
             // 3. This function creates an <iframe> (and YouTube player)
             //    after the API code downloads.
             var player;
@@ -32,14 +28,14 @@
                 player = new YT.Player('player', {
                     height: '315',
                     width: '560',
-                    videoId: 't4SzgYZsrDs',
+                    videoId: 'wpwrSf2GXv0',
                     events: {
                         'onReady': onPlayerReady,
                         'onStateChange': onPlayerStateChange
                     },
                     playerVars :{ /* プレーヤーに渡すパラメータ */
                         rel: 0, //最初の動画の再生が終了（または停止）したときに、プレーヤーに関連動画を表示するかどうか　0:表示しない 1:表示する　デフォルトは1
-                        // playlist: 't4SzgYZsrDs', //次に流すyoutubeにアップした動画のID指定
+                        // playlist: 'wpwrSf2GXv0', //次に流すyoutubeにアップした動画のID指定
                         loop: 0, //ループをするかどうか　0:ループしない 1:ループをする　デフォルトは0
                         controls: 0, //コントローラーを表示させるか　0:コントローラー無し 1:コントローラー有り　デフォルトは1
                         autoplay: 0, //オートで再生させるか　0:オートで再生させない　1：オートで再生する　デフォルトは0
@@ -57,7 +53,7 @@
                 event.target.mute(); // ミュートにする
                 // event.target.playVideo(); // 動画再生
             }
-
+            
             // 5. The API calls this function when the player's state changes.
             //    The function indicates that when playing a video (state=1),
             //    the player should play for six seconds and then stop.
@@ -67,7 +63,9 @@
                     // setTimeout(stopVideo, 5000); // 5秒間、再生して停止させる
                     done = true;
                 }
+                if (event.data == YT.PlayerState.ENDED) {
 
+                }
             }
             function stopVideo() {
                 player.stopVideo();
@@ -75,10 +73,21 @@
 
             // SwiftからJavaScriptをコール
             //ネイティブから処理を呼出
-             function callFromNative(videoId) {
-                 // 取得したvieoを再生
-                 player.loadVideoById(videoId, 0, "large")
-             }
+            function callFromNative(videoId) {
+                // 取得したvieoを再生
+                player.loadVideoById(videoId, 0, "large")
+            }
+            function onPlayerError(event) {
+               /* HTML5プレーヤーでエラーが発生した時に呼び出される（Flashプレーヤーの場合は何もかえらない） */
+               dbg("PlayerError:"+event.data);   /* エラーの種類を整数で返す */
+               /*
+                  2:      無効なパラメータが含まれている（動画IDが間違っている場合など）
+                  5:      再生できません
+                  100:   動画が見つかりません（動画が削除されている、プライベート動画など）
+                  101:   所有者により埋め込みが禁止されている動画
+                  150:   101と同じ
+               */
+            }
         </script>
     </body>
 </html>
