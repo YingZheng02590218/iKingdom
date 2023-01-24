@@ -110,7 +110,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 3
         case 3:
-            return 3
+            return 4
         default:
             return 0
         }
@@ -208,9 +208,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
             case 1:
+                cell.centerLabel.text = "使い方ガイド on YouTube"
+                cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
+            case 2:
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 2:
+            case 3:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
@@ -277,6 +280,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
             case 1:
+                performSegue(withIdentifier: "YouTubeViewController", sender: tableView.cellForRow(at: indexPath))
+            case 2:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
                 let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
@@ -285,7 +290,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
-            case 2:
+            case 3:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()

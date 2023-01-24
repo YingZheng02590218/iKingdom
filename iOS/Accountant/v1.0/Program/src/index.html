@@ -3,13 +3,11 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
-            
     </head>
     
     <body>
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-        <div id="player">
-        </div>
+        <div id="player"></div>
         <script>
             // YouTubeの埋め込み動画をYouTube Player APIでコントロールしよう！
             // https://blog.8bit.co.jp/?p=15803
@@ -19,7 +17,6 @@
             // API読み込み
             // 2. This code loads the IFrame Player API code asynchronously.
             var tag = document.createElement('script');
-            
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -76,10 +73,21 @@
 
             // SwiftからJavaScriptをコール
             //ネイティブから処理を呼出
-             function callFromNative(videoId) {
-                 // 取得したvieoを再生
-                 player.loadVideoById(videoId, 0, "large")
-             }
+            function callFromNative(videoId) {
+                // 取得したvieoを再生
+                player.loadVideoById(videoId, 0, "large")
+            }
+            function onPlayerError(event) {
+               /* HTML5プレーヤーでエラーが発生した時に呼び出される（Flashプレーヤーの場合は何もかえらない） */
+               dbg("PlayerError:"+event.data);   /* エラーの種類を整数で返す */
+               /*
+                  2:      無効なパラメータが含まれている（動画IDが間違っている場合など）
+                  5:      再生できません
+                  100:   動画が見つかりません（動画が削除されている、プライベート動画など）
+                  101:   所有者により埋め込みが禁止されている動画
+                  150:   101と同じ
+               */
+            }
         </script>
     </body>
 </html>

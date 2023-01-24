@@ -20,6 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     public var window: UIWindow?
 
+    var shouldSupportAllOrientation = false
+
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if shouldSupportAllOrientation == true {
+            return UIInterfaceOrientationMask.all
+        }
+        return UIInterfaceOrientationMask.portrait
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let config = Realm.Configuration(

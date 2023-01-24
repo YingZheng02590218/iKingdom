@@ -41,11 +41,11 @@ class MapTableViewCell: UITableViewCell {
     // 星を表示させる
     func setRating(rating: Double) {
         DispatchQueue.main.async {
-            let starRatingView = StarRatingView(frame: CGRect(origin: .zero, size: CGSize(width: self.starRatingStakView.bounds.width*0.9, height: self.starRatingStakView.bounds.height*0.9)),
-                                                rating: Float(rating),
-                                                color: UIColor.systemOrange,
-                                                starRounding: .floorToHalfStar)
-            self.starRatingStakView.addSubview(starRatingView)
+//            let starRatingView = StarRatingView(frame: CGRect(origin: .zero, size: CGSize(width: self.starRatingStakView.bounds.width*0.9, height: self.starRatingStakView.bounds.height*0.9)),
+//                                                rating: Float(rating),
+//                                                color: UIColor.systemOrange,
+//                                                starRounding: .floorToHalfStar)
+//            self.starRatingStakView.addSubview(starRatingView)
 //            starRatingView.centerXAnchor.constraint(equalTo: self.starRatingStakView.centerXAnchor).isActive = true
 //            starRatingView.centerYAnchor.constraint(equalTo: self.starRatingStakView.centerYAnchor).isActive = true
         }

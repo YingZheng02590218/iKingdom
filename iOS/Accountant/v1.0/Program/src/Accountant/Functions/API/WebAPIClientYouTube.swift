@@ -20,7 +20,7 @@ protocol RequestYouTube {
     var headers: HTTPHeaders? { get }
     var parameters: [String: Any]? { get }
     
-    func request<T: RequestYouTube>(_ req: req, completion: ((ResponseYouTube<req.Body>) -> Void)?)
+    func request<T: RequestYouTube>(_ req: T, completion: ((ResponseYouTube<T.Body>) -> Void)?)
     func decode(from data: Data) throws -> ResponseYouTube<Body>
 }
 
@@ -52,7 +52,7 @@ struct DecodableResponseYouTube<Body: Decodable>: Decodable {
 
 extension RequestYouTube where Body: Decodable {
     
-    func request<T: RequestYouTube>(_ req: req, completion: ((ResponseYouTube<req.Body>) -> Void)?) {
+    func request<T: RequestYouTube>(_ req: T, completion: ((ResponseYouTube<T.Body>) -> Void)?) {
         let req = AF.request(
             req.baseURL + req.path,
             method: req.method,

@@ -1,8 +1,9 @@
 //
 //  YouTubeViewController.swift
-//  YouTubeApp
+//  Accountant
 //
-//  Created by Hisashi Ishihara on 2023/01/18.
+//  Created by Hisashi Ishihara on 2023/01/24.
+//  Copyright © 2023 Hisashi Ishihara. All rights reserved.
 //
 
 import Alamofire
@@ -33,7 +34,8 @@ class YouTubeViewController: UIViewController {
 
     //    @IBOutlet weak var webView: WKWebView!
     @IBOutlet var webViewBase: UIView!
-    lazy var webView = WKWebView()
+
+     var webView = WKWebView()
 
     @IBOutlet var tableView: UITableView!
 
@@ -41,6 +43,11 @@ class YouTubeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
+
         // FIXME: 全画面の時のみ、横画面にすることを許可する
         // https://teratail.com/questions/9741?sort=1
         // 全画面表示になったことを検知
@@ -64,7 +71,7 @@ class YouTubeViewController: UIViewController {
         //        これを指定しないと、YouTube動画がインライン再生されず、
         //        再生ボタンをタップした瞬間に全画面再生になってしまいます。
         config.allowsInlineMediaPlayback = true
-        
+
         // 自動再生させる
         config.mediaTypesRequiringUserActionForPlayback = []
 
@@ -167,9 +174,9 @@ class YouTubeViewController: UIViewController {
 
         // ① Channels:list でチャンネルの情報を取得する
         //   アップロード済み動画 のリストが含まれているプレイリストの ID（playlistId）が取得できる
-        //        callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
+                callApiChannels(channelId: "UCOUu8YlbaPz0W2TyFTZHvjA") // FIXME: ザ・きんにくTV 【The Muscle TV】
 
-        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
+//        callApiChannels(channelId: "UCFAwrtqSFrAxIjeIXkjmEAg") // @paciolist   UCFAwrtqSFrAxIjeIXkjmEAg
         // ② PlaylistItems:list で playlistId に含まれている動画の一覧を取得する
         //   各動画の概要と videoId が取得できる
 
@@ -254,6 +261,7 @@ class YouTubeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // 回転禁止
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         appdelegate.shouldSupportAllOrientation = false
@@ -300,7 +308,7 @@ extension UIImage {
     }
 }
 // Respond when a user selects a place.
-extension ViewController: UITableViewDelegate {
+extension YouTubeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
@@ -326,7 +334,7 @@ extension ViewController: UITableViewDelegate {
 }
 
 // Populate the table with the list of most likely places.
-extension ViewController: UITableViewDataSource {
+extension YouTubeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
