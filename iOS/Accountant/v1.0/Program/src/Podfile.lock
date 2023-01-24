@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.6.1)
   - EAIntroView (2.13.0):
     - EARestrictedScrollView (~> 1.1.0)
   - EARestrictedScrollView (1.1.0)
@@ -142,6 +143,7 @@ PODS:
   - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
+  - Alamofire (= 5.6.1)
   - EAIntroView
   - Firebase/Core
   - Firebase/Crashlytics
@@ -155,6 +157,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - EAIntroView
     - EARestrictedScrollView
     - Firebase
@@ -179,6 +182,7 @@ SPEC REPOS:
     - SwiftyStoreKit
 
 SPEC CHECKSUMS:
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   EAIntroView: 9adedfc6b5c3fd3ebe19766da01dae573e6ce053
   EARestrictedScrollView: b0c2a3f92fb2610bb44d71c5e4893777c89e45ef
   Firebase: 580d09e8edafc3073ebf09c03fd42e4d80d35fe9
@@ -202,6 +206,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 18966bc4e4a3a31d72a25d97ca5357f7b6fd335c
+PODFILE CHECKSUM: 338dda9f23f4065451c9e7b1e7f068fe753b5459
 
 COCOAPODS: 1.11.2
