@@ -276,6 +276,7 @@ class CategoryListTableViewController: UITableViewController {
             return configuration
         }
     }
+    // FIXME: コールされない。trailingSwipeActionsConfigurationForRowAt が呼ばれる
     // セルの右側から出てくるdeleteボタンを押下した時
     override func tableView(
         _ tableView: UITableView,

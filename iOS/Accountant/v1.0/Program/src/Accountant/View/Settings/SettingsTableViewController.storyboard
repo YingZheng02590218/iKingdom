@@ -33,6 +33,14 @@
             </objects>
             <point key="canvasLocation" x="6504" y="2478"/>
         </scene>
+        <!--BackupViewController-->
+        <scene sceneID="4fK-Uu-leU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="BackupViewController" id="Hfe-UK-hiR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C8z-Ld-jof" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6425" y="2506"/>
+        </scene>
         <!--SettingsPeriodTableViewController-->
         <scene sceneID="OlB-zh-A7n">
             <objects>
@@ -153,6 +161,7 @@
                         <segue destination="hjp-Wc-Ax9" kind="showDetail" identifier="SettingsHelpViewController" id="Wvv-zF-muz"/>
                         <segue destination="dKv-K6-fHd" kind="showDetail" identifier="SettingsUpgradeTableViewController" id="ZQ2-p6-Sig"/>
                         <segue destination="fTk-JG-5fj" kind="showDetail" identifier="OpeningBalanceViewController" id="P4a-ge-WFi"/>
+                        <segue destination="Hfe-UK-hiR" kind="showDetail" identifier="BackupViewController" id="pnB-4f-KyO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EF2-Gb-Y35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

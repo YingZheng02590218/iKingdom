@@ -468,6 +468,10 @@
 		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
+		F9ED93682982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
+		F9ED93692982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
+		F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
+		F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -749,6 +753,8 @@
 		F9EC675027B95DDD0003FBB6 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EMTNeumorphicView.framework; path = Carthage/Build/iOS/EMTNeumorphicView.framework; sourceTree = "<group>"; };
 		F9ED936629826F2700B255EF /* Paciolist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paciolist.entitlements; sourceTree = "<group>"; };
+		F9ED93672982837100B255EF /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
+		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -896,6 +902,18 @@
 				F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */,
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
+				F9ED936D2982838700B255EF /* Backup */,
+				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9F4607524CF64BA008FE62B /* SettingsInformation */,
+				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
+				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
+				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
+				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
+				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
+				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
+				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
+				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
+				F96B62232595ED75000FC05F /* SettingsHelp */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1343,17 +1361,6 @@
 				F955B6122490FF9A005E2C6D /* TB */,
 				F9706847252AC631003307F8 /* PLAccount */,
 				F929C0252478365E0034FAAF /* Settings */,
-				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
-				F9F4607524CF64BA008FE62B /* SettingsInformation */,
-				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
-				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
-				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
-				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
-				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
-				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
-				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
-				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
-				F96B62232595ED75000FC05F /* SettingsHelp */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
 			path = View;
@@ -1482,6 +1489,15 @@
 			path = STG;
 			sourceTree = "<group>";
 		};
+		F9ED936D2982838700B255EF /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				F9ED93672982837100B255EF /* BackupViewController.swift */,
+				F9ED936A2982837E00B255EF /* BackupViewController.storyboard */,
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
 		F9F324522833A5A400DA813E /* WalkThrough */ = {
 			isa = PBXGroup;
 			children = (
@@ -1537,7 +1553,8 @@
 				F9860FBD285B39C8008D0714 /* SettingsPeriodYear */,
 				F9860FBE285B39DC008D0714 /* SettingsTheDayOfReckoning */,
 			);
-			path = SettingPeriod;
+			name = SettingPeriod;
+			path = ../SettingPeriod;
 			sourceTree = "<group>";
 		};
 		F9F934ED2485574300BF7AA7 /* Initial */ = {
@@ -1668,6 +1685,7 @@
 				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
@@ -1733,6 +1751,7 @@
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
@@ -1974,6 +1993,7 @@
 				F9B209F027A4377000F7EA8D /* BSViewController.swift in Sources */,
 				F9BDCBAF27A6CCC000BD8770 /* PLViewController.swift in Sources */,
 				F9860FB9285AB805008D0714 /* Network.swift in Sources */,
+				F9ED93682982837100B255EF /* BackupViewController.swift in Sources */,
 				F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */,
 				F963E2CB296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */,
@@ -2161,6 +2181,7 @@
 				F9EC669727B90BC60003FBB6 /* BSViewController.swift in Sources */,
 				F9EC669827B90BC60003FBB6 /* PLViewController.swift in Sources */,
 				F9860FBA285AB805008D0714 /* Network.swift in Sources */,
+				F9ED93692982837100B255EF /* BackupViewController.swift in Sources */,
 				F9EC669927B90BC60003FBB6 /* AccountDetailPickerTextField.swift in Sources */,
 				F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F9EC669A27B90BC60003FBB6 /* DataBaseSettingsTaxonomy.swift in Sources */,
