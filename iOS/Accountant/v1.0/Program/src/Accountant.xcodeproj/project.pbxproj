@@ -474,6 +474,8 @@
 		F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
 		F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
 		F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
+		F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
+		F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -758,6 +760,7 @@
 		F9ED93672982837100B255EF /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
 		F9ED936F298396C900B255EF /* ContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManager.swift; sourceTree = "<group>"; };
+		F9ED93762983ABFE00B255EF /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -1532,6 +1535,7 @@
 				F9AC551E292CA1D1003966E4 /* PLData.swift */,
 				F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */,
 				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
+				F9ED93762983ABFE00B255EF /* BackupManager.swift */,
 			);
 			path = DataBaseRealm;
 			sourceTree = "<group>";
@@ -2067,6 +2071,7 @@
 				F9F4605424BDD616008FE62B /* Migration.swift in Sources */,
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
+				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
@@ -2256,6 +2261,7 @@
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
+				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,

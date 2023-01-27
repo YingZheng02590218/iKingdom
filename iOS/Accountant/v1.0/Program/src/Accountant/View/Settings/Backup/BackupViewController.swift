@@ -100,8 +100,8 @@ class BackupViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             sender.isSelected = !sender.isSelected
         }
-
-        self.containerManager.save("あああ")
+        // iCloud Documents にバックアップを作成する
+        BackupManager.shared.backup()
     }
 
 }

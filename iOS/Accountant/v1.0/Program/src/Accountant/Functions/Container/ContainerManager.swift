@@ -59,7 +59,7 @@ class ContainerManager {
         }
     }
 }
-
+// UIDocumentを継承しないと書けないっぽい
 class Document: UIDocument {
     var text: String? = ""
 

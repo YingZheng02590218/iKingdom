@@ -43,6 +43,27 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use FaceID as authentification to unlock.</string>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.com.ikingdom778.Accountant</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>$(DISPLAY_NAME)</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+		<key>iCloud.com.ikingdom778.AccountantSTG</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>$(DISPLAY_NAME)</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>SKAdNetworkItems</key>
@@ -80,26 +101,5 @@
 	<array>
 		<dict/>
 	</array>
-	<key>NSUbiquitousContainers</key>
-	<dict>
-		<key>iCloud.com.ikingdom778.Accountant</key>
-		<dict>
-			<key>NSUbiquitousContainerSupportedFolderLevels</key>
-			<string>Any</string>
-			<key>NSUbiquitousContainerName</key>
-			<string>$(DISPLAY_NAME)</string>
-			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
-			<true/>
-		</dict>
-		<key>iCloud.com.ikingdom778.AccountantSTG</key>
-		<dict>
-			<key>NSUbiquitousContainerSupportedFolderLevels</key>
-			<string>Any</string>
-			<key>NSUbiquitousContainerName</key>
-			<string>$(DISPLAY_NAME)</string>
-			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
-			<true/>
-		</dict>
-	</dict>
 </dict>
 </plist>
