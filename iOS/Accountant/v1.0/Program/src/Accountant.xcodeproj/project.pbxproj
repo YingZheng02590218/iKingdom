@@ -472,6 +472,8 @@
 		F9ED93692982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
 		F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
 		F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
+		F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
+		F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -755,6 +757,7 @@
 		F9ED936629826F2700B255EF /* Paciolist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paciolist.entitlements; sourceTree = "<group>"; };
 		F9ED93672982837100B255EF /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
+		F9ED936F298396C900B255EF /* ContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManager.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -1186,6 +1189,7 @@
 		F9860FBF285B3DC0008D0714 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
+				F9ED936E298396AD00B255EF /* Container */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F901E8752848BA7A00290DFD /* Biometrics */,
@@ -1496,6 +1500,14 @@
 				F9ED936A2982837E00B255EF /* BackupViewController.storyboard */,
 			);
 			path = Backup;
+			sourceTree = "<group>";
+		};
+		F9ED936E298396AD00B255EF /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				F9ED936F298396C900B255EF /* ContainerManager.swift */,
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 		F9F324522833A5A400DA813E /* WalkThrough */ = {
@@ -2035,6 +2047,7 @@
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
 				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
+				F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
@@ -2223,6 +2236,7 @@
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
 				F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
+				F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,

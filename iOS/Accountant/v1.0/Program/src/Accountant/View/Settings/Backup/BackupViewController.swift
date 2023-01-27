@@ -14,6 +14,8 @@ class BackupViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var label: UILabel!
+    // コンテナ　ファイル
+    private let containerManager = ContainerManager()
 
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
@@ -91,13 +93,15 @@ class BackupViewController: UIViewController {
 
         tableView.setEditing(editing, animated: animated)
     }
-
+    // バックアップ作成ボタン
     @IBAction func buttonTapped(_ sender: EMTNeumorphicButton) {
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             sender.isSelected = !sender.isSelected
         }
+
+        self.containerManager.save("あああ")
     }
 
 }
@@ -122,7 +126,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
-        // TODO: バックアップデータ一覧
+        // TODO: バックアップデータ一覧　時刻　バージョン　ファイルサイズMB
         cell.centerLabel.text = "バックアップデータ \(1)"
         cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
         cell.shouldIndentWhileEditing = true
