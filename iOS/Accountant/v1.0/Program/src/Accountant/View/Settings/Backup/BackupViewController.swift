@@ -16,6 +16,7 @@ class BackupViewController: UIViewController {
     @IBOutlet var label: UILabel!
     // コンテナ　ファイル
     private let containerManager = ContainerManager()
+    var displayName: [String] = []
 
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
@@ -43,8 +44,10 @@ class BackupViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
-    }
 
+        reload()
+    }
+    
     // MARK: - Setting
 
     private func setTableView() {
@@ -101,9 +104,21 @@ class BackupViewController: UIViewController {
             sender.isSelected = !sender.isSelected
         }
         // iCloud Documents にバックアップを作成する
-        BackupManager.shared.backup()
+        BackupManager.shared.backup {
+
+            self.reload()
+        }
     }
 
+    func reload() {
+        BackupManager.shared.load {
+            print($0)
+            self.displayName = $0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
 
 extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
@@ -120,14 +135,14 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        displayName.count
     }
     // セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
         // TODO: バックアップデータ一覧　時刻　バージョン　ファイルサイズMB
-        cell.centerLabel.text = "バックアップデータ \(1)"
+        cell.centerLabel.text = "\(displayName[indexPath.row])"
         cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
         cell.shouldIndentWhileEditing = true
         cell.accessoryView = nil
