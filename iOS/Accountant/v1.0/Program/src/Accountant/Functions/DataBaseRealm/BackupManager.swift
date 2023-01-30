@@ -34,6 +34,12 @@ class BackupManager {
             .appendingPathComponent("Documents")
             .appendingPathComponent(folderName)
     }
+    /// iCloud Driveのパス
+    private var documentsFolderUrl: URL {
+        // iCloud Driveのパスは、ローカルと同じように、FileManagerでとれます。
+        return FileManager.default.url(forUbiquityContainerIdentifier: nil)!
+            .appendingPathComponent("Documents")
+    }
     /// バックアップファイル名（前部）
     private let mBackupFileNamePre = "default.realm_bk_"
 
@@ -74,6 +80,20 @@ class BackupManager {
             throw error
         }
     }
+    /// バックアップフォルダ削除
+    func deleteBackupFolder(folderName: String? = nil) {
+        let (exists, files) = isBackupFileExists(folderName: folderName)
+        if exists {
+            do {
+                if let folderName = folderName {
+                    try FileManager.default.removeItem(at: documentsFolderUrl.appendingPathComponent(folderName))
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
     /// バックアップファイル削除
     func deleteBackup() {
         let (exists, files) = isBackupFileExists()
@@ -89,13 +109,19 @@ class BackupManager {
     }
     /// バックアップフォルダにバックアップファイルがあるか、ある場合、そのファイル名を取得
     /// - Returns: バックアップファイルの有無、そのファイル名
-    private func isBackupFileExists() -> (Bool, [String]) {
+    private func isBackupFileExists(folderName: String? = nil) -> (Bool, [String]) {
         var exists = false
         var files: [String] = []
         var allFiles: [String] = []
         // バックアップフォルダのファイル取得
         do {
-            allFiles = try FileManager.default.contentsOfDirectory(atPath: backupFolderUrl.path)
+            if let folderName = folderName {
+                // バックアップファイルの格納場所
+                let folderUrl = documentsFolderUrl.appendingPathComponent(folderName)
+                allFiles = try FileManager.default.contentsOfDirectory(atPath: folderUrl.path)
+            } else {
+                allFiles = try FileManager.default.contentsOfDirectory(atPath: backupFolderUrl.path)
+            }
         } catch {
             return (exists, files)
         }
@@ -123,7 +149,7 @@ class BackupManager {
 
                 var displayName: [String] = []
                 for result in query.results {
-                    print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
+//                    print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
                     // Optional(["kMDItemDisplayName": default, "kMDItemFSSize": 454832, "kMDItemContentType": dyn.ah62d46dzqm0gw23srf4gn5m4ge81e3pbrv0z82xpp63daqvxfy2dcpmwg60xarvrga5w4rm3, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270607/default.realm_bk_2023-01-27-06-07-59])
                     // Optional(["kMDItemDisplayName": 202301270608, "kMDItemContentType": public.folder, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270608])
 

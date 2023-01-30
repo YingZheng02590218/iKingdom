@@ -36,6 +36,9 @@ class BackupViewController: UIViewController {
         // ディレクトリ監視
         removeFilePresenterIfNeeded()
     }
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +64,7 @@ class BackupViewController: UIViewController {
         super.viewDidLayoutSubviews()
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
-
+        // tableViewをリロード
         reload()
     }
     
@@ -120,26 +123,77 @@ class BackupViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             sender.isSelected = !sender.isSelected
         }
+        // インジゲーターを開始
+        self.showActivityIndicatorView()
         // iCloud Documents にバックアップを作成する
         BackupManager.shared.backup {
 
-            let alert = UIAlertController(title: "バックアップをしました。", message: nil, preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: { [self] () -> Void in
-//                        self.reload()
-                    })
-                }
-            }
         }
     }
-
+    // tableViewをリロード
     func reload() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             BackupManager.shared.load {
                 print($0)
                 self.displayName = $0
                 self.tableView.reloadData()
+            }
+        }
+    }
+
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        // タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
+        // 背景になるView
+        backView.backgroundColor = .mainColor
+        // 表示位置を設定（画面中央）
+        activityIndicatorView.center = CGPoint(x: view.center.x, y: view.center.y)
+        // インジケーターのスタイルを指定（白色＆大きいサイズ）
+        activityIndicatorView.style = UIActivityIndicatorView.Style.large
+        // インジケーターを View に追加
+        backView.addSubview(activityIndicatorView)
+        // インジケーターを表示＆アニメーション開始
+        activityIndicatorView.startAnimating()
+
+        // tabBarControllerのViewを使う
+        guard let tabBarView = self.tabBarController?.view else {
+            return
+        }
+        // 背景をNavigationControllerのViewに貼り付け
+        tabBarView.addSubview(backView)
+
+        // サイズ合わせはAutoLayoutで
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+        backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+        backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+        backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        DispatchQueue.global(qos: .default).async {
+            // 非同期処理などが終了したらメインスレッドでアニメーション終了
+            DispatchQueue.main.async {
+                // 非同期処理などを実行（今回は2秒間待つだけ）
+                Thread.sleep(forTimeInterval: 1.0)
+                // アニメーション終了
+                self.activityIndicatorView.stopAnimating()
+                // タブの有効化
+                if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                    for tabBarItem in arrayOfTabBarItems {
+                        if let tabBarItem = tabBarItem as? UITabBarItem {
+                            tabBarItem.isEnabled = true
+                        }
+                    }
+                }
+                self.backView.removeFromSuperview()
             }
         }
     }
@@ -206,8 +260,10 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 style: .destructive,
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
-                    // TODO: バックアップファイルを削除
-//                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                    // インジゲーターを開始
+                    self.showActivityIndicatorView()
+                    // バックアップファイルを削除
+                    BackupManager.shared.deleteBackupFolder(folderName: self.displayName[indexPath.row])
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                     //                                AnalyticsParameterContentType: Constant.JOURNALS,
@@ -279,6 +335,10 @@ extension BackupViewController: NSFilePresenter {
     // 提示された項目の内容または属性が変更されたことを伝える。
     func presentedItemDidChange() {
         print("Change item.")
+
+        reload()
+        // インジケーターを終了
+        self.finishActivityIndicatorView()
     }
 
     // ファイルまたはファイルパッケージの新しいバージョンが追加されたことをデリゲートに通知する
@@ -324,8 +384,6 @@ extension BackupViewController: NSFilePresenter {
         } else {
             print("Remove subitem (\(url.path)).")
         }
-
-        reload()
     }
 
     // ファイル/ディレクトリが移動した時の通知
