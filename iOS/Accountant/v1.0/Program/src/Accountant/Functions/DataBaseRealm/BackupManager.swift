@@ -19,6 +19,8 @@ class BackupManager {
 
         folderNameDateformater.dateFormat = "yyyyMMddHHmm"
         folderNameDateformater.locale = Locale(identifier: "en_US_POSIX")
+
+        metadataQuery = NSMetadataQuery()
     }
 
     let fileNameDateformater = DateFormatter()
@@ -106,29 +108,33 @@ class BackupManager {
     }
 
     // MARK: バックアップファイル取得
-    private var metadata: NSMetadataQuery! // 参照を保持するため、メンバとして持っておく。load()内のローカル変数にするとうまく動かない。
+    private var metadataQuery: NSMetadataQuery // 参照を保持するため、メンバとして持っておく。load()内のローカル変数にするとうまく動かない。
 
     func load(completion: @escaping ([String]) -> Void) {
-        metadata = NSMetadataQuery()
-        metadata.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
-        metadata.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+        metadataQuery = NSMetadataQuery()
+        metadataQuery.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
+        metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+        metadataQuery.sortDescriptors = [
+            NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false), // 効いていない
+        ]
 
-        NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadata, queue: nil) { notification in
-            let query = notification.object as! NSMetadataQuery
+        NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadataQuery, queue: nil) { notification in
+            if let query = notification.object as? NSMetadataQuery {
 
-            var displayName: [String] = []
-            for result in query.results {
-                print((result as AnyObject).values(forAttributes: [NSMetadataItemDisplayNameKey, NSMetadataItemFSSizeKey, NSMetadataItemPathKey, NSMetadataItemContentTypeKey]))
-// Optional(["kMDItemDisplayName": default, "kMDItemFSSize": 454832, "kMDItemContentType": dyn.ah62d46dzqm0gw23srf4gn5m4ge81e3pbrv0z82xpp63daqvxfy2dcpmwg60xarvrga5w4rm3, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270607/default.realm_bk_2023-01-27-06-07-59])
-// Optional(["kMDItemDisplayName": 202301270608, "kMDItemContentType": public.folder, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270608])
+                var displayName: [String] = []
+                for result in query.results {
+                    print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
+                    // Optional(["kMDItemDisplayName": default, "kMDItemFSSize": 454832, "kMDItemContentType": dyn.ah62d46dzqm0gw23srf4gn5m4ge81e3pbrv0z82xpp63daqvxfy2dcpmwg60xarvrga5w4rm3, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270607/default.realm_bk_2023-01-27-06-07-59])
+                    // Optional(["kMDItemDisplayName": 202301270608, "kMDItemContentType": public.folder, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270608])
 
-                let name = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
-                displayName.append(name)
+                    let name = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
+                    displayName.append(name)
+                }
+                // 並べ替え
+                completion(displayName.sorted { $0 < $1 })
             }
-            completion(displayName)
         }
 
-        metadata.start()
+        metadataQuery.start()
     }
-
 }

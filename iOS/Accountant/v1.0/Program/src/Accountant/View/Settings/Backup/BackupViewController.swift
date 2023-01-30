@@ -15,16 +15,33 @@ class BackupViewController: UIViewController {
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var label: UILabel!
     // コンテナ　ファイル
-    private let containerManager = ContainerManager()
+    //    private let containerManager = ContainerManager()
     var displayName: [String] = []
 
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
         (FileManager.default.ubiquityIdentityToken != nil)
     }
+    // ディレクトリ監視
+    var isPresenting = false
+    // ディレクトリ監視
+    var presentedItemURL: URL? {
+        return FileManager.default.url(forUbiquityContainerIdentifier: nil)?
+            .appendingPathComponent("Documents", isDirectory: true)
+    }
+    // ディレクトリ監視
+    let presentedItemOperationQueue = OperationQueue()
+
+    deinit {
+        // ディレクトリ監視
+        removeFilePresenterIfNeeded()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // ディレクトリ監視
+        addFilePresenterIfNeeded()
+
         // 削除機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
         editButtonItem.tintColor = .accentColor
         navigationItem.rightBarButtonItem = editButtonItem
@@ -106,15 +123,22 @@ class BackupViewController: UIViewController {
         // iCloud Documents にバックアップを作成する
         BackupManager.shared.backup {
 
-            self.reload()
+            let alert = UIAlertController(title: "バックアップをしました。", message: nil, preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: { [self] () -> Void in
+//                        self.reload()
+                    })
+                }
+            }
         }
     }
 
     func reload() {
-        BackupManager.shared.load {
-            print($0)
-            self.displayName = $0
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            BackupManager.shared.load {
+                print($0)
+                self.displayName = $0
                 self.tableView.reloadData()
             }
         }
@@ -128,10 +152,18 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セクションヘッダーのテキスト決める
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "バックアップ時刻"
+        if displayName.isEmpty {
+            return nil
+        } else {
+            return "バックアップ時刻"
+        }
     }
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        "復元する場合は、上記からバックアップファイルを選択してください。"
+        if displayName.isEmpty {
+            return nil
+        } else {
+            return "復元する場合は、上記からバックアップファイルを選択してください。"
+        }
     }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -175,7 +207,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
                     // TODO: バックアップファイルを削除
-                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+//                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                     //                                AnalyticsParameterContentType: Constant.JOURNALS,
@@ -204,7 +236,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
                     // TODO: データベースを復元
-                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+//                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                     //                                AnalyticsParameterContentType: Constant.JOURNALS,
@@ -219,4 +251,111 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
         present(alert, animated: true, completion: nil)
     }
 
+}
+
+// 流れ
+// ファイル/ディレクトリを管理するオブジェクトにNSFilePresenterプロトコルを指定する。
+// NSFileCoordinatorのaddFilePresenter:クラスを呼び出してオブジェクトを登録する。
+// NSFilePresenterのメソッド内にそれぞれの処理を書く
+// 管理が必要なくなるタイミングでNSFileCoordinatorのremoveFilePresenterを呼び出してファイルプレゼンタの登録を解除する。
+extension BackupViewController: NSFilePresenter {
+
+    // ファイルプレゼンタをシステムに登録
+    func addFilePresenterIfNeeded() {
+        if !isPresenting {
+            isPresenting = true
+            NSFileCoordinator.addFilePresenter(self)
+        }
+    }
+
+    // ファイルプレゼンタをシステムの登録から解除
+    func removeFilePresenterIfNeeded() {
+        if isPresenting {
+            isPresenting = false
+            NSFileCoordinator.removeFilePresenter(self)
+        }
+    }
+
+    // 提示された項目の内容または属性が変更されたことを伝える。
+    func presentedItemDidChange() {
+        print("Change item.")
+    }
+
+    // ファイルまたはファイルパッケージの新しいバージョンが追加されたことをデリゲートに通知する
+    func presentedItemDidGainVersion(version: NSFileVersion) {
+        print("Update file at \(version.modificationDate!).")
+    }
+
+    // ファイルまたはファイルパッケージのバージョンが消えたことをデリゲートに通知する
+    func presentedItemDidLoseVersion(version: NSFileVersion) {
+        print("Lose file version at \(version.modificationDate!).")
+    }
+
+    // ディレクトリ内のアイテムが新しいバージョンになった（更新された）時の通知
+    func presentedSubitem(at url: URL, didGain version: NSFileVersion) {
+
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Update directory (\(url.path)) at \(version.modificationDate!).")
+            } else {
+                print("Update file (\(url.path)) at \(version.modificationDate!).")
+            }
+        }
+    }
+
+    // ディレクトリ内のアイテムが削除された時の通知
+    func presentedSubitem(at url: URL, didLose version: NSFileVersion) {
+        print("looooooooooooose")
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Lose directory version (\(url.path)) at \(version.modificationDate!).")
+            } else {
+                print("Lose file version (\(url.path)) at \(version.modificationDate!).")
+            }
+        }
+    }
+
+    // ファイル/ディレクトリの内容変更の通知
+    func presentedSubitemDidChange(at url: URL) {
+        if FileManager.default.fileExists(atPath: url.path) {
+            print("Add subitem (\(url.path)).")
+        } else {
+            print("Remove subitem (\(url.path)).")
+        }
+
+        reload()
+    }
+
+    // ファイル/ディレクトリが移動した時の通知
+    func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: newURL.path!, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Move directory from (\(oldURL.path!)) to (\(newURL.path!).")
+            } else {
+                print("Move file from (\(oldURL.path!)) to (\(newURL.path!)).")
+            }
+        }
+    }
+
+    // MARK: 何したら呼ばれるのか
+
+    // 何したら呼ばれるのか
+    func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError?) -> Void) {
+        print("accommodatePresentedItemDeletionWithCompletionHandler")
+    }
+
+    // 何したら呼ばれるのか
+    private func accommodatePresentedSubitemDeletionAtURL(url: URL, completionHandler: @escaping (NSError?) -> Void) {
+        print("accommodatePresentedSubitemDeletionAtURL")
+        print("url: \(url.path)")
+    }
+
+    // 何したら呼ばれるのか
+    func presentedSubitemDidAppear(at url: URL) {
+        print("presentedSubitemDidAppearAtURL")
+        print("url: \(url.path)")
+    }
 }
