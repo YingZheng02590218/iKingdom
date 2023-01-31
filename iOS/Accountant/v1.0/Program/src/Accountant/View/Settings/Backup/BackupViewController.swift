@@ -137,6 +137,13 @@ class BackupViewController: UIViewController {
                 print($0)
                 self.displayName = $0
                 self.tableView.reloadData()
+                // 編集ボタン
+                if self.displayName.isEmpty {
+                    self.setEditing(false, animated: true)
+                    self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = false
+                } else {
+                    self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
             }
         }
     }
@@ -252,7 +259,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "削除", message: "バックアップファイルを削除しますか？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "削除", message: "\(displayName[indexPath.row])\nバックアップファイルを削除しますか？", preferredStyle: .alert)
 
         alert.addAction(
             UIAlertAction(
@@ -263,7 +270,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     // インジゲーターを開始
                     self.showActivityIndicatorView()
                     // バックアップファイルを削除
-                    BackupManager.shared.deleteBackupFolder(folderName: self.displayName[indexPath.row])
+                    BackupManager.shared.deleteBackupFolder(
+                        folderName: self.displayName[indexPath.row]
+                    )
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                     //                                AnalyticsParameterContentType: Constant.JOURNALS,
@@ -275,8 +284,14 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
         )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 復元機能 アラートのポップアップを表示
         self.showPopoverRestore(indexPath: indexPath)
@@ -335,7 +350,7 @@ extension BackupViewController: NSFilePresenter {
     // 提示された項目の内容または属性が変更されたことを伝える。
     func presentedItemDidChange() {
         print("Change item.")
-
+        // tableViewをリロード
         reload()
         // インジケーターを終了
         self.finishActivityIndicatorView()
