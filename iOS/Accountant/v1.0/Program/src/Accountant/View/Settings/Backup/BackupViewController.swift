@@ -10,14 +10,14 @@ import EMTNeumorphicView
 import UIKit
 
 class BackupViewController: UIViewController {
-
+    
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var label: UILabel!
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
     var backupFiles: [(String, NSNumber?)] = []
-
+    
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
         (FileManager.default.ubiquityIdentityToken != nil)
@@ -26,12 +26,12 @@ class BackupViewController: UIViewController {
     var isPresenting = false
     // ディレクトリ監視
     var presentedItemURL: URL? {
-        return FileManager.default.url(forUbiquityContainerIdentifier: nil)?
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)?
             .appendingPathComponent("Documents", isDirectory: true)
     }
     // ディレクトリ監視
     let presentedItemOperationQueue = OperationQueue()
-
+    
     deinit {
         // ディレクトリ監視
         removeFilePresenterIfNeeded()
@@ -39,27 +39,27 @@ class BackupViewController: UIViewController {
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // ディレクトリ監視
         addFilePresenterIfNeeded()
-
+        
         // 削除機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
         editButtonItem.tintColor = .accentColor
         navigationItem.rightBarButtonItem = editButtonItem
-
+        
         // title設定
         navigationItem.title = "バックアップ・復元"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
-
+        
         // UI
         setTableView()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // ニューモフィズム　ボタンとビューのデザインを指定する
@@ -69,7 +69,7 @@ class BackupViewController: UIViewController {
     }
     
     // MARK: - Setting
-
+    
     private func setTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -80,7 +80,7 @@ class BackupViewController: UIViewController {
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
     }
-
+    
     // MARK: EMTNeumorphicView
     // ニューモフィズム　ボタンとビューのデザインを指定する
     private func createEMTNeumorphicView() {
@@ -113,7 +113,7 @@ class BackupViewController: UIViewController {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
+        
         tableView.setEditing(editing, animated: animated)
     }
     // バックアップ作成ボタン
@@ -127,7 +127,7 @@ class BackupViewController: UIViewController {
         self.showActivityIndicatorView()
         // iCloud Documents にバックアップを作成する
         BackupManager.shared.backup {
-
+            
         }
     }
     // tableViewをリロード
@@ -147,7 +147,7 @@ class BackupViewController: UIViewController {
             }
         }
     }
-
+    
     // インジゲーターを開始
     func showActivityIndicatorView() {
         DispatchQueue.main.async {
@@ -169,14 +169,14 @@ class BackupViewController: UIViewController {
             self.backView.addSubview(self.activityIndicatorView)
             // インジケーターを表示＆アニメーション開始
             self.activityIndicatorView.startAnimating()
-
+            
             // tabBarControllerのViewを使う
             guard let tabBarView = self.tabBarController?.view else {
                 return
             }
             // 背景をNavigationControllerのViewに貼り付け
             tabBarView.addSubview(self.backView)
-
+            
             // サイズ合わせはAutoLayoutで
             self.backView.translatesAutoresizingMaskIntoConstraints = false
             self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
@@ -232,7 +232,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
         // バックアップファイル一覧　時刻　バージョン　ファイルサイズMB
         cell.centerLabel.text = "\(backupFiles[indexPath.row].0)"
@@ -241,18 +241,18 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             byteCountFormatter.allowedUnits = [.useKB] // 使用する単位を選択
             byteCountFormatter.isAdaptive = true // 端数桁を表示する(123 MB -> 123.4 MB)(KBは0桁, MBは1桁, GB以上は2桁)
             byteCountFormatter.zeroPadsFractionDigits = true // trueだと100 MBを100.0 MBとして表示する(isAdaptiveをtrueにする必要がある)
-
+            
             let byte = Measurement<UnitInformationStorage>(value: Double(truncating: size), unit: .bytes)
-
+            
             byteCountFormatter.countStyle = .decimal // 1 KB = 1000 bytes
             print(byteCountFormatter.string(from: byte)) // 1,024 KB
-
+            
             cell.subLabel.text = "\(byteCountFormatter.string(from: byte))"
         }
         cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
         cell.shouldIndentWhileEditing = true
         cell.accessoryView = nil
-
+        
         return cell
     }
     // 編集機能
@@ -273,7 +273,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
         let alert = UIAlertController(title: "削除", message: "\(backupFiles[indexPath.row].0)\nバックアップファイルを削除しますか？", preferredStyle: .alert)
-
+        
         alert.addAction(
             UIAlertAction(
                 title: "OK",
@@ -296,7 +296,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             )
         )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+        
         present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 // self.dismiss にすると、ViewControllerを閉じてしまうので注意
@@ -304,7 +304,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 復元機能 アラートのポップアップを表示
         self.showPopoverRestore(indexPath: indexPath)
@@ -322,7 +322,38 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     """,
             preferredStyle: .alert
         )
-
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    // 最終確認
+                    self.showPopoverRestoreAgain(indexPath: indexPath)
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    // 復元機能 アラートのポップアップを表示
+    private func showPopoverRestoreAgain(indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: "最終確認",
+            message: """
+                    バックアップファイルからデータベースを復元しますか？
+                    現在のデータベースは上書きされます。
+                    """,
+            preferredStyle: .alert
+        )
+        
         alert.addAction(
             UIAlertAction(
                 title: "OK",
@@ -341,8 +372,13 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             )
         )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(alert, animated: true, completion: nil)
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     // 復元処理
     func restore(indexPath: IndexPath) {
@@ -372,7 +408,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
 // NSFilePresenterのメソッド内にそれぞれの処理を書く
 // 管理が必要なくなるタイミングでNSFileCoordinatorのremoveFilePresenterを呼び出してファイルプレゼンタの登録を解除する。
 extension BackupViewController: NSFilePresenter {
-
+    
     // ファイルプレゼンタをシステムに登録
     func addFilePresenterIfNeeded() {
         if !isPresenting {
@@ -380,7 +416,7 @@ extension BackupViewController: NSFilePresenter {
             NSFileCoordinator.addFilePresenter(self)
         }
     }
-
+    
     // ファイルプレゼンタをシステムの登録から解除
     func removeFilePresenterIfNeeded() {
         if isPresenting {
@@ -388,7 +424,7 @@ extension BackupViewController: NSFilePresenter {
             NSFileCoordinator.removeFilePresenter(self)
         }
     }
-
+    
     // 提示された項目の内容または属性が変更されたことを伝える。
     func presentedItemDidChange() {
         print("Change item.")
@@ -397,20 +433,20 @@ extension BackupViewController: NSFilePresenter {
         // インジケーターを終了
         self.finishActivityIndicatorView()
     }
-
+    
     // ファイルまたはファイルパッケージの新しいバージョンが追加されたことをデリゲートに通知する
     func presentedItemDidGainVersion(version: NSFileVersion) {
         print("Update file at \(version.modificationDate).")
     }
-
+    
     // ファイルまたはファイルパッケージのバージョンが消えたことをデリゲートに通知する
     func presentedItemDidLoseVersion(version: NSFileVersion) {
         print("Lose file version at \(version.modificationDate).")
     }
-
+    
     // ディレクトリ内のアイテムが新しいバージョンになった（更新された）時の通知
     func presentedSubitem(at url: URL, didGain version: NSFileVersion) {
-
+        
         var isDir = ObjCBool(false)
         if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
             if Bool(isDir.boolValue) {
@@ -420,7 +456,7 @@ extension BackupViewController: NSFilePresenter {
             }
         }
     }
-
+    
     // ディレクトリ内のアイテムが削除された時の通知
     func presentedSubitem(at url: URL, didLose version: NSFileVersion) {
         print("looooooooooooose")
@@ -433,7 +469,7 @@ extension BackupViewController: NSFilePresenter {
             }
         }
     }
-
+    
     // ファイル/ディレクトリの内容変更の通知
     func presentedSubitemDidChange(at url: URL) {
         if FileManager.default.fileExists(atPath: url.path) {
@@ -442,7 +478,7 @@ extension BackupViewController: NSFilePresenter {
             print("Remove subitem (\(url.path)).")
         }
     }
-
+    
     // ファイル/ディレクトリが移動した時の通知
     func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
         var isDir = ObjCBool(false)
@@ -454,20 +490,20 @@ extension BackupViewController: NSFilePresenter {
             }
         }
     }
-
+    
     // MARK: 何したら呼ばれるのか
-
+    
     // 何したら呼ばれるのか
     func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError?) -> Void) {
         print("accommodatePresentedItemDeletionWithCompletionHandler")
     }
-
+    
     // 何したら呼ばれるのか
     private func accommodatePresentedSubitemDeletionAtURL(url: URL, completionHandler: @escaping (NSError?) -> Void) {
         print("accommodatePresentedSubitemDeletionAtURL")
         print("url: \(url.path)")
     }
-
+    
     // 何したら呼ばれるのか
     func presentedSubitemDidAppear(at url: URL) {
         print("presentedSubitemDidAppearAtURL")

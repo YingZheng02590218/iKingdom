@@ -31,14 +31,14 @@ class BackupManager {
         let folderName = folderNameDateformater.string(from: Date()) // 日付
         // iCloud Driveのパスは、ローカルと同じように、FileManagerでとれます。
         return FileManager.default.url(forUbiquityContainerIdentifier: nil)!
-            .appendingPathComponent("Documents")
-            .appendingPathComponent(folderName)
+            .appendingPathComponent("Documents", isDirectory: true)
+            .appendingPathComponent(folderName, isDirectory: true)
     }
     /// iCloud Driveのパス
     private var documentsFolderUrl: URL {
         // iCloud Driveのパスは、ローカルと同じように、FileManagerでとれます。
         return FileManager.default.url(forUbiquityContainerIdentifier: nil)!
-            .appendingPathComponent("Documents")
+            .appendingPathComponent("Documents", isDirectory: true)
     }
     /// バックアップファイル名（前部）
     private let mBackupFileNamePre = "default.realm_bk_"
@@ -155,25 +155,31 @@ class BackupManager {
         // metadataQuery.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
         metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         metadataQuery.sortDescriptors = [
-            NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false), // 効いていない
+            NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false) // 効いていない
         ]
 
         NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadataQuery, queue: nil) { notification in
             if let query = notification.object as? NSMetadataQuery {
 
                 var backupFiles: [(String, NSNumber?)] = []
+                // Documents内のフォルダとファイルにアクセス
                 for result in query.results {
                     // print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemFSNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
+                    // フォルダの場合
                     let contentType = (result as AnyObject).value(forAttribute: NSMetadataItemContentTypeKey) as! String
-                    if "public.folder" == contentType {
+                    if contentType == "public.folder" {
+                        // フォルダ名
                         let dysplayName = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
-
+                        // フォルダ内のファイルのファイル名
                         let fileName = self.getBackup(folderName: dysplayName)
+                        // Documents内のフォルダとファイルにアクセス
                         for result in query.results {
+                            // 同名のファイルからサイズを取得
                             let name = (result as AnyObject).value(forAttribute: NSMetadataItemFSNameKey) as! String
-                            print(fileName, name)
+                            // print(fileName, name)
                             if fileName == name {
                                 let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
+                                // フォルダ名、ファイルサイズ
                                 backupFiles.append((dysplayName, size))
                             }
                         }
@@ -201,13 +207,14 @@ class BackupManager {
                 // 既存Realmファイル削除
                 let realmURLs = [
                     realmURL,
-                    realmURL.appendingPathExtension("lock"),
-                    realmURL.appendingPathExtension("note"),
+                    realmURL.appendingPathExtension("lock"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
+                    realmURL.appendingPathExtension("note"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
                     realmURL.appendingPathExtension("management")
                 ]
                 for URL in realmURLs {
-                    do { // URL    Foundation.URL    "file:///var/mobile/Containers/Data/Application/C7E1E626-E114-4402-83EC-834AE43292F9/Documents/default.realm"
+                    do {
                         try FileManager.default.removeItem(at: URL)
+                        // URL"file:///var/mobile/Containers/Data/Application/C7E1E626-E114-4402-83EC-834AE43292F9/Documents/default.realm"
                     } catch {
                         print(error.localizedDescription)
                     }
