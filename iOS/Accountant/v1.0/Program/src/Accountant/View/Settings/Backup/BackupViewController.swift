@@ -16,7 +16,7 @@ class BackupViewController: UIViewController {
     @IBOutlet var label: UILabel!
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
-    var displayName: [String] = []
+    var backupFiles: [(String, NSNumber?)] = []
 
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
@@ -135,10 +135,10 @@ class BackupViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             BackupManager.shared.load {
                 print($0)
-                self.displayName = $0
+                self.backupFiles = $0
                 self.tableView.reloadData()
                 // 編集ボタン
-                if self.displayName.isEmpty {
+                if self.backupFiles.isEmpty {
                     self.setEditing(false, animated: true)
                     self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = false
                 } else {
@@ -187,23 +187,23 @@ class BackupViewController: UIViewController {
     }
     // インジケーターを終了
     func finishActivityIndicatorView() {
-            // 非同期処理などが終了したらメインスレッドでアニメーション終了
-            DispatchQueue.main.async {
-                // 非同期処理などを実行（今回は2秒間待つだけ）
-                Thread.sleep(forTimeInterval: 1.0)
-                // アニメーション終了
-                self.activityIndicatorView.stopAnimating()
-                // タブの有効化
-                if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
-                    for tabBarItem in arrayOfTabBarItems {
-                        if let tabBarItem = tabBarItem as? UITabBarItem {
-                            tabBarItem.isEnabled = true
-                        }
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
                     }
                 }
-                self.backView.removeFromSuperview()
             }
+            self.backView.removeFromSuperview()
         }
+    }
 }
 
 extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
@@ -213,14 +213,14 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セクションヘッダーのテキスト決める
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if displayName.isEmpty {
+        if backupFiles.isEmpty {
             return nil
         } else {
             return "バックアップ時刻"
         }
     }
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if displayName.isEmpty {
+        if backupFiles.isEmpty {
             return nil
         } else {
             return "復元する場合は、上記からバックアップファイルを選択してください。"
@@ -228,14 +228,27 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        displayName.count
+        backupFiles.count
     }
     // セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
-        // TODO: バックアップデータ一覧　時刻　バージョン　ファイルサイズMB
-        cell.centerLabel.text = "\(displayName[indexPath.row])"
+        // バックアップファイル一覧　時刻　バージョン　ファイルサイズMB
+        cell.centerLabel.text = "\(backupFiles[indexPath.row].0)"
+        if let size = backupFiles[indexPath.row].1 {
+            let byteCountFormatter = ByteCountFormatter()
+            byteCountFormatter.allowedUnits = [.useKB] // 使用する単位を選択
+            byteCountFormatter.isAdaptive = true // 端数桁を表示する(123 MB -> 123.4 MB)(KBは0桁, MBは1桁, GB以上は2桁)
+            byteCountFormatter.zeroPadsFractionDigits = true // trueだと100 MBを100.0 MBとして表示する(isAdaptiveをtrueにする必要がある)
+
+            let byte = Measurement<UnitInformationStorage>(value: Double(truncating: size), unit: .bytes)
+
+            byteCountFormatter.countStyle = .decimal // 1 KB = 1000 bytes
+            print(byteCountFormatter.string(from: byte)) // 1,024 KB
+
+            cell.subLabel.text = "\(byteCountFormatter.string(from: byte))"
+        }
         cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
         cell.shouldIndentWhileEditing = true
         cell.accessoryView = nil
@@ -259,7 +272,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "削除", message: "\(displayName[indexPath.row])\nバックアップファイルを削除しますか？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "削除", message: "\(backupFiles[indexPath.row].0)\nバックアップファイルを削除しますか？", preferredStyle: .alert)
 
         alert.addAction(
             UIAlertAction(
@@ -271,7 +284,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     self.showActivityIndicatorView()
                     // バックアップファイルを削除
                     BackupManager.shared.deleteBackupFolder(
-                        folderName: self.displayName[indexPath.row]
+                        folderName: self.backupFiles[indexPath.row].0
                     )
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
@@ -304,8 +317,8 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     バックアップファイルからデータベースを復元しますか？
                     現在のデータベースは上書きされます。
                     復元には時間がかかることがあります。
-                    復元中は操作を行なわずにお待ちください。
-                    復元後、アプリを再起動してください。
+                    復元中は操作を行わずにお待ちください。
+                    復元が完了後、アプリを再起動してください。
                     """,
             preferredStyle: .alert
         )
@@ -337,7 +350,7 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             // インジゲーターを開始
             self.showActivityIndicatorView()
             // iCloud Documents からデータベースを復元する
-            BackupManager.shared.restore(folderName: self.displayName[indexPath.row]) {
+            BackupManager.shared.restore(folderName: self.backupFiles[indexPath.row].0) {
                 // インジケーターを終了
                 self.finishActivityIndicatorView()
                 Thread.sleep(forTimeInterval: 1.5)
@@ -387,12 +400,12 @@ extension BackupViewController: NSFilePresenter {
 
     // ファイルまたはファイルパッケージの新しいバージョンが追加されたことをデリゲートに通知する
     func presentedItemDidGainVersion(version: NSFileVersion) {
-        print("Update file at \(version.modificationDate!).")
+        print("Update file at \(version.modificationDate).")
     }
 
     // ファイルまたはファイルパッケージのバージョンが消えたことをデリゲートに通知する
     func presentedItemDidLoseVersion(version: NSFileVersion) {
-        print("Lose file version at \(version.modificationDate!).")
+        print("Lose file version at \(version.modificationDate).")
     }
 
     // ディレクトリ内のアイテムが新しいバージョンになった（更新された）時の通知
@@ -401,9 +414,9 @@ extension BackupViewController: NSFilePresenter {
         var isDir = ObjCBool(false)
         if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
             if Bool(isDir.boolValue) {
-                print("Update directory (\(url.path)) at \(version.modificationDate!).")
+                print("Update directory (\(url.path)) at \(version.modificationDate).")
             } else {
-                print("Update file (\(url.path)) at \(version.modificationDate!).")
+                print("Update file (\(url.path)) at \(version.modificationDate).")
             }
         }
     }
@@ -414,9 +427,9 @@ extension BackupViewController: NSFilePresenter {
         var isDir = ObjCBool(false)
         if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
             if Bool(isDir.boolValue) {
-                print("Lose directory version (\(url.path)) at \(version.modificationDate!).")
+                print("Lose directory version (\(url.path)) at \(version.modificationDate).")
             } else {
-                print("Lose file version (\(url.path)) at \(version.modificationDate!).")
+                print("Lose file version (\(url.path)) at \(version.modificationDate).")
             }
         }
     }
@@ -435,9 +448,9 @@ extension BackupViewController: NSFilePresenter {
         var isDir = ObjCBool(false)
         if FileManager.default.fileExists(atPath: newURL.path!, isDirectory: &isDir) {
             if Bool(isDir.boolValue) {
-                print("Move directory from (\(oldURL.path!)) to (\(newURL.path!).")
+                print("Move directory from (\(oldURL.path)) to (\(newURL.path!).")
             } else {
-                print("Move file from (\(oldURL.path!)) to (\(newURL.path!)).")
+                print("Move file from (\(oldURL.path)) to (\(newURL.path)).")
             }
         }
     }

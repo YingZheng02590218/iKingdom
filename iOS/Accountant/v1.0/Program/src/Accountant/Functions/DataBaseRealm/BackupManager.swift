@@ -138,9 +138,21 @@ class BackupManager {
     // MARK: バックアップファイル取得
     private var metadataQuery: NSMetadataQuery // 参照を保持するため、メンバとして持っておく。load()内のローカル変数にするとうまく動かない。
 
-    func load(completion: @escaping ([String]) -> Void) {
+    /// バックアップファイル
+    func getBackup(folderName: String) -> String {
+        let (exists, files) = isBackupFileExists(folderName: folderName)
+        if exists {
+            if let file = files.first {
+                return file
+            }
+        }
+        return ""
+    }
+
+    func load(completion: @escaping ([(String, NSNumber?)]) -> Void) {
         metadataQuery = NSMetadataQuery()
-        metadataQuery.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
+        // フォルダとファイルを取得して、ファイルのサイズを取得するため、絞り込まない
+        // metadataQuery.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
         metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         metadataQuery.sortDescriptors = [
             NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false), // 効いていない
@@ -149,17 +161,26 @@ class BackupManager {
         NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadataQuery, queue: nil) { notification in
             if let query = notification.object as? NSMetadataQuery {
 
-                var displayName: [String] = []
+                var backupFiles: [(String, NSNumber?)] = []
                 for result in query.results {
-//                    print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
-                    // Optional(["kMDItemDisplayName": default, "kMDItemFSSize": 454832, "kMDItemContentType": dyn.ah62d46dzqm0gw23srf4gn5m4ge81e3pbrv0z82xpp63daqvxfy2dcpmwg60xarvrga5w4rm3, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270607/default.realm_bk_2023-01-27-06-07-59])
-                    // Optional(["kMDItemDisplayName": 202301270608, "kMDItemContentType": public.folder, "kMDItemPath": /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202301270608])
+                    // print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemFSNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
+                    let contentType = (result as AnyObject).value(forAttribute: NSMetadataItemContentTypeKey) as! String
+                    if "public.folder" == contentType {
+                        let dysplayName = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
 
-                    let name = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
-                    displayName.append(name)
+                        let fileName = self.getBackup(folderName: dysplayName)
+                        for result in query.results {
+                            let name = (result as AnyObject).value(forAttribute: NSMetadataItemFSNameKey) as! String
+                            print(fileName, name)
+                            if fileName == name {
+                                let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
+                                backupFiles.append((dysplayName, size))
+                            }
+                        }
+                    }
                 }
                 // 並べ替え
-                completion(displayName.sorted { $0 < $1 })
+                completion(backupFiles.sorted { $0.0 < $1.0 })
             }
         }
 
