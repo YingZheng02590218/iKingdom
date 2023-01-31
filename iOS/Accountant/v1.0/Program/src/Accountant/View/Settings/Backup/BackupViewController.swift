@@ -150,42 +150,43 @@ class BackupViewController: UIViewController {
 
     // インジゲーターを開始
     func showActivityIndicatorView() {
-        // タブの無効化
-        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
-            for tabBarItem in arrayOfTabBarItems {
-                if let tabBarItem = tabBarItem as? UITabBarItem {
-                    tabBarItem.isEnabled = false
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
                 }
             }
-        }
-        // 背景になるView
-        backView.backgroundColor = .mainColor
-        // 表示位置を設定（画面中央）
-        activityIndicatorView.center = CGPoint(x: view.center.x, y: view.center.y)
-        // インジケーターのスタイルを指定（白色＆大きいサイズ）
-        activityIndicatorView.style = UIActivityIndicatorView.Style.large
-        // インジケーターを View に追加
-        backView.addSubview(activityIndicatorView)
-        // インジケーターを表示＆アニメーション開始
-        activityIndicatorView.startAnimating()
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
 
-        // tabBarControllerのViewを使う
-        guard let tabBarView = self.tabBarController?.view else {
-            return
-        }
-        // 背景をNavigationControllerのViewに貼り付け
-        tabBarView.addSubview(backView)
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
 
-        // サイズ合わせはAutoLayoutで
-        backView.translatesAutoresizingMaskIntoConstraints = false
-        backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
-        backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
-        backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
-        backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
     }
     // インジケーターを終了
     func finishActivityIndicatorView() {
-        DispatchQueue.global(qos: .default).async {
             // 非同期処理などが終了したらメインスレッドでアニメーション終了
             DispatchQueue.main.async {
                 // 非同期処理などを実行（今回は2秒間待つだけ）
@@ -203,7 +204,6 @@ class BackupViewController: UIViewController {
                 self.backView.removeFromSuperview()
             }
         }
-    }
 }
 
 extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
@@ -298,7 +298,17 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // 復元機能 アラートのポップアップを表示
     private func showPopoverRestore(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "復元", message: "バックアップファイルからデータベースを復元しますか？\n現在のデータベースは上書きされます。\n復元には時間がかかることがあります。\n復元中は操作を行なわずにお待ちください。", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "復元",
+            message: """
+                    バックアップファイルからデータベースを復元しますか？
+                    現在のデータベースは上書きされます。
+                    復元には時間がかかることがあります。
+                    復元中は操作を行なわずにお待ちください。
+                    復元後、アプリを再起動してください。
+                    """,
+            preferredStyle: .alert
+        )
 
         alert.addAction(
             UIAlertAction(
@@ -306,8 +316,8 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                 style: .destructive,
                 handler: { _ in
                     print("OK アクションをタップした時の処理")
-                    // TODO: データベースを復元
-//                    self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                    // 復元処理
+                    self.restore(indexPath: indexPath)
                     //                            // イベントログ
                     //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                     //                                AnalyticsParameterContentType: Constant.JOURNALS,
@@ -321,7 +331,26 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
 
         present(alert, animated: true, completion: nil)
     }
-
+    // 復元処理
+    func restore(indexPath: IndexPath) {
+        DispatchQueue.global(qos: .default).async {
+            // インジゲーターを開始
+            self.showActivityIndicatorView()
+            // iCloud Documents からデータベースを復元する
+            BackupManager.shared.restore(folderName: self.displayName[indexPath.row]) {
+                // インジケーターを終了
+                self.finishActivityIndicatorView()
+                Thread.sleep(forTimeInterval: 1.5)
+                DispatchQueue.main.async {
+                    // 既存のRealmを開放させるため アプリ終了
+                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                        exit(0)
+                    }
+                }
+            }
+        }
+    }
 }
 
 // 流れ

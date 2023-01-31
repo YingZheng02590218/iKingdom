@@ -118,6 +118,8 @@ class BackupManager {
             if let folderName = folderName {
                 // バックアップファイルの格納場所
                 let folderUrl = documentsFolderUrl.appendingPathComponent(folderName)
+                // ダウンロードする前にiCloudとの同期を行う
+                try FileManager.default.startDownloadingUbiquitousItem(at: folderUrl)
                 allFiles = try FileManager.default.contentsOfDirectory(atPath: folderUrl.path)
             } else {
                 allFiles = try FileManager.default.contentsOfDirectory(atPath: backupFolderUrl.path)
@@ -162,5 +164,51 @@ class BackupManager {
         }
 
         metadataQuery.start()
+    }
+
+    /// Realmのデータを復元
+    func restore(folderName: String, completion: @escaping () -> Void) {
+        guard let realmURL = Realm.Configuration.defaultConfiguration.fileURL else {
+            print("Realmのファイルパスが取得できませんでした。")
+            return
+        }
+        // バックアップファイルの有無チェック
+        let (exists, files) = isBackupFileExists(folderName: folderName)
+        if exists {
+            do {
+                let config = Realm.Configuration()
+                // 既存Realmファイル削除
+                let realmURLs = [
+                    realmURL,
+                    realmURL.appendingPathExtension("lock"),
+                    realmURL.appendingPathExtension("note"),
+                    realmURL.appendingPathExtension("management")
+                ]
+                for URL in realmURLs {
+                    do { // URL    Foundation.URL    "file:///var/mobile/Containers/Data/Application/C7E1E626-E114-4402-83EC-834AE43292F9/Documents/default.realm"
+                        try FileManager.default.removeItem(at: URL)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                // バックアップファイルの格納場所
+                let folderUrl = documentsFolderUrl.appendingPathComponent(folderName)
+                // ダウンロードする前にiCloudとの同期を行う
+                try FileManager.default.startDownloadingUbiquitousItem(at: folderUrl)
+                // バックアップファイルをRealmの位置にコピー
+                try FileManager.default.copyItem(
+                    at: folderUrl.appendingPathComponent(files[files.count - 1]),
+                    to: realmURL
+                )
+                Realm.Configuration.defaultConfiguration = config
+                print(config) // schemaVersion を確認できる
+
+                Thread.sleep(forTimeInterval: 3.0)
+                completion()
+                //　abort()   // 既存のRealmを開放させるため
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
