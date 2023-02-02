@@ -127,7 +127,13 @@ class BackupViewController: UIViewController {
         self.showActivityIndicatorView()
         // iCloud Documents にバックアップを作成する
         BackupManager.shared.backup {
-            
+            // イベントログ
+            FirebaseAnalytics.logEvent(
+                event: AnalyticsEvents.iCloudBackup,
+                parameters: [
+                    AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
+                ]
+            )
         }
     }
     // tableViewをリロード
@@ -286,12 +292,13 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     BackupManager.shared.deleteBackupFolder(
                         folderName: self.backupFiles[indexPath.row].0
                     )
-                    //                            // イベントログ
-                    //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    //                                AnalyticsParameterContentType: Constant.JOURNALS,
-                    //                                AnalyticsParameterItemID: Constant.DELETEJOURNALENTRY
-                    //                            ])
-                    //                        }
+                    // イベントログ
+                    FirebaseAnalytics.logEvent(
+                        event: AnalyticsEvents.iCloudBackup,
+                        parameters: [
+                            AnalyticsEventParameters.kind.description: Parameter.delete.description as NSObject
+                        ]
+                    )
                 }
             )
         )
@@ -362,12 +369,13 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
                     print("OK アクションをタップした時の処理")
                     // 復元処理
                     self.restore(indexPath: indexPath)
-                    //                            // イベントログ
-                    //                            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    //                                AnalyticsParameterContentType: Constant.JOURNALS,
-                    //                                AnalyticsParameterItemID: Constant.DELETEJOURNALENTRY
-                    //                            ])
-                    //                        }
+                    // イベントログ
+                    FirebaseAnalytics.logEvent(
+                        event: AnalyticsEvents.iCloudBackup,
+                        parameters: [
+                            AnalyticsEventParameters.kind.description: Parameter.restore.description as NSObject
+                        ]
+                    )
                 }
             )
         )
