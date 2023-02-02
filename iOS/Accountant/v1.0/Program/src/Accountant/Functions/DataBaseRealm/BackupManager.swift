@@ -63,6 +63,7 @@ class BackupManager {
             let fileUrl = backupFolderUrl.appendingPathComponent(fileName)
             // バックアップ作成
             try backupRealm(backupFileUrl: fileUrl)
+            
             completion()
         } catch {
             print(error.localizedDescription)
@@ -123,6 +124,7 @@ class BackupManager {
                 allFiles = try FileManager.default.contentsOfDirectory(atPath: folderUrl.path)
             } else {
                 allFiles = try FileManager.default.contentsOfDirectory(atPath: backupFolderUrl.path)
+                // fileName    String    ".default.realm_bk_2023-02-02-10-30-00.icloud"
             }
         } catch {
             return (exists, files)
@@ -164,7 +166,7 @@ class BackupManager {
                 var backupFiles: [(String, NSNumber?)] = []
                 // Documents内のフォルダとファイルにアクセス
                 for result in query.results {
-                    // print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemFSNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey]))
+                    // print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemFSNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey, NSMetadataItemPathKey]))
                     // フォルダの場合
                     let contentType = (result as AnyObject).value(forAttribute: NSMetadataItemContentTypeKey) as! String
                     if contentType == "public.folder" {
@@ -172,12 +174,20 @@ class BackupManager {
                         let dysplayName = (result as AnyObject).value(forAttribute: NSMetadataItemDisplayNameKey) as! String
                         // フォルダ内のファイルのファイル名
                         let fileName = self.getBackup(folderName: dysplayName)
+                        // fileName    String    ".default.realm_bk_2023-02-02-10-30-00.icloud"
                         // Documents内のフォルダとファイルにアクセス
                         for result in query.results {
                             // 同名のファイルからサイズを取得
                             let name = (result as AnyObject).value(forAttribute: NSMetadataItemFSNameKey) as! String
-                            // print(fileName, name)
+                            // name    String    "default.realm_bk_2023-02-02-10-30-00"
                             if fileName == name {
+                                let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
+                                // フォルダ名、ファイルサイズ
+                                backupFiles.append((dysplayName, size))
+                            }
+                            // デバイス間の共有　iCloud経由の場合、ファイル名が変わる！！！復元する際に、ダウンロードをしないと復元できない。
+                            if fileName == "." + name + ".icloud" {
+                                print("." + name + ".icloud", "加工した　.icloud　です。")
                                 let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
                                 // フォルダ名、ファイルサイズ
                                 backupFiles.append((dysplayName, size))
@@ -199,44 +209,98 @@ class BackupManager {
             print("Realmのファイルパスが取得できませんでした。")
             return
         }
-        // バックアップファイルの有無チェック
-        let (exists, files) = isBackupFileExists(folderName: folderName)
-        if exists {
-            do {
-                let config = Realm.Configuration()
-                // 既存Realmファイル削除
-                let realmURLs = [
-                    realmURL,
-                    realmURL.appendingPathExtension("lock"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
-                    realmURL.appendingPathExtension("note"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
-                    realmURL.appendingPathExtension("management")
-                ]
-                for URL in realmURLs {
-                    do {
-                        try FileManager.default.removeItem(at: URL)
-                        // URL"file:///var/mobile/Containers/Data/Application/C7E1E626-E114-4402-83EC-834AE43292F9/Documents/default.realm"
-                    } catch {
-                        print(error.localizedDescription)
+        // バックアップファイルの格納場所
+        let folderUrl = documentsFolderUrl.appendingPathComponent(folderName)
+        // ダウンロードする前にiCloudとの同期を行う
+        // This simple code launch the download
+        do {
+            let urls = try? FileManager.default.contentsOfDirectory(at: folderUrl, includingPropertiesForKeys: nil, options: [])
+            if let url = urls?.first {
+                try FileManager.default.startDownloadingUbiquitousItem(at: url)
+            }
+        } catch {
+            print("Unexpected error: \(error).")
+        }
+        // iCloudからファイルをダウンロード
+        downloadFileFromiCloud(folderName: folderName, completion: {
+            // バックアップファイルの有無チェック
+            let (exists, files) = self.isBackupFileExists(folderName: folderName)
+            if exists {
+                do {
+                    let config = Realm.Configuration()
+                    // 既存Realmファイル削除
+                    let realmURLs = [
+                        realmURL,
+                        realmURL.appendingPathExtension("lock"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
+                        realmURL.appendingPathExtension("note"), // 排他アクセス等に使われていて、実行中以外は、削除等しても構いませんと説明されています。
+                        realmURL.appendingPathExtension("management")
+                    ]
+                    for URL in realmURLs {
+                        do {
+                            try FileManager.default.removeItem(at: URL)
+                            // URL"file:///var/mobile/Containers/Data/Application/C7E1E626-E114-4402-83EC-834AE43292F9/Documents/default.realm"
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    // バックアップファイルをRealmの位置にコピー
+                    print(files[files.count - 1])
+                    try FileManager.default.copyItem(
+                        at: folderUrl.appendingPathComponent(files[files.count - 1]),
+                        to: realmURL
+                    )
+                    Realm.Configuration.defaultConfiguration = config
+                    print(config) // schemaVersion を確認できる
+                    Thread.sleep(forTimeInterval: 3.0)
+                    completion()
+                    //　abort()   // 既存のRealmを開放させるため
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        })
+    }
+    // iCloudからファイルをダウンロード
+    func downloadFileFromiCloud(folderName: String, completion: @escaping () -> Void) {
+        // If it’s a background function, I advise you to put this function in another DispatchQueue than the main one.
+        DispatchQueue.global(qos: .utility).async {
+
+            let fileManager = FileManager.default
+            // Browse your icloud container to find the file you want
+            if let icloudFolderURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents").appendingPathComponent(folderName),
+               let urls = try? fileManager.contentsOfDirectory(at: icloudFolderURL, includingPropertiesForKeys: nil, options: []) {
+                // Here select the file url you are interested in (for the exemple we take the first)
+                if let myURL = urls.first {
+                    // We have our url
+                    var lastPathComponent = myURL.lastPathComponent
+                    if lastPathComponent.contains(".icloud") {
+                        // Delete the "." which is at the beginning of the file name
+                        lastPathComponent.removeFirst()
+                        let folderPath = myURL.deletingLastPathComponent().path
+                        let downloadedFilePath = folderPath + "/" + lastPathComponent.replacingOccurrences(of: ".icloud", with: "")
+                        var isDownloaded = false
+                        while !isDownloaded {
+                            if fileManager.fileExists(atPath: downloadedFilePath) {
+                                isDownloaded = true
+                            }
+                        }
+                        // Do what you want with your downloaded file at path contains in variable "downloadedFilePath"
+                        completion()
+                    } else {
+                        // ダウンロード済みの場合
+                        completion()
                     }
                 }
-                // バックアップファイルの格納場所
-                let folderUrl = documentsFolderUrl.appendingPathComponent(folderName)
-                // ダウンロードする前にiCloudとの同期を行う
-                try FileManager.default.startDownloadingUbiquitousItem(at: folderUrl)
-                // バックアップファイルをRealmの位置にコピー
-                try FileManager.default.copyItem(
-                    at: folderUrl.appendingPathComponent(files[files.count - 1]),
-                    to: realmURL
-                )
-                Realm.Configuration.defaultConfiguration = config
-                print(config) // schemaVersion を確認できる
-
-                Thread.sleep(forTimeInterval: 3.0)
-                completion()
-                //　abort()   // 既存のRealmを開放させるため
-            } catch {
-                print(error.localizedDescription)
             }
         }
     }
 }
+
+// ■キューの作り方による種類
+// 既存のキューを使うか、新規でキューを作るかの作り方
+//　　｜ーー＞既存のディスパッチキュー
+//　　｜　　　　｜ーー＞メインキュー（main queue）・・・直列（同期型）
+//　　｜　　　　｜ーー＞グローバルキュー（global queue）・・・並列（非同期型）
+//　　｜
+//　　｜ーー＞新規のディスパッチキュー
+//　　　　　　　｜ーー＞DispatchQueue型のイニシャライザ
