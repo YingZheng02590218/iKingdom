@@ -21,6 +21,8 @@
 		F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */; };
 		F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
+		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
+		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
 		F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */; };
 		F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F91878CA25831A7B00D2E793 /* GoogleService-Info.plist */; };
@@ -468,6 +470,14 @@
 		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
+		F9ED93682982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
+		F9ED93692982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
+		F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
+		F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
+		F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
+		F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
+		F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
+		F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -520,6 +530,7 @@
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
 		F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerSettingsTaxonomyAccount.swift; sourceTree = "<group>"; };
@@ -551,6 +562,7 @@
 		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTG.entitlements; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
@@ -747,6 +759,11 @@
 		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		F9EC675027B95DDD0003FBB6 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EMTNeumorphicView.framework; path = Carthage/Build/iOS/EMTNeumorphicView.framework; sourceTree = "<group>"; };
+		F9ED936629826F2700B255EF /* Paciolist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paciolist.entitlements; sourceTree = "<group>"; };
+		F9ED93672982837100B255EF /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
+		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
+		F9ED936F298396C900B255EF /* ContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManager.swift; sourceTree = "<group>"; };
+		F9ED93762983ABFE00B255EF /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -869,6 +886,14 @@
 			path = SettingsOperatingJournalEntry;
 			sourceTree = "<group>";
 		};
+		F910F1BD298BC1B5009E6B02 /* FirebaseAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */,
+			);
+			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
 		F919603524AC6FC40084A18B /* PrintOut */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,6 +919,18 @@
 				F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */,
 				F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */,
 				F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */,
+				F9ED936D2982838700B255EF /* Backup */,
+				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
+				F9F4607524CF64BA008FE62B /* SettingsInformation */,
+				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
+				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
+				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
+				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
+				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
+				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
+				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
+				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
+				F96B62232595ED75000FC05F /* SettingsHelp */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -961,6 +998,8 @@
 		F94EDD86237AEB3A0074D812 = {
 			isa = PBXGroup;
 			children = (
+				F9ED936629826F2700B255EF /* Paciolist.entitlements */,
+				F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */,
 				F986CC1D29474392005A2138 /* .swiftlint.yml */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
 				F94EDD90237AEB3A0074D812 /* Products */,
@@ -1164,6 +1203,8 @@
 		F9860FBF285B3DC0008D0714 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
+				F910F1BD298BC1B5009E6B02 /* FirebaseAnalytics */,
+				F9ED936E298396AD00B255EF /* Container */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
 				F9F934ED2485574300BF7AA7 /* Initial */,
 				F901E8752848BA7A00290DFD /* Biometrics */,
@@ -1339,17 +1380,6 @@
 				F955B6122490FF9A005E2C6D /* TB */,
 				F9706847252AC631003307F8 /* PLAccount */,
 				F929C0252478365E0034FAAF /* Settings */,
-				F9F7992E25A864300037EC50 /* SettingsUpgrade */,
-				F9F4607524CF64BA008FE62B /* SettingsInformation */,
-				F9F934EA2485544B00BF7AA7 /* SettingPeriod */,
-				F98CD96124DCA92F001CBF94 /* SettingsCategoryMain */,
-				F98CD95D24DCA0FA001CBF94 /* SettingsCategoryList */,
-				F9A59B4B25187C3E00930A91 /* SettingsCategoryDetail */,
-				F9C2BEB8250C9D4700825936 /* SettingsTaxonomyAccountByTaxonomyList */,
-				F9C2BEBB250CCF4F00825936 /* SettingsTaxonomyList */,
-				F98EF6DE257CBEBE00CBCDDC /* SettingsOperating */,
-				F906C4E1263B1426006C6233 /* SettingsOperatingJournalEntry */,
-				F96B62232595ED75000FC05F /* SettingsHelp */,
 				F95F597F2650266300EFE522 /* UIParts */,
 			);
 			path = View;
@@ -1478,6 +1508,23 @@
 			path = STG;
 			sourceTree = "<group>";
 		};
+		F9ED936D2982838700B255EF /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				F9ED93672982837100B255EF /* BackupViewController.swift */,
+				F9ED936A2982837E00B255EF /* BackupViewController.storyboard */,
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
+		F9ED936E298396AD00B255EF /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				F9ED936F298396C900B255EF /* ContainerManager.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		F9F324522833A5A400DA813E /* WalkThrough */ = {
 			isa = PBXGroup;
 			children = (
@@ -1500,6 +1547,7 @@
 				F9AC551E292CA1D1003966E4 /* PLData.swift */,
 				F9D15FBB296EA3C1005E197D /* ProfitAndLossStatementData.swift */,
 				F93A263329573714002B7EB9 /* JournalEntryData.swift */,
+				F9ED93762983ABFE00B255EF /* BackupManager.swift */,
 			);
 			path = DataBaseRealm;
 			sourceTree = "<group>";
@@ -1533,7 +1581,8 @@
 				F9860FBD285B39C8008D0714 /* SettingsPeriodYear */,
 				F9860FBE285B39DC008D0714 /* SettingsTheDayOfReckoning */,
 			);
-			path = SettingPeriod;
+			name = SettingPeriod;
+			path = ../SettingPeriod;
 			sourceTree = "<group>";
 		};
 		F9F934ED2485574300BF7AA7 /* Initial */ = {
@@ -1664,6 +1713,7 @@
 				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
@@ -1729,6 +1779,7 @@
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
@@ -1970,6 +2021,7 @@
 				F9B209F027A4377000F7EA8D /* BSViewController.swift in Sources */,
 				F9BDCBAF27A6CCC000BD8770 /* PLViewController.swift in Sources */,
 				F9860FB9285AB805008D0714 /* Network.swift in Sources */,
+				F9ED93682982837100B255EF /* BackupViewController.swift in Sources */,
 				F97422E0253F091500FBA052 /* AccountDetailPickerTextField.swift in Sources */,
 				F963E2CB296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */,
@@ -2011,6 +2063,7 @@
 				F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */,
 				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
+				F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
@@ -2018,6 +2071,7 @@
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
+				F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
 				F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */,
@@ -2030,6 +2084,7 @@
 				F9F4605424BDD616008FE62B /* Migration.swift in Sources */,
 				F9D224CC24894493006C6CD9 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F906C4E3263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
+				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
@@ -2157,6 +2212,7 @@
 				F9EC669727B90BC60003FBB6 /* BSViewController.swift in Sources */,
 				F9EC669827B90BC60003FBB6 /* PLViewController.swift in Sources */,
 				F9860FBA285AB805008D0714 /* Network.swift in Sources */,
+				F9ED93692982837100B255EF /* BackupViewController.swift in Sources */,
 				F9EC669927B90BC60003FBB6 /* AccountDetailPickerTextField.swift in Sources */,
 				F963E2CC296829A6002DF49E /* PDFMakerPLAccount.swift in Sources */,
 				F9EC669A27B90BC60003FBB6 /* DataBaseSettingsTaxonomy.swift in Sources */,
@@ -2198,6 +2254,7 @@
 				F9EC66B827B90BC60003FBB6 /* DataBaseManagerAccountingBooks.swift in Sources */,
 				F963E2C32966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DE2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
+				F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */,
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
@@ -2205,6 +2262,7 @@
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
+				F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
 				F9EC66BF27B90BC60003FBB6 /* ListCollectionViewCell.swift in Sources */,
@@ -2217,6 +2275,7 @@
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
 				F9EC66C527B90BC60003FBB6 /* DataBaseSubsidiaryLedger.swift in Sources */,
 				F9EC66C627B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.swift in Sources */,
+				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
@@ -2482,8 +2541,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2504,7 +2564,7 @@
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2516,6 +2576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
@@ -2538,7 +2599,7 @@
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Provisioning Profile Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Distribution Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2550,6 +2611,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
@@ -2572,7 +2634,7 @@
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Provisioning Profile Development";
+				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2584,6 +2646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
@@ -2606,7 +2669,7 @@
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Provisioning Profile Development";
+				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

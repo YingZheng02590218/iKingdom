@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         // イベントログ
-        Analytics.setUserID("123456")
+        // Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
         setupUserDefaults()
         

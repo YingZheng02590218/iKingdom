@@ -1,0 +1,520 @@
+//
+//  BackupViewController.swift
+//  Accountant
+//
+//  Created by Hisashi Ishihara on 2023/01/26.
+//  Copyright © 2023 Hisashi Ishihara. All rights reserved.
+//
+
+import EMTNeumorphicView
+import UIKit
+
+class BackupViewController: UIViewController {
+    
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var button: EMTNeumorphicButton!
+    @IBOutlet var label: UILabel!
+    // コンテナ　ファイル
+    //    private let containerManager = ContainerManager()
+    var backupFiles: [(String, NSNumber?)] = []
+    
+    // iCloudが有効かどうかの判定
+    private var isiCloudEnabled: Bool {
+        (FileManager.default.ubiquityIdentityToken != nil)
+    }
+    // ディレクトリ監視
+    var isPresenting = false
+    // ディレクトリ監視
+    var presentedItemURL: URL? {
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)?
+            .appendingPathComponent("Documents", isDirectory: true)
+    }
+    // ディレクトリ監視
+    let presentedItemOperationQueue = OperationQueue()
+    
+    deinit {
+        // ディレクトリ監視
+        removeFilePresenterIfNeeded()
+    }
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // ディレクトリ監視
+        addFilePresenterIfNeeded()
+        
+        // 削除機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
+        editButtonItem.tintColor = .accentColor
+        navigationItem.rightBarButtonItem = editButtonItem
+        
+        // title設定
+        navigationItem.title = "バックアップ・復元"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+        
+        // UI
+        setTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // ニューモフィズム　ボタンとビューのデザインを指定する
+        createEMTNeumorphicView()
+        // tableViewをリロード
+        reload()
+    }
+    
+    // MARK: - Setting
+    
+    private func setTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
+        // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
+        tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.separatorColor = .accentColor
+    }
+    
+    // MARK: EMTNeumorphicView
+    // ニューモフィズム　ボタンとビューのデザインを指定する
+    private func createEMTNeumorphicView() {
+        //        inputButton.setTitle("入力", for: .normal)
+        button.neumorphicLayer?.cornerRadius = 15
+        button.setTitleColor(.accentColor, for: .selected)
+        button.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        button.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        button.neumorphicLayer?.edged = Constant.edged
+        button.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+        button.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        // iCloudが無効の場合、不活性化
+        if isiCloudEnabled {
+            button.setTitleColor(.accentColor, for: .normal)
+            // アイコン画像の色を指定する
+            button.tintColor = .accentColor
+            let backImage = UIImage(named: "baseline_cloud_upload_black_36pt")?.withRenderingMode(.alwaysTemplate)
+            button.setImage(backImage, for: UIControl.State.normal)
+            label.isHidden = true
+        } else {
+            button.setTitleColor(.mainColor, for: .normal)
+            // アイコン画像の色を指定する
+            button.tintColor = .mainColor
+            let backImage = UIImage(named: "baseline_cloud_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
+            button.setImage(backImage, for: UIControl.State.normal)
+            label.isHidden = false
+        }
+        button.isEnabled = isiCloudEnabled
+    }
+    // 編集モード切り替え
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        tableView.setEditing(editing, animated: animated)
+    }
+    // バックアップ作成ボタン
+    @IBAction func buttonTapped(_ sender: EMTNeumorphicButton) {
+        // ボタンを選択する
+        sender.isSelected = !sender.isSelected
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            sender.isSelected = !sender.isSelected
+        }
+        // インジゲーターを開始
+        self.showActivityIndicatorView()
+        // iCloud Documents にバックアップを作成する
+        BackupManager.shared.backup {
+            // イベントログ
+            FirebaseAnalytics.logEvent(
+                event: AnalyticsEvents.iCloudBackup,
+                parameters: [
+                    AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
+                ]
+            )
+        }
+    }
+    // tableViewをリロード
+    func reload() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            BackupManager.shared.load {
+                print($0)
+                self.backupFiles = $0
+                self.tableView.reloadData()
+                // 編集ボタン
+                if self.backupFiles.isEmpty {
+                    self.setEditing(false, animated: true)
+                    self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = false
+                } else {
+                    self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
+        }
+    }
+}
+
+extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
+    // セクションの数を設定する
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    // セクションヘッダーのテキスト決める
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if backupFiles.isEmpty {
+            return nil
+        } else {
+            return "バックアップ時刻"
+        }
+    }
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if backupFiles.isEmpty {
+            return nil
+        } else {
+            return "復元する場合は、上記からバックアップファイルを選択してください。"
+        }
+    }
+    // セルの数
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        backupFiles.count
+    }
+    // セルを生成して返却するメソッド
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
+        // バックアップファイル一覧　時刻　バージョン　ファイルサイズMB
+        cell.centerLabel.text = "\(backupFiles[indexPath.row].0)"
+        if let size = backupFiles[indexPath.row].1 {
+            let byteCountFormatter = ByteCountFormatter()
+            byteCountFormatter.allowedUnits = [.useKB] // 使用する単位を選択
+            byteCountFormatter.isAdaptive = true // 端数桁を表示する(123 MB -> 123.4 MB)(KBは0桁, MBは1桁, GB以上は2桁)
+            byteCountFormatter.zeroPadsFractionDigits = true // trueだと100 MBを100.0 MBとして表示する(isAdaptiveをtrueにする必要がある)
+            
+            let byte = Measurement<UnitInformationStorage>(value: Double(truncating: size), unit: .bytes)
+            
+            byteCountFormatter.countStyle = .decimal // 1 KB = 1000 bytes
+            print(byteCountFormatter.string(from: byte)) // 1,024 KB
+            
+            cell.subLabel.text = "\(byteCountFormatter.string(from: byte))"
+        }
+        cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
+        cell.shouldIndentWhileEditing = true
+        cell.accessoryView = nil
+        
+        return cell
+    }
+    // 編集機能
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .delete
+    }
+    // 削除機能 セルを左へスワイプ
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+            // 削除機能 アラートのポップアップを表示
+            self.showPopover(indexPath: indexPath)
+            completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
+        }
+        action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+    // 削除機能 アラートのポップアップを表示
+    private func showPopover(indexPath: IndexPath) {
+        let alert = UIAlertController(title: "削除", message: "\(backupFiles[indexPath.row].0)\nバックアップファイルを削除しますか？", preferredStyle: .alert)
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    // インジゲーターを開始
+                    self.showActivityIndicatorView()
+                    // バックアップファイルを削除
+                    BackupManager.shared.deleteBackupFolder(
+                        folderName: self.backupFiles[indexPath.row].0
+                    )
+                    // イベントログ
+                    FirebaseAnalytics.logEvent(
+                        event: AnalyticsEvents.iCloudBackup,
+                        parameters: [
+                            AnalyticsEventParameters.kind.description: Parameter.delete.description as NSObject
+                        ]
+                    )
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 復元機能 アラートのポップアップを表示
+        self.showPopoverRestore(indexPath: indexPath)
+    }
+    // 復元機能 アラートのポップアップを表示
+    private func showPopoverRestore(indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: "復元",
+            message: """
+                    バックアップファイルからデータベースを復元しますか？
+                    現在のデータベースは上書きされます。
+                    復元には時間がかかることがあります。
+                    復元中は操作を行わずにお待ちください。
+                    復元が完了後、アプリを再起動してください。
+                    """,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    // 最終確認
+                    self.showPopoverRestoreAgain(indexPath: indexPath)
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    // 復元機能 アラートのポップアップを表示
+    private func showPopoverRestoreAgain(indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: "最終確認",
+            message: """
+                    バックアップファイルからデータベースを復元しますか？
+                    現在のデータベースは上書きされます。
+                    """,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    print("OK アクションをタップした時の処理")
+                    // 復元処理
+                    self.restore(indexPath: indexPath)
+                    // イベントログ
+                    FirebaseAnalytics.logEvent(
+                        event: AnalyticsEvents.iCloudBackup,
+                        parameters: [
+                            AnalyticsEventParameters.kind.description: Parameter.restore.description as NSObject
+                        ]
+                    )
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    // 復元処理
+    func restore(indexPath: IndexPath) {
+        DispatchQueue.global(qos: .default).async {
+            // インジゲーターを開始
+            self.showActivityIndicatorView()
+            // iCloud Documents からデータベースを復元する
+            BackupManager.shared.restore(folderName: self.backupFiles[indexPath.row].0) {
+                // インジケーターを終了
+                self.finishActivityIndicatorView()
+                Thread.sleep(forTimeInterval: 1.5)
+                DispatchQueue.main.async {
+                    // 既存のRealmを開放させるため アプリ終了
+                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                        exit(0)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 流れ
+// ファイル/ディレクトリを管理するオブジェクトにNSFilePresenterプロトコルを指定する。
+// NSFileCoordinatorのaddFilePresenter:クラスを呼び出してオブジェクトを登録する。
+// NSFilePresenterのメソッド内にそれぞれの処理を書く
+// 管理が必要なくなるタイミングでNSFileCoordinatorのremoveFilePresenterを呼び出してファイルプレゼンタの登録を解除する。
+extension BackupViewController: NSFilePresenter {
+    
+    // ファイルプレゼンタをシステムに登録
+    func addFilePresenterIfNeeded() {
+        if !isPresenting {
+            isPresenting = true
+            NSFileCoordinator.addFilePresenter(self)
+        }
+    }
+    
+    // ファイルプレゼンタをシステムの登録から解除
+    func removeFilePresenterIfNeeded() {
+        if isPresenting {
+            isPresenting = false
+            NSFileCoordinator.removeFilePresenter(self)
+        }
+    }
+    
+    // 提示された項目の内容または属性が変更されたことを伝える。
+    func presentedItemDidChange() {
+        print("Change item.")
+        // tableViewをリロード
+        reload()
+        // インジケーターを終了
+        self.finishActivityIndicatorView()
+    }
+    
+    // ファイルまたはファイルパッケージの新しいバージョンが追加されたことをデリゲートに通知する
+    func presentedItemDidGainVersion(version: NSFileVersion) {
+        print("Update file at \(version.modificationDate).")
+    }
+    
+    // ファイルまたはファイルパッケージのバージョンが消えたことをデリゲートに通知する
+    func presentedItemDidLoseVersion(version: NSFileVersion) {
+        print("Lose file version at \(version.modificationDate).")
+    }
+    
+    // ディレクトリ内のアイテムが新しいバージョンになった（更新された）時の通知
+    func presentedSubitem(at url: URL, didGain version: NSFileVersion) {
+        
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Update directory (\(url.path)) at \(version.modificationDate).")
+            } else {
+                print("Update file (\(url.path)) at \(version.modificationDate).")
+            }
+        }
+    }
+    
+    // ディレクトリ内のアイテムが削除された時の通知
+    func presentedSubitem(at url: URL, didLose version: NSFileVersion) {
+        print("looooooooooooose")
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Lose directory version (\(url.path)) at \(version.modificationDate).")
+            } else {
+                print("Lose file version (\(url.path)) at \(version.modificationDate).")
+            }
+        }
+    }
+    
+    // ファイル/ディレクトリの内容変更の通知
+    func presentedSubitemDidChange(at url: URL) {
+        if FileManager.default.fileExists(atPath: url.path) {
+            print("Add subitem (\(url.path)).")
+        } else {
+            print("Remove subitem (\(url.path)).")
+        }
+    }
+    
+    // ファイル/ディレクトリが移動した時の通知
+    func presentedSubitemAtURL(oldURL: NSURL, didMoveToURL newURL: NSURL) {
+        var isDir = ObjCBool(false)
+        if FileManager.default.fileExists(atPath: newURL.path!, isDirectory: &isDir) {
+            if Bool(isDir.boolValue) {
+                print("Move directory from (\(oldURL.path)) to (\(newURL.path!).")
+            } else {
+                print("Move file from (\(oldURL.path)) to (\(newURL.path)).")
+            }
+        }
+    }
+    
+    // MARK: 何したら呼ばれるのか
+    
+    // 何したら呼ばれるのか
+    func accommodatePresentedItemDeletionWithCompletionHandler(completionHandler: (NSError?) -> Void) {
+        print("accommodatePresentedItemDeletionWithCompletionHandler")
+    }
+    
+    // 何したら呼ばれるのか
+    private func accommodatePresentedSubitemDeletionAtURL(url: URL, completionHandler: @escaping (NSError?) -> Void) {
+        print("accommodatePresentedSubitemDeletionAtURL")
+        print("url: \(url.path)")
+    }
+    
+    // 何したら呼ばれるのか
+    func presentedSubitemDidAppear(at url: URL) {
+        print("presentedSubitemDidAppearAtURL")
+        print("url: \(url.path)")
+    }
+}
