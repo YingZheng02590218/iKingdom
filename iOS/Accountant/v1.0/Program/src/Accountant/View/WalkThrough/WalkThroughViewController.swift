@@ -6,8 +6,8 @@
 //  Copyright © 2022 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import EAIntroView
+import UIKit
 
 class WalkThroughViewController: UIViewController {
 
@@ -29,7 +29,7 @@ class WalkThroughViewController: UIViewController {
         page.titlePositionY = self.view.bounds.size.height / 2
         page.desc = "複式簿記の会計帳簿\n\n紙の帳簿と同じデザインを表現した\n複式簿記で記帳ができるアプリ"
         page.descColor = UIColor.lightGray
-        page.descFont = UIFont(name: "HiraMaruProN-W4", size: 18)
+        page.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
         page.descPositionY = self.view.bounds.size.height / 2
         page.bgColor = UIColor.clear
         
@@ -42,15 +42,15 @@ class WalkThroughViewController: UIViewController {
         // タイトルのフォントの設定
         page1.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
         
-        page1.titlePositionY = self.view.bounds.size.height * 0.8
+        page1.titlePositionY = self.view.bounds.size.height * 0.9
         // ディスクリプションのテキスト
         page1.desc = "日々の取引を仕訳する\nやることはこれだけ\n\nよく使う仕訳のテンプレートを準備しておくと、最速で入力が完了"
         // ディスクリプションの色変更
         page1.descColor = UIColor.lightGray
         // ディスクリプションのフォントの設定
-        page1.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
+        page1.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
         // テキストの位置を変更
-        page1.descPositionY = self.view.bounds.size.height * 0.8
+        page1.descPositionY = self.view.bounds.size.height * 0.85
         // 背景色変更
         page1.bgColor = UIColor.clear
         // 背景画像
@@ -60,11 +60,11 @@ class WalkThroughViewController: UIViewController {
         page2.title = "主要簿"
         page2.titleColor = UIColor.textColor
         page2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
-        page2.titlePositionY = self.view.bounds.size.height * 0.8
+        page2.titlePositionY = self.view.bounds.size.height * 0.9
         page2.desc = "仕訳帳と総勘定元帳を確認する\n\n仕訳帳で、仕訳の編集や削除ができる"
         page2.descColor = UIColor.lightGray
-        page2.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
-        page2.descPositionY = self.view.bounds.size.height * 0.8
+        page2.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
+        page2.descPositionY = self.view.bounds.size.height * 0.85
         page2.bgColor = UIColor.clear
         page2.bgImage = UIImage(named: "bg2")
         
@@ -72,11 +72,11 @@ class WalkThroughViewController: UIViewController {
         page1of2.title = " "
         page1of2.titleColor = UIColor.textColor
         page1of2.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
-        page1of2.titlePositionY = self.view.bounds.size.height * 0.8
+        page1of2.titlePositionY = self.view.bounds.size.height * 0.9
         page1of2.desc = "プリンターで印刷や\nPDFファイルを出力することができる"
         page1of2.descColor = UIColor.lightGray
-        page1of2.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
-        page1of2.descPositionY = self.view.bounds.size.height * 0.8
+        page1of2.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
+        page1of2.descPositionY = self.view.bounds.size.height * 0.85
         page1of2.bgColor = UIColor.clear
         page1of2.bgImage = UIImage(named: "bg1of2")
         
@@ -84,11 +84,11 @@ class WalkThroughViewController: UIViewController {
         page3.title = "決算"
         page3.titleColor = UIColor.textColor
         page3.titleFont = UIFont(name: "Helvetica-Bold", size: 40)
-        page3.titlePositionY = self.view.bounds.size.height * 0.8
+        page3.titlePositionY = self.view.bounds.size.height * 0.9
         page3.desc = "決算整理仕訳を済ませると\n貸借対照表と損益計算書が完成します"
         page3.descColor = UIColor.lightGray
-        page3.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
-        page3.descPositionY = self.view.bounds.size.height * 0.8
+        page3.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
+        page3.descPositionY = self.view.bounds.size.height * 0.85
         page3.bgColor = UIColor.clear
         page3.bgImage = UIImage(named: "bg3")
 
@@ -96,11 +96,11 @@ class WalkThroughViewController: UIViewController {
         page4.title = "まず勘定科目を設定しよう"
         page4.titleColor = UIColor.textColor
         page4.titleFont = UIFont(name: "Helvetica-Bold", size: 29)
-        page4.titlePositionY = self.view.bounds.size.height * 0.8
+        page4.titlePositionY = self.view.bounds.size.height * 0.9
         page4.desc = "使用する勘定科目をONにする\n\nオリジナルの勘定科目も登録できる"
         page4.descColor = UIColor.lightGray
-        page4.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
-        page4.descPositionY = self.view.bounds.size.height * 0.8
+        page4.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
+        page4.descPositionY = self.view.bounds.size.height * 0.85
         page4.bgColor = UIColor.clear
         page4.bgImage = UIImage(named: "bg4")
         
@@ -111,7 +111,7 @@ class WalkThroughViewController: UIViewController {
         page5.titlePositionY = self.view.bounds.size.height / 2
         page5.desc = ""
         page5.descColor = UIColor.lightGray
-        page5.descFont = UIFont(name: "HiraMaruProN-W4", size: 20)
+        page5.descFont = UIFont(name: "HiraMaruProN-W4", size: 19)
         page5.descPositionY = self.view.bounds.size.height / 2
         page5.bgColor = UIColor.clear
         
@@ -130,9 +130,9 @@ class WalkThroughViewController: UIViewController {
         } else {
             introView?.pageControl.pageIndicatorTintColor = .lightGray
         }
-        introView?.pageControl.currentPageIndicatorTintColor = .accentBlue
+        introView?.pageControl.currentPageIndicatorTintColor = .accentColor
 
-        introView?.pageControlY = self.view.bounds.size.height * 0.9
+        introView?.pageControlY = self.view.bounds.size.height * 0.95
         
         introView?.delegate = self
         // アニメーション設定
