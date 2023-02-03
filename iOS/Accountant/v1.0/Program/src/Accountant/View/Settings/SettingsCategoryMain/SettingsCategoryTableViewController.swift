@@ -231,6 +231,22 @@ class SettingsCategoryTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         var cell = UITableViewCell()
