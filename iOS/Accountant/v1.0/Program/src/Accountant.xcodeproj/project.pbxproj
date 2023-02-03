@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -54,6 +54,12 @@
 		F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
+		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
+		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
+		F9439D46298D27F800FCBA41 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9439D47298D27FC00FCBA41 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
+		F9439D48298D27FC00FCBA41 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
@@ -259,7 +265,6 @@
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
-		F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
 		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
@@ -297,6 +302,12 @@
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
 		F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */; };
+		F9E42A45298D1DFE00360DA4 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
+		F9E42A46298D1DFE00360DA4 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9E42A47298D1DFE00360DA4 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
+		F9E42A48298D1DFE00360DA4 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
+		F9E42A4A298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
@@ -466,10 +477,6 @@
 		F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */; };
-		F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */; };
-		F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
-		F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
-		F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */; };
 		F9ED93682982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
 		F9ED93692982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
 		F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
@@ -484,7 +491,6 @@
 		F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
 		F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
 		F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
-		F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9EC675027B95DDD0003FBB6 /* Realm.framework */; };
 		F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
 		F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
 		F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */; };
@@ -508,6 +514,35 @@
 		F9F934FA2485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934F92485F21400BF7AA7 /* DataBaseManagerAccountingBooks.swift */; };
 		F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F9439D44298D27F500FCBA41 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */,
+				F9439D48298D27FC00FCBA41 /* RealmSwift.xcframework in Embed Frameworks */,
+				F9439D46298D27F800FCBA41 /* Realm.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F9E42A46298D1DFE00360DA4 /* RealmSwift.xcframework in Embed Frameworks */,
+				F9E42A4A298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Embed Frameworks */,
+				F9E42A48298D1DFE00360DA4 /* Realm.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0578B27B5D3F0965D2D68CE5 /* Pods-AccountantUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantUITests.release.xcconfig"; path = "Target Support Files/Pods-AccountantUITests/Pods-AccountantUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -751,6 +786,9 @@
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
 		F9E0FE85266BA6230024FE40 /* PDFMakerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PDFMakerViewController.storyboard; sourceTree = "<group>"; };
+		F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		F9E42A43298D1DFE00360DA4 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
+		F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = EMTNeumorphicView.xcframework; path = Carthage/Build/EMTNeumorphicView.xcframework; sourceTree = "<group>"; };
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
@@ -800,12 +838,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */,
-				F9EC675F27B961AB0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
-				F9CD0BA427C3F3D100F5ED19 /* EMTNeumorphicView.framework in Frameworks */,
+				F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */,
+				F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */,
 				F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */,
 				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
-				F9EC676227B9623D0003FBB6 /* Realm.framework in Frameworks */,
+				F9439D47298D27FC00FCBA41 /* RealmSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,13 +851,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */,
+				F9E42A47298D1DFE00360DA4 /* Realm.xcframework in Frameworks */,
+				F9E42A45298D1DFE00360DA4 /* RealmSwift.xcframework in Frameworks */,
 				F94DE33827DC9C0A0022F739 /* MessageUI.framework in Frameworks */,
-				F9EC676427B9624F0003FBB6 /* RealmSwift.framework in Frameworks */,
 				F9EC670B27B90BC60003FBB6 /* PDFKit.framework in Frameworks */,
-				F9EC675627B95DDD0003FBB6 /* EMTNeumorphicView.framework in Frameworks */,
 				F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */,
 				952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */,
-				F9F3A00B27B962A5001E873F /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,6 +882,9 @@
 		F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */,
+				F9E42A43298D1DFE00360DA4 /* Realm.xcframework */,
+				F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */,
 				F9578BDC2858CA13001C5D74 /* Network.framework */,
 				F94DE33627DC9C020022F739 /* MessageUI.framework */,
 				F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */,
@@ -1618,7 +1659,7 @@
 				F94EDD8D237AEB3A0074D812 /* Resources */,
 				F91878C9258300DB00D2E793 /* Run Script */,
 				490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */,
-				F9EC675A27B960F70003FBB6 /* Run Script Carthage */,
+				F9439D44298D27F500FCBA41 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1639,8 +1680,8 @@
 				F9EC670D27B90BC60003FBB6 /* Resources */,
 				F9EC674027B90BC60003FBB6 /* ShellScript */,
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
-				F9EC675927B95E240003FBB6 /* Run Script Carthage */,
 				F986CC1C2947419E005A2138 /* Run Script SwiftLint */,
+				F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1954,48 +1995,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		F9EC675927B95E240003FBB6 /* Run Script Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/EMTNeumorphicView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
-			);
-			name = "Run Script Carthage";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		F9EC675A27B960F70003FBB6 /* Run Script Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/EMTNeumorphicView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
-			);
-			name = "Run Script Carthage";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2546,7 +2545,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2581,7 +2580,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3.0.0;
 				DEVELOPMENT_TEAM = T526NZN54U;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
