@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 操作設定クラス
 class SettingsOperatingTableViewController: UITableViewController {

@@ -17,18 +17,18 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     var accountDetailBig = ""
     var accountDetail = ""
     // ドラムロールに表示する勘定科目の文言
-    var big0: [String] = Array<String>()
-    var big1: [String] = Array<String>()
-    var big2: [String] = Array<String>()
-    var big3: [String] = Array<String>()
-    var big4: [String] = Array<String>()
-    var big5: [String] = Array<String>()
-    var big6: [String] = Array<String>()
-    var big7: [String] = Array<String>()
-    var big8: [String] = Array<String>()
-    var big9: [String] = Array<String>()
-    var big10: [String] = Array<String>()
-    var big11: [String] = Array<String>()
+    var big0: [String] = []
+    var big1: [String] = []
+    var big2: [String] = []
+    var big3: [String] = []
+    var big4: [String] = []
+    var big5: [String] = []
+    var big6: [String] = []
+    var big7: [String] = []
+    var big8: [String] = []
+    var big9: [String] = []
+    var big10: [String] = []
+    var big11: [String] = []
 
     /*
      // Only override drawRect: if you perform custom drawing.

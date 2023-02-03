@@ -82,7 +82,7 @@ class DataBaseManagerSettingsTaxonomy { // }: DataBaseManagerSettingsTaxonomyMod
     func getAllSettingsTaxonomy() -> Results<DataBaseSettingsTaxonomy> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomy.self, predicates: [
             NSPredicate(format: "category2 LIKE %@", NSString(string: "?*")), // nilチェック　大区分以降に値があるもののみに絞る
-            NSPredicate(format: "abstract == %@", NSNumber(value: false)),
+            NSPredicate(format: "abstract == %@", NSNumber(value: false))
             // .filter("BSAndPL_category != \(999)") // 仮勘定科目は除外する　貸借対照表に表示しないため
             // .filter("switching == \(true)") // 不要　2020/08/02
         ])

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 総勘定元帳クラス
 class GeneralLedgerTableViewController: UITableViewController {
@@ -183,16 +183,18 @@ class GeneralLedgerTableViewController: UITableViewController {
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
-        let indexPath: IndexPath = self.tableView.indexPathForSelectedRow! // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-        let databaseManagerSettings = CategoryListModel() // データベースマネジャー
-        let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
-        // ③遷移先ViewCntrollerの取得
-        if let navigationController = segue.destination as? UINavigationController,
-           let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerAccountViewController {
-            // 遷移先のコントローラに値を渡す
-            viewControllerGeneralLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+        if let indexPath: IndexPath = self.tableView.indexPathForSelectedRow {
+            // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
+            let databaseManagerSettings = CategoryListModel() // データベースマネジャー
+            let objects = databaseManagerSettings.getSettingsSwitchingOn(rank0: indexPath.section) // どのセクションに表示するセルかを判別するため引数で渡す
+            // ③遷移先ViewCntrollerの取得
+            if let navigationController = segue.destination as? UINavigationController,
+               let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerAccountViewController {
+                // 遷移先のコントローラに値を渡す
+                viewControllerGeneralLedgerAccount.account = "\(objects[indexPath.row].category as String)" // セルに表示した勘定名を取得
+            }
+            // セルの選択を解除
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

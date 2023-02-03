@@ -218,7 +218,6 @@ class DataBaseManagerTaxonomy {
      * @param number 設定表示科目の連番
      * @return result 合計額
      */
-    // 取得 表示科目　表示名別の合計
     func getTotalOfTaxonomy(numberOfSettingsTaxonomy: Int, lastYear: Bool) -> String {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)

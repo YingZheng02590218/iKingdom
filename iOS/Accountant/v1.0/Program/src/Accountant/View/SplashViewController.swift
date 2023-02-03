@@ -52,7 +52,7 @@ class SplashViewController: UIViewController {
                 message: "最新のアプリをご利用いただけます。",
                 preferredStyle: .alert
             )
-            let storeAction = UIAlertAction(title: "ストアページへ", style: .default) { [weak self] _ in
+            let storeAction = UIAlertAction(title: "ストアページへ", style: .default) { _ in
                 // guard let self = self else { return }
                 // AppStore へのリンクは、Short Linkを指定すると、外部ブラウザを経由して、AppStoreアプリを起動される。
                 guard let url = URL(string: Constant.APPSTOREAPPPAGE) else { return }
@@ -61,7 +61,7 @@ class SplashViewController: UIViewController {
                 completionHandler(false)
 
             }
-            let laterAction = UIAlertAction(title: "あとで", style: .destructive) { [weak self] _ in
+            let laterAction = UIAlertAction(title: "あとで", style: .destructive) { _ in
                 // guard let self = self else { return }
                 completionHandler(true)
             }

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import AudioToolbox // 効果音
+import UIKit
 
 // 勘定科目一覧　画面
 class CategoryListTableViewController: UITableViewController {
