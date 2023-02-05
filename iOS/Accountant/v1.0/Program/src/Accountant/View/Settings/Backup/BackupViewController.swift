@@ -390,9 +390,9 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     // 復元処理
     func restore(indexPath: IndexPath) {
+        // インジゲーターを開始
+        self.showActivityIndicatorView()
         DispatchQueue.global(qos: .default).async {
-            // インジゲーターを開始
-            self.showActivityIndicatorView()
             // iCloud Documents からデータベースを復元する
             BackupManager.shared.restore(folderName: self.backupFiles[indexPath.row].0) {
                 // インジケーターを終了

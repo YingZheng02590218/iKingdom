@@ -122,7 +122,7 @@ class DataBaseManagerSettingsPeriod {
     }
     // 最古の年度の取得　会計帳簿
     func getOldestPeriodYear() -> Int {
-        var objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
+        let objects = RealmManager.shared.read(type: DataBaseAccountingBooks.self)
         // 最小値
         if let min = objects.value(forKeyPath: "@min.fiscalYear") {
         print(min)

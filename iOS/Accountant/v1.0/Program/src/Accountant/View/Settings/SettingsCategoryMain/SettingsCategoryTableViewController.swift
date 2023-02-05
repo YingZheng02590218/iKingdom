@@ -13,6 +13,9 @@ import UIKit
 class SettingsCategoryTableViewController: UITableViewController {
 
     var gADBannerView: GADBannerView!
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +121,8 @@ class SettingsCategoryTableViewController: UITableViewController {
     }
 
     // 勘定科目体系　設定スイッチ 切り替え
-    @objc func onSegment(sender: UISegmentedControl) {
+    @objc
+    func onSegment(sender: UISegmentedControl) {
         // セグメントコントロール　0: 法人, 1:個人
         let segStatus = sender.selectedSegmentIndex == 0 ? true : false
         print("Segment \(segStatus)")
@@ -133,36 +137,8 @@ class SettingsCategoryTableViewController: UITableViewController {
                 title: "OK",
                 style: .destructive,
                 handler: { _ in
-                    // 法人/個人フラグ　設定スイッチ
-                    UserDefaults.standard.set(segStatus, forKey: "corporation_switch")
-                    UserDefaults.standard.synchronize()
-                    // 法人/個人フラグ
-                    if UserDefaults.standard.bool(forKey: "corporation_switch") {
-                        // 更新　スイッチの切り替え
-                        // 法人対応 ONに切り替える
-                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "繰越利益") {
-                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
-                        }
-                    } else {
-                        // 更新　スイッチの切り替え
-                        // 個人事業主対応 ONに切り替える
-                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "元入金") {
-                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
-                        }
-                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
-                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
-                        }
-                        if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
-                            DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
-                        }
-                    }
-                    // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
-                    let databaseManager = TBModel()
-                    databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
-                    databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
-
-                    // リロード
-                    self.tableView.reloadData()
+                    // 勘定科目体系を変更
+                    self.change(segStatus: segStatus)
                 }
             )
         )
@@ -179,6 +155,104 @@ class SettingsCategoryTableViewController: UITableViewController {
             )
         )
         present(alert, animated: true, completion: nil)
+    }
+    // 勘定科目体系を変更
+    func change(segStatus: Bool) {
+        // インジゲーターを開始
+        self.showActivityIndicatorView()
+        DispatchQueue.global(qos: .default).async {
+            // 法人/個人フラグ　設定スイッチ
+            UserDefaults.standard.set(segStatus, forKey: "corporation_switch")
+            UserDefaults.standard.synchronize()
+            // 法人/個人フラグ
+            if UserDefaults.standard.bool(forKey: "corporation_switch") {
+                // 更新　スイッチの切り替え
+                // 法人対応 ONに切り替える
+                if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "繰越利益") {
+                    DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                }
+            } else {
+                // 更新　スイッチの切り替え
+                // 個人事業主対応 ONに切り替える
+                if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "元入金") {
+                    DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                }
+                if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主貸") {
+                    DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                }
+                if let settingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(category: "事業主借") {
+                    DatabaseManagerSettingsTaxonomyAccount.shared.updateSettingsCategorySwitching(tag: settingsTaxonomyAccount.number, isOn: true)
+                }
+            }
+            // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+            let databaseManager = TBModel()
+            databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+            databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+            
+            // インジケーターを終了
+            self.finishActivityIndicatorView()
+            Thread.sleep(forTimeInterval: 0.5)
+            DispatchQueue.main.async {
+                // リロード
+                self.tableView.reloadData()
+            }
+        }
+    }
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
+        }
     }
 
     // MARK: - Table view data source

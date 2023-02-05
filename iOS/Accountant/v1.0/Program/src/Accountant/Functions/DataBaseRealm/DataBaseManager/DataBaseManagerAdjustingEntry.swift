@@ -83,7 +83,7 @@ class DataBaseManagerAdjustingEntry {
     // 取得 決算整理仕訳　勘定別　損益勘定以外 全年度
     func getAllAdjustingEntryInAccountAll(account: String) -> Results<DataBaseAdjustingEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseAdjustingEntry.self, predicates: [
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)), // 条件を間違えないように注意する
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)) // 条件を間違えないように注意する
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects

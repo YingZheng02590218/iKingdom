@@ -8,7 +8,7 @@
 
 import FirebaseAnalytics // イベントログ対応
 
-struct FirebaseAnalytics {
+enum FirebaseAnalytics {
 
     static func logEvent(event: AnalyticsEvents, parameters: [String: NSObject]?) {
         // イベントログ

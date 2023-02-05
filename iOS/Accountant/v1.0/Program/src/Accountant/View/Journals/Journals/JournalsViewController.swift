@@ -931,15 +931,14 @@ extension JournalsViewController: JournalsPresenterOutput {
         numberOfEdittedJournalEntry = nil
         tappedIndexPathSection = nil
         indexPathForAutoScroll = nil
-        // 更新処理
-        self.tableView.reloadData()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            // 更新処理
+            self.tableView.reloadData()
             // クルクルを止める
             self.refreshControl.endRefreshing()
+            // ボタンを更新
+            self.setButtons()
         }
-        // ボタンを更新
-        setButtons()
     }
     
     func reloadData() {
@@ -1062,12 +1061,14 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.primaryKeys = nil
         self.primaryKeysAdjusting = nil
         self.indexPaths = [] // まとめて編集の選択されたセル　初期化
-        // 仕訳入力後に仕訳帳を更新する
-        self.tableView.reloadData()
-        // ボタンを更新
-        setButtons()
-        // 下へスクロールする
-        scrollToBottom()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            // 仕訳入力後に仕訳帳を更新する
+            self.tableView.reloadData()
+            // ボタンを更新
+            self.setButtons()
+            // 下へスクロールする
+            self.scrollToBottom()
+        }
     }
     // PDFのプレビューを表示させる
     func showPreview() {

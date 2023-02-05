@@ -3,20 +3,20 @@
 
   def common_pods
     # Pods for All
-    pod 'Google-Mobile-Ads-SDK', '8.13.0'
+    pod 'Google-Mobile-Ads-SDK'
     pod 'GoogleAnalytics'
-    pod 'GoogleUtilities', '7.7.0'
-#    pod 'Firebase/AdMob'
+    pod 'GoogleUtilities'
     pod 'Firebase/Core'
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
     pod 'SwiftyStoreKit'
+    pod 'Gecco'
+    pod 'EAIntroView'
+    pod 'MXParallaxHeader'
+#    pod 'Firebase/AdMob'
 #    pod 'RealmSwift', ' ~> 10.21'
 #    pod 'NeuKit'
 #    pod 'EMTNeumorphicView'
-    pod 'Gecco'
-    pod 'EAIntroView'
-    pod "MXParallaxHeader"
   end
 
   target 'Paciolist' do

@@ -27,7 +27,7 @@ class DataBaseManagerTransferEntry {
     func getAllTransferEntryInPLAccountAll(account: String) -> Results<DataBaseTransferEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseTransferEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
@@ -36,7 +36,7 @@ class DataBaseManagerTransferEntry {
     func getAllTransferEntry(account: String) -> Results<DataBaseTransferEntry> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseTransferEntry.self, predicates: [
             NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account)),
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高")),
+            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "残高"), NSString(string: "残高"))
         ])
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
