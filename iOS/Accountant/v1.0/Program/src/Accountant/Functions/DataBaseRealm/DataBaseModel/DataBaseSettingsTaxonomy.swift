@@ -59,6 +59,6 @@ class DataBaseSettingsTaxonomy: RObject {
     @objc dynamic var category6: String = "" // 階層6
     @objc dynamic var category7: String = "" // 階層7
     @objc dynamic var category: String = ""  // 表示科目名
-    @objc dynamic var abstract: Bool = false // 抽象区分
-    @objc dynamic var switching: Bool = false // 有効無効
+    @objc dynamic var abstract = false // 抽象区分
+    @objc dynamic var switching = false // 有効無効
 }

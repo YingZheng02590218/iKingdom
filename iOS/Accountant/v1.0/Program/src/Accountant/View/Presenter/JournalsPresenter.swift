@@ -212,21 +212,17 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
-        // 全勘定の合計と残高を計算する
-        model.initializeJournals(completion: { isFinished in
-            print("Result is \(isFinished)")
-            // 通常仕訳　全
-            objects = model.getJournalEntriesInJournals()
-            // 決算整理仕訳
-            objectsss = model.getJournalAdjustingEntry()
-            // 損益振替仕訳
-            dataBaseTransferEntries = model.getTransferEntryInAccount()
-            // 資本振替仕訳
-            dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
-
-            // オートスクロール
-            view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
-        })
+        // 通常仕訳　全
+        objects = model.getJournalEntriesInJournals()
+        // 決算整理仕訳
+        objectsss = model.getJournalAdjustingEntry()
+        // 損益振替仕訳
+        dataBaseTransferEntries = model.getTransferEntryInAccount()
+        // 資本振替仕訳
+        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
+        
+        // オートスクロール
+        view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
     }
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {

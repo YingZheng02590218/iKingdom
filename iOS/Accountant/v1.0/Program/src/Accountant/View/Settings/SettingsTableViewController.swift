@@ -15,6 +15,7 @@ import UIKit
 // 設定クラス
 class SettingsTableViewController: UIViewController {
 
+    @IBOutlet var versionLabel: UILabel!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var scrollView: UIScrollView!
     // 【Xcode11】いつもスクロールしなかったUIScrollView + AutoLayoutをやっと攻略できた
@@ -58,6 +59,8 @@ class SettingsTableViewController: UIViewController {
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
+
+        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
 
 
@@ -95,7 +98,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
-         4
+         5
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,10 +106,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            return 4
+            return 1
         case 2:
-            return 3
+            return 4
         case 3:
+            return 3
+        case 4:
             return 3
         default:
             return 0
@@ -118,10 +123,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return "アップグレード"
         case 1:
-            return "帳簿情報"
+            return "バックアップ"
         case 2:
-            return "環境設定"
+            return "帳簿情報"
         case 3:
+            return "環境設定"
+        case 4:
             return "サポート"
         default:
             return ""
@@ -130,9 +137,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 1:
+        case 2:
             return "開始残高　前期の決算書、もしくは試算表の貸借対照表をご参照いただきながら設定してください。"
-        case 3:
+        case 4:
             return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
         default:
             return ""
@@ -158,6 +165,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         } else if indexPath.section == 1 {
+            cell.centerLabel.text = "データのバックアップ・復元"
+            cell.leftImageView.image = UIImage(named: "baseline_cloud_upload_black_36pt")?.withRenderingMode(.alwaysTemplate)
+
+        } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
@@ -174,7 +185,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             default:
                 break
             }
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
@@ -222,7 +233,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
-        case 2:
+        case 3:
             switch indexPath.row {
             case 0:
                 return nil
@@ -246,6 +257,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         } else if indexPath.section == 1 {
+
+            performSegue(withIdentifier: "BackupViewController", sender: tableView.cellForRow(at: indexPath))
+
+        } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 performSegue(withIdentifier: "SettingsInformationTableViewController", sender: tableView.cellForRow(at: indexPath))
@@ -258,7 +273,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             default:
                 break
             }
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
                 break
@@ -292,10 +307,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     // 件名
                     mail.setSubject("お問い合わせ")
                     // 本文　末尾に、iPhoneのモデルとOSとバージョンを表示
-                    if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
-                       let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
-                        mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(version) Buld: \(build)", isHTML: false)
-                    }
+                    mail.setMessageBody("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------\n\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)\n Version: \(AppVersion.currentVersion) Buld: \(AppVersion.currentBuildVersion)", isHTML: false)
                     present(mail, animated: true, completion: nil)
                 } else {
                     print("送信できません")

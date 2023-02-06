@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import AudioToolbox // 効果音
+import UIKit
 
 // 勘定科目一覧　画面
 class CategoryListTableViewController: UITableViewController {
@@ -276,6 +276,7 @@ class CategoryListTableViewController: UITableViewController {
             return configuration
         }
     }
+    // FIXME: コールされない。trailingSwipeActionsConfigurationForRowAt が呼ばれる
     // セルの右側から出てくるdeleteボタンを押下した時
     override func tableView(
         _ tableView: UITableView,

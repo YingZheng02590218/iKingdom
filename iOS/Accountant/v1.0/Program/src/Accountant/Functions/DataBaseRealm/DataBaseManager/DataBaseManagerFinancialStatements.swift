@@ -152,7 +152,7 @@ class DataBaseManagerFinancialStatements: DataBaseManager {
         do {
             // (2)書き込みトランザクション内でデータを追加する
             try DataBaseManager.realm.write {
-                var number = afterClosingTrialBalance.save()
+                let number = afterClosingTrialBalance.save()
                 print(number)
                 object.dataBaseFinancialStatements?.afterClosingTrialBalance = afterClosingTrialBalance // 財務諸表に繰越試算表を追加する
             }

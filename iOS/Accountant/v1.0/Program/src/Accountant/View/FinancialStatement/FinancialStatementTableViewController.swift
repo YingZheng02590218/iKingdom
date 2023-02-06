@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import GoogleMobileAds // マネタイズ対応
+import UIKit
 
 // 決算書クラス
 class FinancialStatementTableViewController: UITableViewController {
@@ -255,6 +255,7 @@ class FinancialStatementTableViewController: UITableViewController {
     }
     // 画面遷移の準備　貸借対照表画面 損益計算書画面 キャッシュフロー計算書
     var tappedIndexPath: IndexPath?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         guard let indexPath = self.tableView.indexPathForSelectedRow else { return } // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
@@ -264,7 +265,7 @@ class FinancialStatementTableViewController: UITableViewController {
         case "segue_PLAccount": // “セグウェイにつけた名称”:
             // ③遷移先ViewCntrollerの取得
             if let navigationController = segue.destination as? UINavigationController,
-               let viewControllerGeneralLedgerAccount = navigationController.topViewController as? GeneralLedgerPLAccountViewController {
+               let _ = navigationController.topViewController as? GeneralLedgerPLAccountViewController {
                 // 遷移先のコントローラに値を渡す
                 // 遷移先のコントローラー.条件用の属性 = “条件”
             }

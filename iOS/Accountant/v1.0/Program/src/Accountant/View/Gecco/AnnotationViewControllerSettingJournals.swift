@@ -6,8 +6,8 @@
 //  Copyright © 2022 Hisashi Ishihara. All rights reserved.
 //
 
-import UIKit
 import Gecco
+import UIKit
 
 class AnnotationViewControllerSettingJournals: SpotlightViewController {
 

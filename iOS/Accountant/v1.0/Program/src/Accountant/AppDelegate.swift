@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         // イベントログ
-        Analytics.setUserID("123456")
+        // Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
         setupUserDefaults()
         
@@ -243,7 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         firstLunch = [firstLunchKey: true]
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
-        //　userDefaults.set(true, forKey: firstLunchKey)
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 法人/個人フラグ　法人:true, 個人:false
         firstLunchKey = "corporation_switch"
         firstLunch = [firstLunchKey: false] // 初期値は個人とする

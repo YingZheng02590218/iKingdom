@@ -797,5 +797,4 @@ class DataBaseManagerPLAccount {
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
-    
 }
