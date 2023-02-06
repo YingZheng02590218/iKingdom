@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */; };
-		952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
 		F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
 		F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
@@ -131,6 +130,7 @@
 		F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */; };
 		F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96B62262595FE77000FC05F /* SettingsHelpViewController.swift */; };
+		F96D2DAE298FC8DD00E722BE /* Pods_PaciolistSTG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */; };
 		F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */; };
 		F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9711328249D12A1006258F7 /* TBTableViewCell.swift */; };
 		F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */; };
@@ -851,13 +851,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F96D2DAE298FC8DD00E722BE /* Pods_PaciolistSTG.framework in Frameworks */,
 				F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */,
 				F9E42A47298D1DFE00360DA4 /* Realm.xcframework in Frameworks */,
 				F9E42A45298D1DFE00360DA4 /* RealmSwift.xcframework in Frameworks */,
 				F94DE33827DC9C0A0022F739 /* MessageUI.framework in Frameworks */,
 				F9EC670B27B90BC60003FBB6 /* PDFKit.framework in Frameworks */,
 				F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */,
-				952D5BB11E6FDE9F770DCE26 /* Pods_PaciolistSTG.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2543,9 +2543,9 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 4.0.05;
 				DEVELOPMENT_TEAM = T526NZN54U;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2559,7 +2559,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2578,9 +2578,9 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 4.0.05;
 				DEVELOPMENT_TEAM = T526NZN54U;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2594,7 +2594,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2613,8 +2613,9 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 4.0.05;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2629,7 +2630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2648,8 +2649,9 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3.0.0;
+				CURRENT_PROJECT_VERSION = 4.0.05;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2664,7 +2666,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 4.0.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
