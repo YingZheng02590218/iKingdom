@@ -10,7 +10,16 @@ import UIKit
 
 // ドラムロール　仕訳画面　勘定科目選択
 class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // ドラムロールに表示する勘定科目の文言
     var big0: [String] = []
     var big1: [String] = []
@@ -559,12 +568,20 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
     @objc func done() {
         print("done", self.text, selectedValue)
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         self.text = selectedValue
         self.endEditing(true)
     }
     
     @objc func cancel() {
         print("cancel", self.text, selectedValue)
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         self.text = ""
         self.endEditing(true)
     }

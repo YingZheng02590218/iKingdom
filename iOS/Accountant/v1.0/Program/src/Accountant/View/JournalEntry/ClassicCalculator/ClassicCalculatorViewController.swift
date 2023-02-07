@@ -37,6 +37,7 @@ class ClassicCalculatorViewController: UIViewController {
     
     @IBOutlet private var buttonDot: UIButton!
     @IBOutlet private var buttonEqual: EMTNeumorphicButton!
+    @IBOutlet private var arrayHugo: [EMTNeumorphicButton]!
 
     // 設定残高振替仕訳　連番
     var primaryKey: Int = 0
@@ -56,7 +57,27 @@ class ClassicCalculatorViewController: UIViewController {
 
 //    var turn = true
 //    var count = 0
-
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -278,11 +299,13 @@ class ClassicCalculatorViewController: UIViewController {
 //        buttonPercent.layer.cornerRadius = buttonPercent.frame.height / 2.2
         
     }
-    
-    @IBOutlet private var arrayHugo: [EMTNeumorphicButton]!
-    
     // 数字ボタンを押下
-    @objc func numClick(_ sender: EMTNeumorphicButton) {
+    @objc
+    func numClick(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true}
         for i in newArray {
@@ -467,8 +490,12 @@ class ClassicCalculatorViewController: UIViewController {
     // 入力値を設定する
     // ビジネスロジックを呼び出す
     // box1 四則演算子 box2 = 計算結果
-    @objc func clickEqual(_ sender: UIButton) {
- 
+    @objc
+    func clickEqual(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
 //        calculate()
 
         // 開始残高画面からの遷移の場合
@@ -572,7 +599,12 @@ class ClassicCalculatorViewController: UIViewController {
         buttonEqual.addTarget(self, action: #selector(clickEqual(_:)), for: .touchUpInside)
     }
     
-    @objc func clickAc(_ sender: EMTNeumorphicButton) {
+    @objc
+    func clickAc(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true}
         for i in newArray {

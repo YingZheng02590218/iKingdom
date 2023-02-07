@@ -13,6 +13,16 @@ import UIKit
 class SettingsOperatingTableViewController: UITableViewController {
     
     @IBOutlet private var gADBannerView: GADBannerView!
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,7 +201,12 @@ class SettingsOperatingTableViewController: UITableViewController {
         }
     }
     // 有効無効　変更時のアクション
-    @objc func hundleSwitch(sender: UISwitch) {
+    @objc
+    func hundleSwitch(sender: UISwitch) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 設定操作        
         if sender.tag == 0 { // 損益振替仕訳
             DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger0", isOn: sender.isOn)

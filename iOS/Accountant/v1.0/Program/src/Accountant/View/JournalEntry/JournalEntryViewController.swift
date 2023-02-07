@@ -49,7 +49,26 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
     var isShown = false
-
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     private var timer: Timer? // Timerを保持する変数
     
     // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
@@ -608,6 +627,10 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: UISegmentedControl
     @IBAction func segmentedControl(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         if segmentedControl.selectedSegmentIndex == 0 {
             // 仕訳タイプ判定
             journalEntryType = .JournalEntry // 仕訳
@@ -631,6 +654,10 @@ class JournalEntryViewController: UIViewController {
     }
     
     @IBAction func leftButtonTapped(_ sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true }
         for i in newArray {
@@ -650,6 +677,10 @@ class JournalEntryViewController: UIViewController {
     }
     
     @IBAction func rightButtonTapped(_ sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true }
         for i in newArray {
@@ -726,7 +757,11 @@ class JournalEntryViewController: UIViewController {
     }
     // TextFieldのキーボードについているBarButtonが押下された時
     @objc func barButtonTapped(_ sender: UIBarButtonItem) {
-        
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+
         switch sender.tag {
         case 7: // 小書きの場合 Done
             self.view.endEditing(true)
@@ -752,11 +787,13 @@ class JournalEntryViewController: UIViewController {
         isShown = false
     }
 
-    
     // MARK: EMTNeumorphicButton
     // 入力ボタン
     @IBAction func inputButtonTapped(_ sender: EMTNeumorphicButton) {
-        
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true }
         for i in newArray {
@@ -796,6 +833,9 @@ class JournalEntryViewController: UIViewController {
                         self.buttonTappedForJournalEntriesOnTabBar()
                     }
                 } else {
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
                     // ネットワークなし
                     let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
                     
@@ -884,6 +924,9 @@ class JournalEntryViewController: UIViewController {
         )
         
         if dBJournalEntry.checkPropertyIsNil() {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             let alert = UIAlertController(title: "なにも入力されていません", message: "変更したい項目に入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -955,6 +998,9 @@ class JournalEntryViewController: UIViewController {
             }
             // タブバーの仕訳タブから入力の場合
             else {
+                // フィードバック
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
                 let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
                 self.present(alert, animated: true) { () -> Void in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1092,6 +1138,9 @@ class JournalEntryViewController: UIViewController {
                 AnalyticsParameterContentType: Constant.JOURNALENTRY,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
             let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1106,6 +1155,9 @@ class JournalEntryViewController: UIViewController {
     func textInputCheck() -> Bool {
         
         guard textFieldCategoryDebit.text != "" && textFieldCategoryDebit.text != "" else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             let alert = UIAlertController(title: "借方勘定科目", message: "入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1118,6 +1170,9 @@ class JournalEntryViewController: UIViewController {
         }
         
         guard textFieldCategoryCredit.text != "" && textFieldCategoryCredit.text != "" else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             let alert = UIAlertController(title: "貸方勘定科目", message: "入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1130,6 +1185,9 @@ class JournalEntryViewController: UIViewController {
         }
         
         guard textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "0" else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1142,6 +1200,9 @@ class JournalEntryViewController: UIViewController {
         }
         
         guard textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "0" else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -1187,6 +1248,10 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: UIButton
     @IBAction func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 選択されていたボタンを選択解除する
         let newArray = arrayHugo.filter { $0.isSelected == true }
         for i in newArray {

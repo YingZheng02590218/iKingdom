@@ -204,6 +204,13 @@ class SettingsUpgradeTableViewController: UITableViewController {
             UpgradeManager.shared.verifyPurchase(
                 productId: UpgradeManager.PRODUCTIDSTANDARDPLAN,
                 completion: { isSuccess in
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    if isSuccess {
+                        generator.notificationOccurred(.success)
+                    } else {
+                        generator.notificationOccurred(.error)
+                    }
                     let alert = UIAlertController(title: "復元", message: "\(isSuccess ? "成功しました" : "失敗しました")", preferredStyle: .alert)
                     self.present(alert, animated: true) { () -> Void in
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
