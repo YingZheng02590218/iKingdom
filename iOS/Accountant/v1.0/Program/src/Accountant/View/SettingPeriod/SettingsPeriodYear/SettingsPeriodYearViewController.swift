@@ -12,6 +12,16 @@ import UIKit
 class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet private var pickerView: UIPickerView!
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +88,10 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
     }
     
     @IBAction func save(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
         if Network.shared.isOnline() ||
             // アップグレード機能　スタンダードプラン サブスクリプション購読済み
@@ -191,6 +205,10 @@ class SettingsPeriodYearViewController: UIViewController, UIPickerViewDataSource
     }
     
     @IBAction func cancel(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         self.dismiss(animated: true, completion: nil)
     }
 }

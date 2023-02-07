@@ -16,6 +16,16 @@ class SettingsCategoryTableViewController: UITableViewController {
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +133,10 @@ class SettingsCategoryTableViewController: UITableViewController {
     // 勘定科目体系　設定スイッチ 切り替え
     @objc
     func onSegment(sender: UISegmentedControl) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // セグメントコントロール　0: 法人, 1:個人
         let segStatus = sender.selectedSegmentIndex == 0 ? true : false
         print("Segment \(segStatus)")

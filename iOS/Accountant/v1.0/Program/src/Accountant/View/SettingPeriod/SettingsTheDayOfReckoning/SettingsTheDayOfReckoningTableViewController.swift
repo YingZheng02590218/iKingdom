@@ -6,13 +6,10 @@
 //  Copyright © 2020 Hisashi Ishihara. All rights reserved.
 //
 
-import GoogleMobileAds // マネタイズ対応
 import UIKit
 
 // 設定決算日
 class SettingsTheDayOfReckoningTableViewController: UITableViewController {
-
-    var gADBannerView: GADBannerView!
     
     var month = false // 決算日設定月
     
@@ -28,34 +25,10 @@ class SettingsTheDayOfReckoningTableViewController: UITableViewController {
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOBID
-            
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: 30 * -1)
-        } else {
-            if let gADBannerView = gADBannerView {
-                // GADBannerView を外す
-                removeBannerViewToView(gADBannerView)
-            }
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // アップグレード機能　スタンダードプラン
-        if let gADBannerView = gADBannerView {
-            // GADBannerView を外す
-            removeBannerViewToView(gADBannerView)
-        }
     }
     
     // MARK: - Table view data source
