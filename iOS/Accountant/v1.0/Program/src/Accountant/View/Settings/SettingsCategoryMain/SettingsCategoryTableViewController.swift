@@ -11,12 +11,12 @@ import UIKit
 
 // 勘定科目体系クラス
 class SettingsCategoryTableViewController: UITableViewController {
-
+    
     var gADBannerView: GADBannerView!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // title設定
@@ -55,7 +55,7 @@ class SettingsCategoryTableViewController: UITableViewController {
             }
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -106,7 +106,7 @@ class SettingsCategoryTableViewController: UITableViewController {
         let firstLunchKey = "firstLunch_SettingsCategory"
         userDefaults.set(false, forKey: firstLunchKey)
         userDefaults.synchronize()
-
+        
         // タブの有効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
@@ -119,14 +119,14 @@ class SettingsCategoryTableViewController: UITableViewController {
         // 赤ポチを終了
         self.tabBarController?.viewControllers?[4].tabBarItem.badgeValue = nil
     }
-
+    
     // 勘定科目体系　設定スイッチ 切り替え
     @objc
     func onSegment(sender: UISegmentedControl) {
         // セグメントコントロール　0: 法人, 1:個人
         let segStatus = sender.selectedSegmentIndex == 0 ? true : false
         print("Segment \(segStatus)")
-
+        
         let alert = UIAlertController(
             title: "変更",
             message: "勘定科目体系を変更しますか？",
@@ -150,11 +150,22 @@ class SettingsCategoryTableViewController: UITableViewController {
                     DispatchQueue.main.async {
                         // 法人/個人フラグ　スイッチを元に戻す
                         sender.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "corporation_switch") ? 0 : 1
+                        // アップグレード機能　スタンダードプラン
+                        if let gADBannerView = self.gADBannerView {
+                            // GADBannerView を表示する
+                            gADBannerView.isHidden = false
+                        }
                     }
                 }
             )
         )
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: {
+            // アップグレード機能　スタンダードプラン
+            if let gADBannerView = self.gADBannerView {
+                // GADBannerView を隠す
+                gADBannerView.isHidden = true
+            }
+        })
     }
     // 勘定科目体系を変更
     func change(segStatus: Bool) {
@@ -193,6 +204,11 @@ class SettingsCategoryTableViewController: UITableViewController {
             self.finishActivityIndicatorView()
             Thread.sleep(forTimeInterval: 0.5)
             DispatchQueue.main.async {
+                // アップグレード機能　スタンダードプラン
+                if let gADBannerView = self.gADBannerView {
+                    // GADBannerView を表示する
+                    gADBannerView.isHidden = false
+                }
                 // リロード
                 self.tableView.reloadData()
             }
@@ -254,13 +270,13 @@ class SettingsCategoryTableViewController: UITableViewController {
             self.backView.removeFromSuperview()
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         3
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -312,7 +328,7 @@ class SettingsCategoryTableViewController: UITableViewController {
             tableView.bringSubviewToFront(gADBannerView)
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         // アップグレード機能　スタンダードプラン
         if !UpgradeManager.shared.inAppPurchaseFlag {
@@ -322,9 +338,9 @@ class SettingsCategoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         var cell = UITableViewCell()
-
+        
         if indexPath.section == 0 {
             if cell.accessoryView == nil {
                 // 法人/個人フラグ　設定スイッチ
@@ -373,7 +389,7 @@ class SettingsCategoryTableViewController: UITableViewController {
             disclosureView.tintColor = UIColor.accentColor
             cell.accessoryView = disclosureView
         }
-
+        
         return cell
     }
 }
