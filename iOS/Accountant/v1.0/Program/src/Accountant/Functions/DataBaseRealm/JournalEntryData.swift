@@ -29,12 +29,12 @@ struct JournalEntryData {
     }
     // 値が入っているプロパティがあるかどうかをチェックする
     func checkPropertyIsNil() -> Bool {
-        guard date != nil else { return false }
-        guard debit_category != nil else { return false }
-        guard debit_amount != nil else { return false }
-        guard credit_category != nil else { return false }
-        guard credit_amount != nil else { return false }
-        guard smallWritting != nil else { return false }
+        guard date == nil else { return false }
+        guard debit_category == nil else { return false }
+        guard debit_amount == nil else { return false }
+        guard credit_category == nil else { return false }
+        guard credit_amount == nil else { return false }
+        guard smallWritting == nil else { return false }
 
         return true
     }

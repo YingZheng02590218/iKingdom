@@ -834,32 +834,44 @@ class JournalEntryViewController: UIViewController {
         var datePicker: String?
         if isMaskedDatePicker {
             datePicker = dateFormatter.string(from: self.datePicker.date)
+        } else {
+            datePicker = nil
         }
         var textFieldCategoryDebit: String?
         if let text = self.textFieldCategoryDebit.text {
             if !text.isEmpty {
                 textFieldCategoryDebit = text
             }
+        } else {
+            textFieldCategoryDebit = nil
         }
         var textFieldCategoryCredit: String?
         if let text = self.textFieldCategoryCredit.text {
             if !text.isEmpty {
                 textFieldCategoryCredit = text
             }
+        } else {
+            textFieldCategoryCredit = nil
         }
         var textFieldAmountDebit: Int64?
         if let text = self.textFieldAmountDebit.text {
             textFieldAmountDebit = Int64(StringUtility.shared.removeComma(string: text))
+        } else {
+            textFieldAmountDebit = nil
         }
         var textFieldAmountCredit: Int64?
         if let text = self.textFieldAmountCredit.text {
             textFieldAmountCredit = Int64(StringUtility.shared.removeComma(string: text))
+        } else {
+            textFieldAmountCredit = nil
         }
         var textFieldSmallWritting: String?
         if let text = self.textFieldSmallWritting.text {
             if !text.isEmpty {
                 textFieldSmallWritting = text
             }
+        } else {
+            textFieldSmallWritting = nil
         }
         
         let dBJournalEntry = JournalEntryData(
