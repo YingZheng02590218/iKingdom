@@ -29,7 +29,17 @@ class SettingsTableViewController: UIViewController {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
-
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
@@ -63,9 +73,13 @@ class SettingsTableViewController: UIViewController {
         versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
 
-
     // 生体認証パスコードロック　設定スイッチ 切り替え
-    @objc func switchTriggered(sender: UISwitch) {
+    @objc
+    func switchTriggered(sender: UISwitch) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 生体認証かパスコードのいずれかが使用可能かを確認する
         if LocalAuthentication.canEvaluatePolicy() {
             // 認証使用可能時の処理
@@ -75,6 +89,9 @@ class SettingsTableViewController: UIViewController {
                 UserDefaults.standard.synchronize()
             }
         } else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
             // 認証使用可能時の処理
             DispatchQueue.main.async {
                 // スイッチを元に戻す

@@ -14,6 +14,16 @@ class BackupViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var label: UILabel!
+    // フィードバック
+    private let feedbackGeneratorHeavy: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
     var backupFiles: [(String, NSNumber?)] = []
@@ -118,6 +128,10 @@ class BackupViewController: UIViewController {
     }
     // バックアップ作成ボタン
     @IBAction func buttonTapped(_ sender: EMTNeumorphicButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // ボタンを選択する
         sender.isSelected = !sender.isSelected
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
