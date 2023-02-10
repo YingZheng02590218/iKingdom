@@ -2798,7 +2798,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2814,7 +2814,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2834,7 +2834,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2850,7 +2850,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2868,7 +2868,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PaciolistWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T526NZN54U;
@@ -2885,6 +2885,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant.PaciolistWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2900,10 +2901,12 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PaciolistWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T526NZN54U;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PaciolistWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PaciolistWidget;
@@ -2917,6 +2920,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant.PaciolistWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistWidget Distribution Provisioning Profile";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2998,7 +3003,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3015,7 +3020,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3035,7 +3040,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3052,7 +3057,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
