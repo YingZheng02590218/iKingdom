@@ -14,5 +14,9 @@
 	<array>
 		<string>iCloud.com.ikingdom778.Accountant</string>
 	</array>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.ikingdom.Accountant</string>
+	</array>
 </dict>
 </plist>

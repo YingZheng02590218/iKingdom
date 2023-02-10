@@ -62,6 +62,8 @@ class DataBaseManagerJournalEntry {
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(accountLeft: debitCategory, accountRight: creditCategory)
+        // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
+        DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         return number
     }
 
@@ -196,7 +198,8 @@ class DataBaseManagerJournalEntry {
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(accountLeft: accountLeft, accountRight: accountRight) // 編集前の借方勘定と貸方勘定
         dataBaseManager.setAccountTotal(accountLeft: debitCategory, accountRight: creditCategory) // 編集後の借方勘定と貸方勘定
-        
+        // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
+        DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
     }
 
@@ -219,6 +222,8 @@ class DataBaseManagerJournalEntry {
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(accountLeft: accountLeft, accountRight: accountRight)
+        // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
+        DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
 }

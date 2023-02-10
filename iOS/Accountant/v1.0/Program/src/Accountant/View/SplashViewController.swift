@@ -89,7 +89,7 @@ class SplashViewController: UIViewController {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
                 guard let result = (json?["results"] as? [Any])?.first as? [String: Any],
-                      let storeVersion = result["version"] as? String else { return }
+                      let storeVersion = result["version"] as? String else { return } // TODO: 4.0.0が返ってくる
 
                 // 端末のアプリバージョンと App Store のアプリバージョンを比較
                 if appVersion != storeVersion {
