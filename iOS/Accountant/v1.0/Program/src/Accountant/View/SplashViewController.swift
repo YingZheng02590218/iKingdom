@@ -75,7 +75,7 @@ class SplashViewController: UIViewController {
     func appVersionCheck(completionHandler: @escaping (Bool) -> Void) {
         let appVersion = AppVersion.currentVersion
         let identifier = AppVersion.identifier
-        guard let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else { return }
+        guard let url = URL(string: "https://itunes.apple.com/us/lookup?bundleId=\(identifier)") else { return }
         //        // アプリバージョン　< 強制アップデートバージョン（）の場合、強制アップデートダイアログを表示する
         //        let appVersionValue = AppVersion.convertVersionValue(string: AppVersion.currentVersion)
         //        let forcedUpdateVersionValue = AppVersion.convertVersionValue(string: "TODO") // APIから取得する
@@ -89,7 +89,7 @@ class SplashViewController: UIViewController {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
                 guard let result = (json?["results"] as? [Any])?.first as? [String: Any],
-                      let storeVersion = result["version"] as? String else { return } // TODO: 4.0.0が返ってくる
+                      let storeVersion = result["version"] as? String else { return }
 
                 // 端末のアプリバージョンと App Store のアプリバージョンを比較
                 if appVersion != storeVersion {
