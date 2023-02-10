@@ -12,9 +12,20 @@ import UIKit
 // 会計期間クラス
 class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
-    var gADBannerView: GADBannerView!
-
     private var interstitial: GADInterstitialAd?
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,43 +48,12 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-            // iPhone X のポートレート決め打ちです　→ 仕訳帳のタブバーの上にバナー広告が表示されるように調整した。
-            //        print(self.view.frame.size.height)
-            //        print(gADBannerView.frame.height)
-            //        gADBannerView.frame.origin = CGPoint(x: 0, y: self.view.frame.size.height - gADBannerView.frame.height + tableView.contentOffset.y) // スクロール時の、広告の位置を固定する
-            //        gADBannerView.frame.size = CGSize(width: self.view.frame.width, height: gADBannerView.frame.height)
-            // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOBID
-
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            print(tableView.visibleCells[tableView.visibleCells.count-1].frame.height)
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count-1].frame.height * -1)
-            // マネタイズ対応　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-        } else {
-            if let gADBannerView = gADBannerView {
-                // GADBannerView を外す
-                removeBannerViewToView(gADBannerView)
-            }
-        }
         // セットアップ AdMob
         setupAdMob()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // アップグレード機能　スタンダードプラン
-        if let gADBannerView = gADBannerView {
-            // GADBannerView を外す
-            removeBannerViewToView(gADBannerView)
-        }
     }
 
     // インタースティシャル広告を表示　マネタイズ対応
@@ -223,14 +203,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             return ""
         }
     }
-
-    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-            tableView.bringSubviewToFront(gADBannerView)
-        }
-    }
     // セクションフッターのテキスト決める
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
@@ -334,12 +306,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         case 1:
             // 会計年度
             if let cell = tableView.cellForRow(at: indexPath) {
-                // チェックマークを入れる
-                cell.accessoryType = .checkmark
-                // ここからデータベースを更新する
-                pickAccountingBook(tag: cell.tag) // 会計帳簿の連番
-                // 年度を選択時に会計期間画面を更新する
-                tableView.reloadData()
+                // ダイアログ
+                showDialog(tag: cell.tag) // 会計帳簿の連番
             }
         default:
             print("")
@@ -347,16 +315,116 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     // チェックマークの切り替え　データベースを更新
     func pickAccountingBook(tag: Int) {
-        // データベース
-        DataBaseManagerSettingsPeriod.shared.setMainBooksOpenOrClose(tag: tag)
-        // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
-        let dataBaseManagerAccount = GeneralLedgerAccountModel()
-        dataBaseManagerAccount.addGeneralLedgerAccountLack()
-        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
-        let databaseManager = TBModel()
-        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
-        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+        // インジゲーターを開始
+        self.showActivityIndicatorView()
+        DispatchQueue.global(qos: .default).async {
+            // データベース
+            DataBaseManagerSettingsPeriod.shared.setMainBooksOpenOrClose(tag: tag)
+            // 帳簿の年度を切り替えた場合、設定勘定科目と勘定の勘定科目を比較して、不足している勘定を追加する　2020/11/08
+            let dataBaseManagerAccount = GeneralLedgerAccountModel()
+            dataBaseManagerAccount.addGeneralLedgerAccountLack()
+            // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+            let databaseManager = TBModel()
+            databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+            databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+            // インジケーターを終了
+            self.finishActivityIndicatorView()
+            Thread.sleep(forTimeInterval: 0.5)
+            DispatchQueue.main.async {
+                // リロード
+                self.tableView.reloadData() // 年度を選択時に会計期間画面を更新する
+            }
+        }
     }
+    // ダイアログ
+    func showDialog(tag: Int) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        
+        let alert = UIAlertController(
+            title: "変更",
+            message: "帳簿を変更しますか？",
+            preferredStyle: .alert
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
+                    // ここからデータベースを更新する
+                    self.pickAccountingBook(tag: tag) // 会計帳簿の連番
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: "Cancel",
+                style: .cancel,
+                handler: { _ in
+                }
+            )
+        )
+        present(alert, animated: true, completion: nil)
+    }
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
+        }
+    }
+
     // セルの選択が外れた時に呼び出される
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
