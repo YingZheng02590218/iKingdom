@@ -126,7 +126,7 @@ struct PaciolistWidgetEntryView : View {
         }
     }
     var netIncomeOrLossScale: Double {
-        if (entry.accountingData.expense / right).isNaN {
+        if (entry.accountingData.netIncomeOrLoss / left).isNaN {
             return 0
         } else {
             return (entry.accountingData.netIncomeOrLoss / left)
@@ -308,12 +308,12 @@ struct PaciolistWidget: Widget {
 struct PaciolistWidget_Previews: PreviewProvider {
     static var previews: some View {
         let accountingData = AccountingData(
-            assets: 70,
-            liabilities: 20,
-            netAssets: 40,
-            expense: 30,
-            income: 30,
-            netIncomeOrLoss: 10
+            assets: 700000,
+            liabilities: 300000,
+            netAssets: 400000,
+            expense: 300000,
+            income: 500000,
+            netIncomeOrLoss: 200000
         )
         PaciolistWidgetEntryView(entry: SimpleEntry(date: Date(), accountingData: accountingData, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
