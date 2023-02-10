@@ -305,8 +305,8 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
         // 利益5種類　売上総利益、営業利益、経常利益、税金等調整前当期純利益、当期純利益
         for i in 0..<5 {
             if let profitAndLossStatement = dataBaseAccountingBooks.dataBaseFinancialStatements?.profitAndLossStatement {
-                // TODO: ウィジェット 5大区分　合計額
-                let userDefault = UserDefaults(suiteName: "group.com.ikingdom.AccountantSTG")
+                // ウィジェット 5大区分　合計額
+                let userDefault = UserDefaults(suiteName: AppGroups.appGroupsId)
                 do {
                     try DataBaseManager.realm.write {
                         switch i {
