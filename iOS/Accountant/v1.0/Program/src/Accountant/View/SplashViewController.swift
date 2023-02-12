@@ -75,7 +75,7 @@ class SplashViewController: UIViewController {
     func appVersionCheck(completionHandler: @escaping (Bool) -> Void) {
         let appVersion = AppVersion.currentVersion
         let identifier = AppVersion.identifier
-        guard let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else { return }
+        guard let url = URL(string: "https://itunes.apple.com/us/lookup?bundleId=\(identifier)") else { return }
         //        // アプリバージョン　< 強制アップデートバージョン（）の場合、強制アップデートダイアログを表示する
         //        let appVersionValue = AppVersion.convertVersionValue(string: AppVersion.currentVersion)
         //        let forcedUpdateVersionValue = AppVersion.convertVersionValue(string: "TODO") // APIから取得する

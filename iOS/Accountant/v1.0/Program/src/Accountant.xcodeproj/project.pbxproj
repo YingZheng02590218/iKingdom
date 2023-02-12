@@ -274,6 +274,8 @@
 		F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */; };
 		F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */; };
 		F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */; };
+		F9D15D782996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */; };
+		F9D15D792996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */; };
 		F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
 		F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */; };
 		F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */; };
@@ -298,6 +300,30 @@
 		F9DA6CB3282D03AA0016A1A7 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */; };
 		F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
 		F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */; };
+		F9DC86F529932E1C00919E5F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F429932E1C00919E5F /* WidgetKit.framework */; };
+		F9DC86F729932E1C00919E5F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F629932E1C00919E5F /* SwiftUI.framework */; };
+		F9DC86FA29932E1C00919E5F /* PaciolistWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86F929932E1C00919E5F /* PaciolistWidgetBundle.swift */; };
+		F9DC86FC29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */; };
+		F9DC86FE29932E1C00919E5F /* PaciolistWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */; };
+		F9DC870129932E1D00919E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC870029932E1D00919E5F /* Assets.xcassets */; };
+		F9DC870329932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */; };
+		F9DC870429932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */; };
+		F9DC870729932E1D00919E5F /* PaciolistWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F9DC873529948CCE00919E5F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F429932E1C00919E5F /* WidgetKit.framework */; };
+		F9DC873629948CCE00919E5F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F629932E1C00919E5F /* SwiftUI.framework */; };
+		F9DC873929948CCE00919E5F /* PaciolistSTGWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873829948CCE00919E5F /* PaciolistSTGWidgetBundle.swift */; };
+		F9DC873B29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */; };
+		F9DC873D29948CCE00919E5F /* PaciolistSTGWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */; };
+		F9DC874029948CCF00919E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC873F29948CCF00919E5F /* Assets.xcassets */; };
+		F9DC874229948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */; };
+		F9DC874329948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */; };
+		F9DC874629948CCF00919E5F /* PaciolistSTGWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F9DC87512994ECD100919E5F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC874F2994EC7100919E5F /* Color.xcassets */; };
+		F9DC87522994ECDD00919E5F /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC874B2994EB4600919E5F /* UIColor+extension.swift */; };
+		F9DC87542995351300919E5F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC87532995351300919E5F /* Color.xcassets */; };
+		F9DC87562995354000919E5F /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC87552995354000919E5F /* UIColor+extension.swift */; };
+		F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
+		F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -515,6 +541,23 @@
 		F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */ = {isa = PBXBuildFile; fileRef = F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F9DC870529932E1D00919E5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F94EDD87237AEB3A0074D812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9DC86F229932E1C00919E5F;
+			remoteInfo = PaciolistWidgetExtension;
+		};
+		F9DC874429948CCF00919E5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F94EDD87237AEB3A0074D812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9DC873329948CCE00919E5F;
+			remoteInfo = PaciolistSTGWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		F9439D44298D27F500FCBA41 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -527,6 +570,28 @@
 				F9439D46298D27F800FCBA41 /* Realm.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC870829932E1D00919E5F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F9DC870729932E1D00919E5F /* PaciolistWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC872F2994895100919E5F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F9DC874629948CCF00919E5F /* PaciolistSTGWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */ = {
@@ -766,6 +831,7 @@
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryDetailTableViewController.swift; sourceTree = "<group>"; };
 		F9D08D9225444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingAccountDetailTableViewCell.swift; sourceTree = "<group>"; };
+		F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerBalanceSheetProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9D15FB2296D8E3E005E197D /* ProfitAndLossStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementViewController.swift; sourceTree = "<group>"; };
 		F9D15FB5296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfitAndLossStatementViewController.storyboard; sourceTree = "<group>"; };
 		F9D15FB8296EA260005E197D /* ProfitAndLossStatementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitAndLossStatementPresenter.swift; sourceTree = "<group>"; };
@@ -782,6 +848,29 @@
 		F9D5D54E247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
 		F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		F9DB32FB297158F000D865D8 /* DataBaseOpeningJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseOpeningJournalEntry.swift; sourceTree = "<group>"; };
+		F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PaciolistWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9DC86F429932E1C00919E5F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F9DC86F629932E1C00919E5F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F9DC86F929932E1C00919E5F /* PaciolistWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidgetBundle.swift; sourceTree = "<group>"; };
+		F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidget.swift; sourceTree = "<group>"; };
+		F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PaciolistWidget.intentdefinition; sourceTree = "<group>"; };
+		F9DC870029932E1D00919E5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9DC870229932E1D00919E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PaciolistSTGWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9DC873829948CCE00919E5F /* PaciolistSTGWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidgetBundle.swift; sourceTree = "<group>"; };
+		F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidget.swift; sourceTree = "<group>"; };
+		F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PaciolistSTGWidget.intentdefinition; sourceTree = "<group>"; };
+		F9DC873F29948CCF00919E5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9DC874129948CCF00919E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9DC874A29949AFD00919E5F /* PaciolistSTGWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTGWidgetExtension.entitlements; sourceTree = "<group>"; };
+		F9DC874B2994EB4600919E5F /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		F9DC874F2994EC7100919E5F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		F9DC87532995351300919E5F /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		F9DC87552995354000919E5F /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
+		F9DC8758299537A200919E5F /* PaciolistWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistWidgetExtension.entitlements; sourceTree = "<group>"; };
+		F9DC875929953B1D00919E5F /* AppGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroups.swift; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -847,6 +936,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F9DC86F029932E1C00919E5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC86F729932E1C00919E5F /* SwiftUI.framework in Frameworks */,
+				F9DC86F529932E1C00919E5F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC873129948CCE00919E5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC873629948CCE00919E5F /* SwiftUI.framework in Frameworks */,
+				F9DC873529948CCE00919E5F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F9EC670A27B90BC60003FBB6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -905,6 +1012,8 @@
 				213D3BB43C7359BF8FC7C07E /* libPods-AccountantUITests.a */,
 				48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */,
 				2D73795937EF48CE7A86817B /* Pods_PaciolistSTG.framework */,
+				F9DC86F429932E1C00919E5F /* WidgetKit.framework */,
+				F9DC86F629932E1C00919E5F /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -992,6 +1101,7 @@
 				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
 				F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */,
 				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
+				F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */,
 				F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */,
 				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
 				F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */,
@@ -1039,10 +1149,14 @@
 		F94EDD86237AEB3A0074D812 = {
 			isa = PBXGroup;
 			children = (
+				F9DC8758299537A200919E5F /* PaciolistWidgetExtension.entitlements */,
+				F9DC874A29949AFD00919E5F /* PaciolistSTGWidgetExtension.entitlements */,
 				F9ED936629826F2700B255EF /* Paciolist.entitlements */,
 				F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */,
 				F986CC1D29474392005A2138 /* .swiftlint.yml */,
 				F94EDD91237AEB3A0074D812 /* Accountant */,
+				F9DC86F829932E1C00919E5F /* PaciolistWidget */,
+				F9DC873729948CCE00919E5F /* PaciolistSTGWidget */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
 				F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */,
@@ -1055,6 +1169,8 @@
 			children = (
 				F94EDD8F237AEB3A0074D812 /* Paciolist.app */,
 				F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */,
+				F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */,
+				F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1495,10 +1611,41 @@
 			children = (
 				F9DA6CB1282D03AA0016A1A7 /* DateManager.swift */,
 				F98289B72978E0E800F8F1B8 /* AppVersion.swift */,
+				F9DC875929953B1D00919E5F /* AppGroups.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
 				F9AD64E22912B66B00B9F50B /* StringUtility.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F9DC86F829932E1C00919E5F /* PaciolistWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F9DC86F929932E1C00919E5F /* PaciolistWidgetBundle.swift */,
+				F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */,
+				F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */,
+				F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */,
+				F9DC87552995354000919E5F /* UIColor+extension.swift */,
+				F9DC870029932E1D00919E5F /* Assets.xcassets */,
+				F9DC87532995351300919E5F /* Color.xcassets */,
+				F9DC870229932E1D00919E5F /* Info.plist */,
+			);
+			path = PaciolistWidget;
+			sourceTree = "<group>";
+		};
+		F9DC873729948CCE00919E5F /* PaciolistSTGWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F9DC873829948CCE00919E5F /* PaciolistSTGWidgetBundle.swift */,
+				F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */,
+				F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */,
+				F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */,
+				F9DC874B2994EB4600919E5F /* UIColor+extension.swift */,
+				F9DC873F29948CCF00919E5F /* Assets.xcassets */,
+				F9DC874F2994EC7100919E5F /* Color.xcassets */,
+				F9DC874129948CCF00919E5F /* Info.plist */,
+			);
+			path = PaciolistSTGWidget;
 			sourceTree = "<group>";
 		};
 		F9E0F43526413E2700085CC0 /* Cell */ = {
@@ -1660,15 +1807,51 @@
 				F91878C9258300DB00D2E793 /* Run Script */,
 				490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */,
 				F9439D44298D27F500FCBA41 /* Embed Frameworks */,
+				F9DC870829932E1D00919E5F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F9DC870629932E1D00919E5F /* PBXTargetDependency */,
 			);
 			name = Paciolist;
 			productName = Accountant;
 			productReference = F94EDD8F237AEB3A0074D812 /* Paciolist.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F9DC86F229932E1C00919E5F /* PaciolistWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9DC870B29932E1D00919E5F /* Build configuration list for PBXNativeTarget "PaciolistWidgetExtension" */;
+			buildPhases = (
+				F9DC86EF29932E1C00919E5F /* Sources */,
+				F9DC86F029932E1C00919E5F /* Frameworks */,
+				F9DC86F129932E1C00919E5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PaciolistWidgetExtension;
+			productName = PaciolistWidgetExtension;
+			productReference = F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F9DC873329948CCE00919E5F /* PaciolistSTGWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9DC874729948CCF00919E5F /* Build configuration list for PBXNativeTarget "PaciolistSTGWidgetExtension" */;
+			buildPhases = (
+				F9DC873029948CCE00919E5F /* Sources */,
+				F9DC873129948CCE00919E5F /* Frameworks */,
+				F9DC873229948CCE00919E5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PaciolistSTGWidgetExtension;
+			productName = PaciolistSTGWidgetExtension;
+			productReference = F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		F9EC668C27B90BC60003FBB6 /* PaciolistSTG */ = {
 			isa = PBXNativeTarget;
@@ -1682,10 +1865,12 @@
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
 				F986CC1C2947419E005A2138 /* Run Script SwiftLint */,
 				F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */,
+				F9DC872F2994895100919E5F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F9DC874529948CCF00919E5F /* PBXTargetDependency */,
 			);
 			name = PaciolistSTG;
 			productName = Accountant;
@@ -1698,12 +1883,18 @@
 		F94EDD87237AEB3A0074D812 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Hisashi Ishihara";
 				TargetAttributes = {
 					F94EDD8E237AEB3A0074D812 = {
 						CreatedOnToolsVersion = 11.1;
+					};
+					F9DC86F229932E1C00919E5F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					F9DC873329948CCE00919E5F = {
+						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
@@ -1723,6 +1914,8 @@
 			targets = (
 				F94EDD8E237AEB3A0074D812 /* Paciolist */,
 				F9EC668C27B90BC60003FBB6 /* PaciolistSTG */,
+				F9DC86F229932E1C00919E5F /* PaciolistWidgetExtension */,
+				F9DC873329948CCE00919E5F /* PaciolistSTGWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1791,6 +1984,24 @@
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC86F129932E1C00919E5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC870129932E1D00919E5F /* Assets.xcassets in Resources */,
+				F9DC87542995351300919E5F /* Color.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC873229948CCE00919E5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC874029948CCF00919E5F /* Assets.xcassets in Resources */,
+				F9DC87512994ECD100919E5F /* Color.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2063,10 +2274,12 @@
 				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */,
+				F9DC870429932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
 				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
+				F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
@@ -2119,6 +2332,7 @@
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
+				F9D15D782996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift in Sources */,
 				F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
@@ -2187,6 +2401,30 @@
 				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
 				F9A6686D266247C7008E9137 /* UIColor+extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC86EF29932E1C00919E5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC86FA29932E1C00919E5F /* PaciolistWidgetBundle.swift in Sources */,
+				F9DC86FC29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift in Sources */,
+				F9DC870329932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */,
+				F9DC87562995354000919E5F /* UIColor+extension.swift in Sources */,
+				F9DC86FE29932E1C00919E5F /* PaciolistWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9DC873029948CCE00919E5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9DC873D29948CCE00919E5F /* PaciolistSTGWidget.swift in Sources */,
+				F9DC873B29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift in Sources */,
+				F9DC87522994ECDD00919E5F /* UIColor+extension.swift in Sources */,
+				F9DC874229948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */,
+				F9DC873929948CCE00919E5F /* PaciolistSTGWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2259,6 +2497,7 @@
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
 				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
+				F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */,
 				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
 				F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
@@ -2311,6 +2550,7 @@
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
 				F9EC66DF27B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
+				F9D15D792996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift in Sources */,
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
 				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
@@ -2329,6 +2569,7 @@
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
+				F9DC874329948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */,
 				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
@@ -2382,6 +2623,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F9DC870629932E1D00919E5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9DC86F229932E1C00919E5F /* PaciolistWidgetExtension */;
+			targetProxy = F9DC870529932E1D00919E5F /* PBXContainerItemProxy */;
+		};
+		F9DC874529948CCF00919E5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9DC873329948CCE00919E5F /* PaciolistSTGWidgetExtension */;
+			targetProxy = F9DC874429948CCF00919E5F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F94EDD9A237AEB3A0074D812 /* Main.storyboard */ = {
@@ -2538,12 +2792,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 39BB083924E3DF054BD9CB2A /* Pods-Paciolist.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2559,7 +2814,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2573,12 +2828,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2594,7 +2850,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2604,16 +2860,150 @@
 			};
 			name = Release;
 		};
+		F9DC870929932E1D00919E5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = PaciolistWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaciolistWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PaciolistWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant.PaciolistWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9DC870A29932E1D00919E5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = PaciolistWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaciolistWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PaciolistWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant.PaciolistWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistWidget Distribution Provisioning Profile";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F9DC874829948CCF00919E5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = PaciolistSTGWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaciolistSTGWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PaciolistSTGWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG.PaciolistSTGWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9DC874929948CCF00919E5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = PaciolistSTGWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaciolistSTGWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PaciolistSTGWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG.PaciolistSTGWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F9EC674327B90BC60003FBB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4E71F0C10598DD47284262D /* Pods-PaciolistSTG.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2630,7 +3020,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2644,12 +3034,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24B019FB635FB5CEF76A02CC /* Pods-PaciolistSTG.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.0.0;
+				CURRENT_PROJECT_VERSION = 4.1.1;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -2666,7 +3057,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0.1;
+				MARKETING_VERSION = 4.1.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2693,6 +3084,24 @@
 			buildConfigurations = (
 				F94EDDBC237AEB3C0074D812 /* Debug */,
 				F94EDDBD237AEB3C0074D812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9DC870B29932E1D00919E5F /* Build configuration list for PBXNativeTarget "PaciolistWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9DC870929932E1D00919E5F /* Debug */,
+				F9DC870A29932E1D00919E5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9DC874729948CCF00919E5F /* Build configuration list for PBXNativeTarget "PaciolistSTGWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9DC874829948CCF00919E5F /* Debug */,
+				F9DC874929948CCF00919E5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
