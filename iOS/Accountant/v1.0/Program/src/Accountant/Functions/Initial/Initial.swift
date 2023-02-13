@@ -30,7 +30,7 @@ class Initial {
             self.initializePeriod()
             // チュートリアル対応 コーチマーク型　初回起動時
             let userDefaults = UserDefaults.standard
-            let firstLunchKey = "firstLunch_JournalEntry"
+            let firstLunchKey = "sample_JournalEntry"
             if userDefaults.bool(forKey: firstLunchKey) {
                 // 仕訳のサンプルデータを作成する
                 _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
@@ -50,6 +50,9 @@ class Initial {
                     creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
                     smallWritting: "ゾウ商店"
                 )
+                // フラグを倒す
+                userDefaults.set(false, forKey: firstLunchKey)
+                userDefaults.synchronize()
             }
             
             // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
