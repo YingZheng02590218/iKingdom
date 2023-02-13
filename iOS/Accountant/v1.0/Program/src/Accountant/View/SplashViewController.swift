@@ -92,7 +92,8 @@ class SplashViewController: UIViewController {
                       let storeVersion = result["version"] as? String else { return }
 
                 // 端末のアプリバージョンと App Store のアプリバージョンを比較
-                if appVersion != storeVersion {
+                print(appVersion, storeVersion, appVersion < storeVersion)
+                if appVersion < storeVersion {
                     // appVersion と storeVersion が異なっている時に実行したい処理
                     // 半強制アップデートダイアログを表示する
                     self.showForcedUpdateDialog(completionHandler: { moveForward in
