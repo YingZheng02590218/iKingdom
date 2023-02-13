@@ -205,18 +205,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
                 cell.centerLabel.text = "パスコードロックを利用する"
                 cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
-                if cell.accessoryView == nil {
-                    let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                    // 生体認証パスコードロック　設定スイッチ
-                    switchView.onTintColor = .accentColor
-                    switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
-                    switchView.tag = indexPath.row
-                    switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
-                    cell.accessoryView = switchView
-                }
+                let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                // 生体認証パスコードロック　設定スイッチ
+                switchView.onTintColor = .accentColor
+                switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
+                switchView.tag = indexPath.row
+                switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
+                cell.accessoryView = switchView
                 return cell
             case 1:
                 cell.centerLabel.text = "仕訳"
