@@ -851,9 +851,9 @@ class JournalEntryViewController: UIViewController {
                                 if Network.shared.isOnline() {
                                     // アップグレード画面を表示
                                     if let viewController = UIStoryboard(
-                                        name: "SettingsUpgradeTableViewController",
+                                        name: "SettingsUpgradeViewController",
                                         bundle: nil
-                                    ).instantiateViewController(withIdentifier: "SettingsUpgradeTableViewController") as? SettingsUpgradeTableViewController {
+                                    ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
                                         self.present(viewController, animated: true, completion: nil)
                                     }
                                 } else {

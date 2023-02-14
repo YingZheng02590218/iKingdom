@@ -140,6 +140,8 @@
 		F9789A342475C49B00B62CAF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9789A332475C49B00B62CAF /* SettingsTableViewController.swift */; };
 		F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
 		F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */; };
+		F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98163072999E1B70027B4C8 /* SettingsUpgradeViewController.swift */; };
+		F98163092999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98163072999E1B70027B4C8 /* SettingsUpgradeViewController.swift */; };
 		F98289782973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
 		F98289792973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */; };
 		F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */; };
@@ -181,7 +183,7 @@
 		F9941D6A26458259008B3970 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
 		F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */; };
 		F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
-		F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */; };
+		F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */; };
 		F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CE326208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard */; };
 		F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CEE26208DF50099D51C /* SettingsPeriodYearViewController.storyboard */; };
 		F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CF326208E800099D51C /* SettingsHelpDetailViewController.storyboard */; };
@@ -415,7 +417,6 @@
 		F9EC66DF27B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97AC19C25A976000077B667 /* UpgradeManager.swift */; };
 		F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */; };
-		F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7992F25A8647B0037EC50 /* SettingsUpgradeTableViewController.swift */; };
 		F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91F6E2C248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift */; };
 		F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934EE2485578900BF7AA7 /* Initial.swift */; };
 		F9EC66E527B90BC60003FBB6 /* DataBaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */; };
@@ -472,7 +473,7 @@
 		F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BDCBB727A9603D00BD8770 /* JournalsViewController.storyboard */; };
 		F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CEE26208DF50099D51C /* SettingsPeriodYearViewController.storyboard */; };
 		F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7AB261DD61C004611E4 /* SettingsTableViewController.storyboard */; };
-		F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */; };
+		F9EC672027B90BC60003FBB6 /* SettingsUpgradeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */; };
 		F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
 		F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CF326208E800099D51C /* SettingsHelpDetailViewController.storyboard */; };
 		F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */; };
@@ -527,7 +528,6 @@
 		F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */; };
 		F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */; };
 		F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4608024D1ED15008FE62B /* PickerTextField.swift */; };
-		F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7992F25A8647B0037EC50 /* SettingsUpgradeTableViewController.swift */; };
 		F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */; };
 		F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */; };
 		F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */; };
@@ -721,6 +721,7 @@
 		F9789A352475CA8000B62CAF /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F97AC19C25A976000077B667 /* UpgradeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		F97C278E263AB39D00DFC3B0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F98163072999E1B70027B4C8 /* SettingsUpgradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUpgradeViewController.swift; sourceTree = "<group>"; };
 		F98289772973C00700F8F1B8 /* AfterClosingTrialBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalanceViewController.swift; sourceTree = "<group>"; };
 		F982897A2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AfterClosingTrialBalanceViewController.storyboard; sourceTree = "<group>"; };
 		F982897D2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterClosingTrialBalancePresenter.swift; sourceTree = "<group>"; };
@@ -746,7 +747,7 @@
 		F9941D6926458259008B3970 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpViewController.storyboard; sourceTree = "<group>"; };
-		F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsUpgradeTableViewController.storyboard; sourceTree = "<group>"; };
+		F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsUpgradeViewController.storyboard; sourceTree = "<group>"; };
 		F9963CE326208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTheDayOfReckoningTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CEE26208DF50099D51C /* SettingsPeriodYearViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsPeriodYearViewController.storyboard; sourceTree = "<group>"; };
 		F9963CF326208E800099D51C /* SettingsHelpDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpDetailViewController.storyboard; sourceTree = "<group>"; };
@@ -907,7 +908,6 @@
 		F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInformationTableViewController.swift; sourceTree = "<group>"; };
 		F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNameTableViewCell.swift; sourceTree = "<group>"; };
 		F9F4608024D1ED15008FE62B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
-		F9F7992F25A8647B0037EC50 /* SettingsUpgradeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUpgradeTableViewController.swift; sourceTree = "<group>"; };
 		F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccount.swift; sourceTree = "<group>"; };
 		F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournals.swift; sourceTree = "<group>"; };
@@ -1753,8 +1753,8 @@
 		F9F7992E25A864300037EC50 /* SettingsUpgrade */ = {
 			isa = PBXGroup;
 			children = (
-				F9F7992F25A8647B0037EC50 /* SettingsUpgradeTableViewController.swift */,
-				F9963CD5262089690099D51C /* SettingsUpgradeTableViewController.storyboard */,
+				F98163072999E1B70027B4C8 /* SettingsUpgradeViewController.swift */,
+				F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */,
 				F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */,
 			);
 			path = SettingsUpgrade;
@@ -1944,7 +1944,7 @@
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
-				F9963CD6262089690099D51C /* SettingsUpgradeTableViewController.storyboard in Resources */,
+				F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
@@ -2028,7 +2028,7 @@
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
-				F9EC672027B90BC60003FBB6 /* SettingsUpgradeTableViewController.storyboard in Resources */,
+				F9EC672027B90BC60003FBB6 /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
@@ -2300,6 +2300,7 @@
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
+				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */,
 				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
@@ -2336,7 +2337,6 @@
 				F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
 				F97AC19D25A976000077B667 /* UpgradeManager.swift in Sources */,
 				F9706849252ACD38003307F8 /* DataBaseManagerPLAccount.swift in Sources */,
-				F9F7993025A8647B0037EC50 /* SettingsUpgradeTableViewController.swift in Sources */,
 				F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
 				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
@@ -2518,6 +2518,7 @@
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
+				F98163092999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
 				F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
@@ -2553,7 +2554,6 @@
 				F9D15D792996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift in Sources */,
 				F9EC66E027B90BC60003FBB6 /* UpgradeManager.swift in Sources */,
 				F9EC66E127B90BC60003FBB6 /* DataBaseManagerPLAccount.swift in Sources */,
-				F9EC66E227B90BC60003FBB6 /* SettingsUpgradeTableViewController.swift in Sources */,
 				F9D15FB4296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
 				F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,

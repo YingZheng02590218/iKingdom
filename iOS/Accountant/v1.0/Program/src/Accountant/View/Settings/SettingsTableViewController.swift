@@ -51,6 +51,15 @@ class SettingsTableViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
+        
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = self.view.frame.height * 0.15
+        scrollView.parallaxHeader.mode = .fill
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
+
+        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,15 +71,6 @@ class SettingsTableViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
-        scrollView.parallaxHeader.mode = .center
-        scrollView.parallaxHeader.minimumHeight = 0
-        scrollView.contentSize = contentView.frame.size
-        scrollView.flashScrollIndicators()
-
-        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
 
     // 生体認証パスコードロック　設定スイッチ 切り替え
@@ -138,7 +138,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "アップグレード"
+            return ""
         case 1:
             return "バックアップ"
         case 2:
@@ -162,6 +162,14 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             return ""
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 55
+        } else {
+            return 44
+        }
+    }
     //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -172,12 +180,28 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
+        // ラベル
+        cell.centerLabel.font = UIFont.systemFont(ofSize: 16.0)
+        cell.centerLabel.textColor = .textColor
+        // アイコン画像の色を指定する
+        cell.leftImageView.tintColor = .textColor
+        // 背景色
+        cell.backgroundColor = .mainColor2
 
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
+                // Accessory Color
+                disclosureView.tintColor = UIColor.mainColor2
+                // ラベル
                 cell.centerLabel.text = "アップグレード"
+                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+                cell.centerLabel.textColor = .mainColor2
                 cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
+                // アイコン画像の色を指定する
+                cell.leftImageView.tintColor = .mainColor2
+                // 背景色
+                cell.backgroundColor = .accentColor
             default:
                 break
             }
@@ -205,18 +229,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
                 cell.centerLabel.text = "パスコードロックを利用する"
                 cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
-                if cell.accessoryView == nil {
-                    let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-                    // 生体認証パスコードロック　設定スイッチ
-                    switchView.onTintColor = .accentColor
-                    switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
-                    switchView.tag = indexPath.row
-                    switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
-                    cell.accessoryView = switchView
-                }
+                let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                // 生体認証パスコードロック　設定スイッチ
+                switchView.onTintColor = .accentColor
+                switchView.isOn = UserDefaults.standard.bool(forKey: "biometrics_switch")
+                switchView.tag = indexPath.row
+                switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
+                cell.accessoryView = switchView
                 return cell
             case 1:
                 cell.centerLabel.text = "仕訳"
@@ -269,7 +290,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
+                performSegue(withIdentifier: "SettingsUpgradeViewController", sender: tableView.cellForRow(at: indexPath))
             default:
                 break
             }
