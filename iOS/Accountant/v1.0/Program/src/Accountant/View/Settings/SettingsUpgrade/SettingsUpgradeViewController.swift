@@ -29,13 +29,20 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
     
-    
+    // サブスクリプション プラン名
     @IBOutlet var titleLabel: UILabel!
+    // 広告なし
+    @IBOutlet var invisibileAdsTitleLabel: UILabel!
+    @IBOutlet var invisibileAdsSubTitleLabel: UILabel!
+    // 購入
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var explainLabel: UILabel!
+    // 復元
     @IBOutlet var restoreButton: EMTNeumorphicButton!
     @IBOutlet var restoreExplainLabel: UILabel!
+    // 解約
     @IBOutlet var howToCancelButton: UIButton!
+    // プラポリ
     @IBOutlet var privacyPolicyButton: UIButton!
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
@@ -131,6 +138,9 @@ class SettingsUpgradeViewController: UIViewController {
         print(localizedTitle, localizedPrice, localizedSubscriptionPeriod)
         // サブスクリプション　タイトル「Standard Plan」
         titleLabel.text = localizedTitle
+        // 広告なし
+        invisibileAdsTitleLabel.text = language == "ja-JP" ? "広告なし" : "Go ad-free"
+        invisibileAdsSubTitleLabel.text = language == "ja-JP" ? "作業に集中することができます" : "You can more focus"
         // 購入済みを表すアイコンの色を緑色へ切り替えるためにリロードする
         if UpgradeManager.shared.inAppPurchaseFlag {
             self.button.setImage(UIImage(systemName: "checkmark.seal.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large))?.withRenderingMode(.alwaysTemplate), for: .normal)

@@ -315,6 +315,8 @@
                         <outlet property="explainLabel" destination="SdP-26-F9c" id="HlF-sy-YIU"/>
                         <outlet property="headerView" destination="DXl-iY-WPr" id="gTP-J6-XWd"/>
                         <outlet property="howToCancelButton" destination="Mmi-Mb-aJq" id="O8z-zX-RRx"/>
+                        <outlet property="invisibileAdsSubTitleLabel" destination="KF3-2U-hoJ" id="Fdo-yf-dhE"/>
+                        <outlet property="invisibileAdsTitleLabel" destination="znr-Na-iwj" id="x9k-VA-Z7u"/>
                         <outlet property="privacyPolicyButton" destination="gLp-G7-a0z" id="Tqz-WR-xob"/>
                         <outlet property="restoreButton" destination="6dj-lL-H0C" id="rqB-yq-YRD"/>
                         <outlet property="restoreExplainLabel" destination="Nsg-bb-J9r" id="qdU-3o-MHk"/>
