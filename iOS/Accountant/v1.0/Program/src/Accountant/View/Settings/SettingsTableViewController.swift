@@ -62,10 +62,9 @@ class SettingsTableViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
-        scrollView.parallaxHeader.mode = .center
+        scrollView.parallaxHeader.height = self.view.frame.height * 0.2
+        scrollView.parallaxHeader.mode = .top
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
@@ -162,6 +161,14 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             return ""
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 66
+        } else {
+            return 44
+        }
+    }
     //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -173,11 +180,20 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
 
+        cell.centerLabel.font = UIFont.systemFont(ofSize: 16.0)
+        cell.centerLabel.textColor = .textColor
+        // アイコン画像の色を指定する
+        cell.leftImageView.tintColor = .textColor
+
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "アップグレード"
+                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
+                cell.centerLabel.textColor = .accentColor
                 cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
+                // アイコン画像の色を指定する
+                cell.leftImageView.tintColor = .accentColor
             default:
                 break
             }
@@ -266,7 +282,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "SettingsUpgradeTableViewController", sender: tableView.cellForRow(at: indexPath))
+                performSegue(withIdentifier: "SettingsUpgradeViewController", sender: tableView.cellForRow(at: indexPath))
             default:
                 break
             }
