@@ -51,6 +51,15 @@ class SettingsTableViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
+        
+        scrollView.parallaxHeader.view = headerView
+        scrollView.parallaxHeader.height = self.view.frame.height * 0.15
+        scrollView.parallaxHeader.mode = .fill
+        scrollView.parallaxHeader.minimumHeight = 0
+        scrollView.contentSize = contentView.frame.size
+        scrollView.flashScrollIndicators()
+
+        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,14 +71,6 @@ class SettingsTableViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.height * 0.2
-        scrollView.parallaxHeader.mode = .top
-        scrollView.parallaxHeader.minimumHeight = 0
-        scrollView.contentSize = contentView.frame.size
-        scrollView.flashScrollIndicators()
-
-        versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
 
     // 生体認証パスコードロック　設定スイッチ 切り替え
@@ -137,7 +138,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "アップグレード"
+            return ""
         case 1:
             return "バックアップ"
         case 2:
@@ -164,7 +165,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 66
+            return 55
         } else {
             return 44
         }
@@ -179,21 +180,28 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
-
+        // ラベル
         cell.centerLabel.font = UIFont.systemFont(ofSize: 16.0)
         cell.centerLabel.textColor = .textColor
         // アイコン画像の色を指定する
         cell.leftImageView.tintColor = .textColor
+        // 背景色
+        cell.backgroundColor = .mainColor2
 
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
+                // Accessory Color
+                disclosureView.tintColor = UIColor.mainColor2
+                // ラベル
                 cell.centerLabel.text = "アップグレード"
-                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
-                cell.centerLabel.textColor = .accentColor
+                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+                cell.centerLabel.textColor = .mainColor2
                 cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
                 // アイコン画像の色を指定する
-                cell.leftImageView.tintColor = .accentColor
+                cell.leftImageView.tintColor = .mainColor2
+                // 背景色
+                cell.backgroundColor = .accentColor
             default:
                 break
             }
