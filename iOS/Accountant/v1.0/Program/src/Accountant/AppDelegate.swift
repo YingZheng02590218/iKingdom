@@ -202,6 +202,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
         // userDefaults.set(true, forKey: firstLunchKey)
+        // サンプル仕訳データ
+        firstLunchKey = "sample_JournalEntry"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
         // 精算表
         firstLunchKey = "firstLunch_WorkSheet"
         firstLunch = [firstLunchKey: true]
