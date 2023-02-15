@@ -14,7 +14,7 @@ import UIKit
 
 // 設定クラス
 class SettingsTableViewController: UIViewController {
-
+    
     @IBOutlet var versionLabel: UILabel!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var scrollView: UIScrollView!
@@ -45,7 +45,7 @@ class SettingsTableViewController: UIViewController {
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
-
+        
         self.navigationItem.title = "設定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -58,7 +58,7 @@ class SettingsTableViewController: UIViewController {
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
-
+        
         versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
     
@@ -68,11 +68,11 @@ class SettingsTableViewController: UIViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-
+    
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc
     func switchTriggered(sender: UISwitch) {
@@ -107,17 +107,59 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
-
+    // PUSH通知　ボタン
+    @objc
+    func pushNotificationSettingButtonTapped(sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // OSの通知設定画面へ遷移
+        self.linkToSettingsScreen()
+    }
+    // 通知設定状況を取得
+    func pushPermissionState(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                print("Allow notification")
+                completion(true)
+            case .denied:
+                print("Denied notification")
+                completion(false)
+            case .notDetermined:
+                print("Not settings")
+                completion(false)
+            case .provisional:
+                print("provisional")
+                completion(false)
+            case .ephemeral:
+                print("ephemeral")
+                completion(false)
+            @unknown default:
+                print("default")
+                completion(false)
+            }
+        }
+    }
+    // OSの通知設定画面へ遷移
+    func linkToSettingsScreen() {
+        DispatchQueue.main.async {
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Table view data source
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-         5
+        5
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -129,7 +171,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 3:
             return 3
         case 4:
-            return 3
+            return 4
         default:
             return 0
         }
@@ -172,9 +214,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     }
     //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
-
+        
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
@@ -187,7 +229,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         cell.leftImageView.tintColor = .textColor
         // 背景色
         cell.backgroundColor = .mainColor2
-
+        
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -208,7 +250,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 1 {
             cell.centerLabel.text = "データのバックアップ・復元"
             cell.leftImageView.image = UIImage(named: "baseline_cloud_upload_black_36pt")?.withRenderingMode(.alwaysTemplate)
-
+            
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
@@ -251,12 +293,33 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             switch indexPath.row {
             case 0:
+                cell.centerLabel.text = "PUSH通知設定"
+                // ボタン
+                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 50, height: 50))
+                // PUSH通知　設定スイッチ
+                button.tintColor = .accentColor
+                let picture = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
+                button.setImage(picture, for: .normal)
+                button.imageView?.tintColor = .accentColor
+                pushPermissionState(completion: { isOn in
+                    DispatchQueue.main.async {
+                        if isOn {
+                            cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                        } else {
+                            cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                        }
+                    }
+                })
+                button.tag = indexPath.row
+                button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
+                cell.accessoryView = button
+            case 1:
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 1:
+            case 2:
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 2:
+            case 3:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
@@ -264,14 +327,21 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         }
-
+        
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
         case 3:
+            switch indexPath.row {
+            case 0:
+                return nil
+            default:
+                return indexPath
+            }
+        case 4:
             switch indexPath.row {
             case 0:
                 return nil
@@ -295,9 +365,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         } else if indexPath.section == 1 {
-
+            
             performSegue(withIdentifier: "BackupViewController", sender: tableView.cellForRow(at: indexPath))
-
+            
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
@@ -325,8 +395,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
+                break
             case 1:
+                performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
+            case 2:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
                 let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
@@ -335,7 +407,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
-            case 2:
+            case 3:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
@@ -361,7 +433,7 @@ extension SettingsTableViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         posX = scrollView.contentOffset.x
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.x = posX
     }

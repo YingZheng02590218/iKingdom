@@ -112,6 +112,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         // Push通知 Firebase
         setupFirebasePushNotification()
+        // Push通知　バッジ
+        application.applicationIconBadgeNumber = 0
         // イベントログ
         // Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
@@ -470,7 +472,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     // MARK: - Push通知がタップされた時
-
+    
     // Push通知がタップされた時
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // 通知の情報を取得
@@ -510,7 +512,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         completionHandler()
     }
-
+}
 // Push通知をタップされた時のアクション
 enum PushNotificationAction: CustomStringConvertible {
     // AppStore アプリページ
