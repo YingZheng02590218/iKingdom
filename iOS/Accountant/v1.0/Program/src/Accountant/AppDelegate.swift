@@ -444,7 +444,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             Messaging.messaging().appDidReceiveMessage(userInfo)
         }
         
-        completionHandler(.noData)
+        completionHandler(.newData)
     }
     
     // フォアグラウンドで通知を受け取るために必要
@@ -473,10 +473,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // Push通知がタップされた時
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // push通知に付随しているデータを取得
-        let userInfo = response.notification.request.content.userInfo as NSDictionary
-        print("userNotificationCenter didReceive : userInfo=\(userInfo)")
-        
         // 通知の情報を取得
         let notification = response.notification
         // リモート通知かローカル通知かを判別
@@ -487,9 +483,43 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         // 通知の ID を取得
         print("notification.request.identifier: \(notification.request.identifier)")
-        
         // 通知を押したので通知フラグのアイコンを消す
         UIApplication.shared.applicationIconBadgeNumber = 0
+        // push通知に付随しているデータを取得
+        let userInfo = response.notification.request.content.userInfo as NSDictionary
+        print("userNotificationCenter didReceive : userInfo=\(userInfo)")
+        // アクションによって処理を分岐する
+        guard let action = userInfo["action"] as? String else {
+            completionHandler()
+            return
+        }
+        print(action)
+        // アップデートのお知らせ
+        if action == PushNotificationAction.appStore.description {
+            // 外部でブラウザを開く
+            let url = URL(string: Constant.APPSTOREAPPPAGE)
+            if let url = url {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        }
+        // ホワイトリスト 【whitelist】 WL
+        // 対象を選別して受け入れたり拒絶したりする仕組みの一つで、受け入れる対象を列挙した目録（リスト）を作り、そこに載っていないものは拒絶する方式。また、そのような目録のこと。
+        // IT分野では、通信やアクセスを許可する対象やアドレスなどのリストを作成し、それ以外は拒否・禁止する方式を「ホワイトリスト方式」という。許可したい対象が特定可能で、拒否したい対象より少数の場合に適している。
         
         completionHandler()
     }
+
+// Push通知をタップされた時のアクション
+enum PushNotificationAction: CustomStringConvertible {
+    // AppStore アプリページ
+    case appStore
+
+    var description: String {
+        switch self {
+        case .appStore:
+            return "appStore"
+        }
+    }
+}
