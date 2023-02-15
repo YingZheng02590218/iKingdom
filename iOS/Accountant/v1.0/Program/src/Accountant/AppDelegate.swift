@@ -10,23 +10,25 @@
 import AdSupport // IDFA対応
 import AppTrackingTransparency // IDFA対応
 import Firebase // マネタイズ対応
+import FirebaseMessaging // Push通知
 import GoogleMobileAds
 import RealmSwift
 import StoreKit
 import SwiftyStoreKit // アップグレード機能　スタンダードプラン
+import UserNotifications // Push通知
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     public var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
             schemaVersion: 2,
-
+            
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
             migrationBlock: { migration, oldSchemaVersion in
@@ -104,10 +106,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // will automatically perform the migration
         _ = try! Realm()
         // Override point for customization after application launch.
-
+        
         // // マネタイズ対応　Use Firebase library to configure APIs
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        // Push通知 Firebase
+        setupFirebasePushNotification()
         // イベントログ
         // Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
@@ -126,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
             UserDefaults.standard.synchronize()
         }
-
+        
         // アップグレード機能
         // アプリ起動時にトランザクションの監視を開始します
         initSwiftyStorekit()
@@ -136,11 +140,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    // Push通知 Firebase
+    func setupFirebasePushNotification() {
+        // Firebase　リモート通知に登録する
+        // For iOS 10 display notification (sent via APNS)
+        UNUserNotificationCenter.current().delegate = self
+        // プッシュ通知の許可を要求
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: [.alert, .badge, .sound]
+        ) { granted, error in
+            if let error = error {
+                print("プッシュ通知許可要求エラー : \(error.localizedDescription)")
+                return
+            }
+            if !granted {
+                print("プッシュ通知が拒否されました。")
+                return
+            }
+            DispatchQueue.main.async {
+                // APNs への登録
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+        
+        // プッシュ通知のパーミッションを初めて取得した直後のapplication(_:didRegisterForRemoteNotificationsWithDeviceToken:)では、FCMトークンがまだ生成されておらず、FIRInstanceID.instanceID().token()の値がnilになることがある
+        // なので、オブザーバを利用して確実に取得するのがオススメらしい (addRefreshFcmTokenNotificationObserver())
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.fcmTokenRefreshNotification(_:)),
+            name: .MessagingRegistrationTokenRefreshed,
+            object: nil
+        )
+    }
+    
+    @objc
+    func fcmTokenRefreshNotification(_ notification: Notification) {
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("FCMトークン: \(token)")
+            }
+        }
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-
+        
         // 生体認証パスコードロック 認証を要求する
         // applicationWillResignActive: フォアグラウンドからバックグラウンドへ移行しようとした時
         UserDefaults.standard.set(true, forKey: "biometrics")
@@ -149,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-
+        
         // 生体認証パスコードロック
         // アプリをバックグラウンドに持っていった状態から再度フォアグラウンドへアプリを復帰させる場合
         showPassCodeLock()
@@ -185,7 +232,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
     // UserDefaultsをセットアップ
     func setupUserDefaults() {
         // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
@@ -294,7 +341,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - IDFA対応
-
+    
     /// Alert表示
     private func showRequestTrackingAuthorizationAlert() {
         if #available(iOS 14, *) {
@@ -312,7 +359,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
     }
-
+    
     // MARK: - 生体認証パスコードロック
     
     // 生体認証パスコードロック画面へ遷移させる
@@ -330,21 +377,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // 生体認証パスコードロック
                     if let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
                         .instantiateViewController(withIdentifier: "PassCodeLockViewController") as? PassCodeLockViewController {
-
+                        
                         if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-
+                            
                             // 現在のrootViewControllerにおいて一番上に表示されているViewControllerを取得する
                             var topViewController: UIViewController = rootViewController
                             while let presentedViewController = topViewController.presentedViewController {
                                 topViewController = presentedViewController
                             }
-
+                            
                             // すでにパスコードロック画面がかぶせてあるかを確認する
                             let isDisplayedPasscodeLock: Bool = topViewController.children.map {
                                 $0 is PassCodeLockViewController
                             }
                                 .contains(true)
-
+                            
                             // パスコードロック画面がかぶせてなければかぶせる
                             if !isDisplayedPasscodeLock {
                                 let nav = UINavigationController(rootViewController: viewController)
@@ -359,3 +406,90 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // MARK: - APNs 登録
+    
+    // APNs 登録成功時に呼ばれる
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenStr: String = deviceToken.reduce("", { $0 + String(format: "%02X", $1) })
+        print("APNsトークン: \(deviceTokenStr)")
+        
+        // APNsトークンを、FCM登録トークンにマッピング
+        Messaging.messaging().setAPNSToken(deviceToken, type: .prod)
+        // Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("FCMトークン: \(token)")
+            }
+        }
+    }
+    // APNs 登録失敗時に呼ばれる
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("APNs 登録に失敗しました : \(error.localizedDescription)")
+    }
+    
+    // MARK: - Push通知を受信した時
+    
+    // Push通知を受信した時（サイレントプッシュ）
+    // payload に "Content-available"=1 が設定されている、かつ
+    // BackgroundModes の RemoteNotification の設定も必要
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if #available(iOS 10.0, *) {
+            print("iOS 10.0 未満")
+        } else {
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+        }
+        
+        completionHandler(.noData)
+    }
+    
+    // フォアグラウンドで通知を受け取るために必要
+    // フォアグラウンドで通知を受信した時
+    // UNUserNotificationCenter.current().delegate = self も必須
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        let userInfo = notification.request.content.userInfo as NSDictionary
+        print("userNotificationCenter willPresent : userInfo=\(userInfo)")
+        
+        // push通知設定したい場合
+        // badgeは設定しないほうが良いかも
+        if #available(iOS 14.0, *) {
+            completionHandler([.list, .banner, .badge, .sound]) // alertはdeprecated
+        } else {
+            // Fallback on earlier versions
+            completionHandler([.alert, .badge, .sound])
+        }
+        
+        // 通知を押したので通知フラグのアイコンを消す
+        // 上部でbadgeを設定した場合、消せる
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
+    // MARK: - Push通知がタップされた時
+
+    // Push通知がタップされた時
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // push通知に付随しているデータを取得
+        let userInfo = response.notification.request.content.userInfo as NSDictionary
+        print("userNotificationCenter didReceive : userInfo=\(userInfo)")
+        
+        // 通知の情報を取得
+        let notification = response.notification
+        // リモート通知かローカル通知かを判別
+        if notification.request.trigger is UNPushNotificationTrigger {
+            print("didReceive Push Notification")
+        } else {
+            print("didReceive Local Notification")
+        }
+        // 通知の ID を取得
+        print("notification.request.identifier: \(notification.request.identifier)")
+        
+        // 通知を押したので通知フラグのアイコンを消す
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        completionHandler()
+    }
