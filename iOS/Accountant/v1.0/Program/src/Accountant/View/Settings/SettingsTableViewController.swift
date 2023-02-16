@@ -272,7 +272,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "パスコードロックを利用する"
-                cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
+                // 生体認証かパスコードのいずれかが使用可能かを確認する
+                if LocalAuthentication.canEvaluatePolicy() {
+                    cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
+                } else {
+                    cell.leftImageView.image = UIImage(named: "baseline_lock_open_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // 生体認証パスコードロック　設定スイッチ
                 switchView.onTintColor = .accentColor
@@ -293,7 +298,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             switch indexPath.row {
             case 0:
-                cell.centerLabel.text = "PUSH通知設定"
+                cell.centerLabel.text = "通知設定"
                 // ボタン
                 let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
                 // PUSH通知　設定スイッチ
