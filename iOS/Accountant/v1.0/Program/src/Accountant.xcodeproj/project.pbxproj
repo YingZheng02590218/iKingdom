@@ -518,6 +518,8 @@
 		F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
 		F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
 		F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */; };
+		F9F3802A299DCBA900B77562 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F38029299DCBA900B77562 /* NotificationService.swift */; };
+		F9F3802E299DCBA900B77562 /* NotificationServiceSTG.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F9F38027299DCBA900B77562 /* NotificationServiceSTG.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
 		F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */; };
 		F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */; };
@@ -556,6 +558,13 @@
 			remoteGlobalIDString = F9DC873329948CCE00919E5F;
 			remoteInfo = PaciolistSTGWidgetExtension;
 		};
+		F9F3802C299DCBA900B77562 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F94EDD87237AEB3A0074D812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9F38026299DCBA900B77562;
+			remoteInfo = NotificationServiceSTG;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -589,6 +598,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				F9F3802E299DCBA900B77562 /* NotificationServiceSTG.appex in Embed Foundation Extensions */,
 				F9DC874629948CCF00919E5F /* PaciolistSTGWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -898,6 +908,9 @@
 		F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSModel.swift; sourceTree = "<group>"; };
 		F9F324532833A5D900DA813E /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		F9F324562833A82700DA813E /* WalkThroughViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WalkThroughViewController.storyboard; sourceTree = "<group>"; };
+		F9F38027299DCBA900B77562 /* NotificationServiceSTG.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceSTG.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9F38029299DCBA900B77562 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F9F3802B299DCBA900B77562 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9F3A01827BB991C001E873F /* HTMLhelperAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelperAccount.swift; sourceTree = "<group>"; };
 		F9F3A01B27BB9F9D001E873F /* PDFMakerAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerAccount.swift; sourceTree = "<group>"; };
 		F9F4605324BDD616008FE62B /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
@@ -965,6 +978,13 @@
 				F94DE33827DC9C0A0022F739 /* MessageUI.framework in Frameworks */,
 				F9EC670B27B90BC60003FBB6 /* PDFKit.framework in Frameworks */,
 				F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9F38024299DCBA900B77562 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,6 +1177,7 @@
 				F94EDD91237AEB3A0074D812 /* Accountant */,
 				F9DC86F829932E1C00919E5F /* PaciolistWidget */,
 				F9DC873729948CCE00919E5F /* PaciolistSTGWidget */,
+				F9F38028299DCBA900B77562 /* NotificationServiceSTG */,
 				F94EDD90237AEB3A0074D812 /* Products */,
 				E1E5AF283FD62A963E8A39BF /* Pods */,
 				F3D2BF7C1C8F3D6EA0FEFA88 /* Frameworks */,
@@ -1171,6 +1192,7 @@
 				F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */,
 				F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */,
 				F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */,
+				F9F38027299DCBA900B77562 /* NotificationServiceSTG.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1722,6 +1744,15 @@
 			path = WalkThrough;
 			sourceTree = "<group>";
 		};
+		F9F38028299DCBA900B77562 /* NotificationServiceSTG */ = {
+			isa = PBXGroup;
+			children = (
+				F9F38029299DCBA900B77562 /* NotificationService.swift */,
+				F9F3802B299DCBA900B77562 /* Info.plist */,
+			);
+			path = NotificationServiceSTG;
+			sourceTree = "<group>";
+		};
 		F9F4605224BDD5D5008FE62B /* DataBaseRealm */ = {
 			isa = PBXGroup;
 			children = (
@@ -1871,11 +1902,29 @@
 			);
 			dependencies = (
 				F9DC874529948CCF00919E5F /* PBXTargetDependency */,
+				F9F3802D299DCBA900B77562 /* PBXTargetDependency */,
 			);
 			name = PaciolistSTG;
 			productName = Accountant;
 			productReference = F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F9F38026299DCBA900B77562 /* NotificationServiceSTG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9F38031299DCBAA00B77562 /* Build configuration list for PBXNativeTarget "NotificationServiceSTG" */;
+			buildPhases = (
+				F9F38023299DCBA900B77562 /* Sources */,
+				F9F38024299DCBA900B77562 /* Frameworks */,
+				F9F38025299DCBA900B77562 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationServiceSTG;
+			productName = NotificationServiceSTG;
+			productReference = F9F38027299DCBA900B77562 /* NotificationServiceSTG.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -1894,6 +1943,9 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					F9DC873329948CCE00919E5F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					F9F38026299DCBA900B77562 = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -1916,6 +1968,7 @@
 				F9EC668C27B90BC60003FBB6 /* PaciolistSTG */,
 				F9DC86F229932E1C00919E5F /* PaciolistWidgetExtension */,
 				F9DC873329948CCE00919E5F /* PaciolistSTGWidgetExtension */,
+				F9F38026299DCBA900B77562 /* NotificationServiceSTG */,
 			);
 		};
 /* End PBXProject section */
@@ -2068,6 +2121,13 @@
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9F38025299DCBA900B77562 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2622,6 +2682,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F9F38023299DCBA900B77562 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9F3802A299DCBA900B77562 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2634,6 +2702,11 @@
 			isa = PBXTargetDependency;
 			target = F9DC873329948CCE00919E5F /* PaciolistSTGWidgetExtension */;
 			targetProxy = F9DC874429948CCF00919E5F /* PBXContainerItemProxy */;
+		};
+		F9F3802D299DCBA900B77562 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9F38026299DCBA900B77562 /* NotificationServiceSTG */;
+			targetProxy = F9F3802C299DCBA900B77562 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3067,6 +3140,64 @@
 			};
 			name = Release;
 		};
+		F9F3802F299DCBAA00B77562 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationServiceSTG/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceSTG;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG.NotificationServiceSTG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9F38030299DCBAA00B77562 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T526NZN54U;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationServiceSTG/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceSTG;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Hisashi Ishihara. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG.NotificationServiceSTG;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3111,6 +3242,15 @@
 			buildConfigurations = (
 				F9EC674327B90BC60003FBB6 /* Debug */,
 				F9EC674427B90BC60003FBB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9F38031299DCBAA00B77562 /* Build configuration list for PBXNativeTarget "NotificationServiceSTG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9F3802F299DCBAA00B77562 /* Debug */,
+				F9F38030299DCBAA00B77562 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

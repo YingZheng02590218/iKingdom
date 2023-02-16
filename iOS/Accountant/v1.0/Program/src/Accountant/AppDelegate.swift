@@ -439,6 +439,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Push通知を受信した時（サイレントプッシュ）
     // payload に "Content-available"=1 が設定されている、かつ
     // BackgroundModes の RemoteNotification の設定も必要
+    // 実機で、Firebaseからプッシュ通知を送信しても、デバッグできない
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if #available(iOS 10.0, *) {
             print("iOS 10.0 未満")
@@ -515,6 +516,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 // Push通知をタップされた時のアクション
 enum PushNotificationAction: CustomStringConvertible {
+    // カスタムデータ
+    // キー: action
+    
+    // 値:
     // AppStore アプリページ
     case appStore
 
