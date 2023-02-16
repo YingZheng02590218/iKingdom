@@ -295,7 +295,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 cell.centerLabel.text = "PUSH通知設定"
                 // ボタン
-                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 50, height: 50))
+                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
                 // PUSH通知　設定スイッチ
                 button.tintColor = .accentColor
                 let picture = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
