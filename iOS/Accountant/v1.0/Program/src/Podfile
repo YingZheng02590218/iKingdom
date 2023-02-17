@@ -9,6 +9,7 @@
     pod 'Firebase/Core'
     pod 'Firebase/Crashlytics'
     pod 'Firebase/Performance'
+    pod 'Firebase/Messaging'
     pod 'SwiftyStoreKit'
     pod 'Gecco'
     pod 'EAIntroView'
