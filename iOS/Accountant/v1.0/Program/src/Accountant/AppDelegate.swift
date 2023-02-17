@@ -132,6 +132,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             name: .MessagingRegistrationTokenRefreshed,
             object: nil
         )
+        // TODO: ローカル通知
+        // UserNotificationUtility.shared.evereyDayTimerRequest(hour: 15, minute: 36)
         // Push通知　バッジ
         application.applicationIconBadgeNumber = 0
         // イベントログ

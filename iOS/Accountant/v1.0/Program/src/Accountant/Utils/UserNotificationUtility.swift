@@ -31,6 +31,42 @@ final class UserNotificationUtility: NSObject {
             completion(.success(isGranted))
         }
     }
+    
+    // MARK: ローカル通知
+    
+    func evereyDayTimerRequest(hour: Int, minute: Int) {
+        // 通知時間を指定する部分
+        // 毎朝xx時
+        let dateComponents = DateComponents(
+            calendar: Calendar.current,
+            timeZone: TimeZone.current,
+            hour: hour,
+            minute: minute
+        )
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents,
+            repeats: true
+        )
+        let content = UNMutableNotificationContent()
+        // 通知メッセージを指定
+        content.body = "帳簿付けの時刻です。\n本日の取引を入力しましょう。"
+        // この通知を受け取った直後の、アプリバッジの値を指定
+        content.badge = 1
+        // 通知音を指定
+        content.sound = .defaultCritical
+        // identifier には、他の通知設定と重複しない値を指定します
+        let request = UNNotificationRequest(
+            identifier: UUID().uuidString,
+            content: content,
+            trigger: trigger
+        )
+        // ローカル通知をセット
+        center.add(request) { error in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension UserNotificationUtility: UNUserNotificationCenterDelegate {
@@ -71,6 +107,7 @@ extension UserNotificationUtility: UNUserNotificationCenterDelegate {
             print("didReceive Push Notification")
         } else {
             print("didReceive Local Notification")
+            completionHandler()
         }
         // 通知の ID を取得
         print("notification.request.identifier: \(notification.request.identifier)")
