@@ -191,6 +191,16 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
+    var time: Date = {
+            let df = DateFormatter()
+            df.calendar = Calendar(identifier: .gregorian)
+            df.locale = Locale(identifier: "ja_JP")
+            df.timeZone = TimeZone(identifier: "Asia/Tokyo")
+            df.dateStyle = .none
+            df.timeStyle = .short
+
+        return df.date(from: "\("12"):\("00")")!
+        }()
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -210,7 +220,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 5
+            return 6
         case 4:
             return 3
         default:
@@ -366,7 +376,28 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
                 cell.accessoryView = switchView
-                return cell
+                
+            case 5:
+                cell.centerLabel.text = "指定時刻"
+                cell.leftImageView.image = nil
+
+                let picker = UIDatePicker()
+                picker.locale = Locale(identifier: "en_US_POSIX")
+                picker.timeZone = .current
+                picker.calendar = Calendar(identifier: .gregorian)
+                // デバイスの設定(暦法)を無視して表示させる
+                
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .automatic
+                } else {
+                    // Fallback on earlier versions
+                }
+                // 時間のみにする
+                picker.datePickerMode = .time
+                picker.center = cell.contentView.center
+                print(time)
+                picker.date = time
+                cell.accessoryView = picker
 
             default:
                 break
