@@ -15,7 +15,6 @@ import GoogleMobileAds
 import RealmSwift
 import StoreKit
 import SwiftyStoreKit // アップグレード機能　スタンダードプラン
-import UserNotifications // Push通知
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -111,7 +110,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         // Push通知 Firebase
-        setupFirebasePushNotification()
+        UserNotificationUtility.shared.initialize()
+        UserNotificationUtility.shared.showPushPermit { result in
+            switch result {
+            case .success(let isGranted):
+                if isGranted {
+                    DispatchQueue.main.async {
+                        // APNs への登録
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+        // プッシュ通知のパーミッションを初めて取得した直後のapplication(_:didRegisterForRemoteNotificationsWithDeviceToken:)では、FCMトークンがまだ生成されておらず、FIRInstanceID.instanceID().token()の値がnilになることがある
+        // なので、オブザーバを利用して確実に取得するのがオススメらしい (addRefreshFcmTokenNotificationObserver())
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.fcmTokenRefreshNotification(_:)),
+            name: .MessagingRegistrationTokenRefreshed,
+            object: nil
+        )
         // Push通知　バッジ
         application.applicationIconBadgeNumber = 0
         // イベントログ
@@ -141,49 +161,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Network.shared.setUp() // 初期化対応
         
         return true
-    }
-    // Push通知 Firebase
-    func setupFirebasePushNotification() {
-        // Firebase　リモート通知に登録する
-        // For iOS 10 display notification (sent via APNS)
-        UNUserNotificationCenter.current().delegate = self
-        // プッシュ通知の許可を要求
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: [.alert, .badge, .sound]
-        ) { granted, error in
-            if let error = error {
-                print("プッシュ通知許可要求エラー : \(error.localizedDescription)")
-                return
-            }
-            if !granted {
-                print("プッシュ通知が拒否されました。")
-                return
-            }
-            DispatchQueue.main.async {
-                // APNs への登録
-                UIApplication.shared.registerForRemoteNotifications()
-            }
-        }
-        
-        // プッシュ通知のパーミッションを初めて取得した直後のapplication(_:didRegisterForRemoteNotificationsWithDeviceToken:)では、FCMトークンがまだ生成されておらず、FIRInstanceID.instanceID().token()の値がnilになることがある
-        // なので、オブザーバを利用して確実に取得するのがオススメらしい (addRefreshFcmTokenNotificationObserver())
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.fcmTokenRefreshNotification(_:)),
-            name: .MessagingRegistrationTokenRefreshed,
-            object: nil
-        )
-    }
-    
-    @objc
-    func fcmTokenRefreshNotification(_ notification: Notification) {
-        Messaging.messaging().token { token, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("FCMトークン: \(token)")
-            }
-        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -235,6 +212,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: - APNs 登録
+    
+    // APNs 登録成功時に呼ばれる
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenStr: String = deviceToken.reduce("", { $0 + String(format: "%02X", $1) })
+        print("APNsトークン: \(deviceTokenStr)")
+        
+        // APNsトークンを、FCM登録トークンにマッピング
+        Messaging.messaging().setAPNSToken(deviceToken, type: .prod)
+        // Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("FCMトークン: \(token)")
+            }
+        }
+    }
+    // APNs 登録失敗時に呼ばれる
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("APNs 登録に失敗しました : \(error.localizedDescription)")
+    }
+    
+    // MARK: - Push通知を受信した時
+    
+    // Push通知を受信した時（サイレントプッシュ）
+    // payload に "Content-available"=1 が設定されている、かつ
+    // BackgroundModes の RemoteNotification の設定も必要
+    // 実機で、Firebaseからプッシュ通知を送信しても、デバッグできない
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if #available(iOS 10.0, *) {
+            print("iOS 10.0 未満")
+        } else {
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+        }
+        
+        completionHandler(.newData)
+    }
+    
+    @objc
+    func fcmTokenRefreshNotification(_ notification: Notification) {
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("FCMトークン: \(token)")
+            }
+        }
+    }
     // UserDefaultsをセットアップ
     func setupUserDefaults() {
         // チュートリアル対応 コーチマーク型　初回起動時　4行を追加
@@ -405,128 +431,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-        }
-    }
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-    
-    // MARK: - APNs 登録
-    
-    // APNs 登録成功時に呼ばれる
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenStr: String = deviceToken.reduce("", { $0 + String(format: "%02X", $1) })
-        print("APNsトークン: \(deviceTokenStr)")
-        
-        // APNsトークンを、FCM登録トークンにマッピング
-        Messaging.messaging().setAPNSToken(deviceToken, type: .prod)
-        // Messaging.messaging().apnsToken = deviceToken
-        Messaging.messaging().token { token, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("FCMトークン: \(token)")
-            }
-        }
-    }
-    // APNs 登録失敗時に呼ばれる
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("APNs 登録に失敗しました : \(error.localizedDescription)")
-    }
-    
-    // MARK: - Push通知を受信した時
-    
-    // Push通知を受信した時（サイレントプッシュ）
-    // payload に "Content-available"=1 が設定されている、かつ
-    // BackgroundModes の RemoteNotification の設定も必要
-    // 実機で、Firebaseからプッシュ通知を送信しても、デバッグできない
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if #available(iOS 10.0, *) {
-            print("iOS 10.0 未満")
-        } else {
-            Messaging.messaging().appDidReceiveMessage(userInfo)
-        }
-        
-        completionHandler(.newData)
-    }
-    
-    // フォアグラウンドで通知を受け取るために必要
-    // フォアグラウンドで通知を受信した時
-    // UNUserNotificationCenter.current().delegate = self も必須
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        let userInfo = notification.request.content.userInfo as NSDictionary
-        print("userNotificationCenter willPresent : userInfo=\(userInfo)")
-        
-        // push通知設定したい場合
-        // badgeは設定しないほうが良いかも
-        if #available(iOS 14.0, *) {
-            completionHandler([.list, .banner, .badge, .sound]) // alertはdeprecated
-        } else {
-            // Fallback on earlier versions
-            completionHandler([.alert, .badge, .sound])
-        }
-        
-        // 通知を押したので通知フラグのアイコンを消す
-        // 上部でbadgeを設定した場合、消せる
-        UIApplication.shared.applicationIconBadgeNumber = 0
-    }
-    
-    // MARK: - Push通知がタップされた時
-    
-    // Push通知がタップされた時
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // 通知の情報を取得
-        let notification = response.notification
-        // リモート通知かローカル通知かを判別
-        if notification.request.trigger is UNPushNotificationTrigger {
-            print("didReceive Push Notification")
-        } else {
-            print("didReceive Local Notification")
-        }
-        // 通知の ID を取得
-        print("notification.request.identifier: \(notification.request.identifier)")
-        // 通知を押したので通知フラグのアイコンを消す
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        // push通知に付随しているデータを取得
-        let userInfo = response.notification.request.content.userInfo as NSDictionary
-        print("userNotificationCenter didReceive : userInfo=\(userInfo)")
-        // アクションによって処理を分岐する
-        guard let action = userInfo["action"] as? String else {
-            completionHandler()
-            return
-        }
-        print(action)
-        // アップデートのお知らせ
-        if action == PushNotificationAction.appStore.description {
-            // 外部でブラウザを開く
-            let url = URL(string: Constant.APPSTOREAPPPAGE)
-            if let url = url {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        }
-        // ホワイトリスト 【whitelist】 WL
-        // 対象を選別して受け入れたり拒絶したりする仕組みの一つで、受け入れる対象を列挙した目録（リスト）を作り、そこに載っていないものは拒絶する方式。また、そのような目録のこと。
-        // IT分野では、通信やアクセスを許可する対象やアドレスなどのリストを作成し、それ以外は拒否・禁止する方式を「ホワイトリスト方式」という。許可したい対象が特定可能で、拒否したい対象より少数の場合に適している。
-        
-        completionHandler()
-    }
-}
-// Push通知をタップされた時のアクション
-enum PushNotificationAction: CustomStringConvertible {
-    // カスタムデータ
-    // キー: action
-    
-    // 値:
-    // AppStore アプリページ
-    case appStore
-
-    var description: String {
-        switch self {
-        case .appStore:
-            return "appStore"
         }
     }
 }

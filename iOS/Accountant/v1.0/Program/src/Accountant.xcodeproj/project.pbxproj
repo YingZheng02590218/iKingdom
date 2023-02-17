@@ -339,6 +339,8 @@
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
+		F9EAE99E299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
+		F9EAE99F299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
 		F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
 		F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */; };
@@ -902,6 +904,7 @@
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
+		F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtility.swift; sourceTree = "<group>"; };
 		F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaciolistSTG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -1658,6 +1661,7 @@
 				F9DC875929953B1D00919E5F /* AppGroups.swift */,
 				F9860FB8285AB805008D0714 /* Network.swift */,
 				F9AD64E22912B66B00B9F50B /* StringUtility.swift */,
+				F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2468,6 +2472,7 @@
 				F955B607248FE6EF005E2C6D /* FinancialStatementTableViewController.swift in Sources */,
 				F9B209E8279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift in Sources */,
 				F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */,
+				F9EAE99E299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */,
 				F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
@@ -2686,6 +2691,7 @@
 				F9EC66E827B90BC60003FBB6 /* GeneralLedgerAccountTableViewCell.swift in Sources */,
 				F9EC66E927B90BC60003FBB6 /* DataBaseManagerFinancialStatements.swift in Sources */,
 				F9482EB7282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */,
+				F9EAE99F299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */,
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
