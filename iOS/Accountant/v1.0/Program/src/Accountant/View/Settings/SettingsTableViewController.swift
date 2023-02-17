@@ -169,9 +169,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 3
-        case 4:
             return 4
+        case 4:
+            return 3
         default:
             return 0
         }
@@ -292,12 +292,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 2:
                 cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
-            default:
-                break
-            }
-        } else {
-            switch indexPath.row {
-            case 0:
+            case 3:
                 cell.centerLabel.text = "通知設定"
                 // ボタン
                 let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
@@ -318,13 +313,19 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 button.tag = indexPath.row
                 button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
                 cell.accessoryView = button
-            case 1:
+
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 2:
+            case 1:
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 3:
+            case 2:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
@@ -343,13 +344,13 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 return nil
+            case 3:
+                return nil
             default:
                 return indexPath
             }
         case 4:
             switch indexPath.row {
-            case 0:
-                return nil
             default:
                 return indexPath
             }
@@ -394,16 +395,16 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
             case 2:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
+            case 3:
+                break
             default:
                 break
             }
         } else {
             switch indexPath.row {
             case 0:
-                break
-            case 1:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
-            case 2:
+            case 1:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
                 let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
@@ -412,7 +413,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
-            case 3:
+            case 2:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
