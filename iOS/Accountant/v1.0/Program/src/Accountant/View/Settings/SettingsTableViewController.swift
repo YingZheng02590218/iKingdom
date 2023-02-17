@@ -117,6 +117,47 @@ class SettingsTableViewController: UIViewController {
         // OSの通知設定画面へ遷移
         self.linkToSettingsScreen()
     }
+    // ローカル通知　設定スイッチ 切り替え
+    @objc
+    func localNotificationSettingSwitchTriggered(sender: UISwitch) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        pushPermissionState(completion: { isOn in
+            DispatchQueue.main.async {
+                if isOn {
+                    DispatchQueue.main.async {
+                        // ローカル通知　設定スイッチ
+                        UserDefaults.standard.set(sender.isOn, forKey: "local_notification_switch")
+                        UserDefaults.standard.synchronize()
+                    }
+                } else {
+                    // OSの設定　がOFFの場合
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                    // 認証使用可能時の処理
+                    DispatchQueue.main.async {
+                        // スイッチを元に戻す
+                        sender.isOn = !sender.isOn
+                        // アラート画面を表示する
+                        let alert = UIAlertController(title: "エラー", message: "ローカル通知を利用できるように\n通知をオンに設定してください", preferredStyle: .alert)
+                        
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                self.dismiss(animated: true, completion: {
+                                    // OSの通知設定画面へ遷移
+                                    self.linkToSettingsScreen()
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     // 通知設定状況を取得
     func pushPermissionState(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -169,7 +210,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 4
+            return 5
         case 4:
             return 3
         default:
@@ -306,6 +347,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                         if isOn {
                             cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
                         } else {
+                            // OSの設定　がOFFの場合
                             cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
                         }
                     }
@@ -313,6 +355,18 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 button.tag = indexPath.row
                 button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
                 cell.accessoryView = button
+            case 4:
+                cell.centerLabel.text = "帳簿付け時刻の通知"
+                cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
+
+                let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                // ローカル通知　設定スイッチ
+                switchView.onTintColor = .accentColor
+                switchView.isOn = UserDefaults.standard.bool(forKey: "local_notification_switch")
+                switchView.tag = indexPath.row
+                switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
+                cell.accessoryView = switchView
+                return cell
 
             default:
                 break
@@ -345,6 +399,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 return nil
             case 3:
+                return nil
+            case 4:
                 return nil
             default:
                 return indexPath
@@ -395,8 +451,6 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 performSegue(withIdentifier: "SettingsOperatingJournalEntryViewController", sender: tableView.cellForRow(at: indexPath))
             case 2:
                 performSegue(withIdentifier: "SettingsOperatingTableViewController", sender: tableView.cellForRow(at: indexPath))
-            case 3:
-                break
             default:
                 break
             }

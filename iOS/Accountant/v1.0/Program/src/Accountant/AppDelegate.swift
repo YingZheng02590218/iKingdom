@@ -345,6 +345,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // ロック中
         userDefaults.set(true, forKey: firstLunchKey)
+        // ローカル通知
+        firstLunchKey = "local_notification_switch"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
     }
     
     // MARK: - アップグレード機能
