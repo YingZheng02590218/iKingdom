@@ -34,6 +34,7 @@ final class UserNotificationUtility: NSObject {
     
     // MARK: ローカル通知
     
+    // 通知を登録
     func evereyDayTimerRequest(hour: Int, minute: Int) {
         // 通知時間を指定する部分
         // 毎朝xx時
@@ -49,14 +50,15 @@ final class UserNotificationUtility: NSObject {
         )
         let content = UNMutableNotificationContent()
         // 通知メッセージを指定
-        content.body = "帳簿付けの時刻です。\n本日の取引を入力しましょう。"
+        content.title = "帳簿付けの時刻です。"
+        content.body = "本日の取引を入力しましょう。"
         // この通知を受け取った直後の、アプリバッジの値を指定
         content.badge = 1
         // 通知音を指定
         content.sound = .defaultCritical
         // identifier には、他の通知設定と重複しない値を指定します
         let request = UNNotificationRequest(
-            identifier: UUID().uuidString,
+            identifier: "localNotificationEvereyDay", // UUID().uuidString, 通知が重複してしまう。
             content: content,
             trigger: trigger
         )
@@ -67,6 +69,43 @@ final class UserNotificationUtility: NSObject {
             }
         }
     }
+    // 重複した通知を削除
+    func deleteDuplicatedEvereyDayTimerRequest() {
+        // 未配信の通知の一覧を取得する
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
+            if !requests.isEmpty {
+                for request in requests {
+                    // ローカル通知のプロパティを取り出す
+                    print("ローカル通知 未配信の通知")
+                    print("identifier: ", request.identifier)
+                    print("title: ", request.content.title)
+                    print("body: ", request.content.body)
+                    if request.identifier != "localNotificationEvereyDay" {
+                        // 特定の未配信の通知を削除する
+                        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                    }
+                }
+            }
+        }
+    }
+    // 指定時刻
+    var time: Date = {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = .current
+        df.dateStyle = .none
+        df.timeStyle = .short
+        // 時刻
+        if let time = UserDefaults.standard.string(forKey: "localNotificationEvereyDay") {
+            let array = time.components(separatedBy: ":")
+            print("hour", array[0])
+            print("minute", array[1])
+            return df.date(from: "\(array[0]):\(array[1])") ?? Date()
+        } else {
+            return Date()
+        }
+    }()
 }
 
 extension UserNotificationUtility: UNUserNotificationCenterDelegate {

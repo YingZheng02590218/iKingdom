@@ -157,6 +157,20 @@ class SettingsTableViewController: UIViewController {
             }
         })
     }
+    // 指定時刻
+    @objc
+    func datePickerTriggered(sender: UIDatePicker) {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = .current
+
+        df.dateStyle = .none
+        df.timeStyle = .short
+        let time = df.string(from: sender.date) // String "21:00"
+        UserDefaults.standard.set(time, forKey: "localNotificationEvereyDay")
+        UserDefaults.standard.synchronize()
+    }
 
     // 通知設定状況を取得
     func pushPermissionState(completion: @escaping (Bool) -> Void) {
@@ -191,16 +205,6 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
-    var time: Date = {
-            let df = DateFormatter()
-            df.calendar = Calendar(identifier: .gregorian)
-            df.locale = Locale(identifier: "ja_JP")
-            df.timeZone = TimeZone(identifier: "Asia/Tokyo")
-            df.dateStyle = .none
-            df.timeStyle = .short
-
-        return df.date(from: "\("12"):\("00")")!
-        }()
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -382,21 +386,22 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = nil
 
                 let picker = UIDatePicker()
-                picker.locale = Locale(identifier: "en_US_POSIX")
+                picker.locale = Locale(identifier: "ja_JP") // Locale(identifier: "en_US_POSIX")
                 picker.timeZone = .current
                 picker.calendar = Calendar(identifier: .gregorian)
                 // デバイスの設定(暦法)を無視して表示させる
                 
                 if #available(iOS 13.4, *) {
-                    picker.preferredDatePickerStyle = .automatic
+                    picker.preferredDatePickerStyle = .compact
                 } else {
                     // Fallback on earlier versions
                 }
                 // 時間のみにする
                 picker.datePickerMode = .time
                 picker.center = cell.contentView.center
-                print(time)
-                picker.date = time
+                // 初期値
+                picker.date = UserNotificationUtility.shared.time
+                picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
                 cell.accessoryView = picker
 
             default:
