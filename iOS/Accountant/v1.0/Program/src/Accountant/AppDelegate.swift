@@ -179,6 +179,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 生体認証パスコードロック
         // アプリをバックグラウンドに持っていった状態から再度フォアグラウンドへアプリを復帰させる場合
         showPassCodeLock()
+        // ローカル通知
+        if UserDefaults.standard.bool(forKey: "local_notification_switch") {
+            if let time = UserDefaults.standard.string(forKey: "localNotificationEvereyDay") {
+                // 文字列を分割する
+                let array = time.components(separatedBy: ":")
+                print("hour", array[0])
+                print("minute", array[1])
+                if let hour = Int(array[0]),
+                   let minute = Int(array[1]) {
+                    // 通知を登録
+                    UserNotificationUtility.shared.evereyDayTimerRequest(hour: hour, minute: minute)
+                    // 重複した通知を削除
+                    UserNotificationUtility.shared.deleteDuplicatedEvereyDayTimerRequest()
+                }
+            }
+        } else {
+            // 全ての未配信の通知を削除する
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -331,6 +350,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
         //　userDefaults.set(true, forKey: firstLunchKey)
+        // ローカル通知
+        firstLunchKey = "local_notification_switch"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
+        // ローカル通知 毎日
+        firstLunchKey = "localNotificationEvereyDay"
+        let localNotificationTime = [firstLunchKey: "19:00"]
+        userDefaults.register(defaults: localNotificationTime)
+        // 動作確認用
+        // userDefaults.set("21:00", forKey: firstLunchKey)
         // 生体認証パスコードロック設定スイッチ
         firstLunchKey = "biometrics_switch"
         firstLunch = [firstLunchKey: false] // 初期値はOFFとする

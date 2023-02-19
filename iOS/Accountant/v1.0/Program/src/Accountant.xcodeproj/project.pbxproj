@@ -31,6 +31,8 @@
 		F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */; };
 		F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */; };
 		F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */; };
+		F928F93429A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */; };
+		F928F93529A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */; };
 		F929C00B247708CF0034FAAF /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929C00A247708CF0034FAAF /* MasterData.swift */; };
 		F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */; };
 		F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */; };
@@ -667,6 +669,7 @@
 		F922771B261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsCategoryDetailTableViewController.storyboard; sourceTree = "<group>"; };
+		F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crrect_answer3.mp3; sourceTree = "<group>"; };
 		F929C00A247708CF0034FAAF /* MasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
 		F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewController.swift; sourceTree = "<group>"; };
 		F92F4EF3249CCD5B00D50767 /* TBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBViewController.swift; sourceTree = "<group>"; };
@@ -1551,6 +1554,7 @@
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
 				F9C7371F265E7D7E00A9F287 /* Color.xcassets */,
+				F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */,
 				F94EDDA2237AEB3B0074D812 /* Info.plist */,
 				F97C278F263AB39D00DFC3B0 /* InfoPlist.strings */,
 				F9EC674727B911FD0003FBB6 /* GoogleService-Info */,
@@ -2036,6 +2040,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */,
+				F928F93429A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
@@ -2120,6 +2125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */,
+				F928F93529A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */,
 				F9EC670F27B90BC60003FBB6 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */,

@@ -117,6 +117,61 @@ class SettingsTableViewController: UIViewController {
         // OSの通知設定画面へ遷移
         self.linkToSettingsScreen()
     }
+    // ローカル通知　設定スイッチ 切り替え
+    @objc
+    func localNotificationSettingSwitchTriggered(sender: UISwitch) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        pushPermissionState(completion: { isOn in
+            DispatchQueue.main.async {
+                if isOn {
+                    DispatchQueue.main.async {
+                        // ローカル通知　設定スイッチ
+                        UserDefaults.standard.set(sender.isOn, forKey: "local_notification_switch")
+                        UserDefaults.standard.synchronize()
+                    }
+                } else {
+                    // OSの設定　がOFFの場合
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                    // 認証使用可能時の処理
+                    DispatchQueue.main.async {
+                        // スイッチを元に戻す
+                        sender.isOn = !sender.isOn
+                        // アラート画面を表示する
+                        let alert = UIAlertController(title: "エラー", message: "ローカル通知を利用できるように\n通知をオンに設定してください", preferredStyle: .alert)
+                        
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                self.dismiss(animated: true, completion: {
+                                    // OSの通知設定画面へ遷移
+                                    self.linkToSettingsScreen()
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+    // 指定時刻
+    @objc
+    func datePickerTriggered(sender: UIDatePicker) {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = .current
+
+        df.dateStyle = .none
+        df.timeStyle = .short
+        let time = df.string(from: sender.date) // String "21:00"
+        UserDefaults.standard.set(time, forKey: "localNotificationEvereyDay")
+        UserDefaults.standard.synchronize()
+    }
+
     // 通知設定状況を取得
     func pushPermissionState(completion: @escaping (Bool) -> Void) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -169,9 +224,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 3
+            return 6
         case 4:
-            return 4
+            return 3
         default:
             return 0
         }
@@ -292,12 +347,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 2:
                 cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
-            default:
-                break
-            }
-        } else {
-            switch indexPath.row {
-            case 0:
+            case 3:
                 cell.centerLabel.text = "通知設定"
                 // ボタン
                 let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
@@ -311,6 +361,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                         if isOn {
                             cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
                         } else {
+                            // OSの設定　がOFFの場合
                             cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
                         }
                     }
@@ -318,13 +369,53 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 button.tag = indexPath.row
                 button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
                 cell.accessoryView = button
-            case 1:
+            case 4:
+                cell.centerLabel.text = "帳簿付け時刻の通知"
+                cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
+
+                let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                // ローカル通知　設定スイッチ
+                switchView.onTintColor = .accentColor
+                switchView.isOn = UserDefaults.standard.bool(forKey: "local_notification_switch")
+                switchView.tag = indexPath.row
+                switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
+                cell.accessoryView = switchView
+                
+            case 5:
+                cell.centerLabel.text = "指定時刻"
+                cell.leftImageView.image = nil
+
+                let picker = UIDatePicker()
+                picker.locale = Locale(identifier: "ja_JP") // Locale(identifier: "en_US_POSIX")
+                picker.timeZone = .current
+                picker.calendar = Calendar(identifier: .gregorian)
+                // デバイスの設定(暦法)を無視して表示させる
+                
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .compact
+                } else {
+                    // Fallback on earlier versions
+                }
+                // 時間のみにする
+                picker.datePickerMode = .time
+                picker.center = cell.contentView.center
+                // 初期値
+                picker.date = UserNotificationUtility.shared.time
+                picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
+                cell.accessoryView = picker
+
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 2:
+            case 1:
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
-            case 3:
+            case 2:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
@@ -343,13 +434,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 return nil
+            case 3:
+                return nil
+            case 4:
+                return nil
             default:
                 return indexPath
             }
         case 4:
             switch indexPath.row {
-            case 0:
-                return nil
             default:
                 return indexPath
             }
@@ -400,10 +493,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else {
             switch indexPath.row {
             case 0:
-                break
-            case 1:
                 performSegue(withIdentifier: "SettingsHelpViewController", sender: tableView.cellForRow(at: indexPath))
-            case 2:
+            case 1:
                 /// TODO: -  アプリ名変更
                 // アプリ内でブラウザを開く
                 let url = URL(string:  "https://apps.apple.com/jp/app/%E8%A4%87%E5%BC%8F%E7%B0%BF%E8%A8%98%E3%81%AE%E4%BC%9A%E8%A8%88%E5%B8%B3%E7%B0%BF-thereckoning-%E3%82%B6-%E3%83%AC%E3%82%B3%E3%83%8B%E3%83%B3%E3%82%B0/id1535793378?l=ja&ls=1&mt=8&action=write-review")
@@ -412,7 +503,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     vc.preferredControlTintColor = .accentBlue
                     present(vc, animated: true, completion: nil)
                 }
-            case 3:
+            case 2:
                 // お問い合わせ機能
                 if MFMailComposeViewController.canSendMail() {
                     let mail = MFMailComposeViewController()
