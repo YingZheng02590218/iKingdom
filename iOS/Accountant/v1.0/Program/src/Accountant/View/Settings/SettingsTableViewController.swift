@@ -269,9 +269,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 35
         case 2:
-            return 50
+            return 55
         case 4:
-            return 50
+            return 55
         default:
             return 0
         }
