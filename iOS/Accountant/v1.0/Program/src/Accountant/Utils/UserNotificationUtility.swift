@@ -50,8 +50,9 @@ final class UserNotificationUtility: NSObject {
         )
         let content = UNMutableNotificationContent()
         // 通知メッセージを指定
-        content.title = "帳簿付けの時刻です。"
-        content.body = "本日の取引を入力しましょう。"
+        // 先頭を0埋めする
+        content.title = "\(String(format: "%02d", hour)):\(String(format: "%02d", minute)) 帳簿付けの時刻です"
+        content.body = "今日の取引を入力しましょう📝"
         // この通知を受け取った直後の、アプリバッジの値を指定
         content.badge = 1
         // 通知音を指定
