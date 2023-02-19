@@ -33,6 +33,10 @@
 		F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */; };
 		F928F93429A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */; };
 		F928F93529A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */; };
+		F928F93729A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928F93629A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift */; };
+		F928F93829A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928F93629A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift */; };
+		F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F928F93929A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib */; };
+		F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F928F93929A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib */; };
 		F929C00B247708CF0034FAAF /* MasterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F929C00A247708CF0034FAAF /* MasterData.swift */; };
 		F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */; };
 		F929C0242478361F0034FAAF /* DatabaseManagerSettingsTaxonomyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */; };
@@ -670,6 +674,8 @@
 		F9227720261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsTaxonomyListTableViewController.storyboard; sourceTree = "<group>"; };
 		F9227730261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsCategoryDetailTableViewController.storyboard; sourceTree = "<group>"; };
 		F928F93329A1CFF600D447B7 /* crrect_answer3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crrect_answer3.mp3; sourceTree = "<group>"; };
+		F928F93629A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		F928F93929A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		F929C00A247708CF0034FAAF /* MasterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterData.swift; sourceTree = "<group>"; };
 		F92EA9372428B18100B721C3 /* JournalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryViewController.swift; sourceTree = "<group>"; };
 		F92F4EF3249CCD5B00D50767 /* TBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBViewController.swift; sourceTree = "<group>"; };
@@ -1498,6 +1504,8 @@
 				F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */,
 				F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */,
 				F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */,
+				F928F93629A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift */,
+				F928F93929A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2050,6 +2058,7 @@
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
+				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
@@ -2135,6 +2144,7 @@
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
+				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
@@ -2407,6 +2417,7 @@
 				F9DC870429932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
+				F928F93729A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
 				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */,
@@ -2626,6 +2637,7 @@
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
+				F928F93829A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
 				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
 				F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */,

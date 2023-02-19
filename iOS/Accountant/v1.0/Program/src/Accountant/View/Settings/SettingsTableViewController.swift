@@ -45,7 +45,11 @@ class SettingsTableViewController: UIViewController {
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
-        
+        tableView.register(
+            UINib(nibName: String(describing: NewsTableViewHeaderFooterView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: NewsTableViewHeaderFooterView.self)
+        )
+
         self.navigationItem.title = "設定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -252,14 +256,45 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 2:
-            return "開始残高　前期の決算書、もしくは試算表の貸借対照表をご参照いただきながら設定してください。"
+            return "開始残高\n前期の決算書、もしくは試算表を参照いただきながらご入力ください。"
         case 4:
-            return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
+            return "開発者へメールを送ることができます。\nメールを受信できるように受信拒否設定は解除してください。"
         default:
             return ""
         }
     }
-    
+    // セクションフッターの高さ
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 35
+        case 2:
+            return 55
+        case 4:
+            return 55
+        default:
+            return 0
+        }
+    }
+    // セクションフッター
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: NewsTableViewHeaderFooterView.self))
+            if let headerView = view as? NewsTableViewHeaderFooterView {
+                headerView.textLabel?.text = nil
+                let message = [
+                    "このアプリが少しでも役に立ったなと思ったら、サブスク登録、高評価をお願いいたします。",
+                ]
+                headerView.setup(message: message)
+                return headerView
+            }
+        default:
+            break
+        }
+        return nil
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 55
@@ -386,6 +421,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = nil
 
                 let picker = UIDatePicker()
+                picker.tintColor = .accentColor
                 picker.locale = Locale(identifier: "ja_JP") // Locale(identifier: "en_US_POSIX")
                 picker.timeZone = .current
                 picker.calendar = Calendar(identifier: .gregorian)

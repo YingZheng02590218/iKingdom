@@ -4,17 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Accountant.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
 		<key>NotificationService.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>30</integer>
+			<integer>29</integer>
 		</dict>
 		<key>NotificationServiceSTG.xcscheme_^#shared#^_</key>
 		<dict>
@@ -24,27 +17,32 @@
 		<key>PaciolistSTG.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>27</integer>
 		</dict>
 		<key>PaciolistSTGWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>28</integer>
 		</dict>
 		<key>PaciolistWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>30</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>F9DC873329948CCE00919E5F</key>
+		<key>F94EDD8E237AEB3A0074D812</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F9EC668C27B90BC60003FBB6</key>
+		<key>F9DC86F229932E1C00919E5F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9F38035299E2C1D00B77562</key>
 		<dict>
 			<key>primary</key>
 			<true/>
