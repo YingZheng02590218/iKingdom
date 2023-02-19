@@ -256,9 +256,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 2:
-            return "開始残高\n前期の決算書、もしくは試算表や貸借対照表をご参照いただきながら設定してください。"
+            return "開始残高\n前期の決算書、もしくは試算表を参照いただきながらご入力ください。"
         case 4:
-            return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
+            return "開発者へメールを送ることができます。\nメールを受信できるように受信拒否設定は解除してください。"
         default:
             return ""
         }
