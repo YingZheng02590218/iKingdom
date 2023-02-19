@@ -104,7 +104,7 @@ final class UserNotificationUtility: NSObject {
             print("minute", array[1])
             return df.date(from: "\(array[0]):\(array[1])") ?? Date()
         } else {
-            return Date()
+            return df.date(from: "19:00") ?? Date()
         }
     }()
 }
