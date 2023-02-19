@@ -56,7 +56,7 @@ final class UserNotificationUtility: NSObject {
         // この通知を受け取った直後の、アプリバッジの値を指定
         content.badge = 1
         // 通知音を指定
-        content.sound = .defaultCritical
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "crrect_answer3.mp3"))
         // identifier には、他の通知設定と重複しない値を指定します
         let request = UNNotificationRequest(
             identifier: "localNotificationEvereyDay", // UUID().uuidString, 通知が重複してしまう。
