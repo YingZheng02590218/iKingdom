@@ -22,11 +22,15 @@ enum FirebaseAnalytics {
 enum AnalyticsEvents: CustomStringConvertible {
     // iCloudバックアップ
     case iCloudBackup
+    // ローカル通知
+    case localNotificationEvereyDay
 
     var description: String {
         switch self {
         case .iCloudBackup:
             return "icloud_backup"
+        case .localNotificationEvereyDay:
+            return "local_notification_everey_day"
         }
     }
 }

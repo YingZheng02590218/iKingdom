@@ -147,6 +147,11 @@ extension UserNotificationUtility: UNUserNotificationCenterDelegate {
             print("didReceive Push Notification")
         } else {
             print("didReceive Local Notification")
+            // イベントログ
+            FirebaseAnalytics.logEvent(
+                event: AnalyticsEvents.localNotificationEvereyDay,
+                parameters: nil
+            )
             completionHandler()
         }
         // 通知の ID を取得
