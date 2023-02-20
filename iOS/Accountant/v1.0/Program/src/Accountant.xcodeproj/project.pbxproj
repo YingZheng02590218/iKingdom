@@ -272,6 +272,10 @@
 		F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */; };
 		F9C2BEBA250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */; };
 		F9C2BEBD250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */; };
+		F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
+		F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */; };
+		F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */; };
+		F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */; };
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
 		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
@@ -856,6 +860,8 @@
 		F9C2BC28277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClassicCalculatorViewController.storyboard; sourceTree = "<group>"; };
 		F9C2BEB9250C9E8500825936 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyAccountByTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
 		F9C2BEBC250CCF9E00825936 /* SettingsTaxonomyListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTaxonomyListTableViewController.swift; sourceTree = "<group>"; };
+		F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PopUpViewController.storyboard; sourceTree = "<group>"; };
+		F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		F9CD5899266B963600F27E80 /* HTMLhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelper.swift; sourceTree = "<group>"; };
 		F9CD589B266B980A00F27E80 /* PDFMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMaker.swift; sourceTree = "<group>"; };
@@ -1648,6 +1654,15 @@
 			path = SettingsTaxonomyList;
 			sourceTree = "<group>";
 		};
+		F9C6C74329A3A5E000BA8F83 /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F9C6C73E29A3A5D700BA8F83 /* PopUpViewController.swift */,
+				F9C6C73D29A3A5D700BA8F83 /* PopUpViewController.storyboard */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		F9D224C724893F41006C6CD9 /* SubsidiaryLedger */ = {
 			isa = PBXGroup;
 			children = (
@@ -1834,6 +1849,7 @@
 				F98163072999E1B70027B4C8 /* SettingsUpgradeViewController.swift */,
 				F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */,
 				F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */,
+				F9C6C74329A3A5E000BA8F83 /* PopUp */,
 			);
 			path = SettingsUpgrade;
 			sourceTree = "<group>";
@@ -2053,6 +2069,7 @@
 				F99BE776261DCB22004611E4 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
+				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
@@ -2139,6 +2156,7 @@
 				F9EC670F27B90BC60003FBB6 /* FinancialStatementTableViewController.storyboard in Resources */,
 				F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */,
 				F9EC671127B90BC60003FBB6 /* SettingsOperatingTableViewController.storyboard in Resources */,
+				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
@@ -2539,6 +2557,7 @@
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
+				F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
@@ -2759,6 +2778,7 @@
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
+				F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,
 				F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */,
