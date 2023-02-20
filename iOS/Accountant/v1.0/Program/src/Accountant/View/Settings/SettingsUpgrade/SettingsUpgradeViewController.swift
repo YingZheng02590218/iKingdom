@@ -305,12 +305,19 @@ class SettingsUpgradeViewController: UIViewController {
     }
     // プライバシーポリシー　利用規約
     @IBAction func privacyPolicyButtonTapped(_ sender: Any) {
-        // TODO: - アプリ名変更
-        // アプリ内でブラウザを開く
-        let url = URL(string: "https://www.facebook.com/The-Reckoning-103608024863220")
+        // iPad で、Facebookページを開けない現象の対応
+//        // アプリ内でブラウザを開く
+//        let url = URL(string: "https://www.facebook.com/profile.php?id=100064085410025")
+//        if let url = url {
+//            let vc = SFSafariViewController(url: url)
+//            present(vc, animated: true, completion: nil)
+//        }
+        // 外部でブラウザを開く
+        let url = URL(string: "https://www.facebook.com/profile.php?id=100064085410025")
         if let url = url {
-            let vc = SFSafariViewController(url: url)
-            present(vc, animated: true, completion: nil)
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
         }
     }
     // インジゲーターを開始
