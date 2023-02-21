@@ -42,6 +42,8 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet var restoreExplainLabel: UILabel!
     // 解約
     @IBOutlet var howToCancelButton: UIButton!
+    // 利用規約
+    @IBOutlet var termsButton: UIButton!
     // プラポリ
     @IBOutlet var privacyPolicyButton: UIButton!
     // フィードバック
@@ -212,11 +214,17 @@ class SettingsUpgradeViewController: UIViewController {
         } else {
             howToCancelButton.setTitle("How to cancel", for: .normal)
         }
-        // プライバシーポリシー / 利用規約
+        // 利用規約
         if language == "ja-JP" {
-            privacyPolicyButton.setTitle("プライバシーポリシー / 利用規約", for: .normal)
+            termsButton.setTitle("利用規約", for: .normal)
         } else {
-            privacyPolicyButton.setTitle("Privacy Policy / Terms of Use", for: .normal)
+            termsButton.setTitle("Terms of Use", for: .normal)
+        }
+        // プライバシーポリシー
+        if language == "ja-JP" {
+            privacyPolicyButton.setTitle("プライバシーポリシー", for: .normal)
+        } else {
+            privacyPolicyButton.setTitle("Privacy Policy", for: .normal)
         }
     }
     // 購入
@@ -303,16 +311,60 @@ class SettingsUpgradeViewController: UIViewController {
             }
         }
     }
-    // プライバシーポリシー　利用規約
-    @IBAction func privacyPolicyButtonTapped(_ sender: Any) {
-        // TODO: - アプリ名変更
-        // アプリ内でブラウザを開く
-        let url = URL(string: "https://www.facebook.com/The-Reckoning-103608024863220")
-        if let url = url {
-            let vc = SFSafariViewController(url: url)
-            present(vc, animated: true, completion: nil)
+    // 利用規約
+    @IBAction func termsButtonTapped(_ sender: Any) {
+        // iPad で、Facebookページを開けない現象の対応
+//        // アプリ内でブラウザを開く
+//        let url = URL(string: "https://www.facebook.com/profile.php?id=100064085410025")
+//        if let url = url {
+//            let vc = SFSafariViewController(url: url)
+//            present(vc, animated: true, completion: nil)
+//        }
+//        // 外部でブラウザを開く
+//        let url = URL(string: "https://www.facebook.com/profile.php?id=100064085410025")
+//        if let url = url {
+//            if UIApplication.shared.canOpenURL(url) {
+//                UIApplication.shared.open(url)
+//            }
+//        }
+        // ポップアップを表示させる
+        if let viewController = UIStoryboard(
+            name: "PopUpViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "PopUpViewController"
+        ) as? PopUpViewController {
+            viewController.termsOrPrivacyPolicy = .terms
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.modalTransitionStyle = .crossDissolve
+            // tabBarControllerのViewを使う
+            guard let tabBarController = self.tabBarController else {
+                return
+            }
+            tabBarController.present(viewController, animated: true, completion: nil)
         }
     }
+    // プライバシーポリシー
+    @IBAction func privacyPolicyButtonTapped(_ sender: Any) {
+        // iPad で、Facebookページを開けない現象の対応
+        // ポップアップを表示させる
+        if let viewController = UIStoryboard(
+            name: "PopUpViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "PopUpViewController"
+        ) as? PopUpViewController {
+            viewController.termsOrPrivacyPolicy = .privacyPolicy
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.modalTransitionStyle = .crossDissolve
+            // tabBarControllerのViewを使う
+            guard let tabBarController = self.tabBarController else {
+                return
+            }
+            tabBarController.present(viewController, animated: true, completion: nil)
+        }
+    }
+
     // インジゲーターを開始
     func showActivityIndicatorView() {
         DispatchQueue.main.async {

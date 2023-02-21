@@ -14,7 +14,7 @@ import UIKit
 
 // 設定クラス
 class SettingsTableViewController: UIViewController {
-
+    
     @IBOutlet var versionLabel: UILabel!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var scrollView: UIScrollView!
@@ -45,6 +45,10 @@ class SettingsTableViewController: UIViewController {
         // XIBを登録　xibカスタムセル設定によりsegueが無効になっているためsegueを発生させる
         tableView.register(UINib(nibName: "WithIconTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.separatorColor = .accentColor
+        tableView.register(
+            UINib(nibName: String(describing: NewsTableViewHeaderFooterView.self), bundle: nil),
+            forHeaderFooterViewReuseIdentifier: String(describing: NewsTableViewHeaderFooterView.self)
+        )
 
         self.navigationItem.title = "設定"
         // largeTitle表示
@@ -58,7 +62,7 @@ class SettingsTableViewController: UIViewController {
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
-
+        
         versionLabel.text = "Version \(AppVersion.currentVersion)"
     }
     
@@ -68,11 +72,11 @@ class SettingsTableViewController: UIViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-
+    
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc
     func switchTriggered(sender: UISwitch) {
@@ -107,17 +111,114 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
+    // PUSH通知　ボタン
+    @objc
+    func pushNotificationSettingButtonTapped(sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // OSの通知設定画面へ遷移
+        self.linkToSettingsScreen()
+    }
+    // ローカル通知　設定スイッチ 切り替え
+    @objc
+    func localNotificationSettingSwitchTriggered(sender: UISwitch) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorHeavy as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        pushPermissionState(completion: { isOn in
+            DispatchQueue.main.async {
+                if isOn {
+                    DispatchQueue.main.async {
+                        // ローカル通知　設定スイッチ
+                        UserDefaults.standard.set(sender.isOn, forKey: "local_notification_switch")
+                        UserDefaults.standard.synchronize()
+                    }
+                } else {
+                    // OSの設定　がOFFの場合
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                    // 認証使用可能時の処理
+                    DispatchQueue.main.async {
+                        // スイッチを元に戻す
+                        sender.isOn = !sender.isOn
+                        // アラート画面を表示する
+                        let alert = UIAlertController(title: "エラー", message: "ローカル通知を利用できるように\n通知をオンに設定してください", preferredStyle: .alert)
+                        
+                        self.present(alert, animated: true) { () -> Void in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                self.dismiss(animated: true, completion: {
+                                    // OSの通知設定画面へ遷移
+                                    self.linkToSettingsScreen()
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    }
+    // 指定時刻
+    @objc
+    func datePickerTriggered(sender: UIDatePicker) {
+        let df = DateFormatter()
+        df.calendar = Calendar(identifier: .gregorian)
+        df.locale = Locale(identifier: "ja_JP")
+        df.timeZone = .current
 
+        df.dateStyle = .none
+        df.timeStyle = .short
+        let time = df.string(from: sender.date) // String "21:00"
+        UserDefaults.standard.set(time, forKey: "localNotificationEvereyDay")
+        UserDefaults.standard.synchronize()
+    }
+
+    // 通知設定状況を取得
+    func pushPermissionState(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                print("Allow notification")
+                completion(true)
+            case .denied:
+                print("Denied notification")
+                completion(false)
+            case .notDetermined:
+                print("Not settings")
+                completion(false)
+            case .provisional:
+                print("provisional")
+                completion(false)
+            case .ephemeral:
+                print("ephemeral")
+                completion(false)
+            @unknown default:
+                print("default")
+                completion(false)
+            }
+        }
+    }
+    // OSの通知設定画面へ遷移
+    func linkToSettingsScreen() {
+        DispatchQueue.main.async {
+            if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Table view data source
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-         5
+        5
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -127,7 +228,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 3
+            return 6
         case 4:
             return 3
         default:
@@ -155,14 +256,45 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 2:
-            return "開始残高　前期の決算書、もしくは試算表の貸借対照表をご参照いただきながら設定してください。"
+            return "開始残高\n前期の決算書、もしくは試算表を参照いただきながらご入力ください。"
         case 4:
-            return "開発者へメールを送ることができます\nメールを受信できるように受信拒否設定は解除してください"
+            return "開発者へメールを送ることができます。\nメールを受信できるように受信拒否設定は解除してください。"
         default:
             return ""
         }
     }
-    
+    // セクションフッターの高さ
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 35
+        case 2:
+            return 55
+        case 4:
+            return 55
+        default:
+            return 0
+        }
+    }
+    // セクションフッター
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: NewsTableViewHeaderFooterView.self))
+            if let headerView = view as? NewsTableViewHeaderFooterView {
+                headerView.textLabel?.text = nil
+                let message = [
+                    "このアプリが少しでも役に立ったなと思ったら、サブスク登録、高評価をお願いいたします。",
+                ]
+                headerView.setup(message: message)
+                return headerView
+            }
+        default:
+            break
+        }
+        return nil
+    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 55
@@ -172,9 +304,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     }
     //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
-
+        
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
@@ -187,7 +319,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         cell.leftImageView.tintColor = .textColor
         // 背景色
         cell.backgroundColor = .mainColor2
-
+        
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -208,7 +340,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 1 {
             cell.centerLabel.text = "データのバックアップ・復元"
             cell.leftImageView.image = UIImage(named: "baseline_cloud_upload_black_36pt")?.withRenderingMode(.alwaysTemplate)
-
+            
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
@@ -230,7 +362,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "パスコードロックを利用する"
-                cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
+                // 生体認証かパスコードのいずれかが使用可能かを確認する
+                if LocalAuthentication.canEvaluatePolicy() {
+                    cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
+                } else {
+                    cell.leftImageView.image = UIImage(named: "baseline_lock_open_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                }
                 let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 // 生体認証パスコードロック　設定スイッチ
                 switchView.onTintColor = .accentColor
@@ -245,6 +382,64 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 2:
                 cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
+            case 3:
+                cell.centerLabel.text = "通知設定"
+                // ボタン
+                let button = UIButton(frame: CGRect(x: 0, y: cell.frame.size.height / 2, width: 25, height: 25))
+                // PUSH通知　設定スイッチ
+                button.tintColor = .accentColor
+                let picture = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
+                button.setImage(picture, for: .normal)
+                button.imageView?.tintColor = .accentColor
+                pushPermissionState(completion: { isOn in
+                    DispatchQueue.main.async {
+                        if isOn {
+                            cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                        } else {
+                            // OSの設定　がOFFの場合
+                            cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                        }
+                    }
+                })
+                button.tag = indexPath.row
+                button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
+                cell.accessoryView = button
+            case 4:
+                cell.centerLabel.text = "帳簿付け時刻の通知"
+                cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
+
+                let switchView = UISwitch(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+                // ローカル通知　設定スイッチ
+                switchView.onTintColor = .accentColor
+                switchView.isOn = UserDefaults.standard.bool(forKey: "local_notification_switch")
+                switchView.tag = indexPath.row
+                switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
+                cell.accessoryView = switchView
+                
+            case 5:
+                cell.centerLabel.text = "指定時刻"
+                cell.leftImageView.image = nil
+
+                let picker = UIDatePicker()
+                picker.tintColor = .accentColor
+                picker.locale = Locale(identifier: "ja_JP") // Locale(identifier: "en_US_POSIX")
+                picker.timeZone = .current
+                picker.calendar = Calendar(identifier: .gregorian)
+                // デバイスの設定(暦法)を無視して表示させる
+                
+                if #available(iOS 13.4, *) {
+                    picker.preferredDatePickerStyle = .compact
+                } else {
+                    // Fallback on earlier versions
+                }
+                // 時間のみにする
+                picker.datePickerMode = .time
+                picker.center = cell.contentView.center
+                // 初期値
+                picker.date = UserNotificationUtility.shared.time
+                picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
+                cell.accessoryView = picker
+
             default:
                 break
             }
@@ -264,10 +459,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         }
-
+        
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
@@ -275,6 +470,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             switch indexPath.row {
             case 0:
                 return nil
+            case 3:
+                return nil
+            case 4:
+                return nil
+            default:
+                return indexPath
+            }
+        case 4:
+            switch indexPath.row {
             default:
                 return indexPath
             }
@@ -295,9 +499,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 break
             }
         } else if indexPath.section == 1 {
-
+            
             performSegue(withIdentifier: "BackupViewController", sender: tableView.cellForRow(at: indexPath))
-
+            
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
@@ -361,7 +565,7 @@ extension SettingsTableViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         posX = scrollView.contentOffset.x
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.x = posX
     }

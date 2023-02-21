@@ -28,10 +28,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfg-Kx-lIG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="スタンダードプラン" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9u-Wr-2Pq">
-                                                                <rect key="frame" x="79.5" y="11.5" width="255.5" height="33.5"/>
+                                                                <rect key="frame" x="79.5" y="13.5" width="255.5" height="33.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                                                 <color key="textColor" name="AccentColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHJ-7i-qSu">
-                                                        <rect key="frame" x="0.0" y="56" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="60" width="414" height="60.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseline_visibility_off_black_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="zoP-aY-7aO">
-                                                                <rect key="frame" x="40" y="-2" width="60" height="60"/>
+                                                                <rect key="frame" x="40" y="0.5" width="60" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
@@ -57,13 +57,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="広告なし" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znr-Na-iwj" userLabel="TitleLabel">
-                                                                <rect key="frame" x="120" y="-2" width="101.5" height="30"/>
+                                                                <rect key="frame" x="120" y="0.5" width="101.5" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作業に集中することができます" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KF3-2U-hoJ" userLabel="SubTitleLabel">
-                                                                <rect key="frame" x="120" y="41" width="200" height="17"/>
+                                                                <rect key="frame" x="120" y="43.5" width="200" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -83,10 +83,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-hu-l3e">
-                                                        <rect key="frame" x="0.0" y="112" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="120.5" width="414" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D5q-FZ-rj1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="41.5" y="14" width="331" height="28"/>
+                                                                <rect key="frame" x="41.5" y="15" width="331" height="30"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                                                 <color key="tintColor" name="MainColor"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -117,7 +117,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHH-dm-nEG">
-                                                        <rect key="frame" x="0.0" y="168" width="414" height="263"/>
+                                                        <rect key="frame" x="0.0" y="180.5" width="414" height="220.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdP-26-F9c">
                                                                 <rect key="frame" x="30" y="10" width="354" height="401"/>
@@ -148,10 +148,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-h4-vGR">
-                                                        <rect key="frame" x="0.0" y="431" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="401" width="414" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dj-lL-H0C" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="120" y="12" width="174.5" height="32"/>
+                                                                <rect key="frame" x="120" y="14" width="174.5" height="32"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <color key="tintColor" name="AccentColor"/>
                                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
@@ -182,7 +182,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLG-P4-pcG">
-                                                        <rect key="frame" x="0.0" y="487" width="414" height="263"/>
+                                                        <rect key="frame" x="0.0" y="461" width="414" height="220.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nsg-bb-J9r">
                                                                 <rect key="frame" x="30" y="10" width="354" height="153"/>
@@ -205,10 +205,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pa-Wd-mTw">
-                                                        <rect key="frame" x="0.0" y="750" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="681.5" width="414" height="60.5"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmi-Mb-aJq">
-                                                                <rect key="frame" x="151" y="13.5" width="112" height="29"/>
+                                                                <rect key="frame" x="151" y="16" width="112" height="29"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="tintColor" name="AccentBlue"/>
                                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
@@ -239,15 +239,15 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfM-Jz-gBx">
-                                                        <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                                                        <rect key="frame" x="0.0" y="742" width="414" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLp-G7-a0z">
-                                                                <rect key="frame" x="68.5" y="13.5" width="277" height="29"/>
+                                                                <rect key="frame" x="151" y="15.5" width="112" height="29"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="tintColor" name="AccentBlue"/>
                                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                <state key="normal" title="プライバシーポリシー / 利用規約">
+                                                                <state key="normal" title="利用規約">
                                                                     <color key="titleColor" name="AccentBlue"/>
                                                                     <imageReference key="image" image="safari" catalog="system" symbolScale="medium"/>
                                                                 </state>
@@ -260,7 +260,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="privacyPolicyButtonTapped:" destination="qJT-bY-pn8" eventType="touchUpInside" id="TFG-QG-CZ1"/>
+                                                                    <action selector="termsButtonTapped:" destination="qJT-bY-pn8" eventType="touchUpInside" id="V45-6b-AK3"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -270,6 +270,40 @@
                                                             <constraint firstItem="gLp-G7-a0z" firstAttribute="height" relation="lessThanOrEqual" secondItem="bfM-Jz-gBx" secondAttribute="height" id="J8E-jw-JUb"/>
                                                             <constraint firstAttribute="height" constant="30" id="KqH-OK-Huv"/>
                                                             <constraint firstItem="gLp-G7-a0z" firstAttribute="centerX" secondItem="bfM-Jz-gBx" secondAttribute="centerX" id="LMp-U8-IYU"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sit-5H-0p3">
+                                                        <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INg-SQ-hQP">
+                                                                <rect key="frame" x="103.5" y="15.5" width="207" height="29"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                <color key="tintColor" name="AccentBlue"/>
+                                                                <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                                                <state key="normal" title="プライバシーポリシー ">
+                                                                    <color key="titleColor" name="AccentBlue"/>
+                                                                    <imageReference key="image" image="safari" catalog="system" symbolScale="medium"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRound">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="privacyPolicyButtonTapped:" destination="qJT-bY-pn8" eventType="touchUpInside" id="hgO-is-cwM"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="centerY" secondItem="Sit-5H-0p3" secondAttribute="centerY" id="3t2-Wt-HbM"/>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="height" relation="lessThanOrEqual" secondItem="Sit-5H-0p3" secondAttribute="height" id="fAU-lm-JaV"/>
+                                                            <constraint firstItem="INg-SQ-hQP" firstAttribute="centerX" secondItem="Sit-5H-0p3" secondAttribute="centerX" id="gEF-T7-Pxf"/>
+                                                            <constraint firstAttribute="height" constant="30" id="uF1-4J-kcR"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -317,10 +351,11 @@
                         <outlet property="howToCancelButton" destination="Mmi-Mb-aJq" id="O8z-zX-RRx"/>
                         <outlet property="invisibileAdsSubTitleLabel" destination="KF3-2U-hoJ" id="Fdo-yf-dhE"/>
                         <outlet property="invisibileAdsTitleLabel" destination="znr-Na-iwj" id="x9k-VA-Z7u"/>
-                        <outlet property="privacyPolicyButton" destination="gLp-G7-a0z" id="Tqz-WR-xob"/>
+                        <outlet property="privacyPolicyButton" destination="INg-SQ-hQP" id="exP-VK-3WJ"/>
                         <outlet property="restoreButton" destination="6dj-lL-H0C" id="rqB-yq-YRD"/>
                         <outlet property="restoreExplainLabel" destination="Nsg-bb-J9r" id="qdU-3o-MHk"/>
                         <outlet property="scrollView" destination="G2V-hj-w9w" id="hoo-sv-d6o"/>
+                        <outlet property="termsButton" destination="gLp-G7-a0z" id="bJT-Un-KU5"/>
                         <outlet property="titleLabel" destination="h9u-Wr-2Pq" id="AS0-az-y2l"/>
                     </connections>
                 </viewController>
