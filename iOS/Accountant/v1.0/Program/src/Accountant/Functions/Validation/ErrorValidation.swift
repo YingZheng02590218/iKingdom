@@ -1,0 +1,61 @@
+//
+//  ErrorValidation.swift
+//  Accountant
+//
+//  Created by Hisashi Ishihara on 2023/03/09.
+//  Copyright © 2023 Hisashi Ishihara. All rights reserved.
+//
+
+import Foundation
+
+// バリエーション状態
+enum ErrorValidationState: Hashable {
+    // 未バリデーション
+    case unvalidated
+    // 失敗
+    case failure(message: String?)
+    // 成功
+    case success
+    
+    var errorText: String? {
+        switch self {
+        case.failure(let errorText):
+            return errorText
+        case .success, .unvalidated:
+            return nil
+        }
+    }
+}
+
+// バリデーションチェック　バリデーション状態を返却する
+struct ErrorValidation {
+    
+    func validateSmallWriting(text: String) -> ErrorValidationState {
+        let editableType = EditableType.smallWriting
+        // 最大長
+        guard text.count <= editableType.maxLength else {
+            return .failure(
+                message: ErrorValidationType.maxLength(
+                    name: editableType.rawValue,
+                    max: editableType.maxLength
+                ).errorText
+            )
+        }
+        return .success
+    }
+    
+    func validateNickname(text: String) -> ErrorValidationState {
+        let editableType = EditableType.nickname
+        // 最大長
+        guard text.count <= editableType.maxLength else {
+            return .failure(
+                message: ErrorValidationType.maxLength(
+                    name: editableType.rawValue,
+                    max: editableType.maxLength
+                ).errorText
+            )
+        }
+        return .success
+    }
+
+}
