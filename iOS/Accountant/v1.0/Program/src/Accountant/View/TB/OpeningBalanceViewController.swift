@@ -37,6 +37,9 @@ class OpeningBalanceViewController: UIViewController {
     var category: String = ""
     // 電卓画面で入力中の金額は、借方か貸方か
     var debitOrCredit: DebitOrCredit = .credit
+    // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
+    let backView = UIView()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: OpeningBalancePresenterInput!
@@ -82,6 +85,11 @@ class OpeningBalanceViewController: UIViewController {
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // 編集ボタン setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
+        editButtonItem.tintColor = .accentColor
+        navigationItem.rightBarButtonItem = editButtonItem
+        self.navigationItem.title = "開始残高"
     }
 
     // ボタンのデザインを指定する
@@ -95,6 +103,97 @@ class OpeningBalanceViewController: UIViewController {
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
+        }
+    }
+
+    // 編集モード切り替え
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        // 編集中の場合
+        if editing {
+            navigationItem.title = "編集中"
+            
+            tableView.reloadData()
+        } else {
+            // 残高　借方　貸方
+            if presenter.debit_balance_total() == presenter.credit_balance_total() {
+                navigationItem.title = "開始残高"
+                // ローディング処理
+                // インジゲーターを開始
+                self.showActivityIndicatorView()
+                // 集計処理
+                DispatchQueue.global(qos: .background).async {
+                    self.presenter.refreshTable()
+                }
+            } else {
+                // 再度編集中へ戻す
+                self.setEditing(true, animated: true)
+                // フィードバック
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+                let alert = UIAlertController(title: "貸借の合計が不一致", message: "再度、入力してください", preferredStyle: .alert)
+                self.present(alert, animated: true) { () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .mainColor
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
         }
     }
 
@@ -135,6 +234,9 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
                 account = presenter.objects(forRow: indexPath.row).debit_category // 相手勘定科目名
                 valueCreditText = presenter.objects(forRow: indexPath.row).credit_amount
             }
+            // 編集中 は有効化
+            cell.textFieldAmountDebit.isEnabled = self.isEditing
+            cell.textFieldAmountCredit.isEnabled = self.isEditing
 
             cell.setup(
                 primaryKey: presenter.objects(forRow: indexPath.row).number,
@@ -201,8 +303,13 @@ extension OpeningBalanceViewController: InputTextTableCellDelegate {
 extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
 
     func reloadData() {
-
-        tableView.reloadData()
+        // 更新処理
+        self.tableView.reloadData()
+    }
+    
+    func finishLoading() {
+        // インジケーターを終了
+        self.finishActivityIndicatorView()
     }
 
     func setupViewForViewDidLoad() {
@@ -228,7 +335,6 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
             }
         }
         titleLabel.text = "開始残高"
-        self.navigationItem.title = "開始残高"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
 
         // 要素数が少ないUITableViewで残りの部分や余白を消す

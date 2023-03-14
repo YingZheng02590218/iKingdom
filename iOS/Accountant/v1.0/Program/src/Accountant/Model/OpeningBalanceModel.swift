@@ -15,6 +15,7 @@ protocol OpeningBalanceModelInput {
     func calculateAccountTotalAccount()
 
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit)
+    func initializeJournals(completion: (Bool) -> Void)
 
     func getTotalAmount(leftOrRight: Int) -> Int64
     func getDataBaseTransferEntries() -> Results<DataBaseSettingTransferEntry>
@@ -198,6 +199,18 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                 print("エラーが発生しました")
             }
         }
+    }
+
+    // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
+    func initializeJournals(completion: (Bool) -> Void) {
+        // 転記　仕訳から勘定への関連を付け直す
+        DataBaseManagerJournals.shared.reconnectJournalEntryToAccounts()
+        // 全勘定の合計と残高を計算する　注意：決算日設定機能で決算日を変更後に損益勘定と繰越利益の日付を更新するために必要な処理である
+        let databaseManager = TBModel()
+        databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
+        databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
+        
+        completion(true)
     }
 
     // MARK: Delete
