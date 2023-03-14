@@ -15,7 +15,6 @@ class OpeningBalanceViewController: UIViewController {
 
     // MARK: - var let
 
-    var gADBannerView: GADBannerView!
     /// 開始残高　上部
     @IBOutlet private var companyNameLabel: UILabel!
     @IBOutlet private var titleLabel: UILabel!
@@ -340,34 +339,10 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOBID
-
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-        } else {
-            if let gADBannerView = gADBannerView {
-                // GADBannerView を外す
-                removeBannerViewToView(gADBannerView)
-            }
-        }
     }
 
     func setupViewForViewWillDisappear() {
-        // アップグレード機能　スタンダードプラン
-        if let gADBannerView = gADBannerView {
-            // GADBannerView を外す
-            removeBannerViewToView(gADBannerView)
-        }
+
     }
 
     func setupViewForViewDidAppear() {
