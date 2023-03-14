@@ -553,6 +553,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     present(mail, animated: true, completion: nil)
                 } else {
                     print("送信できません")
+                    let alert = UIAlertController(title: "メール作成できません", message: "メールアドレスが設定されていないため", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
                 }
             default:
                 break
