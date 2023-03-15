@@ -14,6 +14,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     
     @IBOutlet private var nicknameTextField: UITextField!
     @IBOutlet private var nicknameCounterLabel: UILabel!
+    @IBOutlet private var nicknameView: EMTNeumorphicView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,19 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }
     }
     
+    override func createEMTNeumorphicView() {
+        super.createEMTNeumorphicView()
+        
+        if let view = nicknameView {
+            view.neumorphicLayer?.cornerRadius = 15
+            view.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            view.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            view.neumorphicLayer?.edged = Constant.edged
+            view.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            view.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            view.neumorphicLayer?.depthType = .concave
+        }
+    }
     // TextField作成 ニックネーム
     func createTextFieldForNickname() {
         nicknameTextField.delegate = self

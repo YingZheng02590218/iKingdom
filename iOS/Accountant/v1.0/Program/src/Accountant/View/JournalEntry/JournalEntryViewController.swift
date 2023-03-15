@@ -446,7 +446,7 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: EMTNeumorphicView
     // ニューモフィズム　ボタンとビューのデザインを指定する
-    private func createEMTNeumorphicView() {
+    func createEMTNeumorphicView() {
         
         if let datePickerView = datePickerView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
