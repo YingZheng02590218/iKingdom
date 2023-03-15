@@ -252,6 +252,12 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             }
         }
     }
+    
+    override func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        super.cancelButtonTapped(sender)
+        
+        nicknameTextField.text = ""
+    }
     // 削除ボタン
     @IBOutlet private var deleteButton: EMTNeumorphicButton!
     

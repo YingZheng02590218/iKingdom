@@ -566,7 +566,8 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
     }
 
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
-    @objc func done() {
+    @objc
+    func done() {
         print("done", self.text, selectedValue)
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
@@ -576,7 +577,8 @@ class PickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource
         self.endEditing(true)
     }
     
-    @objc func cancel() {
+    @objc
+    func cancel() {
         print("cancel", self.text, selectedValue)
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {

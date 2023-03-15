@@ -186,7 +186,10 @@ class JournalEntryViewController: UIViewController {
             textFieldAmountCredit.text = ""
             textFieldAmountDebit.text = ""
         }
-        if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+        if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
+            journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+            journalEntryType != .SettingsJournalEntriesFixing {
+            
             if textFieldSmallWritting.text == "" {
                 textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
             }
@@ -780,10 +783,13 @@ class JournalEntryViewController: UIViewController {
         self.view.endEditing(true)
     }
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグを切り替える
-    @objc func keyboardDidAppear() {
+    @objc
+    func keyboardDidAppear() {
         isShown = true
     }
-    @objc func keyboardDidDisappear() {
+    
+    @objc
+    func keyboardDidDisappear() {
         isShown = false
     }
     
@@ -1440,7 +1446,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         return true
     }
     
-    // テキストフィールがタップされ、入力可能になったあと
+    // 入力開始 テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // フォーカス　効果　ドロップシャドウをかける
         textField.layer.shadowOpacity = 1.4
@@ -1456,6 +1462,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         }
         // 借方金額　貸方金額
         if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
+            // 電卓画面へ遷移させるために要る
             self.view.endEditing(true)
         }
     }
@@ -1543,25 +1550,31 @@ extension JournalEntryViewController: UITextFieldDelegate {
         // フォーカス　効果　フォーカスが外れたら色を消す
         textField.layer.shadowColor = UIColor.clear.cgColor
         
-        // Segueを場合分け
-        if textField.tag == 111 {
+        if textField.tag == 111 { // 借方勘定科目
             if textFieldCategoryDebit.text == "" {
+                // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 貸方と同じ勘定科目の場合
                 textFieldCategoryDebit.text = ""
             } else {
-                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集ではない場合
+                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+                    journalEntryType != .SettingsJournalEntriesFixing {
                     if textFieldCategoryCredit.text == "" {
                         textFieldCategoryCredit.becomeFirstResponder()
                     }
                 }
             }
-        } else if textField.tag == 222 {
+        } else if textField.tag == 222 { // 貸方勘定科目
             if textFieldCategoryCredit.text == "" {
+                // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 借方と同じ勘定科目の場合
                 textFieldCategoryCredit.text = ""
             } else {
                 // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
+                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+                    journalEntryType != .SettingsJournalEntriesFixing {
+                    
                     if textFieldAmountDebit.text == "" {
                         textFieldAmountDebit.becomeFirstResponder() // カーソルを金額へ移す
                     }
