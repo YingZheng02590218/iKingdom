@@ -54,7 +54,7 @@ class JournalEntryViewController: UIViewController {
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
     var isShown = false
     // フィードバック
-    private let feedbackGeneratorMedium: Any? = {
+    let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.prepare()

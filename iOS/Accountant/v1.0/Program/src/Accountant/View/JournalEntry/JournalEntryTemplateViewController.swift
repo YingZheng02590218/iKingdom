@@ -262,6 +262,10 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     @IBOutlet private var deleteButton: EMTNeumorphicButton!
     
     @IBAction func deleteButton(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 確認のポップアップを表示したい
         self.showPopover()
     }
@@ -269,7 +273,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     private func showPopover() {
         let alert = UIAlertController(title: "削除", message: "よく使う仕訳を削除しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [self] (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース　よく使う仕訳を削除
             if DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: primaryKey) {
