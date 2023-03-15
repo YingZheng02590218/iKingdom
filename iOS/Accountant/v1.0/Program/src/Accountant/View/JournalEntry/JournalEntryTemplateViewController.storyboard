@@ -46,28 +46,28 @@
                                             <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BL8-YH-rpg">
                                                 <rect key="frame" x="10" y="10" width="280" height="93.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="mRN-W1-2Sj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="37.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="mRN-W1-2Sj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="45.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <color key="shadowColor" name="MainColor"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="仕訳の概要を入力してください" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGJ-wO-Vaf">
-                                                        <rect key="frame" x="0.0" y="37.5" width="280" height="6"/>
+                                                        <rect key="frame" x="0.0" y="45.5" width="280" height="28"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dA8-I1-Wdk"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="dA8-I1-Wdk"/>
                                                         </constraints>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="Eap-Pz-yNQ">
-                                                        <rect key="frame" x="0.0" y="43.5" width="280" height="50"/>
+                                                        <rect key="frame" x="0.0" y="73.5" width="280" height="20"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -83,10 +83,10 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="CGJ-wO-Vaf" firstAttribute="height" relation="lessThanOrEqual" secondItem="BL8-YH-rpg" secondAttribute="height" multiplier="0.5" constant="-20" id="9xV-L2-s1Z"/>
+                                                    <constraint firstItem="CGJ-wO-Vaf" firstAttribute="height" relation="lessThanOrEqual" secondItem="BL8-YH-rpg" secondAttribute="height" multiplier="0.35" priority="750" id="9xV-L2-s1Z"/>
                                                     <constraint firstAttribute="trailing" secondItem="mRN-W1-2Sj" secondAttribute="trailing" id="Chn-Sa-lVx"/>
                                                     <constraint firstItem="CGJ-wO-Vaf" firstAttribute="leading" secondItem="BL8-YH-rpg" secondAttribute="leading" id="IfK-Zm-NFv"/>
-                                                    <constraint firstItem="mRN-W1-2Sj" firstAttribute="height" secondItem="BL8-YH-rpg" secondAttribute="height" multiplier="0.4" id="Oir-gD-Uhw"/>
+                                                    <constraint firstItem="mRN-W1-2Sj" firstAttribute="height" secondItem="BL8-YH-rpg" secondAttribute="height" multiplier="0.35" id="Oir-gD-Uhw"/>
                                                     <constraint firstItem="mRN-W1-2Sj" firstAttribute="top" secondItem="BL8-YH-rpg" secondAttribute="top" id="Q2I-aq-ogY"/>
                                                     <constraint firstItem="mRN-W1-2Sj" firstAttribute="leading" secondItem="BL8-YH-rpg" secondAttribute="leading" id="RVW-Rc-cpI"/>
                                                     <constraint firstAttribute="trailing" secondItem="CGJ-wO-Vaf" secondAttribute="trailing" id="Sf9-Nw-TZB"/>
@@ -123,7 +123,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="137.5" height="35.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <color key="shadowColor" name="MainColor"/>
@@ -133,7 +133,7 @@
                                                                 <rect key="frame" x="142.5" y="0.0" width="137.5" height="35.5"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                                 <color key="textColor" name="TextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <color key="shadowColor" name="MainColor"/>
@@ -265,28 +265,28 @@
                                             <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="krV-Tn-xWh">
                                                 <rect key="frame" x="10" y="10" width="280" height="93.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Ku-UqX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="28"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Ku-UqX">
+                                                        <rect key="frame" x="0.0" y="0.0" width="280" height="32.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <color key="shadowColor" name="MainColor"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QrX-gP-fQs">
-                                                        <rect key="frame" x="0.0" y="28" width="280" height="15.5"/>
+                                                        <rect key="frame" x="0.0" y="32.5" width="280" height="41"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="psX-ZK-Nqq"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="psX-ZK-Nqq"/>
                                                         </constraints>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="8HF-QY-FtA">
-                                                        <rect key="frame" x="0.0" y="43.5" width="280" height="50"/>
+                                                        <rect key="frame" x="0.0" y="73.5" width="280" height="20"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -304,14 +304,14 @@
                                                 <constraints>
                                                     <constraint firstItem="Sd7-Ku-UqX" firstAttribute="top" secondItem="krV-Tn-xWh" secondAttribute="top" id="9jk-gy-LKv"/>
                                                     <constraint firstItem="8HF-QY-FtA" firstAttribute="trailing" secondItem="QrX-gP-fQs" secondAttribute="trailing" id="9lq-Kn-KTS"/>
-                                                    <constraint firstItem="QrX-gP-fQs" firstAttribute="height" relation="lessThanOrEqual" secondItem="krV-Tn-xWh" secondAttribute="height" multiplier="0.5" constant="-20" id="EM6-2f-Tfw"/>
+                                                    <constraint firstItem="QrX-gP-fQs" firstAttribute="height" relation="lessThanOrEqual" secondItem="krV-Tn-xWh" secondAttribute="height" multiplier="0.35" priority="750" id="EM6-2f-Tfw"/>
                                                     <constraint firstItem="QrX-gP-fQs" firstAttribute="leading" secondItem="krV-Tn-xWh" secondAttribute="leading" id="Hru-jP-3pM"/>
                                                     <constraint firstAttribute="trailing" secondItem="QrX-gP-fQs" secondAttribute="trailing" id="JSy-cf-G2a"/>
                                                     <constraint firstAttribute="trailing" secondItem="Sd7-Ku-UqX" secondAttribute="trailing" id="JlL-of-rK6"/>
                                                     <constraint firstItem="QrX-gP-fQs" firstAttribute="centerX" secondItem="krV-Tn-xWh" secondAttribute="centerX" id="LlD-NR-etd"/>
                                                     <constraint firstItem="QrX-gP-fQs" firstAttribute="width" secondItem="krV-Tn-xWh" secondAttribute="width" id="PuW-Gj-Thu"/>
                                                     <constraint firstItem="Sd7-Ku-UqX" firstAttribute="leading" secondItem="krV-Tn-xWh" secondAttribute="leading" id="RM8-6w-eMS"/>
-                                                    <constraint firstItem="Sd7-Ku-UqX" firstAttribute="height" secondItem="krV-Tn-xWh" secondAttribute="height" multiplier="0.3" id="d7N-Sn-bxZ"/>
+                                                    <constraint firstItem="Sd7-Ku-UqX" firstAttribute="height" secondItem="krV-Tn-xWh" secondAttribute="height" multiplier="0.35" id="d7N-Sn-bxZ"/>
                                                     <constraint firstItem="8HF-QY-FtA" firstAttribute="top" secondItem="QrX-gP-fQs" secondAttribute="bottom" id="h61-GK-JFZ"/>
                                                     <constraint firstItem="QrX-gP-fQs" firstAttribute="top" secondItem="Sd7-Ku-UqX" secondAttribute="bottom" id="kui-bJ-zPB"/>
                                                     <constraint firstItem="Sd7-Ku-UqX" firstAttribute="width" secondItem="krV-Tn-xWh" secondAttribute="width" id="srH-s6-fov"/>

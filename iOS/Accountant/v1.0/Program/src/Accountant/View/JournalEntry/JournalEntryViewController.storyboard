@@ -80,11 +80,38 @@
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView">
                                         <rect key="frame" x="0.0" y="159.33333333333334" width="408" height="159.00000000000003"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="9mt-Mb-VQH">
+                                                <rect key="frame" x="0.0" y="0.0" width="408" height="20"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Xpl-8l-1zP"/>
+                                                </constraints>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="発生日">
+                                                        <attributes>
+                                                            <color key="NSColor" name="TextColor"/>
+                                                            <font key="NSFont" size="15" name="HiraginoSans-W3"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="*">
+                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <font key="NSFont" size="15" name="AppleSymbols"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" name="MainColor"/>
+                                                <size key="shadowOffset" width="1" height="1"/>
+                                            </label>
                                             <stackView opaque="NO" tag="111" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-qD-M1U">
-                                                <rect key="frame" x="0.0" y="0.0" width="408" height="149"/>
+                                                <rect key="frame" x="0.0" y="20" width="408" height="129"/>
                                                 <subviews>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fs-GK-JAo" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="0.0" y="5" width="51.333333333333336" height="139"/>
+                                                        <rect key="frame" x="0.0" y="5" width="51.333333333333336" height="119"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="" image="arrow_back_ios-arrow_back_ios_symbol">
@@ -95,10 +122,10 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcr-5P-JyB" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="56.333333333333343" y="5" width="285.33333333333326" height="139"/>
+                                                        <rect key="frame" x="56.333333333333343" y="5" width="285.33333333333326" height="119"/>
                                                         <subviews>
                                                             <datePicker tag="2222" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Kpa-dQ-eBA">
-                                                                <rect key="frame" x="5" y="5" width="275.33333333333331" height="129"/>
+                                                                <rect key="frame" x="5" y="5" width="275.33333333333331" height="109"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
                                                                     <!--1970-01-01 11:00:00 +0000-->
@@ -122,7 +149,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4du-Lt-kP1" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                        <rect key="frame" x="346.66666666666669" y="5" width="61.333333333333314" height="139"/>
+                                                        <rect key="frame" x="346.66666666666669" y="5" width="61.333333333333314" height="119"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="" image="arrow_forward_ios-arrow_forward_ios_symbol">
@@ -168,11 +195,14 @@
                                             <constraint firstAttribute="trailing" secondItem="5Lm-v1-UzE" secondAttribute="trailing" id="7U4-K5-mIu"/>
                                             <constraint firstAttribute="bottom" secondItem="jHf-qD-M1U" secondAttribute="bottom" constant="10" id="9TS-TM-bpZ"/>
                                             <constraint firstItem="jHf-qD-M1U" firstAttribute="width" secondItem="xaT-PY-SRA" secondAttribute="width" id="Gsm-Nl-kKX"/>
-                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="height" secondItem="xaT-PY-SRA" secondAttribute="height" constant="-10" id="Sme-U3-VJb"/>
+                                            <constraint firstAttribute="trailing" secondItem="9mt-Mb-VQH" secondAttribute="trailing" id="Id0-yT-OWa"/>
+                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="height" secondItem="xaT-PY-SRA" secondAttribute="height" constant="-30" id="Sme-U3-VJb"/>
                                             <constraint firstAttribute="bottom" secondItem="5Lm-v1-UzE" secondAttribute="bottom" id="iWb-vP-aqx"/>
+                                            <constraint firstItem="9mt-Mb-VQH" firstAttribute="top" secondItem="xaT-PY-SRA" secondAttribute="top" id="jY8-oT-4gQ"/>
                                             <constraint firstItem="5Lm-v1-UzE" firstAttribute="top" secondItem="xaT-PY-SRA" secondAttribute="top" id="lOi-uU-Z8V"/>
                                             <constraint firstAttribute="trailing" secondItem="jHf-qD-M1U" secondAttribute="trailing" id="oCO-jH-dL5"/>
-                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="top" secondItem="xaT-PY-SRA" secondAttribute="top" id="uYE-tP-u8D"/>
+                                            <constraint firstItem="9mt-Mb-VQH" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" id="tmM-Dp-AA3"/>
+                                            <constraint firstItem="jHf-qD-M1U" firstAttribute="top" secondItem="9mt-Mb-VQH" secondAttribute="bottom" id="uYE-tP-u8D"/>
                                             <constraint firstItem="jHf-qD-M1U" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" id="xEN-kT-qhY"/>
                                             <constraint firstItem="5Lm-v1-UzE" firstAttribute="leading" secondItem="xaT-PY-SRA" secondAttribute="leading" id="yqk-2d-qaY"/>
                                         </constraints>
@@ -180,28 +210,56 @@
                                     <view tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14e-0l-xHx" userLabel="mid2_Neumorphic View" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                         <rect key="frame" x="0.0" y="318.33333333333331" width="408" height="159.33333333333331"/>
                                         <subviews>
-                                            <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
+                                            <stackView opaque="NO" tag="3333" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bza-Ia-eRI">
                                                 <rect key="frame" x="10" y="10" width="388" height="139.33333333333334"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BZL-1o-tF1" userLabel="Stack View1">
                                                         <rect key="frame" x="0.0" y="0.0" width="388" height="39.666666666666664"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-HE-bM2">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="tVJ-HE-bM2">
                                                                 <rect key="frame" x="0.0" y="0.0" width="191.66666666666666" height="39.666666666666664"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
-                                                                <color key="textColor" name="TextColor"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="借方">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="TextColor"/>
+                                                                            <font key="NSFont" size="15" name="HiraginoSans-W3"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment content="*">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="1" green="0.14913000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="15" name="AppleSymbols"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
                                                                 <nil key="highlightedColor"/>
                                                                 <color key="shadowColor" name="MainColor"/>
                                                                 <size key="shadowOffset" width="1" height="1"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="貸方" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-oH-5MC">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Icn-oH-5MC">
                                                                 <rect key="frame" x="196.66666666666663" y="0.0" width="191.33333333333337" height="39.666666666666664"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
-                                                                <color key="textColor" name="TextColor"/>
+                                                                <attributedString key="attributedText">
+                                                                    <fragment content="貸方">
+                                                                        <attributes>
+                                                                            <color key="NSColor" name="TextColor"/>
+                                                                            <font key="NSFont" size="15" name="HiraginoSans-W3"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                    <fragment content="*">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="1" green="0.14913000000000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <font key="NSFont" size="15" name="AppleSymbols"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
                                                                 <nil key="highlightedColor"/>
                                                                 <color key="shadowColor" name="MainColor"/>
                                                                 <size key="shadowOffset" width="1" height="1"/>
@@ -334,28 +392,28 @@
                                             <stackView opaque="NO" tag="33" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MZv-9k-QYm">
                                                 <rect key="frame" x="10" y="10" width="388" height="139"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-b8-FIi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小書き" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-b8-FIi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="48.666666666666664"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="19"/>
+                                                        <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <color key="shadowColor" name="MainColor"/>
                                                         <size key="shadowOffset" width="1" height="1"/>
                                                     </label>
                                                     <textField opaque="NO" tag="555" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="取引内容" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-71-Qqm">
-                                                        <rect key="frame" x="0.0" y="55.666666666666742" width="388" height="33.333333333333343"/>
+                                                        <rect key="frame" x="0.0" y="48.666666666666735" width="388" height="70.333333333333314"/>
                                                         <color key="backgroundColor" name="MainColor2"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Ben-5o-Eln"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="Ben-5o-Eln"/>
                                                         </constraints>
                                                         <color key="textColor" name="TextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartQuotesType="yes"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="y7J-fD-Ma2">
-                                                        <rect key="frame" x="0.0" y="89" width="388" height="50"/>
+                                                        <rect key="frame" x="0.0" y="119" width="388" height="20"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -373,12 +431,12 @@
                                                 <constraints>
                                                     <constraint firstItem="y7J-fD-Ma2" firstAttribute="trailing" secondItem="nGT-71-Qqm" secondAttribute="trailing" id="Bgh-HJ-5yl"/>
                                                     <constraint firstItem="nGT-71-Qqm" firstAttribute="top" secondItem="d8g-b8-FIi" secondAttribute="bottom" id="DjL-VG-TcT"/>
-                                                    <constraint firstItem="nGT-71-Qqm" firstAttribute="height" relation="lessThanOrEqual" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.5" constant="-20" id="Dmu-Lv-sl7"/>
+                                                    <constraint firstItem="nGT-71-Qqm" firstAttribute="height" relation="lessThanOrEqual" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.35" priority="750" id="Dmu-Lv-sl7"/>
                                                     <constraint firstItem="nGT-71-Qqm" firstAttribute="centerX" secondItem="MZv-9k-QYm" secondAttribute="centerX" id="Ex2-sb-oD1"/>
                                                     <constraint firstItem="nGT-71-Qqm" firstAttribute="leading" secondItem="MZv-9k-QYm" secondAttribute="leading" id="HUb-Ql-vkR"/>
                                                     <constraint firstAttribute="trailing" secondItem="d8g-b8-FIi" secondAttribute="trailing" id="SPk-YR-OhW"/>
                                                     <constraint firstItem="nGT-71-Qqm" firstAttribute="width" secondItem="MZv-9k-QYm" secondAttribute="width" id="Tfp-t8-ZJw"/>
-                                                    <constraint firstItem="d8g-b8-FIi" firstAttribute="height" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.4" id="YP7-JQ-ohW"/>
+                                                    <constraint firstItem="d8g-b8-FIi" firstAttribute="height" secondItem="MZv-9k-QYm" secondAttribute="height" multiplier="0.35" id="YP7-JQ-ohW"/>
                                                     <constraint firstItem="y7J-fD-Ma2" firstAttribute="top" secondItem="nGT-71-Qqm" secondAttribute="bottom" id="ZU6-rD-sNt"/>
                                                     <constraint firstItem="d8g-b8-FIi" firstAttribute="top" secondItem="MZv-9k-QYm" secondAttribute="top" id="Zco-Ll-L6r"/>
                                                     <constraint firstAttribute="trailing" secondItem="nGT-71-Qqm" secondAttribute="trailing" id="Zyq-l6-cQ2"/>
@@ -427,7 +485,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" clipsSubviews="YES" tag="444" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmr-j8-KMb" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="185.66666666666666" y="0.0" width="37" height="83.666666666666671"/>
+                                                                <rect key="frame" x="102" y="0.0" width="204" height="83.666666666666671"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="入力">
