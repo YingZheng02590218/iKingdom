@@ -368,6 +368,9 @@ class JournalEntryViewController: UIViewController {
         guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNow: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
+        guard let yyyyMMddHHmmssNowCurrent = Date.convertDate(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ") else { return }
+        print(yyyyMMddHHmmssNowCurrent.toString(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
+
         // デイトピッカーの最大値と最小値を設定
         if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             // 決算整理仕訳の場合は日付を決算日に固定
@@ -435,7 +438,7 @@ class JournalEntryViewController: UIViewController {
                 datePicker.date = yyyyMMddHHmmssNextYear // 注意：カンマの後にスペースがないとnilになる
             }
         } else {
-            datePicker.date = yyyyMMddHHmmssNow // 注意：カンマの後にスペースがないとnilになる
+            datePicker.date = yyyyMMddHHmmssNowCurrent // 注意：カンマの後にスペースがないとnilになる
         }
         //        // 背景色
         //        datePicker.backgroundColor = .systemBackground

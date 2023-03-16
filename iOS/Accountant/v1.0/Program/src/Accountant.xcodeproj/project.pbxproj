@@ -20,6 +20,8 @@
 		F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */; };
 		F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
+		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
+		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
@@ -668,6 +670,7 @@
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1543,6 +1546,7 @@
 			isa = PBXGroup;
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+				F909645529C32D8B00BB5298 /* Date+extension.swift */,
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
@@ -2581,6 +2585,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
+				F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
@@ -2805,6 +2810,7 @@
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
+				F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,
 				F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */,
