@@ -40,9 +40,6 @@ class OpeningBalanceTableViewCell: UITableViewCell {
         textFieldAmountDebit.textAlignment = .right
         textFieldAmountCredit.textAlignment = .right
 
-        textFieldAmountDebit.layer.borderWidth = 0.5
-        textFieldAmountCredit.layer.borderWidth = 0.5
-
         handler = tapHandler
     }
 }
