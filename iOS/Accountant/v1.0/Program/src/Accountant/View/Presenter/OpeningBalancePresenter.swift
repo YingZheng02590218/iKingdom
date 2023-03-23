@@ -29,6 +29,7 @@ protocol OpeningBalancePresenterInput {
     func credit_balance_total() -> String
 
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit)
+    func refreshTable()
 }
 
 protocol OpeningBalancePresenterOutput: AnyObject {
@@ -37,6 +38,7 @@ protocol OpeningBalancePresenterOutput: AnyObject {
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
+    func finishLoading()
 }
 
 final class OpeningBalancePresenter: OpeningBalancePresenterInput {
@@ -113,5 +115,15 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
         model.calculateAccountTotalAccount()
         // 更新処理
         view.reloadData()
+    }
+    
+    func refreshTable() {
+        // FIXME: 最も古い年度の帳簿を対象にする
+        // 全勘定の合計と残高を計算する
+        model.initializeJournals(completion: { isFinished in
+            print("Result is \(isFinished)")
+            // ローディング終了
+            view.finishLoading()
+        })
     }
 }

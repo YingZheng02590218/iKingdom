@@ -151,7 +151,7 @@ class BackupManager {
         return ""
     }
 
-    func load(completion: @escaping ([(String, NSNumber?)]) -> Void) {
+    func load(completion: @escaping ([(String, NSNumber?, Bool)]) -> Void) {
         metadataQuery = NSMetadataQuery()
         // フォルダとファイルを取得して、ファイルのサイズを取得するため、絞り込まない
         // metadataQuery.predicate = NSPredicate(format: "%K like 'public.folder'", NSMetadataItemContentTypeKey)
@@ -163,7 +163,7 @@ class BackupManager {
         NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadataQuery, queue: nil) { notification in
             if let query = notification.object as? NSMetadataQuery {
 
-                var backupFiles: [(String, NSNumber?)] = []
+                var backupFiles: [(String, NSNumber?, Bool)] = []
                 // Documents内のフォルダとファイルにアクセス
                 for result in query.results {
                     // print((result as AnyObject).values(forAttributes: [NSMetadataItemFSContentChangeDateKey, NSMetadataItemDisplayNameKey, NSMetadataItemFSNameKey, NSMetadataItemContentTypeKey, NSMetadataItemFSSizeKey, NSMetadataItemPathKey]))
@@ -182,15 +182,17 @@ class BackupManager {
                             // name    String    "default.realm_bk_2023-02-02-10-30-00"
                             if fileName == name {
                                 let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
+                                let isOniCloud = false
                                 // フォルダ名、ファイルサイズ
-                                backupFiles.append((dysplayName, size))
+                                backupFiles.append((dysplayName, size, isOniCloud))
                             }
                             // デバイス間の共有　iCloud経由の場合、ファイル名が変わる！！！復元する際に、ダウンロードをしないと復元できない。
                             if fileName == "." + name + ".icloud" {
                                 print("." + name + ".icloud", "加工した　.icloud　です。")
                                 let size = (result as AnyObject).value(forAttribute: NSMetadataItemFSSizeKey) as? NSNumber
-                                // フォルダ名、ファイルサイズ
-                                backupFiles.append((dysplayName, size))
+                                let isOniCloud = true
+                                // フォルダ名、ファイルサイズ、iCloudからダウンロードされていないか
+                                backupFiles.append((dysplayName, size, isOniCloud))
                             }
                         }
                     }

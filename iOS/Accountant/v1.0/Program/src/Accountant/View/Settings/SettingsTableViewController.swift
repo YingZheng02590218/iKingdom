@@ -71,12 +71,18 @@ class SettingsTableViewController: UIViewController {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
+        // 会計期間のセルをリロードする
+        reloadRow(section: 2, row: 1)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+    // 会計期間のセルをリロードする
+    func reloadRow(section: Int, row: Int) {
+        let indexPath = IndexPath(row: row, section: section)
+        tableView.reloadRows(at: [indexPath], with: .fade)
+    }
     // 生体認証パスコードロック　設定スイッチ 切り替え
     @objc
     func switchTriggered(sender: UISwitch) {
@@ -315,6 +321,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         // ラベル
         cell.centerLabel.font = UIFont.systemFont(ofSize: 16.0)
         cell.centerLabel.textColor = .textColor
+        // 右側のラベル
+        cell.subLabel.text = ""
         // アイコン画像の色を指定する
         cell.leftImageView.tintColor = .textColor
         // 背景色
@@ -348,6 +356,11 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = UIImage(named: "domain-domain_symbol")?.withRenderingMode(.alwaysTemplate)
             case 1:
                 cell.centerLabel.text = "会計期間"
+                // 期首
+                let beginningOfYearDate = DateManager.shared.getBeginningOfYearDate()
+                // 期末
+                let endingOfYearDate = DateManager.shared.getEndingOfYearDate()
+                cell.subLabel.text = "\(beginningOfYearDate)〜\(endingOfYearDate)"
                 cell.leftImageView.image = UIImage(named: "edit_calendar-edit_calendar_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 cell.centerLabel.text = "勘定科目体系"
@@ -553,6 +566,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                     present(mail, animated: true, completion: nil)
                 } else {
                     print("送信できません")
+                    let alert = UIAlertController(title: "メール作成できません", message: "メールアドレスが設定されていないため", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
                 }
             default:
                 break

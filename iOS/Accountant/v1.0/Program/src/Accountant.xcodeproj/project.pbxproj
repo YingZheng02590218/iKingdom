@@ -20,6 +20,8 @@
 		F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */; };
 		F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
+		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
+		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
@@ -524,6 +526,12 @@
 		F9ED9371298396C900B255EF /* ContainerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED936F298396C900B255EF /* ContainerManager.swift */; };
 		F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
 		F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93762983ABFE00B255EF /* BackupManager.swift */; };
+		F9EE7D3229B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3129B9C06D0045EDB7 /* ErrorValidationType.swift */; };
+		F9EE7D3329B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3129B9C06D0045EDB7 /* ErrorValidationType.swift */; };
+		F9EE7D3529B9C35B0045EDB7 /* ErrorValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3429B9C35B0045EDB7 /* ErrorValidation.swift */; };
+		F9EE7D3629B9C35B0045EDB7 /* ErrorValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3429B9C35B0045EDB7 /* ErrorValidation.swift */; };
+		F9EE7D3829BB221F0045EDB7 /* EditableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3729BB221F0045EDB7 /* EditableType.swift */; };
+		F9EE7D3929BB221F0045EDB7 /* EditableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3729BB221F0045EDB7 /* EditableType.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -662,6 +670,7 @@
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
@@ -930,6 +939,9 @@
 		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
 		F9ED936F298396C900B255EF /* ContainerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerManager.swift; sourceTree = "<group>"; };
 		F9ED93762983ABFE00B255EF /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
+		F9EE7D3129B9C06D0045EDB7 /* ErrorValidationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorValidationType.swift; sourceTree = "<group>"; };
+		F9EE7D3429B9C35B0045EDB7 /* ErrorValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorValidation.swift; sourceTree = "<group>"; };
+		F9EE7D3729BB221F0045EDB7 /* EditableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableType.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
@@ -1422,6 +1434,7 @@
 		F9860FBF285B3DC0008D0714 /* Functions */ = {
 			isa = PBXGroup;
 			children = (
+				F9EE7D3029B9C03C0045EDB7 /* Validation */,
 				F910F1BD298BC1B5009E6B02 /* FirebaseAnalytics */,
 				F9ED936E298396AD00B255EF /* Container */,
 				F9F4605224BDD5D5008FE62B /* DataBaseRealm */,
@@ -1533,6 +1546,7 @@
 			isa = PBXGroup;
 			children = (
 				F9A6686C266247C7008E9137 /* UIColor+extension.swift */,
+				F909645529C32D8B00BB5298 /* Date+extension.swift */,
 				F9B78D32293628550051C027 /* UIView+extension.swift */,
 				F9B95220283CE60200138D07 /* UITraitCollection+extension.swift */,
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
@@ -1786,6 +1800,16 @@
 				F9ED936F298396C900B255EF /* ContainerManager.swift */,
 			);
 			path = Container;
+			sourceTree = "<group>";
+		};
+		F9EE7D3029B9C03C0045EDB7 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				F9EE7D3129B9C06D0045EDB7 /* ErrorValidationType.swift */,
+				F9EE7D3729BB221F0045EDB7 /* EditableType.swift */,
+				F9EE7D3429B9C35B0045EDB7 /* ErrorValidation.swift */,
+			);
+			path = Validation;
 			sourceTree = "<group>";
 		};
 		F9F324522833A5A400DA813E /* WalkThrough */ = {
@@ -2377,6 +2401,7 @@
 				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
+				F9EE7D3529B9C35B0045EDB7 /* ErrorValidation.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5525292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
 				F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */,
@@ -2410,6 +2435,7 @@
 				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
 				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
+				F9EE7D3229B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */,
 				F9F934E92484E7BD00BF7AA7 /* DataBaseGeneralLedger.swift in Sources */,
 				F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
@@ -2441,6 +2467,7 @@
 				F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */,
 				F9354DB62498A361007DB098 /* DataBaseFinancialStatements.swift in Sources */,
 				F963E2AA2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
+				F9EE7D3829BB221F0045EDB7 /* EditableType.swift in Sources */,
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
 				F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
@@ -2558,6 +2585,7 @@
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
 				F9C6C74129A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
+				F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */,
 				F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */,
 				F98289902973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */,
@@ -2598,6 +2626,7 @@
 				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */,
 				F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */,
+				F9EE7D3629B9C35B0045EDB7 /* ErrorValidation.swift in Sources */,
 				F9EC669227B90BC60003FBB6 /* DataBaseManagerTaxonomy.swift in Sources */,
 				F9AC5526292CCC16003966E4 /* HTMLhelperPL.swift in Sources */,
 				F93A263529573714002B7EB9 /* JournalEntryData.swift in Sources */,
@@ -2631,6 +2660,7 @@
 				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
 				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
+				F9EE7D3329B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */,
 				F9EC66A927B90BC60003FBB6 /* DataBaseGeneralLedger.swift in Sources */,
 				F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
@@ -2662,6 +2692,7 @@
 				F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */,
 				F963E2AB2962BB47002DF49E /* PDFMakerBalanceSheet.swift in Sources */,
 				F9EC66BD27B90BC60003FBB6 /* DataBaseWorkSheet.swift in Sources */,
+				F9EE7D3929BB221F0045EDB7 /* EditableType.swift in Sources */,
 				F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
@@ -2779,6 +2810,7 @@
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,
 				F9C6C74229A3A5D700BA8F83 /* PopUpViewController.swift in Sources */,
+				F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */,
 				F9EC670727B90BC60003FBB6 /* PickerTextField.swift in Sources */,
 				F98289912973F00900F8F1B8 /* OpeningBalanceTableViewCell.swift in Sources */,
 				F9EC670827B90BC60003FBB6 /* CarouselTabCollectionViewCell.swift in Sources */,

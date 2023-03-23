@@ -34,7 +34,16 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     fileprivate let refreshControl = UIRefreshControl()
     var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
-    
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     /// GUIアーキテクチャ　MVP
     private var presenter: TBPresenterInput!
     func inject(presenter: TBPresenterInput) {
@@ -135,6 +144,10 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     @IBAction func segmentedControl(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         if segmentedControl.selectedSegmentIndex == 0 {
             titleLabel.text = "決算整理前合計試算表"
             self.navigationItem.title = "決算整理前合計試算表"

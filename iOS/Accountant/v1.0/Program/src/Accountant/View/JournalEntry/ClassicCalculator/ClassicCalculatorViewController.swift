@@ -123,7 +123,7 @@ class ClassicCalculatorViewController: UIViewController {
         
         button1.setTitle("1", for: .normal)
         button1.setTitleColor(.textColor, for: .normal)
-        button1.neumorphicLayer?.cornerRadius = button1.frame.height / 2.2
+        button1.neumorphicLayer?.cornerRadius = button1.frame.height / 2.8
         button1.contentVerticalAlignment = .fill
 //        button1.contentHorizontalAlignment = .fill
         button1.setTitleColor(.textColor, for: .selected)
@@ -135,7 +135,7 @@ class ClassicCalculatorViewController: UIViewController {
         
         button2.setTitle("2", for: .normal)
         button2.setTitleColor(.textColor, for: .normal)
-        button2.neumorphicLayer?.cornerRadius = button2.frame.height / 2.2
+        button2.neumorphicLayer?.cornerRadius = button2.frame.height / 2.8
         button2.contentVerticalAlignment = .fill
 //        button2.contentHorizontalAlignment = .fill
         button2.setTitleColor(.textColor, for: .selected)
@@ -147,7 +147,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button3.setTitle("3", for: .normal)
         button3.setTitleColor(.textColor, for: .normal)
-        button3.neumorphicLayer?.cornerRadius = button3.frame.height / 2.2
+        button3.neumorphicLayer?.cornerRadius = button3.frame.height / 2.8
         button3.contentVerticalAlignment = .fill
 //        button3.contentHorizontalAlignment = .fill
         button3.setTitleColor(.textColor, for: .selected)
@@ -160,7 +160,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button4.setTitle("4", for: .normal)
         button4.setTitleColor(.textColor, for: .normal)
-        button4.neumorphicLayer?.cornerRadius = button4.frame.height / 2.2
+        button4.neumorphicLayer?.cornerRadius = button4.frame.height / 2.8
         button4.contentVerticalAlignment = .fill
 //        button4.contentHorizontalAlignment = .fill
         button4.setTitleColor(.textColor, for: .selected)
@@ -172,7 +172,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button5.setTitle("5", for: .normal)
         button5.setTitleColor(.textColor, for: .normal)
-        button5.neumorphicLayer?.cornerRadius = button5.frame.height / 2.2
+        button5.neumorphicLayer?.cornerRadius = button5.frame.height / 2.8
         button5.contentVerticalAlignment = .fill
 //        button5.contentHorizontalAlignment = .fill
         button5.setTitleColor(.textColor, for: .selected)
@@ -184,7 +184,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button6.setTitle("6", for: .normal)
         button6.setTitleColor(.textColor, for: .normal)
-        button6.neumorphicLayer?.cornerRadius = button6.frame.height / 2.2
+        button6.neumorphicLayer?.cornerRadius = button6.frame.height / 2.8
         button6.contentVerticalAlignment = .fill
 //        button6.contentHorizontalAlignment = .fill
         button6.setTitleColor(.textColor, for: .selected)
@@ -197,7 +197,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button7.setTitle("7", for: .normal)
         button7.setTitleColor(.textColor, for: .normal)
-        button7.neumorphicLayer?.cornerRadius = button7.frame.height / 2.2
+        button7.neumorphicLayer?.cornerRadius = button7.frame.height / 2.8
         button7.contentVerticalAlignment = .fill
 //        button7.contentHorizontalAlignment = .fill
         button7.setTitleColor(.textColor, for: .selected)
@@ -209,7 +209,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button8.setTitle("8", for: .normal)
         button8.setTitleColor(.textColor, for: .normal)
-        button8.neumorphicLayer?.cornerRadius = button8.frame.height / 2.2
+        button8.neumorphicLayer?.cornerRadius = button8.frame.height / 2.8
         button8.contentVerticalAlignment = .fill
 //        button8.contentHorizontalAlignment = .fill
         button8.setTitleColor(.textColor, for: .selected)
@@ -221,7 +221,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button9.setTitle("9", for: .normal)
         button9.setTitleColor(.textColor, for: .normal)
-        button9.neumorphicLayer?.cornerRadius = button9.frame.height / 2.2
+        button9.neumorphicLayer?.cornerRadius = button9.frame.height / 2.8
         button9.contentVerticalAlignment = .fill
 //        button9.contentHorizontalAlignment = .fill
         button9.setTitleColor(.textColor, for: .selected)
@@ -234,7 +234,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         button0.setTitle("0", for: .normal)
         button0.setTitleColor(.textColor, for: .normal)
-        button0.neumorphicLayer?.cornerRadius = button0.frame.height / 2.2
+        button0.neumorphicLayer?.cornerRadius = button0.frame.height / 2.8
         button0.contentVerticalAlignment = .fill
 //        button0.contentHorizontalAlignment = .fill
         button0.setTitleColor(.textColor, for: .selected)
@@ -266,7 +266,7 @@ class ClassicCalculatorViewController: UIViewController {
         
         buttonEqual.setTitle("=", for: .normal)
         buttonEqual.setTitleColor(.textColor, for: .normal)
-        buttonEqual.neumorphicLayer?.cornerRadius = buttonEqual.frame.height / 2.2
+        buttonEqual.neumorphicLayer?.cornerRadius = buttonEqual.frame.height / 2.8
         buttonEqual.contentVerticalAlignment = .fill
 //        buttonEqual.contentHorizontalAlignment = .fill
         buttonEqual.setTitleColor(.textColor, for: .selected)
@@ -278,7 +278,7 @@ class ClassicCalculatorViewController: UIViewController {
 
         buttonAc.setTitle("AC", for: .normal)
         buttonAc.setTitleColor(.textColor, for: .normal)
-        buttonAc.neumorphicLayer?.cornerRadius = buttonAc.frame.height / 2.2
+        buttonAc.neumorphicLayer?.cornerRadius = buttonAc.frame.height / 2.8
         buttonAc.contentVerticalAlignment = .fill
 //        buttonAc.contentHorizontalAlignment = .fill
         buttonAc.setTitleColor(.textColor, for: .selected)
