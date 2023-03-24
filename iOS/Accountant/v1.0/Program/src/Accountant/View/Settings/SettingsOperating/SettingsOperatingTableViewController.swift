@@ -149,14 +149,15 @@ class SettingsOperatingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
+            return UITableViewCell()
+        }
+
+        cell.label.text = nil
         // 設定操作
         let object = DataBaseManagerSettingsOperating.shared.getSettingsOperating() // 決算整理仕訳 損益振替仕訳 資本振替仕訳
         switch indexPath.row {
         case 0:
-            // ① UI部品を指定
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
-                return UITableViewCell()
-            }
             cell.textLabel?.text = "損益振替仕訳を表示"
             if let englishFromOfClosingTheLedger0 = object?.EnglishFromOfClosingTheLedger0 {
                 // 勘定科目の有効無効
@@ -167,9 +168,6 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.toggleButton.tag = 0
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
-                return UITableViewCell()
-            }
             cell.textLabel?.text = "資本振替仕訳を表示"
             if let englishFromOfClosingTheLedger1 = object?.EnglishFromOfClosingTheLedger1 {
                 // 勘定科目の有効無効
@@ -180,10 +178,8 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.toggleButton.tag = 1
             return cell
         case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.textLabel?.text = "残高振替仕訳を表示(前期繰越、次期繰越)"
+            cell.textLabel?.text = "残高振替仕訳を表示"
+            cell.label.text = "前期繰越、次期繰越"
             if let englishFromOfClosingTheLedger2 = object?.EnglishFromOfClosingTheLedger2 {
                 // 勘定科目の有効無効
                 cell.toggleButton.isOn = englishFromOfClosingTheLedger2
@@ -193,9 +189,6 @@ class SettingsOperatingTableViewController: UITableViewController {
             cell.toggleButton.tag = 2
             return cell
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
-                return UITableViewCell()
-            }
             cell.textLabel?.text = ""
             return cell
         }
