@@ -471,7 +471,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 // お問い合わせ機能
-                cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
+                cell.centerLabel.text = "お問い合わせ"
+                cell.subLabel.text = "要望・不具合報告"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
