@@ -432,15 +432,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             self.backView.removeFromSuperview()
         }
     }
-
-    // セルの選択が外れた時に呼び出される
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let cell = tableView.cellForRow(at: indexPath)
-            // チェックマークを外す
-            cell?.accessoryType = .none
-        }
-    }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
