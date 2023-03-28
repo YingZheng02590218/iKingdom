@@ -29,6 +29,8 @@ class SettingsTableViewController: UIViewController {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var headerView: UIView!
     var posX: CGFloat = 0
+    // 通知設定 設定アプリ　Allow Notifications
+    var isOn = false
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
         if #available(iOS 10.0, *) {
@@ -68,11 +70,17 @@ class SettingsTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // 通知設定
+        pushPermissionState(completion: { isOn in
+            self.isOn = isOn
+        })
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
         // 会計期間のセルをリロードする
         reloadRow(section: 2, row: 1)
+        // 通知設定のセルをリロードする
+        reloadRow(section: 3, row: 3)
     }
     
     override func viewDidLayoutSubviews() {
@@ -404,16 +412,13 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 let picture = UIImage(systemName: "square.and.arrow.up")?.withRenderingMode(.alwaysTemplate)
                 button.setImage(picture, for: .normal)
                 button.imageView?.tintColor = .accentColor
-                pushPermissionState(completion: { isOn in
-                    DispatchQueue.main.async {
-                        if isOn {
-                            cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
-                        } else {
-                            // OSの設定　がOFFの場合
-                            cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
-                        }
-                    }
-                })
+                // 通知設定
+                if isOn {
+                    cell.leftImageView.image = UIImage(named: "baseline_notifications_active_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                } else {
+                    // OSの設定　がOFFの場合
+                    cell.leftImageView.image = UIImage(named: "baseline_notifications_off_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                }
                 button.tag = indexPath.row
                 button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
                 cell.accessoryView = button
@@ -466,7 +471,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 // お問い合わせ機能
-                cell.centerLabel.text = "お問い合わせ(要望・不具合報告)"
+                cell.centerLabel.text = "お問い合わせ"
+                cell.subLabel.text = "要望・不具合報告"
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break

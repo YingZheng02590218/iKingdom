@@ -31,6 +31,14 @@ extension UIColor {
         UIColor(named: "BaseColor") ?? .white
     }
 
+    class var borderBlueColor: UIColor {
+        UIColor(named: "BorderBlueColor") ?? .white
+    }
+
+    class var borderRedColor: UIColor {
+        UIColor(named: "BorderRedColor") ?? .white
+    }
+    
     class var calculatorDisplay: UIColor {
         UIColor(named: "CalculatorDisplay") ?? .white
     }

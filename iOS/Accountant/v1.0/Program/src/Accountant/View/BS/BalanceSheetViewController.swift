@@ -93,6 +93,7 @@ class BalanceSheetViewController: UIViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
+        tableView.separatorColor = .accentColor
     }
     // ボタンのデザインを指定する
     private func createButtons() {

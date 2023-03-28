@@ -318,6 +318,12 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
                     cell.label.text = ""
                 }
                 cell.label.textAlignment = NSTextAlignment.center
+                
+                // Accessory Color
+                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+                let disclosureView = UIImageView(image: disclosureImage)
+                disclosureView.tintColor = UIColor.accentColor
+                cell.accessoryView = disclosureView
             }
             return cell
         }
@@ -325,9 +331,9 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
     
     // ボタンのデザインを指定する
     private func createButtons() {
-        inputButton.setTitleColor(.textColor, for: .normal)
+        inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
-        inputButton.setTitleColor(.textColor, for: .selected)
+        inputButton.setTitleColor(.accentColor, for: .selected)
         inputButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
         inputButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
         inputButton.neumorphicLayer?.edged = Constant.edged

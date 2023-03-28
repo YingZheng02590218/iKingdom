@@ -31,7 +31,6 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
     
-    fileprivate let refreshControl = UIRefreshControl()
     var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     var pageSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72)
     // フィードバック
@@ -104,11 +103,6 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
         }
     }
     
-    private func setRefreshControl() {
-        tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
-    }
-    
     // チュートリアル対応 コーチマーク型
     private func presentAnnotation() {
         // タブの無効化
@@ -137,11 +131,6 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Action
-    
-    @objc private func refreshTable() {
-        
-        presenter.refreshTable()
-    }
     
     @IBAction func segmentedControl(_ sender: Any) {
         // フィードバック
@@ -223,18 +212,10 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TBViewController: TBPresenterOutput {
     
-    func reloadData() {
-        
-        tableView.reloadData()
-        // クルクルを止める
-        refreshControl.endRefreshing()
-    }
-    
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
         createButtons() // ボタン作成
-        setRefreshControl()
         // TODO: 印刷機能を一時的に蓋をする。あらためてHTMLで作る。 印刷ボタンを定義
         //        let printoutButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(button_print))
         //        //ナビゲーションに定義したボタンを置く

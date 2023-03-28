@@ -42,7 +42,7 @@
                     <constraint firstAttribute="trailing" secondItem="e1C-9B-yaM" secondAttribute="trailing" constant="20" id="BHQ-k4-diz"/>
                     <constraint firstItem="5eW-UU-mNW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Coe-vV-ULX"/>
                     <constraint firstItem="qSD-f9-Q0z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lhi-sE-Ju8"/>
-                    <constraint firstItem="qSD-f9-Q0z" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.1" id="UvK-BM-4xz"/>
+                    <constraint firstItem="qSD-f9-Q0z" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="UvK-BM-4xz"/>
                     <constraint firstItem="5eW-UU-mNW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="V69-dr-iyB"/>
                     <constraint firstItem="e1C-9B-yaM" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="bBa-SY-mhM"/>
                     <constraint firstItem="qSD-f9-Q0z" firstAttribute="leading" secondItem="5eW-UU-mNW" secondAttribute="trailing" constant="10" id="bdW-Md-JRK"/>
@@ -51,7 +51,6 @@
                     <constraint firstItem="e1C-9B-yaM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gpy-3B-I6D"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5eW-UU-mNW" secondAttribute="trailing" id="nzV-09-uv6"/>
                     <constraint firstItem="5eW-UU-mNW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pLu-d6-kaS"/>
-                    <constraint firstItem="e1C-9B-yaM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qSD-f9-Q0z" secondAttribute="trailing" id="xTK-M4-5YD"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5eW-UU-mNW" secondAttribute="bottom" constant="8" id="zbM-Pd-6yR"/>
                 </constraints>
             </tableViewCellContentView>

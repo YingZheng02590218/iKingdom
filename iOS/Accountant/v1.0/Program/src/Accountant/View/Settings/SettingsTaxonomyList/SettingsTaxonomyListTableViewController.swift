@@ -150,16 +150,21 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
         }
 
         cell.label.textAlignment = .right
+        cell.label.textColor = .systemGreen
         // UIButtonを非表示
         cell.toggleButton.isHidden = true
         // UIButtonを無効化
         cell.toggleButton.isEnabled = false
         if objects[indexPath.row].abstract { // 抽象区分の場合
+            // 背景色
+            cell.backgroundColor = .baseColor
             // UILabelを非表示
             cell.label.isHidden = true
             // セルの選択不可にする
             cell.selectionStyle = .none
         } else {
+            // 背景色
+            cell.backgroundColor = .mainColor2
             // 表示科目の連番
             cell.tag = objects[indexPath.row].number
             // UILabelを表示
@@ -168,6 +173,17 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             if howToUse {
                 // セルの選択を許可
                 cell.selectionStyle = .default
+            }
+        }
+        // チェックマークを外す
+        cell.accessoryType = .none
+        // 勘定科目を編集する場合　勘定科目の連番から勘定科目を取得　表示科目を知るため
+        if let dataBaseSettingsTaxonomyAccount = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfTaxonomyAccount) {
+            let numberOfTaxonomy = Int(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy) // 表示科目
+            // 設定勘定科目に紐づけられている設定表示科目に、チェックマークをつける
+            if objects[indexPath.row].number == numberOfTaxonomy {
+                // チェックマークを入れる
+                cell.accessoryType = .checkmark
             }
         }
         print(objects[indexPath.row].number, objects[indexPath.row].switching)
@@ -209,18 +225,10 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             if cell?.selectionStyle == UITableViewCell.SelectionStyle.none { // セルが選択不可
                 print("抽象区分　表示科目")
             } else {
-                // チェックマークを入れる
-                cell?.accessoryType = .checkmark
                 // 確認のポップアップを表示したい
                 self.showPopover(indexPath: indexPath)
             }
         }
-    }
-    // セルの選択が外れた時に呼び出される
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        // チェックマークを外す
-        cell?.accessoryType = .none
     }
     // 編集機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {

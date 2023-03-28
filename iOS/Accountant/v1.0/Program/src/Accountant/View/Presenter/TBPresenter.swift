@@ -29,14 +29,11 @@ protocol TBPresenterInput {
     func credit_total_total() -> String
     func debit_balance_total() -> String
     func credit_balance_total() -> String
-    
-    func refreshTable()
-    
+        
     func getTotalAmount(account: String, leftOrRight: Int) -> String
 }
 
 protocol TBPresenterOutput: AnyObject {
-    func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
@@ -122,16 +119,6 @@ final class TBPresenter: TBPresenterInput {
     func credit_balance_total() -> String {
         
         StringUtility.shared.setComma(amount: object.compoundTrialBalance!.credit_balance_total)
-    }
-    
-    func refreshTable() {
-        // 全勘定の合計と残高を計算する
-        // 合計残高試算表　再計算 合計額を計算
-        model.setAllAccountTotal()
-        // 合計残高試算表　再計算 合計額を計算
-        model.calculateAmountOfAllAccount()
-        // 更新処理
-        view.reloadData()
     }
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> String {
