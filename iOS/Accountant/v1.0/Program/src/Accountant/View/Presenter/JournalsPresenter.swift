@@ -176,21 +176,25 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     func refreshTable(isEditing: Bool) {
         if !isEditing {
-            // 全勘定の合計と残高を計算する
-            model.initializeJournals(completion: { isFinished in
-                print("Result is \(isFinished)")
-                // 通常仕訳　全
-                objects = model.getJournalEntriesInJournals()
-                // 決算整理仕訳
-                objectsss = model.getJournalAdjustingEntry()
-                // 損益振替仕訳
-                dataBaseTransferEntries = model.getTransferEntryInAccount()
-                // 資本振替仕訳
-                dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
-                
-                // 更新処理
-                view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
-            })
+            DispatchQueue.global(qos: .default).async {
+                // 全勘定の合計と残高を計算する
+                self.model.initializeJournals(completion: { isFinished in
+                    print("Result is \(isFinished)")
+                    // 重要: 仕訳データを参照する際、メインスレッドで行う
+                    DispatchQueue.main.async {
+                        // 通常仕訳　全
+                        self.objects = self.model.getJournalEntriesInJournals()
+                        // 決算整理仕訳
+                        self.objectsss = self.model.getJournalAdjustingEntry()
+                        // 損益振替仕訳
+                        self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
+                        // 資本振替仕訳
+                        self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+                        // 更新処理
+                        self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
+                    }
+                })
+            }
         } else {
             // 更新処理
             view.reloadData()

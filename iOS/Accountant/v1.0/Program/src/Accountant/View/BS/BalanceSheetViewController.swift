@@ -93,6 +93,7 @@ class BalanceSheetViewController: UIViewController {
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
+        tableView.separatorColor = .accentColor
     }
     // ボタンのデザインを指定する
     private func createButtons() {
@@ -146,18 +147,18 @@ extension BalanceSheetViewController: UITableViewDelegate, UITableViewDataSource
         switch section {
         case 0: return 35 // 資産の部
         case 1:
-            return 0 // 流動資産
+            return 35 // 流動資産
         case 2:
-            return 0 // 固定資産
+            return 35 // 固定資産
         case 3:
-            return 0 // 繰延資産
+            return 35 // 繰延資産
         case 4:
             return 0 // 資産合計
         case 5: return 35 // 負債の部
         case 6:
-            return 0 // 流動負債
+            return 35 // 流動負債
         case 7:
-            return 0 // 固定負債
+            return 35 // 固定負債
         case 8:
             return 0 // 負債合計
         case 9: return 35 // 資本の部

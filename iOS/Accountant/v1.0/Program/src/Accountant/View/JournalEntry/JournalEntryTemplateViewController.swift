@@ -13,6 +13,8 @@ import UIKit
 class JournalEntryTemplateViewController: JournalEntryViewController {
     
     @IBOutlet private var nicknameTextField: UITextField!
+    @IBOutlet private var nicknameCounterLabel: UILabel!
+    @IBOutlet private var nicknameView: EMTNeumorphicView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +47,22 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         }
     }
     
+    override func createEMTNeumorphicView() {
+        super.createEMTNeumorphicView()
+        
+        if let view = nicknameView {
+            view.neumorphicLayer?.cornerRadius = 15
+            view.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+            view.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+            view.neumorphicLayer?.edged = Constant.edged
+            view.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+            view.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            view.neumorphicLayer?.depthType = .concave
+        }
+    }
     // TextField作成 ニックネーム
     func createTextFieldForNickname() {
         nicknameTextField.delegate = self
-        nicknameTextField.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
         nicknameTextField.tintColor = UIColor.accentColor
         // toolbar 小書き Done:Tag Cancel:Tag
@@ -67,14 +81,40 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         nicknameTextField.inputAccessoryView = toolbar
         
         nicknameTextField.layer.borderWidth = 0.5
+        // 最大文字数
+        nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
+    }
+    // TextFieldに入力され値が変化した時の処理の関数
+    @objc
+    override func textFieldDidChange(_ sender: UITextField) {
+        super.textFieldDidChange(sender)
+        
+        if let text = sender.text {
+            if sender == nicknameTextField {
+                // ニックネーム　文字数カウンタ
+                let maxLength = EditableType.nickname.maxLength
+                nicknameCounterLabel.font = .boldSystemFont(ofSize: 15)
+                nicknameCounterLabel.text = "\(maxLength - text.count)/\(maxLength)  "
+                if text.count > maxLength {
+                    nicknameCounterLabel.textColor = .systemPink
+                } else {
+                    nicknameCounterLabel.textColor = text.count >= maxLength - 3 ? .systemYellow : .systemGreen
+                }
+                if text.count == maxLength {
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                }
+            }
+        }
     }
     
-    @objc override func barButtonTapped(_ sender: UIBarButtonItem) {
+    @objc
+    override func barButtonTapped(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 8: // ニックネームの場合 Done
             self.view.endEditing(true)
         case 88: // ニックネームの場合 Cancel
-            nicknameTextField.text = ""
             self.view.endEditing(true)// textFieldDidEndEditingで貸方金額へコピーするのでtextを設定した後に実行
         default:
             self.view.endEditing(true)
@@ -82,6 +122,16 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     }
     
     @IBAction override func inputButtonTapped(_ sender: EMTNeumorphicButton) {
+        // バリデーションチェック
+        if self.textInputCheckForSettingsJournalEntries() {
+            if journalEntryType == .SettingsJournalEntries {
+                // 追加
+                buttonTappedForSettingsJournalEntries()
+            } else if journalEntryType == .SettingsJournalEntriesFixing {
+                // 更新
+                buttonTappedForSettingsJournalEntriesFixing()
+            }
+        }
         // シスログ出力
         // printによる出力はUTCになってしまうので、9時間ずれる
         let formatter = DateFormatter()
@@ -89,88 +139,133 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
         formatter.timeZone = TimeZone.current // UTC時刻を補正
         formatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
+    }
+    // 入力チェック　バリデーション よく使う仕訳
+    func textInputCheckForSettingsJournalEntries() -> Bool {
+        // ニックネーム　バリデーションチェック
+        switch ErrorValidation().validateNickname(text: nicknameTextField.text ?? "") {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                // TextFieldのキーボードを自動的に表示する
+                self.nicknameTextField.becomeFirstResponder()
+            })
+            return false // NG
+        }
+        
+        // 小書き　バリデーションチェック
+        switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                // TextFieldのキーボードを自動的に表示する
+                self.textFieldSmallWritting.becomeFirstResponder()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // 追加
+    func buttonTappedForSettingsJournalEntries() {
         var number = 0
-        if journalEntryType == .SettingsJournalEntries {
-            var amountDebitTextField = ""
-            if let text = textFieldAmountDebit.text {
-                amountDebitTextField = StringUtility.shared.removeComma(string: text)
-            }
-            var amountCreditTextField = ""
-            if let text = textFieldAmountCredit.text {
-                amountCreditTextField = StringUtility.shared.removeComma(string: text)
-            }
-            if let nicknameTextField = nicknameTextField.text,
-               let textFieldCategoryDebit = textFieldCategoryDebit.text,
-               let textFieldCategoryCredit = textFieldCategoryCredit.text,
-               let textFieldSmallWritting = textFieldSmallWritting.text {
-                // データベース　よく使う仕訳を追加
-                number = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
-                    nickname: nicknameTextField,
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting
-                )
-                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
-                   let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
-                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
-                   let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                    print(navigationController.viewControllers[0])
-                    print(navigationController.viewControllers[1])
-                    // 画面を閉じる
-                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        presentingViewController.viewReload = true
-                        presentingViewController.viewWillAppear(true)
-                    })
-                }
-            }
-        } else if journalEntryType == .SettingsJournalEntriesFixing {
-            var amountDebitTextField = ""
-            if let text = textFieldAmountDebit.text {
-                amountDebitTextField = StringUtility.shared.removeComma(string: text)
-            }
-            var amountCreditTextField = ""
-            if let text = textFieldAmountCredit.text {
-                amountCreditTextField = StringUtility.shared.removeComma(string: text)
-            }
-            if let nicknameTextField = nicknameTextField.text,
-               let textFieldCategoryDebit = textFieldCategoryDebit.text,
-               let textFieldCategoryCredit = textFieldCategoryCredit.text,
-               let textFieldSmallWritting = textFieldSmallWritting.text {
-                // データベース　よく使う仕訳を更新
-                number = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
-                    primaryKey: primaryKey,
-                    nickname: nicknameTextField,
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: Int64(amountCreditTextField) ?? 0,// カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting
-                )
-                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
-                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
-                   let navigationController = splitViewController.viewControllers[0]  as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
-                   let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
-                   let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                    print(navigationController.viewControllers[0])
-                    print(navigationController.viewControllers[1])
-                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                    // 画面を閉じる
-                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        presentingViewController.viewReload = true
-                        presentingViewController.viewWillAppear(true)
-                    })
-                }
+        
+        var amountDebitTextField = ""
+        if let text = textFieldAmountDebit.text {
+            amountDebitTextField = StringUtility.shared.removeComma(string: text)
+        }
+        var amountCreditTextField = ""
+        if let text = textFieldAmountCredit.text {
+            amountCreditTextField = StringUtility.shared.removeComma(string: text)
+        }
+        if let nicknameTextField = nicknameTextField.text,
+           let textFieldCategoryDebit = textFieldCategoryDebit.text,
+           let textFieldCategoryCredit = textFieldCategoryCredit.text,
+           let textFieldSmallWritting = textFieldSmallWritting.text {
+            // データベース　よく使う仕訳を追加
+            number = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
+                nickname: nicknameTextField,
+                debitCategory: textFieldCategoryDebit,
+                debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                creditCategory: textFieldCategoryCredit,
+                creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                smallWritting: textFieldSmallWritting
+            )
+            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+               let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+               let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
+               let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                print(navigationController.viewControllers[0])
+                print(navigationController.viewControllers[1])
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewReload = true
+                    presentingViewController.viewWillAppear(true)
+                })
             }
         }
+    }
+    // 更新
+    func buttonTappedForSettingsJournalEntriesFixing() {
+        var number = 0
+        var amountDebitTextField = ""
+        if let text = textFieldAmountDebit.text {
+            amountDebitTextField = StringUtility.shared.removeComma(string: text)
+        }
+        var amountCreditTextField = ""
+        if let text = textFieldAmountCredit.text {
+            amountCreditTextField = StringUtility.shared.removeComma(string: text)
+        }
+        if let nicknameTextField = nicknameTextField.text,
+           let textFieldCategoryDebit = textFieldCategoryDebit.text,
+           let textFieldCategoryCredit = textFieldCategoryCredit.text,
+           let textFieldSmallWritting = textFieldSmallWritting.text {
+            // データベース　よく使う仕訳を更新
+            number = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
+                primaryKey: primaryKey,
+                nickname: nicknameTextField,
+                debitCategory: textFieldCategoryDebit,
+                debitAmount: Int64(amountDebitTextField) ?? 0, // カンマを削除してからデータベースに書き込む
+                creditCategory: textFieldCategoryCredit,
+                creditAmount: Int64(amountCreditTextField) ?? 0,// カンマを削除してからデータベースに書き込む
+                smallWritting: textFieldSmallWritting
+            )
+            if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+               let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+               let navigationController = splitViewController.viewControllers[0]  as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
+               let navigationController2 = navigationController.viewControllers[1] as? UINavigationController,
+               let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+                print(navigationController.viewControllers[0])
+                print(navigationController.viewControllers[1])
+                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+                // 画面を閉じる
+                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                    presentingViewController.viewReload = true
+                    presentingViewController.viewWillAppear(true)
+                })
+            }
+        }
+    }
+    
+    override func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+        super.cancelButtonTapped(sender)
+        
+        nicknameTextField.text = ""
     }
     // 削除ボタン
     @IBOutlet private var deleteButton: EMTNeumorphicButton!
     
     @IBAction func deleteButton(_ sender: Any) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         // 確認のポップアップを表示したい
         self.showPopover()
     }
@@ -178,7 +273,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     private func showPopover() {
         let alert = UIAlertController(title: "削除", message: "よく使う仕訳を削除しますか？", preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { [self] (action: UIAlertAction!) in
             print("OK アクションをタップした時の処理")
             // データベース　よく使う仕訳を削除
             if DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: primaryKey) {

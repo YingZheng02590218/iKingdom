@@ -20,10 +20,6 @@ class GeneralLedgerTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // リロード機能
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
-        self.refreshControl = refreshControl
         
         self.navigationItem.title = "総勘定元帳"
         // largeTitle表示
@@ -77,23 +73,6 @@ class GeneralLedgerTableViewController: UITableViewController {
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }
-    }
-
-    // リロード機能
-    @objc func refreshTable() {
-        // 全勘定の合計と残高を計算する
-        let databaseManager = TBModel()
-        databaseManager.setAllAccountTotal()
-        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
-        // 精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-//        let WSModel = WSModel()
-//        WSModel.calculateAmountOfAllAccount()
-//        WSModel.calculateAmountOfAllAccountForBS()
-//        WSModel.calculateAmountOfAllAccountForPL()
-        // 更新処理
-        self.tableView.reloadData()
-        // クルクルを止める
-        refreshControl?.endRefreshing()
     }
 
     // MARK: - Table view data source

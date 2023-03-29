@@ -47,10 +47,14 @@ class JournalEntryViewController: UIViewController {
     // テキストフィールド　小書き
     @IBOutlet var textFieldSmallWritting: UITextField!
     @IBOutlet var smallWrittingTextFieldView: EMTNeumorphicView!
+    // 小書き　カウンタ
+    @IBOutlet var smallWritingCounterLabel: UILabel!
+    // 小書き　エラーメッセージ
+    var errorMessage: String?
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグ
     var isShown = false
     // フィードバック
-    private let feedbackGeneratorMedium: Any? = {
+    let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
             let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.prepare()
@@ -182,7 +186,10 @@ class JournalEntryViewController: UIViewController {
             textFieldAmountCredit.text = ""
             textFieldAmountDebit.text = ""
         }
-        if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+        if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
+            journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+            journalEntryType != .SettingsJournalEntriesFixing {
+            
             if textFieldSmallWritting.text == "" {
                 textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
             }
@@ -206,7 +213,7 @@ class JournalEntryViewController: UIViewController {
         // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
+        
         // テキストフィールド　勘定科目、小書きのキーボードが表示中 viewDidLoadなどで監視を設定
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidDisappear), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -233,7 +240,7 @@ class JournalEntryViewController: UIViewController {
         // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー解除をしている
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-
+        
         // テキストフィールド　勘定科目、小書きのキーボードが表示中 監視を解除
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -361,6 +368,9 @@ class JournalEntryViewController: UIViewController {
         guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNow: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
+        guard let yyyyMMddHHmmssNowCurrent = Date.convertDate(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ") else { return }
+        print(yyyyMMddHHmmssNowCurrent.toString(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
+
         // デイトピッカーの最大値と最小値を設定
         if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             // 決算整理仕訳の場合は日付を決算日に固定
@@ -428,7 +438,7 @@ class JournalEntryViewController: UIViewController {
                 datePicker.date = yyyyMMddHHmmssNextYear // 注意：カンマの後にスペースがないとnilになる
             }
         } else {
-            datePicker.date = yyyyMMddHHmmssNow // 注意：カンマの後にスペースがないとnilになる
+            datePicker.date = yyyyMMddHHmmssNowCurrent // 注意：カンマの後にスペースがないとnilになる
         }
         //        // 背景色
         //        datePicker.backgroundColor = .systemBackground
@@ -442,7 +452,7 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: EMTNeumorphicView
     // ニューモフィズム　ボタンとビューのデザインを指定する
-    private func createEMTNeumorphicView() {
+    func createEMTNeumorphicView() {
         
         if let datePickerView = datePickerView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
@@ -546,9 +556,6 @@ class JournalEntryViewController: UIViewController {
         
         textFieldAmountDebit.textAlignment = .left
         textFieldAmountCredit.textAlignment = .right
-        // TextFieldに入力された値に反応
-        textFieldAmountDebit.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
-        textFieldAmountCredit.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
         
         textFieldAmountDebit.layer.borderWidth = 0.5
         textFieldAmountCredit.layer.borderWidth = 0.5
@@ -556,13 +563,12 @@ class JournalEntryViewController: UIViewController {
     // TextField作成 小書き
     func createTextFieldForSmallwritting() {
         textFieldSmallWritting.delegate = self
-        textFieldSmallWritting.textAlignment = .center
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
         textFieldSmallWritting.tintColor = UIColor.accentColor
         // 文字サイズを指定
         textFieldSmallWritting.adjustsFontSizeToFitWidth = true // TextField 文字のサイズを合わせる
-        textFieldSmallWritting.minimumFontSize = 12
-
+        textFieldSmallWritting.minimumFontSize = 17
+        
         // toolbar 小書き Done:Tag Cancel:Tag
         let toolbar = UIToolbar()
         toolbar.frame = CGRect(
@@ -584,6 +590,8 @@ class JournalEntryViewController: UIViewController {
         textFieldSmallWritting.inputAccessoryView = toolbar
         
         textFieldSmallWritting.layer.borderWidth = 0.5
+        // 最大文字数
+        textFieldSmallWritting.addTarget(self, action: #selector(textFieldDidChange), for: UIControl.Event.editingChanged)
     }
     // 初期値を再設定
     func setInitialData() {
@@ -702,7 +710,6 @@ class JournalEntryViewController: UIViewController {
     // MARK: UITextField
     @IBAction private func textFieldCategoryDebit(_ sender: UITextField) {}
     @IBAction private func textFieldCategoryCredit(_ sender: UITextField) {}
-    @IBAction private func textFieldSmallWritting(_ sender: UITextField) {}
     
     // MARK: キーボード
     // UIKeyboardWillShow通知を受けて、実行される関数
@@ -761,12 +768,11 @@ class JournalEntryViewController: UIViewController {
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
         }
-
+        
         switch sender.tag {
         case 7: // 小書きの場合 Done
             self.view.endEditing(true)
         case 77: // 小書きの場合 Cancel
-            textFieldSmallWritting.text = ""
             self.view.endEditing(true)
         default:
             self.view.endEditing(true)
@@ -780,13 +786,16 @@ class JournalEntryViewController: UIViewController {
         self.view.endEditing(true)
     }
     // テキストフィールド　勘定科目、小書きのキーボードが表示中フラグを切り替える
-    @objc func keyboardDidAppear() {
+    @objc
+    func keyboardDidAppear() {
         isShown = true
     }
-    @objc func keyboardDidDisappear() {
+    
+    @objc
+    func keyboardDidDisappear() {
         isShown = false
     }
-
+    
     // MARK: EMTNeumorphicButton
     // 入力ボタン
     @IBAction func inputButtonTapped(_ sender: EMTNeumorphicButton) {
@@ -806,8 +815,11 @@ class JournalEntryViewController: UIViewController {
         }
         
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
-            
-            buttonTappedForJournalEntriesPackageFixing()
+            // バリデーションチェック
+            if self.textInputCheckForJournalEntriesPackageFixing() {
+                
+                buttonTappedForJournalEntriesPackageFixing()
+            }
         } else { // 一括編集以外
             
             // バリデーションチェック
@@ -1151,6 +1163,23 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
+    // 入力チェック　バリデーション 仕訳一括編集
+    func textInputCheckForJournalEntriesPackageFixing() -> Bool {
+        // 小書き　バリデーションチェック
+        switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                // TextFieldのキーボードを自動的に表示する
+                self.textFieldSmallWritting.becomeFirstResponder()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
     // 入力チェック　バリデーション
     func textInputCheck() -> Bool {
         
@@ -1214,10 +1243,34 @@ class JournalEntryViewController: UIViewController {
             return false // NG
         }
         
-        if textFieldSmallWritting.text == "" {
-            textFieldSmallWritting.text = ""
+        // 小書き　バリデーションチェック
+        switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            // エラーダイアログ
+            showErrorMessage(completion: {
+                // TextFieldのキーボードを自動的に表示する
+                self.textFieldSmallWritting.becomeFirstResponder()
+            })
+            return false // NG
         }
+        
         return true // OK
+    }
+    // エラーダイアログ
+    func showErrorMessage(completion: @escaping () -> Void) {
+        // フィードバック
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        let alert = UIAlertController(title: "エラー", message: errorMessage, preferredStyle: .alert)
+        self.present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.dismiss(animated: true, completion: nil)
+                completion()
+            }
+        }
     }
     // インタースティシャル広告を表示　マネタイズ対応
     func showAd() {
@@ -1379,14 +1432,15 @@ extension JournalEntryViewController: UITextFieldDelegate {
     //    textFieldShouldEndEditing
     //    textFieldDidEndEditing
     //    textFieldShouldReturn
-
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         // 借方金額　貸方金額、小書き
         if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
             // 借方勘定科目、貸方勘定科目、小書きのキーボードが表示中に、電卓を表示させないようにする
             if isShown {
+                // フォーカスを、貸方勘定科目から、金額へ移す際に、キーボードを閉じる
                 // キーボードが表示されている時
-               return false
+                self.view.endEditing(true)
             } else {
                 // 隠れている時
                 return true
@@ -1395,14 +1449,14 @@ extension JournalEntryViewController: UITextFieldDelegate {
         return true
     }
     
-    // テキストフィールがタップされ、入力可能になったあと
+    // 入力開始 テキストフィールがタップされ、入力可能になったあと
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // フォーカス　効果　ドロップシャドウをかける
         textField.layer.shadowOpacity = 1.4
         textField.layer.shadowRadius = 4
         textField.layer.shadowColor = UIColor.calculatorDisplay.cgColor
         textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-
+        
         // 2列目のComponentをリロードする
         if textField == textFieldCategoryDebit {
             textFieldCategoryDebit.reloadComponent()
@@ -1411,6 +1465,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         }
         // 借方金額　貸方金額
         if textField == textFieldAmountDebit || textField == textFieldAmountCredit {
+            // 電卓画面へ遷移させるために要る
             self.view.endEditing(true)
         }
     }
@@ -1445,9 +1500,9 @@ extension JournalEntryViewController: UITextFieldDelegate {
         case 333, 444: // 金額の文字数 + カンマの数 (100万円の位まで入力可能とする)
             maxLength = 7 + 2
         case 555: // 小書きの文字数
-            maxLength = 25
+            maxLength = EditableType.smallWriting.maxLength
         case 888: // ニックネームの文字数
-            maxLength = 25
+            maxLength = EditableType.nickname.maxLength
         default:
             break
         }
@@ -1457,18 +1512,33 @@ extension JournalEntryViewController: UITextFieldDelegate {
         let stringNumber = string.count
         // 最大文字数以上ならfalseを返す
         resultForLength = textFieldNumber + stringNumber <= maxLength
-        // 文字列が0文字の場合、backspaceキーが押下されたということなので一文字削除する
+        // 文字列が0文字の場合、backspaceキーが押下されたということなので反映させる
         if string.isEmpty {
-            textField.deleteBackward()
+            // textField.deleteBackward() うまくいかない
+            // 末尾の1文字を削除
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if isBackSpace == -92 {
+                    print("Backspace was pressed")
+                    return true
+                }
+            }
         }
         // 判定
-        if !resultForCharacter { // 指定したスーパーセットの文字セットでないならfalseを返す
+        if !resultForCharacter {
+            // 指定したスーパーセットの文字セットでないならfalseを返す
             return false
-        } else if !resultForLength { // 最大文字数以上ならfalseを返す
-            return false
+        } else if !resultForLength {
+            // 最大文字数以上 入力制限はしない
+            return true
         } else {
             return true
         }
+    }
+    // リターンキー押下でキーボードを閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     // キーボードを閉じる前
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -1483,25 +1553,31 @@ extension JournalEntryViewController: UITextFieldDelegate {
         // フォーカス　効果　フォーカスが外れたら色を消す
         textField.layer.shadowColor = UIColor.clear.cgColor
         
-        // Segueを場合分け
-        if textField.tag == 111 {
+        if textField.tag == 111 { // 借方勘定科目
             if textFieldCategoryDebit.text == "" {
+                // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 貸方と同じ勘定科目の場合
                 textFieldCategoryDebit.text = ""
             } else {
-                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集ではない場合
+                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+                    journalEntryType != .SettingsJournalEntriesFixing {
                     if textFieldCategoryCredit.text == "" {
                         textFieldCategoryCredit.becomeFirstResponder()
                     }
                 }
             }
-        } else if textField.tag == 222 {
+        } else if textField.tag == 222 { // 貸方勘定科目
             if textFieldCategoryCredit.text == "" {
+                // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 借方と同じ勘定科目の場合
                 textFieldCategoryCredit.text = ""
             } else {
                 // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if journalEntryType != .JournalEntriesPackageFixing { // 仕訳一括編集ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
+                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
+                    journalEntryType != .SettingsJournalEntriesFixing {
+                    
                     if textFieldAmountDebit.text == "" {
                         textFieldAmountDebit.becomeFirstResponder() // カーソルを金額へ移す
                     }
@@ -1510,13 +1586,29 @@ extension JournalEntryViewController: UITextFieldDelegate {
         }
     }
     // TextFieldに入力され値が変化した時の処理の関数
-    @objc func textFieldDidChange(_ sender: UITextField) {
+    @objc
+    func textFieldDidChange(_ sender: UITextField) {
         if let text = sender.text {
             // カンマを追加する
             if sender == textFieldAmountDebit || sender == textFieldAmountCredit { // 借方金額仮　貸方金額
                 sender.text = "\(StringUtility.shared.addComma(string: text))"
+            } else if sender == textFieldSmallWritting {
+                // 小書き　文字数カウンタ
+                let maxLength = EditableType.smallWriting.maxLength
+                smallWritingCounterLabel.font = .boldSystemFont(ofSize: 15)
+                smallWritingCounterLabel.text = "\(maxLength - text.count)/\(maxLength)  "
+                if text.count > maxLength {
+                    smallWritingCounterLabel.textColor = .systemPink
+                } else {
+                    smallWritingCounterLabel.textColor = text.count >= maxLength - 3 ? .systemYellow : .systemGreen
+                }
+                if text.count == maxLength {
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                }
             }
-            print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
+            // print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
         }
     }
 }

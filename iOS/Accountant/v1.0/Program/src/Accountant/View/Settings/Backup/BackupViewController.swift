@@ -26,7 +26,7 @@ class BackupViewController: UIViewController {
     }()
     // コンテナ　ファイル
     //    private let containerManager = ContainerManager()
-    var backupFiles: [(String, NSNumber?)] = []
+    var backupFiles: [(String, NSNumber?, Bool)] = []
     
     // iCloudが有効かどうかの判定
     private var isiCloudEnabled: Bool {
@@ -137,17 +137,26 @@ class BackupViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             sender.isSelected = !sender.isSelected
         }
-        // インジゲーターを開始
-        self.showActivityIndicatorView()
-        // iCloud Documents にバックアップを作成する
-        BackupManager.shared.backup {
-            // イベントログ
-            FirebaseAnalytics.logEvent(
-                event: AnalyticsEvents.iCloudBackup,
-                parameters: [
-                    AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
-                ]
-            )
+        // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する
+        if Network.shared.isOnline() {
+            // インジゲーターを開始
+            self.showActivityIndicatorView()
+            // iCloud Documents にバックアップを作成する
+            BackupManager.shared.backup {
+                // イベントログ
+                FirebaseAnalytics.logEvent(
+                    event: AnalyticsEvents.iCloudBackup,
+                    parameters: [
+                        AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
+                    ]
+                )
+            }
+        } else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+            // オフラインダイアログ
+            self.showOfflineDialog()
         }
     }
     // tableViewをリロード
@@ -269,9 +278,19 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.subLabel.text = "\(byteCountFormatter.string(from: byte))"
         }
+        // 未ダウンロードアイコン
+        let isOniCloud = backupFiles[indexPath.row].2
+        if isOniCloud {
+            let image = UIImage(systemName: "icloud.and.arrow.down")?.withRenderingMode(.alwaysTemplate)
+            let disclosureView = UIImageView(image: image)
+            disclosureView.tintColor = UIColor.mainColor
+            cell.accessoryView = disclosureView
+        } else {
+            cell.accessoryView = nil
+        }
+        
         cell.leftImageView.image = UIImage(named: "database-database_symbol")?.withRenderingMode(.alwaysTemplate)
         cell.shouldIndentWhileEditing = true
-        cell.accessoryView = nil
         
         return cell
     }
@@ -282,8 +301,17 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     // 削除機能 セルを左へスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
-            // 削除機能 アラートのポップアップを表示
-            self.showPopover(indexPath: indexPath)
+            // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する
+            if Network.shared.isOnline() {
+                // 削除機能 アラートのポップアップを表示
+                self.showPopover(indexPath: indexPath)
+            } else {
+                // フィードバック
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+                // オフラインダイアログ
+                self.showOfflineDialog()
+            }
             completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
         }
         action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
@@ -327,8 +355,35 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 復元機能 アラートのポップアップを表示
-        self.showPopoverRestore(indexPath: indexPath)
+        // 未ダウンロード
+        let isOniCloud = backupFiles[indexPath.row].2
+        if isOniCloud {
+            // オフラインの場合iCloudへアクセスできないので、ネットワーク接続を確認する
+            if Network.shared.isOnline() {
+                // 復元機能 アラートのポップアップを表示
+                self.showPopoverRestore(indexPath: indexPath)
+            } else {
+                // フィードバック
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+                // オフラインダイアログ
+                showOfflineDialog()
+            }
+        } else {
+            // 復元機能 アラートのポップアップを表示
+            self.showPopoverRestore(indexPath: indexPath)
+        }
+    }
+    // オフラインダイアログ
+    func showOfflineDialog() {
+        // ネットワークなし
+        let alert = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。", preferredStyle: .alert)
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     // 復元機能 アラートのポップアップを表示
     private func showPopoverRestore(indexPath: IndexPath) {

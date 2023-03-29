@@ -284,6 +284,8 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
 #endif
             // 会計帳簿の連番
             cell.tag = objects[indexPath.row].number
+            // チェックマーク　の色
+            cell.tintColor = .systemGreen
             // 開いている帳簿にチェックマークをつける
             if objects[indexPath.row].openOrClose {
                 // チェックマークを入れる
@@ -305,9 +307,15 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
         switch indexPath.section {
         case 1:
             // 会計年度
-            if let cell = tableView.cellForRow(at: indexPath) {
-                // ダイアログ
-                showDialog(tag: cell.tag) // 会計帳簿の連番
+            // データベース
+            let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+            if objects[indexPath.row].openOrClose {
+                // 開いている帳簿の場合
+            } else {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    // ダイアログ
+                    showDialog(tag: cell.tag) // 会計帳簿の連番
+                }
             }
         default:
             print("")
@@ -424,15 +432,6 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             self.backView.removeFromSuperview()
         }
     }
-
-    // セルの選択が外れた時に呼び出される
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let cell = tableView.cellForRow(at: indexPath)
-            // チェックマークを外す
-            cell?.accessoryType = .none
-        }
-    }
     // 削除機能 セルを左へスワイプ
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //        print("選択されたセルを取得: \(indexPath.section), \(indexPath.row)") //  1行目 [4, 0] となる　7月の仕訳データはsection4だから
@@ -449,13 +448,57 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
     }
     // 削除機能 アラートのポップアップを表示
     private func showPopover(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "削除", message: "会計帳簿を削除しますか？", preferredStyle: .alert)
+        // データベース
+        let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
+        let objectsJournalEntry = DataBaseManagerSettingsPeriod.shared.getJournalEntryCount(fiscalYear: objects[indexPath.row].fiscalYear)
+        let objectsAdjustingEntry = DataBaseManagerSettingsPeriod.shared.getAdjustingEntryCount(fiscalYear: objects[indexPath.row].fiscalYear)
+        // 会計帳簿の年度を表示する
+        let alert = UIAlertController(
+            title: "削除",
+            message: """
+                    「\(objects[indexPath.row].fiscalYear)」の会計帳簿を削除しますか？
+                    \(objectsJournalEntry.count + objectsAdjustingEntry.count)件のデータがあります。
+                    """,
+            preferredStyle: .alert
+        )
 
         alert.addAction(
             UIAlertAction(
                 title: "OK",
                 style: .destructive,
                 handler: { (action: UIAlertAction!) in
+                    print("OK アクションをタップした時の処理")
+                    // 最終確認
+                    self.showPopoverAgain(indexPath: indexPath)
+                }
+            )
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+
+    }
+    // 削除機能 アラートのポップアップを表示　最終確認
+    private func showPopoverAgain(indexPath: IndexPath) {
+        let alert = UIAlertController(
+            title: "最終確認",
+            message: """
+                    会計帳簿を削除しますか？
+                    この操作は取り消すことはできません。
+                    """,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .destructive,
+                handler: { _ in
                     print("OK アクションをタップした時の処理")
                     // データベース
                     let objects = DataBaseManagerSettingsPeriod.shared.getMainBooksAll()
@@ -470,9 +513,15 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             )
         )
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
-        present(alert, animated: true, completion: nil)
+        
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
     }
+
     // 表示スタイルの設定
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         // .noneを設定することで、設定したサイズでポップオーバーされる

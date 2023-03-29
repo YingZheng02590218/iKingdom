@@ -186,6 +186,7 @@ class CategoryListTableViewController: UITableViewController {
         cell.tag = presenter.objects(forRow: indexPath.row, section: indexPath.section).number
         // 必須　ラベル
         cell.label.isHidden = true
+        cell.label.textColor = .systemGreen
         // 法人/個人フラグ
         if UserDefaults.standard.bool(forKey: "corporation_switch") {
             // 繰越利益勘定
