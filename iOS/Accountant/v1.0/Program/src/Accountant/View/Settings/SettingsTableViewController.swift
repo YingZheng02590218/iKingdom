@@ -269,12 +269,8 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 2:
-            return "開始残高\n前期の決算書、もしくは試算表を参照いただきながらご入力ください。"
-        case 4:
-            return "開発者へメールを送ることができます。\nメールを受信できるように受信拒否設定は解除してください。"
         default:
-            return ""
+            return nil
         }
     }
     // セクションフッターの高さ
@@ -282,10 +278,6 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         switch section {
         case 0:
             return 35
-        case 2:
-            return 55
-        case 4:
-            return 55
         default:
             return 0
         }
@@ -311,23 +303,27 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 55
+            return 65
         } else {
-            return 44
+            return 50
         }
     }
     //　セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WithIconTableViewCell else { return UITableViewCell() }
-        
+        cell.centerLabelHeighCenterY.priority = .defaultLow
+        cell.centerLabelMiddleCenterY.priority = .defaultHigh
+        cell.lowerLabel.text = nil
+        cell.lowerLabel.isHidden = true
+
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
         // ラベル
-        cell.centerLabel.font = UIFont.systemFont(ofSize: 16.0)
+        cell.centerLabel.font = UIFont.systemFont(ofSize: 18.0)
         cell.centerLabel.textColor = .textColor
         // 右側のラベル
         cell.subLabel.text = ""
@@ -375,6 +371,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
             case 3:
                 cell.centerLabel.text = "開始残高"
+                cell.centerLabelHeighCenterY.priority = .defaultHigh
+                cell.centerLabelMiddleCenterY.priority = .defaultLow
+                cell.lowerLabel.text = "前期の決算書を参照しながらご入力ください。"
+                cell.lowerLabel.isHidden = false
                 cell.leftImageView.image = UIImage(named: "edit_document-edit_document_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
@@ -475,7 +475,11 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 2:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ"
+                cell.centerLabelHeighCenterY.priority = .defaultHigh
+                cell.centerLabelMiddleCenterY.priority = .defaultLow
                 cell.subLabel.text = "要望・不具合報告"
+                cell.lowerLabel.text = "メールを受信できるように受信拒否設定は解除してください。"
+                cell.lowerLabel.isHidden = false
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
             default:
                 break
