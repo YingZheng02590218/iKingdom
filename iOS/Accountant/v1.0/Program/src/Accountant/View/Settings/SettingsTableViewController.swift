@@ -452,7 +452,10 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 }
                 // 時間のみにする
                 picker.datePickerMode = .time
-                picker.center = cell.contentView.center
+                // Let it size itself to its preferred size
+                picker.sizeToFit()
+                // Set the frame without changing the size
+                picker.frame = .init(x: 0, y: 0, width: 80, height: 35)
                 // 初期値
                 picker.date = UserNotificationUtility.shared.time
                 picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
