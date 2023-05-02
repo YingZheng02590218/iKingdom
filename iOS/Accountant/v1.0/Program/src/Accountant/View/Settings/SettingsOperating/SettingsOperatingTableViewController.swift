@@ -152,6 +152,7 @@ class SettingsOperatingTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? CategoryListTableViewCell else {
             return UITableViewCell()
         }
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 18.0)
 
         cell.label.text = nil
         // 設定操作
