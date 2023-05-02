@@ -12,7 +12,6 @@ import UIKit
 // 決算書クラス
 class FinancialStatementTableViewController: UITableViewController {
 
-    var gADBannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,36 +35,10 @@ class FinancialStatementTableViewController: UITableViewController {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOBID
-            
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count - 1].frame.height * -1)
-        } else {
-            if let gADBannerView = gADBannerView {
-                // GADBannerView を外す
-                removeBannerViewToView(gADBannerView)
-            }
-        }
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // アップグレード機能　スタンダードプラン
-        if let gADBannerView = gADBannerView {
-            // GADBannerView を外す
-            removeBannerViewToView(gADBannerView)
-        }
     }
     // リロード機能
     @objc func refreshTable() {
