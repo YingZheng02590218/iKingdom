@@ -13,7 +13,11 @@ class WithIconTableViewCell: UITableViewCell {
     @IBOutlet var leftImageView: UIImageView!
     @IBOutlet var centerLabel: UILabel!
     @IBOutlet var subLabel: UILabel!
-
+    @IBOutlet var lowerLabel: UILabel!
+    
+    @IBOutlet var centerLabelHeighCenterY: NSLayoutConstraint!
+    @IBOutlet var centerLabelMiddleCenterY: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // アイコン画像の色を指定する

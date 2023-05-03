@@ -14,7 +14,6 @@ class GeneralLedgerTableViewController: UITableViewController {
 
     // MARK: - var let
 
-   var gADBannerView: GADBannerView!
     
     // MARK: - Life cycle
 
@@ -36,43 +35,14 @@ class GeneralLedgerTableViewController: UITableViewController {
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
-            // GADBannerView を作成する
-            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-            // GADBannerView プロパティを設定する
-            gADBannerView.adUnitID = Constant.ADMOBID
-            gADBannerView.rootViewController = self
-            // 広告を読み込む
-            gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
-            // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
-        } else {
-            if let gADBannerView = gADBannerView {
-                // GADBannerView を外す
-                removeBannerViewToView(gADBannerView)
-            }
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // アップグレード機能　スタンダードプラン
-        if let gADBannerView = gADBannerView {
-            // GADBannerView を外す
-            removeBannerViewToView(gADBannerView)
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-            view.bringSubviewToFront(gADBannerView)
-        }
     }
 
     // MARK: - Table view data source
@@ -86,11 +56,7 @@ class GeneralLedgerTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        // アップグレード機能　スタンダードプラン
-        if !UpgradeManager.shared.inAppPurchaseFlag {
-            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
-            tableView.bringSubviewToFront(gADBannerView)
-        }
+
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
