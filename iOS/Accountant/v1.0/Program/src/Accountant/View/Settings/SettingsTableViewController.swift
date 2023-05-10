@@ -339,7 +339,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 disclosureView.tintColor = UIColor.mainColor2
                 // ラベル
                 cell.centerLabel.text = "アップグレード"
-                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
                 cell.centerLabel.textColor = .mainColor2
                 cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
                 // アイコン画像の色を指定する

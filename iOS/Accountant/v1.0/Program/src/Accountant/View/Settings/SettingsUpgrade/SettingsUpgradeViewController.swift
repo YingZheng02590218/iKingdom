@@ -35,13 +35,14 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet var invisibileAdsTitleLabel: UILabel!
     @IBOutlet var invisibileAdsSubTitleLabel: UILabel!
     // 購入
+    @IBOutlet var buyLabel: UILabel!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var explainLabel: UILabel!
     // 復元
     @IBOutlet var restoreButton: EMTNeumorphicButton!
     @IBOutlet var restoreExplainLabel: UILabel!
     // 解約
-    @IBOutlet var howToCancelButton: UIButton!
+    @IBOutlet var howToCancelButton: EMTNeumorphicButton!
     // 利用規約
     @IBOutlet var termsButton: UIButton!
     // プラポリ
@@ -124,6 +125,15 @@ class SettingsUpgradeViewController: UIViewController {
         restoreButton.neumorphicLayer?.edged = Constant.edged
         restoreButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         restoreButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        // 解約方法
+        howToCancelButton.setTitleColor(.accentColor, for: .normal)
+        howToCancelButton.neumorphicLayer?.cornerRadius = 15
+        howToCancelButton.setTitleColor(.accentColor, for: .selected)
+        howToCancelButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        howToCancelButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        howToCancelButton.neumorphicLayer?.edged = Constant.edged
+        howToCancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+        howToCancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     // ラベル
     func setupExplainLabel() {
@@ -152,6 +162,7 @@ class SettingsUpgradeViewController: UIViewController {
             self.button.imageView?.tintColor = .mainColor
         }
         // 購入
+        buyLabel.text = language == "ja-JP" ? "今すぐ購入する" : "Purchase"
         button.setTitle("\(localizedPrice) / \(localizedSubscriptionPeriod)　", for: .normal)
         // 復元
         if language == "ja-JP" {
