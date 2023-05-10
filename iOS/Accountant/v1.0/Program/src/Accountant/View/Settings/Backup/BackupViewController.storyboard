@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nc4-0c-lc6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nc4-0c-lc6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTs-V4-oFT">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQQ-9D-F4H" userLabel="innerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="770"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tx2-6K-N3m">
-                                                <rect key="frame" x="15" y="0.0" width="384" height="387"/>
+                                                <rect key="frame" x="15" y="0.0" width="384" height="385"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="機能説明" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dT-bW-gb9">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="23"/>
@@ -33,7 +33,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgD-Q8-eWe">
-                                                        <rect key="frame" x="0.0" y="23" width="384" height="284"/>
+                                                        <rect key="frame" x="0.0" y="23" width="384" height="262"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">バックアップ
@@ -54,20 +54,24 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                 <real key="value" value="2"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRound">
+                                                                <real key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7x-uO-7iM">
-                                                        <rect key="frame" x="0.0" y="307" width="384" height="80"/>
+                                                        <rect key="frame" x="0.0" y="285" width="384" height="100"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoi-9j-l9g" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
-                                                                <rect key="frame" x="38.5" y="20" width="307" height="40"/>
+                                                                <rect key="frame" x="19" y="20" width="346" height="60"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="wQc-5M-mLh"/>
+                                                                    <constraint firstAttribute="height" constant="60" id="wQc-5M-mLh"/>
                                                                 </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                <state key="normal" title="　バックアップファイルを作成">
+                                                                <state key="normal" title="バックアップファイルを作成">
                                                                     <color key="titleColor" name="ButtonTextColor"/>
                                                                 </state>
                                                                 <userDefinedRuntimeAttributes>
@@ -90,7 +94,7 @@
                                                         <constraints>
                                                             <constraint firstItem="hoi-9j-l9g" firstAttribute="centerX" secondItem="O7x-uO-7iM" secondAttribute="centerX" id="MDm-D3-qf8"/>
                                                             <constraint firstItem="2kv-H7-JNe" firstAttribute="top" secondItem="hoi-9j-l9g" secondAttribute="bottom" constant="10" id="NRL-oR-iaP"/>
-                                                            <constraint firstItem="hoi-9j-l9g" firstAttribute="width" relation="greaterThanOrEqual" secondItem="O7x-uO-7iM" secondAttribute="width" multiplier="0.8" id="Yfs-oh-sCb"/>
+                                                            <constraint firstItem="hoi-9j-l9g" firstAttribute="width" relation="greaterThanOrEqual" secondItem="O7x-uO-7iM" secondAttribute="width" multiplier="0.9" id="Yfs-oh-sCb"/>
                                                             <constraint firstAttribute="bottom" secondItem="hoi-9j-l9g" secondAttribute="bottom" constant="20" id="eWE-MG-JE7"/>
                                                             <constraint firstItem="2kv-H7-JNe" firstAttribute="trailing" secondItem="hoi-9j-l9g" secondAttribute="trailing" id="uIc-ss-pAA"/>
                                                             <constraint firstItem="hoi-9j-l9g" firstAttribute="top" secondItem="O7x-uO-7iM" secondAttribute="top" constant="20" id="vQw-xD-wh6"/>
@@ -105,7 +109,7 @@
                                                 </constraints>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="35" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="30" sectionFooterHeight="-1" estimatedSectionFooterHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="c9b-CI-AI2">
-                                                <rect key="frame" x="0.0" y="387" width="414" height="387"/>
+                                                <rect key="frame" x="0.0" y="385" width="414" height="385"/>
                                                 <color key="backgroundColor" name="BaseColor"/>
                                             </tableView>
                                         </subviews>
@@ -161,7 +165,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nc4-0c-lc6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tuB-hl-add">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -176,7 +180,7 @@
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
