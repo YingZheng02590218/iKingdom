@@ -19,6 +19,10 @@
 		F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */; };
 		F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */; };
 		F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */; };
+		F90742C82A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742CB2A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition */; };
+		F90742C92A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742CB2A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition */; };
+		F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */; };
+		F90742D72A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -320,8 +324,6 @@
 		F9DC86FC29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */; };
 		F9DC86FE29932E1C00919E5F /* PaciolistWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */; };
 		F9DC870129932E1D00919E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC870029932E1D00919E5F /* Assets.xcassets */; };
-		F9DC870329932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */; };
-		F9DC870429932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */; };
 		F9DC870729932E1D00919E5F /* PaciolistWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F9DC86F329932E1C00919E5F /* PaciolistWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F9DC873529948CCE00919E5F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F429932E1C00919E5F /* WidgetKit.framework */; };
 		F9DC873629948CCE00919E5F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DC86F629932E1C00919E5F /* SwiftUI.framework */; };
@@ -329,8 +331,6 @@
 		F9DC873B29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */; };
 		F9DC873D29948CCE00919E5F /* PaciolistSTGWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */; };
 		F9DC874029948CCF00919E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC873F29948CCF00919E5F /* Assets.xcassets */; };
-		F9DC874229948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */; };
-		F9DC874329948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */; };
 		F9DC874629948CCF00919E5F /* PaciolistSTGWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F9DC87512994ECD100919E5F /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DC874F2994EC7100919E5F /* Color.xcassets */; };
 		F9DC87522994ECDD00919E5F /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC874B2994EB4600919E5F /* UIColor+extension.swift */; };
@@ -670,6 +670,12 @@
 		F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryViewController.storyboard; sourceTree = "<group>"; };
 		F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		F90742CA2A0D01BB00480551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/PaciolistSTGWidget.intentdefinition; sourceTree = "<group>"; };
+		F90742D82A0DC3B400480551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/PaciolistWidget.intentdefinition; sourceTree = "<group>"; };
+		F90742DB2A0DC3BD00480551 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PaciolistWidget.strings; sourceTree = "<group>"; };
+		F90742DD2A0DC3C000480551 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PaciolistWidget.strings; sourceTree = "<group>"; };
+		F90742E02A0DC46400480551 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PaciolistSTGWidget.strings; sourceTree = "<group>"; };
+		F90742E22A0DC47700480551 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PaciolistSTGWidget.strings; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -901,14 +907,12 @@
 		F9DC86F929932E1C00919E5F /* PaciolistWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidgetBundle.swift; sourceTree = "<group>"; };
 		F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistWidget.swift; sourceTree = "<group>"; };
-		F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PaciolistWidget.intentdefinition; sourceTree = "<group>"; };
 		F9DC870029932E1D00919E5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9DC870229932E1D00919E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9DC873429948CCE00919E5F /* PaciolistSTGWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PaciolistSTGWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DC873829948CCE00919E5F /* PaciolistSTGWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidgetBundle.swift; sourceTree = "<group>"; };
 		F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaciolistSTGWidget.swift; sourceTree = "<group>"; };
-		F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PaciolistSTGWidget.intentdefinition; sourceTree = "<group>"; };
 		F9DC873F29948CCF00919E5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9DC874129948CCF00919E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9DC874A29949AFD00919E5F /* PaciolistSTGWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTGWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -1713,7 +1717,7 @@
 				F9DC86F929932E1C00919E5F /* PaciolistWidgetBundle.swift */,
 				F9DC86FB29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift */,
 				F9DC86FD29932E1C00919E5F /* PaciolistWidget.swift */,
-				F9DC86FF29932E1C00919E5F /* PaciolistWidget.intentdefinition */,
+				F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */,
 				F9DC87552995354000919E5F /* UIColor+extension.swift */,
 				F9DC870029932E1D00919E5F /* Assets.xcassets */,
 				F9DC87532995351300919E5F /* Color.xcassets */,
@@ -1728,7 +1732,7 @@
 				F9DC873829948CCE00919E5F /* PaciolistSTGWidgetBundle.swift */,
 				F9DC873A29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift */,
 				F9DC873C29948CCE00919E5F /* PaciolistSTGWidget.swift */,
-				F9DC873E29948CCE00919E5F /* PaciolistSTGWidget.intentdefinition */,
+				F90742CB2A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition */,
 				F9DC874B2994EB4600919E5F /* UIColor+extension.swift */,
 				F9DC873F29948CCF00919E5F /* Assets.xcassets */,
 				F9DC874F2994EC7100919E5F /* Color.xcassets */,
@@ -2400,6 +2404,7 @@
 				F982898A2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9DB32FC297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
 				F966D828255D1732009BD18F /* DataBaseTaxonomy.swift in Sources */,
+				F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */,
 				F9BDCBBA27A96A8E00BD8770 /* JournalsPresenter.swift in Sources */,
 				F9EE7D3529B9C35B0045EDB7 /* ErrorValidation.swift in Sources */,
 				F966D827255D1729009BD18F /* DataBaseManagerTaxonomy.swift in Sources */,
@@ -2458,7 +2463,6 @@
 				F963E2C22966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift in Sources */,
 				F9AD64DD2912A9D200B9F50B /* PDFMakerBS.swift in Sources */,
 				F9ED9370298396C900B255EF /* ContainerManager.swift in Sources */,
-				F9DC870429932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */,
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F928F93729A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
@@ -2597,9 +2601,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F90742D72A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */,
 				F9DC86FA29932E1C00919E5F /* PaciolistWidgetBundle.swift in Sources */,
 				F9DC86FC29932E1C00919E5F /* PaciolistWidgetLiveActivity.swift in Sources */,
-				F9DC870329932E1D00919E5F /* PaciolistWidget.intentdefinition in Sources */,
 				F9DC87562995354000919E5F /* UIColor+extension.swift in Sources */,
 				F9DC86FE29932E1C00919E5F /* PaciolistWidget.swift in Sources */,
 			);
@@ -2612,7 +2616,7 @@
 				F9DC873D29948CCE00919E5F /* PaciolistSTGWidget.swift in Sources */,
 				F9DC873B29948CCE00919E5F /* PaciolistSTGWidgetLiveActivity.swift in Sources */,
 				F9DC87522994ECDD00919E5F /* UIColor+extension.swift in Sources */,
-				F9DC874229948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */,
+				F90742C92A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */,
 				F9DC873929948CCE00919E5F /* PaciolistSTGWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2763,7 +2767,7 @@
 				F9EC66EA27B90BC60003FBB6 /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
-				F9DC874329948CCF00919E5F /* PaciolistSTGWidget.intentdefinition in Sources */,
+				F90742C82A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */,
 				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
@@ -2860,6 +2864,26 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F90742CB2A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F90742CA2A0D01BB00480551 /* Base */,
+				F90742E02A0DC46400480551 /* ja */,
+				F90742E22A0DC47700480551 /* en */,
+			);
+			name = PaciolistSTGWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
+		F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F90742D82A0DC3B400480551 /* Base */,
+				F90742DB2A0DC3BD00480551 /* en */,
+				F90742DD2A0DC3C000480551 /* ja */,
+			);
+			name = PaciolistWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
 		F94EDD9A237AEB3A0074D812 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
