@@ -119,6 +119,10 @@ class BackupViewController: UIViewController {
             label.isHidden = false
         }
         button.isEnabled = isiCloudEnabled
+        //  ボタンの画像サイズ変更
+        button.imageView?.contentMode = .scaleAspectFit
+        // button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
     }
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {

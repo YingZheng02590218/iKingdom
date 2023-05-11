@@ -97,8 +97,8 @@ class SettingsUpgradeViewController: UIViewController {
         createEMTNeumorphicView()
         // ヘッダービュー
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
-        scrollView.parallaxHeader.mode = .top
+        scrollView.parallaxHeader.height = headerView.frame.width * 0.5
+        scrollView.parallaxHeader.mode = .bottom
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
