@@ -240,6 +240,7 @@ class SettingsPeriodTableViewController: UITableViewController, UIPopoverPresent
             }
             let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
             // 会計帳簿の年度をセルに表示する
+            cell.textLabel?.font = .systemFont(ofSize: 22, weight: .bold)
             if indexPath.row == 0 {
                 cell.textLabel?.text = "月"
                 let day = theDayOfReckoning
