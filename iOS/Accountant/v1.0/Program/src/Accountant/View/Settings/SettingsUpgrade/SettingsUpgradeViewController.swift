@@ -348,11 +348,8 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.termsOrPrivacyPolicy = .terms
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
-            // tabBarControllerのViewを使う
-            guard let tabBarController = self.tabBarController else {
-                return
-            }
-            tabBarController.present(viewController, animated: true, completion: nil)
+
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     // プライバシーポリシー
@@ -368,11 +365,8 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.termsOrPrivacyPolicy = .privacyPolicy
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
-            // tabBarControllerのViewを使う
-            guard let tabBarController = self.tabBarController else {
-                return
-            }
-            tabBarController.present(viewController, animated: true, completion: nil)
+
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 

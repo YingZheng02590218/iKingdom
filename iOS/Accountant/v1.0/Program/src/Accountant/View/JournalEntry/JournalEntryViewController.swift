@@ -859,17 +859,12 @@ class JournalEntryViewController: UIViewController {
                             title: "OK",
                             style: .default,
                             handler: { (action: UIAlertAction!) -> Void in
-                                // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
-                                if Network.shared.isOnline() {
-                                    // アップグレード画面を表示
-                                    if let viewController = UIStoryboard(
-                                        name: "SettingsUpgradeViewController",
-                                        bundle: nil
-                                    ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                                        self.present(viewController, animated: true, completion: nil)
-                                    }
-                                } else {
-                                    
+                                // アップグレード画面を表示
+                                if let viewController = UIStoryboard(
+                                    name: "SettingsUpgradeViewController",
+                                    bundle: nil
+                                ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                                    self.present(viewController, animated: true, completion: nil)
                                 }
                             }
                         )
