@@ -455,7 +455,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 // Let it size itself to its preferred size
                 picker.sizeToFit()
                 // Set the frame without changing the size
-                picker.frame = .init(x: 0, y: 0, width: 80, height: 35)
+                picker.frame = .init(x: 0, y: 0, width: 90, height: 35)
+                // systemLayoutSizeFittingとはUIViewのメソッドで、引数に合うSizeを返してくれます。
+                // 引数に自身のViewのWidthを入れ、横の優先順位を上げる(defaultHighをセットする)ことで横幅いっぱいの時用のサイズを取得できます。
+                let targetSize = CGSize(width: picker.frame.width, height: 0)
+                let size = picker.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .defaultLow)
+                picker.frame.size = size
                 // 初期値
                 picker.date = UserNotificationUtility.shared.time
                 picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
