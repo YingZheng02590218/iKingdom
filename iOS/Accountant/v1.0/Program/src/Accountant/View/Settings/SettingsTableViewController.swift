@@ -305,7 +305,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.section == 0 {
             return 70
         } else {
-            return 50
+            return 60
         }
     }
     //　セルを生成して返却するメソッド
@@ -323,7 +323,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
         // ラベル
-        cell.centerLabel.font = UIFont.systemFont(ofSize: 18.0)
+        cell.centerLabel.font = UIFont.systemFont(ofSize: 19.0)
         cell.centerLabel.textColor = .textColor
         // 右側のラベル
         cell.subLabel.text = ""
@@ -382,7 +382,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                cell.centerLabel.text = "パスコードロックを利用する"
+                cell.centerLabel.text = "生体認証・パスコード"
                 // 生体認証かパスコードのいずれかが使用可能かを確認する
                 if LocalAuthentication.canEvaluatePolicy() {
                     cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
