@@ -35,13 +35,14 @@ class SettingsUpgradeViewController: UIViewController {
     @IBOutlet var invisibileAdsTitleLabel: UILabel!
     @IBOutlet var invisibileAdsSubTitleLabel: UILabel!
     // 購入
+    @IBOutlet var buyLabel: UILabel!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var explainLabel: UILabel!
     // 復元
     @IBOutlet var restoreButton: EMTNeumorphicButton!
     @IBOutlet var restoreExplainLabel: UILabel!
     // 解約
-    @IBOutlet var howToCancelButton: UIButton!
+    @IBOutlet var howToCancelButton: EMTNeumorphicButton!
     // 利用規約
     @IBOutlet var termsButton: UIButton!
     // プラポリ
@@ -96,8 +97,8 @@ class SettingsUpgradeViewController: UIViewController {
         createEMTNeumorphicView()
         // ヘッダービュー
         scrollView.parallaxHeader.view = headerView
-        scrollView.parallaxHeader.height = self.view.frame.width * 0.7
-        scrollView.parallaxHeader.mode = .top
+        scrollView.parallaxHeader.height = headerView.frame.width * 0.6
+        scrollView.parallaxHeader.mode = .bottom
         scrollView.parallaxHeader.minimumHeight = 0
         scrollView.contentSize = contentView.frame.size
         scrollView.flashScrollIndicators()
@@ -124,6 +125,15 @@ class SettingsUpgradeViewController: UIViewController {
         restoreButton.neumorphicLayer?.edged = Constant.edged
         restoreButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         restoreButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+        // 解約方法
+        howToCancelButton.setTitleColor(.accentColor, for: .normal)
+        howToCancelButton.neumorphicLayer?.cornerRadius = 15
+        howToCancelButton.setTitleColor(.accentColor, for: .selected)
+        howToCancelButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        howToCancelButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        howToCancelButton.neumorphicLayer?.edged = Constant.edged
+        howToCancelButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+        howToCancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     // ラベル
     func setupExplainLabel() {
@@ -152,6 +162,7 @@ class SettingsUpgradeViewController: UIViewController {
             self.button.imageView?.tintColor = .mainColor
         }
         // 購入
+        buyLabel.text = language == "ja-JP" ? "今すぐ購入する" : "Purchase"
         button.setTitle("\(localizedPrice) / \(localizedSubscriptionPeriod)　", for: .normal)
         // 復元
         if language == "ja-JP" {
@@ -337,11 +348,8 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.termsOrPrivacyPolicy = .terms
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
-            // tabBarControllerのViewを使う
-            guard let tabBarController = self.tabBarController else {
-                return
-            }
-            tabBarController.present(viewController, animated: true, completion: nil)
+
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     // プライバシーポリシー
@@ -357,11 +365,8 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.termsOrPrivacyPolicy = .privacyPolicy
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
-            // tabBarControllerのViewを使う
-            guard let tabBarController = self.tabBarController else {
-                return
-            }
-            tabBarController.present(viewController, animated: true, completion: nil)
+
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 

@@ -1165,17 +1165,15 @@ extension BSViewController: BSPresenterOutput {
         if !UpgradeManager.shared.inAppPurchaseFlag {
             // マネタイズ対応　完了　注意：viewDidLoad()ではなく、viewWillAppear()に実装すること
             // GADBannerView を作成する
-            if gADBannerView == nil {
-                gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
-                // GADBannerView プロパティを設定する
-                gADBannerView.adUnitID = Constant.ADMOBID
-                gADBannerView.rootViewController = self
-                // 広告を読み込む
-                gADBannerView.load(GADRequest())
-                print("rowHeight", tableView.rowHeight)
-                // GADBannerView を作成する
-                addBannerViewToView(gADBannerView, constant: tableView.rowHeight * -1)
-            }
+            gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
+            // GADBannerView プロパティを設定する
+            gADBannerView.adUnitID = Constant.ADMOBID
+            gADBannerView.rootViewController = self
+            // 広告を読み込む
+            gADBannerView.load(GADRequest())
+            print("rowHeight", tableView.rowHeight)
+            // GADBannerView を作成する
+            addBannerViewToView(gADBannerView, constant: tableView.rowHeight * -1)
         } else {
             if let gADBannerView = gADBannerView {
                 // GADBannerView を外す

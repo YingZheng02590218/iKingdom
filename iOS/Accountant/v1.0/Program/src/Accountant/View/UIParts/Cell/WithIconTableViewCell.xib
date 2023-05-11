@@ -27,31 +27,31 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1C-9B-yaM">
-                        <rect key="frame" x="108" y="35" width="192" height="0.0"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="118" y="35" width="192" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="MainColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSD-f9-Q0z">
-                        <rect key="frame" x="55" y="24.5" width="192" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSD-f9-Q0z">
+                        <rect key="frame" x="55" y="23.5" width="192" height="23"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <color key="textColor" name="TextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maH-rj-aqu">
                         <rect key="frame" x="74" y="60" width="266" height="40"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" name="MainColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="maH-rj-aqu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qSD-f9-Q0z" secondAttribute="bottom" id="3Ov-cl-Mws"/>
-                    <constraint firstAttribute="trailing" secondItem="e1C-9B-yaM" secondAttribute="trailing" constant="20" id="BHQ-k4-diz"/>
+                    <constraint firstAttribute="trailing" secondItem="e1C-9B-yaM" secondAttribute="trailing" constant="10" id="BHQ-k4-diz"/>
                     <constraint firstAttribute="bottom" secondItem="maH-rj-aqu" secondAttribute="bottom" constant="5" id="Bk8-rP-MQo"/>
                     <constraint firstItem="5eW-UU-mNW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Coe-vV-ULX"/>
                     <constraint firstItem="qSD-f9-Q0z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="0.75" priority="750" id="Lhi-sE-Ju8"/>
-                    <constraint firstItem="maH-rj-aqu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="20" id="MUT-Rg-ZCs"/>
+                    <constraint firstItem="maH-rj-aqu" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="10" id="MUT-Rg-ZCs"/>
                     <constraint firstItem="qSD-f9-Q0z" firstAttribute="width" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.6" id="UvK-BM-4xz"/>
                     <constraint firstItem="5eW-UU-mNW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="V69-dr-iyB"/>
                     <constraint firstItem="qSD-f9-Q0z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="acA-Ru-hHZ"/>
@@ -90,7 +90,7 @@
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor2">
-            <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.96899998188018799" green="0.9649999737739563" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
