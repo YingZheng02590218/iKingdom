@@ -303,9 +303,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 65
+            return 70
         } else {
-            return 50
+            return 60
         }
     }
     //　セルを生成して返却するメソッド
@@ -323,7 +323,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
         // ラベル
-        cell.centerLabel.font = UIFont.systemFont(ofSize: 18.0)
+        cell.centerLabel.font = UIFont.systemFont(ofSize: 19.0)
         cell.centerLabel.textColor = .textColor
         // 右側のラベル
         cell.subLabel.text = ""
@@ -339,7 +339,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 disclosureView.tintColor = UIColor.mainColor2
                 // ラベル
                 cell.centerLabel.text = "アップグレード"
-                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+                cell.centerLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
                 cell.centerLabel.textColor = .mainColor2
                 cell.leftImageView.image = UIImage(named: "military_tech-military_tech_symbol")?.withRenderingMode(.alwaysTemplate)
                 // アイコン画像の色を指定する
@@ -382,7 +382,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                cell.centerLabel.text = "パスコードロックを利用する"
+                cell.centerLabel.text = "生体認証・パスコード"
                 // 生体認証かパスコードのいずれかが使用可能かを確認する
                 if LocalAuthentication.canEvaluatePolicy() {
                     cell.leftImageView.image = UIImage(named: "lock-lock_symbol")?.withRenderingMode(.alwaysTemplate)
@@ -455,7 +455,12 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 // Let it size itself to its preferred size
                 picker.sizeToFit()
                 // Set the frame without changing the size
-                picker.frame = .init(x: 0, y: 0, width: 80, height: 35)
+                picker.frame = .init(x: 0, y: 0, width: 90, height: 35)
+                // systemLayoutSizeFittingとはUIViewのメソッドで、引数に合うSizeを返してくれます。
+                // 引数に自身のViewのWidthを入れ、横の優先順位を上げる(defaultHighをセットする)ことで横幅いっぱいの時用のサイズを取得できます。
+                let targetSize = CGSize(width: picker.frame.width, height: 0)
+                let size = picker.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .defaultLow)
+                picker.frame.size = size
                 // 初期値
                 picker.date = UserNotificationUtility.shared.time
                 picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
