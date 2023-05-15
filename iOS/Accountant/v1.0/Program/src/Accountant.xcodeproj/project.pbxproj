@@ -69,6 +69,10 @@
 		F93D789A2A1222E600C75BA9 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78982A1222E600C75BA9 /* SplashPresenter.swift */; };
 		F93D789C2A12239400C75BA9 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789B2A12239400C75BA9 /* SplashModel.swift */; };
 		F93D789D2A12239400C75BA9 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789B2A12239400C75BA9 /* SplashModel.swift */; };
+		F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */; };
+		F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */; };
+		F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
+		F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
 		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
@@ -718,6 +722,8 @@
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
 		F93D78982A1222E600C75BA9 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		F93D789B2A12239400C75BA9 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
+		F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryPresenter.swift; sourceTree = "<group>"; };
+		F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryModel.swift; sourceTree = "<group>"; };
 		F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTG.entitlements; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
@@ -1570,6 +1576,7 @@
 			isa = PBXGroup;
 			children = (
 				F93D789B2A12239400C75BA9 /* SplashModel.swift */,
+				F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */,
 				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
 				F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */,
 				F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */,
@@ -1636,6 +1643,7 @@
 			isa = PBXGroup;
 			children = (
 				F93D78982A1222E600C75BA9 /* SplashPresenter.swift */,
+				F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */,
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
 				F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */,
 				F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */,
@@ -2488,6 +2496,7 @@
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
+				F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
@@ -2497,6 +2506,7 @@
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
+				F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
@@ -2715,6 +2725,7 @@
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
 				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
+				F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
@@ -2724,6 +2735,7 @@
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
+				F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F98163092999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
