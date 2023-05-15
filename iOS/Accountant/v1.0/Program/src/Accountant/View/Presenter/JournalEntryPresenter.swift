@@ -19,8 +19,10 @@ protocol JournalEntryPresenterInput {
     func viewDidLayoutSubviews()
     // チュートリアル対応 コーチマーク型
     func showAnnotation()
-    
+    // 入力ボタン
     func inputButtonTapped(journalEntryType: JournalEntryType)
+    // OKボタン
+    func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData)
 }
 
 protocol JournalEntryPresenterOutput: AnyObject {
@@ -37,7 +39,7 @@ protocol JournalEntryPresenterOutput: AnyObject {
     // 入力チェック　バリデーション 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool
     // 仕訳一括編集　の処理
-    func buttonTappedForJournalEntriesPackageFixing()
+    func buttonTappedForJournalEntriesPackageFixing() -> JournalEntryData
     // 入力チェック　バリデーション
     func textInputCheck() -> Bool
     // 決算整理仕訳　の処理
@@ -50,6 +52,12 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func buttonTappedForJournalEntriesOnTabBar()
     // ダイアログ　オフライン
     func showDialogForOfline()
+    // ダイアログ　なにも入力されていない
+    func showDialogForEmpty()
+    // ダイアログ　ほんとうに変更しますか？
+    func showDialogForFinal(journalEntryData: JournalEntryData)
+    // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
+    func closeScreen(journalEntryData: JournalEntryData)
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -96,13 +104,21 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
             }
         }
     }
-    
+    // 入力ボタン
     func inputButtonTapped(journalEntryType: JournalEntryType) {
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             // バリデーションチェック
             if self.view.textInputCheckForJournalEntriesPackageFixing() {
-                
-                view.buttonTappedForJournalEntriesPackageFixing()
+                // 入力値を取得する
+                let journalEntryData = view.buttonTappedForJournalEntriesPackageFixing()
+                if journalEntryData.checkPropertyIsNil() {
+                    // ダイアログ　なにも入力されていない
+                    view.showDialogForEmpty()
+                } else {
+                    // ダイアログ　ほんとうに変更しますか？
+                    view.showDialogForFinal(journalEntryData: journalEntryData)
+                }
+
             }
         } else { // 一括編集以外
             
@@ -134,5 +150,10 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                 }
             }
         }
+    }
+    // OKボタン　
+    func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData) {
+        // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
+        view.closeScreen(journalEntryData: journalEntryData)
     }
 }

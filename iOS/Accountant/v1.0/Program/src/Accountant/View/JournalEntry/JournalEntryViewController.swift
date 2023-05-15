@@ -700,7 +700,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // 仕訳一括編集　の処理
-    func buttonTappedForJournalEntriesPackageFixing() {
+    func buttonTappedForJournalEntriesPackageFixing() -> JournalEntryData {
         // バリデーションチェック
         var datePicker: String?
         if isMaskedDatePicker {
@@ -754,42 +754,7 @@ class JournalEntryViewController: UIViewController {
             smallWritting: textFieldSmallWritting
         )
         
-        if dBJournalEntry.checkPropertyIsNil() {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "なにも入力されていません", message: "変更したい項目に入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        } else {
-            // いづれかひとつに値があれば下記を実行する
-            let alert = UIAlertController(
-                title: "最終確認",
-                message: "ほんとうに変更しますか？\n日付: \(dBJournalEntry.date ?? "")\n借方勘定: \(dBJournalEntry.debit_category ?? "")\n貸方勘定: \(dBJournalEntry.credit_category ?? "")\n金額: \(dBJournalEntry.credit_amount?.description ?? "")\n小書き: \(dBJournalEntry.smallWritting ?? "")",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-                print("OK アクションをタップした時の処理")
-                if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-                   let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-                   let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // 編集を終了する
-                        presentingViewController.setEditing(false, animated: true)
-                        presentingViewController.dBJournalEntry = dBJournalEntry
-                        presentingViewController.updateSelectedJournalEntries()
-                    })
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                print("Cancel アクションをタップした時の処理")
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
+        return dBJournalEntry
     }
     
     // 決算整理仕訳　の処理
@@ -1604,6 +1569,51 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             )
         )
         self.present(alertController, animated: true, completion: nil)
+    }
+    // ダイアログ　なにも入力されていない
+    func showDialogForEmpty() {
+        // フィードバック
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        let alert = UIAlertController(title: "なにも入力されていません", message: "変更したい項目に入力してください", preferredStyle: .alert)
+        self.present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    // ダイアログ　ほんとうに変更しますか？
+    func showDialogForFinal(journalEntryData: JournalEntryData) {
+        // いづれかひとつに値があれば下記を実行する
+        let alert = UIAlertController(
+            title: "最終確認",
+            message: "ほんとうに変更しますか？\n日付: \(journalEntryData.date ?? "")\n借方勘定: \(journalEntryData.debit_category ?? "")\n貸方勘定: \(journalEntryData.credit_category ?? "")\n金額: \(journalEntryData.credit_amount?.description ?? "")\n小書き: \(journalEntryData.smallWritting ?? "")",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
+            print("OK アクションをタップした時の処理")
+            
+            self.presenter.okButtonTappedDialogForFinal(journalEntryData: journalEntryData)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("Cancel アクションをタップした時の処理")
+        }))
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
+    func closeScreen(journalEntryData: JournalEntryData) {
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                // 編集を終了する
+                presentingViewController.setEditing(false, animated: true)
+                presentingViewController.dBJournalEntry = journalEntryData
+                presentingViewController.updateSelectedJournalEntries()
+            })
+        }
     }
 }
 
