@@ -51,7 +51,7 @@ protocol JournalEntryPresenterOutput: AnyObject {
     // 仕訳編集　の処理
     func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int)
     // 仕訳　の処理
-    func buttonTappedForJournalEntries()
+    func buttonTappedForJournalEntries() -> JournalEntryData?
     // タブバーの仕訳タブからの遷移の場合
     func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData?
     // ダイアログ　オフライン
@@ -70,6 +70,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func goBackToPreviousScreen()
     // 仕訳帳画面へ戻る
     func goBackToJournalsScreen(number: Int)
+    // 仕訳帳画面へ戻る
+    func goBackToJournalsScreenJournalEntry(number: Int)
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -171,8 +173,14 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                             }
                         }
                     } else if journalEntryType == .JournalEntries { // 仕訳
-                        
-                        self.view.buttonTappedForJournalEntries()
+                        // 入力値を取得する
+                        if let journalEntryData = view.buttonTappedForJournalEntries() {
+                            // 仕訳
+                            model.addJournalEntry(journalEntryData: journalEntryData) { number in
+                                // 仕訳帳画面へ戻る
+                                view.goBackToJournalsScreenJournalEntry(number: number)
+                            }
+                        }
                     } else if journalEntryType == .JournalEntry { // タブバーの仕訳タブからの遷移の場合
                         // 入力値を取得する
                         if let journalEntryData = view.buttonTappedForJournalEntriesOnTabBar() {

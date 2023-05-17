@@ -813,10 +813,9 @@ class JournalEntryViewController: UIViewController {
     }
     
     // 仕訳　の処理
-    func buttonTappedForJournalEntries() {
+    func buttonTappedForJournalEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -824,12 +823,13 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64, // カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
             // イベントログ
@@ -837,19 +837,11 @@ class JournalEntryViewController: UIViewController {
                 AnalyticsParameterContentType: Constant.JOURNALS,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-            
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               //                        let nc = viewController.presentingViewController as! UINavigationController
-                let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
-                    //                                    presentingViewController.viewWillAppear(true)
-                    presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: 0) // 0:通常仕訳
-                })
-            }
+
+            return dBJournalEntry
         }
+        
+        return nil
     }
     
     // タブバーの仕訳タブからの遷移の場合
@@ -1611,6 +1603,19 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
             self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
                 presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: self.tappedIndexPath.section)
+            })
+        }
+    }
+    
+    // 仕訳帳画面へ戻る
+    func goBackToJournalsScreenJournalEntry(number: Int) {
+        
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: 0) // 0:通常仕訳
             })
         }
     }
