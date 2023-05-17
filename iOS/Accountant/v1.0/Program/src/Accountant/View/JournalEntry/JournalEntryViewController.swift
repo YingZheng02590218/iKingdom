@@ -786,7 +786,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // 仕訳編集　の処理
-    func buttonTappedForJournalEntriesFixing() {
+    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int) {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
@@ -797,46 +797,20 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            if tappedIndexPath.section == 1 { // 決算整理仕訳
-                // データベースに書き込む
-                DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
-                    primaryKey: primaryKey,
-                    date: dateFormatter.string(from: datePicker.date),
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting,
-                    completion: { primaryKey in
-                        print("Result is \(primaryKey)")
-                        number = primaryKey
-                    }
-                )
-            } else { // 仕訳
-                // データベースに書き込む
-                DataBaseManagerJournalEntry.shared.updateJournalEntry(
-                    primaryKey: primaryKey,
-                    date: dateFormatter.string(from: datePicker.date),
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting,
-                    completion: { primaryKey in
-                        print("Result is \(primaryKey)")
-                        number = primaryKey
-                    }
-                )
-            }
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: self.tappedIndexPath.section)
-                })
-            }
+            
+            let dBJournalEntry = JournalEntryData(
+                date: dateFormatter.string(from: datePicker.date),
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
+                smallWritting: textFieldSmallWritting
+            )
+
+            return (dBJournalEntry, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
         }
+        
+        return (nil, tappedIndexPath.section, primaryKey)
     }
     
     // 仕訳　の処理
@@ -1628,7 +1602,18 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
             ])
         }
-
+    }
+    // 仕訳帳画面へ戻る
+    func goBackToJournalsScreen(number: Int) {
+        
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: self.tappedIndexPath.section)
+            })
+        }
     }
 }
 

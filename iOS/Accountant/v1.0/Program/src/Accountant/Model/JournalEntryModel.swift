@@ -13,6 +13,8 @@ protocol JournalEntryModelInput {
     func addJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void)
     // 決算整理仕訳
     func addAdjustingJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void)
+    // 決算整理仕訳 更新
+    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void)
 }
 
 // 仕訳クラス
@@ -43,5 +45,20 @@ class JournalEntryModel: JournalEntryModelInput {
         )
         completion(number)
     }
-
+    // 決算整理仕訳 更新
+    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void) {
+        DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
+            primaryKey: primaryKey,
+            date: journalEntryData.date!,
+            debitCategory: journalEntryData.debit_category!,
+            debitAmount: journalEntryData.debit_amount!, // カンマを削除してからデータベースに書き込む
+            creditCategory: journalEntryData.credit_category!,
+            creditAmount: journalEntryData.credit_amount!, // カンマを削除してからデータベースに書き込む
+            smallWritting: journalEntryData.smallWritting!,
+            completion: { primaryKey in
+                print("Result is \(primaryKey)")
+                completion(primaryKey)
+            }
+        )
+    }
 }
