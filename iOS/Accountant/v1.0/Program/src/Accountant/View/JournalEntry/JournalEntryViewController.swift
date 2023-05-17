@@ -789,7 +789,6 @@ class JournalEntryViewController: UIViewController {
     func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int) {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,

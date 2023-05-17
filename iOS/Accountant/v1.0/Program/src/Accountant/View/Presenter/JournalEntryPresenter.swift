@@ -163,6 +163,11 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                                     view.goBackToJournalsScreen(number: number)
                                 }
                             } else { // 仕訳
+                                // 仕訳 更新
+                                model.updateJournalEntry(journalEntryData: journalEntryData, primaryKey: result.2) { number in
+                                    // 仕訳帳画面へ戻る
+                                    view.goBackToJournalsScreen(number: number)
+                                }
                             }
                         }
                     } else if journalEntryType == .JournalEntries { // 仕訳
