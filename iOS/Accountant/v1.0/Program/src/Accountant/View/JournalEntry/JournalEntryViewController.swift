@@ -1109,20 +1109,6 @@ class JournalEntryViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    // アップグレード画面を表示
-    func showUpgradeScreen() {
-        // 乱数　1から6までのIntを生成
-        let iValue = Int.random(in: 1 ... 6)
-        if iValue % 2 == 0 {
-            if let viewController = UIStoryboard(
-                name: "SettingsUpgradeViewController",
-                bundle: nil
-            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                self.present(viewController, animated: true, completion: nil)
-            }
-        }
-    }
 }
 
 // MARK: - GADFullScreenContentDelegate
@@ -1563,8 +1549,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 title: "OK",
                 style: .default,
                 handler: { (action: UIAlertAction!) -> Void in
-                    // アップグレード画面を表示
-                    self.showUpgradeScreen()
+                    // OKボタン ダイアログ　オフライン
+                    self.presenter.okButtonTappedDialogForOfline()
                 }
             )
         )
@@ -1613,6 +1599,19 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 presentingViewController.dBJournalEntry = journalEntryData
                 presentingViewController.updateSelectedJournalEntries()
             })
+        }
+    }
+    // アップグレード画面を表示
+    func showUpgradeScreen() {
+        // 乱数　1から6までのIntを生成
+        let iValue = Int.random(in: 1 ... 6)
+        if iValue % 2 == 0 {
+            if let viewController = UIStoryboard(
+                name: "SettingsUpgradeViewController",
+                bundle: nil
+            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                self.present(viewController, animated: true, completion: nil)
+            }
         }
     }
 }

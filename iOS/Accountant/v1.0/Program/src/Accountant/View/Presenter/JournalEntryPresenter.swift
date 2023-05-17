@@ -23,6 +23,8 @@ protocol JournalEntryPresenterInput {
     func inputButtonTapped(journalEntryType: JournalEntryType)
     // OKボタン
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData)
+    // OKボタン ダイアログ　オフライン
+    func okButtonTappedDialogForOfline()
 }
 
 protocol JournalEntryPresenterOutput: AnyObject {
@@ -58,6 +60,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func showDialogForFinal(journalEntryData: JournalEntryData)
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
     func closeScreen(journalEntryData: JournalEntryData)
+    // アップグレード画面を表示
+    func showUpgradeScreen()
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -155,5 +159,10 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData) {
         // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
         view.closeScreen(journalEntryData: journalEntryData)
+    }
+    // OKボタン ダイアログ　オフライン
+    func okButtonTappedDialogForOfline() {
+        // アップグレード画面を表示
+        view.showUpgradeScreen()
     }
 }
