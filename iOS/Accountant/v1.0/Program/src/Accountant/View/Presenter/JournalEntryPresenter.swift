@@ -47,7 +47,7 @@ protocol JournalEntryPresenterOutput: AnyObject {
     // 入力チェック　バリデーション
     func textInputCheck() -> Bool
     // 決算整理仕訳　の処理
-    func buttonTappedForAdjustingAndClosingEntries()
+    func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData?
     // 仕訳編集　の処理
     func buttonTappedForJournalEntriesFixing()
     // 仕訳　の処理
@@ -66,6 +66,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func showUpgradeScreen()
     // ダイアログ 記帳しました
     func showDialogForSucceed()
+    // 決算整理仕訳後に遷移元画面へ戻る
+    func goBackToPreviousScreen()
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -140,8 +142,14 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                     // ネットワークあり
                     // 仕訳タイプ判定　仕訳、決算整理仕訳、編集、一括編集
                     if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
-                        
-                        view.buttonTappedForAdjustingAndClosingEntries()
+                        // 入力値を取得する
+                        if let journalEntryData = view.buttonTappedForAdjustingAndClosingEntries() {
+                            // 決算整理仕訳
+                            model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { number in
+                                // 決算整理仕訳後に遷移元画面へ戻る
+                                view.goBackToPreviousScreen()
+                            }
+                        }
                     } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
                         
                         self.view.buttonTappedForJournalEntriesFixing()

@@ -758,7 +758,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // 決算整理仕訳　の処理
-    func buttonTappedForAdjustingAndClosingEntries() {
+    func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         var number = 0
@@ -769,49 +769,20 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerAdjustingEntry.shared.addAdjustingJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-            print(number)
-            // 精算表画面から入力の場合
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               let presentingViewController = navigationController.viewControllers[1] as? WSViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // viewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.reloadData()
-                })
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.WORKSHEET,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
-            }
-            // タブバーの仕訳タブから入力の場合
-            else {
-                // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.success)
-                let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
-                self.present(alert, animated: true) { () -> Void in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.dismiss(animated: true, completion: { [self] () -> Void in
-                            self.showAd()
-                        })
-                    }
-                }
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
-            }
+            
+            return dBJournalEntry
         }
+        
+        return nil
     }
     
     // 仕訳編集　の処理
@@ -1620,6 +1591,44 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 })
             }
         }
+    }
+    
+    // 決算整理仕訳後に遷移元画面へ戻る
+    func goBackToPreviousScreen() {
+        // 精算表画面から入力の場合
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers[1] as? WSViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.reloadData()
+            })
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.WORKSHEET,
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+            ])
+        }
+        // タブバーの仕訳タブから入力の場合
+        else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: { [self] () -> Void in
+                        self.showAd()
+                    })
+                }
+            }
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+            ])
+        }
+
     }
 }
 
