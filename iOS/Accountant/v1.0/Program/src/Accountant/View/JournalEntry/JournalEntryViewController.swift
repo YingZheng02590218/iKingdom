@@ -909,10 +909,9 @@ class JournalEntryViewController: UIViewController {
     }
     
     // タブバーの仕訳タブからの遷移の場合
-    func buttonTappedForJournalEntriesOnTabBar() {
+    func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -920,32 +919,25 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64, // カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-            print(number)
             // イベントログ
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                 AnalyticsParameterContentType: Constant.JOURNALENTRY,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: { [self] () -> Void in
-                        self.showAd()
-                    })
-                }
-            }
+            
+            return dBJournalEntry
         }
+        
+        return nil
     }
     // 入力チェック　バリデーション 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
@@ -1130,8 +1122,8 @@ extension JournalEntryViewController: GADFullScreenContentDelegate {
         print("Ad did dismiss full screen content.")
         // セットアップ AdMob
         setupAdMob()
-        // アップグレード画面を表示
-        showUpgradeScreen()
+        // 広告を閉じた
+        presenter.adDidDismissFullScreenContent()
     }
 }
 
@@ -1585,7 +1577,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             print("Cancel アクションをタップした時の処理")
         }))
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
     func closeScreen(journalEntryData: JournalEntryData) {
@@ -1611,6 +1603,21 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 bundle: nil
             ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
                 self.present(viewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // ダイアログ 記帳しました
+    func showDialogForSucceed() {
+        // フィードバック
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+        self.present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.dismiss(animated: true, completion: { [self] () -> Void in
+                    self.showAd()
+                })
             }
         }
     }

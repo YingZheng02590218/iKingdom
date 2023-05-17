@@ -25,6 +25,8 @@ protocol JournalEntryPresenterInput {
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData)
     // OKボタン ダイアログ　オフライン
     func okButtonTappedDialogForOfline()
+    // 広告を閉じた
+    func adDidDismissFullScreenContent()
 }
 
 protocol JournalEntryPresenterOutput: AnyObject {
@@ -51,7 +53,7 @@ protocol JournalEntryPresenterOutput: AnyObject {
     // 仕訳　の処理
     func buttonTappedForJournalEntries()
     // タブバーの仕訳タブからの遷移の場合
-    func buttonTappedForJournalEntriesOnTabBar()
+    func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData?
     // ダイアログ　オフライン
     func showDialogForOfline()
     // ダイアログ　なにも入力されていない
@@ -62,6 +64,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func closeScreen(journalEntryData: JournalEntryData)
     // アップグレード画面を表示
     func showUpgradeScreen()
+    // ダイアログ 記帳しました
+    func showDialogForSucceed()
 }
 
 final class JournalEntryPresenter: JournalEntryPresenterInput {
@@ -137,7 +141,7 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                     // 仕訳タイプ判定　仕訳、決算整理仕訳、編集、一括編集
                     if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
                         
-                        self.view.buttonTappedForAdjustingAndClosingEntries()
+                        view.buttonTappedForAdjustingAndClosingEntries()
                     } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
                         
                         self.view.buttonTappedForJournalEntriesFixing()
@@ -145,8 +149,14 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                         
                         self.view.buttonTappedForJournalEntries()
                     } else if journalEntryType == .JournalEntry { // タブバーの仕訳タブからの遷移の場合
-                        
-                        self.view.buttonTappedForJournalEntriesOnTabBar()
+                        // 入力値を取得する
+                        if let journalEntryData = view.buttonTappedForJournalEntriesOnTabBar() {
+                            // 仕訳
+                            model.addJournalEntry(journalEntryData: journalEntryData) { number in
+                                // ダイアログ 記帳しました
+                                view.showDialogForSucceed()
+                            }
+                        }
                     }
                 } else {
                     // ダイアログ　オフライン
@@ -162,6 +172,11 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     }
     // OKボタン ダイアログ　オフライン
     func okButtonTappedDialogForOfline() {
+        // アップグレード画面を表示
+        view.showUpgradeScreen()
+    }
+    // 広告を閉じた
+    func adDidDismissFullScreenContent() {
         // アップグレード画面を表示
         view.showUpgradeScreen()
     }
