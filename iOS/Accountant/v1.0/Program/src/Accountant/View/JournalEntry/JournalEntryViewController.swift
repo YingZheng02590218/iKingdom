@@ -696,7 +696,18 @@ class JournalEntryViewController: UIViewController {
             sender.isSelected = !sender.isSelected
         }
         
-        presenter.inputButtonTapped(journalEntryType: journalEntryType)
+        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+            // バリデーションチェック 小書き
+            if textInputCheckForJournalEntriesPackageFixing() {
+                presenter.inputButtonTapped(journalEntryType: journalEntryType)
+            }
+        } else { // 一括編集以外
+            // バリデーションチェック　全て入力されているか
+            if textInputCheck() {
+                presenter.inputButtonTapped(journalEntryType: journalEntryType)
+            }
+        }
+
     }
     
     // 仕訳一括編集　の処理
@@ -875,7 +886,7 @@ class JournalEntryViewController: UIViewController {
         
         return nil
     }
-    // 入力チェック　バリデーション 仕訳一括編集
+    // 入力チェック 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
         // 小書き　バリデーションチェック
         switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
@@ -892,66 +903,46 @@ class JournalEntryViewController: UIViewController {
         
         return true // OK
     }
-    // 入力チェック　バリデーション
+
+    // 入力チェック
     func textInputCheck() -> Bool {
-        
-        guard textFieldCategoryDebit.text != "" && textFieldCategoryDebit.text != "" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "借方勘定科目", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldCategoryDebit.becomeFirstResponder()
-                }
+        // バリデーション 借方勘定科目
+        guard textInputCheck(text: textFieldCategoryDebit.text, editableType: .categoryDebit, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryDebit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldCategoryCredit.text != "" && textFieldCategoryCredit.text != "" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "貸方勘定科目", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldCategoryCredit.becomeFirstResponder()
-                }
+        // バリデーション 貸方勘定科目
+        guard textInputCheck(text: textFieldCategoryCredit.text, editableType: .categoryCredit, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryCredit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "0" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldAmountDebit.becomeFirstResponder()
-                }
+        // バリデーション 金額
+        guard textInputCheck(text: textFieldAmountDebit.text, editableType: .amount, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldAmountDebit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "0" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldAmountCredit.becomeFirstResponder()
-                }
+        // バリデーション 金額
+        guard textInputCheck(text: textFieldAmountCredit.text, editableType: .amount, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldAmountCredit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
@@ -961,10 +952,25 @@ class JournalEntryViewController: UIViewController {
             errorMessage = nil
         case .failure(let message):
             errorMessage = message
-            // エラーダイアログ
             showErrorMessage(completion: {
                 // TextFieldのキーボードを自動的に表示する
                 self.textFieldSmallWritting.becomeFirstResponder()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // バリデーション 勘定科目、金額
+    func textInputCheck(text: String?, editableType: EditableType, completion: @escaping () -> Void) -> Bool {
+        // バリデーションチェック
+        switch ErrorValidation().validateEmpty(text: text, editableType: editableType) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                completion()
             })
             return false // NG
         }

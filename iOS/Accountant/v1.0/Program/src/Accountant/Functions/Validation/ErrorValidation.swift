@@ -57,5 +57,16 @@ struct ErrorValidation {
         }
         return .success
     }
-
+    // バリデーション 勘定科目、金額
+    func validateEmpty(text: String?, editableType: EditableType) -> ErrorValidationState {
+        // 必須
+        guard let text = text, !text.isEmpty else {
+            return .failure(
+                message: ErrorValidationType.required(
+                    name: editableType.rawValue
+                ).errorText
+            )
+        }
+        return .success
+    }
 }
