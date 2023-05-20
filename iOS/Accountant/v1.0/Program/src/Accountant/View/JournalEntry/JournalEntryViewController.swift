@@ -595,7 +595,8 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: キーボード
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
         // 小書きを入力中は、画面を上げる
         if textFieldSmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
@@ -614,7 +615,8 @@ class JournalEntryViewController: UIViewController {
         }
     }
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillHide(notification: NSNotification) {
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
         animateWithKeyboard(notification: notification) { _ in
             if self.view.frame.origin.y != 0 {
                 print(self.view.frame.origin.y)
@@ -645,7 +647,8 @@ class JournalEntryViewController: UIViewController {
         animator.startAnimation()
     }
     // TextFieldのキーボードについているBarButtonが押下された時
-    @objc func barButtonTapped(_ sender: UIBarButtonItem) {
+    @objc
+    func barButtonTapped(_ sender: UIBarButtonItem) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -772,7 +775,6 @@ class JournalEntryViewController: UIViewController {
     func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
