@@ -1064,15 +1064,17 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.primaryKeys = nil
         self.primaryKeysAdjusting = nil
         self.indexPaths = [] // まとめて編集の選択されたセル　初期化
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 仕訳入力後に仕訳帳を更新する
             self.tableView.reloadData()
             // ボタンを更新
             self.setButtons()
             // 下へスクロールする
             self.scrollToBottom()
-            // インタースティシャル広告を表示　マネタイズ対応
-            self.showAd()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                // インタースティシャル広告を表示　マネタイズ対応
+                self.showAd()
+            }
         }
     }
     // インタースティシャル広告を表示　マネタイズ対応
@@ -1137,11 +1139,13 @@ extension JournalsViewController: JournalsPresenterOutput {
         // 乱数　1から6までのIntを生成
         let iValue = Int.random(in: 1 ... 6)
         if iValue % 2 == 0 {
-            if let viewController = UIStoryboard(
-                name: "SettingsUpgradeViewController",
-                bundle: nil
-            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                self.present(viewController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                if let viewController = UIStoryboard(
+                    name: "SettingsUpgradeViewController",
+                    bundle: nil
+                ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                    self.present(viewController, animated: true, completion: nil)
+                }
             }
         }
     }

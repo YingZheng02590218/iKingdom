@@ -1544,11 +1544,13 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         // 乱数　1から6までのIntを生成
         let iValue = Int.random(in: 1 ... 6)
         if iValue % 2 == 0 {
-            if let viewController = UIStoryboard(
-                name: "SettingsUpgradeViewController",
-                bundle: nil
-            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                self.present(viewController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                if let viewController = UIStoryboard(
+                    name: "SettingsUpgradeViewController",
+                    bundle: nil
+                ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                    self.present(viewController, animated: true, completion: nil)
+                }
             }
         }
     }
