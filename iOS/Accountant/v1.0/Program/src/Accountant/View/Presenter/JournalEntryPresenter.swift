@@ -52,8 +52,6 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData?
     // ダイアログ　オフライン
     func showDialogForOfline()
-    // ダイアログ　なにも入力されていない
-    func showDialogForEmpty()
     // ダイアログ　ほんとうに変更しますか？
     func showDialogForFinal(journalEntryData: JournalEntryData)
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
@@ -120,14 +118,8 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             // 入力値を取得する
             let journalEntryData = view.buttonTappedForJournalEntriesPackageFixing()
-            // ひとつでも変更されているか
-            if journalEntryData.checkPropertyIsNil() {
-                // ダイアログ　なにも入力されていない
-                view.showDialogForEmpty()
-            } else {
-                // ダイアログ　ほんとうに変更しますか？
-                view.showDialogForFinal(journalEntryData: journalEntryData)
-            }
+            // ダイアログ　ほんとうに変更しますか？
+            view.showDialogForFinal(journalEntryData: journalEntryData)
         } else { // 一括編集以外
             // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
             if Network.shared.isOnline() ||

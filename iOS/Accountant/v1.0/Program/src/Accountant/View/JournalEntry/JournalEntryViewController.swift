@@ -697,7 +697,7 @@ class JournalEntryViewController: UIViewController {
         }
         
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
-            // バリデーションチェック 小書き
+            // バリデーションチェック ひとつでも変更されているか、小書き
             if textInputCheckForJournalEntriesPackageFixing() {
                 presenter.inputButtonTapped(journalEntryType: journalEntryType)
             }
@@ -888,6 +888,20 @@ class JournalEntryViewController: UIViewController {
     }
     // 入力チェック 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
+        // 入力値を取得する
+        let journalEntryData = buttonTappedForJournalEntriesPackageFixing()
+        // バリデーション 何も入力されていない
+        switch ErrorValidation().validateEmptyAll(journalEntryData: journalEntryData) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                // なにか変更させる
+            })
+            return false // NG
+        }
+                
         // 小書き　バリデーションチェック
         switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
         case .success, .unvalidated:
@@ -1489,18 +1503,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             )
         )
         self.present(alertController, animated: true, completion: nil)
-    }
-    // ダイアログ　なにも入力されていない
-    func showDialogForEmpty() {
-        // フィードバック
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.error)
-        let alert = UIAlertController(title: "なにも入力されていません", message: "変更したい項目に入力してください", preferredStyle: .alert)
-        self.present(alert, animated: true) { () -> Void in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
     }
     // ダイアログ　ほんとうに変更しますか？
     func showDialogForFinal(journalEntryData: JournalEntryData) {

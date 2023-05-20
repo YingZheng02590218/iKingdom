@@ -69,4 +69,14 @@ struct ErrorValidation {
         }
         return .success
     }
+    // バリデーション 仕訳一括編集 日付、勘定科目、金額、小書き
+    func validateEmptyAll(journalEntryData: JournalEntryData) -> ErrorValidationState {
+        // 必須 ひとつでも変更されているか
+        guard !journalEntryData.checkPropertyIsNil() else {
+            return .failure(
+                message: ErrorValidationType.requiredSomething.errorText
+            )
+        }
+        return .success
+    }
 }
