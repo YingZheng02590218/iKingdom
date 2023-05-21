@@ -67,6 +67,14 @@ struct ErrorValidation {
                 ).errorText
             )
         }
+        // 必須　金額
+        guard "0" != text && editableType != .amount else {
+            return .failure(
+                message: ErrorValidationType.required(
+                    name: editableType.rawValue
+                ).errorText
+            )
+        }
         return .success
     }
     // バリデーション 仕訳一括編集 日付、勘定科目、金額、小書き
