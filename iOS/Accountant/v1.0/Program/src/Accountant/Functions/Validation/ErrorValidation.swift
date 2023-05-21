@@ -68,12 +68,14 @@ struct ErrorValidation {
             )
         }
         // 必須　金額
-        guard "0" != text && editableType != .amount else {
-            return .failure(
-                message: ErrorValidationType.required(
-                    name: editableType.rawValue
-                ).errorText
-            )
+        if editableType == .amount {
+            guard "0" != text else {
+                return .failure(
+                    message: ErrorValidationType.required(
+                        name: editableType.rawValue
+                    ).errorText
+                )
+            }
         }
         return .success
     }
