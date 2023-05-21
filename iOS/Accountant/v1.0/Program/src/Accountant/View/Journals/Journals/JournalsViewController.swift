@@ -1071,7 +1071,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.setButtons()
             // 下へスクロールする
             self.scrollToBottom()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 3 ... 6)) {
                 // インタースティシャル広告を表示　マネタイズ対応
                 self.showAd()
             }
