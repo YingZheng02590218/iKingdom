@@ -1564,7 +1564,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         self.present(alert, animated: true) { () -> Void in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.dismiss(animated: true, completion: { [self] () -> Void in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0 ... 5)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0 ... 1.5)) {
                         self.showAd()
                     }
                 })

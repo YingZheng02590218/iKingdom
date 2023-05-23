@@ -1053,14 +1053,14 @@ extension JournalsViewController: JournalsPresenterOutput {
         // 入力した仕訳のセルの位置
         indexPathForAutoScroll = nil
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             // 仕訳入力後に仕訳帳を更新する
             self.tableView.reloadData()
             // ボタンを更新
             self.setButtons()
             // 下へスクロールする
             self.scrollToBottom()
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 3 ... 6)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 1.5 ... 3)) {
                 // インタースティシャル広告を表示　マネタイズ対応
                 self.showAd()
             }
