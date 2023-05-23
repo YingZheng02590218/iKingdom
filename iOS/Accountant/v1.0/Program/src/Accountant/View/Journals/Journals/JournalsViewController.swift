@@ -48,6 +48,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // スクロール
     var numberOfEdittedJournalEntry: Int? // 編集した仕訳の連番
     var tappedIndexPathSection: Int? // 通常仕訳か決算整理仕訳か
+    // 入力した仕訳のセルの位置
     private var indexPathForAutoScroll: IndexPath?
     var indexPathLocal = IndexPath(row: 0, section: 0) // 初期表示オートスクロール
     // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
@@ -698,32 +699,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 scroll = false
             }
         }
-        // 入力ボタン押下時の場合
-        if scrollAdding {
-            if indexPath.section == tappedIndexPathSection {
-
-                if tappedIndexPathSection == 0 {
-                    // メソッドの引数 indexPath の変数 row には、セルのインデックス番号が設定されています。インデックス指定に利用する。
-                    if numberOfEdittedJournalEntry == presenter.objects(forRow: indexPath.row).number { // 自動スクロール　入力ボタン押下時の戻り値と　仕訳番号が一致した場合
-                        cell.setHighlighted(true, animated: true)
-                        indexPathForAutoScroll = indexPath
-                    }
-                }
-                // 最後のセルまで表示しされたかどうか
-                if indexPath == indexPathLocal {
-                    // 新規追加した仕訳データのセルを作成するために、最後の行までスクロールする　→ セルを作成時に位置を覚える
-                    if let indexPathForAutoScroll = self.indexPathForAutoScroll {
-                        self.tableView.scrollToRow(at: indexPathForAutoScroll, at: UITableView.ScrollPosition.top, animated: true) // 追加した仕訳データの行を画面の下方に表示する
-                        // 入力ボタン押下時の表示位置 OFF
-                        self.scrollAdding = false
-                        self.indexPathForAutoScroll = nil
-                    } else {
-                        // 上へスクロールする
-                        scrollToTop()
-                    }
-                }
-            }
-        }
         
         if !tableView.isEditing {
             if indexPath.section == tappedIndexPathSection {
@@ -763,8 +738,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         // セクション数　ゼロスタート補正は不要
         for s in 0..<tableView.numberOfSections {
             for r in 0..<tableView.numberOfRows(inSection: s) {
-                indexPathLocal = IndexPath(row: r, section: s)
-                self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
+                self.indexPathLocal = IndexPath(row: r, section: s)
+                print("下へスクロールする: \(String(describing: self.indexPathLocal))")
+                self.tableView.scrollToRow(at: self.indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
                 // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 if let _ = self.indexPathForAutoScroll {
                     break
@@ -777,8 +753,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         if let indexPathForAutoScroll = self.indexPathForAutoScroll {
             for s in (0..<tableView.numberOfSections).reversed() {
                 for r in (0..<tableView.numberOfRows(inSection: s)).reversed() {
-                    indexPathLocal = IndexPath(row: r, section: s)
-                    self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.bottom, animated: true)
+                    self.indexPathLocal = IndexPath(row: r, section: s)
+                    print("下へスクロールする: \(String(describing: self.indexPathLocal)), 入力した仕訳のセル: \(String(describing: indexPathForAutoScroll))")
+                    self.tableView.scrollToRow(at: self.indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
                     // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                     if indexPathLocal == indexPathForAutoScroll {
                         self.indexPathForAutoScroll = nil
@@ -791,8 +768,10 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         } else {
-            // 上へスクロールする
-            scrollToTop()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                // 上へスクロールする
+                self.scrollToTop()
+            }
         }
     }
     // 上へスクロールする
@@ -800,8 +779,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         // セクション数　ゼロスタート補正は不要
         for s in (0..<tableView.numberOfSections).reversed() {
             for r in (0..<tableView.numberOfRows(inSection: s)).reversed() {
-                indexPathLocal = IndexPath(row: r, section: s)
-                self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.bottom, animated: true)
+                self.indexPathLocal = IndexPath(row: r, section: s)
+                print("上へスクロールする: \(String(describing: self.indexPathLocal))")
+                self.tableView.scrollToRow(at: self.indexPathLocal, at: UITableView.ScrollPosition.bottom, animated: true)
                 // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                 if let _ = self.indexPathForAutoScroll {
                     break
@@ -814,8 +794,9 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         if let indexPathForAutoScroll = self.indexPathForAutoScroll {
             for s in 0..<tableView.numberOfSections {
                 for r in 0..<tableView.numberOfRows(inSection: s) {
-                    indexPathLocal = IndexPath(row: r, section: s)
-                    self.tableView.scrollToRow(at: indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
+                    self.indexPathLocal = IndexPath(row: r, section: s)
+                    print("上へスクロールする: \(String(describing: self.indexPathLocal)), 入力した仕訳のセル: \(String(describing: indexPathForAutoScroll))")
+                    self.tableView.scrollToRow(at: self.indexPathLocal, at: UITableView.ScrollPosition.top, animated: true)
                     // topでないとタブバーの裏に隠れてしまう　animatedはありでもよい
                     if indexPathLocal == indexPathForAutoScroll {
                         self.indexPathForAutoScroll = nil
@@ -826,6 +807,11 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     self.indexPathForAutoScroll = nil
                     break
                 }
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                // 下へスクロールする
+                self.scrollToBottom()
             }
         }
     }
@@ -1064,6 +1050,9 @@ extension JournalsViewController: JournalsPresenterOutput {
         self.primaryKeys = nil
         self.primaryKeysAdjusting = nil
         self.indexPaths = [] // まとめて編集の選択されたセル　初期化
+        // 入力した仕訳のセルの位置
+        indexPathForAutoScroll = nil
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 仕訳入力後に仕訳帳を更新する
             self.tableView.reloadData()
