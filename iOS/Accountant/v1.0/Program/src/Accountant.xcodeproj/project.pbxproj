@@ -65,6 +65,14 @@
 		F93A2638295B4FC1002B7EB9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A2636295B4FC1002B7EB9 /* RealmManager.swift */; };
 		F93A630024FA79A400C1C2C1 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */; };
 		F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A630124FA8AFC00C1C2C1 /* DataBase.swift */; };
+		F93D78992A1222E600C75BA9 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78982A1222E600C75BA9 /* SplashPresenter.swift */; };
+		F93D789A2A1222E600C75BA9 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78982A1222E600C75BA9 /* SplashPresenter.swift */; };
+		F93D789C2A12239400C75BA9 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789B2A12239400C75BA9 /* SplashModel.swift */; };
+		F93D789D2A12239400C75BA9 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789B2A12239400C75BA9 /* SplashModel.swift */; };
+		F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */; };
+		F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */; };
+		F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
+		F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
 		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
@@ -712,6 +720,10 @@
 		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		F93A62FF24FA79A400C1C2C1 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		F93A630124FA8AFC00C1C2C1 /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
+		F93D78982A1222E600C75BA9 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		F93D789B2A12239400C75BA9 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
+		F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryPresenter.swift; sourceTree = "<group>"; };
+		F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryModel.swift; sourceTree = "<group>"; };
 		F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTG.entitlements; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
@@ -1563,6 +1575,8 @@
 		F9B209E6279D034500F7EA8D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F93D789B2A12239400C75BA9 /* SplashModel.swift */,
+				F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */,
 				F9F934E42484D59900BF7AA7 /* JournalsModel.swift */,
 				F9D5D54C247E48D600EA35C7 /* GeneralLedgerAccountModel.swift */,
 				F963E2C42966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift */,
@@ -1628,6 +1642,8 @@
 		F9B209EB279D38A900F7EA8D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				F93D78982A1222E600C75BA9 /* SplashPresenter.swift */,
+				F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */,
 				F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */,
 				F9B1548B27C6457900452537 /* GeneralLedgerAccountPresenter.swift */,
 				F963E2C12966E8D0002DF49E /* GeneralLedgerPLAccountPresenter.swift */,
@@ -2480,6 +2496,7 @@
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
+				F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
@@ -2489,6 +2506,7 @@
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
+				F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
@@ -2516,6 +2534,7 @@
 				F98289B82978E0E800F8F1B8 /* AppVersion.swift in Sources */,
 				F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */,
 				F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */,
+				F93D78992A1222E600C75BA9 /* SplashPresenter.swift in Sources */,
 				F9711329249D12A1006258F7 /* TBTableViewCell.swift in Sources */,
 				F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
@@ -2543,6 +2562,7 @@
 				F9C245C826497E4400DD9C9B /* JournalEntryTemplateViewController.swift in Sources */,
 				F901E87A2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC551F292CA1D1003966E4 /* PLData.swift in Sources */,
+				F93D789C2A12239400C75BA9 /* SplashModel.swift in Sources */,
 				F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
@@ -2705,6 +2725,7 @@
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
 				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
+				F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
 				F9EC66C427B90BC60003FBB6 /* Migration.swift in Sources */,
@@ -2714,6 +2735,7 @@
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
+				F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F98163092999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9EC66CC27B90BC60003FBB6 /* SettingAccountDetailTableViewCell.swift in Sources */,
@@ -2741,6 +2763,7 @@
 				F9EC66DA27B90BC60003FBB6 /* WithIconTableViewCell.swift in Sources */,
 				F9EC66DB27B90BC60003FBB6 /* DataBaseJournalEntry.swift in Sources */,
 				F9EC66DC27B90BC60003FBB6 /* TBTableViewCell.swift in Sources */,
+				F93D789A2A1222E600C75BA9 /* SplashPresenter.swift in Sources */,
 				F98289942974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
@@ -2768,6 +2791,7 @@
 				F901E87B2849C97200290DFD /* PassCodeLockViewController.swift in Sources */,
 				F9AC5520292CA1D1003966E4 /* PLData.swift in Sources */,
 				F90742C82A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */,
+				F93D789D2A12239400C75BA9 /* SplashModel.swift in Sources */,
 				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
@@ -3044,7 +3068,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.03;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3060,7 +3084,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 4.4.1;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3080,7 +3104,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.03;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3096,7 +3120,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 4.4.1;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3249,7 +3273,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.03;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3266,7 +3290,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 4.4.1;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3286,7 +3310,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4.4.03;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3303,7 +3327,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 4.4.1;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";

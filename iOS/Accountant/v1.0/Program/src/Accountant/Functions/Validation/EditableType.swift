@@ -12,6 +12,9 @@ import Foundation
 enum EditableType: String {
     case smallWriting = "小書き"
     case nickname = "仕訳の概要"
+    case categoryDebit = "借方勘定科目"
+    case categoryCredit = "貸方勘定科目"
+    case amount = "金額"
 
     // 最大長
     var maxLength: Int {
@@ -20,6 +23,12 @@ enum EditableType: String {
             return 50
         case .nickname:
             return 25
+        case .categoryDebit:
+            return 0
+        case .categoryCredit:
+            return 0
+        case .amount:
+            return 0
         }
     }
 }

@@ -109,19 +109,7 @@ class DataBaseManagerAdjustingEntry {
         // 再計算用に、勘定をメモしておく
         let accountLeft = dataBaseJournalEntry.debit_category
         let accountRight = dataBaseJournalEntry.credit_category
-        // 編集前の仕訳帳と借方勘定と貸方勘定
-        guard let oldLeftObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
-            accountName: dataBaseJournalEntry.debit_category,
-            fiscalYear: dataBaseJournalEntry.fiscalYear
-        ) else {
-            return
-        }
-        guard let oldRightObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
-            accountName: dataBaseJournalEntry.credit_category,
-            fiscalYear: dataBaseJournalEntry.fiscalYear
-        ) else {
-            return
-        }
+
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let leftObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
             accountName: debitCategory,
@@ -151,6 +139,20 @@ class DataBaseManagerAdjustingEntry {
             }
         } catch {
             print("エラーが発生しました")
+        }
+        
+        // 編集前の仕訳帳と借方勘定と貸方勘定
+        guard let oldLeftObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.debit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else {
+            return
+        }
+        guard let oldRightObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+            accountName: dataBaseJournalEntry.credit_category,
+            fiscalYear: dataBaseJournalEntry.fiscalYear
+        ) else {
+            return
         }
         // 編集前の勘定から借方の仕訳データを削除
     outerLoop: while true {
@@ -196,7 +198,10 @@ class DataBaseManagerAdjustingEntry {
         }
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
         let dataBaseManager = TBModel()
-        dataBaseManager.setAccountTotalAdjusting(accountLeft: accountLeft, accountRight: accountRight) // 編集前の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
+        // 勘定科目が空だった場合の対策
+        if !accountLeft.isEmpty && !accountRight.isEmpty {
+            dataBaseManager.setAccountTotalAdjusting(accountLeft: accountLeft, accountRight: accountRight) // 編集前の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
+        }
         dataBaseManager.setAccountTotalAdjusting(accountLeft: debitCategory, accountRight: creditCategory) // 編集後の借方勘定と貸方勘定　 // 決算整理仕訳用にしないといけない
         // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
@@ -218,9 +223,12 @@ class DataBaseManagerAdjustingEntry {
         } catch {
             print("エラーが発生しました")
         }
-        // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
-        let dataBaseManager = TBModel()
-        dataBaseManager.setAccountTotalAdjusting(accountLeft: accountLeft, accountRight: accountRight) // 決算整理仕訳用にしないといけない
+        // 勘定科目が空だった場合の対策
+        if !accountLeft.isEmpty && !accountRight.isEmpty {
+            // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す
+            let dataBaseManager = TBModel()
+            dataBaseManager.setAccountTotalAdjusting(accountLeft: accountLeft, accountRight: accountRight) // 決算整理仕訳用にしないといけない
+        }
         // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         return object.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26

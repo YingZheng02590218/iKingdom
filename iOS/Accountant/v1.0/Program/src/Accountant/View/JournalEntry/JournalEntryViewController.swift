@@ -83,95 +83,69 @@ class JournalEntryViewController: UIViewController {
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int = 0
     
+    /// GUIアーキテクチャ　MVP
+    private var presenter: JournalEntryPresenterInput!
+    
+    func inject(presenter: JournalEntryPresenterInput) {
+        self.presenter = presenter
+    }
+
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "仕訳"
-        // largeTitle表示
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.tintColor = .accentColor
+        presenter = JournalEntryPresenter.init(view: self, model: JournalEntryModel())
+        inject(presenter: presenter)
         
-        // ニューモフィズム　ボタンとビューのデザインを指定する
-        createEMTNeumorphicView()
-        // セットアップ
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
-        dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
+        presenter.viewDidLoad()
     }
+    
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // UIパーツを作成
-        createTextFieldForCategory()
-        createTextFieldForAmount()
-        createTextFieldForSmallwritting()
-        // 仕訳タイプ判定
-        if journalEntryType == .JournalEntries { // 仕訳
-            labelTitle.text = "仕　訳"
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
-            // カルーセルをリロードする
-            reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
-            //　labelTitle.text = "決算整理仕訳"
-            createCarousel() // カルーセルを作成
-            // カルーセルをリロードする
-            reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
-            labelTitle.text = "仕訳まとめて編集"
-            createCarousel() // カルーセルを作成
-            carouselCollectionView.isHidden = true
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            maskDatePickerButton.isHidden = false
-            isMaskedDatePicker = false
-            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
-            createCarousel() // カルーセルを作成
-            carouselCollectionView.isHidden = true
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            // 仕訳データを取得
-            if tappedIndexPath.section == 1 {
-                // 決算整理仕訳
-                labelTitle.text = "決算整理仕訳編集"
-                if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
-                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
-                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
-                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                }
-            } else {
-                // 通常仕訳
-                labelTitle.text = "仕訳編集"
-                if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
-                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
-                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
-                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                }
-            }
-            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        } else if journalEntryType == .JournalEntry {
-            labelTitle.text = ""
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
-            // カルーセルをリロードする
-            reloadCarousel()
-            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        }
-        // セットアップ AdMob
-        setupAdMob()
+        
+        presenter.viewWillAppear()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // テキストフィールド　勘定科目、小書きのキーボードが表示中 viewDidLoadなどで監視を設定
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidDisappear), name: UIResponder.keyboardDidHideNotification, object: nil)
+        // TODO: 動作確認用
+        //        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
+        //        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
+        //
+        //        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
+        //        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
+        //
+        //        self.present(fourthViewController, animated: true, completion: nil)
+        
+        presenter.viewDidAppear()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        presenter.viewDidLayoutSubviews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー解除をしている
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // テキストフィールド　勘定科目、小書きのキーボードが表示中 監視を解除
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    
     // 金額　電卓画面で入力した値を表示させる
     func setAmountValue(numbersOnDisplay: Int) {
         // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
@@ -208,105 +182,13 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー登録をしている
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        // テキストフィールド　勘定科目、小書きのキーボードが表示中 viewDidLoadなどで監視を設定
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidAppear), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidDisappear), name: UIResponder.keyboardDidHideNotification, object: nil)
-        // TODO: 動作確認用
-        //        // 名前を指定してStoryboardを取得する(Fourth.storyboard)
-        //        let storyboard: UIStoryboard = UIStoryboard(name: "PDFMakerViewController", bundle: nil)
-        //
-        //        // StoryboardIDを指定してViewControllerを取得する(PDFMakerViewController)
-        //        let fourthViewController = storyboard.instantiateViewController(withIdentifier: "PDFMakerViewController") as! PDFMakerViewController
-        //
-        //        self.present(fourthViewController, animated: true, completion: nil)
-        // チュートリアル対応 ウォークスルー型
-        showWalkThrough()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // ニューモフィズム　ボタンとビューのデザインを指定する
-        createEMTNeumorphicView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // ここでUIKeyboardWillShowという名前の通知のイベントをオブザーバー解除をしている
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        // テキストフィールド　勘定科目、小書きのキーボードが表示中 監視を解除
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
-    }
-    
-    // MARK: - チュートリアル対応 ウォークスルー型
-    
-    // チュートリアル対応 ウォークスルー型
-    func showWalkThrough() {
-        // チュートリアル対応 ウォークスルー型　初回起動時
-        let userDefaults = UserDefaults.standard
-        let firstLunchKey = "firstLunch_WalkThrough"
-        if userDefaults.bool(forKey: firstLunchKey) {
-            DispatchQueue.global(qos: .default).async {
-                // 非同期処理などを実行（今回は3秒間待つだけ）
-                Thread.sleep(forTimeInterval: 0)
-                DispatchQueue.main.async {
-                    // チュートリアル対応 ウォークスルー型
-                    if let viewController = UIStoryboard(
-                        name: "WalkThroughViewController",
-                        bundle: nil
-                    ).instantiateViewController(
-                        withIdentifier: "WalkThroughViewController"
-                    ) as? WalkThroughViewController {
-                        viewController.modalPresentationStyle = .fullScreen
-                        self.present(viewController, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
-    }
-    
+
     // MARK: - チュートリアル対応 コーチマーク型
     
     // チュートリアル対応 コーチマーク型
     // ウォークスルーが終了後に、呼び出される
     func showAnnotation() {
-        // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
-        let userDefaults = UserDefaults.standard
-        let firstLunchKey = "firstLunch_JournalEntry"
-        if userDefaults.bool(forKey: firstLunchKey) {
-            DispatchQueue.main.async {
-                // コーチマークを開始
-                self.presentAnnotation()
-            }
-        }
-    }
-    // チュートリアル対応 コーチマーク型　コーチマークを開始
-    func presentAnnotation() {
-        // タブの無効化
-        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
-            for tabBarItem in arrayOfTabBarItems {
-                if let tabBarItem = tabBarItem as? UITabBarItem {
-                    tabBarItem.isEnabled = false
-                }
-            }
-        }
-        if let viewController = UIStoryboard(
-            name: "JournalEntryViewController",
-            bundle: nil
-        ).instantiateViewController(
-            withIdentifier: "Annotation_JournalEntry"
-        ) as? AnnotationViewControllerJournalEntry {
-            viewController.alpha = 0.7
-            present(viewController, animated: true, completion: nil)
-        }
+        presenter.showAnnotation()
     }
     // チュートリアル対応 コーチマーク型　コーチマークを終了 コーチマーク画面からコール
     func finishAnnotation() {
@@ -713,7 +595,8 @@ class JournalEntryViewController: UIViewController {
     
     // MARK: キーボード
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc
+    func keyboardWillShow(notification: NSNotification) {
         // 小書きを入力中は、画面を上げる
         if textFieldSmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
@@ -732,7 +615,8 @@ class JournalEntryViewController: UIViewController {
         }
     }
     // UIKeyboardWillShow通知を受けて、実行される関数
-    @objc func keyboardWillHide(notification: NSNotification) {
+    @objc
+    func keyboardWillHide(notification: NSNotification) {
         animateWithKeyboard(notification: notification) { _ in
             if self.view.frame.origin.y != 0 {
                 print(self.view.frame.origin.y)
@@ -763,7 +647,8 @@ class JournalEntryViewController: UIViewController {
         animator.startAnimation()
     }
     // TextFieldのキーボードについているBarButtonが押下された時
-    @objc func barButtonTapped(_ sender: UIBarButtonItem) {
+    @objc
+    func barButtonTapped(_ sender: UIBarButtonItem) {
         // フィードバック
         if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
             generator.impactOccurred()
@@ -815,63 +700,21 @@ class JournalEntryViewController: UIViewController {
         }
         
         if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
-            // バリデーションチェック
-            if self.textInputCheckForJournalEntriesPackageFixing() {
-                
-                buttonTappedForJournalEntriesPackageFixing()
+            // バリデーションチェック ひとつでも変更されているか、小書き
+            if textInputCheckForJournalEntriesPackageFixing() {
+                presenter.inputButtonTapped(journalEntryType: journalEntryType)
             }
         } else { // 一括編集以外
-            
-            // バリデーションチェック
-            if self.textInputCheck() {
-                
-                // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
-                if Network.shared.isOnline() ||
-                    // アップグレード機能　スタンダードプラン サブスクリプション購読済み
-                    UpgradeManager.shared.inAppPurchaseFlag {
-                    // ネットワークあり
-                    // 仕訳タイプ判定　仕訳、決算整理仕訳、編集、一括編集
-                    if self.journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
-                        
-                        self.buttonTappedForAdjustingAndClosingEntries()
-                    } else if self.journalEntryType == .JournalEntriesFixing { // 仕訳編集
-                        
-                        self.buttonTappedForJournalEntriesFixing()
-                    } else if self.journalEntryType == .JournalEntries { // 仕訳
-                        
-                        self.buttonTappedForJournalEntries()
-                    } else if self.journalEntryType == .JournalEntry { // タブバーの仕訳タブからの遷移の場合
-                        
-                        self.buttonTappedForJournalEntriesOnTabBar()
-                    }
-                } else {
-                    // フィードバック
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.error)
-                    // ネットワークなし
-                    let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
-                    
-                    // 選択肢の作成と追加
-                    // titleに選択肢のテキストを、styleに.defaultを
-                    // handlerにボタンが押された時の処理をクロージャで実装する
-                    alertController.addAction(
-                        UIAlertAction(
-                            title: "OK",
-                            style: .default,
-                            handler: { (action: UIAlertAction!) -> Void in
-                                // アップグレード画面を表示
-                                self.showUpgradeScreen()
-                            }
-                        )
-                    )
-                    self.present(alertController, animated: true, completion: nil)
-                }
+            // バリデーションチェック　全て入力されているか
+            if textInputCheck() {
+                presenter.inputButtonTapped(journalEntryType: journalEntryType)
             }
         }
+
     }
     
     // 仕訳一括編集　の処理
-    func buttonTappedForJournalEntriesPackageFixing() {
+    func buttonTappedForJournalEntriesPackageFixing() -> JournalEntryData {
         // バリデーションチェック
         var datePicker: String?
         if isMaskedDatePicker {
@@ -925,49 +768,13 @@ class JournalEntryViewController: UIViewController {
             smallWritting: textFieldSmallWritting
         )
         
-        if dBJournalEntry.checkPropertyIsNil() {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "なにも入力されていません", message: "変更したい項目に入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        } else {
-            // いづれかひとつに値があれば下記を実行する
-            let alert = UIAlertController(
-                title: "最終確認",
-                message: "ほんとうに変更しますか？\n日付: \(dBJournalEntry.date ?? "")\n借方勘定: \(dBJournalEntry.debit_category ?? "")\n貸方勘定: \(dBJournalEntry.credit_category ?? "")\n金額: \(dBJournalEntry.credit_amount?.description ?? "")\n小書き: \(dBJournalEntry.smallWritting ?? "")",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
-                print("OK アクションをタップした時の処理")
-                if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-                   let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-                   let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                    // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                        // 編集を終了する
-                        presentingViewController.setEditing(false, animated: true)
-                        presentingViewController.dBJournalEntry = dBJournalEntry
-                        presentingViewController.updateSelectedJournalEntries()
-                    })
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                print("Cancel アクションをタップした時の処理")
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
+        return dBJournalEntry
     }
     
     // 決算整理仕訳　の処理
-    func buttonTappedForAdjustingAndClosingEntries() {
+    func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -975,56 +782,26 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerAdjustingEntry.shared.addAdjustingJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-            print(number)
-            // 精算表画面から入力の場合
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               let presentingViewController = navigationController.viewControllers[1] as? WSViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // viewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.reloadData()
-                })
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.WORKSHEET,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
-            }
-            // タブバーの仕訳タブから入力の場合
-            else {
-                // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.success)
-                let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
-                self.present(alert, animated: true) { () -> Void in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.dismiss(animated: true, completion: { [self] () -> Void in
-                            self.showAd()
-                        })
-                    }
-                }
-                // イベントログ
-                Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                    AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                    AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
-                ])
-            }
+            
+            return dBJournalEntry
         }
+        
+        return nil
     }
     
     // 仕訳編集　の処理
-    func buttonTappedForJournalEntriesFixing() {
+    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int) {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -1032,53 +809,26 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            if tappedIndexPath.section == 1 { // 決算整理仕訳
-                // データベースに書き込む
-                DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
-                    primaryKey: primaryKey,
-                    date: dateFormatter.string(from: datePicker.date),
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting,
-                    completion: { primaryKey in
-                        print("Result is \(primaryKey)")
-                        number = primaryKey
-                    }
-                )
-            } else { // 仕訳
-                // データベースに書き込む
-                DataBaseManagerJournalEntry.shared.updateJournalEntry(
-                    primaryKey: primaryKey,
-                    date: dateFormatter.string(from: datePicker.date),
-                    debitCategory: textFieldCategoryDebit,
-                    debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                    creditCategory: textFieldCategoryCredit,
-                    creditAmount: textFieldAmountCreditInt64,// カンマを削除してからデータベースに書き込む
-                    smallWritting: textFieldSmallWritting,
-                    completion: { primaryKey in
-                        print("Result is \(primaryKey)")
-                        number = primaryKey
-                    }
-                )
-            }
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: self.tappedIndexPath.section)
-                })
-            }
+            
+            let dBJournalEntry = JournalEntryData(
+                date: dateFormatter.string(from: datePicker.date),
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
+                smallWritting: textFieldSmallWritting
+            )
+
+            return (dBJournalEntry, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
         }
+        
+        return (nil, tappedIndexPath.section, primaryKey)
     }
     
     // 仕訳　の処理
-    func buttonTappedForJournalEntries() {
+    func buttonTappedForJournalEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -1086,12 +836,13 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64, // カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
             // イベントログ
@@ -1099,26 +850,17 @@ class JournalEntryViewController: UIViewController {
                 AnalyticsParameterContentType: Constant.JOURNALS,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-            
-            if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
-               let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
-               //                        let nc = viewController.presentingViewController as! UINavigationController
-                let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
-                // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    // ViewController(仕訳画面)を閉じた時に、TabBarControllerが選択中の遷移元であるTableViewController(仕訳帳画面)で行いたい処理
-                    //                                    presentingViewController.viewWillAppear(true)
-                    presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: 0) // 0:通常仕訳
-                })
-            }
+
+            return dBJournalEntry
         }
+        
+        return nil
     }
     
     // タブバーの仕訳タブからの遷移の場合
-    func buttonTappedForJournalEntriesOnTabBar() {
+    func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        var number = 0
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
            let textFieldAmountDebit = textFieldAmountDebit.text,
            let textFieldCategoryCredit = textFieldCategoryCredit.text,
@@ -1126,35 +868,42 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+            
+            let dBJournalEntry = JournalEntryData(
                 date: dateFormatter.string(from: datePicker.date),
-                debitCategory: textFieldCategoryDebit,
-                debitAmount: textFieldAmountDebitInt64, // カンマを削除してからデータベースに書き込む
-                creditCategory: textFieldCategoryCredit,
-                creditAmount: textFieldAmountCreditInt64, // カンマを削除してからデータベースに書き込む
+                debit_category: textFieldCategoryDebit,
+                debit_amount: textFieldAmountDebitInt64,
+                credit_category: textFieldCategoryCredit,
+                credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-            print(number)
             // イベントログ
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                 AnalyticsParameterContentType: Constant.JOURNALENTRY,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: { [self] () -> Void in
-                        self.showAd()
-                    })
-                }
-            }
+            
+            return dBJournalEntry
         }
+        
+        return nil
     }
-    // 入力チェック　バリデーション 仕訳一括編集
+    // 入力チェック 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
+        // 入力値を取得する
+        let journalEntryData = buttonTappedForJournalEntriesPackageFixing()
+        // バリデーション 何も入力されていない
+        switch ErrorValidation().validateEmptyAll(journalEntryData: journalEntryData) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                // なにか変更させる
+            })
+            return false // NG
+        }
+                
         // 小書き　バリデーションチェック
         switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
         case .success, .unvalidated:
@@ -1170,66 +919,46 @@ class JournalEntryViewController: UIViewController {
         
         return true // OK
     }
-    // 入力チェック　バリデーション
+
+    // 入力チェック
     func textInputCheck() -> Bool {
-        
-        guard textFieldCategoryDebit.text != "" && textFieldCategoryDebit.text != "" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "借方勘定科目", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldCategoryDebit.becomeFirstResponder()
-                }
+        // バリデーション 借方勘定科目
+        guard textInputCheck(text: textFieldCategoryDebit.text, editableType: .categoryDebit, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryDebit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldCategoryCredit.text != "" && textFieldCategoryCredit.text != "" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "貸方勘定科目", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldCategoryCredit.becomeFirstResponder()
-                }
+        // バリデーション 貸方勘定科目
+        guard textInputCheck(text: textFieldCategoryCredit.text, editableType: .categoryCredit, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryCredit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "" && textFieldAmountDebit.text != "0" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldAmountDebit.becomeFirstResponder()
-                }
+        // バリデーション 金額
+        guard textInputCheck(text: textFieldAmountDebit.text, editableType: .amount, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldAmountDebit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
-        guard textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "" && textFieldAmountCredit.text != "0" else {
-            // フィードバック
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "金額", message: "入力してください", preferredStyle: .alert)
-            self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.dismiss(animated: true, completion: nil)
-                    // 未入力のTextFieldのキーボードを自動的に表示する
-                    self.textFieldAmountCredit.becomeFirstResponder()
-                }
+        // バリデーション 金額
+        guard textInputCheck(text: textFieldAmountCredit.text, editableType: .amount, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldAmountCredit.becomeFirstResponder()
             }
+        }) else {
             return false // NG
         }
         
@@ -1239,10 +968,25 @@ class JournalEntryViewController: UIViewController {
             errorMessage = nil
         case .failure(let message):
             errorMessage = message
-            // エラーダイアログ
             showErrorMessage(completion: {
                 // TextFieldのキーボードを自動的に表示する
                 self.textFieldSmallWritting.becomeFirstResponder()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // バリデーション 勘定科目、金額
+    func textInputCheck(text: String?, editableType: EditableType, completion: @escaping () -> Void) -> Bool {
+        // バリデーションチェック
+        switch ErrorValidation().validateEmpty(text: text, editableType: editableType) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                completion()
             })
             return false // NG
         }
@@ -1315,20 +1059,6 @@ class JournalEntryViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    // アップグレード画面を表示
-    func showUpgradeScreen() {
-        // 乱数　1から6までのIntを生成
-        let iValue = Int.random(in: 1 ... 6)
-        if iValue % 2 == 0 {
-            if let viewController = UIStoryboard(
-                name: "SettingsUpgradeViewController",
-                bundle: nil
-            ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
-                self.present(viewController, animated: true, completion: nil)
-            }
-        }
-    }
 }
 
 // MARK: - GADFullScreenContentDelegate
@@ -1350,8 +1080,8 @@ extension JournalEntryViewController: GADFullScreenContentDelegate {
         print("Ad did dismiss full screen content.")
         // セットアップ AdMob
         setupAdMob()
-        // アップグレード画面を表示
-        showUpgradeScreen()
+        // 広告を閉じた
+        presenter.adDidDismissFullScreenContent()
     }
 }
 
@@ -1615,6 +1345,292 @@ extension JournalEntryViewController: UITextFieldDelegate {
                 }
             }
             // print("\(String(describing: sender.text))") // カンマを追加する前にシスアウトすると、カンマが上位のくらいから3桁ごとに自動的に追加される。
+        }
+    }
+}
+extension JournalEntryViewController: JournalEntryPresenterOutput {
+    
+    func setupUI() {
+        self.navigationItem.title = "仕訳"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+        
+        // ニューモフィズム　ボタンとビューのデザインを指定する
+        createEMTNeumorphicView()
+        // セットアップ
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
+        dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
+    }
+    
+    func updateUI() {
+        // UIパーツを作成
+        createTextFieldForCategory()
+        createTextFieldForAmount()
+        createTextFieldForSmallwritting()
+        // 仕訳タイプ判定
+        if journalEntryType == .JournalEntries { // 仕訳
+            labelTitle.text = "仕　訳"
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
+            //　labelTitle.text = "決算整理仕訳"
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+            labelTitle.text = "仕訳まとめて編集"
+            createCarousel() // カルーセルを作成
+            carouselCollectionView.isHidden = true
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            maskDatePickerButton.isHidden = false
+            isMaskedDatePicker = false
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+            createCarousel() // カルーセルを作成
+            carouselCollectionView.isHidden = true
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            // 仕訳データを取得
+            if tappedIndexPath.section == 1 {
+                // 決算整理仕訳
+                labelTitle.text = "決算整理仕訳編集"
+                if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
+                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
+                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
+                }
+            } else {
+                // 通常仕訳
+                labelTitle.text = "仕訳編集"
+                if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
+                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
+                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
+                }
+            }
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        } else if journalEntryType == .JournalEntry {
+            labelTitle.text = ""
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            createCarousel() // カルーセルを作成
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        }
+        // セットアップ AdMob
+        setupAdMob()
+    }
+    
+    // MARK: - チュートリアル対応 ウォークスルー型
+    
+    // チュートリアル対応 ウォークスルー型
+    func showWalkThrough() {
+        // チュートリアル対応 ウォークスルー型　初回起動時
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "firstLunch_WalkThrough"
+        if userDefaults.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+                // 非同期処理などを実行（今回は3秒間待つだけ）
+                Thread.sleep(forTimeInterval: 0)
+                DispatchQueue.main.async {
+                    // チュートリアル対応 ウォークスルー型
+                    if let viewController = UIStoryboard(
+                        name: "WalkThroughViewController",
+                        bundle: nil
+                    ).instantiateViewController(
+                        withIdentifier: "WalkThroughViewController"
+                    ) as? WalkThroughViewController {
+                        viewController.modalPresentationStyle = .fullScreen
+                        self.present(viewController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    // チュートリアル対応 コーチマーク型　コーチマークを開始
+    func presentAnnotation() {
+        // タブの無効化
+        if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+            for tabBarItem in arrayOfTabBarItems {
+                if let tabBarItem = tabBarItem as? UITabBarItem {
+                    tabBarItem.isEnabled = false
+                }
+            }
+        }
+        if let viewController = UIStoryboard(
+            name: "JournalEntryViewController",
+            bundle: nil
+        ).instantiateViewController(
+            withIdentifier: "Annotation_JournalEntry"
+        ) as? AnnotationViewControllerJournalEntry {
+            viewController.alpha = 0.7
+            present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    // ダイアログ　オフライン
+    func showDialogForOfline() {
+        // フィードバック
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.error)
+        // ネットワークなし
+        let alertController = UIAlertController(title: "インターネット未接続", message: "オフラインでは利用できません。\n\nスタンダードプランに\nアップグレードしていただくと、\nオフラインでも利用可能となります。", preferredStyle: .alert)
+        
+        // 選択肢の作成と追加
+        // titleに選択肢のテキストを、styleに.defaultを
+        // handlerにボタンが押された時の処理をクロージャで実装する
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: { (action: UIAlertAction!) -> Void in
+                    // OKボタン ダイアログ　オフライン
+                    self.presenter.okButtonTappedDialogForOfline()
+                }
+            )
+        )
+        self.present(alertController, animated: true, completion: nil)
+    }
+    // ダイアログ　ほんとうに変更しますか？
+    func showDialogForFinal(journalEntryData: JournalEntryData) {
+        // いづれかひとつに値があれば下記を実行する
+        let alert = UIAlertController(
+            title: "最終確認",
+            message: "ほんとうに変更しますか？\n日付: \(journalEntryData.date ?? "")\n借方勘定: \(journalEntryData.debit_category ?? "")\n貸方勘定: \(journalEntryData.credit_category ?? "")\n金額: \(journalEntryData.credit_amount?.description ?? "")\n小書き: \(journalEntryData.smallWritting ?? "")",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
+            print("OK アクションをタップした時の処理")
+            
+            self.presenter.okButtonTappedDialogForFinal(journalEntryData: journalEntryData)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("Cancel アクションをタップした時の処理")
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
+    func closeScreen(journalEntryData: JournalEntryData) {
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                // 編集を終了する
+                presentingViewController.setEditing(false, animated: true)
+                presentingViewController.dBJournalEntry = journalEntryData
+                presentingViewController.updateSelectedJournalEntries()
+            })
+        }
+    }
+    // アップグレード画面を表示
+    func showUpgradeScreen() {
+        // 乱数　1から6までのIntを生成
+        let iValue = Int.random(in: 1 ... 6)
+        if iValue % 2 == 0 {
+            DispatchQueue.main.async {
+                if let viewController = UIStoryboard(
+                    name: "SettingsUpgradeViewController",
+                    bundle: nil
+                ).instantiateViewController(withIdentifier: "SettingsUpgradeViewController") as? SettingsUpgradeViewController {
+                    self.present(viewController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    // ダイアログ 記帳しました
+    func showDialogForSucceed() {
+        // フィードバック
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+        self.present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.dismiss(animated: true, completion: { [self] () -> Void in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + Double.random(in: 0 ... 1.5)) {
+                        self.showAd()
+                    }
+                })
+            }
+        }
+    }
+    
+    // 決算整理仕訳後に遷移元画面へ戻る
+    func goBackToPreviousScreen() {
+        // 精算表画面から入力の場合
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers[1] as? WSViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // viewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.reloadData()
+            })
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.WORKSHEET,
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+            ])
+        }
+        // タブバーの仕訳タブから入力の場合
+        else {
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.dismiss(animated: true, completion: { [self] () -> Void in
+                        self.showAd()
+                    })
+                }
+            }
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                AnalyticsParameterItemID: Constant.ADDADJUSTINGJOURNALENTRY
+            ])
+        }
+    }
+    // 仕訳帳画面へ戻る
+    func goBackToJournalsScreen(number: Int) {
+        
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: self.tappedIndexPath.section)
+            })
+        }
+    }
+    
+    // 仕訳帳画面へ戻る
+    func goBackToJournalsScreenJournalEntry(number: Int) {
+        
+        if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
+           let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
+           let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
+            // TableViewControllerJournalEntryのviewWillAppearを呼び出す　更新のため
+            self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                presentingViewController.autoScrollToCell(number: number, tappedIndexPathSection: 0) // 0:通常仕訳
+            })
         }
     }
 }

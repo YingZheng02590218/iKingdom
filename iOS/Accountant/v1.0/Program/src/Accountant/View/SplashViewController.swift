@@ -14,103 +14,80 @@ class SplashViewController: UIViewController {
     @IBOutlet private var logoImageView: UIView!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
-
+    
+    /// GUIアーキテクチャ　MVP
+    private var presenter: SplashPresenterInput!
+    
+    func inject(presenter: SplashPresenterInput) {
+        self.presenter = presenter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 初期化処理
-        initialize()
+        
+        presenter = SplashPresenter.init(view: self, model: SplashModel())
+        inject(presenter: presenter)
+        
+        presenter.viewDidLoad()
     }
-
-    // MARK: - ロゴとインジゲーターのアニメーション
-
-    func initialize() {
-        // インジゲーターを開始
-        showActivityIndicatorView()
-        // データベース初期化
-        let initial = Initial()
-        initial.initialize {
-            // 半強制アップデートダイアログ表示
-            self.appVersionCheck(completionHandler: { moveForward in
-                if moveForward {
-                    // インジケーターを終了
-                    self.finishActivityIndicatorView()
-                } else {
-                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                        exit(0)
-                    }
+    // ロゴをアニメーションさせる
+    func showAnimation() {
+        // 少し縮小するアニメーション
+        if let logoLabel = self.logoLabel {
+            UIView.animate(
+                withDuration: 0.9,
+                delay: 0.2,
+                options: UIView.AnimationOptions.curveEaseOut,
+                animations: { () in
+                    logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                }, completion: { _ in
+                    
                 }
-            })
+            )
+            // 拡大させて、消えるアニメーション
+            UIView.animate(
+                withDuration: 0.4,
+                delay: 0.2,
+                options: UIView.AnimationOptions.curveEaseOut,
+                animations: { () in
+                    self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                    self.logoLabel.alpha = 0
+                }, completion: { _ in
+                    self.logoImageView.removeFromSuperview()
+                }
+            )
         }
     }
-    // 半強制アップデートダイアログを表示する アラートを表示し、App Store に誘導する
-    func showForcedUpdateDialog(completionHandler: @escaping (Bool) -> Void) {
+}
 
+extension SplashViewController: SplashPresenterOutput {
+    
+    // 半強制アップデートダイアログを表示する アラートを表示し、App Store に誘導する
+    func showForcedUpdateDialog() {
         DispatchQueue.main.async {
             let alert = UIAlertController(
                 title: "アップデートのお知らせ",
                 message: "最新のアプリをご利用いただけます。",
                 preferredStyle: .alert
             )
-            let storeAction = UIAlertAction(title: "ストアページへ", style: .default) { _ in
-                // guard let self = self else { return }
-                // AppStore へのリンクは、Short Linkを指定すると、外部ブラウザを経由して、AppStoreアプリを起動される。
-                guard let url = URL(string: Constant.APPSTOREAPPPAGE) else { return }
-                UIApplication.shared.open(url, options: [:])
-                // self.showForcedUpdateDialog()
-                completionHandler(false)
-
+            let storeAction = UIAlertAction(
+                title: "ストアページへ",
+                style: .default
+            ) { _ in
+                // アップデートボタン
+                self.presenter.updateButtonTapped()
             }
-            let laterAction = UIAlertAction(title: "あとで", style: .destructive) { _ in
-                // guard let self = self else { return }
-                completionHandler(true)
+            let laterAction = UIAlertAction(
+                title: "あとで",
+                style: .destructive
+            ) { _ in
+                // あとでボタン
+                self.presenter.laterButtonTapped()
             }
             alert.addAction(storeAction)
             alert.addAction(laterAction)
             self.present(alert, animated: true)
         }
-    }
-    // https://cpoint-lab.co.jp/article/202206/22919/
-    // 端末にインストールされているアプリのバージョンを取得後、App Store から公開済みアプリのバージョンを取得し、それらを比較すると言う処理を行なっています。
-    func appVersionCheck(completionHandler: @escaping (Bool) -> Void) {
-        let appVersion = AppVersion.currentVersion
-        let identifier = AppVersion.identifier
-        guard let url = URL(string: "https://itunes.apple.com/us/lookup?bundleId=\(identifier)") else { return }
-        //        // アプリバージョン　< 強制アップデートバージョン（）の場合、強制アップデートダイアログを表示する
-        //        let appVersionValue = AppVersion.convertVersionValue(string: AppVersion.currentVersion)
-        //        let forcedUpdateVersionValue = AppVersion.convertVersionValue(string: "TODO") // APIから取得する
-        //        guard forcedUpdateVersionValue <= appVersionValue else {
-        //            // 強制アップデートダイアログを表示する
-        //            showForcedUpdateDialog()
-        //        }
-
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
-                guard let result = (json?["results"] as? [Any])?.first as? [String: Any],
-                      let storeVersion = result["version"] as? String else { return }
-
-                // 端末のアプリバージョンと App Store のアプリバージョンを比較
-                print(appVersion, storeVersion, appVersion < storeVersion)
-                if appVersion < storeVersion {
-                    // appVersion と storeVersion が異なっている時に実行したい処理
-                    // 半強制アップデートダイアログを表示する
-                    self.showForcedUpdateDialog(completionHandler: { moveForward in
-                        if moveForward {
-                            completionHandler(true)
-                        } else {
-                            completionHandler(false)
-                        }
-                    })
-                } else {
-                    completionHandler(true)
-                }
-            } catch let error {
-                print(error)
-            }
-        }
-        task.resume()
     }
     // インジゲーターを開始
     func showActivityIndicatorView() {
@@ -149,36 +126,15 @@ class SplashViewController: UIViewController {
             }
         }
     }
-    // ロゴをアニメーションさせる
-    func showAnimation() {
-        // 少し縮小するアニメーション
-        if let logoLabel = self.logoLabel {
-            UIView.animate(
-                withDuration: 0.9,
-                delay: 0.2,
-                options: UIView.AnimationOptions.curveEaseOut,
-                animations: { () in
-                    logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                }, completion: { _ in
-
-                }
-            )
-            // 拡大させて、消えるアニメーション
-            UIView.animate(
-                withDuration: 0.4,
-                delay: 0.2,
-                options: UIView.AnimationOptions.curveEaseOut,
-                animations: { () in
-                    self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                    self.logoLabel.alpha = 0
-                }, completion: { _ in
-                    self.logoImageView.removeFromSuperview()
-                }
-            )
+    // AppStore
+    func goToAppStore() {
+        // AppStore へのリンクは、Short Linkを指定すると、外部ブラウザを経由して、AppStoreアプリを起動される。
+        guard let url = URL(string: Constant.APPSTOREAPPPAGE) else { return }
+        UIApplication.shared.open(url, options: [:])
+        
+        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+            exit(0)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
 }

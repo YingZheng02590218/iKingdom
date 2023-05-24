@@ -57,5 +57,36 @@ struct ErrorValidation {
         }
         return .success
     }
-
+    // バリデーション 勘定科目、金額
+    func validateEmpty(text: String?, editableType: EditableType) -> ErrorValidationState {
+        // 必須
+        guard let text = text, !text.isEmpty else {
+            return .failure(
+                message: ErrorValidationType.required(
+                    name: editableType.rawValue
+                ).errorText
+            )
+        }
+        // 必須　金額
+        if editableType == .amount {
+            guard "0" != text else {
+                return .failure(
+                    message: ErrorValidationType.required(
+                        name: editableType.rawValue
+                    ).errorText
+                )
+            }
+        }
+        return .success
+    }
+    // バリデーション 仕訳一括編集 日付、勘定科目、金額、小書き
+    func validateEmptyAll(journalEntryData: JournalEntryData) -> ErrorValidationState {
+        // 必須 ひとつでも変更されているか
+        guard !journalEntryData.checkPropertyIsNil() else {
+            return .failure(
+                message: ErrorValidationType.requiredSomething.errorText
+            )
+        }
+        return .success
+    }
 }
