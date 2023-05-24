@@ -348,8 +348,13 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.termsOrPrivacyPolicy = .terms
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
-
-            self.present(viewController, animated: true, completion: nil)
+            // tabBarControllerのViewを使う
+            guard let tabBarController = self.tabBarController else {
+                // 遷移元画面が、仕訳入力後に、モーダル表示している場合
+                self.present(viewController, animated: true, completion: nil)
+                return
+            }
+            tabBarController.present(viewController, animated: true, completion: nil)
         }
     }
     // プライバシーポリシー
@@ -366,7 +371,13 @@ class SettingsUpgradeViewController: UIViewController {
             viewController.modalPresentationStyle = .overCurrentContext
             viewController.modalTransitionStyle = .crossDissolve
 
-            self.present(viewController, animated: true, completion: nil)
+            // tabBarControllerのViewを使う
+            guard let tabBarController = self.tabBarController else {
+                // 遷移元画面が、仕訳入力後に、モーダル表示している場合
+                self.present(viewController, animated: true, completion: nil)
+                return
+            }
+            tabBarController.present(viewController, animated: true, completion: nil)
         }
     }
 
@@ -394,11 +405,20 @@ class SettingsUpgradeViewController: UIViewController {
             
             // tabBarControllerのViewを使う
             guard let tabBarView = self.tabBarController?.view else {
+                // 遷移元画面が、仕訳入力後に、モーダル表示している場合
+                // 背景をNavigationControllerのViewに貼り付け
+                self.view.addSubview(self.backView)
+                // サイズ合わせはAutoLayoutで
+                self.backView.translatesAutoresizingMaskIntoConstraints = false
+                self.backView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+                self.backView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+                self.backView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+                self.backView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+
                 return
             }
             // 背景をNavigationControllerのViewに貼り付け
             tabBarView.addSubview(self.backView)
-            
             // サイズ合わせはAutoLayoutで
             self.backView.translatesAutoresizingMaskIntoConstraints = false
             self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7kZ-pz-DPb">
-                                <rect key="frame" x="20.5" y="204" width="373" height="488"/>
+                                <rect key="frame" x="20.5" y="122.5" width="373" height="651"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOr-cJ-tIg">
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="60"/>
@@ -54,10 +54,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FcO-up-AzF">
-                                        <rect key="frame" x="0.0" y="60" width="373" height="363"/>
+                                        <rect key="frame" x="0.0" y="60" width="373" height="526"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-J4-oPv">
-                                                <rect key="frame" x="10" y="10" width="353" height="343"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-J4-oPv">
+                                                <rect key="frame" x="10" y="10" width="353" height="506"/>
                                                 <color key="backgroundColor" name="CellBackground"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -73,13 +73,15 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Xq-OI-USk">
-                                        <rect key="frame" x="0.0" y="423" width="373" height="65"/>
+                                        <rect key="frame" x="0.0" y="586" width="373" height="65"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-2e-Enf">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-2e-Enf">
                                                 <rect key="frame" x="19" y="16.5" width="335" height="32.5"/>
                                                 <color key="tintColor" name="AccentColor"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Close"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Close">
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="closeButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="qpG-NV-bSc"/>
                                                 </connections>
@@ -113,7 +115,7 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7kZ-pz-DPb" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.6" id="5nv-SX-hwe"/>
+                            <constraint firstItem="7kZ-pz-DPb" firstAttribute="height" secondItem="vDu-zF-Fre" secondAttribute="height" multiplier="0.8" id="5nv-SX-hwe"/>
                             <constraint firstItem="7kZ-pz-DPb" firstAttribute="width" secondItem="vDu-zF-Fre" secondAttribute="width" multiplier="0.9" id="Rut-75-BF2"/>
                             <constraint firstItem="7kZ-pz-DPb" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="rhl-VD-Dmk"/>
                             <constraint firstItem="7kZ-pz-DPb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="rkh-xV-JdT"/>
@@ -140,7 +142,7 @@
             <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="CellBackground">
             <color red="0.97500002384185791" green="0.99099999666213989" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

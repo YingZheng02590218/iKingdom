@@ -305,7 +305,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.section == 0 {
             return 70
         } else {
-            return 60
+            return 50
         }
     }
     //　セルを生成して返却するメソッド

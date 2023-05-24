@@ -29,4 +29,20 @@ extension String {
         )
         return ceil(boundingBox.height)
     }
+    
+    // 全角かどうか
+    public var isFullwidth: Bool {
+        // 全角＼、全角｜、絵文字　が含まれる場合は、エラー
+        guard !self.contains("＼") else { return false }
+        guard !self.contains("｜") else { return false }
+        guard !self.contains("　") else { return false }
+        // 絵文字チェック
+        let isContainedAppleColorEmoji = self.unicodeScalars.filter {
+            $0.properties.isEmojiPresentation || $0.properties.isEmojiModifier || $0.properties.isEmojiModifierBase
+        }.isEmpty
+        guard isContainedAppleColorEmoji else { return false }
+        
+        // 全角に変換した文字列と比較することで判定
+        return self == self.applyingTransform(.fullwidthToHalfwidth, reverse: true)
+    }
 }

@@ -216,17 +216,19 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     
     func autoScroll(number: Int, tappedIndexPathSection: Int) {
-        // 通常仕訳　全
-        objects = model.getJournalEntriesInJournals()
-        // 決算整理仕訳
-        objectsss = model.getJournalAdjustingEntry()
-        // 損益振替仕訳
-        dataBaseTransferEntries = model.getTransferEntryInAccount()
-        // 資本振替仕訳
-        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
-        
-        // オートスクロール
-        view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
+        DispatchQueue.main.async {
+            // 通常仕訳　全
+            self.objects = self.model.getJournalEntriesInJournals()
+            // 決算整理仕訳
+            self.objectsss = self.model.getJournalAdjustingEntry()
+            // 損益振替仕訳
+            self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
+            // 資本振替仕訳
+            self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+            
+            // オートスクロール
+            self.view.autoScroll(number: number, tappedIndexPathSection: tappedIndexPathSection)
+        }
     }
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
