@@ -1365,6 +1365,52 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
     }
     
+    // MARK: - 生体認証パスコードロック
+    
+    // 生体認証パスコードロック画面へ遷移させる
+    func showPassCodeLock() {
+        // パスコードロックを設定していない場合は何もしない
+        if !UserDefaults.standard.bool(forKey: "biometrics_switch") {
+            return
+        }
+        // 生体認証パスコードロック　フォアグラウンドへ戻ったとき
+        let ud = UserDefaults.standard
+        let firstLunchKey = "biometrics"
+        if ud.bool(forKey: firstLunchKey) {
+            DispatchQueue.global(qos: .default).async {
+                DispatchQueue.main.async {
+                    // 生体認証パスコードロック
+                    if let viewController = UIStoryboard(name: "PassCodeLockViewController", bundle: nil)
+                        .instantiateViewController(withIdentifier: "PassCodeLockViewController") as? PassCodeLockViewController {
+                        
+                        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+                            
+                            // 現在のrootViewControllerにおいて一番上に表示されているViewControllerを取得する
+                            var topViewController: UIViewController = rootViewController
+                            while let presentedViewController = topViewController.presentedViewController {
+                                topViewController = presentedViewController
+                            }
+                            
+                            // すでにパスコードロック画面がかぶせてあるかを確認する
+                            let isDisplayedPasscodeLock: Bool = topViewController.children.map {
+                                $0 is PassCodeLockViewController
+                            }
+                                .contains(true)
+                            
+                            // パスコードロック画面がかぶせてなければかぶせる
+                            if !isDisplayedPasscodeLock {
+                                let nav = UINavigationController(rootViewController: viewController)
+                                nav.modalPresentationStyle = .overFullScreen
+                                nav.modalTransitionStyle   = .crossDissolve
+                                topViewController.present(nav, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     func updateUI() {
         // UIパーツを作成
         createTextFieldForCategory()
