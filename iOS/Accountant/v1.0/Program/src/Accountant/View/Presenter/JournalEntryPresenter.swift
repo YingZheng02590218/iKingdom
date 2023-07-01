@@ -34,6 +34,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func setupUI()
     
     func updateUI()
+    // 生体認証パスコードロック画面へ遷移させる
+    func showPassCodeLock()
     // チュートリアル対応 ウォークスルー型
     func showWalkThrough()
     // ニューモフィズム　ボタンとビューのデザインを指定する
@@ -84,6 +86,9 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     
     func viewDidLoad() {
         view.setupUI()
+        // 生体認証パスコードロック
+        // アプリを未起動状態から再度アプリを起動させる場合
+        view.showPassCodeLock()
     }
     
     func viewWillAppear() {
