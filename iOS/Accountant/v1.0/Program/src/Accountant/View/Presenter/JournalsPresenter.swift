@@ -99,21 +99,21 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     
     func viewWillAppear() {
-        
-        company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
-        fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
-        theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
-        // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
-        // 通常仕訳　全
-        objects = model.getJournalEntriesInJournals()
-        // 決算整理仕訳
-        objectsss = model.getJournalAdjustingEntry()
-        // 損益振替仕訳
-        dataBaseTransferEntries = model.getTransferEntryInAccount()
-        // 資本振替仕訳
-        dataBaseCapitalTransferJournalEntry = model.getCapitalTransferJournalEntryInAccount()
-
-        view.setupViewForViewWillAppear()
+        self.company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
+        self.fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        self.theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+        DispatchQueue.main.async {
+            // 会計年度を切り替えした場合、仕訳帳をリロードして選択された年度のデータを表示する
+            // 通常仕訳　全
+            self.objects = self.model.getJournalEntriesInJournals()
+            // 決算整理仕訳
+            self.objectsss = self.model.getJournalAdjustingEntry()
+            // 損益振替仕訳
+            self.dataBaseTransferEntries = self.model.getTransferEntryInAccount()
+            // 資本振替仕訳
+            self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
+        }
+        self.view.setupViewForViewWillAppear()
     }
     
     func viewWillDisappear() {
