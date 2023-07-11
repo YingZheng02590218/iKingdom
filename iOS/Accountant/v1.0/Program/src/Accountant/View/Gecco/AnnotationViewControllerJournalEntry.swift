@@ -90,13 +90,15 @@ class AnnotationViewControllerJournalEntry: SpotlightViewController {
                 moveType: .disappear
             )
         case 5:
-            if let navigationController = presentingViewController as? UINavigationController,
-               let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    // ViewController(コーチマーク画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                    // チュートリアル対応 コーチマーク型
-                    presentingViewController.finishAnnotation()
-                })
+            DispatchQueue.main.async {
+                if let navigationController = self.presentingViewController as? UINavigationController,
+                   let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        // ViewController(コーチマーク画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                        // チュートリアル対応 コーチマーク型
+                        presentingViewController.finishAnnotation()
+                    })
+                }
             }
         default:
             break
