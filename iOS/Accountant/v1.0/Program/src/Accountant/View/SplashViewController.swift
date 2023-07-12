@@ -11,10 +11,14 @@ import UIKit
 class SplashViewController: UIViewController {
     // 初期化画面　ロゴ
     @IBOutlet private var logoLabel: UILabel!
+
+    @IBOutlet private var whatIsDoingLabel: CountAnimateLabel!
     @IBOutlet private var logoImageView: UIView!
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
-    
+    var time = 0
+    var timer = Timer()
+
     /// GUIアーキテクチャ　MVP
     private var presenter: SplashPresenterInput!
     
@@ -36,7 +40,7 @@ class SplashViewController: UIViewController {
         if let logoLabel = self.logoLabel {
             UIView.animate(
                 withDuration: 0.9,
-                delay: 0.2,
+                delay: 0.0,
                 options: UIView.AnimationOptions.curveEaseOut,
                 animations: { () in
                     logoLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -47,7 +51,7 @@ class SplashViewController: UIViewController {
             // 拡大させて、消えるアニメーション
             UIView.animate(
                 withDuration: 0.4,
-                delay: 0.2,
+                delay: 0.0,
                 options: UIView.AnimationOptions.curveEaseOut,
                 animations: { () in
                     self.logoLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -95,7 +99,7 @@ extension SplashViewController: SplashPresenterOutput {
             if let logoImageView = self.logoImageView {
                 logoImageView.isHidden = false
                 // 表示位置を設定（画面中央）
-                self.activityIndicatorView.center = CGPoint(x: logoImageView.center.x, y: logoImageView.center.y + 60)
+                self.activityIndicatorView.center = CGPoint(x: logoImageView.center.x, y: logoImageView.center.y + 0)
                 // インジケーターのスタイルを指定（白色＆大きいサイズ）
                 self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
                 // インジケーターを View に追加
@@ -126,6 +130,17 @@ extension SplashViewController: SplashPresenterOutput {
             }
         }
     }
+    // パーセンテージを表示させる
+    func showPersentage(persentage: Int) {
+        DispatchQueue.main.async {
+            if let whatIsDoingLabel = self.whatIsDoingLabel {
+                whatIsDoingLabel.isHidden = false
+                self.whatIsDoingLabel.animate(from: self.time, to: persentage, duration: TimeInterval((persentage - self.time) / 10))
+                self.time = persentage
+            }
+        }
+    }
+    
     // AppStore
     func goToAppStore() {
         // AppStore へのリンクは、Short Linkを指定すると、外部ブラウザを経由して、AppStoreアプリを起動される。

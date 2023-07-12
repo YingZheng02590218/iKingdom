@@ -526,6 +526,8 @@
 		F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE7BB261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard */; };
 		F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99BE790261DCFE9004611E4 /* CFTableViewController.storyboard */; };
 		F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */; };
+		F9ECC3812A5EE04400C3576A /* CountAnimateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ECC3802A5EE04400C3576A /* CountAnimateLabel.swift */; };
+		F9ECC3822A5F008300C3576A /* CountAnimateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ECC3802A5EE04400C3576A /* CountAnimateLabel.swift */; };
 		F9ED93682982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
 		F9ED93692982837100B255EF /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9ED93672982837100B255EF /* BackupViewController.swift */; };
 		F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9ED936A2982837E00B255EF /* BackupViewController.storyboard */; };
@@ -950,6 +952,7 @@
 		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		F9EC675027B95DDD0003FBB6 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		F9EC675127B95DDD0003FBB6 /* EMTNeumorphicView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EMTNeumorphicView.framework; path = Carthage/Build/iOS/EMTNeumorphicView.framework; sourceTree = "<group>"; };
+		F9ECC3802A5EE04400C3576A /* CountAnimateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAnimateLabel.swift; sourceTree = "<group>"; };
 		F9ED936629826F2700B255EF /* Paciolist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paciolist.entitlements; sourceTree = "<group>"; };
 		F9ED93672982837100B255EF /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 		F9ED936A2982837E00B255EF /* BackupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BackupViewController.storyboard; sourceTree = "<group>"; };
@@ -1375,6 +1378,7 @@
 			children = (
 				F95F5980265026B100EFE522 /* ViewController */,
 				F9A3A6462631AB2C006E0FA0 /* Cell */,
+				F9ECC3802A5EE04400C3576A /* CountAnimateLabel.swift */,
 			);
 			path = UIParts;
 			sourceTree = "<group>";
@@ -2511,6 +2515,7 @@
 				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
 				F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */,
 				F9D08D9325444EA500CE3CB2 /* SettingAccountDetailTableViewCell.swift in Sources */,
+				F9ECC3812A5EE04400C3576A /* CountAnimateLabel.swift in Sources */,
 				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
@@ -2645,6 +2650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9ECC3822A5F008300C3576A /* CountAnimateLabel.swift in Sources */,
 				F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */,
 				F982898B2973E8B900F8F1B8 /* OpeningBalanceModel.swift in Sources */,
 				F9DB32FD297158F000D865D8 /* DataBaseOpeningJournalEntry.swift in Sources */,
