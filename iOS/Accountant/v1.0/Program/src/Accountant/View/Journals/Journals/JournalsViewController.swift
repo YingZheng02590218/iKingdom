@@ -957,7 +957,9 @@ extension JournalsViewController: JournalsPresenterOutput {
         // UIViewControllerの表示画面を更新・リロード
         //        self.loadView() // エラー発生　2020/07/31　Thread 1: EXC_BAD_ACCESS (code=1, address=0x600022903198)
         if !tableView.isEditing {
-            self.tableView.reloadData() // エラーが発生しないか心配
+            DispatchQueue.main.async {
+                self.tableView.reloadData() // エラーが発生しないか心配
+            }
         }
         if let company = presenter.company {
             labelCompanyName.text = company // 社名
