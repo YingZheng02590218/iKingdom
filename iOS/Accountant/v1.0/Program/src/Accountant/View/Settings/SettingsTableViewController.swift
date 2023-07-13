@@ -51,7 +51,7 @@ class SettingsTableViewController: UIViewController {
             UINib(nibName: String(describing: NewsTableViewHeaderFooterView.self), bundle: nil),
             forHeaderFooterViewReuseIdentifier: String(describing: NewsTableViewHeaderFooterView.self)
         )
-
+        
         self.navigationItem.title = "設定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -66,6 +66,9 @@ class SettingsTableViewController: UIViewController {
         scrollView.flashScrollIndicators()
         
         versionLabel.text = "Version \(AppVersion.currentVersion)"
+        
+        // Push通知の権限ダイアログを表示させる
+        showDialogForPushNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +89,26 @@ class SettingsTableViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+    
+    // Push通知の権限ダイアログを表示させる
+    func showDialogForPushNotifications() {
+        // Push通知 Firebase
+        UserNotificationUtility.shared.initialize()
+        UserNotificationUtility.shared.showPushPermit { result in
+            switch result {
+            case .success(let isGranted):
+                if isGranted {
+                    DispatchQueue.main.async {
+                        // APNs への登録
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
     // 会計期間のセルをリロードする
     func reloadRow(section: Int, row: Int) {
         let indexPath = IndexPath(row: row, section: section)

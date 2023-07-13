@@ -109,21 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // // マネタイズ対応　Use Firebase library to configure APIs
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        // Push通知 Firebase
-        UserNotificationUtility.shared.initialize()
-        UserNotificationUtility.shared.showPushPermit { result in
-            switch result {
-            case .success(let isGranted):
-                if isGranted {
-                    DispatchQueue.main.async {
-                        // APNs への登録
-                        UIApplication.shared.registerForRemoteNotifications()
-                    }
-                }
-            case .failure(let error):
-                debugPrint(error.localizedDescription)
-            }
-        }
+
         // プッシュ通知のパーミッションを初めて取得した直後のapplication(_:didRegisterForRemoteNotificationsWithDeviceToken:)では、FCMトークンがまだ生成されておらず、FIRInstanceID.instanceID().token()の値がnilになることがある
         // なので、オブザーバを利用して確実に取得するのがオススメらしい (addRefreshFcmTokenNotificationObserver())
         NotificationCenter.default.addObserver(
