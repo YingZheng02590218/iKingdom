@@ -11,7 +11,7 @@ import Foundation
 /// GUIアーキテクチャ　MVP
 protocol SplashModelInput {
     // 初期化処理
-    func initialize(completionHandler: @escaping () -> Void)
+    func initialize(onProgress: @escaping (Int) -> Void, completionHandler: @escaping () -> Void)
     // バージョンチェック
     func appVersionCheck(completionHandler: @escaping (Bool) -> Void)
 }
@@ -20,12 +20,17 @@ protocol SplashModelInput {
 class SplashModel: SplashModelInput {
     
     // 初期化処理
-    func initialize(completionHandler: @escaping () -> Void) {
+    func initialize(onProgress: @escaping (Int) -> Void, completionHandler: @escaping () -> Void) {
         // データベース初期化
         let initial = Initial()
-        initial.initialize {
-            completionHandler()
-        }
+        initial.initialize(
+            onProgress: { persentage in
+                onProgress(persentage)
+            },
+            completion: {
+                completionHandler()
+            }
+        )
     }
     
     // バージョンチェック
