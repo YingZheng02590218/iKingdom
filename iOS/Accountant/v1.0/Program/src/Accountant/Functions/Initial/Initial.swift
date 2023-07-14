@@ -18,14 +18,20 @@ class Initial {
     func initialize(onProgress: @escaping (Int) -> Void, completion: @escaping () -> Void) {
         
         DispatchQueue.global(qos: .background).async { // default では進捗率をUIに表示させることがうまくできなかった
-            onProgress(80)
+            onProgress(90)
+            print("設定勘定科目　初期化", Date())
             // 設定画面　設定勘定科目　初期化
             self.initialiseMasterData {
+                print("設定勘定科目　初期化", Date())
+                print("会計帳簿棚　初期化", Date())
                 // 設定画面　会計帳簿棚　初期化
                 self.initializeAccountingBooksShelf {
+                    print("会計帳簿棚　初期化", Date())
                     onProgress(100)
+                    print("表示科目　初期化", Date())
                     // 表示科目　初期化
                     self.initializeTaxonomy {
+                        print("表示科目　初期化", Date())
                         // 設定操作　初期化
                         self.initializeSettingsOperating {
                             // 設定会計期間　決算日　初期化
