@@ -1509,7 +1509,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     }
     
     // チュートリアル対応 コーチマーク型　コーチマークを開始
-    func presentAnnotation() {
+    func presentAnnotation() {        
         // タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
