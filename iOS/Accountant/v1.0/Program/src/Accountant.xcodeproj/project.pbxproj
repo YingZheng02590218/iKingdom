@@ -102,6 +102,8 @@
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
 		F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
+		F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
+		F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
 		F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59812650273200EFE522 /* CarouselAndPageViewController.swift */; };
 		F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A0265027A000EFE522 /* CarouselAndPageViewController.storyboard */; };
 		F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */; };
@@ -744,6 +746,7 @@
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntryGroup.swift; sourceTree = "<group>"; };
 		F95D44FF25ADE5F00044493A /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F95D450325AECAE80044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F95D450425AECAE90044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -1231,6 +1234,7 @@
 				F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */,
 				F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */,
 				F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */,
+				F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */,
 			);
 			path = DataBaseModel;
 			sourceTree = "<group>";
@@ -2520,6 +2524,7 @@
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
+				F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B629647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
@@ -2750,6 +2755,7 @@
 				F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
+				F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
