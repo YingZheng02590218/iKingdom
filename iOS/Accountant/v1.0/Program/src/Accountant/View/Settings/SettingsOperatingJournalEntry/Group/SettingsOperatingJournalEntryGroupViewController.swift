@@ -8,6 +8,7 @@
 
 import UIKit
 
+// グループ一覧
 class SettingsOperatingJournalEntryGroupViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
@@ -16,6 +17,12 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         super.viewDidLoad()
 
         setTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     // MARK: - Setting
@@ -27,7 +34,6 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
             tableView.sectionHeaderTopPadding = 0
         }
         tableView.separatorColor = .accentColor
-        
     }
 }
 

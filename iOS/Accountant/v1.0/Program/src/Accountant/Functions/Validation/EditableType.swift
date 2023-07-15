@@ -15,6 +15,7 @@ enum EditableType: String {
     case categoryDebit = "借方勘定科目"
     case categoryCredit = "貸方勘定科目"
     case amount = "金額"
+    case group = "グループ名"
 
     // 最大長
     var maxLength: Int {
@@ -29,6 +30,8 @@ enum EditableType: String {
             return 0
         case .amount:
             return 0
+        case .group:
+            return 25
         }
     }
 }
