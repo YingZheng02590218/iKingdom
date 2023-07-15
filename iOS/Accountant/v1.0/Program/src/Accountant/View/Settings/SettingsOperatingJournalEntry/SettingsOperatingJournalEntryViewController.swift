@@ -56,7 +56,8 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         listCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
     // 編集機能　長押しした際に呼ばれるメソッド
-    @objc func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+    @objc
+    func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
         // 押された位置でcellのPathを取得
         let point = recognizer.location(in: listCollectionView)
         let indexPath = listCollectionView.indexPathForItem(at: point)
@@ -82,11 +83,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
         if identifier == "longTapped" { // segueがタップ
             if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
-                if let _ = self.tappedIndexPath { // 代入に成功したら、ロングタップだと判断できる
-                    return true // true: 画面遷移させる
-                }
+                return true // true: 画面遷移させる
             }
         } else if identifier == "buttonTapped" {
+            // 追加ボタン
             return true
         }
         return false // false:画面遷移させない
@@ -99,9 +99,9 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
             if segue.identifier == "buttonTapped" {
                 controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
-                if tappedIndexPath != nil { // nil:ロングタップではない
+                if let tappedIndexPath = self.tappedIndexPath { // nil:ロングタップではない
                     controller.journalEntryType = .SettingsJournalEntriesFixing // セルに表示した仕訳タイプを取得
-                    controller.tappedIndexPath = self.tappedIndexPath! // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                    controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
                     self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
                 }
             }
@@ -110,43 +110,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     
 }
 // プロトコル定義
-extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    // ヘッダーセル
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: "CollectionReusableView",
-            for: indexPath
-        ) as? CollectionReusableView else {
-            fatalError("Could not find proper header")
-        }
-        if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == 0 {
-                header.sectionLabel.text = "よく使う仕訳"// "section \(indexPath.section)"
-            }
-            return header
-        }
-        return UICollectionReusableView()
-    }
-    // collectionViewの要素の数を返す
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
-        return objects.count
-    }
-    // collectionViewのセルを返す（セルの内容を決める）
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
-        cell.nicknameLabel.text = objects[indexPath.row].nickname
-        cell.debitLabel.text = objects[indexPath.row].debit_category
-        cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
-        cell.creditLabel.text = objects[indexPath.row].credit_category
-        cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-        return cell
-    }
+extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegateFlowLayout {
     //    //セル間の間隔を指定
     //    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
     //        return 20
@@ -166,6 +130,47 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate,
         // top:ナビゲーションバーの高さ分上に移動
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
+}
+
+extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSource {
+    // collectionViewの要素の数を返す
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // データベース　よく使う仕訳を追加
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        return objects.count
+    }
+    // collectionViewのセルを返す（セルの内容を決める）
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
+        // データベース　よく使う仕訳を追加
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        cell.nicknameLabel.text = objects[indexPath.row].nickname
+        cell.debitLabel.text = objects[indexPath.row].debit_category
+        cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
+        cell.creditLabel.text = objects[indexPath.row].credit_category
+        cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+        return cell
+    }
+    // ヘッダーセル
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "CollectionReusableView",
+            for: indexPath
+        ) as? CollectionReusableView else {
+            fatalError("Could not find proper header")
+        }
+        if kind == UICollectionView.elementKindSectionHeader {
+            if indexPath.section == 0 {
+                header.sectionLabel.text = "よく使う仕訳"// "section \(indexPath.section)"
+            }
+            return header
+        }
+        return UICollectionReusableView()
+    }
+}
+
+extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate {
     /// セルの選択時に背景色を変化させる
     /// 今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
     /// 以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
