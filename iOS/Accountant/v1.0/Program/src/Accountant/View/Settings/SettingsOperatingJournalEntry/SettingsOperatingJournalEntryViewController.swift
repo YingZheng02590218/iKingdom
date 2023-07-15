@@ -88,6 +88,9 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         } else if identifier == "buttonTapped" {
             // 追加ボタン
             return true
+        } else if identifier == "groupButtonTapped" {
+            // グループ一覧ボタン
+            return true
         }
         return false // false:画面遷移させない
     }

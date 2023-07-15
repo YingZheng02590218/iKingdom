@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XqM-EL-yIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XqM-EL-yIQ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i5R-zz-sdu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="qwU-IE-fQd">
                                     <size key="itemSize" width="414" height="100"/>
@@ -95,7 +95,13 @@
                             <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="yCP-qJ-FOM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa"/>
+                    <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="oZl-bT-o43">
+                            <connections>
+                                <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="listCollectionView" destination="i5R-zz-sdu" id="5BI-kw-ieS"/>
                         <segue destination="lgc-ER-CXx" kind="presentation" identifier="longTapped" id="c5P-u2-Wh3"/>
@@ -113,12 +119,22 @@
             </objects>
             <point key="canvasLocation" x="8689" y="4008"/>
         </scene>
+        <!--SettingsOperatingJournalEntryGroupViewController-->
+        <scene sceneID="Ras-ss-1ZA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsOperatingJournalEntryGroupViewController" id="2Lw-yL-ofc" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2nL-fR-O6j"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dw5-Io-7Bd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8755" y="4195"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="raN-UQ-rCq">
             <objects>
                 <navigationController id="XqM-EL-yIQ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BWk-ru-4h5">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>

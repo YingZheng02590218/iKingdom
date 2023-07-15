@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qjc-of-q6o">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="8qP-xd-6Pw">
+            <objects>
+                <navigationController id="Qjc-of-q6o" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8WF-hF-bt3">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="ong-nu-ZPm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3n-BG-i4I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-929" y="4"/>
+        </scene>
+        <!--グループ一覧-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="SettingsOperatingJournalEntryGroupViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3zy-pv-lMX">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="BaseColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3zy-pv-lMX" secondAttribute="bottom" id="GCD-DL-S0t"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3zy-pv-lMX" secondAttribute="trailing" id="PB9-Fo-GO6"/>
+                            <constraint firstItem="3zy-pv-lMX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="gVM-tM-9os"/>
+                            <constraint firstItem="3zy-pv-lMX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iQF-uG-en9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="グループ一覧" id="rWI-Dd-vYR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="e10-DS-6o0">
+                            <connections>
+                                <segue destination="k7h-GB-t8q" kind="show" id="7TE-iL-Rdl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="3zy-pv-lMX" id="HfU-IM-apb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-25" y="4"/>
+        </scene>
+        <!--SettingsOperatingJournalEntryGroupDetailViewController-->
+        <scene sceneID="Y53-7G-kRc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsOperatingJournalEntryGroupDetailViewController" id="k7h-GB-t8q" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RMi-pS-7hZ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzX-mn-bqs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681" y="-233"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="BaseColor">
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
