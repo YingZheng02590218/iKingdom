@@ -45,6 +45,8 @@ class DataBaseManagerSettingsOperatingJournalEntryGroup {
     // 取得　よく使う仕訳のグループ
     func getJournalEntryGroup() -> Results<DataBaseSettingsOperatingJournalEntryGroup> {
         let objects = RealmManager.shared.read(type: DataBaseSettingsOperatingJournalEntryGroup.self)
+            .sorted(byKeyPath: "groupName", ascending: true)
+
         return objects
     }
     

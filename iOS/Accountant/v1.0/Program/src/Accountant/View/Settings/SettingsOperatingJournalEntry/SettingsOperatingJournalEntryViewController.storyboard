@@ -96,7 +96,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dvD-GS-fFa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="oZl-bT-o43">
+                        <barButtonItem key="rightBarButtonItem" title="グループ一覧" image="rectangle.3.group" catalog="system" id="oZl-bT-o43">
                             <connections>
                                 <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
                             </connections>
@@ -150,6 +150,7 @@
         <segue reference="Rzt-vn-hlB"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="rectangle.3.group" catalog="system" width="128" height="80"/>
         <namedColor name="AccentBlue">
             <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
