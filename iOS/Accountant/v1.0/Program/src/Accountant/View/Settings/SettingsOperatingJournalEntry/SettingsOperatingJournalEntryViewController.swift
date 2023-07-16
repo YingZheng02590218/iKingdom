@@ -9,9 +9,10 @@
 import UIKit
 
 // 設定仕訳画面
-class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRecognizerDelegate {
+class SettingsOperatingJournalEntryViewController: UIViewController {
     
     @IBOutlet private var listCollectionView: UICollectionView!
+    
     var tappedIndexPath: IndexPath?
     var viewReload = false // リロードするかどうか
     
@@ -24,20 +25,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
-
-        // 更新機能　編集機能
-        // UILongPressGestureRecognizer宣言
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26
-        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
-        longPressRecognizer.delegate = self
-        // CollectionViewにrecognizerを設定
-        listCollectionView.addGestureRecognizer(longPressRecognizer)
         
+        setupRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.createList() // リストを作成
+        // リストを作成
+        createList()
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
             DispatchQueue.main.async {
@@ -63,29 +58,17 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
         let nib = UINib(nibName: "ListCollectionViewCell", bundle: .main)
         listCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
     }
-    // 編集機能　長押しした際に呼ばれるメソッド
-    @objc
-    func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
-        // 押された位置でcellのPathを取得
-        let point = recognizer.location(in: listCollectionView)
-        let indexPath = listCollectionView.indexPathForItem(at: point)
-        
-        if indexPath?.section == 1 {
-            print("空白行を長押し")
-        } else {
-            guard let _ = indexPath else {
-                return
-            }
-            if recognizer.state == UIGestureRecognizer.State.began {
-                // 長押しされた場合の処理
-                print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
-                // ロングタップされたセルの位置をフィールドで保持する
-                self.tappedIndexPath = indexPath
-                // 別の画面に遷移 仕訳画面
-                performSegue(withIdentifier: "longTapped", sender: nil)
-            }
-        }
+    
+    func setupRecognizer() {
+        // 更新機能　編集機能
+        // UILongPressGestureRecognizer宣言
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26
+        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        longPressRecognizer.delegate = self
+        // CollectionViewにrecognizerを設定
+        listCollectionView.addGestureRecognizer(longPressRecognizer)
     }
+    
     // 追加機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
@@ -118,7 +101,32 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
             }
         }
     }
-    
+}
+
+extension SettingsOperatingJournalEntryViewController: UIGestureRecognizerDelegate {
+    // 編集機能　長押しした際に呼ばれるメソッド
+    @objc
+    func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+        // 押された位置でcellのPathを取得
+        let point = recognizer.location(in: listCollectionView)
+        let indexPath = listCollectionView.indexPathForItem(at: point)
+        
+        if indexPath?.section == 1 {
+            print("空白行を長押し")
+        } else {
+            guard let _ = indexPath else {
+                return
+            }
+            if recognizer.state == UIGestureRecognizer.State.began {
+                // 長押しされた場合の処理
+                print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
+                // ロングタップされたセルの位置をフィールドで保持する
+                self.tappedIndexPath = indexPath
+                // 別の画面に遷移 仕訳画面
+                performSegue(withIdentifier: "longTapped", sender: nil)
+            }
+        }
+    }
 }
 // プロトコル定義
 extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegateFlowLayout {
