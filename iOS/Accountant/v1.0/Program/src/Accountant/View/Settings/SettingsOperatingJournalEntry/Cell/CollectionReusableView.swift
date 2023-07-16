@@ -17,24 +17,11 @@ class CollectionReusableView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         // 日付　ボタン作成
-        createButtons()
     }
     
     override func layoutSubviews() {
         
-        createButtons()
     }
     
-    // ボタンのデザインを指定する
-    private func createButtons() {
-        addButton.setTitleColor(.textColor, for: .normal)
-        addButton.neumorphicLayer?.cornerRadius = 10
-        addButton.setTitleColor(.textColor, for: .selected)
-        addButton.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
-        addButton.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
-        addButton.neumorphicLayer?.edged = Constant.edged
-        addButton.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-        addButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
-    }
     
 }

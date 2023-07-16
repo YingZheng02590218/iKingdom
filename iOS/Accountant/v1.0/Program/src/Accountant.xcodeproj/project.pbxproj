@@ -238,6 +238,14 @@
 		F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
 		F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
 		F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */ = {isa = PBXBuildFile; fileRef = F99CF359251B2D18004295DE /* taxonomy.csv */; };
+		F99D3AF82A63FDAD00E19110 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF42A63FDAD00E19110 /* CustomCollectionViewCell.xib */; };
+		F99D3AF92A63FDAD00E19110 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF42A63FDAD00E19110 /* CustomCollectionViewCell.xib */; };
+		F99D3AFA2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */; };
+		F99D3AFB2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */; };
+		F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
+		F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
+		F99D3AFE2A63FDAD00E19110 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF72A63FDAD00E19110 /* CustomCollectionViewCell.swift */; };
+		F99D3AFF2A63FDAD00E19110 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF72A63FDAD00E19110 /* CustomCollectionViewCell.swift */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
@@ -850,6 +858,10 @@
 		F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PeriodYearViewController.storyboard; sourceTree = "<group>"; };
 		F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodYearViewController.swift; sourceTree = "<group>"; };
 		F99CF359251B2D18004295DE /* taxonomy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomy.csv; sourceTree = "<group>"; };
+		F99D3AF42A63FDAD00E19110 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		F99D3AF72A63FDAD00E19110 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithIconTableViewCell.swift; sourceTree = "<group>"; };
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
@@ -1577,6 +1589,10 @@
 				F98D5369264FB49A00996653 /* WithLabelTableViewCell.xib */,
 				F928F93629A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift */,
 				F928F93929A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib */,
+				F99D3AF72A63FDAD00E19110 /* CustomCollectionViewCell.swift */,
+				F99D3AF42A63FDAD00E19110 /* CustomCollectionViewCell.xib */,
+				F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */,
+				F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2175,7 +2191,9 @@
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
+				F99D3AF82A63FDAD00E19110 /* CustomCollectionViewCell.xib in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
@@ -2264,7 +2282,9 @@
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
 				F9EC672627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
+				F99D3AF92A63FDAD00E19110 /* CustomCollectionViewCell.xib in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
@@ -2502,6 +2522,7 @@
 				F963E2D1296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F9D15FBC296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */,
+				F99D3AFE2A63FDAD00E19110 /* CustomCollectionViewCell.swift in Sources */,
 				F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */,
 				F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */,
 				F963E2BD2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
@@ -2618,6 +2639,7 @@
 				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F99D3AFA2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */,
 				F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
 				F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
@@ -2736,6 +2758,7 @@
 				F963E2D2296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift in Sources */,
 				F9D15FBD296EA3C1005E197D /* ProfitAndLossStatementData.swift in Sources */,
 				F9EC66AA27B90BC60003FBB6 /* SettingsOperatingTableViewController.swift in Sources */,
+				F99D3AFF2A63FDAD00E19110 /* CustomCollectionViewCell.swift in Sources */,
 				F9EC66AB27B90BC60003FBB6 /* DataBaseBalanceSheet.swift in Sources */,
 				F9EC66AC27B90BC60003FBB6 /* JournalsTableViewCell.swift in Sources */,
 				F963E2BE2966E746002DF49E /* GeneralLedgerPLAccountViewController.swift in Sources */,
@@ -2852,6 +2875,7 @@
 				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F99D3AFB2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */,
 				F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
 				F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,
