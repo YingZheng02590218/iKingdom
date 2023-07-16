@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-929" y="4"/>
         </scene>
-        <!--グループ一覧-->
+        <!--Settings Operating Journal Entry Group View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="SettingsOperatingJournalEntryGroupViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,6 +46,9 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="MainColor2"/>
+                                        <connections>
+                                            <segue destination="k7h-GB-t8q" kind="show" identifier="longTapped" id="xYT-7e-pgx"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -59,10 +62,10 @@
                             <constraint firstItem="3zy-pv-lMX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iQF-uG-en9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="グループ一覧" id="rWI-Dd-vYR">
+                    <navigationItem key="navigationItem" id="rWI-Dd-vYR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="e10-DS-6o0">
                             <connections>
-                                <segue destination="k7h-GB-t8q" kind="show" id="7TE-iL-Rdl"/>
+                                <segue destination="k7h-GB-t8q" kind="show" identifier="buttonTapped" id="7TE-iL-Rdl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -85,6 +88,9 @@
             <point key="canvasLocation" x="681" y="-233"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7TE-iL-Rdl"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

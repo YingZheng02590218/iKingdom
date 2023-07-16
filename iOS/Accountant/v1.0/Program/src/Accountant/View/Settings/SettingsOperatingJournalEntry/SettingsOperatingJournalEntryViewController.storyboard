@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--設定　仕訳画面-->
+        <!--Settings Operating Journal Entry View Controller-->
         <scene sceneID="K5M-eL-0TU">
             <objects>
                 <viewController id="AqH-TQ-WTZ" customClass="SettingsOperatingJournalEntryViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,7 +95,7 @@
                             <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="i5R-zz-sdu" secondAttribute="bottom" id="yCP-qJ-FOM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="設定　仕訳画面" id="dvD-GS-fFa">
+                    <navigationItem key="navigationItem" id="dvD-GS-fFa">
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="oZl-bT-o43">
                             <connections>
                                 <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
@@ -147,7 +147,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c5P-u2-Wh3"/>
+        <segue reference="Rzt-vn-hlB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <namedColor name="AccentBlue">

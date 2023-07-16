@@ -17,6 +17,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController, UIGestureRe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // title設定
+        navigationItem.title = "設定 仕訳画面"
+        // largeTitle表示
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .accentColor
+
         // 更新機能　編集機能
         // UILongPressGestureRecognizer宣言
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26

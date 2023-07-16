@@ -51,7 +51,7 @@ class DataBaseManagerSettingsOperatingJournalEntryGroup {
     // 取得　よく使う仕訳のグループ
     func getJournalEntryGroup(groupName: String) -> Results<DataBaseSettingsOperatingJournalEntryGroup> {
         let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntryGroup.self, predicates: [
-            NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: groupName), NSString(string: groupName))
+            NSPredicate(format: "groupName LIKE %@", NSString(string: groupName))
         ])
         return objects
     }
@@ -62,7 +62,7 @@ class DataBaseManagerSettingsOperatingJournalEntryGroup {
     func updateJournalEntryGroup(primaryKey: Int, groupName: String) -> Int {
         let value: [String: Any] = [
             "number": primaryKey,
-            "nickname": groupName,
+            "groupName": groupName,
         ]
         do {
             try DataBaseManager.realm.write {

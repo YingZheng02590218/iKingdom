@@ -18,7 +18,9 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
     @IBOutlet var textFieldView: EMTNeumorphicView!
     // エラーメッセージ
     var errorMessage: String?
-    
+    // 編集　グループ一覧画面で選択されたセルの位置
+    var tappedIndexPath: IndexPath?
+
     // フィードバック
     let feedbackGeneratorMedium: Any? = {
         if #available(iOS 10.0, *) {
@@ -53,6 +55,17 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         setupTextField()
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 編集　グループ一覧画面で選択されたセルの位置
+        if let tappedIndexPath = tappedIndexPath {
+            let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+            // 初期値
+            textField.text = objects[tappedIndexPath.row].groupName
+        }
     }
     
     func setupTextField() {
@@ -101,7 +114,10 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             textFieldView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
             textFieldView.neumorphicLayer?.depthType = .concave
         }
-        //        inputButton.setTitle("入力", for: .normal)
+        // 編集　グループ一覧画面で選択されたセルの位置
+        if let tappedIndexPath = tappedIndexPath {
+            inputButton.setTitle("更新", for: .normal)
+        }
         inputButton.setTitleColor(.accentColor, for: .normal)
         inputButton.neumorphicLayer?.cornerRadius = 15
         inputButton.setTitleColor(.accentColor, for: .selected)
@@ -193,8 +209,14 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
         
         // バリデーションチェック
         if self.textInputCheckForSettingsJournalEntryGroup() {
-            DataBaseManagerSettingsOperatingJournalEntryGroup.shared.addJournalEntryGroup(groupName: textField.text ?? "")
-            // ダイアログ 記帳しました
+            // 編集　グループ一覧画面で選択されたセルの位置
+            if let tappedIndexPath = tappedIndexPath {
+                let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+                DataBaseManagerSettingsOperatingJournalEntryGroup.shared.updateJournalEntryGroup(primaryKey: objects[tappedIndexPath.row].number, groupName: textField.text ?? "")
+            } else {
+                DataBaseManagerSettingsOperatingJournalEntryGroup.shared.addJournalEntryGroup(groupName: textField.text ?? "")
+            }
+            // ダイアログ 登録しました
             showDialogForSucceed()
         }
     }
