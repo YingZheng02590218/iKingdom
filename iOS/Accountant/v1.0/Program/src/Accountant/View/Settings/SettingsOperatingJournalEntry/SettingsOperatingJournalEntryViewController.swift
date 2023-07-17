@@ -11,69 +11,47 @@ import UIKit
 // 設定仕訳画面
 class SettingsOperatingJournalEntryViewController: UIViewController {
     
-    @IBOutlet private var listCollectionView: UICollectionView!
+    @IBOutlet private var tableView: UITableView!
     
-    var tappedIndexPath: IndexPath?
+    // 仕訳編集　編集の対象となる仕訳の連番
+    var primaryKey: Int?
+    
     var viewReload = false // リロードするかどうか
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // title設定
-        navigationItem.title = "設定 仕訳画面"
+        navigationItem.title = "設定 よく使う仕訳"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
         
-        setupRecognizer()
+        initTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // リストを作成
-        createList()
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
             DispatchQueue.main.async {
-                self.listCollectionView.reloadData()
+                self.tableView.reloadData()
                 self.viewReload = false
                 JournalEntryViewController.viewReload = true
             }
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        // 画面の回転に合わせてCellのサイズを変更する
-        listCollectionView.collectionViewLayout.invalidateLayout()
-        listCollectionView.reloadData()
+    func presentToDetail() {
+        // 別の画面に遷移 仕訳画面
+        performSegue(withIdentifier: "longTapped", sender: nil)
     }
-    
-    // MARK: - Create View
-    
-    // リスト作成
-    func createList() {
-        // xib読み込み
-        let nib = UINib(nibName: "ListCollectionViewCell", bundle: .main)
-        listCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
-    }
-    
-    func setupRecognizer() {
-        // 更新機能　編集機能
-        // UILongPressGestureRecognizer宣言
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26
-        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
-        longPressRecognizer.delegate = self
-        // CollectionViewにrecognizerを設定
-        listCollectionView.addGestureRecognizer(longPressRecognizer)
-    }
-    
     // 追加機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
         if identifier == "longTapped" { // segueがタップ
-            if self.tappedIndexPath != nil { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
+            if let primaryKey = primaryKey { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
                 return true // true: 画面遷移させる
             }
         } else if identifier == "buttonTapped" {
@@ -93,41 +71,58 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             if segue.identifier == "buttonTapped" {
                 controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
-                if let tappedIndexPath = self.tappedIndexPath { // nil:ロングタップではない
+                if let primaryKey = primaryKey { // nil:ロングタップではない
                     controller.journalEntryType = .SettingsJournalEntriesFixing // セルに表示した仕訳タイプを取得
-                    controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+                    controller.primaryKey = primaryKey
                 }
             }
         }
     }
 }
 
-extension SettingsOperatingJournalEntryViewController: UIGestureRecognizerDelegate {
-    // 編集機能　長押しした際に呼ばれるメソッド
-    @objc
-    func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
-        // 押された位置でcellのPathを取得
-        let point = recognizer.location(in: listCollectionView)
-        let indexPath = listCollectionView.indexPathForItem(at: point)
+// MARK: UITableViewDelegate, UITableViewDataSource
+
+extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func initTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        let customTableViewCellName = "CustomTableViewCell"
+        tableView.register(UINib(nibName: customTableViewCellName, bundle: nil), forCellReuseIdentifier: customTableViewCellName)
+        tableView.separatorColor = .accentColor
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
         
-        if indexPath?.section == 1 {
-            print("空白行を長押し")
-        } else {
-            guard let _ = indexPath else {
-                return
-            }
-            if recognizer.state == UIGestureRecognizer.State.began {
-                // 長押しされた場合の処理
-                print("長押しされたcellのindexPath:\(String(describing: indexPath?.row))")
-                // ロングタップされたセルの位置をフィールドで保持する
-                self.tappedIndexPath = indexPath
-                // 別の画面に遷移 仕訳画面
-                performSegue(withIdentifier: "longTapped", sender: nil)
-            }
-        }
+        return objects.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath as IndexPath) as! CustomTableViewCell
+        cell.collectionView.delegate = self
+        cell.collectionView.dataSource = self
+        cell.configure(gropName: objects[indexPath.row].groupName)
+        cell.delegate = self // CustomCollectionViewCellDelegate
+        
+        return cell
+    }
+    // cellの高さ
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        250
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        250
     }
 }
+
 // プロトコル定義
 extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegateFlowLayout {
     //    //セル間の間隔を指定
@@ -137,11 +132,20 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegateF
     // セルのサイズ(CGSize)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         print(collectionView.frame)
-        print(view.frame)
+        print(tableView.frame)
         if UIDevice.current.userInterfaceIdiom == .pad {
-            return CGSize(width: (collectionView.frame.width / 3) - 20, height: 100)
+            if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+                return CGSize(width: (collectionView.frame.width / 4) - 20, height: (collectionView.frame.height / 2) - 20)
+            } else {
+                return CGSize(width: (collectionView.frame.width / 3) - 40, height: (collectionView.frame.height / 2) - 20)
+            }
         } else {
-            return CGSize(width: collectionView.frame.width - 20, height: 100)
+            // TableViewCell の高さからCollectionViewCell の高さを割り出す
+            if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+                return CGSize(width: (collectionView.frame.width / 3) - 20, height: (collectionView.frame.height / 2) - 20)
+            } else {
+                return CGSize(width: collectionView.frame.width - 40, height: (collectionView.frame.height / 2) - 20)
+            }
         }
     }
     // 余白の調整（UIImageを拡大、縮小している）
@@ -163,29 +167,14 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         // データベース　よく使う仕訳を追加
         let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        cell.number = objects[indexPath.row].number
         cell.nicknameLabel.text = objects[indexPath.row].nickname
         cell.debitLabel.text = objects[indexPath.row].debit_category
         cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
         cell.creditLabel.text = objects[indexPath.row].credit_category
         cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+        
         return cell
-    }
-    // ヘッダーセル
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: "CollectionReusableView",
-            for: indexPath
-        ) as? CollectionReusableView else {
-            fatalError("Could not find proper header")
-        }
-        if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == 0 {
-                header.sectionLabel.text = "よく使う仕訳"// "section \(indexPath.section)"
-            }
-            return header
-        }
-        return UICollectionReusableView()
     }
 }
 
@@ -221,5 +210,15 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
     //    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
     //        return true  // 変更
     //    }
-    
+}
+
+extension SettingsOperatingJournalEntryViewController: CustomCollectionViewCellDelegate {
+    func showDetail(cell: ListCollectionViewCell) {
+        if let number = cell.number {
+            // セルに表示させているよく使う仕訳の連番を保持する
+            primaryKey = number
+            // 画面遷移
+            presentToDetail()
+        }
+    }
 }

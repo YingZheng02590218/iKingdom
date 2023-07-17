@@ -60,6 +60,13 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         ])
         return objects
     }
+    // 取得　よく使う仕訳
+    func getJournalEntry(number: Int) -> Results<DataBaseSettingsOperatingJournalEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntry.self, predicates: [
+            NSPredicate(format: "number == %@", NSNumber(value: number))
+        ])
+        return objects
+    }
 
     // MARK: Update
     

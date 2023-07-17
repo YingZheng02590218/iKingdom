@@ -167,6 +167,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="mu5-kb-Wdz"/>
             <color key="backgroundColor" name="BaseColor"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-10" id="4Mj-Ka-wMh"/>
                 <constraint firstItem="lfj-sH-a01" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" constant="-10" id="HLt-cs-uZL"/>

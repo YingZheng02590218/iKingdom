@@ -18,6 +18,8 @@ class ListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var creditamauntLabel: UILabel!
     
     @IBOutlet var backgroundViewForNeumorphism: EMTNeumorphicView!
+    // よく使う仕訳の連番
+    var number: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()

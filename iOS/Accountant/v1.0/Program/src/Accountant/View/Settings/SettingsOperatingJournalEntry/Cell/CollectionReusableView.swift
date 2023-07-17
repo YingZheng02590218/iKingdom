@@ -16,7 +16,6 @@ class CollectionReusableView: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // 日付　ボタン作成
     }
     
     override func layoutSubviews() {
