@@ -17,6 +17,8 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     var primaryKey: Int?
     
     var viewReload = false // リロードするかどうか
+    // グループ
+    var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,9 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
             DispatchQueue.main.async {
@@ -97,18 +102,20 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-        
-        return objects.count
+        groupObjects.count + 1 // グループ　その他
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath as IndexPath) as! CustomTableViewCell
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
-        cell.configure(gropName: objects[indexPath.row].groupName)
+        if indexPath.row == groupObjects.count {
+            cell.collectionView.tag = 111
+            cell.configure(gropName: "その他")
+        } else {
+            cell.collectionView.tag = 0
+            cell.configure(gropName: groupObjects[indexPath.row].groupName)
+        }
         cell.delegate = self // CustomCollectionViewCellDelegate
         
         return cell
@@ -156,25 +163,47 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegateF
 }
 
 extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
     // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
-        return objects.count
+        // グループ　その他
+        if collectionView.tag == 111 {
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
+            return objects.count
+        } else {
+            // データベース　よく使う仕訳
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[section].number)
+            return objects.count
+        }
     }
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
-        cell.number = objects[indexPath.row].number
-        cell.nicknameLabel.text = objects[indexPath.row].nickname
-        cell.debitLabel.text = objects[indexPath.row].debit_category
-        cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
-        cell.creditLabel.text = objects[indexPath.row].credit_category
-        cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-        
-        return cell
+        // グループ　その他
+        if collectionView.tag == 111 {
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
+            cell.number = objects[indexPath.row].number
+            cell.nicknameLabel.text = objects[indexPath.row].nickname
+            cell.debitLabel.text = objects[indexPath.row].debit_category
+            cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
+            cell.creditLabel.text = objects[indexPath.row].credit_category
+            cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+            
+            return cell
+        } else {
+            // データベース　よく使う仕訳
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[indexPath.row].number)
+            cell.number = objects[indexPath.row].number
+            cell.nicknameLabel.text = objects[indexPath.row].nickname
+            cell.debitLabel.text = objects[indexPath.row].debit_category
+            cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
+            cell.creditLabel.text = objects[indexPath.row].credit_category
+            cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+            
+            return cell
+        }
     }
 }
 
