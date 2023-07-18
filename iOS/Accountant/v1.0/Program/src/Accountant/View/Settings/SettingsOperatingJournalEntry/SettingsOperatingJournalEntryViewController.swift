@@ -11,11 +11,16 @@ import UIKit
 // 設定仕訳画面
 class SettingsOperatingJournalEntryViewController: UIViewController {
     
+    // まとめて編集機能
+    @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
+
     @IBOutlet private var tableView: UITableView!
     
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
-    
+    // まとめて編集機能
+    var selectedItemNumners: [Int] = []
+
     var viewReload = false // リロードするかどうか
     // グループ
     var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
@@ -30,6 +35,13 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
         
+        // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
+        editButtonItem.tintColor = .accentColor
+        navigationItem.leftBarButtonItem = editButtonItem
+
+        editWithSlectionButton.isHidden = true
+        editWithSlectionButton.tintColor = tableView.isEditing ? .accentBlue : UIColor.clear// 色
+
         initTable()
     }
     
@@ -51,7 +63,22 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             }
         }
     }
-    
+    // 編集モード切り替え
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+
+        editWithSlectionButton.isHidden = !editing
+        editWithSlectionButton.isEnabled = false // まとめて編集ボタン
+        editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
+        // 編集中の場合
+        if editing {
+            self.selectedItemNumners = [] // 初期化
+        }
+        // 編集モードに入る前、編集後に選択していたセルをリセットする
+        self.tableView.reloadData()
+        navigationItem.title = "設定 よく使う仕訳"
+    }
+
     func presentToDetail() {
         // 別の画面に遷移 仕訳画面
         performSegue(withIdentifier: "longTapped", sender: nil)
@@ -86,6 +113,12 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK: - Action
+    
+    // まとめて編集機能 グループ選択画面を表示させる
+    @IBAction func editBarButtonItemTapped(_ sender: Any) {
     }
 }
 
@@ -198,37 +231,40 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
-        // グループ　その他
-        if collectionView.tag == 111 {
-            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
-            cell.number = objects[indexPath.row].number
-            cell.nicknameLabel.text = objects[indexPath.row].nickname
-            cell.debitLabel.text = objects[indexPath.row].debit_category
-            cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
-            cell.creditLabel.text = objects[indexPath.row].credit_category
-            cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-            if objects.isEmpty {
-                collectionView.isHidden = true
-            } else {
-                collectionView.isHidden = false
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag == 111 ? 0 : groupObjects[indexPath.row].number // グループ　その他 collectionView.tag == 111
+        )
+        cell.number = objects[indexPath.row].number
+        cell.nicknameLabel.text = objects[indexPath.row].nickname
+        cell.debitLabel.text = objects[indexPath.row].debit_category
+        cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
+        cell.creditLabel.text = objects[indexPath.row].credit_category
+        cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+        // コールバックに選択状態を切り替え時の処理を登録
+        cell.switchValueChangedCompletion = { [weak self] (isSelected: Bool, number: Int) in
+            guard let self = self else { return }
+            if self.isEditing { // 編集モードの場合
+                // DataSourceを更新
+                if isSelected {
+                    self.selectedItemNumners.append(number)
+                } else {
+                    // 選択を解除されたよく使う仕訳の連番を除去する
+                    self.selectedItemNumners.removeAll(where: { $0 == number })
+                }
+                print("selectedItemNumners", self.selectedItemNumners)
             }
-            return cell
-        } else {
-            // データベース　よく使う仕訳
-            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[indexPath.row].number)
-            cell.number = objects[indexPath.row].number
-            cell.nicknameLabel.text = objects[indexPath.row].nickname
-            cell.debitLabel.text = objects[indexPath.row].debit_category
-            cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
-            cell.creditLabel.text = objects[indexPath.row].credit_category
-            cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-            if objects.isEmpty {
-                collectionView.isHidden = true
-            } else {
-                collectionView.isHidden = false
-            }
-            return cell
         }
+        if objects.isEmpty {
+            collectionView.isHidden = true
+        } else {
+            collectionView.isHidden = false
+        }
+        // 編集モードの場合
+        // CollectionViewで複数選択できるように設定する
+        collectionView.allowsMultipleSelection = self.isEditing
+        
+        return cell
     }
 }
 
@@ -256,10 +292,25 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
         print("Selected: \(indexPath)")
         // タップしたセルを中央へスクロールさせる
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        // 編集中の場合
+        if self.isEditing {
+            editWithSlectionButton.isEnabled = !selectedItemNumners.isEmpty ? true : false // まとめて編集ボタン
+            // title設定
+            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "設定 よく使う仕訳"
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("Deselected: \(indexPath)")
+        // 編集中の場合
+        if self.isEditing {
+            editWithSlectionButton.isEnabled = !selectedItemNumners.isEmpty ? true : false // まとめて編集ボタン
+            // title設定
+            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "設定 よく使う仕訳"
+        } else {
+            editWithSlectionButton.isEnabled = false
+            navigationItem.title = "設定 よく使う仕訳"
+        }
     }
     
     //    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {

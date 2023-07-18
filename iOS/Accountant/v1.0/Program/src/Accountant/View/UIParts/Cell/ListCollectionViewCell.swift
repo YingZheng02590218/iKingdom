@@ -16,10 +16,11 @@ class ListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var debitamauntLabel: UILabel!
     @IBOutlet var creditLabel: UILabel!
     @IBOutlet var creditamauntLabel: UILabel!
-    
     @IBOutlet var backgroundViewForNeumorphism: EMTNeumorphicView!
     // よく使う仕訳の連番
     var number: Int?
+    /// コールバック
+    var switchValueChangedCompletion: ((Bool, Int) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         
         createViewDesign()
     }
@@ -42,6 +44,10 @@ class ListCollectionViewCell: UICollectionViewCell {
     private func onUpdateSelection() {
         // セルの枠線の太さを変える
         backgroundViewForNeumorphism.neumorphicLayer?.borderWidth = self.isSelected ? 1 : 0
+        if let number = number {
+            // タップ時の選択状態とよく使う仕訳自身の連番を返す
+            switchValueChangedCompletion?(isSelected, number)
+        }
     }
     
     // ビューのデザインを指定する
@@ -57,5 +63,4 @@ class ListCollectionViewCell: UICollectionViewCell {
         backgroundViewForNeumorphism.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
         backgroundViewForNeumorphism.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
-    
 }
