@@ -30,8 +30,6 @@ class ListCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        createViewDesign()
     }
     
     override var isSelected: Bool {

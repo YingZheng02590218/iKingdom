@@ -18,7 +18,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
-    // まとめて編集機能
+    // まとめて編集機能　選択したよく使う仕訳の連番
     var selectedItemNumners: [Int] = []
     
     var viewReload = false // リロードするかどうか
@@ -29,7 +29,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         super.viewDidLoad()
         
         // title設定
-        navigationItem.title = "設定 よく使う仕訳"
+        navigationItem.title = "よく使う仕訳"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -88,7 +88,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         }
         // 編集モードに入る前、編集後に選択していたセルをリセットする
         self.tableView.reloadData()
-        navigationItem.title = "設定 よく使う仕訳"
+        navigationItem.title = "よく使う仕訳"
     }
     
     func presentToDetail() {
@@ -144,19 +144,25 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     // グループを変更する
     func updateGroup(selectedItemNumners: [Int], groupNumber: Int) {
         // 一括変更の処理
-        for number in selectedItemNumners {
+        self.updateJournalEntry(selectedItemNumners: selectedItemNumners, groupNumber: groupNumber, completion: {
+            // リロード
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func updateJournalEntry(selectedItemNumners: [Int], groupNumber: Int, completion: () -> Void) {
+        for selectedItemNumner in selectedItemNumners {
             // 仕訳データを更新
-            _ = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
-                primaryKey: number,
+            // 仕訳データを更新
+            DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
+                primaryKey: selectedItemNumner,
                 groupNumber: groupNumber
             )
         }
-        // リロード
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        completion() //　ここでコールバックする（呼び出し元に処理を戻す）
     }
-    
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
@@ -274,19 +280,19 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
         cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
         cell.creditLabel.text = objects[indexPath.row].credit_category
         cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
+        // 選択したよく使う仕訳の連番 に含まれている場合は、選択状態とする
+        cell.isSelected = !selectedItemNumners.filter({ $0 == objects[indexPath.row].number }).isEmpty
+        // と指定してしまうと その後、当該セルをタップしても反応しなくなるという問題が出てきます。
+        // その場合は、以下のようにするとセルが反応してくれます。
+        if cell.isSelected {
+            // 画面を回転させるとセルの選択状態がリセットされる対策
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+        }
         // コールバックに選択状態を切り替え時の処理を登録
         cell.switchValueChangedCompletion = { [weak self] (isSelected: Bool, number: Int) in
             guard let self = self else { return }
-            if self.isEditing { // 編集モードの場合
-                // DataSourceを更新
-                if isSelected {
-                    self.selectedItemNumners.append(number)
-                } else {
-                    // 選択を解除されたよく使う仕訳の連番を除去する
-                    self.selectedItemNumners.removeAll(where: { $0 == number })
-                }
-                print("selectedItemNumners", self.selectedItemNumners)
-            }
+            print("cellForItemAt", isSelected, number)
+            print("cellForItemAt selectedItemNumners", self.selectedItemNumners)
         }
         if objects.isEmpty {
             collectionView.isHidden = true
@@ -327,9 +333,25 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         // 編集中の場合
         if self.isEditing {
+            // collectionViewCoellのindexPathを特定する
+            guard let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell,
+                  let number = cell.number else {
+                return
+            }
+            // DataSourceを更新
+            if selectedItemNumners.filter({ $0 == number }).isEmpty {
+                self.selectedItemNumners.append(number)
+                self.selectedItemNumners.sort() // 配列の要素を並べ替える
+            } else {
+                // 画面を回転させるとセルの選択状態がリセットされる
+                print("重複している", number)
+            }
+                
+            print("didSelectItemAt selectedItemNumners", self.selectedItemNumners)
+            
             editWithSlectionButton.isEnabled = !selectedItemNumners.isEmpty ? true : false // まとめて編集ボタン
             // title設定
-            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "設定 よく使う仕訳"
+            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "よく使う仕訳"
         }
     }
     
@@ -337,12 +359,22 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
         print("Deselected: \(indexPath)")
         // 編集中の場合
         if self.isEditing {
+            // collectionViewCoellのindexPathを特定する
+            guard let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell,
+                  let number = cell.number else {
+                return
+            }
+            // DataSourceを更新
+            // 選択を解除されたよく使う仕訳の連番を除去する
+            self.selectedItemNumners.removeAll(where: { $0 == number })
+            print("didDeselectItemAt selectedItemNumners", self.selectedItemNumners)
+            
             editWithSlectionButton.isEnabled = !selectedItemNumners.isEmpty ? true : false // まとめて編集ボタン
             // title設定
-            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "設定 よく使う仕訳"
+            navigationItem.title = !selectedItemNumners.isEmpty ? "\(selectedItemNumners.count)件選択" : "よく使う仕訳"
         } else {
             editWithSlectionButton.isEnabled = false
-            navigationItem.title = "設定 よく使う仕訳"
+            navigationItem.title = "よく使う仕訳"
         }
     }
     
