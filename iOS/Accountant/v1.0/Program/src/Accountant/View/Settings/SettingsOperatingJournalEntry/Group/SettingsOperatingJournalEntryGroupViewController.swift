@@ -68,11 +68,13 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
                     print("OK アクションをタップした時の処理")
                     // グループ名を削除
                     //                        let result = self.presenter.deleteJournalEntry(number: self.presenter.objects(forRow: indexPath.row).number)
-                    let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-                    let result = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.deleteJournalEntryGroup(number: objects[indexPath.row].number)
-                    if result == true {
-                        self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
-                    }
+                    let groups = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+                    self.updateJournalEntry(groupNumber: groups[indexPath.row].number, completion: {
+                        let result = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.deleteJournalEntryGroup(number: groups[indexPath.row].number)
+                        if result == true {
+                            self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                        }
+                    })
                 }
             )
         )
@@ -81,6 +83,19 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    func updateJournalEntry(groupNumber: Int, completion: () -> Void) {
+        // データベース　よく使う仕訳
+        let settingsOperatingJournalEntries = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupNumber)
+        for settingsOperatingJournalEntry in settingsOperatingJournalEntries {
+            // 仕訳データを更新
+            let primaryKey = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
+                primaryKey: settingsOperatingJournalEntry.number,
+                groupNumber: 0 // その他
+            )
+        }
+        completion() //　ここでコールバックする（呼び出し元に処理を戻す）
+    }
+            
     // MARK: - Navigation
     
     func setupCellLongPressed(indexPath: IndexPath) {

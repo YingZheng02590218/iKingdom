@@ -59,10 +59,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             }
         } else {
             // グループ一覧から遷移してきた場合
-            // グループ
-            groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if self.isEditing { // 編集モードの場合
+                // 選択中のセルがリセットされるので、リロードしない
+            } else {
+                // グループ
+                groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -73,6 +77,11 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         editWithSlectionButton.isHidden = !editing
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
+        if var rightBarButtonItems = navigationItem.rightBarButtonItems {
+            for button in rightBarButtonItems where button != editButtonItem {
+                button.isEnabled = !editing // ＋ボタン、グループ一覧ボタン
+            }
+        }
         // 編集中の場合
         if editing {
             self.selectedItemNumners = [] // 初期化
