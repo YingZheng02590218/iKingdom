@@ -10,7 +10,7 @@ import EMTNeumorphicView
 import UIKit
 
 class GroupChoiceViewController: UIViewController {
-
+    
     @IBOutlet var pickerView: UIPickerView!
     @IBOutlet var pickerViewView: EMTNeumorphicView!
     @IBOutlet private var pickerViewViewView: EMTNeumorphicView!
@@ -79,7 +79,7 @@ class GroupChoiceViewController: UIViewController {
         cancelButton.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
     }
     
-    @IBAction func doneButtonTapped(_ sender: EMTNeumorphicButton) {
+    @IBAction private func doneButtonTapped(_ sender: EMTNeumorphicButton) {
         // ボタンを選択する
         sender.isSelected = true
         
@@ -87,23 +87,13 @@ class GroupChoiceViewController: UIViewController {
             self.doneButton.isSelected = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-                let groupName =  objects[self.pickerView.selectedRow(inComponent: 0)].groupName
-                
-                let alert = UIAlertController(title: "最終確認", message: "グループを 「\(groupName)」 に変更しますか？", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { (action: UIAlertAction!) in
-                    print("OK アクションをタップした時の処理")
-                    
-                }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                    print("Cancel アクションをタップした時の処理")
-                }))
-                self.present(alert, animated: true, completion: nil)
+                // 確認ダイアログ
+                self.showDialog()
             }
         }
     }
     
-    @IBAction func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
+    @IBAction private func cancelButtonTapped(_ sender: EMTNeumorphicButton) {
         // ボタンを選択する
         sender.isSelected = true
         
@@ -115,7 +105,62 @@ class GroupChoiceViewController: UIViewController {
             }
         }
     }
-    
+    // 確認ダイアログ
+    func showDialog() {
+        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+        let groupName = objects[self.pickerView.selectedRow(inComponent: 0)].groupName
+        let number = objects[self.pickerView.selectedRow(inComponent: 0)].number
+        
+        let alert = UIAlertController(title: "最終確認", message: "グループを 「\(groupName)」 に変更しますか？", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .destructive,
+            handler: { _ in
+                print("OK アクションをタップした時の処理")
+                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                   let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
+                   let navigationController = splitViewController.viewControllers[0] as? UINavigationController { // スプリットコントローラから、現在選択されているコントローラを取得する
+                    let navigationController2: UINavigationController
+                    // iPadとiPhoneで動きが変わるので分岐する
+                    if UIDevice.current.userInterfaceIdiom == .pad { // iPad
+                        //        if UIDevice.current.orientation == .portrait { // ポートレート 上下逆さまだとポートレートとはならない
+                        print(splitViewController.viewControllers.count)
+                        if let navigationController0 = splitViewController.viewControllers[0] as? UINavigationController, // ナビゲーションバーコントローラの配下にあるビューコントローラーを取得
+                           let navigationController1 = navigationController0.viewControllers[1] as? UINavigationController {
+                            navigationController2 = navigationController1
+                            print("iPad ビューコントローラーの階層")
+                            if let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // 呼び出し元のビューコントローラーを取得
+                                // viewWillAppearを呼び出す　更新のため
+                                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                    presentingViewController.updateGroup(groupNumber: number)
+                                    // 編集を終了する
+                                    presentingViewController.setEditing(false, animated: true)
+                                })
+                            }
+                        }
+                    } else { // iPhone
+                        print(splitViewController.viewControllers.count)
+                        if let navigationController1 = navigationController.viewControllers[1] as? UINavigationController {
+                            navigationController2 = navigationController1
+                            print("iPhone ビューコントローラーの階層")
+                            if let presentingViewController = navigationController2.viewControllers[0] as? SettingsOperatingJournalEntryViewController { // 呼び出し元のビューコントローラーを取得
+                                // viewWillAppearを呼び出す　更新のため
+                                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                                    presentingViewController.updateGroup(groupNumber: number)
+                                    // 編集を終了する
+                                    presentingViewController.setEditing(false, animated: true)
+                                })
+                            }
+                        }
+                    }
+                }
+            }
+        ))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("Cancel アクションをタップした時の処理")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension GroupChoiceViewController: UIPickerViewDataSource, UIPickerViewDelegate {

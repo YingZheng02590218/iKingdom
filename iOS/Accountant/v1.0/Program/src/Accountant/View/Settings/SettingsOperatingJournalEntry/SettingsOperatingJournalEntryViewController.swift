@@ -13,14 +13,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     
     // まとめて編集機能
     @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
-
+    
     @IBOutlet private var tableView: UITableView!
     
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
     // まとめて編集機能
     var selectedItemNumners: [Int] = []
-
+    
     var viewReload = false // リロードするかどうか
     // グループ
     var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
@@ -37,11 +37,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         
         // まとめて編集機能 setEditingメソッドを使用するため、Storyboard上の編集ボタンを上書きしてボタンを生成する
         editButtonItem.tintColor = .accentColor
-        navigationItem.leftBarButtonItem = editButtonItem
-
+        if var rightBarButtonItems = navigationItem.rightBarButtonItems {
+            rightBarButtonItems.append(editButtonItem)
+            navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: false)
+        }
+        
         editWithSlectionButton.isHidden = true
         editWithSlectionButton.tintColor = tableView.isEditing ? .accentBlue : UIColor.clear// 色
-
+        
         initTable()
     }
     
@@ -66,7 +69,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
+        
         editWithSlectionButton.isHidden = !editing
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
@@ -78,7 +81,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         self.tableView.reloadData()
         navigationItem.title = "設定 よく使う仕訳"
     }
-
+    
     func presentToDetail() {
         // 別の画面に遷移 仕訳画面
         performSegue(withIdentifier: "longTapped", sender: nil)
@@ -124,6 +127,27 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             self.present(viewController, animated: true, completion: nil)
         }
     }
+    
+    func updateGroup(groupNumber: Int) {
+        
+        updateGroup(selectedItemNumners: selectedItemNumners, groupNumber: groupNumber)
+    }
+    // グループを変更する
+    func updateGroup(selectedItemNumners: [Int], groupNumber: Int) {
+        // 一括変更の処理
+        for number in selectedItemNumners {
+            // 仕訳データを更新
+            _ = DataBaseManagerSettingsOperatingJournalEntry.shared.updateJournalEntry(
+                primaryKey: number,
+                groupNumber: groupNumber
+            )
+        }
+        // リロード
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
 }
 
 // MARK: UITableViewDelegate, UITableViewDataSource
@@ -152,10 +176,10 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {
             // グループ　その他
-            cell.collectionView.tag = 111
+            cell.collectionView.tag = 0 // グループの連番
             cell.configure(gropName: "その他")
         } else {
-            cell.collectionView.tag = 0
+            cell.collectionView.tag = groupObjects[indexPath.row].number // グループの連番
             cell.configure(gropName: groupObjects[indexPath.row].groupName)
         }
         cell.delegate = self // CustomCollectionViewCellDelegate
@@ -222,22 +246,18 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
     }
     // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // グループ　その他
-        if collectionView.tag == 111 {
-            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
-            return objects.count
-        } else {
-            // データベース　よく使う仕訳
-            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[section].number)
-            return objects.count
-        }
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
+        return objects.count
     }
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         // データベース　よく使う仕訳
         let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
-            group: collectionView.tag == 111 ? 0 : groupObjects[indexPath.row].number // グループ　その他 collectionView.tag == 111
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
         )
         cell.number = objects[indexPath.row].number
         cell.nicknameLabel.text = objects[indexPath.row].nickname

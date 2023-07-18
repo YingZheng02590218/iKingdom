@@ -18,7 +18,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -21,6 +21,4 @@ class CollectionReusableView: UICollectionReusableView {
     override func layoutSubviews() {
         
     }
-    
-    
 }

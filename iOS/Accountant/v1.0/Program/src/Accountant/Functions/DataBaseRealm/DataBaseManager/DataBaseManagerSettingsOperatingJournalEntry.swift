@@ -98,6 +98,22 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         return primaryKey
     }
     
+    // 更新　よく使う仕訳　グループ
+    func updateJournalEntry(primaryKey: Int, groupNumber: Int) {
+        // 編集するよく使う仕訳
+        let value: [String: Any] = [
+            "number": primaryKey,
+            "group": groupNumber
+        ]
+        do {
+            try DataBaseManager.realm.write {
+                DataBaseManager.realm.create(DataBaseSettingsOperatingJournalEntry.self, value: value, update: .modified) // 一部上書き更新
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
+
     // MARK: Delete
     
     // 削除　よく使う仕訳
