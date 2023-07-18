@@ -119,6 +119,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     
     // まとめて編集機能 グループ選択画面を表示させる
     @IBAction func editBarButtonItemTapped(_ sender: Any) {
+        
+        if let viewController = UIStoryboard(name: "GroupChoiceViewController", bundle: nil).instantiateInitialViewController() as? GroupChoiceViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 }
 

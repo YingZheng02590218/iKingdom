@@ -242,6 +242,10 @@
 		F99D3AFB2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */; };
 		F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
 		F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
+		F99D3B012A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */; };
+		F99D3B022A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */; };
+		F99D3B042A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */; };
+		F99D3B052A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
@@ -856,6 +860,8 @@
 		F99CF359251B2D18004295DE /* taxonomy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomy.csv; sourceTree = "<group>"; };
 		F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChoiceViewController.swift; sourceTree = "<group>"; };
+		F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupChoiceViewController.storyboard; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithIconTableViewCell.swift; sourceTree = "<group>"; };
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
@@ -1144,6 +1150,8 @@
 			children = (
 				F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */,
 				F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */,
+				F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */,
+				F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */,
 				F9E0F43526413E2700085CC0 /* Cell */,
 				F9593DB92A62B62300A1D0B3 /* Group */,
 			);
@@ -2151,6 +2159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99D3B042A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */,
 				F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */,
 				F928F93429A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
@@ -2241,6 +2250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99D3B052A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */,
 				F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */,
 				F928F93529A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */,
@@ -2533,6 +2543,7 @@
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F928F93729A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
+				F99D3B012A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
 				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */,
@@ -2768,6 +2779,7 @@
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
+				F99D3B022A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */,
 				F928F93829A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
 				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
