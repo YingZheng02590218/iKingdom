@@ -35,15 +35,19 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-
         // よく使う仕訳を追加や削除して、よく使う仕訳画面に戻ってきてもリロードされない。reloadData()は、よく使う仕訳画面に戻ってきた時のみ実行するように修正
         if viewReload {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.tableView.reloadData() // CollectionView を更新していたが、画面構成を変更したので、TableViewを更新する
                 self.viewReload = false
                 JournalEntryViewController.viewReload = true
+            }
+        } else {
+            // グループ一覧から遷移してきた場合
+            // グループ
+            groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
@@ -110,6 +114,7 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {
+            // グループ　その他
             cell.collectionView.tag = 111
             cell.configure(gropName: "その他")
         } else {
@@ -122,11 +127,23 @@ extension SettingsOperatingJournalEntryViewController: UITableViewDelegate, UITa
     }
     // cellの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        250
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        250
+        if indexPath.row == groupObjects.count {
+            // グループ　その他
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
+            if objects.isEmpty {
+                return 30
+            } else {
+                return 250
+            }
+        } else {
+            // データベース　よく使う仕訳
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[indexPath.row].number)
+            if objects.isEmpty {
+                return 30
+            } else {
+                return 250
+            }
+        }
     }
 }
 
@@ -190,7 +207,11 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
             cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
             cell.creditLabel.text = objects[indexPath.row].credit_category
             cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-            
+            if objects.isEmpty {
+                collectionView.isHidden = true
+            } else {
+                collectionView.isHidden = false
+            }
             return cell
         } else {
             // データベース　よく使う仕訳
@@ -201,7 +222,11 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDataSourc
             cell.debitamauntLabel.text = String(objects[indexPath.row].debit_amount)
             cell.creditLabel.text = objects[indexPath.row].credit_category
             cell.creditamauntLabel.text = String(objects[indexPath.row].credit_amount)
-            
+            if objects.isEmpty {
+                collectionView.isHidden = true
+            } else {
+                collectionView.isHidden = false
+            }
             return cell
         }
     }
@@ -229,7 +254,8 @@ extension SettingsOperatingJournalEntryViewController: UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(indexPath)")
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        // タップしたセルを中央へスクロールさせる
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
