@@ -218,6 +218,7 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             }
             // ダイアログ 登録しました
             showDialogForSucceed()
+            JournalEntryViewController.viewReload = true
         }
     }
     // ダイアログ 記帳しました

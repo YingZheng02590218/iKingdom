@@ -212,6 +212,10 @@
 		F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */; };
 		F99112E42495290000E28BB9 /* BSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E32495290000E28BB9 /* BSModel.swift */; };
 		F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */; };
+		F991EEF92A67B5640077547F /* CarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */; };
+		F991EEFA2A67B5640077547F /* CarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */; };
+		F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
+		F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
 		F9941D6A26458259008B3970 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
 		F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */; };
 		F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
@@ -834,6 +838,8 @@
 		F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingTableViewController.swift; sourceTree = "<group>"; };
 		F99112E32495290000E28BB9 /* BSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSModel.swift; sourceTree = "<group>"; };
 		F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseBalanceSheet.swift; sourceTree = "<group>"; };
+		F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTableViewCell.swift; sourceTree = "<group>"; };
+		F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTableViewCell.xib; sourceTree = "<group>"; };
 		F9941D6926458259008B3970 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpViewController.storyboard; sourceTree = "<group>"; };
@@ -1587,6 +1593,8 @@
 				F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */,
 				F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */,
 				F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */,
+				F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */,
+				F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */,
 				F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */,
 				F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */,
 				F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */,
@@ -2225,6 +2233,7 @@
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */,
+				F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2316,6 +2325,7 @@
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */,
+				F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2489,6 +2499,7 @@
 				F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
 				F951725E295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
+				F991EEF92A67B5640077547F /* CarouselTableViewCell.swift in Sources */,
 				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9D08D8E25444CF700CE3CB2 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,
@@ -2725,6 +2736,7 @@
 				F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9EC669327B90BC60003FBB6 /* SettingsTableViewCell.swift in Sources */,
 				F951725F295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
+				F991EEFA2A67B5640077547F /* CarouselTableViewCell.swift in Sources */,
 				F9EC669427B90BC60003FBB6 /* ClassicCalculatorViewController.swift in Sources */,
 				F9EC669527B90BC60003FBB6 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9EC669627B90BC60003FBB6 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,

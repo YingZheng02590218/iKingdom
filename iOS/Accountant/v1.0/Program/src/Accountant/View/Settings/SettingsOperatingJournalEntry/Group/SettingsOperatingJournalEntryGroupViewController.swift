@@ -73,6 +73,7 @@ class SettingsOperatingJournalEntryGroupViewController: UIViewController {
                         let result = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.deleteJournalEntryGroup(number: groups[indexPath.row].number)
                         if result == true {
                             self.tableView.reloadData() // データベースの削除処理が成功した場合、テーブルをリロードする
+                            JournalEntryViewController.viewReload = true
                         }
                     })
                 }

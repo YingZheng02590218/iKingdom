@@ -21,8 +21,8 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet var labelTitle: UILabel!
     // 仕訳/決算整理仕訳　切り替え
     @IBOutlet var segmentedControl: UISegmentedControl!
-    // コレクションビュー　カルーセル　よく使う仕訳
-    @IBOutlet var carouselCollectionView: UICollectionView!
+    // よく使う仕訳　エリア　カルーセル
+    @IBOutlet private var tableView: UITableView!
     // カルーセル　true: リロードする
     static var viewReload = false
     // ボタン　アウトレットコレクション
@@ -82,7 +82,9 @@ class JournalEntryViewController: UIViewController {
     var tappedIndexPath = IndexPath(row: 0, section: 0)
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int = 0
-    
+    // グループ
+    var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalEntryPresenterInput!
     
@@ -169,15 +171,16 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
-    // カルーセルをリロードする
+    // よく使う仕訳　エリア カルーセルをリロードする
     func reloadCarousel() {
         if JournalEntryViewController.viewReload {
             DispatchQueue.main.async { [self] in
                 // よく使う仕訳で選択した勘定科目が入っている可能性があるので、初期化
                 self.textFieldCategoryDebit.text = nil
                 textFieldCategoryCredit.text = nil
+                // よく使う仕訳　エリア
+                tableView.reloadData()
                 
-                self.carouselCollectionView.reloadData()
                 JournalEntryViewController.viewReload = false
             }
         }
@@ -217,15 +220,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // MARK: - Setting
-    
-    // MARK: UICollectionView
-    // カルーセル作成
-    func createCarousel() {
-        // xib読み込み
-        let nib = UINib(nibName: "CarouselCollectionViewCell", bundle: .main)
-        carouselCollectionView.register(nib, forCellWithReuseIdentifier: "cell")
-    }
-    
+        
     // MARK: UIDatePicker
     // デートピッカー作成
     func createDatePicker() {
@@ -1085,36 +1080,113 @@ extension JournalEntryViewController: GADFullScreenContentDelegate {
     }
 }
 
+// MARK: UITableViewDelegate, UITableViewDataSource
+
+extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func initTable() {
+        // 仕訳テンプレート画面では使用しない
+        if let tableView = tableView {
+            tableView.delegate = self
+            tableView.dataSource = self
+            let cellName = "CarouselTableViewCell"
+            tableView.register(UINib(nibName: cellName, bundle: nil), forCellReuseIdentifier: cellName)
+            tableView.separatorColor = .accentColor
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        groupObjects.count + 1 // グループ　その他
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarouselTableViewCell", for: indexPath as IndexPath) as! CarouselTableViewCell
+        cell.collectionView.delegate = self
+        cell.collectionView.dataSource = self
+        if indexPath.row == groupObjects.count {
+            // グループ　その他
+            cell.collectionView.tag = 0 // グループの連番
+            cell.configure(gropName: "その他")
+        } else {
+            cell.collectionView.tag = groupObjects[indexPath.row].number // グループの連番
+            cell.configure(gropName: groupObjects[indexPath.row].groupName)
+        }
+        
+        return cell
+    }
+    // cellの高さ
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == groupObjects.count {
+            // グループ　その他
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: 0)
+            if objects.isEmpty {
+                return 30
+            } else {
+                return tableView.frame.height - 0
+            }
+        } else {
+            // データベース　よく使う仕訳
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(group: groupObjects[indexPath.row].number)
+            if objects.isEmpty {
+                return 30
+            } else {
+                return tableView.frame.height - 0
+            }
+        }
+    }
+}
+
 // MARK: - UICollectionViewDelegate
 
-extension JournalEntryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension JournalEntryViewController: UICollectionViewDelegateFlowLayout {
+    // セルのサイズ(CGSize)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
+        // Labelの文字数に合わせてセルの幅を決める
+        let size: CGSize = objects[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15.0)])
+        return CGSize(width: size.width + 20.0, height: (collectionView.bounds.size.height / 2) - 10)
+    }
+    // 余白の調整（UIImageを拡大、縮小している）
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        // top:ナビゲーションバーの高さ分上に移動
+        return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+    }
+
+}
+
+extension JournalEntryViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
     // collectionViewの要素の数を返す
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
         return objects.count
     }
     // collectionViewのセルを返す（セルの内容を決める）
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CarouselCollectionViewCell else { return UICollectionViewCell() }
-        // データベース　よく使う仕訳を追加
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        // データベース　よく使う仕訳
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
         cell.nicknameLabel.text = objects[indexPath.row].nickname
         return cell
     }
-    //    //セル間の間隔を指定
-    //    private func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat {
-    //        return 20
-    //    }
-    // セルのサイズ(CGSize)
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.frame.height * 1.5, height: collectionView.frame.height - 15)
-    }
-    // 余白の調整（UIImageを拡大、縮小している）
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        // top:ナビゲーションバーの高さ分上に移動
-        return UIEdgeInsets(top: 0, left: 3, bottom: 3, right: 3)
-    }
+}
+
+extension JournalEntryViewController: UICollectionViewDelegate {
+
     /// セルの選択時に背景色を変化させる
     /// 今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
     /// 以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
@@ -1125,7 +1197,9 @@ extension JournalEntryViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         print("Highlighted: \(indexPath)")
         // データベース　よく使う仕訳
-        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
+        let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(
+            group: collectionView.tag // グループ　その他 collectionView.tag == 0
+        )
         textFieldCategoryDebit.text = objects[indexPath.row].debit_category
         textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))
         textFieldCategoryCredit.text = objects[indexPath.row].credit_category
@@ -1348,6 +1422,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         }
     }
 }
+
 extension JournalEntryViewController: JournalEntryPresenterOutput {
     
     func setupUI() {
@@ -1363,6 +1438,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         dateFormatter.locale = Locale.current
         dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
         dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
+        // よく使う仕訳　エリア
+        initTable()
     }
     
     // MARK: - 生体認証パスコードロック
@@ -1420,27 +1497,25 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         if journalEntryType == .JournalEntries { // 仕訳
             labelTitle.text = "仕　訳"
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             //　labelTitle.text = "決算整理仕訳"
-            createCarousel() // カルーセルを作成
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
             labelTitle.text = "仕訳まとめて編集"
-            createCarousel() // カルーセルを作成
-            carouselCollectionView.isHidden = true
+            // よく使う仕訳　エリア
+            tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             maskDatePickerButton.isHidden = false
             isMaskedDatePicker = false
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
-            createCarousel() // カルーセルを作成
-            carouselCollectionView.isHidden = true
+            // よく使う仕訳　エリア
+            tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
             // 仕訳データを取得
             if tappedIndexPath.section == 1 {
@@ -1472,7 +1547,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         } else if journalEntryType == .JournalEntry {
             labelTitle.text = ""
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            createCarousel() // カルーセルを作成
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
