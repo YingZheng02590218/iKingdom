@@ -27,9 +27,11 @@ class ListCollectionViewCell: UICollectionViewCell {
 
         createViewDesign()
     }
-    
+    // ダークモード　切り替え時に色が更新されない場合の対策
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        createViewDesign()
     }
     
     override var isSelected: Bool {

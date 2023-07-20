@@ -67,7 +67,14 @@ class SettingsOperatingJournalEntryGroupDetailViewController: UIViewController {
             textField.text = objects[tappedIndexPath.row].groupName
         }
     }
-    
+    // ダークモード　切り替え時に色が更新されない場合の対策
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // ニューモフィズム　ボタンとビューのデザインを指定する
+        createEMTNeumorphicView()
+    }
+
     func setupTextField() {
         textField.delegate = self
         // テキストの入力位置を指すライン、これはカーソルではなくキャレット(caret)と呼ぶそうです。
