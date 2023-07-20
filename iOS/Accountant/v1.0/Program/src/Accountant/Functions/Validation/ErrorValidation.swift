@@ -57,6 +57,28 @@ struct ErrorValidation {
         }
         return .success
     }
+    // バリデーション　グループ名
+    func validateSettingsJournalEntryGroup(text: String?) -> ErrorValidationState {
+        let editableType = EditableType.group
+        // 必須
+        guard let text = text, !text.isEmpty else {
+            return .failure(
+                message: ErrorValidationType.required(
+                    name: editableType.rawValue
+                ).errorText
+            )
+        }
+        // 最大長
+        guard text.count <= editableType.maxLength else {
+            return .failure(
+                message: ErrorValidationType.maxLength(
+                    name: editableType.rawValue,
+                    max: editableType.maxLength
+                ).errorText
+            )
+        }
+        return .success
+    }
     // バリデーション 勘定科目、金額
     func validateEmpty(text: String?, editableType: EditableType) -> ErrorValidationState {
         // 必須

@@ -25,56 +25,42 @@
                                         <rect key="frame" x="0.0" y="0.0" width="408" height="159.33333333333334"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="voY-jm-Bql">
-                                                <rect key="frame" x="10" y="0.0" width="388" height="159.33333333333334"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="408" height="159.33333333333334"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZD-WS-Sy8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="388" height="47.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="408" height="97.666666666666671"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="29"/>
                                                         <color key="textColor" name="TextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7RC-03-hT4">
-                                                        <rect key="frame" x="0.0" y="47.666666666666664" width="388" height="111.66666666666669"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="200" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WcP-ol-10D">
+                                                        <rect key="frame" x="0.0" y="97.666666666666671" width="408" height="61.666666666666671"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="32o-9m-xWf">
-                                                            <size key="itemSize" width="128" height="128"/>
-                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        </collectionViewFlowLayout>
-                                                        <cells/>
                                                         <connections>
-                                                            <outlet property="dataSource" destination="RxZ-JM-Gew" id="iFN-aQ-1ZJ"/>
-                                                            <outlet property="delegate" destination="RxZ-JM-Gew" id="9Yl-yG-eU4"/>
+                                                            <outlet property="dataSource" destination="RxZ-JM-Gew" id="iKf-fA-7yE"/>
+                                                            <outlet property="delegate" destination="RxZ-JM-Gew" id="6jK-Kf-0ZQ"/>
                                                         </connections>
-                                                    </collectionView>
+                                                    </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="SZD-WS-Sy8" secondAttribute="trailing" id="25u-zw-mwb"/>
-                                                    <constraint firstItem="7RC-03-hT4" firstAttribute="leading" secondItem="voY-jm-Bql" secondAttribute="leading" id="BeL-ST-2eV"/>
                                                     <constraint firstItem="SZD-WS-Sy8" firstAttribute="top" secondItem="voY-jm-Bql" secondAttribute="top" id="EJ3-jn-Vuw"/>
-                                                    <constraint firstAttribute="trailing" secondItem="7RC-03-hT4" secondAttribute="trailing" id="Lom-dh-W6X"/>
-                                                    <constraint firstItem="7RC-03-hT4" firstAttribute="height" secondItem="voY-jm-Bql" secondAttribute="height" multiplier="0.7" id="XDb-8y-sgZ"/>
-                                                    <constraint firstItem="SZD-WS-Sy8" firstAttribute="height" secondItem="voY-jm-Bql" secondAttribute="height" multiplier="0.3" id="esl-eR-Ths"/>
-                                                    <constraint firstItem="7RC-03-hT4" firstAttribute="width" secondItem="voY-jm-Bql" secondAttribute="width" id="ndj-rr-SBe"/>
                                                     <constraint firstItem="SZD-WS-Sy8" firstAttribute="width" secondItem="voY-jm-Bql" secondAttribute="width" id="oPR-gb-Mm8"/>
                                                     <constraint firstItem="SZD-WS-Sy8" firstAttribute="leading" secondItem="voY-jm-Bql" secondAttribute="leading" id="q3M-T7-dTu"/>
-                                                    <constraint firstItem="7RC-03-hT4" firstAttribute="top" secondItem="SZD-WS-Sy8" secondAttribute="bottom" id="rmC-0c-srq"/>
-                                                    <constraint firstAttribute="bottom" secondItem="7RC-03-hT4" secondAttribute="bottom" id="yc9-Fa-Xwl"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="voY-jm-Bql" firstAttribute="width" secondItem="VCd-Tw-HKo" secondAttribute="width" constant="-20" id="4Dn-Ko-NcJ"/>
-                                            <constraint firstItem="voY-jm-Bql" firstAttribute="leading" secondItem="VCd-Tw-HKo" secondAttribute="leading" constant="10" id="8Fq-N6-xZe"/>
+                                            <constraint firstItem="voY-jm-Bql" firstAttribute="width" secondItem="VCd-Tw-HKo" secondAttribute="width" id="4Dn-Ko-NcJ"/>
+                                            <constraint firstItem="voY-jm-Bql" firstAttribute="leading" secondItem="VCd-Tw-HKo" secondAttribute="leading" id="8Fq-N6-xZe"/>
                                             <constraint firstItem="voY-jm-Bql" firstAttribute="height" secondItem="VCd-Tw-HKo" secondAttribute="height" id="cM9-7C-oO5"/>
                                             <constraint firstItem="voY-jm-Bql" firstAttribute="top" secondItem="VCd-Tw-HKo" secondAttribute="top" id="qF1-xi-3Lb"/>
                                             <constraint firstAttribute="bottom" secondItem="voY-jm-Bql" secondAttribute="bottom" id="uCx-Pa-rKq"/>
-                                            <constraint firstAttribute="trailing" secondItem="voY-jm-Bql" secondAttribute="trailing" constant="10" id="vwW-Ax-NQg"/>
+                                            <constraint firstAttribute="trailing" secondItem="voY-jm-Bql" secondAttribute="trailing" id="vwW-Ax-NQg"/>
                                         </constraints>
                                     </view>
                                     <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaT-PY-SRA" userLabel="mid1_NeumorphicView">
@@ -621,7 +607,6 @@
                         <outlet property="buttonLeft" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
                         <outlet property="buttonRight" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
                         <outlet property="cancelButton" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
-                        <outlet property="carouselCollectionView" destination="7RC-03-hT4" id="Zw8-9E-bXQ"/>
                         <outlet property="datePicker" destination="Kpa-dQ-eBA" id="Oa7-eh-kgx"/>
                         <outlet property="datePickerView" destination="wcr-5P-JyB" id="0q6-z7-Y5J"/>
                         <outlet property="inputButton" destination="kmr-j8-KMb" id="Cl5-WC-WJy"/>
@@ -630,6 +615,7 @@
                         <outlet property="segmentedControl" destination="g2X-kG-cDb" id="DEl-FB-xZ0"/>
                         <outlet property="smallWritingCounterLabel" destination="y7J-fD-Ma2" id="wMq-aU-0Ua"/>
                         <outlet property="smallWrittingTextFieldView" destination="X8k-rh-mmp" id="q7O-tP-ypq"/>
+                        <outlet property="tableView" destination="WcP-ol-10D" id="wX2-IT-Ign"/>
                         <outlet property="textFieldAmountCredit" destination="8YU-bl-bba" id="9e8-Jc-Q7E"/>
                         <outlet property="textFieldAmountDebit" destination="b2F-8K-hRw" id="CmH-Dz-fak"/>
                         <outlet property="textFieldCategoryCredit" destination="arY-VQ-0Zi" id="u91-Mk-D5t"/>
@@ -734,7 +720,7 @@
         <image name="arrow_forward_ios-arrow_forward_ios_symbol" width="10" height="17"/>
         <image name="close-close_symbol" width="12" height="12"/>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

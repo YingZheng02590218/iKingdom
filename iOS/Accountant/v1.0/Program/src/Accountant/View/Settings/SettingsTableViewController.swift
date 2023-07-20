@@ -421,7 +421,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.accessoryView = switchView
                 return cell
             case 1:
-                cell.centerLabel.text = "仕訳"
+                cell.centerLabel.text = "よく使う仕訳"
                 cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
             case 2:
                 cell.centerLabel.text = "主要簿"

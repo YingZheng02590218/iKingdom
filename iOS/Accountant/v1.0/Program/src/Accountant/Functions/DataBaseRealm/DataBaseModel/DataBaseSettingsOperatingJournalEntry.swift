@@ -35,4 +35,5 @@ class DataBaseSettingsOperatingJournalEntry: RObject {
     @objc dynamic var credit_category: String = ""     // 貸方勘定
     @objc dynamic var credit_amount: Int64 = 0         // 貸方金額
     @objc dynamic var smallWritting: String = ""       // 小書き
+    @objc dynamic var group: Int = 0               // グループID
 }

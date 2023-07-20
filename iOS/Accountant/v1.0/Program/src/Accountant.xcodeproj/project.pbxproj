@@ -57,6 +57,10 @@
 		F9354DC02498F730007DB098 /* DataBaseProfitAndLossStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */; };
 		F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */; };
 		F9354DC524990AB4007DB098 /* DataBaseManagerFinancialStatements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */; };
+		F937332F2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F937332E2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift */; };
+		F93733302A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F937332E2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift */; };
+		F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93733312A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard */; };
+		F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F93733312A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard */; };
 		F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
 		F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */; };
 		F93A263429573714002B7EB9 /* JournalEntryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93A263329573714002B7EB9 /* JournalEntryData.swift */; };
@@ -102,6 +106,14 @@
 		F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F955B6102490FD3E005E2C6D /* CFTableViewController.swift */; };
 		F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
 		F9578BDE2858CA1B001C5D74 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9578BDC2858CA13001C5D74 /* Network.framework */; };
+		F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
+		F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */; };
+		F9593DB72A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */; };
+		F9593DB82A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */; };
+		F9593DBB2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */; };
+		F9593DBC2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */; };
+		F9593DBE2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */; };
+		F9593DBF2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */; };
 		F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59812650273200EFE522 /* CarouselAndPageViewController.swift */; };
 		F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F95F59A0265027A000EFE522 /* CarouselAndPageViewController.storyboard */; };
 		F95F59A726502DC200EFE522 /* CarouselTabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95F59A526502DC200EFE522 /* CarouselTabCollectionViewCell.swift */; };
@@ -200,6 +212,10 @@
 		F98EF6E0257CC03500CBCDDC /* SettingsOperatingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */; };
 		F99112E42495290000E28BB9 /* BSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E32495290000E28BB9 /* BSModel.swift */; };
 		F99112E624952EA100E28BB9 /* DataBaseBalanceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */; };
+		F991EEF92A67B5640077547F /* CarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */; };
+		F991EEFA2A67B5640077547F /* CarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */; };
+		F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
+		F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
 		F9941D6A26458259008B3970 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
 		F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */; };
 		F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
@@ -226,6 +242,14 @@
 		F99C6BA1280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
 		F99C6BA2280DAFF300E99080 /* PeriodYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */; };
 		F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */ = {isa = PBXBuildFile; fileRef = F99CF359251B2D18004295DE /* taxonomy.csv */; };
+		F99D3AFA2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */; };
+		F99D3AFB2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */; };
+		F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
+		F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */; };
+		F99D3B012A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */; };
+		F99D3B022A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */; };
+		F99D3B042A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */; };
+		F99D3B052A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */; };
 		F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */; };
 		F9A3A6492631ABD0006E0FA0 /* WithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */; };
 		F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */; };
@@ -717,6 +741,8 @@
 		F9354DBF2498F730007DB098 /* DataBaseProfitAndLossStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseProfitAndLossStatement.swift; sourceTree = "<group>"; };
 		F9354DC22498FEB5007DB098 /* DataBaseCashFlowStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseCashFlowStatement.swift; sourceTree = "<group>"; };
 		F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerFinancialStatements.swift; sourceTree = "<group>"; };
+		F937332E2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryGroupDetailViewController.swift; sourceTree = "<group>"; };
+		F93733312A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryGroupDetailViewController.storyboard; sourceTree = "<group>"; };
 		F93A262E29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryTableViewController.swift; sourceTree = "<group>"; };
 		F93A263329573714002B7EB9 /* JournalEntryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryData.swift; sourceTree = "<group>"; };
 		F93A2636295B4FC1002B7EB9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -744,6 +770,10 @@
 		F955B606248FE6EF005E2C6D /* FinancialStatementTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinancialStatementTableViewController.swift; path = Accountant/View/FinancialStatement/FinancialStatementTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F955B6102490FD3E005E2C6D /* CFTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFTableViewController.swift; sourceTree = "<group>"; };
 		F9578BDC2858CA13001C5D74 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
+		F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsOperatingJournalEntryGroup.swift; sourceTree = "<group>"; };
+		F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingJournalEntryGroupViewController.swift; sourceTree = "<group>"; };
+		F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingJournalEntryGroupViewController.storyboard; sourceTree = "<group>"; };
+		F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntryGroup.swift; sourceTree = "<group>"; };
 		F95D44FF25ADE5F00044493A /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F95D450325AECAE80044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F95D450425AECAE90044493A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -808,6 +838,8 @@
 		F98EF6DF257CC03500CBCDDC /* SettingsOperatingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOperatingTableViewController.swift; sourceTree = "<group>"; };
 		F99112E32495290000E28BB9 /* BSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSModel.swift; sourceTree = "<group>"; };
 		F99112E524952EA100E28BB9 /* DataBaseBalanceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseBalanceSheet.swift; sourceTree = "<group>"; };
+		F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTableViewCell.swift; sourceTree = "<group>"; };
+		F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTableViewCell.xib; sourceTree = "<group>"; };
 		F9941D6926458259008B3970 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpViewController.storyboard; sourceTree = "<group>"; };
@@ -832,6 +864,10 @@
 		F99C6B9D280DAFE100E99080 /* PeriodYearViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PeriodYearViewController.storyboard; sourceTree = "<group>"; };
 		F99C6BA0280DAFF300E99080 /* PeriodYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodYearViewController.swift; sourceTree = "<group>"; };
 		F99CF359251B2D18004295DE /* taxonomy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taxonomy.csv; sourceTree = "<group>"; };
+		F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChoiceViewController.swift; sourceTree = "<group>"; };
+		F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupChoiceViewController.storyboard; sourceTree = "<group>"; };
 		F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerJournalEntry.swift; sourceTree = "<group>"; };
 		F9A3A6472631ABD0006E0FA0 /* WithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithIconTableViewCell.swift; sourceTree = "<group>"; };
 		F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithIconTableViewCell.xib; sourceTree = "<group>"; };
@@ -1120,7 +1156,10 @@
 			children = (
 				F906C4E2263B14E7006C6233 /* SettingsOperatingJournalEntryViewController.swift */,
 				F906C4E7263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard */,
+				F99D3B002A66AF8200E19110 /* GroupChoiceViewController.swift */,
+				F99D3B032A66AFBA00E19110 /* GroupChoiceViewController.storyboard */,
 				F9E0F43526413E2700085CC0 /* Cell */,
+				F9593DB92A62B62300A1D0B3 /* Group */,
 			);
 			path = SettingsOperatingJournalEntry;
 			sourceTree = "<group>";
@@ -1197,6 +1236,7 @@
 				F9134C272476E8CF002A0F77 /* DatabaseManagerSettingsTaxonomyAccount.swift */,
 				F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */,
 				F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */,
+				F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */,
 			);
 			path = DataBaseManager;
 			sourceTree = "<group>";
@@ -1231,6 +1271,7 @@
 				F9134C292476E987002A0F77 /* DataBaseSettingsTaxonomyAccount.swift */,
 				F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */,
 				F9876D2826428F290095F130 /* DataBaseSettingsOperatingJournalEntry.swift */,
+				F9593DB32A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift */,
 			);
 			path = DataBaseModel;
 			sourceTree = "<group>";
@@ -1371,6 +1412,17 @@
 				F9AC5521292CC8B4003966E4 /* PDFMakerPL.swift */,
 			);
 			path = PDF;
+			sourceTree = "<group>";
+		};
+		F9593DB92A62B62300A1D0B3 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				F9593DB62A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift */,
+				F9593DBA2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard */,
+				F937332E2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift */,
+				F93733312A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard */,
+			);
+			path = Group;
 			sourceTree = "<group>";
 		};
 		F95F597F2650266300EFE522 /* UIParts */ = {
@@ -1539,6 +1591,10 @@
 				F9A3A6482631ABD0006E0FA0 /* WithIconTableViewCell.xib */,
 				F9AD5F3626399C00003EC6EF /* CarouselCollectionViewCell.swift */,
 				F9AD5F3726399C00003EC6EF /* CarouselCollectionViewCell.xib */,
+				F99D3AF52A63FDAD00E19110 /* CustomTableViewCell.swift */,
+				F99D3AF62A63FDAD00E19110 /* CustomTableViewCell.xib */,
+				F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */,
+				F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */,
 				F906C4EC263B1B65006C6233 /* ListCollectionViewCell.swift */,
 				F906C4ED263B1B65006C6233 /* ListCollectionViewCell.xib */,
 				F98D5368264FB49A00996653 /* WithLabelTableViewCell.swift */,
@@ -2111,6 +2167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99D3B042A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */,
 				F986CC1E29474392005A2138 /* .swiftlint.yml in Resources */,
 				F928F93429A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9A3A64A2631ABD0006E0FA0 /* WithIconTableViewCell.xib in Resources */,
@@ -2135,6 +2192,7 @@
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
+				F9593DBB2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
@@ -2142,6 +2200,7 @@
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -2168,11 +2227,13 @@
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
 				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
+				F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */,
+				F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2198,6 +2259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99D3B052A66AFBA00E19110 /* GroupChoiceViewController.storyboard in Resources */,
 				F986CC1F29474392005A2138 /* .swiftlint.yml in Resources */,
 				F928F93529A1CFF600D447B7 /* crrect_answer3.mp3 in Resources */,
 				F9EC670E27B90BC60003FBB6 /* WithIconTableViewCell.xib in Resources */,
@@ -2222,6 +2284,7 @@
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
+				F9593DBC2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
@@ -2229,6 +2292,7 @@
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
 				F9EC672627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
 				F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -2255,11 +2319,13 @@
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
 				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
+				F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */,
+				F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2433,6 +2499,7 @@
 				F9AC551C292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9D08D8F25444D2100CE3CB2 /* SettingsTableViewCell.swift in Sources */,
 				F951725E295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
+				F991EEF92A67B5640077547F /* CarouselTableViewCell.swift in Sources */,
 				F9C2BC25277DEF08006334D0 /* ClassicCalculatorViewController.swift in Sources */,
 				F9D08D8D25444CF700CE3CB2 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9D08D8E25444CF700CE3CB2 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,
@@ -2458,6 +2525,7 @@
 				F92EA9382428B18100B721C3 /* JournalEntryViewController.swift in Sources */,
 				F929C0232478361F0034FAAF /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F9F3A01927BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
+				F937332F2A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift in Sources */,
 				F93A630224FA8AFC00C1C2C1 /* DataBase.swift in Sources */,
 				F9AD64E02912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EE7D3229B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */,
@@ -2486,6 +2554,7 @@
 				F9354DC32498FEB5007DB098 /* DataBaseCashFlowStatement.swift in Sources */,
 				F95F59822650273200EFE522 /* CarouselAndPageViewController.swift in Sources */,
 				F928F93729A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
+				F99D3B012A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */,
 				F9BDCBB227A6D1C600BD8770 /* PLPresenter.swift in Sources */,
 				F963E2C52966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */,
@@ -2520,6 +2589,7 @@
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
+				F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9941D6A26458259008B3970 /* TabBarController.swift in Sources */,
 				F9F934E72484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B629647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
@@ -2544,6 +2614,7 @@
 				F98289932974094A00F8F1B8 /* DataBaseOpeningBalanceAccount.swift in Sources */,
 				F9AD64E32912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9D15FC2296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
+				F9593DB72A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */,
 				F99B65BD24B781E3006BD3DD /* WSViewController.swift in Sources */,
 				F919603224AC53890084A18B /* File.swift in Sources */,
 				F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */,
@@ -2554,6 +2625,7 @@
 				F9D15FB3296D8E3E005E197D /* ProfitAndLossStatementViewController.swift in Sources */,
 				F963E2A42962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F91F6E2D248A1259003C3F5D /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
+				F9593DBE2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9F934EF2485578900BF7AA7 /* Initial.swift in Sources */,
 				F963E29B2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5522292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
@@ -2578,6 +2650,7 @@
 				F98D8A5127A534BD009560AA /* Printout+Utility.swift in Sources */,
 				F9B95221283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC192945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F99D3AFA2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */,
 				F982897E2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
 				F98289842973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F976798D24A8904B007A0D73 /* PLModel.swift in Sources */,
@@ -2663,6 +2736,7 @@
 				F9AC551D292B9E38003966E4 /* Accounting.swift in Sources */,
 				F9EC669327B90BC60003FBB6 /* SettingsTableViewCell.swift in Sources */,
 				F951725F295F060B007DD20C /* DataBaseManagerAccount.swift in Sources */,
+				F991EEFA2A67B5640077547F /* CarouselTableViewCell.swift in Sources */,
 				F9EC669427B90BC60003FBB6 /* ClassicCalculatorViewController.swift in Sources */,
 				F9EC669527B90BC60003FBB6 /* SettingAccountDetailAccountTableViewCell.swift in Sources */,
 				F9EC669627B90BC60003FBB6 /* SettingAccountDetailTaxonomyTableViewCell.swift in Sources */,
@@ -2688,6 +2762,7 @@
 				F9EC66A527B90BC60003FBB6 /* JournalEntryViewController.swift in Sources */,
 				F9EC66A627B90BC60003FBB6 /* DataBaseSettingsTaxonomyAccount.swift in Sources */,
 				F9F3A01A27BB991C001E873F /* HTMLhelperAccount.swift in Sources */,
+				F93733302A62C86D0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.swift in Sources */,
 				F9EC66A827B90BC60003FBB6 /* DataBase.swift in Sources */,
 				F9AD64E12912AA1300B9F50B /* HTMLhelperBS.swift in Sources */,
 				F9EE7D3329B9C06D0045EDB7 /* ErrorValidationType.swift in Sources */,
@@ -2716,6 +2791,7 @@
 				F9EC66B927B90BC60003FBB6 /* DataBaseCashFlowStatement.swift in Sources */,
 				F9EC66BA27B90BC60003FBB6 /* CarouselAndPageViewController.swift in Sources */,
 				F9EC66BB27B90BC60003FBB6 /* PLPresenter.swift in Sources */,
+				F99D3B022A66AF8200E19110 /* GroupChoiceViewController.swift in Sources */,
 				F928F93829A1EF1C00D447B7 /* NewsTableViewHeaderFooterView.swift in Sources */,
 				F963E2C62966E9BE002DF49E /* GeneralLedgerPLAccountModel.swift in Sources */,
 				F9EC66BC27B90BC60003FBB6 /* DataBaseFinancialStatements.swift in Sources */,
@@ -2750,6 +2826,7 @@
 				F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
+				F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F9EC66CF27B90BC60003FBB6 /* DataBaseManagerGeneralLedger.swift in Sources */,
 				F963E2B729647A01002DF49E /* DataBaseTransferEntry.swift in Sources */,
 				F9EC66D027B90BC60003FBB6 /* DataBaseAccountingBooks.swift in Sources */,
@@ -2774,6 +2851,7 @@
 				F9AD64E42912B66B00B9F50B /* StringUtility.swift in Sources */,
 				F9D15FC3296EAFEF005E197D /* PDFMakerProfitAndLossStatement.swift in Sources */,
 				F9EC66DD27B90BC60003FBB6 /* WSViewController.swift in Sources */,
+				F9593DB82A62B61C00A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.swift in Sources */,
 				F9EC66DE27B90BC60003FBB6 /* File.swift in Sources */,
 				F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */,
 				F9EC66DF27B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.swift in Sources */,
@@ -2784,6 +2862,7 @@
 				F963E2A52962B728002DF49E /* BalanceSheetModel.swift in Sources */,
 				F9EC66E327B90BC60003FBB6 /* DataBaseManagerAccountingBooksShelf.swift in Sources */,
 				F9EC66E427B90BC60003FBB6 /* Initial.swift in Sources */,
+				F9593DBF2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift in Sources */,
 				F963E29C2961D686002DF49E /* BalanceSheetViewController.swift in Sources */,
 				F9AC5523292CC8B4003966E4 /* PDFMakerPL.swift in Sources */,
 				F9EC66E527B90BC60003FBB6 /* DataBaseAccount.swift in Sources */,
@@ -2808,6 +2887,7 @@
 				F9EC66F127B90BC60003FBB6 /* Printout+Utility.swift in Sources */,
 				F9B95222283CE60200138D07 /* UITraitCollection+extension.swift in Sources */,
 				F986CC1A2945BA9A005A2138 /* SplashViewController.swift in Sources */,
+				F99D3AFB2A63FDAD00E19110 /* CustomTableViewCell.swift in Sources */,
 				F982897F2973C3FF00F8F1B8 /* AfterClosingTrialBalancePresenter.swift in Sources */,
 				F98289852973E83100F8F1B8 /* OpeningBalanceViewController.swift in Sources */,
 				F9EC66F227B90BC60003FBB6 /* PLModel.swift in Sources */,

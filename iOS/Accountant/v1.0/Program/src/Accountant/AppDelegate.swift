@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 2,
+            schemaVersion: 3,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -94,6 +94,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject?["EnglishFromOfClosingTheLedger1"] = true
                         // 残高振替仕訳 初期値はON
                         newObject?["EnglishFromOfClosingTheLedger2"] = true
+                    }
+                }
+                // スキーマバージョン
+                if oldSchemaVersion < 3 {
+                    // DataBaseSettingsOperatingオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseSettingsOperatingJournalEntry.className()) { oldObject, newObject in
+                        // 設定仕訳画面 よく使う仕訳
+                        // グループID 初期値は 0
+                        newObject?["group"] = 0
                     }
                 }
             }
