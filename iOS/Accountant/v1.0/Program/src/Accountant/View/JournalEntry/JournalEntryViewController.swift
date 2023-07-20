@@ -84,14 +84,14 @@ class JournalEntryViewController: UIViewController {
     var primaryKey: Int = 0
     // グループ
     var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalEntryPresenterInput!
     
     func inject(presenter: JournalEntryPresenterInput) {
         self.presenter = presenter
     }
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -185,7 +185,7 @@ class JournalEntryViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - チュートリアル対応 コーチマーク型
     
     // チュートリアル対応 コーチマーク型
@@ -220,7 +220,7 @@ class JournalEntryViewController: UIViewController {
     }
     
     // MARK: - Setting
-        
+    
     // MARK: UIDatePicker
     // デートピッカー作成
     func createDatePicker() {
@@ -247,7 +247,7 @@ class JournalEntryViewController: UIViewController {
         guard let yyyyMMddHHmmssNow: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
         guard let yyyyMMddHHmmssNowCurrent = Date.convertDate(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ") else { return }
         print(yyyyMMddHHmmssNowCurrent.toString(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
-
+        
         // デイトピッカーの最大値と最小値を設定
         if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
             // 決算整理仕訳の場合は日付を決算日に固定
@@ -595,8 +595,8 @@ class JournalEntryViewController: UIViewController {
         // 小書きを入力中は、画面を上げる
         if textFieldSmallWritting.isEditing {
             guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-            // テキストフィールドの下辺
-            let txtLimit = textFieldSmallWritting.frame.origin.y + textFieldSmallWritting.frame.height + 8.0
+            // 入力ボタンの下辺
+            let txtLimit = inputButton.frame.origin.y + inputButton.frame.height - 10.0
             
             animateWithKeyboard(notification: notification) { keyboardFrame in
                 if self.view.frame.origin.y == 0 {
@@ -705,7 +705,6 @@ class JournalEntryViewController: UIViewController {
                 presenter.inputButtonTapped(journalEntryType: journalEntryType)
             }
         }
-
     }
     
     // 仕訳一括編集　の処理
@@ -813,7 +812,7 @@ class JournalEntryViewController: UIViewController {
                 credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-
+            
             return (dBJournalEntry, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
         }
         
@@ -845,7 +844,7 @@ class JournalEntryViewController: UIViewController {
                 AnalyticsParameterContentType: Constant.JOURNALS,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
-
+            
             return dBJournalEntry
         }
         
@@ -898,7 +897,7 @@ class JournalEntryViewController: UIViewController {
             })
             return false // NG
         }
-                
+        
         // 小書き　バリデーションチェック
         switch ErrorValidation().validateSmallWriting(text: textFieldSmallWritting.text ?? "") {
         case .success, .unvalidated:
@@ -914,7 +913,7 @@ class JournalEntryViewController: UIViewController {
         
         return true // OK
     }
-
+    
     // 入力チェック
     func textInputCheck() -> Bool {
         // バリデーション 借方勘定科目
@@ -936,7 +935,15 @@ class JournalEntryViewController: UIViewController {
         }) else {
             return false // NG
         }
-        
+        // バリデーション 勘定科目
+        guard textInputCheck(creditText: textFieldCategoryCredit.text, debitText: textFieldCategoryDebit.text, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // 未入力のTextFieldのキーボードを自動的に表示する
+                self.textFieldCategoryCredit.becomeFirstResponder()
+            }
+        }) else {
+            return false // NG
+        }
         // バリデーション 金額
         guard textInputCheck(text: textFieldAmountDebit.text, editableType: .amount, completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -976,6 +983,22 @@ class JournalEntryViewController: UIViewController {
     func textInputCheck(text: String?, editableType: EditableType, completion: @escaping () -> Void) -> Bool {
         // バリデーションチェック
         switch ErrorValidation().validateEmpty(text: text, editableType: editableType) {
+        case .success, .unvalidated:
+            errorMessage = nil
+        case .failure(let message):
+            errorMessage = message
+            showErrorMessage(completion: {
+                completion()
+            })
+            return false // NG
+        }
+        
+        return true // OK
+    }
+    // バリデーション 勘定科目
+    func textInputCheck(creditText: String?, debitText: String?, completion: @escaping () -> Void) -> Bool {
+        // バリデーションチェック
+        switch ErrorValidation().validate(creditText: creditText, debitText: debitText) {
         case .success, .unvalidated:
             errorMessage = nil
         case .failure(let message):
@@ -1158,7 +1181,7 @@ extension JournalEntryViewController: UICollectionViewDelegateFlowLayout {
         // top:ナビゲーションバーの高さ分上に移動
         return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
-
+    
 }
 
 extension JournalEntryViewController: UICollectionViewDataSource {
@@ -1186,7 +1209,7 @@ extension JournalEntryViewController: UICollectionViewDataSource {
 }
 
 extension JournalEntryViewController: UICollectionViewDelegate {
-
+    
     /// セルの選択時に背景色を変化させる
     /// 今度はセルが選択状態になった時に背景色が青に変化するようにしてみます。
     /// 以下の3つのメソッドはデフォルトでtrueなので、このケースでは実装しなくても良いです。
@@ -1367,7 +1390,8 @@ extension JournalEntryViewController: UITextFieldDelegate {
             if textFieldCategoryDebit.text == "" {
                 // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 貸方と同じ勘定科目の場合
-                textFieldCategoryDebit.text = ""
+                // 同じ勘定科目を指定できるように変更
+                // textFieldCategoryDebit.text = ""
             } else {
                 if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集ではない場合
                     journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
@@ -1381,7 +1405,8 @@ extension JournalEntryViewController: UITextFieldDelegate {
             if textFieldCategoryCredit.text == "" {
                 // 未入力
             } else if textFieldCategoryCredit.text == textFieldCategoryDebit.text { // 借方と同じ勘定科目の場合
-                textFieldCategoryCredit.text = ""
+                // 同じ勘定科目を指定できるように変更
+                // textFieldCategoryCredit.text = ""
             } else {
                 // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
                 if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
@@ -1487,7 +1512,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             }
         }
     }
-
+    
     func updateUI() {
         // UIパーツを作成
         createTextFieldForCategory()
@@ -1601,8 +1626,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             viewController.alpha = 0.7
             present(viewController, animated: true, completion: nil)
         }
-    }
-    
+    }    
     // ダイアログ　オフライン
     func showDialogForOfline() {
         // フィードバック
@@ -1677,6 +1701,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     
     // ダイアログ 記帳しました
     func showDialogForSucceed() {
+        // 入力中のキーボード　小書き不要の場合に、入力ボタンを押下された場合 フォーカスされている状態を外す
+        self.textFieldSmallWritting.resignFirstResponder()
         // フィードバック
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
