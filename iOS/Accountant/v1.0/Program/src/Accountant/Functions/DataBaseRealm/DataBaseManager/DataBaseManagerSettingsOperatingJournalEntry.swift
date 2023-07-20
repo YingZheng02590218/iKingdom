@@ -72,6 +72,7 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntry.self, predicates: [
             NSPredicate(format: "group == %@", NSNumber(value: group))
         ])
+            .sorted(byKeyPath: "nickname", ascending: true) // タイトル順でソートする
         return objects
     }
 

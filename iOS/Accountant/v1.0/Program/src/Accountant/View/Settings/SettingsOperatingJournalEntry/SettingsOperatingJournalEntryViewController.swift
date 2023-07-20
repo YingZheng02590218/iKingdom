@@ -148,6 +148,8 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             // リロード
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                
+                JournalEntryViewController.viewReload = true
             }
         })
     }
