@@ -36,7 +36,6 @@ class GroupChoiceViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.isHidden = false
-        //        pickerViewView.isHidden = false
         
         if let datePickerView = pickerViewView {
             datePickerView.neumorphicLayer?.cornerRadius = 15
@@ -108,8 +107,8 @@ class GroupChoiceViewController: UIViewController {
     // 確認ダイアログ
     func showDialog() {
         let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-        let groupName = objects[self.pickerView.selectedRow(inComponent: 0)].groupName
-        let number = objects[self.pickerView.selectedRow(inComponent: 0)].number
+        let groupName = pickerView.selectedRow(inComponent: 0) == DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup().count ? "その他" : objects[pickerView.selectedRow(inComponent: 0)].groupName
+        let number = pickerView.selectedRow(inComponent: 0) == DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup().count ? 0 : objects[self.pickerView.selectedRow(inComponent: 0)].number
         
         let alert = UIAlertController(title: "最終確認", message: "グループを 「\(groupName)」 に変更しますか？", preferredStyle: .alert)
         alert.addAction(UIAlertAction(
@@ -170,11 +169,15 @@ extension GroupChoiceViewController: UIPickerViewDataSource, UIPickerViewDelegat
     }
     // UIPickerViewの行数、リストの数 コンポーネントの内のデータ
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup().count
+        DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup().count + 1
     }
     // UIPickerViewの最初の表示 ホイールに表示する選択肢のタイトル
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
-        return objects[row].groupName
+        if row == DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup().count {
+            return "その他"
+        } else {
+            let objects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+            return objects[row].groupName
+        }
     }
 }
