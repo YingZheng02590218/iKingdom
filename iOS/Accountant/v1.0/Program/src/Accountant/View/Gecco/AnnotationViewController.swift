@@ -9,6 +9,7 @@
 import Gecco
 import UIKit
 
+// 精算表　試算表
 class AnnotationViewController: SpotlightViewController {
     
     @IBOutlet var annotationViews: [UIView]!
@@ -96,7 +97,14 @@ extension AnnotationViewController: SpotlightViewControllerDelegate {
     }
     
     func spotlightViewControllerWillDismiss(_ viewController: SpotlightViewController, animated: Bool) {
-        spotlightView.disappear()
+        print(stepIndex)
+        switch stepIndex {
+        case 3:
+            // スポットライトが最後のUIパーツに当たっている時にダブルタップすると、クラッシュが発生していた対策
+            break
+        default:
+            spotlightView.disappear()
+        }
     }
 }
 
