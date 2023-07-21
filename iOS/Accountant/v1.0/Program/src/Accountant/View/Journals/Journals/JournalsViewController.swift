@@ -862,6 +862,26 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         addBarButtonItem.isEnabled = !editing // 仕訳入力ボタン
         // 編集中の場合
         if editing {
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+        } else {
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+        }
+        // 編集中の場合
+        if editing {
             self.indexPaths = [] // 初期化
         }
         navigationItem.title = "仕訳帳"
