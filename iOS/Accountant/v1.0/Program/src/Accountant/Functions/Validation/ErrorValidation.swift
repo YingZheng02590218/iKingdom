@@ -101,6 +101,16 @@ struct ErrorValidation {
         }
         return .success
     }
+    // バリデーション 勘定科目
+    func validate(creditText: String?, debitText: String?) -> ErrorValidationState {
+        // 貸方と同じ勘定科目の場合
+        guard creditText != debitText else {
+            return .failure(
+                message: ErrorValidationType.requiredDifferentCategory.errorText
+            )
+        }
+        return .success
+    }
     // バリデーション 仕訳一括編集 日付、勘定科目、金額、小書き
     func validateEmptyAll(journalEntryData: JournalEntryData) -> ErrorValidationState {
         // 必須 ひとつでも変更されているか
