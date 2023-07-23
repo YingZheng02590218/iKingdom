@@ -85,7 +85,7 @@ struct HTMLhelper {
             font-size: 80%;
         }
         .fontsize95 {
-            font-size: 95%;
+            font-size: 100%;
         }
     
         .flex-colum {
@@ -136,7 +136,7 @@ struct HTMLhelper {
                 }
     .page{
         width: 210mm;
-        height: 296mm;
+        height: auto; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
         box-sizing: border-box;
         padding: 0mm 10mm;
         display: block;
@@ -203,9 +203,10 @@ struct HTMLhelper {
         margin: 0px 0; }
 
       th, td {
-              font-size: 15px;
-      border: 0px solid #05203a;
-      padding: 5px; }
+        font-size: 17px;
+        border: 0px solid #05203a;
+        padding: 5px;
+      }
 
       th {
       width: 70%;
@@ -323,16 +324,16 @@ struct HTMLhelper {
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debitCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountDebit == 0 ? "" : String(numberOfAccountDebit))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
                   <td class="line_single_blue_bottom"></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom center"></td>
                   <td class="line_double_red_right line_single_blue_bottom center"></td>
-                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95"><p class="right">\(creditCategory)</p></td>
+                  <td class="smallWritting line_single_blue_bottom line_double_red_right fontsize95"><p class="right fontsize95">\(creditCategory)</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccountCredit == 0 ? "" : String(numberOfAccountCredit))</td>
                   <td class="line_double_red_right line_single_blue_bottom"></td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(creditAmount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
                 </tr>
                 <tr class="rowHeight">
                   <td class="line_single_red_right line_single_blue_bottom"></td>
