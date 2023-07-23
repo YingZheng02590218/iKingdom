@@ -303,7 +303,9 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
 
     func reloadData() {
         // 更新処理
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func finishLoading() {

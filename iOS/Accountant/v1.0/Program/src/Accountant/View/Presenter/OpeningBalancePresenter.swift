@@ -122,6 +122,8 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
         // 全勘定の合計と残高を計算する
         model.initializeJournals(completion: { isFinished in
             print("Result is \(isFinished)")
+            // 編集を終了する
+            view.reloadData()
             // ローディング終了
             view.finishLoading()
         })
