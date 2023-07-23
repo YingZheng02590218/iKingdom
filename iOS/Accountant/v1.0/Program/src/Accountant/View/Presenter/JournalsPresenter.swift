@@ -44,6 +44,8 @@ protocol JournalsPresenterInput {
 }
 
 protocol JournalsPresenterOutput: AnyObject {
+    func showActivityIndicatorView()
+    func finishActivityIndicatorView()
     func reloadData(primaryKeys: [Int]?, primaryKeysAdjusting: [Int]?)
     func reloadData()
     func setupViewForViewDidLoad()
@@ -176,6 +178,8 @@ final class JournalsPresenter: JournalsPresenterInput {
     
     func refreshTable(isEditing: Bool) {
         if !isEditing {
+            // インジゲーターを開始
+            view.showActivityIndicatorView()
             DispatchQueue.global(qos: .default).async {
                 // 全勘定の合計と残高を計算する
                 self.model.initializeJournals(completion: { isFinished in
@@ -192,6 +196,8 @@ final class JournalsPresenter: JournalsPresenterInput {
                         self.dataBaseCapitalTransferJournalEntry = self.model.getCapitalTransferJournalEntryInAccount()
                         // 更新処理
                         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
+                        // インジケーターを終了
+                        self.view.finishActivityIndicatorView()
                     }
                 })
             }

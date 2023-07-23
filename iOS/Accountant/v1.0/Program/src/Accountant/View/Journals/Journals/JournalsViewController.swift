@@ -54,6 +54,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // セルが画面に表示される直前に表示される ※セルが0個の場合は呼び出されない
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scrollAdding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
+    // インジゲーター
+    let backView = UIView()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
@@ -282,7 +284,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     // リロード機能
-    @objc private func refreshTable() {
+    @objc
+    private func refreshTable() {
         
         presenter.refreshTable(isEditing: tableView.isEditing)
     }
@@ -1160,6 +1163,60 @@ extension JournalsViewController: JournalsPresenterOutput {
             }
         }
     }
+    
+    // インジゲーターを開始
+    func showActivityIndicatorView() {
+        DispatchQueue.main.async {
+            self.editButtonItem.isEnabled = false // 編集ボタン
+            self.pdfBarButtonItem.isEnabled = false // 印刷ボタン
+            self.addBarButtonItem.isEnabled = false // 仕訳入力ボタン
+            // タブの無効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = false
+                    }
+                }
+            }
+            // 背景になるView
+            self.backView.backgroundColor = .clear
+            
+            // tabBarControllerのViewを使う
+            guard let tabBarView = self.tabBarController?.view else {
+                return
+            }
+            // 背景をNavigationControllerのViewに貼り付け
+            tabBarView.addSubview(self.backView)
+            
+            // サイズ合わせはAutoLayoutで
+            self.backView.translatesAutoresizingMaskIntoConstraints = false
+            self.backView.topAnchor.constraint(equalTo: tabBarView.topAnchor).isActive = true
+            self.backView.bottomAnchor.constraint(equalTo: tabBarView.bottomAnchor).isActive = true
+            self.backView.leftAnchor.constraint(equalTo: tabBarView.leftAnchor).isActive = true
+            self.backView.rightAnchor.constraint(equalTo: tabBarView.rightAnchor).isActive = true
+        }
+    }
+    // インジケーターを終了
+    func finishActivityIndicatorView() {
+        // 非同期処理などが終了したらメインスレッドでアニメーション終了
+        DispatchQueue.main.async {
+            // 非同期処理などを実行（今回は2秒間待つだけ）
+            Thread.sleep(forTimeInterval: 1.0)
+            self.editButtonItem.isEnabled = true // 編集ボタン
+            self.pdfBarButtonItem.isEnabled = true // 印刷ボタン
+            self.addBarButtonItem.isEnabled = true // 仕訳入力ボタン
+            // タブの有効化
+            if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
+                for tabBarItem in arrayOfTabBarItems {
+                    if let tabBarItem = tabBarItem as? UITabBarItem {
+                        tabBarItem.isEnabled = true
+                    }
+                }
+            }
+            self.backView.removeFromSuperview()
+        }
+    }
+
 }
 
 /*
