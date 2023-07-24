@@ -3156,6 +3156,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3175,6 +3176,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Development Provisioning Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Paciolist Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3192,6 +3194,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3211,6 +3214,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Paciolist Distribution Provisioning Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Paciolist Distribution Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3361,6 +3365,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3381,6 +3386,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3398,6 +3404,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = T526NZN54U;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3418,6 +3425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "PaciolistSTG Development Provisioning Profile";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "PaciolistSTG Development Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
