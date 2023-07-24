@@ -152,9 +152,9 @@ class OpeningBalanceViewController: UIViewController {
             // フィードバック
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.error)
-            let alert = UIAlertController(title: "開いている帳簿の年度", message: "開始残高入力する際は、最も古い年度の帳簿を開いてください。", preferredStyle: .alert)
+            let alert = UIAlertController(title: "開いている帳簿の年度", message: "開始残高を入力する際は、最も古い年度の帳簿を開いてください。", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
