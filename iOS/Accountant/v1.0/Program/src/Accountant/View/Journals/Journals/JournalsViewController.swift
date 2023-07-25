@@ -55,6 +55,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     var scroll = false   // flag 初回起動後かどうかを判定する (viewDidLoadでON, viewDidAppearでOFF)
     var scrollAdding = false   // flag 入力ボタン押下後かどうかを判定する (autoScrollでON, viewDidAppearでOFF)
     // インジゲーター
+    var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
 
     /// GUIアーキテクチャ　MVP
@@ -885,7 +886,14 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // 編集中の場合
         if editing {
+            // 前回の、まとめて編集後のセルのハイライトを戻す
+            self.primaryKeys = nil
+            self.primaryKeysAdjusting = nil
             self.indexPaths = [] // 初期化
+            DispatchQueue.main.async {
+                // 編集前に選択状態を更新する
+                self.tableView.reloadData()
+            }
         }
         navigationItem.title = "仕訳帳"
     }
@@ -1180,7 +1188,15 @@ extension JournalsViewController: JournalsPresenterOutput {
             }
             // 背景になるView
             self.backView.backgroundColor = .clear
-            
+            // 表示位置を設定（画面中央）
+            self.activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            // インジケーターのスタイルを指定（白色＆大きいサイズ）
+            self.activityIndicatorView.style = UIActivityIndicatorView.Style.large
+            // インジケーターを View に追加
+            self.backView.addSubview(self.activityIndicatorView)
+            // インジケーターを表示＆アニメーション開始
+            self.activityIndicatorView.startAnimating()
+
             // tabBarControllerのViewを使う
             guard let tabBarView = self.tabBarController?.view else {
                 return
@@ -1205,6 +1221,8 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.editButtonItem.isEnabled = true // 編集ボタン
             self.pdfBarButtonItem.isEnabled = true // 印刷ボタン
             self.addBarButtonItem.isEnabled = true // 仕訳入力ボタン
+            // アニメーション終了
+            self.activityIndicatorView.stopAnimating()
             // タブの有効化
             if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
                 for tabBarItem in arrayOfTabBarItems {
