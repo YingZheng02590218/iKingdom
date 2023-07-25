@@ -20,15 +20,24 @@ protocol JournalsModelInput {
 
     func updateJournalEntry(primaryKey: Int, fiscalYear: Int)
     func updateAdjustingJournalEntry(primaryKey: Int, fiscalYear: Int)
-    func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void)
+    func updateJournalEntry(
+        primaryKey: Int,
+        date: String?,
+        debitCategory: String?,
+        debitAmount: Int64?,
+        creditCategory: String?,
+        creditAmount: Int64?,
+        smallWritting: String?,
+        completion: (Int) -> Void
+    )
     func updateAdjustingJournalEntry(
         primaryKey: Int,
-        date: String,
-        debitCategory: String,
-        debitAmount: Int64,
-        creditCategory: String,
-        creditAmount: Int64,
-        smallWritting: String,
+        date: String?,
+        debitCategory: String?,
+        debitAmount: Int64?,
+        creditCategory: String?,
+        creditAmount: Int64?,
+        smallWritting: String?,
         completion: (Int) -> Void
     )
     
@@ -299,7 +308,16 @@ class JournalsModel: JournalsModelInput {
         }
     }
     // 更新 仕訳　日付、借方勘定、借方金額、貸方勘定、貸方金額、小書き
-    func updateJournalEntry(primaryKey: Int, date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64, smallWritting: String, completion: (Int) -> Void) {
+    func updateJournalEntry(
+        primaryKey: Int,
+        date: String?,
+        debitCategory: String?,
+        debitAmount: Int64?,
+        creditCategory: String?,
+        creditAmount: Int64?,
+        smallWritting: String?,
+        completion: (Int) -> Void
+    ) {
         DataBaseManagerJournalEntry.shared.updateJournalEntry(
             primaryKey: primaryKey,
             date: date,
@@ -317,12 +335,12 @@ class JournalsModel: JournalsModelInput {
     // 更新 決算整理仕訳　日付、借方勘定、借方金額、貸方勘定、貸方金額、小書き
     func updateAdjustingJournalEntry(
         primaryKey: Int,
-        date: String,
-        debitCategory: String,
-        debitAmount: Int64,
-        creditCategory: String,
-        creditAmount: Int64,
-        smallWritting: String,
+        date: String?,
+        debitCategory: String?,
+        debitAmount: Int64?,
+        creditCategory: String?,
+        creditAmount: Int64?,
+        smallWritting: String?,
         completion: (Int) -> Void
     ) {
         DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(

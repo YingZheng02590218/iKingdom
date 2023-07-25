@@ -96,12 +96,12 @@ class DataBaseManagerJournalEntry {
     // 更新 仕訳
     func updateJournalEntry(
         primaryKey: Int,
-        date: String,
-        debitCategory: String,
-        debitAmount: Int64,
-        creditCategory: String,
-        creditAmount: Int64,
-        smallWritting: String,
+        date: String?,
+        debitCategory: String?,
+        debitAmount: Int64?,
+        creditCategory: String?,
+        creditAmount: Int64?,
+        smallWritting: String?,
         completion: (Int) -> Void
     ) {
         // 編集する仕訳
@@ -112,13 +112,13 @@ class DataBaseManagerJournalEntry {
 
         // 編集後の仕訳帳と借方勘定と貸方勘定
         guard let leftObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
-            accountName: debitCategory,
+            accountName: debitCategory ?? accountLeft,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else {
             return
         }
         guard let rightObject = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
-            accountName: creditCategory,
+            accountName: creditCategory ?? accountRight,
             fiscalYear: dataBaseJournalEntry.fiscalYear
         ) else {
             return
@@ -128,12 +128,12 @@ class DataBaseManagerJournalEntry {
             try DataBaseManager.realm.write {
                 let value: [String: Any] = [
                     "number": primaryKey,
-                    "date": date,
-                    "debit_category": debitCategory,
-                    "debit_amount": debitAmount,
-                    "credit_category": creditCategory,
-                    "credit_amount": creditAmount,
-                    "smallWritting": smallWritting
+                    "date": date ?? dataBaseJournalEntry.date,
+                    "debit_category": debitCategory ?? dataBaseJournalEntry.debit_category,
+                    "debit_amount": debitAmount ?? dataBaseJournalEntry.debit_amount,
+                    "credit_category": creditCategory ?? dataBaseJournalEntry.credit_category,
+                    "credit_amount": creditAmount ?? dataBaseJournalEntry.credit_amount,
+                    "smallWritting": smallWritting ?? dataBaseJournalEntry.smallWritting
                 ]
                 DataBaseManager.realm.create(DataBaseJournalEntry.self, value: value, update: .modified) // 一部上書き更新
             }
@@ -202,7 +202,10 @@ class DataBaseManagerJournalEntry {
         if !accountLeft.isEmpty && !accountRight.isEmpty {
             dataBaseManager.setAccountTotal(accountLeft: accountLeft, accountRight: accountRight) // 編集前の借方勘定と貸方勘定
         }
-        dataBaseManager.setAccountTotal(accountLeft: debitCategory, accountRight: creditCategory) // 編集後の借方勘定と貸方勘定
+        dataBaseManager.setAccountTotal(
+            accountLeft: debitCategory ?? dataBaseJournalEntry.debit_category,
+            accountRight: creditCategory ?? dataBaseJournalEntry.credit_category
+        ) // 編集後の借方勘定と貸方勘定
         // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         completion(primaryKey) //　ここでコールバックする（呼び出し元に処理を戻す）
