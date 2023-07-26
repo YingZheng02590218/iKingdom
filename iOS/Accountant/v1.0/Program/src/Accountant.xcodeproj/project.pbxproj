@@ -3154,7 +3154,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3192,7 +3192,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3363,7 +3363,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
@@ -3402,7 +3402,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
