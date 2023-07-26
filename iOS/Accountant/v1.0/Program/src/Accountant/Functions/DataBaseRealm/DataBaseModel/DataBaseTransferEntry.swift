@@ -13,6 +13,10 @@ import RealmSwift
 class DataBaseTransferEntry: DataBaseJournalEntry {
 
 }
+// 月次残高振替仕訳
+class DataBaseMonthlyTransferEntry: DataBaseJournalEntry {
+
+}
 // 設定残高振替仕訳クラス 開始残高で使用する
 class DataBaseSettingTransferEntry: DataBaseJournalEntry {
 

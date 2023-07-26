@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 3,
+            schemaVersion: 4,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -102,6 +102,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // 設定仕訳画面 よく使う仕訳
                         // グループID 初期値は 0
                         newObject?["group"] = 0
+                    }
+                }
+                // スキーマバージョン
+                if oldSchemaVersion < 4 {
+                    // DataBaseAccountオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
+                        // 月次残高振替仕訳
+                        newObject?["dataBaseMonthlyTransferEntries"] = List<DataBaseMonthlyTransferEntry>()
                     }
                 }
             }

@@ -62,6 +62,9 @@ class DataBaseManagerJournalEntry {
         // 仕訳データを追加後に、勘定ごとに保持している合計と残高を再計算する処理をここで呼び出す　2020/06/18 16:29
         let dataBaseManager = TBModel()
         dataBaseManager.setAccountTotal(accountLeft: debitCategory, accountRight: creditCategory)
+        
+        // TODO: 月次残高振替
+        
         // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
         return number

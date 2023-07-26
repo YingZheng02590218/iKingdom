@@ -39,6 +39,9 @@ protocol GeneralLedgerAccountModelInput {
     
     func initializePdfMaker(account: String, completion: (URL?) -> Void)
     func initializeCsvMaker(account: String, completion: (URL?) -> Void)
+
+    func getJournalEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseJournalEntry>
+    func getAdjustingEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseAdjustingEntry>
 }
 // 勘定クラス
 class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
@@ -224,6 +227,38 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
         objects = objects.sorted(byKeyPath: "date", ascending: true)
         return objects
     }
+    
+    // MARK: - 勘定 月次
+    // 取得　通常仕訳 勘定別に月別に取得
+    func getJournalEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseJournalEntry> {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'").first
+        let dataBaseJournalEntries = dataBaseAccount?.dataBaseJournalEntries
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+        // .filter("date LIKE '*%@*'", month) // うまく動かない
+        // .filter("date >= %@ AND date <= %@", "*/\(theDayOfBeginningOfYear)", "*/\(theDayOfEndingOfYear)") // うまく動かない
+        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+            .filter("date BEGINSWITH '\(yearMonth)'")
+            .sorted(byKeyPath: "date", ascending: true)
+        print(dataBaseJournalEntries)
+        return dataBaseJournalEntries!
+    }
+    // 取得 決算整理仕訳　勘定別に月別に取得
+    func getAdjustingEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseAdjustingEntry> {
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        let dataBaseAccount = dataBaseAccountingBooks.dataBaseGeneralLedger!.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'").first
+        let dataBaseAdjustingEntries = dataBaseAccount?.dataBaseAdjustingEntries
+            .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")
+        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+            .filter("date BEGINSWITH '\(yearMonth)'")
+            .sorted(byKeyPath: "date", ascending: true)
+        return dataBaseAdjustingEntries!
+    }
+
     // 取得　損益振替仕訳 勘定別に取得
     func getTransferEntryInAccount(account: String) -> DataBaseTransferEntry? {
 

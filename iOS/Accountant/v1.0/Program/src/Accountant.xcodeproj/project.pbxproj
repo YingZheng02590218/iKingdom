@@ -363,6 +363,8 @@
 		F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
 		F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */; };
 		F9941D6A26458259008B3970 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9941D6926458259008B3970 /* TabBarController.swift */; };
+		F994303A2A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */; };
+		F994303B2A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */; };
 		F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */; };
 		F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */; };
 		F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */; };
@@ -1062,6 +1064,7 @@
 		F991EEF82A67B5640077547F /* CarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTableViewCell.swift; sourceTree = "<group>"; };
 		F991EEFB2A67B5C70077547F /* CarouselTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselTableViewCell.xib; sourceTree = "<group>"; };
 		F9941D6926458259008B3970 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerMonthlyTransferEntry.swift; sourceTree = "<group>"; };
 		F9963CC2262081D50099D51C /* SettingsOperatingTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsOperatingTableViewController.storyboard; sourceTree = "<group>"; };
 		F9963CCA262088CB0099D51C /* SettingsHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsHelpViewController.storyboard; sourceTree = "<group>"; };
 		F9963CD5262089690099D51C /* SettingsUpgradeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsUpgradeViewController.storyboard; sourceTree = "<group>"; };
@@ -1507,6 +1510,7 @@
 				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
 				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
 				F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */,
+				F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */,
 				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
@@ -3021,6 +3025,7 @@
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
 				F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F940E4B52A9077B4008AEAFC /* WKWebView+extension.swift in Sources */,
+				F994303A2A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift in Sources */,
 				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
@@ -3264,6 +3269,7 @@
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
 				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F940E4B62A9077B4008AEAFC /* WKWebView+extension.swift in Sources */,
+				F994303B2A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift in Sources */,
 				F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,

@@ -192,6 +192,70 @@ class DateManager {
     }
     
     // 現在日時
+    // 期末　月日
+    func getTheDayOfEndingOfYear() -> String {
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear() // 年度
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning() // 決算日
+        var fiscalYearFixed = 0 // 補正値
+        if theDayOfReckoning == "12/31" {
+            fiscalYearFixed = 0 // 年度と同じ年
+        } else {
+            fiscalYearFixed = 1 // 年度 + 1年
+        }
+        // 今年度の決算日　決算日 + 年度 + 時分秒
+        let fullTheDayOfReckoning = dateFormatter.date(from: theDayOfReckoning + "/" + String(fiscalYear + fiscalYearFixed))!
+        return dateFormatterMMdd.string(from: fullTheDayOfReckoning)
+    }
+    
+    // 月別の月末日を取得 12ヶ月分
+    func getTheDayOfEndingOfMonth() -> [Date] {
+        // 月別の月末日 12ヶ月分
+        var beginningOfMonthDates: [Date] = []
+        
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear() // 年度
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning() // 決算日
+        var fiscalYearFixed = 0 // 補正値
+        if theDayOfReckoning == "12/31" {
+            fiscalYearFixed = 0 // 年度と同じ年
+        } else {
+            fiscalYearFixed = 1 // 年度 + 1年
+        }
+        // 今年度の決算日　決算日 + 年度 + 時分秒
+        guard let fullTheDayOfReckoning = dateFormatter.date(from: String(fiscalYear + fiscalYearFixed) + "/" + theDayOfReckoning) else {
+            return beginningOfMonthDates
+        }
+        // 年度開始日　決算日の翌日に設定する
+        guard let dayOfStartInPeriod = calendar.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
+              let dayOfStartInPeriod = calendar.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else { // 今年度の決算日 +１日
+            return beginningOfMonthDates
+        }
+        //　ある月の月初・月末を取得する方法。月初の取得は1日固定で取得するだけだが、月末の取得は月初から1ヶ月進めて1日戻すことで算出できる。
+        var calendar = Calendar(identifier: .gregorian) // 西暦を指定
+        calendar.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60) ?? .current
+        
+        for i in 0..<12 {
+            // 今年度の開始日 ＋１ヶ月
+            if let dayOfStartInPeriodAdded = Calendar.current.date(byAdding: .month, value: i, to: dayOfStartInPeriod),
+               // day: 1 を指定してもよいが省略しても月初となる
+               let firstDay = calendar.date(from: DateComponents(year: dayOfStartInPeriodAdded.year, month: dayOfStartInPeriodAdded.month)) {
+                /* こう書いても同じ
+                 var comps = calendar.dateComponents([.year, .month], from: Date())
+                 comps.year = 2020
+                 comps.month = 2
+                 let firstDay = calendar.date(from: comps)!
+                 */
+                let add = DateComponents(month: 1, day: -1) // 月初から1ヶ月進めて1日戻す
+                if let lastDay = calendar.date(byAdding: add, to: firstDay) {
+                    print("月初：\(firstDay)") // 2020-01-31 15:00:00 +0000
+                    print("月末：\(lastDay)\n") // 2020-02-28 15:00:00 +0000
+                    // 先頭を0埋めする
+                    beginningOfMonthDates.append(lastDay)
+                }
+            }
+        }
+        return beginningOfMonthDates
+    }
+    
     func getDate() -> String {
         
         formatter.string(from: Date())
