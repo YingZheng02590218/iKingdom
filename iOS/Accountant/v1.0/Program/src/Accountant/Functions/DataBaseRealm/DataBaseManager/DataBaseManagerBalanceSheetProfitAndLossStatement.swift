@@ -51,11 +51,13 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
             expense += profitAndLossStatement.NonOperatingExpenses
             expense += profitAndLossStatement.ExtraordinaryLosses
             userDefault?.set(expense, forKey: "expense" )
+            print("ウィジェット　expense        ", expense)
             // 収益
             var income = profitAndLossStatement.NetSales
             income += profitAndLossStatement.NonOperatingIncome
             income += profitAndLossStatement.ExtraordinaryIncome
             userDefault?.set(income, forKey: "income" )
+            print("ウィジェット　income         ", income)
         }
         
         if #available(iOS 14.0, *) {
@@ -96,12 +98,15 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
                     case 0: // 資産
                         balanceSheet.Asset_total = totalAmountOfBig5
                         userDefault?.set(totalAmountOfBig5, forKey: "assets" )
+                        print("ウィジェット　assets         ", totalAmountOfBig5)
                     case 1: // 負債
                         balanceSheet.Liability_total = totalAmountOfBig5
                         userDefault?.set(totalAmountOfBig5, forKey: "liabilities" )
+                        print("ウィジェット　liabilities    ", totalAmountOfBig5)
                     case 2: // 純資産
                         balanceSheet.Equity_total = totalAmountOfBig5
                         userDefault?.set(totalAmountOfBig5, forKey: "netAssets" )
+                        print("ウィジェット　netAssets      ", totalAmountOfBig5)
                     default:
                         print("bigCategoryTotalAmount", totalAmountOfBig5)
                     }
@@ -321,6 +326,7 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
                         case 4: // 当期純利益（損失）
                             profitAndLossStatement.NetIncomeOrLoss = profitAndLossStatement.IncomeOrLossBeforeIncomeTaxes - profitAndLossStatement.IncomeTaxes
                             userDefault?.set(profitAndLossStatement.IncomeOrLossBeforeIncomeTaxes - profitAndLossStatement.IncomeTaxes, forKey: "netIncomeOrLoss" )
+                            print("ウィジェット　netIncomeOrLoss", profitAndLossStatement.IncomeOrLossBeforeIncomeTaxes - profitAndLossStatement.IncomeTaxes)
                         default:
                             print()
                         }
