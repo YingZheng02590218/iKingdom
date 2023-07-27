@@ -10,22 +10,22 @@ import Foundation
 import RealmSwift
 
 class BackupManager {
-
+    
     static let shared = BackupManager()
-
+    
     private init() {
         fileNameDateformater.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         fileNameDateformater.locale = Locale(identifier: "en_US_POSIX")
-
+        
         folderNameDateformater.dateFormat = "yyyyMMddHHmm"
         folderNameDateformater.locale = Locale(identifier: "en_US_POSIX")
-
+        
         metadataQuery = NSMetadataQuery()
     }
-
+    
     let fileNameDateformater = DateFormatter()
     let folderNameDateformater = DateFormatter()
-
+    
     /// バックアップフォルダURL
     private var backupFolderUrl: URL {
         let folderName = folderNameDateformater.string(from: Date()) // 日付
@@ -42,17 +42,25 @@ class BackupManager {
     }
     /// バックアップファイル名（前部）
     private let mBackupFileNamePre = "default.realm_bk_"
-
+    
     // MARK: バックアップ
-
+    
     /// バックアップデータ作成処理
     /// RealmのデータをiCloudにコピー
-    func backup(completion: @escaping () -> Void) {
+    func backup(completion: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
+            // iCloud Drive / Paciolist フォルダ作成　ユーザーがFileアプリから削除したケースに対応
+            if FileManager.default.fileExists(atPath: documentsFolderUrl.path) {
+                print(documentsFolderUrl.path)
+            } else {
+                print(documentsFolderUrl.path) // /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents
+                try FileManager.default.createDirectory(atPath: documentsFolderUrl.path, withIntermediateDirectories: true)
+            }
             /// iCloudにフォルダ作成
             if FileManager.default.fileExists(atPath: backupFolderUrl.path) {
-
+                print(backupFolderUrl.path)
             } else {
+                print(backupFolderUrl.path) // /private/var/mobile/Library/Mobile Documents/iCloud~com~ikingdom778~AccountantSTG/Documents/202307272221
                 try FileManager.default.createDirectory(atPath: backupFolderUrl.path, withIntermediateDirectories: false)
             }
             // 既存バックアップファイル（iCloud）の削除
@@ -67,6 +75,7 @@ class BackupManager {
             completion()
         } catch {
             print(error.localizedDescription)
+            errorHandler()
         }
     }
     /// Realmのデータファイルを指定ファイル名（フルパス）にコピー
@@ -94,7 +103,7 @@ class BackupManager {
             }
         }
     }
-
+    
     /// バックアップファイル削除
     func deleteBackup() {
         let (exists, files) = isBackupFileExists()
@@ -136,10 +145,10 @@ class BackupManager {
         }
         return (exists, files)
     }
-
+    
     // MARK: バックアップファイル取得
     private var metadataQuery: NSMetadataQuery // 参照を保持するため、メンバとして持っておく。load()内のローカル変数にするとうまく動かない。
-
+    
     /// バックアップファイル
     func getBackup(folderName: String) -> String {
         let (exists, files) = isBackupFileExists(folderName: folderName)
@@ -150,7 +159,7 @@ class BackupManager {
         }
         return ""
     }
-
+    
     func load(completion: @escaping ([(String, NSNumber?, Bool)]) -> Void) {
         metadataQuery = NSMetadataQuery()
         // フォルダとファイルを取得して、ファイルのサイズを取得するため、絞り込まない
@@ -159,10 +168,10 @@ class BackupManager {
         metadataQuery.sortDescriptors = [
             NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false) // 効いていない
         ]
-
+        
         NotificationCenter.default.addObserver(forName: .NSMetadataQueryDidFinishGathering, object: metadataQuery, queue: nil) { notification in
             if let query = notification.object as? NSMetadataQuery {
-
+                
                 var backupFiles: [(String, NSNumber?, Bool)] = []
                 // Documents内のフォルダとファイルにアクセス
                 for result in query.results {
@@ -201,10 +210,10 @@ class BackupManager {
                 completion(backupFiles.sorted { $0.0 < $1.0 })
             }
         }
-
+        
         metadataQuery.start()
     }
-
+    
     /// Realmのデータを復元
     func restore(folderName: String, completion: @escaping () -> Void) {
         guard let realmURL = Realm.Configuration.defaultConfiguration.fileURL else {
@@ -266,7 +275,7 @@ class BackupManager {
     func downloadFileFromiCloud(folderName: String, completion: @escaping () -> Void) {
         // If it’s a background function, I advise you to put this function in another DispatchQueue than the main one.
         DispatchQueue.global(qos: .utility).async {
-
+            
             let fileManager = FileManager.default
             // Browse your icloud container to find the file you want
             if let icloudFolderURL = fileManager.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents").appendingPathComponent(folderName),

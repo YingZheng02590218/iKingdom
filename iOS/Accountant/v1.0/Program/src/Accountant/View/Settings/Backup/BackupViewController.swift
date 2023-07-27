@@ -146,15 +146,23 @@ class BackupViewController: UIViewController {
             // インジゲーターを開始
             self.showActivityIndicatorView()
             // iCloud Documents にバックアップを作成する
-            BackupManager.shared.backup {
-                // イベントログ
-                FirebaseAnalytics.logEvent(
-                    event: AnalyticsEvents.iCloudBackup,
-                    parameters: [
-                        AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
-                    ]
-                )
-            }
+            BackupManager.shared.backup(
+                completion: {
+                    // イベントログ
+                    FirebaseAnalytics.logEvent(
+                        event: AnalyticsEvents.iCloudBackup,
+                        parameters: [
+                            AnalyticsEventParameters.kind.description: Parameter.backup.description as NSObject
+                        ]
+                    )
+                },
+                errorHandler: {
+                    // インジケーターを終了
+                    self.finishActivityIndicatorView()
+                    // iCloud Drive へバックアップに失敗
+                    self.showiCloudDriveDialog()
+                }
+            )
         } else {
             // フィードバック
             let generator = UINotificationFeedbackGenerator()
@@ -389,6 +397,17 @@ extension BackupViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    // iCloud Drive へバックアップに失敗
+    func showiCloudDriveDialog() {
+        // ネットワークなし
+        let alert = UIAlertController(title: "iCloud Drive", message: "バックアップに失敗しました", preferredStyle: .alert)
+        present(alert, animated: true) { () -> Void in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                // self.dismiss にすると、ViewControllerを閉じてしまうので注意
+                alert.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     // 復元機能 アラートのポップアップを表示
     private func showPopoverRestore(indexPath: IndexPath) {
         let alert = UIAlertController(
@@ -558,6 +577,10 @@ extension BackupViewController: NSFilePresenter {
         } else {
             print("Remove subitem (\(url.path)).")
         }
+        // tableViewをリロード
+        reload()
+        // インジケーターを終了
+        self.finishActivityIndicatorView()
     }
     
     // ファイル/ディレクトリが移動した時の通知
