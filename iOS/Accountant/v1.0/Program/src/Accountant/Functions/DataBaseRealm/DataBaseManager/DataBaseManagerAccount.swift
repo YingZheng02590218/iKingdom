@@ -45,7 +45,24 @@ class DataBaseManagerAccount {
             return dataBaseAccount
         }
     }
-
+    /**
+     * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
+     * 年度を指定して勘定を取得する 元入金、繰越利益　専用
+     * @param  勘定名
+     * @return  勘定
+     */
+    func getAccountByAccountNameWithFiscalYearForCapital(accountName: String, fiscalYear: Int) -> DataBaseAccount? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
+        ])
+        let dataBaseAccounts = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(accountName)'")
+        guard let dataBaseAccount = dataBaseAccounts?.first else {
+            return nil
+        }
+        return dataBaseAccount
+    }
+    
     /**
      * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
      * 勘定名と年度を指定して勘定を取得する
