@@ -36,14 +36,16 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = false
             // データベース　よく使う仕訳を追加
-            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry()
-            primaryKey = objects[tappedIndexPath.row].number
-            nicknameTextField.text = objects[tappedIndexPath.row].nickname
-            textFieldCategoryDebit.text = objects[tappedIndexPath.row].debit_category
-            textFieldAmountDebit.text = String(objects[tappedIndexPath.row].debit_amount)
-            textFieldCategoryCredit.text = objects[tappedIndexPath.row].credit_category
-            textFieldAmountCredit.text = String(objects[tappedIndexPath.row].credit_amount)
-            textFieldSmallWritting.text = objects[tappedIndexPath.row].smallWritting
+            let objects = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(number: primaryKey)
+            if let object = objects.first {
+                primaryKey = object.number
+                nicknameTextField.text = object.nickname
+                textFieldCategoryDebit.text = object.debit_category
+                textFieldAmountDebit.text = String(object.debit_amount)
+                textFieldCategoryCredit.text = object.credit_category
+                textFieldAmountCredit.text = String(object.credit_amount)
+                textFieldSmallWritting.text = object.smallWritting
+            }
         }
     }
     

@@ -108,33 +108,54 @@ class OpeningBalanceViewController: UIViewController {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        // 編集中の場合
-        if editing {
-            navigationItem.title = "編集中"
-            
-            tableView.reloadData()
-        } else {
-            // 残高　借方　貸方
-            if presenter.debit_balance_total() == presenter.credit_balance_total() {
-                navigationItem.title = "開始残高"
-                // ローディング処理
-                // インジゲーターを開始
-                self.showActivityIndicatorView()
-                // 集計処理
-                DispatchQueue.global(qos: .background).async {
-                    self.presenter.refreshTable()
-                }
+        // 開いている帳簿の年度と一番古い帳簿の年度が同じ場合
+        if let fiscalYear = presenter.fiscalYear,
+           let fiscalYearOpening = presenter.fiscalYearOpening,
+           fiscalYear == fiscalYearOpening {
+            // 編集中の場合
+            if editing {
+                navigationItem.title = "編集中"
+                
+                tableView.reloadData()
             } else {
-                // 再度編集中へ戻す
-                self.setEditing(true, animated: true)
-                // フィードバック
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
-                let alert = UIAlertController(title: "貸借の合計が不一致", message: "再度、入力してください", preferredStyle: .alert)
-                self.present(alert, animated: true) { () -> Void in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        self.dismiss(animated: true, completion: nil)
+                // 残高　借方　貸方
+                if presenter.debit_balance_total() == presenter.credit_balance_total() {
+                    navigationItem.title = "開始残高"
+                    // ローディング処理
+                    // インジゲーターを開始
+                    self.showActivityIndicatorView()
+                    // 集計処理
+                    DispatchQueue.global(qos: .background).async {
+                        self.presenter.refreshTable()
                     }
+                } else {
+                    // 再度編集中へ戻す
+                    self.setEditing(true, animated: true)
+                    // フィードバック
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.error)
+                    let alert = UIAlertController(title: "貸借の合計が不一致", message: "再度、入力してください", preferredStyle: .alert)
+                    self.present(alert, animated: true) { () -> Void in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        } else {
+            // 開いている帳簿の年度と一番古い帳簿の年度が同じではない場合
+            // 編集中の場合
+            if editing {
+                // 編集を終了する
+                self.setEditing(false, animated: true)
+            }
+            // フィードバック
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+            let alert = UIAlertController(title: "開いている帳簿の年度", message: "開始残高を入力する際は、最も古い年度の帳簿を開いてください。", preferredStyle: .alert)
+            self.present(alert, animated: true) { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -303,7 +324,9 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
 
     func reloadData() {
         // 更新処理
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func finishLoading() {

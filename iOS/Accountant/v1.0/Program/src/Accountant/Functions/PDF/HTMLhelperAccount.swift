@@ -88,7 +88,7 @@ struct HTMLhelperAccount {
                 font-size: 80%;
             }
             .fontsize95 {
-                font-size: 95%;
+                font-size: 100%;
             }
     
             .flex-colum {
@@ -147,7 +147,7 @@ struct HTMLhelperAccount {
                     }
         .page{
             width: 210mm;
-            height: 296mm;
+            height: auto; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
             box-sizing: border-box;
             padding: 0mm 10mm;
             display: block;
@@ -213,10 +213,11 @@ struct HTMLhelperAccount {
             table{
             margin: 0px 0; }
 
-          th, td {
-                  font-size: 15px;
+        th, td {
+          font-size: 17px;
           border: 0px solid #05203a;
-          padding: 5px; }
+          padding: 5px;
+        }
 
           th {
           width: 70%;
@@ -351,9 +352,9 @@ struct HTMLhelperAccount {
                   <td class="smallWritting line_single_blue_bottom line_double_red_right left fontsize95">\(debitCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(creditAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(creditAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(balanceAmount))</p></td>
                 </tr>
     """
         } else {
@@ -363,10 +364,10 @@ struct HTMLhelperAccount {
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(day)</td>
                   <td class="smallWritting line_single_blue_bottom line_double_red_right right fontsize95">\(creditCategory)</td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(numberOfAccount == 0 ? "" : String(numberOfAccount))</td>
-                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right">\(String(debitAmount))</p></td>
+                  <td class="line_double_red_right line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(debitAmount))</p></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95"></td>
                   <td class="line_double_red_right line_single_blue_bottom fontsize95 center">\(balanceDebitOrCredit)</td>
-                  <td class="line_single_blue_bottom fontsize95"><p class="right">\(String(balanceAmount))</p></td>
+                  <td class="line_single_blue_bottom fontsize95"><p class="right fontsize95">\(String(balanceAmount))</p></td>
                 </tr>
     """
         }

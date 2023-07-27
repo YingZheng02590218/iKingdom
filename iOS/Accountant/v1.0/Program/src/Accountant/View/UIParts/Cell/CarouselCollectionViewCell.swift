@@ -17,6 +17,7 @@ class CarouselCollectionViewCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         // セルの背景色を変える
 //        self.contentView.backgroundColor = .white
         // セルの枠線の太さを変える

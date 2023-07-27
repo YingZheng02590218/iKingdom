@@ -60,6 +60,21 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         ])
         return objects
     }
+    // 取得　よく使う仕訳
+    func getJournalEntry(number: Int) -> Results<DataBaseSettingsOperatingJournalEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntry.self, predicates: [
+            NSPredicate(format: "number == %@", NSNumber(value: number))
+        ])
+        return objects
+    }
+    // 取得　よく使う仕訳
+    func getJournalEntry(group: Int) -> Results<DataBaseSettingsOperatingJournalEntry> {
+        let objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsOperatingJournalEntry.self, predicates: [
+            NSPredicate(format: "group == %@", NSNumber(value: group))
+        ])
+            .sorted(byKeyPath: "nickname", ascending: true) // タイトル順でソートする
+        return objects
+    }
 
     // MARK: Update
     
@@ -84,6 +99,22 @@ class DataBaseManagerSettingsOperatingJournalEntry {
         return primaryKey
     }
     
+    // 更新　よく使う仕訳　グループ
+    func updateJournalEntry(primaryKey: Int, groupNumber: Int) {
+        // 編集するよく使う仕訳
+        let value: [String: Any] = [
+            "number": primaryKey,
+            "group": groupNumber
+        ]
+        do {
+            try DataBaseManager.realm.write {
+                DataBaseManager.realm.create(DataBaseSettingsOperatingJournalEntry.self, value: value, update: .modified) // 一部上書き更新
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
+
     // MARK: Delete
     
     // 削除　よく使う仕訳

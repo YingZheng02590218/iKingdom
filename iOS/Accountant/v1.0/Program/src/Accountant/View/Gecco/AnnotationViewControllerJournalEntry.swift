@@ -25,13 +25,13 @@ class AnnotationViewControllerJournalEntry: SpotlightViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupAnnotationViewPositionn()
+        setupAnnotationViewPosition()
     }
     
     func next(_ labelAnimated: Bool) {
         updateAnnotationView(labelAnimated)
         
-        let rightBarButtonFrames = extractRightBarButtonConvertedFramess()
+        let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
         switch stepIndex {
         case 0:
             spotlightView.appear(
@@ -90,13 +90,15 @@ class AnnotationViewControllerJournalEntry: SpotlightViewController {
                 moveType: .disappear
             )
         case 5:
-            if let navigationController = presentingViewController as? UINavigationController,
-               let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
-                self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
-                    // ViewController(コーチマーク画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
-                    // チュートリアル対応 コーチマーク型
-                    presentingViewController.finishAnnotation()
-                })
+            DispatchQueue.main.async {
+                if let navigationController = self.presentingViewController as? UINavigationController,
+                   let presentingViewController = navigationController.viewControllers.first as? JournalEntryViewController {
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        // ViewController(コーチマーク画面)を閉じた時に、遷移元であるViewController(仕訳画面)で行いたい処理
+                        // チュートリアル対応 コーチマーク型
+                        presentingViewController.finishAnnotation()
+                    })
+                }
             }
         default:
             break
@@ -135,39 +137,48 @@ extension AnnotationViewControllerJournalEntry: SpotlightViewControllerDelegate 
     }
     
     func spotlightViewControllerWillDismiss(_ viewController: SpotlightViewController, animated: Bool) {
-        spotlightView.disappear()
+        print(stepIndex)
+        switch stepIndex {
+        case 6:
+            // スポットライトが小書きに当たっている時にダブルタップすると、クラッシュが発生していた対策
+            break
+        default:
+            spotlightView.disappear()
+        }
     }
 }
 
 private extension AnnotationViewControllerJournalEntry {
     
-    func setupAnnotationViewPositionn() {
-        let rightBarButtonFrames = extractRightBarButtonConvertedFramess()
-        annotationViews.enumerated().forEach { (offset, annotationView) in
-            switch offset {
-            case 0:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
-                annotationView.frame.origin.y = rightBarButtonFrames.zero.origin.y + rightBarButtonFrames.zero.height + 20
-            case 1:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
-                annotationView.frame.origin.y = rightBarButtonFrames.firstLeft.origin.y + rightBarButtonFrames.firstLeft.height + 20
-            case 2:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
-                annotationView.frame.origin.y = rightBarButtonFrames.secondLeft.origin.y + rightBarButtonFrames.secondLeft.height + 20
-            case 3:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
-                annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + rightBarButtonFrames.third.height + 20
-            case 4:
-                annotationView.frame.origin.x = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)! - annotationView.frame.size.width
-                annotationView.frame.origin.y = rightBarButtonFrames.forth.origin.y + rightBarButtonFrames.forth.height + 20
-            default:
-                fatalError("unexpected index \(offset) for \(annotationView)")
+    func setupAnnotationViewPosition() {
+        if let width = (UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width) {
+            let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
+            annotationViews.enumerated().forEach { offset, annotationView in
+                switch offset {
+                case 0:
+                    annotationView.frame.origin.x = width - annotationView.frame.size.width
+                    annotationView.frame.origin.y = rightBarButtonFrames.zero.origin.y + rightBarButtonFrames.zero.height + 20
+                case 1:
+                    annotationView.frame.origin.x = width - annotationView.frame.size.width
+                    annotationView.frame.origin.y = rightBarButtonFrames.firstLeft.origin.y + rightBarButtonFrames.firstLeft.height + 20
+                case 2:
+                    annotationView.frame.origin.x = width - annotationView.frame.size.width
+                    annotationView.frame.origin.y = rightBarButtonFrames.secondLeft.origin.y + rightBarButtonFrames.secondLeft.height + 20
+                case 3:
+                    annotationView.frame.origin.x = width - annotationView.frame.size.width
+                    annotationView.frame.origin.y = rightBarButtonFrames.third.origin.y + rightBarButtonFrames.third.height + 20
+                case 4:
+                    annotationView.frame.origin.x = width - annotationView.frame.size.width
+                    annotationView.frame.origin.y = rightBarButtonFrames.forth.origin.y + rightBarButtonFrames.forth.height + 20
+                default:
+                    fatalError("unexpected index \(offset) for \(annotationView)")
+                }
             }
         }
     }
     
     var navigationBarHeight: CGFloat { 44 }
-    var viewControllerHasNavigationItemm: UIViewController? {
+    var viewController: UIViewController? {
         if let controller = presentingViewController as? JournalEntryViewController {
             print(controller)
             return controller
@@ -175,15 +186,15 @@ private extension AnnotationViewControllerJournalEntry {
         return presentingViewController
     }
     
-    func extractRightBarButtonConvertedFramess() -> (zero: CGRect, firstLeft: CGRect, firstRight: CGRect, secondLeft: CGRect, secondRight: CGRect, third: CGRect, forth: CGRect) {
+    func extractRightBarButtonConvertedFrames() -> (zero: CGRect, firstLeft: CGRect, firstRight: CGRect, secondLeft: CGRect, secondRight: CGRect, third: CGRect, forth: CGRect) {
         guard
-            let zero        = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(11)?.viewWithTag(111)?.viewWithTag(2_222) as? UIDatePicker,
-            let firstLeft   = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(111) as? PickerTextField,
-            let firstRight  = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(222) as? PickerTextField,
-            let secondLeft  = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(333) as? UITextField,
-            let secondRight = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(444) as? UITextField,
-            let third       = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(33)?.viewWithTag(555) as? UITextField,
-            let forth       = viewControllerHasNavigationItemm?.view.viewWithTag(1)?.viewWithTag(44)?.viewWithTag(555)?.viewWithTag(444) as? UIButton
+            let zero        = viewController?.view.viewWithTag(1)?.viewWithTag(11)?.viewWithTag(111)?.viewWithTag(2_222) as? UIDatePicker,
+            let firstLeft   = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(111) as? PickerTextField,
+            let firstRight  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(11_111)?.viewWithTag(222) as? PickerTextField,
+            let secondLeft  = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(333) as? UITextField,
+            let secondRight = viewController?.view.viewWithTag(1)?.viewWithTag(22)?.viewWithTag(3_333)?.viewWithTag(22_222)?.viewWithTag(444) as? UITextField,
+            let third       = viewController?.view.viewWithTag(1)?.viewWithTag(33)?.viewWithTag(555) as? UITextField,
+            let forth       = viewController?.view.viewWithTag(1)?.viewWithTag(44)?.viewWithTag(555)?.viewWithTag(444) as? UIButton
         else {
             fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }

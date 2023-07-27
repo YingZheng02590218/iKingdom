@@ -11,7 +11,7 @@ import Foundation
 /// GUIアーキテクチャ　MVP
 protocol SplashModelInput {
     // 初期化処理
-    func initialize(completionHandler: @escaping () -> Void)
+    func initialize(onProgress: @escaping (Int) -> Void, completionHandler: @escaping () -> Void)
     // バージョンチェック
     func appVersionCheck(completionHandler: @escaping (Bool) -> Void)
 }
@@ -20,12 +20,17 @@ protocol SplashModelInput {
 class SplashModel: SplashModelInput {
     
     // 初期化処理
-    func initialize(completionHandler: @escaping () -> Void) {
+    func initialize(onProgress: @escaping (Int) -> Void, completionHandler: @escaping () -> Void) {
         // データベース初期化
         let initial = Initial()
-        initial.initialize {
-            completionHandler()
-        }
+        initial.initialize(
+            onProgress: { persentage in
+                onProgress(persentage)
+            },
+            completion: {
+                completionHandler()
+            }
+        )
     }
     
     // バージョンチェック
@@ -42,8 +47,22 @@ class SplashModel: SplashModelInput {
         //            // 強制アップデートダイアログを表示する
         //            showForcedUpdateDialog()
         //        }
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5) // タイムアウトの動作確認をする場合 0.0001 を指定する
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let err = error as NSError? {
+                if err.domain == NSURLErrorDomain {
+                    // タイムアウトエラー
+                    // ネットワーク未接続でも仕訳入力はできるようにするために、バージョンチェックのレスポンスが返らなければスルーする
+                    print(err.code)
+                    // NSURLErrorDomain Code=-1001 "The request timed out."
+                    // NSURLErrorDomain Code=-1009 "The Internet connection appears to be offline."
+                    print("Error is time out :", err.code == NSURLErrorTimedOut)
+                }
+                completionHandler(false)
+                return
+            }
+            
             guard let data = data else { return }
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]

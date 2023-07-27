@@ -15,6 +15,7 @@ protocol OpeningBalancePresenterInput {
     var company: String? { get }
     var fiscalYear: Int? { get }
     var theDayOfBeginningOfYear: String? { get }
+    var fiscalYearOpening: Int? { get }
 
     var numberOfobjects: Int { get }
 
@@ -48,6 +49,8 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
     var company: String?
     var fiscalYear: Int?
     var theDayOfBeginningOfYear: String?
+    // 開いている帳簿の年度の取得　会計帳簿
+    var fiscalYearOpening: Int?
     // 設定残高振替仕訳 開始残高
     private var dataBaseTransferEntries: Results<DataBaseSettingTransferEntry>
 
@@ -76,6 +79,8 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
         // 一番古い会計帳簿の年度の期首　とする
         fiscalYear = DataBaseManagerSettingsPeriod.shared.getOldestPeriodYear()
         theDayOfBeginningOfYear = DateManager.shared.getTheDayOfBeginningOfYear()
+        // 開いている帳簿の年度の取得　会計帳簿
+        fiscalYearOpening = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         // 再計算 合計額を計算
         model.calculateAccountTotalAccount()
 
@@ -122,6 +127,8 @@ final class OpeningBalancePresenter: OpeningBalancePresenterInput {
         // 全勘定の合計と残高を計算する
         model.initializeJournals(completion: { isFinished in
             print("Result is \(isFinished)")
+            // 編集を終了する
+            view.reloadData()
             // ローディング終了
             view.finishLoading()
         })
