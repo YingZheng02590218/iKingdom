@@ -140,13 +140,15 @@ class DataBaseManagerJournals: DataBaseManager {
             guard let journals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+            // 元入金と繰越利益は、資本金勘定ではなく、勘定（の元入金、繰越利益）クラスに記帳する
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYearForCapital(
                 accountName: dataBaseJournalEntry.debit_category,
                 fiscalYear: dataBaseJournalEntry.fiscalYear
             ) else {
                 return
             }
-            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+            // 元入金と繰越利益は、資本金勘定ではなく、勘定（の元入金、繰越利益）クラスに記帳する
+            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYearForCapital(
                 accountName: dataBaseJournalEntry.credit_category,
                 fiscalYear: dataBaseJournalEntry.fiscalYear
             ) else {
@@ -168,10 +170,18 @@ class DataBaseManagerJournals: DataBaseManager {
             guard let journals = DataBaseManagerJournals.shared.getJournalsWithFiscalYear(fiscalYear: dataBaseJournalEntry.fiscalYear) else {
                 return
             }
-            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.debit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            // 元入金と繰越利益は、資本金勘定ではなく、勘定（の元入金、繰越利益）クラスに記帳する
+            guard let leftObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYearForCapital(
+                accountName: dataBaseJournalEntry.debit_category,
+                fiscalYear: dataBaseJournalEntry.fiscalYear
+            ) else {
                 return
             }
-            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(accountName: dataBaseJournalEntry.credit_category, fiscalYear: dataBaseJournalEntry.fiscalYear) else {
+            // 元入金と繰越利益は、資本金勘定ではなく、勘定（の元入金、繰越利益）クラスに記帳する
+            guard let rightObject: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYearForCapital(
+                accountName: dataBaseJournalEntry.credit_category,
+                fiscalYear: dataBaseJournalEntry.fiscalYear
+            ) else {
                 return
             }
             do {
