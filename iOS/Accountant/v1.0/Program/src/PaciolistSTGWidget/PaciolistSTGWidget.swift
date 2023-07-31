@@ -83,19 +83,21 @@ struct PaciolistSTGWidgetEntryView : View {
     // 借方　全体
     var left: Double {
         let left = (entry.accountingData.assets + entry.accountingData.expense)
-        print("ウィジェット　借方　全体", left)
+        print("ウィジェット　借方　全体　金額", Int(left), "資産", Int(entry.accountingData.assets), "費用", Int(entry.accountingData.expense))
         return left
     }
     // 貸方　全体
     var right: Double {
         // 当期純利益　の場合
         if !(entry.accountingData.netIncomeOrLoss < 0) {
-            let right = (entry.accountingData.liabilities + entry.accountingData.netAssets + entry.accountingData.income)
-            print("ウィジェット　貸方　全体", right)
+            // 当期純利益の場合、当期純利益を収益から差し引く。純資産Viewに重ねて表示させる。
+            let right = (entry.accountingData.liabilities + entry.accountingData.netAssets + (entry.accountingData.income - entry.accountingData.netIncomeOrLoss))
+            print("ウィジェット　貸方　全体　金額", Int(right), "負債", Int(entry.accountingData.liabilities), "純資産", Int(entry.accountingData.netAssets), "収益", Int(entry.accountingData.income - entry.accountingData.netIncomeOrLoss))
             return right
         } else {
-            let right = (entry.accountingData.liabilities + entry.accountingData.netAssets + entry.accountingData.income) + (entry.accountingData.netIncomeOrLoss * -1) // 純資産に当期純損失を足す
-            print("ウィジェット　貸方　全体", right)
+            // 当期純損失の場合、当期純損失を純資産へ足す。純資産Viewに重ねて表示させる。
+            let right = (entry.accountingData.liabilities + entry.accountingData.netAssets + (entry.accountingData.income + (entry.accountingData.netIncomeOrLoss * -1))) // 純資産に当期純損失を足す
+            print("ウィジェット　貸方　全体　金額", Int(right), "負債", Int(entry.accountingData.liabilities), "純資産", Int(entry.accountingData.netAssets), "収益", Int(entry.accountingData.income + (entry.accountingData.netIncomeOrLoss * -1)))
             return right
         }
     }
@@ -138,6 +140,7 @@ struct PaciolistSTGWidgetEntryView : View {
                 return ((entry.accountingData.netAssets) / left)
             }
         } else {
+            // 当期純損失の場合、当期純損失を純資産へ足す。純資産Viewに重ねて表示させる。
             if ((entry.accountingData.netAssets + (entry.accountingData.netIncomeOrLoss * -1)) / left).isNaN { // 純資産に当期純損失を足す
                 return 0
             } else {
@@ -156,20 +159,31 @@ struct PaciolistSTGWidgetEntryView : View {
                 return (entry.accountingData.netIncomeOrLoss / entry.accountingData.netAssets)
             }
         } else {
-            if ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.assets).isNaN { // 純資産に当期純損失を足す
+            if ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.expense).isNaN {
                 return 0
             } else {
-                print("ウィジェット　借方　当期純損失 / 資産", ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.assets))
-                return ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.assets) // 純資産に当期純損失を足す
+                print("ウィジェット　借方　当期純損失 / 費用", ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.expense))
+                return ((entry.accountingData.netIncomeOrLoss * -1) / entry.accountingData.expense)
             }
         }
     }
     var incomeScale: Double { // 収益
-        if ((entry.accountingData.income) / left).isNaN {
-            return 0
+        // 当期純利益　の場合
+        if !(entry.accountingData.netIncomeOrLoss < 0) {
+            // 当期純利益の場合、当期純利益を収益から差し引く。純資産Viewに重ねて表示させる。
+            if ((entry.accountingData.income - entry.accountingData.netIncomeOrLoss) / left).isNaN {
+                return 0
+            } else {
+                print("ウィジェット　貸方　収益", ((entry.accountingData.income - entry.accountingData.netIncomeOrLoss) / left))
+                return ((entry.accountingData.income - entry.accountingData.netIncomeOrLoss) / left)
+            }
         } else {
-            print("ウィジェット　貸方　収益", ((entry.accountingData.income) / left))
-            return ((entry.accountingData.income) / left)
+            if ((entry.accountingData.income) / left).isNaN {
+                return 0
+            } else {
+                print("ウィジェット　貸方　収益", ((entry.accountingData.income) / left))
+                return ((entry.accountingData.income) / left)
+            }
         }
     }
     
@@ -213,21 +227,92 @@ struct PaciolistSTGWidgetEntryView : View {
                 }
                 .zIndex(1)
                 
+                // 借方貸方
                 HStack(spacing: 0) {
                     // 借方
                     VStack(spacing: 0) {
                         // 資産
-                        // 当期純損失　の場合
-                        if entry.accountingData.netIncomeOrLoss < 0 {
-                            ZStack(alignment: .bottom) {
-                                //　Text("\(assetsScale)")
-                                Text("\(convertAmount(amount: entry.accountingData.assets - (entry.accountingData.netIncomeOrLoss * -1)))") // 純資産に当期純損失を足す
-                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 15, alignment: .topTrailing)
-                                // 調整するため、高さを指定しない
-                                //                             .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * assetsScale <= geometry.size.height - 15 ? geometry.size.height * assetsScale : geometry.size.height - 15))
-                                //                                    .background(.yellow)
+                        //　Text("\(assetsScale)")
+                        Text("資産 \(convertAmount(amount: entry.accountingData.assets))")
+                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * assetsScale <= geometry.size.height ? geometry.size.height * assetsScale : geometry.size.height))
+                            .font(.caption)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                        
+                        // 費用
+                        ZStack() {
+                            // 当期純損失　の場合
+                            if entry.accountingData.netIncomeOrLoss < 0 {
+                                Text("費用 \(convertAmount(amount: entry.accountingData.expense - (entry.accountingData.netIncomeOrLoss * -1)))")
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .bottomTrailing)
                                     .font(.caption)
-                                //                                .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(1)
+                                    .zIndex(0)
+                                
+                                GeometryReader { geometry in
+                                    VStack(spacing: 0) {
+                                        //　Text("\(netIncomeOrLossScale)")
+                                        Text("当期純損失 \(convertAmount(amount: entry.accountingData.netIncomeOrLoss * -1))")
+                                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                                            .background(Color.plColor)
+                                            .font(.caption)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                                            .zIndex(1)
+                                        
+                                        // Spacer() // レイアウト崩れる
+                                    }
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                                    .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height ? geometry.size.height * netIncomeOrLossScale : geometry.size.height))
+                                    // .background(.green)
+                                }
+                            } else {
+                                //　Text("\(expenseScale)")
+                                Text("費用 \(convertAmount(amount: entry.accountingData.expense))")
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                                    .font(.caption)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(1)
+                                    .zIndex(0)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .bottom)
+                        .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * expenseScale <= geometry.size.height ? geometry.size.height * expenseScale : geometry.size.height))
+                        //                            .background(Color.pink)
+                        .background(Color.plColor)
+                        .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                        
+                    }
+                    .frame(height: geometry.size.height)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    // .background(.pink)
+                    
+                    // 貸方
+                    VStack(spacing: 0) {
+                        // 負債
+                        //　Text("\(liabilitiesScale)")
+                        Text("負債 \(convertAmount(amount: entry.accountingData.liabilities))")
+                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * liabilitiesScale <= geometry.size.height ? geometry.size.height * liabilitiesScale : geometry.size.height))
+                        // .background(.brown)
+                            .font(.caption)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                        
+                        // 純資産
+                        ZStack() {
+                            // 当期純利益　の場合
+                            if !(entry.accountingData.netIncomeOrLoss < 0) {
+                                Text("純資産 \(convertAmount(amount: entry.accountingData.netAssets + (entry.accountingData.netIncomeOrLoss * -1)))")
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing)
+                                    .font(.caption)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(1)
                                     .zIndex(0)
                                 
                                 GeometryReader { geometry in
@@ -236,88 +321,58 @@ struct PaciolistSTGWidgetEntryView : View {
                                         Spacer()
                                         
                                         //　Text("\(netIncomeOrLossScale)")
-                                        Text("\(convertAmount(amount: entry.accountingData.netIncomeOrLoss * -1))")
-                                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .topTrailing)
-                                        // 調整するため、高さを指定しない
-                                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height - 45 ? geometry.size.height * netIncomeOrLossScale : geometry.size.height - 45))
+                                        Text("当期純利益 \(convertAmount(amount: entry.accountingData.netIncomeOrLoss))")
+                                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .bottomTrailing)
+                                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height ? geometry.size.height * netIncomeOrLossScale : geometry.size.height))
                                             .background(Color.plColor)
                                             .font(.caption)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
                                             .addBorder(.gray, width: 0.5, cornerRadius: 1)
                                             .zIndex(1)
                                     }
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .bottomTrailing)
                                 }
+                            } else {
+                                //　Text("\(netAssetsScale)")
+                                Text("純資産 \(convertAmount(amount: entry.accountingData.netAssets + (entry.accountingData.netIncomeOrLoss * -1)))")
+                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
+                                // .background(.secondary)
+                                    .font(.caption)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(1)
+                                    .zIndex(0)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 15, alignment: .bottom)
-                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * assetsScale <= geometry.size.height - 15 ? geometry.size.height * assetsScale : geometry.size.height - 15))
-                            //                            .background(Color.pink)
-                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                            
-                        } else {
-                            //　Text("\(assetsScale)")
-                            Text("\(convertAmount(amount: entry.accountingData.assets))")
-                                .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 15, alignment: .topTrailing)
-                            // 調整するため、高さを指定しない
-                                .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * assetsScale <= geometry.size.height - 15 ? geometry.size.height * assetsScale : geometry.size.height - 15))
+                        }
+                        .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
+                        .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netAssetsScale <= geometry.size.height ? geometry.size.height * netAssetsScale : geometry.size.height))
+                        .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                        // .background(.mint)
+                        
+                        // 当期純利益　の場合
+                        if !(entry.accountingData.netIncomeOrLoss < 0) {
+                            // 収益
+                            //　Text("\(incomeScale)")
+                            Text("収益 \(convertAmount(amount: entry.accountingData.income - entry.accountingData.netIncomeOrLoss))")
+                                .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
+                                .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * incomeScale <= geometry.size.height ? geometry.size.height * incomeScale : geometry.size.height))
+                                .background(Color.plColor)
                                 .font(.caption)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(1)
+                                .addBorder(.gray, width: 0.5, cornerRadius: 1)
+                        } else {
+                            // 収益
+                            //　Text("\(incomeScale)")
+                            Text("収益 \(convertAmount(amount: entry.accountingData.income))")
+                                .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
+                                .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * incomeScale <= geometry.size.height ? geometry.size.height * incomeScale : geometry.size.height))
+                                .background(Color.plColor)
+                                .font(.caption)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(1)
                                 .addBorder(.gray, width: 0.5, cornerRadius: 1)
                         }
-                        
-                        //　Text("\(expenseScale)")
-                        Text("\(convertAmount(amount: entry.accountingData.expense))")
-                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 15, alignment: .topTrailing)
-                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * expenseScale <= geometry.size.height - 15 ? geometry.size.height * expenseScale : geometry.size.height - 15))
-                        //                            .background(.green)
-                            .background(Color.plColor)
-                            .font(.caption)
-                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                    }
-                    .frame(height: geometry.size.height)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    // .background(.pink)
-                    
-                    // 貸方
-                    VStack(spacing: 0) {
-                        //　Text("\(liabilitiesScale)")
-                        Text("\(convertAmount(amount: entry.accountingData.liabilities))")
-                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .topTrailing)
-                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * liabilitiesScale <= geometry.size.height - 45 ? geometry.size.height * liabilitiesScale : geometry.size.height - 45))
-                        // .background(.brown)
-                            .font(.caption)
-                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                        
-                        // 純資産
-                        ZStack() {
-                            //　Text("\(netAssetsScale)")
-                            Text("\(convertAmount(amount: entry.accountingData.netAssets + (entry.accountingData.netIncomeOrLoss * -1)))")
-                                .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
-                            //                                .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netAssetsScale <= geometry.size.height - 45 ? geometry.size.height * netAssetsScale : geometry.size.height - 45))
-                            // .background(.secondary)
-                                .font(.caption)
-                            //                                .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                            
-                            // 当期純利益　の場合
-                            if !(entry.accountingData.netIncomeOrLoss < 0) {
-                                //　Text("\(netIncomeOrLossScale)")
-                                Text("\(convertAmount(amount: entry.accountingData.netIncomeOrLoss))")
-                                    .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .bottomTrailing)
-                                // 調整するため、高さを指定しない
-                                    .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height - 45 ? geometry.size.height * netIncomeOrLossScale : geometry.size.height - 45))
-                                    .background(Color.plColor)
-                                    .font(.caption)
-                                    .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
-                        .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * netAssetsScale <= geometry.size.height - 45 ? geometry.size.height * netAssetsScale : geometry.size.height - 45))
-                        .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                        
-                        //　Text("\(incomeScale)")
-                        Text("\(convertAmount(amount: entry.accountingData.income))")
-                            .frame(maxWidth: .infinity, minHeight: 15, maxHeight: geometry.size.height - 45, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
-                            .frame(height: minHeightCheck(minHeight: 15, height: geometry.size.height * incomeScale <= geometry.size.height - 45 ? geometry.size.height * incomeScale : geometry.size.height - 45))
-                            .background(Color.plColor)
-                            .font(.caption)
-                            .addBorder(.gray, width: 0.5, cornerRadius: 1)
                     }
                     .frame(height: geometry.size.height)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -378,22 +433,22 @@ struct PaciolistSTGWidget: Widget {
 
 struct PaciolistSTGWidget_Previews: PreviewProvider {
     static var previews: some View {
-        //        let accountingData = AccountingData(
-        //            assets: 700000,
-        //            liabilities: 300000,
-        //            netAssets: 400000,
-        //            expense: 300000,
-        //            income: 500000,
-        //            netIncomeOrLoss: 200000
-        //        )
         let accountingData = AccountingData(
-            assets:          700000,
-            liabilities:     300000,
-            netAssets:       400000,
-            expense:         500000,
-            income:          500000,
-            netIncomeOrLoss: 000000
+            assets: 700000,
+            liabilities: 300000,
+            netAssets: 400000,
+            expense: 300000,
+            income: 500000,
+            netIncomeOrLoss: 200000
         )
+        //        let accountingData = AccountingData(
+        //            assets:          700000,
+        //            liabilities:     300000,
+        //            netAssets:       400000,
+        //            expense:         500000,
+        //            income:          500000,
+        //            netIncomeOrLoss: 000000
+        //        )
         //        let accountingData = AccountingData(
         //            assets:           200000,
         //            liabilities:      100000,
