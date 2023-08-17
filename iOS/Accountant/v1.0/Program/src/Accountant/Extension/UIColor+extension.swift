@@ -51,6 +51,10 @@ extension UIColor {
         UIColor(named: "MainColor2") ?? .white
     }
 
+    class var cellBackground: UIColor {
+        UIColor(named: "CellBackground") ?? .white
+    }
+    
     class var textColor: UIColor {
         UIColor(named: "TextColor") ?? .white
     }

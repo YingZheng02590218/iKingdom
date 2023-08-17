@@ -77,6 +77,10 @@
 		F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */; };
 		F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
 		F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */; };
+		F940E4AC2A8DFE14008AEAFC /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AB2A8DFE14008AEAFC /* terms.html */; };
+		F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AB2A8DFE14008AEAFC /* terms.html */; };
+		F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */; };
+		F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */; };
 		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
@@ -753,6 +757,8 @@
 		F93D789E2A1236BF00C75BA9 /* JournalEntryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryPresenter.swift; sourceTree = "<group>"; };
 		F93D78A12A12370C00C75BA9 /* JournalEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryModel.swift; sourceTree = "<group>"; };
 		F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTG.entitlements; sourceTree = "<group>"; };
+		F940E4AB2A8DFE14008AEAFC /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
+		F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy_policy.html; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
@@ -1656,6 +1662,8 @@
 		F9B209E9279D08C100F7EA8D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F940E4AB2A8DFE14008AEAFC /* terms.html */,
+				F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
@@ -2181,6 +2189,7 @@
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
+				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
@@ -2207,6 +2216,7 @@
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
+				F940E4AC2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
 				F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
@@ -2273,6 +2283,7 @@
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
+				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
@@ -2299,6 +2310,7 @@
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
+				F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
