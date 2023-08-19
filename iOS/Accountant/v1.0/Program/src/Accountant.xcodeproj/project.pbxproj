@@ -81,6 +81,8 @@
 		F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AB2A8DFE14008AEAFC /* terms.html */; };
 		F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */; };
 		F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */; };
+		F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4B12A8E22CC008AEAFC /* explain_backup.html */; };
+		F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4B12A8E22CC008AEAFC /* explain_backup.html */; };
 		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
@@ -759,6 +761,7 @@
 		F94034E12982261200FD93F5 /* PaciolistSTG.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistSTG.entitlements; sourceTree = "<group>"; };
 		F940E4AB2A8DFE14008AEAFC /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy_policy.html; sourceTree = "<group>"; };
+		F940E4B12A8E22CC008AEAFC /* explain_backup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = explain_backup.html; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
@@ -1664,6 +1667,7 @@
 			children = (
 				F940E4AB2A8DFE14008AEAFC /* terms.html */,
 				F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */,
+				F940E4B12A8E22CC008AEAFC /* explain_backup.html */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
@@ -2199,6 +2203,7 @@
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
+				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9593DBB2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,
@@ -2293,6 +2298,7 @@
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
+				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeViewController.storyboard in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9593DBC2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+            <title></title>
+            
+            <style>
+                body {
+                    font-family: "Hiragino Kaku Gothic ProN";
+                    color: #707070;
+                    line-height: 1.0em;
+                    margin: 0.5em;
+                    word-break: break-all;
+                    font-size: 0.8em;
+                }
+                h1 {
+                    text-align: left ;
+                }
+                section section h1 {
+                    text-align: left;
+                }
+                section p {
+                    font-size: 0.4em;
+                    padding-left: 2.0em;
+                }
+                h1 {
+                    margin: 0em;
+                    background-color: rgba(142,142,147,0.2);
+                    padding: 0.3em;
+                }
+                ul, ol {
+                    padding-left: 1.5em;
+                }
+                li {
+                    margin-bottom: 0.8em;
+                }
+                li li {
+                    list-style-type: lower-roman;
+                }
+                #endline {
+                    text-align: right;
+                }
+            </style>
+            
+            <script type="text/javascript">
+                function changeFontColor(colorCode) {
+                    var elem = document.getElementById("elem01");
+                    elem.style.color = colorCode;
+                }
+            </script>
+    </head>
+    
+    <body id ="elem01">
+        <section>
+            
+            <section>
+                <h1>データベース</h1>
+                <p></p>
+                <ul>
+                    <li>帳簿のデータは、データベースに保存されています。</li>
+                    <li>データベースは、iPhone 内に構築されています。</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h1>バックアップ</h1>
+                <p></p>
+                <ul>
+                    <li>データベースを、バックアップファイルとして、保存しておくことができます。</li>
+                    <li>バックアップファイルは、クラウドに保存されます。</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h1>バックアップファイル</h1>
+                <p></p>
+                <ul>
+                    <li>バックアップファイルは、iCloud Drive 内に保存されます。</li>
+                    <li>Paciolist アプリをアンインストールしても、iCloud Drive 内に残ります。</li>
+                    <li>ファイルアプリより確認することができます。</li>
+                </ul>
+                <p>ファイルアプリ > iCloud Drive > Paciolist > バックアップファイル</p>
+            </section>
+            
+            <section>
+                <h1>復元</h1>
+                <p></p>
+                <ul>
+                    <li>データベースを、バックアップファイルが作成された時点の状態に、復元することができます。</li>
+                    <li>復元をすると、元に戻すことはできません。</li>
+                    <li>復元をする前に、バックアップすることをオススメします。</li>
+                </ul>
+            </section>
+            
+        </section>
+    </body>
+    
+</html>

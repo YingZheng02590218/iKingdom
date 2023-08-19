@@ -8,12 +8,17 @@
 
 import EMTNeumorphicView
 import UIKit
+import WebKit
 
 class BackupViewController: UIViewController {
     
+    @IBOutlet var baseView: UIView!
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var button: EMTNeumorphicButton!
     @IBOutlet var label: UILabel!
+    
+    var webView: WKWebView?
+
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
         if #available(iOS 10.0, *) {
@@ -70,12 +75,54 @@ class BackupViewController: UIViewController {
         setTableView()
     }
     
+    override func loadView() {
+        super.loadView() // 重要
+        
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        guard let webView = webView else {
+            return
+        }
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        // 背景色が白くなるので透明にする
+        webView.isOpaque = false
+        webView.backgroundColor = .cellBackground
+        webView.scrollView.backgroundColor = .clear
+        // バウンスを禁止する
+        webView.scrollView.bounces = false
+        
+        baseView.addSubview(webView)
+        baseView.bringSubviewToFront(webView)
+
+        // 親Viewを覆うように制約をつける
+        webView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 0).isActive = true
+        webView.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 0).isActive = true
+        webView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: 0).isActive = true
+        webView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: 0).isActive = true
+        webView.layoutIfNeeded()
+        
+        // HTML を読み込む
+        if let url = Bundle.main.url(forResource: "explain_backup", withExtension: "html") {
+            let urlRequest = URLRequest(url: url)
+            webView.load(urlRequest)
+        }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
         // tableViewをリロード
         reload()
+        // ダークモード対応 HTML上の文字色を変更する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.webView?.evaluateJavaScript(
+                "changeFontColor('\(UITraitCollection.isDarkMode ? "#F2F2F2" : "#0C0C0C")')",
+                completionHandler: { _, _ in
+                    print("Completed Javascript evaluation.")
+                }
+            )
+        }
     }
     
     // MARK: - Setting
