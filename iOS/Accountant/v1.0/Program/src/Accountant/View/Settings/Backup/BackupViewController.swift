@@ -90,7 +90,8 @@ class BackupViewController: UIViewController {
         webView.scrollView.backgroundColor = .clear
         // バウンスを禁止する
         webView.scrollView.bounces = false
-        
+        webView.navigationDelegate = self
+
         baseView.addSubview(webView)
         baseView.bringSubviewToFront(webView)
 
@@ -659,5 +660,13 @@ extension BackupViewController: NSFilePresenter {
     func presentedSubitemDidAppear(at url: URL) {
         print("presentedSubitemDidAppearAtURL")
         print("url: \(url.path)")
+    }
+}
+
+extension BackupViewController: WKNavigationDelegate {
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // 長押しによる選択、コールアウト表示を禁止する
+        webView.prohibitTouchCalloutAndUserSelect()
     }
 }

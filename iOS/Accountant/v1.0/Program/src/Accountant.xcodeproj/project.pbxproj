@@ -83,6 +83,8 @@
 		F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */; };
 		F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4B12A8E22CC008AEAFC /* explain_backup.html */; };
 		F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */ = {isa = PBXBuildFile; fileRef = F940E4B12A8E22CC008AEAFC /* explain_backup.html */; };
+		F940E4B52A9077B4008AEAFC /* WKWebView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940E4B42A9077B4008AEAFC /* WKWebView+extension.swift */; };
+		F940E4B62A9077B4008AEAFC /* WKWebView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940E4B42A9077B4008AEAFC /* WKWebView+extension.swift */; };
 		F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9439D43298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
@@ -762,6 +764,7 @@
 		F940E4AB2A8DFE14008AEAFC /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy_policy.html; sourceTree = "<group>"; };
 		F940E4B12A8E22CC008AEAFC /* explain_backup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = explain_backup.html; sourceTree = "<group>"; };
+		F940E4B42A9077B4008AEAFC /* WKWebView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+extension.swift"; sourceTree = "<group>"; };
 		F9482EAC282F9E20008B82E1 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListPresenter.swift; sourceTree = "<group>"; };
 		F9482EB8282FDD91008B82E1 /* CategoryListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListModel.swift; sourceTree = "<group>"; };
@@ -1637,6 +1640,7 @@
 				F98D8A5027A534BD009560AA /* Printout+Utility.swift */,
 				F9482EAC282F9E20008B82E1 /* String+extension.swift */,
 				F9AD64E52912C56400B9F50B /* UIViewController+extension.swift */,
+				F940E4B42A9077B4008AEAFC /* WKWebView+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2588,6 +2592,7 @@
 				F9BEED102566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9BEED0E2566F56400678391 /* AnnotationViewControllerJournals.swift in Sources */,
 				F93D78A22A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
+				F940E4B52A9077B4008AEAFC /* WKWebView+extension.swift in Sources */,
 				F98289812973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
 				F9AD5F3826399C00003EC6EF /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FBF296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,
@@ -2825,6 +2830,7 @@
 				F9EC66C127B90BC60003FBB6 /* AnnotationViewControllerSettingPeriod.swift in Sources */,
 				F9EC66C227B90BC60003FBB6 /* AnnotationViewControllerJournals.swift in Sources */,
 				F98289822973C43F00F8F1B8 /* AfterClosingTrialBalanceModel.swift in Sources */,
+				F940E4B62A9077B4008AEAFC /* WKWebView+extension.swift in Sources */,
 				F93D78A32A12370C00C75BA9 /* JournalEntryModel.swift in Sources */,
 				F9EC66C327B90BC60003FBB6 /* CarouselCollectionViewCell.swift in Sources */,
 				F9D15FC0296EA7F9005E197D /* ProfitAndLossStatementModel.swift in Sources */,

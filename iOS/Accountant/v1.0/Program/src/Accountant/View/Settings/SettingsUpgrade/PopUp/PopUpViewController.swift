@@ -66,7 +66,8 @@ class PopUpViewController: UIViewController {
         webView.scrollView.backgroundColor = .clear
         // バウンスを禁止する
         webView.scrollView.bounces = false
-        
+        webView.navigationDelegate = self
+
         bodyView.addSubview(webView)
         bodyView.bringSubviewToFront(webView)
 
@@ -108,6 +109,14 @@ class PopUpViewController: UIViewController {
     @IBAction func closeButtonTapped(_ sender: Any) {
         
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PopUpViewController: WKNavigationDelegate {
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // 長押しによる選択、コールアウト表示を禁止する
+        webView.prohibitTouchCalloutAndUserSelect()
     }
 }
 
