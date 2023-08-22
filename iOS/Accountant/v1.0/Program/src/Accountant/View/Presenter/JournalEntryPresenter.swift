@@ -120,28 +120,55 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
     // 入力ボタン
     func inputButtonTapped(journalEntryType: JournalEntryType) {
         
-        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             // 入力値を取得する
             let journalEntryData = view.buttonTappedForJournalEntriesPackageFixing()
             // ダイアログ　ほんとうに変更しますか？
             view.showDialogForFinal(journalEntryData: journalEntryData)
         } else { // 一括編集以外
             // オフラインの場合広告が表示できないので、ネットワーク接続を確認する
-            if Network.shared.isOnline() ||
-                // アップグレード機能　スタンダードプラン サブスクリプション購読済み
-                UpgradeManager.shared.inAppPurchaseFlag {
-                // ネットワークあり
+            if Network.shared.isOnline() || // ネットワークあり
+                UpgradeManager.shared.inAppPurchaseFlag { // アップグレード機能　スタンダードプラン サブスクリプション購読済み
+                
                 // 仕訳タイプ判定　仕訳、決算整理仕訳、編集、一括編集
-                if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
+                
+                if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
+                    // 入力値を取得する
+                    if let journalEntryData = view.buttonTappedForJournalEntries() {
+                        // 仕訳
+                        model.addJournalEntry(journalEntryData: journalEntryData) { number in
+                            // 仕訳帳画面へ戻る
+                            view.goBackToJournalsScreenJournalEntry(number: number)
+                        }
+                    }
+                } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
                     // 入力値を取得する
                     if let journalEntryData = view.buttonTappedForAdjustingAndClosingEntries() {
                         // 決算整理仕訳
-                        model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { number in
+                        model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
                             // 決算整理仕訳後に遷移元画面へ戻る
                             view.goBackToPreviousScreen()
                         }
                     }
-                } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+                } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+                    // 入力値を取得する
+                    if let journalEntryData = view.buttonTappedForJournalEntriesOnTabBar() {
+                        // 仕訳
+                        model.addJournalEntry(journalEntryData: journalEntryData) { _ in
+                            // ダイアログ 記帳しました
+                            view.showDialogForSucceed()
+                        }
+                    }
+                } else if journalEntryType == .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
+                    // 入力値を取得する
+                    if let journalEntryData = view.buttonTappedForAdjustingAndClosingEntries() {
+                        // 決算整理仕訳
+                        model.addAdjustingJournalEntry(journalEntryData: journalEntryData) { _ in
+                            // 決算整理仕訳後に遷移元画面へ戻る
+                            view.goBackToPreviousScreen()
+                        }
+                    }
+                } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
                     // 入力値を取得する
                     let result = view.buttonTappedForJournalEntriesFixing()
                     if let journalEntryData = result.0 {
@@ -159,24 +186,6 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                             }
                         }
                     }
-                } else if journalEntryType == .JournalEntries { // 仕訳
-                    // 入力値を取得する
-                    if let journalEntryData = view.buttonTappedForJournalEntries() {
-                        // 仕訳
-                        model.addJournalEntry(journalEntryData: journalEntryData) { number in
-                            // 仕訳帳画面へ戻る
-                            view.goBackToJournalsScreenJournalEntry(number: number)
-                        }
-                    }
-                } else if journalEntryType == .JournalEntry { // タブバーの仕訳タブからの遷移の場合
-                    // 入力値を取得する
-                    if let journalEntryData = view.buttonTappedForJournalEntriesOnTabBar() {
-                        // 仕訳
-                        model.addJournalEntry(journalEntryData: journalEntryData) { number in
-                            // ダイアログ 記帳しました
-                            view.showDialogForSucceed()
-                        }
-                    }
                 }
             } else {
                 // ダイアログ　オフライン
@@ -184,7 +193,7 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
             }
         }
     }
-    // OKボタン　
+    // OKボタン
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData) {
         // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
         view.closeScreen(journalEntryData: journalEntryData)
