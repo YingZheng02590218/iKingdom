@@ -857,8 +857,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
-        tableView.setEditing(editing, animated: animated)
-
         editWithSlectionButton.isHidden = !editing
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
@@ -894,6 +892,10 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 // 編集前に選択状態を更新する
                 self.tableView.reloadData()
             }
+        }
+        // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
         }
         navigationItem.title = "仕訳帳"
     }
