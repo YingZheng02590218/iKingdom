@@ -92,7 +92,7 @@ class BSViewController: UIViewController {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
