@@ -111,7 +111,9 @@ class JournalsModel: JournalsModelInput {
         let databaseManager = TBModel()
         databaseManager.setAllAccountTotal()            // 集計　合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))
         databaseManager.calculateAmountOfAllAccount()   // 合計額を計算
-        
+        // ウィジェット　貸借対照表と損益計算書の、五大区分の合計額と当期純利益の額を再計算する
+        DataBaseManagerBalanceSheetProfitAndLossStatement.shared.setupAmountForBsAndPL()
+
         completion(true)
     }
     
