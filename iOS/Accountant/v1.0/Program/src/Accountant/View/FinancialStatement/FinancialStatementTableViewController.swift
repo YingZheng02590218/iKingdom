@@ -12,16 +12,10 @@ import UIKit
 // 決算書クラス
 class FinancialStatementTableViewController: UITableViewController {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.separatorColor = .accentColor
-
-        // リロード機能
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
-        self.refreshControl = refreshControl
         
         self.navigationItem.title = "決算書"
         // largeTitle表示
@@ -39,22 +33,6 @@ class FinancialStatementTableViewController: UITableViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-    }
-    // リロード機能
-    @objc func refreshTable() {
-        // 全勘定の合計と残高を計算する
-        let databaseManager = TBModel()
-        databaseManager.setAllAccountTotal()
-        databaseManager.calculateAmountOfAllAccount() // 合計額を計算
-        // 精算表　借方合計と貸方合計の計算 (修正記入、損益計算書、貸借対照表)
-        let WSModel = WSModel()
-        WSModel.initialize()
-        // 設定表示科目　初期化
-        DataBaseManagerTaxonomy.shared.initializeTaxonomy()
-        // 更新処理
-        self.tableView.reloadData()
-        // クルクルを止める
-        refreshControl?.endRefreshing()
     }
 
     // MARK: - Table view data source
