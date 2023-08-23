@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L06-3q-mbG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="L06-3q-mbG">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="SettingsHelpDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0EX-ri-3LQ" customClass="SettingsHelpDetailViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="78T-2F-2CX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiP-9d-jNF">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -65,7 +67,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flD-rt-n5l">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -108,7 +110,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BUW-1U-SgM">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -140,7 +142,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3l-sa-OQv">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -166,7 +168,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-8G-Bh4">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -209,7 +211,7 @@ Paciolist パチョーリ主義
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -275,7 +277,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -317,7 +319,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -349,7 +351,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -388,7 +390,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -419,7 +421,7 @@ BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替え�
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -451,7 +453,7 @@ OKボタンをタップします。
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">
 
@@ -482,15 +484,22 @@ OKボタンをタップします。
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zlo-N8-grp">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yXR-Mj-B82"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
+                            <constraint firstItem="Zlo-N8-grp" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="2dM-xK-drC"/>
                             <constraint firstItem="flD-rt-n5l" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="3oC-yC-dlZ"/>
                             <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="633-KG-GqZ"/>
                             <constraint firstItem="Edc-8G-Bh4" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="74S-Ot-tsh"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Zlo-N8-grp" secondAttribute="bottom" id="8MA-BE-1rD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="BUW-1U-SgM" secondAttribute="trailing" id="9sT-mm-R4P"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
+                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Zlo-N8-grp" secondAttribute="trailing" id="Fjm-yZ-3wC"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="BUW-1U-SgM" secondAttribute="bottom" id="GPP-ep-hK8"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
                             <constraint firstItem="T3l-sa-OQv" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="JNg-t2-0FL"/>
@@ -524,6 +533,7 @@ OKボタンをタップします。
                             <constraint firstItem="BUW-1U-SgM" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="kKt-l1-IYQ"/>
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
+                            <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Edc-8G-Bh4" secondAttribute="bottom" id="oU6-Lr-YQf"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="T3l-sa-OQv" secondAttribute="trailing" id="p8P-f4-mAi"/>
                             <constraint firstItem="MiP-9d-jNF" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="r2w-Lj-amg"/>
@@ -539,6 +549,7 @@ OKボタンをタップします。
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
                         <outlet property="aboutThisAppTextView" destination="MiP-9d-jNF" id="alY-5L-XMd"/>
+                        <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
                         <outlet property="basicOfBookkeepingTextView" destination="BUW-1U-SgM" id="Oxc-Ga-O4h"/>
                         <outlet property="configurationTextView" destination="0pN-XE-IXu" id="34I-H0-jCd"/>
                         <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
@@ -562,7 +573,7 @@ OKボタンをタップします。
                 <navigationController id="L06-3q-mbG" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vbR-Oq-jAM">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -576,7 +587,7 @@ OKボタンをタップします。
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

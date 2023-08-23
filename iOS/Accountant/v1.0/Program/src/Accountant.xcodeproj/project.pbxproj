@@ -23,6 +23,14 @@
 		F90742C92A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742CB2A0D01BB00480551 /* PaciolistSTGWidget.intentdefinition */; };
 		F90742D62A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */; };
 		F90742D72A0DC3B400480551 /* PaciolistWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F90742D92A0DC3B400480551 /* PaciolistWidget.intentdefinition */; };
+		F907D0202A95F82000A701C3 /* About_This_App.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D01F2A95F81F00A701C3 /* About_This_App.html */; };
+		F907D0212A95F82000A701C3 /* About_This_App.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D01F2A95F81F00A701C3 /* About_This_App.html */; };
+		F907D0232A9604A200A701C3 /* Thought.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0222A9604A200A701C3 /* Thought.html */; };
+		F907D0242A9604A200A701C3 /* Thought.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0222A9604A200A701C3 /* Thought.html */; };
+		F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */; };
+		F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */; };
+		F907D0292A960F2100A701C3 /* 簿記一巡.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0282A960F2100A701C3 /* 簿記一巡.png */; };
+		F907D02A2A960F2100A701C3 /* 簿記一巡.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0282A960F2100A701C3 /* 簿記一巡.png */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -718,6 +726,10 @@
 		F90742DD2A0DC3C000480551 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PaciolistWidget.strings; sourceTree = "<group>"; };
 		F90742E02A0DC46400480551 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PaciolistSTGWidget.strings; sourceTree = "<group>"; };
 		F90742E22A0DC47700480551 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PaciolistSTGWidget.strings; sourceTree = "<group>"; };
+		F907D01F2A95F81F00A701C3 /* About_This_App.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = About_This_App.html; sourceTree = "<group>"; };
+		F907D0222A9604A200A701C3 /* Thought.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Thought.html; sourceTree = "<group>"; };
+		F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Basic_Of_Bookkeeping.html; sourceTree = "<group>"; };
+		F907D0282A960F2100A701C3 /* 簿記一巡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "簿記一巡.png"; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1672,6 +1684,10 @@
 				F940E4AB2A8DFE14008AEAFC /* terms.html */,
 				F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */,
 				F940E4B12A8E22CC008AEAFC /* explain_backup.html */,
+				F907D01F2A95F81F00A701C3 /* About_This_App.html */,
+				F907D0222A9604A200A701C3 /* Thought.html */,
+				F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */,
+				F907D0282A960F2100A701C3 /* 簿記一巡.png */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
 				F94EDD9D237AEB3B0074D812 /* Assets.xcassets */,
@@ -2193,6 +2209,7 @@
 				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
+				F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
@@ -2200,6 +2217,7 @@
 				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
+				F907D0202A95F82000A701C3 /* About_This_App.html in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -2224,6 +2242,7 @@
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
+				F907D0232A9604A200A701C3 /* Thought.html in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F940E4AC2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
@@ -2241,6 +2260,7 @@
 				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
 				F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
+				F907D0292A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
@@ -2288,6 +2308,7 @@
 				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
+				F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
@@ -2295,6 +2316,7 @@
 				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
+				F907D0212A95F82000A701C3 /* About_This_App.html in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
@@ -2319,6 +2341,7 @@
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
+				F907D0242A9604A200A701C3 /* Thought.html in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
 				F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
@@ -2336,6 +2359,7 @@
 				F9EC673527B90BC60003FBB6 /* InfoPlist.strings in Resources */,
 				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F9EC673627B90BC60003FBB6 /* CarouselAndPageViewController.storyboard in Resources */,
+				F907D02A2A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,

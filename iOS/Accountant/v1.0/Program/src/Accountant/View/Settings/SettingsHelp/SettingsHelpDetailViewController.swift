@@ -8,6 +8,7 @@
 
 import GoogleMobileAds // マネタイズ対応
 import UIKit
+import WebKit
 
 class SettingsHelpDetailViewController: UIViewController {
 
@@ -25,7 +26,10 @@ class SettingsHelpDetailViewController: UIViewController {
     @IBOutlet private var journalEntryEditTextView: UITextView!
     @IBOutlet private var journalEntryDeleteTextView: UITextView!
     @IBOutlet private var journalsTextView: UITextView!
-    
+    @IBOutlet var baseView: UIView!
+
+    var webView: WKWebView?
+
     var textViewSwitchNumber: Int = 0
 
     override func viewDidLoad() {
@@ -33,117 +37,11 @@ class SettingsHelpDetailViewController: UIViewController {
 
         switch textViewSwitchNumber {
         case 0:
-            aboutThisAppTextView.isHidden = false
-            if let baseString = aboutThisAppTextView.text {
-                let attributedString = NSMutableAttributedString(string: baseString)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "このアプリについて"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "アプリ名："))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "概要："))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "想定ユーザー："))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "コンセプト："))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "作成書類："))
-                aboutThisAppTextView.attributedText = attributedString
-                aboutThisAppTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                aboutThisAppTextView.setContentOffset(
-                    CGPoint(x: 0, y: -aboutThisAppTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 1:
-            thoughtTextView.isHidden = false
-            // textView_thought.font = .systemFont(ofSize: 19)
-            if let baseString = thoughtTextView.text {
-                let attributedString = NSMutableAttributedString(string: baseString)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "当アプリで採用した会計概念"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　簿記の分類"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　帳簿会計の分類"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　会計帳簿の分類"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　仕訳の分類"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　帳簿決算（帳簿の締め切り）方法"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "□　経済活動の種類による分類"))
-                thoughtTextView.attributedText = attributedString
-                thoughtTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                thoughtTextView.setContentOffset(
-                    CGPoint(x: 0, y: -thoughtTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 2:
-            basicOfBookkeepingTextView.isHidden = false
-            if let baseString = basicOfBookkeepingTextView.text {
-                let attributedString = NSMutableAttributedString(string: basicOfBookkeepingTextView.text)
-                let textAttachment = NSTextAttachment()
-                textAttachment.image = UIImage(named: "簿記一巡.png")!
-                let oldWidth = textAttachment.image!.size.width
-                print(textAttachment.image!.size.width)
-                print(basicOfBookkeepingTextView.frame.size.width)
-                print((UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.bounds.width)!)
-                let scaleFactor = oldWidth / (basicOfBookkeepingTextView.frame.size.width - 20) * 1 // for the padding inside the textView
-                print(scaleFactor)
-                textAttachment.image = UIImage.init(cgImage: textAttachment.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-                print(basicOfBookkeepingTextView.text.unicodeScalars.count)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "1. 簿記の基礎"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "1. 取引の発生から財務諸表までの流れ"))
-                attributedString.replaceCharacters(in: NSMakeRange(150, 1), with: attrStringWithImage)
-                basicOfBookkeepingTextView.attributedText = attributedString
-                basicOfBookkeepingTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                basicOfBookkeepingTextView.setContentOffset(
-                    CGPoint(x: 0, y: -basicOfBookkeepingTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 3: // 初期設定の手順
             setUpTextView.isHidden = false
             if let baseString = setUpTextView.text {
@@ -776,6 +674,85 @@ class SettingsHelpDetailViewController: UIViewController {
             break
         }
     }
+    
+    override func loadView() {
+        super.loadView() // 重要
+        
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        guard let webView = webView else {
+            return
+        }
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        // 背景色が白くなるので透明にする
+        webView.isOpaque = false
+        webView.backgroundColor = .cellBackground
+        webView.scrollView.backgroundColor = .clear
+        // バウンスを禁止する
+        webView.scrollView.bounces = false
+        webView.navigationDelegate = self
+
+        baseView.addSubview(webView)
+        baseView.bringSubviewToFront(webView)
+
+        // 親Viewを覆うように制約をつける
+        webView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 0).isActive = true
+        webView.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 0).isActive = true
+        webView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: 0).isActive = true
+        webView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: 0).isActive = true
+        webView.layoutIfNeeded()
+        
+        var fileName = ""
+        switch textViewSwitchNumber {
+        case 0:
+            fileName = "About_This_App"
+        case 1:
+            fileName = "Thought"
+        case 2:
+            fileName = "Basic_Of_Bookkeeping"
+        default:
+            break
+        }
+        // HTML を読み込む
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "html") {
+            let urlRequest = URLRequest(url: url)
+            webView.load(urlRequest)
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // ダークモード対応 HTML上の文字色を変更する
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.webView?.evaluateJavaScript(
+                "changeFontColor('\(UITraitCollection.isDarkMode ? "#F2F2F2" : "#0C0C0C")')",
+                completionHandler: { _, _ in
+                    print("Completed Javascript evaluation.")
+                }
+            )
+            
+            switch self.textViewSwitchNumber {
+            case 0:
+                break
+            case 1:
+                break
+            case 2:
+                // 画像を表示させる
+                if let path = Bundle.main.url(forResource: "簿記一巡", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImage('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+            default:
+                break
+            }
+        }
+    }
+
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -810,5 +787,13 @@ class SettingsHelpDetailViewController: UIViewController {
 
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SettingsHelpDetailViewController: WKNavigationDelegate {
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // 長押しによる選択、コールアウト表示を禁止する
+        webView.prohibitTouchCalloutAndUserSelect()
     }
 }
