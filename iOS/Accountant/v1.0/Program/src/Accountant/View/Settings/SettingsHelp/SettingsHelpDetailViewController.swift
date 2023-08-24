@@ -14,11 +14,6 @@ class SettingsHelpDetailViewController: UIViewController {
 
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var aboutThisAppTextView: UITextView!
-    @IBOutlet private var thoughtTextView: UITextView!
-    @IBOutlet private var basicOfBookkeepingTextView: UITextView!
-    @IBOutlet private var setUpTextView: UITextView!
-    @IBOutlet private var setUpBasicInfoTextView: UITextView!
     @IBOutlet private var setUpAccountTextView: UITextView!
     @IBOutlet private var setUpAccountEditTextView: UITextView!
     @IBOutlet private var configurationTextView: UITextView!
@@ -43,128 +38,9 @@ class SettingsHelpDetailViewController: UIViewController {
         case 2:
             break
         case 3: // 初期設定の手順
-            setUpTextView.isHidden = false
-            if let baseString = setUpTextView.text {
-                let attributedString = NSMutableAttributedString(string: setUpTextView.text)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "1. 初期設定の手順"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "    1. 基本情報の登録 "))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "    2. 勘定科目体系の登録 "))
-                setUpTextView.attributedText = attributedString
-                setUpTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                setUpTextView.setContentOffset(
-                    CGPoint(x: 0, y: -setUpTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 4: // 基本情報の登録をしよう
-            setUpBasicInfoTextView.isHidden = false
-            if let baseString = setUpBasicInfoTextView.text {
-                let attributedString = NSMutableAttributedString(string: setUpBasicInfoTextView.text)
-                // 基本情報の登録　事業者名を設定しよう 設定画面
-                let textAttachment = NSTextAttachment()
-                textAttachment.image = UIImage(named: "TableViewControllerSettings_cell_user.png")!
-                var oldWidth = textAttachment.image!.size.width
-                print(textAttachment.image!.size.width)
-                print(setUpBasicInfoTextView.frame.size.width)
-                var scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // -20 for the padding inside the textView, *3 textViewの幅の三分の1のサイズにするため
-                textAttachment.image = UIImage.init(cgImage: textAttachment.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                var attrStringWithImage = NSAttributedString(attachment: textAttachment)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                print(NSString(string: baseString).range(of: "こちらで設定した事業者名は"))
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "こちらで設定した事業者名は").location - 3, 1), with: attrStringWithImage)
-                // 基本情報の登録 事業者名を設定しよう 帳簿情報画面
-                let textAttachmentt = NSTextAttachment()
-                textAttachmentt.image = UIImage(named: "TableViewControllerSettingsInformation.png")!
-                oldWidth = textAttachmentt.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachmentt.image = UIImage.init(cgImage: textAttachmentt.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachmentt)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "こちらで設定した事業者名は").location - 2, 1), with: attrStringWithImage)
-                // 基本情報の登録 決算日を設定しよう ①
-                let textAttachment1 = NSTextAttachment()
-                textAttachment1.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_term.png")!
-                oldWidth = textAttachment1.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment1.image = UIImage.init(cgImage: textAttachment1.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment1)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "こちらで設定した決算日は").location - 3, 1), with: attrStringWithImage)
-                // 基本情報の登録 決算日を設定しよう ②
-                let textAttachment2 = NSTextAttachment()
-                textAttachment2.image = UIImage(named: "Text View set Up basic Info2.png")!
-                oldWidth = textAttachment2.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment2.image = UIImage.init(cgImage: textAttachment2.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment2)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "こちらで設定した決算日は").location - 2, 1), with: attrStringWithImage)
-                // 基本情報の登録 会計帳簿を作成しよう
-                let textAttachment0 = NSTextAttachment()
-                textAttachment0.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_term.png")!
-                oldWidth = textAttachment0.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment0.image = UIImage.init(cgImage: textAttachment0.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment0)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "会計帳簿を作成後に").location - 4, 1), with: attrStringWithImage)
-                // 基本情報の登録 会計帳簿を作成しよう ③
-                let textAttachment3 = NSTextAttachment()
-                textAttachment3.image = UIImage(named: "Text View set Up basic Info3.png")!
-                oldWidth = textAttachment3.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment3.image = UIImage.init(cgImage: textAttachment3.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment3)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "会計帳簿を作成後に").location-3, 1), with: attrStringWithImage)
-                // 基本情報の登録 会計帳簿を作成しよう ④
-                let textAttachment4 = NSTextAttachment()
-                textAttachment4.image = UIImage(named: "Text View set Up basic Info4.png")!
-                oldWidth = textAttachment4.image!.size.width
-                scaleFactor = oldWidth / (setUpBasicInfoTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment4.image = UIImage.init(cgImage: textAttachment4.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment4)
-                print(setUpBasicInfoTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "会計帳簿を作成後に").location-2, 1), with: attrStringWithImage)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "2. 基本情報の登録をしよう"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 事業者名を設定しよう"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 決算日を設定しよう"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 会計帳簿を作成しよう"))
-                setUpBasicInfoTextView.attributedText = attributedString
-                setUpBasicInfoTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                setUpBasicInfoTextView.setContentOffset(
-                    CGPoint(x: 0, y: -setUpBasicInfoTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 5: // 勘定科目を設定しよう
             setUpAccountTextView.isHidden = false
             if let baseString = setUpAccountTextView.text {
@@ -710,6 +586,12 @@ class SettingsHelpDetailViewController: UIViewController {
             fileName = "Thought"
         case 2:
             fileName = "Basic_Of_Bookkeeping"
+        case 4:
+            fileName = "Set_Up_Basic_Info"
+        case 41:
+            fileName = "Set_Up_Basic_Info2"
+        case 42:
+            fileName = "Set_Up_Basic_Info3"
         default:
             break
         }
@@ -742,6 +624,80 @@ class SettingsHelpDetailViewController: UIViewController {
                     print(path)
                     self.webView?.evaluateJavaScript(
                         "changeImage('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+             // 基本情報の登録をしよう
+            case 4:
+                // 基本情報の登録　事業者名を設定しよう 設定画面
+                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_user", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImage('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+                // 基本情報の登録 事業者名を設定しよう 帳簿情報画面
+                if let path = Bundle.main.url(forResource: "TableViewControllerSettingsInformation", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImageSecond('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+            case 41:
+                // 基本情報の登録 決算日を設定しよう ①
+                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImage('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+                // 基本情報の登録 決算日を設定しよう ②
+                if let path = Bundle.main.url(forResource: "Text View set Up basic Info2", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImageSecond('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+            case 42:
+                // 基本情報の登録 会計帳簿を作成しよう
+                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImage('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+                // 基本情報の登録 会計帳簿を作成しよう ③
+                if let path = Bundle.main.url(forResource: "Text View set Up basic Info3", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImageSecond('\(path)')",
+                        completionHandler: { _, _ in
+                            print("Completed Javascript evaluation.")
+                        }
+                    )
+                }
+                // 基本情報の登録 会計帳簿を作成しよう ④
+                if let path = Bundle.main.url(forResource: "Text View set Up basic Info4", withExtension: "png") {
+                    print(path)
+                    self.webView?.evaluateJavaScript(
+                        "changeImageThird('\(path)')",
                         completionHandler: { _, _ in
                             print("Completed Javascript evaluation.")
                         }

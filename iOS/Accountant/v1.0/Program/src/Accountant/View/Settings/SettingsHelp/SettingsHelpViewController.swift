@@ -69,7 +69,17 @@ class SettingsHelpViewController: UIViewController {
         attributedString.addAttribute(
             .link,
             value: "Link4",
-            range: NSString(string: baseString!).range(of: "基本情報の登録をしよう")
+            range: NSString(string: baseString!).range(of: "事業者名を設定しよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link4-1",
+            range: NSString(string: baseString!).range(of: "決算日を設定しよう")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link4-2",
+            range: NSString(string: baseString!).range(of: "会計帳簿を作成しよう")
         )
         attributedString.addAttribute(
             .link,
@@ -191,11 +201,25 @@ class SettingsHelpViewController: UIViewController {
                 viewController.textViewSwitchNumber = 3
             }
             if urlString == "Link4" {
-                print("基本情報の登録をしようのリンクがタップされました")
+                print("事業者名を設定しようのリンクがタップされました")
                 // ログ送信処理
                 // 詳細画面を開く処理
-                viewController.navigationItem.title = "基本情報の登録をしよう"
+                viewController.navigationItem.title = "事業者名を設定しよう"
                 viewController.textViewSwitchNumber = 4
+            }
+            if urlString == "Link4-1" {
+                print("決算日を設定しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "決算日を設定しよう"
+                viewController.textViewSwitchNumber = 41
+            }
+            if urlString == "Link4-2" {
+                print("会計帳簿を作成しようのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "会計帳簿を作成しよう"
+                viewController.textViewSwitchNumber = 42
             }
             if urlString == "Link5" {
                 print("勘定科目を設定しようのリンクがタップされました")
