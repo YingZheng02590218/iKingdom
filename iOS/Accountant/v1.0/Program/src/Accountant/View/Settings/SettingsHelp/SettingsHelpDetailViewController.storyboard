@@ -17,72 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOT-no-hpO">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-3. 勘定科目を設定しよう
-
-* 準備資料
-    * 以前使用していた会計帳簿や前年度の決算書
-どのような勘定科目が必要なのかを確認することができます。
-
-    * 前年の勘定科目内訳明細書
-    * 前年の青色申告決算書や収支内訳書
-どのような表示科目が必要なのかを確認することができます。
-※ 表示科目とは、財務諸表に表示される勘定科目を集計した科目です。
-
-
-* 勘定科目の確認
-勘定科目毎にスイッチがあります。使用したい勘定科目をONに、不使用の勘定科目をOFFに設定してください。
-表示方法は2通りあります
-
-
-    * 勘定科目を一覧で表示
-勘定科目 &gt; 勘定科目一覧 &gt; 勘定科目一覧画面
-
-
-
-
-表示順：流動資産 → 固定資産 → 繰延資産 → 流動負債 → 固定負債 → 資本 → 売上 → 販売費及び一般管理費 → 営業外損益 → 特別損益 → 税金
-
-
-    * 表示科目別に勘定科目を表示
-勘定科目 &gt; 表示科目別勘定科目一覧 &gt; BS/PL切替えボタン
-
-
-
-
-BS (貸借対照表)科目とPL (損益計算書)科目の表示を切り替えることができます。
-
-
-* 勘定科目体系の図
-
-
-* 新規に追加登録する
-勘定科目 &gt; 勘定科目一覧 &gt; Edit &gt; 勘定科目追加 &gt; 大区分 &gt; 中区分 &gt; 勘定科目名 &gt; 表示科目名 &gt; 登録 &gt; Done
-
-
-
-
-
-
-
-勘定科目を追加登録後は、表示科目のみ変更が可能です。
-
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -308,10 +242,7 @@ OKボタンをタップします。
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Q4H-SJ-CSd"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Qd0-AD-rEj"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="VOT-no-hpO" secondAttribute="bottom" id="TCz-5z-1Sf"/>
-                            <constraint firstItem="VOT-no-hpO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="UQO-Ui-NaK"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
                             <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Y0E-mg-gh4"/>
@@ -328,7 +259,6 @@ OKボタンをタップします。
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="VOT-no-hpO" secondAttribute="trailing" id="x8H-A1-lTa"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="xqE-bB-oEH"/>
                             <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="y5T-29-zst"/>
                         </constraints>
@@ -342,7 +272,6 @@ OKボタンをタップします。
                         <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
                         <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
                         <outlet property="setUpAccountEditTextView" destination="7dM-0h-33G" id="ydP-aF-ok0"/>
-                        <outlet property="setUpAccountTextView" destination="VOT-no-hpO" id="4sq-Cc-uTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

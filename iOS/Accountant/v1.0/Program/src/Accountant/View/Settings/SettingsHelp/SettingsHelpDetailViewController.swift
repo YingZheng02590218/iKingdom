@@ -11,10 +11,9 @@ import UIKit
 import WebKit
 
 class SettingsHelpDetailViewController: UIViewController {
-
+    
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var setUpAccountTextView: UITextView!
     @IBOutlet private var setUpAccountEditTextView: UITextView!
     @IBOutlet private var configurationTextView: UITextView!
     @IBOutlet private var journalEntryTextView: UITextView!
@@ -22,14 +21,14 @@ class SettingsHelpDetailViewController: UIViewController {
     @IBOutlet private var journalEntryDeleteTextView: UITextView!
     @IBOutlet private var journalsTextView: UITextView!
     @IBOutlet var baseView: UIView!
-
+    
     var webView: WKWebView?
-
+    
     var textViewSwitchNumber: Int = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         switch textViewSwitchNumber {
         case 0:
             break
@@ -42,146 +41,7 @@ class SettingsHelpDetailViewController: UIViewController {
         case 4: // 基本情報の登録をしよう
             break
         case 5: // 勘定科目を設定しよう
-            setUpAccountTextView.isHidden = false
-            if let baseString = setUpAccountTextView.text {
-                let attributedString = NSMutableAttributedString(string: setUpAccountTextView.text)
-                // 勘定科目体系の登録 勘定科目を一覧で表示 ①
-                let textAttachment00 = NSTextAttachment()
-                textAttachment00.image = UIImage(named: "Text View set Up1.png")!
-                var oldWidth = textAttachment00.image!.size.width
-                var scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment00.image = UIImage.init(cgImage: textAttachment00.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                var attrStringWithImage = NSAttributedString(attachment: textAttachment00)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "表示順：").location - 4, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録 勘定科目を一覧で表示 ②
-                let textAttachment000 = NSTextAttachment()
-                textAttachment000.image = UIImage(named: "Text View set Up2.png")!
-                oldWidth = textAttachment000.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment000.image = UIImage.init(cgImage: textAttachment000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment000)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "表示順：").location - 3, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録 勘定科目を一覧で表示 ③
-                let textAttachment0000 = NSTextAttachment()
-                textAttachment0000.image = UIImage(named: "TableViewControllerCategoryList.png")!
-                oldWidth = textAttachment0000.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment0000.image = UIImage.init(cgImage: textAttachment0000.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment0000)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "表示順：").location-2, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録 表示科目別に勘定科目を表示 ①
-                let textAttachment0 = NSTextAttachment()
-                textAttachment0.image = UIImage(named: "Text View set Up1.png")!
-                oldWidth = textAttachment0.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment0.image = UIImage.init(cgImage: textAttachment0.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment0)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "BS (貸借対照表)科目と").location - 4, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　表示科目別に勘定科目を表示 ②
-                let textAttachment1 = NSTextAttachment()
-                textAttachment1.image = UIImage(named: "TableViewControllerSettingsCategory_categoriesBSandPL.png")!
-                oldWidth = textAttachment1.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment1.image = UIImage.init(cgImage: textAttachment1.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment1)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "BS (貸借対照表)科目と").location - 3, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　表示科目別に勘定科目を表示 ③
-                let textAttachment11 = NSTextAttachment()
-                textAttachment11.image = UIImage(named: "TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png")!
-                oldWidth = textAttachment11.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment11.image = UIImage.init(cgImage: textAttachment11.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment11)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "BS (貸借対照表)科目と").location - 2, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ①設定画面
-                let textAttachmentttt = NSTextAttachment()
-                textAttachmentttt.image = UIImage(named: "Text View set Up1.png")!
-                oldWidth = textAttachmentttt.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachmentttt.image = UIImage.init(cgImage: textAttachmentttt.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachmentttt)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 7, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ②
-                let textAttachment2 = NSTextAttachment()
-                textAttachment2.image = UIImage(named: "Text View set Up2.png")!
-                oldWidth = textAttachment2.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment2.image = UIImage.init(cgImage: textAttachment2.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment2)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 6, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ③
-                let textAttachment3 = NSTextAttachment()
-                textAttachment3.image = UIImage(named: "Text View set Up3.png")!
-                oldWidth = textAttachment3.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment3.image = UIImage.init(cgImage: textAttachment3.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment3)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 5, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ④
-                let textAttachment4 = NSTextAttachment()
-                textAttachment4.image = UIImage(named: "Text View set Up4.png")!
-                oldWidth = textAttachment4.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment4.image = UIImage.init(cgImage: textAttachment4.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment4)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 4, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ⑤
-                let textAttachment5 = NSTextAttachment()
-                textAttachment5.image = UIImage(named: "Text View set Up5.png")!
-                oldWidth = textAttachment5.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment5.image = UIImage.init(cgImage: textAttachment5.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment5)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 3, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録　新規に追加登録する ⑥
-                let textAttachment6 = NSTextAttachment()
-                textAttachment6.image = UIImage(named: "Text View set Up6.png")!
-                oldWidth = textAttachment6.image!.size.width
-                scaleFactor = oldWidth / (setUpAccountTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment6.image = UIImage.init(cgImage: textAttachment6.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment6)
-                print(setUpAccountTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "勘定科目を追加登録後は").location - 2, 1), with: attrStringWithImage)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "3. 勘定科目を設定しよう"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 準備資料"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 勘定科目の確認"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 勘定科目体系の図"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 新規に追加登録する"))
-                setUpAccountTextView.attributedText = attributedString
-                setUpAccountTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                setUpAccountTextView.setContentOffset(
-                    CGPoint(x: 0, y: -setUpAccountTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 6: // 勘定科目の編集しよう
             setUpAccountEditTextView.isHidden = false
             if let baseString = setUpAccountEditTextView.text {
@@ -240,7 +100,7 @@ class SettingsHelpDetailViewController: UIViewController {
                 attrStringWithImage = NSAttributedString(attachment: textAttachment0000000)
                 print(setUpAccountEditTextView.text.unicodeScalars.count)
                 attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "表示科目名のみ変更").location - 2, 1), with: attrStringWithImage)
-
+                
                 // 勘定科目体系の登録 削除をする ①
                 let textAttachment00000000 = NSTextAttachment()
                 textAttachment00000000.image = UIImage(named: "Text View set Up1.png")!
@@ -567,10 +427,10 @@ class SettingsHelpDetailViewController: UIViewController {
         // バウンスを禁止する
         webView.scrollView.bounces = false
         webView.navigationDelegate = self
-
+        
         baseView.addSubview(webView)
         baseView.bringSubviewToFront(webView)
-
+        
         // 親Viewを覆うように制約をつける
         webView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 0).isActive = true
         webView.topAnchor.constraint(equalTo: baseView.topAnchor, constant: 0).isActive = true
@@ -592,6 +452,14 @@ class SettingsHelpDetailViewController: UIViewController {
             fileName = "Set_Up_Basic_Info2"
         case 42:
             fileName = "Set_Up_Basic_Info3"
+        case 5:
+            fileName = "Set_Up_Account"
+        case 51:
+            fileName = "Set_Up_Account2"
+        case 52:
+            fileName = "Set_Up_Account3"
+        case 53:
+            fileName = "Set_Up_Account4"
         default:
             break
         }
@@ -601,7 +469,7 @@ class SettingsHelpDetailViewController: UIViewController {
             webView.load(urlRequest)
         }
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // ダークモード対応 HTML上の文字色を変更する
@@ -612,103 +480,236 @@ class SettingsHelpDetailViewController: UIViewController {
                     print("Completed Javascript evaluation.")
                 }
             )
-            
-            switch self.textViewSwitchNumber {
-            case 0:
-                break
-            case 1:
-                break
-            case 2:
-                // 画像を表示させる
-                if let path = Bundle.main.url(forResource: "簿記一巡", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImage('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-             // 基本情報の登録をしよう
-            case 4:
-                // 基本情報の登録　事業者名を設定しよう 設定画面
-                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_user", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImage('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-                // 基本情報の登録 事業者名を設定しよう 帳簿情報画面
-                if let path = Bundle.main.url(forResource: "TableViewControllerSettingsInformation", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImageSecond('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-            case 41:
-                // 基本情報の登録 決算日を設定しよう ①
-                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImage('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-                // 基本情報の登録 決算日を設定しよう ②
-                if let path = Bundle.main.url(forResource: "Text View set Up basic Info2", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImageSecond('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-            case 42:
-                // 基本情報の登録 会計帳簿を作成しよう
-                if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImage('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-                // 基本情報の登録 会計帳簿を作成しよう ③
-                if let path = Bundle.main.url(forResource: "Text View set Up basic Info3", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImageSecond('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-                // 基本情報の登録 会計帳簿を作成しよう ④
-                if let path = Bundle.main.url(forResource: "Text View set Up basic Info4", withExtension: "png") {
-                    print(path)
-                    self.webView?.evaluateJavaScript(
-                        "changeImageThird('\(path)')",
-                        completionHandler: { _, _ in
-                            print("Completed Javascript evaluation.")
-                        }
-                    )
-                }
-            default:
-                break
-            }
+            // HTML上の画像を指定する
+            self.updateHtmlImage()
         }
     }
-
+    
+    // HTML上の画像を指定する
+    func updateHtmlImage() {
+        switch self.textViewSwitchNumber {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            // 画像を表示させる
+            if let path = Bundle.main.url(forResource: "簿記一巡", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 基本情報の登録をしよう
+        case 4:
+            // 基本情報の登録　事業者名を設定しよう 設定画面
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_user", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 基本情報の登録 事業者名を設定しよう 帳簿情報画面
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsInformation", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSecond('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+        case 41:
+            // 基本情報の登録 決算日を設定しよう ①
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 基本情報の登録 決算日を設定しよう ②
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info2", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSecond('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+        case 42:
+            // 基本情報の登録 会計帳簿を作成しよう
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 基本情報の登録 会計帳簿を作成しよう ③
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info3", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSecond('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 基本情報の登録 会計帳簿を作成しよう ④
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info4", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageThird('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+        case 5:
+            break
+        case 51:
+            // 勘定科目体系の登録 勘定科目を一覧で表示 ①
+            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録 勘定科目を一覧で表示 ②
+            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSecond('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録 勘定科目を一覧で表示 ③
+            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageThird('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            
+            // 勘定科目体系の登録 表示科目別に勘定科目を表示 ①
+            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageForth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　表示科目別に勘定科目を表示 ②
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsCategory_categoriesBSandPL", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageFifth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　表示科目別に勘定科目を表示 ③
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsTaxonomyAccountByTaxonomyList", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSixth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+        case 52:
+            break
+        case 53:
+            // 勘定科目体系の登録　新規に追加登録する ①設定画面
+            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImage('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　新規に追加登録する ②
+            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSecond('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　新規に追加登録する ③
+            if let path = Bundle.main.url(forResource: "Text View set Up3", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageThird('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            
+            // 勘定科目体系の登録　新規に追加登録する ④
+            if let path = Bundle.main.url(forResource: "Text View set Up4", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageForth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　新規に追加登録する ⑤
+            if let path = Bundle.main.url(forResource: "Text View set Up5", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageFifth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+            // 勘定科目体系の登録　新規に追加登録する ⑥
+            if let path = Bundle.main.url(forResource: "Text View set Up6", withExtension: "png") {
+                print(path)
+                self.webView?.evaluateJavaScript(
+                    "changeImageSixth('\(path)')",
+                    completionHandler: { _, _ in
+                        print("Completed Javascript evaluation.")
+                    }
+                )
+            }
+        default:
+            break
+        }
+    }
+    
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -731,7 +732,7 @@ class SettingsHelpDetailViewController: UIViewController {
             }
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -740,14 +741,14 @@ class SettingsHelpDetailViewController: UIViewController {
             removeBannerViewToView(gADBannerView)
         }
     }
-
+    
     @IBAction func closeButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension SettingsHelpDetailViewController: WKNavigationDelegate {
-
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 長押しによる選択、コールアウト表示を禁止する
         webView.prohibitTouchCalloutAndUserSelect()

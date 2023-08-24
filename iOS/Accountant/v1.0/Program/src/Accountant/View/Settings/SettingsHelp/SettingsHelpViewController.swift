@@ -84,7 +84,22 @@ class SettingsHelpViewController: UIViewController {
         attributedString.addAttribute(
             .link,
             value: "Link5",
-            range: NSString(string: baseString!).range(of: "勘定科目を設定しよう")
+            range: NSString(string: baseString!).range(of: "準備する資料")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link5-1",
+            range: NSString(string: baseString!).range(of: "勘定科目の確認")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link5-2",
+            range: NSString(string: baseString!).range(of: "勘定科目体系の図")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link5-3",
+            range: NSString(string: baseString!).range(of: "新規に追加登録する")
         )
         attributedString.addAttribute(
             .link,
@@ -153,7 +168,7 @@ class SettingsHelpViewController: UIViewController {
             }
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // アップグレード機能　スタンダードプラン
@@ -222,11 +237,32 @@ class SettingsHelpViewController: UIViewController {
                 viewController.textViewSwitchNumber = 42
             }
             if urlString == "Link5" {
-                print("勘定科目を設定しようのリンクがタップされました")
+                print("準備する資料のリンクがタップされました")
                 // ログ送信処理
                 // 詳細画面を開く処理
-                viewController.navigationItem.title = "勘定科目を設定しよう"
+                viewController.navigationItem.title = "準備する資料"
                 viewController.textViewSwitchNumber = 5
+            }
+            if urlString == "Link5-1" {
+                print("勘定科目の確認のリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "勘定科目の確認"
+                viewController.textViewSwitchNumber = 51
+            }
+            if urlString == "Link5-2" {
+                print("勘定科目体系の図のリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "勘定科目体系の図"
+                viewController.textViewSwitchNumber = 52
+            }
+            if urlString == "Link5-3" {
+                print("新規に追加登録するのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "新規に追加登録する"
+                viewController.textViewSwitchNumber = 53
             }
             if urlString == "Link6" {
                 print("勘定科目の編集しようのリンクがタップされました")
