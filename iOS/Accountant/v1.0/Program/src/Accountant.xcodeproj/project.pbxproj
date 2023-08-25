@@ -123,6 +123,8 @@
 		F907D0B22A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */; };
 		F907D0B42A98991B00A701C3 /* Configuration.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B32A98991B00A701C3 /* Configuration.html */; };
 		F907D0B52A98991B00A701C3 /* Configuration.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B32A98991B00A701C3 /* Configuration.html */; };
+		F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B62A98A57100A701C3 /* Journal_Entry.html */; };
+		F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B62A98A57100A701C3 /* Journal_Entry.html */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -868,6 +870,7 @@
 		F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account_Edit.html; sourceTree = "<group>"; };
 		F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account_Edit2.html; sourceTree = "<group>"; };
 		F907D0B32A98991B00A701C3 /* Configuration.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Configuration.html; sourceTree = "<group>"; };
+		F907D0B62A98A57100A701C3 /* Journal_Entry.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry.html; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1879,6 +1882,7 @@
 				F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */,
 				F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */,
 				F907D0B32A98991B00A701C3 /* Configuration.html */,
+				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2412,6 +2416,7 @@
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F907D0802A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
+				F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F907D0982A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
 				F907D0602A97552D00A701C3 /* Text View set Up3.png in Resources */,
@@ -2557,6 +2562,7 @@
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F907D0812A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
+				F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F907D0992A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
 				F907D0612A97552D00A701C3 /* Text View set Up3.png in Resources */,

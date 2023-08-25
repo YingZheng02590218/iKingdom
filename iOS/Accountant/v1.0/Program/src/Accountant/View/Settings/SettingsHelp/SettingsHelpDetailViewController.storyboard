@@ -17,45 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-4. 帳簿に記帳する
-    1. 仕訳を入力する
-仕訳 &gt; 日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 入力ボタン
-
-
-① 日付の入力
-ドラムロールとボタンを操作して日付を選択できます。
-
-②④ 勘定科目の入力
-入力欄をタップすると、ドラムロールが表示されます。
-ドラムロールの左列が勘定科目の大区分、右列が勘定科目です。
-
-③ 金額の入力
-入力欄をタップすると、キーボードが表示されます。
-7桁までの金額を入力できます。
-
-⑤ 小書きの入力
-入力欄をタップすると、キーボードが表示されます。
-20桁までの金額を入力できます。
-
-⑥ 入力ボタン
-ボタンをタップすると仕訳が記帳されます。
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -165,18 +126,14 @@ OKボタンをタップします。
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Zlo-N8-grp" secondAttribute="trailing" id="Fjm-yZ-3wC"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Q4H-SJ-CSd"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
                             <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
                             <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="euo-8m-YyO"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
-                            <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
                         </constraints>
@@ -186,7 +143,6 @@ OKボタンをタップします。
                         <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
                         <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
                         <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
-                        <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
                         <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
                     </connections>
                 </viewController>
