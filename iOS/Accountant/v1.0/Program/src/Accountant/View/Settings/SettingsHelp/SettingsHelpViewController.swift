@@ -104,7 +104,12 @@ class SettingsHelpViewController: UIViewController {
         attributedString.addAttribute(
             .link,
             value: "Link6",
-            range: NSString(string: baseString!).range(of: "勘定科目の編集しよう")
+            range: NSString(string: baseString!).range(of: "修正をする")
+        )
+        attributedString.addAttribute(
+            .link,
+            value: "Link6-1",
+            range: NSString(string: baseString!).range(of: "削除をする")
         )
         attributedString.addAttribute(
             .link,
@@ -265,11 +270,18 @@ class SettingsHelpViewController: UIViewController {
                 viewController.textViewSwitchNumber = 53
             }
             if urlString == "Link6" {
-                print("勘定科目の編集しようのリンクがタップされました")
+                print("修正をするのリンクがタップされました")
                 // ログ送信処理
                 // 詳細画面を開く処理
-                viewController.navigationItem.title = "勘定科目の編集しよう"
+                viewController.navigationItem.title = "修正をする"
                 viewController.textViewSwitchNumber = 6
+            }
+            if urlString == "Link6-1" {
+                print("削除をするのリンクがタップされました")
+                // ログ送信処理
+                // 詳細画面を開く処理
+                viewController.navigationItem.title = "削除をする"
+                viewController.textViewSwitchNumber = 61
             }
             if urlString == "Link7" {
                 print("環境設定を確認・変更しようのリンクがタップされました")

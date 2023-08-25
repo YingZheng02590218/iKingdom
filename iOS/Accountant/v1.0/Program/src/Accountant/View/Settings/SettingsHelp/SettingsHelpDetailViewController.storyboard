@@ -17,48 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-0h-33G">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-4. 勘定科目の編集しよう
-
-    * 修正をする
-勘定科目 &gt; 勘定科目一覧 &gt; 任意の勘定科目 &gt; 表示科目名 &gt; 任意の表示科目 &gt; OK
-
-
-
-
-
-
-
-表示科目名のみ変更が可能です。
-
-
-    * 削除をする
-勘定科目 &gt; 勘定科目一覧 &gt; Edit &gt; 任意の勘定科目の赤い丸ボタン &gt; ゴミ箱ボタン &gt; OK &gt; Done
-
-
-
-
-
-
-
-
-新規で追加した勘定科目のみ削除が可能です。
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -245,11 +203,9 @@ OKボタンをタップします。
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Y0E-mg-gh4"/>
                             <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Z3c-VO-fXh"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
                             <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="7dM-0h-33G" secondAttribute="bottom" id="dZ6-1x-t0c"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
@@ -259,8 +215,6 @@ OKボタンをタップします。
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="7dM-0h-33G" secondAttribute="trailing" id="xqE-bB-oEH"/>
-                            <constraint firstItem="7dM-0h-33G" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="y5T-29-zst"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
@@ -271,7 +225,6 @@ OKボタンをタップします。
                         <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
                         <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>
                         <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
-                        <outlet property="setUpAccountEditTextView" destination="7dM-0h-33G" id="ydP-aF-ok0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -298,7 +251,7 @@ OKボタンをタップします。
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
