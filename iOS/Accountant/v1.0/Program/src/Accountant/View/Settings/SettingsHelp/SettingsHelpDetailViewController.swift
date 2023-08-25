@@ -14,7 +14,6 @@ class SettingsHelpDetailViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var journalEntryEditTextView: UITextView!
     @IBOutlet private var journalEntryDeleteTextView: UITextView!
     @IBOutlet private var journalsTextView: UITextView!
     @IBOutlet var baseView: UIView!
@@ -27,49 +26,6 @@ class SettingsHelpDetailViewController: UIViewController {
         super.viewDidLoad()
         
 //        switch textViewSwitchNumber {
-//        case 9: // 仕訳を修正する
-//            //            journalEntryEditTextView.isHidden = false
-//            //            if let baseString = journalEntryEditTextView.text {
-//            //                let attributedString = NSMutableAttributedString(string: journalEntryEditTextView.text)
-//            //                // 4. 帳簿に記帳する 2. 仕訳を修正する ①
-//            //                let textAttachment666 = NSTextAttachment()
-//            //                textAttachment666.image = UIImage(named: "TableViewControllerJournals.png")!
-//            //                var oldWidth = textAttachment666.image!.size.width
-//            //                var scaleFactor = oldWidth / (journalEntryEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//            //                textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//            //                var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
-//            //                print(journalEntryEditTextView.text.unicodeScalars.count)
-//            //                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "① 任意の仕訳を長押し").location - 3, 1), with: attrStringWithImage)
-//            //                // 4. 帳簿に記帳する 2. 仕訳を修正する　②
-//            //                let textAttachment777 = NSTextAttachment()
-//            //                textAttachment777.image = UIImage(named: "TableViewControllerJournals1.png")!
-//            //                oldWidth = textAttachment777.image!.size.width
-//            //                scaleFactor = oldWidth / (setUpAccountEditTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//            //                textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//            //                attrStringWithImage = NSAttributedString(attachment: textAttachment777)
-//            //                print(setUpAccountEditTextView.text.unicodeScalars.count)
-//            //                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "① 任意の仕訳を長押し").location - 2, 1), with: attrStringWithImage)
-//            //                // 複数の属性を一気に指定します.
-//            //                // 全体の文字サイズを指定
-//            //                attributedString.addAttributes([
-//            //                    .font: UIFont.systemFont(ofSize: 19)
-//            //                ], range: NSString(string: baseString).range(of: baseString))
-//            //                // カテゴリタイトルの文字サイズを指定
-//            //                attributedString.addAttributes([
-//            //                    .font: UIFont.boldSystemFont(ofSize: 30)
-//            //                ], range: NSString(string: baseString).range(of: "4. 帳簿に記帳する"))
-//            //                attributedString.addAttributes([
-//            //                    .font: UIFont.boldSystemFont(ofSize: 20)
-//            //                ], range: NSString(string: baseString).range(of: "2. 仕訳を修正する"))
-//            //                journalEntryEditTextView.attributedText = attributedString
-//            //                journalEntryEditTextView.textColor = .textColor
-//            //                self.view.layoutIfNeeded()    // 追加
-//            //                journalEntryEditTextView.setContentOffset(
-//            //                    CGPoint(x: 0, y: -journalEntryEditTextView.contentInset.top),
-//            //                    animated: false
-//            //                )
-//            //            }
-//            break
 //        case 10: // 仕訳を削除する
 //            journalEntryDeleteTextView.isHidden = false
 //            if let baseString = journalEntryDeleteTextView.text {
@@ -431,6 +387,18 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImage(path: path)
             }
+        case .Link9:
+            // 4. 帳簿に記帳する 2. 仕訳を修正する ①
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+            // 4. 帳簿に記帳する 2. 仕訳を修正する　②
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals1", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
+
 
         default:
             break
@@ -598,7 +566,7 @@ enum HelpDetailKind: String {
         case .Link8:
             return "Journal_Entry"
         case .Link9:
-            return ""
+            return "Journal_Entry_Edit"
         case .Link10:
             return ""
         case .Link11:

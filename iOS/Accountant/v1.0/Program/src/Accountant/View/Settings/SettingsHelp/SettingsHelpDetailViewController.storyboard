@@ -142,7 +142,6 @@ OKボタンをタップします。
                     <connections>
                         <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
                         <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
-                        <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
                         <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
                     </connections>
                 </viewController>

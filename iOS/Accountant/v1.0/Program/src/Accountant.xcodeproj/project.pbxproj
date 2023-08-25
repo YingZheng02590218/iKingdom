@@ -125,6 +125,8 @@
 		F907D0B52A98991B00A701C3 /* Configuration.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B32A98991B00A701C3 /* Configuration.html */; };
 		F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B62A98A57100A701C3 /* Journal_Entry.html */; };
 		F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B62A98A57100A701C3 /* Journal_Entry.html */; };
+		F907D0BA2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */; };
+		F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -871,6 +873,7 @@
 		F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account_Edit2.html; sourceTree = "<group>"; };
 		F907D0B32A98991B00A701C3 /* Configuration.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Configuration.html; sourceTree = "<group>"; };
 		F907D0B62A98A57100A701C3 /* Journal_Entry.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry.html; sourceTree = "<group>"; };
+		F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Edit.html; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1883,6 +1886,7 @@
 				F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */,
 				F907D0B32A98991B00A701C3 /* Configuration.html */,
 				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
+				F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2508,6 +2512,7 @@
 				F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F907D0822A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */,
 				F963E2B02963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
+				F907D0BA2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F907D0742A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */,
@@ -2654,6 +2659,7 @@
 				F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F907D0832A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */,
 				F963E2B12963270A002DF49E /* BSTableViewHeaderFooterView.xib in Resources */,
+				F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */,
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F907D0752A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */,
