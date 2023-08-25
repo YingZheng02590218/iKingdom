@@ -14,7 +14,6 @@ class SettingsHelpDetailViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var configurationTextView: UITextView!
     @IBOutlet private var journalEntryTextView: UITextView!
     @IBOutlet private var journalEntryEditTextView: UITextView!
     @IBOutlet private var journalEntryDeleteTextView: UITextView!
@@ -44,47 +43,7 @@ class SettingsHelpDetailViewController: UIViewController {
         case 6: // 勘定科目の編集しよう
             break
         case 7: // 環境設定を確認・変更しよう
-            configurationTextView.isHidden = false
-            if let baseString = configurationTextView.text {
-                let attributedString = NSMutableAttributedString(string: configurationTextView.text)
-                // 勘定科目体系の登録 削除をする ⑥
-                let textAttachment666 = NSTextAttachment()
-                textAttachment666.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_Journals.png")!
-                var oldWidth = textAttachment666.image!.size.width
-                var scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
-                print(configurationTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "損益振替仕訳と資本振替仕訳の表示").location - 3, 1), with: attrStringWithImage)
-                // 勘定科目体系の登録 削除をする ⑦
-                let textAttachment777 = NSTextAttachment()
-                textAttachment777.image = UIImage(named: "TableViewControllerSettings_cell_list_settings_Journals1.png")!
-                oldWidth = textAttachment777.image!.size.width
-                scaleFactor = oldWidth / (configurationTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-                textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-                attrStringWithImage = NSAttributedString(attachment: textAttachment777)
-                print(configurationTextView.text.unicodeScalars.count)
-                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "損益振替仕訳と資本振替仕訳の表示").location - 2, 1), with: attrStringWithImage)
-                // 複数の属性を一気に指定します.
-                // 全体の文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.systemFont(ofSize: 19)
-                ], range: NSString(string: baseString).range(of: baseString))
-                // カテゴリタイトルの文字サイズを指定
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 30)
-                ], range: NSString(string: baseString).range(of: "5. 環境設定を確認・変更しよう"))
-                attributedString.addAttributes([
-                    .font: UIFont.boldSystemFont(ofSize: 20)
-                ], range: NSString(string: baseString).range(of: "* 仕訳帳画面"))
-                configurationTextView.attributedText = attributedString
-                configurationTextView.textColor = .textColor
-                self.view.layoutIfNeeded()    // 追加
-                configurationTextView.setContentOffset(
-                    CGPoint(x: 0, y: -configurationTextView.contentInset.top),
-                    animated: false
-                )
-            }
+            break
         case 8: // 仕訳を入力する
             journalEntryTextView.isHidden = false
             if let baseString = journalEntryTextView.text {
@@ -321,6 +280,8 @@ class SettingsHelpDetailViewController: UIViewController {
             fileName = "Set_Up_Account_Edit"
         case 61:
             fileName = "Set_Up_Account_Edit2"
+        case 7:
+            fileName = "Configuration"
         default:
             break
         }
@@ -532,6 +493,17 @@ class SettingsHelpDetailViewController: UIViewController {
             // 勘定科目体系の登録 削除をする ⑦
             // TableViewControllerCategoryList_delete4
             // 不要
+        case 7:
+            // 勘定科目体系の登録 削除をする ⑥
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_Journals", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+            // 勘定科目体系の登録 削除をする ⑦
+            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_Journals1", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
         default:
             break
         }

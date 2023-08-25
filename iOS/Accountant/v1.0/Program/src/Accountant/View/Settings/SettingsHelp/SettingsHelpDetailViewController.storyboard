@@ -17,38 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pN-XE-IXu">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-5. 環境設定を確認・変更しよう
-
-    * 仕訳帳画面
-勘定科目 &gt; 仕訳帳
-
-        * 決算振替仕訳
-
-
-
-損益振替仕訳と資本振替仕訳の表示と非表示を切り替えることができます。
-
-
-
-
-
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt5-EN-SZ3">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -192,7 +160,6 @@ OKボタンをタップします。
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="2dM-xK-drC"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="633-KG-GqZ"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Zlo-N8-grp" secondAttribute="bottom" id="8MA-BE-1rD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Zlo-N8-grp" secondAttribute="trailing" id="Fjm-yZ-3wC"/>
@@ -200,17 +167,14 @@ OKボタンをタップします。
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="Q4H-SJ-CSd"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="0pN-XE-IXu" secondAttribute="bottom" id="S8y-9c-NXP"/>
                             <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="vt5-EN-SZ3" secondAttribute="bottom" id="Wkb-BN-Z85"/>
-                            <constraint firstItem="0pN-XE-IXu" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="Z3c-VO-fXh"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
                             <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="vt5-EN-SZ3" secondAttribute="trailing" id="djK-2E-JH0"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
                             <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="euo-8m-YyO"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="0pN-XE-IXu" secondAttribute="trailing" id="hG8-XR-9bP"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
                             <constraint firstItem="vt5-EN-SZ3" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="lXk-DL-fbD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
@@ -220,7 +184,6 @@ OKボタンをタップします。
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
                         <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
-                        <outlet property="configurationTextView" destination="0pN-XE-IXu" id="34I-H0-jCd"/>
                         <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
                         <outlet property="journalEntryEditTextView" destination="t3B-JS-UlO" id="Q7c-IK-AAv"/>
                         <outlet property="journalEntryTextView" destination="vt5-EN-SZ3" id="xsU-0w-eJk"/>

@@ -121,6 +121,8 @@
 		F907D0AF2A988F5000A701C3 /* Set_Up_Account_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */; };
 		F907D0B12A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */; };
 		F907D0B22A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */; };
+		F907D0B42A98991B00A701C3 /* Configuration.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B32A98991B00A701C3 /* Configuration.html */; };
+		F907D0B52A98991B00A701C3 /* Configuration.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B32A98991B00A701C3 /* Configuration.html */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -865,6 +867,7 @@
 		F907D0A82A976E4F00A701C3 /* Set_Up_Account3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account3.html; sourceTree = "<group>"; };
 		F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account_Edit.html; sourceTree = "<group>"; };
 		F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account_Edit2.html; sourceTree = "<group>"; };
+		F907D0B32A98991B00A701C3 /* Configuration.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Configuration.html; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1875,6 +1878,7 @@
 				F907D0A72A976E4F00A701C3 /* Set_Up_Account4.html */,
 				F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */,
 				F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */,
+				F907D0B32A98991B00A701C3 /* Configuration.html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2472,6 +2476,7 @@
 				F907D05C2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
 				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
+				F907D0B42A98991B00A701C3 /* Configuration.html in Resources */,
 				F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
@@ -2616,6 +2621,7 @@
 				F907D05D2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
 				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
+				F907D0B52A98991B00A701C3 /* Configuration.html in Resources */,
 				F9EC672F27B90BC60003FBB6 /* Main.storyboard in Resources */,
 				F9EC673027B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9EC673127B90BC60003FBB6 /* PLViewController.xib in Resources */,
