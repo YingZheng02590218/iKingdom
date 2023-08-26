@@ -81,6 +81,10 @@ class SettingsHelpDetailViewController: UIViewController {
     func updateHtmlImage() {
         switch self.helpDetailKind {
         case .Link0:
+            if let path = Bundle.main.url(forResource: "Pacioli", withExtension: "jpg") {
+                print(path)
+                changeImage(path: path)
+            }
             break
         case .Link1:
             break

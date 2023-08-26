@@ -29,6 +29,11 @@
                     font-size: 1.0em;
                     padding-left: 1.0em;
                 }
+                section img {
+                    margin: auto;
+                    float: top;
+                    display: inline;
+                }
                 ul, ol {
                     padding-left: 2.5em;
                     font-size: 1.0em;
@@ -48,6 +53,10 @@
                 function changeFontColor(colorCode) {
                     var elem = document.getElementById("elem01");
                     elem.style.color = colorCode;
+                }
+                function changeImage(path) {
+                    var elem = document.getElementById("elem02");
+                    elem.src = path;
                 }
             </script>
     </head>
@@ -115,13 +124,14 @@
             
             <section>
                 <h1>アプリ名</h1>
-                <p>Paciolist （パチョーリスト、パチョリスト）</p>
-                <p>パチョーリ主義</p>
-                <p></p>
-                <p>ルカ・パチョーリ</p>
-                <p>（Fra Luca Bartolomeo de Pacioli）</p>
-                <p>簿記の教科書となる本を書いた「近代会計学の父」と呼ばれるイタリアの数学者、修道僧。</p>
-                <p>彼の思想を受け継ぐアプリという意味が由来です。</p>
+                <p><b>Paciolist</b>（パチョーリ主義）</p>
+                <img id ="elem02" src="画像.png" width="100%" height="auto" align="bottom"></img>
+                <p><b>ルカ・パチョーリ</b><br>
+                （Fra Luca Bartolomeo de Pacioli）</p>
+                
+                <p>簿記の教科書となる本を書いた「近代会計学の父」と呼ばれるイタリアの数学者、修道僧。<br>
+                彼の思想を受け継ぐアプリという意味が由来です。</p>
+                
                 <p>イタリア・ルネッサンス時代</p>
                 <p>「1400年代 フィレンツェ共和国では、多くの市民が会計学校に通い、下層階級の労働者ですら帳簿をつけていたという記録が多く残されている。ここでは、土地所有者や専門職に就いているすべての人が、基本的な会計処理を実践していたとされる。」</p>
             </section>

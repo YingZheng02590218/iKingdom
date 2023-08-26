@@ -133,6 +133,8 @@
 		F907D0C12A99E65800A701C3 /* Journals.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BF2A99E65800A701C3 /* Journals.html */; };
 		F907D0C32A99E71F00A701C3 /* Journals2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C22A99E71F00A701C3 /* Journals2.html */; };
 		F907D0C42A99E71F00A701C3 /* Journals2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C22A99E71F00A701C3 /* Journals2.html */; };
+		F907D0C62A99F86000A701C3 /* Pacioli.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C52A99F85F00A701C3 /* Pacioli.jpg */; };
+		F907D0C72A99F86000A701C3 /* Pacioli.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C52A99F85F00A701C3 /* Pacioli.jpg */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -883,6 +885,7 @@
 		F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Delete.html; sourceTree = "<group>"; };
 		F907D0BF2A99E65800A701C3 /* Journals.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals.html; sourceTree = "<group>"; };
 		F907D0C22A99E71F00A701C3 /* Journals2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals2.html; sourceTree = "<group>"; };
+		F907D0C52A99F85F00A701C3 /* Pacioli.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pacioli.jpg; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1381,6 +1384,7 @@
 				F907D0372A97552B00A701C3 /* Text View set Up5.png */,
 				F907D0392A97552B00A701C3 /* Text View set Up6.png */,
 				F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */,
+				F907D0C52A99F85F00A701C3 /* Pacioli.jpg */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -2502,6 +2506,7 @@
 				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F907D0B42A98991B00A701C3 /* Configuration.html in Resources */,
 				F906C4E8263B1503006C6233 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
+				F907D0C62A99F86000A701C3 /* Pacioli.jpg in Resources */,
 				F9BDCBB027A6CCC000BD8770 /* PLViewController.xib in Resources */,
 				F99BE799261DD042004611E4 /* WSViewController.storyboard in Resources */,
 				F907D0922A97552D00A701C3 /* TableViewControllerJournals.png in Resources */,
@@ -2652,6 +2657,7 @@
 				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F907D0B52A98991B00A701C3 /* Configuration.html in Resources */,
 				F9EC672F27B90BC60003FBB6 /* Main.storyboard in Resources */,
+				F907D0C72A99F86000A701C3 /* Pacioli.jpg in Resources */,
 				F9EC673027B90BC60003FBB6 /* SettingsOperatingJournalEntryViewController.storyboard in Resources */,
 				F9EC673127B90BC60003FBB6 /* PLViewController.xib in Resources */,
 				F907D0932A97552D00A701C3 /* TableViewControllerJournals.png in Resources */,
