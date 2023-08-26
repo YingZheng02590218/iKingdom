@@ -36,7 +36,7 @@
                 }
                 section img {
                     margin: auto;
-                    float: left;
+                    float: top;
                     display: inline;
                 }
                 ul, ol {
@@ -92,12 +92,17 @@
             <p></p>
 
             <section>
-                <h1>* 総勘定元帳</h1>
+                <h1>総勘定元帳</h1>
                 <p>総勘定元帳 > 総勘定元帳画面 > 任意の勘定 > 勘定画面</p>
-                <img id ="elem02" src="画像.png" width="100%" height="auto" align="top"></img>
-                <p>② 任意の勘定<br>
-                仕訳データが一件も存在しない勘定は、勘定名がグレーとなっています。</p>
-                <img id ="elem03" src="画像.png" width="100%" height="auto" align="top"></img>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left">仕訳データが一件も存在しない勘定は、勘定名がグレーアウトされています。</img>
+                <br clear="all">
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left">
+                    貸借科目の場合、残高振替仕訳（前期繰越と次期繰越）が表示されます。<br>
+                    <br>
+                    繰越利益や元入金の場合、損益振替仕訳が表示されます。<br>
+                    <br>
+                損益の場合、資本振替仕訳が表示されます。</img>
+                <br clear="all">
             </section>
 
         </section>
