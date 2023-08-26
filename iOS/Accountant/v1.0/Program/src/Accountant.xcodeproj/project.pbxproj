@@ -129,6 +129,10 @@
 		F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */; };
 		F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */; };
 		F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */; };
+		F907D0C02A99E65800A701C3 /* Journals.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BF2A99E65800A701C3 /* Journals.html */; };
+		F907D0C12A99E65800A701C3 /* Journals.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BF2A99E65800A701C3 /* Journals.html */; };
+		F907D0C32A99E71F00A701C3 /* Journals2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C22A99E71F00A701C3 /* Journals2.html */; };
+		F907D0C42A99E71F00A701C3 /* Journals2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0C22A99E71F00A701C3 /* Journals2.html */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -877,6 +881,8 @@
 		F907D0B62A98A57100A701C3 /* Journal_Entry.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry.html; sourceTree = "<group>"; };
 		F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Edit.html; sourceTree = "<group>"; };
 		F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Delete.html; sourceTree = "<group>"; };
+		F907D0BF2A99E65800A701C3 /* Journals.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals.html; sourceTree = "<group>"; };
+		F907D0C22A99E71F00A701C3 /* Journals2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals2.html; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1891,6 +1897,8 @@
 				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
 				F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */,
 				F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */,
+				F907D0BF2A99E65800A701C3 /* Journals.html */,
+				F907D0C22A99E71F00A701C3 /* Journals2.html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2421,6 +2429,7 @@
 				F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
+				F907D0C02A99E65800A701C3 /* Journals.html in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F907D0802A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
@@ -2471,6 +2480,7 @@
 				F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F907D08E2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
+				F907D0C32A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F907D06E2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
@@ -2569,6 +2579,7 @@
 				F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
+				F907D0C12A99E65800A701C3 /* Journals.html in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F907D0812A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
@@ -2619,6 +2630,7 @@
 				F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
 				F907D08F2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
+				F907D0C42A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F907D06F2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,

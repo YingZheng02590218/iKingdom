@@ -17,38 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-4. 帳簿に記帳する
-    4. 入力した取引を確認しよう
-
-* 仕訳帳
-仕訳帳 &gt; 仕訳帳画面
-
-
-
-* 総勘定元帳
-総勘定元帳 &gt; 総勘定元帳画面 &gt; 任意の勘定 &gt; 勘定画面
-
-
-
-② 任意の勘定
-仕訳データが一件も存在しない勘定は、勘定名がグレーとなっています。
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zlo-N8-grp">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,17 +28,12 @@
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="2dM-xK-drC"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Zlo-N8-grp" secondAttribute="bottom" id="8MA-BE-1rD"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Zlo-N8-grp" secondAttribute="trailing" id="Fjm-yZ-3wC"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
-                            <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
                         <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
-                        <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ddm-lb-yi1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -98,9 +61,6 @@
     <resources>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="TextColor">
-            <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

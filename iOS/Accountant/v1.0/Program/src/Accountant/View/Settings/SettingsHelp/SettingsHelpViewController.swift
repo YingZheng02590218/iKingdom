@@ -137,6 +137,12 @@ class SettingsHelpViewController: UIViewController {
             value: HelpDetailKind.Link11.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link11.title)
         )
+        attributedString.addAttribute(
+            .link,
+            value: HelpDetailKind.Link111.rawValue,
+            range: NSString(string: baseString!).range(of: HelpDetailKind.Link111.title)
+        )
+
         textView.attributedText = attributedString
         textView.textColor = .textColor
         textView.frame = CGRect(

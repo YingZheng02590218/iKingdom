@@ -14,7 +14,6 @@ class SettingsHelpDetailViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var journalsTextView: UITextView!
     @IBOutlet var baseView: UIView!
     
     var webView: WKWebView?
@@ -24,61 +23,6 @@ class SettingsHelpDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        switch textViewSwitchNumber {
-//        case 11: // 入力した取引を確認しよう
-//            journalsTextView.isHidden = false
-//            if let baseString = journalsTextView.text {
-//                let attributedString = NSMutableAttributedString(string: journalsTextView.text)
-//                // 仕訳帳 ①
-//                let textAttachment666 = NSTextAttachment()
-//                textAttachment666.image = UIImage(named: "TableViewControllerJournals4.png")!
-//                var oldWidth = textAttachment666.image!.size.width
-//                var scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
-//                print(journalsTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "* 総勘定元帳").location-3, 1), with: attrStringWithImage)
-//                // 総勘定元帳　①
-//                let textAttachment777 = NSTextAttachment()
-//                textAttachment777.image = UIImage(named: "TableViewControllerGeneralLedger.png")!
-//                oldWidth = textAttachment777.image!.size.width
-//                scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                attrStringWithImage = NSAttributedString(attachment: textAttachment777)
-//                print(journalsTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "② 任意の勘定").location - 3, 1), with: attrStringWithImage)
-//                // 総勘定元帳　②
-//                let textAttachment888 = NSTextAttachment()
-//                textAttachment888.image = UIImage(named: "TableViewControllerGeneralLedger1.png")!
-//                oldWidth = textAttachment888.image!.size.width
-//                scaleFactor = oldWidth / (journalsTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment888.image = UIImage.init(cgImage: textAttachment888.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                attrStringWithImage = NSAttributedString(attachment: textAttachment888)
-//                print(journalsTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "② 任意の勘定").location - 2, 1), with: attrStringWithImage)
-//                // 複数の属性を一気に指定します.
-//                // 全体の文字サイズを指定
-//                attributedString.addAttributes([
-//                    .font: UIFont.systemFont(ofSize: 19)
-//                ], range: NSString(string: baseString).range(of: baseString))
-//                // カテゴリタイトルの文字サイズを指定
-//                attributedString.addAttributes([
-//                    .font: UIFont.boldSystemFont(ofSize: 30)
-//                ], range: NSString(string: baseString).range(of: "4. 帳簿に記帳する"))
-//                attributedString.addAttributes([
-//                    .font: UIFont.boldSystemFont(ofSize: 20)
-//                ], range: NSString(string: baseString).range(of: "4. 入力した取引を確認しよう"))
-//                journalsTextView.attributedText = attributedString
-//                journalsTextView.textColor = .textColor
-//                self.view.layoutIfNeeded()    // 追加
-//                journalsTextView.setContentOffset(
-//                    CGPoint(x: 0, y: -journalsTextView.contentInset.top),
-//                    animated: false
-//                )
-//            }
-//        default:
-//            break
-//        }
     }
     
     override func loadView() {
@@ -363,7 +307,23 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImageThird(path: path)
             }
-
+        case .Link11:
+            // 仕訳帳 ①
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals4", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+        case .Link111:
+            // 総勘定元帳　①
+            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+            // 総勘定元帳　②
+            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger1", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
         default:
             break
         }
@@ -496,7 +456,8 @@ enum HelpDetailKind: String {
     case Link10
     // 入力した取引を確認しよう
     case Link11
-    
+    case Link111
+
     var fileName: String {
         switch self {
         case .Link0:
@@ -534,7 +495,9 @@ enum HelpDetailKind: String {
         case .Link10:
             return "Journal_Entry_Delete"
         case .Link11:
-            return ""
+            return "Journals"
+        case .Link111:
+            return "Journals2"
         }
     }
     
@@ -575,7 +538,9 @@ enum HelpDetailKind: String {
         case .Link10:
             return "仕訳を削除する"
         case .Link11:
-            return "入力した取引を確認しよう"
+            return "仕訳帳を確認する"
+        case .Link111:
+            return "総勘定元帳を確認する"
         }
     }
 }
