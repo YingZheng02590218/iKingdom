@@ -14,7 +14,6 @@ class SettingsHelpDetailViewController: UIViewController {
     
     var gADBannerView: GADBannerView!
     
-    @IBOutlet private var journalEntryDeleteTextView: UITextView!
     @IBOutlet private var journalsTextView: UITextView!
     @IBOutlet var baseView: UIView!
     
@@ -26,57 +25,6 @@ class SettingsHelpDetailViewController: UIViewController {
         super.viewDidLoad()
         
 //        switch textViewSwitchNumber {
-//        case 10: // 仕訳を削除する
-//            journalEntryDeleteTextView.isHidden = false
-//            if let baseString = journalEntryDeleteTextView.text {
-//                let attributedString = NSMutableAttributedString(string: journalEntryDeleteTextView.text)
-//                // 4. 帳簿に記帳する 2. 仕訳を修正する ①
-//                let textAttachment666 = NSTextAttachment()
-//                textAttachment666.image = UIImage(named: "TableViewControllerJournals.png")!
-//                var oldWidth = textAttachment666.image!.size.width
-//                var scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment666.image = UIImage.init(cgImage: textAttachment666.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                var attrStringWithImage = NSAttributedString(attachment: textAttachment666)
-//                print(journalEntryDeleteTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "① 任意の仕訳を右から左へスワイプ").location - 4, 1), with: attrStringWithImage)
-//                // 4. 帳簿に記帳する 2. 仕訳を修正する　②
-//                let textAttachment777 = NSTextAttachment()
-//                textAttachment777.image = UIImage(named: "TableViewControllerJournals2.png")!
-//                oldWidth = textAttachment777.image!.size.width
-//                scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment777.image = UIImage.init(cgImage: textAttachment777.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                attrStringWithImage = NSAttributedString(attachment: textAttachment777)
-//                print(journalEntryDeleteTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "① 任意の仕訳を右から左へスワイプ").location - 3, 1), with: attrStringWithImage)
-//                // 4. 帳簿に記帳する 2. 仕訳を修正する　③
-//                let textAttachment888 = NSTextAttachment()
-//                textAttachment888.image = UIImage(named: "TableViewControllerJournals3.png")!
-//                oldWidth = textAttachment888.image!.size.width
-//                scaleFactor = oldWidth / (journalEntryDeleteTextView.frame.size.width - 20) * 3 // for the padding inside the textView
-//                textAttachment888.image = UIImage.init(cgImage: textAttachment888.image!.cgImage!, scale: scaleFactor, orientation: UIImage.Orientation.up)
-//                attrStringWithImage = NSAttributedString(attachment: textAttachment888)
-//                print(journalEntryDeleteTextView.text.unicodeScalars.count)
-//                attributedString.replaceCharacters(in: NSMakeRange(NSString(string: baseString).range(of: "① 任意の仕訳を右から左へスワイプ").location - 2, 1), with: attrStringWithImage)
-//                // 複数の属性を一気に指定します.
-//                // 全体の文字サイズを指定
-//                attributedString.addAttributes([
-//                    .font: UIFont.systemFont(ofSize: 19)
-//                ], range: NSString(string: baseString).range(of: baseString))
-//                // カテゴリタイトルの文字サイズを指定
-//                attributedString.addAttributes([
-//                    .font: UIFont.boldSystemFont(ofSize: 30)
-//                ], range: NSString(string: baseString).range(of: "4. 帳簿に記帳する"))
-//                attributedString.addAttributes([
-//                    .font: UIFont.boldSystemFont(ofSize: 20)
-//                ], range: NSString(string: baseString).range(of: "3. 仕訳を削除する"))
-//                journalEntryDeleteTextView.attributedText = attributedString
-//                journalEntryDeleteTextView.textColor = .textColor
-//                self.view.layoutIfNeeded()    // 追加
-//                journalEntryDeleteTextView.setContentOffset(
-//                    CGPoint(x: 0, y: -journalEntryDeleteTextView.contentInset.top),
-//                    animated: false
-//                )
-//            }
 //        case 11: // 入力した取引を確認しよう
 //            journalsTextView.isHidden = false
 //            if let baseString = journalsTextView.text {
@@ -399,6 +347,22 @@ class SettingsHelpDetailViewController: UIViewController {
                 changeImageSecond(path: path)
             }
 
+        case .Link10:
+            // 4. 帳簿に記帳する 2. 仕訳を修正する ①
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+            // 4. 帳簿に記帳する 2. 仕訳を修正する　②
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals2", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
+            // 4. 帳簿に記帳する 2. 仕訳を修正する　③
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals3", withExtension: "png") {
+                print(path)
+                changeImageThird(path: path)
+            }
 
         default:
             break
@@ -568,7 +532,7 @@ enum HelpDetailKind: String {
         case .Link9:
             return "Journal_Entry_Edit"
         case .Link10:
-            return ""
+            return "Journal_Entry_Delete"
         case .Link11:
             return ""
         }

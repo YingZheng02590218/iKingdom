@@ -17,69 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3B-JS-UlO">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-
-
-4. 帳簿に記帳する
-    2. 仕訳を修正する
-仕訳帳 &gt; 任意の仕訳を長押し &gt; 仕訳
-
-
-
-① 任意の仕訳を長押し
-任意の仕訳を長押しすると仕訳画面が表示されます。
-
-② 仕訳画面
-日付 &gt; 勘定科目(借方) &gt; 金額 &gt; 勘定科目(貸方) &gt; 小書き &gt; 更新ボタン
-仕訳をすると同様の手順です。
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eue-6e-Ona">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">
-
-4. 帳簿に記帳する
-    3. 仕訳を削除する
-仕訳帳 &gt; 任意の仕訳を右から左へスワイプ &gt; ゴミ箱ボタン &gt; OK
-
-
-
-
-① 任意の仕訳を右から左へスワイプ
-任意の仕訳を右から左へスワイプすると確認画面が表示されます。
-
-② ゴミ箱ボタン
-ゴミ箱ボタンをタップします。
-
-③ OK
-OKボタンをタップします。
-
-
-
-
-
-
-</string>
-                                <color key="textColor" name="TextColor"/>
-                                <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11e-dw-F4Q">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,26 +59,17 @@ OKボタンをタップします。
                         <constraints>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="2dM-xK-drC"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Zlo-N8-grp" secondAttribute="bottom" id="8MA-BE-1rD"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="t3B-JS-UlO" secondAttribute="trailing" id="FAM-uh-hIG"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Zlo-N8-grp" secondAttribute="trailing" id="Fjm-yZ-3wC"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="11e-dw-F4Q" secondAttribute="trailing" id="HBO-6B-6IY"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="trailing" secondItem="Eue-6e-Ona" secondAttribute="trailing" id="O2A-DP-Eso"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="QFs-CG-0NZ"/>
-                            <constraint firstItem="t3B-JS-UlO" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="UVj-xf-gMN"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="cwe-f4-shG"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="dYm-yR-YUJ"/>
                             <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="11e-dw-F4Q" secondAttribute="bottom" id="e46-zv-1ej"/>
                             <constraint firstItem="11e-dw-F4Q" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="eLj-0Z-7MD"/>
-                            <constraint firstItem="Eue-6e-Ona" firstAttribute="top" secondItem="yXR-Mj-B82" secondAttribute="top" id="euo-8m-YyO"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="Eue-6e-Ona" secondAttribute="bottom" id="hrc-V4-Dy5"/>
-                            <constraint firstItem="yXR-Mj-B82" firstAttribute="bottom" secondItem="t3B-JS-UlO" secondAttribute="bottom" id="mdf-hK-V7h"/>
                             <constraint firstItem="Zlo-N8-grp" firstAttribute="leading" secondItem="yXR-Mj-B82" secondAttribute="leading" id="oMn-D0-8hE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bp3-nW-EoU"/>
                     <connections>
                         <outlet property="baseView" destination="Zlo-N8-grp" id="UqD-iP-udH"/>
-                        <outlet property="journalEntryDeleteTextView" destination="Eue-6e-Ona" id="TU1-Vm-Eb5"/>
                         <outlet property="journalsTextView" destination="11e-dw-F4Q" id="N1K-F9-GYP"/>
                     </connections>
                 </viewController>

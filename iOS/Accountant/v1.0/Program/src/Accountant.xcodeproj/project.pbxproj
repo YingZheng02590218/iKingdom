@@ -127,6 +127,8 @@
 		F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B62A98A57100A701C3 /* Journal_Entry.html */; };
 		F907D0BA2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */; };
 		F907D0BB2A98AE4300A701C3 /* Journal_Entry_Edit.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */; };
+		F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */; };
+		F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */; };
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
@@ -874,6 +876,7 @@
 		F907D0B32A98991B00A701C3 /* Configuration.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Configuration.html; sourceTree = "<group>"; };
 		F907D0B62A98A57100A701C3 /* Journal_Entry.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry.html; sourceTree = "<group>"; };
 		F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Edit.html; sourceTree = "<group>"; };
+		F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journal_Entry_Delete.html; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
@@ -1887,6 +1890,7 @@
 				F907D0B32A98991B00A701C3 /* Configuration.html */,
 				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
 				F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */,
+				F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2430,6 +2434,7 @@
 				F907D0782A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
+				F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F907D0582A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */,
 				F907D06C2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */,
 				F907D0642A97552D00A701C3 /* Text View set Up5.png in Resources */,
@@ -2577,6 +2582,7 @@
 				F907D0792A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
+				F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F907D0592A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */,
 				F907D06D2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */,
 				F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */,
