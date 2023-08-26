@@ -36,7 +36,7 @@
                 }
                 section img {
                     margin: auto;
-                    float: left;
+                    float: top;
                     display: inline;
                 }
                 ul, ol {
@@ -67,22 +67,6 @@
                     var elem = document.getElementById("elem03");
                     elem.src = path;
                 }
-                function changeImageThird(path) {
-                    var elem = document.getElementById("elem04");
-                    elem.src = path;
-                }
-                function changeImageForth(path) {
-                    var elem = document.getElementById("elem05");
-                    elem.src = path;
-                }
-                function changeImageFifth(path) {
-                    var elem = document.getElementById("elem06");
-                    elem.src = path;
-                }
-                function changeImageSixth(path) {
-                    var elem = document.getElementById("elem07");
-                    elem.src = path;
-                }
             </script>
     </head>
     
@@ -94,15 +78,14 @@
             <section>
                 <h1>2. 仕訳を修正する</h1>
                 <p>仕訳帳 > 任意の仕訳を長押し > 仕訳</p>
-                
-                <p>① 任意の仕訳を長押し</p>
-                <img id ="elem02" src="画像.png" width="100%" height="auto" align="top">
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left">
                     任意の仕訳を長押しすると仕訳画面が表示されます。</img>
+                <br clear="all">
                 
-                <p>② 仕訳画面</p>
-                <img id ="elem03" src="画像.png" width="100%" height="auto" align="top">
-                    仕訳をすると同様の手順です。<br>
-                    日付 > 勘定科目(借方) > 金額 > 勘定科目(貸方) > 小書き > 更新ボタン</img>
+                <p>日付 > 勘定科目(借方) > 勘定科目(貸方) > 金額 > 小書き > 更新ボタン</p>
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left">
+                    仕訳をする操作と同様の手順です。</img>
+                <br clear="all">
             </section>
             
         </section>

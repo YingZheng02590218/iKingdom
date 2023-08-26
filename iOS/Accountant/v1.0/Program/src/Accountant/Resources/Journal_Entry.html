@@ -36,6 +36,8 @@
                 }
                 section img {
                     margin: auto;
+                    float: top;
+                    display: inline;
                 }
                 ul, ol {
                     padding-left: 2.5em;
@@ -61,26 +63,6 @@
                     var elem = document.getElementById("elem02");
                     elem.src = path;
                 }
-                function changeImageSecond(path) {
-                    var elem = document.getElementById("elem03");
-                    elem.src = path;
-                }
-                function changeImageThird(path) {
-                    var elem = document.getElementById("elem04");
-                    elem.src = path;
-                }
-                function changeImageForth(path) {
-                    var elem = document.getElementById("elem05");
-                    elem.src = path;
-                }
-                function changeImageFifth(path) {
-                    var elem = document.getElementById("elem06");
-                    elem.src = path;
-                }
-                function changeImageSixth(path) {
-                    var elem = document.getElementById("elem07");
-                    elem.src = path;
-                }
             </script>
     </head>
     
@@ -91,27 +73,24 @@
             
             <section>
                 <h1>1. 仕訳を入力する</h1>
-                <p>仕訳 > 日付 > 勘定科目(借方) > 金額 > 勘定科目(貸方) > 小書き > 入力ボタン</p>
-                <img id ="elem02" src="画像.png" width="100%" height="auto" align="top"></img>
+                <p>仕訳 > 日付 > 勘定科目(借方) > 勘定科目(貸方) > 金額 > 小書き > 入力ボタン</p>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
                 
-                <p>① 日付の入力<br>
-                ドラムロールとボタンを操作して日付を選択できます。</p>
+                <p>日付<br>
+                決算整理仕訳の場合、決算日が固定で指定されます。</p>
                 
-                <p>②④ 勘定科目の入力<br>
-                入力欄をタップすると、ドラムロールが表示されます。<br>
-                ドラムロールの左列が勘定科目の大区分、右列が勘定科目です。</p>
+                <p>勘定科目<br>
+                ドラムロールの左列が大区分、右列が勘定科目です。</p>
                 
-                <p>③ 金額の入力<br>
-                入力欄をタップすると、キーボードが表示されます。<br>
-                7桁までの金額を入力できます。</p>
+                <p>金額<br>
+                8桁までの金額を入力できます。</p>
                 
-                <p>⑤ 小書きの入力<br>
-                入力欄をタップすると、キーボードが表示されます。<br>
-                20桁までの金額を入力できます。</p>
+                <p>小書き<br>
+                50桁までの金額を入力できます。</p>
                 
-                <p>⑥ 入力ボタン<br>
-                ボタンをタップすると仕訳が記帳されます。</p>
-                
+                <p>入力ボタン<br>
+                タップすると仕訳が記帳されます。</p>
+                <br clear="all">
             </section>
             
         </section>
