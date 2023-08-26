@@ -47,16 +47,12 @@
 		F907D05D2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */; };
 		F907D05E2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */; };
 		F907D05F2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */; };
-		F907D0602A97552D00A701C3 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0352A97552B00A701C3 /* Text View set Up3.png */; };
-		F907D0612A97552D00A701C3 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0352A97552B00A701C3 /* Text View set Up3.png */; };
 		F907D0622A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */; };
 		F907D0632A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */; };
 		F907D0642A97552D00A701C3 /* Text View set Up5.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0372A97552B00A701C3 /* Text View set Up5.png */; };
 		F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0372A97552B00A701C3 /* Text View set Up5.png */; };
 		F907D0662A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
 		F907D0672A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
-		F907D0682A97552D00A701C3 /* Text View set Up6.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0392A97552B00A701C3 /* Text View set Up6.png */; };
-		F907D0692A97552D00A701C3 /* Text View set Up6.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0392A97552B00A701C3 /* Text View set Up6.png */; };
 		F907D06A2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */; };
 		F907D06B2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */; };
 		F907D06C2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */; };
@@ -490,6 +486,8 @@
 		F9DC87562995354000919E5F /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC87552995354000919E5F /* UIColor+extension.swift */; };
 		F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
 		F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
+		F9E07A8E2A9A16E90065FD17 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */; };
+		F9E07A8F2A9A16E90065FD17 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -842,11 +840,9 @@
 		F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info2.png"; sourceTree = "<group>"; };
 		F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete2.png; sourceTree = "<group>"; };
 		F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info3.png"; sourceTree = "<group>"; };
-		F907D0352A97552B00A701C3 /* Text View set Up3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up3.png"; sourceTree = "<group>"; };
 		F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png; sourceTree = "<group>"; };
 		F907D0372A97552B00A701C3 /* Text View set Up5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up5.png"; sourceTree = "<group>"; };
 		F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger.png; sourceTree = "<group>"; };
-		F907D0392A97552B00A701C3 /* Text View set Up6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up6.png"; sourceTree = "<group>"; };
 		F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info4.png"; sourceTree = "<group>"; };
 		F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Review.png; sourceTree = "<group>"; };
 		F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger1.png; sourceTree = "<group>"; };
@@ -1152,6 +1148,7 @@
 		F9DC87552995354000919E5F /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9DC8758299537A200919E5F /* PaciolistWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F9DC875929953B1D00919E5F /* AppGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroups.swift; sourceTree = "<group>"; };
+		F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up3.png"; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -1379,10 +1376,9 @@
 				F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */,
 				F907D0442A97552C00A701C3 /* Text View set Up1.png */,
 				F907D04A2A97552D00A701C3 /* Text View set Up2.png */,
-				F907D0352A97552B00A701C3 /* Text View set Up3.png */,
+				F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */,
 				F907D03E2A97552C00A701C3 /* Text View set Up4.png */,
 				F907D0372A97552B00A701C3 /* Text View set Up5.png */,
-				F907D0392A97552B00A701C3 /* Text View set Up6.png */,
 				F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */,
 				F907D0C52A99F85F00A701C3 /* Pacioli.jpg */,
 			);
@@ -2440,7 +2436,6 @@
 				F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F907D0982A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
-				F907D0602A97552D00A701C3 /* Text View set Up3.png in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F907D0202A95F82000A701C3 /* About_This_App.html in Resources */,
@@ -2458,6 +2453,7 @@
 				F907D05A2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
+				F9E07A8E2A9A16E90065FD17 /* Text View set Up3.png in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -2520,7 +2516,6 @@
 				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
 				F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F907D08C2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
-				F907D0682A97552D00A701C3 /* Text View set Up6.png in Resources */,
 				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F907D0292A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
@@ -2591,7 +2586,6 @@
 				F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F907D0992A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
-				F907D0612A97552D00A701C3 /* Text View set Up3.png in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F907D0212A95F82000A701C3 /* About_This_App.html in Resources */,
@@ -2609,6 +2603,7 @@
 				F907D05B2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
+				F9E07A8F2A9A16E90065FD17 /* Text View set Up3.png in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -2671,7 +2666,6 @@
 				F9EC673527B90BC60003FBB6 /* InfoPlist.strings in Resources */,
 				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F907D08D2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
-				F907D0692A97552D00A701C3 /* Text View set Up6.png in Resources */,
 				F9EC673627B90BC60003FBB6 /* CarouselAndPageViewController.storyboard in Resources */,
 				F907D02A2A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,

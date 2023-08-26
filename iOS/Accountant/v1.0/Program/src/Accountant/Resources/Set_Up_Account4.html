@@ -36,6 +36,8 @@
                 }
                 section img {
                     margin: auto;
+                    float: top;
+                    display: inline;
                 }
                 ul, ol {
                     padding-left: 2.5em;
@@ -73,14 +75,6 @@
                     var elem = document.getElementById("elem05");
                     elem.src = path;
                 }
-                function changeImageFifth(path) {
-                    var elem = document.getElementById("elem06");
-                    elem.src = path;
-                }
-                function changeImageSixth(path) {
-                    var elem = document.getElementById("elem07");
-                    elem.src = path;
-                }
             </script>
     </head>
 
@@ -90,16 +84,16 @@
             <p></p>
 
             <section>
-                <h1>* 新規に追加登録する</h1>
-                <p>勘定科目 > 勘定科目一覧 > Edit > 勘定科目追加</p>
-                <img id ="elem02" src="画像.png" width="100%" height="auto" align="top"></img>
-                <img id ="elem03" src="画像.png" width="100%" height="auto" align="top"></img>
-                <img id ="elem04" src="画像.png" width="100%" height="auto" align="top"></img>
-                <img id ="elem05" src="画像.png" width="100%" height="auto" align="top"></img>
-                <p>大区分 > 中区分 > 勘定科目名 > 表示科目名 > 登録 > Done</p>
-                <img id ="elem06" src="画像.png" width="100%" height="auto" align="top"></img>
-                <img id ="elem07" src="画像.png" width="100%" height="auto" align="top"></img>
-                <p>勘定科目を追加登録後は、表示科目のみ変更が可能です。</p>
+                <h1>新規登録する</h1>
+                <p>勘定科目体系 > 勘定科目一覧 > ＋</p>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem04" src="画像.png" width="50%" height="auto" align="left"></img>
+                <br clear="all">
+                <p>大区分 > 中区分 > 勘定科目名 > 表示科目名 > 登録</p>
+                <img id ="elem05" src="画像.png" width="50%" height="auto" align="left"></img>
+                <br clear="all">
+                <p>勘定科目を新規登録した後は、表示科目名のみ変更が可能です。</p>
             </section>
 
         </section>

@@ -172,36 +172,25 @@ class SettingsHelpDetailViewController: UIViewController {
         case .Link52:
             break
         case .Link53:
-            // 勘定科目体系の登録　新規に追加登録する ①設定画面
+            // 勘定科目体系の登録　新規登録する ①設定画面
             if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
-            // 勘定科目体系の登録　新規に追加登録する ②
+            // 勘定科目体系の登録　新規登録する ②
             if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
-            // 勘定科目体系の登録　新規に追加登録する ③
-            if let path = Bundle.main.url(forResource: "Text View set Up3", withExtension: "png") {
+            // 勘定科目体系の登録　新規登録する ③
+            if let path = Bundle.main.url(forResource: "Text View set Up4", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
-            
-            // 勘定科目体系の登録　新規に追加登録する ④
-            if let path = Bundle.main.url(forResource: "Text View set Up4", withExtension: "png") {
-                print(path)
-                changeImageForth(path: path)
-            }
-            // 勘定科目体系の登録　新規に追加登録する ⑤
+            // 勘定科目体系の登録　新規登録する ④
             if let path = Bundle.main.url(forResource: "Text View set Up5", withExtension: "png") {
                 print(path)
-                changeImageFifth(path: path)
-            }
-            // 勘定科目体系の登録　新規に追加登録する ⑥
-            if let path = Bundle.main.url(forResource: "Text View set Up6", withExtension: "png") {
-                print(path)
-                changeImageSixth(path: path)
+                changeImageForth(path: path)
             }
             // 勘定科目の編集しよう
         case .Link6:
@@ -531,7 +520,7 @@ enum HelpDetailKind: String {
         case .Link52:
             return "勘定科目体系の図"
         case .Link53:
-            return "新規に追加登録する"
+            return "新規登録する"
         case .Link6:
             return "修正をする"
         case .Link61:
