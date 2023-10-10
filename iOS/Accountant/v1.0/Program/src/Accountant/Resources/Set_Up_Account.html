@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+            <title></title>
+            
+            <style>
+                body {
+                    font-family: "Hiragino Kaku Gothic ProN";
+                    color: #707070;
+                    line-height: 1.0em;
+                    margin: 0.5em;
+                    word-break: break-all;
+                    font-size: 1.0em;
+                }
+                h1 {
+                    text-align: left ;
+                    margin: 0em;
+                    padding: 0.3em;
+                }
+                section section h1 {
+                    text-align: left;
+                    border: double 4px #2d8fdd; /*二重線 太さ 色*/
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section p {
+                    font-size: 1.0em;
+                    padding-left: 1.0em;
+                }
+                section ol p {
+                    padding-left: 0.0em;
+                    font-weight: bold;
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section img {
+                    margin: auto;
+                }
+                ul, ol {
+                    padding-left: 2.5em;
+                    font-size: 1.0em;
+                }
+                li {
+                    margin-bottom: 0.8em;
+                }
+                li li {
+                    list-style-type: lower-roman;
+                }
+                #endline {
+                    text-align: right;
+                }
+            </style>
+            
+            <script type="text/javascript">
+                function changeFontColor(colorCode) {
+                    var elem = document.getElementById("elem01");
+                    elem.style.color = colorCode;
+                }
+            </script>
+    </head>
+    
+    <body id ="elem01">
+        <section>
+            <h1>3. 勘定科目を設定しよう</h1>
+            <p></p>
+            
+            <section>
+                <h1>準備する資料</h1>
+                
+                <p><b>どのような勘定科目が必要なのかを確認する。</b></p>
+                <ul>
+                    <li>前年の会計帳簿や前年度の決算書</li>
+                </ul>
+                
+                <p><b>どのような表示科目が必要なのかを確認する。</b>（法人のみ）<br>
+                ※ 表示科目とは、財務諸表に表示される勘定科目を集計した科目です。</p>
+                <ul>
+                    <li>前年の勘定科目内訳明細書</li>
+                    <li>前年の青色申告決算書や収支内訳書</li>
+                </ul>
+            </section>
+            
+        </section>
+    </body>
+    
+</html>

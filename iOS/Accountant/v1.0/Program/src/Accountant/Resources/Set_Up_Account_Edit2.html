@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+            <title></title>
+
+            <style>
+                body {
+                    font-family: "Hiragino Kaku Gothic ProN";
+                    color: #707070;
+                    line-height: 1.0em;
+                    margin: 0.5em;
+                    word-break: break-all;
+                    font-size: 1.0em;
+                }
+                h1 {
+                    text-align: left ;
+                    margin: 0em;
+                    padding: 0.3em;
+                }
+                section section h1 {
+                    text-align: left;
+                    border: double 4px #2d8fdd; /*二重線 太さ 色*/
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section p {
+                    font-size: 1.0em;
+                    padding-left: 1.0em;
+                }
+                section ol p {
+                    padding-left: 0.0em;
+                    font-weight: bold;
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section img {
+                    margin: auto;
+                    float: top;
+                    display: inline;
+                }
+                ul, ol {
+                    padding-left: 2.5em;
+                    font-size: 1.0em;
+                }
+                li {
+                    margin-bottom: 0.8em;
+                }
+                li li {
+                    list-style-type: lower-roman;
+                }
+                #endline {
+                    text-align: right;
+                }
+            </style>
+
+            <script type="text/javascript">
+                function changeFontColor(colorCode) {
+                    var elem = document.getElementById("elem01");
+                    elem.style.color = colorCode;
+                }
+                function changeImage(path) {
+                    var elem = document.getElementById("elem02");
+                    elem.src = path;
+                }
+                function changeImageSecond(path) {
+                    var elem = document.getElementById("elem03");
+                    elem.src = path;
+                }
+                function changeImageThird(path) {
+                    var elem = document.getElementById("elem04");
+                    elem.src = path;
+                }
+                function changeImageForth(path) {
+                    var elem = document.getElementById("elem05");
+                    elem.src = path;
+                }
+                function changeImageFifth(path) {
+                    var elem = document.getElementById("elem06");
+                    elem.src = path;
+                }
+                function changeImageSixth(path) {
+                    var elem = document.getElementById("elem07");
+                    elem.src = path;
+                }
+            </script>
+    </head>
+
+    <body id ="elem01">
+        <section>
+            <h1>4. 勘定科目の編集しよう</h1>
+            <p></p>
+
+            <section>
+                <h1>削除をする</h1>
+                <p>勘定科目体系 > 勘定科目一覧 > 編集</p>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem04" src="画像.png" width="50%" height="auto" align="left"></img>
+                <br clear="all">
+                <p>任意の勘定科目の赤い丸ボタン > ゴミ箱ボタン > OK</p>
+                <img id ="elem05" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem06" src="画像.png" width="50%" height="auto" align="left"></img>
+                <img id ="elem07" src="画像.png" width="50%" height="auto" align="left"></img>
+                <br clear="all">
+                <p>新規登録した勘定科目のみ削除が可能です。</p>
+            </section>
+
+        </section>
+    </body>
+
+</html>
