@@ -265,7 +265,7 @@ struct PaciolistWidgetEntryView : View {
                                             
                                             Text(convertAmount(amount: entry.accountingData.netIncomeOrLoss * -1))
                                                 .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
-                                                .background(Color.plColor)
+                                                .widgetBackground(Color.plColor)
                                                 .font(.caption)
                                                 .multilineTextAlignment(.leading)
                                                 .lineLimit(1)
@@ -276,8 +276,8 @@ struct PaciolistWidgetEntryView : View {
                                     }
                                     .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
                                     .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height ? geometry.size.height * netIncomeOrLossScale : geometry.size.height))
-                                    // .background(.green)
-                                    .background(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
+                                    // .widgetBackground(.green)
+                                    .widgetBackground(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
                                     .addBorder(.gray, width: 0.5, cornerRadius: 1)
                                 }
                             } else {
@@ -300,13 +300,13 @@ struct PaciolistWidgetEntryView : View {
                         }
                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottom)
                         .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * expenseScale <= geometry.size.height ? geometry.size.height * expenseScale : geometry.size.height))
-                        .background(Color.plColor)
+                        .widgetBackground(Color.plColor)
                         .addBorder(.gray, width: 0.5, cornerRadius: 1)
                         
                     }
                     .frame(height: geometry.size.height)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    // .background(.pink)
+                    // .widgetBackground(.pink)
                     
                     // 貸方
                     VStack(spacing: 0) {
@@ -314,14 +314,14 @@ struct PaciolistWidgetEntryView : View {
                         ZStack() {
                             Text("負債 ")
                                 .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topLeading)
-                            // .background(.brown)
+                            // .widgetBackground(.brown)
                                 .font(.caption)
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(1)
                             
                             Text(convertAmount(amount: entry.accountingData.liabilities))
                                 .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
-                            // .background(.brown)
+                            // .widgetBackground(.brown)
                                 .font(.caption)
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(1)
@@ -368,7 +368,7 @@ struct PaciolistWidgetEntryView : View {
                                                 
                                                 Text(convertAmount(amount: entry.accountingData.netIncomeOrLoss))
                                                     .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
-                                                    .background(Color.plColor)
+                                                    .widgetBackground(Color.plColor)
                                                     .font(.caption)
                                                     .multilineTextAlignment(.leading)
                                                     .lineLimit(1)
@@ -376,7 +376,7 @@ struct PaciolistWidgetEntryView : View {
                                             }
                                             .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
                                             .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height ? geometry.size.height * netIncomeOrLossScale : geometry.size.height))
-                                            .background(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
+                                            .widgetBackground(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
                                             .addBorder(.gray, width: 0.5, cornerRadius: 1)
                                         }
                                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
@@ -387,7 +387,7 @@ struct PaciolistWidgetEntryView : View {
                                 ZStack() {
                                     Text("純資産 ")
                                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topLeading) // 資本振替 当期純利益の分を差し引く
-                                    // .background(.secondary)
+                                    // .widgetBackground(.secondary)
                                         .font(.caption)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
@@ -395,7 +395,7 @@ struct PaciolistWidgetEntryView : View {
                                     
                                     Text(convertAmount(amount: entry.accountingData.netAssets + (entry.accountingData.netIncomeOrLoss * -1)))
                                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
-                                    // .background(.secondary)
+                                    // .widgetBackground(.secondary)
                                         .font(.caption)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
@@ -408,7 +408,7 @@ struct PaciolistWidgetEntryView : View {
                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
                         .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * netAssetsScale <= geometry.size.height ? geometry.size.height * netAssetsScale : geometry.size.height))
                         .addBorder(.gray, width: 0.5, cornerRadius: 1)
-                        // .background(.mint)
+                        // .widgetBackground(.mint)
                         
                         // 当期純利益　の場合
                         if !(entry.accountingData.netIncomeOrLoss < 0) {
@@ -425,7 +425,7 @@ struct PaciolistWidgetEntryView : View {
                                     
                                     Text(convertAmount(amount: entry.accountingData.income - entry.accountingData.netIncomeOrLoss))
                                         .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
-                                        .background(Color.plColor)
+                                        .widgetBackground(Color.plColor)
                                         .font(.caption)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
@@ -447,7 +447,7 @@ struct PaciolistWidgetEntryView : View {
                                 
                                 Text(convertAmount(amount: entry.accountingData.income))
                                     .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
-                                    .background(Color.plColor)
+                                    .widgetBackground(Color.plColor)
                                     .font(.caption)
                                     .multilineTextAlignment(.leading)
                                     .lineLimit(1)
@@ -460,14 +460,14 @@ struct PaciolistWidgetEntryView : View {
                     }
                     .frame(height: geometry.size.height)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    // .background(.mint)
+                    // .widgetBackground(.mint)
                 }
                 .frame(height: geometry.size.height)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.mainColor2)
+                .widgetBackground(Color.mainColor2)
             }
             .padding(13)
-            .background(Color.baseColor)
+            .widgetBackground(Color.baseColor)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .zIndex(0)
             
@@ -486,7 +486,7 @@ struct PaciolistWidgetEntryView : View {
                 .padding(.trailing, 16)
                 .zIndex(1)
         }
-        // .background(Color.pink)
+        // .widgetBackground(Color.pink)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
@@ -539,6 +539,7 @@ struct PaciolistWidget: Widget {
         }
         .configurationDisplayName("B/S and P/L") // 『Widgetの名称』
         .description("This is an map of B/S and P/L widget.") // 『Widgetの説明』
+        .contentMarginsDisabled()
     }
 }
 
@@ -554,5 +555,17 @@ struct PaciolistWidget_Previews: PreviewProvider {
         )
         PaciolistWidgetEntryView(entry: SimpleEntry(date: Date(), accountingData: accountingData, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+extension View {
+    func widgetBackground(_ backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            return background(backgroundView)
+        }
     }
 }
