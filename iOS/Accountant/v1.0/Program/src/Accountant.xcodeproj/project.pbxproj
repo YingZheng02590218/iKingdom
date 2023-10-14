@@ -199,8 +199,6 @@
 		F9439D46298D27F800FCBA41 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D47298D27FC00FCBA41 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
 		F9439D48298D27FC00FCBA41 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F945CCBF2AD6B08C004294E0 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
-		F945CCC02AD6B08C004294E0 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
 		F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
@@ -1216,13 +1214,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */,
-				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
+				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
 				F9439D42298D27F500FCBA41 /* EMTNeumorphicView.xcframework in Frameworks */,
 				F9439D45298D27F800FCBA41 /* Realm.xcframework in Frameworks */,
-				F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */,
-				43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */,
 				F9439D47298D27FC00FCBA41 /* RealmSwift.xcframework in Frameworks */,
+				F94DE33727DC9C020022F739 /* MessageUI.framework in Frameworks */,
+				F966371327B2930A00475CC7 /* PDFKit.framework in Frameworks */,
+				F9578BDD2858CA13001C5D74 /* Network.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,8 +1247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F96D2DAE298FC8DD00E722BE /* Pods_PaciolistSTG.framework in Frameworks */,
-				F945CCC02AD6B08C004294E0 /* RealmSwift.xcframework in Frameworks */,
-				F945CCBF2AD6B08C004294E0 /* Realm.xcframework in Frameworks */,
 				F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */,
 				F9E42A47298D1DFE00360DA4 /* Realm.xcframework in Frameworks */,
 				F9E42A45298D1DFE00360DA4 /* RealmSwift.xcframework in Frameworks */,
