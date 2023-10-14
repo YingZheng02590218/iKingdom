@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -199,6 +199,8 @@
 		F9439D46298D27F800FCBA41 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9439D47298D27FC00FCBA41 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
 		F9439D48298D27FC00FCBA41 /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F945CCBF2AD6B08C004294E0 /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; };
+		F945CCC02AD6B08C004294E0 /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */; };
 		F9482EAD282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EAE282F9E20008B82E1 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EAC282F9E20008B82E1 /* String+extension.swift */; };
 		F9482EB6282FCA97008B82E1 /* CategoryListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9482EB5282FCA97008B82E1 /* CategoryListPresenter.swift */; };
@@ -1247,6 +1249,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F96D2DAE298FC8DD00E722BE /* Pods_PaciolistSTG.framework in Frameworks */,
+				F945CCC02AD6B08C004294E0 /* RealmSwift.xcframework in Frameworks */,
+				F945CCBF2AD6B08C004294E0 /* Realm.xcframework in Frameworks */,
 				F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */,
 				F9E42A47298D1DFE00360DA4 /* Realm.xcframework in Frameworks */,
 				F9E42A45298D1DFE00360DA4 /* RealmSwift.xcframework in Frameworks */,
@@ -2246,10 +2250,10 @@
 				F94EDD8B237AEB3A0074D812 /* Sources */,
 				F94EDD8C237AEB3A0074D812 /* Frameworks */,
 				F94EDD8D237AEB3A0074D812 /* Resources */,
-				F91878C9258300DB00D2E793 /* Run Script */,
 				490895BAAAAEFC6AC2D95DDF /* [CP] Embed Pods Frameworks */,
 				F9439D44298D27F500FCBA41 /* Embed Frameworks */,
 				F9DC870829932E1D00919E5F /* Embed Foundation Extensions */,
+				F91878C9258300DB00D2E793 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2304,11 +2308,11 @@
 				F9EC668E27B90BC60003FBB6 /* Sources */,
 				F9EC670A27B90BC60003FBB6 /* Frameworks */,
 				F9EC670D27B90BC60003FBB6 /* Resources */,
-				F9EC674027B90BC60003FBB6 /* ShellScript */,
 				F9EC674127B90BC60003FBB6 /* [CP] Embed Pods Frameworks */,
 				F986CC1C2947419E005A2138 /* Run Script SwiftLint */,
 				F9E42A4B298D1DFF00360DA4 /* Embed Frameworks */,
 				F9DC872F2994895100919E5F /* Embed Foundation Extensions */,
+				F9EC674027B90BC60003FBB6 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2804,7 +2808,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9EC674027B90BC60003FBB6 /* ShellScript */ = {
+		F9EC674027B90BC60003FBB6 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2814,6 +2818,7 @@
 			inputPaths = (
 				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
