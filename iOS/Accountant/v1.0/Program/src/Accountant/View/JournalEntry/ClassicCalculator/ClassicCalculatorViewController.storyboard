@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -283,13 +283,14 @@
                                                             <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDn-Al-IDc" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                                         <rect key="frame" x="127.5" y="0.0" width="118" height="68"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title=" ">
+                                                        <buttonConfiguration key="configuration" style="plain" title="8">
                                                             <fontDescription key="titleFontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="60"/>
+                                                            <color key="baseForegroundColor" name="ButtonTextColor"/>
                                                         </buttonConfiguration>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleAspectFit" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Erw-G6-iSV" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
@@ -346,7 +347,7 @@
                         <outlet property="button9" destination="0xa-9U-hff" id="U3v-CD-j7a"/>
                         <outlet property="buttonAc" destination="t7R-DU-4BS" id="D9S-r0-a1t"/>
                         <outlet property="buttonDivied" destination="vQA-Db-dfL" id="K0L-5y-lKU"/>
-                        <outlet property="buttonDot" destination="lDn-Al-IDc" id="WV4-J7-Coc"/>
+                        <outlet property="buttonDoubleZero" destination="lDn-Al-IDc" id="X0q-bD-7BE"/>
                         <outlet property="buttonEqual" destination="Erw-G6-iSV" id="ggc-58-pHJ"/>
                         <outlet property="buttonMinus" destination="OUl-ck-MAZ" id="sto-n3-v5r"/>
                         <outlet property="buttonMultiple" destination="xXE-2f-HKE" id="4Q9-N7-lJJ"/>
@@ -367,6 +368,7 @@
                         <outletCollection property="arrayHugo" destination="6Vk-6h-Mug" collectionClass="NSMutableArray" id="emf-wI-0Vy"/>
                         <outletCollection property="arrayHugo" destination="67Q-c1-Utk" collectionClass="NSMutableArray" id="Pst-x5-5CG"/>
                         <outletCollection property="arrayHugo" destination="Erw-G6-iSV" collectionClass="NSMutableArray" id="X6w-dM-BhW"/>
+                        <outletCollection property="arrayHugo" destination="lDn-Al-IDc" collectionClass="NSMutableArray" id="Ilt-va-JR7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -376,7 +378,7 @@
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
