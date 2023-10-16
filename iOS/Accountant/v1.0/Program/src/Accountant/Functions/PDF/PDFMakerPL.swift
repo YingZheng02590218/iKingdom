@@ -14,7 +14,7 @@ class PDFMakerPL {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelperPL()
-    let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm 595.2755905512, 841.8897637795
+    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm 595.2755905512, 841.8897637795
     var fiscalYear = 0
     
     func initialize(pLData: PLData, completion: ([URL]?) -> Void) {

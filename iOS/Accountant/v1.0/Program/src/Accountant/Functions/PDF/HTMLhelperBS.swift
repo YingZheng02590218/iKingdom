@@ -147,7 +147,7 @@ struct HTMLhelperBS {
             width: 210mm;
             height: 296mm;
             box-sizing: border-box;
-            padding: 0mm 10mm;
+            padding: 10mm 10mm;
             display: block;
     <!--         break-after: always; -->
         }
