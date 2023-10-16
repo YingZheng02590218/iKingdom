@@ -14,7 +14,7 @@ class PDFMakerBalanceSheet {
     var PDFpath: [URL]?
 
     let hTMLhelper = HTMLhelperBS()
-    let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm
+    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
     var fiscalYear = 0
 
     func initialize(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
