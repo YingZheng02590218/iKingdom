@@ -150,7 +150,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
@@ -418,18 +418,15 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             if segue.identifier == "buttonTapped" {
                 controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
-                // 編集中ではない場合
-                if !tableView.isEditing {
-                    if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
-                        controller.journalEntryType = .JournalEntriesFixing // セルに表示した仕訳タイプを取得
-                        controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
-                        if tappedIndexPath.section == 0 {
-                            controller.primaryKey = presenter.objects(forRow: tappedIndexPath.row).number
-                        } else {
-                            controller.primaryKey = presenter.objectsss(forRow: tappedIndexPath.row).number
-                        }
-                        self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+                if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
+                    controller.journalEntryType = .JournalEntriesFixing // セルに表示した仕訳タイプを取得
+                    controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
+                    if tappedIndexPath.section == 0 {
+                        controller.primaryKey = presenter.objects(forRow: tappedIndexPath.row).number
+                    } else {
+                        controller.primaryKey = presenter.objectsss(forRow: tappedIndexPath.row).number
                     }
+                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
                 }
             }
         }
@@ -835,15 +832,28 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     // 削除機能 セルを左へスワイプ
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         switch indexPath.section {
-        case 0, 1:
             // 通常仕訳 決算整理仕訳
-            let action = UIContextualAction(style: .destructive, title: "削除") { (action, view, completionHandler) in
+        case 0, 1:
+            // 削除ボタン
+            let action = UIContextualAction(style: .destructive, title: "削除") { action, view, completionHandler in
                 // 確認のポップアップを表示したい
                 self.showPopover(indexPath: indexPath)
                 completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
             }
             action.image = UIImage(systemName: "trash.fill") // 画像設定（タイトルは非表示になる）
-            let configuration = UISwipeActionsConfiguration(actions: [action])
+            
+            // 編集ボタン
+            let actionEdit = UIContextualAction(style: .normal, title: "編集") { _, _, completionHandler in
+                print("cellのindexPath:\(String(describing: indexPath.row))")
+                // セルの位置をフィールドで保持する
+                self.tappedIndexPath = indexPath
+                self.presenter.cellLongPressed(indexPath: indexPath)
+                completionHandler(true) // 処理成功時はtrue/失敗時はfalseを設定する
+            }
+            actionEdit.backgroundColor = .accentDark
+            actionEdit.image = UIImage(systemName: "pencil.line") // 画像設定（タイトルは非表示になる）
+            
+            let configuration = UISwipeActionsConfiguration(actions: [action, actionEdit])
             return configuration
         default:
             // 資本振替仕訳 空白行
@@ -856,8 +866,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
-        tableView.setEditing(editing, animated: animated)
 
         editWithSlectionButton.isHidden = !editing
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
@@ -894,6 +902,10 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 // 編集前に選択状態を更新する
                 self.tableView.reloadData()
             }
+        }
+        // 削除機能 セルを左へスワイプして削除ボタンが表示された状態で編集モードに入ると、右端のチェックボックスが表示されないことがあることへの対策
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.tableView.setEditing(editing, animated: animated)
         }
         navigationItem.title = "仕訳帳"
     }

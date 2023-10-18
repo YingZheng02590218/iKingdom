@@ -162,9 +162,10 @@ class JournalEntryViewController: UIViewController {
             textFieldAmountCredit.text = ""
             textFieldAmountDebit.text = ""
         }
-        if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
-            journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
-            journalEntryType != .SettingsJournalEntriesFixing {
+        // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
+        if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集 仕訳帳画面からの遷移の場合
+            journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
+            journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
             
             if textFieldSmallWritting.text == "" {
                 textFieldSmallWritting.becomeFirstResponder() // カーソルを移す
@@ -249,7 +250,8 @@ class JournalEntryViewController: UIViewController {
         print(yyyyMMddHHmmssNowCurrent.toString(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
         
         // デイトピッカーの最大値と最小値を設定
-        if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
+        if journalEntryType == .AdjustingAndClosingEntries || // 決算整理仕訳 精算表画面からの遷移の場合
+            journalEntryType == .AdjustingAndClosingEntry {
             // 決算整理仕訳の場合は日付を決算日に固定
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 print("### 会計期間が年をまたがない場合")
@@ -261,9 +263,9 @@ class JournalEntryViewController: UIViewController {
                 datePicker.minimumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
                 datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
             }
-        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
             // 決算日設定機能　何もしない
-        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             
         } else {
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
@@ -304,11 +306,12 @@ class JournalEntryViewController: UIViewController {
             }
         }
         // ピッカーの初期値
-        if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+        if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
             // 決算日設定機能　何もしない viewDidLoad()で値を設定している
-        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             // nothing
-        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
+        } else if journalEntryType == .AdjustingAndClosingEntries || // 決算整理仕訳 精算表画面からの遷移の場合
+                    journalEntryType == .AdjustingAndClosingEntry {
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 datePicker.date = yyyyMMddHHmmss // 注意：カンマの後にスペースがないとnilになる
             } else {
@@ -518,11 +521,11 @@ class JournalEntryViewController: UIViewController {
         }
         if segmentedControl.selectedSegmentIndex == 0 {
             // 仕訳タイプ判定
-            journalEntryType = .JournalEntry // 仕訳
+            journalEntryType = .JournalEntry // 仕訳 タブバーの仕訳タブからの遷移の場合
             labelTitle.text = ""
             self.navigationItem.title = "仕訳"
         } else {
-            journalEntryType = .AdjustingAndClosingEntries // 決算整理仕訳
+            journalEntryType = .AdjustingAndClosingEntry // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
             labelTitle.text = ""
             self.navigationItem.title = "決算整理仕訳"
         }
@@ -694,7 +697,7 @@ class JournalEntryViewController: UIViewController {
             sender.isSelected = !sender.isSelected
         }
         
-        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
+        if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             // バリデーションチェック ひとつでも変更されているか、小書き
             if textInputCheckForJournalEntriesPackageFixing() {
                 presenter.inputButtonTapped(journalEntryType: journalEntryType)
@@ -1072,8 +1075,9 @@ class JournalEntryViewController: UIViewController {
         textFieldAmountDebit.text = ""
         textFieldAmountCredit.text = ""
         textFieldSmallWritting.text = ""
-        // 終了させる　仕訳帳画面へ戻る
-        if self.journalEntryType == .JournalEntries { // 仕訳
+        // 終了させる　仕訳帳画面か精算表画面へ戻る
+        if journalEntryType != .JournalEntry && // 仕訳 タブバーの仕訳タブからの遷移の場合
+            journalEntryType != .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -1393,9 +1397,10 @@ extension JournalEntryViewController: UITextFieldDelegate {
                 // 同じ勘定科目を指定できるように変更
                 // textFieldCategoryDebit.text = ""
             } else {
-                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集ではない場合
-                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
-                    journalEntryType != .SettingsJournalEntriesFixing {
+                // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集 仕訳帳画面からの遷移の場合
+                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳 追加
+                    journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
                     if textFieldCategoryCredit.text == "" {
                         textFieldCategoryCredit.becomeFirstResponder()
                     }
@@ -1409,9 +1414,10 @@ extension JournalEntryViewController: UITextFieldDelegate {
                 // textFieldCategoryCredit.text = ""
             } else {
                 // TextField_amount_credit.becomeFirstResponder() //貸方金額は不使用のため
-                if journalEntryType != .JournalEntriesPackageFixing  && // 仕訳一括編集ではない場合
-                    journalEntryType != .SettingsJournalEntries  && // よく使う仕訳ではない場合
-                    journalEntryType != .SettingsJournalEntriesFixing {
+                // 仕訳一括編集ではない場合 よく使う仕訳ではない場合
+                if journalEntryType != .JournalEntriesPackageFixing && // 仕訳一括編集 仕訳帳画面からの遷移の場合
+                    journalEntryType != .SettingsJournalEntries && // よく使う仕訳 追加
+                    journalEntryType != .SettingsJournalEntriesFixing { // よく使う仕訳 更新
                     
                     if textFieldAmountDebit.text == "" {
                         textFieldAmountDebit.becomeFirstResponder() // カーソルを金額へ移す
@@ -1519,26 +1525,29 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         createTextFieldForAmount()
         createTextFieldForSmallwritting()
         // 仕訳タイプ判定
-        if journalEntryType == .JournalEntries { // 仕訳
+        if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
             labelTitle.text = "仕　訳"
             // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳
-            //　labelTitle.text = "決算整理仕訳"
+        } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
+            labelTitle.text = "決算整理仕訳"
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集
-            labelTitle.text = "仕訳まとめて編集"
-            // よく使う仕訳　エリア
-            tableView.isHidden = true
+        } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+            labelTitle.text = ""
+            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
+            // カルーセルをリロードする
+            reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            maskDatePickerButton.isHidden = false
-            isMaskedDatePicker = false
-            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集
+        } else if journalEntryType == .AdjustingAndClosingEntry {
+            labelTitle.text = ""
+            // カルーセルをリロードする
+            reloadCarousel()
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
@@ -1569,12 +1578,14 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 }
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        } else if journalEntryType == .JournalEntry {
-            labelTitle.text = ""
-            // カルーセルを追加しても、仕訳画面に戻ってきても反映されないので、viewDidLoadからviewWillAppearへ移動
-            // カルーセルをリロードする
-            reloadCarousel()
+        } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
+            labelTitle.text = "仕訳まとめて編集"
+            // よく使う仕訳　エリア
+            tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            maskDatePickerButton.isHidden = false
+            isMaskedDatePicker = false
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         }
         // セットアップ AdMob
         setupAdMob()
@@ -1739,7 +1750,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // フィードバック
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.success)
-            let alert = UIAlertController(title: "仕訳", message: "記帳しました", preferredStyle: .alert)
+            let alert = UIAlertController(title: "決算整理仕訳", message: "記帳しました", preferredStyle: .alert)
             self.present(alert, animated: true) { () -> Void in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.dismiss(animated: true, completion: { [self] () -> Void in
@@ -1783,15 +1794,17 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
 
 // 仕訳タイプ(仕訳 or 決算整理仕訳 or 編集)
 enum JournalEntryType {
-    // 仕訳
+    // 仕訳 仕訳帳画面からの遷移の場合
     case JournalEntries
-    // 決算整理仕訳
+    // 決算整理仕訳 精算表画面からの遷移の場合
     case AdjustingAndClosingEntries
-    // タブバーの仕訳タブからの遷移の場合
+    // 仕訳 タブバーの仕訳タブからの遷移の場合
     case JournalEntry
-    // 仕訳編集
+    // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
+    case AdjustingAndClosingEntry
+    // 仕訳編集 仕訳帳画面からの遷移の場合
     case JournalEntriesFixing
-    // 仕訳一括編集
+    // 仕訳一括編集 仕訳帳画面からの遷移の場合
     case JournalEntriesPackageFixing
     // よく使う仕訳 追加
     case SettingsJournalEntries

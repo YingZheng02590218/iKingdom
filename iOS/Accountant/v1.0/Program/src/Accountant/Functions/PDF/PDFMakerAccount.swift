@@ -14,7 +14,7 @@ class PDFMakerAccount {
     var PDFpath: [URL]?
     
     let hTMLhelper = HTMLhelperAccount()
-    let paperSize = CGSize(width: 170 / 25.4 * 72, height: 257 / 25.4 * 72) // 調整した　A4 210×297mm
+    let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
     // 勘定名
     var account: String = ""
     var fiscalYear = 0

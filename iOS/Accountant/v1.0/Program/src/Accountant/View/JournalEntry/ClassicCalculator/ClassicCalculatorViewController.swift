@@ -35,7 +35,7 @@ class ClassicCalculatorViewController: UIViewController {
     @IBOutlet private var buttonMinus: EMTNeumorphicButton!
     @IBOutlet private var buttonPlus: EMTNeumorphicButton!
     
-    @IBOutlet private var buttonDot: UIButton!
+    @IBOutlet private var buttonDoubleZero: EMTNeumorphicButton!
     @IBOutlet private var buttonEqual: EMTNeumorphicButton!
     @IBOutlet private var arrayHugo: [EMTNeumorphicButton]!
 
@@ -260,10 +260,18 @@ class ClassicCalculatorViewController: UIViewController {
 //        buttonMinus.backgroundColor = .orange
 //        buttonMinus.layer.cornerRadius = buttonMinus.frame.height / 2.2
         
-//        buttonDot.setTitle(".", for: .normal)
-//        buttonDot.backgroundColor = .darkGray
-//        buttonDot.layer.cornerRadius = buttonDot.frame.height / 2.2
-        
+        buttonDoubleZero.setTitle("00", for: .normal)
+        buttonDoubleZero.setTitleColor(.textColor, for: .normal)
+        buttonDoubleZero.neumorphicLayer?.cornerRadius = buttonDoubleZero.frame.height / 2.8
+        buttonDoubleZero.contentVerticalAlignment = .fill
+//        buttonDoubleZero.contentHorizontalAlignment = .fill
+        buttonDoubleZero.setTitleColor(.textColor, for: .selected)
+        buttonDoubleZero.neumorphicLayer?.lightShadowOpacity = Constant.LIGHTSHADOWOPACITY
+        buttonDoubleZero.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
+        buttonDoubleZero.neumorphicLayer?.edged = Constant.edged
+        buttonDoubleZero.neumorphicLayer?.elementDepth = Constant.ELEMENTDEPTH
+        buttonDoubleZero.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+
         buttonEqual.setTitle("=", for: .normal)
         buttonEqual.setTitleColor(.textColor, for: .normal)
         buttonEqual.neumorphicLayer?.cornerRadius = buttonEqual.frame.height / 2.8
@@ -324,6 +332,12 @@ class ClassicCalculatorViewController: UIViewController {
         }
         
         switch sender {
+        case buttonDoubleZero:
+            // 入力チェック 文字数最大数を設定
+            if sentText.description.count > 6 {
+                return
+            }
+            numbersOnDisplay = sentText * 100 + DecimalNumbers.zero.rawValue + DecimalNumbers.zero.rawValue
         case button0:
             numbersOnDisplay = sentText * 10 + DecimalNumbers.zero.rawValue
         case button1:
@@ -350,8 +364,9 @@ class ClassicCalculatorViewController: UIViewController {
         
         label.text = numbersOnDisplay.description
     }
+    
     func numAction() {
-        
+        buttonDoubleZero.addTarget(self, action: #selector(numClick(_:)), for: .touchUpInside)
         button0.addTarget(self, action: #selector(numClick(_:)), for: .touchUpInside)
         button1.addTarget(self, action: #selector(numClick(_:)), for: .touchUpInside)
         button2.addTarget(self, action: #selector(numClick(_:)), for: .touchUpInside)

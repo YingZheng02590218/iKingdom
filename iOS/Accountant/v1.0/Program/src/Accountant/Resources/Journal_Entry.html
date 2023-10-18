@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+            <title></title>
+            
+            <style>
+                body {
+                    font-family: "Hiragino Kaku Gothic ProN";
+                    color: #707070;
+                    line-height: 1.0em;
+                    margin: 0.5em;
+                    word-break: break-all;
+                    font-size: 1.0em;
+                }
+                h1 {
+                    text-align: left ;
+                    margin: 0em;
+                    padding: 0.3em;
+                }
+                section section h1 {
+                    text-align: left;
+                    border: double 4px #2d8fdd; /*二重線 太さ 色*/
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section p {
+                    font-size: 1.0em;
+                    padding-left: 1.0em;
+                }
+                section ol p {
+                    padding-left: 0.0em;
+                    font-weight: bold;
+                    background-color: rgba(142,142,147,0.2);
+                }
+                section img {
+                    margin: auto;
+                    float: top;
+                    display: inline;
+                }
+                ul, ol {
+                    padding-left: 2.5em;
+                    font-size: 1.0em;
+                }
+                li {
+                    margin-bottom: 0.8em;
+                }
+                li li {
+                    list-style-type: lower-roman;
+                }
+                #endline {
+                    text-align: right;
+                }
+            </style>
+            
+            <script type="text/javascript">
+                function changeFontColor(colorCode) {
+                    var elem = document.getElementById("elem01");
+                    elem.style.color = colorCode;
+                }
+                function changeImage(path) {
+                    var elem = document.getElementById("elem02");
+                    elem.src = path;
+                }
+            </script>
+    </head>
+    
+    <body id ="elem01">
+        <section>
+            <h1>4. 帳簿に記帳する</h1>
+            <p></p>
+            
+            <section>
+                <h1>1. 仕訳を入力する</h1>
+                <p>仕訳 > 日付 > 勘定科目(借方) > 勘定科目(貸方) > 金額 > 小書き > 入力ボタン</p>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
+                
+                <p>【日付】<br>
+                決算整理仕訳の場合、決算日が固定で指定されます。</p>
+                
+                <p>【勘定科目】<br>
+                ドラムロールの左列が大区分、右列が勘定科目です。</p>
+                
+                <p>【金額】<br>
+                8桁までの金額を入力できます。</p>
+                
+                <p>【小書き】<br>
+                50桁までの金額を入力できます。</p>
+                
+                <p>【入力ボタン】<br>
+                タップすると仕訳が記帳されます。</p>
+                <br clear="all">
+            </section>
+            
+        </section>
+    </body>
+    
+</html>

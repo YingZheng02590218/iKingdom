@@ -54,6 +54,7 @@ struct PaciolistSTGWidgetLiveActivity: Widget {
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
         }
+        .contentMarginsDisabled()
     }
 }
 

@@ -136,9 +136,9 @@ struct HTMLhelper {
                 }
     .page{
         width: 210mm;
-        height: auto; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
+        height: 296mm; /*　296mmを指定していたが、レイアウトが崩れていたので変更　*/
         box-sizing: border-box;
-        padding: 0mm 10mm;
+        padding: 10mm 10mm;
         display: block;
         break-after: always;
     }

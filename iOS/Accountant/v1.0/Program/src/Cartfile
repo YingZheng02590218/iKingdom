@@ -1,2 +1,2 @@
-github "realm/realm-cocoa" == 10.34.1
+github "realm/realm-cocoa" == 10.43.0
 github "hirokimu/EMTNeumorphicView" == 1.0.4

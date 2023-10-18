@@ -98,7 +98,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
             backgroundView.neumorphicLayer?.darkShadowOpacity = Constant.DARKSHADOWOPACITY
             backgroundView.neumorphicLayer?.edged = Constant.edged
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
-            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.baseColor.cgColor
+            backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
         }
     }
