@@ -91,6 +91,25 @@ class DataBaseManagerJournalEntry {
         return objects
     }
     
+    // 取得 仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳
+    func getJournalEntryWith(date: String, debitCategory: String, debitAmount: Int64, creditCategory: String, creditAmount: Int64) -> Results<DataBaseJournalEntry> {
+        // 開いている会計帳簿の年度を取得
+        let dataBaseAccountingBook = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+
+        var objects = RealmManager.shared.readWithPredicate(
+            type: DataBaseJournalEntry.self,
+            predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook.fiscalYear)),
+                NSPredicate(format: "date LIKE %@", NSString(string: date)),
+                NSPredicate(format: "debit_category LIKE %@ AND credit_category LIKE %@", NSString(string: debitCategory), NSString(string: creditCategory)),
+                NSPredicate(format: "debit_amount == %@ AND credit_amount == %@", NSNumber(value: debitAmount), NSNumber(value: creditAmount)),
+                // 条件を間違えないように注意する
+            ]
+        )
+        objects = objects.sorted(byKeyPath: "date", ascending: true)
+        return objects
+    }
+
     // MARK: Update
     
     // 更新 仕訳
