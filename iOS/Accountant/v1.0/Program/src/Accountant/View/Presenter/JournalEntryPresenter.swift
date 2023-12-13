@@ -22,6 +22,8 @@ protocol JournalEntryPresenterInput {
     // 入力ボタン
     func inputButtonTapped(journalEntryType: JournalEntryType)
     // OKボタン
+    func okButtonTappedDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData)
+    // OKボタン
     func okButtonTappedDialogForFinal(journalEntryData: JournalEntryData)
     // OKボタン ダイアログ　オフライン
     func okButtonTappedDialogForOfline()
@@ -54,6 +56,8 @@ protocol JournalEntryPresenterOutput: AnyObject {
     func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData?
     // ダイアログ　オフライン
     func showDialogForOfline()
+    // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+    func showDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData)
     // ダイアログ　ほんとうに変更しますか？
     func showDialogForFinal(journalEntryData: JournalEntryData)
     // 画面を閉じる　仕訳帳へ編集した仕訳データを渡す
@@ -136,9 +140,13 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                     // 入力値を取得する
                     if let journalEntryData = view.buttonTappedForJournalEntries() {
                         // 仕訳
-                        model.addJournalEntry(journalEntryData: journalEntryData) { number in
+                        model.addJournalEntry(isForced: false, journalEntryData: journalEntryData) { number in
                             // 仕訳帳画面へ戻る
                             view.goBackToJournalsScreenJournalEntry(number: number)
+                        } errorHandler: { numbers in
+                            print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
+                            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+                            view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
                         }
                     }
                 } else if journalEntryType == .AdjustingAndClosingEntries { // 決算整理仕訳 精算表画面からの遷移の場合
@@ -154,9 +162,13 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                     // 入力値を取得する
                     if let journalEntryData = view.buttonTappedForJournalEntriesOnTabBar() {
                         // 仕訳
-                        model.addJournalEntry(journalEntryData: journalEntryData) { _ in
+                        model.addJournalEntry(isForced: false, journalEntryData: journalEntryData) { _ in
                             // ダイアログ 記帳しました
                             view.showDialogForSucceed()
+                        } errorHandler: { numbers in
+                            print("仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳", numbers)
+                            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+                            view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
                         }
                     }
                 } else if journalEntryType == .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
@@ -191,6 +203,22 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                 // ダイアログ　オフライン
                 view.showDialogForOfline()
             }
+        }
+    }
+    // OKボタン
+    func okButtonTappedDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData) {
+        // 仕訳
+        model.addJournalEntry(isForced: true, journalEntryData: journalEntryData) { number in
+            if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
+                // 仕訳帳画面へ戻る
+                view.goBackToJournalsScreenJournalEntry(number: number)
+            } else if journalEntryType == .JournalEntry { // 仕訳 タブバーの仕訳タブからの遷移の場合
+                // ダイアログ 記帳しました
+                view.showDialogForSucceed()
+            }
+        } errorHandler: { _ in
+            // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+            view.showDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
         }
     }
     // OKボタン

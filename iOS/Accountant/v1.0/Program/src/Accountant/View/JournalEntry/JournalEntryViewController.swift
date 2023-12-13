@@ -1661,6 +1661,27 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         )
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    // ダイアログ　日付と借方勘定科目、貸方勘定科目、金額が同一
+    func showDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData) {
+        // いづれかひとつに値があれば下記を実行する
+        let alert = UIAlertController(
+            title: "確認",
+            message: "日付と借方勘定科目、貸方勘定科目、金額が同じ内容の仕訳がすでに存在します。そのまま仕訳を入力しますか？",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
+            print("OK アクションをタップした時の処理")
+            
+            self.presenter.okButtonTappedDialogForSameJournalEntry(journalEntryType: journalEntryType, journalEntryData: journalEntryData)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            print("Cancel アクションをタップした時の処理")
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
     // ダイアログ　ほんとうに変更しますか？
     func showDialogForFinal(journalEntryData: JournalEntryData) {
         // いづれかひとつに値があれば下記を実行する

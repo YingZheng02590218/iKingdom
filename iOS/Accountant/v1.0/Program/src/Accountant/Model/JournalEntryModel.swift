@@ -10,7 +10,7 @@ import Foundation
 /// GUIアーキテクチャ　MVP
 protocol JournalEntryModelInput {
     // 仕訳
-    func addJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void)
+    func addJournalEntry(isForced: Bool, journalEntryData: JournalEntryData, completion: (Int) -> Void, errorHandler: ([Int]) -> Void)
     // 決算整理仕訳
     func addAdjustingJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void)
     // 決算整理仕訳 更新
@@ -23,17 +23,28 @@ protocol JournalEntryModelInput {
 class JournalEntryModel: JournalEntryModelInput {
     
     // 仕訳
-    func addJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void) {
-        
-        let number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+    func addJournalEntry(isForced: Bool, journalEntryData: JournalEntryData, completion: (Int) -> Void, errorHandler: ([Int]) -> Void) {
+        // 取得 仕訳　日付と借方勘定科目、貸方勘定科目、金額が同一の仕訳
+        let journalEntries = DataBaseManagerJournalEntry.shared.getJournalEntryWith(
             date: journalEntryData.date!,
             debitCategory: journalEntryData.debit_category!,
             debitAmount: journalEntryData.debit_amount!, // カンマを削除してからデータベースに書き込む
             creditCategory: journalEntryData.credit_category!,
-            creditAmount: journalEntryData.credit_amount!, // カンマを削除してからデータベースに書き込む
-            smallWritting: journalEntryData.smallWritting!
-        )
-        completion(number)
+            creditAmount: journalEntryData.credit_amount! // カンマを削除してからデータベースに書き込む
+        ) 
+        if journalEntries.isEmpty || isForced {
+            let number = DataBaseManagerJournalEntry.shared.addJournalEntry(
+                date: journalEntryData.date!,
+                debitCategory: journalEntryData.debit_category!,
+                debitAmount: journalEntryData.debit_amount!, // カンマを削除してからデータベースに書き込む
+                creditCategory: journalEntryData.credit_category!,
+                creditAmount: journalEntryData.credit_amount!, // カンマを削除してからデータベースに書き込む
+                smallWritting: journalEntryData.smallWritting!
+            )
+            completion(number)
+        } else {
+            errorHandler(journalEntries.map{ $0.number })
+        }
     }
     // 決算整理仕訳
     func addAdjustingJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void) {
