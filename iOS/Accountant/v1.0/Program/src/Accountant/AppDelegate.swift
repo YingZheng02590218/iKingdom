@@ -13,7 +13,6 @@ import Firebase // マネタイズ対応
 import FirebaseMessaging // Push通知
 import GoogleMobileAds
 import RealmSwift
-import StoreKit
 import SwiftyStoreKit // アップグレード機能　スタンダードプラン
 
 @UIApplicationMain
@@ -133,20 +132,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Analytics.setUserID("123456")
         // UserDefaultsをセットアップ
         setupUserDefaults()
-        
-        // レビュー催促機能
-        let key = "startUpCount"
-        let count = UserDefaults.standard.integer(forKey: key)
-        if count == 5 { // 起動が5回目にレビューを催促する
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-            }
-        }
-        if count < 6 {
-            // 永遠にインクリメントするのを防ぐ
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
-            UserDefaults.standard.synchronize()
-        }
         
         // アップグレード機能
         // アプリ起動時にトランザクションの監視を開始します
