@@ -6,6 +6,7 @@
 //  Copyright © 2022 Hisashi Ishihara. All rights reserved.
 //
 
+import StoreKit
 import UIKit
 
 class SplashViewController: UIViewController {
@@ -150,6 +151,25 @@ extension SplashViewController: SplashPresenterOutput {
         UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
             exit(0)
+        }
+    }
+    
+    // MARK: - レビュー催促機能
+
+    // レビュー催促機能
+    func showRequestReview() {
+        // レビューリクエスト画面は、３６５日で最大３回までしか表示されないルールがあるようです。
+        let key = "startUpCount"
+        let count = UserDefaults.standard.integer(forKey: key)
+        if count == 10 { // 起動が5回目にレビューを催促する
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            }
+        }
+        if count < 11 {
+            // 永遠にインクリメントするのを防ぐ
+            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: key) + 1, forKey: key)
+            UserDefaults.standard.synchronize()
         }
     }
 }

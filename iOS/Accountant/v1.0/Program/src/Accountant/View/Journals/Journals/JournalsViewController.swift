@@ -817,6 +817,14 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
@@ -1036,7 +1044,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
         } else {

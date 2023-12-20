@@ -67,7 +67,6 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
-            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())

@@ -35,12 +35,11 @@ class SettingsInformationTableViewController: UITableViewController {
             gADBannerView = GADBannerView(adSize: GADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
-            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
+            addBannerViewToView(gADBannerView, constant: -10)
         } else {
             if let gADBannerView = gADBannerView {
                 // GADBannerView を外す
@@ -152,5 +151,12 @@ class SettingsInformationTableViewController: UITableViewController {
             return cell
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
+        }
+    }
 }

@@ -29,6 +29,8 @@ protocol SplashPresenterOutput: AnyObject {
     func showForcedUpdateDialog()
     // AppStore
     func goToAppStore()
+    // レビュー催促機能
+    func showRequestReview()
 }
 
 final class SplashPresenter: SplashPresenterInput {
@@ -64,6 +66,8 @@ final class SplashPresenter: SplashPresenterInput {
                     } else {
                         // インジケーターを終了
                         self.view.finishActivityIndicatorView()
+                        // レビュー催促機能
+                        self.view.showRequestReview()
                     }
                 })
             }

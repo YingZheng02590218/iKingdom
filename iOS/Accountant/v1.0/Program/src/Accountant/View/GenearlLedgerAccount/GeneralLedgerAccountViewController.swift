@@ -528,7 +528,6 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         } else {

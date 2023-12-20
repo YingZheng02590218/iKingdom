@@ -41,11 +41,9 @@ class SettingsTaxonomyListTableViewController: UITableViewController {
             gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
-            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.visibleCells[tableView.visibleCells.count - 1].frame.height)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView.visibleCells[tableView.visibleCells.count - 1].frame.height * -1)
         } else {
