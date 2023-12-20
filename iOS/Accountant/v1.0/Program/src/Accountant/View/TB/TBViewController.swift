@@ -257,11 +257,9 @@ extension TBViewController: TBPresenterOutput {
             gADBannerView = GADBannerView(adSize: GADAdSizeLargeBanner)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
-            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.rowHeight)
             // GADBannerView を作成する
             addBannerViewToView(gADBannerView, constant: tableView!.rowHeight * -1)
         } else {

@@ -44,13 +44,11 @@ class SettingsOperatingTableViewController: UITableViewController {
             gADBannerView = GADBannerView(adSize: GADAdSizeMediumRectangle)
             // GADBannerView プロパティを設定する
             gADBannerView.adUnitID = Constant.ADMOBID
-            
             gADBannerView.rootViewController = self
             // 広告を読み込む
             gADBannerView.load(GADRequest())
-            print(tableView.visibleCells[tableView.visibleCells.count - 1].frame.height)
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: self.tableView.visibleCells[self.tableView.visibleCells.count - 1].frame.height * -1)
+            addBannerViewToView(gADBannerView, constant: -10)
         } else {
             if let gADBannerView = gADBannerView {
                 // GADBannerView を外す
@@ -71,6 +69,11 @@ class SettingsOperatingTableViewController: UITableViewController {
     // ビューが表示された後に呼ばれる
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            view.bringSubviewToFront(gADBannerView)
+        }
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let userDefaults = UserDefaults.standard
         let firstLunchKey = "firstLunch_SettingsJournals"
@@ -208,6 +211,14 @@ class SettingsOperatingTableViewController: UITableViewController {
             DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger1", isOn: sender.isOn)
         } else if sender.tag == 2 { // 残高振替仕訳
             DataBaseManagerSettingsOperating.shared.updateSettingsOperating(englishFromOfClosingTheLedger: "EnglishFromOfClosingTheLedger2", isOn: sender.isOn)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        // アップグレード機能　スタンダードプラン
+        if !UpgradeManager.shared.inAppPurchaseFlag {
+            // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
+            tableView.bringSubviewToFront(gADBannerView)
         }
     }
 }
