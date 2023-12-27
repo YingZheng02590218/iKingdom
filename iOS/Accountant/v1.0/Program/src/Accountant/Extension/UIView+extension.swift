@@ -94,7 +94,7 @@ extension UIView {
             delay: 0,
             options: .curveEaseIn,
             animations: {
-                self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
             }
         ) { _ in
             UIView.animate(

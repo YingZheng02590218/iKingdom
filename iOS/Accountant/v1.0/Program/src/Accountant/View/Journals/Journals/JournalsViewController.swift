@@ -174,6 +174,19 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 backgroundView.layer.insertSublayer(gradientLayer, at: 0)
             }
         }
+        
+        if let addButton = addButton {
+            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 2
+            // 影の色を指定。(UIColorをCGColorに変換している)
+            addButton.layer.shadowColor = UIColor.black.cgColor
+            // 影の縁のぼかしの強さを指定
+            addButton.layer.shadowRadius = 3
+            // 影の位置を指定
+            addButton.layer.shadowOffset = CGSize(width: addButton.frame.width / 2, height: addButton.frame.width / 2)
+            // 影の不透明度(濃さ)を指定
+            addButton.layer.shadowOpacity = 1.0
+        }
     }
 
     // 仕訳画面表示ボタン
