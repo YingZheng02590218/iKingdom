@@ -36,7 +36,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0Y-TI-3e1">
-                                <rect key="frame" x="73.5" y="772" width="267" height="50"/>
+                                <rect key="frame" x="73.5" y="785" width="267" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itk-Fe-54s">
                                         <rect key="frame" x="0.0" y="0.0" width="267" height="50"/>
@@ -93,7 +93,7 @@
                         <constraints>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="136-Xv-VWG"/>
                             <constraint firstItem="e4Q-98-al7" firstAttribute="trailing" secondItem="KN3-ez-inu" secondAttribute="trailing" constant="-27" id="4Xr-oX-aTD"/>
-                            <constraint firstItem="q0Y-TI-3e1" firstAttribute="bottom" secondItem="HtZ-IJ-Vrf" secondAttribute="bottom" constant="-20" id="N7z-MR-A3C"/>
+                            <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="q0Y-TI-3e1" secondAttribute="bottom" constant="27" id="Fwp-FQ-DKg"/>
                             <constraint firstItem="HtZ-IJ-Vrf" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="XaI-XH-vyv"/>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="top" secondItem="HtZ-IJ-Vrf" secondAttribute="bottom" id="bmO-rP-31q"/>
                             <constraint firstItem="q0Y-TI-3e1" firstAttribute="centerX" secondItem="5Ua-Ra-N1O" secondAttribute="centerX" id="dSx-ZB-cHU"/>

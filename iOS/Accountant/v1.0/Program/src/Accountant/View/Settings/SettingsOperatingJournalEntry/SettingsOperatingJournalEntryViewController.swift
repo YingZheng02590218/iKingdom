@@ -72,7 +72,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             }
         }
         // 仕訳画面表示ボタン
-        addButton.isEnabled = true
+        addButton.isEnabled = !isEditing
         
         if let addButton = addButton {
             // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
