@@ -84,4 +84,30 @@ extension UIView {
             layer.shadowRadius = newValue
         }
     }
+    
+    // MARK: アニメーション
+    
+    // アニメーション　ボタン
+    func animateView() {
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            options: .curveEaseIn,
+            animations: {
+                self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+        ) { _ in
+            UIView.animate(
+                withDuration: 0.4,
+                delay: 0,
+                usingSpringWithDamping: 0.3,
+                initialSpringVelocity: 10,
+                options: .curveEaseOut,
+                animations: {
+                    self.transform = .identity
+                    
+                }, completion: nil
+            )
+        }
+    }
 }
