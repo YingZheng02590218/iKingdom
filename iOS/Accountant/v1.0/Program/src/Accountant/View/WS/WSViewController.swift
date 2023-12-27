@@ -24,7 +24,7 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var backgroundView: EMTNeumorphicView!
     // 仕訳画面表示ボタン
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet private var addButton: UIButton!
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
 

@@ -32,7 +32,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     @IBOutlet private var backgroundView: EMTNeumorphicView!
     // 仕訳画面表示ボタン
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet private var addButton: UIButton!
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
     
@@ -445,7 +445,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped" {
+            if segue.identifier == "buttonTapped" || segue.identifier == "buttonTapped2" {
                 controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
