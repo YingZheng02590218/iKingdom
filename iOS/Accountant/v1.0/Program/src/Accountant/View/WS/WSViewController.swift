@@ -23,6 +23,8 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     /// 精算表　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet var backgroundView: EMTNeumorphicView!
+    // 仕訳画面表示ボタン
+    @IBOutlet var addButton: UIButton!
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
 
@@ -104,6 +106,15 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
         }
     }
     
+    // 仕訳画面表示ボタン
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        sender.animateView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 別の画面に遷移 仕訳画面
+            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
+        }
+    }
+    
     private func setRefreshControl() {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTable), for: UIControl.Event.valueChanged)
@@ -150,6 +161,12 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     }
     
     // MARK: - Navigation
+    
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        return false // false:画面遷移させない
+    }
     
     // 画面遷移の準備　勘定科目画面
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -406,6 +423,10 @@ extension WSViewController: WSPresenterOutput {
         }
         labelTitle.text = "精算表"
         labelTitle.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        // 仕訳画面表示ボタン
+        addButton.isEnabled = true
+
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
@@ -424,7 +445,7 @@ extension WSViewController: WSPresenterOutput {
                 gADBannerView,
                 constant: (tableView.visibleCells[tableView.visibleCells.count - 3].frame.height +
                            tableView.visibleCells[tableView.visibleCells.count - 2].frame.height +
-                           tableView.visibleCells[tableView.visibleCells.count - 1].frame.height) * -1
+                           tableView.visibleCells[tableView.visibleCells.count - 1].frame.height + 20) * -1
             ) // 一番したから3行分のスペースを空ける
         } else {
             if let gADBannerView = gADBannerView {
