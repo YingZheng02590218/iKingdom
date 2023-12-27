@@ -15,7 +15,9 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
     
     @IBOutlet private var tableView: UITableView!
-    
+    // 仕訳画面表示ボタン
+    @IBOutlet private var addButton: UIButton!
+
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
     // まとめて編集機能　選択したよく使う仕訳の連番
@@ -69,6 +71,21 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                 }
             }
         }
+        // 仕訳画面表示ボタン
+        addButton.isEnabled = true
+        
+        if let addButton = addButton {
+            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 2
+            // 影の色を指定。(UIColorをCGColorに変換している)
+            addButton.layer.shadowColor = UIColor.black.cgColor
+            // 影の縁のぼかしの強さを指定
+            addButton.layer.shadowRadius = 3
+            // 影の位置を指定
+            addButton.layer.shadowOffset = CGSize(width: addButton.frame.width / 2, height: addButton.frame.width / 2)
+            // 影の不透明度(濃さ)を指定
+            addButton.layer.shadowOpacity = 1.0
+        }
     }
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -77,6 +94,8 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         editWithSlectionButton.isHidden = !editing
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
+        // 仕訳画面表示ボタン
+        addButton.isEnabled = !editing
         if var rightBarButtonItems = navigationItem.rightBarButtonItems {
             for button in rightBarButtonItems where button != editButtonItem {
                 button.isEnabled = !editing // ＋ボタン、グループ一覧ボタン
@@ -95,6 +114,16 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         // 別の画面に遷移 仕訳画面
         performSegue(withIdentifier: "longTapped", sender: nil)
     }
+    
+    // 仕訳画面表示ボタン
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        sender.animateView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 別の画面に遷移 仕訳画面
+            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
+        }
+    }
+    
     // 追加機能　画面遷移の準備の前に入力検証
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
@@ -116,7 +145,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryTemplateViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped" {
+            if segue.identifier == "buttonTapped" || segue.identifier == "buttonTapped2" {
                 controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let primaryKey = primaryKey { // nil:ロングタップではない
