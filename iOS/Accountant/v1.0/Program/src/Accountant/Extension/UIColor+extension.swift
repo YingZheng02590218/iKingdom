@@ -55,10 +55,17 @@ extension UIColor {
         UIColor(named: "CellBackground") ?? .white
     }
     
+    class var cellBackgroundGradationStart: UIColor {
+        UIColor(named: "CellBackgroundGradationStart") ?? .white
+    }
+    
+    class var cellBackgroundGradationEnd: UIColor {
+        UIColor(named: "CellBackgroundGradationEnd") ?? .white
+    }
+    
     class var textColor: UIColor {
         UIColor(named: "TextColor") ?? .white
     }
 
     static let theme = UIColor(named: "C1D2EB")
-
 }

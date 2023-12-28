@@ -25,6 +25,8 @@ class AfterClosingTrialBalanceViewController: UIViewController {
     /// 繰越試算表　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    // グラデーションレイヤー　書類系画面
+    let gradientLayer = CAGradientLayer()
 
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
@@ -88,6 +90,18 @@ class AfterClosingTrialBalanceViewController: UIViewController {
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
+            
+            // グラデーション
+            gradientLayer.frame = backgroundView.bounds
+            gradientLayer.cornerRadius = 15
+            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
+            gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
+            if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
+                backgroundView.layer.replaceSublayer(gradientLayer, with: gradientLayer)
+            } else {
+                backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+            }
         }
     }
 

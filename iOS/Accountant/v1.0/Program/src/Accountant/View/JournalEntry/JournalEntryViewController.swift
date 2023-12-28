@@ -1133,7 +1133,7 @@ extension JournalEntryViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CarouselTableViewCell", for: indexPath as IndexPath) as! CarouselTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CarouselTableViewCell", for: indexPath) as! CarouselTableViewCell
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         if indexPath.row == groupObjects.count {
@@ -1180,7 +1180,9 @@ extension JournalEntryViewController: UICollectionViewDelegateFlowLayout {
         )
         // Labelの文字数に合わせてセルの幅を決める
         let size: CGSize = objects[indexPath.row].nickname.size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15.0)])
-        return CGSize(width: size.width + 20.0, height: (collectionView.bounds.size.height / 2) - 10)
+        // 横画面で、collectionViewの高さから計算した高さがマイナスになる場合の対策
+        let height = (collectionView.bounds.size.height / 2) - 10
+        return CGSize(width: size.width + 20.0, height: height < 0 ? 0 : height)
     }
     // 余白の調整（UIImageを拡大、縮小している）
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

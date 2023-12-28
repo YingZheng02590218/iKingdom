@@ -31,6 +31,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     /// 仕訳帳　下部
     @IBOutlet private var tableView: UITableView! // アウトレット接続 Referencing Outlets が接続されていないとnilとなるので注意
     @IBOutlet private var backgroundView: EMTNeumorphicView!
+    // 仕訳画面表示ボタン
+    @IBOutlet private var addButton: UIButton!
+    // グラデーションレイヤー　書類系画面
+    let gradientLayer = CAGradientLayer()
     
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
@@ -135,12 +139,17 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 pdfBarButtonItem.isEnabled = true
             }
             navigationItem.leftBarButtonItem?.isEnabled = true
+            // 仕訳画面表示ボタン
+            addButton.isEnabled = true
         } else { // 仕訳が0件の場合
             // ボタンを不活性にする
             pdfBarButtonItem.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
+            // 仕訳画面表示ボタン
+            addButton.isEnabled = false
         }
     }
+
     // ボタンのデザインを指定する
     private func createButtons() {
         
@@ -152,6 +161,40 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             backgroundView.neumorphicLayer?.elementDepth = ELEMENTDEPTH
             backgroundView.neumorphicLayer?.elementBackgroundColor = UIColor.mainColor2.cgColor
             backgroundView.neumorphicLayer?.depthType = .convex
+            
+            // グラデーション
+            gradientLayer.frame = backgroundView.bounds
+            gradientLayer.cornerRadius = 15
+            gradientLayer.colors = [UIColor.cellBackgroundGradationStart.cgColor, UIColor.cellBackgroundGradationEnd.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0.6)
+            gradientLayer.endPoint = CGPoint(x: 0.4, y: 1)
+            if let sublayers = backgroundView.layer.sublayers, sublayers.contains(gradientLayer) {
+                backgroundView.layer.replaceSublayer(gradientLayer, with: gradientLayer)
+            } else {
+                backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+            }
+        }
+        
+        if let addButton = addButton {
+            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 2
+            // 影の色を指定。(UIColorをCGColorに変換している)
+            addButton.layer.shadowColor = UIColor.black.cgColor
+            // 影の縁のぼかしの強さを指定
+            addButton.layer.shadowRadius = 3
+            // 影の位置を指定
+            addButton.layer.shadowOffset = CGSize(width: addButton.frame.width / 2, height: addButton.frame.width / 2)
+            // 影の不透明度(濃さ)を指定
+            addButton.layer.shadowOpacity = 1.0
+        }
+    }
+
+    // 仕訳画面表示ボタン
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        sender.animateView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 別の画面に遷移 仕訳画面
+            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
         }
     }
     
@@ -415,7 +458,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped" {
+            if segue.identifier == "buttonTapped" || segue.identifier == "buttonTapped2" {
                 controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
@@ -880,6 +923,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
         pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         addBarButtonItem.isEnabled = !editing // 仕訳入力ボタン
+        // 仕訳画面表示ボタン
+        addButton.isEnabled = !editing
         // 編集中の場合
         if editing {
             // タブの無効化
@@ -1045,7 +1090,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             // 広告を読み込む
             gADBannerView.load(GADRequest())
             // GADBannerView を作成する
-            addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 8) * -1)
+            addBannerViewToView(gADBannerView, constant: (tableView.rowHeight + 28) * -1)
         } else {
             if let gADBannerView = gADBannerView {
                 // GADBannerView を外す
@@ -1197,6 +1242,9 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.editButtonItem.isEnabled = false // 編集ボタン
             self.pdfBarButtonItem.isEnabled = false // 印刷ボタン
             self.addBarButtonItem.isEnabled = false // 仕訳入力ボタン
+            // 仕訳画面表示ボタン
+            self.addButton.isEnabled = false
+
             // タブの無効化
             if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
                 for tabBarItem in arrayOfTabBarItems {
@@ -1240,6 +1288,8 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.editButtonItem.isEnabled = true // 編集ボタン
             self.pdfBarButtonItem.isEnabled = true // 印刷ボタン
             self.addBarButtonItem.isEnabled = true // 仕訳入力ボタン
+            // 仕訳画面表示ボタン
+            self.addButton.isEnabled = true
             // アニメーション終了
             self.activityIndicatorView.stopAnimating()
             // タブの有効化

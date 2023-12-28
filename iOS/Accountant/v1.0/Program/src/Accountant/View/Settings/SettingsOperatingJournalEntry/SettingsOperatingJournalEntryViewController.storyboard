@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XqM-EL-yIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XqM-EL-yIQ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,7 +36,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0Y-TI-3e1">
-                                <rect key="frame" x="73.5" y="789.5" width="267" height="50"/>
+                                <rect key="frame" x="73.5" y="785" width="267" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itk-Fe-54s">
                                         <rect key="frame" x="0.0" y="0.0" width="267" height="50"/>
@@ -55,16 +56,49 @@
                                     <constraint firstItem="itk-Fe-54s" firstAttribute="top" secondItem="q0Y-TI-3e1" secondAttribute="top" id="yiU-dC-lNu"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4Q-98-al7">
+                                <rect key="frame" x="337" y="785" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="e4Q-98-al7" secondAttribute="height" multiplier="25:25" id="9zI-Lx-wjr"/>
+                                    <constraint firstAttribute="width" constant="50" id="LwG-ob-cwc"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" name="AccentBlue"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRound">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="AqH-TQ-WTZ" eventType="touchUpInside" id="Jd7-SM-efv"/>
+                                    <segue destination="lgc-ER-CXx" kind="presentation" identifier="buttonTapped2" id="Zgv-T4-7PY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KN3-ez-inu"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="136-Xv-VWG"/>
-                            <constraint firstItem="q0Y-TI-3e1" firstAttribute="bottom" secondItem="HtZ-IJ-Vrf" secondAttribute="bottom" constant="-2.5" id="N7z-MR-A3C"/>
+                            <constraint firstItem="e4Q-98-al7" firstAttribute="trailing" secondItem="KN3-ez-inu" secondAttribute="trailing" constant="-27" id="4Xr-oX-aTD"/>
+                            <constraint firstItem="KN3-ez-inu" firstAttribute="bottom" secondItem="q0Y-TI-3e1" secondAttribute="bottom" constant="27" id="Fwp-FQ-DKg"/>
                             <constraint firstItem="HtZ-IJ-Vrf" firstAttribute="leading" secondItem="KN3-ez-inu" secondAttribute="leading" id="XaI-XH-vyv"/>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="top" secondItem="HtZ-IJ-Vrf" secondAttribute="bottom" id="bmO-rP-31q"/>
                             <constraint firstItem="q0Y-TI-3e1" firstAttribute="centerX" secondItem="5Ua-Ra-N1O" secondAttribute="centerX" id="dSx-ZB-cHU"/>
                             <constraint firstItem="KN3-ez-inu" firstAttribute="trailing" secondItem="HtZ-IJ-Vrf" secondAttribute="trailing" id="ecW-6v-2g3"/>
+                            <constraint firstItem="e4Q-98-al7" firstAttribute="bottom" secondItem="KN3-ez-inu" secondAttribute="bottom" constant="-27" id="pko-6K-gSw"/>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="bottom" secondItem="KN3-ez-inu" secondAttribute="bottom" id="pqK-Lh-aP0"/>
                             <constraint firstItem="HtZ-IJ-Vrf" firstAttribute="top" secondItem="KN3-ez-inu" secondAttribute="top" id="vWQ-HN-W06"/>
                             <constraint firstItem="lJj-Ho-CQv" firstAttribute="trailing" secondItem="KN3-ez-inu" secondAttribute="trailing" id="zxx-Uj-c5g"/>
@@ -77,7 +111,7 @@
                                     <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="add" id="B3W-Tv-5zJ">
+                            <barButtonItem systemItem="add" hidden="YES" id="B3W-Tv-5zJ">
                                 <connections>
                                     <segue destination="lgc-ER-CXx" kind="presentation" identifier="buttonTapped" id="GOO-Er-6lu"/>
                                 </connections>
@@ -85,6 +119,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="e4Q-98-al7" id="0lT-nN-47H"/>
                         <outlet property="editWithSlectionButton" destination="itk-Fe-54s" id="NzN-Tx-PnX"/>
                         <outlet property="tableView" destination="HtZ-IJ-Vrf" id="LQC-D2-qwa"/>
                         <segue destination="lgc-ER-CXx" kind="presentation" identifier="longTapped" id="c5P-u2-Wh3"/>
@@ -130,15 +165,20 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c5P-u2-Wh3"/>
+        <segue reference="Zgv-T4-7PY"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <image name="rectangle.3.group" catalog="system" width="128" height="80"/>
+        <namedColor name="AccentBlue">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="AccentColor">
             <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
