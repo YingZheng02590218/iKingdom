@@ -421,13 +421,15 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForCategory() {
         textFieldCategoryDebit.delegate = self
         textFieldCategoryCredit.delegate = self
-        textFieldCategoryDebit.setup()
-        textFieldCategoryCredit.setup()
+
         textFieldCategoryDebit.textAlignment = .left
         textFieldCategoryCredit.textAlignment = .right
         
         textFieldCategoryDebit.layer.borderWidth = 0.5
         textFieldCategoryCredit.layer.borderWidth = 0.5
+        
+        textFieldCategoryDebit.setup()
+        textFieldCategoryCredit.setup()
     }
     
     // MARK: UITextField
@@ -1475,6 +1477,10 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
         // よく使う仕訳　エリア
         initTable()
+        // UIパーツを作成
+        createTextFieldForCategory()
+        createTextFieldForAmount()
+        createTextFieldForSmallwritting()
     }
     
     // MARK: - 生体認証パスコードロック
@@ -1524,10 +1530,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     }
     
     func updateUI() {
-        // UIパーツを作成
-        createTextFieldForCategory()
-        createTextFieldForAmount()
-        createTextFieldForSmallwritting()
+        // 勘定科目
+        textFieldCategoryDebit.updateUI()
+        textFieldCategoryCredit.updateUI()
         // 仕訳タイプ判定
         if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
             labelTitle.text = "仕　訳"
