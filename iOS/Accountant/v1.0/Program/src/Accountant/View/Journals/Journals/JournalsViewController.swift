@@ -61,7 +61,17 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
-    
+    // フィードバック
+    let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
+
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
     func inject(presenter: JournalsPresenterInput) {
@@ -177,13 +187,13 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if let addButton = addButton {
             // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
-            addButton.layer.cornerRadius = addButton.frame.width / 2 - 2
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 1
             // 影の色を指定。(UIColorをCGColorに変換している)
             addButton.layer.shadowColor = UIColor.black.cgColor
             // 影の縁のぼかしの強さを指定
             addButton.layer.shadowRadius = 3
             // 影の位置を指定
-            addButton.layer.shadowOffset = CGSize(width: addButton.frame.width / 2, height: addButton.frame.width / 2)
+            addButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
             // 影の不透明度(濃さ)を指定
             addButton.layer.shadowOpacity = 1.0
         }
@@ -191,6 +201,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // 仕訳画面表示ボタン
     @IBAction func addButtonTapped(_ sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
         sender.animateView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // 別の画面に遷移 仕訳画面
