@@ -234,7 +234,6 @@ class JournalEntryViewController: UIViewController {
         let nowStringYear = fiscalYear.description                            //　本年度
         let nowStringNextYear = (fiscalYear + 1).description                  //　次年度
         let nowStringMonthDay = DateManager.shared.dateFormatterMMdd.string(from: now) // 現在時刻の月日
-        let nowStringHHmmss = "00:00:00.000 Z" // DateManager.shared.dateFormatterHHmmss.string(from: now) // "00:00:00 +0000"
         let nowStringYYYY = DateManager.shared.dateFormatterYYYY.string(from: now)
         // 設定決算日
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
@@ -245,8 +244,8 @@ class JournalEntryViewController: UIViewController {
         guard let dayOfStartInYear: Date       = DateManager.shared.dateFormatterMMdd.date(from: "01/01") else { return }
         guard let dayOfEndInYear: Date         = DateManager.shared.dateFormatterMMdd.date(from: "12/31") else { return }
         guard let nowStringMonthDayMMdd: Date  = DateManager.shared.dateFormatterMMdd.date(from: nowStringMonthDay) else { return }
-        guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + nowStringHHmmss) else { return }
-        guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + nowStringHHmmss) else { return }
+        guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear) else { return }
+        guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear) else { return }
         // guard let yyyyMMddHHmmssNow: Date      = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
         // リワード広告が表示されたあと、日付が現在日時にリセットされる
         // guard let yyyyMMddHHmmssNowCurrent = Date.convertDate(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ") else { return }
