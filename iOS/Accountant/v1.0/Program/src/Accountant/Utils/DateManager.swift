@@ -30,27 +30,27 @@ class DateManager {
         // 現在日時
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         // TODO: locale
-        // formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.calendar = Calendar(identifier: .gregorian)
         // TODO: timeZone
-        // formatter.locale = Locale(identifier: "en_US_POSIX") この書き方は効かない
+        formatter.locale = Locale(identifier: "en_US_POSIX") // この書き方は効かない
         
         // 会計期間の範囲内に入っているかどうかを判定する
         // dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy/MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         dateFormatter.dateFormat = "yyyy/MM/dd"
-        // dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
         // 会計期間の範囲内に入っているかどうかを判定する
         dateFormatteryyyyMMdd.dateFormat = "yyyy-MM-dd"
         // dateFormatteryyyyMMdd.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        // dateFormatteryyyyMMdd.calendar = Calendar(identifier: .gregorian)
+        dateFormatteryyyyMMdd.calendar = Calendar(identifier: .gregorian)
         dateFormatteryyyyMMdd.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         dateFormatteryyyyMMdd.locale = Locale(identifier: "en_US_POSIX")
         
         // 期首　月日
         dateFormatterMMdd.dateFormat = DateFormatter.dateFormat(fromTemplate: "MM/dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        // dateFormatterMMdd.calendar = Calendar(identifier: .gregorian)
+        dateFormatterMMdd.calendar = Calendar(identifier: .gregorian)
         dateFormatterMMdd.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         
         // ピッカーの初期値 最大値　最小値
@@ -60,25 +60,26 @@ class DateManager {
         
         // ピッカーの初期値 最大値　最小値
         dateFormatterYYYY.dateFormat = DateFormatter.dateFormat(fromTemplate: "YYYY", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        // dateFormatterYYYY.calendar = Calendar(identifier: .gregorian)
+        dateFormatterYYYY.calendar = Calendar(identifier: .gregorian)
         dateFormatterYYYY.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         
         // ピッカーの初期値 最大値　最小値
         timezone.dateFormat = "MM-dd"
         // timezone.dateFormat = DateFormatter.dateFormat(fromTemplate: "MM-dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        // timezone.calendar = Calendar(identifier: .gregorian)
+        timezone.calendar = Calendar(identifier: .gregorian)
         timezone.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         // TODO: locale これで効いてる？
         // timezone.locale = Locale(identifier: "en_US_POSIX")
         
         // ピッカーの初期値 最大値　最小値
         dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        // dateFormatterHHmmss.calendar = Calendar(identifier: .gregorian)
+        dateFormatterHHmmss.calendar = Calendar(identifier: .gregorian)
         dateFormatterHHmmss.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
     }
     
     let now = Date() // UTC時間なので　9時間ずれる
-    
+    let calendar = Calendar(identifier: .gregorian)
+
     let dateFormatterPicker = DateFormatter() // 年/月/日
     let dateFormatterStringToDate = DateFormatter() // 年/月/日
     let formatter = DateFormatter() // 年/月/日 時:分
@@ -106,8 +107,8 @@ class DateManager {
             return false
         }
         // 年度開始日　決算日の翌日に設定する
-        guard let dayOfStartInPeriod = Calendar.current.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
-              let dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
+        guard let dayOfStartInPeriod = calendar.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
+              let dayOfStartInPeriod = calendar.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
             return false
         } // 今年度の決算日 +１日
         // 形式を変換する　"yyyy/MM/dd"　→ "yyyy-MM-dd"
@@ -147,8 +148,8 @@ class DateManager {
             return ""
         }
         // 年度開始日　決算日の翌日に設定する
-        guard let dayOfStartInPeriod = Calendar.current.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
-              let dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
+        guard let dayOfStartInPeriod = calendar.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
+              let dayOfStartInPeriod = calendar.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
             return ""
         } // 今年度の決算日 +１日
         // 先頭を0埋めする
@@ -188,8 +189,8 @@ class DateManager {
             return ""
         }
         // 年度開始日　決算日の翌日に設定する
-        guard let dayOfStartInPeriod = Calendar.current.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
-              let dayOfStartInPeriod = Calendar.current.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
+        guard let dayOfStartInPeriod = calendar.date(byAdding: .year, value: -1, to: fullTheDayOfReckoning), // 今年度の決算日 -１年
+              let dayOfStartInPeriod = calendar.date(byAdding: .day, value: 1, to: dayOfStartInPeriod) else {
             return ""
         } // 今年度の決算日 +１日
         
