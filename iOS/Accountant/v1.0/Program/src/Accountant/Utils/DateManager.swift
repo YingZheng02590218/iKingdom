@@ -54,7 +54,7 @@ class DateManager {
         dateFormatterMMdd.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         
         // ピッカーの初期値 最大値　最小値
-        dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
+        dateFormatteryyyyMMddHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd", options: 0, locale: Locale(identifier: "en_US_POSIX"))
         dateFormatteryyyyMMddHHmmss.calendar = Calendar(identifier: .gregorian)
         dateFormatteryyyyMMddHHmmss.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         
@@ -70,11 +70,6 @@ class DateManager {
         timezone.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
         // TODO: locale これで効いてる？
         // timezone.locale = Locale(identifier: "en_US_POSIX")
-        
-        // ピッカーの初期値 最大値　最小値
-        dateFormatterHHmmss.dateFormat = DateFormatter.dateFormat(fromTemplate: "'T'HH:mm:ss.SSSZZZZZ", options: 0, locale: Locale(identifier: "en_US_POSIX"))
-        dateFormatterHHmmss.calendar = Calendar(identifier: .gregorian)
-        dateFormatterHHmmss.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60)
     }
     
     let now = Date() // UTC時間なので　9時間ずれる
@@ -89,7 +84,6 @@ class DateManager {
     let dateFormatteryyyyMMdd = DateFormatter() // 年-月-日
     let dateFormatterYYYY = DateFormatter() // 年
     let timezone = DateFormatter() // 月-日
-    let dateFormatterHHmmss = DateFormatter() // 時分秒
     
     // 期中：期首～期末までの間の期間。
     // 年度変更機能 引数の日付が、会計期間の範囲内に入っているかどうかを判定する
