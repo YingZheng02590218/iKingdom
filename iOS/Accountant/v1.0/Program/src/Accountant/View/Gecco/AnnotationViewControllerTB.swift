@@ -1,16 +1,16 @@
 //
-//  AnnotationViewController.swift
+//  AnnotationViewControllerTB.swift
 //  Accountant
 //
-//  Created by Hisashi Ishihara on 2020/11/18.
-//  Copyright © 2020 Hisashi Ishihara. All rights reserved.
+//  Created by Hisashi Ishihara on 2023/12/30.
+//  Copyright © 2023 Hisashi Ishihara. All rights reserved.
 //
 
 import Gecco
 import UIKit
 
-// 精算表
-class AnnotationViewController: SpotlightViewController {
+// 試算表
+class AnnotationViewControllerTB: SpotlightViewController {
     
     @IBOutlet var annotationViews: [UIView]!
     
@@ -60,7 +60,7 @@ class AnnotationViewController: SpotlightViewController {
     }
 }
 
-extension AnnotationViewController: SpotlightViewDelegate {
+extension AnnotationViewControllerTB: SpotlightViewDelegate {
     
     func spotlightWillAppear(spotlightView: SpotlightView, spotlight: SpotlightType) {
         print("\(#function): \(spotlight)")
@@ -70,7 +70,7 @@ extension AnnotationViewController: SpotlightViewDelegate {
     }
 }
 
-extension AnnotationViewController: SpotlightViewControllerDelegate {
+extension AnnotationViewControllerTB: SpotlightViewControllerDelegate {
     
     func spotlightViewControllerWillPresent(_ viewController: SpotlightViewController, animated: Bool) {
         next(false)
@@ -92,7 +92,7 @@ extension AnnotationViewController: SpotlightViewControllerDelegate {
     }
 }
 
-private extension AnnotationViewController {
+private extension AnnotationViewControllerTB {
     
     func setupAnnotationViewPosition() {
         let rightBarButtonFrames = extractRightBarButtonConvertedFrames()
@@ -115,7 +115,7 @@ private extension AnnotationViewController {
             if controller.viewControllers[0] is FinancialStatementTableViewController {
                 let tableViewControllerFinancialStatement = controller.viewControllers[0]
                 print(tableViewControllerFinancialStatement)
-                if let wSViewController = controller.viewControllers[1] as? WSViewController {
+                if let wSViewController = controller.viewControllers[1] as? TBViewController {
                     print(wSViewController)
                     return controller.viewControllers[1]
                 }
@@ -128,7 +128,7 @@ private extension AnnotationViewController {
     
     func extractRightBarButtonConvertedFrames() -> (CGRect) {
         guard
-            let firstRightBarButtonItem = viewControllerHasNavigationItem?.view.viewWithTag(0)?.viewWithTag(55)
+            let firstRightBarButtonItem = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[0].value(forKey: "view") as? UIView
         else {
             fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }

@@ -127,7 +127,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
                 }
             }
         }
-        if let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as? AnnotationViewController {
+        if let viewController = UIStoryboard(name: "TBViewController", bundle: nil).instantiateViewController(withIdentifier: "Annotation_TrialBalance") as? AnnotationViewControllerTB {
             viewController.alpha = 0.7
             present(viewController, animated: true, completion: nil)
         }

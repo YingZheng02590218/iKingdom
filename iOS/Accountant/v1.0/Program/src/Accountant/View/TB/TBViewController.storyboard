@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mqU-Yd-p1X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mqU-Yd-p1X">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14z-DW-9U7" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
-                                <rect key="frame" x="7" y="55" width="0.0" height="800"/>
+                                <rect key="frame" x="7" y="55" width="400" height="800"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDs-6j-Ntr" userLabel="ViewBase">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bX-L3k">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                                 <subviews>
                                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqe-TZ-AuG" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="Fc2-HD-pSV" userLabel="company_name">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
@@ -45,7 +45,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="令和xx年3月31日" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-qc-gzB" userLabel="closingDate">
-                                                                <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
+                                                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="12"/>
                                                                 <nil key="textColor"/>
@@ -199,21 +199,21 @@
                                         </constraints>
                                     </view>
                                     <tableView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="20" estimatedRowHeight="-1" sectionHeaderHeight="25" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fNc-Jo-BVR">
-                                        <rect key="frame" x="0.0" y="120" width="0.0" height="665"/>
+                                        <rect key="frame" x="0.0" y="120" width="400" height="665"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_TB" id="sQ5-fY-wHT" customClass="TBTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="0.0" height="20"/>
+                                                <rect key="frame" x="0.0" y="50" width="400" height="20"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sQ5-fY-wHT" id="ZN2-d6-xhu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nM6-OM-ZCk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM6-OM-ZCk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-eZ-lsk" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-eZ-lsk" userLabel="debit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -238,11 +238,11 @@
                                                                 <constraint firstAttribute="bottom" secondItem="n6c-eZ-lsk" secondAttribute="bottom" id="WnZ-IC-ZKl"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NjM-aC-taG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjM-aC-taG">
+                                                            <rect key="frame" x="97.5" y="0.0" width="205" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="TJb-yI-iLr" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="TJb-yI-iLr" userLabel="account">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -267,11 +267,11 @@
                                                                 <constraint firstItem="TJb-yI-iLr" firstAttribute="top" secondItem="NjM-aC-taG" secondAttribute="top" id="Xne-Hv-m6f"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9DZ-Ly-bo4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DZ-Ly-bo4">
+                                                            <rect key="frame" x="302.5" y="0.0" width="97.5" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-DI-dCK" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="kNd-DI-dCK" userLabel="credit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -335,17 +335,17 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_last_TB" id="sYL-Wy-4Zu" userLabel="cell_last_TB" customClass="TBTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="70" width="0.0" height="20"/>
+                                                <rect key="frame" x="0.0" y="70" width="400" height="20"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sYL-Wy-4Zu" id="aIN-To-wMj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="400" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxx-op-Kzi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxx-op-Kzi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="6P4-4f-eyC" userLabel="debit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="6P4-4f-eyC" userLabel="debit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -370,11 +370,11 @@
                                                                 <constraint firstAttribute="bottom" secondItem="6P4-4f-eyC" secondAttribute="bottom" id="VRY-ah-jJ6"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-Lf-sGX">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3P-Lf-sGX">
+                                                            <rect key="frame" x="97.5" y="0.0" width="205" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Jac-nZ-whg" userLabel="account">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="Jac-nZ-whg" userLabel="account">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="205" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -399,11 +399,11 @@
                                                                 <constraint firstItem="Jac-nZ-whg" firstAttribute="top" secondItem="p3P-Lf-sGX" secondAttribute="top" id="tmg-gH-da9"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-So-Bab">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-So-Bab">
+                                                            <rect key="frame" x="302.5" y="0.0" width="97.5" height="20"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="BEj-TK-Fun" userLabel="credit">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.05000000074505806" translatesAutoresizingMaskIntoConstraints="NO" id="BEj-TK-Fun" userLabel="credit">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="97.5" height="20"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="15"/>
@@ -545,20 +545,15 @@
             </objects>
             <point key="canvasLocation" x="3358" y="3185"/>
         </scene>
-        <!--Annotation View Controller-->
+        <!--Annotation View ControllerTB-->
         <scene sceneID="la3-oc-wdN">
             <objects>
-                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewController" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rMu-1m-WEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="Annotation_TrialBalance" id="xDU-xs-svT" customClass="AnnotationViewControllerTB" customModule="Paciolist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n94-lm-BM6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ここにボタンがあります" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pk9-MN-wHJ">
-                                <rect key="frame" x="5" y="671" width="404" height="30"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
-                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3D-at-1TR">
                                 <rect key="frame" x="5" y="671" width="404" height="30"/>
                                 <string key="text">合計試算表と残高試算表を
@@ -567,34 +562,19 @@
                                 <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="印刷するときはこちら" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-oB-q3U">
-                                <rect key="frame" x="5" y="671" width="404" height="23"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
-                                <color key="textColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="roj-iB-rdK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ukb-oB-q3U" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="0gd-KJ-njH"/>
                             <constraint firstItem="w3D-at-1TR" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="EGe-aI-5mL"/>
-                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="LwE-PC-MHO"/>
                             <constraint firstItem="w3D-at-1TR" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="VZo-2H-In7"/>
-                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="Vxv-AZ-Bx7"/>
-                            <constraint firstItem="ukb-oB-q3U" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="kCG-mW-0ZO"/>
-                            <constraint firstItem="ukb-oB-q3U" firstAttribute="trailing" secondItem="roj-iB-rdK" secondAttribute="trailing" constant="5" id="rXz-Vi-F8R"/>
                             <constraint firstItem="w3D-at-1TR" firstAttribute="leading" secondItem="roj-iB-rdK" secondAttribute="leading" constant="5" id="rq4-dw-7qP"/>
-                            <constraint firstItem="Pk9-MN-wHJ" firstAttribute="width" secondItem="roj-iB-rdK" secondAttribute="width" constant="-10" id="vrf-Gl-vML"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="annotationViews" destination="Pk9-MN-wHJ" collectionClass="NSMutableArray" id="3qc-LV-fZn"/>
-                        <outletCollection property="annotationViews" destination="w3D-at-1TR" collectionClass="NSMutableArray" id="ami-NH-Njn"/>
-                        <outletCollection property="annotationViews" destination="ukb-oB-q3U" collectionClass="NSMutableArray" id="qG7-xd-Udt"/>
+                        <outletCollection property="annotationViews" destination="w3D-at-1TR" collectionClass="NSMutableArray" id="LKQ-s9-rgx"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rMu-1m-WEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4067" y="3185"/>
         </scene>
