@@ -33,7 +33,7 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet private var cancelButton: EMTNeumorphicButton!
     // デイトピッカー　日付
     @IBOutlet private var datePicker: UIDatePicker!
-    let dateFormatter = DateFormatter()
+
     var isMaskedDatePicker = false // マスクフラグ
     
     @IBOutlet private var datePickerView: EMTNeumorphicView!
@@ -84,6 +84,8 @@ class JournalEntryViewController: UIViewController {
     var primaryKey: Int = 0
     // グループ
     var groupObjects = DataBaseManagerSettingsOperatingJournalEntryGroup.shared.getJournalEntryGroup()
+    // 和暦対応　西暦に固定する
+    let calendar = Calendar(identifier: .gregorian)
     
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalEntryPresenterInput!
@@ -232,20 +234,19 @@ class JournalEntryViewController: UIViewController {
         let nowStringYear = fiscalYear.description                            //　本年度
         let nowStringNextYear = (fiscalYear + 1).description                  //　次年度
         let nowStringMonthDay = DateManager.shared.dateFormatterMMdd.string(from: now) // 現在時刻の月日
-        let nowStringHHmmss = DateManager.shared.dateFormatterHHmmss.string(from: now)
         let nowStringYYYY = DateManager.shared.dateFormatterYYYY.string(from: now)
         // 設定決算日
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         guard let dayOfEndInPeriod: Date   = DateManager.shared.dateFormatterMMdd.date(from: theDayOfReckoning) else { return } // 決算日設定機能 注意：nowStringYearは、開始日の日付が存在するかどうかを確認するために記述した。閏年など
-        guard let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: dayOfEndInPeriod) else { return } // 決算日設定機能　年度開始日は決算日の翌日に設定する
+        guard let modifiedDate = calendar.date(byAdding: .day, value: 1, to: dayOfEndInPeriod) else { return } // 決算日設定機能　年度開始日は決算日の翌日に設定する
         guard let dayOfStartInPeriod: Date = DateManager.shared.dateFormatterMMdd.date(from: DateManager.shared.dateFormatterMMdd.string(from: modifiedDate)) else { return } // 決算日設定機能　年度開始日
         // 期間
         guard let dayOfStartInYear: Date       = DateManager.shared.dateFormatterMMdd.date(from: "01/01") else { return }
         guard let dayOfEndInYear: Date         = DateManager.shared.dateFormatterMMdd.date(from: "12/31") else { return }
         guard let nowStringMonthDayMMdd: Date  = DateManager.shared.dateFormatterMMdd.date(from: nowStringMonthDay) else { return }
-        guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear + ", " + nowStringHHmmss) else { return }
-        guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear + ", " + nowStringHHmmss) else { return }
-        guard let yyyyMMddHHmmssNow: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
+        guard let yyyyMMddHHmmss: Date         = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringYear) else { return }
+        guard let yyyyMMddHHmmssNextYear: Date = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: theDayOfReckoning + "/" + nowStringNextYear) else { return }
+        // guard let yyyyMMddHHmmssNow: Date      = DateManager.shared.dateFormatteryyyyMMddHHmmss.date(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss) else { return }
         // リワード広告が表示されたあと、日付が現在日時にリセットされる
         // guard let yyyyMMddHHmmssNowCurrent = Date.convertDate(from: nowStringMonthDay + "/" + nowStringYYYY + ", " + nowStringHHmmss, format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ") else { return }
         // print(yyyyMMddHHmmssNowCurrent.toString(format: "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"))
@@ -256,13 +257,16 @@ class JournalEntryViewController: UIViewController {
             // 決算整理仕訳の場合は日付を決算日に固定
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 print("### 会計期間が年をまたがない場合")
-                datePicker.minimumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
-                print(DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))"))
-                datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
+                // 決算日設定機能　注意：カンマの後にスペースがないとnilになる 04-02にすると04-01となる
+                datePicker.minimumDate = yyyyMMddHHmmss
+                // 04-01にすると03-31となる
+                datePicker.maximumDate = yyyyMMddHHmmss
             } else { // 会計期間が年をまたぐ場合
                 print("### 会計期間が年をまたぐ場合")
-                datePicker.minimumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
-                datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
+                // 決算日設定機能　注意：カンマの後にスペースがないとnilになる 04-02にすると04-01となる
+                datePicker.minimumDate = calendar.date(byAdding: .year, value: 1, to: yyyyMMddHHmmss)
+                // 04-01にすると03-31となる
+                datePicker.maximumDate = calendar.date(byAdding: .year, value: 1, to: yyyyMMddHHmmss)
             }
         } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
             // 決算日設定機能　何もしない
@@ -271,36 +275,38 @@ class JournalEntryViewController: UIViewController {
         } else {
             if theDayOfReckoning == "12/31" { // 会計期間が年をまたがない場合
                 print("### 会計期間が年をまたがない場合")
-                datePicker.minimumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: modifiedDate))")
-                print(DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: modifiedDate))"))
-                datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
-                print(DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))"))
+                // 決算日設定機能　注意：カンマの後にスペースがないとnilになる 04-02にすると04-01となる
+                guard let modifiedDate = calendar.date(byAdding: .year, value: -1, to: yyyyMMddHHmmss),
+                      let modifiedDate = calendar.date(byAdding: .day, value: 1, to: modifiedDate) else { return } // 決算日設定機能　年度開始日は決算日の翌日に設定する
+                datePicker.minimumDate = modifiedDate
+                // 04-01にすると03-31となる
+                datePicker.maximumDate = yyyyMMddHHmmss
             } else { // 会計期間が年をまたぐ場合
                 // 01/01 以降か
-                guard let interval = (Calendar.current.dateComponents([.month], from: dayOfStartInYear, to: nowStringMonthDayMMdd)).month else { return }
+                guard let interval = (calendar.dateComponents([.month], from: dayOfStartInYear, to: nowStringMonthDayMMdd)).month else { return }
                 // 設定決算日 未満か
-                guard let interval1 = (Calendar.current.dateComponents([.month], from: dayOfEndInPeriod, to: nowStringMonthDayMMdd)).month else { return }
+                guard let interval1 = (calendar.dateComponents([.month], from: dayOfEndInPeriod, to: nowStringMonthDayMMdd)).month else { return }
                 // 年度開始日 以降か
-                guard let interval2 = (Calendar.current.dateComponents([.month], from: dayOfStartInPeriod, to: nowStringMonthDayMMdd)).month else { return }
+                guard let interval2 = (calendar.dateComponents([.month], from: dayOfStartInPeriod, to: nowStringMonthDayMMdd)).month else { return }
                 // 12/31と同じ、もしくはそれ以前か
-                guard let interval3 = (Calendar.current.dateComponents([.month], from: dayOfEndInYear, to: nowStringMonthDayMMdd)).month else { return }
+                guard let interval3 = (calendar.dateComponents([.month], from: dayOfEndInYear, to: nowStringMonthDayMMdd)).month else { return }
                 
                 if interval >= 0 {
                     print("### 会計期間　1/01 以降")
                     if interval1 <= 0 {
                         print("### 会計期間　設定決算日 未満")
                         // 決算日設定機能　注意：カンマの後にスペースがないとnilになる
-                        datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: yyyyMMddHHmmss)
+                        datePicker.minimumDate = calendar.date(byAdding: .day, value: 1, to: yyyyMMddHHmmss)
                         // 四月以降か
-                        datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: (nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))"))
+                        datePicker.maximumDate = calendar.date(byAdding: .year, value: 1, to: yyyyMMddHHmmss)
                     } else if interval2 >= 0 {
                         print("### 会計期間　年度開始日 以降")
                         if interval3 <= 0 {
                             print("### 会計期間　12/31 以前")
                             // 決算日設定機能　注意：カンマの後にスペースがないとnilになる 04-02にすると04-01となる
-                            datePicker.minimumDate = Calendar.current.date(byAdding: .day, value: 1, to: yyyyMMddHHmmss)
+                            datePicker.minimumDate = calendar.date(byAdding: .day, value: 1, to: yyyyMMddHHmmss)
                             // 04-01にすると03-31となる
-                            datePicker.maximumDate = DateManager.shared.dateFormatteryyyyMMdd.date(from: nowStringNextYear + "-\(DateManager.shared.timezone.string(from: dayOfEndInPeriod))")
+                            datePicker.maximumDate = calendar.date(byAdding: .year, value: 1, to: yyyyMMddHHmmss)
                         }
                     }
                 }
@@ -330,6 +336,8 @@ class JournalEntryViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
+        // 和暦対応　西暦に固定する
+        datePicker.calendar = Calendar(identifier: .gregorian)
     }
     
     // MARK: EMTNeumorphicView
@@ -421,13 +429,15 @@ class JournalEntryViewController: UIViewController {
     func createTextFieldForCategory() {
         textFieldCategoryDebit.delegate = self
         textFieldCategoryCredit.delegate = self
-        textFieldCategoryDebit.setup()
-        textFieldCategoryCredit.setup()
+        
         textFieldCategoryDebit.textAlignment = .left
         textFieldCategoryCredit.textAlignment = .right
         
         textFieldCategoryDebit.layer.borderWidth = 0.5
         textFieldCategoryCredit.layer.borderWidth = 0.5
+        
+        textFieldCategoryDebit.setup()
+        textFieldCategoryCredit.setup()
     }
     
     // MARK: UITextField
@@ -561,7 +571,7 @@ class JournalEntryViewController: UIViewController {
         
         let min = datePicker.minimumDate!
         if datePicker.date > min {
-            let modifiedDate = Calendar.current.date(byAdding: .day, value: -1, to: datePicker.date)! // 1日前へ
+            let modifiedDate = calendar.date(byAdding: .day, value: -1, to: datePicker.date)! // 1日前へ
             datePicker.date = modifiedDate
         }
     }
@@ -584,7 +594,7 @@ class JournalEntryViewController: UIViewController {
         
         let max = datePicker.maximumDate!
         if datePicker.date < max {
-            let modifiedDate = Calendar.current.date(byAdding: .day, value: 1, to: datePicker.date)! // 1日次へ
+            let modifiedDate = calendar.date(byAdding: .day, value: 1, to: datePicker.date)! // 1日次へ
             datePicker.date = modifiedDate
         }
     }
@@ -717,7 +727,8 @@ class JournalEntryViewController: UIViewController {
         // バリデーションチェック
         var datePicker: String?
         if isMaskedDatePicker {
-            datePicker = dateFormatter.string(from: self.datePicker.date)
+            let date = "\(self.datePicker.date.year)/\(self.datePicker.date.month)/\(self.datePicker.date.day)"
+            datePicker = date
         } else {
             datePicker = nil
         }
@@ -782,8 +793,9 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
             
+            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
             let dBJournalEntry = JournalEntryData(
-                date: dateFormatter.string(from: datePicker.date),
+                date: date,
                 debit_category: textFieldCategoryDebit,
                 debit_amount: textFieldAmountDebitInt64,
                 credit_category: textFieldCategoryCredit,
@@ -809,8 +821,9 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
             
+            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
             let dBJournalEntry = JournalEntryData(
-                date: dateFormatter.string(from: datePicker.date),
+                date: date,
                 debit_category: textFieldCategoryDebit,
                 debit_amount: textFieldAmountDebitInt64,
                 credit_category: textFieldCategoryCredit,
@@ -836,8 +849,9 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
             
+            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
             let dBJournalEntry = JournalEntryData(
-                date: dateFormatter.string(from: datePicker.date),
+                date: date,
                 debit_category: textFieldCategoryDebit,
                 debit_amount: textFieldAmountDebitInt64,
                 credit_category: textFieldCategoryCredit,
@@ -867,9 +881,10 @@ class JournalEntryViewController: UIViewController {
            let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
            let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
            let textFieldSmallWritting = textFieldSmallWritting.text {
-            
+            // 先頭を0埋めする
+            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
             let dBJournalEntry = JournalEntryData(
-                date: dateFormatter.string(from: datePicker.date),
+                date: date,
                 debit_category: textFieldCategoryDebit,
                 debit_amount: textFieldAmountDebitInt64,
                 credit_category: textFieldCategoryCredit,
@@ -1466,15 +1481,14 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .accentColor
-        
         // ニューモフィズム　ボタンとビューのデザインを指定する
         createEMTNeumorphicView()
-        // セットアップ
-        dateFormatter.locale = Locale.current
-        dateFormatter.timeZone = TimeZone.current // UTC時刻を補正
-        dateFormatter.dateFormat = "yyyy/MM/dd"     // 注意：　小文字のyにしなければならない
         // よく使う仕訳　エリア
         initTable()
+        // UIパーツを作成
+        createTextFieldForCategory()
+        createTextFieldForAmount()
+        createTextFieldForSmallwritting()
     }
     
     // MARK: - 生体認証パスコードロック
@@ -1524,10 +1538,9 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     }
     
     func updateUI() {
-        // UIパーツを作成
-        createTextFieldForCategory()
-        createTextFieldForAmount()
-        createTextFieldForSmallwritting()
+        // 勘定科目
+        textFieldCategoryDebit.updateUI()
+        textFieldCategoryCredit.updateUI()
         // 仕訳タイプ判定
         if journalEntryType == .JournalEntries { // 仕訳 仕訳帳画面からの遷移の場合
             labelTitle.text = "仕　訳"
@@ -1560,8 +1573,10 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 // 決算整理仕訳
                 labelTitle.text = "決算整理仕訳編集"
                 if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
-                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                   // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
+                   let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
+                   let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
+                    datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
                     textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                     textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
                     textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
@@ -1572,8 +1587,10 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                 // 通常仕訳
                 labelTitle.text = "仕訳編集"
                 if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
-                   let data = dateFormatter.date(from: dataBaseJournalEntry.date) {
-                    datePicker.date = data // 注意：カンマの後にスペースがないとnilになる
+                   // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
+                   let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
+                   let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
+                    datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
                     textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                     textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
                     textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
@@ -1623,7 +1640,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
     }
     
     // チュートリアル対応 コーチマーク型　コーチマークを開始
-    func presentAnnotation() {        
+    func presentAnnotation() {
         // タブの無効化
         if let arrayOfTabBarItems = self.tabBarController?.tabBar.items as NSArray? {
             for tabBarItem in arrayOfTabBarItems {
@@ -1641,7 +1658,7 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             viewController.alpha = 0.7
             present(viewController, animated: true, completion: nil)
         }
-    }    
+    }
     // ダイアログ　オフライン
     func showDialogForOfline() {
         // フィードバック

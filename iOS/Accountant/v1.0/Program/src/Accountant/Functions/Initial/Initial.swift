@@ -147,13 +147,15 @@ class Initial {
         // 現在時刻を取得
         let now = Date() // UTC時間なので　9時間ずれる
         
-        switch Calendar.current.dateComponents([.month], from: now).month! {
+        let calendar = Calendar(identifier: .gregorian)
+
+        switch calendar.dateComponents([.month], from: now).month! {
         case 4, 5, 6, 7, 8, 9, 10, 11, 12:
-            return Calendar.current.dateComponents([.year], from: now).year!
+            return calendar.dateComponents([.year], from: now).year!
             //        case 1,2,3:
             //            return Calendar.current.date(byAdding: .year, value: -1, to: now)!
         default:
-            let lastYear = Calendar.current.dateComponents([.year], from: now).year!
+            let lastYear = calendar.dateComponents([.year], from: now).year!
             return lastYear - 1 // 1月から3月であれば去年の年に補正する
         }
     }

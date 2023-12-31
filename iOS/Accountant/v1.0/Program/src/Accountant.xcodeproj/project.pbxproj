@@ -433,6 +433,8 @@
 		F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C7371F265E7D7E00A9F287 /* Color.xcassets */; };
 		F9CD589A266B963600F27E80 /* HTMLhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD5899266B963600F27E80 /* HTMLhelper.swift */; };
 		F9CD589D266B9B9E00F27E80 /* PDFMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CD589B266B980A00F27E80 /* PDFMaker.swift */; };
+		F9CE81DE2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CE81DD2B3FC710004D7CDE /* AnnotationViewControllerTB.swift */; };
+		F9CE81DF2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CE81DD2B3FC710004D7CDE /* AnnotationViewControllerTB.swift */; };
 		F9CF22E72425016E00572070 /* JournalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */; };
 		F9CF960B2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */; };
 		F9D08D8D25444CF700CE3CB2 /* SettingAccountDetailAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97422D9253F091500FBA052 /* SettingAccountDetailAccountTableViewCell.swift */; };
@@ -1106,6 +1108,7 @@
 		F9C7371F265E7D7E00A9F287 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		F9CD5899266B963600F27E80 /* HTMLhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLhelper.swift; sourceTree = "<group>"; };
 		F9CD589B266B980A00F27E80 /* PDFMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMaker.swift; sourceTree = "<group>"; };
+		F9CE81DD2B3FC710004D7CDE /* AnnotationViewControllerTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerTB.swift; sourceTree = "<group>"; };
 		F9CF22E62425016E00572070 /* JournalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalsTableViewCell.swift; sourceTree = "<group>"; };
 		F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerSettingsOperatingJournalEntry.swift; sourceTree = "<group>"; };
 		F9D08D9025444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCategoryDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -2074,6 +2077,7 @@
 			isa = PBXGroup;
 			children = (
 				F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */,
+				F9CE81DD2B3FC710004D7CDE /* AnnotationViewControllerTB.swift */,
 				F9BEED0D2566F56400678391 /* AnnotationViewControllerJournals.swift */,
 				F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */,
 				F9BEED0F2566FB3900678391 /* AnnotationViewControllerSettingPeriod.swift */,
@@ -2949,6 +2953,7 @@
 				F9ECC3812A5EE04400C3576A /* CountAnimateLabel.swift in Sources */,
 				F963E2CE296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33427DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
+				F9CE81DE2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F963E2B929647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
 				F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9593DB42A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
@@ -3187,6 +3192,7 @@
 				F963E2CF296A8D55002DF49E /* DataBaseCapitalAccount.swift in Sources */,
 				F94DE33527DB6A770022F739 /* AnnotationViewControllerSettingJournals.swift in Sources */,
 				F963E2BA29647AA0002DF49E /* DataBasePLAccount.swift in Sources */,
+				F9CE81DF2B3FC710004D7CDE /* AnnotationViewControllerTB.swift in Sources */,
 				F9EC66CD27B90BC60003FBB6 /* DataBaseSettingsPeriod.swift in Sources */,
 				F9EC66CE27B90BC60003FBB6 /* TabBarController.swift in Sources */,
 				F9593DB52A62B3D100A1D0B3 /* DataBaseSettingsOperatingJournalEntryGroup.swift in Sources */,
@@ -3517,7 +3523,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3534,7 +3540,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.7.0;
+				MARKETING_VERSION = 4.8.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3555,7 +3561,7 @@
 				CODE_SIGN_ENTITLEMENTS = Paciolist.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -3572,7 +3578,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.7.0;
+				MARKETING_VERSION = 4.8.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.Accountant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3726,7 +3732,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
@@ -3745,7 +3751,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.7.0;
+				MARKETING_VERSION = 4.8.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3766,7 +3772,7 @@
 				CODE_SIGN_ENTITLEMENTS = PaciolistSTG.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = T526NZN54U;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T526NZN54U;
 				ENABLE_BITCODE = NO;
@@ -3785,7 +3791,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.7.0;
+				MARKETING_VERSION = 4.8.0;
 				OTHER_SWIFT_FLAGS = "-D $(TARGET_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ikingdom.AccountantSTG;
 				PRODUCT_NAME = "$(TARGET_NAME)";

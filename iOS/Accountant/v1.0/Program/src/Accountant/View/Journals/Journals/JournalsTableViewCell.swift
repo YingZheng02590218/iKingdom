@@ -15,6 +15,7 @@ class JournalsTableViewCell: UITableViewCell {
     @IBOutlet var listSummaryLabel: UILabel!
     @IBOutlet var listDateMonthLabel: UILabel!
     @IBOutlet var listDateLabel: UILabel!
+    @IBOutlet var listDateSecondLabel: UILabel!
     @IBOutlet var listNumberLeftLabel: UILabel!
     @IBOutlet var listNumberRightLabel: UILabel!
     @IBOutlet var listDebitLabel: UILabel!
@@ -34,6 +35,7 @@ class JournalsTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         listDateMonthLabel.text = nil    // 「月」注意：空白を代入しないと、変な値が入る。
+        listDateSecondLabel.text = nil    // 「月」注意：空白を代入しないと、変な値が入る。
         listDateLabel.text = nil     // 末尾2文字の「日」         //日付
         listSummaryDebitLabel.text = nil     // 借方勘定
         listSummaryCreditLabel.text = nil   // 貸方勘定
@@ -47,6 +49,7 @@ class JournalsTableViewCell: UITableViewCell {
     func setTextColor(isInPeriod: Bool) {
         // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
         listDateMonthLabel.textColor = isInPeriod ? .textColor : .red
+        listDateSecondLabel.textColor = isInPeriod ? .textColor : .red
         listDateLabel.textColor = isInPeriod ? .textColor : .red
         listSummaryDebitLabel.textColor = isInPeriod ? .textColor : .red
         listSummaryCreditLabel.textColor = isInPeriod ? .textColor : .red
