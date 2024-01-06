@@ -1,4 +1,4 @@
-name: UnitTests
+name: CI
 
 on:
   push:
@@ -16,4 +16,4 @@ jobs:
           xcode-version: '15.0.0'
 
       - name: UnitTests
-        run: xcodebuild test -project UnitTestApp01.xcodeproj -scheme UnitTestApp01 -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 12,OS=16.1'
+        run: xcodebuild test -project Accountant.xcodeproj -scheme Paciolist -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 12,OS=16.1'
