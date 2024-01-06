@@ -15,5 +15,15 @@ jobs:
         with:
           xcode-version: '14.2.0'
 
+      - name: Xcode build
+        run: set -o pipefail &&
+          xcodebuild
+          -sdk iphonesimulator
+          -configuration Debug
+          -workspace Accountant.xcworkspace
+          -scheme Paciolist
+          build
+          | bundle exec xcpretty
+    
       - name: UnitTests
         run: xcodebuild test -workspace Accountant.xcworkspace -scheme Paciolist -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 12,OS=16.1'
