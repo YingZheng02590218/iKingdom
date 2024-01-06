@@ -16,4 +16,4 @@ jobs:
           xcode-version: '14.2.0'
 
       - name: UnitTests
-        run: xcodebuild test -project Accountant.xcodeproj -scheme Paciolist -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 12,OS=16.1'
+        run: xcodebuild test -workspace Accountant.xcworkspace -scheme Paciolist -sdk iphonesimulator -destination platform='iOS Simulator,name=iPhone 12,OS=16.1'
