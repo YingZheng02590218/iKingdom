@@ -15,6 +15,9 @@ jobs:
         with:
           xcode-version: '14.2.0'
 
+      - name: Install Pods
+        run: pod install
+            
       - name: Xcode build
         run: set -o pipefail &&
           xcodebuild
