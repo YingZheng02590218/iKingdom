@@ -19,7 +19,7 @@ class PDFMakerAccount {
     var account: String = ""
     var fiscalYear = 0
     
-    func initialize(account: String) {
+    func initialize(account: String, completion: ([URL]?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
@@ -53,10 +53,12 @@ class PDFMakerAccount {
             print(error)
         }
         
-        readDB()
+        let url = readDB()
+        completion(url)
     }
     
-    func readDB() {
+    // PDFファイルを生成
+    func readDB() -> [URL]? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerAccountModel()
         // 開始仕訳
@@ -497,6 +499,10 @@ class PDFMakerAccount {
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
             self.PDFpath?.append(fileName)
+            
+            return self.PDFpath
+        } else {
+            return nil
         }
     }
     

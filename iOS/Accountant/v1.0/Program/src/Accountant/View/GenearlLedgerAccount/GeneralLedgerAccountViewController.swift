@@ -35,8 +35,6 @@ class GeneralLedgerAccountViewController: UIViewController {
     
     // 勘定名
     var account: String = ""
-    // 印刷機能
-    let pDFMaker = PDFMakerAccount()
 
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerAccountPresenterInput!
@@ -120,12 +118,7 @@ class GeneralLedgerAccountViewController: UIViewController {
      * 印刷ボタン押下時メソッド
      */
     @IBAction func printButtonTapped(_ sender: Any) {
-        // 初期化
-        pDFMaker.initialize(account: account)
-        
-        let previewController = QLPreviewController()
-        previewController.dataSource = self
-        present(previewController, animated: true, completion: nil)
+        presenter.pdfBarButtonItemTapped()        
     }
 }
 
@@ -563,6 +556,13 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
     func setupViewForViewDidAppear() {
 
     }
+    
+    // PDFのプレビューを表示させる
+    func showPreview() {
+        let previewController = QLPreviewController()
+        previewController.dataSource = self
+        present(previewController, animated: true, completion: nil)
+    }
 }
 
 /*
@@ -573,16 +573,16 @@ extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = pDFMaker.PDFpath {
+        if let PDFpath = presenter.PDFpath {
             return PDFpath.count
         } else {
             return 0
         }
     }
-
+    
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+        guard let pdfFilePath = presenter.PDFpath?[index] else {
             return "" as! QLPreviewItem
         }
         return pdfFilePath as QLPreviewItem

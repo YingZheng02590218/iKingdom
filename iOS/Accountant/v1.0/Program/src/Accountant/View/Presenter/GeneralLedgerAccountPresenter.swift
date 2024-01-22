@@ -26,6 +26,8 @@ protocol GeneralLedgerAccountPresenterInput {
     func dataBaseTransferEntries() -> DataBaseTransferEntry?
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
 
+    var PDFpath: [URL]? { get }
+
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -40,6 +42,8 @@ protocol GeneralLedgerAccountPresenterInput {
     func getBalanceAmountCapitalTransferJournalEntry() -> Int64
     func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String
     func getNumberOfAccount(accountName: String) -> Int
+    
+    func pdfBarButtonItemTapped()
 }
 
 protocol GeneralLedgerAccountPresenterOutput: AnyObject {
@@ -47,6 +51,7 @@ protocol GeneralLedgerAccountPresenterOutput: AnyObject {
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
+    func showPreview()
 }
 
 final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
@@ -66,6 +71,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     // 損益振替仕訳
     private var dataBaseTransferEntry: DataBaseTransferEntry?
+    // PDFのパス
+    var PDFpath: [URL]?
 
     private weak var view: GeneralLedgerAccountPresenterOutput!
     private var model: GeneralLedgerAccountModelInput
@@ -257,5 +264,15 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     func getNumberOfAccount(accountName: String) -> Int {
         
         model.getNumberOfAccount(accountName: accountName)
+    }
+    
+    // 印刷機能
+    func pdfBarButtonItemTapped() {
+        // 初期化 PDFメーカー
+        model.initializePDFMaker(account: account, completion: { PDFpath in
+            
+            self.PDFpath = PDFpath
+            self.view.showPreview()
+        })
     }
 }
