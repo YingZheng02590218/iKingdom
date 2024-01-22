@@ -429,8 +429,19 @@ class PDFMakerAccount {
                     offsetBy: 10
                 )
             ]
-            let creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
-            let debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+            var debitCategory = ""
+            if dataBaseTransferEntry.debit_category == "資本金勘定" {
+                debitCategory = Constant.capitalAccountName
+            } else {
+                debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+            }
+            var creditCategory = ""
+            if dataBaseTransferEntry.credit_category == "資本金勘定" {
+                creditCategory = Constant.capitalAccountName
+            } else {
+                creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
+            }
+            
             let debitAmount = dataBaseTransferEntry.debit_amount
             let creditAmount = dataBaseTransferEntry.credit_amount
             _ = dataBaseTransferEntry.smallWritting
