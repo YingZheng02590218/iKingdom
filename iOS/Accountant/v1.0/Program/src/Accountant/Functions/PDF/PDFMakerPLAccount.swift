@@ -19,7 +19,7 @@ class PDFMakerPLAccount {
     var account: String = "損益"
     var fiscalYear = 0
 
-    func initialize() {
+    func initialize(completion: ([URL]?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
@@ -52,10 +52,12 @@ class PDFMakerPLAccount {
             print(error)
         }
 
-        readDB()
+        let url = readDB()
+        completion(url)
     }
 
-    func readDB() {
+    // PDFファイルを生成
+    func readDB() -> [URL]? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerPLAccountModel()
         // 損益振替仕訳
@@ -260,6 +262,10 @@ class PDFMakerPLAccount {
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
             self.PDFpath?.append(fileName)
+            
+            return self.PDFpath
+        } else {
+            return nil
         }
     }
 
