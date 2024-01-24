@@ -269,7 +269,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(account: account, completion: { PDFpath in
+        model.initializePdfMaker(account: account, completion: { PDFpath in
             
             self.PDFpath = PDFpath
             self.view.showPreview()

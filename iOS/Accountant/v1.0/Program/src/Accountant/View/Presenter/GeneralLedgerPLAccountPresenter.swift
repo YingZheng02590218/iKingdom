@@ -142,7 +142,7 @@ final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInpu
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(completion: { PDFpath in
+        model.initializePdfMaker(completion: { PDFpath in
             
             self.PDFpath = PDFpath
             self.view.showPreview()

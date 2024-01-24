@@ -26,8 +26,8 @@ protocol JournalsPresenterInput {
     func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
     
-    var PDFpath: [URL]? { get }
-    
+    var filePath: URL? { get }
+
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -36,6 +36,7 @@ protocol JournalsPresenterInput {
     func refreshTable(isEditing: Bool)
     func cellLongPressed(indexPath: IndexPath)
     func pdfBarButtonItemTapped()
+    func csvBarButtonItemTapped()
     func deleteJournalEntry(number: Int) -> Bool
     func deleteAdjustingJournalEntry(number: Int) -> Bool
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int)
@@ -73,8 +74,8 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 資本振替仕訳
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
     
-    // PDFのパス
-    var PDFpath: [URL]?
+    // PDF,CSVファイルのパス
+    var filePath: URL?
     
     private weak var view: JournalsPresenterOutput!
     private var model: JournalsModelInput
@@ -214,9 +215,19 @@ final class JournalsPresenter: JournalsPresenterInput {
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(completion: { PDFpath in
+        model.initializePdfMaker(completion: { filePath in
             
-            self.PDFpath = PDFpath
+            self.filePath = filePath
+            self.view.showPreview()
+        })
+    }
+    
+    // CSV機能
+    func csvBarButtonItemTapped() {
+        // 初期化
+        model.initializeCsvMaker(completion: { csvPath in
+                        
+            self.filePath = csvPath
             self.view.showPreview()
         })
     }

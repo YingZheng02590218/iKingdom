@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		43E4CB23DCC378D611804351 /* Pods_Paciolist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AA89A10D2FF9D31170F5A3 /* Pods_Paciolist.framework */; };
+		F9001D292B5FBDAA0014CC7B /* CsvFileMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */; };
+		F9001D2A2B5FBDAB0014CC7B /* CsvFileMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */; };
 		F90114142412A02F009DBE2F /* DataBaseJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */; };
 		F901E8772848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
 		F901E8782848BA8B00290DFD /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901E8762848BA8B00290DFD /* Biometrics.swift */; };
@@ -816,6 +818,7 @@
 		B4E71F0C10598DD47284262D /* Pods-PaciolistSTG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaciolistSTG.debug.xcconfig"; path = "Target Support Files/Pods-PaciolistSTG/Pods-PaciolistSTG.debug.xcconfig"; sourceTree = "<group>"; };
 		E4E5E538AD3BB3474BDA9AF2 /* Pods-AccountantTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountantTests.release.xcconfig"; path = "Target Support Files/Pods-AccountantTests/Pods-AccountantTests.release.xcconfig"; sourceTree = "<group>"; };
 		ECE24ECAAF6EE29EB56741AB /* Pods-Paciolist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paciolist.release.xcconfig"; path = "Target Support Files/Pods-Paciolist/Pods-Paciolist.release.xcconfig"; sourceTree = "<group>"; };
+		F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = CsvFileMaker.swift; sourceTree = "<group>"; };
 		F90114132412A02F009DBE2F /* DataBaseJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournalEntry.swift; sourceTree = "<group>"; };
 		F901E8762848BA8B00290DFD /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		F901E8792849C97200290DFD /* PassCodeLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassCodeLockViewController.swift; sourceTree = "<group>"; };
@@ -1323,6 +1326,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F9002BFE2B5E6F9C0011FE9C /* CSV */ = {
+			isa = PBXGroup;
+			children = (
+				F9002BFB2B5E6F930011FE9C /* CsvFileMaker.swift */,
+			);
+			path = CSV;
+			sourceTree = "<group>";
+		};
 		F901E8752848BA7A00290DFD /* Biometrics */ = {
 			isa = PBXGroup;
 			children = (
@@ -1738,6 +1749,7 @@
 				F901E8752848BA7A00290DFD /* Biometrics */,
 				F9860FBC285B388E008D0714 /* Upgrade */,
 				F9578BDF2859BFB7001C5D74 /* PDF */,
+				F9002BFE2B5E6F9C0011FE9C /* CSV */,
 				F919603524AC6FC40084A18B /* PrintOut */,
 				F9AC551B292B9E38003966E4 /* Accounting.swift */,
 			);
@@ -3009,6 +3021,7 @@
 				F93D789C2A12239400C75BA9 /* SplashModel.swift in Sources */,
 				F963E2A72962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */,
+				F9001D2A2B5FBDAB0014CC7B /* CsvFileMaker.swift in Sources */,
 				F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */,
 				F9354DB82498C7C8007DB098 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9B209ED279D38EA00F7EA8D /* BSPresenter.swift in Sources */,
@@ -3248,6 +3261,7 @@
 				F93D789D2A12239400C75BA9 /* SplashModel.swift in Sources */,
 				F963E2A82962BA40002DF49E /* BalanceSheetData.swift in Sources */,
 				F9EC66EB27B90BC60003FBB6 /* AnnotationViewControllerJournalEntry.swift in Sources */,
+				F9001D292B5FBDAA0014CC7B /* CsvFileMaker.swift in Sources */,
 				F9EC66EC27B90BC60003FBB6 /* WSModel.swift in Sources */,
 				F9EC66ED27B90BC60003FBB6 /* DataBaseCompoundTrialBalance.swift in Sources */,
 				F9EC66EE27B90BC60003FBB6 /* BSPresenter.swift in Sources */,

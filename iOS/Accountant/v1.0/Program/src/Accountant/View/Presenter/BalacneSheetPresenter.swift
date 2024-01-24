@@ -291,7 +291,7 @@ final class BalacneSheetPresenter: BalacneSheetPresenterInput {
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(balanceSheetData: balanceSheetData, completion: { PDFpath in
+        model.initializePdfMaker(balanceSheetData: balanceSheetData, completion: { PDFpath in
             self.PDFpath = PDFpath
             self.view.showPreview()
         })

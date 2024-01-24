@@ -41,7 +41,8 @@ protocol JournalsModelInput {
         completion: (Int) -> Void
     )
     
-    func initializePDFMaker(completion: ([URL]?) -> Void)
+    func initializePdfMaker(completion: (URL?) -> Void)
+    func initializeCsvMaker(completion: (URL?) -> Void)
 }
 
 // 仕訳帳クラス
@@ -50,10 +51,20 @@ class JournalsModel: JournalsModelInput {
     // 印刷機能
     let pDFMaker = PDFMaker()
     // 初期化 PDFメーカー
-    func initializePDFMaker(completion: ([URL]?) -> Void) {
+    func initializePdfMaker(completion: (URL?) -> Void) {
         
-        pDFMaker.initialize(completion: { PDFpath in
-            completion(PDFpath)
+        pDFMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
+    // CSV機能
+    let csvFileMaker = CsvFileMaker()
+    // 初期化
+    func initializeCsvMaker(completion: (URL?) -> Void) {
+        
+        csvFileMaker.initialize(completion: { filePath in
+            completion(filePath)
         })
     }
     

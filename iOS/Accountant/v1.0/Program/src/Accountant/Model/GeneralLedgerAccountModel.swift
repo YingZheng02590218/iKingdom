@@ -37,7 +37,7 @@ protocol GeneralLedgerAccountModelInput {
 
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     
-    func initializePDFMaker(account: String, completion: ([URL]?) -> Void)
+    func initializePdfMaker(account: String, completion: ([URL]?) -> Void)
 }
 // 勘定クラス
 class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
@@ -45,7 +45,7 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerAccount()
     // 初期化 PDFメーカー
-    func initializePDFMaker(account: String, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(account: String, completion: ([URL]?) -> Void) {
         
         pDFMaker.initialize(account: account, completion: { PDFpath in
             completion(PDFpath)

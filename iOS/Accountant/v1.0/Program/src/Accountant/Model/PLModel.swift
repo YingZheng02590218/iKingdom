@@ -12,14 +12,14 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol PLModelInput {
     func initializeBenefits() -> PLData
-    func initializePDFMaker(pLData: PLData, completion: ([URL]?) -> Void)
+    func initializePdfMaker(pLData: PLData, completion: ([URL]?) -> Void)
 }
 // 損益計算書クラス
 class PLModel: PLModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerPL()
     // 初期化 PDFメーカー
-    func initializePDFMaker(pLData: PLData, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(pLData: PLData, completion: ([URL]?) -> Void) {
         
         pDFMaker.initialize(pLData: pLData, completion: { PDFpath in
             completion(PDFpath)

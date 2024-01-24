@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol ProfitAndLossStatementModelInput {
     func initializeBenefits() -> ProfitAndLossStatementData
-    func initializePDFMaker(profitAndLossStatementData: ProfitAndLossStatementData, completion: ([URL]?) -> Void)
+    func initializePdfMaker(profitAndLossStatementData: ProfitAndLossStatementData, completion: ([URL]?) -> Void)
     
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
 }
@@ -21,7 +21,7 @@ class ProfitAndLossStatementModel: ProfitAndLossStatementModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerProfitAndLossStatement()
     // 初期化 PDFメーカー
-    func initializePDFMaker(profitAndLossStatementData: ProfitAndLossStatementData, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(profitAndLossStatementData: ProfitAndLossStatementData, completion: ([URL]?) -> Void) {
         pDFMaker.initialize(profitAndLossStatementData: profitAndLossStatementData, completion: { PDFpath in
             completion(PDFpath)
         })
