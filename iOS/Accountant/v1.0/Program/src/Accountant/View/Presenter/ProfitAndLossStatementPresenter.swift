@@ -322,7 +322,7 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(profitAndLossStatementData: profitAndLossStatementData, completion: { PDFpath in
+        model.initializePdfMaker(profitAndLossStatementData: profitAndLossStatementData, completion: { PDFpath in
             
             self.PDFpath = PDFpath
             self.view.showPreview()

@@ -37,7 +37,8 @@ protocol GeneralLedgerAccountModelInput {
 
     func getAllAdjustingEntryInAccount(account: String) -> Results<DataBaseAdjustingEntry>
     
-    func initializePDFMaker(account: String, completion: ([URL]?) -> Void)
+    func initializePdfMaker(account: String, completion: (URL?) -> Void)
+    func initializeCsvMaker(account: String, completion: (URL?) -> Void)
 }
 // 勘定クラス
 class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
@@ -45,10 +46,20 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerAccount()
     // 初期化 PDFメーカー
-    func initializePDFMaker(account: String, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(account: String, completion: (URL?) -> Void) {
         
-        pDFMaker.initialize(account: account, completion: { PDFpath in
-            completion(PDFpath)
+        pDFMaker.initialize(account: account, completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
+    // CSV機能
+    let csvFileMaker = CsvFileMakerAccount()
+    // 初期化
+    func initializeCsvMaker(account: String, completion: (URL?) -> Void) {
+        
+        csvFileMaker.initialize(account: account, completion: { filePath in
+            completion(filePath)
         })
     }
     

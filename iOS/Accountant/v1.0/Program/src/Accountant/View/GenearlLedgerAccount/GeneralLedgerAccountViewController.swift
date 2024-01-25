@@ -22,6 +22,7 @@ class GeneralLedgerAccountViewController: UIViewController {
     @IBOutlet private var topView: UIView!
     @IBOutlet private var listHeadingLabel: UILabel!
     @IBOutlet private var printBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     /// 勘定　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
@@ -88,6 +89,7 @@ class GeneralLedgerAccountViewController: UIViewController {
     private func createButtons() {
         
         printBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
 
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
@@ -119,6 +121,10 @@ class GeneralLedgerAccountViewController: UIViewController {
      */
     @IBAction func printButtonTapped(_ sender: Any) {
         presenter.pdfBarButtonItemTapped()        
+    }
+    
+    @IBAction func csvBarButtonItemTapped(_ sender: Any) {
+        presenter.csvBarButtonItemTapped()
     }
 }
 
@@ -519,8 +525,10 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             presenter.numberOfDataBaseAdjustingEntries +
             presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
             printBarButtonItem.isEnabled = true
+            csvBarButtonItem.isEnabled = true
         } else {
             printBarButtonItem.isEnabled = false
+            csvBarButtonItem.isEnabled = false
         }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
@@ -573,8 +581,8 @@ extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = presenter.PDFpath {
-            return PDFpath.count
+        if let _ = presenter.filePath {
+            return 1
         } else {
             return 0
         }
@@ -582,9 +590,9 @@ extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = presenter.PDFpath?[index] else {
+        guard let filePath = presenter.filePath else {
             return "" as! QLPreviewItem
         }
-        return pdfFilePath as QLPreviewItem
+        return filePath as QLPreviewItem
     }
 }

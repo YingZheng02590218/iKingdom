@@ -268,7 +268,7 @@ final class PLPresenter: PLPresenterInput {
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(pLData: pLData, completion: { PDFpath in
+        model.initializePdfMaker(pLData: pLData, completion: { PDFpath in
             
             self.PDFpath = PDFpath
             self.view.showPreview()

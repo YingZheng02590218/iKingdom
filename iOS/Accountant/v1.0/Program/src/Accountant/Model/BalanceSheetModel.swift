@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol BalanceSheetModelInput {
     func initializeBS() -> BalanceSheetData
-    func initializePDFMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void)
+    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void)
     
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
 }
@@ -21,7 +21,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerBalanceSheet()
     // 初期化 PDFメーカー
-    func initializePDFMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void) {
         pDFMaker.initialize(balanceSheetData: balanceSheetData, completion: { PDFpath in
             completion(PDFpath)
         })
