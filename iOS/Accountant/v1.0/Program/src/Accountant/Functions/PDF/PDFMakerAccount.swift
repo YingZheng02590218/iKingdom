@@ -19,7 +19,7 @@ class PDFMakerAccount {
     var account: String = ""
     var fiscalYear = 0
     
-    func initialize(account: String) {
+    func initialize(account: String, completion: ([URL]?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
@@ -53,10 +53,12 @@ class PDFMakerAccount {
             print(error)
         }
         
-        readDB()
+        let url = readDB()
+        completion(url)
     }
     
-    func readDB() {
+    // PDFファイルを生成
+    func readDB() -> [URL]? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerAccountModel()
         // 開始仕訳
@@ -427,8 +429,19 @@ class PDFMakerAccount {
                     offsetBy: 10
                 )
             ]
-            let creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
-            let debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+            var debitCategory = ""
+            if dataBaseTransferEntry.debit_category == "資本金勘定" {
+                debitCategory = Constant.capitalAccountName
+            } else {
+                debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
+            }
+            var creditCategory = ""
+            if dataBaseTransferEntry.credit_category == "資本金勘定" {
+                creditCategory = Constant.capitalAccountName
+            } else {
+                creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
+            }
+            
             let debitAmount = dataBaseTransferEntry.debit_amount
             let creditAmount = dataBaseTransferEntry.credit_amount
             _ = dataBaseTransferEntry.smallWritting
@@ -497,6 +510,10 @@ class PDFMakerAccount {
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
             self.PDFpath?.append(fileName)
+            
+            return self.PDFpath
+        } else {
+            return nil
         }
     }
     

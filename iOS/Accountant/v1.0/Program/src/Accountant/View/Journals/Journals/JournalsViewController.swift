@@ -141,7 +141,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         pdfBarButtonItem.tintColor = .accentColor
         addBarButtonItem.tintColor = .accentColor
-        
+        // 仕訳画面表示ボタン
+        addButton.isEnabled = true
         // 空白行対応
         if presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 { // 仕訳が1件以上ある場合
             // ボタンを活性にする
@@ -149,14 +150,10 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 pdfBarButtonItem.isEnabled = true
             }
             navigationItem.leftBarButtonItem?.isEnabled = true
-            // 仕訳画面表示ボタン
-            addButton.isEnabled = true
         } else { // 仕訳が0件の場合
             // ボタンを不活性にする
             pdfBarButtonItem.isEnabled = false // 印刷ボタン
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
-            // 仕訳画面表示ボタン
-            addButton.isEnabled = false
         }
     }
     

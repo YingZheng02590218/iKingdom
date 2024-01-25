@@ -21,10 +21,22 @@ protocol GeneralLedgerPLAccountModelInput {
     
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
+    
+    func initializePDFMaker(completion: ([URL]?) -> Void)
 }
 // 損益勘定クラス
 class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
-
+    
+    // 印刷機能
+    let pDFMaker = PDFMakerPLAccount()
+    // 初期化 PDFメーカー
+    func initializePDFMaker(completion: ([URL]?) -> Void) {
+        
+        pDFMaker.initialize(completion: { PDFpath in
+            completion(PDFpath)
+        })
+    }
+    
     // MARK: - CRUD
     
     // MARK: Create
