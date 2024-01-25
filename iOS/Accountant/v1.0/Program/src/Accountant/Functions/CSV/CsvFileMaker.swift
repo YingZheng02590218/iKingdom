@@ -156,7 +156,7 @@ class CsvFileMaker {
             csv += line // csv = CSVとして出力する内容全体
         }
         
-        csv = "日付,借方勘定,借方金額,貸方勘定,貸方金額,小書き\r\n" + csv // 見出し行を先頭行に追加
+        csv = "日付,借方勘定,借方金額,貸方勘定,貸方金額,摘要\r\n" + csv // 見出し行を先頭行に追加
         print(csv)
         // csvデータを一時ディレクトリに保存する
         if let fileUrl = saveToTempDirectory(csv: csv) {

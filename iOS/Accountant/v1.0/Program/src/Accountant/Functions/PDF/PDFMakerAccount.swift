@@ -11,7 +11,7 @@ import UIKit
 
 class PDFMakerAccount {
     
-    var PDFpath: [URL]?
+    var PDFpath: URL?
     
     let hTMLhelper = HTMLhelperAccount()
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
@@ -19,12 +19,12 @@ class PDFMakerAccount {
     var account: String = ""
     var fiscalYear = 0
     
-    func initialize(account: String, completion: ([URL]?) -> Void) {
+    func initialize(account: String, completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
         self.account = account
-        PDFpath = []
+        PDFpath = nil
         
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
@@ -58,7 +58,7 @@ class PDFMakerAccount {
     }
     
     // PDFファイルを生成
-    func readDB() -> [URL]? {
+    func readDB() -> URL? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerAccountModel()
         // 開始仕訳
@@ -509,9 +509,9 @@ class PDFMakerAccount {
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
-            self.PDFpath?.append(fileName)
+            PDFpath = fileName
             
-            return self.PDFpath
+            return PDFpath
         } else {
             return nil
         }
