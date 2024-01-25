@@ -11,7 +11,7 @@ import UIKit
 
 class PDFMakerPLAccount {
 
-    var PDFpath: [URL]?
+    var PDFpath: URL?
 
     let hTMLhelper = HTMLhelperAccount() // 共通で使用する
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
@@ -19,11 +19,11 @@ class PDFMakerPLAccount {
     var account: String = "損益"
     var fiscalYear = 0
 
-    func initialize(completion: ([URL]?) -> Void) {
+    func initialize(completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
-        PDFpath = []
+        PDFpath = nil
 
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
@@ -57,7 +57,7 @@ class PDFMakerPLAccount {
     }
 
     // PDFファイルを生成
-    func readDB() -> [URL]? {
+    func readDB() -> URL? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerPLAccountModel()
         // 損益振替仕訳
@@ -82,7 +82,8 @@ class PDFMakerPLAccount {
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
-        // 行数分繰り返す 仕訳
+        
+        // 損益振替仕訳
         for i in 0..<dataBaseTransferEntries.count {
 
             let fiscalYear = dataBaseTransferEntries[i].fiscalYear
@@ -254,16 +255,15 @@ class PDFMakerPLAccount {
         // フッターを取得する
         let footerString = hTMLhelper.footerHTMLstring()
         htmlString.append(footerString)
+        print(htmlString)
         // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
-
-        print(htmlString)
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
-            self.PDFpath?.append(fileName)
-            
-            return self.PDFpath
+            PDFpath = fileName
+
+            return PDFpath
         } else {
             return nil
         }
@@ -306,9 +306,6 @@ class PDFMakerPLAccount {
         } catch {
             print("失敗した")
         }
-
-        // "receipt-" + UUID().uuidString
-        // "\(fiscalYear)-Account-\(account)"
 
         let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GeneralLedger-\(account)" + ".pdf")
         do {

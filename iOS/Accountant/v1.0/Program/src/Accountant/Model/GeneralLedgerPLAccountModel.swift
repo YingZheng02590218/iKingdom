@@ -22,7 +22,8 @@ protocol GeneralLedgerPLAccountModelInput {
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry>
     func getCapitalTransferJournalEntryInAccount() -> DataBaseCapitalTransferJournalEntry?
     
-    func initializePdfMaker(completion: ([URL]?) -> Void)
+    func initializePdfMaker(completion: (URL?) -> Void)
+    func initializeCsvMaker(completion: (URL?) -> Void)
 }
 // 損益勘定クラス
 class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
@@ -30,10 +31,20 @@ class GeneralLedgerPLAccountModel: GeneralLedgerPLAccountModelInput {
     // 印刷機能
     let pDFMaker = PDFMakerPLAccount()
     // 初期化 PDFメーカー
-    func initializePdfMaker(completion: ([URL]?) -> Void) {
+    func initializePdfMaker(completion: (URL?) -> Void) {
         
-        pDFMaker.initialize(completion: { PDFpath in
-            completion(PDFpath)
+        pDFMaker.initialize(completion: { filePath in
+            completion(filePath)
+        })
+    }
+    
+    // CSV機能
+    let csvFileMaker = CsvFileMakerPLAccount()
+    // 初期化
+    func initializeCsvMaker(completion: (URL?) -> Void) {
+        
+        csvFileMaker.initialize(completion: { filePath in
+            completion(filePath)
         })
     }
     

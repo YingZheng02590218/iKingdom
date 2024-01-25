@@ -311,7 +311,6 @@ class PDFMaker {
         // フッターを取得する
         let footerString = hTMLhelper.footerHTMLstring()
         htmlString.append(footerString)
-
         print(htmlString)
         // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
@@ -364,7 +363,6 @@ class PDFMaker {
             print("失敗した")
         }
         
-        // "receipt-" + UUID().uuidString
         let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-Journals" + ".pdf")
         do {
             try data.write(to: filePath)

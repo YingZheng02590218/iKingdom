@@ -502,10 +502,9 @@ class PDFMakerAccount {
         // フッターを取得する
         let footerString = hTMLhelper.footerHTMLstring()
         htmlString.append(footerString)
-        // HTML -> PDF
-        let pdfData = getPDF(fromHTML: htmlString)
-        
         print(htmlString)
+        // HTML -> PDF
+        let pdfData = getPDF(fromHTML: htmlString)        
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
@@ -554,9 +553,6 @@ class PDFMakerAccount {
         } catch {
             print("失敗した")
         }
-        
-        // "receipt-" + UUID().uuidString
-        // "\(fiscalYear)-Account-\(account)"
         
         let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GeneralLedger-\(account)" + ".pdf")
         do {

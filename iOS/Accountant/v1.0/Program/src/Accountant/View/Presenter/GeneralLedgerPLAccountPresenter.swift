@@ -20,7 +20,7 @@ protocol GeneralLedgerPLAccountPresenterInput {
     func dataBaseTransferEntries(forRow row: Int) -> DataBaseTransferEntry
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
     
-    var PDFpath: [URL]? { get }
+    var filePath: URL? { get }
 
     func viewDidLoad()
     func viewWillAppear()
@@ -34,6 +34,7 @@ protocol GeneralLedgerPLAccountPresenterInput {
     func getNumberOfAccount(accountName: String) -> Int
     
     func pdfBarButtonItemTapped()
+    func csvBarButtonItemTapped()
 }
 
 protocol GeneralLedgerPLAccountPresenterOutput: AnyObject {
@@ -53,8 +54,8 @@ final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInpu
     private var dataBaseTransferEntries: Results<DataBaseTransferEntry>
     // 資本振替仕訳
     private var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
-    // PDFのパス
-    var PDFpath: [URL]?
+    // PDF,CSVファイルのパス
+    var filePath: URL?
 
     private weak var view: GeneralLedgerPLAccountPresenterOutput!
     private var model: GeneralLedgerPLAccountModelInput
@@ -144,7 +145,17 @@ final class GeneralLedgerPLAccountPresenter: GeneralLedgerPLAccountPresenterInpu
         // 初期化 PDFメーカー
         model.initializePdfMaker(completion: { PDFpath in
             
-            self.PDFpath = PDFpath
+            self.filePath = PDFpath
+            self.view.showPreview()
+        })
+    }
+    
+    // CSV機能
+    func csvBarButtonItemTapped() {
+        // 初期化
+        model.initializeCsvMaker(completion: { csvPath in
+            
+            self.filePath = csvPath
             self.view.showPreview()
         })
     }
