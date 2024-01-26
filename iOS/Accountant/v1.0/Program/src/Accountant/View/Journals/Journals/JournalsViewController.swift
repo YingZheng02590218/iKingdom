@@ -1157,6 +1157,16 @@ extension JournalsViewController: JournalsPresenterOutput {
         }
         // セットアップ AdMob
         setupAdMob()
+        
+        // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+        for i in 0..<presenter.numberOfobjects where !DateManager.shared.isInPeriod(date: presenter.objects(forRow: i).date) {
+            Toast.show("仕訳の日付が会計期間の範囲外です。", self.backgroundView)
+            return
+        }
+        for i in 0..<presenter.numberOfobjectsss where !DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: i).date) {
+            Toast.show("仕訳の日付が会計期間の範囲外です。", self.backgroundView)
+            return
+        }
     }
     
     func setupViewForViewWillDisappear() {

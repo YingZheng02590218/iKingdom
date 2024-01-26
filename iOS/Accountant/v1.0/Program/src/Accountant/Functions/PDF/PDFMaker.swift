@@ -74,7 +74,8 @@ class PDFMaker {
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
-        // 行数分繰り返す 仕訳
+        
+        // 仕訳
         for item in dataBaseJournalEntries {
             
             let fiscalYear = item.fiscalYear
@@ -82,19 +83,11 @@ class PDFMaker {
                 let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // 仕訳クラス                // モデル定義
-            ////    @objc dynamic var number: Int = 0                 //仕訳番号
-            //    @objc dynamic var fiscalYear: Int = 0               //年度
-            //    @objc dynamic var date: String = ""                 //日付
-            //    @objc dynamic var debit_category: String = ""       //借方勘定
-            //    @objc dynamic var debit_amount: Int64 = 0           //借方金額
-            //    @objc dynamic var credit_category: String = ""      //貸方勘定
-            //    @objc dynamic var credit_amount: Int64 = 0          //貸方金額
-            //    @objc dynamic var smallWritting: String = ""        //小書き
-            //    @objc dynamic var balance_left: Int64 = 0           //差引残高
-            //    @objc dynamic var balance_right: Int64 = 0          //差引残高
-            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: item.date) else {
+                return nil
+            }
+
             let debitCategory = item.debit_category
             let debitAmount = item.debit_amount
             let creditCategory = item.credit_category
@@ -107,8 +100,8 @@ class PDFMaker {
             let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)") // 損益勘定の場合はエラーになる
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -132,7 +125,8 @@ class PDFMaker {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 決算整理仕訳
+        
+        // 決算整理仕訳
         for item in dataBaseAdjustingEntries {
             
             let fiscalYear = item.fiscalYear
@@ -140,8 +134,11 @@ class PDFMaker {
                 let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: item.date) else {
+                return nil
+            }
+
             let debitCategory = item.debit_category
             let debitAmount = item.debit_amount
             let creditCategory = item.credit_category
@@ -154,8 +151,8 @@ class PDFMaker {
             let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
             
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -179,6 +176,7 @@ class PDFMaker {
                 pageNumber += 1
             }
         }
+        
         // 損益振替仕訳
         for item in dataBaseTransferEntries {
 
@@ -187,8 +185,11 @@ class PDFMaker {
                 let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            let month = item.date[item.date.index(item.date.startIndex, offsetBy: 5)..<item.date.index(item.date.startIndex, offsetBy: 7)]
-            let date = item.date[item.date.index(item.date.startIndex, offsetBy: 8)..<item.date.index(item.date.startIndex, offsetBy: 10)]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: item.date) else {
+                return nil
+            }
+
             let debitCategory = item.debit_category
             let debitAmount = item.debit_amount
             let creditCategory = item.credit_category
@@ -201,8 +202,8 @@ class PDFMaker {
             let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -226,6 +227,7 @@ class PDFMaker {
                 pageNumber += 1
             }
         }
+        
         // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseManager.getCapitalTransferJournalEntryInAccount() {
             let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
@@ -233,20 +235,11 @@ class PDFMaker {
                 let tableHeader = hTMLhelper.headerstring(title: "仕訳帳", fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            let month = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex, offsetBy: 5
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex, offsetBy: 7
-                )
-            ]
-            let date = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex, offsetBy: 8
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex, offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
+                return nil
+            }
+
             var debitCategory = ""
             if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                 debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
@@ -270,8 +263,8 @@ class PDFMaker {
             let numberOfAccountDebit: Int = generalLedgerAccountModel.getNumberOfAccount(accountName: "\(debitCategory)")
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -295,6 +288,7 @@ class PDFMaker {
                 pageNumber += 1
             }
         }
+        
         if counter > 0 && counter <= 10 {
             for _ in counter ..< 10 {
                 let rowString = hTMLhelper.getSingleRowEmpty()

@@ -99,25 +99,11 @@ class PDFMakerAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseTransferEntry.date[
-                dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseTransferEntry.date[
-                dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
+                return nil
+            }
+
             var debitCategory = ""
             if dataBaseTransferEntry.debit_category == "資本金勘定" {
                 debitCategory = Constant.capitalAccountName
@@ -148,8 +134,8 @@ class PDFMakerAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditOpeningJournalEntry()
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -175,7 +161,7 @@ class PDFMakerAccount {
             }
         }
 
-        // 行数分繰り返す 仕訳
+        // 仕訳
         for i in 0..<dataBaseJournalEntries.count {
             
             let fiscalYear = dataBaseJournalEntries[i].fiscalYear
@@ -183,25 +169,11 @@ class PDFMakerAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseJournalEntries[i].date[
-                dataBaseJournalEntries[i].date.index(
-                    dataBaseJournalEntries[i].date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseJournalEntries[i].date.index(
-                    dataBaseJournalEntries[i].date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseJournalEntries[i].date[
-                dataBaseJournalEntries[i].date.index(
-                    dataBaseJournalEntries[i].date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseJournalEntries[i].date.index(
-                    dataBaseJournalEntries[i].date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseJournalEntries[i].date) else {
+                return nil
+            }
+
             let debitCategory = dataBaseJournalEntries[i].debit_category
             let debitAmount = dataBaseJournalEntries[i].debit_amount
             let creditCategory = dataBaseJournalEntries[i].credit_category
@@ -221,8 +193,8 @@ class PDFMakerAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
             
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -247,7 +219,8 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 決算整理仕訳
+        
+        // 決算整理仕訳
         for i in 0..<dataBaseAdjustingEntries.count {
             
             let fiscalYear = dataBaseAdjustingEntries[i].fiscalYear
@@ -255,25 +228,11 @@ class PDFMakerAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseAdjustingEntries[i].date[
-                dataBaseAdjustingEntries[i].date.index(
-                    dataBaseAdjustingEntries[i].date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseAdjustingEntries[i].date.index(
-                    dataBaseAdjustingEntries[i].date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseAdjustingEntries[i].date[
-                dataBaseAdjustingEntries[i].date.index(
-                    dataBaseAdjustingEntries[i].date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseAdjustingEntries[i].date.index(
-                    dataBaseAdjustingEntries[i].date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseAdjustingEntries[i].date) else {
+                return nil
+            }
+
             let debitCategory = dataBaseAdjustingEntries[i].debit_category
             let debitAmount = dataBaseAdjustingEntries[i].debit_amount
             let creditCategory = dataBaseAdjustingEntries[i].credit_category
@@ -293,8 +252,8 @@ class PDFMakerAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditAdjusting(indexPath: IndexPath(row: i, section: 0))
             
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -319,7 +278,8 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 資本振替仕訳
+        
+        // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
             
             let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
@@ -327,25 +287,11 @@ class PDFMakerAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
+                return nil
+            }
+
             var debitCategory = ""
             if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                 debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
@@ -376,8 +322,8 @@ class PDFMakerAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditCapitalTransferJournalEntry()
             
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -410,25 +356,11 @@ class PDFMakerAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseTransferEntry.date[
-                dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseTransferEntry.date[
-                dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseTransferEntry.date.index(
-                    dataBaseTransferEntry.date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntry.date) else {
+                return nil
+            }
+
             var debitCategory = ""
             if dataBaseTransferEntry.debit_category == "資本金勘定" {
                 debitCategory = Constant.capitalAccountName
@@ -459,8 +391,8 @@ class PDFMakerAccount {
             let balanceDebitOrCredit = "-"
             
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
