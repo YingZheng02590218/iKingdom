@@ -154,8 +154,6 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
         
         var date: String = ""                      // 日付
         var upperCellMonth: String = ""         // 日付
-        var oneOfCaractorAtLast: String = ""    // 末尾1文字の「日」         //日付
-        var twoOfCaractorAtLast: String = ""    // 末尾2文字の「日」         //日付
         var debitCategory: String = ""         // 借方勘定の場合      この勘定が借方の場合
         var creditCategory: String = ""        // 摘要　             相手方勘定なので貸方
         var debitAmount: Int64 = 0             // 借方金額
@@ -175,8 +173,6 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                     upperCellMonth = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row - 1).date)"             // 日付
                 }
-                oneOfCaractorAtLast = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date.suffix(1))"     // 末尾1文字の「日」         //日付
-                twoOfCaractorAtLast = "\(presenter.dataBaseTransferEntries(forRow: indexPath.row).date.suffix(2))"     // 末尾2文字の「日」         //日付
                 debitCategory = presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_category          // 借方勘定の場合                      //この勘定が借方の場合
                 creditCategory = presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_category      // 摘要　相手方勘定なので貸方
                 debitAmount = presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount            // 借方金額
@@ -212,8 +208,6 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                 // 資本振替仕訳
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
                     date = "\(dataBaseCapitalTransferJournalEntry.date)"
-                    oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
-                    twoOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(2))"
                     if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                         debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
                     } else {
@@ -261,57 +255,22 @@ extension GeneralLedgerPLAccountViewController: UITableViewDelegate, UITableView
                     }
                 }
             }
-// 月
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                // 一行上のセルに表示した月とこの行の月を比較する
-                // let upperCellMonth = "\(presenter.objectss(forRow: indexPathRowFixed - 1).date)" // 日付
-                let dateMonth = date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 5
-                    )..<upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 7
-                    )
-                    ] != "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" {
-                        cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                    } else {
-                        cell.listDateMonthLabel.text = "" // 注意：空白を代入しないと、変な値が入る。
+            // 日付
+            if let date = DateManager.shared.dateFormatter.date(from: date) {
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
+                    // 一行上のセルに表示した月とこの行の月を比較する
+                    if let upperCellDate = DateManager.shared.dateFormatter.date(from: upperCellMonth) {
+                        // 日付の6文字目にある月の十の位を抽出
+                        cell.listDateMonthLabel.text = "\(date.month)" == "\(upperCellDate.month)" ? "" : "\(date.month)"
                     }
-                } else {
-                    print(upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)])
-                    print("\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])")
-                    if upperCellMonth[upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 5
-                    )..<upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 7
-                    )
-                    ] != "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" {
-                        cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                    } else {
-                        cell.listDateMonthLabel.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
+                } else { // 先頭行は月を表示
+                    cell.listDateMonthLabel.text = "\(date.month)"
                 }
-            } else { // 先頭行は月を表示
-                let dateMonth = date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                } else {
-                    cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                }
+                // 日付の9文字目にある日の十の位を抽出
+                cell.listDateDayLabel.text = "\(date.day)"
+                cell.listDateDayLabel.textAlignment = NSTextAlignment.right
             }
-// 日
-            let date = date[date.index(date.startIndex, offsetBy: 8)..<date.index(date.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.listDateDayLabel.text = "\(oneOfCaractorAtLast)" // 末尾1文字の「日」         //日付
-            } else {
-                cell.listDateDayLabel.text = "\(twoOfCaractorAtLast)" // 末尾2文字の「日」         //日付
-            }
-            cell.listDateDayLabel.textAlignment = NSTextAlignment.right
 // 摘要
             if account == "\(debitCategory)" { // 借方勘定の場合                      //この勘定が借方の場合
                 cell.listSummaryLabel.text = "\(creditCategory) "             // 摘要　相手方勘定なので貸方
