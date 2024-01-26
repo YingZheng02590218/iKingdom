@@ -155,7 +155,7 @@ class PDFMakerPLAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 資本振替仕訳
+        // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
 
             let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
