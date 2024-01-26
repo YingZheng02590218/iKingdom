@@ -141,6 +141,7 @@ class PDFMakerPLAccount {
                 pageNumber += 1
             }
         }
+        
         // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
 

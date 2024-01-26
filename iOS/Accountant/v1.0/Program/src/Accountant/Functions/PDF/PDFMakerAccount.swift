@@ -161,7 +161,7 @@ class PDFMakerAccount {
             }
         }
 
-        // 行数分繰り返す 仕訳
+        // 仕訳
         for i in 0..<dataBaseJournalEntries.count {
             
             let fiscalYear = dataBaseJournalEntries[i].fiscalYear
@@ -219,7 +219,8 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 決算整理仕訳
+        
+        // 決算整理仕訳
         for i in 0..<dataBaseAdjustingEntries.count {
             
             let fiscalYear = dataBaseAdjustingEntries[i].fiscalYear
@@ -277,7 +278,8 @@ class PDFMakerAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 資本振替仕訳
+        
+        // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
             
             let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
