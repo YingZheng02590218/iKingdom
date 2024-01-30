@@ -454,6 +454,7 @@ enum HelpDetailKind: String {
     case Link11
     case Link111
 
+    // HTMLファイル名
     var fileName: String {
         switch self {
         case .Link0:
@@ -497,34 +498,35 @@ enum HelpDetailKind: String {
         }
     }
     
+    // リンクを設定する文字列
     var title: String {
         switch self {
         case .Link0:
             return "このアプリについて"
         case .Link1:
-            return "当アプリで採用した会計概念"
+            return "採用した会計概念"
         case .Link2:
             return "簿記の基礎"
         case .Link3:
-            return "初期設定の手順"
+            return ""
         case .Link4:
             return "事業者名を設定しよう"
         case .Link41:
             return "決算日を設定しよう"
         case .Link42:
-            return "会計帳簿を作成しよう"
+            return "新たな年度の帳簿を作成しよう"
         case .Link5:
             return "準備する資料"
         case .Link51:
-            return "勘定科目の確認"
+            return "勘定科目を確認する"
         case .Link52:
             return "勘定科目体系の図"
         case .Link53:
-            return "新規登録する"
+            return "勘定科目を新規に登録する"
         case .Link6:
-            return "修正をする"
+            return "勘定科目を修正する"
         case .Link61:
-            return "削除をする"
+            return "勘定科目を削除する"
         case .Link7:
             return "環境設定を確認・変更しよう"
         case .Link8:
