@@ -309,6 +309,11 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImage(path: path)
             }
+            // 仕訳帳 ②
+            if let path = Bundle.main.url(forResource: "TableViewControllerJournals5", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
         case .Link111:
             // 総勘定元帳　①
             if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger", withExtension: "png") {
