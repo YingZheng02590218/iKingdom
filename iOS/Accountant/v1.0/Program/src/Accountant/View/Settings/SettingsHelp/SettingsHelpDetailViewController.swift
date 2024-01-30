@@ -510,11 +510,11 @@ enum HelpDetailKind: String {
         case .Link3:
             return ""
         case .Link4:
-            return "事業者名を設定しよう"
+            return "事業者名を設定する"
         case .Link41:
-            return "決算日を設定しよう"
+            return "決算日を設定する"
         case .Link42:
-            return "新たな年度の帳簿を作成しよう"
+            return "新たな年度の帳簿を作成する"
         case .Link5:
             return "準備する資料"
         case .Link51:
