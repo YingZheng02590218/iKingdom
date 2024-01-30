@@ -11,7 +11,7 @@ import UIKit
 
 class PDFMakerPLAccount {
 
-    var PDFpath: [URL]?
+    var PDFpath: URL?
 
     let hTMLhelper = HTMLhelperAccount() // 共通で使用する
     let paperSize = CGSize(width: 210 / 25.4 * 72, height: 297 / 25.4 * 72) // 調整した　A4 210×297mm
@@ -19,11 +19,11 @@ class PDFMakerPLAccount {
     var account: String = "損益"
     var fiscalYear = 0
 
-    func initialize(completion: ([URL]?) -> Void) {
+    func initialize(completion: (URL?) -> Void) {
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         fiscalYear = dataBaseAccountingBooks.fiscalYear
         // 初期化
-        PDFpath = []
+        PDFpath = nil
 
         guard let tempDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return }
         let pDFsDirectory = tempDirectory.appendingPathComponent("PDFs", isDirectory: true)
@@ -57,7 +57,7 @@ class PDFMakerPLAccount {
     }
 
     // PDFファイルを生成
-    func readDB() -> [URL]? {
+    func readDB() -> URL? {
         // 勘定のデータを取得する
         let generalLedgerAccountModel = GeneralLedgerPLAccountModel()
         // 損益振替仕訳
@@ -82,7 +82,8 @@ class PDFMakerPLAccount {
         // HTMLのヘッダーを取得する
         let htmlHeader = hTMLhelper.headerHTMLstring()
         htmlString.append(htmlHeader)
-        // 行数分繰り返す 仕訳
+        
+        // 損益振替仕訳
         for i in 0..<dataBaseTransferEntries.count {
 
             let fiscalYear = dataBaseTransferEntries[i].fiscalYear
@@ -90,25 +91,11 @@ class PDFMakerPLAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseTransferEntries[i].date[
-                dataBaseTransferEntries[i].date.index(
-                    dataBaseTransferEntries[i].date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseTransferEntries[i].date.index(
-                    dataBaseTransferEntries[i].date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseTransferEntries[i].date[
-                dataBaseTransferEntries[i].date.index(
-                    dataBaseTransferEntries[i].date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseTransferEntries[i].date.index(
-                    dataBaseTransferEntries[i].date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseTransferEntries[i].date) else {
+                return nil
+            }
+            
             let debitCategory = dataBaseTransferEntries[i].debit_category
             let debitAmount = dataBaseTransferEntries[i].debit_amount
             let creditCategory = dataBaseTransferEntries[i].credit_category
@@ -128,8 +115,8 @@ class PDFMakerPLAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCredit(indexPath: IndexPath(row: i, section: 0))
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -154,7 +141,8 @@ class PDFMakerPLAccount {
                 pageNumber += 1
             }
         }
-        // 行数分繰り返す 資本振替仕訳
+        
+        // 資本振替仕訳
         if let dataBaseCapitalTransferJournalEntry = dataBaseCapitalTransferJournalEntry {
 
             let fiscalYear = dataBaseCapitalTransferJournalEntry.fiscalYear
@@ -162,25 +150,11 @@ class PDFMakerPLAccount {
                 let tableHeader = hTMLhelper.headerstring(title: account, fiscalYear: fiscalYear, pageNumber: pageNumber)
                 htmlString.append(tableHeader)
             }
-            // データ
-            let month = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 5
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 7
-                )
-            ]
-            let date = dataBaseCapitalTransferJournalEntry.date[
-                dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 8
-                )..<dataBaseCapitalTransferJournalEntry.date.index(
-                    dataBaseCapitalTransferJournalEntry.date.startIndex,
-                    offsetBy: 10
-                )
-            ]
+            // 日付
+            guard let date = DateManager.shared.dateFormatter.date(from: dataBaseCapitalTransferJournalEntry.date) else {
+                return nil
+            }
+
             var debitCategory = ""
             if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                 debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
@@ -211,8 +185,8 @@ class PDFMakerPLAccount {
             let balanceDebitOrCredit = generalLedgerAccountModel.getBalanceDebitOrCreditCapitalTransferJournalEntry()
 
             let rowString = hTMLhelper.getSingleRow(
-                month: String(month),
-                day: String(date),
+                month: String(date.month),
+                day: String(date.day),
                 debitCategory: debitCategory,
                 debitAmount: debitAmount,
                 creditCategory: creditCategory,
@@ -254,16 +228,15 @@ class PDFMakerPLAccount {
         // フッターを取得する
         let footerString = hTMLhelper.footerHTMLstring()
         htmlString.append(footerString)
+        print(htmlString)
         // HTML -> PDF
         let pdfData = getPDF(fromHTML: htmlString)
-
-        print(htmlString)
         // PDFデータを一時ディレクトリに保存する
         if let fileName = saveToTempDirectory(data: pdfData) {
             // PDFファイルを表示する
-            self.PDFpath?.append(fileName)
-            
-            return self.PDFpath
+            PDFpath = fileName
+
+            return PDFpath
         } else {
             return nil
         }
@@ -306,9 +279,6 @@ class PDFMakerPLAccount {
         } catch {
             print("失敗した")
         }
-
-        // "receipt-" + UUID().uuidString
-        // "\(fiscalYear)-Account-\(account)"
 
         let filePath = pDFsDirectory.appendingPathComponent("\(fiscalYear)-GeneralLedger-\(account)" + ".pdf")
         do {

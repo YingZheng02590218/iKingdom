@@ -319,7 +319,7 @@ final class BSPresenter: BSPresenterInput {
     // 印刷機能
     func pdfBarButtonItemTapped() {
         // 初期化 PDFメーカー
-        model.initializePDFMaker(bSData: bSData, completion: { PDFpath in
+        model.initializePdfMaker(bSData: bSData, completion: { PDFpath in
             self.PDFpath = PDFpath
             self.view.showPreview()
         })

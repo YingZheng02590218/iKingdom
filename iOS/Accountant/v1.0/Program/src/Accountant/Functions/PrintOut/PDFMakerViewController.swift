@@ -36,7 +36,7 @@ class PDFMakerViewController: UIViewController {
     
     @IBAction func tappedPreview(_ sender: Any) {
         
-        if let PDFpath = pDFMaker.PDFpath?[0] {
+        if let PDFpath = pDFMaker.PDFpath {
             let document = PDFDocument(url: PDFpath)
             pdfView.usePageViewController(true)
             
@@ -74,7 +74,7 @@ class PDFMakerViewController: UIViewController {
 
     private func resizePrintingPaper() -> NSData? {
         // CGPDFDocumentを取得
-        if let PDFpath = pDFMaker.PDFpath?[0] {
+        if let PDFpath = pDFMaker.PDFpath {
             let document = PDFDocument(url: PDFpath)
             guard let documentRef = document?.documentRef else { return nil }
             
@@ -135,7 +135,7 @@ extension PDFMakerViewController: QLPreviewControllerDataSource {
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
         if let PDFpath = pDFMaker.PDFpath {
-            return PDFpath.count
+            return 1
         } else {
             return 0
         }
@@ -143,9 +143,9 @@ extension PDFMakerViewController: QLPreviewControllerDataSource {
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = pDFMaker.PDFpath?[index] else {
+        guard let PDFpath = pDFMaker.PDFpath else {
             return "" as! QLPreviewItem
         }
-        return pdfFilePath as QLPreviewItem
+        return PDFpath as QLPreviewItem
     }
 }

@@ -24,6 +24,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
     @IBOutlet private var addBarButtonItem: UIBarButtonItem!
     @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     @IBOutlet private var labelCompanyName: UILabel!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var closingDateLabel: UILabel!
@@ -140,6 +141,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     private func setButtons() {
         
         pdfBarButtonItem.tintColor = .accentColor
+        csvBarButtonItem.tintColor = .accentColor
         addBarButtonItem.tintColor = .accentColor
         // 仕訳画面表示ボタン
         addButton.isEnabled = true
@@ -148,6 +150,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             // ボタンを活性にする
             if !tableView.isEditing { // 編集モードではない場合
                 pdfBarButtonItem.isEnabled = true
+                csvBarButtonItem.isEnabled = true
             }
             navigationItem.leftBarButtonItem?.isEnabled = true
         } else { // 仕訳が0件の場合
@@ -433,6 +436,11 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func pdfBarButtonItemTapped(_ sender: UIBarButtonItem) {
         
         presenter.pdfBarButtonItemTapped()
+    }
+    
+    @IBAction func csvBarButtonItemTapped(_ sender: UIBarButtonItem) {
+        
+        presenter.csvBarButtonItemTapped()
     }
     
     func updateFiscalYear(fiscalYear: Int) {
@@ -971,6 +979,7 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         editWithSlectionButton.isEnabled = false // まとめて編集ボタン
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
         pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
+        csvBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // CSVボタン
         addBarButtonItem.isEnabled = !editing // 仕訳入力ボタン
         // 仕訳画面表示ボタン
         addButton.isEnabled = !editing
@@ -1148,6 +1157,16 @@ extension JournalsViewController: JournalsPresenterOutput {
         }
         // セットアップ AdMob
         setupAdMob()
+        
+        // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+        for i in 0..<presenter.numberOfobjects where !DateManager.shared.isInPeriod(date: presenter.objects(forRow: i).date) {
+            Toast.show("仕訳の日付が会計期間の範囲外です。", self.backgroundView)
+            return
+        }
+        for i in 0..<presenter.numberOfobjectsss where !DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: i).date) {
+            Toast.show("仕訳の日付が会計期間の範囲外です。", self.backgroundView)
+            return
+        }
     }
     
     func setupViewForViewWillDisappear() {
@@ -1290,6 +1309,7 @@ extension JournalsViewController: JournalsPresenterOutput {
         DispatchQueue.main.async {
             self.editButtonItem.isEnabled = false // 編集ボタン
             self.pdfBarButtonItem.isEnabled = false // 印刷ボタン
+            self.csvBarButtonItem.isEnabled = false // CSVボタン
             self.addBarButtonItem.isEnabled = false // 仕訳入力ボタン
             // 仕訳画面表示ボタン
             self.addButton.isEnabled = false
@@ -1336,6 +1356,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             Thread.sleep(forTimeInterval: 1.0)
             self.editButtonItem.isEnabled = true // 編集ボタン
             self.pdfBarButtonItem.isEnabled = true // 印刷ボタン
+            self.csvBarButtonItem.isEnabled = true // CSVボタン
             self.addBarButtonItem.isEnabled = true // 仕訳入力ボタン
             // 仕訳画面表示ボタン
             self.addButton.isEnabled = true
@@ -1362,8 +1383,8 @@ extension JournalsViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = presenter.PDFpath {
-            return PDFpath.count
+        if let _ = presenter.filePath {
+            return 1
         } else {
             return 0
         }
@@ -1371,10 +1392,10 @@ extension JournalsViewController: QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = presenter.PDFpath?[index] else {
+        guard let filePath = presenter.filePath else {
             return "" as! QLPreviewItem
         }
-        return pdfFilePath as QLPreviewItem
+        return filePath as QLPreviewItem
     }
 }
 

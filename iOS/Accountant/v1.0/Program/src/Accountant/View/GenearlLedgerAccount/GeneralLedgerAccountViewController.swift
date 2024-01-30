@@ -15,13 +15,14 @@ import UIKit
 class GeneralLedgerAccountViewController: UIViewController {
     
     // MARK: - var let
-
+    
     var gADBannerView: GADBannerView!
     /// 勘定　上部
     @IBOutlet private var dateYearLabel: UILabel!
     @IBOutlet private var topView: UIView!
     @IBOutlet private var listHeadingLabel: UILabel!
     @IBOutlet private var printBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     /// 勘定　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
@@ -35,7 +36,7 @@ class GeneralLedgerAccountViewController: UIViewController {
     
     // 勘定名
     var account: String = ""
-
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerAccountPresenterInput!
     func inject(presenter: GeneralLedgerAccountPresenterInput) {
@@ -57,13 +58,13 @@ class GeneralLedgerAccountViewController: UIViewController {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         presenter.viewWillDisappear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
@@ -88,7 +89,8 @@ class GeneralLedgerAccountViewController: UIViewController {
     private func createButtons() {
         
         printBarButtonItem.tintColor = .accentColor
-
+        csvBarButtonItem.tintColor = .accentColor
+        
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
@@ -118,7 +120,11 @@ class GeneralLedgerAccountViewController: UIViewController {
      * 印刷ボタン押下時メソッド
      */
     @IBAction func printButtonTapped(_ sender: Any) {
-        presenter.pdfBarButtonItemTapped()        
+        presenter.pdfBarButtonItemTapped()
+    }
+    
+    @IBAction func csvBarButtonItemTapped(_ sender: Any) {
+        presenter.csvBarButtonItemTapped()
     }
 }
 
@@ -153,13 +159,11 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     }
     // セルを生成して返却するメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_list_generalLedger_account", for: indexPath) as? GeneralLedgerAccountTableViewCell else { return UITableViewCell() }
         
         var date: String = ""                      // 日付
         var upperCellMonth: String = ""         // 日付
-        var oneOfCaractorAtLast: String = ""    // 末尾1文字の「日」         //日付
-        var twoOfCaractorAtLast: String = ""    // 末尾2文字の「日」         //日付
         var debitCategory: String = ""         // 借方勘定の場合      この勘定が借方の場合
         var creditCategory: String = ""        // 摘要　             相手方勘定なので貸方
         var debitAmount: Int64 = 0             // 借方金額
@@ -170,26 +174,24 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         // 差引残高　差引残高クラスで計算した計算結果を取得
         var balanceAmount: Int64 = 0
         var balanceDebitOrCredit: String = ""
-
+        
         if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3 || indexPath.section == 4 {
-
+            
             if indexPath.section == 0 {
                 // 開始仕訳
                 if let dataBaseTransferEntry = presenter.dataBaseOpeningJournalEntries() {
                     date = "\(dataBaseTransferEntry.date)"
-                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
-                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
                     creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.credit_category
                     debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "前期繰越" : dataBaseTransferEntry.debit_category
                     creditAmount = dataBaseTransferEntry.credit_amount
                     debitAmount = dataBaseTransferEntry.debit_amount
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
+                    
                     // 差引残高　差引残高クラスで計算した計算結果を取得
                     balanceAmount = presenter.getBalanceAmountOpeningJournalEntry()
                     balanceDebitOrCredit = presenter.getBalanceDebitOrCreditOpeningJournalEntry()
-
+                    
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor
@@ -217,15 +219,13 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                     upperCellMonth = "\(presenter.databaseJournalEntries(forRow: indexPath.row - 1).date)"             // 日付
                 }
-                oneOfCaractorAtLast = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date.suffix(1))"     // 末尾1文字の「日」         //日付
-                twoOfCaractorAtLast = "\(presenter.databaseJournalEntries(forRow: indexPath.row).date.suffix(2))"     // 末尾2文字の「日」         //日付
                 debitCategory = presenter.databaseJournalEntries(forRow: indexPath.row).debit_category          // 借方勘定の場合                      //この勘定が借方の場合
                 creditCategory = presenter.databaseJournalEntries(forRow: indexPath.row).credit_category      // 摘要　相手方勘定なので貸方
                 debitAmount = presenter.databaseJournalEntries(forRow: indexPath.row).debit_amount            // 借方金額
                 creditAmount = presenter.databaseJournalEntries(forRow: indexPath.row).credit_amount             // 貸方金額
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
-
+                
                 // 差引残高　差引残高クラスで計算した計算結果を取得
                 balanceAmount = presenter.getBalanceAmount(indexPath: indexPath)
                 balanceDebitOrCredit = presenter.getBalanceDebitOrCredit(indexPath: indexPath)
@@ -256,15 +256,13 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                     upperCellMonth = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row - 1).date)"
                 }
-                oneOfCaractorAtLast = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date.suffix(1))"
-                twoOfCaractorAtLast = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date.suffix(2))"
                 debitCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_category
                 creditCategory = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_category
                 debitAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).debit_amount
                 creditAmount = presenter.dataBaseAdjustingEntries(forRow: indexPath.row).credit_amount
                 numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")// 損益勘定の場合はエラーになる
                 numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")// 損益勘定の場合はエラーになる
-
+                
                 balanceAmount = presenter.getBalanceAmountAdjusting(indexPath: indexPath) // TODO: メソッドをまとめる
                 balanceDebitOrCredit = presenter.getBalanceDebitOrCreditAdjusting(indexPath: indexPath)
                 
@@ -293,8 +291,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 print("資本振替仕訳", indexPath)
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
                     date = "\(dataBaseCapitalTransferJournalEntry.date)"
-                    oneOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(1))"
-                    twoOfCaractorAtLast = "\(dataBaseCapitalTransferJournalEntry.date.suffix(2))"
                     if dataBaseCapitalTransferJournalEntry.debit_category == "損益" { // 損益勘定の場合
                         debitCategory = dataBaseCapitalTransferJournalEntry.debit_category
                     } else {
@@ -319,7 +315,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     }
                     balanceAmount = presenter.getBalanceAmountCapitalTransferJournalEntry()
                     balanceDebitOrCredit = presenter.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-
+                    
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor
@@ -345,18 +341,16 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 // 損益振替仕訳、残高振替仕訳
                 if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
                     date = "\(dataBaseTransferEntry.date)"
-                    oneOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(1))"
-                    twoOfCaractorAtLast = "\(dataBaseTransferEntry.date.suffix(2))"
                     creditCategory = dataBaseTransferEntry.credit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.credit_category
                     debitCategory = dataBaseTransferEntry.debit_category == "残高" ? "次期繰越" : dataBaseTransferEntry.debit_category
                     creditAmount = dataBaseTransferEntry.credit_amount
                     debitAmount = dataBaseTransferEntry.debit_amount
                     numberOfAccountCredit = presenter.getNumberOfAccount(accountName: "\(creditCategory)")
                     numberOfAccountDebit = presenter.getNumberOfAccount(accountName: "\(debitCategory)")
-
+                    
                     balanceAmount = 0
                     balanceDebitOrCredit = "-"
-
+                    
                     // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                     if DateManager.shared.isInPeriod(date: dataBaseTransferEntry.date) {
                         cell.listDateMonthLabel.textColor = .textColor
@@ -379,57 +373,22 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     }
                 }
             }
-            // 月
-            // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
-            if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
-                // 一行上のセルに表示した月とこの行の月を比較する
-                // let upperCellMonth = "\(presenter.objectss(forRow: indexPathRowFixed - 1).date)" // 日付
-                let dateMonth = date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    if upperCellMonth[upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 5
-                    )..<upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 7
-                    )
-                    ] != "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" {
-                        cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                    } else {
-                        cell.listDateMonthLabel.text = "" // 注意：空白を代入しないと、変な値が入る。
+            // 日付
+            if let date = DateManager.shared.dateFormatter.date(from: date) {
+                // 月別のセクションのうち、日付が一番古いものに月欄に月を表示し、それ以降は空白とする。
+                if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
+                    // 一行上のセルに表示した月とこの行の月を比較する
+                    if let upperCellDate = DateManager.shared.dateFormatter.date(from: upperCellMonth) {
+                        // 日付の6文字目にある月の十の位を抽出
+                        cell.listDateMonthLabel.text = "\(date.month)" == "\(upperCellDate.month)" ? "" : "\(date.month)"
                     }
-                } else {
-                    print(upperCellMonth[upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 5)..<upperCellMonth.index(upperCellMonth.startIndex, offsetBy: 7)])
-                    print("\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])")
-                    if upperCellMonth[upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 5
-                    )..<upperCellMonth.index(
-                        upperCellMonth.startIndex,
-                        offsetBy: 7
-                    )
-                    ] != "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" {
-                        cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                    } else {
-                        cell.listDateMonthLabel.text = "" // 注意：空白を代入しないと、変な値が入る。
-                    }
+                } else { // 先頭行は月を表示
+                    cell.listDateMonthLabel.text = "\(date.month)"
                 }
-            } else { // 先頭行は月を表示
-                let dateMonth = date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 6)] // 日付の6文字目にある月の十の位を抽出
-                if dateMonth == "0" { // 日の十の位が0の場合は表示しない
-                    cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 6)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                } else {
-                    cell.listDateMonthLabel.text = "\(date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.startIndex, offsetBy: 7)])" // 「月」
-                }
+                // 日付の9文字目にある日の十の位を抽出
+                cell.listDateDayLabel.text = "\(date.day)"
+                cell.listDateDayLabel.textAlignment = NSTextAlignment.right
             }
-            // 日
-            let date = date[date.index(date.startIndex, offsetBy: 8)..<date.index(date.startIndex, offsetBy: 9)] // 日付の9文字目にある日の十の位を抽出
-            if date == "0" { // 日の十の位が0の場合は表示しない
-                cell.listDateDayLabel.text = "\(oneOfCaractorAtLast)" // 末尾1文字の「日」         //日付
-            } else {
-                cell.listDateDayLabel.text = "\(twoOfCaractorAtLast)" // 末尾2文字の「日」         //日付
-            }
-            cell.listDateDayLabel.textAlignment = NSTextAlignment.right
             // 摘要
             if account == "\(debitCategory)" || "資本金勘定" == "\(debitCategory)" { // 借方勘定の場合 //この勘定が借方の場合
                 cell.listSummaryLabel.text = "\(creditCategory) " // 摘要　相手方勘定なので貸方
@@ -493,23 +452,23 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
 }
 
 extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutput {
-
+    
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
         createButtons() // ボタン作成
-
+        
         self.navigationItem.title = "勘定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-
+    
     func setupViewForViewWillAppear() {
         // ヘッダー部分　勘定名を表示
         listHeadingLabel.text = account
         listHeadingLabel.font = UIFont.boldSystemFont(ofSize: 21)
-
+        
         if let fiscalYear = presenter.fiscalYear {
             dateYearLabel.text = fiscalYear.description + "年"
         }
@@ -519,8 +478,10 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             presenter.numberOfDataBaseAdjustingEntries +
             presenter.numberOfDataBaseCapitalTransferJournalEntry >= 1 {
             printBarButtonItem.isEnabled = true
+            csvBarButtonItem.isEnabled = true
         } else {
             printBarButtonItem.isEnabled = false
+            csvBarButtonItem.isEnabled = false
         }
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
@@ -544,7 +505,7 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             }
         }
     }
-
+    
     func setupViewForViewWillDisappear() {
         // アップグレード機能　スタンダードプラン
         if let gADBannerView = gADBannerView {
@@ -554,7 +515,7 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
     }
     
     func setupViewForViewDidAppear() {
-
+        
     }
     
     // PDFのプレビューを表示させる
@@ -573,8 +534,8 @@ extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         
-        if let PDFpath = presenter.PDFpath {
-            return PDFpath.count
+        if let _ = presenter.filePath {
+            return 1
         } else {
             return 0
         }
@@ -582,9 +543,9 @@ extension GeneralLedgerAccountViewController: QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let pdfFilePath = presenter.PDFpath?[index] else {
+        guard let filePath = presenter.filePath else {
             return "" as! QLPreviewItem
         }
-        return pdfFilePath as QLPreviewItem
+        return filePath as QLPreviewItem
     }
 }

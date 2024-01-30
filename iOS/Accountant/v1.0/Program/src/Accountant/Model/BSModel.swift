@@ -12,7 +12,7 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol BSModelInput {
     func initializeBS() -> BSData
-    func initializePDFMaker(bSData: BSData, completion: ([URL]?) -> Void)
+    func initializePdfMaker(bSData: BSData, completion: ([URL]?) -> Void)
 }
 // 貸借対照表クラス
 class BSModel: BSModelInput {
@@ -20,7 +20,7 @@ class BSModel: BSModelInput {
     let pDFMaker = PDFMakerBS()
     
     // 初期化 PDFメーカー
-    func initializePDFMaker(bSData: BSData, completion: ([URL]?) -> Void) {
+    func initializePdfMaker(bSData: BSData, completion: ([URL]?) -> Void) {
         pDFMaker.initialize(bSData: bSData, completion: { PDFpath in
             completion(PDFpath)
         })
