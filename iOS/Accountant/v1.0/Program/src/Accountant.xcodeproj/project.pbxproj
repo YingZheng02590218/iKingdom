@@ -55,8 +55,6 @@
 		F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0372A97552B00A701C3 /* Text View set Up5.png */; };
 		F907D0662A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
 		F907D0672A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
-		F907D06A2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */; };
-		F907D06B2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */; };
 		F907D06C2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */; };
 		F907D06D2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */; };
 		F907D06E2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */; };
@@ -136,6 +134,14 @@
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
+		F90A23472B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */; };
+		F90A23482B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */; };
+		F90A23492B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */; };
+		F90A234A2B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */; };
+		F90A234C2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */; };
+		F90A234D2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */; };
+		F90A234F2B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */; };
+		F90A23502B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */; };
 		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
@@ -856,7 +862,6 @@
 		F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png; sourceTree = "<group>"; };
 		F907D0372A97552B00A701C3 /* Text View set Up5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up5.png"; sourceTree = "<group>"; };
 		F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger.png; sourceTree = "<group>"; };
-		F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info4.png"; sourceTree = "<group>"; };
 		F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Review.png; sourceTree = "<group>"; };
 		F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger1.png; sourceTree = "<group>"; };
 		F907D03D2A97552B00A701C3 /* TableViewControllerCategoryList_delete3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete3.png; sourceTree = "<group>"; };
@@ -896,6 +901,10 @@
 		F907D0C22A99E71F00A701C3 /* Journals2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals2.html; sourceTree = "<group>"; };
 		F907D0C52A99F85F00A701C3 /* Pacioli.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pacioli.jpg; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
+		F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info7.png"; sourceTree = "<group>"; };
+		F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info6.png"; sourceTree = "<group>"; };
+		F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info5.png"; sourceTree = "<group>"; };
+		F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info4.png"; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1402,7 +1411,10 @@
 				F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */,
 				F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */,
 				F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */,
-				F907D03A2A97552B00A701C3 /* Text View set Up basic Info4.png */,
+				F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */,
+				F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */,
+				F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */,
+				F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */,
 				F907D0442A97552C00A701C3 /* Text View set Up1.png */,
 				F907D04A2A97552D00A701C3 /* Text View set Up2.png */,
 				F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */,
@@ -2453,6 +2465,7 @@
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0A92A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
 				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
+				F90A234C2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */,
 				F907D0B12A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F9E55A9A2B69274600CE310A /* TableViewControllerJournals5.png in Resources */,
@@ -2461,6 +2474,7 @@
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
+				F90A23472B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F907D0C02A99E65800A701C3 /* Journals.html in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
@@ -2481,6 +2495,7 @@
 				F907D0642A97552D00A701C3 /* Text View set Up5.png in Resources */,
 				F907D05E2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */,
 				F907D0562A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */,
+				F90A234F2B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */,
 				F907D0AB2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F907D05A2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
@@ -2542,7 +2557,6 @@
 				F99BE7B4261DD84E004611E4 /* SettingsInformationTableViewController.storyboard in Resources */,
 				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
 				F907D0862A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */,
-				F907D06A2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */,
 				F907D02C2A9752FD00A701C3 /* Set_Up_Basic_Info.html in Resources */,
 				F907D0A52A9767ED00A701C3 /* Set_Up_Account2.html in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
@@ -2550,6 +2564,7 @@
 				F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F907D08C2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
 				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
+				F90A23492B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */,
 				F907D0292A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
@@ -2604,6 +2619,7 @@
 				F9EC671127B90BC60003FBB6 /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0AA2A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
 				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
+				F90A234D2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */,
 				F907D0B22A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
 				F9E55A9B2B69274600CE310A /* TableViewControllerJournals5.png in Resources */,
@@ -2612,6 +2628,7 @@
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
+				F90A23482B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F907D0C12A99E65800A701C3 /* Journals.html in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
@@ -2632,6 +2649,7 @@
 				F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */,
 				F907D05F2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */,
 				F907D0572A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */,
+				F90A23502B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */,
 				F907D0AC2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
 				F907D05B2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
@@ -2693,7 +2711,6 @@
 				F9EC673227B90BC60003FBB6 /* WSViewController.storyboard in Resources */,
 				F9EC673327B90BC60003FBB6 /* SettingsInformationTableViewController.storyboard in Resources */,
 				F907D0872A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */,
-				F907D06B2A97552D00A701C3 /* Text View set Up basic Info4.png in Resources */,
 				F907D02D2A9752FD00A701C3 /* Set_Up_Basic_Info.html in Resources */,
 				F907D0A62A9767ED00A701C3 /* Set_Up_Account2.html in Resources */,
 				F9EC673427B90BC60003FBB6 /* PageContentViewController.storyboard in Resources */,
@@ -2701,6 +2718,7 @@
 				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
 				F907D08D2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
 				F9EC673627B90BC60003FBB6 /* CarouselAndPageViewController.storyboard in Resources */,
+				F90A234A2B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */,
 				F907D02A2A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,

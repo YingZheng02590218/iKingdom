@@ -135,6 +135,21 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImageThird(path: path)
             }
+            // 基本情報の登録 会計帳簿を作成しよう ⑤
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info5", withExtension: "png") {
+                print(path)
+                changeImageForth(path: path)
+            }
+            // 基本情報の登録 会計帳簿を作成しよう ⑥
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info6", withExtension: "png") {
+                print(path)
+                changeImageFifth(path: path)
+            }
+            // 基本情報の登録 会計帳簿を作成しよう ⑦
+            if let path = Bundle.main.url(forResource: "Text View set Up basic Info7", withExtension: "png") {
+                print(path)
+                changeImageSixth(path: path)
+            }
         case .Link5:
             break
         case .Link51:
