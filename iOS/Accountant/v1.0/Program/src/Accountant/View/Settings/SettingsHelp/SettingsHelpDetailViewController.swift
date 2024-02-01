@@ -85,7 +85,6 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImage(path: path)
             }
-            break
         case .Link1:
             break
         case .Link2:
@@ -99,54 +98,54 @@ class SettingsHelpDetailViewController: UIViewController {
             // 基本情報の登録をしよう
         case .Link4:
             // 基本情報の登録　事業者名を設定しよう 設定画面
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_user", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 基本情報の登録 事業者名を設定しよう 帳簿情報画面
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsInformation", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
         case .Link41:
             // 基本情報の登録 決算日を設定しよう ①
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo3", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 基本情報の登録 決算日を設定しよう ②
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo4", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
         case .Link42:
             // 基本情報の登録 会計帳簿を作成しよう
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_term", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo3", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 基本情報の登録 会計帳簿を作成しよう ③
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info3", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo5", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 基本情報の登録 会計帳簿を作成しよう ④
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info4", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo6", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             // 基本情報の登録 会計帳簿を作成しよう ⑤
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info5", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo7", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }
             // 基本情報の登録 会計帳簿を作成しよう ⑥
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info6", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo8", withExtension: "png") {
                 print(path)
                 changeImageFifth(path: path)
             }
             // 基本情報の登録 会計帳簿を作成しよう ⑦
-            if let path = Bundle.main.url(forResource: "Text View set Up basic Info7", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "BasicInfo9", withExtension: "png") {
                 print(path)
                 changeImageSixth(path: path)
             }
@@ -154,33 +153,33 @@ class SettingsHelpDetailViewController: UIViewController {
             break
         case .Link51:
             // 勘定科目体系の登録 勘定科目を一覧で表示 ①
-            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 勘定科目体系の登録 勘定科目を一覧で表示 ②
-            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 勘定科目体系の登録 勘定科目を一覧で表示 ③
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem4", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             
             // 勘定科目体系の登録 表示科目別に勘定科目を表示 ①
-            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }
             // 勘定科目体系の登録　表示科目別に勘定科目を表示 ②
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsCategory_categoriesBSandPL", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem5", withExtension: "png") {
                 print(path)
                 changeImageFifth(path: path)
             }
             // 勘定科目体系の登録　表示科目別に勘定科目を表示 ③
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettingsTaxonomyAccountByTaxonomyList", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem6", withExtension: "png") {
                 print(path)
                 changeImageSixth(path: path)
             }
@@ -188,91 +187,88 @@ class SettingsHelpDetailViewController: UIViewController {
             break
         case .Link53:
             // 勘定科目体系の登録　新規登録する ①設定画面
-            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 勘定科目体系の登録　新規登録する ②
-            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 勘定科目体系の登録　新規登録する ③
-            if let path = Bundle.main.url(forResource: "Text View set Up4", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem7", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             // 勘定科目体系の登録　新規登録する ④
-            if let path = Bundle.main.url(forResource: "Text View set Up5", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem8", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }
             // 勘定科目の編集しよう
         case .Link6:
             // 勘定科目体系の登録 修正をする ①
-            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 勘定科目体系の登録 修正をする ②
-            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 勘定科目体系の登録 修正をする ③
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem9", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             // 勘定科目体系の登録 修正をする ④
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem10", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }
             // 勘定科目体系の登録 修正をする ⑤
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList3", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem11", withExtension: "png") {
                 print(path)
                 changeImageFifth(path: path)
             }
             // 勘定科目体系の登録 修正をする ⑥
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList4", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem12", withExtension: "png") {
                 print(path)
                 changeImageSixth(path: path)
             }
         case .Link61:
             // 勘定科目体系の登録 削除をする ①
-            if let path = Bundle.main.url(forResource: "Text View set Up1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 勘定科目体系の登録 削除をする ②
-            if let path = Bundle.main.url(forResource: "Text View set Up2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 勘定科目体系の登録 削除をする ③
-            if let path = Bundle.main.url(forResource: "Text View set Up3", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem3", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             // 勘定科目体系の登録 削除をする ④
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList_delete1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem13", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }
             // 勘定科目体系の登録 削除をする ⑤
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList_delete2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem14", withExtension: "png") {
                 print(path)
                 changeImageFifth(path: path)
             }
             // 勘定科目体系の登録 削除をする ⑥
-            if let path = Bundle.main.url(forResource: "TableViewControllerCategoryList_delete3", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "AccountItem15", withExtension: "png") {
                 print(path)
                 changeImageSixth(path: path)
             }
-            // 勘定科目体系の登録 削除をする ⑦
-            // TableViewControllerCategoryList_delete4
-            // 不要
         case .Link7:
             //
             if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_Journals", withExtension: "png") {

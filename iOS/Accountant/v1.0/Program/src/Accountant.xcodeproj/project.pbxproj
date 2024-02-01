@@ -37,70 +37,30 @@
 		F907D02D2A9752FD00A701C3 /* Set_Up_Basic_Info.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D02B2A9752FD00A701C3 /* Set_Up_Basic_Info.html */; };
 		F907D0522A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D02E2A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png */; };
 		F907D0532A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D02E2A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png */; };
-		F907D0542A97552D00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D02F2A97552A00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png */; };
-		F907D0552A97552D00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D02F2A97552A00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png */; };
 		F907D0562A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0302A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png */; };
 		F907D0572A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0302A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png */; };
 		F907D0582A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0312A97552A00A701C3 /* TableViewControllerJournals3.png */; };
 		F907D0592A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0312A97552A00A701C3 /* TableViewControllerJournals3.png */; };
-		F907D05A2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */; };
-		F907D05B2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */; };
-		F907D05C2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */; };
-		F907D05D2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */; };
-		F907D05E2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */; };
-		F907D05F2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */; };
-		F907D0622A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */; };
-		F907D0632A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */; };
-		F907D0642A97552D00A701C3 /* Text View set Up5.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0372A97552B00A701C3 /* Text View set Up5.png */; };
-		F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0372A97552B00A701C3 /* Text View set Up5.png */; };
 		F907D0662A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
 		F907D0672A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */; };
 		F907D06C2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */; };
 		F907D06D2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */; };
 		F907D06E2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */; };
 		F907D06F2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */; };
-		F907D0702A97552D00A701C3 /* TableViewControllerCategoryList_delete3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03D2A97552B00A701C3 /* TableViewControllerCategoryList_delete3.png */; };
-		F907D0712A97552D00A701C3 /* TableViewControllerCategoryList_delete3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03D2A97552B00A701C3 /* TableViewControllerCategoryList_delete3.png */; };
-		F907D0722A97552D00A701C3 /* Text View set Up4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03E2A97552C00A701C3 /* Text View set Up4.png */; };
-		F907D0732A97552D00A701C3 /* Text View set Up4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03E2A97552C00A701C3 /* Text View set Up4.png */; };
 		F907D0742A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03F2A97552C00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png */; };
 		F907D0752A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D03F2A97552C00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png */; };
 		F907D0762A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0402A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png */; };
 		F907D0772A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0402A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png */; };
-		F907D0782A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0412A97552C00A701C3 /* TableViewControllerSettingsInformation.png */; };
-		F907D0792A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0412A97552C00A701C3 /* TableViewControllerSettingsInformation.png */; };
-		F907D07A2A97552D00A701C3 /* TableViewControllerCategoryList2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0422A97552C00A701C3 /* TableViewControllerCategoryList2.png */; };
-		F907D07B2A97552D00A701C3 /* TableViewControllerCategoryList2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0422A97552C00A701C3 /* TableViewControllerCategoryList2.png */; };
 		F907D07C2A97552D00A701C3 /* TableViewControllerJournals1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0432A97552C00A701C3 /* TableViewControllerJournals1.png */; };
 		F907D07D2A97552D00A701C3 /* TableViewControllerJournals1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0432A97552C00A701C3 /* TableViewControllerJournals1.png */; };
-		F907D07E2A97552D00A701C3 /* Text View set Up1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0442A97552C00A701C3 /* Text View set Up1.png */; };
-		F907D07F2A97552D00A701C3 /* Text View set Up1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0442A97552C00A701C3 /* Text View set Up1.png */; };
-		F907D0802A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0452A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png */; };
-		F907D0812A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0452A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png */; };
 		F907D0822A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0462A97552C00A701C3 /* TableViewControllerJournals2.png */; };
 		F907D0832A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0462A97552C00A701C3 /* TableViewControllerJournals2.png */; };
 		F907D0842A97552D00A701C3 /* ViewControllerJournalEntry.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */; };
 		F907D0852A97552D00A701C3 /* ViewControllerJournalEntry.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */; };
-		F907D0862A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0482A97552C00A701C3 /* TableViewControllerCategoryList1.png */; };
-		F907D0872A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0482A97552C00A701C3 /* TableViewControllerCategoryList1.png */; };
-		F907D0882A97552D00A701C3 /* TableViewControllerSettings_cell_user.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0492A97552D00A701C3 /* TableViewControllerSettings_cell_user.png */; };
-		F907D0892A97552D00A701C3 /* TableViewControllerSettings_cell_user.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0492A97552D00A701C3 /* TableViewControllerSettings_cell_user.png */; };
-		F907D08A2A97552D00A701C3 /* Text View set Up2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04A2A97552D00A701C3 /* Text View set Up2.png */; };
-		F907D08B2A97552D00A701C3 /* Text View set Up2.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04A2A97552D00A701C3 /* Text View set Up2.png */; };
-		F907D08C2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04B2A97552D00A701C3 /* TableViewControllerCategoryList3.png */; };
-		F907D08D2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04B2A97552D00A701C3 /* TableViewControllerCategoryList3.png */; };
-		F907D08E2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04C2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png */; };
-		F907D08F2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04C2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png */; };
 		F907D0902A97552D00A701C3 /* TableViewControllerJournals4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04D2A97552D00A701C3 /* TableViewControllerJournals4.png */; };
 		F907D0912A97552D00A701C3 /* TableViewControllerJournals4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04D2A97552D00A701C3 /* TableViewControllerJournals4.png */; };
 		F907D0922A97552D00A701C3 /* TableViewControllerJournals.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04E2A97552D00A701C3 /* TableViewControllerJournals.png */; };
 		F907D0932A97552D00A701C3 /* TableViewControllerJournals.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04E2A97552D00A701C3 /* TableViewControllerJournals.png */; };
-		F907D0942A97552D00A701C3 /* TableViewControllerCategoryList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04F2A97552D00A701C3 /* TableViewControllerCategoryList.png */; };
-		F907D0952A97552D00A701C3 /* TableViewControllerCategoryList.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D04F2A97552D00A701C3 /* TableViewControllerCategoryList.png */; };
-		F907D0962A97552D00A701C3 /* TableViewControllerCategoryList4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0502A97552D00A701C3 /* TableViewControllerCategoryList4.png */; };
-		F907D0972A97552D00A701C3 /* TableViewControllerCategoryList4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0502A97552D00A701C3 /* TableViewControllerCategoryList4.png */; };
-		F907D0982A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0512A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png */; };
-		F907D0992A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */ = {isa = PBXBuildFile; fileRef = F907D0512A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png */; };
 		F907D09C2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D09B2A9757E200A701C3 /* Set_Up_Basic_Info2.html */; };
 		F907D09D2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D09B2A9757E200A701C3 /* Set_Up_Basic_Info2.html */; };
 		F907D09F2A9758E600A701C3 /* Set_Up_Basic_Info3.html in Resources */ = {isa = PBXBuildFile; fileRef = F907D09E2A9758E500A701C3 /* Set_Up_Basic_Info3.html */; };
@@ -134,14 +94,54 @@
 		F907D3412521D080003B2556 /* DataBaseSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606624C44C8F008FE62B /* DataBaseSettingsTaxonomy.swift */; };
 		F909645629C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
 		F909645729C32D8B00BB5298 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F909645529C32D8B00BB5298 /* Date+extension.swift */; };
-		F90A23472B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */; };
-		F90A23482B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */; };
-		F90A23492B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */; };
-		F90A234A2B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */; };
-		F90A234C2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */; };
-		F90A234D2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */; };
-		F90A234F2B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */; };
-		F90A23502B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */; };
+		F90A23522B6BB8C4009E35C0 /* BasicInfo1.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23512B6BB8C4009E35C0 /* BasicInfo1.png */; };
+		F90A23532B6BB8C4009E35C0 /* BasicInfo1.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23512B6BB8C4009E35C0 /* BasicInfo1.png */; };
+		F90A23552B6BB917009E35C0 /* BasicInfo2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23542B6BB917009E35C0 /* BasicInfo2.png */; };
+		F90A23562B6BB917009E35C0 /* BasicInfo2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23542B6BB917009E35C0 /* BasicInfo2.png */; };
+		F90A23582B6BBA6C009E35C0 /* BasicInfo3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23572B6BBA6C009E35C0 /* BasicInfo3.png */; };
+		F90A23592B6BBA6C009E35C0 /* BasicInfo3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23572B6BBA6C009E35C0 /* BasicInfo3.png */; };
+		F90A235B2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235A2B6BBAFC009E35C0 /* BasicInfo4.png */; };
+		F90A235C2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235A2B6BBAFC009E35C0 /* BasicInfo4.png */; };
+		F90A235F2B6BBBFF009E35C0 /* BasicInfo6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235D2B6BBBFF009E35C0 /* BasicInfo6.png */; };
+		F90A23602B6BBBFF009E35C0 /* BasicInfo6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235D2B6BBBFF009E35C0 /* BasicInfo6.png */; };
+		F90A23612B6BBBFF009E35C0 /* BasicInfo5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235E2B6BBBFF009E35C0 /* BasicInfo5.png */; };
+		F90A23622B6BBBFF009E35C0 /* BasicInfo5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A235E2B6BBBFF009E35C0 /* BasicInfo5.png */; };
+		F90A23642B6BBC58009E35C0 /* BasicInfo7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23632B6BBC58009E35C0 /* BasicInfo7.png */; };
+		F90A23652B6BBC58009E35C0 /* BasicInfo7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23632B6BBC58009E35C0 /* BasicInfo7.png */; };
+		F90A23682B6BBF89009E35C0 /* BasicInfo8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23662B6BBF89009E35C0 /* BasicInfo8.png */; };
+		F90A23692B6BBF89009E35C0 /* BasicInfo8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23662B6BBF89009E35C0 /* BasicInfo8.png */; };
+		F90A236A2B6BBF89009E35C0 /* BasicInfo9.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23672B6BBF89009E35C0 /* BasicInfo9.png */; };
+		F90A236B2B6BBF89009E35C0 /* BasicInfo9.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23672B6BBF89009E35C0 /* BasicInfo9.png */; };
+		F90A236F2B6BC31B009E35C0 /* AccountItem1.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236C2B6BC31B009E35C0 /* AccountItem1.png */; };
+		F90A23702B6BC31B009E35C0 /* AccountItem1.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236C2B6BC31B009E35C0 /* AccountItem1.png */; };
+		F90A23712B6BC31B009E35C0 /* AccountItem3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236D2B6BC31B009E35C0 /* AccountItem3.png */; };
+		F90A23722B6BC31B009E35C0 /* AccountItem3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236D2B6BC31B009E35C0 /* AccountItem3.png */; };
+		F90A23732B6BC31B009E35C0 /* AccountItem2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236E2B6BC31B009E35C0 /* AccountItem2.png */; };
+		F90A23742B6BC31B009E35C0 /* AccountItem2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A236E2B6BC31B009E35C0 /* AccountItem2.png */; };
+		F90A23792B6BC5A0009E35C0 /* AccountItem9.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23782B6BC5A0009E35C0 /* AccountItem9.png */; };
+		F90A237A2B6BC5A0009E35C0 /* AccountItem9.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23782B6BC5A0009E35C0 /* AccountItem9.png */; };
+		F90A237C2B6BC7FB009E35C0 /* AccountItem4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */; };
+		F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */; };
+		F90A237F2B6BC962009E35C0 /* AccountItem5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A237E2B6BC962009E35C0 /* AccountItem5.png */; };
+		F90A23802B6BC962009E35C0 /* AccountItem5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A237E2B6BC962009E35C0 /* AccountItem5.png */; };
+		F90A23822B6BCA1F009E35C0 /* AccountItem6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23812B6BCA1F009E35C0 /* AccountItem6.png */; };
+		F90A23832B6BCA1F009E35C0 /* AccountItem6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23812B6BCA1F009E35C0 /* AccountItem6.png */; };
+		F90A23862B6BCBDF009E35C0 /* AccountItem7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23842B6BCBDF009E35C0 /* AccountItem7.png */; };
+		F90A23872B6BCBDF009E35C0 /* AccountItem7.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23842B6BCBDF009E35C0 /* AccountItem7.png */; };
+		F90A23882B6BCBDF009E35C0 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23852B6BCBDF009E35C0 /* AccountItem8.png */; };
+		F90A23892B6BCBDF009E35C0 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23852B6BCBDF009E35C0 /* AccountItem8.png */; };
+		F90A238F2B6BCF68009E35C0 /* AccountItem10.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A238B2B6BCF67009E35C0 /* AccountItem10.png */; };
+		F90A23902B6BCF68009E35C0 /* AccountItem10.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A238B2B6BCF67009E35C0 /* AccountItem10.png */; };
+		F90A23952B6BCFDF009E35C0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23932B6BCFDF009E35C0 /* AccountItem11.png */; };
+		F90A23962B6BCFDF009E35C0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23932B6BCFDF009E35C0 /* AccountItem11.png */; };
+		F90A23972B6BCFDF009E35C0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23942B6BCFDF009E35C0 /* AccountItem12.png */; };
+		F90A23982B6BCFDF009E35C0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23942B6BCFDF009E35C0 /* AccountItem12.png */; };
+		F90A239B2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
+		F90A239C2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
+		F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */; };
+		F90A239E2B6BD1AB009E35C0 /* AccountItem14.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */; };
+		F90A23A02B6BD216009E35C0 /* AccountItem15.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239F2B6BD216009E35C0 /* AccountItem15.png */; };
+		F90A23A12B6BD216009E35C0 /* AccountItem15.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239F2B6BD216009E35C0 /* AccountItem15.png */; };
 		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
@@ -502,8 +502,6 @@
 		F9DC87562995354000919E5F /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC87552995354000919E5F /* UIColor+extension.swift */; };
 		F9DC875A29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
 		F9DC875B29953B1D00919E5F /* AppGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DC875929953B1D00919E5F /* AppGroups.swift */; };
-		F9E07A8E2A9A16E90065FD17 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */; };
-		F9E07A8F2A9A16E90065FD17 /* Text View set Up3.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */; };
 		F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */; };
 		F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */; };
 		F9E0FE84266BA58C0024FE40 /* PDFMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */; };
@@ -853,38 +851,18 @@
 		F907D0282A960F2100A701C3 /* 簿記一巡.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "簿記一巡.png"; sourceTree = "<group>"; };
 		F907D02B2A9752FD00A701C3 /* Set_Up_Basic_Info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Basic_Info.html; sourceTree = "<group>"; };
 		F907D02E2A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Journals1.png; sourceTree = "<group>"; };
-		F907D02F2A97552A00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsCategory_categoriesBSandPL.png; sourceTree = "<group>"; };
 		F907D0302A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Journals.png; sourceTree = "<group>"; };
 		F907D0312A97552A00A701C3 /* TableViewControllerJournals3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerJournals3.png; sourceTree = "<group>"; };
-		F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info2.png"; sourceTree = "<group>"; };
-		F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete2.png; sourceTree = "<group>"; };
-		F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info3.png"; sourceTree = "<group>"; };
-		F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png; sourceTree = "<group>"; };
-		F907D0372A97552B00A701C3 /* Text View set Up5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up5.png"; sourceTree = "<group>"; };
 		F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger.png; sourceTree = "<group>"; };
 		F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Review.png; sourceTree = "<group>"; };
 		F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerGeneralLedger1.png; sourceTree = "<group>"; };
-		F907D03D2A97552B00A701C3 /* TableViewControllerCategoryList_delete3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete3.png; sourceTree = "<group>"; };
-		F907D03E2A97552C00A701C3 /* Text View set Up4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up4.png"; sourceTree = "<group>"; };
 		F907D03F2A97552C00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsCategoryDetail_reuseIdentifier.png; sourceTree = "<group>"; };
 		F907D0402A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_Help.png; sourceTree = "<group>"; };
-		F907D0412A97552C00A701C3 /* TableViewControllerSettingsInformation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettingsInformation.png; sourceTree = "<group>"; };
-		F907D0422A97552C00A701C3 /* TableViewControllerCategoryList2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList2.png; sourceTree = "<group>"; };
 		F907D0432A97552C00A701C3 /* TableViewControllerJournals1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerJournals1.png; sourceTree = "<group>"; };
-		F907D0442A97552C00A701C3 /* Text View set Up1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up1.png"; sourceTree = "<group>"; };
-		F907D0452A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_list_settings_term.png; sourceTree = "<group>"; };
 		F907D0462A97552C00A701C3 /* TableViewControllerJournals2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerJournals2.png; sourceTree = "<group>"; };
 		F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ViewControllerJournalEntry.png; sourceTree = "<group>"; };
-		F907D0482A97552C00A701C3 /* TableViewControllerCategoryList1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList1.png; sourceTree = "<group>"; };
-		F907D0492A97552D00A701C3 /* TableViewControllerSettings_cell_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerSettings_cell_user.png; sourceTree = "<group>"; };
-		F907D04A2A97552D00A701C3 /* Text View set Up2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up2.png"; sourceTree = "<group>"; };
-		F907D04B2A97552D00A701C3 /* TableViewControllerCategoryList3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList3.png; sourceTree = "<group>"; };
-		F907D04C2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete1.png; sourceTree = "<group>"; };
 		F907D04D2A97552D00A701C3 /* TableViewControllerJournals4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerJournals4.png; sourceTree = "<group>"; };
 		F907D04E2A97552D00A701C3 /* TableViewControllerJournals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerJournals.png; sourceTree = "<group>"; };
-		F907D04F2A97552D00A701C3 /* TableViewControllerCategoryList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList.png; sourceTree = "<group>"; };
-		F907D0502A97552D00A701C3 /* TableViewControllerCategoryList4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList4.png; sourceTree = "<group>"; };
-		F907D0512A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableViewControllerCategoryList_delete4.png; sourceTree = "<group>"; };
 		F907D09B2A9757E200A701C3 /* Set_Up_Basic_Info2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Basic_Info2.html; sourceTree = "<group>"; };
 		F907D09E2A9758E500A701C3 /* Set_Up_Basic_Info3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Basic_Info3.html; sourceTree = "<group>"; };
 		F907D0A12A97635500A701C3 /* Set_Up_Account.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Set_Up_Account.html; sourceTree = "<group>"; };
@@ -901,10 +879,30 @@
 		F907D0C22A99E71F00A701C3 /* Journals2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Journals2.html; sourceTree = "<group>"; };
 		F907D0C52A99F85F00A701C3 /* Pacioli.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Pacioli.jpg; sourceTree = "<group>"; };
 		F909645529C32D8B00BB5298 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
-		F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info7.png"; sourceTree = "<group>"; };
-		F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info6.png"; sourceTree = "<group>"; };
-		F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info5.png"; sourceTree = "<group>"; };
-		F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up basic Info4.png"; sourceTree = "<group>"; };
+		F90A23512B6BB8C4009E35C0 /* BasicInfo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo1.png; sourceTree = "<group>"; };
+		F90A23542B6BB917009E35C0 /* BasicInfo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo2.png; sourceTree = "<group>"; };
+		F90A23572B6BBA6C009E35C0 /* BasicInfo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo3.png; sourceTree = "<group>"; };
+		F90A235A2B6BBAFC009E35C0 /* BasicInfo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo4.png; sourceTree = "<group>"; };
+		F90A235D2B6BBBFF009E35C0 /* BasicInfo6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo6.png; sourceTree = "<group>"; };
+		F90A235E2B6BBBFF009E35C0 /* BasicInfo5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo5.png; sourceTree = "<group>"; };
+		F90A23632B6BBC58009E35C0 /* BasicInfo7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo7.png; sourceTree = "<group>"; };
+		F90A23662B6BBF89009E35C0 /* BasicInfo8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo8.png; sourceTree = "<group>"; };
+		F90A23672B6BBF89009E35C0 /* BasicInfo9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BasicInfo9.png; sourceTree = "<group>"; };
+		F90A236C2B6BC31B009E35C0 /* AccountItem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem1.png; sourceTree = "<group>"; };
+		F90A236D2B6BC31B009E35C0 /* AccountItem3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem3.png; sourceTree = "<group>"; };
+		F90A236E2B6BC31B009E35C0 /* AccountItem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem2.png; sourceTree = "<group>"; };
+		F90A23782B6BC5A0009E35C0 /* AccountItem9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem9.png; sourceTree = "<group>"; };
+		F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem4.png; sourceTree = "<group>"; };
+		F90A237E2B6BC962009E35C0 /* AccountItem5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem5.png; sourceTree = "<group>"; };
+		F90A23812B6BCA1F009E35C0 /* AccountItem6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem6.png; sourceTree = "<group>"; };
+		F90A23842B6BCBDF009E35C0 /* AccountItem7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem7.png; sourceTree = "<group>"; };
+		F90A23852B6BCBDF009E35C0 /* AccountItem8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem8.png; sourceTree = "<group>"; };
+		F90A238B2B6BCF67009E35C0 /* AccountItem10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem10.png; sourceTree = "<group>"; };
+		F90A23932B6BCFDF009E35C0 /* AccountItem11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AccountItem11.png; path = ../../../../../../../../../Desktop/HelpGuide_images/AccountItem11.png; sourceTree = "<group>"; };
+		F90A23942B6BCFDF009E35C0 /* AccountItem12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AccountItem12.png; path = ../../../../../../../../../Desktop/HelpGuide_images/AccountItem12.png; sourceTree = "<group>"; };
+		F90A23992B6BD1AB009E35C0 /* AccountItem13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem13.png; sourceTree = "<group>"; };
+		F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem14.png; sourceTree = "<group>"; };
+		F90A239F2B6BD216009E35C0 /* AccountItem15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem15.png; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1174,7 +1172,6 @@
 		F9DC87552995354000919E5F /* UIColor+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		F9DC8758299537A200919E5F /* PaciolistWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaciolistWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F9DC875929953B1D00919E5F /* AppGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroups.swift; sourceTree = "<group>"; };
-		F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Text View set Up3.png"; sourceTree = "<group>"; };
 		F9E0F43626413EB900085CC0 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		F9E0F43726413EB900085CC0 /* CollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionReusableView.xib; sourceTree = "<group>"; };
 		F9E0FE83266BA58C0024FE40 /* PDFMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFMakerViewController.swift; sourceTree = "<group>"; };
@@ -1381,16 +1378,32 @@
 		F907D09A2A97553D00A701C3 /* Help */ = {
 			isa = PBXGroup;
 			children = (
+				F907D0C52A99F85F00A701C3 /* Pacioli.jpg */,
 				F907D0282A960F2100A701C3 /* 簿記一巡.png */,
-				F907D04C2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png */,
-				F907D0332A97552B00A701C3 /* TableViewControllerCategoryList_delete2.png */,
-				F907D03D2A97552B00A701C3 /* TableViewControllerCategoryList_delete3.png */,
-				F907D0512A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png */,
-				F907D04F2A97552D00A701C3 /* TableViewControllerCategoryList.png */,
-				F907D0482A97552C00A701C3 /* TableViewControllerCategoryList1.png */,
-				F907D0422A97552C00A701C3 /* TableViewControllerCategoryList2.png */,
-				F907D04B2A97552D00A701C3 /* TableViewControllerCategoryList3.png */,
-				F907D0502A97552D00A701C3 /* TableViewControllerCategoryList4.png */,
+				F90A23512B6BB8C4009E35C0 /* BasicInfo1.png */,
+				F90A23542B6BB917009E35C0 /* BasicInfo2.png */,
+				F90A23572B6BBA6C009E35C0 /* BasicInfo3.png */,
+				F90A235A2B6BBAFC009E35C0 /* BasicInfo4.png */,
+				F90A235E2B6BBBFF009E35C0 /* BasicInfo5.png */,
+				F90A235D2B6BBBFF009E35C0 /* BasicInfo6.png */,
+				F90A23632B6BBC58009E35C0 /* BasicInfo7.png */,
+				F90A23662B6BBF89009E35C0 /* BasicInfo8.png */,
+				F90A23672B6BBF89009E35C0 /* BasicInfo9.png */,
+				F90A236C2B6BC31B009E35C0 /* AccountItem1.png */,
+				F90A236E2B6BC31B009E35C0 /* AccountItem2.png */,
+				F90A236D2B6BC31B009E35C0 /* AccountItem3.png */,
+				F90A237B2B6BC7FB009E35C0 /* AccountItem4.png */,
+				F90A237E2B6BC962009E35C0 /* AccountItem5.png */,
+				F90A23812B6BCA1F009E35C0 /* AccountItem6.png */,
+				F90A23842B6BCBDF009E35C0 /* AccountItem7.png */,
+				F90A23852B6BCBDF009E35C0 /* AccountItem8.png */,
+				F90A23782B6BC5A0009E35C0 /* AccountItem9.png */,
+				F90A238B2B6BCF67009E35C0 /* AccountItem10.png */,
+				F90A23932B6BCFDF009E35C0 /* AccountItem11.png */,
+				F90A23942B6BCFDF009E35C0 /* AccountItem12.png */,
+				F90A23992B6BD1AB009E35C0 /* AccountItem13.png */,
+				F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */,
+				F90A239F2B6BD216009E35C0 /* AccountItem15.png */,
 				F907D0382A97552B00A701C3 /* TableViewControllerGeneralLedger.png */,
 				F907D03C2A97552B00A701C3 /* TableViewControllerGeneralLedger1.png */,
 				F907D04E2A97552D00A701C3 /* TableViewControllerJournals.png */,
@@ -1403,25 +1416,8 @@
 				F907D0302A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png */,
 				F907D02E2A97552A00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png */,
 				F907D03B2A97552B00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png */,
-				F907D0452A97552C00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png */,
-				F907D0492A97552D00A701C3 /* TableViewControllerSettings_cell_user.png */,
-				F907D02F2A97552A00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png */,
 				F907D03F2A97552C00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png */,
-				F907D0412A97552C00A701C3 /* TableViewControllerSettingsInformation.png */,
-				F907D0362A97552B00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png */,
-				F907D0322A97552B00A701C3 /* Text View set Up basic Info2.png */,
-				F907D0342A97552B00A701C3 /* Text View set Up basic Info3.png */,
-				F90A234E2B6A6A1E009E35C0 /* Text View set Up basic Info4.png */,
-				F90A234B2B6A66F9009E35C0 /* Text View set Up basic Info5.png */,
-				F90A23462B6A65D7009E35C0 /* Text View set Up basic Info6.png */,
-				F90A23452B6A65D6009E35C0 /* Text View set Up basic Info7.png */,
-				F907D0442A97552C00A701C3 /* Text View set Up1.png */,
-				F907D04A2A97552D00A701C3 /* Text View set Up2.png */,
-				F9E07A8D2A9A16E90065FD17 /* Text View set Up3.png */,
-				F907D03E2A97552C00A701C3 /* Text View set Up4.png */,
-				F907D0372A97552B00A701C3 /* Text View set Up5.png */,
 				F907D0472A97552C00A701C3 /* ViewControllerJournalEntry.png */,
-				F907D0C52A99F85F00A701C3 /* Pacioli.jpg */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -2465,87 +2461,91 @@
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0A92A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
 				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
-				F90A234C2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */,
 				F907D0B12A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
 				F9E55A9A2B69274600CE310A /* TableViewControllerJournals5.png in Resources */,
-				F907D0722A97552D00A701C3 /* Text View set Up4.png in Resources */,
-				F907D07A2A97552D00A701C3 /* TableViewControllerCategoryList2.png in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
-				F90A23472B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
+				F90A238F2B6BCF68009E35C0 /* AccountItem10.png in Resources */,
+				F90A23792B6BC5A0009E35C0 /* AccountItem9.png in Resources */,
 				F907D0C02A99E65800A701C3 /* Journals.html in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
+				F90A23822B6BCA1F009E35C0 /* AccountItem6.png in Resources */,
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
-				F907D0802A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
+				F90A236F2B6BC31B009E35C0 /* AccountItem1.png in Resources */,
 				F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
-				F907D0982A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
 				F9968AB0264AC1640025F6D4 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F907D0202A95F82000A701C3 /* About_This_App.html in Resources */,
-				F907D0782A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F907D0582A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */,
 				F907D06C2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */,
-				F907D0642A97552D00A701C3 /* Text View set Up5.png in Resources */,
-				F907D05E2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */,
 				F907D0562A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */,
-				F90A234F2B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */,
+				F90A237C2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
+				F90A235F2B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AB2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F99BAEC2261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard in Resources */,
-				F907D05A2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
 				F9BDCBB827A9603D00BD8770 /* JournalsViewController.storyboard in Resources */,
+				F90A23712B6BC31B009E35C0 /* AccountItem3.png in Resources */,
+				F90A23682B6BBF89009E35C0 /* BasicInfo8.png in Resources */,
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
-				F9E07A8E2A9A16E90065FD17 /* Text View set Up3.png in Resources */,
+				F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
+				F90A235B2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F907D0522A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png in Resources */,
+				F90A23732B6BC31B009E35C0 /* AccountItem2.png in Resources */,
 				F907D09C2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */,
-				F907D07E2A97552D00A701C3 /* Text View set Up1.png in Resources */,
+				F90A23522B6BB8C4009E35C0 /* BasicInfo1.png in Resources */,
 				F907D09F2A9758E600A701C3 /* Set_Up_Basic_Info3.html in Resources */,
+				F90A23552B6BB917009E35C0 /* BasicInfo2.png in Resources */,
 				F9963CD6262089690099D51C /* SettingsUpgradeViewController.storyboard in Resources */,
 				F907D0662A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */,
+				F90A23582B6BBA6C009E35C0 /* BasicInfo3.png in Resources */,
 				F9C73720265E7D7E00A9F287 /* Color.xcassets in Resources */,
 				F9593DBB2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,
 				F907D0902A97552D00A701C3 /* TableViewControllerJournals4.png in Resources */,
+				F90A239B2B6BD1AB009E35C0 /* AccountItem13.png in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F90A23612B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F907D07C2A97552D00A701C3 /* TableViewControllerJournals1.png in Resources */,
-				F907D0622A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */,
+				F90A23952B6BCFDF009E35C0 /* AccountItem11.png in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
+				F90A23642B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F99BAEBA261C9C800038FBB2 /* GeneralLedgerTableViewController.storyboard in Resources */,
-				F907D0542A97552D00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png in Resources */,
+				F90A23882B6BCBDF009E35C0 /* AccountItem8.png in Resources */,
 				F9E0FE86266BA6230024FE40 /* PDFMakerViewController.storyboard in Resources */,
+				F90A236A2B6BBF89009E35C0 /* BasicInfo9.png in Resources */,
 				F9227721261F32660080B746 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
-				F907D0702A97552D00A701C3 /* TableViewControllerCategoryList_delete3.png in Resources */,
 				F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F90A23A02B6BD216009E35C0 /* AccountItem15.png in Resources */,
 				F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
-				F907D08E2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
 				F907D0C32A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F907D06E2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
+				F90A23972B6BCFDF009E35C0 /* AccountItem12.png in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F907D0232A9604A200A701C3 /* Thought.html in Resources */,
 				F907D0762A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png in Resources */,
+				F90A23862B6BCBDF009E35C0 /* AccountItem7.png in Resources */,
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F940E4AC2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F907D0A22A97635500A701C3 /* Set_Up_Account.html in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
-				F907D0962A97552D00A701C3 /* TableViewControllerCategoryList4.png in Resources */,
 				F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F907D0842A97552D00A701C3 /* ViewControllerJournalEntry.png in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
-				F907D05C2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
 				F963E29E2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F907D0B42A98991B00A701C3 /* Configuration.html in Resources */,
@@ -2556,21 +2556,18 @@
 				F907D0922A97552D00A701C3 /* TableViewControllerJournals.png in Resources */,
 				F99BE7B4261DD84E004611E4 /* SettingsInformationTableViewController.storyboard in Resources */,
 				F95F59B226503E1D00EFE522 /* PageContentViewController.storyboard in Resources */,
-				F907D0862A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */,
 				F907D02C2A9752FD00A701C3 /* Set_Up_Basic_Info.html in Resources */,
 				F907D0A52A9767ED00A701C3 /* Set_Up_Account2.html in Resources */,
 				F97C278D263AB39D00DFC3B0 /* InfoPlist.strings in Resources */,
+				F90A237F2B6BC962009E35C0 /* AccountItem5.png in Resources */,
 				F95F59A1265027A000EFE522 /* CarouselAndPageViewController.storyboard in Resources */,
 				F901E87D2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
-				F907D08C2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
 				F9A3C83026552041001218F1 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
-				F90A23492B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */,
 				F907D0292A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F99BAEB2261C98410038FBB2 /* JournalEntryViewController.storyboard in Resources */,
 				F91878CB25831A7B00D2E793 /* GoogleService-Info.plist in Resources */,
 				F9C2BC1E277DEE2D006334D0 /* DSEG14Classic-Regular.ttf in Resources */,
 				F982898D2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
-				F907D0942A97552D00A701C3 /* TableViewControllerCategoryList.png in Resources */,
 				F94E79EB259DF8C7004726F7 /* Settings.bundle in Resources */,
 				F93733322A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F907D0822A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */,
@@ -2579,10 +2576,8 @@
 				F9E0F43926413EB900085CC0 /* CollectionReusableView.xib in Resources */,
 				F98D536B264FB49A00996653 /* WithLabelTableViewCell.xib in Resources */,
 				F907D0742A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */,
-				F907D08A2A97552D00A701C3 /* Text View set Up2.png in Resources */,
 				F99BE7BC261DDA60004611E4 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F99BE791261DCFE9004611E4 /* CFTableViewController.storyboard in Resources */,
-				F907D0882A97552D00A701C3 /* TableViewControllerSettings_cell_user.png in Resources */,
 				F991EEFC2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2619,87 +2614,91 @@
 				F9EC671127B90BC60003FBB6 /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0AA2A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
 				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
-				F90A234D2B6A66F9009E35C0 /* Text View set Up basic Info5.png in Resources */,
 				F907D0B22A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
 				F9E55A9B2B69274600CE310A /* TableViewControllerJournals5.png in Resources */,
-				F907D0732A97552D00A701C3 /* Text View set Up4.png in Resources */,
-				F907D07B2A97552D00A701C3 /* TableViewControllerCategoryList2.png in Resources */,
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
-				F90A23482B6A65D7009E35C0 /* Text View set Up basic Info7.png in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
+				F90A23902B6BCF68009E35C0 /* AccountItem10.png in Resources */,
+				F90A237A2B6BC5A0009E35C0 /* AccountItem9.png in Resources */,
 				F907D0C12A99E65800A701C3 /* Journals.html in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
+				F90A23832B6BCA1F009E35C0 /* AccountItem6.png in Resources */,
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
-				F907D0812A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_term.png in Resources */,
+				F90A23702B6BC31B009E35C0 /* AccountItem1.png in Resources */,
 				F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */,
 				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
-				F907D0992A97552D00A701C3 /* TableViewControllerCategoryList_delete4.png in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
 				F9EC671927B90BC60003FBB6 /* JournalEntryTemplateViewController.storyboard in Resources */,
 				F907D0212A95F82000A701C3 /* About_This_App.html in Resources */,
-				F907D0792A97552D00A701C3 /* TableViewControllerSettingsInformation.png in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
 				F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F907D0592A97552D00A701C3 /* TableViewControllerJournals3.png in Resources */,
 				F907D06D2A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Review.png in Resources */,
-				F907D0652A97552D00A701C3 /* Text View set Up5.png in Resources */,
-				F907D05F2A97552D00A701C3 /* Text View set Up basic Info3.png in Resources */,
 				F907D0572A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals.png in Resources */,
-				F90A23502B6A6A1E009E35C0 /* Text View set Up basic Info4.png in Resources */,
+				F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
+				F90A23602B6BBBFF009E35C0 /* BasicInfo6.png in Resources */,
 				F907D0AC2A976E4F00A701C3 /* Set_Up_Account3.html in Resources */,
 				F9EC671C27B90BC60003FBB6 /* GeneralLedgerAccountViewController.storyboard in Resources */,
-				F907D05B2A97552D00A701C3 /* Text View set Up basic Info2.png in Resources */,
 				F9EC671D27B90BC60003FBB6 /* JournalsViewController.storyboard in Resources */,
+				F90A23722B6BC31B009E35C0 /* AccountItem3.png in Resources */,
+				F90A23692B6BBF89009E35C0 /* BasicInfo8.png in Resources */,
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
-				F9E07A8F2A9A16E90065FD17 /* Text View set Up3.png in Resources */,
+				F90A239E2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
+				F90A235C2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
 				F907D0532A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Journals1.png in Resources */,
+				F90A23742B6BC31B009E35C0 /* AccountItem2.png in Resources */,
 				F907D09D2A9757E200A701C3 /* Set_Up_Basic_Info2.html in Resources */,
-				F907D07F2A97552D00A701C3 /* Text View set Up1.png in Resources */,
+				F90A23532B6BB8C4009E35C0 /* BasicInfo1.png in Resources */,
 				F907D0A02A9758E600A701C3 /* Set_Up_Basic_Info3.html in Resources */,
+				F90A23562B6BB917009E35C0 /* BasicInfo2.png in Resources */,
 				F9EC672027B90BC60003FBB6 /* SettingsUpgradeViewController.storyboard in Resources */,
 				F907D0672A97552D00A701C3 /* TableViewControllerGeneralLedger.png in Resources */,
+				F90A23592B6BBA6C009E35C0 /* BasicInfo3.png in Resources */,
 				F9EC672127B90BC60003FBB6 /* Color.xcassets in Resources */,
 				F9593DBC2A62B64800A1D0B3 /* SettingsOperatingJournalEntryGroupViewController.storyboard in Resources */,
 				F907D0912A97552D00A701C3 /* TableViewControllerJournals4.png in Resources */,
+				F90A239C2B6BD1AB009E35C0 /* AccountItem13.png in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
+				F90A23622B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
 				F907D07D2A97552D00A701C3 /* TableViewControllerJournals1.png in Resources */,
-				F907D0632A97552D00A701C3 /* TableViewControllerSettingsTaxonomyAccountByTaxonomyList.png in Resources */,
+				F90A23962B6BCFDF009E35C0 /* AccountItem11.png in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
+				F90A23652B6BBC58009E35C0 /* BasicInfo7.png in Resources */,
 				F9EC672427B90BC60003FBB6 /* GeneralLedgerTableViewController.storyboard in Resources */,
-				F907D0552A97552D00A701C3 /* TableViewControllerSettingsCategory_categoriesBSandPL.png in Resources */,
+				F90A23892B6BCBDF009E35C0 /* AccountItem8.png in Resources */,
 				F9EC672527B90BC60003FBB6 /* PDFMakerViewController.storyboard in Resources */,
+				F90A236B2B6BBF89009E35C0 /* BasicInfo9.png in Resources */,
 				F9EC672627B90BC60003FBB6 /* SettingsTaxonomyListTableViewController.storyboard in Resources */,
-				F907D0712A97552D00A701C3 /* TableViewControllerCategoryList_delete3.png in Resources */,
 				F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
+				F90A23A12B6BD216009E35C0 /* AccountItem15.png in Resources */,
 				F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
-				F907D08F2A97552D00A701C3 /* TableViewControllerCategoryList_delete1.png in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
 				F907D0C42A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F907D06F2A97552D00A701C3 /* TableViewControllerGeneralLedger1.png in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
+				F90A23982B6BCFDF009E35C0 /* AccountItem12.png in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F907D0242A9604A200A701C3 /* Thought.html in Resources */,
 				F907D0772A97552D00A701C3 /* TableViewControllerSettings_cell_list_settings_Help.png in Resources */,
+				F90A23872B6BCBDF009E35C0 /* AccountItem7.png in Resources */,
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
 				F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */,
 				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F907D0A32A97635500A701C3 /* Set_Up_Account.html in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
-				F907D0972A97552D00A701C3 /* TableViewControllerCategoryList4.png in Resources */,
 				F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
 				F907D0852A97552D00A701C3 /* ViewControllerJournalEntry.png in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
-				F907D05D2A97552D00A701C3 /* TableViewControllerCategoryList_delete2.png in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,
 				F963E29F2961D6A7002DF49E /* BalanceSheetViewController.storyboard in Resources */,
 				F907D0B52A98991B00A701C3 /* Configuration.html in Resources */,
@@ -2710,21 +2709,18 @@
 				F907D0932A97552D00A701C3 /* TableViewControllerJournals.png in Resources */,
 				F9EC673227B90BC60003FBB6 /* WSViewController.storyboard in Resources */,
 				F9EC673327B90BC60003FBB6 /* SettingsInformationTableViewController.storyboard in Resources */,
-				F907D0872A97552D00A701C3 /* TableViewControllerCategoryList1.png in Resources */,
 				F907D02D2A9752FD00A701C3 /* Set_Up_Basic_Info.html in Resources */,
 				F907D0A62A9767ED00A701C3 /* Set_Up_Account2.html in Resources */,
 				F9EC673427B90BC60003FBB6 /* PageContentViewController.storyboard in Resources */,
+				F90A23802B6BC962009E35C0 /* AccountItem5.png in Resources */,
 				F9EC673527B90BC60003FBB6 /* InfoPlist.strings in Resources */,
 				F901E87E2849CC2900290DFD /* PassCodeLockViewController.storyboard in Resources */,
-				F907D08D2A97552D00A701C3 /* TableViewControllerCategoryList3.png in Resources */,
 				F9EC673627B90BC60003FBB6 /* CarouselAndPageViewController.storyboard in Resources */,
-				F90A234A2B6A65D7009E35C0 /* Text View set Up basic Info6.png in Resources */,
 				F907D02A2A960F2100A701C3 /* 簿記一巡.png in Resources */,
 				F9EC673727B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.storyboard in Resources */,
 				F9EC673827B90BC60003FBB6 /* JournalEntryViewController.storyboard in Resources */,
 				F9EC673A27B90BC60003FBB6 /* DSEG14Classic-Regular.ttf in Resources */,
 				F982898E2973E9CA00F8F1B8 /* OpeningBalanceViewController.storyboard in Resources */,
-				F907D0952A97552D00A701C3 /* TableViewControllerCategoryList.png in Resources */,
 				F9EC673B27B90BC60003FBB6 /* Settings.bundle in Resources */,
 				F93733332A62C87E0061ACA2 /* SettingsOperatingJournalEntryGroupDetailViewController.storyboard in Resources */,
 				F907D0832A97552D00A701C3 /* TableViewControllerJournals2.png in Resources */,
@@ -2733,10 +2729,8 @@
 				F9EC673C27B90BC60003FBB6 /* CollectionReusableView.xib in Resources */,
 				F9EC673D27B90BC60003FBB6 /* WithLabelTableViewCell.xib in Resources */,
 				F907D0752A97552D00A701C3 /* TableViewControllerSettingsCategoryDetail_reuseIdentifier.png in Resources */,
-				F907D08B2A97552D00A701C3 /* Text View set Up2.png in Resources */,
 				F9EC673E27B90BC60003FBB6 /* SettingsCategoryTableViewController.storyboard in Resources */,
 				F9EC673F27B90BC60003FBB6 /* CFTableViewController.storyboard in Resources */,
-				F907D0892A97552D00A701C3 /* TableViewControllerSettings_cell_user.png in Resources */,
 				F991EEFD2A67B5C70077547F /* CarouselTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
