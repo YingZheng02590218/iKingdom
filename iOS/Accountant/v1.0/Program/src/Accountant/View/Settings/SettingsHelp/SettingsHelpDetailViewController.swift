@@ -340,8 +340,16 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImageSecond(path: path)
             }
-        default:
-            break
+            // 総勘定元帳　③
+            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger2", withExtension: "png") {
+                print(path)
+                changeImageThird(path: path)
+            }
+            // 総勘定元帳　④
+            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger3", withExtension: "png") {
+                print(path)
+                changeImageForth(path: path)
+            }
         }
     }
     
