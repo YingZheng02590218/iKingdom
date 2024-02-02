@@ -156,6 +156,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         } else { // 仕訳が0件の場合
             // ボタンを不活性にする
             pdfBarButtonItem.isEnabled = false // 印刷ボタン
+            csvBarButtonItem.isEnabled = false
             navigationItem.leftBarButtonItem?.isEnabled = false // 編集ボタン
         }
     }

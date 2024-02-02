@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
-
+    
     <head>
         <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
             <title></title>
-
+            
             <style>
                 body {
                     font-family: "Hiragino Kaku Gothic ProN";
@@ -53,7 +53,7 @@
                     text-align: right;
                 }
             </style>
-
+            
             <script type="text/javascript">
                 function changeFontColor(colorCode) {
                     var elem = document.getElementById("elem01");
@@ -75,56 +75,62 @@
                     var elem = document.getElementById("elem05");
                     elem.src = path;
                 }
+                function changeImageFifth(path) {
+                    var elem = document.getElementById("elem06");
+                    elem.src = path;
+                }
+                function changeImageSixth(path) {
+                    var elem = document.getElementById("elem07");
+                    elem.src = path;
+                }
             </script>
     </head>
-
+    
     <body id ="elem01">
         <section>
-            <h1>2. 勘定科目を設定しよう</h1>
+            <h1>3. 開始残高を設定しよう</h1>
             <p></p>
-
+            
             <section>
-                <h1>勘定科目を新規に登録する</h1>
-                <p>設定画面 > 勘定科目体系 > 勘定科目一覧</p>
+                <h1>開始残高</h1>
+                <p>アプリを使い始めた<b>導入時のみ</b>開始残高を設定するだけで、翌年の年度からは、自動で残高振替がおこなわれます。</p>
+                <p>設定画面 > 開始残高</p>
                 <img id ="elem02" src="画像.png" width="50%" height="auto" align="left">
-                    勘定科目体系をタップします</img>
+                    開始残高をタップします</img>
                 <br clear="all">
-
+                
                 <p></p>
-
+                
                 <img id ="elem03" src="画像.png" width="50%" height="auto" align="left">
-                    勘定科目一覧をタップします</img>
+                    編集ボタンをタップします</img>
                 <br clear="all">
-
-                <p></p>
-
+                
+                <p>任意の勘定科目へ、残高を入力することができます。</p>
                 <img id ="elem04" src="画像.png" width="50%" height="auto" align="left">
-                    ＋ をタップします</img>
+                    任意の勘定科目の借方、もしくは貸方ををタップします</img>
                 <br clear="all">
                 
                 <p></p>
-
-                <p>勘定科目を登録した後は、表示科目名のみ変更が可能です。</p>
-                <p>各項目を選択・記入して、登録ボタンをタップすると勘定科目が登録されます。</p>
-                <img id ="elem05" src="画像.png" width="50%" height="auto" align="left"></img>
                 
-                <p>【大区分】<br>
-                流動資産や固定資産など</p>
+                <img id ="elem05" src="画像.png" width="50%" height="auto" align="left">
+                    残高の金額を入力します</img>
+                <br clear="all">
                 
-                <p>【中区分】<br>
-                当座資産や棚卸資産など</p>
+                <p></p>
                 
-                <p>【勘定科目名】<br>
-                自由な名称をつけることができます。<br>
-                勘定科目を登録した後は、変更はできません。</p>
+                <img id ="elem06" src="画像.png" width="50%" height="auto" align="left">
+                    開始残高の借方の合計と貸方の合計が一致していることを確認して
+                    </img>
+                <br clear="all">
                 
-                <p>【表示科目名】（法人のみ）<br>
-                勘定科目が決算書の上で表示される名称を、デフォルトで用意された表示科目の一覧の中から、選択することができます。</p>
+                <p></p>
                 
+                <img id ="elem07" src="画像.png" width="50%" height="auto" align="left">
+                    完了ボタンをタップします</img>
                 <br clear="all">
             </section>
-
+            
         </section>
     </body>
-
+    
 </html>
