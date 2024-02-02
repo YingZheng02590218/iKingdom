@@ -62,11 +62,6 @@ class SettingsHelpViewController: UIViewController {
             value: HelpDetailKind.Link2.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link2.title)
         )
-        //        attributedString.addAttribute(
-        //            .link,
-        //                                      value: HelpDetailKind.Link3.rawValue,
-        //                                      range: NSString(string: baseString!).range(of: HelpDetailKind.Link3.)
-        // )
         attributedString.addAttribute(
             .link,
             value: HelpDetailKind.Link4.rawValue,
@@ -111,6 +106,11 @@ class SettingsHelpViewController: UIViewController {
             .link,
             value: HelpDetailKind.Link61.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link61.title)
+        )
+        attributedString.addAttribute(
+            .link,
+            value: HelpDetailKind.Link3.rawValue,
+            range: NSString(string: baseString!).range(of: HelpDetailKind.Link3.title)
         )
         attributedString.addAttribute(
             .link,

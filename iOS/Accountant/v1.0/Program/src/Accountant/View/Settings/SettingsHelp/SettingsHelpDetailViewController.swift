@@ -88,13 +88,10 @@ class SettingsHelpDetailViewController: UIViewController {
         case .Link1:
             break
         case .Link2:
-            // 画像を表示させる
             if let path = Bundle.main.url(forResource: "簿記一巡", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
-        case .Link3:
-            break
             // 基本情報の登録をしよう
         case .Link4:
             // 基本情報の登録　事業者名を設定しよう 設定画面
@@ -266,6 +263,37 @@ class SettingsHelpDetailViewController: UIViewController {
             }
             // 勘定科目体系の登録 削除をする ⑥
             if let path = Bundle.main.url(forResource: "AccountItem15", withExtension: "png") {
+                print(path)
+                changeImageSixth(path: path)
+            }
+        case .Link3:
+            // 開始残高を設定しよう ①
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry1", withExtension: "png") {
+                print(path)
+                changeImage(path: path)
+            }
+            // 開始残高を設定しよう ②
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry2", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
+            }
+            // 開始残高を設定しよう ③
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry3", withExtension: "png") {
+                print(path)
+                changeImageThird(path: path)
+            }
+            // 開始残高を設定しよう ④
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry4", withExtension: "png") {
+                print(path)
+                changeImageForth(path: path)
+            }
+            // 開始残高を設定しよう ⑤
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry5", withExtension: "png") {
+                print(path)
+                changeImageFifth(path: path)
+            }
+            // 開始残高を設定しよう ⑥
+            if let path = Bundle.main.url(forResource: "OpeningJournalEntry6", withExtension: "png") {
                 print(path)
                 changeImageSixth(path: path)
             }
@@ -461,8 +489,6 @@ enum HelpDetailKind: String {
     case Link0
     case Link1
     case Link2
-    // 初期設定の手順
-    case Link3
     // 基本情報の登録をしよう
     case Link4
     case Link41
@@ -475,6 +501,8 @@ enum HelpDetailKind: String {
     // 勘定科目の編集しよう
     case Link6
     case Link61
+    // 開始残高を設定しよう
+    case Link3
     // 環境設定を確認・変更しよう
     case Link7
     // 仕訳を入力する
@@ -496,8 +524,6 @@ enum HelpDetailKind: String {
             return "Thought"
         case .Link2:
             return "Basic_Of_Bookkeeping"
-        case .Link3:
-            return ""
         case .Link4:
             return "Set_Up_Basic_Info"
         case .Link41:
@@ -516,6 +542,8 @@ enum HelpDetailKind: String {
             return "Set_Up_Account_Edit"
         case .Link61:
             return "Set_Up_Account_Edit2"
+        case .Link3:
+            return "Opening_Journal_Entry"
         case .Link7:
             return "Configuration"
         case .Link8:
@@ -540,8 +568,6 @@ enum HelpDetailKind: String {
             return "採用した会計概念"
         case .Link2:
             return "簿記の基礎"
-        case .Link3:
-            return ""
         case .Link4:
             return "事業者名を設定する"
         case .Link41:
@@ -560,6 +586,8 @@ enum HelpDetailKind: String {
             return "勘定科目を修正する"
         case .Link61:
             return "勘定科目を削除する"
+        case .Link3:
+            return "開始残高を設定しよう"
         case .Link7:
             return "環境設定を確認・変更しよう"
         case .Link8:
