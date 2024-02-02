@@ -270,79 +270,88 @@ class SettingsHelpDetailViewController: UIViewController {
                 changeImageSixth(path: path)
             }
         case .Link7:
-            //
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_Journals", withExtension: "png") {
+            // 環境設置を確認・変更しよう
+            if let path = Bundle.main.url(forResource: "Configuration1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
-            //
-            if let path = Bundle.main.url(forResource: "TableViewControllerSettings_cell_list_settings_Journals1", withExtension: "png") {
+            // 環境設置を確認・変更しよう
+            if let path = Bundle.main.url(forResource: "Configuration2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
         case .Link8:
-            //
-            if let path = Bundle.main.url(forResource: "ViewControllerJournalEntry", withExtension: "png") {
+            // 仕訳を入力する
+            if let path = Bundle.main.url(forResource: "JournalEntry1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
+            }
+            // 仕訳を入力する
+            if let path = Bundle.main.url(forResource: "JournalEntry2", withExtension: "png") {
+                print(path)
+                changeImageSecond(path: path)
             }
         case .Link9:
-            // 4. 帳簿に記帳する 2. 仕訳を修正する ①
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals", withExtension: "png") {
+            // 4. 帳簿に記帳する 仕訳を修正する ①
+            if let path = Bundle.main.url(forResource: "Journals1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
-            // 4. 帳簿に記帳する 2. 仕訳を修正する　②
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals1", withExtension: "png") {
+            // 4. 帳簿に記帳する 仕訳を修正する　②
+            if let path = Bundle.main.url(forResource: "Journals2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
-
+            // 4. 帳簿に記帳する 仕訳を修正する　③
+            if let path = Bundle.main.url(forResource: "Journals3", withExtension: "png") {
+                print(path)
+                changeImageThird(path: path)
+            }
         case .Link10:
-            // 4. 帳簿に記帳する 2. 仕訳を修正する ①
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals", withExtension: "png") {
+            // 4. 帳簿に記帳する 仕訳を削除する ①
+            if let path = Bundle.main.url(forResource: "Journals1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
-            // 4. 帳簿に記帳する 2. 仕訳を修正する　②
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals2", withExtension: "png") {
+            // 4. 帳簿に記帳する 仕訳を削除する　②
+            if let path = Bundle.main.url(forResource: "Journals2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
-            // 4. 帳簿に記帳する 2. 仕訳を修正する　③
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals3", withExtension: "png") {
+            // 4. 帳簿に記帳する 仕訳を削除する　③
+            if let path = Bundle.main.url(forResource: "Journals4", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
         case .Link11:
             // 仕訳帳 ①
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals4", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "Journals5", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 仕訳帳 ②
-            if let path = Bundle.main.url(forResource: "TableViewControllerJournals5", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "Journals6", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
         case .Link111:
             // 総勘定元帳　①
-            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "GeneralLedger1", withExtension: "png") {
                 print(path)
                 changeImage(path: path)
             }
             // 総勘定元帳　②
-            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger1", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "GeneralLedger2", withExtension: "png") {
                 print(path)
                 changeImageSecond(path: path)
             }
             // 総勘定元帳　③
-            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger2", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "GeneralLedger3", withExtension: "png") {
                 print(path)
                 changeImageThird(path: path)
             }
             // 総勘定元帳　④
-            if let path = Bundle.main.url(forResource: "TableViewControllerGeneralLedger3", withExtension: "png") {
+            if let path = Bundle.main.url(forResource: "GeneralLedger4", withExtension: "png") {
                 print(path)
                 changeImageForth(path: path)
             }

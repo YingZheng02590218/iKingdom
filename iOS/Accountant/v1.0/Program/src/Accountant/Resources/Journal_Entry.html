@@ -63,6 +63,10 @@
                     var elem = document.getElementById("elem02");
                     elem.src = path;
                 }
+                function changeImageSecond(path) {
+                    var elem = document.getElementById("elem03");
+                    elem.src = path;
+                }
             </script>
     </head>
     
@@ -74,10 +78,9 @@
             <section>
                 <h1>仕訳を入力する</h1>
                 <p>各項目を選択・記入して、入力ボタンをタップすると仕訳が記帳されます。</p>
-                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
-                
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left">
                 <p>【日付】<br>
-                決算整理仕訳の場合、決算日が固定で指定されます。</p>
+                会計期間の範囲内の日を選択することができます。</p>
                 
                 <p>【勘定科目】<br>
                 ピッカーの左列が大区分、右列が勘定科目です。</p>
@@ -87,7 +90,15 @@
                 
                 <p>【小書き】<br>
                 50桁までの文字を入力することができます。</p>
+                </img>
+                <br clear="all">
                 
+                <p></p>
+
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left">
+                <p>【日付】<br>
+                決算整理仕訳の場合、決算日が固定で指定されます。</p>
+                </img>
                 <br clear="all">
             </section>
             
