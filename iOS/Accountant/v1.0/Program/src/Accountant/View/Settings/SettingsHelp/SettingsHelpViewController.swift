@@ -38,14 +38,14 @@ class SettingsHelpViewController: UIViewController {
         ], range: NSString(string: baseString!).range(of: "3. 初期設定"))
         attributedString.addAttributes([
             .font: UIFont.boldSystemFont(ofSize: 30)
-        ], range: NSString(string: baseString!).range(of: "4. 帳簿に記帳する"))
+        ], range: NSString(string: baseString!).range(of: "4. 日常の入力作業"))
         attributedString.addAttributes([
             .font: UIFont.boldSystemFont(ofSize: 30)
         ], range: NSString(string: baseString!).range(of: "5. 決算準備"))
         attributedString.addAttributes([
             .font: UIFont.boldSystemFont(ofSize: 30)
         ], range: NSString(string: baseString!).range(of: "6. 決算作業"))
-
+        
         // リンクを設置
         attributedString.addAttribute(
             .link,
@@ -62,11 +62,6 @@ class SettingsHelpViewController: UIViewController {
             value: HelpDetailKind.Link2.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link2.title)
         )
-        //        attributedString.addAttribute(
-        //            .link,
-        //                                      value: HelpDetailKind.Link3.rawValue,
-        //                                      range: NSString(string: baseString!).range(of: HelpDetailKind.Link3.)
-        // )
         attributedString.addAttribute(
             .link,
             value: HelpDetailKind.Link4.rawValue,
@@ -92,11 +87,11 @@ class SettingsHelpViewController: UIViewController {
             value: HelpDetailKind.Link51.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link51.title)
         )
-        attributedString.addAttribute(
-            .link,
-            value: HelpDetailKind.Link52.rawValue,
-            range: NSString(string: baseString!).range(of: HelpDetailKind.Link52.title)
-        )
+        //        attributedString.addAttribute(
+        //            .link,
+        //            value: HelpDetailKind.Link52.rawValue,
+        //            range: NSString(string: baseString!).range(of: HelpDetailKind.Link52.title)
+        //        )
         attributedString.addAttribute(
             .link,
             value: HelpDetailKind.Link53.rawValue,
@@ -111,6 +106,11 @@ class SettingsHelpViewController: UIViewController {
             .link,
             value: HelpDetailKind.Link61.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link61.title)
+        )
+        attributedString.addAttribute(
+            .link,
+            value: HelpDetailKind.Link3.rawValue,
+            range: NSString(string: baseString!).range(of: HelpDetailKind.Link3.title)
         )
         attributedString.addAttribute(
             .link,
@@ -142,7 +142,7 @@ class SettingsHelpViewController: UIViewController {
             value: HelpDetailKind.Link111.rawValue,
             range: NSString(string: baseString!).range(of: HelpDetailKind.Link111.title)
         )
-
+        
         textView.attributedText = attributedString
         textView.textColor = .textColor
         textView.frame = CGRect(
@@ -159,6 +159,7 @@ class SettingsHelpViewController: UIViewController {
         textView.delegate = self
         view.addSubview(textView)
     }
+    
     // ビューが表示される直前に呼ばれる
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

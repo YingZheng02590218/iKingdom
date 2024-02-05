@@ -71,22 +71,64 @@
                     var elem = document.getElementById("elem04");
                     elem.src = path;
                 }
+                function changeImageForth(path) {
+                    var elem = document.getElementById("elem05");
+                    elem.src = path;
+                }
+                function changeImageFifth(path) {
+                    var elem = document.getElementById("elem06");
+                    elem.src = path;
+                }
+                function changeImageSixth(path) {
+                    var elem = document.getElementById("elem07");
+                    elem.src = path;
+                }
             </script>
     </head>
     
     <body id ="elem01">
         <section>
-            <h1>2. 基本情報の登録をしよう</h1>
+            <h1>1. 基本情報の登録をしよう</h1>
             <p></p>
-
+            
             <section>
-                <h1>会計帳簿を作成しよう</h1>
-                <p>会計期間 > 会計年度を追加 > 任意の年度 > 保存</p>
-                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left"></img>
-                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left"></img>
-                <img id ="elem04" src="画像.png" width="50%" height="auto" align="left"></img>
+                <h1>新たな年度の帳簿を作成する</h1>
+                <p>設定画面 > 会計期間</p>
+                <img id ="elem02" src="画像.png" width="50%" height="auto" align="left">
+                    会計期間をタップします</img>
                 <br clear="all">
-                <p>会計帳簿を作成後に、任意の年度の帳簿を開くことができます。</p>
+
+                <p></p>
+
+                <img id ="elem03" src="画像.png" width="50%" height="auto" align="left">
+                    会計年度を追加ボタンをタップします</img>
+                <br clear="all">
+                
+                <p>任意の年度を選択して、保存ボタンをタップすると</p>
+                <img id ="elem04" src="画像.png" width="60%" height="auto" align="left"></img>
+                <br clear="all">
+                
+                <p>選択した年度が「会計年度」の一覧に追加されます</p>
+                <img id ="elem05" src="画像.png" width="70%" height="auto" align="left">
+                </img>
+                <br clear="all">
+
+                <p>任意の年度をタップすると、帳簿の年度を切り替えることができます</p>
+                <img id ="elem06" src="画像.png" width="70%" height="auto" align="left">
+                </img>
+                <br clear="all">
+
+                <p></p>
+            </section>
+            
+            <section>
+                <h1>帳簿を削除する</h1>
+                <p>任意の年度を左へスワイプするとゴミ箱ボタンが現れます</p>
+                <img id ="elem07" src="画像.png" width="70%" height="auto" align="left"></img>
+                <br clear="all">
+                
+                <p>ゴミ箱ボタンをタップすると、任意の年度の帳簿を削除することができます</p>
+                <p><b>この操作は取り消すことはできません。</b></p>
             </section>
             
         </section>
