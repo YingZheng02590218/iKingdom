@@ -106,10 +106,6 @@
 		F90A23892B6BCBDF009E35C0 /* AccountItem8.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23852B6BCBDF009E35C0 /* AccountItem8.png */; };
 		F90A238F2B6BCF68009E35C0 /* AccountItem10.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A238B2B6BCF67009E35C0 /* AccountItem10.png */; };
 		F90A23902B6BCF68009E35C0 /* AccountItem10.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A238B2B6BCF67009E35C0 /* AccountItem10.png */; };
-		F90A23952B6BCFDF009E35C0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23932B6BCFDF009E35C0 /* AccountItem11.png */; };
-		F90A23962B6BCFDF009E35C0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23932B6BCFDF009E35C0 /* AccountItem11.png */; };
-		F90A23972B6BCFDF009E35C0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23942B6BCFDF009E35C0 /* AccountItem12.png */; };
-		F90A23982B6BCFDF009E35C0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23942B6BCFDF009E35C0 /* AccountItem12.png */; };
 		F90A239B2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
 		F90A239C2B6BD1AB009E35C0 /* AccountItem13.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23992B6BD1AB009E35C0 /* AccountItem13.png */; };
 		F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */; };
@@ -158,6 +154,10 @@
 		F90A23E62B6D0F93009E35C0 /* OpeningJournalEntry5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */; };
 		F90A23E82B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
 		F90A23E92B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
+		F90F39162B76347F0098C7F0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39152B76347F0098C7F0 /* AccountItem11.png */; };
+		F90F39172B76347F0098C7F0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39152B76347F0098C7F0 /* AccountItem11.png */; };
+		F90F39192B7634B00098C7F0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39182B7634B00098C7F0 /* AccountItem12.png */; };
+		F90F391A2B7634B00098C7F0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39182B7634B00098C7F0 /* AccountItem12.png */; };
 		F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */; };
 		F91878C62581431100D2E793 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
@@ -899,8 +899,6 @@
 		F90A23842B6BCBDF009E35C0 /* AccountItem7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem7.png; sourceTree = "<group>"; };
 		F90A23852B6BCBDF009E35C0 /* AccountItem8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem8.png; sourceTree = "<group>"; };
 		F90A238B2B6BCF67009E35C0 /* AccountItem10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem10.png; sourceTree = "<group>"; };
-		F90A23932B6BCFDF009E35C0 /* AccountItem11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AccountItem11.png; path = ../../../../../../../../../Desktop/HelpGuide_images/AccountItem11.png; sourceTree = "<group>"; };
-		F90A23942B6BCFDF009E35C0 /* AccountItem12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AccountItem12.png; path = ../../../../../../../../../Desktop/HelpGuide_images/AccountItem12.png; sourceTree = "<group>"; };
 		F90A23992B6BD1AB009E35C0 /* AccountItem13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem13.png; sourceTree = "<group>"; };
 		F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem14.png; sourceTree = "<group>"; };
 		F90A239F2B6BD216009E35C0 /* AccountItem15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem15.png; sourceTree = "<group>"; };
@@ -925,6 +923,8 @@
 		F90A23DB2B6D0F93009E35C0 /* OpeningJournalEntry4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry4.png; sourceTree = "<group>"; };
 		F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry5.png; sourceTree = "<group>"; };
 		F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry6.png; sourceTree = "<group>"; };
+		F90F39152B76347F0098C7F0 /* AccountItem11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem11.png; sourceTree = "<group>"; };
+		F90F39182B7634B00098C7F0 /* AccountItem12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem12.png; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		F9134C232476BC25002A0F77 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		F9134C252476BCE6002A0F77 /* CategoryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1420,8 +1420,8 @@
 				F90A23852B6BCBDF009E35C0 /* AccountItem8.png */,
 				F90A23782B6BC5A0009E35C0 /* AccountItem9.png */,
 				F90A238B2B6BCF67009E35C0 /* AccountItem10.png */,
-				F90A23932B6BCFDF009E35C0 /* AccountItem11.png */,
-				F90A23942B6BCFDF009E35C0 /* AccountItem12.png */,
+				F90F39152B76347F0098C7F0 /* AccountItem11.png */,
+				F90F39182B7634B00098C7F0 /* AccountItem12.png */,
 				F90A23992B6BD1AB009E35C0 /* AccountItem13.png */,
 				F90A239A2B6BD1AB009E35C0 /* AccountItem14.png */,
 				F90A239F2B6BD216009E35C0 /* AccountItem15.png */,
@@ -2489,6 +2489,7 @@
 				F94EDDA1237AEB3B0074D812 /* LaunchScreen.storyboard in Resources */,
 				F9963CC3262081D50099D51C /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0A92A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
+				F90F39192B7634B00098C7F0 /* AccountItem12.png in Resources */,
 				F90A23E32B6D0F93009E35C0 /* OpeningJournalEntry4.png in Resources */,
 				F90A23C12B6D0450009E35C0 /* Journals4.png in Resources */,
 				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
@@ -2513,6 +2514,7 @@
 				F907D0202A95F82000A701C3 /* About_This_App.html in Resources */,
 				F9FF9AB825317A0D00FB06BB /* taxonomyAccount.csv in Resources */,
 				F9C2BC29277DEF4B006334D0 /* ClassicCalculatorViewController.storyboard in Resources */,
+				F90F39162B76347F0098C7F0 /* AccountItem11.png in Resources */,
 				F907D0BD2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237C2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AC2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
@@ -2541,7 +2543,6 @@
 				F90A239B2B6BD1AB009E35C0 /* AccountItem13.png in Resources */,
 				F9963CF426208E800099D51C /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F90A23612B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
-				F90A23952B6BCFDF009E35C0 /* AccountItem11.png in Resources */,
 				F9ED936B2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23DF2B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
 				F906C4EF263B1B65006C6233 /* ListCollectionViewCell.xib in Resources */,
@@ -2564,7 +2565,6 @@
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F90A23BE2B6D0392009E35C0 /* Journals3.png in Resources */,
 				F922771C261F30860080B746 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
-				F90A23972B6BCFDF009E35C0 /* AccountItem12.png in Resources */,
 				F99BE7A4261DD0EA004611E4 /* TBViewController.storyboard in Resources */,
 				F9963CCB262088CB0099D51C /* SettingsHelpViewController.storyboard in Resources */,
 				F907D0232A9604A200A701C3 /* Thought.html in Resources */,
@@ -2649,6 +2649,7 @@
 				F9EC671027B90BC60003FBB6 /* LaunchScreen.storyboard in Resources */,
 				F9EC671127B90BC60003FBB6 /* SettingsOperatingTableViewController.storyboard in Resources */,
 				F907D0AA2A976E4F00A701C3 /* Set_Up_Account4.html in Resources */,
+				F90F391A2B7634B00098C7F0 /* AccountItem12.png in Resources */,
 				F90A23E42B6D0F93009E35C0 /* OpeningJournalEntry4.png in Resources */,
 				F90A23C22B6D0450009E35C0 /* Journals4.png in Resources */,
 				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
@@ -2673,6 +2674,7 @@
 				F907D0212A95F82000A701C3 /* About_This_App.html in Resources */,
 				F9EC671A27B90BC60003FBB6 /* taxonomyAccount.csv in Resources */,
 				F9EC671B27B90BC60003FBB6 /* ClassicCalculatorViewController.storyboard in Resources */,
+				F90F39172B76347F0098C7F0 /* AccountItem11.png in Resources */,
 				F907D0BE2A99E0FD00A701C3 /* Journal_Entry_Delete.html in Resources */,
 				F90A237D2B6BC7FB009E35C0 /* AccountItem4.png in Resources */,
 				F90A23AD2B6CFDD0009E35C0 /* JournalEntry2.png in Resources */,
@@ -2701,7 +2703,6 @@
 				F90A239C2B6BD1AB009E35C0 /* AccountItem13.png in Resources */,
 				F9EC672227B90BC60003FBB6 /* SettingsHelpDetailViewController.storyboard in Resources */,
 				F90A23622B6BBBFF009E35C0 /* BasicInfo5.png in Resources */,
-				F90A23962B6BCFDF009E35C0 /* AccountItem11.png in Resources */,
 				F9ED936C2982837E00B255EF /* BackupViewController.storyboard in Resources */,
 				F90A23E02B6D0F93009E35C0 /* OpeningJournalEntry3.png in Resources */,
 				F9EC672327B90BC60003FBB6 /* ListCollectionViewCell.xib in Resources */,
@@ -2724,7 +2725,6 @@
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
 				F90A23BF2B6D0392009E35C0 /* Journals3.png in Resources */,
 				F9EC672827B90BC60003FBB6 /* SettingsTaxonomyAccountByTaxonomyListTableViewController.storyboard in Resources */,
-				F90A23982B6BCFDF009E35C0 /* AccountItem12.png in Resources */,
 				F9EC672927B90BC60003FBB6 /* TBViewController.storyboard in Resources */,
 				F9EC674C27B912430003FBB6 /* GoogleService-Info.plist in Resources */,
 				F907D0242A9604A200A701C3 /* Thought.html in Resources */,
