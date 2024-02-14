@@ -717,6 +717,10 @@
 		F9EE7D3829BB221F0045EDB7 /* EditableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3729BB221F0045EDB7 /* EditableType.swift */; };
 		F9EE7D3929BB221F0045EDB7 /* EditableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE7D3729BB221F0045EDB7 /* EditableType.swift */; };
 		F9EFC2C52585328C0088EA44 /* DataBaseSettingsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */; };
+		F9EFE2A92B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFE2A82B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift */; };
+		F9EFE2AA2B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EFE2A82B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift */; };
+		F9EFE2AC2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9EFE2AB2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib */; };
+		F9EFE2AD2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9EFE2AB2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib */; };
 		F9F26EFF24D6C1DC00241DB4 /* WSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */; };
 		F9F324542833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
 		F9F324552833A5D900DA813E /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F324532833A5D900DA813E /* WalkThroughViewController.swift */; };
@@ -1223,6 +1227,8 @@
 		F9EE7D3429B9C35B0045EDB7 /* ErrorValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorValidation.swift; sourceTree = "<group>"; };
 		F9EE7D3729BB221F0045EDB7 /* EditableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableType.swift; sourceTree = "<group>"; };
 		F9EFC2C42585328C0088EA44 /* DataBaseSettingsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseSettingsPeriod.swift; sourceTree = "<group>"; };
+		F9EFE2A82B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		F9EFE2AB2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		F9F164B22786021B0044665A /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F164B92786030E0044665A /* GoogleAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GoogleAnalytics.xcframework; path = Pods/GoogleAnalytics/Frameworks/GoogleAnalytics.xcframework; sourceTree = "<group>"; };
 		F9F26EFE24D6C1DC00241DB4 /* WSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSModel.swift; sourceTree = "<group>"; };
@@ -2084,6 +2090,8 @@
 				F9D5D549247E408C00EA35C7 /* GeneralLedgerAccountViewController.swift */,
 				F99BAEC1261C9D460038FBB2 /* GeneralLedgerAccountViewController.storyboard */,
 				F9B209E7279D074A00F7EA8D /* GeneralLedgerAccountTableViewCell.swift */,
+				F9EFE2A82B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift */,
+				F9EFE2AB2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib */,
 			);
 			path = GenearlLedgerAccount;
 			sourceTree = "<group>";
@@ -2499,6 +2507,7 @@
 				F9C6C73F29A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F907D0B12A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F94EDD9E237AEB3B0074D812 /* Assets.xcassets in Resources */,
+				F9EFE2AC2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib in Resources */,
 				F99BE7C4261DDC77004611E4 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0262A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
@@ -2659,6 +2668,7 @@
 				F9C6C74029A3A5D700BA8F83 /* PopUpViewController.storyboard in Resources */,
 				F907D0B22A98914200A701C3 /* Set_Up_Account_Edit2.html in Resources */,
 				F9EC671227B90BC60003FBB6 /* Assets.xcassets in Resources */,
+				F9EFE2AD2B7A4DB300A652EB /* AccountTableViewHeaderFooterView.xib in Resources */,
 				F9EC671327B90BC60003FBB6 /* SettingsPeriodTableViewController.storyboard in Resources */,
 				F907D0272A96099A00A701C3 /* Basic_Of_Bookkeeping.html in Resources */,
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
@@ -3141,6 +3151,7 @@
 				F96B62272595FE77000FC05F /* SettingsHelpViewController.swift in Sources */,
 				F9D224C924893F61006C6CD9 /* DataBaseAccountingBooksShelf.swift in Sources */,
 				F955B6112490FD3E005E2C6D /* CFTableViewController.swift in Sources */,
+				F9EFE2A92B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
@@ -3385,6 +3396,7 @@
 				F9EC670027B90BC60003FBB6 /* SettingsHelpViewController.swift in Sources */,
 				F9EC670127B90BC60003FBB6 /* DataBaseAccountingBooksShelf.swift in Sources */,
 				F9EC670227B90BC60003FBB6 /* CFTableViewController.swift in Sources */,
+				F9EFE2AA2B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9EC670327B90BC60003FBB6 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9EC670427B90BC60003FBB6 /* SettingsPeriodTableViewCell.swift in Sources */,
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,

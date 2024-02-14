@@ -589,7 +589,7 @@ class TBModel: TBModelInput {
                             // 借方と貸方で金額が大きい方はどちらか
                             if left > right {
                                 // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addTransferEntryForClosingBalanceAccount(
+                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
                                     date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
                                     debitCategory: account,
                                     creditCategory: "残高",
@@ -600,7 +600,7 @@ class TBModel: TBModelInput {
                                 )
                             } else if left < right {
                                 // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addTransferEntryForClosingBalanceAccount(
+                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
                                     date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
                                     debitCategory: "残高",
                                     creditCategory: account,
@@ -611,7 +611,7 @@ class TBModel: TBModelInput {
                                 )
                             } else {
                                 // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addTransferEntryForClosingBalanceAccount(
+                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
                                     date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
                                     debitCategory: account,
                                     creditCategory: "残高",

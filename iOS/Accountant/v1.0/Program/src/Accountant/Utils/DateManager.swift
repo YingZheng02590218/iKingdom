@@ -253,7 +253,9 @@ class DateManager {
                 }
             }
         }
-        return beginningOfMonthDates
+        print(beginningOfMonthDates)
+        print(beginningOfMonthDates.sorted(by: <))
+        return beginningOfMonthDates.sorted(by: <)
     }
     
     func getDate() -> String {

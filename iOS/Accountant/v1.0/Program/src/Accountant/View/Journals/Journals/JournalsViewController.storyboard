@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iWJ-SB-FwY" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWJ-SB-FwY" customClass="EMTNeumorphicView" customModule="EMTNeumorphicView">
                                 <rect key="frame" x="7" y="55" width="0.0" height="800"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="3WR-VZ-ahH" userLabel="ViewBase">
@@ -28,8 +28,8 @@
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
+                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-1V-x9k" userLabel="company_name">
                                                                 <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
