@@ -79,6 +79,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var databaseJournalEntriesSection9: Results<DataBaseJournalEntry>?
     private var databaseJournalEntriesSection10: Results<DataBaseJournalEntry>?
     private var databaseJournalEntriesSection11: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection12: Results<DataBaseJournalEntry>?
     // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
     // 資本振替仕訳
@@ -134,6 +135,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
                 databaseJournalEntriesSection10 = dataBaseJournalEntries
             case 11:
                 databaseJournalEntriesSection11 = dataBaseJournalEntries
+            case 12:
+                databaseJournalEntriesSection12 = dataBaseJournalEntries
             default:
                 break
             }
@@ -230,6 +233,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
             return databaseJournalEntriesSection10?.count ?? 0
         case 11:
             return databaseJournalEntriesSection11?.count ?? 0
+        case 12:
+            return databaseJournalEntriesSection12?.count ?? 0
         default:
             return 0
         }
@@ -261,6 +266,8 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
             return databaseJournalEntriesSection10?[row]
         case 11:
             return databaseJournalEntriesSection11?[row]
+        case 12:
+            return databaseJournalEntriesSection12?[row]
         default:
             return nil
         }

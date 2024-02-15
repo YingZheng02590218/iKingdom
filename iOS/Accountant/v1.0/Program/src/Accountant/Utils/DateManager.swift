@@ -207,7 +207,7 @@ class DateManager {
         return dateFormatterMMdd.string(from: fullTheDayOfReckoning)
     }
     
-    // 月別の月末日を取得 12ヶ月分
+    // 月別の月末日を取得 12ヶ月分 月末ではない場合、13ヶ月分
     func getTheDayOfEndingOfMonth(isLastDay: Bool = true) -> [Date] {
         // 月別の月末日 12ヶ月分
         var beginningOfMonthDates: [Date] = []
@@ -232,8 +232,8 @@ class DateManager {
         //　ある月の月初・月末を取得する方法。月初の取得は1日固定で取得するだけだが、月末の取得は月初から1ヶ月進めて1日戻すことで算出できる。
         var calendar = Calendar(identifier: .gregorian) // 西暦を指定
         calendar.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60) ?? .current
-        
-        for i in 0..<12 {
+        // 月末ではない場合、13ヶ月分が必要となる
+        for i in 0..<13 {
             // 今年度の開始日 ＋１ヶ月
             if let dayOfStartInPeriodAdded = Calendar.current.date(byAdding: .month, value: i, to: dayOfStartInPeriod),
                // day: 1 を指定してもよいが省略しても月初となる
@@ -254,7 +254,10 @@ class DateManager {
                     } else {
                         let add = DateComponents(month: 0, day: 1) // 月末から1日進める
                         if let nextFirstDay = calendar.date(byAdding: add, to: lastDay) {
-                            beginningOfMonthDates.append(nextFirstDay)
+                            // 今年度の決算日 > 次月の月初
+                            if fullTheDayOfReckoning > nextFirstDay {
+                                beginningOfMonthDates.append(nextFirstDay)
+                            }
                         }
                     }
                 }

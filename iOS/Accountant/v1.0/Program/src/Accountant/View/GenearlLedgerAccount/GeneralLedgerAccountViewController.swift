@@ -143,12 +143,12 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
         // 通常仕訳(12ヶ月分)　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
-        return 17
+        return 18
     }
     // セクションヘッダーの高さ
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case /*1, */2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12/*, 13*/:
+        case /*1, */2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
                 switch section {
@@ -176,9 +176,10 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 20
                 case 12:
                     return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
+                case 13:
+                     return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
                     // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
-                    // return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
                 default:
                     return 0
                 }
@@ -193,7 +194,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションフッターの高さ
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11/*, 12, 13*/:
+        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12/*, 13*/:
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
                 switch section {
@@ -220,7 +221,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 60
                 case 11:
                     return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 60
-                    // case 12: // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                case 12:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                    // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
                 default:
                     return 0
@@ -238,15 +241,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderView {
-                // 文字色　次期繰越
-                headerView.listDateMonthLabel.textColor = .textColor
-                headerView.listDateDayLabel.textColor = .textColor
-                headerView.listSummaryLabel.textColor = .textColor
-                headerView.listDebitLabel.textColor = .textColor
-                headerView.listCreditLabel.textColor = .textColor
-                headerView.listDebitOrCreditLabel.textColor = .textColor
-                headerView.listBalanceLabel.textColor = .textColor
-                
                 headerView.listSummaryLabel.text = "前月繰越"
                 
                 // 配列のインデックス　月別の月末日を取得 12ヶ月分
@@ -281,17 +275,19 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     index = 9
                 case 12:
                     index = 10
+                case 13:
+                     index = 11
                     // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
-                    // index = 11
                 default:
                     index = nil
                 }
                 // 取得　通常仕訳 勘定別に月別に取得
                 if let index = index,
-                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
+                   nextFirstDays.count > index,
+                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,
-                    yearMonth: "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" // CONTAINS 部分一致
+                    yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
                    ) {
                     // 日付
                     // 月
@@ -324,6 +320,26 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         balanceAmount = 0
                     }
                     headerView.listBalanceLabel.text = StringUtility.shared.addComma(string: balanceAmount.description)
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseMonthlyTransferEntry.date) {
+                        // 文字色　次期繰越
+                        headerView.listDateMonthLabel.textColor = .textColor
+                        headerView.listDateDayLabel.textColor = .textColor
+                        headerView.listSummaryLabel.textColor = .textColor
+                        headerView.listDebitLabel.textColor = .textColor
+                        headerView.listCreditLabel.textColor = .textColor
+                        headerView.listDebitOrCreditLabel.textColor = .textColor
+                        headerView.listBalanceLabel.textColor = .textColor
+                    } else {
+                        // 文字色　次期繰越
+                        headerView.listDateMonthLabel.textColor = .red
+                        headerView.listDateDayLabel.textColor = .red
+                        headerView.listSummaryLabel.textColor = .red
+                        headerView.listDebitLabel.textColor = .red
+                        headerView.listCreditLabel.textColor = .red
+                        headerView.listDebitOrCreditLabel.textColor = .red
+                        headerView.listBalanceLabel.textColor = .red
+                    }
                 } else {
                     headerView.listDateMonthLabel.text = ""
                     headerView.listDateDayLabel.text = ""
@@ -346,20 +362,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderFooterView {
-                // 文字色　次期繰越
-                headerView.listDateMonthLabel.textColor = .textColor
-                headerView.listDateDayLabel.textColor = .textColor
-                headerView.listSummaryLabel.textColor = .textColor
-                headerView.listSummarySecondLabel.textColor = .accentRedColor
-                headerView.listDebitLabel.textColor = .textColor
-                headerView.listDebitSecondLabel.textColor = .accentRedColor
-                headerView.listDebitThirdLabel.textColor = .textColor
-                headerView.listCreditLabel.textColor = .textColor
-                headerView.listCreditSecondLabel.textColor = .accentRedColor
-                headerView.listCreditThirdLabel.textColor = .textColor
-                headerView.listDebitOrCreditLabel.textColor = .textColor
-                headerView.listBalanceLabel.textColor = .textColor
-                
                 headerView.listSummaryLabel.text = "合計"
                 headerView.listSummarySecondLabel.text = "次月繰越"
                 
@@ -392,19 +394,19 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     index = 9
                 case 11:
                     index = 10
-                    // case 12: // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                case 12:
+                    index = 11
+                    // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
-                    // index = 11
                 default:
                     index = nil
                 }
                 // 取得　通常仕訳 勘定別に月別に取得
                 if let index = index,
-                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
+                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,
-                    yearMonth: "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" // CONTAINS 部分一致
+                    yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
                    ) {
-                    
                     // 日付
                     if let date = DateManager.shared.dateFormatter.date(from: dataBaseMonthlyTransferEntry.date) {
                         // 月
@@ -433,6 +435,36 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         //        balanceDebitOrCredit = "-"
                         //    }
                         headerView.listDebitOrCreditLabel.text = balanceDebitOrCredit
+                    }
+                    // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
+                    if DateManager.shared.isInPeriod(date: dataBaseMonthlyTransferEntry.date) {
+                        // 文字色　次期繰越
+                        headerView.listDateMonthLabel.textColor = .textColor
+                        headerView.listDateDayLabel.textColor = .textColor
+                        headerView.listSummaryLabel.textColor = .textColor
+                        headerView.listSummarySecondLabel.textColor = .accentRedColor
+                        headerView.listDebitLabel.textColor = .textColor
+                        headerView.listDebitSecondLabel.textColor = .accentRedColor
+                        headerView.listDebitThirdLabel.textColor = .textColor
+                        headerView.listCreditLabel.textColor = .textColor
+                        headerView.listCreditSecondLabel.textColor = .accentRedColor
+                        headerView.listCreditThirdLabel.textColor = .textColor
+                        headerView.listDebitOrCreditLabel.textColor = .textColor
+                        headerView.listBalanceLabel.textColor = .textColor
+                    } else {
+                        // 文字色　次期繰越
+                        headerView.listDateMonthLabel.textColor = .red
+                        headerView.listDateDayLabel.textColor = .red
+                        headerView.listSummaryLabel.textColor = .red
+                        headerView.listSummarySecondLabel.textColor = .red
+                        headerView.listDebitLabel.textColor = .red
+                        headerView.listDebitSecondLabel.textColor = .red
+                        headerView.listDebitThirdLabel.textColor = .red
+                        headerView.listCreditLabel.textColor = .red
+                        headerView.listCreditSecondLabel.textColor = .red
+                        headerView.listCreditThirdLabel.textColor = .red
+                        headerView.listDebitOrCreditLabel.textColor = .red
+                        headerView.listBalanceLabel.textColor = .red
                     }
                 } else {
                     headerView.listDateMonthLabel.text = ""
@@ -494,18 +526,20 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         case 11:
             return presenter.numberOfDatabaseJournalEntries(forSection: 10)
         case 12:
-            // 通常仕訳 期末
             return presenter.numberOfDatabaseJournalEntries(forSection: 11)
         case 13:
+            // 通常仕訳 期末
+            return presenter.numberOfDatabaseJournalEntries(forSection: 12)
+        case 14:
             // 決算整理仕訳
             return presenter.numberOfDataBaseAdjustingEntries
-        case 14:
+        case 15:
             // 資本振替仕訳
             return presenter.numberOfDataBaseCapitalTransferJournalEntry
-        case 15:
+        case 16:
             // 損益振替仕訳、残高振替仕訳
             return presenter.numberOfDataBaseTransferEntry
-        case 16:
+        case 17:
             // 空白行
             return 21 // 空白行を表示するため+21行を追加
         default:
@@ -530,7 +564,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         var balanceAmount: Int64 = 0
         var balanceDebitOrCredit: String = ""
         
-        if indexPath.section != 16 {
+        if indexPath.section != 17 {
             
             if indexPath.section == 0 {
                 // 開始仕訳
@@ -568,7 +602,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         cell.listBalanceLabel.textColor = .red
                     }
                 }
-            } else if indexPath.section == 13 {
+            } else if indexPath.section == 14 {
                 // 決算整理仕訳　勘定別　損益勘定以外
                 date = "\(presenter.dataBaseAdjustingEntries(forRow: indexPath.row).date)"
                 if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
@@ -604,7 +638,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listDebitOrCreditLabel.textColor = .red
                     cell.listBalanceLabel.textColor = .red
                 }
-            } else if indexPath.section == 14 {
+            } else if indexPath.section == 15 {
                 // 資本振替仕訳
                 print("資本振替仕訳", indexPath)
                 if let dataBaseCapitalTransferJournalEntry = presenter.dataBaseCapitalTransferJournalEntries() {
@@ -655,7 +689,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         cell.listBalanceLabel.textColor = .red
                     }
                 }
-            } else if indexPath.section == 15 {
+            } else if indexPath.section == 16 {
                 // 損益振替仕訳、残高振替仕訳
                 if let dataBaseTransferEntry = presenter.dataBaseTransferEntries() {
                     date = "\(dataBaseTransferEntry.date)"
@@ -809,7 +843,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         switch indexPath.section {
             // 選択不可にしたい場合は"nil"を返す
-        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14:
             return indexPath
         default:
             return nil

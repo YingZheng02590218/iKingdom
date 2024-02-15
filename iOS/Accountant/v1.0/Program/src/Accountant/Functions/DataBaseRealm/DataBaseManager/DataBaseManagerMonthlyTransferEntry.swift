@@ -139,7 +139,23 @@ class DataBaseManagerMonthlyTransferEntry {
             .sorted(byKeyPath: "date", ascending: true)
         return dataBaseMonthlyTransferEntries?.first
     }
-
+    
+    // 取得 月次残高振替仕訳　勘定別
+    func getMonthlyTransferEntryInAccountBeginsWith(account: String, yearMonth: String) -> DataBaseMonthlyTransferEntry? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'").first
+        // print("月次残高振替仕訳 12ヶ月分 \(account)", dataBaseAccount?.dataBaseMonthlyTransferEntries)
+        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+            .filter("date BEGINSWITH '\(yearMonth)'")
+            .sorted(byKeyPath: "date", ascending: true)
+        print(dataBaseMonthlyTransferEntries)
+        return dataBaseMonthlyTransferEntries?.first
+    }
+    
     // MARK: Update
     // 更新 月次残高振替仕訳
     func updateTransferEntry(
