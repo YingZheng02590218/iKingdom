@@ -768,7 +768,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listNumberLabel.text = numberOfAccountCredit.description // 丁数　相手方勘定なので貸方
                 }
                 //　借方金額
-                cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(debitAmount))) "        // 借方金額
+                cell.listDebitLabel.text = StringUtility.shared.addComma(string: debitAmount.description) // 借方金額
                 //　貸方金額
                 cell.listCreditLabel.text = ""                                                 // 貸方金額 注意：空白を代入しないと、変な値が入る。
             } else if account == "\(creditCategory)" || "資本金勘定" == "\(creditCategory)" {  // 貸方勘定の場合
@@ -782,10 +782,10 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     cell.listNumberLabel.text = numberOfAccountDebit.description // 丁数　相手方勘定なので貸方
                 }
                 cell.listDebitLabel.text = ""                                                                         // 借方金額 注意：空白を代入しないと、変な値が入る。
-                cell.listCreditLabel.text = "\(StringUtility.shared.addComma(string: String(creditAmount))) "      // 貸方金額
+                cell.listCreditLabel.text = StringUtility.shared.addComma(string: creditAmount.description) // 貸方金額
             }
             
-            cell.listBalanceLabel.text = "\(StringUtility.shared.addComma(string: balanceAmount.description))"    // 差引残高
+            cell.listBalanceLabel.text = StringUtility.shared.addComma(string: balanceAmount.description.description) // 差引残高
             cell.listDebitOrCreditLabel.text = balanceDebitOrCredit                          // 借又貸
             // セルの選択を許可
             cell.selectionStyle = .default
