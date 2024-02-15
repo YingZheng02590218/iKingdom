@@ -217,12 +217,12 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 headerView.listDateMonthLabel.textColor = .textColor
                 headerView.listDateDayLabel.textColor = .textColor
                 headerView.listSummaryLabel.textColor = .textColor
-                headerView.listSummarySecondLabel.textColor = .accentColor
+                headerView.listSummarySecondLabel.textColor = .accentRedColor
                 headerView.listDebitLabel.textColor = .textColor
-                headerView.listDebitSecondLabel.textColor = .accentColor
+                headerView.listDebitSecondLabel.textColor = .accentRedColor
                 headerView.listDebitThirdLabel.textColor = .textColor
                 headerView.listCreditLabel.textColor = .textColor
-                headerView.listCreditSecondLabel.textColor = .accentColor
+                headerView.listCreditSecondLabel.textColor = .accentRedColor
                 headerView.listCreditThirdLabel.textColor = .textColor
                 headerView.listDebitOrCreditLabel.textColor = .textColor
                 headerView.listBalanceLabel.textColor = .textColor
@@ -261,9 +261,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     index = 10
                     // case 12: // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
+                    // index = 11
                     // case 13:
                     // 決算整理仕訳
-                    // index = 11
                 default:
                     index = nil
                 }
@@ -271,7 +271,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 if let index = index,
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
                     account: account,
-                    yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))"
+                    yearMonth: "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" // CONTAINS 部分一致
                    ) {
                     
                     // 日付
@@ -283,13 +283,13 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         headerView.listDateDayLabel.text = "\(date.day)"
                         headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
                         // 借方
-                        headerView.listDebitLabel.text = dataBaseMonthlyTransferEntry.debit_amount.description
-                        headerView.listDebitSecondLabel.text = dataBaseMonthlyTransferEntry.balance_right == 0 ? "" : dataBaseMonthlyTransferEntry.balance_right.description // 借方勘定　＊引数の貸方勘定を振替える
-                        headerView.listDebitThirdLabel.text = (dataBaseMonthlyTransferEntry.debit_amount + dataBaseMonthlyTransferEntry.balance_right).description
+                        headerView.listDebitLabel.text = StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.debit_amount.description)
+                        headerView.listDebitSecondLabel.text = dataBaseMonthlyTransferEntry.balance_right == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_right.description) // 借方勘定　＊引数の貸方勘定を振替える
+                        headerView.listDebitThirdLabel.text = StringUtility.shared.addComma(string: (dataBaseMonthlyTransferEntry.debit_amount + dataBaseMonthlyTransferEntry.balance_right).description)
                         // 貸方
-                        headerView.listCreditLabel.text = dataBaseMonthlyTransferEntry.credit_amount.description
-                        headerView.listCreditSecondLabel.text = dataBaseMonthlyTransferEntry.balance_left == 0 ? "" : dataBaseMonthlyTransferEntry.balance_left.description // 貸方勘定　＊引数の借方勘定を振替える
-                        headerView.listCreditThirdLabel.text = (dataBaseMonthlyTransferEntry.credit_amount + dataBaseMonthlyTransferEntry.balance_left).description
+                        headerView.listCreditLabel.text = StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.credit_amount.description)
+                        headerView.listCreditSecondLabel.text = dataBaseMonthlyTransferEntry.balance_left == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_left.description) // 貸方勘定　＊引数の借方勘定を振替える
+                        headerView.listCreditThirdLabel.text = StringUtility.shared.addComma(string: (dataBaseMonthlyTransferEntry.credit_amount + dataBaseMonthlyTransferEntry.balance_left).description)
                         // 借又貸
                         var balanceDebitOrCredit: String = ""
                         //    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {

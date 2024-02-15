@@ -132,9 +132,10 @@ class DataBaseManagerMonthlyTransferEntry {
         ])
         let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
             .filter("accountName LIKE '\(account)'").first
+        // print("月次残高振替仕訳 12ヶ月分 \(account)", dataBaseAccount?.dataBaseMonthlyTransferEntries)
         let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
-        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-            .filter("date BEGINSWITH '\(yearMonth)'")
+        // CONTAINS 部分一致
+            .filter("date CONTAINS '\(yearMonth)'") // 決算日が変更され、年が変わった場合の対策
             .sorted(byKeyPath: "date", ascending: true)
         return dataBaseMonthlyTransferEntries?.first
     }
