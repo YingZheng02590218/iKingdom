@@ -30,6 +30,10 @@ class GeneralLedgerAccountViewController: UIViewController {
                 UINib(nibName: String(describing: AccountTableViewHeaderFooterView.self), bundle: nil),
                 forHeaderFooterViewReuseIdentifier: String(describing: AccountTableViewHeaderFooterView.self)
             )
+            tableView.register(
+                UINib(nibName: String(describing: AccountTableViewHeaderView.self), bundle: nil),
+                forHeaderFooterViewReuseIdentifier: String(describing: AccountTableViewHeaderView.self)
+            )
         }
     }
     @IBOutlet private var backgroundView: EMTNeumorphicView!
@@ -144,6 +148,43 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
     // セクションヘッダーの高さ
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
+        case /*1, */2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12/*, 13*/:
+            // 貸借科目　のみに絞る
+            if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                switch section {
+                    // case 1: // 初月は前期繰越があるため、不要
+                    // 通常仕訳 期首
+                case 2:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 20
+                case 3:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 20
+                case 4:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 20
+                case 5:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 20
+                case 6:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 20
+                case 7:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 20
+                case 8:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 20
+                case 9:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 20
+                case 10:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 20
+                case 11:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 20
+                case 12:
+                    return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
+                    // 決算月は次期繰越があるため、不要
+                    // 通常仕訳 期末
+                    // return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                default:
+                    return 0
+                }
+            } else {
+                return 0
+            }
         default:
             return 0
         }
@@ -191,29 +232,121 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
             return 0
         }
     }
-    // セクションヘッダーの色とか調整する
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = .textColor
-            header.textLabel?.textAlignment = .left
-            // システムフォントのサイズを設定
-            header.textLabel?.font = UIFont.systemFont(ofSize: 16)
-        }
-    }
-    // セクションヘッダーのテキスト決める
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        default:
+    // セクションヘッダー
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderView.self))
+        // 貸借科目　のみに絞る
+        if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+            if let headerView = view as? AccountTableViewHeaderView {
+                // 文字色　次期繰越
+                headerView.listDateMonthLabel.textColor = .textColor
+                headerView.listDateDayLabel.textColor = .textColor
+                headerView.listSummaryLabel.textColor = .textColor
+                headerView.listDebitLabel.textColor = .textColor
+                headerView.listCreditLabel.textColor = .textColor
+                headerView.listDebitOrCreditLabel.textColor = .textColor
+                headerView.listBalanceLabel.textColor = .textColor
+                
+                headerView.listSummaryLabel.text = "前月繰越"
+                
+                // 配列のインデックス　月別の月末日を取得 12ヶ月分
+                var index: Int?
+                // 月別の月末日を取得 12ヶ月分
+                let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                // 月別の翌月の初日を取得 12ヶ月分
+                let nextFirstDays = DateManager.shared.getTheDayOfEndingOfMonth(isLastDay: false)
+                
+                switch section {
+                    // case 1: // 初月は前期繰越があるため、不要
+                    // 通常仕訳 期首
+                case 2:
+                    index = 0
+                case 3:
+                    index = 1
+                case 4:
+                    index = 2
+                case 5:
+                    index = 3
+                case 6:
+                    index = 4
+                case 7:
+                    index = 5
+                case 8:
+                    index = 6
+                case 9:
+                    index = 7
+                case 10:
+                    index = 8
+                case 11:
+                    index = 9
+                case 12:
+                    index = 10
+                    // 決算月は次期繰越があるため、不要
+                    // 通常仕訳 期末
+                    // index = 11
+                default:
+                    index = nil
+                }
+                // 取得　通常仕訳 勘定別に月別に取得
+                if let index = index,
+                   let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
+                    account: account,
+                    yearMonth: "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" // CONTAINS 部分一致
+                   ) {
+                    // 日付
+                    // 月
+                    headerView.listDateMonthLabel.text = "\(nextFirstDays[index].month)"
+                    headerView.listDateMonthLabel.textAlignment = NSTextAlignment.right
+                    // 日
+                    headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)"
+                    headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
+                    // 借方
+                    headerView.listDebitLabel.text = dataBaseMonthlyTransferEntry.balance_left == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_left.description) // 貸方勘定　＊引数の借方勘定を振替える
+                    // 貸方
+                    headerView.listCreditLabel.text = dataBaseMonthlyTransferEntry.balance_right == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_right.description) // 借方勘定　＊引数の貸方勘定を振替える
+                    // 借又貸
+                    var balanceDebitOrCredit: String = ""
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                        balanceDebitOrCredit = "借"
+                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                        balanceDebitOrCredit = "貸"
+                    } else {
+                        balanceDebitOrCredit = "-"
+                    }
+                    headerView.listDebitOrCreditLabel.text = balanceDebitOrCredit
+                    // 差引残高額
+                    var balanceAmount: Int64 = 0
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right { // 借方と貸方を比較
+                        balanceAmount = dataBaseMonthlyTransferEntry.balance_left
+                    } else if dataBaseMonthlyTransferEntry.balance_right > dataBaseMonthlyTransferEntry.balance_left {
+                        balanceAmount = dataBaseMonthlyTransferEntry.balance_right
+                    } else {
+                        balanceAmount = 0
+                    }
+                    headerView.listBalanceLabel.text = StringUtility.shared.addComma(string: balanceAmount.description)
+                } else {
+                    headerView.listDateMonthLabel.text = ""
+                    headerView.listDateDayLabel.text = ""
+                    headerView.listDebitLabel.text = ""
+                    headerView.listCreditLabel.text = ""
+                    headerView.listDebitOrCreditLabel.text = ""
+                    headerView.listBalanceLabel.text = ""
+                }
+                return headerView
+            }
+            return nil
+        } else {
             return nil
         }
     }
+    
     // セクションフッター
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: AccountTableViewHeaderFooterView.self))
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderFooterView {
-                // TODO: 文字色　次期繰越
+                // 文字色　次期繰越
                 headerView.listDateMonthLabel.textColor = .textColor
                 headerView.listDateDayLabel.textColor = .textColor
                 headerView.listSummaryLabel.textColor = .textColor
@@ -262,8 +395,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     // case 12: // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
                     // index = 11
-                    // case 13:
-                    // 決算整理仕訳
                 default:
                     index = nil
                 }
@@ -301,7 +432,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         //    } else {
                         //        balanceDebitOrCredit = "-"
                         //    }
-                        balanceDebitOrCredit = ""
                         headerView.listDebitOrCreditLabel.text = balanceDebitOrCredit
                     }
                 } else {

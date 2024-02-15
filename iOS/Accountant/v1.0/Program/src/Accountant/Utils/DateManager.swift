@@ -208,7 +208,7 @@ class DateManager {
     }
     
     // 月別の月末日を取得 12ヶ月分
-    func getTheDayOfEndingOfMonth() -> [Date] {
+    func getTheDayOfEndingOfMonth(isLastDay: Bool = true) -> [Date] {
         // 月別の月末日 12ヶ月分
         var beginningOfMonthDates: [Date] = []
         
@@ -249,7 +249,14 @@ class DateManager {
                     print("月初：\(firstDay)") // 2020-01-31 15:00:00 +0000
                     print("月末：\(lastDay)\n") // 2020-02-28 15:00:00 +0000
                     // 先頭を0埋めする
-                    beginningOfMonthDates.append(lastDay)
+                    if isLastDay {
+                        beginningOfMonthDates.append(lastDay)
+                    } else {
+                        let add = DateComponents(month: 0, day: 1) // 月末から1日進める
+                        if let nextFirstDay = calendar.date(byAdding: add, to: lastDay) {
+                            beginningOfMonthDates.append(nextFirstDay)
+                        }
+                    }
                 }
             }
         }

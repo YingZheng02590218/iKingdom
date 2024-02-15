@@ -63,7 +63,7 @@ class DataBaseManagerMonthlyTransferEntry {
             debit_amount: debitAmount, // 借方金額
             credit_category: debitCategory, // 貸方勘定　＊引数の借方勘定を振替える
             credit_amount: creditAmount, // 貸方金額
-            smallWritting: "残高振替仕訳", // 小書き
+            smallWritting: "月次残高振替仕訳", // 小書き
             balance_left: balanceLeft,
             balance_right: balanceRight
         )

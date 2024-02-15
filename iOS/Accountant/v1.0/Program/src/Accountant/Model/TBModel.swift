@@ -554,11 +554,28 @@ class TBModel: TBModelInput {
                 }
                 // 月別の月末日を取得 12ヶ月分
                 let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
-                for lastDay in lastDays {
+                
+                for index in 0..<lastDays.count {
+                    if index > 0 {
+                        // 前月の　月次残高振替仕訳　の金額を加味する
+                        if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
+                            account: account,
+                            yearMonth: "/" + "\(String(format: "%02d", lastDays[index-1].month))" + "/" // CONTAINS 部分一致
+                        ) {
+                            // 勘定が借方と貸方のどちらか
+                            if account == "\(dataBaseMonthlyTransferEntry.debit_category)" { // 借方
+                                // 借方勘定　＊貸方勘定を振替える
+                                right += dataBaseMonthlyTransferEntry.balance_right // 累計額に追加
+                            } else if account == "\(dataBaseMonthlyTransferEntry.credit_category)" { // 貸方
+                                // 貸方勘定　＊借方勘定を振替える
+                                left += dataBaseMonthlyTransferEntry.balance_left // 累計額に追加
+                            }
+                        }
+                    }
                     // 通常仕訳 勘定別に月別に取得
                     let dataBaseJournalEntries = dataBaseManagerAccount.getJournalEntryInAccountInMonth(
                         account: account,
-                        yearMonth: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))"
+                        yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))"
                     )
                     for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ
                         // 勘定が借方と貸方のどちらか
@@ -568,61 +585,58 @@ class TBModel: TBModelInput {
                             right += dataBaseJournalEntries[i].credit_amount // 累計額に追加
                         }
                     }
-                    // 決算整理仕訳
-                    let dataBaseAdjustingEntries = dataBaseManagerAccount.getAdjustingEntryInAccountInMonth(
-                        account: account,
-                        yearMonth: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))"
-                    )
-                    for i in 0..<dataBaseAdjustingEntries.count { // 勘定内のすべての仕訳データ
-                        // 勘定が借方と貸方のどちらか
-                        if account == "\(dataBaseAdjustingEntries[i].debit_category)" { // 借方
-                            left += dataBaseAdjustingEntries[i].debit_amount // 累計額に追加
-                        } else if account == "\(dataBaseAdjustingEntries[i].credit_category)" { // 貸方
-                            right += dataBaseAdjustingEntries[i].credit_amount // 累計額に追加
-                        }
+                    // 決算月は、次期繰越があるので、不要
+                    //    // 決算整理仕訳
+                    //    let dataBaseAdjustingEntries = dataBaseManagerAccount.getAdjustingEntryInAccountInMonth(
+                    //        account: account,
+                    //        yearMonth: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))"
+                    //    )
+                    //    for i in 0..<dataBaseAdjustingEntries.count { // 勘定内のすべての仕訳データ
+                    //        // 勘定が借方と貸方のどちらか
+                    //        if account == "\(dataBaseAdjustingEntries[i].debit_category)" { // 借方
+                    //            left += dataBaseAdjustingEntries[i].debit_amount // 累計額に追加
+                    //        } else if account == "\(dataBaseAdjustingEntries[i].credit_category)" { // 貸方
+                    //            right += dataBaseAdjustingEntries[i].credit_amount // 累計額に追加
+                    //        }
+                    //    }
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if left > right {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: account,
+                            creditCategory: "残高",
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: left - right, // 差額を格納
+                            balanceRight: 0
+                        )
+                    } else if left < right {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: "残高",
+                            creditCategory: account,
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: 0,
+                            balanceRight: right - left
+                        )
+                    } else {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: account,
+                            creditCategory: "残高",
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: 0,
+                            balanceRight: 0
+                        )
                     }
-                    
-                    let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-                    if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-                        // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                        for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                            // 借方と貸方で金額が大きい方はどちらか
-                            if left > right {
-                                // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
-                                    date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
-                                    debitCategory: account,
-                                    creditCategory: "残高",
-                                    debitAmount: left,
-                                    creditAmount: right,
-                                    balanceLeft: left - right, // 差額を格納
-                                    balanceRight: 0
-                                )
-                            } else if left < right {
-                                // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
-                                    date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
-                                    debitCategory: "残高",
-                                    creditCategory: account,
-                                    debitAmount: left,
-                                    creditAmount: right,
-                                    balanceLeft: 0,
-                                    balanceRight: right - left
-                                )
-                            } else {
-                                // 月次残高振替仕訳
-                                DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
-                                    date: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))" + "/" + "\(String(format: "%02d", lastDay.day))",
-                                    debitCategory: account,
-                                    creditCategory: "残高",
-                                    debitAmount: left,
-                                    creditAmount: right,
-                                    balanceLeft: 0,
-                                    balanceRight: 0
-                                )
-                            }
-                        }
-                    }
+                    // 月別に合計を計算する
+                    left = 0
+                    right = 0
                 }
             }
         }
