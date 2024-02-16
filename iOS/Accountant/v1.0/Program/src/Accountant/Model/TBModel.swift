@@ -554,6 +554,8 @@ class TBModel: TBModelInput {
                 }
                 // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付が会計期間の範囲外の場合、削除する
                 DataBaseManagerMonthlyTransferEntry.shared.deleteMonthlyTransferEntryInAccountInFiscalYear(account: account)
+                // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付（年月）が重複している場合、削除する
+                DataBaseManagerMonthlyTransferEntry.shared.deleteDuplicatedMonthlyTransferEntryInAccountInFiscalYear(account: account)
                 
                 // 月別の月末日を取得 12ヶ月分
                 let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()

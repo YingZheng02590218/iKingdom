@@ -142,7 +142,7 @@ class GeneralLedgerAccountViewController: UIViewController {
 extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDataSource {
     // セクションの数を設定する
     func numberOfSections(in tableView: UITableView) -> Int {
-        // 通常仕訳(12ヶ月分)　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
+        // 開始仕訳　通常仕訳(13ヶ月分)　決算整理仕訳 損益振替仕訳 資本振替仕訳　空白行
         return 18
     }
     // セクションヘッダーの高さ
@@ -177,7 +177,14 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 case 12:
                     return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
                 case 13:
-                     return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                    // 月別の月末日を取得 12ヶ月分
+                    let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                    // 月別の月末を取得 13ヶ月分　が存在するか
+                    if lastDays.count > 12 {
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                    } else {
+                        return 0
+                    }
                     // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
                 default:
@@ -222,7 +229,16 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 case 11:
                     return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 60
                 case 12:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                    // 月別の月末日を取得 12ヶ月分
+                    let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                    // 月別の月末を取得 13ヶ月分　が存在するか
+                    if lastDays.count > 12 {
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                    } else {
+                        return 0
+                    }
+                    // case 13:
+                    // return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 60
                     // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
                 default:
@@ -241,8 +257,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderView {
-                headerView.listSummaryLabel.text = "前月繰越"
-                
                 // 配列のインデックス　月別の月末日を取得 12ヶ月分
                 var index: Int?
                 // 月別の月末日を取得 12ヶ月分
@@ -274,9 +288,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 case 11:
                     index = 9
                 case 12:
-                    index = 10
+                    index = 10 // 決算月　決算日が月末の場合
                 case 13:
-                     index = 11
+                     index = 11 // 決算月　決算日が月末ではない場合
                     // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
                 default:
@@ -284,6 +298,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 }
 
                 if let index = index,
+                   // 月別の翌月の初日を取得 12ヶ月分　に存在するか
                    nextFirstDays.count > index,
                    // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
@@ -297,6 +312,8 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                     // 日
                     headerView.listDateDayLabel.text = "\(nextFirstDays[index].day)"
                     headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
+                    // 摘要
+                    headerView.listSummaryLabel.text = "前月繰越"
                     // 借方
                     headerView.listDebitLabel.text = dataBaseMonthlyTransferEntry.balance_left == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_left.description) // 貸方勘定　＊引数の借方勘定を振替える
                     // 貸方
@@ -344,6 +361,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 } else {
                     headerView.listDateMonthLabel.text = ""
                     headerView.listDateDayLabel.text = ""
+                    headerView.listSummaryLabel.text = ""
                     headerView.listDebitLabel.text = ""
                     headerView.listCreditLabel.text = ""
                     headerView.listDebitOrCreditLabel.text = ""
@@ -363,9 +381,6 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         // 貸借科目　のみに絞る
         if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
             if let headerView = view as? AccountTableViewHeaderFooterView {
-                headerView.listSummaryLabel.text = "合計"
-                headerView.listSummarySecondLabel.text = "次月繰越"
-                
                 // 配列のインデックス　月別の月末日を取得 12ヶ月分
                 var index: Int?
                 // 月別の月末日を取得 12ヶ月分
@@ -394,9 +409,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 case 10:
                     index = 9
                 case 11:
-                    index = 10
+                    index = 10 // 決算月　決算日が月末の場合
                 case 12:
-                    index = 11
+                    index = 11 // 決算月　決算日が月末ではない場合
                     // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
                     // 通常仕訳 期末
                 default:
@@ -404,6 +419,8 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 }
 
                 if let index = index,
+                   // 月別の月末を取得 12ヶ月分　に存在するか
+                   lastDays.count > index,
                    // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,
@@ -417,6 +434,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                         // 日
                         headerView.listDateDayLabel.text = "\(date.day)"
                         headerView.listDateDayLabel.textAlignment = NSTextAlignment.right
+                        // 摘要
+                        headerView.listSummaryLabel.text = "合計"
+                        headerView.listSummarySecondLabel.text = "次月繰越"
                         // 借方
                         headerView.listDebitLabel.text = StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.debit_amount.description)
                         headerView.listDebitSecondLabel.text = dataBaseMonthlyTransferEntry.balance_right == 0 ? "" : StringUtility.shared.addComma(string: dataBaseMonthlyTransferEntry.balance_right.description) // 借方勘定　＊引数の貸方勘定を振替える
@@ -471,6 +491,8 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 } else {
                     headerView.listDateMonthLabel.text = ""
                     headerView.listDateDayLabel.text = ""
+                    headerView.listSummaryLabel.text = ""
+                    headerView.listSummarySecondLabel.text = ""
                     headerView.listDebitLabel.text = ""
                     headerView.listDebitSecondLabel.text = ""
                     headerView.listDebitThirdLabel.text = ""

@@ -166,6 +166,20 @@ class DataBaseManagerMonthlyTransferEntry {
         print("月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致", dataBaseMonthlyTransferEntries)
         return dataBaseMonthlyTransferEntries?.first
     }
+    // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致 複数
+    func getAllMonthlyTransferEntryInAccountBeginsWith(account: String, yearMonth: String) -> Results<DataBaseMonthlyTransferEntry>? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+            .filter("accountName LIKE '\(account)'").first
+        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+            .filter("date BEGINSWITH '\(yearMonth)'")
+            .sorted(byKeyPath: "date", ascending: true)
+        print("月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致 複数", dataBaseMonthlyTransferEntries)
+        return dataBaseMonthlyTransferEntries
+    }
     
     // MARK: Update
     // 更新 月次残高振替仕訳
@@ -226,4 +240,29 @@ class DataBaseManagerMonthlyTransferEntry {
             }
         }
     }
+    // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付（年月）が重複している場合、削除する
+    func deleteDuplicatedMonthlyTransferEntryInAccountInFiscalYear(account: String) {
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        for index in 0..<lastDays.count {
+            // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致 複数
+            if let dataBaseMonthlyTransferEntries = getAllMonthlyTransferEntryInAccountBeginsWith(
+                account: account,
+                yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
+            ) {
+                while dataBaseMonthlyTransferEntries.count > 1 {
+                    if let dataBaseMonthlyTransferEntry = dataBaseMonthlyTransferEntries.first {
+                        do {
+                            try DataBaseManager.realm.write {
+                                DataBaseManager.realm.delete(dataBaseMonthlyTransferEntry)
+                            }
+                        } catch {
+                            print("エラーが発生しました")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }

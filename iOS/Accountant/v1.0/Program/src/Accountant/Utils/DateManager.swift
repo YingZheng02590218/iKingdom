@@ -207,7 +207,8 @@ class DateManager {
         return dateFormatterMMdd.string(from: fullTheDayOfReckoning)
     }
     
-    // 月別の月末日を取得 12ヶ月分 月末ではない場合、13ヶ月分
+    // true : 月別の月末日を取得    12ヶ月分 (月末ではない場合、13ヶ月分)
+    // false: 月別の翌月の初日を取得 11ヶ月分 (月末ではない場合、12ヶ月分)
     func getTheDayOfEndingOfMonth(isLastDay: Bool = true) -> [Date] {
         // 月別の月末日 12ヶ月分
         var beginningOfMonthDates: [Date] = []
@@ -232,11 +233,13 @@ class DateManager {
         //　ある月の月初・月末を取得する方法。月初の取得は1日固定で取得するだけだが、月末の取得は月初から1ヶ月進めて1日戻すことで算出できる。
         var calendar = Calendar(identifier: .gregorian) // 西暦を指定
         calendar.timeZone = TimeZone(secondsFromGMT: 0 * 60 * 60) ?? .current
+        
+        print("期首：\(dayOfStartInPeriod)\n") // 期首：2023-01-02 00:00:00 +0000
         // 月末ではない場合、13ヶ月分が必要となる
         for i in 0..<13 {
             // 今年度の開始日 ＋１ヶ月
             if let dayOfStartInPeriodAdded = Calendar.current.date(byAdding: .month, value: i, to: dayOfStartInPeriod),
-               // day: 1 を指定してもよいが省略しても月初となる
+               // 月初 day: 1 を指定してもよいが省略しても月初となる
                let firstDay = calendar.date(from: DateComponents(year: dayOfStartInPeriodAdded.year, month: dayOfStartInPeriodAdded.month)) {
                 /* こう書いても同じ
                  var comps = calendar.dateComponents([.year, .month], from: Date())
@@ -244,28 +247,59 @@ class DateManager {
                  comps.month = 2
                  let firstDay = calendar.date(from: comps)!
                  */
+                // 月末
                 let add = DateComponents(month: 1, day: -1) // 月初から1ヶ月進めて1日戻す
                 if let lastDay = calendar.date(byAdding: add, to: firstDay) {
-                    print("月初：\(firstDay)") // 2020-01-31 15:00:00 +0000
-                    print("月末：\(lastDay)\n") // 2020-02-28 15:00:00 +0000
+                    print("index：\(i)")
+                    print("月初：\(firstDay)")  // 月初：2023-01-01 00:00:00 +0000
+                    print("月末：\(lastDay)\n") // 月末：2023-01-31 00:00:00 +0000
                     // 先頭を0埋めする
-                    if isLastDay {
-                        beginningOfMonthDates.append(lastDay)
-                    } else {
+                    if isLastDay { // 月末
+                        // 今年度の決算日 > 月末
+                        if fullTheDayOfReckoning > lastDay {
+                            beginningOfMonthDates.append(lastDay)
+                        } else {
+                            beginningOfMonthDates.append(fullTheDayOfReckoning)
+                        }
+                    } else { // 次月の月初
                         let add = DateComponents(month: 0, day: 1) // 月末から1日進める
                         if let nextFirstDay = calendar.date(byAdding: add, to: lastDay) {
                             // 今年度の決算日 > 次月の月初
                             if fullTheDayOfReckoning > nextFirstDay {
                                 beginningOfMonthDates.append(nextFirstDay)
+                                // } else {
+                                //  // 翌年の期首
+                                //  let add = DateComponents(year: 1) // 月初から1ヶ月進めて1日戻す
+                                //  if let nextFiscalYearFirstDay = calendar.date(byAdding: add, to: dayOfStartInPeriod) {
+                                //      beginningOfMonthDates.append(nextFiscalYearFirstDay)
+                                //  }
                             }
                         }
                     }
                 }
             }
         }
-        print(beginningOfMonthDates)
-        print(beginningOfMonthDates.sorted(by: <))
-        return beginningOfMonthDates.sorted(by: <)
+        print("期末：\(fullTheDayOfReckoning)\n") // 期末：2024-01-01 00:00:00 +0000
+        
+        print("月別の月末日を取得 12ヶ月分 月末ではない場合、13ヶ月分")
+        if isLastDay {
+            print("月末 \n", beginningOfMonthDates.count)
+            print(dump(beginningOfMonthDates.sorted(by: <)))
+        } else {
+            print("月初 \n", beginningOfMonthDates.count)
+            print(dump(beginningOfMonthDates.sorted(by: <)))
+        }
+        
+        // 重複削除 配列から重複する要素を削除する 決算日が月末の場合、12ヶ月分で足りるので、13ヶ月分だと重複してしまうため。
+        var uniqueDates = Array(Set(beginningOfMonthDates))
+        if isLastDay {
+            print("月末 重複削除\n", uniqueDates.count)
+            print(dump(uniqueDates.sorted(by: <)))
+        } else {
+            print("月初 重複削除\n", uniqueDates.count)
+            print(dump(uniqueDates.sorted(by: <)))
+        }
+        return uniqueDates.sorted(by: <)
     }
     
     func getDate() -> String {
