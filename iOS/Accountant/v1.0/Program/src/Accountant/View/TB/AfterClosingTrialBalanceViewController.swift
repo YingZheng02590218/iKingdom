@@ -131,16 +131,16 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
             // 勘定科目をセルに表示する
             cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
             cell.accountLabel.textAlignment = NSTextAlignment.center
-            // 残高　借方
+            // 残高　借方　勘定別の決算整理後の合計額
             cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
-            // 残高　貸方
+            // 残高　貸方　勘定別の決算整理後の合計額
             cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
-            // 残高　借方
+            // 借方　残高　集計
             cell.debitLabel.text = presenter.debit_balance_total()
-            // 残高　貸方
+            // 貸方　残高　集計
             cell.creditLabel.text = presenter.credit_balance_total()
             // 借方貸方の金額が不一致の場合、文字色を赤
             if cell.debitLabel.text != cell.creditLabel.text {

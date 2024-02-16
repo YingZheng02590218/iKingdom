@@ -282,9 +282,10 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 default:
                     index = nil
                 }
-                // 取得　通常仕訳 勘定別に月別に取得
+
                 if let index = index,
                    nextFirstDays.count > index,
+                   // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,
                     yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致
@@ -401,8 +402,9 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 default:
                     index = nil
                 }
-                // 取得　通常仕訳 勘定別に月別に取得
+
                 if let index = index,
+                   // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
                    let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                     account: account,
                     yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" // BEGINSWITH 前方一致

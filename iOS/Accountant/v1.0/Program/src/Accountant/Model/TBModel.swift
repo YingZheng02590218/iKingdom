@@ -552,15 +552,19 @@ class TBModel: TBModelInput {
                         right += dataBaseOpeningJournalEntry.credit_amount // 累計額に追加
                     }
                 }
+                // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付が会計期間の範囲外の場合、削除する
+                DataBaseManagerMonthlyTransferEntry.shared.deleteMonthlyTransferEntryInAccountInFiscalYear(account: account)
+                
                 // 月別の月末日を取得 12ヶ月分
                 let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
                 
                 for index in 0..<lastDays.count {
                     if index > 0 {
                         // 前月の　月次残高振替仕訳　の金額を加味する
-                        if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccount(
+                        // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                        if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
                             account: account,
-                            yearMonth: "/" + "\(String(format: "%02d", lastDays[index-1].month))" + "/" // CONTAINS 部分一致
+                            yearMonth: "\(lastDays[index - 1].year)" + "/" + "\(String(format: "%02d", lastDays[index - 1].month))" // BEGINSWITH 前方一致
                         ) {
                             // 勘定が借方と貸方のどちらか
                             if account == "\(dataBaseMonthlyTransferEntry.debit_category)" { // 借方

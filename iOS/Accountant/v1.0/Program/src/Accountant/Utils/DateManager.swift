@@ -119,7 +119,7 @@ class DateManager {
         print("####変換後　", journalEntryDate)
         print("####決算日　", fullTheDayOfReckoning)
         print(journalEntryDate < dayOfStartInPeriod, fullTheDayOfReckoning < journalEntryDate)
-        
+        // 期首 - 期末
         if journalEntryDate < dayOfStartInPeriod || fullTheDayOfReckoning < journalEntryDate {
             return false // 範囲外
         } else {
