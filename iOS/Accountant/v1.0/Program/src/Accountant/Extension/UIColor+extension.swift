@@ -19,6 +19,10 @@ extension UIColor {
         UIColor(named: "AccentColor") ?? .white
     }
 
+    class var accentRedColor: UIColor {
+        UIColor(named: "AccentRedColor") ?? .white
+    }
+
     class var accentDark: UIColor {
         UIColor(named: "AccentDark") ?? .white
     }

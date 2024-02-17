@@ -184,6 +184,8 @@ class TBModel: TBModelInput {
             calculateAccountTotalAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
             // 勘定別の決算整理後の集計
             calculateAccountTotalAfterAdjusting(account: dataBaseSettingsTaxonomyAccounts[i].category)
+            //　勘定クラス　勘定別に月次残高振替仕訳データを集計　開始仕訳　仕訳　決算整理仕訳
+            calculateAccountMonthlyTotal(account: dataBaseSettingsTaxonomyAccounts[i].category)
         }
         // 損益振替仕訳、資本振替仕訳 を行う
         transferJournals()
@@ -230,6 +232,9 @@ class TBModel: TBModelInput {
             )
             // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
         }
+        //　勘定クラス　勘定別に月次残高振替仕訳データを集計　開始仕訳　仕訳　決算整理仕訳
+        calculateAccountMonthlyTotal(account: accountLeft)
+        calculateAccountMonthlyTotal(account: accountRight)
     }
     // 設定　決算整理仕訳と決算整理後　勘定クラス　個別の勘定別　決算整理仕訳データを追加後に、呼び出される
     func setAccountTotalAdjusting(accountLeft: String, accountRight: String) {
@@ -259,6 +264,9 @@ class TBModel: TBModelInput {
             )
             // 表示科目　貸借対照表の大区分と中区分の合計額と、表示科目の集計額を集計 は、BS画面のwillAppear()で行う
         }
+        //　勘定クラス　勘定別に月次残高振替仕訳データを集計　開始仕訳　仕訳　決算整理仕訳
+        calculateAccountMonthlyTotal(account: accountLeft)
+        calculateAccountMonthlyTotal(account: accountRight)
     }
     
     // MARK: - 帳簿締切
@@ -518,6 +526,142 @@ class TBModel: TBModelInput {
                     }
                 }
             }
+        }
+    }
+    //　勘定クラス　勘定別に月次残高振替仕訳データを集計　開始仕訳　仕訳　決算整理仕訳
+    private func calculateAccountMonthlyTotal(account: String) {
+        // 損益計算書に関する勘定科目のみに絞る
+        if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+            // 月次残高振替は貸借科目のみを対象とする
+        } else {
+            // 勘定に仕訳が存在するかどうか
+            if isExistJournalEntryInAccount(account: account) {
+                var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
+                var right: Int64 = 0
+                
+                let dataBaseManagerAccount = GeneralLedgerAccountModel()
+                // 開始仕訳 勘定別に取得　期首の月の場合
+                let dataBaseOpeningJournalEntry = dataBaseManagerAccount.getOpeningJournalEntryInAccount(
+                    account: account
+                )
+                if let dataBaseOpeningJournalEntry = dataBaseOpeningJournalEntry {
+                    // 勘定が借方と貸方のどちらか
+                    if account == dataBaseOpeningJournalEntry.debit_category { // 借方
+                        left += dataBaseOpeningJournalEntry.debit_amount // 累計額に追加
+                    } else if account == dataBaseOpeningJournalEntry.credit_category { // 貸方
+                        right += dataBaseOpeningJournalEntry.credit_amount // 累計額に追加
+                    }
+                }
+                // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付が会計期間の範囲外の場合、削除する
+                DataBaseManagerMonthlyTransferEntry.shared.deleteMonthlyTransferEntryInAccountInFiscalYear(account: account)
+                // 削除　月次残高振替仕訳 今年度の勘定別の月次残高振替仕訳のうち、日付（年月）が重複している場合、削除する
+                DataBaseManagerMonthlyTransferEntry.shared.deleteDuplicatedMonthlyTransferEntryInAccountInFiscalYear(account: account)
+                
+                // 月別の月末日を取得 12ヶ月分
+                let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                
+                for index in 0..<lastDays.count {
+                    if index > 0 {
+                        // 前月の　月次残高振替仕訳　の金額を加味する
+                        // 取得 月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                        if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                            account: account,
+                            yearMonth: "\(lastDays[index - 1].year)" + "/" + "\(String(format: "%02d", lastDays[index - 1].month))" // BEGINSWITH 前方一致
+                        ) {
+                            // 勘定が借方と貸方のどちらか
+                            if account == "\(dataBaseMonthlyTransferEntry.debit_category)" { // 借方
+                                // 借方勘定　＊貸方勘定を振替える
+                                right += dataBaseMonthlyTransferEntry.balance_right // 累計額に追加
+                            } else if account == "\(dataBaseMonthlyTransferEntry.credit_category)" { // 貸方
+                                // 貸方勘定　＊借方勘定を振替える
+                                left += dataBaseMonthlyTransferEntry.balance_left // 累計額に追加
+                            }
+                        }
+                    }
+                    // 通常仕訳 勘定別に月別に取得
+                    let dataBaseJournalEntries = dataBaseManagerAccount.getJournalEntryInAccountInMonth(
+                        account: account,
+                        yearMonth: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))"
+                    )
+                    for i in 0..<dataBaseJournalEntries.count { // 勘定内のすべての仕訳データ
+                        // 勘定が借方と貸方のどちらか
+                        if account == "\(dataBaseJournalEntries[i].debit_category)" { // 借方
+                            left += dataBaseJournalEntries[i].debit_amount // 累計額に追加
+                        } else if account == "\(dataBaseJournalEntries[i].credit_category)" { // 貸方
+                            right += dataBaseJournalEntries[i].credit_amount // 累計額に追加
+                        }
+                    }
+                    // 決算月は、次期繰越があるので、不要
+                    //    // 決算整理仕訳
+                    //    let dataBaseAdjustingEntries = dataBaseManagerAccount.getAdjustingEntryInAccountInMonth(
+                    //        account: account,
+                    //        yearMonth: "\(lastDay.year)" + "/" + "\(String(format: "%02d", lastDay.month))"
+                    //    )
+                    //    for i in 0..<dataBaseAdjustingEntries.count { // 勘定内のすべての仕訳データ
+                    //        // 勘定が借方と貸方のどちらか
+                    //        if account == "\(dataBaseAdjustingEntries[i].debit_category)" { // 借方
+                    //            left += dataBaseAdjustingEntries[i].debit_amount // 累計額に追加
+                    //        } else if account == "\(dataBaseAdjustingEntries[i].credit_category)" { // 貸方
+                    //            right += dataBaseAdjustingEntries[i].credit_amount // 累計額に追加
+                    //        }
+                    //    }
+                    // 借方と貸方で金額が大きい方はどちらか
+                    if left > right {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: account,
+                            creditCategory: "残高",
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: left - right, // 差額を格納
+                            balanceRight: 0
+                        )
+                    } else if left < right {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: "残高",
+                            creditCategory: account,
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: 0,
+                            balanceRight: right - left
+                        )
+                    } else {
+                        // 月次残高振替仕訳
+                        DataBaseManagerMonthlyTransferEntry.shared.addMonthlyTransferEntryForClosingBalanceAccount(
+                            date: "\(lastDays[index].year)" + "/" + "\(String(format: "%02d", lastDays[index].month))" + "/" + "\(String(format: "%02d", lastDays[index].day))",
+                            debitCategory: account,
+                            creditCategory: "残高",
+                            debitAmount: left,
+                            creditAmount: right,
+                            balanceLeft: 0,
+                            balanceRight: 0
+                        )
+                    }
+                    // 月別に合計を計算する
+                    left = 0
+                    right = 0
+                }
+            }
+        }
+    }
+    
+    // 勘定に仕訳が存在するかどうか
+    func isExistJournalEntryInAccount(account: String) -> Bool {
+        // 仕訳データがない勘定の表示名をグレーアウトする
+        let model = GeneralLedgerAccountModel()
+        // 開始仕訳
+        let dataBaseOpeningJournalEntry = model.getOpeningJournalEntryInAccount(account: account)
+        
+        let objectss = model.getJournalEntryInAccount(account: account) // 勘定別に取得
+        let objectsss = model.getAllAdjustingEntryInAccount(account: account) // 決算整理仕訳
+        
+        if !objectss.isEmpty || !objectsss.isEmpty || dataBaseOpeningJournalEntry != nil {
+            return true
+        } else {
+            return false
         }
     }
     

@@ -1247,9 +1247,9 @@ extension JournalEntryViewController: UICollectionViewDelegate {
             group: collectionView.tag // グループ　その他 collectionView.tag == 0
         )
         textFieldCategoryDebit.text = objects[indexPath.row].debit_category
-        textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].debit_amount))
+        textFieldAmountDebit.text = StringUtility.shared.addComma(string: objects[indexPath.row].debit_amount.description)
         textFieldCategoryCredit.text = objects[indexPath.row].credit_category
-        textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(objects[indexPath.row].credit_amount))
+        textFieldAmountCredit.text = StringUtility.shared.addComma(string: objects[indexPath.row].credit_amount.description)
         textFieldSmallWritting.text = objects[indexPath.row].smallWritting
     }
     
@@ -1451,7 +1451,7 @@ extension JournalEntryViewController: UITextFieldDelegate {
         if let text = sender.text {
             // カンマを追加する
             if sender == textFieldAmountDebit || sender == textFieldAmountCredit { // 借方金額仮　貸方金額
-                sender.text = "\(StringUtility.shared.addComma(string: text))"
+                sender.text = StringUtility.shared.addComma(string: text.description)
             } else if sender == textFieldSmallWritting {
                 // 小書き　文字数カウンタ
                 let maxLength = EditableType.smallWriting.maxLength
@@ -1579,8 +1579,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                     datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
                     textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                     textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
                     textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
                 }
             } else {
@@ -1593,8 +1593,8 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
                     datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
                     textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
                     textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.debit_amount))
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: String(dataBaseJournalEntry.credit_amount))
+                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
+                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
                     textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
                 }
             }

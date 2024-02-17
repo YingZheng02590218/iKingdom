@@ -589,8 +589,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: "\(presenter.objects(forRow: indexPath.row).credit_category)")    // 丁数を取得
                 cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
             }
-            cell.listDebitLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow: indexPath.row).debit_amount))) "        // 借方金額
-            cell.listCreditLabel.text = "\(StringUtility.shared.addComma(string: String(presenter.objects(forRow: indexPath.row).credit_amount))) "      // 貸方金額
+            cell.listDebitLabel.text = StringUtility.shared.addComma(string: presenter.objects(forRow: indexPath.row).debit_amount.description) // 借方金額
+            cell.listCreditLabel.text = StringUtility.shared.addComma(string: presenter.objects(forRow: indexPath.row).credit_amount.description) // 貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objects(forRow: indexPath.row).date))
@@ -644,8 +644,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 accountName: presenter.objectsss(forRow: indexPath.row).credit_category
             )
             cell.listNumberRightLabel.text = numberOfAccountRight.description
-            cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).debit_amount)) // 借方金額
-            cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(presenter.objectsss(forRow: indexPath.row).credit_amount)) // 貸方金額
+            cell.listDebitLabel.text = StringUtility.shared.addComma(string: presenter.objectsss(forRow: indexPath.row).debit_amount.description) // 借方金額
+            cell.listCreditLabel.text = StringUtility.shared.addComma(string: presenter.objectsss(forRow: indexPath.row).credit_amount.description) // 貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.objectsss(forRow: indexPath.row).date))
@@ -706,8 +706,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                 )
                 cell.listNumberRightLabel.text = numberOfAccountRight.description                                   // 丁数　貸方
             }
-            cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount)) // 借方金額
-            cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount)) // 貸方金額
+            cell.listDebitLabel.text = StringUtility.shared.addComma(string: presenter.dataBaseTransferEntries(forRow: indexPath.row).debit_amount.description) // 借方金額
+            cell.listCreditLabel.text = StringUtility.shared.addComma(string: presenter.dataBaseTransferEntries(forRow: indexPath.row).credit_amount.description) // 貸方金額
             
             // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
             cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: presenter.dataBaseTransferEntries(forRow: indexPath.row).date))
@@ -765,8 +765,8 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
                     let numberOfAccountRight = DatabaseManagerSettingsTaxonomyAccount.shared.getNumberOfAccount(accountName: Constant.capitalAccountName) // 丁数を取得
                     cell.listNumberRightLabel.text = numberOfAccountRight.description
                 }
-                cell.listDebitLabel.text = StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.debit_amount)) // 借方金額
-                cell.listCreditLabel.text = StringUtility.shared.addComma(string: String(dataBaseCapitalTransferJournalEntry.credit_amount)) // 貸方金額
+                cell.listDebitLabel.text = StringUtility.shared.addComma(string: dataBaseCapitalTransferJournalEntry.debit_amount.description) // 借方金額
+                cell.listCreditLabel.text = StringUtility.shared.addComma(string: dataBaseCapitalTransferJournalEntry.credit_amount.description) // 貸方金額
                 
                 // 年度変更機能　仕訳の年度が、帳簿の年度とあっているかを判定する
                 cell.setTextColor(isInPeriod: DateManager.shared.isInPeriod(date: dataBaseCapitalTransferJournalEntry.date))
