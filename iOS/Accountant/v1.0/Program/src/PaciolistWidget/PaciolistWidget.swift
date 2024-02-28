@@ -187,11 +187,25 @@ struct PaciolistWidgetEntryView : View {
         //        }
     }
     
+    // 金額の単位を変換する　千円/円
     func convertAmount(amount: Double) -> String {
         // 小数点第2位や3位など任意の桁数で丸め処理
         let fixedAmount = floor(amount / 1000)
         // 文字列型に変換して小数点の表示桁数を調整
-        return String(format: "%.0f", entry.isThousand ? fixedAmount : amount)
+        // return String(format: "%.0f", entry.isThousand ? fixedAmount : amount)
+        return addComma(value: entry.isThousand ? fixedAmount : amount)
+    }
+    // カンマ区切りに変換（表示用）
+    func addComma(value: Double) -> String {
+        // 3桁ごとにカンマ区切りするフォーマット
+        let formatter = NumberFormatter() // プロパティの設定はcreateTextFieldForAmountで行う
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.groupingSeparator = ","
+        formatter.groupingSize = 3
+        guard let formattedValue = formatter.string(from: NSNumber(value: value)) else {
+            return ""
+        }
+        return formattedValue
     }
     
     var body: some View {
@@ -229,21 +243,21 @@ struct PaciolistWidgetEntryView : View {
                             if !(entry.accountingData.netIncomeOrLoss == 0) {
                                 ZStack() {
                                     Text("当期純利益 ")
-                                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomLeading)
+                                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topLeading)
                                         .font(.caption)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
                                         .zIndex(0)
                                     
                                     Text(convertAmount(amount: entry.accountingData.netIncomeOrLoss))
-                                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
+                                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
                                         .widgetBackground(Color.plColor)
                                         .font(.caption)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(1)
                                         .zIndex(1)
                                 }
-                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
+                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
                                 .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * netIncomeOrLossScale <= geometry.size.height ? geometry.size.height * netIncomeOrLossScale : geometry.size.height))
                                 .widgetBackground(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
                                 .addBorder(.gray, width: 0.5, cornerRadius: 1)
@@ -302,7 +316,7 @@ struct PaciolistWidgetEntryView : View {
                         // 純資産
                         ZStack() {
                             Text("純資産 ")
-                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topLeading) // 資本振替 当期純利益の分を差し引く
+                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomLeading) // 資本振替 当期純利益の分を差し引く
                             // .widgetBackground(.secondary)
                                 .font(.caption)
                                 .multilineTextAlignment(.leading)
@@ -310,14 +324,14 @@ struct PaciolistWidgetEntryView : View {
                                 .zIndex(0)
                             
                             Text(convertAmount(amount: entry.accountingData.netAssets))
-                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing) // 資本振替 当期純利益の分を差し引く
+                                .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing) // 資本振替 当期純利益の分を差し引く
                             // .widgetBackground(.secondary)
                                 .font(.caption)
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(1)
                                 .zIndex(1)
                         }
-                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topTrailing)
+                        .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing)
                         .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * netAssetsScale <= geometry.size.height ? geometry.size.height * netAssetsScale : geometry.size.height))
                         // .widgetBackground(.green)
                         .widgetBackground(Color.mainColor2) // 重ねて表示させるので、背景が透過してしまう対策
@@ -367,7 +381,7 @@ struct PaciolistWidgetEntryView : View {
                                     .lineLimit(1)
                                     .zIndex(1)
                             }
-                            .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .topLeading) // 資本振替 当期純利益の分を差し引く
+                            .frame(maxWidth: .infinity, minHeight: 0, maxHeight: geometry.size.height, alignment: .bottomTrailing) // 資本振替 当期純利益の分を差し引く
                             .frame(height: minHeightCheck(minHeight: 0, height: geometry.size.height * incomeScale <= geometry.size.height ? geometry.size.height * incomeScale : geometry.size.height))
                             .addBorder(.gray, width: 0.5, cornerRadius: 1)
                         }
