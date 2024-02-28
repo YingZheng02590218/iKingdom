@@ -136,10 +136,6 @@
 		F90A23CB2B6D0576009E35C0 /* GeneralLedger1.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23C92B6D0576009E35C0 /* GeneralLedger1.png */; };
 		F90A23CF2B6D0656009E35C0 /* GeneralLedger2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CC2B6D0655009E35C0 /* GeneralLedger2.png */; };
 		F90A23D02B6D0656009E35C0 /* GeneralLedger2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CC2B6D0655009E35C0 /* GeneralLedger2.png */; };
-		F90A23D12B6D0656009E35C0 /* GeneralLedger4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CD2B6D0656009E35C0 /* GeneralLedger4.png */; };
-		F90A23D22B6D0656009E35C0 /* GeneralLedger4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CD2B6D0656009E35C0 /* GeneralLedger4.png */; };
-		F90A23D32B6D0656009E35C0 /* GeneralLedger3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CE2B6D0656009E35C0 /* GeneralLedger3.png */; };
-		F90A23D42B6D0656009E35C0 /* GeneralLedger3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23CE2B6D0656009E35C0 /* GeneralLedger3.png */; };
 		F90A23D62B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F90A23D52B6D0D17009E35C0 /* Opening_Journal_Entry.html */; };
 		F90A23D72B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */ = {isa = PBXBuildFile; fileRef = F90A23D52B6D0D17009E35C0 /* Opening_Journal_Entry.html */; };
 		F90A23DD2B6D0F93009E35C0 /* OpeningJournalEntry2.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23D82B6D0F92009E35C0 /* OpeningJournalEntry2.png */; };
@@ -154,6 +150,12 @@
 		F90A23E62B6D0F93009E35C0 /* OpeningJournalEntry5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */; };
 		F90A23E82B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
 		F90A23E92B6D1225009E35C0 /* OpeningJournalEntry6.png in Resources */ = {isa = PBXBuildFile; fileRef = F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */; };
+		F90CED282B8F4D76005FFE99 /* GeneralLedger5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */; };
+		F90CED292B8F4D76005FFE99 /* GeneralLedger5.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */; };
+		F90CED2B2B8F4E00005FFE99 /* GeneralLedger4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */; };
+		F90CED2C2B8F4E00005FFE99 /* GeneralLedger4.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */; };
+		F90CED2E2B8F5029005FFE99 /* GeneralLedger3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED2D2B8F5029005FFE99 /* GeneralLedger3.png */; };
+		F90CED2F2B8F5029005FFE99 /* GeneralLedger3.png in Resources */ = {isa = PBXBuildFile; fileRef = F90CED2D2B8F5029005FFE99 /* GeneralLedger3.png */; };
 		F90F39162B76347F0098C7F0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39152B76347F0098C7F0 /* AccountItem11.png */; };
 		F90F39172B76347F0098C7F0 /* AccountItem11.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39152B76347F0098C7F0 /* AccountItem11.png */; };
 		F90F39192B7634B00098C7F0 /* AccountItem12.png in Resources */ = {isa = PBXBuildFile; fileRef = F90F39182B7634B00098C7F0 /* AccountItem12.png */; };
@@ -924,8 +926,6 @@
 		F90A23C42B6D050C009E35C0 /* Journals6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Journals6.png; sourceTree = "<group>"; };
 		F90A23C92B6D0576009E35C0 /* GeneralLedger1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger1.png; sourceTree = "<group>"; };
 		F90A23CC2B6D0655009E35C0 /* GeneralLedger2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger2.png; sourceTree = "<group>"; };
-		F90A23CD2B6D0656009E35C0 /* GeneralLedger4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger4.png; sourceTree = "<group>"; };
-		F90A23CE2B6D0656009E35C0 /* GeneralLedger3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger3.png; sourceTree = "<group>"; };
 		F90A23D52B6D0D17009E35C0 /* Opening_Journal_Entry.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Opening_Journal_Entry.html; sourceTree = "<group>"; };
 		F90A23D82B6D0F92009E35C0 /* OpeningJournalEntry2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry2.png; sourceTree = "<group>"; };
 		F90A23D92B6D0F93009E35C0 /* OpeningJournalEntry3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry3.png; sourceTree = "<group>"; };
@@ -933,6 +933,9 @@
 		F90A23DB2B6D0F93009E35C0 /* OpeningJournalEntry4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry4.png; sourceTree = "<group>"; };
 		F90A23DC2B6D0F93009E35C0 /* OpeningJournalEntry5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry5.png; sourceTree = "<group>"; };
 		F90A23E72B6D1225009E35C0 /* OpeningJournalEntry6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpeningJournalEntry6.png; sourceTree = "<group>"; };
+		F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger5.png; sourceTree = "<group>"; };
+		F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger4.png; sourceTree = "<group>"; };
+		F90CED2D2B8F5029005FFE99 /* GeneralLedger3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GeneralLedger3.png; sourceTree = "<group>"; };
 		F90F39152B76347F0098C7F0 /* AccountItem11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem11.png; sourceTree = "<group>"; };
 		F90F39182B7634B00098C7F0 /* AccountItem12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountItem12.png; sourceTree = "<group>"; };
 		F910F1BE298BC1DD009E6B02 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
@@ -1458,10 +1461,40 @@
 				F90A23C42B6D050C009E35C0 /* Journals6.png */,
 				F90A23C92B6D0576009E35C0 /* GeneralLedger1.png */,
 				F90A23CC2B6D0655009E35C0 /* GeneralLedger2.png */,
-				F90A23CE2B6D0656009E35C0 /* GeneralLedger3.png */,
-				F90A23CD2B6D0656009E35C0 /* GeneralLedger4.png */,
+				F90CED2D2B8F5029005FFE99 /* GeneralLedger3.png */,
+				F90CED2A2B8F4E00005FFE99 /* GeneralLedger4.png */,
+				F90CED272B8F4D76005FFE99 /* GeneralLedger5.png */,
 			);
 			path = Help;
+			sourceTree = "<group>";
+		};
+		F90CED302B8F5249005FFE99 /* Html */ = {
+			isa = PBXGroup;
+			children = (
+				F940E4AB2A8DFE14008AEAFC /* terms.html */,
+				F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */,
+				F940E4B12A8E22CC008AEAFC /* explain_backup.html */,
+				F907D01F2A95F81F00A701C3 /* About_This_App.html */,
+				F907D0222A9604A200A701C3 /* Thought.html */,
+				F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */,
+				F907D02B2A9752FD00A701C3 /* Set_Up_Basic_Info.html */,
+				F907D09B2A9757E200A701C3 /* Set_Up_Basic_Info2.html */,
+				F907D09E2A9758E500A701C3 /* Set_Up_Basic_Info3.html */,
+				F907D0A12A97635500A701C3 /* Set_Up_Account.html */,
+				F907D0A42A9767ED00A701C3 /* Set_Up_Account2.html */,
+				F907D0A82A976E4F00A701C3 /* Set_Up_Account3.html */,
+				F907D0A72A976E4F00A701C3 /* Set_Up_Account4.html */,
+				F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */,
+				F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */,
+				F90A23D52B6D0D17009E35C0 /* Opening_Journal_Entry.html */,
+				F907D0B32A98991B00A701C3 /* Configuration.html */,
+				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
+				F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */,
+				F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */,
+				F907D0BF2A99E65800A701C3 /* Journals.html */,
+				F907D0C22A99E71F00A701C3 /* Journals2.html */,
+			);
+			path = Html;
 			sourceTree = "<group>";
 		};
 		F910F1BD298BC1B5009E6B02 /* FirebaseAnalytics */ = {
@@ -1959,28 +1992,7 @@
 		F9B209E9279D08C100F7EA8D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F940E4AB2A8DFE14008AEAFC /* terms.html */,
-				F940E4AE2A8E1AA1008AEAFC /* privacy_policy.html */,
-				F940E4B12A8E22CC008AEAFC /* explain_backup.html */,
-				F907D01F2A95F81F00A701C3 /* About_This_App.html */,
-				F907D0222A9604A200A701C3 /* Thought.html */,
-				F907D0252A96099A00A701C3 /* Basic_Of_Bookkeeping.html */,
-				F907D02B2A9752FD00A701C3 /* Set_Up_Basic_Info.html */,
-				F907D09B2A9757E200A701C3 /* Set_Up_Basic_Info2.html */,
-				F907D09E2A9758E500A701C3 /* Set_Up_Basic_Info3.html */,
-				F907D0A12A97635500A701C3 /* Set_Up_Account.html */,
-				F907D0A42A9767ED00A701C3 /* Set_Up_Account2.html */,
-				F907D0A82A976E4F00A701C3 /* Set_Up_Account3.html */,
-				F907D0A72A976E4F00A701C3 /* Set_Up_Account4.html */,
-				F907D0AD2A988F5000A701C3 /* Set_Up_Account_Edit.html */,
-				F907D0B02A98914200A701C3 /* Set_Up_Account_Edit2.html */,
-				F90A23D52B6D0D17009E35C0 /* Opening_Journal_Entry.html */,
-				F907D0B32A98991B00A701C3 /* Configuration.html */,
-				F907D0B62A98A57100A701C3 /* Journal_Entry.html */,
-				F907D0B92A98AE4300A701C3 /* Journal_Entry_Edit.html */,
-				F907D0BC2A99E0FD00A701C3 /* Journal_Entry_Delete.html */,
-				F907D0BF2A99E65800A701C3 /* Journals.html */,
-				F907D0C22A99E71F00A701C3 /* Journals2.html */,
+				F90CED302B8F5249005FFE99 /* Html */,
 				F907D09A2A97553D00A701C3 /* Help */,
 				F99CF359251B2D18004295DE /* taxonomy.csv */,
 				F9FF9AB725317A0D00FB06BB /* taxonomyAccount.csv */,
@@ -2522,6 +2534,7 @@
 				F95F59A826502DC200EFE522 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9963CE426208BC60099D51C /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F90A238F2B6BCF68009E35C0 /* AccountItem10.png in Resources */,
+				F90CED282B8F4D76005FFE99 /* GeneralLedger5.png in Resources */,
 				F90A23792B6BC5A0009E35C0 /* AccountItem9.png in Resources */,
 				F907D0C02A99E65800A701C3 /* Journals.html in Resources */,
 				F9AD5F3926399C00003EC6EF /* CarouselCollectionViewCell.xib in Resources */,
@@ -2529,6 +2542,7 @@
 				F928F93A29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F90A236F2B6BC31B009E35C0 /* AccountItem1.png in Resources */,
 				F907D0B72A98A57100A701C3 /* Journal_Entry.html in Resources */,
+				F90CED2E2B8F5029005FFE99 /* GeneralLedger3.png in Resources */,
 				F90A23D62B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */,
 				F940E4AF2A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9227717261F2D8F0080B746 /* CategoryListTableViewController.storyboard in Resources */,
@@ -2581,7 +2595,6 @@
 				F9F324572833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
 				F90A23A02B6BD216009E35C0 /* AccountItem15.png in Resources */,
 				F99D3AFC2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
-				F90A23D32B6D0656009E35C0 /* GeneralLedger3.png in Resources */,
 				F9B209F127A4377000F7EA8D /* BSViewController.xib in Resources */,
 				F907D0C32A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9E280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
@@ -2594,11 +2607,11 @@
 				F9227731261F34110080B746 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F940E4AC2A8DFE14008AEAFC /* terms.html in Resources */,
 				F90A23BB2B6D0350009E35C0 /* Journals1.png in Resources */,
+				F90CED2B2B8F4E00005FFE99 /* GeneralLedger4.png in Resources */,
 				F963E2BF2966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F907D0A22A97635500A701C3 /* Set_Up_Account.html in Resources */,
 				F9B209F527A4EF7C00F7EA8D /* BSTableViewCell.xib in Resources */,
 				F982897B2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
-				F90A23D12B6D0656009E35C0 /* GeneralLedger4.png in Resources */,
 				F99CF35B251B2D18004295DE /* taxonomy.csv in Resources */,
 				F90A23E12B6D0F93009E35C0 /* OpeningJournalEntry1.png in Resources */,
 				F94EDD9C237AEB3A0074D812 /* Main.storyboard in Resources */,
@@ -2684,6 +2697,7 @@
 				F9EC671427B90BC60003FBB6 /* CarouselTabCollectionViewCell.xib in Resources */,
 				F9EC671527B90BC60003FBB6 /* SettingsTheDayOfReckoningTableViewController.storyboard in Resources */,
 				F90A23902B6BCF68009E35C0 /* AccountItem10.png in Resources */,
+				F90CED292B8F4D76005FFE99 /* GeneralLedger5.png in Resources */,
 				F90A237A2B6BC5A0009E35C0 /* AccountItem9.png in Resources */,
 				F907D0C12A99E65800A701C3 /* Journals.html in Resources */,
 				F9EC671627B90BC60003FBB6 /* CarouselCollectionViewCell.xib in Resources */,
@@ -2691,6 +2705,7 @@
 				F928F93B29A1EF5800D447B7 /* NewsTableViewHeaderFooterView.xib in Resources */,
 				F90A23702B6BC31B009E35C0 /* AccountItem1.png in Resources */,
 				F907D0B82A98A57100A701C3 /* Journal_Entry.html in Resources */,
+				F90CED2F2B8F5029005FFE99 /* GeneralLedger3.png in Resources */,
 				F90A23D72B6D0D17009E35C0 /* Opening_Journal_Entry.html in Resources */,
 				F940E4B02A8E1AA1008AEAFC /* privacy_policy.html in Resources */,
 				F9EC671827B90BC60003FBB6 /* CategoryListTableViewController.storyboard in Resources */,
@@ -2743,7 +2758,6 @@
 				F9F324582833A82700DA813E /* WalkThroughViewController.storyboard in Resources */,
 				F90A23A12B6BD216009E35C0 /* AccountItem15.png in Resources */,
 				F99D3AFD2A63FDAD00E19110 /* CustomTableViewCell.xib in Resources */,
-				F90A23D42B6D0656009E35C0 /* GeneralLedger3.png in Resources */,
 				F9EC672727B90BC60003FBB6 /* BSViewController.xib in Resources */,
 				F907D0C42A99E71F00A701C3 /* Journals2.html in Resources */,
 				F99C6B9F280DAFE100E99080 /* PeriodYearViewController.storyboard in Resources */,
@@ -2756,11 +2770,11 @@
 				F9EC672B27B90BC60003FBB6 /* SettingsHelpViewController.storyboard in Resources */,
 				F940E4AD2A8DFE14008AEAFC /* terms.html in Resources */,
 				F90A23BC2B6D0350009E35C0 /* Journals1.png in Resources */,
+				F90CED2C2B8F4E00005FFE99 /* GeneralLedger4.png in Resources */,
 				F963E2C02966E746002DF49E /* GeneralLedgerPLAccountViewController.storyboard in Resources */,
 				F907D0A32A97635500A701C3 /* Set_Up_Account.html in Resources */,
 				F9EC672C27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.storyboard in Resources */,
 				F982897C2973C06800F8F1B8 /* AfterClosingTrialBalanceViewController.storyboard in Resources */,
-				F90A23D22B6D0656009E35C0 /* GeneralLedger4.png in Resources */,
 				F9EC672D27B90BC60003FBB6 /* BSTableViewCell.xib in Resources */,
 				F90A23E22B6D0F93009E35C0 /* OpeningJournalEntry1.png in Resources */,
 				F9EC672E27B90BC60003FBB6 /* taxonomy.csv in Resources */,

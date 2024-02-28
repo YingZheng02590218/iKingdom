@@ -383,6 +383,11 @@ class SettingsHelpDetailViewController: UIViewController {
                 print(path)
                 changeImageForth(path: path)
             }
+            // 総勘定元帳　⑤
+            if let path = Bundle.main.url(forResource: "GeneralLedger5", withExtension: "png") {
+                print(path)
+                changeImageFifth(path: path)
+            }
         }
     }
     
