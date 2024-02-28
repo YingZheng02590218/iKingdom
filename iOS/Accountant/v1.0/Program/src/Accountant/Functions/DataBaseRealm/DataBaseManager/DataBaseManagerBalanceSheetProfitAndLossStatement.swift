@@ -40,25 +40,45 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
         // 利益を計算する関数を呼び出す todo
         setBenefitTotal()
         
+        // ウィジェット 5大区分　合計額
+        let userDefault = UserDefaults(suiteName: AppGroups.appGroupsId)
+        
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let profitAndLossStatement = dataBaseAccountingBooks.dataBaseFinancialStatements?.profitAndLossStatement {
-            // ウィジェット 5大区分　合計額
-            let userDefault = UserDefaults(suiteName: AppGroups.appGroupsId)
             // 費用
-            var expense = profitAndLossStatement.CostOfGoodsSold
-            expense += profitAndLossStatement.SellingGeneralAndAdministrativeExpenses
-            expense += profitAndLossStatement.IncomeTaxes
-            expense += profitAndLossStatement.NonOperatingExpenses
-            expense += profitAndLossStatement.ExtraordinaryLosses
+            var expense = profitAndLossStatement.CostOfGoodsSold // 商品売上原価 Cost of goods sold
+            expense += profitAndLossStatement.SellingGeneralAndAdministrativeExpenses // 販売費及び一般管理費 Selling, general and administrative expenses
+            expense += profitAndLossStatement.IncomeTaxes // 法人税等 ⇒ Income taxes
+            expense += profitAndLossStatement.NonOperatingExpenses // 営業外費用 ⇒ Non-operating expenses
+            expense += profitAndLossStatement.ExtraordinaryLosses // 特別損失 ⇒ Extraordinary losses
             userDefault?.set(expense, forKey: "expense" )
             print("ウィジェット　expense        ", expense)
             // 収益
-            var income = profitAndLossStatement.NetSales
-            income += profitAndLossStatement.NonOperatingIncome
-            income += profitAndLossStatement.ExtraordinaryIncome
+            var income = profitAndLossStatement.NetSales // 売上高 Net sales
+            income += profitAndLossStatement.NonOperatingIncome // 営業外収益 ⇒ Non-operating income
+            income += profitAndLossStatement.ExtraordinaryIncome // 特別利益 ⇒ Extraordinary income
             userDefault?.set(income, forKey: "income" )
             print("ウィジェット　income         ", income)
         }
+        
+        let assets = userDefault?.double(forKey: UserDefaults.Keys.assets.rawValue) ?? 0
+        let liabilities = userDefault?.double(forKey: UserDefaults.Keys.liabilities.rawValue) ?? 0
+        let netAssets = userDefault?.double(forKey: UserDefaults.Keys.netAssets.rawValue) ?? 0
+        let netIncomeOrLoss = userDefault?.double(forKey: UserDefaults.Keys.netIncomeOrLoss.rawValue) ?? 0
+        let expense = userDefault?.double(forKey: UserDefaults.Keys.expense.rawValue) ?? 0
+        let income = userDefault?.double(forKey: UserDefaults.Keys.income.rawValue) ?? 0
+        print("ウィジェット　資産       　　　　　  　  　     ", assets)
+        print("ウィジェット　負債・純資産 　　　　　　          ", liabilities + netAssets)
+        print("ウィジェット　資産 == 負債・純資産  　　　　　　  ", assets == liabilities + netAssets)
+        print("ウィジェット　費用・当期純利益    　  　　　　　  ", expense + (netIncomeOrLoss >= 0 ? netIncomeOrLoss : 0))
+        print("ウィジェット　収益・当期純損失        　　　　　　", income + (netIncomeOrLoss >= 0 ? 0 : netIncomeOrLoss))
+        print("ウィジェット　費用・当期純利益 == 収益・当期純損失 ", (expense + (netIncomeOrLoss >= 0 ? netIncomeOrLoss : 0) == income + (netIncomeOrLoss >= 0 ? 0 : netIncomeOrLoss)))
+        
+        let left = assets + expense + (netIncomeOrLoss >= 0 ? netIncomeOrLoss : 0)
+        let right = liabilities + netAssets + income + (netIncomeOrLoss >= 0 ? 0 : netIncomeOrLoss)
+        print("ウィジェット　借方         　     ", left)
+        print("ウィジェット　貸方         　     ", right)
+        print("ウィジェット　借方==貸方           ", left == right)
         
         if #available(iOS 14.0, *) {
             // アプリ側からWidgetを更新する
@@ -392,4 +412,18 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
         return positiveOrNegative
     }
     
+}
+extension UserDefaults {
+    enum Keys: String {
+        case assets
+        case liabilities
+        case netAssets
+        
+        case expense
+        case income
+        
+        case netIncomeOrLoss
+        
+        case isThousand
+    }
 }
