@@ -16,7 +16,9 @@ class DataBaseManagerPLAccount {
     
     private init() {
     }
-    
+
+    // MARK: - 損益勘定
+
     /**
      * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
      * 年度を指定して損益勘定を取得する
@@ -29,6 +31,9 @@ class DataBaseManagerPLAccount {
         let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount
         return dataBaseAccount
     }
+    
+    // MARK: - 資本金勘定
+
     /**
      * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
      * 年度を指定して資本金勘定を取得する
@@ -380,7 +385,6 @@ class DataBaseManagerPLAccount {
         print(objects)
         return objects!
     }
-    // MARK: - 損益勘定
     // 取得　損益振替仕訳 損益勘定から取得　※仕訳帳にプロパティを用意せずに、損益勘定のプロパティを参照する。
     func getTransferEntryInAccount() -> Results<DataBaseTransferEntry> {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
@@ -579,7 +583,7 @@ class DataBaseManagerPLAccount {
                         } else {
                             for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                                 try DataBaseManager.realm.write {
-                                    // 損益振替仕訳データを代入
+                                    // 残高振替仕訳データを代入
                                     dataBaseAccountingBook.dataBaseGeneralLedger?.dataBaseAccounts[i].dataBaseTransferEntry = dataBaseJournalEntry
                                 }
                                 break

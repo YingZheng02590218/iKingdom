@@ -13,21 +13,23 @@ import RealmSwift
 protocol GeneralLedgerAccountPresenterInput {
     
     var fiscalYear: Int? { get }
-
+    
     var numberOfDataBaseOpeningJournalEntry: Int { get }
     var numberOfDatabaseJournalEntries: Int { get }
+    func numberOfDatabaseJournalEntries(forSection: Int) -> Int
     var numberOfDataBaseAdjustingEntries: Int { get }
     var numberOfDataBaseTransferEntry: Int { get }
     var numberOfDataBaseCapitalTransferJournalEntry: Int { get }
-
+    
     func dataBaseOpeningJournalEntries() -> DataBaseOpeningJournalEntry?
     func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry
+    func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry?
     func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry
     func dataBaseTransferEntries() -> DataBaseTransferEntry?
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry?
-
+    
     var filePath: URL? { get }
-
+    
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -35,8 +37,6 @@ protocol GeneralLedgerAccountPresenterInput {
     
     func getBalanceAmountOpeningJournalEntry() -> Int64
     func getBalanceDebitOrCreditOpeningJournalEntry() -> String
-    func getBalanceAmount(indexPath: IndexPath) -> Int64
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64
     func getBalanceDebitOrCreditAdjusting(indexPath: IndexPath) -> String
     func getBalanceAmountCapitalTransferJournalEntry() -> Int64
@@ -66,6 +66,20 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     private var dataBaseOpeningJournalEntry: DataBaseOpeningJournalEntry?
     // 通常仕訳　勘定別
     private var databaseJournalEntries: Results<DataBaseJournalEntry>
+    // 通常仕訳 勘定別に月別に取得
+    private var databaseJournalEntriesSection0: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection1: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection2: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection3: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection4: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection5: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection6: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection7: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection8: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection9: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection10: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection11: Results<DataBaseJournalEntry>?
+    private var databaseJournalEntriesSection12: Results<DataBaseJournalEntry>?
     // 決算整理仕訳　勘定別　損益勘定を含む　繰越利益を含む
     private var dataBaseAdjustingEntries: Results<DataBaseAdjustingEntry>
     // 資本振替仕訳
@@ -75,7 +89,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     
     // PDF,CSVファイルのパス
     var filePath: URL?
-
+    
     private weak var view: GeneralLedgerAccountPresenterOutput!
     private var model: GeneralLedgerAccountModelInput
     
@@ -87,6 +101,46 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         dataBaseOpeningJournalEntry = model.getOpeningJournalEntryInAccount(account: account)
         // 通常仕訳　勘定別
         databaseJournalEntries = model.getJournalEntryInAccount(account: account)
+        
+        // 月別の月末日を取得 12ヶ月分
+        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+        for i in 0..<lastDays.count {
+            // 通常仕訳 勘定別に月別に取得
+            let dataBaseJournalEntries = model.getJournalEntryInAccountInMonth(
+                account: account,
+                yearMonth: "\(lastDays[i].year)" + "/" + "\(String(format: "%02d", lastDays[i].month))"
+            )
+            switch i {
+            case 0:
+                databaseJournalEntriesSection0 = dataBaseJournalEntries
+            case 1:
+                databaseJournalEntriesSection1 = dataBaseJournalEntries
+            case 2:
+                databaseJournalEntriesSection2 = dataBaseJournalEntries
+            case 3:
+                databaseJournalEntriesSection3 = dataBaseJournalEntries
+            case 4:
+                databaseJournalEntriesSection4 = dataBaseJournalEntries
+            case 5:
+                databaseJournalEntriesSection5 = dataBaseJournalEntries
+            case 6:
+                databaseJournalEntriesSection6 = dataBaseJournalEntries
+            case 7:
+                databaseJournalEntriesSection7 = dataBaseJournalEntries
+            case 8:
+                databaseJournalEntriesSection8 = dataBaseJournalEntries
+            case 9:
+                databaseJournalEntriesSection9 = dataBaseJournalEntries
+            case 10:
+                databaseJournalEntriesSection10 = dataBaseJournalEntries
+            case 11:
+                databaseJournalEntriesSection11 = dataBaseJournalEntries
+            case 12:
+                databaseJournalEntriesSection12 = dataBaseJournalEntries
+            default:
+                break
+            }
+        }
         // 決算整理仕訳　勘定別
         dataBaseAdjustingEntries = model.getAdjustingJournalEntryInAccount(account: account)
         // 資本振替仕訳
@@ -116,17 +170,17 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         
         view.setupViewForViewWillAppear()
     }
-
+    
     func viewWillDisappear() {
-
+        
         view.setupViewForViewWillDisappear()
     }
-
+    
     func viewDidAppear() {
         
         view.setupViewForViewDidAppear()
     }
-
+    
     var numberOfDataBaseOpeningJournalEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         if let englishFromOfClosingTheLedger2 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger2 {
@@ -138,17 +192,85 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         }
         return 0
     }
-
+    
     func dataBaseOpeningJournalEntries() -> DataBaseOpeningJournalEntry? {
         dataBaseOpeningJournalEntry
     }
-
+    
+    // 通常仕訳
     var numberOfDatabaseJournalEntries: Int {
         databaseJournalEntries.count
     }
-    
+    // 通常仕訳
     func databaseJournalEntries(forRow row: Int) -> DataBaseJournalEntry {
         databaseJournalEntries[row]
+    }
+    
+    // 通常仕訳　月次残高
+    func numberOfDatabaseJournalEntries(forSection: Int) -> Int {
+        switch forSection {
+        case 0:
+            return databaseJournalEntriesSection0?.count ?? 0
+        case 1:
+            return databaseJournalEntriesSection1?.count ?? 0
+        case 2:
+            return databaseJournalEntriesSection2?.count ?? 0
+        case 3:
+            return databaseJournalEntriesSection3?.count ?? 0
+        case 4:
+            return databaseJournalEntriesSection4?.count ?? 0
+        case 5:
+            return databaseJournalEntriesSection5?.count ?? 0
+        case 6:
+            return databaseJournalEntriesSection6?.count ?? 0
+        case 7:
+            return databaseJournalEntriesSection7?.count ?? 0
+        case 8:
+            return databaseJournalEntriesSection8?.count ?? 0
+        case 9:
+            return databaseJournalEntriesSection9?.count ?? 0
+        case 10:
+            return databaseJournalEntriesSection10?.count ?? 0
+        case 11:
+            return databaseJournalEntriesSection11?.count ?? 0
+        case 12:
+            return databaseJournalEntriesSection12?.count ?? 0
+        default:
+            return 0
+        }
+    }
+    // 通常仕訳　月次残高
+    func databaseJournalEntries(forSection: Int, forRow row: Int) -> DataBaseJournalEntry? {
+        switch forSection {
+        case 0:
+            return databaseJournalEntriesSection0?[row]
+        case 1:
+            return databaseJournalEntriesSection1?[row]
+        case 2:
+            return databaseJournalEntriesSection2?[row]
+        case 3:
+            return databaseJournalEntriesSection3?[row]
+        case 4:
+            return databaseJournalEntriesSection4?[row]
+        case 5:
+            return databaseJournalEntriesSection5?[row]
+        case 6:
+            return databaseJournalEntriesSection6?[row]
+        case 7:
+            return databaseJournalEntriesSection7?[row]
+        case 8:
+            return databaseJournalEntriesSection8?[row]
+        case 9:
+            return databaseJournalEntriesSection9?[row]
+        case 10:
+            return databaseJournalEntriesSection10?[row]
+        case 11:
+            return databaseJournalEntriesSection11?[row]
+        case 12:
+            return databaseJournalEntriesSection12?[row]
+        default:
+            return nil
+        }
     }
     
     var numberOfDataBaseAdjustingEntries: Int {
@@ -158,7 +280,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     func dataBaseAdjustingEntries(forRow row: Int) -> DataBaseAdjustingEntry {
         dataBaseAdjustingEntries[row]
     }
-
+    
     var numberOfDataBaseTransferEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         // 損益計算書に関する勘定科目のみに絞る
@@ -179,11 +301,11 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         }
         return 0
     }
-
+    
     func dataBaseTransferEntries() -> DataBaseTransferEntry? {
         dataBaseTransferEntry
     }
-
+    
     var numberOfDataBaseCapitalTransferJournalEntry: Int {
         let dataBaseSettingsOperating = RealmManager.shared.readWithPrimaryKey(type: DataBaseSettingsOperating.self, key: 1)
         if let englishFromOfClosingTheLedger1 = dataBaseSettingsOperating?.EnglishFromOfClosingTheLedger1 {
@@ -204,32 +326,22 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
         }
         return 0
     }
-
+    
     func dataBaseCapitalTransferJournalEntries() -> DataBaseCapitalTransferJournalEntry? {
         dataBaseCapitalTransferJournalEntry
     }
-
+    
     // MARK: - 差引残高額
-
+    
     // 取得　差引残高額　 開始仕訳
     func getBalanceAmountOpeningJournalEntry() -> Int64 {
-
+        
         model.getBalanceAmountOpeningJournalEntry()
     }
     // 借又貸を取得 開始仕訳
     func getBalanceDebitOrCreditOpeningJournalEntry() -> String {
-
+        
         model.getBalanceDebitOrCreditOpeningJournalEntry()
-    }
-    // 取得　差引残高額　仕訳
-    func getBalanceAmount(indexPath: IndexPath) -> Int64 {
-
-        model.getBalanceAmount(indexPath: indexPath)
-    }
-    // 借又貸を取得
-    func getBalanceDebitOrCredit(indexPath: IndexPath) -> String {
-
-        model.getBalanceDebitOrCredit(indexPath: indexPath)
     }
     // 取得　差引残高額　 決算整理仕訳
     func getBalanceAmountAdjusting(indexPath: IndexPath) -> Int64 {
@@ -243,25 +355,25 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     }
     // 取得　差引残高額　 資本振替仕訳
     func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-
+        
         model.getBalanceAmountCapitalTransferJournalEntry()
     }
     // 借又貸を取得 資本振替仕訳
     func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-
+        
         model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
     }
     // FIXME: 省略
-//    // 取得　差引残高額 損益振替仕訳
-//    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
-//
-//        model.getBalanceAmountCapitalTransferJournalEntry()
-//    }
-//    // 借又貸を取得 損益振替仕訳
-//    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
-//
-//        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
-//    }
+    //    // 取得　差引残高額 損益振替仕訳
+    //    func getBalanceAmountCapitalTransferJournalEntry() -> Int64 {
+    //
+    //        model.getBalanceAmountCapitalTransferJournalEntry()
+    //    }
+    //    // 借又貸を取得 損益振替仕訳
+    //    func getBalanceDebitOrCreditCapitalTransferJournalEntry() -> String {
+    //
+    //        model.getBalanceDebitOrCreditCapitalTransferJournalEntry()
+    //    }
     // 丁数を取得
     func getNumberOfAccount(accountName: String) -> Int {
         
@@ -282,7 +394,7 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
     func csvBarButtonItemTapped() {
         // 初期化
         model.initializeCsvMaker(account: account, completion: { csvPath in
-                        
+            
             self.filePath = csvPath
             self.view.showPreview()
         })

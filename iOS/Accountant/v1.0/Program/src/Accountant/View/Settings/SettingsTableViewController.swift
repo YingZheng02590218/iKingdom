@@ -11,6 +11,7 @@ import MessageUI // お問い合わせ機能
 import MXParallaxHeader
 import SafariServices // アプリ内でブラウザ表示
 import UIKit
+import WidgetKit
 
 // 設定クラス
 class SettingsTableViewController: UIViewController {
@@ -31,6 +32,16 @@ class SettingsTableViewController: UIViewController {
     var posX: CGFloat = 0
     // 通知設定 設定アプリ　Allow Notifications
     var isOn = false
+    // フィードバック
+    private let feedbackGeneratorMedium: Any? = {
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            return generator
+        } else {
+            return nil
+        }
+    }()
     // フィードバック
     private let feedbackGeneratorHeavy: Any? = {
         if #available(iOS 10.0, *) {
@@ -246,6 +257,34 @@ class SettingsTableViewController: UIViewController {
             }
         }
     }
+    
+    // ウィジェット 単位　設定 切り替え
+    @objc
+    func onSegment(sender: UISegmentedControl) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        // セグメントコントロール　0: 千円, 1:円
+        let segStatus = sender.selectedSegmentIndex == 0 ? true : false
+        print("Segment \(segStatus)")
+        // ウィジェット 単位を変更
+        change(isThousand: segStatus)
+    }
+    // ウィジェット 単位を変更
+    func change(isThousand: Bool) {
+        // ウィジェット 単位　設定
+        let userDefault = UserDefaults(suiteName: AppGroups.appGroupsId)
+        userDefault?.set(isThousand, forKey: "isThousand" )
+        
+        if #available(iOS 14.0, *) {
+            // アプリ側からWidgetを更新する
+            WidgetCenter.shared.reloadAllTimelines()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
 }
 
 extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -265,7 +304,7 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             return 4
         case 3:
-            return 6
+            return 7
         case 4:
             return 3
         default:
@@ -369,18 +408,26 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.leftImageView.tintColor = .mainColor2
                 // 背景色
                 cell.backgroundColor = .accentColor
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             default:
                 break
             }
         } else if indexPath.section == 1 {
             cell.centerLabel.text = "データのバックアップ・復元"
             cell.leftImageView.image = UIImage(named: "baseline_cloud_upload_black_36pt")?.withRenderingMode(.alwaysTemplate)
+            // セルの選択を可にする
+            cell.selectionStyle = .gray
             
         } else if indexPath.section == 2 {
             switch indexPath.row {
             case 0:
                 cell.centerLabel.text = "事業者名" // 注意：UITableViewCell内のViewに表示している。AttributesInspectorでHiddenをONにすると見えなくなる。
                 cell.leftImageView.image = UIImage(named: "domain-domain_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 1:
                 cell.centerLabel.text = "会計期間"
                 // 期首
@@ -389,9 +436,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 let endingOfYearDate = DateManager.shared.getEndingOfYearDate()
                 cell.subLabel.text = "\(beginningOfYearDate)〜\(endingOfYearDate)"
                 cell.leftImageView.image = UIImage(named: "edit_calendar-edit_calendar_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 2:
                 cell.centerLabel.text = "勘定科目体系"
                 cell.leftImageView.image = UIImage(named: "account_tree-account_tree_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 3:
                 cell.centerLabel.text = "開始残高"
                 cell.centerLabelHeighCenterY.priority = .defaultHigh
@@ -399,6 +452,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.lowerLabel.text = "前期の決算書を参照しながらご入力ください。"
                 cell.lowerLabel.isHidden = false
                 cell.leftImageView.image = UIImage(named: "edit_document-edit_document_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             default:
                 break
             }
@@ -419,13 +475,22 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(switchTriggered), for: .valueChanged)
                 cell.accessoryView = switchView
+                // セルの選択不可にする
+                cell.selectionStyle = .none
+
                 return cell
             case 1:
                 cell.centerLabel.text = "よく使う仕訳"
                 cell.leftImageView.image = UIImage(named: "border_color-border_color_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 2:
                 cell.centerLabel.text = "主要簿"
                 cell.leftImageView.image = UIImage(named: "import_contacts-import_contacts_grad200_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 3:
                 cell.centerLabel.text = "通知設定"
                 // ボタン
@@ -445,6 +510,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 button.tag = indexPath.row
                 button.addTarget(self, action: #selector(pushNotificationSettingButtonTapped), for: .touchUpInside)
                 cell.accessoryView = button
+                // セルの選択不可にする
+                cell.selectionStyle = .none
+
             case 4:
                 cell.centerLabel.text = "帳簿付け時刻の通知"
                 cell.leftImageView.image = UIImage(named: "baseline_alarm_black_36pt")?.withRenderingMode(.alwaysTemplate)
@@ -456,7 +524,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 switchView.tag = indexPath.row
                 switchView.addTarget(self, action: #selector(localNotificationSettingSwitchTriggered), for: .valueChanged)
                 cell.accessoryView = switchView
-                
+                // セルの選択不可にする
+                cell.selectionStyle = .none
+
             case 5:
                 cell.centerLabel.text = "指定時刻"
                 cell.leftImageView.image = nil
@@ -488,7 +558,29 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 picker.date = UserNotificationUtility.shared.time
                 picker.addTarget(self, action: #selector(datePickerTriggered), for: .valueChanged)
                 cell.accessoryView = picker
+                // セルの選択不可にする
+                cell.selectionStyle = .none
 
+            case 6:
+                // ウィジェット 単位　設定
+                cell.centerLabel.text = "Widget"
+                cell.centerLabelHeighCenterY.priority = .defaultHigh
+                cell.centerLabelMiddleCenterY.priority = .defaultLow
+                cell.subLabel.text = "金額の単位"
+                cell.lowerLabel.text = "ウィジェットに表示させる金額の単位を指定します。"
+                cell.lowerLabel.isHidden = false
+
+                cell.leftImageView.image = UIImage(named: "baseline_widgets_black_36pt")?.withRenderingMode(.alwaysTemplate)
+                // ウィジェット 単位　設定 セグメントコントロール
+                let segment = UISegmentedControl(items: ["千円", "円"])
+                // ウィジェット 単位　設定
+                let userDefault = UserDefaults(suiteName: AppGroups.appGroupsId)
+                segment.selectedSegmentIndex = userDefault?.bool(forKey: "isThousand") ?? true ? 0 : 1
+                segment.addTarget(self, action: #selector(onSegment), for: .valueChanged)
+                cell.accessoryView = UIView(frame: segment.frame)
+                cell.accessoryView?.addSubview(segment)
+                // セルの選択不可にする
+                cell.selectionStyle = .none
             default:
                 break
             }
@@ -497,9 +589,15 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
             case 0:
                 cell.centerLabel.text = "使い方ガイド"
                 cell.leftImageView.image = UIImage(named: "help-help_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 1:
                 cell.centerLabel.text = "評価・レビュー"
                 cell.leftImageView.image = UIImage(named: "thumb_up-thumb_up_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             case 2:
                 // お問い合わせ機能
                 cell.centerLabel.text = "お問い合わせ"
@@ -509,6 +607,9 @@ extension SettingsTableViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.lowerLabel.text = "メールを受信できるように受信拒否設定は解除してください。"
                 cell.lowerLabel.isHidden = false
                 cell.leftImageView.image = UIImage(named: "forum-forum_symbol")?.withRenderingMode(.alwaysTemplate)
+                // セルの選択を可にする
+                cell.selectionStyle = .gray
+                
             default:
                 break
             }
