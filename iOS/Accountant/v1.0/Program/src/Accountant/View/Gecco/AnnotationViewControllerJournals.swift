@@ -70,6 +70,10 @@ class AnnotationViewControllerJournals: SpotlightViewController {
                 ),
                 moveType: .direct
             )
+            if let third = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(33) as? UITableViewCell {
+                // TableViewのスワイプアクションの擬似的なアニメーション
+                UIView.animateRevealHideActionForRow(cell: third) {}
+            }
         case 4:
             spotlightView.move(
                 Spotlight.RoundedRect(
@@ -88,6 +92,10 @@ class AnnotationViewControllerJournals: SpotlightViewController {
                 ),
                 moveType: .direct
             )
+            if let fifth = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(333) as? UITableView {
+                // TableViewのドラッグアクションの擬似的なアニメーション
+                UIView.animateRevealHideActionForTable(tableView: fifth) {}
+            }
         case 6:
             spotlightView.appear(
                 Spotlight.Oval(
@@ -204,7 +212,7 @@ private extension AnnotationViewControllerJournals {
             let second = viewControllerHasNavigationItem?.navigationItem.rightBarButtonItems?[1].value(forKey: "view") as? UIView,
             let third  = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(33),
             let fifth  = tableViewControllerHasCell?.view.viewWithTag(0)?.viewWithTag(333),
-            let forth = viewControllerHasNavigationItem?.navigationItem.leftBarButtonItems?[0].value(forKey: "view") as? UIView
+            let forth  = viewControllerHasNavigationItem?.navigationItem.leftBarButtonItems?[0].value(forKey: "view") as? UIView
         else {
             fatalError("Unexpected extract view from UIBarButtonItem via value(forKey:)")
         }
