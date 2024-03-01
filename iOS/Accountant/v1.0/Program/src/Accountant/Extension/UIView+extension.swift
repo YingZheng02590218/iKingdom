@@ -111,3 +111,107 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    // TableViewのスワイプアクションの擬似的なアニメーション
+    class func animateRevealHideActionForRow(cell: UITableViewCell, completion: (() -> Void)? = nil) {
+        lazy var imageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(systemName: "trash.fill")
+            imageView.backgroundColor = .systemRed
+            imageView.tintColor = .white
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+        
+        let swipeLabelWidth = 80.0
+        let swipeLabelFrame = CGRect(x: cell.bounds.size.width - swipeLabelWidth, y: cell.frame.origin.y, width: swipeLabelWidth, height: cell.bounds.size.height)
+        
+        var swipeLabel: UILabel? = .init(frame: swipeLabelFrame)
+        if let swipeLabel = swipeLabel {
+            swipeLabel.backgroundColor = .systemRed
+            swipeLabel.textColor = .white
+            // セルに背景色をつける。削除ボタンを隠すため
+            cell.backgroundColor = UIColor.mainColor2
+            // TableViewを取得
+            if let superview = cell.superview {
+                superview.addSubview(swipeLabel)
+                NSLayoutConstraint.activate([
+                    swipeLabel.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+                ])
+                // セルを削除ボタンの前面に移動させる
+                superview.bringSubviewToFront(cell)
+            }
+            
+            swipeLabel.addSubview(imageView)
+            NSLayoutConstraint.activate([
+                imageView.heightAnchor.constraint(equalTo: swipeLabel.heightAnchor, multiplier: 0.45),
+                imageView.centerXAnchor.constraint(equalTo: swipeLabel.centerXAnchor),
+                imageView.centerYAnchor.constraint(equalTo: swipeLabel.centerYAnchor)
+            ])
+        }
+        
+        UIView.animate(
+            withDuration: 1.5,
+            animations: {
+                cell.frame = .init(
+                    x: cell.frame.origin.x - swipeLabelWidth,
+                    y: cell.frame.origin.y,
+                    width: cell.bounds.size.width,
+                    height: cell.bounds.size.height
+                )
+            }
+        ) { _ in
+            UIView.animate(
+                withDuration: 1.5,
+                animations: {
+                    cell.frame = .init(
+                        x: cell.frame.origin.x + swipeLabelWidth,
+                        y: cell.frame.origin.y,
+                        width: cell.bounds.size.width,
+                        height: cell.bounds.size.height
+                    )
+                }, completion: { _ in
+                    swipeLabel?.removeFromSuperview()
+                    swipeLabel = nil
+                    // セルに背景色をつける。削除ボタンを隠すため
+                    cell.backgroundColor = .clear
+                    
+                    completion?()
+                }
+            )
+        }
+    }
+    
+    // TableViewのドラッグアクションの擬似的なアニメーション
+    class func animateRevealHideActionForTable(tableView: UITableView, completion: (() -> Void)? = nil) {
+        let swipeLabelHeight = 80.0
+        
+        UIView.animate(
+            withDuration: 1.5,
+            animations: {
+                tableView.frame = .init(
+                    x: tableView.frame.origin.x,
+                    y: tableView.frame.origin.y + swipeLabelHeight,
+                    width: tableView.bounds.size.width,
+                    height: tableView.bounds.size.height
+                )
+            }
+        ) { _ in
+            UIView.animate(
+                withDuration: 0.5,
+                animations: {
+                    tableView.frame = .init(
+                        x: tableView.frame.origin.x,
+                        y: tableView.frame.origin.y - swipeLabelHeight,
+                        width: tableView.bounds.size.width,
+                        height: tableView.bounds.size.height
+                    )
+                }, completion: { _ in
+                    
+                    completion?()
+                }
+            )
+        }
+    }
+}

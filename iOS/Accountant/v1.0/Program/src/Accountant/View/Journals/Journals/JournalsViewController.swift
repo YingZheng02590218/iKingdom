@@ -1189,7 +1189,7 @@ extension JournalsViewController: JournalsPresenterOutput {
             // テーブルをスクロールさせる。scrollViewDidScrollメソッドを呼び出して、インセットの設定を行うため。
             if !indexPath.isEmpty {
                 // チュートリアル対応 コーチマーク型　タグを設定する
-                tableView.visibleCells[0].tag = 33
+                tableView.visibleCells.first?.tag = 33
                 // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
                 let userDefaults = UserDefaults.standard
                 let firstLunchKey = "firstLunch_Journals"
