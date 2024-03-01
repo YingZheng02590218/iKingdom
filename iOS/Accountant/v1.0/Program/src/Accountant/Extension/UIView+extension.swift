@@ -125,13 +125,23 @@ extension UIView {
         }()
         
         let swipeLabelWidth = 80.0
-        let swipeLabelFrame = CGRect(x: cell.bounds.size.width, y: 0, width: swipeLabelWidth, height: cell.bounds.size.height)
+        let swipeLabelFrame = CGRect(x: cell.bounds.size.width - swipeLabelWidth, y: cell.frame.origin.y, width: swipeLabelWidth, height: cell.bounds.size.height)
         
         var swipeLabel: UILabel? = .init(frame: swipeLabelFrame)
         if let swipeLabel = swipeLabel {
             swipeLabel.backgroundColor = .systemRed
             swipeLabel.textColor = .white
-            cell.addSubview(swipeLabel)
+            // セルに背景色をつける。削除ボタンを隠すため
+            cell.backgroundColor = UIColor.mainColor2
+            // TableViewを取得
+            if let superview = cell.superview {
+                superview.addSubview(swipeLabel)
+                NSLayoutConstraint.activate([
+                    swipeLabel.trailingAnchor.constraint(equalTo: superview.trailingAnchor)
+                ])
+                // セルを削除ボタンの前面に移動させる
+                superview.bringSubviewToFront(cell)
+            }
             
             swipeLabel.addSubview(imageView)
             NSLayoutConstraint.activate([
@@ -145,25 +155,27 @@ extension UIView {
             withDuration: 1.5,
             animations: {
                 cell.frame = .init(
-                    x: cell.frame.origin.x - swipeLabelWidth / 1,
+                    x: cell.frame.origin.x - swipeLabelWidth,
                     y: cell.frame.origin.y,
-                    width: cell.bounds.size.width + swipeLabelWidth / 1,
+                    width: cell.bounds.size.width,
                     height: cell.bounds.size.height
                 )
             }
         ) { _ in
             UIView.animate(
-                withDuration: 0.5,
+                withDuration: 1.5,
                 animations: {
                     cell.frame = .init(
-                        x: cell.frame.origin.x + swipeLabelWidth / 1,
+                        x: cell.frame.origin.x + swipeLabelWidth,
                         y: cell.frame.origin.y,
-                        width: cell.bounds.size.width - swipeLabelWidth / 1,
+                        width: cell.bounds.size.width,
                         height: cell.bounds.size.height
                     )
                 }, completion: { _ in
                     swipeLabel?.removeFromSuperview()
                     swipeLabel = nil
+                    // セルに背景色をつける。削除ボタンを隠すため
+                    cell.backgroundColor = .clear
                     
                     completion?()
                 }
