@@ -28,8 +28,8 @@
                                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1g-F1-sE4" userLabel="View top">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="120"/>
                                                 <subviews>
-                                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
-                                                        <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
+                                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVB-HA-sb7" userLabel="ViewUpper">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="株式会社 iKingdom" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="eWE-1V-x9k" userLabel="company_name">
                                                                 <rect key="frame" x="0.0" y="30" width="0.0" height="30"/>
@@ -71,8 +71,8 @@
                                                             <constraint firstItem="aIP-xT-tcO" firstAttribute="leading" secondItem="fVB-HA-sb7" secondAttribute="leading" id="wgo-5U-IVM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
-                                                        <rect key="frame" x="0.0" y="60" width="0.0" height="60"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-hu-A8w" userLabel="TopView">
+                                                        <rect key="frame" x="0.0" y="60" width="400" height="60"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bR-9B-asA" userLabel="ViewDate">
                                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="60"/>
@@ -1013,11 +1013,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="仕訳帳" id="dv7-m9-iZ3">
                         <rightBarButtonItems>
-                            <barButtonItem title=" 仕訳入力" hidden="YES" id="uJC-kS-QV3">
-                                <connections>
-                                    <segue destination="TR8-pc-zuU" kind="presentation" identifier="buttonTapped" id="plG-Re-WNv"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem image="picture_as_pdf-picture_as_pdf_symbol" id="i4W-ZZ-FXk">
                                 <connections>
                                     <action selector="pdfBarButtonItemTapped:" destination="Y6W-OH-hqX" id="t5g-6i-XbI"/>
@@ -1031,7 +1026,6 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="addBarButtonItem" destination="uJC-kS-QV3" id="ZB0-Rc-Gyf"/>
                         <outlet property="addButton" destination="rAK-W9-R5l" id="3d3-Vg-oie"/>
                         <outlet property="backgroundView" destination="iWJ-SB-FwY" id="V9x-28-Ync"/>
                         <outlet property="closingDateLabel" destination="O7L-5s-hJI" id="zKE-dF-zr8"/>
@@ -1153,7 +1147,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UZN-EG-7jc"/>
+        <segue reference="W6Q-N5-Dbe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="csv-csv_symbol" width="17" height="14"/>

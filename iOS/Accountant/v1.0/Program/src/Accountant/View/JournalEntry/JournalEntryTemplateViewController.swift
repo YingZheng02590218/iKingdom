@@ -15,6 +15,8 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
     @IBOutlet private var nicknameTextField: UITextField!
     @IBOutlet private var nicknameCounterLabel: UILabel!
     @IBOutlet private var nicknameView: EMTNeumorphicView!
+    // 仕訳画面で入力された仕訳の内容
+    var journalEntryData: JournalEntryData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,15 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
             labelTitle.text = "よく使う仕訳"
             inputButton.setTitle("追　加", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
             deleteButton.isHidden = true
+            
+            // 仕訳画面で入力された仕訳の内容
+            if let journalEntryData = journalEntryData {
+                textFieldCategoryDebit.text = journalEntryData.debit_category
+                textFieldCategoryCredit.text = journalEntryData.credit_category
+                textFieldAmountDebit.text = StringUtility.shared.addComma(string: journalEntryData.debit_amount?.description ?? "")
+                textFieldAmountCredit.text = StringUtility.shared.addComma(string: journalEntryData.credit_amount?.description ?? "")
+                textFieldSmallWritting.text = journalEntryData.smallWritting
+            }
         } else if journalEntryType == .SettingsJournalEntriesFixing {
             labelTitle.text = "よく使う仕訳"
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
@@ -197,6 +208,7 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                 creditAmount: Int64(amountCreditTextField) ?? 0, // カンマを削除してからデータベースに書き込む
                 smallWritting: textFieldSmallWritting
             )
+            // 設定よく使う仕訳画面
             if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
                let splitViewController = tabBarController.selectedViewController as? UISplitViewController, // 基底のコントローラから、選択されているを取得する
                let navigationController = splitViewController.viewControllers[0] as? UINavigationController, // スプリットコントローラから、現在選択されているコントローラを取得する
@@ -210,6 +222,29 @@ class JournalEntryTemplateViewController: JournalEntryViewController {
                     presentingViewController.viewReload = true
                     presentingViewController.viewWillAppear(true)
                 })
+            } else {
+                // 仕訳画面 タブバー
+                if let tabBarController = self.presentingViewController as? UITabBarController, // 基底となっているコントローラ
+                   let navigationController = tabBarController.selectedViewController as? UINavigationController,
+                   let presentingViewController = navigationController.topViewController as? JournalEntryViewController {
+                    print(navigationController.topViewController)
+                    print(navigationController.viewControllers)
+                    // 画面を閉じる
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        // よく使う仕訳　エリア カルーセルをリロードする
+                        JournalEntryViewController.viewReload = true
+                        presentingViewController.viewWillAppear(true)
+                    })
+                }
+                // 仕訳画面 仕訳帳画面、精算表画面
+                if let presentingViewController = presentingViewController as? JournalEntryViewController {
+                    // 画面を閉じる
+                    self.dismiss(animated: true, completion: { [presentingViewController] () -> Void in
+                        // よく使う仕訳　エリア カルーセルをリロードする
+                        JournalEntryViewController.viewReload = true
+                        presentingViewController.viewWillAppear(true)
+                    })
+                }
             }
         }
     }

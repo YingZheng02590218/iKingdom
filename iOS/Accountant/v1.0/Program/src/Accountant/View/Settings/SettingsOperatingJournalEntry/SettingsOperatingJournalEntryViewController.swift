@@ -81,10 +81,10 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                 }
             }
         }
-        // 仕訳画面表示ボタン
-        addButton.isEnabled = !isEditing
         
         if let addButton = addButton {
+            // 仕訳画面表示ボタン
+            addButton.isEnabled = !isEditing
             // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
             addButton.layer.cornerRadius = addButton.frame.width / 2 - 1
             // 影の色を指定。(UIColorをCGColorに変換している)
@@ -120,6 +120,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         navigationItem.title = "よく使う仕訳"
     }
     
+    // よく使う仕訳画面を表示させる
     func presentToDetail() {
         // 別の画面に遷移 仕訳画面
         performSegue(withIdentifier: "longTapped", sender: nil)
@@ -145,9 +146,6 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             if let primaryKey = primaryKey { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
                 return true // true: 画面遷移させる
             }
-        } else if identifier == "buttonTapped" {
-            // 追加ボタン
-            return true
         } else if identifier == "groupButtonTapped" {
             // グループ一覧ボタン
             return true
@@ -159,7 +157,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryTemplateViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped" || segue.identifier == "buttonTapped2" {
+            if segue.identifier == "buttonTapped2" {
                 controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let primaryKey = primaryKey { // nil:ロングタップではない

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RxZ-JM-Gew">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RxZ-JM-Gew">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -575,16 +576,49 @@
                                     <constraint firstItem="14e-0l-xHx" firstAttribute="height" secondItem="7Xe-Zw-HUf" secondAttribute="height" multiplier="0.2" id="zL3-rL-5Pq"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRb-av-T7L">
+                                <rect key="frame" x="351" y="766" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Ods-WQ-GqG"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" name="AccentBlue"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRound">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="RxZ-JM-Gew" eventType="touchUpInside" id="wei-Oo-pJU"/>
+                                    <segue destination="Phr-8Y-Mpl" kind="presentation" identifier="buttonTapped2" id="vMJ-TC-8dB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qiy-ix-sdg"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <constraints>
+                            <constraint firstItem="yRb-av-T7L" firstAttribute="width" secondItem="yRb-av-T7L" secondAttribute="height" multiplier="25:25" id="1ys-0J-3Os"/>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="7Xe-Zw-HUf" secondAttribute="trailing" constant="10" id="44Z-PX-lTp"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="height" secondItem="qiy-ix-sdg" secondAttribute="height" id="4wc-Jw-atD"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="leading" secondItem="qiy-ix-sdg" secondAttribute="leading" constant="10" id="PHA-oa-TGH"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="width" secondItem="qiy-ix-sdg" secondAttribute="width" constant="-20" id="R85-ta-jx5"/>
+                            <constraint firstItem="qiy-ix-sdg" firstAttribute="trailing" secondItem="yRb-av-T7L" secondAttribute="trailing" constant="27" id="TMh-va-fp1"/>
                             <constraint firstItem="7Xe-Zw-HUf" firstAttribute="top" secondItem="qiy-ix-sdg" secondAttribute="top" id="UvS-Lh-qpO"/>
                             <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="7Xe-Zw-HUf" secondAttribute="bottom" id="ZBU-FR-Frw"/>
+                            <constraint firstItem="qiy-ix-sdg" firstAttribute="bottom" secondItem="yRb-av-T7L" secondAttribute="bottom" constant="27" id="hIv-zr-WsC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="仕訳" id="8ln-1Z-2oy">
@@ -604,6 +638,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="yRb-av-T7L" id="Gx4-er-lIq"/>
                         <outlet property="buttonLeft" destination="4fs-GK-JAo" id="Qem-QS-EuL"/>
                         <outlet property="buttonRight" destination="4du-Lt-kP1" id="M0R-uy-fG6"/>
                         <outlet property="cancelButton" destination="Ef0-Vy-bhy" id="YfV-1a-d1g"/>
@@ -711,6 +746,14 @@
             </objects>
             <point key="canvasLocation" x="1236" y="2782"/>
         </scene>
+        <!--JournalEntryTemplateViewController-->
+        <scene sceneID="Yws-7H-zsK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="JournalEntryTemplateViewController" id="Phr-8Y-Mpl" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iid-yN-Hzr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933" y="3163"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="oNm-xH-Kw5"/>
@@ -719,6 +762,11 @@
         <image name="arrow_back_ios-arrow_back_ios_symbol" width="10" height="17"/>
         <image name="arrow_forward_ios-arrow_forward_ios_symbol" width="10" height="17"/>
         <image name="close-close_symbol" width="12" height="12"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="AccentBlue">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="BaseColor">
             <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -729,7 +777,7 @@
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="0.48500001430511475" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MainColor2">
-            <color red="0.96862745098039216" green="0.96470588235294119" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.96899998188018799" green="0.9649999737739563" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="TextColor">
             <color red="0.05000000074505806" green="0.05000000074505806" blue="0.05000000074505806" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

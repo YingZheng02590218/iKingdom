@@ -105,18 +105,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dvD-GS-fFa">
-                        <rightBarButtonItems>
-                            <barButtonItem title="グループ一覧" image="rectangle.3.group" catalog="system" id="oZl-bT-o43">
-                                <connections>
-                                    <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" hidden="YES" id="B3W-Tv-5zJ">
-                                <connections>
-                                    <segue destination="lgc-ER-CXx" kind="presentation" identifier="buttonTapped" id="GOO-Er-6lu"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="グループ一覧" image="rectangle.3.group" catalog="system" id="oZl-bT-o43">
+                            <connections>
+                                <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="e4Q-98-al7" id="0lT-nN-47H"/>

@@ -33,6 +33,8 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet private var cancelButton: EMTNeumorphicButton!
     // デイトピッカー　日付
     @IBOutlet private var datePicker: UIDatePicker!
+    // 仕訳画面表示ボタン
+    @IBOutlet private var addButton: UIButton!
 
     var isMaskedDatePicker = false // マスクフラグ
     
@@ -784,54 +786,22 @@ class JournalEntryViewController: UIViewController {
     // 決算整理仕訳　の処理
     func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
-        // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        if let textFieldCategoryDebit = textFieldCategoryDebit.text,
-           let textFieldAmountDebit = textFieldAmountDebit.text,
-           let textFieldCategoryCredit = textFieldCategoryCredit.text,
-           let textFieldAmountCredit = textFieldAmountCredit.text,
-           let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
-           let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
-           let textFieldSmallWritting = textFieldSmallWritting.text {
+        // ユーザーが入力した仕訳の内容を取得する
+        if let journalEntryData = getInputJournalEntryData() {
             
-            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
-            let dBJournalEntry = JournalEntryData(
-                date: date,
-                debit_category: textFieldCategoryDebit,
-                debit_amount: textFieldAmountDebitInt64,
-                credit_category: textFieldCategoryCredit,
-                credit_amount: textFieldAmountCreditInt64,
-                smallWritting: textFieldSmallWritting
-            )
-            
-            return dBJournalEntry
+            return journalEntryData
         }
         
         return nil
     }
     
-    // 仕訳編集　の処理
+    // 仕訳編集/決算整理仕訳編集　の処理
     func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int) {
         // データベース　仕訳データを追加
-        // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        if let textFieldCategoryDebit = textFieldCategoryDebit.text,
-           let textFieldAmountDebit = textFieldAmountDebit.text,
-           let textFieldCategoryCredit = textFieldCategoryCredit.text,
-           let textFieldAmountCredit = textFieldAmountCredit.text,
-           let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
-           let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
-           let textFieldSmallWritting = textFieldSmallWritting.text {
+        // ユーザーが入力した仕訳の内容を取得する
+        if let journalEntryData = getInputJournalEntryData() {
             
-            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
-            let dBJournalEntry = JournalEntryData(
-                date: date,
-                debit_category: textFieldCategoryDebit,
-                debit_amount: textFieldAmountDebitInt64,
-                credit_category: textFieldCategoryCredit,
-                credit_amount: textFieldAmountCreditInt64,
-                smallWritting: textFieldSmallWritting
-            )
-            
-            return (dBJournalEntry, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
+            return (journalEntryData, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
         }
         
         return (nil, tappedIndexPath.section, primaryKey)
@@ -840,31 +810,15 @@ class JournalEntryViewController: UIViewController {
     // 仕訳　の処理
     func buttonTappedForJournalEntries() -> JournalEntryData? {
         // データベース　仕訳データを追加
-        // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
-        if let textFieldCategoryDebit = textFieldCategoryDebit.text,
-           let textFieldAmountDebit = textFieldAmountDebit.text,
-           let textFieldCategoryCredit = textFieldCategoryCredit.text,
-           let textFieldAmountCredit = textFieldAmountCredit.text,
-           let textFieldAmountDebitInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountDebit)),
-           let textFieldAmountCreditInt64 = Int64(StringUtility.shared.removeComma(string: textFieldAmountCredit)),
-           let textFieldSmallWritting = textFieldSmallWritting.text {
-            
-            let date = "\(datePicker.date.year)" + "/" + "\(String(format: "%02d", datePicker.date.month))" + "/" + "\(String(format: "%02d", datePicker.date.day))"
-            let dBJournalEntry = JournalEntryData(
-                date: date,
-                debit_category: textFieldCategoryDebit,
-                debit_amount: textFieldAmountDebitInt64,
-                credit_category: textFieldCategoryCredit,
-                credit_amount: textFieldAmountCreditInt64,
-                smallWritting: textFieldSmallWritting
-            )
+        // ユーザーが入力した仕訳の内容を取得する
+        if let journalEntryData = getInputJournalEntryData() {
             // イベントログ
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                 AnalyticsParameterContentType: Constant.JOURNALS,
                 AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
             ])
             
-            return dBJournalEntry
+            return journalEntryData
         }
         
         return nil
@@ -872,6 +826,23 @@ class JournalEntryViewController: UIViewController {
     
     // タブバーの仕訳タブからの遷移の場合
     func buttonTappedForJournalEntriesOnTabBar() -> JournalEntryData? {
+        // データベース　仕訳データを追加
+        // ユーザーが入力した仕訳の内容を取得する
+        if let journalEntryData = getInputJournalEntryData() {
+            // イベントログ
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterContentType: Constant.JOURNALENTRY,
+                AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
+            ])
+            
+            return journalEntryData
+        }
+        
+        return nil
+    }
+    
+    // ユーザーが入力した仕訳の内容を取得する
+    func getInputJournalEntryData() -> JournalEntryData? {
         // データベース　仕訳データを追加
         // Int型は数字以外の文字列が入っていると例外発生する　入力チェックで弾く
         if let textFieldCategoryDebit = textFieldCategoryDebit.text,
@@ -891,17 +862,13 @@ class JournalEntryViewController: UIViewController {
                 credit_amount: textFieldAmountCreditInt64,
                 smallWritting: textFieldSmallWritting
             )
-            // イベントログ
-            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterContentType: Constant.JOURNALENTRY,
-                AnalyticsParameterItemID: Constant.ADDJOURNALENTRY
-            ])
             
             return dBJournalEntry
         }
         
         return nil
     }
+    
     // 入力チェック 仕訳一括編集
     func textInputCheckForJournalEntriesPackageFixing() -> Bool {
         // 入力値を取得する
@@ -1096,6 +1063,41 @@ class JournalEntryViewController: UIViewController {
         if journalEntryType != .JournalEntry && // 仕訳 タブバーの仕訳タブからの遷移の場合
             journalEntryType != .AdjustingAndClosingEntry { // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // よく使う仕訳画面へ遷移ボタン
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        // フィードバック
+        if #available(iOS 10.0, *), let generator = feedbackGeneratorMedium as? UIImpactFeedbackGenerator {
+            generator.impactOccurred()
+        }
+        sender.animateView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // 別の画面に遷移 仕訳画面
+            self.performSegue(withIdentifier: "buttonTapped2", sender: nil)
+        }
+    }
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "buttonTapped2" {
+            return false // false:画面遷移させない
+        }
+        return true // true: 画面遷移させる
+    }
+    // 追加機能　画面遷移の準備　仕訳画面
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // segue.destinationの型はUIViewController
+        if let controller = segue.destination as? JournalEntryTemplateViewController {
+            // 遷移先のコントローラに値を渡す
+            if segue.identifier == "buttonTapped2" {
+                controller.journalEntryType = .SettingsJournalEntries // セルに表示した仕訳タイプを取得
+                // ユーザーが入力した仕訳の内容を取得する
+                // 仕訳一括編集　の処理
+                let journalEntryData = buttonTappedForJournalEntriesPackageFixing()
+                // 仕訳画面で入力された仕訳の内容
+                controller.journalEntryData = journalEntryData
+            }
         }
     }
 }
@@ -1607,6 +1609,21 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             maskDatePickerButton.isHidden = false
             isMaskedDatePicker = false
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        }
+        
+        if let addButton = addButton {
+            // 仕訳画面表示ボタン
+            addButton.isEnabled = !isEditing
+            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 1
+            // 影の色を指定。(UIColorをCGColorに変換している)
+            addButton.layer.shadowColor = UIColor.black.cgColor
+            // 影の縁のぼかしの強さを指定
+            addButton.layer.shadowRadius = 3
+            // 影の位置を指定
+            addButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
+            // 影の不透明度(濃さ)を指定
+            addButton.layer.shadowOpacity = 1.0
         }
         // セットアップ AdMob
         setupAdMob()
