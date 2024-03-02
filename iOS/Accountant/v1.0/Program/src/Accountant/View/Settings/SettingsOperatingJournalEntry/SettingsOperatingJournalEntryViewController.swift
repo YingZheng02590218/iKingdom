@@ -17,7 +17,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     // 仕訳画面表示ボタン
     @IBOutlet private var addButton: UIButton!
-
+    
     // 仕訳編集　編集の対象となる仕訳の連番
     var primaryKey: Int?
     // まとめて編集機能　選択したよく使う仕訳の連番
@@ -81,8 +81,14 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         if let addButton = addButton {
+            // ボタンの色
+            addButton.backgroundColor = .accentLight
             // 仕訳画面表示ボタン
             addButton.isEnabled = !isEditing
             // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
@@ -97,6 +103,7 @@ class SettingsOperatingJournalEntryViewController: UIViewController {
             addButton.layer.shadowOpacity = 1.0
         }
     }
+    
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)

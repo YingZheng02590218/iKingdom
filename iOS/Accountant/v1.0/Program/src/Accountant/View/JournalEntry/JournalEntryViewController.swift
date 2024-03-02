@@ -424,6 +424,23 @@ class JournalEntryViewController: UIViewController {
         cancelButton.setImage(backImage, for: UIControl.State.normal)
         // アイコン画像の色を指定する
         cancelButton.tintColor = .accentColor
+        
+        if let addButton = addButton {
+            // ボタンの色
+            addButton.backgroundColor = .accentLight
+            // 仕訳画面表示ボタン
+            addButton.isEnabled = !isEditing
+            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
+            addButton.layer.cornerRadius = addButton.frame.width / 2 - 1
+            // 影の色を指定。(UIColorをCGColorに変換している)
+            addButton.layer.shadowColor = UIColor.black.cgColor
+            // 影の縁のぼかしの強さを指定
+            addButton.layer.shadowRadius = 3
+            // 影の位置を指定
+            addButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
+            // 影の不透明度(濃さ)を指定
+            addButton.layer.shadowOpacity = 1.0
+        }
     }
     
     // MARK: PickerTextField
@@ -1609,21 +1626,6 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             maskDatePickerButton.isHidden = false
             isMaskedDatePicker = false
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
-        }
-        
-        if let addButton = addButton {
-            // 仕訳画面表示ボタン
-            addButton.isEnabled = !isEditing
-            // ボタンを丸くする処理。ボタンが正方形の時、一辺を2で割った数値を入れる。(今回の場合、 ボタンのサイズは70×70であるので、35。)
-            addButton.layer.cornerRadius = addButton.frame.width / 2 - 1
-            // 影の色を指定。(UIColorをCGColorに変換している)
-            addButton.layer.shadowColor = UIColor.black.cgColor
-            // 影の縁のぼかしの強さを指定
-            addButton.layer.shadowRadius = 3
-            // 影の位置を指定
-            addButton.layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
-            // 影の不透明度(濃さ)を指定
-            addButton.layer.shadowOpacity = 1.0
         }
         // セットアップ AdMob
         setupAdMob()
