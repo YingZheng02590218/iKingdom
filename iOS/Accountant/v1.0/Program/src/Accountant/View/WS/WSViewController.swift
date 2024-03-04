@@ -37,7 +37,6 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     
     var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // 精算表画面で押下された場合は、決算整理仕訳とする
-    @IBOutlet private var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
     @IBOutlet private var printButton: UIButton!
     // フィードバック
     let feedbackGeneratorMedium: Any? = {

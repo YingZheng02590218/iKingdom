@@ -22,7 +22,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
     // 仕訳帳　上部
     // まとめて編集機能
     @IBOutlet private var editWithSlectionButton: UIButton! // 選択した項目を編集ボタン
-    @IBOutlet private var addBarButtonItem: UIBarButtonItem!
     @IBOutlet private var pdfBarButtonItem: UIBarButtonItem!
     @IBOutlet private var csvBarButtonItem: UIBarButtonItem!
     @IBOutlet private var labelCompanyName: UILabel!
@@ -142,7 +141,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         pdfBarButtonItem.tintColor = .accentColor
         csvBarButtonItem.tintColor = .accentColor
-        addBarButtonItem.tintColor = .accentColor
         // 仕訳画面表示ボタン
         addButton.isEnabled = true
         // 空白行対応
@@ -468,8 +466,6 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                     return true // true: 画面遷移させる
                 }
             }
-        } else if identifier == "buttonTapped" {
-            return true
         }
         return false // false:画面遷移させない
     }
@@ -478,7 +474,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? JournalEntryViewController {
             // 遷移先のコントローラに値を渡す
-            if segue.identifier == "buttonTapped" || segue.identifier == "buttonTapped2" {
+            if segue.identifier == "buttonTapped2" {
                 controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
@@ -981,7 +977,6 @@ extension JournalsViewController: UITableViewDelegate, UITableViewDataSource {
         editWithSlectionButton.tintColor = editing ? .accentBlue : UIColor.clear // 色
         pdfBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // 印刷ボタン
         csvBarButtonItem.isEnabled = !editing ? presenter.numberOfobjects + presenter.numberOfobjectsss >= 1 : false // CSVボタン
-        addBarButtonItem.isEnabled = !editing // 仕訳入力ボタン
         // 仕訳画面表示ボタン
         addButton.isEnabled = !editing
         // 編集中の場合
@@ -1311,7 +1306,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.editButtonItem.isEnabled = false // 編集ボタン
             self.pdfBarButtonItem.isEnabled = false // 印刷ボタン
             self.csvBarButtonItem.isEnabled = false // CSVボタン
-            self.addBarButtonItem.isEnabled = false // 仕訳入力ボタン
             // 仕訳画面表示ボタン
             self.addButton.isEnabled = false
             
@@ -1358,7 +1352,6 @@ extension JournalsViewController: JournalsPresenterOutput {
             self.editButtonItem.isEnabled = true // 編集ボタン
             self.pdfBarButtonItem.isEnabled = true // 印刷ボタン
             self.csvBarButtonItem.isEnabled = true // CSVボタン
-            self.addBarButtonItem.isEnabled = true // 仕訳入力ボタン
             // 仕訳画面表示ボタン
             self.addButton.isEnabled = true
             // アニメーション終了
