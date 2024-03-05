@@ -104,18 +104,42 @@ class Initial {
      * 設定勘定科目を初期化する。
      */
     func initialiseMasterData(completion: @escaping () -> Void) {
-        if !DatabaseManagerSettingsTaxonomyAccount.shared.checkInitialising() {
-            // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
-            DatabaseManagerSettingsTaxonomyAccount.shared.deleteAllOfSettingsTaxonomyAccount()
-            let masterData = MasterData()
-            // マスターデータを作成する
-            masterData.readMasterDataFromCSVOfTaxonomyAccount()
+        // 設定勘定科目　初期化　初回起動時
+        if UserDefaults.standard.bool(forKey: "settings_taxonomy_account") {
+            // 設定勘定科目　初期化 失敗している
+            if DatabaseManagerSettingsTaxonomyAccount.shared.checkInitialising() {
+                // フラグを倒す 設定勘定科目　初期化
+                let userDefaults = UserDefaults.standard
+                let firstLunchKey = "settings_taxonomy_account"
+                userDefaults.set(false, forKey: firstLunchKey)
+                userDefaults.synchronize()
+            } else {
+                // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
+                DatabaseManagerSettingsTaxonomyAccount.shared.deleteAllOfSettingsTaxonomyAccount()
+                let masterData = MasterData()
+                // マスターデータを作成する
+                masterData.readMasterDataFromCSVOfTaxonomyAccount()
+            }
+        } else {
+            // 設定勘定科目　初期化 済み
         }
-        if !DataBaseManagerSettingsTaxonomy.shared.checkInitialising() {
-            // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
-            DataBaseManagerSettingsTaxonomy.shared.deleteAllOfSettingsTaxonomy()
-            let masterData = MasterData()
-            masterData.readMasterDataFromCSVOfTaxonomy()
+        // 設定表示科目　初期化　初回起動時
+        if UserDefaults.standard.bool(forKey: "settings_taxonomy") {
+            // 設定勘定科目　初期化 失敗している
+            if DataBaseManagerSettingsTaxonomy.shared.checkInitialising() {
+                // フラグを倒す 設定表示科目　初期化
+                let userDefaults = UserDefaults.standard
+                let firstLunchKey = "settings_taxonomy"
+                userDefaults.set(false, forKey: firstLunchKey)
+                userDefaults.synchronize()
+            } else {
+                // すでに存在するオブジェクトを全て削除する v2.0.2で初期化処理が失敗している場合に対処する処理
+                DataBaseManagerSettingsTaxonomy.shared.deleteAllOfSettingsTaxonomy()
+                let masterData = MasterData()
+                masterData.readMasterDataFromCSVOfTaxonomy()
+            }
+        } else {
+            // 設定表示科目　初期化 済み
         }
         // 法人/個人フラグ
         if UserDefaults.standard.bool(forKey: "corporation_switch") {

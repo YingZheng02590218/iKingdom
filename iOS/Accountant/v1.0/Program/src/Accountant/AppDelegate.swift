@@ -284,6 +284,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.register(defaults: firstLunch)
         // 動作確認用
         // userDefaults.set(true, forKey: firstLunchKey)
+        // 設定勘定科目　初期化
+        firstLunchKey = "settings_taxonomy_account"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
+        // 設定表示科目　初期化
+        firstLunchKey = "settings_taxonomy"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
         // サンプル仕訳データ
         firstLunchKey = "sample_JournalEntry"
         firstLunch = [firstLunchKey: true]

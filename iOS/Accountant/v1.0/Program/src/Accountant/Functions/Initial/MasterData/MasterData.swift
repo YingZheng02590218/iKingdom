@@ -55,6 +55,12 @@ class MasterData {
                 }
                 print("連番: \(number), 勘定科目　CSVファイルを読み込み \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
                 if number == 229 {
+                    // フラグを倒す 設定勘定科目　初期化
+                    let userDefaults = UserDefaults.standard
+                    let firstLunchKey = "settings_taxonomy_account"
+                    userDefaults.set(false, forKey: firstLunchKey)
+                    userDefaults.synchronize()
+                    
                     stop = true
                 }
             }
@@ -98,6 +104,12 @@ class MasterData {
                 }
                 print("連番: \(number) 表示科目　CSVファイルを読み込み")
                 if number == 2_068 {
+                    // フラグを倒す 設定表示科目　初期化
+                    let userDefaults = UserDefaults.standard
+                    let firstLunchKey = "settings_taxonomy"
+                    userDefaults.set(false, forKey: firstLunchKey)
+                    userDefaults.synchronize()
+                    
                     stop = true
                 }
             }
