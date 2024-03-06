@@ -135,6 +135,9 @@ class CategoryListTableViewController: UITableViewController {
         super.setEditing(editing, animated: animated)
         
         tableView.setEditing(editing, animated: animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Navigation
@@ -174,6 +177,16 @@ class CategoryListTableViewController: UITableViewController {
         
         presenter.numberOfobjects(section: section)
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 編集モードの場合
+        if tableView.isEditing {
+            return 43.5
+        } else {
+            // 勘定科目の有効無効
+            return presenter.objects(forRow: indexPath.row, section: indexPath.section).switching ? 43.5 : 0
+        }
+    }
     // セルを生成して返却するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // ① UI部品を指定　TableViewCellCategory
@@ -211,31 +224,39 @@ class CategoryListTableViewController: UITableViewController {
             //                }
             //            }
         }
-        // 勘定科目の有効無効
-        cell.toggleButton.isOn = presenter.objects(forRow: indexPath.row, section: indexPath.section).switching
-        // 勘定科目の有効無効　変更時のアクションを指定
-        cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
-        // モデルオブフェクトの取得 勘定別に取得
-        let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(
-            account: presenter.objects(
-                forRow: indexPath.row,
-                section: indexPath.section
-            ).category as String
-        ) // 通常仕訳　勘定別 全年度にしてはいけない
-        let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(
-            account: presenter.objects(
-                forRow: indexPath.row,
-                section: indexPath.section
-            ).category as String
-        ) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
-        
-        // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
-        if objectss.isEmpty && objectsss.isEmpty {
-            // UIButtonを有効化
-            cell.toggleButton.isEnabled = true
+        // 編集モードの場合
+        if tableView.isEditing {
+            // 勘定科目の有効無効
+            cell.toggleButton.isOn = presenter.objects(forRow: indexPath.row, section: indexPath.section).switching
+            // 勘定科目の有効無効　変更時のアクションを指定
+            cell.toggleButton.addTarget(self, action: #selector(hundleSwitch), for: UIControl.Event.valueChanged)
+            // モデルオブフェクトの取得 勘定別に取得
+            let objectss = DataBaseManagerJournalEntry.shared.getAllJournalEntryInAccountAll(
+                account: presenter.objects(
+                    forRow: indexPath.row,
+                    section: indexPath.section
+                ).category as String
+            ) // 通常仕訳　勘定別 全年度にしてはいけない
+            let objectsss = DataBaseManagerAdjustingEntry.shared.getAllAdjustingEntryInAccountAll(
+                account: presenter.objects(
+                    forRow: indexPath.row,
+                    section: indexPath.section
+                ).category as String
+            ) // 決算整理仕訳　勘定別　損益勘定以外 全年度にしてはいけない
+            
+            // 仕訳データが存在する場合、トグルスイッチはOFFにできないように、無効化する
+            if objectss.isEmpty && objectsss.isEmpty {
+                // UIButtonを有効化
+                cell.toggleButton.isEnabled = true
+            } else {
+                // UIButtonを無効化
+                cell.toggleButton.isEnabled = false
+            }
+            // UIButtonを表示
+            cell.toggleButton.isHidden = false
         } else {
-            // UIButtonを無効化
-            cell.toggleButton.isEnabled = false
+            // UIButtonを非表示
+            cell.toggleButton.isHidden = true
         }
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
