@@ -16,82 +16,47 @@ class Initial {
      * 設定勘定科目、会計帳簿棚、表示科目を初期化する。
      */
     func initialize(onProgress: @escaping (Int) -> Void, completion: @escaping () -> Void) {
-        
+        onProgress(0)
         DispatchQueue.global(qos: .background).async { // default では進捗率をUIに表示させることがうまくできなかった
-            onProgress(90)
+            onProgress(10)
             print("設定勘定科目　初期化", Date())
             // 設定画面　設定勘定科目　初期化
             self.initialiseMasterData {
                 print("設定勘定科目　初期化", Date())
-                print("会計帳簿棚　初期化", Date())
-                // 設定画面　会計帳簿棚　初期化
-                self.initializeAccountingBooksShelf {
-                    print("会計帳簿棚　初期化", Date())
-                    onProgress(100)
-                    print("表示科目　初期化", Date())
-                    // 表示科目　初期化
-                    self.initializeTaxonomy {
-                        print("表示科目　初期化", Date())
-                        // 設定操作　初期化
-                        self.initializeSettingsOperating {
-                            // 設定会計期間　決算日　初期化
-                            self.initializePeriod {
-                                // チュートリアル対応 コーチマーク型　初回起動時
-                                let userDefaults = UserDefaults.standard
-                                let firstLunchKey = "sample_JournalEntry"
-                                if userDefaults.bool(forKey: firstLunchKey) {
-                                    // 仕訳のサンプルデータを作成する
-                                    _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
-                                        date: "\(self.getTheTime())/04/01",
-                                        debitCategory: "現金",
-                                        debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
-                                        creditCategory: "売上高",
-                                        creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
-                                        smallWritting: "ゾウ商店"
-                                    )
-                                    // よく使う仕訳のサンプルデータを作成する
-                                    _ = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
-                                        nickname: "よく使う仕訳1",
-                                        debitCategory: "現金",
-                                        debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
-                                        creditCategory: "売上高",
-                                        creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
-                                        smallWritting: "ゾウ商店"
-                                    )
-                                    // フラグを倒す
-                                    userDefaults.set(false, forKey: firstLunchKey)
-                                    userDefaults.synchronize()
-                                }
-                                
-                                // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
-                                // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
-                                let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(
-                                    adjustingAndClosingEntries: false,
-                                    switching: true
-                                )
-                                for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
-                                    // 損益振替仕訳　が0件超が存在する場合は　削除
-                                    let objects = DataBaseManagerPLAccount.shared.checkAdjustingEntry(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
-                                outerLoop: while !objects.isEmpty {
-                                    for i in 0..<objects.count {
-                                        let isInvalidated = DataBaseManagerPLAccount.shared.deleteAdjustingJournalEntry(primaryKey: objects[i].number)
-                                        print("削除", isInvalidated, objects.count)
-                                        continue outerLoop
+                onProgress(60)
+                print("設定表示科目　初期化", Date())
+                // 設定画面　設定表示科目　初期化
+                self.initializeSettingsTaxonomyFromMasterData {
+                    print("設定表示科目　初期化", Date())
+                    onProgress(70)
+                    print("設定表示科目　初期化", Date())
+                    // 設定勘定科目　初期化　勘定科目のスイッチを設定する
+                    self.initializeSettingsTaxonomy {
+                        print("設定表示科目　初期化", Date())
+                        onProgress(80)
+                        print("会計帳簿棚　初期化", Date())
+                        // 設定画面　会計帳簿棚　初期化
+                        self.initializeAccountingBooksShelf {
+                            print("会計帳簿棚　初期化", Date())
+                            onProgress(90)
+                            print("表示科目　初期化", Date())
+                            // 表示科目　初期化
+                            self.initializeTaxonomy {
+                                print("表示科目　初期化", Date())
+                                onProgress(100)
+                                // 設定操作　初期化
+                                self.initializeSettingsOperating {
+                                    // 設定会計期間　決算日　初期化
+                                    self.initializePeriod {
+                                        // よく使う仕訳のサンプルデータを作成する
+                                        self.addSampleJournalEntry()
+                                        // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
+                                        self.deleteOldTransferEntry()
+                                        
+                                        Thread.sleep(forTimeInterval: 1.5)
+                                        completion()
                                     }
-                                    break
                                 }
-                                    let objectss = DataBaseManagerPLAccount.shared.checkAdjustingEntryInPLAccount(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
-                                outerLoop: while !objectss.isEmpty {
-                                    for i in 0..<objectss.count {
-                                        let isInvalidated = DataBaseManagerPLAccount.shared.removeAdjustingJournalEntry(primaryKey: objectss[i].number)
-                                        print("関連削除", isInvalidated, objectss.count)
-                                        continue outerLoop
-                                    }
-                                    break
-                                }
-                                }
-                                Thread.sleep(forTimeInterval: 1.5)
-                                completion()
                             }
                         }
                     }
@@ -99,6 +64,7 @@ class Initial {
             }
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 設定勘定科目を初期化する。
@@ -123,6 +89,15 @@ class Initial {
         } else {
             // 設定勘定科目　初期化 済み
         }
+        completion()
+    }
+    
+    
+    /**
+     * 初期化　初期化メソッド
+     * 設定表示科目を初期化する。
+     */
+    func initializeSettingsTaxonomyFromMasterData(completion: @escaping () -> Void) {
         // 設定表示科目　初期化　初回起動時
         if UserDefaults.standard.bool(forKey: "settings_taxonomy") {
             // 設定勘定科目　初期化 失敗している
@@ -141,6 +116,11 @@ class Initial {
         } else {
             // 設定表示科目　初期化 済み
         }
+        completion()
+    }
+    
+    // 設定勘定科目　初期化　勘定科目のスイッチを設定する
+    func initializeSettingsTaxonomy(completion: @escaping () -> Void) {
         // 法人/個人フラグ
         if UserDefaults.standard.bool(forKey: "corporation_switch") {
             // 設定勘定科目　初期化　勘定科目のスイッチを設定する　表示科目が選択されていなければOFFにする
@@ -150,6 +130,7 @@ class Initial {
         }
         completion()
     }
+    
     /**
      * 初期化　初期化メソッド
      * 会計帳簿棚を初期化する。
@@ -163,6 +144,7 @@ class Initial {
         initializeAccountingBooks()
         completion()
     }
+    
     /**
      * 初期化　年度メソッド
      * 初期値用の年月を取得する。
@@ -172,7 +154,7 @@ class Initial {
         let now = Date() // UTC時間なので　9時間ずれる
         
         let calendar = Calendar(identifier: .gregorian)
-
+        
         switch calendar.dateComponents([.month], from: now).month! {
         case 4, 5, 6, 7, 8, 9, 10, 11, 12:
             return calendar.dateComponents([.year], from: now).year!
@@ -183,6 +165,7 @@ class Initial {
             return lastYear - 1 // 1月から3月であれば去年の年に補正する
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 会計帳簿を初期化する。
@@ -242,6 +225,7 @@ class Initial {
             DataBaseManagerFinancialStatements.shared.addAfterClosingTrialBalanceToFinancialStatements(number: dataBaseAccountingBook.number)
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 仕訳帳を初期化する。
@@ -251,6 +235,7 @@ class Initial {
             DataBaseManagerJournals.shared.addJournals(number: number)
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 総勘定元帳を初期化する。
@@ -261,6 +246,7 @@ class Initial {
             DataBaseManagerGeneralLedger.shared.addGeneralLedger(number: number)
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 財務諸表を初期化する。
@@ -271,6 +257,7 @@ class Initial {
             DataBaseManagerFinancialStatements.shared.addFinancialStatements(number: number)
         }
     }
+    
     /**
      * 初期化　初期化メソッド
      * 表示科目を初期化する。
@@ -285,6 +272,7 @@ class Initial {
         }
         completion()
     }
+    
     /**
      * 初期化　初期化メソッド
      * 設定操作を初期化する。
@@ -295,6 +283,7 @@ class Initial {
         }
         completion()
     }
+    
     /**
      * 初期化　初期化メソッド
      * 設定会計期間を初期化する。
@@ -304,5 +293,65 @@ class Initial {
             DataBaseManagerSettingsPeriod.shared.addSettingsPeriod()
         }
         completion()
+    }
+    
+    // よく使う仕訳のサンプルデータを作成する
+    func addSampleJournalEntry() {
+        // チュートリアル対応 コーチマーク型　初回起動時
+        let userDefaults = UserDefaults.standard
+        let firstLunchKey = "sample_JournalEntry"
+        if userDefaults.bool(forKey: firstLunchKey) {
+            // 仕訳のサンプルデータを作成する
+            _ = DataBaseManagerJournalEntry.shared.addJournalEntry(
+                date: "\(self.getTheTime())/04/01",
+                debitCategory: "現金",
+                debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
+                creditCategory: "売上高",
+                creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
+                smallWritting: "ゾウ商店"
+            )
+            // よく使う仕訳のサンプルデータを作成する
+            _ = DataBaseManagerSettingsOperatingJournalEntry.shared.addJournalEntry(
+                nickname: "よく使う仕訳1",
+                debitCategory: "現金",
+                debitAmount: 1_000_000, // カンマを削除してからデータベースに書き込む
+                creditCategory: "売上高",
+                creditAmount: 1_000_000,// カンマを削除してからデータベースに書き込む
+                smallWritting: "ゾウ商店"
+            )
+            // フラグを倒す
+            userDefaults.set(false, forKey: firstLunchKey)
+            userDefaults.synchronize()
+        }
+    }
+    
+    // 旧 損益振替仕訳(決算整理仕訳クラス)、資本振替仕訳(決算整理仕訳クラス)を削除する
+    func deleteOldTransferEntry() {
+        // 設定　仕訳と決算整理後　勘定クラス　全ての勘定
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccountAdjustingSwitch(
+            adjustingAndClosingEntries: false,
+            switching: true
+        )
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            // 損益振替仕訳　が0件超が存在する場合は　削除
+            let objects = DataBaseManagerPLAccount.shared.checkAdjustingEntry(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objects.isEmpty {
+            for i in 0..<objects.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.deleteAdjustingJournalEntry(primaryKey: objects[i].number)
+                print("削除", isInvalidated, objects.count)
+                continue outerLoop
+            }
+            break
+        }
+            let objectss = DataBaseManagerPLAccount.shared.checkAdjustingEntryInPLAccount(account: dataBaseSettingsTaxonomyAccounts[i].category) // 損益勘定内に勘定が存在するか
+        outerLoop: while !objectss.isEmpty {
+            for i in 0..<objectss.count {
+                let isInvalidated = DataBaseManagerPLAccount.shared.removeAdjustingJournalEntry(primaryKey: objectss[i].number)
+                print("関連削除", isInvalidated, objectss.count)
+                continue outerLoop
+            }
+            break
+        }
+        }
     }
 }
