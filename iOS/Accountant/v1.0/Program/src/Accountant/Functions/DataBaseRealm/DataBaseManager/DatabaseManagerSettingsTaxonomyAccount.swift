@@ -92,7 +92,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
             return false // 損益計算書の科目ではない
         }
     }
-    // 取得　設定勘定科目　スイッチ
+    // 取得　設定勘定科目　スイッチ　（精算表、試算表で使用している）
     func getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: Bool, switching: Bool) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
             // FIXME: 使用していないプロパティを使っている
@@ -192,7 +192,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }
-    // 取得 大区分、中区分、小区分
+    // 取得 大区分、中区分、小区分　（設定勘定科目一覧画面で使用している）
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
         var predicates = [
             NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))) // 大区分　流動資産
@@ -205,7 +205,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
         return objects
     }
-    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
     func getDataBaseSettingsTaxonomyAccountInRankValid(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
         var predicates = [
             NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))), // 大区分　流動資産
@@ -216,10 +216,11 @@ class DatabaseManagerSettingsTaxonomyAccount {
             predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
         }
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        // シリアルナンバー
+        objects = objects.sorted(byKeyPath: "serialNumber", ascending: true)
         return objects
     }
-    // 取得 大区分別に、スイッチONの勘定科目
+    // 取得 大区分別に、スイッチONの勘定科目　（仕訳画面勘定科目選択、総勘定元帳画面で使用している）
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
             NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))),

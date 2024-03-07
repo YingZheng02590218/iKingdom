@@ -14,8 +14,8 @@ protocol CategoryListPresenterInput {
     
 //    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
 
-    func numberOfobjects(section: Int) -> Int
     func numberOfsections() -> Int
+    func numberOfobjects(section: Int) -> Int
     func objects(forRow row: Int, section: Int) -> DataBaseSettingsTaxonomyAccount
     func titleForHeaderInSection(section: Int) -> String
 

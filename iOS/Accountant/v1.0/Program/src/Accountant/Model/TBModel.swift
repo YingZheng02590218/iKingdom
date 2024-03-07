@@ -13,7 +13,8 @@ import RealmSwift
 protocol TBModelInput {
     func calculateAmountOfAllAccount()
     func setAllAccountTotal()
-    
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
+
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64
 }
 
@@ -26,6 +27,12 @@ class TBModel: TBModelInput {
     
     // MARK: Read
     
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
+        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
+    }
+
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(account: String, leftOrRight: Int) -> Int64 {
         var result: Int64 = 0
