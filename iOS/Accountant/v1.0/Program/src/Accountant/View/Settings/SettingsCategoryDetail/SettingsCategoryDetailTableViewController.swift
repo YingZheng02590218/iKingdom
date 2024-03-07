@@ -364,7 +364,8 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
         categoryCell.accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
     }
     // テキストフィールへの入力が終了したとき
-    @objc func textFieldEditingDidEnd(_ textField: UITextField) {
+    @objc 
+    func textFieldEditingDidEnd(_ textField: UITextField) {
         // 取得　TextField 入力テキスト
         
         // 勘定科目区分選択　の場合

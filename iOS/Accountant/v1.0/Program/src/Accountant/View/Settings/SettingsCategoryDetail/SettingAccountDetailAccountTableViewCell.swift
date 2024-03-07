@@ -19,7 +19,7 @@ class SettingAccountDetailAccountTableViewCell: UITableViewCell {
         accountDetailAccountTextField.delegate = self
         
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
-        toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
+        //　toolbar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3) // RGBで指定する alpha 0透明　1不透明
         toolbar.isTranslucent = true
         toolbar.barStyle = .default
         let doneItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
@@ -53,36 +53,35 @@ extension SettingAccountDetailAccountTableViewCell: UITextFieldDelegate {
     // textFieldに文字が入力される際に呼ばれる　入力チェック(文字列、文字数制限)
     // 戻り値にtrueを返すと入力した文字がTextFieldに反映され、falseを返すと入力した文字が反映されない。
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var resultForCharacter = false
-        var resultForLength = false
-        // 入力チェック　カンマを除外
-        if textField == accountDetailAccountTextField { // 勘定科目名
-            // 除外したい文字　(半角空白、全角空白)
-            let notAllowedCharacters = CharacterSet(charactersIn: ", 　") // Here change this characters based on your requirement
-            let characterSet = CharacterSet(charactersIn: string)
-            // 指定したスーパーセットの文字セットでないならfalseを返す
-            resultForCharacter = !(notAllowedCharacters.isSuperset(of: characterSet))
-            // 入力チェック　文字数最大数を設定
-            let maxLength: Int = 20 // 文字数最大値を定義
-            // textField内の文字数
-            let textFieldNumber = textField.text?.count ?? 0    // todo
-            // 入力された文字数
-            let stringNumber = string.count
-            // 最大文字数以上ならfalseを返す
-            resultForLength = textFieldNumber + stringNumber < maxLength
-            // 文字列が0文字の場合、backspaceキーが押下されたということなので一文字削除する
-            if string.isEmpty {
-                textField.deleteBackward()
-            }
+        // 勘定科目名
+        guard textField == accountDetailAccountTextField else {
+            return false
         }
-        // 判定
-        if !resultForCharacter { // 指定したスーパーセットの文字セットならfalseを返す
-            return false
-        } else if !resultForLength { // 最大文字数以上ならfalseを返す
-            return false
-        } else {
+        // 文字列が0文字の場合、backspaceキーが押下されたということなので一文字削除する
+        guard !string.isEmpty else { // 入力された文字
+            textField.deleteBackward()
             return true
         }
+        // 入力チェック　カンマを除外
+        // 除外したい文字　(半角空白、全角空白)
+        let notAllowedCharacters = CharacterSet(charactersIn: ", 　") // Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: string)
+        // 指定したスーパーセットの文字セットでないならfalseを返す
+        guard !(notAllowedCharacters.isSuperset(of: characterSet)) else { // 入力された文字
+            return false
+        }
+        // 入力チェック　文字数最大数を設定
+        let maxLength: Int = 20 // 文字数最大値を定義
+        // textField内の文字数
+        let textFieldTextCount = textField.text?.count ?? 0
+        // 入力された文字数
+        let stringCount = string.count
+        // 最大文字数以上ならfalseを返す
+        guard textFieldTextCount + stringCount <= maxLength else {
+            return false
+        }
+        // 判定
+        return true
     }
     // リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
