@@ -9,7 +9,7 @@
 import AudioToolbox // 効果音
 import UIKit
 
-// 勘定科目一覧　画面
+// 設定勘定科目一覧　画面
 class CategoryListTableViewController: UITableViewController {
     
     // MARK: - Variable/Let
@@ -138,6 +138,8 @@ class CategoryListTableViewController: UITableViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.tableView.reloadData()
         }
+        // 並び替え　ドラッグ&ドロップ
+        tableView.allowsSelectionDuringEditing = false
     }
     
     // MARK: - Navigation
@@ -318,6 +320,18 @@ class CategoryListTableViewController: UITableViewController {
             tableView.endUpdates()
         }
     }
+    
+    // 並び替え　ドラッグ&ドロップ
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    // 並び替え　ドラッグ&ドロップ
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        // 採番　設定勘定科目 並び替えの順序のためのシリアルナンバーを更新する
+        presenter.makeSerialNumbers(moveRowAt: sourceIndexPath, to: destinationIndexPath)
+    }
+    
     // 編集機能
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         // デフォルトの勘定科目数（230）以上ある場合は、削除可能とし、それ以下の場合は削除不可とする。
@@ -342,6 +356,10 @@ class CategoryListTableViewController: UITableViewController {
         }
         return .delete
     }
+    // インデント
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
 }
 
 extension CategoryListTableViewController: CategoryListPresenterOutput {
@@ -359,5 +377,13 @@ extension CategoryListTableViewController: CategoryListPresenterOutput {
     func setupViewForViewWillAppear() {
         // 勘定科目画面から、仕訳帳画面へ遷移して仕訳を追加した後に、戻ってきた場合はリロードする
         tableView.reloadData()
+    }
+    
+    func showToast() {
+        Toast.show("並び替えは同じ中区分内でのみ可能です", self.tableView)
+        // 別のセクションへ移動しようとした場合
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.tableView.reloadData()
+        }
     }
 }

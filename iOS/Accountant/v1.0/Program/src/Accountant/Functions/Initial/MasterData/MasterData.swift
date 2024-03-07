@@ -48,6 +48,8 @@ class MasterData {
                 do {
                     try DataBaseManager.realm.write {
                         number = dataBaseSettingsTaxonomyAccount.save() // 連番　自動採番
+                        // シリアルナンバー
+                        dataBaseSettingsTaxonomyAccount.serialNumber = number
                         DataBaseManager.realm.add(dataBaseSettingsTaxonomyAccount)
                     }
                 } catch {

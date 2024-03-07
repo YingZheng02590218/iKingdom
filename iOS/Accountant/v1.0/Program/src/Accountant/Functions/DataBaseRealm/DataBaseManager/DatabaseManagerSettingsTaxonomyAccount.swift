@@ -21,7 +21,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
     
     // MARK: Create
     
-    // 追加　設定勘定科目　新規作成
+    // 追加　設定勘定科目　新規作成　（元入金、事業主貸、事業主借、新規の勘定科目を作成時に使用している）
     func addSettingsTaxonomyAccount(rank0: String, rank1: String, rank2: String, numberOfTaxonomy: String, category: String, switching: Bool) -> Int {
         // オブジェクトを作成
         let dataBaseSettingsTaxonomyAccount = DataBaseSettingsTaxonomyAccount(
@@ -38,6 +38,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
         do {
             try DataBaseManager.realm.write {
                 number = dataBaseSettingsTaxonomyAccount.save() //　自動採番
+                // シリアルナンバー
+                dataBaseSettingsTaxonomyAccount.serialNumber = number
                 // 設定勘定科目を追加
                 DataBaseManager.realm.add(dataBaseSettingsTaxonomyAccount)
             }
@@ -308,6 +310,23 @@ class DatabaseManagerSettingsTaxonomyAccount {
             }
         } catch {
             print("エラーが発生しました")
+        }
+    }
+    
+    // 採番　並び替えの順序のためのシリアルナンバーを更新する
+    func makeSerialNumbers(objects: [SeializingObject]) {
+        // 採番をやりなおす
+        for sortedObject in objects.enumerated() {
+            print("採番:", sortedObject.0, "number:", sortedObject.1.number, "serialNumber:", sortedObject.1.serialNumber)
+            do {
+                // (2)書き込みトランザクション内でデータを更新する
+                try DataBaseManager.realm.write {
+                    let value: [String: Any] = ["number": sortedObject.1.number, "serialNumber": sortedObject.0]
+                    DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
         }
     }
     

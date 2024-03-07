@@ -44,6 +44,7 @@ class DataBaseSettingsTaxonomyAccount: RObject {
         self.switching = switching
     }
 
+    @objc dynamic var serialNumber: Int = 0                    // シリアルナンバー　並び替えのための順序
     @objc dynamic var Rank0: String = ""                         // 大区分
     @objc dynamic var Rank1: String = ""                         // 中区分
     @objc dynamic var Rank2: String = ""                         // 小区分

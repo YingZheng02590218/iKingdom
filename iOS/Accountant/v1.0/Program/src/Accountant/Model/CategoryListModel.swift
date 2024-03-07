@@ -18,7 +18,7 @@ protocol CategoryListModelInput {
     func deleteSettingsTaxonomyAccount(number: Int) -> Bool
 }
 
-// クラス
+// 設定勘定科目一覧　画面　クラス
 class CategoryListModel: CategoryListModelInput {
     
     // MARK: - CRUD
