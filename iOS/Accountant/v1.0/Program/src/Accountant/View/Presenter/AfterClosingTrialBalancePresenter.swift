@@ -51,6 +51,7 @@ final class AfterClosingTrialBalancePresenter: AfterClosingTrialBalancePresenter
     var theDayOfReckoning: String?
     // 設定勘定科目 貸借科目
     private var dataBaseSettingsTaxonomyAccounts: Results<DataBaseSettingsTaxonomyAccount>
+    
     private var objects0: Results<DataBaseSettingsTaxonomyAccount>
     private var objects1: Results<DataBaseSettingsTaxonomyAccount>
     private var objects2: Results<DataBaseSettingsTaxonomyAccount>

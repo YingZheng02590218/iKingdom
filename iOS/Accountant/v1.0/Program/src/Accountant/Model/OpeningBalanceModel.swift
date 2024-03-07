@@ -13,28 +13,29 @@ import RealmSwift
 protocol OpeningBalanceModelInput {
     func createOpeningBalance()
     func calculateAccountTotalAccount()
-
+    
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit)
     func initializeJournals(completion: (Bool) -> Void)
-
-    func getTotalAmount(leftOrRight: Int) -> Int64
+    
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
     func getDataBaseTransferEntries() -> Results<DataBaseSettingTransferEntry>
+    func getTotalAmount(leftOrRight: Int) -> Int64
 }
 
 // 繰越試算表クラス
 class OpeningBalanceModel: OpeningBalanceModelInput {
-
+    
     // MARK: - CRUD
-
+    
     // MARK: Create
-
+    
     // 開始残高　残高振替仕訳をつくる
     func createOpeningBalance() {
         guard let dataBaseAccountingBooksShelf = RealmManager.shared.readWithPrimaryKey(
             type: DataBaseAccountingBooksShelf.self,
             key: 1
         ) else { return }
-
+        
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOnBSorPL(BSorPL: 0) // 貸借対照表　資産 負債 純資産
         if let dataBaseOpeningBalanceAccount = DataBaseManagerAccountingBooksShelf.shared.getOpeningBalanceAccount() {
             // 開始残高勘定がある場合
@@ -59,10 +60,10 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
             )
             let numberr = dataBaseAccount.save() //　自動採番
             print("dataBaseOpeningBalanceAccount", numberr)
-
+            
             do {
                 try DataBaseManager.realm.write {
-
+                    
                     dataBaseAccountingBooksShelf.dataBaseOpeningBalanceAccount = dataBaseAccount
                 }
             } catch {
@@ -76,7 +77,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                 // 設定残高振替仕訳 が存在するか
                 let dataBaseTransferEntries = dataBaseOpeningBalanceAccount.dataBaseTransferEntries
                     .filter("debit_category LIKE '\(dataBaseSettingsTaxonomyAccount.category)' || credit_category LIKE '\(dataBaseSettingsTaxonomyAccount.category)'")
-
+                
                 if dataBaseTransferEntries.count == 1 {
                     // 正常
                     print(dataBaseTransferEntries)
@@ -105,10 +106,10 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
                     )
                     let numberr = dataBaseJournalEntry.save() //　自動採番
                     print("DataBaseSettingTransferEntry", numberr)
-
+                    
                     do {
                         try DataBaseManager.realm.write {
-
+                            
                             dataBaseAccountingBooksShelf.dataBaseOpeningBalanceAccount?.dataBaseTransferEntries.append(dataBaseJournalEntry)
                         }
                     } catch {
@@ -118,13 +119,19 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
             }
         }
     }
-
+    
     // MARK: Read
-
+    
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
+        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
+    }
+    
     func getDataBaseTransferEntries() -> Results<DataBaseSettingTransferEntry> {
         DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
     }
-
+    
     // 取得　決算整理前　勘定クラス　合計、残高　勘定別の決算整理前の合計残高
     func getTotalAmount(leftOrRight: Int) -> Int64 {
         var result: Int64 = 0
@@ -144,9 +151,9 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
         }
         return result
     }
-
+    
     // MARK: Update
-
+    
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit) {
         DataBaseManagerAccountingBooksShelf.shared.updateJournalEntry(
             primaryKey: primaryKey,
@@ -164,7 +171,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
     internal func calculateAccountTotalAccount() {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-
+        
         let objects = DataBaseManagerAccountingBooksShelf.shared.getTransferEntriesInOpeningBalanceAccount()
         for i in 0..<objects.count {
             // 勘定が借方と貸方のどちらか
@@ -200,7 +207,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
             }
         }
     }
-
+    
     // 会計処理　転記、合計残高試算表(残高、合計(決算整理前、決算整理仕訳、決算整理後))、表示科目
     func initializeJournals(completion: (Bool) -> Void) {
         // 転記　仕訳から勘定への関連を付け直す
@@ -212,7 +219,7 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
         
         completion(true)
     }
-
+    
     // MARK: Delete
     // 削除 設定残高振替仕訳
     func deleteSettingTransferEntry(primaryKey: Int) -> Bool {
@@ -237,12 +244,12 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
             } catch {
                 print("エラーが発生しました")
             }
-
+            
             continue outerLoop
         }
         break
     }
-
+        
         if !dataBaseJournalEntry.isInvalidated {
             do {
                 try DataBaseManager.realm.write {
@@ -255,5 +262,5 @@ class OpeningBalanceModel: OpeningBalanceModelInput {
         }
         return dataBaseJournalEntry.isInvalidated // 成功したら true まだ失敗時の動きは確認していない　2020/07/26
     }
-
+    
 }
