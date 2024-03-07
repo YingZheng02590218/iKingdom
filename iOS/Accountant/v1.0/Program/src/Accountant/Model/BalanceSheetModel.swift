@@ -35,7 +35,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
     
     // 取得 大区分、中区分、小区分 スイッチONの勘定科目
     func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
-        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
         DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
     }
     

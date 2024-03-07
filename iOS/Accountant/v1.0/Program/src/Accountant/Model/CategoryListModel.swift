@@ -33,7 +33,8 @@ class CategoryListModel: CategoryListModelInput {
     }
     // 取得 大区分別に、スイッチONの勘定科目
     func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOn(rank0: rank0)
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
+        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: nil)
     }
     
     // MARK: Update

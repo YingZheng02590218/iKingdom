@@ -100,6 +100,8 @@ class DatabaseManagerSettingsTaxonomyAccount {
             NSPredicate(format: "switching == %@", NSNumber(value: switching)) // 勘定科目がONだけに絞る
         ])
         objects = objects.sorted(byKeyPath: "number", ascending: true)
+        // MARK: シリアルナンバー
+        //　objects = objects.sorted(byKeyPath: "serialNumber", ascending: true) // 不要
         return objects
     }
     // 取得 全ての勘定科目
@@ -202,10 +204,11 @@ class DatabaseManagerSettingsTaxonomyAccount {
             predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
         }
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
-        objects = objects.sorted(byKeyPath: "number", ascending: true) // 引数:プロパティ名, ソート順は昇順か？
+        // シリアルナンバー
+        objects = objects.sorted(byKeyPath: "serialNumber", ascending: true)
         return objects
     }
-    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
     func getDataBaseSettingsTaxonomyAccountInRankValid(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
         var predicates = [
             NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))), // 大区分　流動資産
@@ -218,15 +221,6 @@ class DatabaseManagerSettingsTaxonomyAccount {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
         // シリアルナンバー
         objects = objects.sorted(byKeyPath: "serialNumber", ascending: true)
-        return objects
-    }
-    // 取得 大区分別に、スイッチONの勘定科目　（仕訳画面勘定科目選択、総勘定元帳画面で使用している）
-    func getSettingsSwitchingOn(rank0: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
-        var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
-            NSPredicate(format: "Rank0 LIKE %@", NSString(string: String(rank0))),
-            NSPredicate(format: "switching == %@", NSNumber(value: true)) // 勘定科目がONだけに絞る
-        ])
-        objects = objects.sorted(byKeyPath: "number", ascending: true)
         return objects
     }
     // 丁数を取得
