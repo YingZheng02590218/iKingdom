@@ -50,7 +50,7 @@ class DataBaseSettingsTaxonomyAccount: RObject {
     @objc dynamic var Rank2: String = ""                         // 小区分
     @objc dynamic var numberOfTaxonomy: String = ""             // タクソノミ表示科目クラス　の連番を保持する
     @objc dynamic var category: String = ""                      // 勘定科目名
-    @objc dynamic var AdjustingAndClosingEntries = false // 決算整理仕訳　使用していない2020/10/07
+    @objc dynamic var AdjustingAndClosingEntries = false // TODO: 決算整理仕訳　使用していない2020/10/07
     @objc dynamic var switching = false                    // 有効無効
     // @objc dynamic var explaining: String = ""              // 説明
 }

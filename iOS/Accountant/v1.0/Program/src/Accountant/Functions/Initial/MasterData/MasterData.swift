@@ -40,7 +40,7 @@ class MasterData {
                     Rank2: line.components(separatedBy: ",")[2], // 小区分
                     numberOfTaxonomy: line.components(separatedBy: ",")[3], // 紐づけた表示科目
                     category: line.components(separatedBy: ",")[4], // 勘定科目名
-                    AdjustingAndClosingEntries: false, // 決算整理仕訳　使用していない2020/10/07
+                    AdjustingAndClosingEntries: false, // TODO: 決算整理仕訳　使用していない 2020/10/07
                     switching: self.toBoolean(string: line.components(separatedBy: ",")[5]) // スイッチ
                 )
                 var number = 0 // 自動採番にした

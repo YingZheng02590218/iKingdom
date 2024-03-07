@@ -92,7 +92,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
             return false // 損益計算書の科目ではない
         }
     }
-    // 取得　設定勘定科目　スイッチ　（精算表、試算表で使用している）
+    // 取得　設定勘定科目　スイッチ　（初期化処理で使用している）
     func getSettingsTaxonomyAccountAdjustingSwitch(adjustingAndClosingEntries: Bool, switching: Bool) -> Results<DataBaseSettingsTaxonomyAccount> {
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: [
             // FIXME: 使用していないプロパティを使っている
