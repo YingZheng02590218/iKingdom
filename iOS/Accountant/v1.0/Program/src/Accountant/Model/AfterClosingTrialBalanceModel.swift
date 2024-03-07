@@ -12,7 +12,8 @@ import RealmSwift
 /// GUIアーキテクチャ　MVP
 protocol AfterClosingTrialBalanceModelInput {
     func calculateAmountOfBSAccounts(dataBaseSettingsTaxonomyAccounts: Results<DataBaseSettingsTaxonomyAccount>)
-    
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
+
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> Int64
 }
 
@@ -24,6 +25,12 @@ class AfterClosingTrialBalanceModel: AfterClosingTrialBalanceModelInput {
     // MARK: Create
     
     // MARK: Read
+    
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目
+    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（貸借対照表、損益計算書、精算表、試算表で使用している）
+        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
+    }
     
     // 取得　決算整理後　勘定クラス　合計、残高　勘定別の決算整理後の合計額
     func getTotalAmountAfterAdjusting(account: String, leftOrRight: Int) -> Int64 {
