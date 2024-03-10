@@ -12,10 +12,10 @@ import UIKit
 class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // 選択された項目
-    var selectedRank0 = ""
-    var selectedRank1 = ""
-    var accountDetailBig = ""
-    var accountDetail = ""
+    var selectedRank0 = "" // 大区分　row
+    var selectedRank1 = "" // 中区分　row
+    var accountDetailBig = "" // 大区分　名称
+    var accountDetail = "" // 中区分　名称
     // ドラムロールに表示する勘定科目の文言
     var big0: [String] = []
     var big1: [String] = []
@@ -48,6 +48,18 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    // 入力カーソル非表示
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        CGRect.zero
+    }
+    // 範囲選択カーソル非表示
+    override func selectionRects(for range: UITextRange) -> [UITextSelectionRect] {
+        []
+    }
+    // コピー・ペースト・選択等のメニュー非表示
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        false
     }
     
     var identifier = ""
@@ -167,7 +179,7 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
             case 11:
                 return big11.count
             default:
-                return 1
+                return 0
             }
         }
     }
@@ -406,11 +418,13 @@ class AccountDetailPickerTextField: UITextField, UIPickerViewDelegate, UIPickerV
 //        pickerView.reloadComponent(1)
     }
     // Buttonを押下　選択した値を仕訳画面のTextFieldに表示する
-    @objc func done() {
+    @objc 
+    func done() {
         self.endEditing(true)
     }
     
-    @objc func cancel() {
+    @objc 
+    func cancel() {
         accountDetailBig = ""
         accountDetail = ""
         self.selectedRank0 = ""

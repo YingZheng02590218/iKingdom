@@ -17,17 +17,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="BaseColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="atH-Tk-ti9">
-                            <rect key="frame" x="0.0" y="249.5" width="414" height="120"/>
+                            <rect key="frame" x="0.0" y="117.5" width="414" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htm-3x-yix" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
+                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htm-3x-yix" customClass="EMTNeumorphicButton" customModule="EMTNeumorphicView">
                                     <rect key="frame" x="117.5" y="30" width="179" height="60"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="Lu3-M3-15R"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="24"/>
-                                    <state key="normal" title="登録">
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
                                         <color key="titleColor" name="ButtonTextColor"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -48,111 +49,52 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category_big" id="LBG-EM-5r1" customClass="SettingAccountDetailTableViewCell" customModule="Paciolist" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="44" id="0KT-tB-STM" customClass="SettingAccountDetailTableViewCell" customModule="Paciolist" customModuleProvider="target">
                                 <rect key="frame" x="20" y="55.5" width="374" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LBG-EM-5r1" id="qGA-GO-u7y">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="AccountDetailPickerTextField" customModule="Paciolist" customModuleProvider="target">
-                                            <rect key="frame" x="115" y="5" width="181" height="34"/>
-                                            <color key="backgroundColor" name="MainColor2"/>
-                                            <color key="textColor" name="TextColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="centerX" secondItem="qGA-GO-u7y" secondAttribute="centerX" multiplier="1.1" id="2vY-IU-lvd"/>
-                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="width" secondItem="qGA-GO-u7y" secondAttribute="width" multiplier="0.483957" id="BsM-X5-anv"/>
-                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="centerY" secondItem="qGA-GO-u7y" secondAttribute="centerY" id="QUE-P4-OfD"/>
-                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="height" secondItem="qGA-GO-u7y" secondAttribute="height" multiplier="0.781609" id="jeE-Pe-jIc"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <outlet property="accountDetailBigTextField" destination="4Cm-FI-Chr" id="tAG-oH-RUH"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_category" id="7R0-uJ-Cbn" customClass="SettingAccountDetailTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                <rect key="frame" x="20" y="99.5" width="374" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7R0-uJ-Cbn" id="hJa-cr-wfc">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iv9-Ab-XG0" customClass="AccountDetailPickerTextField" customModule="Paciolist" customModuleProvider="target">
-                                            <rect key="frame" x="115" y="5" width="181" height="34"/>
-                                            <color key="backgroundColor" name="MainColor2"/>
-                                            <color key="textColor" name="TextColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Iv9-Ab-XG0" firstAttribute="centerX" secondItem="hJa-cr-wfc" secondAttribute="centerX" multiplier="1.1" id="00q-YA-eVC"/>
-                                        <constraint firstItem="Iv9-Ab-XG0" firstAttribute="width" secondItem="hJa-cr-wfc" secondAttribute="width" multiplier="0.483957" id="Yyh-63-BVg"/>
-                                        <constraint firstItem="Iv9-Ab-XG0" firstAttribute="centerY" secondItem="hJa-cr-wfc" secondAttribute="centerY" id="aki-7i-Fxm"/>
-                                        <constraint firstItem="Iv9-Ab-XG0" firstAttribute="height" secondItem="hJa-cr-wfc" secondAttribute="height" multiplier="0.781609" id="shb-Da-uiL"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <outlet property="textField_AccountDetail" destination="Iv9-Ab-XG0" id="rwd-Pg-ucx"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier_Account" id="QPs-Yn-bhd" customClass="SettingAccountDetailAccountTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                <rect key="frame" x="20" y="143.5" width="374" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QPs-Yn-bhd" id="VE0-w9-hmH">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="入力してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3XR-6k-myl">
-                                            <rect key="frame" x="115" y="5" width="181" height="34"/>
-                                            <color key="backgroundColor" name="MainColor2"/>
-                                            <color key="textColor" name="TextColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3XR-6k-myl" firstAttribute="width" secondItem="VE0-w9-hmH" secondAttribute="width" multiplier="0.483957" id="FXS-um-T6K"/>
-                                        <constraint firstItem="3XR-6k-myl" firstAttribute="centerX" secondItem="VE0-w9-hmH" secondAttribute="centerX" multiplier="1.1" id="WOR-pu-Tnd"/>
-                                        <constraint firstItem="3XR-6k-myl" firstAttribute="centerY" secondItem="VE0-w9-hmH" secondAttribute="centerY" id="bJL-Lp-BWT"/>
-                                        <constraint firstItem="3XR-6k-myl" firstAttribute="height" secondItem="VE0-w9-hmH" secondAttribute="height" multiplier="0.781609" id="fVU-yJ-9H4"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="MainColor2"/>
-                                <connections>
-                                    <outlet property="accountDetailAccountTextField" destination="3XR-6k-myl" id="pAj-5O-p8o"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="44" id="0KT-tB-STM" customClass="SettingAccountDetailTaxonomyTableViewCell" customModule="Paciolist" customModuleProvider="target">
-                                <rect key="frame" x="20" y="187.5" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0KT-tB-STM" id="dBs-Vr-npS">
                                     <rect key="frame" x="0.0" y="0.0" width="343.5" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="選択してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4Cm-FI-Chr" customClass="AccountDetailPickerTextField" customModule="Paciolist" customModuleProvider="target">
+                                            <rect key="frame" x="100" y="5" width="223.5" height="34"/>
+                                            <color key="backgroundColor" name="MainColor2"/>
+                                            <color key="textColor" name="TextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="入力してください" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3XR-6k-myl">
+                                            <rect key="frame" x="100" y="5" width="223.5" height="34"/>
+                                            <color key="backgroundColor" name="MainColor2"/>
+                                            <color key="textColor" name="TextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbZ-zd-LJt" userLabel="label">
-                                            <rect key="frame" x="103" y="5" width="206" height="34"/>
+                                            <rect key="frame" x="100" y="5" width="223.5" height="34"/>
                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                             <color key="textColor" name="TextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="zbZ-zd-LJt" firstAttribute="centerX" secondItem="dBs-Vr-npS" secondAttribute="centerX" multiplier="1.2" id="4bg-8E-Tpt"/>
-                                        <constraint firstItem="zbZ-zd-LJt" firstAttribute="width" secondItem="dBs-Vr-npS" secondAttribute="width" multiplier="0.6" id="Ubc-o5-b1k"/>
+                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="centerY" secondItem="dBs-Vr-npS" secondAttribute="centerY" id="26k-YP-CtT"/>
+                                        <constraint firstAttribute="trailing" secondItem="3XR-6k-myl" secondAttribute="trailing" constant="20" id="9Wa-fR-AbE"/>
+                                        <constraint firstAttribute="trailing" secondItem="zbZ-zd-LJt" secondAttribute="trailing" constant="20" id="UBh-dh-WmL"/>
+                                        <constraint firstItem="zbZ-zd-LJt" firstAttribute="width" secondItem="dBs-Vr-npS" secondAttribute="width" multiplier="0.65" id="Ubc-o5-b1k"/>
+                                        <constraint firstItem="3XR-6k-myl" firstAttribute="width" secondItem="dBs-Vr-npS" secondAttribute="width" multiplier="0.65" id="ZD0-fu-VIq"/>
                                         <constraint firstItem="zbZ-zd-LJt" firstAttribute="height" secondItem="dBs-Vr-npS" secondAttribute="height" multiplier="0.781609" id="bkQ-uK-Giv"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Cm-FI-Chr" secondAttribute="trailing" constant="20" id="bz2-AJ-A2F"/>
                                         <constraint firstItem="zbZ-zd-LJt" firstAttribute="centerY" secondItem="dBs-Vr-npS" secondAttribute="centerY" id="eeh-ey-xAs"/>
+                                        <constraint firstItem="3XR-6k-myl" firstAttribute="centerY" secondItem="dBs-Vr-npS" secondAttribute="centerY" id="hAP-Ls-iyr"/>
+                                        <constraint firstItem="4Cm-FI-Chr" firstAttribute="width" secondItem="dBs-Vr-npS" secondAttribute="width" multiplier="0.65" id="tU4-gQ-Pq8"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="MainColor2"/>
                                 <connections>
-                                    <outlet property="label" destination="zbZ-zd-LJt" id="hyL-NH-UK9"/>
+                                    <outlet property="accountDetailAccountTextField" destination="3XR-6k-myl" id="oMi-Ym-fxp"/>
+                                    <outlet property="accountDetailBigTextField" destination="4Cm-FI-Chr" id="ACN-ef-OcC"/>
+                                    <outlet property="label" destination="zbZ-zd-LJt" id="PHd-xQ-nfy"/>
                                     <segue destination="B4C-gl-Hho" kind="presentation" identifier="segue_TaxonomyList" id="IAu-Lh-II4"/>
                                 </connections>
                             </tableViewCell>
@@ -182,7 +124,7 @@
     </scenes>
     <resources>
         <namedColor name="BaseColor">
-            <color red="0.87800002098083496" green="0.89800000190734863" blue="0.92500001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8784313725490196" green="0.89803921568627454" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ButtonTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

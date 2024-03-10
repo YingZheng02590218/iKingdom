@@ -11,9 +11,9 @@ import RealmSwift
 
 // 設定勘定科目クラス
 class DatabaseManagerSettingsTaxonomyAccount {
-
+    
     public static let shared = DatabaseManagerSettingsTaxonomyAccount()
-
+    
     private init() {
     }
     
@@ -218,9 +218,15 @@ class DatabaseManagerSettingsTaxonomyAccount {
         if let rank1 = rank1 {
             predicates.append(NSPredicate(format: "Rank1 LIKE %@", NSString(string: String(rank1)))) // 中区分　当座資産
         }
+        let sortProperties = [
+            SortDescriptor(keyPath: "Rank1", ascending: true), // 中区分
+            SortDescriptor(keyPath: "serialNumber", ascending: true) // シリアルナンバー
+        ]
         var objects = RealmManager.shared.readWithPredicate(type: DataBaseSettingsTaxonomyAccount.self, predicates: predicates)
-        // シリアルナンバー
-        objects = objects.sorted(byKeyPath: "serialNumber", ascending: true)
+            .sorted(by: sortProperties)
+        // MARK: 複数条件でソートする方法　下記の書き方では効かない
+        // objects = objects.sorted(byKeyPath: "Rank1", ascending: true)
+        // objects = objects.sorted(byKeyPath: "serialNumber", ascending: true)
         return objects
     }
     // 丁数を取得
@@ -240,7 +246,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
             }
         }
     }
-
+    
     // MARK: Update
     
     // 初期化
@@ -283,18 +289,18 @@ class DatabaseManagerSettingsTaxonomyAccount {
             print("エラーが発生しました")
         }
     }
-    //    // 更新　勘定科目名を変更
-    //    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // すべての影響範囲に修正が必要
-    //        do {
-    //            // (2)書き込みトランザクション内でデータを更新する
-    //            try DataBaseManager.realm.write {
-    //                let value: [String: Any] = ["number": number, "category": accountName]
-    //                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
-    //            }
-    //        } catch {
-    //            print("エラーが発生しました")
-    //        }
-    //    }
+    // 更新　勘定科目名を変更
+    func updateAccountNameOfSettingsTaxonomyAccount(number: Int, accountName: String) { // WARNING: すべての影響範囲に修正が必要(仕訳、勘定)
+        do {
+            // (2)書き込みトランザクション内でデータを更新する
+            try DataBaseManager.realm.write {
+                let value: [String: Any] = ["number": number, "category": accountName] // 勘定科目名
+                DataBaseManager.realm.create(DataBaseSettingsTaxonomyAccount.self, value: value, update: .modified) // 一部上書き更新
+            }
+        } catch {
+            print("エラーが発生しました")
+        }
+    }
     // 更新　設定勘定科目　設定勘定科目連番から、紐づける表示科目を変更
     func updateTaxonomyOfSettingsTaxonomyAccount(number: Int, numberOfTaxonomy: String) {
         do {
@@ -362,7 +368,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         }
         return false // 勘定を削除できたら、設定勘定科目を削除する
     }
-
+    
     // 削除　勘定、よく使う仕訳　設定勘定科目を削除するときに呼ばれる
     func deleteAccount(number: Int) -> Bool {
         // (2)データベース内に保存されているモデルを取得する　プライマリーキーを指定してオブジェクトを取得
@@ -392,7 +398,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         // よく使う仕訳
         let dataBaseSettingsOperatingJournalEntry = DataBaseManagerSettingsOperatingJournalEntry.shared.getJournalEntry(account: object.category)
         print(dataBaseSettingsOperatingJournalEntry)
-
+        
         // 仕訳クラス　仕訳を削除
         var isInvalidated = true // 初期値は真とする。仕訳データが0件の場合の対策
         var isInvalidated2 = true
@@ -429,7 +435,7 @@ class DatabaseManagerSettingsTaxonomyAccount {
         for _ in 0..<dataBaseSettingsOperatingJournalEntry.count {
             isInvalidated7 = DataBaseManagerSettingsOperatingJournalEntry.shared.deleteJournalEntry(number: dataBaseSettingsOperatingJournalEntry[0].number)
         }
-
+        
         if isInvalidated7 {
             if isInvalidated6 {
                 if isInvalidated5 {
@@ -457,5 +463,5 @@ class DatabaseManagerSettingsTaxonomyAccount {
         }
         return false
     }
-
+    
 }
