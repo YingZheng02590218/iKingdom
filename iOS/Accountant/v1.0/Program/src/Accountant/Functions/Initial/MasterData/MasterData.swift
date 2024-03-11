@@ -40,7 +40,7 @@ class MasterData {
                     Rank2: line.components(separatedBy: ",")[2], // 小区分
                     numberOfTaxonomy: line.components(separatedBy: ",")[3], // 紐づけた表示科目
                     category: line.components(separatedBy: ",")[4], // 勘定科目名
-                    AdjustingAndClosingEntries: false, // 決算整理仕訳　使用していない2020/10/07
+                    AdjustingAndClosingEntries: false, // TODO: 決算整理仕訳　使用していない 2020/10/07
                     switching: self.toBoolean(string: line.components(separatedBy: ",")[5]) // スイッチ
                 )
                 var number = 0 // 自動採番にした
@@ -48,6 +48,8 @@ class MasterData {
                 do {
                     try DataBaseManager.realm.write {
                         number = dataBaseSettingsTaxonomyAccount.save() // 連番　自動採番
+                        // シリアルナンバー
+                        dataBaseSettingsTaxonomyAccount.serialNumber = number
                         DataBaseManager.realm.add(dataBaseSettingsTaxonomyAccount)
                     }
                 } catch {
@@ -55,6 +57,12 @@ class MasterData {
                 }
                 print("連番: \(number), 勘定科目　CSVファイルを読み込み \(dataBaseSettingsTaxonomyAccount.numberOfTaxonomy)")
                 if number == 229 {
+                    // フラグを倒す 設定勘定科目　初期化
+                    let userDefaults = UserDefaults.standard
+                    let firstLunchKey = "settings_taxonomy_account"
+                    userDefaults.set(false, forKey: firstLunchKey)
+                    userDefaults.synchronize()
+                    
                     stop = true
                 }
             }
@@ -98,6 +106,12 @@ class MasterData {
                 }
                 print("連番: \(number) 表示科目　CSVファイルを読み込み")
                 if number == 2_068 {
+                    // フラグを倒す 設定表示科目　初期化
+                    let userDefaults = UserDefaults.standard
+                    let firstLunchKey = "settings_taxonomy"
+                    userDefaults.set(false, forKey: firstLunchKey)
+                    userDefaults.synchronize()
+                    
                     stop = true
                 }
             }

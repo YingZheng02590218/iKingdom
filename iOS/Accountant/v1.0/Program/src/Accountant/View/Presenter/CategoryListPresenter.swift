@@ -14,8 +14,8 @@ protocol CategoryListPresenterInput {
     
 //    var dataBaseSettingsTaxonomyAccount: Results<DataBaseSettingsTaxonomyAccount> { get }
 
-    func numberOfobjects(section: Int) -> Int
     func numberOfsections() -> Int
+    func numberOfobjects(section: Int) -> Int
     func objects(forRow row: Int, section: Int) -> DataBaseSettingsTaxonomyAccount
     func titleForHeaderInSection(section: Int) -> String
 
@@ -24,12 +24,14 @@ protocol CategoryListPresenterInput {
     
     func deleteSettingsTaxonomyAccount(indexPath: IndexPath)
     func changeSwitch(tag: Int, isOn: Bool)
+    func makeSerialNumbers(moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath)
 }
 
 protocol CategoryListPresenterOutput: AnyObject {
     func reloadData()
     func setupViewForViewDidLoad()
     func setupViewForViewWillAppear()
+    func showToast()
 }
 
 final class CategoryListPresenter: CategoryListPresenterInput {
@@ -377,7 +379,86 @@ final class CategoryListPresenter: CategoryListPresenterInput {
             return objects22[row]
         }
     }
-    
+
+    func objects(section: Int) -> Results<DataBaseSettingsTaxonomyAccount> {
+        
+        switch index {
+        case 0: //     "流動資産"
+            switch section {
+            case 0: return objects0
+            case 1: return objects1
+            case 2: return objects2
+            default: return objects2
+            }
+        case 1: //     "固定資産"
+            switch section {
+            case 0: return objects3
+            case 1: return objects4
+            case 2: return objects5
+            default: return objects5
+            }
+        case 2: //     "繰延資産"
+            switch section {
+            case 0: return objects6
+            default: return objects6
+            }
+        case 3: //     "流動負債"
+            switch section {
+            case 0: return objects7
+            case 1: return objects8
+            default: return objects8
+            }
+        case 4: //     "固定負債"
+            switch section {
+            case 0: return objects9
+            default: return objects9
+            }
+        case 5: //     "資本"
+            switch section {
+            case 0: return objects10
+            case 1: return objects11
+            case 2: return objects12
+            case 3: return objects13
+            default: return objects13
+            }
+        case 6: //     "売上"
+            switch section {
+            case 0: return objects14
+            default: return objects14
+            }
+        case 7: //     "売上原価"
+            switch section {
+            case 0: return objects15
+            case 1: return objects16
+            default: return objects16
+            }
+        case 8: //     "販売費及び一般管理費"
+            switch section {
+            case 0: return objects17
+            default: return objects17
+            }
+        case 9: //     "営業外損益"
+            switch section {
+            case 0: return objects18
+            case 1: return objects19
+            default: return objects19
+            }
+        case 10: //    "特別損益"
+            switch section {
+            case 0: return objects20
+            case 1: return objects21
+            default: return objects21
+            }
+        case 11: //    "税金"
+            switch section {
+            case 0: return objects22
+            default: return objects22
+            }
+        default: //    ""
+            return objects22
+        }
+    }
+
     func viewDidLoad() {
         
         view.setupViewForViewDidLoad()
@@ -405,5 +486,45 @@ final class CategoryListPresenter: CategoryListPresenterInput {
         model.updateSettingsCategorySwitching(tag: tag, isOn: isOn)
         // 表示科目のスイッチを設定する　勘定科目がひとつもなければOFFにする
         DataBaseManagerSettingsTaxonomy.shared.updateSettingsCategoryBSAndPLSwitching(number: tag)
+    }
+    
+    // 採番　設定勘定科目 並び替えの順序のためのシリアルナンバーを更新する
+    // カルーセルのタブの識別 移動前　移動後
+    func makeSerialNumbers(moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // 入れ替え時の処理を実装する
+        if sourceIndexPath.section == destinationIndexPath.section {
+            // 移動前
+            let settingTaxonomies = objects(section: sourceIndexPath.section)
+            // 構造体に変換する
+            let objects = settingTaxonomies.map { object -> SeializingObject in
+                let number = object.number
+                let serialNumber = object.serialNumber
+                return SeializingObject(number: number, serialNumber: serialNumber)
+            }
+            print(objects)
+            // ソート
+            var sortedSettingTaxonomies = objects.sorted(by: { $0.serialNumber < $1.serialNumber })
+            print(sortedSettingTaxonomies)
+            // 順序を並び替える用
+            let offset = sourceIndexPath.row > destinationIndexPath.row ? destinationIndexPath.row : destinationIndexPath.row + 1
+            print(sourceIndexPath.row, destinationIndexPath.row)
+            print(offset)
+            // 並び替え
+            sortedSettingTaxonomies.move(fromOffsets: IndexSet([sourceIndexPath.row]), toOffset: offset)
+            print(sortedSettingTaxonomies)
+            // 採番　並び替えの順序のためのシリアルナンバーを更新する
+            DatabaseManagerSettingsTaxonomyAccount.shared.makeSerialNumbers(objects: sortedSettingTaxonomies)
+        } else {
+            view.showToast()
+        }
+    }
+}
+// 連番とシリアルナンバーを格納する構造体
+struct SeializingObject: CustomStringConvertible {
+    let number: Int
+    let serialNumber: Int
+
+    var description: String {
+        return "Object(number: \(number), serialNumber: \(serialNumber))"
     }
 }

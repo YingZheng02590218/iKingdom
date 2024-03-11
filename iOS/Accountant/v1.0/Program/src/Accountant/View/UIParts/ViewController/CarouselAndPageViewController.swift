@@ -194,7 +194,6 @@ extension CarouselAndPageViewController: UIPageViewControllerDelegate, UIPageVie
             // タブの選択位置を更新する
             // セルを選択して、コレクションビューの中の中心へスクロールさせる
             self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-
         }
     }
 }

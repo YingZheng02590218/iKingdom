@@ -42,7 +42,7 @@ class DataBaseManagerGeneralLedger: DataBaseManager {
                     // オブジェクトを作成 勘定
                     let dataBaseAccount = DataBaseAccount(
                         fiscalYear: dataBaseAccountingBooks.fiscalYear,
-                        accountName: objects[i].category,
+                        accountName: objects[i].category, // MARK: 勘定科目名が使用されている
                         debit_total: 0,
                         credit_total: 0,
                         debit_balance: 0,

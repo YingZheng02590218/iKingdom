@@ -12,26 +12,26 @@ import UIKit
 
 // 開始残高 openingBalance
 class OpeningBalanceViewController: UIViewController {
-
+    
     // MARK: - var let
-
+    
     /// 開始残高　上部
     @IBOutlet private var companyNameLabel: UILabel!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var closingDateLabel: UILabel!
-
+    
     @IBOutlet private var printButton: UIButton!
     /// 開始残高　下部
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
-
+    
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
-
+    
     // 設定残高振替仕訳　連番
     var primaryKey: Int = 0
     // 勘定科目名
@@ -41,48 +41,48 @@ class OpeningBalanceViewController: UIViewController {
     // インジゲーター
     var activityIndicatorView = UIActivityIndicatorView()
     let backView = UIView()
-
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: OpeningBalancePresenterInput!
     func inject(presenter: OpeningBalancePresenterInput) {
         self.presenter = presenter
     }
-
+    
     // MARK: - Life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         presenter = OpeningBalancePresenter.init(view: self, model: OpeningBalanceModel())
         inject(presenter: presenter)
-
+        
         presenter.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         presenter.viewWillDisappear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         presenter.viewDidAppear()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // ボタン作成
         createButtons()
     }
-
+    
     // MARK: - Setting
-
+    
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -92,10 +92,10 @@ class OpeningBalanceViewController: UIViewController {
         navigationItem.rightBarButtonItem = editButtonItem
         self.navigationItem.title = "開始残高"
     }
-
+    
     // ボタンのデザインを指定する
     private func createButtons() {
-
+        
         if let backgroundView = backgroundView {
             backgroundView.neumorphicLayer?.cornerRadius = 15
             backgroundView.neumorphicLayer?.lightShadowOpacity = LIGHTSHADOWOPACITY
@@ -118,7 +118,7 @@ class OpeningBalanceViewController: UIViewController {
             }
         }
     }
-
+    
     // 編集モード切り替え
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
@@ -230,56 +230,66 @@ class OpeningBalanceViewController: UIViewController {
             self.backView.removeFromSuperview()
         }
     }
-
+    
     // MARK: - Action
-
+    
     /**
      * 印刷ボタン押下時メソッド
      */
     @IBAction func printButtonTapped(_ sender: UIButton) {
-
+        
     }
 }
 
 extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Table view data source
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter.numberOfsections() + 1 // 合計額の行の分
+    }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 合計額の行の分
-        return presenter.numberOfobjects + 1
+        if section < presenter.numberOfsections() {
+            presenter.numberOfobjects(section: section)
+        } else {
+            1 // 合計額の行の分
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < presenter.numberOfobjects {
+        if indexPath.section < presenter.numberOfsections() {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? OpeningBalanceTableViewCell else { return UITableViewCell() }
             // delegate設定
             cell.delegate = self
-
+            
             var account = ""
             var valueDebitText: Int64 = 0
             var valueCreditText: Int64 = 0
-
-            if presenter.objects(forRow: indexPath.row).debit_category == "残高" { // 借方
-                account = presenter.objects(forRow: indexPath.row).credit_category // 相手勘定科目名
-                valueDebitText = presenter.objects(forRow: indexPath.row).debit_amount
-            } else if presenter.objects(forRow: indexPath.row).credit_category == "残高" { // 貸方
-                account = presenter.objects(forRow: indexPath.row).debit_category // 相手勘定科目名
-                valueCreditText = presenter.objects(forRow: indexPath.row).credit_amount
-            }
-            // 編集中 は有効化
-            cell.textFieldAmountDebit.isEnabled = self.isEditing
-            cell.textFieldAmountCredit.isEnabled = self.isEditing
-
-            cell.setup(
-                primaryKey: presenter.objects(forRow: indexPath.row).number,
-                category: account,
-                valueDebitText: "\(valueDebitText)",
-                valueCreditText: "\(valueCreditText)"
-            ) { (textFieldAmountDebit, textFieldAmountCredit) in
-                cell.debitLabel.text = textFieldAmountDebit.text
-                cell.creditLabel.text = textFieldAmountCredit.text
+            // 設定勘定科目　の勘定名
+            let category = presenter.objects(forRow: indexPath.row, section: indexPath.section).category
+            // 設定残高振替仕訳 開始残高
+            if let dataBaseTransferEntry = presenter.objects(category: category) {
+                if dataBaseTransferEntry.debit_category == "残高" { // 借方
+                    account = dataBaseTransferEntry.credit_category // 相手勘定科目名
+                    valueDebitText = dataBaseTransferEntry.debit_amount
+                } else if dataBaseTransferEntry.credit_category == "残高" { // 貸方
+                    account = dataBaseTransferEntry.debit_category // 相手勘定科目名
+                    valueCreditText = dataBaseTransferEntry.credit_amount
+                }
+                // 編集中 は有効化
+                cell.textFieldAmountDebit.isEnabled = self.isEditing
+                cell.textFieldAmountCredit.isEnabled = self.isEditing
+                
+                cell.setup(
+                    primaryKey: dataBaseTransferEntry.number,
+                    category: account,
+                    valueDebitText: "\(valueDebitText)",
+                    valueCreditText: "\(valueCreditText)"
+                ) { (textFieldAmountDebit, textFieldAmountCredit) in
+                    cell.debitLabel.text = textFieldAmountDebit.text
+                    cell.creditLabel.text = textFieldAmountCredit.text
+                }
             }
             return cell
         } else {
@@ -299,22 +309,22 @@ extension OpeningBalanceViewController: UITableViewDelegate, UITableViewDataSour
             return cell
         }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // segue.destinationの型はUIViewController
         if let controller = segue.destination as? ClassicCalculatorViewController {
-
+            
             controller.primaryKey = primaryKey
             controller.debitOrCredit = debitOrCredit
             controller.category = category
         }
     }
-
+    
     // 金額　電卓画面で入力した値を表示させる
     func setAmountValue(primaryKey: Int, numbersOnDisplay: Int, category: String, debitOrCredit: DebitOrCredit) {
         // 金額を入力後に、電卓画面から仕訳画面へ遷移した場合
         print(numbersOnDisplay, category, debitOrCredit)
-
+        
         presenter.setAmountValue(primaryKey: primaryKey, numbersOnDisplay: numbersOnDisplay, category: category, debitOrCredit: debitOrCredit)
     }
 }
@@ -329,13 +339,13 @@ extension OpeningBalanceViewController: InputTextTableCellDelegate {
         self.category = category
         // 借方金額　貸方金額
         self.debitOrCredit = debitOrCredit
-
+        
         self.view.endEditing(true)
     }
 }
 
 extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
-
+    
     func reloadData() {
         // 更新処理
         DispatchQueue.main.async {
@@ -347,7 +357,7 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
         // インジケーターを終了
         self.finishActivityIndicatorView()
     }
-
+    
     func setupViewForViewDidLoad() {
         // UI
         setTableView()
@@ -358,13 +368,13 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
         //        self.navigationItem.rightBarButtonItem = printoutButton
         printButton.isHidden = true
     }
-
+    
     func setupViewForViewWillAppear() {
         if let company = presenter.company {
             // 月末、年度末などの決算日をラベルに表示する
             companyNameLabel.text = company // 社名
         }
-
+        
         if let theDayOfBeginningOfYear = presenter.theDayOfBeginningOfYear {
             if let fiscalYear = presenter.fiscalYear {
                 closingDateLabel.text = String(fiscalYear) + "年\(theDayOfBeginningOfYear.prefix(2))月\(theDayOfBeginningOfYear.suffix(2))日" // 決算日を表示する
@@ -372,17 +382,17 @@ extension OpeningBalanceViewController: OpeningBalancePresenterOutput {
         }
         titleLabel.text = "開始残高"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-
+        
         // 要素数が少ないUITableViewで残りの部分や余白を消す
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
-
+    
     func setupViewForViewWillDisappear() {
-
+        
     }
-
+    
     func setupViewForViewDidAppear() {
-
+        
     }
 }

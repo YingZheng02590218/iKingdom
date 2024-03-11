@@ -27,7 +27,7 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
     @IBOutlet private var backgroundView: EMTNeumorphicView!
     // グラデーションレイヤー　書類系画面
     let gradientLayer = CAGradientLayer()
-
+    
     let LIGHTSHADOWOPACITY: Float = 0.5
     //    let DARKSHADOWOPACITY: Float = 0.5
     let ELEMENTDEPTH: CGFloat = 4
@@ -66,10 +66,10 @@ class TBViewController: UIViewController, UIPrintInteractionControllerDelegate {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         presenter.viewWillDisappear()
     }
     
@@ -172,28 +172,34 @@ extension TBViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table view data source
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter.numberOfsections() + 1 // 合計額の行の分
+    }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 合計額の行の分
-        return presenter.numberOfobjects + 1
+        if section < presenter.numberOfsections() {
+            presenter.numberOfobjects(section: section)
+        } else {
+            1 // 合計額の行の分
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < presenter.numberOfobjects {
+        if indexPath.section < presenter.numberOfsections() {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
             // 勘定科目をセルに表示する
             //        cell.textLabel?.text = "\(presenter.objects(forRow:indexPath.row].category as String)"
-            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
+            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
             cell.accountLabel.textAlignment = NSTextAlignment.center
             switch segmentedControl.selectedSegmentIndex {
             case 0: // 合計　借方
-                cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 0)
+                cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 0)
                 // 合計　貸方
-                cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 1)
+                cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 1)
             case 1: // 残高　借方
-                cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
+                cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 2)
                 // 残高　貸方
-                cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+                cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 3)
             default:
                 print("cell_TB")
             }
@@ -283,7 +289,7 @@ extension TBViewController: TBPresenterOutput {
             }
         }
     }
-
+    
     func setupViewForViewWillDisappear() {
         // アップグレード機能　スタンダードプラン
         if let gADBannerView = gADBannerView {
@@ -291,7 +297,7 @@ extension TBViewController: TBPresenterOutput {
             removeBannerViewToView(gADBannerView)
         }
     }
-
+    
     func setupViewForViewDidAppear() {
         // チュートリアル対応 コーチマーク型　初回起動時　7行を追加
         let userDefaults = UserDefaults.standard
