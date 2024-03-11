@@ -1382,11 +1382,11 @@ extension JournalEntryViewController: UITextFieldDelegate {
             break
         }
         // textField内の文字数
-        let textFieldNumber = textField.text?.count ?? 0    // todo
+        let textFieldTextCount = textField.text?.count ?? 0    // todo
         // 入力された文字数
-        let stringNumber = string.count
+        let stringCount = string.count
         // 最大文字数以上ならfalseを返す
-        resultForLength = textFieldNumber + stringNumber <= maxLength
+        resultForLength = textFieldTextCount + stringCount <= maxLength
         // 文字列が0文字の場合、backspaceキーが押下されたということなので反映させる
         if string.isEmpty {
             // textField.deleteBackward() うまくいかない

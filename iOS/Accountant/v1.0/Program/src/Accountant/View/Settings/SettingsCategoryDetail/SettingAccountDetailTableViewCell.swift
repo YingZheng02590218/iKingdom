@@ -47,6 +47,8 @@ class SettingAccountDetailTableViewCell: UITableViewCell {
             accountDetailAccountTextField.inputAccessoryView = toolbar
             // 入力開始
             accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingDidBegin),for: UIControl.Event.editingDidBegin)
+            // 入力中
+            accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingChanged),for: UIControl.Event.editingChanged)
             // 入力終了
             accountDetailAccountTextField.addTarget(self, action: #selector(textFieldEditingDidEnd), for: UIControl.Event.editingDidEnd)
         }
@@ -117,16 +119,6 @@ extension SettingAccountDetailTableViewCell: UITextFieldDelegate {
         guard !(notAllowedCharacters.isSuperset(of: characterSet)) else { // 入力された文字
             return false
         }
-        // 入力チェック　文字数最大数を設定
-        let maxLength: Int = 20 // 文字数最大値を定義
-        // textField内の文字数
-        let textFieldTextCount = textField.text?.count ?? 0
-        // 入力された文字数
-        let stringCount = string.count
-        // 最大文字数以上ならfalseを返す
-        guard textFieldTextCount + stringCount <= maxLength else {
-            return false
-        }
         // 判定
         return true
     }
@@ -161,6 +153,22 @@ extension SettingAccountDetailTableViewCell: UITextFieldDelegate {
         delegate?.selectedAccountAction(accountname: accountDetailAccountTextField?.text)
     }
     
+    @objc
+    private func textFieldEditingChanged(_ textField: UITextField) {
+        // 勘定科目名
+        guard textField == accountDetailAccountTextField else {
+            return
+        }
+        guard let text = textField.text else { return }
+        // 変換中はスルー 変換中は制限されない
+        if textField.markedTextRange != nil { return }
+        // 入力チェック　文字数最大数を設定
+        let maxLength: Int = 20 // 文字数最大値を定義
+        if text.count > maxLength {
+            // 確定した時にオーバーしている分は除かれる
+            textField.text = String(text.prefix(maxLength))
+        }
+    }
     // リターンキーが押されたとき
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
