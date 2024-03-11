@@ -407,19 +407,24 @@ class SettingsCategoryDetailTableViewController: UITableViewController {
             // タクソノミ　表示科目
             cell.label.isHidden = false
             cell.label.isEnabled = true
-            
-            cell.accessoryType = .disclosureIndicator
             // セルの選択
             cell.selectionStyle = .default
             cell.textLabel?.text = "表示科目名"
             cell.textLabel?.textColor = .lightGray
             cell.textLabel?.font = .systemFont(ofSize: 14)
             // 表示科目名
-            // 勘定科目の連番から勘定科目を取得　紐づけた表示科目の連番を知るため
+            if let numberOfTaxonomy = self.numberOfTaxonomy, numberOfTaxonomy != 0,
+               // 設定表示科目
+               let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: numberOfTaxonomy) {
+                // 新規登録で選択した表示科目
+                cell.label.text = "\(object.number), \(object.category)"
+            } else
+            // 設定勘定科目　勘定科目の連番から設定勘定科目を取得　紐づけた表示科目の連番を知るため
             if let object = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsTaxonomyAccount(number: numberOfAccount),
                let numberOfTaxonomy = Int(object.numberOfTaxonomy),
+               // 設定表示科目
                let object = DataBaseManagerSettingsTaxonomy.shared.getSettingsTaxonomy(numberOfTaxonomy: numberOfTaxonomy) {
-                
+                // 新規登録以外
                 cell.label.text = "\(object.number), \(object.category)"
             } else {
                 cell.label.text = "表示科目を選択してください"
