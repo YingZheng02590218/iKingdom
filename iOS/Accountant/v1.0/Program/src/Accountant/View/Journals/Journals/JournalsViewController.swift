@@ -71,7 +71,7 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
             return nil
         }
     }()
-
+    
     /// GUIアーキテクチャ　MVP
     private var presenter: JournalsPresenterInput!
     func inject(presenter: JournalsPresenterInput) {
@@ -347,7 +347,8 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
         presenter.refreshTable(isEditing: tableView.isEditing)
     }
     // 編集機能　長押しした際に呼ばれるメソッド
-    @objc private func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+    @objc 
+    private func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
         // 編集中ではない場合
         if !tableView.isEditing {
             if recognizer.state == UIGestureRecognizer.State.began {
@@ -478,11 +479,15 @@ class JournalsViewController: UIViewController, UIGestureRecognizerDelegate {
                 controller.journalEntryType = .JournalEntries // セルに表示した仕訳タイプを取得
             } else if segue.identifier == "longTapped" {
                 if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
-                    controller.journalEntryType = .JournalEntriesFixing // セルに表示した仕訳タイプを取得
+                    
                     controller.tappedIndexPath = tappedIndexPath // アンラップ // ロングタップされたセルの位置をフィールドで保持したものを使用
                     if tappedIndexPath.section == 0 {
+                        // 通常仕訳
+                        controller.journalEntryType = .JournalEntriesFixing // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
                         controller.primaryKey = presenter.objects(forRow: tappedIndexPath.row).number
                     } else {
+                        // 決算整理仕訳
+                        controller.journalEntryType = .AdjustingEntriesFixing // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
                         controller.primaryKey = presenter.objectsss(forRow: tappedIndexPath.row).number
                     }
                     self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする

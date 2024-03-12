@@ -45,6 +45,7 @@ protocol GeneralLedgerAccountPresenterInput {
     
     func pdfBarButtonItemTapped()
     func csvBarButtonItemTapped()
+    func cellLongPressed(indexPath: IndexPath)
 }
 
 protocol GeneralLedgerAccountPresenterOutput: AnyObject {
@@ -52,6 +53,7 @@ protocol GeneralLedgerAccountPresenterOutput: AnyObject {
     func setupViewForViewWillAppear()
     func setupViewForViewWillDisappear()
     func setupViewForViewDidAppear()
+    func setupCellLongPressed(indexPath: IndexPath)
     func showPreview()
 }
 
@@ -398,5 +400,10 @@ final class GeneralLedgerAccountPresenter: GeneralLedgerAccountPresenterInput {
             self.filePath = csvPath
             self.view.showPreview()
         })
+    }
+    
+    func cellLongPressed(indexPath: IndexPath) {
+        
+        view.setupCellLongPressed(indexPath: indexPath)
     }
 }

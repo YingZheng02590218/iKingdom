@@ -49,7 +49,7 @@ protocol JournalEntryPresenterOutput: AnyObject {
     // 決算整理仕訳　の処理
     func buttonTappedForAdjustingAndClosingEntries() -> JournalEntryData?
     // 仕訳編集　の処理
-    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int)
+    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int)
     // 仕訳　の処理
     func buttonTappedForJournalEntries() -> JournalEntryData?
     // タブバーの仕訳タブからの遷移の場合
@@ -180,22 +180,24 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                             view.goBackToPreviousScreen()
                         }
                     }
-                } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
+                } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
                     // 入力値を取得する
                     let result = view.buttonTappedForJournalEntriesFixing()
                     if let journalEntryData = result.0 {
-                        if result.1 == 1 { // 決算整理仕訳
-                            // 決算整理仕訳 更新
-                            model.updateAdjustingJournalEntry(journalEntryData: journalEntryData, primaryKey: result.2) { number in
-                                // 仕訳帳画面へ戻る
-                                view.goBackToJournalsScreen(number: number)
-                            }
-                        } else { // 仕訳
-                            // 仕訳 更新
-                            model.updateJournalEntry(journalEntryData: journalEntryData, primaryKey: result.2) { number in
-                                // 仕訳帳画面へ戻る
-                                view.goBackToJournalsScreen(number: number)
-                            }
+                        // 仕訳 更新
+                        model.updateJournalEntry(journalEntryData: journalEntryData, primaryKey: result.1) { number in
+                            // 勘定画面・仕訳帳画面へ戻る
+                            view.goBackToJournalsScreen(number: number)
+                        }
+                    }
+                } else if journalEntryType == .AdjustingEntriesFixing { // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                    // 入力値を取得する
+                    let result = view.buttonTappedForJournalEntriesFixing()
+                    if let journalEntryData = result.0 {
+                        // 決算整理仕訳 更新
+                        model.updateAdjustingJournalEntry(journalEntryData: journalEntryData, primaryKey: result.1) { number in
+                            // 勘定画面・仕訳帳画面へ戻る
+                            view.goBackToJournalsScreen(number: number)
                         }
                     }
                 }
