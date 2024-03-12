@@ -35,7 +35,7 @@ class JournalEntryViewController: UIViewController {
     @IBOutlet private var datePicker: UIDatePicker!
     // 仕訳画面表示ボタン
     @IBOutlet private var addButton: UIButton!
-
+    
     var isMaskedDatePicker = false // マスクフラグ
     
     @IBOutlet private var datePickerView: EMTNeumorphicView!
@@ -270,7 +270,9 @@ class JournalEntryViewController: UIViewController {
                 // 04-01にすると03-31となる
                 datePicker.maximumDate = calendar.date(byAdding: .year, value: 1, to: yyyyMMddHHmmss)
             }
-        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+            // 決算日設定機能　何もしない
+        } else if journalEntryType == .AdjustingEntriesFixing { // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
             // 決算日設定機能　何もしない
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             
@@ -315,7 +317,9 @@ class JournalEntryViewController: UIViewController {
             }
         }
         // ピッカーの初期値
-        if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
+        if journalEntryType == .JournalEntriesFixing { // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+            // 決算日設定機能　何もしない viewDidLoad()で値を設定している
+        } else if journalEntryType == .AdjustingEntriesFixing { // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
             // 決算日設定機能　何もしない viewDidLoad()で値を設定している
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
             // nothing
@@ -813,15 +817,15 @@ class JournalEntryViewController: UIViewController {
     }
     
     // 仕訳編集/決算整理仕訳編集　の処理
-    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int, Int) {
+    func buttonTappedForJournalEntriesFixing() -> (JournalEntryData?, Int) {
         // データベース　仕訳データを追加
         // ユーザーが入力した仕訳の内容を取得する
         if let journalEntryData = getInputJournalEntryData() {
             
-            return (journalEntryData, tappedIndexPath.section, primaryKey) // 1:決算整理仕訳
+            return (journalEntryData, primaryKey)
         }
         
-        return (nil, tappedIndexPath.section, primaryKey)
+        return (nil, primaryKey)
     }
     
     // 仕訳　の処理
@@ -1583,39 +1587,40 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             // カルーセルをリロードする
             reloadCarousel()
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 仕訳帳画面からの遷移の場合
+        } else if journalEntryType == .JournalEntriesFixing { // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
             // よく使う仕訳　エリア
             tableView.isHidden = true
             createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
-            // 仕訳データを取得
-            if tappedIndexPath.section == 1 {
-                // 決算整理仕訳
-                labelTitle.text = "決算整理仕訳編集"
-                if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
-                   // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
-                   let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
-                   let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
-                    datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
-                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
-                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                }
-            } else {
-                // 通常仕訳
-                labelTitle.text = "仕訳編集"
-                if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
-                   // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
-                   let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
-                   let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
-                    datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
-                    textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
-                    textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
-                    textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
-                    textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
-                    textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
-                }
+            // 通常仕訳
+            labelTitle.text = "仕訳編集"
+            if let dataBaseJournalEntry = DataBaseManagerJournalEntry.shared.getJournalEntryWithNumber(number: primaryKey),
+               // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
+               let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
+               let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
+                datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
+                textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
+                textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
+                textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
+            }
+            inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
+        } else if journalEntryType == .AdjustingEntriesFixing { // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+            // よく使う仕訳　エリア
+            tableView.isHidden = true
+            createDatePicker() // 決算日設定機能　決算日を変更後に仕訳画面に反映させる
+            // 決算整理仕訳
+            labelTitle.text = "決算整理仕訳編集"
+            if let dataBaseJournalEntry = DataBaseManagerAdjustingEntry.shared.getAdjustingEntryWithNumber(number: primaryKey),
+               // データベースに保持した日付をUIのピッカーに渡すために、yyyy/MM/dd形式でDate型へ変換するために使用する
+               let date = DateManager.shared.dateFormatterStringToDate.date(from: dataBaseJournalEntry.date),
+               let date = DateManager.shared.dateFormatterPicker.date(from: "\(date.month)/\(date.day)/\(date.year)") {
+                datePicker.date = date // 注意：カンマの後にスペースがないとnilになる
+                textFieldCategoryDebit.text = dataBaseJournalEntry.debit_category
+                textFieldCategoryCredit.text = dataBaseJournalEntry.credit_category
+                textFieldAmountDebit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.debit_amount.description)
+                textFieldAmountCredit.text = StringUtility.shared.addComma(string: dataBaseJournalEntry.credit_amount.description)
+                textFieldSmallWritting.text = dataBaseJournalEntry.smallWritting
             }
             inputButton.setTitle("更　新", for: UIControl.State.normal)// 注意：Title: Plainにしないと、Attributeでは変化しない。
         } else if journalEntryType == .JournalEntriesPackageFixing { // 仕訳一括編集 仕訳帳画面からの遷移の場合
@@ -1826,9 +1831,17 @@ extension JournalEntryViewController: JournalEntryPresenterOutput {
             ])
         }
     }
-    // 仕訳帳画面へ戻る
+    // 勘定画面・仕訳帳画面へ戻る
     func goBackToJournalsScreen(number: Int) {
-        
+        // 勘定画面へ戻る
+        if let navigationController = presentingViewController as? UINavigationController,
+           let viewController = navigationController.topViewController as? GeneralLedgerAccountViewController {
+            self.dismiss(animated: true, completion: { [viewController] () -> Void in
+                // 仕訳入力ボタンから勘定画面へ遷移して入力が終わったときに呼ばれる。通常仕訳:0 決算整理仕訳:1
+                viewController.reloadData()
+            })
+        }
+        // 仕訳帳画面へ戻る
         if let tabBarController = self.presentingViewController as? UITabBarController, // 一番基底となっているコントローラ
            let navigationController = tabBarController.selectedViewController as? UINavigationController, // 基底のコントローラから、現在選択されているコントローラを取得する
            let presentingViewController = navigationController.viewControllers.first as? JournalsViewController { // ナビゲーションバーコントローラの配下にある最初のビューコントローラーを取得
@@ -1863,8 +1876,10 @@ enum JournalEntryType {
     case JournalEntry
     // 決算整理仕訳 タブバーの仕訳タブからの遷移の場合
     case AdjustingAndClosingEntry
-    // 仕訳編集 仕訳帳画面からの遷移の場合
+    // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
     case JournalEntriesFixing
+    // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+    case AdjustingEntriesFixing
     // 仕訳一括編集 仕訳帳画面からの遷移の場合
     case JournalEntriesPackageFixing
     // よく使う仕訳 追加

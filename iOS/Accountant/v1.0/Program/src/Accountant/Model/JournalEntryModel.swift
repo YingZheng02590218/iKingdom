@@ -13,10 +13,10 @@ protocol JournalEntryModelInput {
     func addJournalEntry(isForced: Bool, journalEntryData: JournalEntryData, completion: (Int) -> Void, errorHandler: ([Int]) -> Void)
     // 決算整理仕訳
     func addAdjustingJournalEntry(journalEntryData: JournalEntryData, completion: (Int) -> Void)
-    // 決算整理仕訳 更新
-    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void)
     // 仕訳 更新
     func updateJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void)
+    // 決算整理仕訳 更新
+    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void)
 }
 
 // 仕訳クラス
@@ -58,9 +58,9 @@ class JournalEntryModel: JournalEntryModelInput {
         )
         completion(number)
     }
-    // 決算整理仕訳 更新
-    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void) {
-        DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
+    // 仕訳 更新
+    func updateJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void) {
+        DataBaseManagerJournalEntry.shared.updateJournalEntry(
             primaryKey: primaryKey,
             date: journalEntryData.date!,
             debitCategory: journalEntryData.debit_category!,
@@ -74,9 +74,9 @@ class JournalEntryModel: JournalEntryModelInput {
             }
         )
     }
-    // 仕訳 更新
-    func updateJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void) {
-        DataBaseManagerJournalEntry.shared.updateJournalEntry(
+    // 決算整理仕訳 更新
+    func updateAdjustingJournalEntry(journalEntryData: JournalEntryData, primaryKey: Int, completion: (Int) -> Void) {
+        DataBaseManagerAdjustingEntry.shared.updateAdjustingJournalEntry(
             primaryKey: primaryKey,
             date: journalEntryData.date!,
             debitCategory: journalEntryData.debit_category!,
