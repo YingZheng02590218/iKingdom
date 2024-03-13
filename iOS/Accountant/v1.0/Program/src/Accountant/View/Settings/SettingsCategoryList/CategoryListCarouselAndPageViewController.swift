@@ -20,6 +20,9 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
         // タブに表示する文言
         pageTabItems = Rank0.allCases.map({ $0.rawValue })
         super.viewDidLoad()
+        
+        // 編集ボタンの設定
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     // MARK: - Action
@@ -32,6 +35,8 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
             pageViewController.setViewControllers([viewController], direction: .forward, animated: false, completion: nil)
             // セルを選択して、collectionViewの中の中心にスクロールさせる　追随　追従
             self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+            // 編集モードを切り替える
+            viewController.setEditing(isEditing, animated: false)
         }
     }
     // 画面遷移の準備　勘定科目画面
@@ -45,11 +50,13 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
             }
         }
     }
-
-    @IBAction func editButtonTapped(_ sender: Any) {
+    
+    // 編集モード切り替え
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
         // 編集モードを切り替える
         if let currentVC = pageViewController.viewControllers?.first as? CategoryListTableViewController {
-            currentVC.setEditing(!currentVC.isEditing, animated: true)
+            currentVC.setEditing(editing, animated: true)
         }
     }
     
@@ -93,7 +100,8 @@ class CategoryListCarouselAndPageViewController: CarouselAndPageViewController {
             // タブの選択位置を更新する
             // セルを選択して、コレクションビューの中の中心へスクロールさせる
             self.carouselCollectionView.selectItem(at: IndexPath(row: selectedIndex, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-
+            // 編集モードを切り替える
+            currentVC.setEditing(isEditing, animated: false)
         }
     }
     

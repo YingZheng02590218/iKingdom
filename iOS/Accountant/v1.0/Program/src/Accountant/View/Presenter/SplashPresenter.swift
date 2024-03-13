@@ -25,6 +25,8 @@ protocol SplashPresenterOutput: AnyObject {
     func finishActivityIndicatorView()
     // パーセンテージを表示させる
     func showPersentage(persentage: Int)
+    // パーセンテージを非表示させる
+    func hidePersentage()
     // 半強制アップデートダイアログを表示する アラートを表示し、App Store に誘導する
     func showForcedUpdateDialog()
     // AppStore
@@ -64,6 +66,8 @@ final class SplashPresenter: SplashPresenterInput {
                         // 半強制アップデートダイアログを表示する
                         self.view.showForcedUpdateDialog()
                     } else {
+                        // パーセンテージを非表示させる
+                        self.view.hidePersentage()
                         // インジケーターを終了
                         self.view.finishActivityIndicatorView()
                         // レビュー催促機能

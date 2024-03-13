@@ -12,7 +12,7 @@ import QuickLook
 import UIKit
 
 // 勘定クラス
-class GeneralLedgerAccountViewController: UIViewController {
+class GeneralLedgerAccountViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - var let
     
@@ -47,6 +47,8 @@ class GeneralLedgerAccountViewController: UIViewController {
     
     // 勘定名
     var account: String = ""
+    // 編集機能
+    var tappedIndexPath: IndexPath?
     
     /// GUIアーキテクチャ　MVP
     private var presenter: GeneralLedgerAccountPresenterInput!
@@ -125,6 +127,16 @@ class GeneralLedgerAccountViewController: UIViewController {
         }
     }
     
+    private func setLongPressRecognizer() {
+        // 更新機能　編集機能
+        // UILongPressGestureRecognizer宣言
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))// 正解: Selector("somefunctionWithSender:forEvent: ") → うまくできなかった。2020/07/26
+        // `UIGestureRecognizerDelegate`を設定するのをお忘れなく
+        longPressRecognizer.delegate = self
+        // tableViewにrecognizerを設定
+        tableView.addGestureRecognizer(longPressRecognizer)
+    }
+    
     // MARK: - Action
     
     /**
@@ -136,6 +148,97 @@ class GeneralLedgerAccountViewController: UIViewController {
     
     @IBAction func csvBarButtonItemTapped(_ sender: Any) {
         presenter.csvBarButtonItemTapped()
+    }
+    
+    // 編集機能　長押しした際に呼ばれるメソッド
+    @objc 
+    private func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+        // 編集中ではない場合
+        if !tableView.isEditing {
+            if recognizer.state == UIGestureRecognizer.State.began {
+                // 押された位置でcellのPathを取得
+                let point = recognizer.location(in: tableView)
+                if let indexPath = tableView.indexPathForRow(at: point) {
+                    // 長押しされた場合の処理
+                    print("長押しされたcellのindexPath:\(String(describing: indexPath.row))")
+                    switch indexPath.section {
+                    case 0:
+                        // 開始仕訳
+                        break
+                    case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+                        // 通常仕訳
+                        // ロングタップされたセルの位置をフィールドで保持する
+                        self.tappedIndexPath = indexPath
+                        
+                        presenter.cellLongPressed(indexPath: indexPath)
+                    case 14:
+                        // 決算整理仕訳
+                        // ロングタップされたセルの位置をフィールドで保持する
+                        self.tappedIndexPath = indexPath
+                        
+                        presenter.cellLongPressed(indexPath: indexPath)
+                    case 15:
+                        // 資本振替仕訳
+                        print("資本振替仕訳を長押し")
+                    case 16:
+                        // 損益振替仕訳、残高振替仕訳
+                        print("損益振替仕訳を長押し")
+                    case 17:
+                        // 空白行
+                        print("空白行を長押し")
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    // 追加機能　画面遷移の準備の前に入力検証
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // 画面のことをScene（シーン）と呼ぶ。 セグエとは、シーンとシーンを接続し画面遷移を行うための部品である。
+        if identifier == "longTapped" { // segueがタップ
+            // 編集中ではない場合
+            if !tableView.isEditing { // ロングタップの場合はセルの位置情報を代入しているのでnilではない
+                if let _ = self.tappedIndexPath { // 代入に成功したら、ロングタップだと判断できる
+                    return true // true: 画面遷移させる
+                }
+            }
+        }
+        return false // false:画面遷移させない
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? JournalEntryViewController {
+            // 遷移先のコントローラに値を渡す
+            if segue.identifier == "longTapped" {
+                if let tappedIndexPath = tappedIndexPath { // nil:ロングタップではない
+                    switch tappedIndexPath.section {
+                    case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
+                        // 通常仕訳
+                        controller.journalEntryType = .JournalEntriesFixing // 仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                        if let journalEntry = presenter.databaseJournalEntries(forSection: tappedIndexPath.section - 1, forRow: tappedIndexPath.row) {
+                            controller.primaryKey = journalEntry.number
+                        }
+                    case 14:
+                        // 決算整理仕訳
+                        controller.journalEntryType = .AdjustingEntriesFixing // 決算整理仕訳編集 勘定画面・仕訳帳画面からの遷移の場合
+                        let adjustingEntry = presenter.dataBaseAdjustingEntries(forRow: tappedIndexPath.row)
+                        controller.primaryKey = adjustingEntry.number
+                    default:
+                        break
+                    }
+                    self.tappedIndexPath = nil // 一度、画面遷移を行なったらセル位置の情報が残るのでリセットする
+                }
+            }
+        }
+    }
+    // 仕訳入力ボタンから勘定画面へ遷移して入力が終わったときに呼ばれる。通常仕訳:0 決算整理仕訳:1
+    func reloadData() {
+        // 更新処理
+        tableView.reloadData()
     }
 }
 
@@ -290,13 +393,13 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 case 12:
                     index = 10 // 決算月　決算日が月末の場合
                 case 13:
-                     index = 11 // 決算月　決算日が月末ではない場合
+                    index = 11 // 決算月　決算日が月末ではない場合
                     // 決算月は次期繰越があるため、不要
                     // 通常仕訳 期末
                 default:
                     index = nil
                 }
-
+                
                 if let index = index,
                    // 月別の翌月の初日を取得 12ヶ月分　に存在するか
                    nextFirstDays.count > index,
@@ -417,7 +520,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 default:
                     index = nil
                 }
-
+                
                 if let index = index,
                    // 月別の月末を取得 12ヶ月分　に存在するか
                    lastDays.count > index,
@@ -750,7 +853,7 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
                 }
             } else {
                 // 通常仕訳　通常仕訳 勘定別
-                if let databaseJournalEntry = presenter.databaseJournalEntries(forSection: indexPath.section - 1, forRow: indexPath.row) {
+                if let databaseJournalEntry = presenter.databaseJournalEntries(forSection: indexPath.section - 1, forRow: indexPath.row) { // 開始仕訳の行を差し引く
                     date = "\(databaseJournalEntry.date)"                              // 日付
                     if indexPath.row > 0 { // 二行目以降は月の先頭のみ、月を表示する
                         if let databaseJournalEntry = presenter.databaseJournalEntries(forSection: indexPath.section - 1, forRow: indexPath.row - 1) {
@@ -881,7 +984,7 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
         // UI
         setTableView()
         createButtons() // ボタン作成
-        
+        setLongPressRecognizer()
         self.navigationItem.title = "勘定"
         // largeTitle表示
         navigationItem.largeTitleDisplayMode = .always
@@ -944,6 +1047,11 @@ extension GeneralLedgerAccountViewController: GeneralLedgerAccountPresenterOutpu
             // マネタイズ対応 bringSubViewToFrontメソッドを使い、広告を最前面に表示します。
             view.bringSubviewToFront(gADBannerView)
         }
+    }
+    
+    func setupCellLongPressed(indexPath: IndexPath) {
+        // 別の画面に遷移 仕訳画面
+        performSegue(withIdentifier: "longTapped", sender: nil)
     }
     
     // PDFのプレビューを表示させる

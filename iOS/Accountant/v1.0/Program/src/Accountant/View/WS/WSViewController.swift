@@ -37,7 +37,6 @@ class WSViewController: UIViewController, UIPrintInteractionControllerDelegate {
     
     var printing = false // プリント機能を使用中のみたてるフラグ　true:セクションをテーブルの先頭行に固定させない。描画時にセクションが重複してしまうため。
     // 精算表画面で押下された場合は、決算整理仕訳とする
-    @IBOutlet private var addBarButtonItem: UIBarButtonItem! // ヘッダー部分の追加ボタン
     @IBOutlet private var printButton: UIButton!
     // フィードバック
     let feedbackGeneratorMedium: Any? = {
@@ -209,32 +208,45 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table view data source
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter.numberOfsections() + 1 + 1 + 1
+        // + 残高試算表合計の行 + 当期純利益 + 修正記入、損益計算書、貸借対照表の合計の行
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        presenter.numberOfobjects + 1 + presenter.numberOfobjectss + 1 + 1  // + 試算表合計の行の分+修正記入の行の分+当期純利益+修正記入、損益計算書、貸借対照表の合計の分
+        if section < presenter.numberOfsections() {
+            presenter.numberOfobjects(section: section)
+        } else {
+            1 // + 残高試算表合計の行 + 当期純利益 + 修正記入、損益計算書、貸借対照表の合計の行
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セル　決算整理前残高試算表の行
-        if indexPath.row < presenter.numberOfobjects {
+        if indexPath.section < presenter.numberOfsections() {
             // ① UI部品を指定
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
+            // 設定勘定科目　の勘定名
+            let category = presenter.objects(forRow: indexPath.row, section: indexPath.section).category
             // 勘定科目をセルに表示する
-            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
+            cell.accountLabel.text = category
             cell.accountLabel.textAlignment = NSTextAlignment.center
             // 決算整理前残高試算表
-            cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
+            cell.debitLabel.text = presenter.getTotalAmount(account: category, leftOrRight: 2)
             cell.debitLabel.textAlignment = NSTextAlignment.right
-            cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+            cell.creditLabel.text = presenter.getTotalAmount(account: category, leftOrRight: 3)
             cell.creditLabel.textAlignment = NSTextAlignment.right
             cell.debitLabel.backgroundColor = .clear
             cell.creditLabel.backgroundColor = .clear
-            switch Int(presenter.objects(forRow: indexPath.row).Rank0) {
+            
+            // 設定勘定科目　の勘定名
+            let Rank0 = presenter.objects(forRow: indexPath.row, section: indexPath.section).Rank0
+            switch Int(Rank0) {
             case 0, 1, 2, 3, 4, 5, 12: // 大分類　貸借対照表：0,1,2
                 // 修正記入
-                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 0)
+                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: category, leftOrRight: 0)
                 cell.debit1Label.textAlignment = NSTextAlignment.right
-                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 1)
+                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: category, leftOrRight: 1)
                 cell.credit1Label.textAlignment = NSTextAlignment.right
                 cell.debit1Label.backgroundColor = .clear
                 cell.credit1Label.backgroundColor = .clear
@@ -244,24 +256,24 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.debit2Label.backgroundColor = .mainColor
                 cell.credit2Label.backgroundColor = .mainColor
                 // 貸借対照表 修正記入の分を差し引きして、表示する　WSModelを作成して処理を記述する
-                cell.debit3Label.text = presenter.getTotalAmountAfterAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
+                cell.debit3Label.text = presenter.getTotalAmountAfterAdjusting(account: category, leftOrRight: 2)
                 cell.debit3Label.textAlignment = NSTextAlignment.right
-                cell.credit3Label.text = presenter.getTotalAmountAfterAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+                cell.credit3Label.text = presenter.getTotalAmountAfterAdjusting(account: category, leftOrRight: 3)
                 cell.credit3Label.textAlignment = NSTextAlignment.right
                 cell.debit3Label.backgroundColor = .clear
                 cell.credit3Label.backgroundColor = .clear
             case 6, 7, 8, 9, 10, 11: // 大分類 損益計算書：3,4
                 // 修正記入
-                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 0)
+                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: category, leftOrRight: 0)
                 cell.debit1Label.textAlignment = NSTextAlignment.right
-                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 1)
+                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: category, leftOrRight: 1)
                 cell.credit1Label.textAlignment = NSTextAlignment.right
                 cell.debit1Label.backgroundColor = .clear
                 cell.credit1Label.backgroundColor = .clear
                 // 損益計算書
-                cell.debit2Label.text = presenter.getTotalAmountAfterAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
+                cell.debit2Label.text = presenter.getTotalAmountAfterAdjusting(account: category, leftOrRight: 2)
                 cell.debit2Label.textAlignment = NSTextAlignment.right
-                cell.credit2Label.text = presenter.getTotalAmountAfterAdjusting(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+                cell.credit2Label.text = presenter.getTotalAmountAfterAdjusting(account: category, leftOrRight: 3)
                 cell.credit2Label.textAlignment = NSTextAlignment.right
                 cell.debit2Label.backgroundColor = .clear
                 cell.credit2Label.backgroundColor = .clear
@@ -274,69 +286,16 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
                 print("a")
             }
             return cell
-        } else if indexPath.row == presenter.numberOfobjects { // セル　試算表の合計の行
+        } else if indexPath.section < presenter.numberOfsections() + 1 {
+            // 試算表の合計の行
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
             cell.accountLabel.text = ""
             // 決算整理前残高試算表
             cell.debitLabel.text = presenter.debit_balance_total()
             cell.creditLabel.text = presenter.credit_balance_total()
             return cell
-        } else if indexPath.row < presenter.numberOfobjects + 1 + presenter.numberOfobjectss { // セル　修正記入の行
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
-            // 勘定科目をセルに表示する
-            cell.accountLabel.text = "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)"
-            cell.accountLabel.textAlignment = NSTextAlignment.center
-            // 決算整理前残高試算表
-            cell.debitLabel.text = ""
-            cell.creditLabel.text = ""
-            cell.debitLabel.backgroundColor = .mainColor
-            cell.creditLabel.backgroundColor = .mainColor
-            switch Int(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).Rank2) {
-            case 0, 1, 2, 3, 4, 5, 12: // 大分類　貸借対照表：0,1,2
-                // 修正記入
-                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 0)
-                cell.debit1Label.textAlignment = NSTextAlignment.right
-                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 1)
-                cell.credit1Label.textAlignment = NSTextAlignment.right
-                cell.debit1Label.backgroundColor = .clear
-                cell.credit1Label.backgroundColor = .clear
-                // 損益計算書
-                cell.debit2Label.text = ""
-                cell.credit2Label.text = ""
-                cell.debit2Label.backgroundColor = .clear
-                cell.credit2Label.backgroundColor = .clear
-                // 貸借対照表
-                cell.debit3Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 2)
-                cell.debit3Label.textAlignment = NSTextAlignment.right
-                cell.credit3Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 3)
-                cell.credit3Label.textAlignment = NSTextAlignment.right
-                cell.debit3Label.backgroundColor = .clear
-                cell.credit3Label.backgroundColor = .clear
-            case 6, 7, 8, 9, 10, 11: // 大分類 損益計算書：3,4
-                // 修正記入
-                cell.debit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 0)
-                cell.debit1Label.textAlignment = NSTextAlignment.right
-                cell.credit1Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 1)
-                cell.credit1Label.textAlignment = NSTextAlignment.right
-                cell.debit1Label.backgroundColor = .clear
-                cell.credit1Label.backgroundColor = .clear
-                // 損益計算書
-                cell.debit2Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 2)
-                cell.debit2Label.textAlignment = NSTextAlignment.right
-                cell.credit2Label.text = presenter.getTotalAmountAdjusting(account: "\(presenter.objectss(forRow: indexPath.row - (presenter.numberOfobjects + 1)).category as String)", leftOrRight: 3)
-                cell.credit2Label.textAlignment = NSTextAlignment.right
-                cell.debit2Label.backgroundColor = .clear
-                cell.credit2Label.backgroundColor = .clear
-                // 貸借対照表
-                cell.debit3Label.text = ""
-                cell.credit3Label.text = ""
-                cell.debit3Label.backgroundColor = .clear
-                cell.credit3Label.backgroundColor = .clear
-            default: // 大分類　貸借対照表：0,1,2 損益計算書：3,4
-                print("aa")
-            }
-            return cell
-        } else if indexPath.row < presenter.numberOfobjects + 1 + presenter.numberOfobjectss + 1 { // セル　当期純利益の行
+        } else if indexPath.section < presenter.numberOfsections() + 1 + 1 {
+            // 当期純利益の行
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
             // 勘定科目をセルに表示する
             cell.accountLabel.text = "当期純利益"
@@ -366,7 +325,8 @@ extension WSViewController: UITableViewDelegate, UITableViewDataSource {
             cell.debit3Label.backgroundColor = .clear
             cell.credit3Label.backgroundColor = .clear
             return cell
-        } else if indexPath.row < presenter.numberOfobjects + 1 + presenter.numberOfobjectss + 1 + 1 { // セル　修正記入と損益計算書、貸借対照表の合計の行
+        } else if indexPath.section < presenter.numberOfsections() + 1 + 1 + 1 {
+            // 修正記入と損益計算書、貸借対照表の合計の行
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_WS_total_2", for: indexPath) as? WSTableViewCell else { return UITableViewCell() }
             cell.accountLabel.text = ""
             // 決算整理前残高試算表

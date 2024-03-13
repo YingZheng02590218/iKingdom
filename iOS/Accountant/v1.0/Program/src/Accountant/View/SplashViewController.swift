@@ -141,6 +141,15 @@ extension SplashViewController: SplashPresenterOutput {
             }
         }
     }
+
+    // パーセンテージを非表示させる
+    func hidePersentage() {
+        DispatchQueue.main.async {
+            if let whatIsDoingLabel = self.whatIsDoingLabel {
+                whatIsDoingLabel.isHidden = true
+            }
+        }
+    }
     
     // AppStore
     func goToAppStore() {

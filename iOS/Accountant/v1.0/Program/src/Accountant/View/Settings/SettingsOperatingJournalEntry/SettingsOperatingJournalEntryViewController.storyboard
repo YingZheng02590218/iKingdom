@@ -72,7 +72,7 @@
                                     <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" name="AccentBlue"/>
+                                    <color key="baseBackgroundColor" name="AccentLight"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -105,18 +105,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dvD-GS-fFa">
-                        <rightBarButtonItems>
-                            <barButtonItem title="グループ一覧" image="rectangle.3.group" catalog="system" id="oZl-bT-o43">
-                                <connections>
-                                    <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" hidden="YES" id="B3W-Tv-5zJ">
-                                <connections>
-                                    <segue destination="lgc-ER-CXx" kind="presentation" identifier="buttonTapped" id="GOO-Er-6lu"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="グループ一覧" image="rectangle.3.group" catalog="system" id="oZl-bT-o43">
+                            <connections>
+                                <segue destination="2Lw-yL-ofc" kind="show" identifier="groupButtonTapped" id="28t-I1-Sw6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="e4Q-98-al7" id="0lT-nN-47H"/>
@@ -171,10 +164,10 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <image name="rectangle.3.group" catalog="system" width="128" height="80"/>
-        <namedColor name="AccentBlue">
-            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="AccentColor">
+            <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="AccentLight">
             <color red="0.13300000131130219" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="BaseColor">

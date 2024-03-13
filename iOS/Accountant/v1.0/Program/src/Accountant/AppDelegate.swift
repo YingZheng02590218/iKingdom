@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 4,
+            schemaVersion: 5,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -110,6 +110,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
                         // 月次残高振替仕訳
                         newObject?["dataBaseMonthlyTransferEntries"] = List<DataBaseMonthlyTransferEntry>()
+                    }
+                }
+                // スキーマバージョン
+                if oldSchemaVersion < 5 {
+                    // DataBaseSettingsTaxonomyAccountオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseSettingsTaxonomyAccount.className()) { oldObject, newObject in
+                        // プロパティを追加します
+                        newObject?["serialNumber"] = oldObject?.number
                     }
                 }
             }
@@ -280,6 +288,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // userDefaults.set(true, forKey: firstLunchKey)
         // 仕訳
         firstLunchKey = "firstLunch_JournalEntry"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
+        // 設定勘定科目　初期化
+        firstLunchKey = "settings_taxonomy_account"
+        firstLunch = [firstLunchKey: true]
+        userDefaults.register(defaults: firstLunch)
+        // 動作確認用
+        // userDefaults.set(true, forKey: firstLunchKey)
+        // 設定表示科目　初期化
+        firstLunchKey = "settings_taxonomy"
         firstLunch = [firstLunchKey: true]
         userDefaults.register(defaults: firstLunch)
         // 動作確認用

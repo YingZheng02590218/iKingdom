@@ -119,22 +119,28 @@ extension AfterClosingTrialBalanceViewController: UITableViewDelegate, UITableVi
 
     // MARK: - Table view data source
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter.numberOfsections() + 1 // 合計額の行の分
+    }
     // セルの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 合計額の行の分
-        return presenter.numberOfobjects + 1
+        if section < presenter.numberOfsections() {
+            presenter.numberOfobjects(section: section)
+        } else {
+            1 // 合計額の行の分
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < presenter.numberOfobjects {
+        if indexPath.section < presenter.numberOfsections() {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }
             // 勘定科目をセルに表示する
-            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row).category as String)"
+            cell.accountLabel.text = "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)"
             cell.accountLabel.textAlignment = NSTextAlignment.center
             // 残高　借方　勘定別の決算整理後の合計額
-            cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 2)
+            cell.debitLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 2)
             // 残高　貸方　勘定別の決算整理後の合計額
-            cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row).category as String)", leftOrRight: 3)
+            cell.creditLabel.text = presenter.getTotalAmount(account: "\(presenter.objects(forRow: indexPath.row, section: indexPath.section).category as String)", leftOrRight: 3)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell_last_TB", for: indexPath) as? TBTableViewCell else { return UITableViewCell() }

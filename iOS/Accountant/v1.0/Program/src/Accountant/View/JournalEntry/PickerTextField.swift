@@ -147,7 +147,9 @@ class PickerTextField: UITextField {
     func getSettingsCategoryFromDB() {
         // データベース
         for i in 0..<Rank0.allCases.count {
-            let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getSettingsSwitchingOn(rank0: i) // どのセクションに表示するセルかを判別するため引数で渡す
+            // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
+            let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: i, rank1: nil)
+            // どのセクションに表示するセルかを判別するため引数で渡す
             //　let items = transferItems(objects: objects) // 区分ごとの勘定科目が入ったArrayリストが返る
             var items: [String] = []
             for y in 0..<objects.count {    // 勘定
