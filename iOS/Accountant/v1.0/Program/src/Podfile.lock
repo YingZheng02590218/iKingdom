@@ -148,6 +148,7 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
+  - SpreadsheetView (0.9.1)
   - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
@@ -161,6 +162,7 @@ DEPENDENCIES:
   - GoogleAnalytics
   - GoogleUtilities
   - MXParallaxHeader
+  - SpreadsheetView
   - SwiftyStoreKit
 
 SPEC REPOS:
@@ -187,6 +189,7 @@ SPEC REPOS:
     - MXParallaxHeader
     - nanopb
     - PromisesObjC
+    - SpreadsheetView
     - SwiftyStoreKit
 
 SPEC CHECKSUMS:
@@ -212,8 +215,9 @@ SPEC CHECKSUMS:
   MXParallaxHeader: de3c867e10ba46e8f6e20c8ee1f2a910372b3b94
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  SpreadsheetView: 688dbd19f2b355df0eb09e486266fd913a013449
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: b060d70e30dc4113fb2c7db76a47c6b08d5d2479
+PODFILE CHECKSUM: 5500fc39fe412ea6554c5f412cfeb14b3a24f893
 
 COCOAPODS: 1.12.0
