@@ -11,10 +11,10 @@ import UIKit
 
 // 決算書クラス
 class FinancialStatementTableViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.separatorColor = .accentColor
         
         self.navigationItem.title = "決算書"
@@ -30,26 +30,27 @@ class FinancialStatementTableViewController: UITableViewController {
         let tableFooterView = UIView(frame: CGRect.zero)
         tableView.tableFooterView = tableFooterView
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        5
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
+        case 0: return    "月次推移表"
             // 決算報告手続き
-        case 0: return    "財務諸表"
+        case 1: return    "財務諸表"
             // 決算本手続き 帳簿の締切
-        case 1: return    "決算振替仕訳"
-        case 2: return    "決算整理仕訳"
+        case 2: return    "決算振替仕訳"
+        case 3: return    "決算整理仕訳"
             // 決算予備手続き
-        case 3: return    "試算表"
+        case 4: return    "試算表"
             // TODO: 開始手続き
             // case 4: return    "再振替仕訳"
             // case 5: return    "開始仕訳"
@@ -61,27 +62,30 @@ class FinancialStatementTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            // 月次推移表
+            return 2
+        case 1:
             // 貸借対照表、損益計算書、キャッシュフロー計算書
             return 2 // 3
-        case 1:
+        case 2:
             // 損益勘定
             return 1
-        case 2:
+        case 3:
             // 精算書
             return 1
-        case 3:
+        case 4:
             // 試算表　繰越試算表
             return 2
         default:
             return 0
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         var cell = UITableViewCell()
-
-        if indexPath.section == 0 {
+        
+        if indexPath.section == 0 || indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
@@ -103,12 +107,12 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             cell = tableView.dequeueReusableCell(withIdentifier: "PLAccount", for: indexPath)
             cell.textLabel?.text = "損益"
             cell.textLabel?.textColor = .textColor
             cell.textLabel?.textAlignment = NSTextAlignment.center
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 3 {
             cell = tableView.dequeueReusableCell(withIdentifier: "WS", for: indexPath)
             cell.textLabel?.text = "精算表"
             cell.textLabel?.textColor = .textColor
@@ -126,13 +130,13 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.textLabel?.textAlignment = NSTextAlignment.center
             }
         }
-
+        
         // Accessory Color
         let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
         let disclosureView = UIImageView(image: disclosureImage)
         disclosureView.tintColor = UIColor.accentColor
         cell.accessoryView = disclosureView
-
+        
         return cell
     }
     
@@ -141,6 +145,35 @@ class FinancialStatementTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                if let viewController = UIStoryboard(
+                    name: "MonthlyTrendsBalanceSheetViewController",
+                    bundle: nil
+                ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
+                }
+            case 1:
+                if let viewController = UIStoryboard(
+                    name: "ProfitAndLossStatementViewController",
+                    bundle: nil
+                ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(viewController, animated: true)
+                    } else {
+                        let navigation = UINavigationController(rootViewController: viewController)
+                        self.present(navigation, animated: true, completion: nil)
+                    }
+                }
+            default:
+                break
+            }
+        } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 // 法人/個人フラグ
@@ -210,7 +243,7 @@ class FinancialStatementTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 選択されたセルを取得
         guard let indexPath = self.tableView.indexPathForSelectedRow else { return } // ※ didSelectRowAtの代わりにこれを使う方がいい　タップされたセルの位置を取得
-
+        
         switch segue.identifier {
             // 損益勘定
         case "segue_PLAccount": // “セグウェイにつけた名称”:

@@ -532,6 +532,12 @@
 		F9E42A48298D1DFE00360DA4 /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A43298D1DFE00360DA4 /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9E42A49298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; };
 		F9E42A4A298D1DFE00360DA4 /* EMTNeumorphicView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */; };
+		F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */; };
+		F9E501AF2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */; };
+		F9E501B02BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */; };
+		F9E501B22BA4145500CC0DFB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501B12BA4145500CC0DFB /* Cells.swift */; };
+		F9E501B32BA4145500CC0DFB /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E501B12BA4145500CC0DFB /* Cells.swift */; };
 		F9E53C24247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */; };
 		F9E620FC2565281600C2C3B3 /* AnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */; };
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
@@ -1215,6 +1221,9 @@
 		F9E42A42298D1DFD00360DA4 /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
 		F9E42A43298D1DFE00360DA4 /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		F9E42A44298D1DFE00360DA4 /* EMTNeumorphicView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = EMTNeumorphicView.xcframework; path = Carthage/Build/EMTNeumorphicView.xcframework; sourceTree = "<group>"; };
+		F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTrendsBalanceSheetViewController.swift; sourceTree = "<group>"; };
+		F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MonthlyTrendsBalanceSheetViewController.storyboard; sourceTree = "<group>"; };
+		F9E501B12BA4145500CC0DFB /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerGeneralLedgerAccountBalance.swift; sourceTree = "<group>"; };
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
@@ -1692,6 +1701,9 @@
 				F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */,
 				F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */,
 				F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */,
+				F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */,
+				F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */,
+				F9E501B12BA4145500CC0DFB /* Cells.swift */,
 			);
 			path = BS;
 			sourceTree = "<group>";
@@ -2564,6 +2576,7 @@
 				F9963CEF26208DF50099D51C /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F90A239D2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
 				F90A235B2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
+				F9E501AF2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */,
 				F99BE7AC261DD61C004611E4 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB6296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B22A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -2727,6 +2740,7 @@
 				F9EC671E27B90BC60003FBB6 /* SettingsPeriodYearViewController.storyboard in Resources */,
 				F90A239E2B6BD1AB009E35C0 /* AccountItem14.png in Resources */,
 				F90A235C2B6BBAFD009E35C0 /* BasicInfo4.png in Resources */,
+				F9E501B02BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard in Resources */,
 				F9EC671F27B90BC60003FBB6 /* SettingsTableViewController.storyboard in Resources */,
 				F9D15FB7296D8F6D005E197D /* ProfitAndLossStatementViewController.storyboard in Resources */,
 				F940E4B32A8E22CC008AEAFC /* explain_backup.html in Resources */,
@@ -3070,6 +3084,7 @@
 				F9ED93772983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9D5D54F247E783C00EA35C7 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9E0F43826413EB900085CC0 /* CollectionReusableView.swift in Sources */,
+				F9E501AC2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
 				F93D789F2A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9A3C82B26552033001218F1 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F98163082999E1B70027B4C8 /* SettingsUpgradeViewController.swift in Sources */,
@@ -3169,6 +3184,7 @@
 				F9D34FB7248A324A00F8B403 /* SettingsPeriodYearViewController.swift in Sources */,
 				F99B65BF24B7A38F006BD3DD /* WSTableViewCell.swift in Sources */,
 				F93A262F29571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
+				F9E501B22BA4145500CC0DFB /* Cells.swift in Sources */,
 				F9482EB9282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F99EDE0D246C00B100334FF4 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9D08D9125444E8800CE3CB2 /* SettingsCategoryDetailTableViewController.swift in Sources */,
@@ -3316,6 +3332,7 @@
 				F9ED93782983ABFE00B255EF /* BackupManager.swift in Sources */,
 				F9EC66C727B90BC60003FBB6 /* GeneralLedgerTableViewCell.swift in Sources */,
 				F9EC66C827B90BC60003FBB6 /* CollectionReusableView.swift in Sources */,
+				F9E501AD2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift in Sources */,
 				F9EC66C927B90BC60003FBB6 /* CategoryListCarouselAndPageViewController.swift in Sources */,
 				F93D78A02A1236BF00C75BA9 /* JournalEntryPresenter.swift in Sources */,
 				F9EC66CA27B90BC60003FBB6 /* DataBaseProfitAndLossStatement.swift in Sources */,
@@ -3415,6 +3432,7 @@
 				F9EC66FB27B90BC60003FBB6 /* SettingsPeriodYearViewController.swift in Sources */,
 				F9EC66FC27B90BC60003FBB6 /* WSTableViewCell.swift in Sources */,
 				F93A263029571FF3002B7EB9 /* SettingsCategoryTableViewController.swift in Sources */,
+				F9E501B32BA4145500CC0DFB /* Cells.swift in Sources */,
 				F9482EBA282FDD91008B82E1 /* CategoryListModel.swift in Sources */,
 				F9EC66FD27B90BC60003FBB6 /* DataBaseManagerJournalEntry.swift in Sources */,
 				F9EC66FE27B90BC60003FBB6 /* SettingsCategoryDetailTableViewController.swift in Sources */,
