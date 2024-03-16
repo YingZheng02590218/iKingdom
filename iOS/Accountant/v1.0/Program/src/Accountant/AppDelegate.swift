@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if oldSchemaVersion < 4 {
                     // DataBaseAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
-                        // 月次残高振替仕訳
+                        // 月次損益振替仕訳、月次残高振替仕訳
                         newObject?["dataBaseMonthlyTransferEntries"] = List<DataBaseMonthlyTransferEntry>()
                     }
                 }
