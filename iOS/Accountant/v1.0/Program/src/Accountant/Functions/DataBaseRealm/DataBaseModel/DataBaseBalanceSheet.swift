@@ -67,3 +67,7 @@ class DataBaseBalanceSheet: RObject {
 
     let dataBaseTaxonomy = List<DataBaseTaxonomy>()           // 表示科目　使用していない　2020/10/09 損益計算書には表示科目の属性がない 2020/11/12 使用する
 }
+
+// 月次貸借対照表クラス
+class DataBaseMonthlyBalanceSheet: DataBaseBalanceSheet {
+}

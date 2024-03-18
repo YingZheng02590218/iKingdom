@@ -75,7 +75,7 @@ class TimeCell: Cell {
         label.frame = bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 12, weight: UIFont.Weight.medium)
-        label.textAlignment = .right
+        label.textAlignment = .left
         
         contentView.addSubview(label)
     }
@@ -113,7 +113,7 @@ class ScheduleCell: Cell {
         label.frame = bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textAlignment = .left
+        label.textAlignment = .right
         
         contentView.addSubview(label)
     }

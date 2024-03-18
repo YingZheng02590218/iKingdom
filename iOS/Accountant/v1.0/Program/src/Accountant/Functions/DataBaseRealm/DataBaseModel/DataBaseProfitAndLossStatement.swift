@@ -84,3 +84,6 @@ class DataBaseProfitAndLossStatement: RObject {
     // 五つの利益
     @objc dynamic var NetIncomeOrLoss: Int64 = 0                            // 当期純利益（損失）⇒ Net income (loss)
 }
+// 月次損益計算書クラス
+class DataBaseMonthlyProfitAndLossStatement: DataBaseProfitAndLossStatement {
+}

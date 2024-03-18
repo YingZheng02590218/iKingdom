@@ -13,8 +13,6 @@ import RealmSwift
 protocol BalanceSheetModelInput {
     func initializeBS() -> BalanceSheetData
     func initializePdfMaker(balanceSheetData: BalanceSheetData, completion: ([URL]?) -> Void)
-    
-    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount>
 }
 // 貸借対照表クラス　個人事業主
 class BalanceSheetModel: BalanceSheetModelInput {
@@ -32,13 +30,7 @@ class BalanceSheetModel: BalanceSheetModelInput {
     // MARK: Create
     
     // MARK: Read
-    
-    // 取得 大区分、中区分、小区分 スイッチONの勘定科目
-    func getDataBaseSettingsTaxonomyAccountInRank(rank0: Int, rank1: Int?) -> Results<DataBaseSettingsTaxonomyAccount> {
-        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
-        DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: rank0, rank1: rank1)
-    }
-    
+        
     // MARK: 読み出し
     
     // 取得　五大区分　前年度表示対応
@@ -295,25 +287,26 @@ class BalanceSheetModel: BalanceSheetModelInput {
         let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
         let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
         // 大区分ごとに設定勘定科目を取得する
-        let objects0 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 0)
-        let objects1 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 1)
-        let objects2 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 0, rank1: 2)
+        // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
+        let objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
+        let objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
+        let objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
         
-        let objects3 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 3)
-        let objects4 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 4)
-        let objects5 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 1, rank1: 5)
+        let objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
+        let objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
+        let objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
         
-        let objects6 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 2, rank1: 6)
+        let objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
         
-        let objects7 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 7)
-        let objects8 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 3, rank1: 8)
+        let objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
+        let objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
         
-        let objects9 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 4, rank1: 9)
+        let objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
 
-        let objects10 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 10) // 株主資本
-        let objects11 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 11) // 評価・換算差額等
-        let objects12 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 12) // 新株予約権
-        let objects13 = getDataBaseSettingsTaxonomyAccountInRank(rank0: 5, rank1: 19) // 非支配株主持分
+        let objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
+        let objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
+        let objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
+        let objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
 
         // MARK: - "    元入金合計"
         

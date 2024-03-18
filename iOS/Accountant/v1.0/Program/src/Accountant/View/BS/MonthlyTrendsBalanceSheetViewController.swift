@@ -26,28 +26,42 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     let ELEMENTDEPTH: CGFloat = 4
     //    let edged = false
     
-    let dates = ["7/10/2017", "7/11/2017", "7/12/2017", "7/13/2017", "7/14/2017", "7/15/2017", "7/16/2017"]
-    let days = ["MONDAY", "TUESDAY", "WEDNSDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
-    let dayColors = [UIColor(red: 0.918, green: 0.224, blue: 0.153, alpha: 1),
-                     UIColor(red: 0.106, green: 0.541, blue: 0.827, alpha: 1),
-                     UIColor(red: 0.200, green: 0.620, blue: 0.565, alpha: 1),
-                     UIColor(red: 0.953, green: 0.498, blue: 0.098, alpha: 1),
-                     UIColor(red: 0.400, green: 0.584, blue: 0.141, alpha: 1),
-                     UIColor(red: 0.835, green: 0.655, blue: 0.051, alpha: 1),
-                     UIColor(red: 0.153, green: 0.569, blue: 0.835, alpha: 1)]
-    let hours = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "1:00 PM", "2:00 PM",
-                 "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"]
+    // 月別の月末日を取得 12ヶ月分
+    let dates = DateManager.shared.getTheDayOfEndingOfMonth()
+    // 大区分ごとに設定勘定科目を取得する
+    // 取得 大区分、中区分、小区分 スイッチONの勘定科目 個人事業主　（仕訳、総勘定元帳、貸借対照表、損益計算書、精算表、試算表 で使用している）
+    let objects0 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 0)
+    let objects1 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 1)
+    let objects2 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 0, rank1: 2)
+    
+    let objects3 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 3)
+    let objects4 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 4)
+    let objects5 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 1, rank1: 5)
+    
+    let objects6 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 2, rank1: 6)
+    
+    let objects7 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 7)
+    let objects8 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 3, rank1: 8)
+    
+    let objects9 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 4, rank1: 9)
+    
+    let objects10 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 10) // 株主資本
+    let objects11 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 11) // 評価・換算差額等
+    let objects12 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 12) // 新株予約権
+    let objects13 = DatabaseManagerSettingsTaxonomyAccount.shared.getDataBaseSettingsTaxonomyAccountInRankValid(rank0: 5, rank1: 19) // 非支配株主持分
+    
     let evenRowColor = UIColor.mainColor2 // UIColor(red: 0.914, green: 0.914, blue: 0.906, alpha: 1)
-    let oddRowColor = UIColor.mainColor2.withAlphaComponent(0.5)
-    let data = [
-        ["", "", "Take medicine", "", "", "", "", "", "", "", "", "", "", "Movie with family", "", "", "", "", "", ""],
-        ["Leave for cabin", "", "", "", "", "Lunch with Tim", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "Downtown parade", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Fireworks show", "", "", ""],
-        ["", "", "", "", "", "Family BBQ", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", "", "", "", "", "", "", "", "Return home", "", "", "", "", "", ""]
-    ]
+    let oddRowColor = UIColor.gray.withAlphaComponent(0.7)
+    
+    //    let dayColors = [UIColor(red: 0.918, green: 0.224, blue: 0.153, alpha: 1),
+    //                     UIColor(red: 0.106, green: 0.541, blue: 0.827, alpha: 1),
+    //                     UIColor(red: 0.200, green: 0.620, blue: 0.565, alpha: 1),
+    //                     UIColor(red: 0.953, green: 0.498, blue: 0.098, alpha: 1),
+    //                     UIColor(red: 0.400, green: 0.584, blue: 0.141, alpha: 1),
+    //                     UIColor(red: 0.835, green: 0.655, blue: 0.051, alpha: 1),
+    //                     UIColor(red: 0.153, green: 0.569, blue: 0.835, alpha: 1)]
+    // ヘッダーの行数
+    let headerRowCount = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,18 +130,32 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
 extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
     
     // MARK: DataSource
-    
+    // 列
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 1 + days.count
+        return 1 + dates.count
     }
-    
+    // 行
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
-        return 1 + 1 + hours.count
+        return headerRowCount
+        + objects0.count
+        + objects1.count
+        + objects2.count
+        + objects3.count
+        + objects4.count
+        + objects5.count
+        + objects6.count
+        + objects7.count
+        + objects8.count
+        + objects9.count
+        + objects10.count
+        + objects11.count
+        + objects12.count
+        + objects13.count
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
         if case 0 = column {
-            return 70
+            return 100
         } else {
             return 70
         }
@@ -152,56 +180,501 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
-        if case (1...(dates.count + 1), 0) = (indexPath.column, indexPath.row) {
-            // 日付
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
-            cell.label.text = dates[indexPath.column - 1]
-            cell.backgroundColor = .clear // .mainColor2
-            return cell
-        } else if case (1...(days.count + 1), 1) = (indexPath.column, indexPath.row) {
-            // 曜日
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DayTitleCell.self), for: indexPath) as! DayTitleCell
-            cell.label.text = days[indexPath.column - 1]
-            cell.label.textColor = dayColors[indexPath.column - 1]
-            cell.backgroundColor = .clear // .mainColor2
-            return cell
-        } else if case (0, 0) = (indexPath.column, indexPath.row) {
+        // 行
+        // 勘定科目0
+        let objects0Count = objects0.count + headerRowCount
+        let objects1Count = objects1.count + objects0.count + headerRowCount
+        let objects2Count = objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects3Count = objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects4Count = objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects5Count = objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects6Count = objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects7Count = objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects8Count = objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects9Count = objects9.count + objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects10Count = objects10.count + objects9.count + objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects11Count = objects11.count + objects10.count + objects9.count + objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects12Count = objects12.count + objects11.count + objects10.count + objects9.count + objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        let objects13Count = objects13.count + objects12.count + objects11.count + objects10.count + objects9.count + objects8.count + objects7.count + objects6.count + objects5.count + objects4.count + objects3.count + objects2.count + objects1.count + objects0.count + headerRowCount
+        // ＜虹の色＞ 7色 ＝ 赤・橙・黄・緑・青・藍・紫
+        
+        if case (0, 0) = (indexPath.column, indexPath.row) {
+            // 0列目、0行目
             // 空白
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
             cell.label.text = ""
             cell.backgroundColor = .clear
             return cell
         } else if case (0, 1) = (indexPath.column, indexPath.row) {
-            // TIMEタイトル
+            // 0列目、1行目
+            // 勘定科目タイトル
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "TIME"
-            cell.backgroundColor = .clear // .mainColor2
+            cell.label.text = "勘定科目"
+            cell.backgroundColor = .clear
             return cell
-        } else if case (0, 2...(hours.count + 2)) = (indexPath.column, indexPath.row) {
-            // 時刻
+            
+            
+        } else if case (0, headerRowCount..<(objects0Count)) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目0
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = hours[indexPath.row - 2]
-            cell.backgroundColor = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.label.text = objects0[indexPath.row - headerRowCount].category
+            cell.backgroundColor = .red.withAlphaComponent(0.1)
             return cell
-        } else if case (1...(days.count + 1), 2...(hours.count + 2)) = (indexPath.column, indexPath.row) {
-            // 予定
+        } else if case (0, objects0Count..<objects1Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目1
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects1[indexPath.row - objects0Count].category
+            cell.backgroundColor = .red.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects1Count..<objects2Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目2
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects2[indexPath.row - objects1Count].category
+            cell.backgroundColor = .red.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects2Count..<objects3Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目3
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects3[indexPath.row - objects2Count].category
+            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects3Count..<objects4Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目4
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects4[indexPath.row - objects3Count].category
+            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects4Count..<objects5Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目5
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects5[indexPath.row - objects4Count].category
+            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects5Count..<objects6Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目6
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects6[indexPath.row - objects5Count].category
+            cell.backgroundColor = .yellow.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects6Count..<objects7Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目7
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects7[indexPath.row - objects6Count].category
+            cell.backgroundColor = .green.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects7Count..<objects8Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目8
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects8[indexPath.row - objects7Count].category
+            cell.backgroundColor = .green.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects8Count..<objects9Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目9
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects9[indexPath.row - objects8Count].category
+            cell.backgroundColor = .cyan.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects9Count..<objects10Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目10
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects10[indexPath.row - objects9Count].category
+            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects10Count..<objects11Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目11
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects11[indexPath.row - objects10Count].category
+            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects11Count..<objects12Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目12
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects12[indexPath.row - objects11Count].category
+            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+            return cell
+        } else if case (0, objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
+            // 0列目、2〜行目
+            // 勘定科目13
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            cell.label.text = objects13[indexPath.row - objects12Count].category
+            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+            return cell
+            
+            
+            
+        } else if case (1...(dates.count + 1), 0) = (indexPath.column, indexPath.row) {
+            // 1〜列目、0行目
+            // 日付
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
+            cell.label.text = "\(dates[indexPath.column - 1].year)" + "-" + "\(String(format: "%02d", dates[indexPath.column - 1].month))"
+            cell.backgroundColor = .clear
+            return cell
+        } else if case (1...(dates.count + 1), 1) = (indexPath.column, indexPath.row) {
+            // 1〜列目、1行目
+            // 空白 曜日
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
+            cell.label.text = ""
+            cell.backgroundColor = .clear
+            return cell
+            
+            
+            
+        } else if case (1...(dates.count + 1), headerRowCount..<(objects0Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目0
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            let text = data[indexPath.column - 1][indexPath.row - 2]
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects0[indexPath.row - headerRowCount].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
             if !text.isEmpty {
                 cell.label.text = text
-                let color = dayColors[indexPath.column - 1]
-                cell.label.textColor = color
-                cell.color = color.withAlphaComponent(0.2)
-                cell.borders.top = .solid(width: 2, color: color)
-                cell.borders.bottom = .solid(width: 2, color: color)
+                //                let color = dayColors[indexPath.column - 1]
+                //                cell.label.textColor = color
+                //                cell.color = color.withAlphaComponent(0.2)
+                //                cell.borders.top = .solid(width: 2, color: color)
+                //                cell.borders.bottom = .solid(width: 2, color: color)
             } else {
                 cell.label.text = nil
-                cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
                 cell.borders.top = .none
                 cell.borders.bottom = .none
             }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects0Count..<(objects1Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目1
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects1[indexPath.row - objects0Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects1Count..<(objects2Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目2
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects2[indexPath.row - objects1Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects2Count..<(objects3Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目3
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects3[indexPath.row - objects2Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects3Count..<(objects4Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目4
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects4[indexPath.row - objects3Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects4Count..<(objects5Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目5
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects5[indexPath.row - objects4Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects5Count..<(objects6Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目6
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects6[indexPath.row - objects5Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目7
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects7[indexPath.row - objects6Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects7Count..<(objects8Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目8
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects8[indexPath.row - objects7Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects8Count..<(objects9Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目9
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects9[indexPath.row - objects8Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects9Count..<(objects10Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目10
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects10[indexPath.row - objects9Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects10Count..<(objects11Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目11
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects11[indexPath.row - objects10Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects11Count..<(objects12Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目12
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects12[indexPath.row - objects11Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
+            return cell
+        } else if case (1...(dates.count + 1), objects12Count..<(objects13Count)) = (indexPath.column, indexPath.row) {
+            // 1〜列目、2〜行目
+            // 残高金額 勘定科目13
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                account: objects13[indexPath.row - objects12Count].category,
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                text = dataBaseMonthlyTransferEntry.balance_left.description
+                
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+            } else {
+                cell.label.text = nil
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+            }
+            //            cell.color = indexPath.row % 2 == 0 ? evenRowColor : oddRowColor
+            cell.color = evenRowColor
+            
             return cell
         }
+        
         return nil
     }
     
@@ -212,6 +685,6 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDelegate {
     /// Delegate
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected: (row: \(indexPath.row), column: \(indexPath.column))")
+        print("didSelectItemAt: (row: \(indexPath.row), column: \(indexPath.column))")
     }
 }
