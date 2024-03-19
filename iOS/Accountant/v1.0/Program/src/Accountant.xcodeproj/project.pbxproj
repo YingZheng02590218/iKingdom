@@ -543,6 +543,8 @@
 		F9E620FE25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */; };
 		F9EAE99E299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
 		F9EAE99F299F14BD00B3F7A9 /* UserNotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */; };
+		F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */; };
+		F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */; };
 		F9EC668F27B90BC60003FBB6 /* DataBaseSettingsOperating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91878C4258141AA00D2E793 /* DataBaseSettingsOperating.swift */; };
 		F9EC669027B90BC60003FBB6 /* DataBaseTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606024C280DF008FE62B /* DataBaseTaxonomy.swift */; };
 		F9EC669127B90BC60003FBB6 /* JournalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BDCBB927A96A8E00BD8770 /* JournalsPresenter.swift */; };
@@ -1228,6 +1230,7 @@
 		F9E620FB2565281600C2C3B3 /* AnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewController.swift; sourceTree = "<group>"; };
 		F9E620FD25656A9A00C2C3B3 /* AnnotationViewControllerJournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationViewControllerJournalEntry.swift; sourceTree = "<group>"; };
 		F9EAE99D299F14BD00B3F7A9 /* UserNotificationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationUtility.swift; sourceTree = "<group>"; };
+		F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerMonthlyBSnPL.swift; sourceTree = "<group>"; };
 		F9EC674527B90BC60003FBB6 /* PaciolistSTG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaciolistSTG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9EC674A27B912430003FBB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9EC674F27B95DDD0003FBB6 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -1573,6 +1576,7 @@
 				F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */,
 				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
 				F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */,
+				F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */,
 				F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */,
 				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
 				F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */,
@@ -1701,9 +1705,6 @@
 				F9B209F327A4EF7C00F7EA8D /* BSTableViewCell.xib */,
 				F963E2AC296326F0002DF49E /* BSTableViewHeaderFooterView.swift */,
 				F963E2AF2963270A002DF49E /* BSTableViewHeaderFooterView.xib */,
-				F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */,
-				F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */,
-				F9E501B12BA4145500CC0DFB /* Cells.swift */,
 			);
 			path = BS;
 			sourceTree = "<group>";
@@ -2037,6 +2038,7 @@
 				F9D5D54B247E409400EA35C7 /* GenearlLedgerAccount */,
 				F9D224C724893F41006C6CD9 /* SubsidiaryLedger */,
 				F955B605248FE5F2005E2C6D /* FinancialStatement */,
+				F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */,
 				F955B60E2490FCD6005E2C6D /* BS */,
 				F955B6082490E305005E2C6D /* PL */,
 				F955B60F2490FD1D005E2C6D /* CF */,
@@ -2345,6 +2347,16 @@
 			);
 			name = GeneralLedger;
 			path = GeneralLedger/GeneralLedger;
+			sourceTree = "<group>";
+		};
+		F9F9ECFC2BAEA6A3004B6A68 /* MonthlyBalanceSheet */ = {
+			isa = PBXGroup;
+			children = (
+				F9E501AB2BA413DA00CC0DFB /* MonthlyTrendsBalanceSheetViewController.swift */,
+				F9E501AE2BA413FC00CC0DFB /* MonthlyTrendsBalanceSheetViewController.storyboard */,
+				F9E501B12BA4145500CC0DFB /* Cells.swift */,
+			);
+			path = MonthlyBalanceSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3195,6 +3207,7 @@
 				F9EFE2A92B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9BEED12256704A800678391 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9A69B6D258A1D6A008E38B9 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9EC65E12BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01C27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9BEED1425671D6700678391 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F98D8A5327A55F27009560AA /* WSPresenter.swift in Sources */,
@@ -3443,6 +3456,7 @@
 				F9EFE2AA2B7A4D1200A652EB /* AccountTableViewHeaderFooterView.swift in Sources */,
 				F9EC670327B90BC60003FBB6 /* AnnotationViewControllerSettingsCategory.swift in Sources */,
 				F9EC670427B90BC60003FBB6 /* SettingsPeriodTableViewCell.swift in Sources */,
+				F9EC65E22BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift in Sources */,
 				F9F3A01D27BB9F9D001E873F /* PDFMakerAccount.swift in Sources */,
 				F9EC670527B90BC60003FBB6 /* AnnotationViewControllerSettingsInformation.swift in Sources */,
 				F9EC670627B90BC60003FBB6 /* WSPresenter.swift in Sources */,

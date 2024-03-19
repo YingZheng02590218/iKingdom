@@ -59,9 +59,11 @@ class DataBaseBalanceSheet: RObject {
     // 大分類　合計
     @objc dynamic var Liability_total: Int64 = 0              // 負債
     
-    // 中分類　合計
+    // 小分類　合計
     @objc dynamic var CapitalStock_total: Int64 = 0           // 株主資本
     @objc dynamic var OtherCapitalSurpluses_total: Int64 = 0 // その他の包括利益累計額 評価・換算差額等
+    // 中分類　合計
+    @objc dynamic var Capital_total: Int64 = 0           // 資本
     // 大分類　合計
     @objc dynamic var Equity_total: Int64 = 0                 // 純資産
 

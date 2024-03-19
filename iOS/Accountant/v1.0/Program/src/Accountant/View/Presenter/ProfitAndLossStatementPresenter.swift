@@ -242,13 +242,13 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
                 // 前年度
                 switch rank1 {
-                case 15: // 営業外収益10  営業外損益    営業外収益
+                case 15: // 営業外収益10  営業外損益
                     return profitAndLossStatementData.lastNonOperatingIncome
-                case 16: // 営業外費用6  営業外損益    営業外費用
+                case 16: // 営業外費用6  営業外損益
                     return profitAndLossStatementData.lastNonOperatingExpenses
-                case 17: // 特別利益11   特別損益    特別利益
+                case 17: // 特別利益11   特別損益
                     return profitAndLossStatementData.lastExtraordinaryIncome
-                case 18: // 特別損失7    特別損益    特別損失
+                case 18: // 特別損失7    特別損益
                     return profitAndLossStatementData.lastExtraordinaryLosses
                 default:
                     return ""
@@ -259,13 +259,13 @@ final class ProfitAndLossStatementPresenter: ProfitAndLossStatementPresenterInpu
         } else {
             // 今年度
             switch rank1 {
-            case 15: // 営業外収益10  営業外損益    営業外収益
+            case 15: // 営業外収益10  営業外損益
                 return profitAndLossStatementData.nonOperatingIncome
-            case 16: // 営業外費用6  営業外損益    営業外費用
+            case 16: // 営業外費用6  営業外損益
                 return profitAndLossStatementData.nonOperatingExpenses
-            case 17: // 特別利益11   特別損益    特別利益
+            case 17: // 特別利益11   特別損益
                 return profitAndLossStatementData.extraordinaryIncome
-            case 18: // 特別損失7    特別損益    特別損失
+            case 18: // 特別損失7    特別損益
                 return profitAndLossStatementData.extraordinaryLosses
             default:
                 return ""

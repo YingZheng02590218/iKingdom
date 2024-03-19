@@ -119,6 +119,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // プロパティを追加します
                         newObject?["serialNumber"] = oldObject?.number
                     }
+                    // カラムを追加
+                    // @objc dynamic var Capital_total: Int64 = 0
+                    // 資本
                 }
             }
         )
