@@ -70,6 +70,9 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         spreadsheetView.register(TimeTitleCell.self, forCellWithReuseIdentifier: String(describing: TimeTitleCell.self))
         spreadsheetView.register(TimeCell.self, forCellWithReuseIdentifier: String(describing: TimeCell.self))
         spreadsheetView.register(ScheduleCell.self, forCellWithReuseIdentifier: String(describing: ScheduleCell.self))
+        
+        // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
+        DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL()
     }
     
     override func viewWillAppear(_ animated: Bool) {
