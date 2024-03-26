@@ -52,7 +52,7 @@ class TimeCell: Cell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        backgroundColor = .clear
         label.frame = bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: UIFont.Weight.medium)

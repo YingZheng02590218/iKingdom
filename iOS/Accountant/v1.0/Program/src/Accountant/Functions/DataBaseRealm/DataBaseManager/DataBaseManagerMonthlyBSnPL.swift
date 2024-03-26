@@ -32,6 +32,11 @@ class DataBaseManagerMonthlyBSnPL {
 //        // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
 //        // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
         
+        // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付が会計期間の範囲外の場合、削除する
+        DataBaseManagerMonthlyBSnPL.shared.deleteMonthlyyBalanceSheetInFiscalYear()
+        // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付（年月）が重複している場合、削除する
+        DataBaseManagerMonthlyBSnPL.shared.deleteDuplicatedMonthlyyBalanceSheetInFiscalYear()
+        
         // 月別の月末日を取得 12ヶ月分
         let dates = DateManager.shared.getTheDayOfEndingOfMonth()
         for date in dates {
@@ -263,7 +268,7 @@ class DataBaseManagerMonthlyBSnPL {
     }
     
     // MARK: Delete
-    // TODO: 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付が会計期間の範囲外の場合、削除する
+    // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付が会計期間の範囲外の場合、削除する
     func deleteMonthlyyBalanceSheetInFiscalYear() {
         // 今年度の勘定別の月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別にすべて取得
         if let dataBaseMonthlyBalanceSheets = getMonthlyBalanceSheetInFiscalYear() {
@@ -285,7 +290,7 @@ class DataBaseManagerMonthlyBSnPL {
             }
         }
     }
-    // TODO: 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付（年月）が重複している場合、削除する
+    // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付（年月）が重複している場合、削除する
     func deleteDuplicatedMonthlyyBalanceSheetInFiscalYear() {
         // 月別の月末日を取得 12ヶ月分
         let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
