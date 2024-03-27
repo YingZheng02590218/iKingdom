@@ -15,6 +15,7 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
     
     /// 貸借対照表　上部
     @IBOutlet var companyNameLabel: UILabel!
+    @IBOutlet var closingDateLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var spreadsheetView: SpreadsheetView!
     @IBOutlet private var backgroundView: EMTNeumorphicView!
@@ -71,6 +72,11 @@ class MonthlyTrendsBalanceSheetViewController: UIViewController {
         spreadsheetView.register(TimeTitleCell.self, forCellWithReuseIdentifier: String(describing: TimeTitleCell.self))
         spreadsheetView.register(TimeCell.self, forCellWithReuseIdentifier: String(describing: TimeCell.self))
         spreadsheetView.register(ScheduleCell.self, forCellWithReuseIdentifier: String(describing: ScheduleCell.self))
+        
+        let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
+        let theDayOfReckoning = DataBaseManagerSettingsPeriod.shared.getTheDayOfReckoning()
+        companyNameLabel.text = DataBaseManagerAccountingBooksShelf.shared.getCompanyName() // 社名
+        closingDateLabel.text = String(fiscalYear) + "年\(theDayOfReckoning.prefix(2))月\(theDayOfReckoning.suffix(2))日" // 決算日を表示する
         
         // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
         DataBaseManagerMonthlyBSnPL.shared.setupAmountForBsAndPL()
@@ -199,13 +205,17 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
         + objects5.count
         + 1
         + objects6.count
+        + 1
         + objects7.count
         + objects8.count
+        + 1
         + objects9.count
+        + 1
         + objects10.count
         + objects11.count
         + objects12.count
         + objects13.count
+        + 1
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
@@ -227,11 +237,11 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
     }
     
     func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 1
+        1
     }
     
     func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
-        return 2
+        2
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
@@ -245,17 +255,18 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
         let objects4Count = objects4.count + objects3Count
         let objects5Count = objects5.count + objects4Count
         let bs5Count = objects5Count + 1
-        let objects6Count = objects6.count + bs5Count// + 1
-        
-        let objects7Count = objects7.count + objects6Count// + 1
+        let objects6Count = objects6.count + bs5Count
+        let bs6Count = objects6Count + 1
+        let objects7Count = objects7.count + bs6Count
         let objects8Count = objects8.count + objects7Count
-        
-        let objects9Count = objects9.count + objects8Count// + 1
-        
-        let objects10Count = objects10.count + objects9Count// + 1
+        let bs8Count = objects8Count + 1
+        let objects9Count = objects9.count + bs8Count
+        let bs9Count = objects9Count + 1
+        let objects10Count = objects10.count + bs9Count
         let objects11Count = objects11.count + objects10Count
         let objects12Count = objects12.count + objects11Count
         let objects13Count = objects13.count + objects12Count
+        let bs13Count = objects13Count + 1
         // ＜虹の色＞ 7色 ＝ 赤・橙・黄・緑・青・藍・紫
         
         if case (0, 0) = (indexPath.column, indexPath.row) {
@@ -272,6 +283,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             // 勘定科目タイトル
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
             cell.label.text = "勘定科目"
+            cell.label.textAlignment = .center
             cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
             cell.borders.top = .none
             cell.borders.bottom = .none
@@ -311,8 +323,9 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             
         } else if case (0, objects2Count..<bs2Count) = (indexPath.column, indexPath.row) {
             // 流動資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
             cell.label.text = "流動資産　合計"
+            cell.label.textAlignment = .right
             cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
             cell.borders.top = .none
             cell.borders.bottom = .solid(width: 3, color: .lightGray)
@@ -351,8 +364,9 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             
         } else if case (0, objects5Count..<bs5Count) = (indexPath.column, indexPath.row) {
             // 固定資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
             cell.label.text = "固定資産　合計"
+            cell.label.textAlignment = .right
             cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
             cell.borders.top = .none
             cell.borders.bottom = .solid(width: 3, color: .lightGray)
@@ -368,11 +382,22 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             cell.borders.top = .none
             cell.borders.bottom = .none
             return cell
-        } else if case (0, objects6Count..<objects7Count) = (indexPath.column, indexPath.row) {
+            
+        } else if case (0, objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
+            // 繰越資産　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
+            cell.label.textAlignment = .right
+            cell.label.text = "繰越資産　合計"
+            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+            cell.borders.top = .none
+            cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            return cell
+            
+        } else if case (0, bs6Count..<objects7Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目7
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects7[indexPath.row - objects6Count].category
+            cell.label.text = objects7[indexPath.row - bs6Count].category
             //            cell.backgroundColor = .green.withAlphaComponent(0.1)
             cell.backgroundColor = .clear
             cell.borders.top = .none
@@ -388,21 +413,43 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             cell.borders.top = .none
             cell.borders.bottom = .none
             return cell
-        } else if case (0, objects8Count..<objects9Count) = (indexPath.column, indexPath.row) {
+            
+        } else if case (0, objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
+            // 流動負債　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
+            cell.label.text = "流動負債　合計"
+            cell.label.textAlignment = .right
+            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+            cell.borders.top = .none
+            cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            return cell
+            
+        } else if case (0, bs8Count..<objects9Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目9
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects9[indexPath.row - objects8Count].category
+            cell.label.text = objects9[indexPath.row - bs8Count].category
             //            cell.backgroundColor = .cyan.withAlphaComponent(0.1)
             cell.backgroundColor = .clear
             cell.borders.top = .none
             cell.borders.bottom = .none
             return cell
-        } else if case (0, objects9Count..<objects10Count) = (indexPath.column, indexPath.row) {
+            
+        } else if case (0, objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
+            // 固定負債　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
+            cell.label.text = "固定負債　合計"
+            cell.label.textAlignment = .right
+            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+            cell.borders.top = .none
+            cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            return cell
+            
+        } else if case (0, bs9Count..<objects10Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目10
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects10[indexPath.row - objects9Count].category
+            cell.label.text = objects10[indexPath.row - bs9Count].category
             //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
             cell.backgroundColor = .clear
             cell.borders.top = .none
@@ -437,6 +484,16 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             cell.backgroundColor = .clear
             cell.borders.top = .none
             cell.borders.bottom = .none
+            return cell
+            
+        } else if case (0, objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
+            // 資本　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
+            cell.label.text = "資本　合計"
+            cell.label.textAlignment = .right
+            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+            cell.borders.top = .none
+            cell.borders.bottom = .solid(width: 3, color: .lightGray)
             return cell
             
             
@@ -670,7 +727,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
             }
             return cell
             
-        } else if case (1...(dates.count + 1), bs5Count..<(objects6Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), bs5Count..<objects6Count) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目6
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
@@ -696,14 +753,40 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 cell.borders.bottom = .none
             }
             return cell
-        } else if case (1...(dates.count + 1), objects6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
+            
+        } else if case (1...(dates.count + 1), objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
+            // 繰越資産　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次貸借対照表　今年度で日付の前方一致
+            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.DeferredAssets_total)
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+                cell.label.textColor = text.contains("△") ? .red : .textColor
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            } else {
+                cell.label.text = nil
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            }
+            return cell
+            
+        } else if case (1...(dates.count + 1), bs6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目7
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
             var text = ""
             // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
             if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects7[indexPath.row - objects6Count].category,
+                account: objects7[indexPath.row - bs6Count].category,
                 yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
             ) {
                 // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
@@ -748,14 +831,40 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 cell.borders.bottom = .none
             }
             return cell
-        } else if case (1...(dates.count + 1), objects8Count..<(objects9Count)) = (indexPath.column, indexPath.row) {
+            
+        } else if case (1...(dates.count + 1), objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
+            // 流動負債　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次貸借対照表　今年度で日付の前方一致
+            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentLiabilities_total)
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+                cell.label.textColor = text.contains("△") ? .red : .textColor
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            } else {
+                cell.label.text = nil
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            }
+            return cell
+            
+        } else if case (1...(dates.count + 1), bs8Count..<(objects9Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目9
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
             var text = ""
             // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
             if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects9[indexPath.row - objects8Count].category,
+                account: objects9[indexPath.row - bs8Count].category,
                 yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
             ) {
                 // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
@@ -774,14 +883,40 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 cell.borders.bottom = .none
             }
             return cell
-        } else if case (1...(dates.count + 1), objects9Count..<(objects10Count)) = (indexPath.column, indexPath.row) {
+            
+        } else if case (1...(dates.count + 1), objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
+            // 固定負債　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次貸借対照表　今年度で日付の前方一致
+            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedLiabilities_total)
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+                cell.label.textColor = text.contains("△") ? .red : .textColor
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            } else {
+                cell.label.text = nil
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            }
+            return cell
+            
+        } else if case (1...(dates.count + 1), bs9Count..<(objects10Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目10
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
             var text = ""
             // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
             if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects10[indexPath.row - objects9Count].category,
+                account: objects10[indexPath.row - bs9Count].category,
                 yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
             ) {
                 // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
@@ -852,7 +987,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 cell.borders.bottom = .none
             }
             return cell
-        } else if case (1...(dates.count + 1), objects12Count..<(objects13Count)) = (indexPath.column, indexPath.row) {
+        } else if case (1...(dates.count + 1), objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目13
             let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
@@ -878,6 +1013,31 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
                 cell.borders.bottom = .none
             }
             return cell
+            
+        } else if case (1...(dates.count + 1), objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
+            // 資本　合計
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
+            var text = ""
+            // 取得 月次貸借対照表　今年度で日付の前方一致
+            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+            ) {
+                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Capital_total)
+            }
+            if !text.isEmpty {
+                cell.label.text = text
+                cell.label.textColor = text.contains("△") ? .red : .textColor
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            } else {
+                cell.label.text = nil
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+            }
+            return cell
         }
         return nil
     }
@@ -889,7 +1049,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDelegate {
     /// Delegate
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, didHighlightItemAt indexPath: IndexPath) {
@@ -901,7 +1061,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDelegate {
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, didSelectItemAt indexPath: IndexPath) {
@@ -913,7 +1073,7 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDelegate {
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, didDeselectItemAt indexPath: IndexPath) {
