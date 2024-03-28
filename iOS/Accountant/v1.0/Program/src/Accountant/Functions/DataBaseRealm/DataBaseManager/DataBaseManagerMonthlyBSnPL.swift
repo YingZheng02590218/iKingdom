@@ -25,13 +25,6 @@ class DataBaseManagerMonthlyBSnPL {
     
     // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
     func setupAmountForBsAndPL() {
-//        // 0:資産 1:負債 2:純資産 4:収益 3:費用
-//        setTotalBig5(big5: 0)// 資産
-//        setTotalBig5(big5: 1)// 負債
-//        setTotalBig5(big5: 2)// 純資産
-//        // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
-//        // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
-        
         // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付が会計期間の範囲外の場合、削除する
         DataBaseManagerMonthlyBSnPL.shared.deleteMonthlyyBalanceSheetInFiscalYear()
         // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付（年月）が重複している場合、削除する
@@ -70,6 +63,13 @@ class DataBaseManagerMonthlyBSnPL {
             setTotalRank0(rank0: 3, yearMonth: yearMonth) // 流動負債
             setTotalRank0(rank0: 4, yearMonth: yearMonth) // 固定負債
             setTotalRank0(rank0: 5, yearMonth: yearMonth) // 資本　TODO: なぜいままでなかった？
+            
+            // 0:資産 1:負債 2:純資産 4:収益 3:費用
+            setTotalBig5(big5: 0, yearMonth: yearMonth) // 資産
+            setTotalBig5(big5: 1, yearMonth: yearMonth) // 負債
+            setTotalBig5(big5: 2, yearMonth: yearMonth) // 純資産
+    //        // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
+    //        // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
         }
 
 //        setTotalRank1(big5: 2, rank1: 10) // 株主資本
@@ -166,7 +166,7 @@ class DataBaseManagerMonthlyBSnPL {
         let dataBaseMonthlyBalanceSheets = RealmManager.shared.readWithPredicate(
             type: DataBaseMonthlyBalanceSheet.self,
             predicates: [
-                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0))
             ]
         )
         print("月次損益振替仕訳、月次残高振替仕訳 12ヶ月分　今年度の勘定別にすべて取得", dataBaseMonthlyBalanceSheets)
@@ -181,7 +181,7 @@ class DataBaseManagerMonthlyBSnPL {
             type: DataBaseMonthlyBalanceSheet.self,
             predicates: [
                 NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
-                NSPredicate(format: "date LIKE %@", NSString(string: date)),
+                NSPredicate(format: "date LIKE %@", NSString(string: date))
             ]
         )
         print("月次損益振替仕訳、月次残高振替仕訳 \(date)　今年度の勘定別で日付が同一", dataBaseMonthlyBalanceSheets)
@@ -198,7 +198,7 @@ class DataBaseManagerMonthlyBSnPL {
             predicates: [
                 NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
                 // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth)),
+                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth))
             ]
         )
         print("月次貸借対照表 \(yearMonth)　今年度 複数", dataBaseMonthlyBalanceSheets)
@@ -215,7 +215,7 @@ class DataBaseManagerMonthlyBSnPL {
             predicates: [
                 NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
                 // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth)),
+                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth))
             ]
         )
         print("月次貸借対照表 \(yearMonth)　今年度 複数", dataBaseMonthlyBalanceSheets)
@@ -257,7 +257,7 @@ class DataBaseManagerMonthlyBSnPL {
                     "CapitalStock_total": CapitalStock_total,
                     "OtherCapitalSurpluses_total": OtherCapitalSurpluses_total,
                     "Capital_total": Capital_total,
-                    "Equity_total": Equity_total,
+                    "Equity_total": Equity_total
                 ]
                 DataBaseManager.realm.create(DataBaseMonthlyBalanceSheet.self, value: value, update: .modified) // 一部上書き更新
             }
@@ -391,30 +391,23 @@ class DataBaseManagerMonthlyBSnPL {
 //                    }
 //                }
 //            } else {
-                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                    // 借方と貸方で金額が大きい方はどちらか
-                    // 月次損益振替仕訳、月次残高振替仕訳
-                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                // 借方と貸方で金額が大きい方はどちらか
+                // 月次損益振替仕訳、月次残高振替仕訳
+                if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
                     // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-                        .filter("date BEGINSWITH '\(yearMonth)'").first {
-                        // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
-                            debitOrCredit = "借"
-                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
-                            debitOrCredit = "貸"
-                        } else {
-                            debitOrCredit = "-"
-                        }
+                    .filter("date BEGINSWITH '\(yearMonth)'").first {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                        debitOrCredit = "借"
+                    } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
                     }
-//                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-//                        debitOrCredit = "借"
-//                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-//                        debitOrCredit = "貸"
-//                    } else {
-//                        debitOrCredit = "-"
-//                    }
                 }
+            }
 //            }
             switch bigCategory {
             case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
@@ -452,109 +445,117 @@ class DataBaseManagerMonthlyBSnPL {
         return positiveOrNegative
     }
     
-//    // 借又貸を取得 5大区分用 TODO: 不要では？
-//    private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String) -> String {
-//        var debitOrCredit: String = "" // 借又貸
-//        var positiveOrNegative: String = "" // 借又貸
-//        
-//        var capitalAccount = ""
-//        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
-//        // 法人/個人フラグ
-//        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-//            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-//        } else {
-//            capitalAccount = CapitalAccountType.capital.rawValue
-//        }
-//        
-//        // 開いている会計帳簿の年度を取得
-//        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-//        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-//            if capitalAccount == account {
-//                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
-//                    // 借方と貸方で金額が大きい方はどちらか
-//                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        debitOrCredit = "借"
-//                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        debitOrCredit = "貸"
-//                    } else {
-//                        debitOrCredit = "-"
-//                    }
-//                }
-//            } else {
-//                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-//                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-//                    // 借方と貸方で金額が大きい方はどちらか
-//                    if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting > dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-//                        debitOrCredit = "借"
-//                    } else if dataBaseGeneralLedger.dataBaseAccounts[i].debit_balance_AfterAdjusting < dataBaseGeneralLedger.dataBaseAccounts[i].credit_balance_AfterAdjusting {
-//                        debitOrCredit = "貸"
-//                    } else {
-//                        debitOrCredit = "-"
-//                    }
-//                }
-//            }
-//            switch bigCategory {
-//            case 0, 3: // 資産　費用
-//                switch debitOrCredit {
-//                case "貸":
-//                    positiveOrNegative = "-"
-//                default:
-//                    positiveOrNegative = ""
-//                }
-//            default: // 1,2,4（負債、純資産、収益）
-//                switch debitOrCredit {
-//                case "借":
-//                    positiveOrNegative = "-"
-//                default:
-//                    positiveOrNegative = ""
-//                }
-//            }
-//        }
-//        return positiveOrNegative
-//    }
+    // 借又貸を取得 5大区分用  月次
+    private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String, yearMonth: String) -> String {
+        var debitOrCredit: String = "" // 借又貸
+        var positiveOrNegative: String = "" // 借又貸
+        
+        var capitalAccount = ""
+        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
+        // 法人/個人フラグ
+        if UserDefaults.standard.bool(forKey: "corporation_switch") {
+            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
+        } else {
+            capitalAccount = CapitalAccountType.capital.rawValue
+        }
+        
+        // 開いている会計帳簿の年度を取得
+        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
+            //            if capitalAccount == account {
+            //                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
+            //                    // 借方と貸方で金額が大きい方はどちらか
+            //                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+            //                        debitOrCredit = "借"
+            //                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
+            //                        debitOrCredit = "貸"
+            //                    } else {
+            //                        debitOrCredit = "-"
+            //                    }
+            //                }
+            //            } else {
+            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                // 借方と貸方で金額が大きい方はどちらか
+                // 月次損益振替仕訳、月次残高振替仕訳
+                if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                    // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                    .filter("date BEGINSWITH '\(yearMonth)'").first {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                        debitOrCredit = "借"
+                    } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                        debitOrCredit = "貸"
+                    } else {
+                        debitOrCredit = "-"
+                    }
+                }
+            }
+        }
+        switch bigCategory {
+        case 0, 3: // 資産　費用
+            switch debitOrCredit {
+            case "貸":
+                positiveOrNegative = "-"
+            default:
+                positiveOrNegative = ""
+            }
+        default: // 1,2,4（負債、純資産、収益）
+            switch debitOrCredit {
+            case "借":
+                positiveOrNegative = "-"
+            default:
+                positiveOrNegative = ""
+            }
+        }
+        //        }
+        return positiveOrNegative
+    }
         
     // MARK: 計算　書き込み
     
-//    // 計算　五大区分 TODO: 不要では？
-//    private func setTotalBig5(big5: Int) {
-//        // 累計額
-//        var totalAmountOfBig5: Int64 = 0
-//        // 設定画面の勘定科目一覧にある勘定を取得する
-//        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInBig5(big5: big5)
-//        // オブジェクトを作成 勘定
-//        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
-//            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
-//            let totalDebitOrCredit = getTotalDebitOrCreditForBig5(
-//                bigCategory: big5,
-//                account: dataBaseSettingsTaxonomyAccounts[i].category
-//            ) // 5大区分用の貸又借を使用する　2020/11/09
-//            if totalDebitOrCredit == "-" {
-//                totalAmountOfBig5 -= totalAmount
-//            } else {
-//                totalAmountOfBig5 += totalAmount
-//            }
-//        }
-//        // 開いている会計帳簿の年度を取得
-//        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-//        if let balanceSheet = dataBaseAccountingBooks.dataBaseFinancialStatements?.balanceSheet {
-//            do {
-//                try DataBaseManager.realm.write {
-//                    switch big5 {
-//                    case 0: // 資産
-//                        balanceSheet.Asset_total = totalAmountOfBig5
-//                    case 1: // 負債
-//                        balanceSheet.Liability_total = totalAmountOfBig5
-//                    case 2: // 純資産
-//                        balanceSheet.Equity_total = totalAmountOfBig5
-//                    default:
-//                        print("bigCategoryTotalAmount", totalAmountOfBig5)
-//                    }
-//                }
-//            } catch {
-//                print("エラーが発生しました")
-//            }
-//        }
-//    }
+    // 計算　五大区分 月次
+    private func setTotalBig5(big5: Int, yearMonth: String) {
+        // 累計額
+        var totalAmountOfBig5: Int64 = 0
+        // 設定画面の勘定科目一覧にある勘定を取得する
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInBig5(big5: big5)
+        // オブジェクトを作成 勘定
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category, yearMonth: yearMonth)
+            let totalDebitOrCredit = getTotalDebitOrCreditForBig5(
+                bigCategory: big5,
+                account: dataBaseSettingsTaxonomyAccounts[i].category,
+                yearMonth: yearMonth
+            ) // 5大区分用の貸又借を使用する　2020/11/09
+            if totalDebitOrCredit == "-" {
+                totalAmountOfBig5 -= totalAmount
+            } else {
+                totalAmountOfBig5 += totalAmount
+            }
+        }
+        // 開いている会計帳簿の年度を取得
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        // 取得 月次貸借対照表　今年度で日付の前方一致
+        if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(yearMonth: yearMonth) {
+            do {
+                try DataBaseManager.realm.write {
+                    switch big5 {
+                    case 0: // 資産
+                        dataBaseMonthlyBalanceSheet.Asset_total = totalAmountOfBig5
+                    case 1: // 負債
+                        dataBaseMonthlyBalanceSheet.Liability_total = totalAmountOfBig5
+                    case 2: // 純資産
+                        dataBaseMonthlyBalanceSheet.Equity_total = totalAmountOfBig5
+                    default:
+                        print("bigCategoryTotalAmount", totalAmountOfBig5)
+                    }
+                }
+            } catch {
+                print("エラーが発生しました")
+            }
+        }
+    }
     // 計算　階層0 大区分
     private func setTotalRank0(rank0: Int, yearMonth: String) {
         // 累計額
