@@ -116,16 +116,8 @@ class DataBaseManagerAccount {
         var result: Int64 = 0
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
-
+        let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: lastYear)
         // 勘定クラス

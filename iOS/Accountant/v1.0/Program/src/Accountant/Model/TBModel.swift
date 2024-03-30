@@ -908,15 +908,9 @@ class TBModel: TBModelInput {
     private func calculateAccountTotalCapitalAccount() {
         var left: Int64 = 0 // 合計 累積　勘定内の仕訳データを全て計算するまで、覚えておく
         var right: Int64 = 0
-        
-        var account = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            account = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            account = CapitalAccountType.capital.rawValue
-        }
+        var account = Constant.capitalAccountName
+
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         // 開始仕訳 勘定別に取得
         let dataBaseOpeningJournalEntry = dataBaseManagerAccount.getOpeningJournalEntryInAccount(account: account)
@@ -972,16 +966,8 @@ class TBModel: TBModelInput {
         
         var objects: Results<DataBaseAdjustingEntry>
         var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
-        
-        var account = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            account = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            account = CapitalAccountType.capital.rawValue
-        }
-        
+        let account = Constant.capitalAccountName        
         let dataBaseManagerAccount = GeneralLedgerAccountModel()
         objects = dataBaseManagerAccount.getAdjustingJournalEntryInAccount(account: account)
         dataBaseCapitalTransferJournalEntry = dataBaseManagerAccount.getCapitalTransferJournalEntryInAccount(account: account)
