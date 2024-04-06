@@ -38,7 +38,7 @@ class AfterClosingTrialBalanceModel: AfterClosingTrialBalanceModelInput {
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            if account == Constant.capitalAccountName || account == "資本金勘定" {
+            if account == Constant.capitalAccountName || account == "資本金勘定" { // TODO: "資本金勘定"はこない
                 if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
                     switch leftOrRight {
                     case 0: // 合計　借方

@@ -67,22 +67,27 @@ class DataBaseManagerAccount {
      * 会計帳簿.総勘定元帳.勘定 オブジェクトを取得するメソッド
      * 勘定名と年度を指定して勘定を取得する
      * @param accountName 勘定名、fiscalYear 年度
-     * @return  DataBaseAccount? 勘定、DataBasePLAccount? 損益勘定
+     * @return  DataBaseAccount? 勘定、DataBasePLAccount? 損益勘定、DataBaseCapitalAccount? 資本金勘定
      * 特殊化方法: 戻り値からの型推論による特殊化　戻り値の代入先の型が決まっている必要がある
      */
     func getAccountByAccountNameWithFiscalYear<T>(accountName: String, fiscalYear: Int) -> T? {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "fiscalYear == %@", NSNumber(value: fiscalYear))
         ])
-
-        if accountName == "損益" {
+        if /*accountName == Constant.capitalAccountName ||*/ accountName == "資本金勘定" {
+            // 資本金勘定の場合
+            guard let dataBaseCapitalAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount else {
+                return nil
+            }
+            return dataBaseCapitalAccount as? T
+        } else if accountName == "損益" {
             // 損益勘定の場合
             guard let dataBasePLAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBasePLAccount else {
                 return nil
             }
             return dataBasePLAccount as? T
         } else {
-            // 損益勘定以外の勘定の場合
+            // 資本金勘定、損益勘定　以外の勘定の場合
             guard let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
                     .filter("accountName LIKE '\(accountName)'")
                     .first else {
@@ -220,6 +225,7 @@ class DataBaseManagerAccount {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
+        // NOTE: 資本金勘定を使用せずに月次残高振替仕訳する際に使用している
         if account == Constant.capitalAccountName || account == "資本金勘定" {
             let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
             let dataBaseTransferEntry = dataBaseAccount?.dataBaseOpeningJournalEntry
@@ -367,7 +373,7 @@ class DataBaseManagerAccount {
                     do {
                         // 相手方の勘定
                         if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
-                            if account == Constant.capitalAccountName || account == "資本金勘定" {
+                            if account == Constant.capitalAccountName || account == "資本金勘定" { // TODO: あってる？
                                 try DataBaseManager.realm.write {
                                     dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseOpeningJournalEntry = dataBaseJournalEntry
                                 }

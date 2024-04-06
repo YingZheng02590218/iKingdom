@@ -13,4 +13,8 @@ import RealmSwift
 class DataBaseCapitalAccount: DataBaseAccount {
     // 資本振替仕訳
     @objc dynamic var dataBaseCapitalTransferJournalEntry: DataBaseCapitalTransferJournalEntry?
+    // 月次資本振替仕訳
+     let dataBaseMonthlyCapitalTransferJournalEntries = List<DataBaseMonthlyCapitalTransferJournalEntry>()
+    // 月次損益振替仕訳、月次残高振替仕訳 資本金勘定クラスとしても使用する
+    // let dataBaseMonthlyTransferEntries = List<DataBaseMonthlyTransferEntry>()
 }

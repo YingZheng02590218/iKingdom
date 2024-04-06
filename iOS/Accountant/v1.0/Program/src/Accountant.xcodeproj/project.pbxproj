@@ -750,6 +750,8 @@
 		F9F4607924D06F6C008FE62B /* CompanyNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */; };
 		F9F4607B24D1A61A008FE62B /* DataBaseManagerSettingsTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */; };
 		F9F4608124D1ED15008FE62B /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F4608024D1ED15008FE62B /* PickerTextField.swift */; };
+		F9F6A7122BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */; };
+		F9F6A7132BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */; };
 		F9F7993225A870B80037EC50 /* SettingUpgradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */; };
 		F9F934E12484C40400BF7AA7 /* DataBaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */; };
 		F9F934E32484D53100BF7AA7 /* DataBaseJournals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */; };
@@ -1269,6 +1271,7 @@
 		F9F4607624D04F8F008FE62B /* SettingsInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInformationTableViewController.swift; sourceTree = "<group>"; };
 		F9F4607824D06F6C008FE62B /* CompanyNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNameTableViewCell.swift; sourceTree = "<group>"; };
 		F9F4608024D1ED15008FE62B /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManagerMonthlyPLAccount.swift; sourceTree = "<group>"; };
 		F9F7993125A870B80037EC50 /* SettingUpgradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpgradeTableViewCell.swift; sourceTree = "<group>"; };
 		F9F934E02484C40400BF7AA7 /* DataBaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAccount.swift; sourceTree = "<group>"; };
 		F9F934E22484D53100BF7AA7 /* DataBaseJournals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseJournals.swift; sourceTree = "<group>"; };
@@ -1572,6 +1575,7 @@
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
 				F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */,
+				F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */,
 				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
 				F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */,
 				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
@@ -3079,6 +3083,7 @@
 				F9354DBB2498DDF4007DB098 /* DataBaseWorkSheet.swift in Sources */,
 				F910F1BF298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB45295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
+				F9F6A7122BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9BDCBB627A9602D00BD8770 /* JournalsViewController.swift in Sources */,
 				F906C4EE263B1B65006C6233 /* ListCollectionViewCell.swift in Sources */,
 				F91878C82581462600D2E793 /* DataBaseManagerSettingsOperating.swift in Sources */,
@@ -3328,6 +3333,7 @@
 				F9EE7D3929BB221F0045EDB7 /* EditableType.swift in Sources */,
 				F910F1C0298BC1DD009E6B02 /* FirebaseAnalytics.swift in Sources */,
 				F971BB46295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift in Sources */,
+				F9F6A7132BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift in Sources */,
 				F9EC66BE27B90BC60003FBB6 /* JournalsViewController.swift in Sources */,
 				F9EC66BF27B90BC60003FBB6 /* ListCollectionViewCell.swift in Sources */,
 				F9EC66C027B90BC60003FBB6 /* DataBaseManagerSettingsOperating.swift in Sources */,

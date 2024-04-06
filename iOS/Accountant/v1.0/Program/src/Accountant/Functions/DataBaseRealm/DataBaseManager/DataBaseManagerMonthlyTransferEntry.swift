@@ -76,11 +76,12 @@ class DataBaseManagerMonthlyTransferEntry {
                     // MARK: 損益振替仕訳は、仕訳帳には追加しない。
                     // 相手方の勘定
                     if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
-//                        if account == "資本金勘定" {
-//                            try DataBaseManager.realm.write {
-//                                dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseTransferEntry = dataBaseJournalEntry
-//                            }
-//                        } else {
+                        if account == "資本金勘定" {
+                            // MARK: 月次損益振替仕訳なので、貸借科目である資本金勘定は通らない
+                            try DataBaseManager.realm.write {
+                                dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
+                            }
+                        } else {
                             for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                                 try DataBaseManager.realm.write {
                                     // 月次損益振替仕訳、月次残高振替仕訳
@@ -88,7 +89,7 @@ class DataBaseManagerMonthlyTransferEntry {
                                 }
                                 break
                             }
-//                        }
+                        }
                     }
                 } catch {
                     print("エラーが発生しました")
@@ -156,11 +157,12 @@ class DataBaseManagerMonthlyTransferEntry {
                     // MARK: 残高振替仕訳は、仕訳帳には追加しない。
                     // 相手方の勘定
                     if let dataBaseGeneralLedger = dataBaseAccountingBook.dataBaseGeneralLedger {
-//                        if account == "資本金勘定" {
-//                            try DataBaseManager.realm.write {
-//                                dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseTransferEntry = dataBaseJournalEntry
-//                            }
-//                        } else {
+                        // WARNING: 元入金、繰越利益では使用しない
+                        if account == "資本金勘定" {
+                            try DataBaseManager.realm.write {
+                                dataBaseGeneralLedger.dataBaseCapitalAccount?.dataBaseMonthlyTransferEntries.append(dataBaseJournalEntry)
+                            }
+                        } else {
                             for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                                 try DataBaseManager.realm.write {
                                     // 月次損益振替仕訳、月次残高振替仕訳
@@ -168,7 +170,7 @@ class DataBaseManagerMonthlyTransferEntry {
                                 }
                                 break
                             }
-//                        }
+                        }
                     }
                 } catch {
                     print("エラーが発生しました")
@@ -181,13 +183,17 @@ class DataBaseManagerMonthlyTransferEntry {
 
     // MARK: Read
     // 取得　月次損益振替仕訳、月次残高振替仕訳 今年度の勘定別にすべて取得
-    func getMonthlyTransferEntryInAccountInFiscalYear(account: String) -> List<DataBaseMonthlyTransferEntry>? {
+    func getMonthlyTransferEntryInAccountInFiscalYear(account: String) -> Results<DataBaseMonthlyTransferEntry>? {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+        let dataBaseMonthlyTransferEntries = RealmManager.shared.readWithPredicate(
+            type: DataBaseMonthlyTransferEntry.self,
+            predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
+                NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account))
+            ]
+        )
         print("月次損益振替仕訳、月次残高振替仕訳 12ヶ月分 \(account)　今年度の勘定別にすべて取得", dataBaseMonthlyTransferEntries)
         return dataBaseMonthlyTransferEntries
     }
@@ -196,12 +202,21 @@ class DataBaseManagerMonthlyTransferEntry {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
-            .filter("date LIKE '\(date)'")
-        print("月次損益振替仕訳、月次残高振替仕訳 \(account)　今年度の勘定別で日付が同一", dataBaseMonthlyTransferEntries)
-        return dataBaseMonthlyTransferEntries?.first
+        // WARNING: 元入金、繰越利益では使用しない　月次残高振替仕訳を追加時にすでに存在しているかの確認で使用している
+        if  account == Constant.capitalAccountName || account == "資本金勘定" {
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+            let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+                .filter("date LIKE '\(date)'")
+            print("月次残高振替仕訳 \(account)　今年度の勘定別で日付が同一", dataBaseMonthlyTransferEntries)
+            return dataBaseMonthlyTransferEntries?.first
+        } else {
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+                .filter("accountName LIKE '\(account)'").first
+            let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+                .filter("date LIKE '\(date)'")
+            print("月次損益振替仕訳、月次残高振替仕訳 \(account)　今年度の勘定別で日付が同一", dataBaseMonthlyTransferEntries)
+            return dataBaseMonthlyTransferEntries?.first
+        }
     }
     // 決算日が月末ではない場合、年が違う同じ月の月次残高振替仕訳が存在するため、CONTAINS 部分一致では区別がつかないため、使用しない
     //    // 取得 月次残高振替仕訳　勘定別
@@ -225,28 +240,59 @@ class DataBaseManagerMonthlyTransferEntry {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
-        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-            .filter("date BEGINSWITH '\(yearMonth)'")
-            .sorted(byKeyPath: "date", ascending: true)
-        print("月次損益振替仕訳、月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致", dataBaseMonthlyTransferEntries)
-        return dataBaseMonthlyTransferEntries?.first
+        // WARNING: 元入金、繰越利益で使用する　月次残高振替仕訳の計算（"資本金勘定"なので計算に使えない？）と、勘定画面と月次推移表画面で使用している
+        if account == Constant.capitalAccountName || account == "資本金勘定" {
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+            let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+            // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                .filter("date BEGINSWITH '\(yearMonth)'")
+                .sorted(byKeyPath: "date", ascending: true)
+            print("月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致", dataBaseMonthlyTransferEntries)
+            return dataBaseMonthlyTransferEntries?.first
+        } else {
+            let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
+                .filter("accountName LIKE '\(account)'").first
+            let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
+            // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                .filter("date BEGINSWITH '\(yearMonth)'")
+                .sorted(byKeyPath: "date", ascending: true)
+            print("月次損益振替仕訳、月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致", dataBaseMonthlyTransferEntries)
+            return dataBaseMonthlyTransferEntries?.first
+        }
     }
     // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致 複数
     func getAllMonthlyTransferEntryInAccountBeginsWith(account: String, yearMonth: String) -> Results<DataBaseMonthlyTransferEntry>? {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
-            .filter("accountName LIKE '\(account)'").first
-        let dataBaseMonthlyTransferEntries = dataBaseAccount?.dataBaseMonthlyTransferEntries
-        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
-            .filter("date BEGINSWITH '\(yearMonth)'")
-            .sorted(byKeyPath: "date", ascending: true)
-        print("月次損益振替仕訳、月次残高振替仕訳 \(account)　今年度の勘定別で日付の先方一致 複数", dataBaseMonthlyTransferEntries)
-        return dataBaseMonthlyTransferEntries
+        let dataBaseMonthlyTransferEntries = RealmManager.shared.readWithPredicate(
+            type: DataBaseMonthlyTransferEntry.self,
+            predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
+                // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth)),
+                NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: account), NSString(string: account))
+            ]
+        )
+        return dataBaseMonthlyTransferEntries.sorted(byKeyPath: "date", ascending: true)
+    }
+    
+    // 取得　月次損益振替仕訳 今年度の勘定別で日付の先方一致 複数 account:"損益"
+    func getAllMonthlyTransferEntryInPLAccountBeginsWith(yearMonth: String) -> Results<DataBaseMonthlyTransferEntry>? {
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseMonthlyTransferEntries = RealmManager.shared.readWithPredicate(
+            type: DataBaseMonthlyTransferEntry.self,
+            predicates: [
+                NSPredicate(format: "fiscalYear == %@", NSNumber(value: dataBaseAccountingBook?.fiscalYear ?? 0)),
+                // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                NSPredicate(format: "date BEGINSWITH %@", NSString(string: yearMonth)),
+                NSPredicate(format: "debit_category LIKE %@ OR credit_category LIKE %@", NSString(string: "損益"), NSString(string: "損益"))
+            ]
+        )
+        print("月次損益振替仕訳 12ヶ月分 損益　今年度の勘定別で日付の先方一致 複数", dataBaseMonthlyTransferEntries)
+        return dataBaseMonthlyTransferEntries.sorted(byKeyPath: "date", ascending: true)
     }
     
     // MARK: Update
@@ -275,7 +321,7 @@ class DataBaseManagerMonthlyTransferEntry {
                     "credit_amount": creditAmount,
                     "smallWritting": smallWritting,
                     "balance_left": balanceLeft,
-                    "balance_right": balanceRight,
+                    "balance_right": balanceRight
                 ]
                 DataBaseManager.realm.create(DataBaseMonthlyTransferEntry.self, value: value, update: .modified) // 一部上書き更新
             }
@@ -297,6 +343,27 @@ class DataBaseManagerMonthlyTransferEntry {
                     // 範囲内
                 } else {
                     // 範囲外
+                    print(dataBaseMonthlyTransferEntry)
+                    // 関連を削除する
+                    if let dataBaseAccount: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+                        accountName: account,
+                        fiscalYear: dataBaseMonthlyTransferEntry.fiscalYear
+                    ) {
+                    outerLoop: while true {
+                        for i in 0..<dataBaseAccount.dataBaseMonthlyTransferEntries.count where dataBaseAccount.dataBaseMonthlyTransferEntries[i].number == dataBaseMonthlyTransferEntry.number ||
+                        dataBaseAccount.dataBaseMonthlyTransferEntries[i].isInvalidated {
+                            do {
+                                try DataBaseManager.realm.write {
+                                    dataBaseAccount.dataBaseMonthlyTransferEntries.remove(at: i)
+                                }
+                            } catch {
+                                print("エラーが発生しました")
+                            }
+                            continue outerLoop
+                        }
+                        break
+                    }
+                    }
                     do {
                         try DataBaseManager.realm.write {
                             DataBaseManager.realm.delete(dataBaseMonthlyTransferEntry)
@@ -320,6 +387,27 @@ class DataBaseManagerMonthlyTransferEntry {
             ) {
                 while dataBaseMonthlyTransferEntries.count > 1 {
                     if let dataBaseMonthlyTransferEntry = dataBaseMonthlyTransferEntries.first {
+                        print(dataBaseMonthlyTransferEntry)
+                        // 関連を削除する
+                        if let dataBaseAccount: DataBaseAccount = DataBaseManagerAccount.shared.getAccountByAccountNameWithFiscalYear(
+                            accountName: account,
+                            fiscalYear: dataBaseMonthlyTransferEntry.fiscalYear
+                        ) {
+                        outerLoop: while true {
+                            for i in 0..<dataBaseAccount.dataBaseMonthlyTransferEntries.count where dataBaseAccount.dataBaseMonthlyTransferEntries[i].number == dataBaseMonthlyTransferEntry.number ||
+                            dataBaseAccount.dataBaseMonthlyTransferEntries[i].isInvalidated {
+                                do {
+                                    try DataBaseManager.realm.write {
+                                        dataBaseAccount.dataBaseMonthlyTransferEntries.remove(at: i)
+                                    }
+                                } catch {
+                                    print("エラーが発生しました")
+                                }
+                                continue outerLoop
+                            }
+                            break
+                        }
+                        }
                         do {
                             try DataBaseManager.realm.write {
                                 DataBaseManager.realm.delete(dataBaseMonthlyTransferEntry)

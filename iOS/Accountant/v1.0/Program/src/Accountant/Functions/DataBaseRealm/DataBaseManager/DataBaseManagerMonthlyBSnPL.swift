@@ -18,9 +18,9 @@ class DataBaseManagerMonthlyBSnPL {
     }
     
     // MARK: - 月次貸借対照表
-
+    
     // MARK: - CRUD
-
+    
     // MARK: Create
     
     // 月次貸借対照表と月次損益計算書の、五大区分の合計額と、大区分の合計額と当期純利益の額を再計算する
@@ -68,13 +68,13 @@ class DataBaseManagerMonthlyBSnPL {
             setTotalBig5(big5: 0, yearMonth: yearMonth) // 資産
             setTotalBig5(big5: 1, yearMonth: yearMonth) // 負債
             setTotalBig5(big5: 2, yearMonth: yearMonth) // 純資産
-    //        // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
-    //        // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
+            // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
+            // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
         }
 
 //        setTotalRank1(big5: 2, rank1: 10) // 株主資本
 //        setTotalRank1(big5: 2, rank1: 11) // その他の包括利益累計額
-        
+
 //        // 損益計算書
 //        setTotalRank0(rank0: 6, yearMonth: yearMonth) // 営業収益9     売上
 //        setTotalRank0(rank0: 7, yearMonth: yearMonth) // 営業費用5     売上原価
@@ -91,7 +91,7 @@ class DataBaseManagerMonthlyBSnPL {
 //        // 利益を計算する関数を呼び出す todo
 //        setBenefitTotal()
     }
-
+    
     // 追加　月次貸借対照表
     func addMonthlyBalanceSheet(
         date: String,
@@ -279,6 +279,7 @@ class DataBaseManagerMonthlyBSnPL {
                     // 範囲内
                 } else {
                     // 範囲外
+                    // NOTE: 関連は使用していない
                     do {
                         try DataBaseManager.realm.write {
                             DataBaseManager.realm.delete(dataBaseMonthlyBalanceSheet)
@@ -301,6 +302,7 @@ class DataBaseManagerMonthlyBSnPL {
             ) {
                 while dataBaseMonthlyBalanceSheets.count > 1 {
                     if let dataBaseMonthlyBalanceSheet = dataBaseMonthlyBalanceSheets.first {
+                        // NOTE: 関連は使用していない
                         do {
                             try DataBaseManager.realm.write {
                                 DataBaseManager.realm.delete(dataBaseMonthlyBalanceSheet)
@@ -323,35 +325,39 @@ class DataBaseManagerMonthlyBSnPL {
         let capitalAccount = Constant.capitalAccountName
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
-//            if capitalAccount == account {
-//                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
-//                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-//                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
-//                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        result = dataBaseCapitalAccount.credit_balance_AfterAdjusting
-//                    } else {
-//                        result = dataBaseCapitalAccount.debit_balance_AfterAdjusting
-//                    }
-//                }
-//            } else {
+            if capitalAccount == account {
+                // 資本金勘定クラス
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount,
+                   let dataBaseMonthlyTransferEntry = dataBaseCapitalAccount.dataBaseMonthlyTransferEntries
+                    // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                    .filter("date BEGINSWITH '\(yearMonth)'").first {
+                    // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                        result = dataBaseMonthlyTransferEntry.balance_left
+                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                        result = dataBaseMonthlyTransferEntry.balance_right
+                    } else {
+                        result = dataBaseMonthlyTransferEntry.balance_left
+                    }
+                }
+            } else {
                 // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
                 for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                     // 月次損益振替仕訳、月次残高振替仕訳
-                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
-                    // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                    if let dataBaseMonthlyTransferEntry = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
                         .filter("date BEGINSWITH '\(yearMonth)'").first {
                         // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
-                            result = dataBaseMonthlyBalanceSheet.balance_left
-                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
-                            result = dataBaseMonthlyBalanceSheet.balance_right
+                        if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
+                            result = dataBaseMonthlyTransferEntry.balance_left
+                        } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
+                            result = dataBaseMonthlyTransferEntry.balance_right
                         } else {
-                            result = dataBaseMonthlyBalanceSheet.balance_left
+                            result = dataBaseMonthlyTransferEntry.balance_left
                         }
                     }
                 }
-//            }
+            }
         }
         return result
     }
@@ -362,38 +368,42 @@ class DataBaseManagerMonthlyBSnPL {
         // 法人/個人フラグ
         let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-//            if capitalAccount == account {
-//                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
-//                    // 借方と貸方で金額が大きい方はどちらか
-//                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        debitOrCredit = "借"
-//                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-//                        debitOrCredit = "貸"
-//                    } else {
-//                        debitOrCredit = "-"
-//                    }
-//                }
-//            } else {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                // 月次損益振替仕訳、月次残高振替仕訳
-                if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
+            if capitalAccount == account {
+                // 資本金勘定クラス
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount,
+                   let dataBaseMonthlyTransferEntry = dataBaseCapitalAccount.dataBaseMonthlyTransferEntries
                     // BEGINSWITH 先頭が指定した文字で始まるデータを検索
                     .filter("date BEGINSWITH '\(yearMonth)'").first {
                     // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                    if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
                         debitOrCredit = "借"
-                    } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
                         debitOrCredit = "貸"
                     } else {
                         debitOrCredit = "-"
                     }
                 }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    // 月次損益振替仕訳、月次残高振替仕訳
+                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                        .filter("date BEGINSWITH '\(yearMonth)'").first {
+                        // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                            debitOrCredit = "借"
+                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                            debitOrCredit = "貸"
+                        } else {
+                            debitOrCredit = "-"
+                        }
+                    }
+                }
             }
-//            }
             switch bigCategory {
             case 0, 1, 2, 7, 8, 11: // 流動資産 固定資産 繰延資産,売上原価 販売費及び一般管理費 税金
                 switch debitOrCredit {
@@ -437,58 +447,62 @@ class DataBaseManagerMonthlyBSnPL {
         // 法人/個人フラグ
         let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
-        let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
-            //            if capitalAccount == account {
-            //                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount {
-            //                    // 借方と貸方で金額が大きい方はどちらか
-            //                    if dataBaseCapitalAccount.debit_balance_AfterAdjusting > dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-            //                        debitOrCredit = "借"
-            //                    } else if dataBaseCapitalAccount.debit_balance_AfterAdjusting < dataBaseCapitalAccount.credit_balance_AfterAdjusting {
-            //                        debitOrCredit = "貸"
-            //                    } else {
-            //                        debitOrCredit = "-"
-            //                    }
-            //                }
-            //            } else {
-            // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
-            for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
-                // 借方と貸方で金額が大きい方はどちらか
-                // 月次損益振替仕訳、月次残高振替仕訳
-                if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
+        if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
+            if capitalAccount == account {
+                // 資本金勘定クラス
+                if let dataBaseCapitalAccount = dataBaseGeneralLedger.dataBaseCapitalAccount,
+                   let dataBaseMonthlyTransferEntry = dataBaseCapitalAccount.dataBaseMonthlyTransferEntries
                     // BEGINSWITH 先頭が指定した文字で始まるデータを検索
                     .filter("date BEGINSWITH '\(yearMonth)'").first {
                     // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                    if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                    if dataBaseMonthlyTransferEntry.balance_left > dataBaseMonthlyTransferEntry.balance_right {
                         debitOrCredit = "借"
-                    } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                    } else if dataBaseMonthlyTransferEntry.balance_left < dataBaseMonthlyTransferEntry.balance_right {
                         debitOrCredit = "貸"
                     } else {
                         debitOrCredit = "-"
                     }
                 }
+            } else {
+                // 総勘定元帳のなかの勘定で、計算したい勘定と同じ場合
+                for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
+                    // 借方と貸方で金額が大きい方はどちらか
+                    // 月次損益振替仕訳、月次残高振替仕訳
+                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                        // BEGINSWITH 先頭が指定した文字で始まるデータを検索
+                        .filter("date BEGINSWITH '\(yearMonth)'").first {
+                        // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
+                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                            debitOrCredit = "借"
+                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                            debitOrCredit = "貸"
+                        } else {
+                            debitOrCredit = "-"
+                        }
+                    }
+                }
+            }
+            switch bigCategory {
+            case 0, 3: // 資産　費用
+                switch debitOrCredit {
+                case "貸":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
+                }
+            default: // 1,2,4（負債、純資産、収益）
+                switch debitOrCredit {
+                case "借":
+                    positiveOrNegative = "-"
+                default:
+                    positiveOrNegative = ""
+                }
             }
         }
-        switch bigCategory {
-        case 0, 3: // 資産　費用
-            switch debitOrCredit {
-            case "貸":
-                positiveOrNegative = "-"
-            default:
-                positiveOrNegative = ""
-            }
-        default: // 1,2,4（負債、純資産、収益）
-            switch debitOrCredit {
-            case "借":
-                positiveOrNegative = "-"
-            default:
-                positiveOrNegative = ""
-            }
-        }
-        //        }
         return positiveOrNegative
     }
-        
+    
     // MARK: 計算　書き込み
     
     // 計算　五大区分 月次
@@ -557,8 +571,6 @@ class DataBaseManagerMonthlyBSnPL {
                 totalAmountOfRank0 += totalAmount
             }
         }
-//        // 開いている会計帳簿の年度を取得
-//        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         // 取得 月次貸借対照表　今年度で日付の前方一致
         if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(yearMonth: yearMonth) {
             do {
