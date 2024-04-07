@@ -254,44 +254,63 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         case /*1, */2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13:
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
-                switch section {
-                    // case 1: // 初月は前期繰越があるため、不要
-                    // 通常仕訳 期首
-                case 2:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 20
-                case 3:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 20
-                case 4:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 20
-                case 5:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 20
-                case 6:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 20
-                case 7:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 20
-                case 8:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 20
-                case 9:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 20
-                case 10:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 20
-                case 11:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 20
-                case 12:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
-                case 13:
-                    // 月別の月末日を取得 12ヶ月分
-                    let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
-                    // 月別の月末を取得 13ヶ月分　が存在するか
-                    if lastDays.count > 12 {
-                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
-                    } else {
+                // 資本金勘定の場合、資本振替仕訳があるので、それを加味する
+                if account == Constant.capitalAccountName || account == "資本金勘定" {
+                    switch section {
+                    case 13:
+                        // 月別の月末日を取得 12ヶ月分
+                        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                        // 月別の月末を取得 13ヶ月分　が存在するか
+                        if lastDays.count > 12 {
+                            return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                        } else {
+                            return 0
+                        }
+                        // 決算月は次期繰越があるため、不要
+                        // 通常仕訳 期末
+                    default:
+                        return 20
+                    }
+                } else {
+                    switch section {
+                        // case 1: // 初月は前期繰越があるため、不要
+                        // 通常仕訳 期首
+                    case 2:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 20
+                    case 3:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 20
+                    case 4:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 20
+                    case 5:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 20
+                    case 6:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 20
+                    case 7:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 20
+                    case 8:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 20
+                    case 9:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 20
+                    case 10:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 20
+                    case 11:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 20
+                    case 12:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 20
+                    case 13:
+                        // 月別の月末日を取得 12ヶ月分
+                        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                        // 月別の月末を取得 13ヶ月分　が存在するか
+                        if lastDays.count > 12 {
+                            return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 20
+                        } else {
+                            return 0
+                        }
+                        // 決算月は次期繰越があるため、不要
+                        // 通常仕訳 期末
+                    default:
                         return 0
                     }
-                    // 決算月は次期繰越があるため、不要
-                    // 通常仕訳 期末
-                default:
-                    return 0
                 }
             } else {
                 return 0
@@ -307,45 +326,66 @@ extension GeneralLedgerAccountViewController: UITableViewDelegate, UITableViewDa
         case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12/*, 13*/:
             // 貸借科目　のみに絞る
             if !DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
-                switch section {
-                case 1:
-                    // 通常仕訳 期首
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 60
-                case 2:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 60
-                case 3:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 60
-                case 4:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 60
-                case 5:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 60
-                case 6:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 60
-                case 7:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 60
-                case 8:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 60
-                case 9:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 60
-                case 10:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 60
-                case 11:
-                    return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 60
-                case 12:
-                    // 月別の月末日を取得 12ヶ月分
-                    let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
-                    // 月別の月末を取得 13ヶ月分　が存在するか
-                    if lastDays.count > 12 {
-                        return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
-                    } else {
+                // 資本金勘定の場合、資本振替仕訳があるので、それを加味する
+                if account == Constant.capitalAccountName || account == "資本金勘定" {
+                    switch section {
+                    case 12:
+                        // 月別の月末日を取得 12ヶ月分
+                        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                        // 月別の月末を取得 13ヶ月分　が存在するか
+                        if lastDays.count > 12 {
+                            return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                        } else {
+                            return 0
+                        }
+                        // case 13:
+                        // return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 60
+                        // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                        // 通常仕訳 期末
+                    default:
+                        return 60
+                    }
+                } else {
+                    switch section {
+                    case 1:
+                        // 通常仕訳 期首
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 0) == 0 ? 0 : 60
+                    case 2:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 1) == 0 ? 0 : 60
+                    case 3:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 2) == 0 ? 0 : 60
+                    case 4:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 3) == 0 ? 0 : 60
+                    case 5:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 4) == 0 ? 0 : 60
+                    case 6:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 5) == 0 ? 0 : 60
+                    case 7:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 6) == 0 ? 0 : 60
+                    case 8:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 7) == 0 ? 0 : 60
+                    case 9:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 8) == 0 ? 0 : 60
+                    case 10:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 9) == 0 ? 0 : 60
+                    case 11:
+                        return presenter.numberOfDatabaseJournalEntries(forSection: 10) == 0 ? 0 : 60
+                    case 12:
+                        // 月別の月末日を取得 12ヶ月分
+                        let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
+                        // 月別の月末を取得 13ヶ月分　が存在するか
+                        if lastDays.count > 12 {
+                            return presenter.numberOfDatabaseJournalEntries(forSection: 11) == 0 ? 0 : 60
+                        } else {
+                            return 0
+                        }
+                        // case 13:
+                        // return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 60
+                        // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
+                        // 通常仕訳 期末
+                    default:
                         return 0
                     }
-                    // case 13:
-                    // return presenter.numberOfDatabaseJournalEntries(forSection: 12) == 0 ? 0 : 60
-                    // 決算整理仕訳の下に次月繰越を表示させる。月次残高振替仕訳には決算整理仕訳も含まれるため。
-                    // 通常仕訳 期末
-                default:
-                    return 0
                 }
             } else {
                 return 0
