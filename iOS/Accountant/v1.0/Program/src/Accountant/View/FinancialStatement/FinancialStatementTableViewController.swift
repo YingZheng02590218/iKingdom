@@ -147,15 +147,31 @@ class FinancialStatementTableViewController: UITableViewController {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                if let viewController = UIStoryboard(
-                    name: "MonthlyTrendsBalanceSheetViewController",
-                    bundle: nil
-                ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(viewController, animated: true)
-                    } else {
-                        let navigation = UINavigationController(rootViewController: viewController)
-                        self.present(navigation, animated: true, completion: nil)
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    // インジケーター
+                    cell.accessoryView = {() -> UIActivityIndicatorView in
+                        let indicatorView = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
+                        indicatorView.startAnimating()
+                        return indicatorView
+                    }()
+                    DispatchQueue.main.async {
+                        if let viewController = UIStoryboard(
+                            name: "MonthlyTrendsBalanceSheetViewController",
+                            bundle: nil
+                        ).instantiateInitialViewController() as? MonthlyTrendsBalanceSheetViewController {
+                            if let navigator = self.navigationController {
+                                // Accessory Color
+                                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+                                let disclosureView = UIImageView(image: disclosureImage)
+                                disclosureView.tintColor = UIColor.accentColor
+                                cell.accessoryView = disclosureView
+                                
+                                navigator.pushViewController(viewController, animated: true)
+                            } else {
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.present(navigation, animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
             case 1:
