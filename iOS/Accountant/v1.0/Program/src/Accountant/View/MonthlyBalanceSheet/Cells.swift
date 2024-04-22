@@ -72,8 +72,7 @@ class TimeCell: Cell {
     }
 }
 
-class ScheduleCell: Cell {
-    let label = UILabel()
+class ScheduleCell: BlurCell {
     var color: UIColor = .clear {
         didSet {
             backgroundView?.backgroundColor = color
@@ -82,7 +81,7 @@ class ScheduleCell: Cell {
     
     override var frame: CGRect {
         didSet {
-            label.frame = bounds.insetBy(dx: 4, dy: 0)
+            label.frame = bounds.insetBy(dx: 0, dy: 0)
         }
     }
     
@@ -104,5 +103,40 @@ class ScheduleCell: Cell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+}
+
+class BlurCell: Cell {
+    let label = UILabel()
+    // ダークモード対応
+    var blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UITraitCollection.isDarkMode ? UIBlurEffect.Style.dark : UIBlurEffect.Style.extraLight))
+    
+    open var isMasked = false {
+        didSet {
+            updateUI()
+        }
+    }
+    
+    func updateUI() {
+        DispatchQueue.main.async {
+            if self.isMasked {
+                // ぼかし効果のスタイルを決め、エフェクトを生成
+                // ぼかし効果を設定したUIVisualEffectViewのインスタンスを生成
+                self.blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UITraitCollection.isDarkMode ? UIBlurEffect.Style.dark : UIBlurEffect.Style.extraLight))
+                // ぼかし効果Viewのframeをviewのframeに合わせる
+                self.blurEffectView.frame = self.label.frame
+                
+                self.blurEffectView.alpha = 1.0
+                // viewにぼかし効果viewを追加
+                if self.label.subviews.isEmpty {
+                    self.label.addSubview(self.blurEffectView)
+                } else {
+                    print("addSubview is not empty")
+                }
+                self.blurEffectView.isHidden = false
+            } else {
+                self.blurEffectView.isHidden = true
+            }
+        }
     }
 }

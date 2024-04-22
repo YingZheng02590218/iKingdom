@@ -278,877 +278,973 @@ extension MonthlyTrendsBalanceSheetViewController: SpreadsheetViewDataSource {
         if case (0, 0) = (indexPath.column, indexPath.row) {
             // 0列目、0行目
             // 空白
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = ""
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = ""
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, 1) = (indexPath.column, indexPath.row) {
             // 0列目、1行目
             // 勘定科目タイトル
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "勘定科目"
-            cell.label.textAlignment = .center
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "勘定科目"
+                cell.label.textAlignment = .center
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
             
         } else if case (0, headerRowCount..<(objects0Count)) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目0
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects0[indexPath.row - headerRowCount].category
-            //            cell.backgroundColor = .red.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects0[indexPath.row - headerRowCount].category
+                //            cell.backgroundColor = .red.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects0Count..<objects1Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目1
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects1[indexPath.row - objects0Count].category
-            //            cell.backgroundColor = .red.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects1[indexPath.row - objects0Count].category
+                //            cell.backgroundColor = .red.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects1Count..<objects2Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目2
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects2[indexPath.row - objects1Count].category
-            //            cell.backgroundColor = .red.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects2[indexPath.row - objects1Count].category
+                //            cell.backgroundColor = .red.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects2Count..<bs2Count) = (indexPath.column, indexPath.row) {
             // 流動資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "流動資産　合計"
-            cell.label.textAlignment = .right
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "流動資産　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs2Count..<objects3Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目3
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects3[indexPath.row - bs2Count].category
-            //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects3[indexPath.row - bs2Count].category
+                //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects3Count..<objects4Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目4
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects4[indexPath.row - objects3Count].category
-            //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects4[indexPath.row - objects3Count].category
+                //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects4Count..<objects5Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目5
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects5[indexPath.row - objects4Count].category
-            //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects5[indexPath.row - objects4Count].category
+                //            cell.backgroundColor = .orange.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects5Count..<bs5Count) = (indexPath.column, indexPath.row) {
             // 固定資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "固定資産　合計"
-            cell.label.textAlignment = .right
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "固定資産　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs5Count..<objects6Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目6
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects6[indexPath.row - bs5Count].category
-            //            cell.backgroundColor = .yellow.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects6[indexPath.row - bs5Count].category
+                //            cell.backgroundColor = .yellow.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
             // 繰越資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.textAlignment = .right
-            cell.label.text = "繰越資産　合計"
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "繰越資産　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs6Count..<big6Count) = (indexPath.column, indexPath.row) {
             // 資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.textAlignment = .right
-            cell.label.text = "資産　合計"
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "資産　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, big6Count..<objects7Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目7
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects7[indexPath.row - big6Count].category
-            //            cell.backgroundColor = .green.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects7[indexPath.row - big6Count].category
+                //            cell.backgroundColor = .green.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects7Count..<objects8Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目8
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects8[indexPath.row - objects7Count].category
-            //            cell.backgroundColor = .green.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects8[indexPath.row - objects7Count].category
+                //            cell.backgroundColor = .green.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
             // 流動負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "流動負債　合計"
-            cell.label.textAlignment = .right
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "流動負債　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs8Count..<objects9Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目9
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects9[indexPath.row - bs8Count].category
-            //            cell.backgroundColor = .cyan.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects9[indexPath.row - bs8Count].category
+                //            cell.backgroundColor = .cyan.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
             // 固定負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "固定負債　合計"
-            cell.label.textAlignment = .right
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "固定負債　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs9Count..<big9Count) = (indexPath.column, indexPath.row) {
             // 負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.textAlignment = .right
-            cell.label.text = "負債　合計"
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "負債　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, big9Count..<objects10Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目10
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects10[indexPath.row - big9Count].category
-            //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects10[indexPath.row - big9Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects10Count..<objects11Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目11
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects11[indexPath.row - objects10Count].category
-            //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects11[indexPath.row - objects10Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects11Count..<objects12Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目12
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects12[indexPath.row - objects11Count].category
-            //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects12[indexPath.row - objects11Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (0, objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
             // 0列目、2〜行目
             // 勘定科目13
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as! TimeCell
-            cell.label.text = objects13[indexPath.row - objects12Count].category
-            //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
-            cell.backgroundColor = .clear
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeCell.self), for: indexPath) as? TimeCell {
+                cell.label.text = objects13[indexPath.row - objects12Count].category
+                //            cell.backgroundColor = .blue.withAlphaComponent(0.1)
+                cell.backgroundColor = .clear
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
         } else if case (0, objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
             // 資本　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.text = "資本　合計"
-            cell.label.textAlignment = .right
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.text = "資本　合計"
+                cell.label.textAlignment = .right
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                return cell
+            }
             
         } else if case (0, bs13Count..<big13Count) = (indexPath.column, indexPath.row) {
             // 純資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as! TimeTitleCell
-            cell.label.textAlignment = .right
-            cell.label.text = "純資産　合計"
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-            cell.borders.top = .none
-            cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TimeTitleCell.self), for: indexPath) as? TimeTitleCell {
+                cell.label.textAlignment = .right
+                cell.label.text = "純資産　合計"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                cell.borders.top = .none
+                cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                return cell
+            }
             
             
             
         } else if case (1...(dates.count + 1), 0) = (indexPath.column, indexPath.row) {
             // 1〜列目、0行目
             // 日付
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
-            cell.label.text = "\(dates[indexPath.column - 1].year)" + "-" + "\(String(format: "%02d", dates[indexPath.column - 1].month))"
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
+                cell.label.text = "\(dates[indexPath.column - 1].year)" + "-" + "\(String(format: "%02d", dates[indexPath.column - 1].month))"
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
         } else if case (1...(dates.count + 1), 1) = (indexPath.column, indexPath.row) {
             // 1〜列目、1行目
             // 空白 曜日
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as! DateCell
-            cell.label.text = ""
-            cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
-            cell.borders.top = .none
-            cell.borders.bottom = .none
-            return cell
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: DateCell.self), for: indexPath) as? DateCell {
+                cell.label.text = ""
+                cell.backgroundColor = .accentColor.withAlphaComponent(0.1)
+                cell.borders.top = .none
+                cell.borders.bottom = .none
+                return cell
+            }
             
             
             
         } else if case (1...(dates.count + 1), headerRowCount..<(objects0Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目0
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects0[indexPath.row - headerRowCount].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 0, rank1: 0, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects0[indexPath.row - headerRowCount].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 0, rank1: 0, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects0Count..<(objects1Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目1
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects1[indexPath.row - objects0Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 0, rank1: 1, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects1[indexPath.row - objects0Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 0, rank1: 1, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects1Count..<(objects2Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目2
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects2[indexPath.row - objects1Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 0, rank1: 2, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects2[indexPath.row - objects1Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 0, rank1: 2, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects2Count..<bs2Count) = (indexPath.column, indexPath.row) {
             // 流動資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentAssets_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentAssets_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs2Count..<(objects3Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目3
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects3[indexPath.row - bs2Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 1, rank1: 3, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects3[indexPath.row - bs2Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 1, rank1: 3, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects3Count..<(objects4Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目4
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects4[indexPath.row - objects3Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 1, rank1: 4, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects4[indexPath.row - objects3Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 1, rank1: 4, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects4Count..<(objects5Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目5
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects5[indexPath.row - objects4Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 1, rank1: 5, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects5[indexPath.row - objects4Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 1, rank1: 5, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects5Count..<bs5Count) = (indexPath.column, indexPath.row) {
             // 固定資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedAssets_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedAssets_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs5Count..<objects6Count) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目6
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects6[indexPath.row - bs5Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 2, rank1: 6, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects6[indexPath.row - bs5Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 2, rank1: 6, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects6Count..<bs6Count) = (indexPath.column, indexPath.row) {
             // 繰越資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.DeferredAssets_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.DeferredAssets_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs6Count..<big6Count) = (indexPath.column, indexPath.row) {
             // 資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Asset_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Asset_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), big6Count..<(objects7Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目7
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects7[indexPath.row - big6Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 3, rank1: 7, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects7[indexPath.row - big6Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 3, rank1: 7, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects7Count..<(objects8Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目8
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects8[indexPath.row - objects7Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 3, rank1: 8, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects8[indexPath.row - objects7Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 3, rank1: 8, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects8Count..<bs8Count) = (indexPath.column, indexPath.row) {
             // 流動負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentLiabilities_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.CurrentLiabilities_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs8Count..<(objects9Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目9
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects9[indexPath.row - bs8Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 4, rank1: 9, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects9[indexPath.row - bs8Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 4, rank1: 9, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects9Count..<bs9Count) = (indexPath.column, indexPath.row) {
             // 固定負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedLiabilities_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.FixedLiabilities_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs9Count..<big9Count) = (indexPath.column, indexPath.row) {
             // 負債　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Liability_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Liability_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), big9Count..<(objects10Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目10
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects10[indexPath.row - big9Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 5, rank1: 10, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects10[indexPath.row - big9Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 10, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects10Count..<(objects11Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目11
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects11[indexPath.row - objects10Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 5, rank1: 11, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects11[indexPath.row - objects10Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 11, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects11Count..<(objects12Count)) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目12
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects12[indexPath.row - objects11Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 5, rank1: 12, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects12[indexPath.row - objects11Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 12, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
         } else if case (1...(dates.count + 1), objects12Count..<objects13Count) = (indexPath.column, indexPath.row) {
             // 1〜列目、2〜行目
             // 残高金額 勘定科目13
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-            if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                account: objects13[indexPath.row - objects12Count].category,
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = getBalanceAmount(rank0: 5, rank1: 19, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                    account: objects13[indexPath.row - objects12Count].category,
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = getBalanceAmount(rank0: 5, rank1: 19, left: dataBaseMonthlyTransferEntry.balance_left, right: dataBaseMonthlyTransferEntry.balance_right)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .clear
+                    cell.borders.top = .none
+                    cell.borders.bottom = .none
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .clear
-                cell.borders.top = .none
-                cell.borders.bottom = .none
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), objects13Count..<bs13Count) = (indexPath.column, indexPath.row) {
             // 資本　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Capital_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Capital_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 2, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.2)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 2, color: .lightGray)
-            }
-            return cell
             
         } else if case (1...(dates.count + 1), bs13Count..<big13Count) = (indexPath.column, indexPath.row) {
             // 純資産　合計
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as! ScheduleCell
-            var text = ""
-            // 取得 月次貸借対照表　今年度で日付の前方一致
-            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
-                yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
-            ) {
-                // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
-                text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Equity_total)
+            if let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: ScheduleCell.self), for: indexPath) as? ScheduleCell {
+                var text = ""
+                // 取得 月次貸借対照表　今年度で日付の前方一致
+                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(
+                    yearMonth: "\(dates[indexPath.column - 1].year)" + "/" + "\(String(format: "%02d", dates[indexPath.column - 1].month))" // BEGINSWITH 前方一致
+                ) {
+                    // 残高の金額を表示用に整形する　残高がマイナスの場合、三角のマークをつける　カンマを追加する
+                    text = StringUtility.shared.setComma(amount: dataBaseMonthlyBalanceSheet.Equity_total)
+                }
+                if !text.isEmpty {
+                    cell.label.text = text
+                    cell.label.textColor = text.contains("△") ? .red : .textColor
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                } else {
+                    cell.label.text = nil
+                    cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
+                    cell.borders.top = .none
+                    cell.borders.bottom = .solid(width: 3, color: .lightGray)
+                }
+                // アップグレード機能　スタンダードプラン
+                cell.isMasked = indexPath.column == 1 ? false : !UpgradeManager.shared.inAppPurchaseFlag
+                return cell
             }
-            if !text.isEmpty {
-                cell.label.text = text
-                cell.label.textColor = text.contains("△") ? .red : .textColor
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            } else {
-                cell.label.text = nil
-                cell.backgroundColor = .accentColor.withAlphaComponent(0.3)
-                cell.borders.top = .none
-                cell.borders.bottom = .solid(width: 3, color: .lightGray)
-            }
-            return cell
             
         }
         return nil
