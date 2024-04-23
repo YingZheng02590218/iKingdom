@@ -63,7 +63,7 @@ class FinancialStatementTableViewController: UITableViewController {
         switch section {
         case 0:
             // 月次推移表
-            return 2
+            return 1
         case 1:
             // 貸借対照表、損益計算書、キャッシュフロー計算書
             return 2 // 3
@@ -85,7 +85,25 @@ class FinancialStatementTableViewController: UITableViewController {
         
         var cell = UITableViewCell()
         
-        if indexPath.section == 0 || indexPath.section == 1 {
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
+                cell.textLabel?.text = "月次推移表（貸借対照表）"
+                cell.textLabel?.textColor = .textColor
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+            case 1:
+                cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
+                cell.textLabel?.text = "月次推移表（損益計算書）"
+                cell.textLabel?.textColor = .textColor
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+            default:
+                cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+                cell.textLabel?.text = ""
+                cell.textLabel?.textColor = .textColor
+                cell.textLabel?.textAlignment = NSTextAlignment.center
+            }
+        } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
@@ -175,17 +193,18 @@ class FinancialStatementTableViewController: UITableViewController {
                     }
                 }
             case 1:
-                if let viewController = UIStoryboard(
-                    name: "ProfitAndLossStatementViewController",
-                    bundle: nil
-                ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(viewController, animated: true)
-                    } else {
-                        let navigation = UINavigationController(rootViewController: viewController)
-                        self.present(navigation, animated: true, completion: nil)
-                    }
-                }
+//                if let viewController = UIStoryboard(
+//                    name: "ProfitAndLossStatementViewController",
+//                    bundle: nil
+//                ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
+//                    if let navigator = self.navigationController {
+//                        navigator.pushViewController(viewController, animated: true)
+//                    } else {
+//                        let navigation = UINavigationController(rootViewController: viewController)
+//                        self.present(navigation, animated: true, completion: nil)
+//                    }
+//                }
+                break
             default:
                 break
             }
