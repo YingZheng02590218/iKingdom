@@ -206,8 +206,8 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                 view.showDialogForOfline()
             }
         }
-        // 月次貸借推移表を更新する　true: リロードする
-        MonthlyTrendsBalanceSheetViewController.needToReload = true
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
     }
     // OKボタン
     func okButtonTappedDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData) {

@@ -84,6 +84,54 @@ class DataBaseProfitAndLossStatement: RObject {
     // 五つの利益
     @objc dynamic var NetIncomeOrLoss: Int64 = 0                            // 当期純利益（損失）⇒ Net income (loss)
 }
-// 月次損益計算書クラス
+
+// 月次損益計算書クラス ＊リレーションは使用しない
 class DataBaseMonthlyProfitAndLossStatement: DataBaseProfitAndLossStatement {
+    convenience init(
+        fiscalYear: Int,
+        date: String,
+
+        NetSales: Int64,
+        CostOfGoodsSold: Int64,
+        GrossProfitOrLoss: Int64,
+
+        SellingGeneralAndAdministrativeExpenses: Int64,
+        OtherCapitalSurpluses_total: Int64,
+
+        NonOperatingIncome: Int64,
+        NonOperatingExpenses: Int64,
+        OrdinaryIncomeOrLoss: Int64,
+
+        ExtraordinaryIncome: Int64,
+        ExtraordinaryLosses: Int64,
+        IncomeOrLossBeforeIncomeTaxes: Int64,
+
+        IncomeTaxes: Int64,
+        NetIncomeOrLoss: Int64
+    ) {
+        self.init()
+
+        self.fiscalYear = fiscalYear
+        self.date = date
+
+        self.NetSales = NetSales
+        self.CostOfGoodsSold = CostOfGoodsSold
+        self.GrossProfitOrLoss = GrossProfitOrLoss
+
+        self.SellingGeneralAndAdministrativeExpenses = SellingGeneralAndAdministrativeExpenses
+        self.OtherCapitalSurpluses_total = OtherCapitalSurpluses_total
+
+        self.NonOperatingIncome = NonOperatingIncome
+        self.NonOperatingExpenses = NonOperatingExpenses
+        self.OrdinaryIncomeOrLoss = OrdinaryIncomeOrLoss
+
+        self.ExtraordinaryIncome = ExtraordinaryIncome
+        self.ExtraordinaryLosses = ExtraordinaryLosses
+        self.IncomeOrLossBeforeIncomeTaxes = IncomeOrLossBeforeIncomeTaxes
+
+        self.IncomeTaxes = IncomeTaxes
+        self.NetIncomeOrLoss = NetIncomeOrLoss
+    }
+    
+    @objc dynamic var date: String = ""                 // 日付
 }

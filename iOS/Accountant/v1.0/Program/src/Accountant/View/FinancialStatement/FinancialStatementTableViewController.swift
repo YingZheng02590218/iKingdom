@@ -63,7 +63,7 @@ class FinancialStatementTableViewController: UITableViewController {
         switch section {
         case 0:
             // 月次推移表
-            return 1
+            return 2
         case 1:
             // 貸借対照表、損益計算書、キャッシュフロー計算書
             return 2 // 3
@@ -193,18 +193,33 @@ class FinancialStatementTableViewController: UITableViewController {
                     }
                 }
             case 1:
-//                if let viewController = UIStoryboard(
-//                    name: "ProfitAndLossStatementViewController",
-//                    bundle: nil
-//                ).instantiateInitialViewController() as? ProfitAndLossStatementViewController {
-//                    if let navigator = self.navigationController {
-//                        navigator.pushViewController(viewController, animated: true)
-//                    } else {
-//                        let navigation = UINavigationController(rootViewController: viewController)
-//                        self.present(navigation, animated: true, completion: nil)
-//                    }
-//                }
-                break
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    // インジケーター
+                    cell.accessoryView = {() -> UIActivityIndicatorView in
+                        let indicatorView = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
+                        indicatorView.startAnimating()
+                        return indicatorView
+                    }()
+                    DispatchQueue.main.async {
+                        if let viewController = UIStoryboard(
+                            name: "MonthlyProfitAndLossStatementViewController",
+                            bundle: nil
+                        ).instantiateInitialViewController() as? MonthlyProfitAndLossStatementViewController {
+                            if let navigator = self.navigationController {
+                                // Accessory Color
+                                let disclosureImage = UIImage(named: "navigate_next")?.withRenderingMode(.alwaysTemplate)
+                                let disclosureView = UIImageView(image: disclosureImage)
+                                disclosureView.tintColor = UIColor.accentColor
+                                cell.accessoryView = disclosureView
+                                
+                                navigator.pushViewController(viewController, animated: true)
+                            } else {
+                                let navigation = UINavigationController(rootViewController: viewController)
+                                self.present(navigation, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
             default:
                 break
             }
