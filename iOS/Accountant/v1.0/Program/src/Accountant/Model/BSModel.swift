@@ -62,7 +62,7 @@ class BSModel: BSModelInput {
         return StringUtility.shared.setComma(amount: result)
     }
     // 取得　階層0 大区分 前年度表示対応
-    func getTotalRank0(big5: Int, rank0: Int, lastYear: Bool) -> String {
+    func getTotalRank0(rank0: Int, lastYear: Bool) -> String {
         var result: Int64 = 0            // 累計額
         if lastYear {
             if DataBaseManagerSettingsPeriod.shared.checkSettingsPeriod() { // 前年度の会計帳簿の存在有無を確認
@@ -83,14 +83,17 @@ class BSModel: BSModelInput {
                 result = balanceSheet.CurrentLiabilities_total
             case 4: // 固定負債
                 result = balanceSheet.FixedLiabilities_total
+            case 5: // 資本
+                result = balanceSheet.Capital_total
             default:
                 print(result)
             }
         }
         return StringUtility.shared.setComma(amount: result)
     }
+    
     // 取得　階層1 中区分　前年度表示対応
-    func getTotalRank1(big5: Int, rank1: Int, lastYear: Bool) -> String {
+    func getTotalRank1(rank1: Int, lastYear: Bool) -> String {
         // 合計額
         var result: Int64 = 0
         if lastYear {
@@ -114,21 +117,14 @@ class BSModel: BSModelInput {
         }
         return StringUtility.shared.setComma(amount: result)
     }
-    
+
     // MARK: Local method　読み出し
 
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     private func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
-
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
+        let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
@@ -163,16 +159,8 @@ class BSModel: BSModelInput {
     private func getTotalDebitOrCredit(bigCategory: Int, midCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
-
+        let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
@@ -239,16 +227,8 @@ class BSModel: BSModelInput {
     private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
-
+        let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
@@ -305,14 +285,12 @@ class BSModel: BSModelInput {
         setTotalBig5(big5: 1)// 負債
         setTotalBig5(big5: 2)// 純資産
         
-        setTotalRank0(big5: 0, rank0: 0)// 流動資産
-        setTotalRank0(big5: 0, rank0: 1)// 固定資産
-        setTotalRank0(big5: 0, rank0: 2)// 繰延資産
-        setTotalRank0(big5: 1, rank0: 3)// 流動負債
-        setTotalRank0(big5: 1, rank0: 4)// 固定負債
-        
-        setTotalRank1(big5: 2, rank1: 10)// 株主資本
-        setTotalRank1(big5: 2, rank1: 11)// その他の包括利益累計額
+        setTotalRank0(rank0: 0)// 流動資産
+        setTotalRank0(rank0: 1)// 固定資産
+        setTotalRank0(rank0: 2)// 繰延資産
+        setTotalRank0(rank0: 3)// 流動負債
+        setTotalRank0(rank0: 4)// 固定負債
+        setTotalRank0(rank0: 5)// 資本　TODO: なぜいままでなかった？
         
         let company = DataBaseManagerAccountingBooksShelf.shared.getCompanyName()
         let fiscalYear = DataBaseManagerSettingsPeriod.shared.getSettingsPeriodYear()
@@ -335,33 +313,33 @@ class BSModel: BSModelInput {
         let objects010143 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0", category1: "1", category2: "0", category3: "1", category4: "43") // 無形固定資産4
         let objects010144 = DataBaseManagerSettingsTaxonomy.shared.getSmallCategory(category0: "0", category1: "1", category2: "0", category3: "1", category4: "44") // 投資その他の資産5
         // MARK: - "    株主資本合計"
-        let capitalStockTotal = self.getTotalRank1(big5: 2, rank1: 10, lastYear: false) // 中区分の合計を取得
-        let lastCapitalStockTotal = self.getTotalRank1(big5: 2, rank1: 10, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let capitalStockTotal = self.getTotalRank1(rank1: 10, lastYear: false) // 中区分の合計を取得
+        let lastCapitalStockTotal = self.getTotalRank1(rank1: 10, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    その他の包括利益累計額合計"
-        let otherCapitalSurplusesTotal = self.getTotalRank1(big5: 2, rank1: 11, lastYear: false) // 中区分の合計を取得
-        let lastOtherCapitalSurplusesTotal = self.getTotalRank1(big5: 2, rank1: 11, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let otherCapitalSurplusesTotal = self.getTotalRank1(rank1: 11, lastYear: false) // 中区分の合計を取得
+        let lastOtherCapitalSurplusesTotal = self.getTotalRank1(rank1: 11, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    流動資産合計"
-        let currentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: false)
-        let lastCurrentAssetsTotal = self.getTotalRank0(big5: 0, rank0: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let currentAssetsTotal = self.getTotalRank0(rank0: 0, lastYear: false)
+        let lastCurrentAssetsTotal = self.getTotalRank0(rank0: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    固定資産合計"
-        let fixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: false)
-        let lastFixedAssetsTotal = self.getTotalRank0(big5: 0, rank0: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let fixedAssetsTotal = self.getTotalRank0(rank0: 1, lastYear: false)
+        let lastFixedAssetsTotal = self.getTotalRank0(rank0: 1, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    繰越資産合計"
-        let deferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: false)
-        let lastDeferredAssetsTotal = self.getTotalRank0(big5: 0, rank0: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let deferredAssetsTotal = self.getTotalRank0(rank0: 2, lastYear: false)
+        let lastDeferredAssetsTotal = self.getTotalRank0(rank0: 2, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    流動負債合計"
-        let currentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: false)
-        let lastCurrentLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+        let currentLiabilitiesTotal = self.getTotalRank0(rank0: 3, lastYear: false)
+        let lastCurrentLiabilitiesTotal = self.getTotalRank0(rank0: 3, lastYear: true) // 前年度の会計帳簿の存在有無を確認
         
         // MARK: - "    固定負債合計"
-        let fixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: false)
-        let lastFixedLiabilitiesTotal = self.getTotalRank0(big5: 1, rank0: 4, lastYear: true) // 前年度の会計帳簿の存在有無を確認
-        
+        let fixedLiabilitiesTotal = self.getTotalRank0(rank0: 4, lastYear: false)
+        let lastFixedLiabilitiesTotal = self.getTotalRank0(rank0: 4, lastYear: true) // 前年度の会計帳簿の存在有無を確認
+
         // MARK: - "資産合計"
         let assetTotal = self.getTotalBig5(big5: 0, lastYear: false)
         let lastAssetTotal = self.getTotalBig5(big5: 0, lastYear: true) // 前年度の会計帳簿の存在有無を確認
@@ -461,7 +439,7 @@ class BSModel: BSModelInput {
         }
     }
     // 計算　階層0 大区分
-    private func setTotalRank0(big5: Int, rank0: Int) {
+    private func setTotalRank0(rank0: Int) {
         // 累計額
         var totalAmountOfRank0: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
@@ -497,6 +475,8 @@ class BSModel: BSModelInput {
                         balanceSheet.CurrentLiabilities_total = totalAmountOfRank0
                     case 4: // 固定負債
                         balanceSheet.FixedLiabilities_total = totalAmountOfRank0
+                    case 5: // 資本
+                        balanceSheet.Capital_total = totalAmountOfRank0
                     default:
                         print(totalAmountOfRank0)
                     }
@@ -508,17 +488,23 @@ class BSModel: BSModelInput {
     }
     // 計算　階層1 中区分
     private func setTotalRank1(big5: Int, rank1: Int) {
-        var totalAmountOfRank1: Int64 = 0            // 累計額
+        var totalAmountOfRank1: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
-        let objects = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
+        let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank1(rank1: rank1)
         // オブジェクトを作成 勘定
-        for i in 0..<objects.count {
-            let totalAmount = getTotalAmount(account: objects[i].category)
-            let totalDebitOrCredit = getTotalDebitOrCredit(bigCategory: Int(objects[i].Rank0)!, midCategory: rank1, account: objects[i].category)
-            if totalDebitOrCredit == "-"{
-                totalAmountOfRank1 -= totalAmount
-            } else {
-                totalAmountOfRank1 += totalAmount
+        for i in 0..<dataBaseSettingsTaxonomyAccounts.count {
+            let totalAmount = getTotalAmount(account: dataBaseSettingsTaxonomyAccounts[i].category)
+            if let rank0 = Int(dataBaseSettingsTaxonomyAccounts[i].Rank0) {
+                let totalDebitOrCredit = getTotalDebitOrCredit(
+                    bigCategory: rank0,
+                    midCategory: rank1,
+                    account: dataBaseSettingsTaxonomyAccounts[i].category
+                )
+                if totalDebitOrCredit == "-" {
+                    totalAmountOfRank1 -= totalAmount
+                } else {
+                    totalAmountOfRank1 += totalAmount
+                }
             }
         }
         // 開いている会計帳簿の年度を取得
@@ -542,7 +528,7 @@ class BSModel: BSModelInput {
             }
         }
     }
-    
+
     // MARK: Delete
     
 }

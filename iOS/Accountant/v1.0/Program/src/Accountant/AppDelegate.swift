@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 5,
+            schemaVersion: 6,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if oldSchemaVersion < 4 {
                     // DataBaseAccountオブジェクトを列挙します
                     migration.enumerateObjects(ofType: DataBaseAccount.className()) { oldObject, newObject in
-                        // 月次残高振替仕訳
+                        // 月次損益振替仕訳、月次残高振替仕訳
                         newObject?["dataBaseMonthlyTransferEntries"] = List<DataBaseMonthlyTransferEntry>()
                     }
                 }
@@ -119,6 +119,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         // プロパティを追加します
                         newObject?["serialNumber"] = oldObject?.number
                     }
+                }
+                // スキーマバージョン
+                if oldSchemaVersion < 6 {
+                    // DataBaseCapitalAccountオブジェクトを列挙します
+                    migration.enumerateObjects(ofType: DataBaseCapitalAccount.className()) { oldObject, newObject in
+                        // 月次資本振替仕訳
+                        newObject?["dataBaseMonthlyCapitalTransferJournalEntries"] = List<DataBaseMonthlyCapitalTransferJournalEntry>()
+                    }
+                    // カラムを追加
+                    // 貸借対照表クラス　DataBaseBalanceSheet
+                    // @objc dynamic var Capital_total: Int64 = 0  // 資本
                 }
             }
         )

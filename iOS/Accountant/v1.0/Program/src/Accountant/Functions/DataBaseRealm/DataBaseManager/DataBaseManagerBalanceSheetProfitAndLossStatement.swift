@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import WidgetKit
 
+// ウィジェット　貸借対照表と損益計算書
 class DataBaseManagerBalanceSheetProfitAndLossStatement {
     
     public static let shared = DataBaseManagerBalanceSheetProfitAndLossStatement()
@@ -27,10 +28,12 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
         
         // 損益計算書
         // データベースに書き込み　//4:収益 3:費用
-        setTotalRank0(big5: 4, rank0: 6) // 営業収益9     売上
-        setTotalRank0(big5: 3, rank0: 7) // 営業費用5     売上原価
-        setTotalRank0(big5: 3, rank0: 8) // 営業費用5     販売費及び一般管理費
-        setTotalRank0(big5: 3, rank0: 11) // 税等8        法人税等 税金
+        setTotalRank0(rank0: 6) // 営業収益9     売上
+        setTotalRank0(rank0: 7) // 営業費用5     売上原価
+        setTotalRank0(rank0: 8) // 営業費用5     販売費及び一般管理費
+        // setTotalRank0(rank0: 9) // 営業外損益　TODO: なぜいままでなかった？
+        // setTotalRank0(rank0: 10) // 特別損益　TODO: なぜいままでなかった？
+        setTotalRank0(rank0: 11) // 税等8        法人税等 税金
         
         setTotalRank1(big5: 4, rank1: 15) // 営業外収益10 営業外損益    営業外収益
         setTotalRank1(big5: 3, rank1: 16) // 営業外費用6  営業外損益    営業外費用
@@ -142,15 +145,8 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
     // 合計残高　勘定別の合計額　借方と貸方でより大きい方の合計を取得
     private func getTotalAmount(account: String) -> Int64 {
         var result: Int64 = 0
-        
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
+        let capitalAccount = Constant.capitalAccountName
         let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = dataBaseAccountingBooks.dataBaseGeneralLedger {
             if capitalAccount == account {
@@ -185,16 +181,8 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
     private func getTotalDebitOrCreditForBig5(bigCategory: Int, account: String) -> String {
         var debitOrCredit: String = "" // 借又貸
         var positiveOrNegative: String = "" // 借又貸
-        
-        var capitalAccount = ""
-        // MARK: 法人：繰越利益勘定、個人事業主：元入金勘定
         // 法人/個人フラグ
-        if UserDefaults.standard.bool(forKey: "corporation_switch") {
-            capitalAccount = CapitalAccountType.retainedEarnings.rawValue
-        } else {
-            capitalAccount = CapitalAccountType.capital.rawValue
-        }
-        
+        let capitalAccount = Constant.capitalAccountName
         // 開いている会計帳簿の年度を取得
         let object = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
         if let dataBaseGeneralLedger = object.dataBaseGeneralLedger {
@@ -245,7 +233,7 @@ class DataBaseManagerBalanceSheetProfitAndLossStatement {
     // MARK: 計算　書き込み
     
     // 計算　階層0 大区分
-    private func setTotalRank0(big5: Int, rank0: Int) {
+    private func setTotalRank0(rank0: Int) {
         var totalAmountOfRank0: Int64 = 0
         // 設定画面の勘定科目一覧にある勘定を取得する
         let dataBaseSettingsTaxonomyAccounts = DatabaseManagerSettingsTaxonomyAccount.shared.getAccountsInRank0(rank0: rank0)

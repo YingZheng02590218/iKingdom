@@ -206,6 +206,8 @@ final class JournalEntryPresenter: JournalEntryPresenterInput {
                 view.showDialogForOfline()
             }
         }
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
     }
     // OKボタン
     func okButtonTappedDialogForSameJournalEntry(journalEntryType: JournalEntryType, journalEntryData: JournalEntryData) {

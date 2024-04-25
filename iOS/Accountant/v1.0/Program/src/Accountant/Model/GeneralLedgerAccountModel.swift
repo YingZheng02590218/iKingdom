@@ -248,8 +248,10 @@ class GeneralLedgerAccountModel: GeneralLedgerAccountModelInput {
     }
     // 取得 決算整理仕訳　勘定別に月別に取得
     func getAdjustingEntryInAccountInMonth(account: String, yearMonth: String) -> Results<DataBaseAdjustingEntry> {
-        let dataBaseAccountingBooks = DataBaseManagerSettingsPeriod.shared.getSettingsPeriod(lastYear: false)
-        let dataBaseAccount = dataBaseAccountingBooks.dataBaseGeneralLedger!.dataBaseAccounts
+        let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
+            NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
+        ])
+        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseAccounts
             .filter("accountName LIKE '\(account)'").first
         let dataBaseAdjustingEntries = dataBaseAccount?.dataBaseAdjustingEntries
             .filter("debit_category LIKE '\(account)' || credit_category LIKE '\(account)'")

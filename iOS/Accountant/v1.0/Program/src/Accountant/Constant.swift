@@ -63,4 +63,7 @@ enum Constant {
             return CapitalAccountType.capital.rawValue
         }
     }
+    
+    // 月次推移表を更新する　true: リロードする
+    static var needToReload = false
 }
