@@ -92,11 +92,15 @@ class FinancialStatementTableViewController: UITableViewController {
                 cell.textLabel?.text = "月次推移表（貸借対照表）"
                 cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
+                cell.detailTextLabel?.text = "β版"
+                cell.detailTextLabel?.textColor = .lightGray
             case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
                 cell.textLabel?.text = "月次推移表（損益計算書）"
                 cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
+                cell.detailTextLabel?.text = "β版"
+                cell.detailTextLabel?.textColor = .lightGray
             default:
                 cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
                 cell.textLabel?.text = ""
@@ -106,7 +110,7 @@ class FinancialStatementTableViewController: UITableViewController {
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "BS", for: indexPath)
+                cell = tableView.dequeueReusableCell(withIdentifier: "PL", for: indexPath)
                 cell.textLabel?.text = "貸借対照表"
                 cell.textLabel?.textColor = .textColor
                 cell.textLabel?.textAlignment = NSTextAlignment.center
