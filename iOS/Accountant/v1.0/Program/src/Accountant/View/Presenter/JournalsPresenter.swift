@@ -251,13 +251,15 @@ final class JournalsPresenter: JournalsPresenterInput {
     }
     // 削除　仕訳
     func deleteJournalEntry(number: Int) -> Bool {
-        
-        DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: number)
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
+        return DataBaseManagerJournalEntry.shared.deleteJournalEntry(number: number)
     }
     // 削除　決算整理仕訳
     func deleteAdjustingJournalEntry(number: Int) -> Bool {
-        
-        DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: number)
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
+        return DataBaseManagerAdjustingEntry.shared.deleteAdjustingJournalEntry(number: number)
     }
     // 年度を変更する
     func updateFiscalYear(indexPaths: [IndexPath], fiscalYear: Int) {
@@ -292,6 +294,8 @@ final class JournalsPresenter: JournalsPresenterInput {
         }
         // view にリロードさせる
         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
+        // 月次推移表を更新する　true: リロードする
+        Constant.needToReload = true
     }
     // 仕訳データを編集した通りに更新する
     func updateSelectedJournalEntries(indexPaths: [IndexPath], dBJournalEntry: JournalEntryData) {
@@ -362,6 +366,8 @@ final class JournalsPresenter: JournalsPresenterInput {
                 self.view.reloadData(primaryKeys: primaryKeys, primaryKeysAdjusting: primaryKeysAdjusting)
                 // インジケーターを終了
                 self.view.finishActivityIndicatorView()
+                // 月次推移表を更新する　true: リロードする
+                Constant.needToReload = true
             }
         }
     }
