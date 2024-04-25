@@ -125,8 +125,8 @@ class DataBaseManagerMonthlyPLAccount {
         let dataBaseAccountingBook = RealmManager.shared.read(type: DataBaseAccountingBooks.self, predicates: [
             NSPredicate(format: "openOrClose == %@", NSNumber(value: true))
         ])
-        let dataBaseAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
-        let dataBaseMonthlyCapitalTransferJournalEntries = dataBaseAccount?.dataBaseMonthlyCapitalTransferJournalEntries
+        let dataBaseCapitalAccount = dataBaseAccountingBook?.dataBaseGeneralLedger?.dataBaseCapitalAccount
+        let dataBaseMonthlyCapitalTransferJournalEntries = dataBaseCapitalAccount?.dataBaseMonthlyCapitalTransferJournalEntries
         // BEGINSWITH 先頭が指定した文字で始まるデータを検索
             .filter("date BEGINSWITH '\(yearMonth)'")
             .sorted(byKeyPath: "date", ascending: true)

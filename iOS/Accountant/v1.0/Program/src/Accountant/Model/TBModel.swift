@@ -1272,22 +1272,6 @@ class TBModel: TBModelInput {
                         left += dataBaseMonthlyTransferEntry.balance_left // 累計額に追加
                     }
                 }
-                
-                // 前月の　月次資本振替仕訳　の金額を加味する 差し引く
-                // 取得 月次資本振替仕訳 資本金勘定から月別に取得
-                if let dataBaseCapitalTransferJournalEntry = DataBaseManagerMonthlyPLAccount.shared.getCapitalTransferJournalEntryInAccount(
-                    yearMonth: "\(lastDays[index - 1].year)" + "/" + "\(String(format: "%02d", lastDays[index - 1].month))"
-                ) {
-                    // 勘定が借方と貸方のどちらか
-                    print(dataBaseCapitalTransferJournalEntry)
-                    if "資本金勘定" == "\(dataBaseCapitalTransferJournalEntry.debit_category)" { // 借方
-                        // 前月の　月次資本振替仕訳　の金額を 差し引く
-                        left -= dataBaseCapitalTransferJournalEntry.debit_amount // 累計額に追加
-                    } else if "資本金勘定" == "\(dataBaseCapitalTransferJournalEntry.credit_category)" { // 貸方
-                        // 前月の　月次資本振替仕訳　の金額を 差し引く
-                        right -= dataBaseCapitalTransferJournalEntry.credit_amount // 累計額に追加
-                    }
-                }
             }
             // 通常仕訳 勘定別に月別に取得
             let dataBaseJournalEntries = dataBaseManagerAccount.getJournalEntryInAccountInMonth(

@@ -199,6 +199,8 @@ final class JournalsPresenter: JournalsPresenterInput {
                         self.view.reloadData(primaryKeys: nil, primaryKeysAdjusting: nil)
                         // インジケーターを終了
                         self.view.finishActivityIndicatorView()
+                        // 月次推移表を更新する　true: リロードする
+                        Constant.needToReload = true
                     }
                 })
             }
