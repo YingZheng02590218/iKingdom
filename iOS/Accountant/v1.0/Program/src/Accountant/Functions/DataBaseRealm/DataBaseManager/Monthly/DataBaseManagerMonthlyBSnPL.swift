@@ -23,10 +23,10 @@ class DataBaseManagerMonthlyBSnPL {
     func setupAmountForBsAndPL(isBs: Bool) {
         // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付が会計期間の範囲外の場合、削除する
         DataBaseManagerMonthlyBSnPL.shared.deleteMonthlyyBalanceSheetInFiscalYear()
-        // 削除　月次損益計算書 今年度の月次損益計算書のうち、日付が会計期間の範囲外の場合、削除する
-        DataBaseManagerMonthlyBSnPL.shared.deleteMonthlyyProfitAndLossStatementInFiscalYear()
         // 削除　月次貸借対照表 今年度の月次貸借対照表のうち、日付（年月）が重複している場合、削除する
         DataBaseManagerMonthlyBSnPL.shared.deleteDuplicatedMonthlyyBalanceSheetInFiscalYear()
+        // 削除　月次損益計算書 今年度の月次損益計算書のうち、日付が会計期間の範囲外の場合、削除する
+        DataBaseManagerMonthlyBSnPL.shared.deleteMonthlyyProfitAndLossStatementInFiscalYear()
         // 削除　月次損益計算書 今年度の月次損益計算書のうち、日付（年月）が重複している場合、削除する
         DataBaseManagerMonthlyBSnPL.shared.deleteDuplicatedMonthlyyProfitAndLossStatementInFiscalYear()
         
@@ -34,93 +34,90 @@ class DataBaseManagerMonthlyBSnPL {
         let dates = DateManager.shared.getTheDayOfEndingOfMonth()
         for date in dates {
             let yearMonth = "\(date.year)" + "/" + "\(String(format: "%02d", date.month))"
-            if isBs {
-                // 取得 月次貸借対照表　今年度で日付の前方一致
-                if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(yearMonth: yearMonth) {
-                    // 月次貸借対照表　があるとき
-                    
-                } else {
-                    // 月次貸借対照表　がないとき
-                    // 追加　月次貸借対照表
-                    addMonthlyBalanceSheet(
-                        date: "\(date.year)" + "/" + "\(String(format: "%02d", date.month))" + "/" + "\(String(format: "%02d", date.day))",
-                        CurrentAssets_total: 0,
-                        FixedAssets_total: 0,
-                        DeferredAssets_total: 0,
-                        Asset_total: 0,
-                        CurrentLiabilities_total: 0,
-                        FixedLiabilities_total: 0,
-                        Liability_total: 0,
-                        CapitalStock_total: 0,
-                        OtherCapitalSurpluses_total: 0,
-                        Capital_total: 0,
-                        Equity_total: 0
-                    )
-                }
-                // 貸借対照表
-                setTotalRank0(rank0: 0, yearMonth: yearMonth) // 流動資産
-                setTotalRank0(rank0: 1, yearMonth: yearMonth) // 固定資産
-                setTotalRank0(rank0: 2, yearMonth: yearMonth) // 繰延資産
-                setTotalRank0(rank0: 3, yearMonth: yearMonth) // 流動負債
-                setTotalRank0(rank0: 4, yearMonth: yearMonth) // 固定負債
-                setTotalRank0(rank0: 5, yearMonth: yearMonth) // 資本　TODO: なぜいままでなかった？
+            // 取得 月次貸借対照表　今年度で日付の前方一致
+            if let dataBaseMonthlyBalanceSheet = DataBaseManagerMonthlyBSnPL.shared.getMonthlyBalanceSheet(yearMonth: yearMonth) {
+                // 月次貸借対照表　があるとき
                 
-                // 0:資産 1:負債 2:純資産 4:収益 3:費用
-                setTotalBig5(big5: 0, yearMonth: yearMonth) // 資産
-                setTotalBig5(big5: 1, yearMonth: yearMonth) // 負債
-                setTotalBig5(big5: 2, yearMonth: yearMonth) // 純資産
-                setTotalRank1(big5: 2, rank1: 10, yearMonth: yearMonth) // 株主資本
-                setTotalRank1(big5: 2, rank1: 11, yearMonth: yearMonth) // その他の包括利益累計額
-                
-                
-                // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
-                // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
             } else {
-                // 取得 月次損益計算書　今年度で日付の前方一致
-                if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(yearMonth: yearMonth) {
-                    // 月次損益計算書　があるとき
-                    
-                } else {
-                    // 月次損益計算書　がないとき
-                    // 追加　月次損益計算書
-                    addMonthlyProfitAndLossStatement(
-                        date: "\(date.year)" + "/" + "\(String(format: "%02d", date.month))" + "/" + "\(String(format: "%02d", date.day))",
-                        NetSales: 0,
-                        CostOfGoodsSold: 0,
-                        GrossProfitOrLoss: 0,
-                        
-                        SellingGeneralAndAdministrativeExpenses: 0,
-                        OtherCapitalSurpluses_total: 0,
-                        
-                        NonOperatingIncome: 0,
-                        NonOperatingExpenses: 0,
-                        OrdinaryIncomeOrLoss: 0,
-                        
-                        ExtraordinaryIncome: 0,
-                        ExtraordinaryLosses: 0,
-                        IncomeOrLossBeforeIncomeTaxes: 0,
-                        
-                        IncomeTaxes: 0,
-                        NetIncomeOrLoss: 0
-                    )
-                }
-                
-                // 損益計算書
-                setTotalRank0(rank0: 6, yearMonth: yearMonth) // 営業収益9     売上
-                setTotalRank0(rank0: 7, yearMonth: yearMonth) // 営業費用5     売上原価
-                setTotalRank0(rank0: 8, yearMonth: yearMonth) // 営業費用5     販売費及び一般管理費
-                // setTotalRank0(rank0: 9) // 営業外損益　TODO: なぜいままでなかった？
-                // setTotalRank0(rank0: 10) // 特別損益　TODO: なぜいままでなかった？
-                setTotalRank0(rank0: 11, yearMonth: yearMonth) // 税等8        法人税等 税金
-                
-                setTotalRank1(big5: 4, rank1: 15, yearMonth: yearMonth) // 営業外収益10 営業外損益
-                setTotalRank1(big5: 3, rank1: 16, yearMonth: yearMonth) // 営業外費用6  営業外損益
-                setTotalRank1(big5: 4, rank1: 17, yearMonth: yearMonth) // 特別利益11   特別損益
-                setTotalRank1(big5: 3, rank1: 18, yearMonth: yearMonth) // 特別損失7    特別損益
-                
-                // 利益を計算する関数を呼び出す todo
-                setBenefitTotal(yearMonth: yearMonth)
+                // 月次貸借対照表　がないとき
+                // 追加　月次貸借対照表
+                addMonthlyBalanceSheet(
+                    date: "\(date.year)" + "/" + "\(String(format: "%02d", date.month))" + "/" + "\(String(format: "%02d", date.day))",
+                    CurrentAssets_total: 0,
+                    FixedAssets_total: 0,
+                    DeferredAssets_total: 0,
+                    Asset_total: 0,
+                    CurrentLiabilities_total: 0,
+                    FixedLiabilities_total: 0,
+                    Liability_total: 0,
+                    CapitalStock_total: 0,
+                    OtherCapitalSurpluses_total: 0,
+                    Capital_total: 0,
+                    Equity_total: 0
+                )
             }
+            // 貸借対照表
+            setTotalRank0(rank0: 0, yearMonth: yearMonth) // 流動資産
+            setTotalRank0(rank0: 1, yearMonth: yearMonth) // 固定資産
+            setTotalRank0(rank0: 2, yearMonth: yearMonth) // 繰延資産
+            setTotalRank0(rank0: 3, yearMonth: yearMonth) // 流動負債
+            setTotalRank0(rank0: 4, yearMonth: yearMonth) // 固定負債
+            setTotalRank0(rank0: 5, yearMonth: yearMonth) // 資本　TODO: なぜいままでなかった？
+            
+            setTotalRank1(big5: 2, rank1: 10, yearMonth: yearMonth) // 株主資本
+            setTotalRank1(big5: 2, rank1: 11, yearMonth: yearMonth) // その他の包括利益累計額
+            
+            // 0:資産 1:負債 2:純資産 4:収益 3:費用
+            setTotalBig5(big5: 0, yearMonth: yearMonth) // 資産
+            setTotalBig5(big5: 1, yearMonth: yearMonth) // 負債
+            setTotalBig5(big5: 2, yearMonth: yearMonth) // 純資産
+            
+            // 取得 月次損益計算書　今年度で日付の前方一致
+            if let dataBaseMonthlyProfitAndLossStatement = DataBaseManagerMonthlyBSnPL.shared.getMonthlyProfitAndLossStatement(yearMonth: yearMonth) {
+                // 月次損益計算書　があるとき
+                
+            } else {
+                // 月次損益計算書　がないとき
+                // 追加　月次損益計算書
+                addMonthlyProfitAndLossStatement(
+                    date: "\(date.year)" + "/" + "\(String(format: "%02d", date.month))" + "/" + "\(String(format: "%02d", date.day))",
+                    NetSales: 0,
+                    CostOfGoodsSold: 0,
+                    GrossProfitOrLoss: 0,
+                    
+                    SellingGeneralAndAdministrativeExpenses: 0,
+                    OtherCapitalSurpluses_total: 0,
+                    
+                    NonOperatingIncome: 0,
+                    NonOperatingExpenses: 0,
+                    OrdinaryIncomeOrLoss: 0,
+                    
+                    ExtraordinaryIncome: 0,
+                    ExtraordinaryLosses: 0,
+                    IncomeOrLossBeforeIncomeTaxes: 0,
+                    
+                    IncomeTaxes: 0,
+                    NetIncomeOrLoss: 0
+                )
+            }
+            
+            // 損益計算書
+            setTotalRank0(rank0: 6, yearMonth: yearMonth) // 営業収益9     売上
+            setTotalRank0(rank0: 7, yearMonth: yearMonth) // 営業費用5     売上原価
+            setTotalRank0(rank0: 8, yearMonth: yearMonth) // 営業費用5     販売費及び一般管理費
+            // setTotalRank0(rank0: 9) // 営業外損益　TODO: なぜいままでなかった？
+            // setTotalRank0(rank0: 10) // 特別損益　TODO: なぜいままでなかった？
+            setTotalRank0(rank0: 11, yearMonth: yearMonth) // 税等8        法人税等 税金
+            
+            setTotalRank1(big5: 4, rank1: 15, yearMonth: yearMonth) // 営業外収益10 営業外損益
+            setTotalRank1(big5: 3, rank1: 16, yearMonth: yearMonth) // 営業外費用6  営業外損益
+            setTotalRank1(big5: 4, rank1: 17, yearMonth: yearMonth) // 特別利益11   特別損益
+            setTotalRank1(big5: 3, rank1: 18, yearMonth: yearMonth) // 特別損失7    特別損益
+            // setTotalBig5(big5: 3)// 費用　TODO: なぜいままでなかった？
+            // setTotalBig5(big5: 4)// 収益　TODO: なぜいままでなかった？
+            
+            // 利益を計算する関数を呼び出す todo
+            setBenefitTotal(yearMonth: yearMonth)
         }
     }
     
@@ -241,7 +238,7 @@ class DataBaseManagerMonthlyBSnPL {
             NetIncomeOrLoss: NetIncomeOrLoss
         )
         // 取得　月次損益振替仕訳、月次残高振替仕訳 勘定別に取得　今年度の勘定別で日付が同一
-        if let monthlyProfitAndLossStatement = getMonthlyBalanceSheet(date: date) {
+        if let monthlyProfitAndLossStatement = getMonthlyProfitAndLossStatement(date: date) {
             // 月次貸借対照表　が存在する場合は　更新
             number = updateProfitAndLossStatement(
                 primaryKey: monthlyProfitAndLossStatement.number,
@@ -689,13 +686,13 @@ class DataBaseManagerMonthlyBSnPL {
                 for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                     // 借方と貸方で金額が大きい方はどちらか
                     // 月次損益振替仕訳、月次残高振替仕訳
-                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                    if let dataBaseMonthlyTransferEntries = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
                         // BEGINSWITH 先頭が指定した文字で始まるデータを検索
                         .filter("date BEGINSWITH '\(yearMonth)'").first {
                         // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                        if dataBaseMonthlyTransferEntries.balance_left > dataBaseMonthlyTransferEntries.balance_right {
                             debitOrCredit = "借"
-                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                        } else if dataBaseMonthlyTransferEntries.balance_left < dataBaseMonthlyTransferEntries.balance_right {
                             debitOrCredit = "貸"
                         } else {
                             debitOrCredit = "-"
@@ -768,13 +765,13 @@ class DataBaseManagerMonthlyBSnPL {
                 for i in 0..<dataBaseGeneralLedger.dataBaseAccounts.count where dataBaseGeneralLedger.dataBaseAccounts[i].accountName == account {
                     // 借方と貸方で金額が大きい方はどちらか
                     // 月次損益振替仕訳、月次残高振替仕訳
-                    if let dataBaseMonthlyBalanceSheet = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
+                    if let dataBaseMonthlyTransferEntries = dataBaseGeneralLedger.dataBaseAccounts[i].dataBaseMonthlyTransferEntries
                         // BEGINSWITH 先頭が指定した文字で始まるデータを検索
                         .filter("date BEGINSWITH '\(yearMonth)'").first {
                         // 借方と貸方で金額が大きい方はどちらか　決算整理後の値を利用する
-                        if dataBaseMonthlyBalanceSheet.balance_left > dataBaseMonthlyBalanceSheet.balance_right {
+                        if dataBaseMonthlyTransferEntries.balance_left > dataBaseMonthlyTransferEntries.balance_right {
                             debitOrCredit = "借"
-                        } else if dataBaseMonthlyBalanceSheet.balance_left < dataBaseMonthlyBalanceSheet.balance_right {
+                        } else if dataBaseMonthlyTransferEntries.balance_left < dataBaseMonthlyTransferEntries.balance_right {
                             debitOrCredit = "貸"
                         } else {
                             debitOrCredit = "-"

@@ -1020,21 +1020,26 @@ class TBModel: TBModelInput {
         let lastDays = DateManager.shared.getTheDayOfEndingOfMonth()
         
         for index in 0..<lastDays.count {
-            if index > 0 {
-                // 前月の　月次損益振替仕訳、月次残高振替仕訳　の金額を加味する
-                // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
-                if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
-                    account: account,
-                    yearMonth: "\(lastDays[index - 1].year)" + "/" + "\(String(format: "%02d", lastDays[index - 1].month))" // BEGINSWITH 前方一致
-                ) {
-                    // 勘定が借方と貸方のどちらか
-                    print(dataBaseMonthlyTransferEntry)
-                    if account == "\(dataBaseMonthlyTransferEntry.debit_category)" { // 借方
-                        // 借方勘定　＊貸方勘定を振替える
-                        right += dataBaseMonthlyTransferEntry.balance_right // 累計額に追加
-                    } else if account == "\(dataBaseMonthlyTransferEntry.credit_category)" { // 貸方
-                        // 貸方勘定　＊借方勘定を振替える
-                        left += dataBaseMonthlyTransferEntry.balance_left // 累計額に追加
+            // 損益計算書に関する勘定科目のみに絞る
+            if DatabaseManagerSettingsTaxonomyAccount.shared.checkSettingsTaxonomyAccountRank0(account: account) {
+                // 月次損益推移表では、前月の金額を加味しない
+            } else {
+                if index > 0 {
+                    // 前月の　月次損益振替仕訳、月次残高振替仕訳　の金額を加味する
+                    // 取得 月次損益振替仕訳、月次残高振替仕訳　今年度の勘定別で日付の先方一致
+                    if let dataBaseMonthlyTransferEntry = DataBaseManagerMonthlyTransferEntry.shared.getMonthlyTransferEntryInAccountBeginsWith(
+                        account: account,
+                        yearMonth: "\(lastDays[index - 1].year)" + "/" + "\(String(format: "%02d", lastDays[index - 1].month))" // BEGINSWITH 前方一致
+                    ) {
+                        // 勘定が借方と貸方のどちらか
+                        print(dataBaseMonthlyTransferEntry)
+                        if account == "\(dataBaseMonthlyTransferEntry.debit_category)" { // 借方
+                            // 借方勘定　＊貸方勘定を振替える
+                            right += dataBaseMonthlyTransferEntry.balance_right // 累計額に追加
+                        } else if account == "\(dataBaseMonthlyTransferEntry.credit_category)" { // 貸方
+                            // 貸方勘定　＊借方勘定を振替える
+                            left += dataBaseMonthlyTransferEntry.balance_left // 累計額に追加
+                        }
                     }
                 }
             }

@@ -1576,17 +1576,14 @@
 				F99EDE0C246C00B100334FF4 /* DataBaseManagerJournalEntry.swift */,
 				F971BB44295EFF96007465F2 /* DataBaseManagerAdjustingEntry.swift */,
 				F963E2D0296AE9FD002DF49E /* DataBaseManagerTransferEntry.swift */,
-				F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */,
 				F9517260295F1209007DD20C /* DataBaseManagerJournals.swift */,
 				F9F934E62484E79100BF7AA7 /* DataBaseManagerGeneralLedger.swift */,
 				F951725D295F060B007DD20C /* DataBaseManagerAccount.swift */,
 				F9706848252ACD38003307F8 /* DataBaseManagerPLAccount.swift */,
-				F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */,
 				F9E53C23247F9E6B007C2F66 /* DataBaseManagerGeneralLedgerAccountBalance.swift */,
 				F963E2C72967BA40002DF49E /* DataBaseManagerGeneralLedgerPLAccountBalance.swift */,
 				F9354DC424990AB4007DB098 /* DataBaseManagerFinancialStatements.swift */,
 				F9D15D772996170E00A2A221 /* DataBaseManagerBalanceSheetProfitAndLossStatement.swift */,
-				F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */,
 				F9F4606424C437F1008FE62B /* DataBaseManagerTaxonomy.swift */,
 				F9D224C52489208D006C6CD9 /* DataBaseManagerSettingsPeriod.swift */,
 				F9F4606824C82F74008FE62B /* DataBaseManagerSettingsTaxonomy.swift */,
@@ -1594,6 +1591,7 @@
 				F91878C72581462600D2E793 /* DataBaseManagerSettingsOperating.swift */,
 				F9CF960A2642B8E0006C90EA /* DataBaseManagerSettingsOperatingJournalEntry.swift */,
 				F9593DBD2A62BA9500A1D0B3 /* DataBaseManagerSettingsOperatingJournalEntryGroup.swift */,
+				F94BE0942BD94260002CFE4D /* Monthly */,
 			);
 			path = DataBaseManager;
 			sourceTree = "<group>";
@@ -1640,6 +1638,16 @@
 				F94BE0912BD7C085002CFE4D /* MonthlyProfitAndLossStatementViewController.storyboard */,
 			);
 			path = ProfitAndLossStatement;
+			sourceTree = "<group>";
+		};
+		F94BE0942BD94260002CFE4D /* Monthly */ = {
+			isa = PBXGroup;
+			children = (
+				F99430392A6FA6C3002F9D21 /* DataBaseManagerMonthlyTransferEntry.swift */,
+				F9F6A7112BB82E0700818060 /* DataBaseManagerMonthlyPLAccount.swift */,
+				F9EC65E02BA847D800CE2CD7 /* DataBaseManagerMonthlyBSnPL.swift */,
+			);
+			path = Monthly;
 			sourceTree = "<group>";
 		};
 		F94EDD86237AEB3A0074D812 = {
